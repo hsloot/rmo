@@ -3,7 +3,7 @@ An R package for the *Marshall-Olkin distribution*: algorithms for the construct
 
 ## Motivation
 
-While the academic literature on the Marshall-Olkin distributions is extensive, an intuitive and easy to use implentation is still missing. This project aims to provide an `R` package with hollostic approach that make it simple and fun to use Marshall-Olkin distributions for research and real-world applications.
+While the academic literature on the Marshall-Olkin distributions is extensive, an intuitive and easy to use implentation is still missing. This project aims to provide an `R` package makes it simple and fun to use Marshall-Olkin distributions for research and real-world applications.
 
 
 ## Recent news
