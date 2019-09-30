@@ -13,7 +13,7 @@ While the academic literature on the Marshall-Olkin distributions is extensive, 
 
 ## Contributing
 
-Contribution is highly welcomed! 
+Contribution is highly welcome! 
 
 ## Lisence
 
