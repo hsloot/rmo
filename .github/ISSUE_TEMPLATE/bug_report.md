@@ -1,7 +1,7 @@
 ---
 name: Bug report
-about: You found encountered an error or unexpeckted behaviour? Great! Create a report
-  to help us improve :-)
+about: You encountered an error or unexpected behaviour? Great! Create a report to
+  help us improve :-)
 title: ''
 labels: ''
 assignees: ''
