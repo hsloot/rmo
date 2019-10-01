@@ -1,20 +1,39 @@
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
 # rmo
-An R package for the *Marshall-Olkin distribution*: algorithms for the construction, simulation and estimation.
+
+<!-- badges: start -->
+
+\[![minimal R
+version](https://img.shields.io/badge/R%3E%3D-3.6.1-6666ff.svg)\]
+\[![packageversion](https://img.shields.io/badge/Package%20version-0.0.0.9000-orange.svg?style=flat-square)\]
+[![Last-changedate](https://img.shields.io/badge/last%20change-2019--10--01-yellowgreen.svg)](/commits/master)
+[![Lifecycle:
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+<!-- badges: end -->
+
+An R package for the *Marshall-Olkin distribution*: algorithms for the
+construction, simulation and estimation.
 
 ## Motivation
 
-While the academic literature on the Marshall-Olkin distributions is extensive, an intuitive and easy to use implentation is still missing. This project aims to provide an `R` package makes it simple and fun to use Marshall-Olkin distributions for research and real-world applications.
+While the academic literature on the Marshall-Olkin distributions is
+extensive, an intuitive and easy to use implementation is still missing.
+This project aims to provide an `R` package makes it simple and fun to
+use Marshall-Olkin distributions for research and real-world
+applications.
 
+## Installation
 
-## Recent news
+You can install the development version from
+[GitHub](https://github.com/) with:
 
-- Sep. 28, 2019: I initialized this project today. As of now, there is no code in the repository. The next goal is to provide the necessary background documentation on the Marshall-Olkin distribution and outline a project plan. Stay tuned.
+``` r
+# install.packages("devtools")
+devtools::install_github("hsloot/rmo")
+```
 
-
-## Contributing
-
-Contribution is highly welcome! 
-
-## Lisence
+## License
 
 MIT [Henrik Sloot]()
