@@ -19,4 +19,4 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
 Collate: 
     'sets.R'
-    'esm.R'
+    'sample.R'
