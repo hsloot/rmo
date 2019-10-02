@@ -1,4 +1,5 @@
 #' @keywords internal
+#' @noRd
 is_within <- function(i, j) {
   count <- 1
   while (j > 0) {
