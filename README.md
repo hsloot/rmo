@@ -13,6 +13,8 @@ version](https://img.shields.io/badge/R%3E%3D-3.6.1-6666ff.svg)
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![Travis build
 status](https://travis-ci.org/hsloot/rmo.svg?branch=master)](https://travis-ci.org/hsloot/rmo)
+[![Codecov test
+coverage](https://codecov.io/gh/hsloot/rmo/branch/master/graph/badge.svg)](https://codecov.io/gh/hsloot/rmo?branch=master)
 <!-- badges: end -->
 
 An R package for the *Marshall-Olkin distribution*: algorithms for the
