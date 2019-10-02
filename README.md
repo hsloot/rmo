@@ -8,9 +8,11 @@
 ![minimal R
 version](https://img.shields.io/badge/R%3E%3D-3.6.1-6666ff.svg)
 ![packageversion](https://img.shields.io/badge/Package%20version-0.0.0.9000-orange.svg?style=flat-square)
-[![Last-changedate](https://img.shields.io/badge/last%20change-2019--10--01-yellowgreen.svg)](/commits/master)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2019--10--02-yellowgreen.svg)](/commits/master)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![Travis build
+status](https://travis-ci.org/hsloot/rmo.svg?branch=master)](https://travis-ci.org/hsloot/rmo)
 <!-- badges: end -->
 
 An R package for the *Marshall-Olkin distribution*: algorithms for the
