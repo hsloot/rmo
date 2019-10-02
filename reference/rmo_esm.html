@@ -138,10 +138,12 @@ The shock rates must be stored in a vector of length \(2^d-1\).</p>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>an \(n \times d\) matrix with rows corresponding to the independent
-samples of size d.</p>
+samples of size \(d\).</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>rmo_esm</span>(<span class='fl'>10</span>, <span class='fl'>2</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>))</div><div class='output co'>#&gt;             [,1]       [,2]
+    <pre class="examples"><div class='input'><span class='co'># sample 10 times from a bivariate Marshall-Olkin distribution with parameters</span>
+<span class='co'># with c(1, 1, 1) using the exogenous shock model algorithm</span>
+<span class='fu'>rmo_esm</span>(<span class='fl'>10</span>, <span class='fl'>2</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>))</div><div class='output co'>#&gt;             [,1]       [,2]
 #&gt;  [1,] 0.20152177 0.20152177
 #&gt;  [2,] 0.85221616 0.85221616
 #&gt;  [3,] 0.02373428 0.02373428
