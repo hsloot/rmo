@@ -1,0 +1,71 @@
+{
+  "@context": ["https://doi.org/10.5063/schema/codemeta-2.0", "http://schema.org"],
+  "@type": "SoftwareSourceCode",
+  "identifier": "rmo",
+  "description": "\n  The package contains an implementation of the Marshall-Olkin distribution and methods for estimation, simulation, and construction.",
+  "name": "rmo: A package for the Marshall-Olkin distribution",
+  "license": "https://spdx.org/licenses/MIT",
+  "version": "0.0.0.9000",
+  "programmingLanguage": {
+    "@type": "ComputerLanguage",
+    "name": "R",
+    "version": "3.6.1",
+    "url": "https://r-project.org"
+  },
+  "runtimePlatform": "R version 3.6.1 (2019-07-05)",
+  "author": [
+    {
+      "@type": "Person",
+      "givenName": "Sloot",
+      "familyName": "Henrik",
+      "email": "henrik.sloot@gmail.com",
+      "@id": "https://orcid.org/0000-0001-8582-7776"
+    }
+  ],
+  "contributor": {},
+  "copyrightHolder": {},
+  "funder": {},
+  "maintainer": [
+    {
+      "@type": "Person",
+      "givenName": "Sloot",
+      "familyName": "Henrik",
+      "email": "henrik.sloot@gmail.com",
+      "@id": "https://orcid.org/0000-0001-8582-7776"
+    }
+  ],
+  "softwareSuggestions": [
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "testthat",
+      "name": "testthat",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=testthat"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "covr",
+      "name": "covr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=covr"
+    }
+  ],
+  "softwareRequirements": [],
+  "codeRepository": "https://github.com/hsloot/rmo",
+  "releaseNotes": "https://github.com/hsloot/rmo/blob/master/NEWS.md",
+  "readme": "https://github.com/hsloot/rmo/blob/master/README.md",
+  "fileSize": "2.851KB",
+  "contIntegration": ["https://travis-ci.org/hsloot/rmo", "https://ci.appveyor.com/project/hsloot/rmo", "https://codecov.io/gh/hsloot/rmo?branch=master"],
+  "developmentStatus": "https://www.tidyverse.org/lifecycle/#experimental",
+  "keywords": ["r", "simulation", "estimation", "modeling", "statistics", "mathematics", "mathematical-modelling"]
+}
