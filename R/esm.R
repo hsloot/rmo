@@ -9,9 +9,11 @@
 #' @param intensities shock model intensity rates
 #'
 #' @return an \eqn{n \times d} matrix with rows corresponding to the independent
-#' samples of size d.
+#' samples of size \eqn{d}.
 #'
 #' @examples
+#' # sample 10 times from a bivariate Marshall-Olkin distribution with parameters
+#' # with c(1, 1, 1) using the exogenous shock model algorithm
 #' rmo_esm(10, 2, c(1, 1, 1))
 #'
 #' @export
