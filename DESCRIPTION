@@ -20,3 +20,5 @@ RoxygenNote: 6.1.1
 Collate: 
     'sets.R'
     'sample.R'
+URL: https://hsloot.github.io/rmo/
+BugReports: https://github.com/hsloot/rmo/issues

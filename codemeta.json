@@ -1,5 +1,8 @@
 {
-  "@context": ["https://doi.org/10.5063/schema/codemeta-2.0", "http://schema.org"],
+  "@context": [
+    "https://doi.org/10.5063/schema/codemeta-2.0",
+    "http://schema.org"
+  ],
   "@type": "SoftwareSourceCode",
   "identifier": "rmo",
   "description": "\n  The package contains an implementation of the Marshall-Olkin distribution and methods for estimation, simulation, and construction.",
@@ -61,11 +64,24 @@
     }
   ],
   "softwareRequirements": [],
-  "codeRepository": "https://github.com/hsloot/rmo",
+  "codeRepository": "https://hsloot.github.io/rmo/",
   "releaseNotes": "https://github.com/hsloot/rmo/blob/master/NEWS.md",
   "readme": "https://github.com/hsloot/rmo/blob/master/README.md",
-  "fileSize": "2.851KB",
-  "contIntegration": ["https://travis-ci.org/hsloot/rmo", "https://ci.appveyor.com/project/hsloot/rmo", "https://codecov.io/gh/hsloot/rmo?branch=master"],
+  "fileSize": "2.887KB",
+  "contIntegration": [
+    "https://travis-ci.org/hsloot/rmo",
+    "https://ci.appveyor.com/project/hsloot/rmo",
+    "https://codecov.io/gh/hsloot/rmo?branch=master"
+  ],
   "developmentStatus": "https://www.tidyverse.org/lifecycle/#experimental",
-  "keywords": ["r", "simulation", "estimation", "modeling", "statistics", "mathematics", "mathematical-modelling"]
+  "keywords": [
+    "r",
+    "simulation",
+    "estimation",
+    "modeling",
+    "statistics",
+    "mathematics",
+    "mathematical-modelling"
+  ],
+  "issueTracker": "https://github.com/hsloot/rmo/issues"
 }
