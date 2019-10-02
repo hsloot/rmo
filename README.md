@@ -40,6 +40,13 @@ You can install the development version from
 devtools::install_github("hsloot/rmo")
 ```
 
+## Example
+
+``` r
+# library(rmo)
+rmo_esm(10, 2, c(1, 1, 1))
+```
+
 ## License
 
 MIT [Henrik Sloot]()

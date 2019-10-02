@@ -17,6 +17,10 @@ make sure someone from the team agrees that it’s a problem. If you’ve found 
 bug, create an associated issue and illustrate the bug with a minimal
 [reprex](https://www.tidyverse.org/help/#reprex).
 
+### Commit message style
+
+We use the [Udacity commit message style](https://udacity.github.io/git-styleguide/). 
+
 ### Pull request process
 
 *  We recommend that you create a Git branch for each pull request (PR).  
