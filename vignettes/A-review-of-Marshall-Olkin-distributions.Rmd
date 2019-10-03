@@ -1,0 +1,11 @@
+---
+title: "A review of Marshall-Olkin distributions"
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  eval=FALSE
+)
+```

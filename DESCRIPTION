@@ -12,7 +12,8 @@ Description:
 License: MIT + file LICENSE
 Suggests:
     testthat,
-    covr
+    covr,
+    rmarkdown
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
