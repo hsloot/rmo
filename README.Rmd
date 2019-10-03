@@ -11,6 +11,7 @@ knitr::opts_chunk$set(
   fig.path = "man/figures/README-",
   out.width = "100%"
 )
+library(rmo)
 ```
 
 # rmo
@@ -42,9 +43,9 @@ devtools::install_github("hsloot/rmo")
 
 ## Example
 
-``` r
+```{r, include=TRUE}
 # library(rmo)
-rmo_esm(10, 2, c(1, 1, 1))
+rmo_esm(n = 10, d = 2, intensities = c(1, 1, 1))
 ```
 
 ## License
