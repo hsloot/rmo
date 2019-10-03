@@ -1,10 +1,7 @@
 # R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
 
 language: R
-r:
-  - oldrel
-  - release
-  - devel
+r: release
 r_github_packages:
   - r-lib/covr
 before_cache: Rscript -e 'remotes::install_cran("pkgdown")'
