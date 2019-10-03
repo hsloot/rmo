@@ -2,7 +2,7 @@
 name: Bug report
 about: You encountered an error or unexpected behaviour? Great! Create a report to
   help us improve :-)
-title: ''
+title: "[BUG]"
 labels: ''
 assignees: ''
 
