@@ -1,6 +1,6 @@
 # Contributing to rmo
 
-This outlines how to propose a change to rmo. For more detailed info about contributing to this, and other tidyverse packages, please see the [**development contributing guide**](https://rstd.io/tidy-contrib).
+This outlines how to propose a change to rmo. 
 
 ### Fixing typos
 
@@ -33,6 +33,4 @@ We use the [Udacity commit message style](https://udacity.github.io/git-stylegui
 
 ### Code of Conduct
 
-Please note that the rmo2 project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By contributing to this project you agree to abide by its terms.
-
-### See tidyverse [development contributing guide](https://rstd.io/tidy-contrib) for further details.
+Please note that the rmo project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By contributing to this project you agree to abide by its terms.
