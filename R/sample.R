@@ -8,7 +8,7 @@
 #' @param d dimension
 #' @param intensities shock model intensity rates
 #'
-#' @return an \eqn{n \times d} matrix with rows corresponding to the independent
+#' @return an \eqn{n \times d}{n x d} matrix with rows corresponding to the independent
 #' samples of size \eqn{d}.
 #'
 #' @examples

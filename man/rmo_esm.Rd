@@ -14,7 +14,7 @@ rmo_esm(n, d, intensities)
 \item{intensities}{shock model intensity rates}
 }
 \value{
-an \eqn{n \times d} matrix with rows corresponding to the independent
+an \eqn{n \times d}{n x d} matrix with rows corresponding to the independent
 samples of size \eqn{d}.
 }
 \description{
