@@ -11,4 +11,4 @@
 ^codecov\.yml$
 ^appveyor\.yml$
 ^codemeta\.json$
-^vignettes/A-review-of-Marshall-Olkin-distributions\.Rmd$
+^vignettes/The-Marshall-Olkin-distribution\.Rmd$
