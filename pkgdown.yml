@@ -2,5 +2,5 @@ pandoc: '2.2'
 pkgdown: 1.4.1
 pkgdown_sha: ~
 articles:
-  A-review-of-Marshall-Olkin-distributions: A-review-of-Marshall-Olkin-distributions.html
+  The-Marshall-Olkin-distribution: The-Marshall-Olkin-distribution.html
 
