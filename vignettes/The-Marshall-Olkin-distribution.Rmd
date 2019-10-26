@@ -117,7 +117,7 @@ Then, it can be shown that the vector \(\boldsymbol{\tau}\), defined below, has 
 Let the following two sequences be independent:
 
 - \(\epsilon_1, \epsilon_2, \ldots \sim \mathrm{Exp} (\lambda)\) iid.
-- \(Y_1, Y_2, \ldots\) iid in \(\mathbb{P} (\{1, \ldots, d\}) \backslash \{ 0\}\) with \(\mathbb{P} (Y_1 = I) = p_I, \ \emptyset \neq I \subseteq \{ 1, \ldots , d\}\).
+- \(Y_1, Y_2, \ldots\) iid in \(\mathcal{P} (\{1, \ldots, d\}) \backslash \{ 0\}\) with \(\mathbb{P} (Y_1 = I) = p_I, \ \emptyset \neq I \subseteq \{ 1, \ldots , d\}\).
 
 Now, we define \(\boldsymbol{\tau}\) by
 \[
