@@ -96,7 +96,7 @@ The *Pickands function* \(P\) of a d-variate Marshall--Olkin distributed random 
 A d-variate Marshall--Olkin distribution has a natural stochastic model: consider independent random variables \(E_I \sim \mathrm{Exp} (\lambda_I), \ \emptyset \neq I \subseteq \{1, \ldots, d\}\) and define
 \[
   \tau_i
-    := \inf \Big\{ E_I \ : \ I \ni i \Big\} , \ i \in \{ 1 , \ldots , d \} .
+    := \min \Big\{ E_I \ : \ I \ni i \Big\} , \ i \in \{ 1 , \ldots , d \} .
 \]
 
 ## The Arnold model
