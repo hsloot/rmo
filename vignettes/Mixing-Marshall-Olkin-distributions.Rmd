@@ -98,4 +98,4 @@ The corresponding parameters are defined by
 \]
 
 This can be generalised by allowing components of \( \tilde{\boldsymbol{\tau}}^{(1)} \) and \( \tilde{\boldsymbol{\tau}}^{(2)} \) to be infinite as long as \( \boldsymbol{\tau} \) has finite margins.
-This means \( \tilde{\lambda}_I^{(j)} = 0 \) is allowed as long as \( \tilde{\lambda}_I^{(1)} + \tilde{\lambda}_I^{(2)} > 0 \).
+Specifically, \( \tilde{\lambda}_I^{(j)} = 0 \) is allowed as long as \( \tilde{\lambda}_I^{(1)} + \tilde{\lambda}_I^{(2)} > 0 \).
