@@ -13,3 +13,4 @@
 ^codemeta\.json$
 ^vignettes/The-Marshall-Olkin-distribution\.Rmd$
 ^vignettes/Mixing-Marshall-Olkin-distributions\.Rmd
+^vignettes/Exchangeable-Marshall-Olkin-distributions\.Rmd
