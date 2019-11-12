@@ -42,7 +42,9 @@ knitr::opts_chunk$set(
 )
 ```
 
-The following document is a compendium for the *Marshall--Olkin distribution*. For a detailed mathematical treatment of this class, we refer to the references at the end of this document.
+The following document is a compendium for the *Marshall--Olkin distribution*. 
+
+For a detailed mathematical treatment of this class, we refer to the references at the end of this document.
 
 ## Definition and survival copula
 
