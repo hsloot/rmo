@@ -1,0 +1,110 @@
+---
+title: "The Lévy frailty model"
+references:
+- id: Mai2017a
+  title: Simulating copulas
+  author:
+  - family: Mai
+    given: Jan-Frederik
+  - family: Scherer
+    given: Matthias
+  publisher: World Scientific
+  edition: 2nd
+  DOI: 10.1142/10265
+  type: book
+  issued:
+    year: 2017
+nocite: |
+  @Mai2017a
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  eval=FALSE
+)
+```
+
+A subclass of exchangeable Marshall--Olkin distributions can be sampled with a so-called *Lévy frailty model*.
+This alternative stochastic model is very efficient in high dimensions.
+
+For a detailed mathematical treatment of this class, we refer to the references at the end of this document.
+
+
+## The extendible subclass
+
+An exchangeable Marshall--Olkin distribution with parameters \( a_0, \ldots, a_{d-1} \) is called extendible if there exists a sequence \( \tau_1, \tau_2, \ldots \) such that each finite margin has a Marshall--Olkin distribution and
+\[
+  \mathbb{P}{\left( \tau_1 > t_1 , \ldots \tau_d > t_d \right)}
+    = \exp{\left \{ - \sum_{i = 0}^{d-1} a_i t_{[i+1]} \right \}}, \quad \boldsymbol{t} \geq 0 .
+\]
+
+
+## The Lévy frailty representation
+
+Each extendible Marshall--Olkin distribution can be uniquely linked (in law) to a Lévy subordinator \( \Lambda \) and a iid unit exponential random variables \( E_1, \ldots , E_d \) such that \( \boldsymbol{\tau} \) has this distribution with
+\[
+  \tau_i
+    = \inf{\left \{ t > 0 \ : \ \Lambda_t \geq E_i \right \}}, \quad i \in \{ 1, \ldots, d\} .
+\]
+
+If \( \psi \) is the Laplace exponent of the Lévy subordinator, i.e. \( \psi (x) = -\log\mathbb{E}{[\exp{\{ - x \Lambda_1\}}]} \), then
+\[
+  a_i
+    = \psi (i+1) - \psi(i) , \quad i \in \{ 1, \ldots, d\} .
+\]
+
+## Homogeneous Poisson process
+
+A simple example is the case, when \( \Lambda \) is a homogenous Poisson process with rate \( \lambda > 0 \).
+In this case
+\[
+  \psi (x)
+    = \lambda {\left( 1 - \exp{\{ -x\}} \right)} , \quad x \geq 0 .
+\]
+
+
+## Killing and drift
+
+Another simple example is the case, when the subordinator has a deterministic drift \(b \geq 0 \) and is killed (send to infinity) at a certain rate \( a \geq 0 \).
+That means
+\[
+  \Lambda_t
+    = N_t^G \cdot \infty + b t , \quad t \geq 0 ,
+\]
+where \( N^G \) is a homogenous Poisson process with rate \( a \).
+
+We have
+\[
+  \psi (x)
+    = a 1_{(0, \infty)} (x)
+      + b x , \quad x \geq 0 .
+\]
+
+This model produces a [multivariate Cuadras-Augé distribution](Cuadras-Auge-distribution.html).
+
+
+## Compound Poisson process
+
+The class of compound Poisson subordinators is the largest class of Lévy subordinators which can be used to sample *exactly* from a Marshall--Olkin distribution.
+Here, the Lévy subordinator has the form
+\[
+  \Lambda_t
+    = N_t^G \cdot \infty
+      + b t
+      + \sum_{i = 1}^{N_t} X_i , \quad t \geq 0 ,
+\]
+where \( N^G \) is a homogenous Poisson process with rate \( a \geq 0 \), \( b \geq 0 \) is a deterministic drift, \( N \) is a homogenous Poisson process with rate \( \lambda \geq 0 \), and \( {\{ X_i \}}_{i \in \mathbb{N}} \) is an iid sequence of non-negative random variables (all objects are independent).
+
+We have
+\[
+  \psi (x)
+    = a 1_{(0, \infty)} (x)
+      + b x
+      + \lambda \left( 1 - \mathcal{L} (X_1; x) \right), \quad x \geq 0 ,
+\]
+where \( x \mapsto \mathcal{L} (X_1, x) \) is the Laplace transform of \( X_1 \).
+
+
+## References
