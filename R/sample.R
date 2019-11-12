@@ -73,8 +73,8 @@ rmo_arnold <- function(n, d, intensities) {
     value <- numeric(d)
 
     while (!all(destroyed)) {
-      W <- rexp(1, total_intensity)
-      Y <- sample.int(n = 2^d-1, size=1, replace=FALSE, prob = transition_probs)
+      W <- rexp(1, total_intensity) # nolint
+      Y <- sample.int(n = 2^d-1, size=1, replace=FALSE, prob = transition_probs) # nolint
 
       for (i in 1:d) {
         if (!destroyed[[i]]) {
