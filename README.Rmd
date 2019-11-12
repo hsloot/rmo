@@ -48,6 +48,11 @@ devtools::install_github("hsloot/rmo")
 rmo_esm(n = 10, d = 2, intensities = c(1, 1, 1))
 ```
 
+
+## Contributing
+
+Contribution is highly appreciated. Contribution can range from improving the documentation, writing tests, or raising issues and feature requests to implementing feature requests or fixing bugs. If you consider to contribute, have a look at our [contribution guide](.github/CONTRIBUTING.md). 
+
 ## License
 
 MIT [Henrik Sloot]()

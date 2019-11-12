@@ -16,7 +16,7 @@ status](https://ci.appveyor.com/api/projects/status/github/hsloot/rmo?branch=mas
 coverage](https://codecov.io/gh/hsloot/rmo/branch/master/graph/badge.svg)](https://codecov.io/gh/hsloot/rmo?branch=master)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
-[![Last-changedate](https://img.shields.io/badge/last%20change-2019--11--01-yellowgreen.svg)](/commits/master)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2019--11--12-yellowgreen.svg)](/commits/master)
 <!-- badges: end -->
 
 An R package for the *Marshall-Olkin distribution*: algorithms for the
@@ -46,17 +46,25 @@ devtools::install_github("hsloot/rmo")
 # library(rmo)
 rmo_esm(n = 10, d = 2, intensities = c(1, 1, 1))
 #>             [,1]       [,2]
-#>  [1,] 0.34169337 0.30427171
-#>  [2,] 0.87884026 0.24449081
-#>  [3,] 0.43552687 0.43552687
-#>  [4,] 0.19583119 0.19583119
-#>  [5,] 0.08550973 0.35980678
-#>  [6,] 0.36669012 0.47580137
-#>  [7,] 0.48359983 0.35594019
-#>  [8,] 0.09656357 0.09656357
-#>  [9,] 0.33930297 0.57129464
-#> [10,] 0.40113901 0.40113901
+#>  [1,] 0.88915640 0.26291879
+#>  [2,] 0.02429431 0.02429431
+#>  [3,] 0.52780143 0.01175364
+#>  [4,] 0.47485603 0.21375354
+#>  [5,] 0.23147035 0.06674164
+#>  [6,] 0.21255479 0.01682099
+#>  [7,] 0.88522365 0.76053695
+#>  [8,] 1.35217610 0.39032035
+#>  [9,] 1.01788729 1.37484129
+#> [10,] 0.36871786 0.27676996
 ```
+
+## Contributing
+
+Contribution is highly appreciated. Contribution can range from
+improving the documentation, writing tests, or raising issues and
+feature requests to implementing feature requests or fixing bugs. If you
+consider to contribute, have a look at our [contribution
+guide](.github/CONTRIBUTING.md).
 
 ## License
 
