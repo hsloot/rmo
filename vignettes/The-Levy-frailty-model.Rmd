@@ -65,7 +65,7 @@ In this case
 \]
 
 
-## Killing and drift
+## Exponential killing and drift
 
 Another simple example is the case, when the subordinator has a deterministic drift \(b \geq 0 \) and is killed (send to infinity) at a certain rate \( a \geq 0 \).
 That means
