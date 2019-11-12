@@ -1,6 +1,6 @@
 # Contributing to rmo
 
-This outlines how to propose a change to rmo. 
+This outlines how to propose a change to rmo.
 
 ### Fixing typos
 
@@ -25,7 +25,7 @@ We use the [Udacity commit message style](https://udacity.github.io/git-stylegui
 
 *  We recommend that you create a Git branch for each pull request (PR).  
 *  Look at the Travis and AppVeyor build status before and after making changes. The `README` should contain badges for any continuous integration services used by the package.  
-*  New code should follow the tidyverse [style guide](https://style.tidyverse.org). You can use the [styler](https://CRAN.R-project.org/package=styler) package to apply these styles, but please don't restyle code that has nothing to do with your PR.  
+*  New code should follow the tidyverse [style guide](https://style.tidyverse.org) and pass `lintr::lint_package()` without errors. You can use the [styler](https://CRAN.R-project.org/package=styler) package to apply these styles, but please don't restyle code that has nothing to do with your PR. For more information on the static code analysis tool `lintr`, see [https://github.com/jimhester/lintr](https://github.com/jimhester/lintr).
 *  We use [roxygen2](https://cran.r-project.org/package=roxygen2), with [Markdown syntax](https://cran.r-project.org/web/packages/roxygen2/vignettes/markdown.html), for documentation.  
 *  We use [testthat](https://cran.r-project.org/package=testthat). Contributions with test cases included are easier to accept.  
 *  For user-facing changes, add a bullet to the top of `NEWS.md` below the current development version header describing the changes made followed by your GitHub username, and links to relevant issue(s)/PR(s).
