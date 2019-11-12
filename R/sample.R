@@ -2,7 +2,8 @@
 #'
 #' Draws `n` independent samples from a `d` variate Marshall-Olkin distribution
 #' with shock rates `intensities` using the *exogenous shock model algorithm*.
-#' The shock rates must be stored in a vector of length \eqn{2^d-1}.
+#' The shock rates must be stored in a vector of length \eqn{2^d-1}. For more information
+#' on this algorithm, see J.-F. Mai, M. SCherer, "Simulating Copulas", World Scientific (2017).
 #'
 #' @param n number of samples
 #' @param d dimension
