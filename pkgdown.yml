@@ -2,7 +2,9 @@ pandoc: '2.2'
 pkgdown: 1.4.1
 pkgdown_sha: ~
 articles:
+  Cuadras-Auge-distributions: Cuadras-Auge-distributions.html
   Exchangeable-Marshall-Olkin-distributions: Exchangeable-Marshall-Olkin-distributions.html
   Mixing-Marshall-Olkin-distributions: Mixing-Marshall-Olkin-distributions.html
+  The-Levy-frailty-model: The-Levy-frailty-model.html
   The-Marshall-Olkin-distribution: The-Marshall-Olkin-distribution.html
 
