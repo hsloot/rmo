@@ -69,7 +69,7 @@ For this reason, we use the notation \( \lambda_i := \lambda_{I} \), if \( i = \
 
 ## Reparametrisation
 
-For \( \boldsymbol{t} \geq 0 \) with descendigly ordered version \( t_{[1]} \geq \cdots \geq t_{[d]} \) the [survival function](The-Marshall-Olkin-distribution.html#definition-and-survival-copula) can be rewritten as
+For \( \boldsymbol{t} \geq 0 \) with descendingly ordered version \( t_{[1]} \geq \cdots \geq t_{[d]} \) the [survival function](The-Marshall-Olkin-distribution.html#definition-and-survival-copula) can be rewritten as
 \[
   \bar{F} (\boldsymbol{t})
     = \exp{\left \{ - \sum_{i=0}^{d-1} a_i \cdot t_{[i+1]} \right \}} , \quad \boldsymbol{t} \geq 0 .
