@@ -23,8 +23,8 @@ rmo_esm <- function(n, d, intensities) {
   out <- matrix(nrow=n, ncol=d)
   for (k in 1:n) {
     value <- rep(Inf, d)
-    for (j in 1:(2^d-1)) {
-      E <- rexp(1, intensities[[j]])
+    for (j in 1:(2^d - 1)) {
+      E <- rexp(1, intensities[[j]]) # nolint
       for (i in 1:d) {
         if (is_within(i, j))
           value[i] <- min(c(value[[i]], E))

@@ -16,3 +16,4 @@
 ^vignettes/Exchangeable-Marshall-Olkin-distributions\.Rmd
 ^vignettes/Cuadras-Auge-distributions\.Rmd
 ^vignettes/The-Levy-frailty-model\.Rmd
+^\.lintr$
