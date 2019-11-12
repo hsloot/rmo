@@ -15,7 +15,7 @@ Only for new or refactored algorithms:
 
 Optional, but recommended:
 
-- [ ] code passes `lintr::lint_package()` wihtout errors
+- [ ] code passes `lintr::lint_package()` without errors
 
 ## Description
 
@@ -23,6 +23,9 @@ Proposed changes:
 -
 -
 -
+
+## Comments
+
 
 ## Mentions for review
 
