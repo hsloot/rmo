@@ -15,4 +15,4 @@ after_success:
     - Rscript -e 'covr::codecov()'
 after_script:
   - R CMD INSTALL $PKG_TARBALL
-  - Rscript -e 'lintr::lint_package(with_defaults(infix_spaces_linter = NULL, line_length_linter = line_length_linter(100))'
+  - Rscript -e 'lintr::lint_package(with_defaults(infix_spaces_linter = NULL, line_length_linter = line_length_linter(100)))'
