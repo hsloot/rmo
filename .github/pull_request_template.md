@@ -1,6 +1,6 @@
 ## Related issues
 
-Fixes #...
+Closes/Fixes #...
 
 ## Checklist
 
@@ -11,7 +11,7 @@ Fixes #...
 
 Only for new or refactored algorithms:
 
-- [ ] benchmarks (and comparison with previous version) included
+- [ ] benchmarks (and comparison with the previous version) included
 
 Optional, but recommended:
 
