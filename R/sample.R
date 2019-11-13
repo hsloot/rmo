@@ -88,9 +88,7 @@ rmo_ex_arnold_sorted <- function(d, ex_intensities) {
     return(rep(epsilon, d))
   }
 
-  for (i in 1:num_affected) { ## if possible, replace with binomial expression
-    ex_intensities <- ex_intensities[1:(d-i)] + ex_intensities[2:(d-i+1)]
-  }
+  ex_intensities <- vapply(1:(d-num_affected), function(x) sum(vapply(0:num_affected, function(y) choose(num_affected, y) * ex_intensities[[x + y]], FUN.VALUE=0.5)) , FUN.VALUE=0.5) # nolint
 
   epsilon + c(rep(0, num_affected),
               rmo_ex_arnold_sorted(d-num_affected, ex_intensities))
