@@ -2,4 +2,5 @@
 
 export(rmo_arnold)
 export(rmo_esm)
+export(rmo_ex_arnold)
 importFrom(stats,rexp)

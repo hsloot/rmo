@@ -21,7 +21,7 @@ samples of size \eqn{d}.
 Draws \code{n} independent samples from a \code{d} variate Marshall-Olkin distribution
 with shock rates \code{intensities} using the \emph{exogenous shock model algorithm}.
 The shock rates must be stored in a vector of length \eqn{2^d-1}. For more information
-on this algorithm, see J.-F. Mai, M. SCherer, "Simulating Copulas", World Scientific (2017).
+on this algorithm, see J.-F. Mai, M. Scherer, "Simulating Copulas", World Scientific (2017).
 }
 \examples{
 # sample 10 times from a bivariate Marshall-Olkin distribution with parameters
