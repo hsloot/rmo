@@ -10,10 +10,7 @@ test_that("ESM implementation for d = 2", {
   x <- rmo_esm(n, 2, intensities)
 
   set.seed(1632)
-  y <- matrix(0, nrow = n, ncol = 2)
-  for (i in 1:n) {
-    y[i, ] <- pmin(1/intensities[1:2] * rexp(2), c(1, 1)/intensities[3] * rexp(1))
-  }
+  y <- test__rmo_esm_bivariate_R(n, intensities)
 
   expect_equal(x, y)
 })
