@@ -38,7 +38,8 @@
 <meta property="og:title" content="Sampling from the exogenous shock model — rmo_esm" />
 <meta property="og:description" content="Draws n independent samples from a d variate Marshall-Olkin distribution
 with shock rates intensities using the exogenous shock model algorithm.
-The shock rates must be stored in a vector of length \(2^d-1\)." />
+The shock rates must be stored in a vector of length \(2^d-1\). For more information
+on this algorithm, see J.-F. Mai, M. SCherer, &quot;Simulating Copulas&quot;, World Scientific (2017)." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -137,7 +138,8 @@ The shock rates must be stored in a vector of length \(2^d-1\)." />
     <div class="ref-description">
     <p>Draws <code>n</code> independent samples from a <code>d</code> variate Marshall-Olkin distribution
 with shock rates <code>intensities</code> using the <em>exogenous shock model algorithm</em>.
-The shock rates must be stored in a vector of length \(2^d-1\).</p>
+The shock rates must be stored in a vector of length \(2^d-1\). For more information
+on this algorithm, see J.-F. Mai, M. SCherer, "Simulating Copulas", World Scientific (2017).</p>
     </div>
 
     <pre class="usage"><span class='fu'>rmo_esm</span>(<span class='no'>n</span>, <span class='no'>d</span>, <span class='no'>intensities</span>)</pre>
@@ -167,17 +169,17 @@ samples of size \(d\).</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># sample 10 times from a bivariate Marshall-Olkin distribution with parameters</span>
 <span class='co'># with c(1, 1, 1) using the exogenous shock model algorithm</span>
-<span class='fu'>rmo_esm</span>(<span class='fl'>10</span>, <span class='fl'>2</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>))</div><div class='output co'>#&gt;             [,1]       [,2]
-#&gt;  [1,] 0.20152177 0.20152177
-#&gt;  [2,] 0.85221616 0.85221616
-#&gt;  [3,] 0.02373428 0.02373428
-#&gt;  [4,] 0.97469010 1.30246013
-#&gt;  [5,] 1.24795243 1.24795243
-#&gt;  [6,] 0.03565984 0.03565984
-#&gt;  [7,] 0.39164776 0.37711201
-#&gt;  [8,] 0.36032584 0.12500131
-#&gt;  [9,] 0.26976093 0.26976093
-#&gt; [10,] 0.06314708 0.06314708</div><div class='input'>
+<span class='fu'>rmo_esm</span>(<span class='fl'>10</span>, <span class='fl'>2</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>))</div><div class='output co'>#&gt;              [,1]        [,2]
+#&gt;  [1,] 0.172273897 0.539260352
+#&gt;  [2,] 0.382878972 0.326413163
+#&gt;  [3,] 0.154131389 0.374895491
+#&gt;  [4,] 0.025959171 0.187107581
+#&gt;  [5,] 0.399658714 0.923826395
+#&gt;  [6,] 0.638164893 0.638164893
+#&gt;  [7,] 0.003116603 0.003116603
+#&gt;  [8,] 0.303693565 0.335631529
+#&gt;  [9,] 0.328570986 0.328570986
+#&gt; [10,] 2.250800771 0.053360772</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

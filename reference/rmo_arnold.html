@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • rmo</title>
+<title>Sampling from the Arnold model — rmo_arnold • rmo</title>
 
 
 <!-- jquery -->
@@ -35,7 +35,12 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Sampling from the Arnold model — rmo_arnold" />
+<meta property="og:description" content="Draws n independent samples from a d variate Marshall-Olkin distribution
+with shock rates intensities using the Arnold model algorithm. The shock
+rates must be stored in a vactor of length \(2^d-1\). For more information
+on this algorithm, see J.-F. Mai, M. SCherer, &quot;Simulating Copulas&quot;, World Scientific (2017)." />
+<meta name="twitter:card" content="summary" />
 
 
 
@@ -54,7 +59,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -123,48 +128,80 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Sampling from the Arnold model</h1>
+    
+    <div class="hidden name"><code>rmo_arnold.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    <p>Draws <code>n</code> independent samples from a <code>d</code> variate Marshall-Olkin distribution
+with shock rates <code>intensities</code> using the <em>Arnold model algorithm</em>. The shock
+rates must be stored in a vactor of length \(2^d-1\). For more information
+on this algorithm, see J.-F. Mai, M. SCherer, "Simulating Copulas", World Scientific (2017).</p>
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
+    <pre class="usage"><span class='fu'>rmo_arnold</span>(<span class='no'>n</span>, <span class='no'>d</span>, <span class='no'>intensities</span>)</pre>
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="rmo_arnold.html">rmo_arnold()</a></code> </p>
-        </td>
-        <td><p>Sampling from the Arnold model</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="rmo_esm.html">rmo_esm()</a></code> </p>
-        </td>
-        <td><p>Sampling from the exogenous shock model</p></td>
-      </tr>
-    </tbody>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>n</th>
+      <td><p>number of samples</p></td>
+    </tr>
+    <tr>
+      <th>d</th>
+      <td><p>dimension</p></td>
+    </tr>
+    <tr>
+      <th>intensities</th>
+      <td><p>shock model intensity rates</p></td>
+    </tr>
     </table>
-  </div>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>an \(n \times d\) matrix with rows corresponding to the independent
+samples of size \(d\).</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'># sample 10 times from a bivariate Marshall-Olkin distribution with parameters</span>
+<span class='co'># with c(1, 1, 1) using the Arnold model algorithm</span>
+<span class='fu'>rmo_arnold</span>(<span class='fl'>10</span>, <span class='fl'>2</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>))</div><div class='output co'>#&gt;             [,1]        [,2]
+#&gt;  [1,] 0.79048125 0.857655172
+#&gt;  [2,] 1.88035786 1.725103201
+#&gt;  [3,] 1.29381550 0.007911428
+#&gt;  [4,] 0.28423879 0.441118520
+#&gt;  [5,] 0.01188661 0.137590616
+#&gt;  [6,] 0.53160480 0.531604795
+#&gt;  [7,] 0.97162586 0.394269934
+#&gt;  [8,] 0.28392301 0.106856233
+#&gt;  [9,] 0.68448748 0.089920311
+#&gt; [10,] 0.64821573 0.278224274</div><div class='input'><span class='co'># sample 10 times from a bivariate Marshall-Olkin distribution with parameters</span>
+<span class='co'># with c(0.5, 0.4, 0.6) using the Arnold model algorithm</span>
+<span class='fu'>rmo_arnold</span>(<span class='fl'>10</span>, <span class='fl'>2</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.5</span>, <span class='fl'>0.4</span>, <span class='fl'>0.6</span>))</div><div class='output co'>#&gt;               [,1]         [,2]
+#&gt;  [1,] 0.5256134408 2.4952548518
+#&gt;  [2,] 0.0566405449 1.3811256879
+#&gt;  [3,] 0.4713702198 0.4713702198
+#&gt;  [4,] 0.9014744696 0.0798837865
+#&gt;  [5,] 0.1341833649 0.1341833649
+#&gt;  [6,] 0.5688985511 4.2231441103
+#&gt;  [7,] 0.8344013482 2.6184419375
+#&gt;  [8,] 0.0002553345 0.0002553345
+#&gt;  [9,] 0.3665506964 0.5451858578
+#&gt; [10,] 0.0891924516 0.0891924516</div><div class='input'>
+</div></pre>
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
+      <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#value">Value</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
+
   </div>
 </div>
 
