@@ -46,7 +46,7 @@ test_that("Alternative implementation", {
   n <- 100
 
   ex_intensities <- c(0.4, 0.3, 0.2, 0.2, 0.1)
-  ex_a <- vapply(0:(5-1), function(x) sum(vapply(0:(5-x-1), function(y) choose(5-x-1, y) * ex_intensities[[y+1]], FUN.VALUE=0.5)), FUN.VALUE=0.5)
+  ex_a <- vapply(0:(5-1), function(x) sum(vapply(0:(5-x-1), function(y) choose(5-x-1, y) * ex_intensities[[y+1]], FUN.VALUE=0.5)), FUN.VALUE=0.5) # nolint
 
   set.seed(1632)
   x <- rmo_ex_arnold(n, 5, ex_intensities)
