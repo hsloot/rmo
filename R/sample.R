@@ -116,15 +116,17 @@ rmo_arnold <- function(n, d, intensities) {
 rmo_ex_arnold <- function(n, d, ex_intensities) {
   out <- matrix(0, nrow=n, ncol=d)
 
-  generator_matrix <- matrix(NA, d, d+1)
+  generator_list <- list()
   for (i in 1:d) {
-    generator_matrix[i, 2:(i+1)] <- vapply(1:i, function(x) sum(vapply(0:(d-i), function(y) choose((d-i), y) * ex_intensities[[x + y]], FUN.VALUE=0.5)) , FUN.VALUE=0.5) * vapply(1:i, function(x) choose(i, x), FUN.VALUE = 0.5) # nolint
-    generator_matrix[i, 1] <- sum(generator_matrix[i, 2:(i+1)])
-    generator_matrix[i, 2:(i+1)] <- generator_matrix[i, 2:(i+1)] / generator_matrix[i, 1]
+    transition_probabilities <- vapply(1:i, function(x) sum(vapply(0:(d-i), function(y) choose((d-i), y) * ex_intensities[[x + y]], FUN.VALUE=0.5)) , FUN.VALUE=0.5) * vapply(1:i, function(x) choose(i, x), FUN.VALUE = 0.5) # nolint
+    total_intensity <- sum(transition_probabilities)
+    transition_probabilities <- transition_probabilities / total_intensity
+    generator_list[[i]] <- list(total_intensity = total_intensity,
+                                transition_probabilities = transition_probabilities)
   }
 
   for (i in 1:n) {
-    value <- rmo_ex_arnold_sorted(d, generator_matrix)
+    value <- rmo_ex_arnold_sorted(d, generator_list)
     perm <- sample.int(d, d, replace = FALSE)
     out[i, ] <- value[perm]
   }
@@ -135,9 +137,9 @@ rmo_ex_arnold <- function(n, d, ex_intensities) {
 #' @importFrom stats rexp
 #' @keywords internal
 #' @noRd
-rmo_ex_arnold_sorted <- function(d, generator_matrix) {
-  total_intensity <- generator_matrix[d, 1]
-  transition_probabilities <- generator_matrix[d, 2:(d+1)]
+rmo_ex_arnold_sorted <- function(d, generator_list) {
+  total_intensity <- generator_list[[d]]$total_intensity
+  transition_probabilities <- generator_list[[d]]$transition_probabilities
 
   epsilon <- rexp(1, total_intensity)
   num_affected <- sample.int(d, 1, replace = FALSE, prob = transition_probabilities)
@@ -147,5 +149,5 @@ rmo_ex_arnold_sorted <- function(d, generator_matrix) {
   }
 
   epsilon + c(rep(0, num_affected),
-              rmo_ex_arnold_sorted(d-num_affected, generator_matrix))
+              rmo_ex_arnold_sorted(d-num_affected, generator_list))
 }
