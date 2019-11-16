@@ -19,6 +19,7 @@
 #'
 #' @export
 #' @importFrom stats rexp
+#' @importFrom assertthat assert_that is.count
 #' @include sets.R
 rmo_esm <- function(n, d, intensities) {
   assert_that(is.count(n), is.count(d), is_mo_parameter(intensities),
@@ -64,6 +65,7 @@ rmo_esm <- function(n, d, intensities) {
 #'
 #' @export
 #' @importFrom stats rexp
+#' @importFrom assertthat assert_that is.count
 #' @include sets.R
 rmo_arnold <- function(n, d, intensities) {
   assert_that(is.count(n), is.count(d), is_mo_parameter(intensities),
@@ -119,6 +121,7 @@ rmo_arnold <- function(n, d, intensities) {
 #' rmo_ex_arnold(10, 2, c(1, 1))
 #'
 #' @export
+#' @importFrom assertthat assert_that is.count
 rmo_ex_arnold <- function(n, d, ex_intensities) {
   assert_that(is.count(n), is.count(d), is_exmo_parameter(ex_intensities),
     length(ex_intensities) == d)
