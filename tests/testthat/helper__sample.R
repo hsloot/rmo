@@ -5,13 +5,9 @@
 ##
 ## #### Setup ####
 ##
-required_packages <- c("assertthat")
-for (pkg in required_packages) {
-  if (!pkg %in% .packages()) {
-    library(pkg, character.only = TRUE, quietly = TRUE, warn.conflicts = FALSE)
-  }
+if (!"assertthat" %in% .packages()) {
+  library("assertthat", character.only = TRUE, quietly = TRUE, warn.conflicts = FALSE)
 }
-
 
 ## #### Custom assertions ####
 ##
@@ -31,8 +27,9 @@ for (pkg in required_packages) {
 #' @keywords internal
 #' @noRd
 test__rmo_assertparameters_R <- function(n, d, intensities) { # nolint
-  assert_that(is.count(n), is.count(d))
-  assert_that(is.numeric(intensities), all(intensities >= 0), length(intensities) == 2^d-1)
+  assertthat::assert_that(assertthat::is.count(n), assertthat::is.count(d))
+  assertthat::assert_that(is.numeric(intensities), all(intensities >= 0),
+    length(intensities) == 2^d-1)
   marginal_intensities <- numeric(d)
   for (i in 1:d) {
     for (j in 1:(2^d-1)) {
@@ -41,7 +38,7 @@ test__rmo_assertparameters_R <- function(n, d, intensities) { # nolint
       }
     }
   }
-  assert_that(all(marginal_intensities > 0))
+  assertthat::assert_that(all(marginal_intensities > 0))
 
   invisible(TRUE)
 }
@@ -62,7 +59,7 @@ test__rmo_assertparameters_R <- function(n, d, intensities) { # nolint
 #' @noRd
 test__rmo_assertexparameters_R <- function(n, d, ex_intensities) { # nolint
   assertthat::assert_that(assertthat::is.count(n), assertthat::is.count(d))
-  assertthat::assert_that(is.numeric(ex_intensities), all(ex_intensities >= 0), length(ex_intensities) == d)
+  assertthat::assert_that(is.numeric(ex_intensities), all(ex_intensities >= 0), length(ex_intensities) == d) # nolint
   marginal_intensities <- vapply(1:d, function(x) sum(vapply(0:(x-1), function(y) choose(x-1, y) * ex_intensities[y+1], FUN.VALUE=0.5)), FUN.VALUE=0.5) # nolint
   assertthat::assert_that(all(marginal_intensities > 0))
 
