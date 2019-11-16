@@ -21,6 +21,16 @@ test_that("Exchangeable Arnold model for d = 2", {
   args[["ex_intensities"]] <- c(3, 0.2)
   expect_equal_sampling_result("rmo_ex_arnold", "test__rmo_ex_arnold_bivariate_R",
                                args, n, use_seed)
+
+  ## comonotone
+  args[["ex_intensities"]] <- c(0, 1)
+  expect_equal_sampling_result("rmo_ex_arnold", "test__rmo_ex_arnold_bivariate_R",
+                               args, n, use_seed)
+
+  ## independence
+  args[["ex_intensities"]] <- c(1, 0)
+  expect_equal_sampling_result("rmo_ex_arnold", "test__rmo_ex_arnold_bivariate_R",
+                               args, n, use_seed)
 })
 
 
@@ -29,7 +39,7 @@ test_that("Exchangeable Arnold model for d = 2", {
 ## parameters is equivalent for d = 5 and different choices
 ## for the ex_intensity vector..
 test_that("Alternative implementation", {
-  n <- 100L
+  n <- 25L
 
   ## all equal
   args <- list("d" = 5L, ex_intensities = rep(1, 5L))
@@ -37,7 +47,17 @@ test_that("Alternative implementation", {
                                args, n, use_seed)
 
   ## heterogeneous ex_intensity vector
-  args <- list("d" = 5L, ex_intensities = c(0.4, 0.3, 0.2, 0.2, 0.1))
+  args[["ex_intensities"]] <- c(0.4, 0.3, 0.2, 0.2, 0.1)
+  expect_equal_sampling_result("rmo_ex_arnold", "test__rmo_ex_arnold_alternative_R",
+                               args, n, use_seed)
+
+  ## comonotone
+  args[["ex_intensities"]] <- c(0, 0, 0, 0, 1)
+  expect_equal_sampling_result("rmo_ex_arnold", "test__rmo_ex_arnold_alternative_R",
+                               args, n, use_seed)
+
+  ## independence
+  args[["ex_intensities"]] <- c(1, 0, 0, 0, 0)
   expect_equal_sampling_result("rmo_ex_arnold", "test__rmo_ex_arnold_alternative_R",
                                args, n, use_seed)
 })

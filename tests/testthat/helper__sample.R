@@ -60,8 +60,8 @@ test__rmo_assertparameters_R <- function(n, d, intensities) { # nolint
 test__rmo_assertexparameters_R <- function(n, d, ex_intensities) { # nolint
   assertthat::assert_that(assertthat::is.count(n), assertthat::is.count(d))
   assertthat::assert_that(is.numeric(ex_intensities), all(ex_intensities >= 0), length(ex_intensities) == d) # nolint
-  marginal_intensities <- vapply(1:d, function(x) sum(vapply(0:(x-1), function(y) choose(x-1, y) * ex_intensities[y+1], FUN.VALUE=0.5)), FUN.VALUE=0.5) # nolint
-  assertthat::assert_that(all(marginal_intensities > 0))
+  marginal_intensities <- sum(vapply(0:(d-1), function(y) choose(d-1, y) * ex_intensities[y+1], FUN.VALUE=0.5)) # nolint
+  assertthat::assert_that(marginal_intensities > 0)
 
   invisible(TRUE)
 }
@@ -91,7 +91,10 @@ test__rmo_esm_bivariate_R <- function(n, d, intensities) { # nolint
 
   out <- matrix(0, nrow = n, ncol = 2)
     for (i in 1:n) {
-      out[i, ] <- pmin(1/intensities[1:2] * stats::rexp(2), c(1, 1)/intensities[3] * stats::rexp(1))
+      E1 <- rexp_if_rate_zero_then_infinity(1, intensities[1]) # nolint
+      E2 <- rexp_if_rate_zero_then_infinity(1, intensities[2]) # nolint
+      E3 <- rexp_if_rate_zero_then_infinity(1, intensities[3]) # nolint
+      out[i, ] <- pmin(c(E1, E2), E3)
     }
 
   out
