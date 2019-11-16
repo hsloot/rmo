@@ -60,8 +60,8 @@ test__rmo_assertparameters_R <- function(n, d, intensities) { # nolint
 test__rmo_assertexparameters_R <- function(n, d, ex_intensities) { # nolint
   assertthat::assert_that(assertthat::is.count(n), assertthat::is.count(d))
   assertthat::assert_that(is.numeric(ex_intensities), all(ex_intensities >= 0), length(ex_intensities) == d) # nolint
-  marginal_intensities <- vapply(1:d, function(x) sum(vapply(0:(x-1), function(y) choose(x-1, y) * ex_intensities[y+1], FUN.VALUE=0.5)), FUN.VALUE=0.5) # nolint
-  assertthat::assert_that(all(marginal_intensities > 0))
+  marginal_intensities <- sum(vapply(0:(d-1), function(y) choose(d-1, y) * ex_intensities[y+1], FUN.VALUE=0.5)) # nolint
+  assertthat::assert_that(marginal_intensities > 0)
 
   invisible(TRUE)
 }
