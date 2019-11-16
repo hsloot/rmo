@@ -1,33 +1,36 @@
 context("Arnold model")
 
+use_seed <- 1632L
+
 ## Test that the implementation Arnold model
-## works as expected for d = 2.
+## works as expected for d = 2 and different choices
+## for the intensity vector..
+
 test_that("Arnold model implementation for d = 2", {
-  n <- 100
-  intensities <- c(0.5, 0.4, 0.2)
+  n <- 25L
 
-  set.seed(1632)
-  x <- rmo_arnold(n, 2, intensities)
+  ## all equal
+  args <- list("d" = 2L, "intensities" = c(1, 1, 1))
+  expect_equal_sampling_result("rmo_arnold", "test__rmo_arnold_bivariate_R",
+                               args, n, use_seed)
 
-  set.seed(1632)
-  total_intensity <- sum(intensities)
-  transition_probabilities <-intensities / total_intensity
-  out <- matrix(0, nrow = n, ncol = 2)
-  for (i in 1:n) {
-    destroyed <- rep(FALSE, 2)
-    while (!all(destroyed)) {
-      W <- rexp(1, total_intensity) # nolint
-      Y <- sample.int(3, 1, replace=FALSE, prob = transition_probabilities) # nolint
-      out[i, !destroyed] <- out[i, !destroyed] + W
-      if (Y == 1) {
-        destroyed[1] <- TRUE
-      } else if (Y == 2) {
-        destroyed[2] <- TRUE
-      } else {
-        destroyed <- rep(TRUE, 2)
-      }
-    }
-  }
+  ## exchangeable, low, high
+  args <- list("d" = 2L, "intensities" = c(0.1, 0.1, 2))
+  expect_equal_sampling_result("rmo_arnold", "test__rmo_arnold_bivariate_R",
+                               args, n, use_seed)
 
-  expect_equal(x, out)
+  ## exchangeable, high, low
+  args <- list("d" = 2L, "intensities" = c(3, 3, 0.5))
+  expect_equal_sampling_result("rmo_arnold", "test__rmo_arnold_bivariate_R",
+                               args, n, use_seed)
+
+  ## Low, High, Low
+  args[["intensities"]] <- c(0.5, 3, 0.2)
+  expect_equal_sampling_result("rmo_arnold", "test__rmo_arnold_bivariate_R",
+                               args, n, use_seed)
+
+  ## Low, Low, High
+  args[["intensities"]] <- c(0.1, 0.005, 2)
+  expect_equal_sampling_result("rmo_arnold", "test__rmo_arnold_bivariate_R",
+                               args, n, use_seed)
 })

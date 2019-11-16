@@ -10,15 +10,18 @@ Authors@R:
 Description:
   The package contains an implementation of the Marshall-Olkin distribution and methods for estimation, simulation, and construction.
 License: MIT + file LICENSE
+Imports:
+    assertthat
 Suggests:
     testthat,
     covr,
-    rmarkdown
+    rmarkdown,
+    rlang
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
-Collate: 
+Collate:
     'sets.R'
     'sample.R'
 URL: https://hsloot.github.io/rmo/

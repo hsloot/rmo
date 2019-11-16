@@ -1,19 +1,34 @@
 context("Exogenous shock model")
+use_seed <- 1632L
 
 ## Test that the implementation exogenous shock model
-## works as expected for d = 2.
+## works as expected for d = 2 and different choices
+## for the intensity vector.
 test_that("ESM implementation for d = 2", {
-  n <- 100
-  intensities <- c(0.5, 0.4, 0.2)
+  n <- 25L
 
-  set.seed(1632)
-  x <- rmo_esm(n, 2, intensities)
+  ## all equal
+  args <- list("d" = 2L, "intensities" = c(1, 1, 1))
+  expect_equal_sampling_result("rmo_esm", "test__rmo_esm_bivariate_R",
+                               args, n, use_seed)
 
-  set.seed(1632)
-  y <- matrix(0, nrow = n, ncol = 2)
-  for (i in 1:n) {
-    y[i, ] <- pmin(1/intensities[1:2] * rexp(2), c(1, 1)/intensities[3] * rexp(1))
-  }
+  ## exchangeable, low, high
+  args <- list("d" = 2L, "intensities" = c(0.1, 0.1, 2))
+  expect_equal_sampling_result("rmo_esm", "test__rmo_esm_bivariate_R",
+                               args, n, use_seed)
 
-  expect_equal(x, y)
+  ## exchangeable, high, low
+  args <- list("d" = 2L, "intensities" = c(3, 3, 0.5))
+  expect_equal_sampling_result("rmo_esm", "test__rmo_esm_bivariate_R",
+                               args, n, use_seed)
+
+  ## Low, High, Low
+  args[["intensities"]] <- c(0.5, 3, 0.2)
+  expect_equal_sampling_result("rmo_esm", "test__rmo_esm_bivariate_R",
+                               args, n, use_seed)
+
+  ## Low, Low, High
+  args[["intensities"]] <- c(0.1, 0.005, 2)
+  expect_equal_sampling_result("rmo_esm", "test__rmo_esm_bivariate_R",
+                               args, n, use_seed)
 })
