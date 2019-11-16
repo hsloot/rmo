@@ -2,7 +2,16 @@
 ## simulation algorithms.
 ##
 ## Naming convention for the functions: test__rmo_<name>_<specialisation>_R
-library("assertthat")
+##
+## #### Setup ####
+##
+if (!"assertthat" %in% .packages()) {
+  library("assertthat")
+}
+
+
+## #### Custom assertions ####
+##
 
 #' Parameters-check for d=2
 #'
@@ -57,6 +66,9 @@ test__rmo_assertexparameters_R <- function(n, d, ex_intensities) {
   invisible(TRUE)
 }
 
+
+## #### Bivariate implementations ####
+##
 
 #' Bivariate exogenous shock model
 #'
@@ -171,6 +183,8 @@ test__rmo_ex_arnold_bivariate_R <- function(n, ex_intensities) {
   out
 }
 
+
+## #### Altenative implementations ####
 
 #' Alternative implementation of exchangeable Arnold model
 #'
