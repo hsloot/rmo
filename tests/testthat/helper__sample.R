@@ -85,8 +85,9 @@ test__rmo_assertexparameters_R <- function(n, d, ex_intensities) {
 #'
 #' @keywords internal
 #' @noRd
-test__rmo_esm_bivariate_R <- function(n, intensities) {
+test__rmo_esm_bivariate_R <- function(n, d, intensities) {
   test__rmo_assertparameters_R(n, 2, intensities)
+  assert_that(d == 2L)
 
   out <- matrix(0, nrow = n, ncol = 2)
     for (i in 1:n) {
@@ -111,8 +112,9 @@ test__rmo_esm_bivariate_R <- function(n, intensities) {
 #'
 #' @keywords internal
 #' @noRd
-test__rmo_arnold_bivariate_R <- function(n, intensities) {
-  test__rmo_assertparameters_R(n, 2, intensities)
+test__rmo_arnold_bivariate_R <- function(n, d, intensities) {
+  test__rmo_assertparameters_R(n, d, intensities)
+  assert_that(d == 2L)
 
   total_intensity <- sum(intensities)
   transition_probabilities <-intensities / total_intensity
@@ -153,8 +155,9 @@ test__rmo_arnold_bivariate_R <- function(n, intensities) {
 #'
 #' @keywords internal
 #' @noRd
-test__rmo_ex_arnold_bivariate_R <- function(n, ex_intensities) {
-  test__rmo_assertexparameters_R(n, 2, ex_intensities)
+test__rmo_ex_arnold_bivariate_R <- function(n, d, ex_intensities) {
+  test__rmo_assertexparameters_R(n, d, ex_intensities)
+  assert_that(d == 2L)
 
   total_intensity <- 2*ex_intensities[[1]] + ex_intensities[[2]]
   transition_probabilities <- c(2*ex_intensities[[1]], ex_intensities[[2]]) /
