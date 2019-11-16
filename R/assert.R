@@ -13,7 +13,7 @@
 #' @return TRUE/FALSE
 #'
 #' @importFrom assertthat assert_that on_failure<-
-#' @include sets.R
+#' @include sets.R aaa.R
 #' @keywords internal
 #' @noRd
 is_mo_parameter <- function(intensities) {
@@ -50,6 +50,7 @@ on_failure(is_mo_parameter) <- function(call, env) {
 #' @return TRUE/FALSE
 #'
 #' @importFrom assertthat assert_that
+#' @include aaa.R
 #' @keywords internal
 #' @noRd
 is_exmo_parameter <- function(ex_intensities) {
