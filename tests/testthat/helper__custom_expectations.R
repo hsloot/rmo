@@ -31,20 +31,20 @@ format_args <- function(args, ...) {
 #' @seealso \url{https://testthat.r-lib.org/articles/custom-expectation.html}
 expect_equal_sampling_result <- function(object, expected, arguments, n = 100L,
     use_seed = 1623L, ...) {
-  act <- quasi_label(rlang::enquo(object), NULL, arg = "object")
-  exp <- quasi_label(rlang::enquo(expected), NULL, arg = "expected")
-  args <- quasi_label(rlang::enquo(arguments), "Arguments", arg = "arguments")
+  act <- testthat::quasi_label(rlang::enquo(object), NULL, arg = "object")
+  exp <- testthat::quasi_label(rlang::enquo(expected), NULL, arg = "expected")
+  args <- testthat::quasi_label(rlang::enquo(arguments), "Arguments", arg = "arguments")
 
-  assert_that(is.string(act$val), is.string(exp$val), is.count(n),
-              is.count(use_seed))
+  assertthat::assert_that(assertthat::is.string(act$val), assertthat::is.string(exp$val),
+    assertthat::is.count(n), assertthat::is.count(use_seed))
 
   set.seed(use_seed)
   x <- do.call(act$val, args = c("n" = n, args$val))
   set.seed(use_seed)
   y <- do.call(exp$val, args = c("n" = n, args$val))
 
-  comp <- compare(x, y, ...)
-  expect(
+  comp <- testthat::compare(x, y, ...)
+  testthat::expect(
     comp$equal,
     sprintf(paste0(
       "Sample results of %s not equal to those of %s.",
