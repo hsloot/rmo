@@ -31,4 +31,14 @@ test_that("ESM implementation for d = 2", {
   args[["intensities"]] <- c(0.1, 0.005, 2)
   expect_equal_sampling_result("rmo_esm", "test__rmo_esm_bivariate_R",
                                args, n, use_seed)
+
+  ## comonotone
+  args[["intensities"]] <- c(0, 0, 1)
+  expect_equal_sampling_result("rmo_esm", "test__rmo_esm_bivariate_R",
+                               args, n, use_seed)
+
+  ## independence
+  args[["intensities"]] <- c(1, 1, 0)
+  expect_equal_sampling_result("rmo_esm", "test__rmo_esm_bivariate_R",
+                               args, n, use_seed)
 })
