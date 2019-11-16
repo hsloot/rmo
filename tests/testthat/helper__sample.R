@@ -9,63 +9,6 @@ if (!"assertthat" %in% .packages()) {
   library("assertthat", character.only = TRUE, quietly = TRUE, warn.conflicts = FALSE)
 }
 
-## #### Custom assertions ####
-##
-
-#' Parameters-check for d=2
-#'
-#' Check if the parameters for an exogenous shock model or Arnold model
-#' sampling algorithm are valid.
-#'
-#' @param n number of samples
-#' @param d dimension of the MO vector
-#' @param intensities shock model intensity rates
-#'
-#' @returns `invsible(TRUE)` and raises error if problem is detected.
-#'
-#' @importFrom assertthat asset_that is.count
-#' @keywords internal
-#' @noRd
-test__rmo_assertparameters_R <- function(n, d, intensities) { # nolint
-  assertthat::assert_that(assertthat::is.count(n), assertthat::is.count(d))
-  assertthat::assert_that(is.numeric(intensities), all(intensities >= 0),
-    length(intensities) == 2^d-1)
-  marginal_intensities <- numeric(d)
-  for (i in 1:d) {
-    for (j in 1:(2^d-1)) {
-      if (is_within(i, j)) {
-        marginal_intensities[i] <- marginal_intensities[i] + intensities[[j]]
-      }
-    }
-  }
-  assertthat::assert_that(all(marginal_intensities > 0))
-
-  invisible(TRUE)
-}
-
-#' Parameters-ex-check for d=2
-#'
-#' Check if the parameters for an exchangeableexogenous shock model or
-#' Arnold model sampling algorithm are valid.
-#'
-#' @param n number of samples
-#' @param d dimension of the MO vector
-#' @param ex_intensities exchangeable shock model intensity rates
-#'
-#' @returns `invsible(TRUE)` and raises error if problem is detected.
-#'
-#' @importFrom assertthat asset_that is.count
-#' @keywords internal
-#' @noRd
-test__rmo_assertexparameters_R <- function(n, d, ex_intensities) { # nolint
-  assertthat::assert_that(assertthat::is.count(n), assertthat::is.count(d))
-  assertthat::assert_that(is.numeric(ex_intensities), all(ex_intensities >= 0), length(ex_intensities) == d) # nolint
-  marginal_intensities <- vapply(1:d, function(x) sum(vapply(0:(x-1), function(y) choose(x-1, y) * ex_intensities[y+1], FUN.VALUE=0.5)), FUN.VALUE=0.5) # nolint
-  assertthat::assert_that(all(marginal_intensities > 0))
-
-  invisible(TRUE)
-}
-
 
 ## #### Bivariate implementations ####
 ##
@@ -86,8 +29,8 @@ test__rmo_assertexparameters_R <- function(n, d, ex_intensities) { # nolint
 #' @keywords internal
 #' @noRd
 test__rmo_esm_bivariate_R <- function(n, d, intensities) { # nolint
-  test__rmo_assertparameters_R(n, 2, intensities)
-  assertthat::assert_that(d == 2L)
+  assertthat::assert_that(assertthat::is.count(n), assertthat::is.count(d),
+    d == 2L, is_mo_parameter(intensities), length(intensities) == 2^d-1)
 
   out <- matrix(0, nrow = n, ncol = 2)
     for (i in 1:n) {
@@ -113,8 +56,8 @@ test__rmo_esm_bivariate_R <- function(n, d, intensities) { # nolint
 #' @keywords internal
 #' @noRd
 test__rmo_arnold_bivariate_R <- function(n, d, intensities) { # nolint
-  test__rmo_assertparameters_R(n, d, intensities)
-  assertthat::assert_that(d == 2L)
+  assertthat::assert_that(assertthat::is.count(n), assertthat::is.count(d),
+    d == 2L, is_mo_parameter(intensities), length(intensities) == 2^d-1)
 
   total_intensity <- sum(intensities)
   transition_probabilities <-intensities / total_intensity
@@ -156,8 +99,8 @@ test__rmo_arnold_bivariate_R <- function(n, d, intensities) { # nolint
 #' @keywords internal
 #' @noRd
 test__rmo_ex_arnold_bivariate_R <- function(n, d, ex_intensities) { # nolint
-  test__rmo_assertexparameters_R(n, d, ex_intensities)
-  assertthat::assert_that(d == 2L)
+  assertthat::assert_that(assertthat::is.count(n), assertthat::is.count(d),
+    d == 2L, is_exmo_parameter(ex_intensities), length(ex_intensities) == d)
 
   total_intensity <- 2*ex_intensities[[1]] + ex_intensities[[2]]
   transition_probabilities <- c(2*ex_intensities[[1]], ex_intensities[[2]]) /
@@ -206,7 +149,8 @@ test__rmo_ex_arnold_bivariate_R <- function(n, d, ex_intensities) { # nolint
 #' @keywords internal
 #' @noRd
 test__rmo_ex_arnold_alternative_R <- function(n, d, ex_intensities) { # nolint
-  test__rmo_assertexparameters_R(n, d, ex_intensities)
+  assertthat::assert_that(assertthat::is.count(n), assertthat::is.count(d),
+    is_exmo_parameter(ex_intensities), length(ex_intensities) == d)
 
   ex_a <- vapply(0:(d-1), function(x) sum(vapply(0:(d-x-1), function(y) choose(d-x-1, y) * ex_intensities[[y+1]], FUN.VALUE=0.5)), FUN.VALUE=0.5) # nolint
 
