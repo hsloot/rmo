@@ -30,7 +30,7 @@ for (pkg in required_packages) {
 #' @importFrom assertthat asset_that is.count
 #' @keywords internal
 #' @noRd
-test__rmo_assertparameters_R <- function(n, d, intensities) {
+test__rmo_assertparameters_R <- function(n, d, intensities) { # nolint
   assert_that(is.count(n), is.count(d))
   assert_that(is.numeric(intensities), all(intensities >= 0), length(intensities) == 2^d-1)
   marginal_intensities <- numeric(d)
@@ -60,10 +60,10 @@ test__rmo_assertparameters_R <- function(n, d, intensities) {
 #' @importFrom assertthat asset_that is.count
 #' @keywords internal
 #' @noRd
-test__rmo_assertexparameters_R <- function(n, d, ex_intensities) {
+test__rmo_assertexparameters_R <- function(n, d, ex_intensities) { # nolint
   assert_that(is.count(n), is.count(d))
   assert_that(is.numeric(ex_intensities), all(ex_intensities >= 0), length(ex_intensities) == d)
-  marginal_intensities <- vapply(1:d, function(x) sum(vapply(0:(x-1), function(y) choose(x-1, y) * ex_intensities[y+1], FUN.VALUE=0.5)), FUN.VALUE=0.5)
+  marginal_intensities <- vapply(1:d, function(x) sum(vapply(0:(x-1), function(y) choose(x-1, y) * ex_intensities[y+1], FUN.VALUE=0.5)), FUN.VALUE=0.5) # nolint
   assert_that(all(marginal_intensities > 0))
 
   invisible(TRUE)
@@ -88,7 +88,7 @@ test__rmo_assertexparameters_R <- function(n, d, ex_intensities) {
 #'
 #' @keywords internal
 #' @noRd
-test__rmo_esm_bivariate_R <- function(n, d, intensities) {
+test__rmo_esm_bivariate_R <- function(n, d, intensities) { # nolint
   test__rmo_assertparameters_R(n, 2, intensities)
   assert_that(d == 2L)
 
@@ -115,7 +115,7 @@ test__rmo_esm_bivariate_R <- function(n, d, intensities) {
 #'
 #' @keywords internal
 #' @noRd
-test__rmo_arnold_bivariate_R <- function(n, d, intensities) {
+test__rmo_arnold_bivariate_R <- function(n, d, intensities) { # nolint
   test__rmo_assertparameters_R(n, d, intensities)
   assert_that(d == 2L)
 
@@ -158,7 +158,7 @@ test__rmo_arnold_bivariate_R <- function(n, d, intensities) {
 #'
 #' @keywords internal
 #' @noRd
-test__rmo_ex_arnold_bivariate_R <- function(n, d, ex_intensities) {
+test__rmo_ex_arnold_bivariate_R <- function(n, d, ex_intensities) { # nolint
   test__rmo_assertexparameters_R(n, d, ex_intensities)
   assert_that(d == 2L)
 
@@ -208,7 +208,7 @@ test__rmo_ex_arnold_bivariate_R <- function(n, d, ex_intensities) {
 #'
 #' @keywords internal
 #' @noRd
-test__rmo_ex_arnold_alternative_R <- function(n, d, ex_intensities) {
+test__rmo_ex_arnold_alternative_R <- function(n, d, ex_intensities) { # nolint
   test__rmo_assertexparameters_R(n, d, ex_intensities)
 
   ex_a <- vapply(0:(d-1), function(x) sum(vapply(0:(d-x-1), function(y) choose(d-x-1, y) * ex_intensities[[y+1]], FUN.VALUE=0.5)), FUN.VALUE=0.5) # nolint
