@@ -25,7 +25,7 @@ rmo_esm <- function(n, d, intensities) {
   for (k in 1:n) {
     value <- rep(Inf, d)
     for (j in 1:(2^d - 1)) {
-      E <- rexp(1, intensities[[j]]) # nolint
+      E <- rexp_if_rate_zero_then_infinity(1, intensities[[j]]) # nolint
       for (i in 1:d) {
         if (is_within(i, j))
           value[i] <- min(c(value[[i]], E))
@@ -150,4 +150,15 @@ rmo_ex_arnold_sorted <- function(d, generator_list) {
 
   epsilon + c(rep(0, num_affected),
               rmo_ex_arnold_sorted(d-num_affected, generator_list))
+}
+
+#' @importFrom stats rexp
+#' @keywords internal
+#' @noRd
+rexp_if_rate_zero_then_infinity <- function(n, rate) { # nolint
+  if (rate == 0) {
+    return(rep(Inf, n))
+  } else {
+    return(rexp(n, rate))
+  }
 }
