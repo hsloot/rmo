@@ -1,6 +1,13 @@
 ## This file contains custom expectations to be used in
 ## unit tests.
 ##
+required_packages <- c("assertthat", "rlang", "testthat")
+for (pkg in required_packages) {
+  if (!pkg %in% .packages()) {
+    library(pkg, character.only = TRUE, quietly = TRUE, warn.conflicts = FALSE)
+  }
+}
+
 
 format_args <- function(args, ...) {
   paste(paste0(" * ", names(args), " = \n\t", format(args, ...)), collapse = "\n")

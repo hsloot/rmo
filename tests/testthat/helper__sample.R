@@ -5,8 +5,11 @@
 ##
 ## #### Setup ####
 ##
-if (!"assertthat" %in% .packages()) {
-  library("assertthat")
+required_packages <- c("assertthat")
+for (pkg in required_packages) {
+  if (!pkg %in% .packages()) {
+    library(pkg, character.only = TRUE, quietly = TRUE, warn.conflicts = FALSE)
+  }
 }
 
 
