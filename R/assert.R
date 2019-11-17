@@ -1,3 +1,17 @@
+## #### Assertation error messages #####
+##
+# nolint start
+ERR_MARGINRATE_NOT_POS = "%s does not have positive marginal rates"
+# nolint end
+
+
+## #### Miscellaneous custom assertations ####
+##
+
+
+## #### Assertations for MO params ####
+##
+
 #' Assertion for the  `intensities` parameter
 #'
 #' Assert if `intensities` is a valid Marshall-Olkin  parameter.
@@ -13,7 +27,7 @@
 #' @return TRUE/FALSE
 #'
 #' @importFrom assertthat assert_that on_failure<-
-#' @include sets.R aaa.R
+#' @include sets.R
 #' @keywords internal
 #' @noRd
 is_mo_parameter <- function(intensities) {
@@ -36,6 +50,9 @@ on_failure(is_mo_parameter) <- function(call, env) {
 }
 
 
+## #### Assertations for exMO params ####
+##
+
 #' Assertion for the `ex_intensities` parameter
 #'
 #' Assert if `ex_intensities` is a valid exchangeable Marshall-Olkin parameter.
@@ -50,7 +67,6 @@ on_failure(is_mo_parameter) <- function(call, env) {
 #' @return TRUE/FALSE
 #'
 #' @importFrom assertthat assert_that
-#' @include aaa.R
 #' @keywords internal
 #' @noRd
 is_exmo_parameter <- function(ex_intensities) {
