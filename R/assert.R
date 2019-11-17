@@ -1,4 +1,4 @@
-## #### Assertation error messages #####
+## #### Assertion error messages #####
 ##
 # nolint start
 ERR_MARGINRATE_NOT_POS = "%s does not have positive marginal rates"
@@ -8,7 +8,7 @@ ERR_NOT_RJUMP_ARGS = "%s is not valid arglist for cpp jump distribution for %s"
 # nolint end
 
 
-## #### Miscellaneous custom assertations ####
+## #### Miscellaneous custom assertions ####
 ##
 
 #' Custom assertions for scalar values
@@ -22,18 +22,18 @@ ERR_NOT_RJUMP_ARGS = "%s is not valid arglist for cpp jump distribution for %s"
 #'   scalar number and `FALSE` otherwise.
 #'
 #' @examples
-#' assertthat::see_if(is_positive_number(-1)) # FALSE
-#' assertthat::see_if(is_positive_number(0)) # FALSE
-#' assertthat::see_if(is_positive_number(c(1, 2))) # FALSE
-#' assertthat::see_if(is_positive_number("1")) # FALSE
-#' assertthat::see_if(is_positive_number(1)) # TRUE
-#' assertthat::see_if(is_positive_number(pi)) # TRUE
+#' assertthat::see_if(is_positive_number(-1))       ## FALSE
+#' assertthat::see_if(is_positive_number(0))        ## FALSE
+#' assertthat::see_if(is_positive_number(c(1, 2)))  ## FALSE
+#' assertthat::see_if(is_positive_number("1"))      ## FALSE
+#' assertthat::see_if(is_positive_number(1))        ## TRUE
+#' assertthat::see_if(is_positive_number(pi))       ## TRUE
 #'
 #' @seealso \code{\link[assertthat:is.scalar]{is.number}}
 #'
 #' @family assertions
 #'
-#' @importFrom assertthat assert_that is.number
+#' @importFrom assertthat is.number
 #'
 #' @keywords internal
 #' @noRd
@@ -54,16 +54,16 @@ on_failure(is_positive_number) <- function(call, env) {
 #'   scalar number and `FALSE` otherwise.
 #'
 #' @examples
-#' assertthat::see_if(is_nonnegative_number(-1)) # FALSE
-#' assertthat::see_if(is_nonnegative_number(c(1, 2))) # FALSE
-#' assertthat::see_if(is_nonnegative_number("1")) # FALSE
-#' assertthat::see_if(is_nonnegative_number(0)) # TRUE
-#' assertthat::see_if(is_nonnegative_number(1)) # TRUE
-#' assertthat::see_if(is_nonnegative_number(pi)) # TRUE
+#' assertthat::see_if(is_nonnegative_number(-1))      ## FALSE
+#' assertthat::see_if(is_nonnegative_number(c(1, 2))) ## FALSE
+#' assertthat::see_if(is_nonnegative_number("1"))     ## FALSE
+#' assertthat::see_if(is_nonnegative_number(0))       ## TRUE
+#' assertthat::see_if(is_nonnegative_number(1))       ## TRUE
+#' assertthat::see_if(is_nonnegative_number(pi))      ## TRUE
 #'
 #' @family assertions
 #'
-#' @importFrom assertthat assert_that is.number
+#' @importFrom assertthat is.number
 #'
 #' @keywords internal
 #' @noRd
@@ -79,7 +79,7 @@ on_failure(is_nonnegative_number) <- function(call, env) {
 }
 
 
-## #### Assertations for MO params ####
+## #### Assertions for MO params ####
 ##
 
 #' Assertion for the  `intensities` parameter
@@ -115,12 +115,16 @@ is_mo_parameter <- function(intensities) {
 
   all(marginal_intensities > 0)
 }
+
+#' @importFrom assertthat on_failure<-
+#' @keywords internal
+#' @noRd
 on_failure(is_mo_parameter) <- function(call, env) {
   sprintf(ERR_MARGINRATE_NOT_POS, deparse(call$intensities))
 }
 
 
-## #### Assertations for exMO params ####
+## #### Assertions for exMO params ####
 ##
 
 #' Assertion for the `ex_intensities` parameter
@@ -146,15 +150,19 @@ is_exmo_parameter <- function(ex_intensities) {
 
   marginal_intensity > 0
 }
+
+#' @importFrom assertthat on_failure<-
+#' @keywords internal
+#' @noRd
 on_failure(is_exmo_parameter) <- function(call, env) {
   sprintf(ERR_MARGINRATE_NOT_POS, deparse(call$ex_intensities))
 }
 
 
-## #### Assertations for CPP jump distr. params ####
+## #### Assertions for CPP jump distr. params ####
 ##
 
-#' Assertation for jump distribution and params
+#' Assertion for jump distribution and params
 #'
 #' @param rjump_name name of sampling function for jump distribution
 #'
@@ -162,8 +170,8 @@ on_failure(is_exmo_parameter) <- function(call, env) {
 #'   and is contained in list of allowed distributions and `FALSE` otherwise.
 #'
 #' @examples
-#' assertthat::see_if(is_rjump_name("rnorm")) # FALSE
-#' assertthat::see_if(is_rjump_name("rexp")) # TRUE
+#' assertthat::see_if(is_rjump_name("rnorm")) ## FALSE
+#' assertthat::see_if(is_rjump_name("rexp"))  ## TRUE
 #'
 #' @family assertions
 #'
@@ -194,8 +202,8 @@ on_failure(is_rjump_name) <- function(call, env) {
 #'   `FALSE` otherwise.
 #'
 #' @examples
-#' assertthat::see_if(is_rjump_arg_list("rexp", list())) # FALSE
-#' assertthat::see_if(is_rjump_arg_list("rexp", list("rate"=0.5))) # TRUE
+#' assertthat::see_if(is_rjump_arg_list("rexp", list()))            ## FALSE
+#' assertthat::see_if(is_rjump_arg_list("rexp", list("rate"=0.5)))  ## TRUE
 #'
 #' @family assertions
 #'

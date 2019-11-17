@@ -29,7 +29,7 @@ An \verb{n x d} array with \code{n} independent samples of the corresponding
 Sampler for LFM with CPP subordinator
 }
 \examples{
-rmo_lfm_cpp(10L, 2L, 0.5, 0, 0, "rposval", list("value" = 1))
-rmo_lfm_cpp(10L, 2L, 0.5, 0, 0, "rexp", list("rate" = 2))
+rmo_lfm_cpp(10L, 2L, 0.5, 0, 0, "rposval", list("value"=1))
+rmo_lfm_cpp(10L, 2L, 0.5, 0, 0, "rexp", list("rate"=2))
 
 }

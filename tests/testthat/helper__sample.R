@@ -142,6 +142,8 @@ test__rmo_ex_arnold_bivariate_R <- function(n, d, ex_intensities) { # nolint
 #' @return A `n x 2` array with samples from the corresponding bivariate
 #'  Marshall-Olkin distributino.
 #'
+#' @importFrom assertthat assert_that is.count
+#'
 #' @keywords internal
 #' @noRd
 test__rmo_lfm_cpp_bivariate_R <- function(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list) { # nolint

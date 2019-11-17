@@ -189,6 +189,9 @@ rmo_ex_arnold_sorted <- function(d, generator_list) {
 }
 
 
+## #### Samplers for extMO distributions ####
+##
+
 #' Sampler for LFM with CPP subordinator
 #'
 #' @param n number of samples
@@ -203,8 +206,8 @@ rmo_ex_arnold_sorted <- function(d, generator_list) {
 #'  `d` variate extendible Marshall-Olkin distribution.
 #'
 #' @examples
-#' rmo_lfm_cpp(10L, 2L, 0.5, 0, 0, "rposval", list("value" = 1))
-#' rmo_lfm_cpp(10L, 2L, 0.5, 0, 0, "rexp", list("rate" = 2))
+#' rmo_lfm_cpp(10L, 2L, 0.5, 0, 0, "rposval", list("value"=1))
+#' rmo_lfm_cpp(10L, 2L, 0.5, 0, 0, "rexp", list("rate"=2))
 #'
 #' @include assert.R
 #'
@@ -259,8 +262,8 @@ rexp_if_rate_zero_then_infinity <- function(n, rate) { # nolint
 #' @return A `n` elements numeric vector with value `value` in each component
 #'
 #' @examples
-#' rposval(10L) ## rep(1, 10L)
-#' rposval(10L, pi) ## rep(pi, 10L)
+#' rposval(10L)       ## rep(1, 10L)
+#' rposval(10L, pi)   ## rep(pi, 10L)
 #'
 #' @family samplers
 #'
