@@ -1,4 +1,4 @@
-#' Assertion for the  `intensities`` parameter
+#' Assertion for the  `intensities` parameter
 #'
 #' Assert if `intensities` is a valid Marshall-Olkin  parameter.
 #' For this, the provided numeric vector must non-negative
