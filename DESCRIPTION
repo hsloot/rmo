@@ -25,6 +25,7 @@ Collate:
     'aaa.R'
     'sets.R'
     'assert.R'
+    'rmo.R'
     'sample.R'
 URL: https://hsloot.github.io/rmo/
 BugReports: https://github.com/hsloot/rmo/issues
