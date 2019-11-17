@@ -1,3 +1,6 @@
+## #### Samplers for MO distributions ####
+##
+
 #' Sampling from the exogenous shock model
 #'
 #' Draws `n` independent samples from a `d` variate Marshall-Olkin distribution
@@ -99,6 +102,10 @@ rmo_arnold <- function(n, d, intensities) {
 }
 
 
+## #### Samplers for exMO distributions ####
+##
+
+
 
 #' Sampling from the modified Arnold model for exchangeable MO
 #'
@@ -181,6 +188,17 @@ rmo_ex_arnold_sorted <- function(d, generator_list) {
               rmo_ex_arnold_sorted(d-num_affected, generator_list))
 }
 
+
+## #### Auxiliary samplers ####
+##
+
+#' Wrapper for `rexp`
+#'
+#' A wrapper for `rexp` with special treatment for the case
+#' `rate=0`.
+#'
+#' @inheritParams stats::rexp
+#'
 #' @importFrom stats rexp
 #' @keywords internal
 #' @noRd
