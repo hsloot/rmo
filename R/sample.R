@@ -189,6 +189,47 @@ rmo_ex_arnold_sorted <- function(d, generator_list) {
 }
 
 
+#' Sampler for LFM with CPP subordinator
+#'
+#' @param n number of samples
+#' @param d dimension
+#' @param rate rate of CPP subordinator
+#' @param rate_killing killing rate of CPP subordinator
+#' @param rate_drift drift rate of CPP subordinator
+#' @param rjump_name name of jump sampling function
+#' @param rjump_arg_list list with named arguments for jump sampling function
+#'
+#' @return An `n x d` array with `n` independent samples of the corresponding
+#'  `d` variate extendible Marshall-Olkin distribution.
+#'
+#' @examples
+#' rmo_lfm_cpp(10L, 2L, 0.5, 0, 0, "rposval", list("value" = 1))
+#' rmo_lfm_cpp(10L, 2L, 0.5, 0, 0, "rexp", list("rate" = 2))
+#'
+#' @include assert.R
+#'
+#' @importFrom assertthat assert_that is.count
+#' @importFrom stats rexp
+#'
+#' @export
+rmo_lfm_cpp <- function(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list) {
+  assert_that(is.count(n), is.count(d), is_positive_number(rate),
+    is_nonnegative_number(rate_killing), is_nonnegative_number(rate_drift),
+    is_rjump_name(rjump_name), is_rjump_arg_list(rjump_name, rjump_arg_list))
+
+  out <- matrix(NA, nrow=n, ncol=d)
+  for (k in 1:n) {
+    unit_exponentials <- rexp(d)
+    cpp_subordinator <- sample_cpp(rate, rate_killing, rate_drift,
+      rjump_name, rjump_arg_list, max(unit_exponentials))
+    out[k, ] <- vapply(1:d, function(x) min(cpp_subordinator[cpp_subordinator[, 2] >= unit_exponentials[[x]], 1]), FUN.VALUE=0.5) # nolint
+  }
+
+  out
+}
+
+
+
 ## #### Auxiliary samplers ####
 ##
 
@@ -232,4 +273,48 @@ rposval <- function(n, value=1) {
   assert_that(is.count(n), is_positive_number(value))
 
   rep(value, times=n)
+}
+
+
+#' Sampler for a CPP process with positive jumps
+#'
+#' A sampling function for a (possibly killed) compound Poisson subordinator
+#' with non-negative jump distribution.
+#'
+#' @param rate rate of CPP subordinator
+#' @param rate_killing killing rate of CPP subordinator
+#' @param rate_drift drift rate of CPP subordinator
+#' @param rjump_name name of jump sampling function
+#' @param rjump_arg_list list with named arguments for jump sampling function
+#' @param minmax_value the smallest allowed maximal value of process
+#'
+#' @return A named `k x 2` array with names `c("t", "value")`,
+#'   where `k` is random.
+#'
+#' @include assert.R
+#'
+#' @importFrom assertthat assert_that
+#' @importFrom stats rexp
+#'
+#' @keywords internal
+#' @noRd
+sample_cpp <- function(rate, rate_killing, rate_drift, rjump_name, rjump_arg_list, minmax_value) {
+  assert_that(is_positive_number(rate), is_nonnegative_number(rate_killing),
+    is_nonnegative_number(rate_drift), is_positive_number(minmax_value),
+    is_rjump_name(rjump_name), is_rjump_arg_list(rjump_name, rjump_arg_list),
+    is_positive_number(minmax_value))
+
+  times <- 0
+  values <- 0
+  while (sum(values) < minmax_value) {
+    waiting_time <- rexp(1, rate)
+    jump_value <- do.call(rjump_name, args=c("n"=1, rjump_arg_list))
+    kill_value <- ifelse(rexp_if_rate_zero_then_infinity(1, rate_killing) <= waiting_time, Inf, 0)
+    drift_value <- waiting_time * rate_drift
+
+    times <- c(times, waiting_time)
+    values <- c(values, kill_value + drift_value + jump_value)
+  }
+
+  cbind("t"=cumsum(times), "value"=cumsum(values))
 }
