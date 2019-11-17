@@ -29,10 +29,10 @@ rmo_esm <- function(n, d, intensities) {
   for (k in 1:n) {
     value <- rep(Inf, d)
     for (j in 1:(2^d - 1)) {
-      E <- rexp_if_rate_zero_then_infinity(1, intensities[[j]]) # nolint
+      shock_time <- rexp_if_rate_zero_then_infinity(1, intensities[[j]])
       for (i in 1:d) {
         if (is_within(i, j))
-          value[i] <- min(c(value[[i]], E))
+          value[i] <- min(c(value[[i]], shock_time))
       }
     }
     out[k, ] <- value
@@ -73,22 +73,22 @@ rmo_arnold <- function(n, d, intensities) {
 
   total_intensity <- sum(intensities)
   transition_probs <- intensities / total_intensity
-  out <- matrix(nrow=n, ncol=d)
 
+  out <- matrix(nrow=n, ncol=d)
   for (k in 1:n) {
     destroyed <- logical(d)
     value <- numeric(d)
 
     while (!all(destroyed)) {
-      W <- rexp(1, total_intensity) # nolint
-      Y <- sample.int(n = 2^d-1, size=1, replace=FALSE, prob = transition_probs) # nolint
+      waiting_time <- rexp(1, total_intensity)
+      affected <- sample.int(n=2^d-1, size=1, replace=FALSE, prob=transition_probs)
 
       for (i in 1:d) {
         if (!destroyed[[i]]) {
-          if (is_within(i, Y)) {
+          if (is_within(i, affected)) {
             destroyed[[i]] <- TRUE
           }
-          value[[i]] <- value[[i]] + W
+          value[[i]] <- value[[i]] + waiting_time
         }
       }
     }
@@ -126,41 +126,58 @@ rmo_ex_arnold <- function(n, d, ex_intensities) {
   assert_that(is.count(n), is.count(d), is_exmo_parameter(ex_intensities),
     length(ex_intensities) == d)
 
-  out <- matrix(0, nrow=n, ncol=d)
-
   generator_list <- list()
   for (i in 1:d) {
-    transition_probabilities <- vapply(1:i, function(x) sum(vapply(0:(d-i), function(y) choose((d-i), y) * ex_intensities[[x + y]], FUN.VALUE=0.5)) , FUN.VALUE=0.5) * vapply(1:i, function(x) choose(i, x), FUN.VALUE = 0.5) # nolint
-    total_intensity <- sum(transition_probabilities)
-    transition_probabilities <- transition_probabilities / total_intensity
-    generator_list[[i]] <- list(total_intensity = total_intensity,
-                                transition_probabilities = transition_probabilities)
+    transition_probs <- vapply(1:i, function(x) sum(vapply(0:(d-i), function(y) choose((d-i), y) * ex_intensities[[x + y]], FUN.VALUE=0.5)) , FUN.VALUE=0.5) * vapply(1:i, function(x) choose(i, x), FUN.VALUE = 0.5) # nolint intermediate result
+    total_intensity <- sum(transition_probs)
+    transition_probs <- transition_probs / total_intensity
+    generator_list[[i]] <- list("total_intensity" = total_intensity,
+                                "transition_probs" = transition_probs)
   }
 
-  for (i in 1:n) {
+  out <- matrix(0, nrow=n, ncol=d)
+  for (k in 1:n) {
     value <- rmo_ex_arnold_sorted(d, generator_list)
     perm <- sample.int(d, d, replace = FALSE)
-    out[i, ] <- value[perm]
+    out[k, ] <- value[perm]
   }
 
   out
 }
 
+#' Sampling from a sorted version of an exchangeable exMO distribution
+#'
+#' Samples *one* random vector which has the distribution of an ascendingly
+#' sorted sample of an exchangeable Marshall-Olkin distribution with the
+#' exchangeable shock intensities `ex_intensities`.
+#'
+#' @param d dimension
+#' @param generator_list `list` of length `d` with the i-th element containing
+#'   named elements with the  `total_intensity` and `transition_probs` of the
+#'   i-marginal exMO model.
+#'
+#' @return A `numeric` vector of length `d`.
+#'
+#' The function currently does *not* perform any argument checks and calls
+#' itself recursively. For more information
+#' on this algorithm, see
+#' J.-F. Mai, M. Scherer, "Simulating Copulas", World Scientific (2017).
+#'
 #' @importFrom stats rexp
 #' @keywords internal
 #' @noRd
 rmo_ex_arnold_sorted <- function(d, generator_list) {
   total_intensity <- generator_list[[d]]$total_intensity
-  transition_probabilities <- generator_list[[d]]$transition_probabilities
+  transition_probs <- generator_list[[d]]$transition_probs
 
-  epsilon <- rexp(1, total_intensity)
-  num_affected <- sample.int(d, 1, replace = FALSE, prob = transition_probabilities)
+  waiting_time <- rexp(1, total_intensity)
+  num_affected <- sample.int(d, 1, replace=FALSE, prob=transition_probs)
 
   if (d == num_affected) {
-    return(rep(epsilon, d))
+    return(rep(waiting_time, d))
   }
 
-  epsilon + c(rep(0, num_affected),
+  waiting_time + c(rep(0, num_affected),
               rmo_ex_arnold_sorted(d-num_affected, generator_list))
 }
 

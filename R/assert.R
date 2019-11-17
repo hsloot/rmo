@@ -24,7 +24,7 @@ is_mo_parameter <- function(intensities) {
   for (i in 1:d) {
     for (j in 1:(2^d-1)) {
       if (is_within(i, j)) {
-        marginal_intensities[i] <- marginal_intensities[i] + intensities[[j]]
+        marginal_intensities[i] <- marginal_intensities[[i]] + intensities[[j]]
       }
     }
   }

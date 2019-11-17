@@ -33,10 +33,10 @@ test__rmo_esm_bivariate_R <- function(n, d, intensities) { # nolint
 
   out <- matrix(0, nrow = n, ncol = 2)
     for (i in 1:n) {
-      E1 <- rexp_if_rate_zero_then_infinity(1, intensities[1]) # nolint
-      E2 <- rexp_if_rate_zero_then_infinity(1, intensities[2]) # nolint
-      E3 <- rexp_if_rate_zero_then_infinity(1, intensities[3]) # nolint
-      out[i, ] <- pmin(c(E1, E2), E3)
+      shock_for_1 <- rexp_if_rate_zero_then_infinity(1, intensities[[1]])
+      shock_for_2 <- rexp_if_rate_zero_then_infinity(1, intensities[[2]])
+      shock_for_1_and_2 <- rexp_if_rate_zero_then_infinity(1, intensities[[3]])
+      out[i, ] <- pmin(c(shock_for_1, shock_for_2), shock_for_1_and_2)
     }
 
   out
@@ -62,15 +62,15 @@ test__rmo_arnold_bivariate_R <- function(n, d, intensities) { # nolint
     d == 2L, is_mo_parameter(intensities), length(intensities) == 2^d-1)
 
   total_intensity <- sum(intensities)
-  transition_probabilities <-intensities / total_intensity
+  transition_probs <-intensities / total_intensity
 
   out <- matrix(0, nrow=n, ncol=2)
   for (i in 1:n) {
   destroyed <- rep(FALSE, 2)
     while (!all(destroyed)) {
-      epsilon <- rexp(1, total_intensity) # nolint
-      affected <- sample.int(3, 1, replace=FALSE, prob = transition_probabilities) # nolint
-      out[i, !destroyed] <- out[i, !destroyed] + epsilon
+      waiting_time <- rexp(1, total_intensity)
+      affected <- sample.int(3, 1, replace=FALSE, prob=transition_probs)
+      out[i, !destroyed] <- out[i, !destroyed] + waiting_time
       if (affected == 1) {
         destroyed[1] <- TRUE
       } else if (affected == 2) {
@@ -105,25 +105,25 @@ test__rmo_ex_arnold_bivariate_R <- function(n, d, ex_intensities) { # nolint
     d == 2L, is_exmo_parameter(ex_intensities), length(ex_intensities) == d)
 
   total_intensity <- 2*ex_intensities[[1]] + ex_intensities[[2]]
-  transition_probabilities <- c(2*ex_intensities[[1]], ex_intensities[[2]]) /
+  transition_probs <- c(2*ex_intensities[[1]], ex_intensities[[2]]) /
     total_intensity
 
   out <- matrix(0, nrow=n, ncol=2)
   for (i in 1:n) {
-    epsilon <- rexp(1, total_intensity)
-    num_affected <- sample.int(2, 1, replace = FALSE, prob = transition_probabilities)
+    waiting_time <- rexp(1, total_intensity)
+    num_affected <- sample.int(2, 1, replace=FALSE, prob=transition_probs)
 
     if (num_affected < 2) {
-      out[i, 1] <- epsilon
+      out[i, 1] <- waiting_time
 
-      epsilon <- rexp(1, sum(ex_intensities))
-      num_affected <- sample.int(1, 1, replace = FALSE) # dummy
-      out[i, 2] <- out[i, 1] + epsilon
+      waiting_time <- rexp(1, sum(ex_intensities))
+      num_affected <- sample.int(1, 1, replace=FALSE) # dummy
+      out[i, 2] <- out[i, 1] + waiting_time
 
       perm <- sample.int(2, 2, replace=FALSE)
       out[i, ] <- out[i, perm]
     } else {
-      out[i, ] <- epsilon
+      out[i, ] <- waiting_time
       perm <- sample.int(2, 2, replace=FALSE) # dummy
     }
   }
@@ -156,24 +156,24 @@ test__rmo_ex_arnold_alternative_R <- function(n, d, ex_intensities) { # nolint
 
   ex_a <- vapply(0:(d-1), function(x) sum(vapply(0:(d-x-1), function(y) choose(d-x-1, y) * ex_intensities[[y+1]], FUN.VALUE=0.5)), FUN.VALUE=0.5) # nolint
 
-  out <- matrix(0, nrow=n, ncol=5)
+  out <- matrix(0, nrow=n, ncol=d)
 
   for (i in 1:n) {
     ex_a_tmp <- ex_a
     d_tmp <- d
     while (d_tmp > 0) {
       ex_a_tmp <- ex_a_tmp[1:d_tmp]
-      ex_intensities_tmp <- vapply(1:d_tmp, function(x) sum(vapply(0:(x-1), function(y) (-1)^(y) * choose(x - 1, y) * ex_a_tmp[[d_tmp - x + y + 1]], FUN.VALUE = 0.5)), FUN.VALUE = 0.5) # nolint
+      ex_intensities_tmp <- vapply(1:d_tmp, function(x) sum(vapply(0:(x-1), function(y) (-1)^(y) * choose(x-1, y) * ex_a_tmp[[d_tmp-x+y+1]], FUN.VALUE=0.5)), FUN.VALUE=0.5) # nolint
 
-      transition_probabilities <- vapply(1:d_tmp, function(x) choose(d_tmp, x), FUN.VALUE = 0.5) *
+      transition_probs <- vapply(1:d_tmp, function(x) choose(d_tmp, x), FUN.VALUE=0.5) *
         ex_intensities_tmp # intermediate result
-      total_intensity <- sum(transition_probabilities)
-      transition_probabilities <- transition_probabilities / total_intensity
+      total_intensity <- sum(transition_probs)
+      transition_probs <- transition_probs / total_intensity
 
-      epsilon <- rexp(1, total_intensity)
-      num_affected <- sample.int(d_tmp, 1, replace = TRUE, prob = transition_probabilities)
+      waiting_time <- rexp(1, total_intensity)
+      num_affected <- sample.int(d_tmp, 1, replace=TRUE, prob=transition_probs)
 
-      out[i, (d-d_tmp+1):d] <- out[i, (d-d_tmp+1):d] + epsilon
+      out[i, (d-d_tmp+1):d] <- out[i, (d-d_tmp+1):d] + waiting_time
       d_tmp <- d_tmp - num_affected
     }
 
