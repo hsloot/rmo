@@ -73,13 +73,38 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=rmarkdown"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "rlang",
+      "name": "rlang",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=rlang"
     }
   ],
-  "softwareRequirements": [],
+  "softwareRequirements": [
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "assertthat",
+      "name": "assertthat",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=assertthat"
+    }
+  ],
   "codeRepository": "https://hsloot.github.io/rmo/",
   "releaseNotes": "https://github.com/hsloot/rmo/blob/master/NEWS.md",
   "readme": "https://github.com/hsloot/rmo/blob/master/README.md",
-  "fileSize": "3.265KB",
+  "fileSize": "7.313KB",
   "contIntegration": [
     "https://travis-ci.org/hsloot/rmo",
     "https://ci.appveyor.com/project/hsloot/rmo",
