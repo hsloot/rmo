@@ -26,7 +26,10 @@ An \verb{n x d} array with \code{n} independent samples of the corresponding
 \code{d} variate extendible Marshall-Olkin distribution.
 }
 \description{
-Sampler for LFM with CPP subordinator
+Draws \code{n} independent samples from a \code{d} variate extendible Marshall-Olkin
+distribution corresponding to a LFM with a compound Poisson subordinator.
+For more information on this algorithm, see
+J.-F. Mai, M. Scherer, "Simulating Copulas", World Scientific (2017).
 }
 \examples{
 rmo_lfm_cpp(10L, 2L, 0.5, 0, 0, "rposval", list("value"=1))
