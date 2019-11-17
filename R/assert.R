@@ -50,7 +50,8 @@ on_failure(is_positive_number) <- function(call, env) {
 
 #' @rdname is_positive_number
 #'
-#' @return `is_nonnegative_number` returns `TRUE` if `x` is a strictly non-negative, scalar number and `FALSE` otherwise.
+#' @return `is_nonnegative_number` returns `TRUE` if `x` is a strictly non-negative,
+#'   scalar number and `FALSE` otherwise.
 #'
 #' @examples
 #' assertthat::see_if(is_nonnegative_number(-1)) # FALSE
