@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Sampler for LFM with CPP subordinator — rmo_lfm_cpp • rmo</title>
+<title>Sampler for Cuadras-Augé distribution — rmo_esm_cuadras_auge • rmo</title>
 
 
 <!-- jquery -->
@@ -35,11 +35,10 @@
 
 
 
-<meta property="og:title" content="Sampler for LFM with CPP subordinator — rmo_lfm_cpp" />
-<meta property="og:description" content="Draws n independent samples from a d variate extendible Marshall-Olkin
-distribution corresponding to a LFM with a compound Poisson subordinator.
-For more information on this algorithm, see
-J.-F. Mai, M. Scherer, &quot;Simulating Copulas&quot;, World Scientific (2017)." />
+<meta property="og:title" content="Sampler for Cuadras-Augé distribution — rmo_esm_cuadras_auge" />
+<meta property="og:description" content="Draws n independent samples from a d variate Cuadras-Augé distribution
+with the exogenous shock model. This is a specialised version of
+rmo_esm." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -130,19 +129,18 @@ J.-F. Mai, M. Scherer, &quot;Simulating Copulas&quot;, World Scientific (2017)."
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Sampler for LFM with CPP subordinator</h1>
+    <h1>Sampler for Cuadras-Augé distribution</h1>
     
-    <div class="hidden name"><code>rmo_lfm_cpp.Rd</code></div>
+    <div class="hidden name"><code>rmo_esm_cuadras_auge.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Draws <code>n</code> independent samples from a <code>d</code> variate extendible Marshall-Olkin
-distribution corresponding to a LFM with a compound Poisson subordinator.
-For more information on this algorithm, see
-J.-F. Mai, M. Scherer, "Simulating Copulas", World Scientific (2017).</p>
+    <p>Draws <code>n</code> independent samples from a <code>d</code> variate Cuadras-Augé distribution
+with the <em>exogenous shock model</em>. This is a specialised version of
+<code>rmo_esm</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>rmo_lfm_cpp</span>(<span class='no'>n</span>, <span class='no'>d</span>, <span class='no'>rate</span>, <span class='no'>rate_killing</span>, <span class='no'>rate_drift</span>, <span class='no'>rjump_name</span>, <span class='no'>rjump_arg_list</span>)</pre>
+    <pre class="usage"><span class='fu'>rmo_esm_cuadras_auge</span>(<span class='no'>n</span>, <span class='no'>d</span>, <span class='no'>alpha</span>, <span class='no'>beta</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -156,54 +154,52 @@ J.-F. Mai, M. Scherer, "Simulating Copulas", World Scientific (2017).</p>
       <td><p>dimension</p></td>
     </tr>
     <tr>
-      <th>rate</th>
-      <td><p>rate of CPP subordinator</p></td>
+      <th>alpha</th>
+      <td><p>rate of individual shocks</p></td>
     </tr>
     <tr>
-      <th>rate_killing</th>
-      <td><p>killing rate of CPP subordinator</p></td>
-    </tr>
-    <tr>
-      <th>rate_drift</th>
-      <td><p>drift rate of CPP subordinator</p></td>
-    </tr>
-    <tr>
-      <th>rjump_name</th>
-      <td><p>name of jump sampling function</p></td>
-    </tr>
-    <tr>
-      <th>rjump_arg_list</th>
-      <td><p>list with named arguments for jump sampling function</p></td>
+      <th>beta</th>
+      <td><p>rate of global shock</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An <code>n x d</code> array with <code>n</code> independent samples of the corresponding
-<code>d</code> variate extendible Marshall-Olkin distribution.</p>
+    <p>An \(n \times d\) array matrix with rows corresponding to
+the independent samples of size \(d\).</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>rmo_lfm_cpp</span>(<span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fl'>0.5</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='st'>"rposval"</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='st'>"value"</span><span class='kw'>=</span><span class='fl'>1</span>))</div><div class='output co'>#&gt;            [,1]       [,2]
-#&gt;  [1,] 0.8241136  0.8241136
-#&gt;  [2,] 2.5684675  2.5684675
-#&gt;  [3,] 2.4258683  9.5501646
-#&gt;  [4,] 1.0330301  0.9846489
-#&gt;  [5,] 0.8114096  0.7490671
-#&gt;  [6,] 1.6369625 17.4050493
-#&gt;  [7,] 2.5283098  5.3108922
-#&gt;  [8,] 2.9484475  2.9484475
-#&gt;  [9,] 5.7319315  1.4133621
-#&gt; [10,] 0.1197391  0.1197391</div><div class='input'><span class='fu'>rmo_lfm_cpp</span>(<span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fl'>0.5</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='st'>"rexp"</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='st'>"rate"</span><span class='kw'>=</span><span class='fl'>2</span>))</div><div class='output co'>#&gt;             [,1]      [,2]
-#&gt;  [1,]  1.0061225 1.0061225
-#&gt;  [2,]  2.1480098 2.1480098
-#&gt;  [3,] 12.6638126 1.4623702
-#&gt;  [4,]  1.7667746 1.7667746
-#&gt;  [5,]  2.6022175 2.6022175
-#&gt;  [6,]  0.1753247 0.1753247
-#&gt;  [7,]  3.9888663 3.9888663
-#&gt;  [8,]  2.5186312 2.5186312
-#&gt;  [9,]  0.4085791 0.4085791
-#&gt; [10,] 13.1530280 5.7734959</div><div class='input'>
+    <pre class="examples"><div class='input'><span class='fu'>rmo_esm_cuadras_auge</span>(<span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fl'>0.5</span>, <span class='fl'>0.2</span>)</div><div class='output co'>#&gt;            [,1]      [,2]
+#&gt;  [1,] 0.7462768 1.1154629
+#&gt;  [2,] 0.1112249 0.1112249
+#&gt;  [3,] 0.2915526 0.8488557
+#&gt;  [4,] 0.8983756 0.4099967
+#&gt;  [5,] 1.0366335 1.3443012
+#&gt;  [6,] 2.7244538 2.9817862
+#&gt;  [7,] 0.6239305 0.4080154
+#&gt;  [8,] 2.0208317 0.9914585
+#&gt;  [9,] 0.9847499 0.4676582
+#&gt; [10,] 2.6411234 0.7176585</div><div class='input'><span class='fu'>rmo_esm_cuadras_auge</span>(<span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fl'>0</span>, <span class='fl'>1</span>)      <span class='co'>## comonotone</span></div><div class='output co'>#&gt;             [,1]       [,2]
+#&gt;  [1,] 0.34689565 0.34689565
+#&gt;  [2,] 1.17822671 1.17822671
+#&gt;  [3,] 0.46104855 0.46104855
+#&gt;  [4,] 0.51208218 0.51208218
+#&gt;  [5,] 0.08567431 0.08567431
+#&gt;  [6,] 1.67551998 1.67551998
+#&gt;  [7,] 0.45389771 0.45389771
+#&gt;  [8,] 0.27537110 0.27537110
+#&gt;  [9,] 1.27878700 1.27878700
+#&gt; [10,] 0.03479680 0.03479680</div><div class='input'><span class='fu'>rmo_esm_cuadras_auge</span>(<span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fl'>1</span>, <span class='fl'>0</span>)      <span class='co'>## independence</span></div><div class='output co'>#&gt;             [,1]       [,2]
+#&gt;  [1,] 0.15237484 1.47353128
+#&gt;  [2,] 0.60255025 0.51610724
+#&gt;  [3,] 0.06513033 0.09360955
+#&gt;  [4,] 2.61426561 1.24654619
+#&gt;  [5,] 1.76510947 0.38145170
+#&gt;  [6,] 0.35041701 0.13600901
+#&gt;  [7,] 1.24153229 0.30068780
+#&gt;  [8,] 0.62919241 2.21487791
+#&gt;  [9,] 0.05366065 0.52694965
+#&gt; [10,] 0.83457045 3.58954107</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
