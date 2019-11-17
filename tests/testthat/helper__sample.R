@@ -172,7 +172,6 @@ test__rmo_lfm_cpp_bivariate_rexp_R <- function(n, rate, rate_killing, rate_drift
 
     times <- 0
     values <- 0
-    stopifnot(rexp(1, jump_rate) > 0) # dummy for argument check
     while (sum(values) < max(unit_exponentials)) {
       waiting_time <- rexp(1, rate)
       jump_value <- rexp(1, jump_rate)
