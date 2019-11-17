@@ -1,3 +1,6 @@
+## #### Samplers for MO distributions ####
+##
+
 #' Sampling from the exogenous shock model
 #'
 #' Draws `n` independent samples from a `d` variate Marshall-Olkin distribution
@@ -99,6 +102,10 @@ rmo_arnold <- function(n, d, intensities) {
 }
 
 
+## #### Samplers for exMO distributions ####
+##
+
+
 
 #' Sampling from the modified Arnold model for exchangeable MO
 #'
@@ -181,13 +188,132 @@ rmo_ex_arnold_sorted <- function(d, generator_list) {
               rmo_ex_arnold_sorted(d-num_affected, generator_list))
 }
 
+
+## #### Samplers for extMO distributions ####
+##
+
+#' Sampler for LFM with CPP subordinator
+#'
+#' @param n number of samples
+#' @param d dimension
+#' @param rate rate of CPP subordinator
+#' @param rate_killing killing rate of CPP subordinator
+#' @param rate_drift drift rate of CPP subordinator
+#' @param rjump_name name of jump sampling function
+#' @param rjump_arg_list list with named arguments for jump sampling function
+#'
+#' @return An `n x d` array with `n` independent samples of the corresponding
+#'  `d` variate extendible Marshall-Olkin distribution.
+#'
+#' @examples
+#' rmo_lfm_cpp(10L, 2L, 0.5, 0, 0, "rposval", list("value"=1))
+#' rmo_lfm_cpp(10L, 2L, 0.5, 0, 0, "rexp", list("rate"=2))
+#'
+#' @include assert.R
+#'
+#' @importFrom assertthat assert_that is.count
+#' @importFrom stats rexp
+#'
+#' @export
+rmo_lfm_cpp <- function(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list) {
+  assert_that(is.count(n), is.count(d), is_positive_number(rate),
+    is_nonnegative_number(rate_killing), is_nonnegative_number(rate_drift),
+    is_rjump_name(rjump_name), is_rjump_arg_list(rjump_name, rjump_arg_list))
+
+  out <- matrix(NA, nrow=n, ncol=d)
+  for (k in 1:n) {
+    unit_exponentials <- rexp(d)
+    cpp_subordinator <- sample_cpp(rate, rate_killing, rate_drift,
+      rjump_name, rjump_arg_list, max(unit_exponentials))
+    out[k, ] <- vapply(1:d, function(x) min(cpp_subordinator[cpp_subordinator[, 2] >= unit_exponentials[[x]], 1]), FUN.VALUE=0.5) # nolint
+  }
+
+  out
+}
+
+
+
+## #### Auxiliary samplers ####
+##
+
+#' Wrapper for `rexp`
+#'
+#' A wrapper for `rexp` with special treatment for the case
+#' `rate=0`.
+#'
+#' @inheritParams stats::rexp
+#'
 #' @importFrom stats rexp
 #' @keywords internal
 #' @noRd
 rexp_if_rate_zero_then_infinity <- function(n, rate) { # nolint
   if (rate == 0) {
     return(rep(Inf, n))
-  } else {
-    return(rexp(n, rate))
   }
+
+  rexp(n, rate)
+}
+
+#' A dummy sampling function for deterministic, positive values
+#'
+#' @param n number of samples
+#' @param value value to sample
+#'
+#' @return A `n` elements numeric vector with value `value` in each component
+#'
+#' @examples
+#' rposval(10L)       ## rep(1, 10L)
+#' rposval(10L, pi)   ## rep(pi, 10L)
+#'
+#' @family samplers
+#'
+#' @include assert.R
+#'
+#' @importFrom assertthat assert_that is.count
+#' @keywords internal
+#' @noRd
+rposval <- function(n, value=1) {
+  assert_that(is.count(n), is_positive_number(value))
+
+  rep(value, times=n)
+}
+
+
+#' Sampler for a CPP process with positive jumps
+#'
+#' A sampling function for a (possibly killed) compound Poisson subordinator
+#' with non-negative jump distribution.
+#'
+#' @param rate rate of CPP subordinator
+#' @param rate_killing killing rate of CPP subordinator
+#' @param rate_drift drift rate of CPP subordinator
+#' @param rjump_name name of jump sampling function
+#' @param rjump_arg_list list with named arguments for jump sampling function
+#' @param minmax_value the smallest allowed maximal value of process
+#'
+#' @return A named `k x 2` array with names `c("t", "value")`,
+#'   where `k` is random.
+#'
+#' @include assert.R
+#'
+#' @importFrom assertthat assert_that
+#' @importFrom stats rexp
+#'
+#' @keywords internal
+#' @noRd
+sample_cpp <- function(rate, rate_killing, rate_drift, rjump_name, rjump_arg_list, minmax_value) {
+
+  times <- 0
+  values <- 0
+  while (sum(values) < minmax_value) {
+    waiting_time <- rexp(1, rate)
+    jump_value <- do.call(rjump_name, args=c("n"=1, rjump_arg_list))
+    kill_value <- ifelse(rexp_if_rate_zero_then_infinity(1, rate_killing) <= waiting_time, Inf, 0)
+    drift_value <- waiting_time * rate_drift
+
+    times <- c(times, waiting_time)
+    values <- c(values, kill_value + drift_value + jump_value)
+  }
+
+  cbind("t"=cumsum(times), "value"=cumsum(values))
 }

@@ -131,6 +131,95 @@ test__rmo_ex_arnold_bivariate_R <- function(n, d, ex_intensities) { # nolint
   out
 }
 
+#' Bivariate LFM-CPP
+#'
+#' A wrapper for bivariate implementations of the Lévy-frailty model
+#' with a compound Poisson subordinator and specific jump distributions
+#' for the extendible subclass.
+#'
+#' @inheritParams rmo_lfm_cpp
+#'
+#' @return A `n x 2` array with samples from the corresponding bivariate
+#'  Marshall-Olkin distributino.
+#'
+#' @importFrom assertthat assert_that is.count
+#'
+#' @keywords internal
+#' @noRd
+test__rmo_lfm_cpp_bivariate_R <- function(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list) { # nolint
+  assertthat::assert_that(assertthat::is.count(n), assertthat::is.count(d),
+    is_positive_number(rate), is_nonnegative_number(rate_killing),
+    is_nonnegative_number(rate_drift), is_rjump_name(rjump_name),
+    is_rjump_arg_list(rjump_name, rjump_arg_list), d == 2L)
+
+    if (rjump_name == "rexp") {
+      return(test__rmo_lfm_cpp_bivariate_rexp_R(n, rate, rate_killing,
+        rate_drift, rjump_arg_list$rate))
+    } else if (rjump_name == "rposval") {
+      return(test__rmo_lfm_cpp_bivariate_rposval_R(n, rate, rate_killing,
+        rate_drift, rjump_arg_list$value))
+    }
+}
+
+#' @rdname test__rmo_lfm_cpp_bivariate_R
+#'
+#' @importFrom stats rexp
+#'
+#' @keywords internal
+#' @noRd
+test__rmo_lfm_cpp_bivariate_rexp_R <- function(n, rate, rate_killing, rate_drift, jump_rate) { # nolint
+  out <- matrix(NA, nrow=n, ncol=2L)
+  for (k in 1:n) {
+    unit_exponentials <- rexp(2L, 1)
+
+    times <- 0
+    values <- 0
+    while (sum(values) < max(unit_exponentials)) {
+      waiting_time <- rexp(1, rate)
+      jump_value <- rexp(1, jump_rate)
+      kill_value <- ifelse(rexp_if_rate_zero_then_infinity(1, rate_killing) <= waiting_time, Inf, 0)
+      drift_value <- waiting_time * rate_drift
+
+      times <- c(times, waiting_time)
+      values <- c(values, kill_value + drift_value + jump_value)
+    }
+
+    cpp_subordinator <- cbind("t"=cumsum(times), "values"=cumsum(values))
+    out[k, ] <- vapply(1:2L, function(x) min(cpp_subordinator[cpp_subordinator[, 2] >= unit_exponentials[[x]], 1]), FUN.VALUE=0.5) # nolint
+  }
+
+  out
+}
+
+#' @rdname test__rmo_lfm_cpp_bivariate_R
+#'
+#' @importFrom stats rexp
+#'
+#' @keywords internal
+#' @noRd
+test__rmo_lfm_cpp_bivariate_rposval_R <- function(n, rate, rate_killing, rate_drift, jump_value) { # nolint
+  out <- matrix(NA, nrow=n, ncol=2L)
+  for (k in 1:n) {
+    unit_exponentials <- rexp(2L, 1)
+
+    times <- 0
+    values <- 0
+    while (sum(values) < max(unit_exponentials)) {
+      waiting_time <- rexp(1, rate)
+      kill_value <- ifelse(rexp_if_rate_zero_then_infinity(1, rate_killing) <= waiting_time, Inf, 0)
+      drift_value <- waiting_time * rate_drift
+
+      times <- c(times, waiting_time)
+      values <- c(values, kill_value + drift_value + jump_value)
+    }
+
+    cpp_subordinator <- cbind("t"=cumsum(times), "values"=cumsum(values))
+    out[k, ] <- vapply(1:2L, function(x) min(cpp_subordinator[cpp_subordinator[, 2] >= unit_exponentials[[x]], 1]), FUN.VALUE=0.5) # nolint
+  }
+
+  out
+}
+
 
 ## #### Altenative implementations ####
 
