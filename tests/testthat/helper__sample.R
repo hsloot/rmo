@@ -133,7 +133,7 @@ test__rmo_ex_arnold_bivariate_R <- function(n, d, ex_intensities) { # nolint
 
 #' Bivariate LFM-CPP
 #'
-#' A wrapper for bivariate implementations of the Lévy-frailty model
+#' A wrapper for bivariate implementation of the Lévy-frailty model
 #' with a compound Poisson subordinator and specific jump distributions
 #' for the extendible subclass.
 #'
@@ -215,6 +215,37 @@ test__rmo_lfm_cpp_bivariate_rposval_R <- function(n, rate, rate_killing, rate_dr
 
     cpp_subordinator <- cbind("t"=cumsum(times), "values"=cumsum(values))
     out[k, ] <- vapply(1:2L, function(x) min(cpp_subordinator[cpp_subordinator[, 2] >= unit_exponentials[[x]], 1]), FUN.VALUE=0.5) # nolint
+  }
+
+  out
+}
+
+
+#' Bivariate Cuadras-Augé
+#'
+#' An implementation of the bivariate Cuadras-Augé model as a specialised
+#' version of the exogenous shock model
+#'
+#' @inheritParams rmo_esm_cuadras_auge
+#'
+#' @return A `n x 2` array with samples from the corresponding bivariate
+#'  Marshall-Olkin distributino.
+#'
+#' @include assert.R
+#' @importFrom assertthat assert_that is.count
+#'
+#' @keywords internal
+#' @noRd
+test__rmo_esm_cuadras_auge_bivariate_R <- function(n, d, alpha, beta) { # nolint
+  assert_that(is.count(n), is.count(d), is_nonnegative_number(alpha),
+    is_nonnegative_number(beta), alpha + beta > 0, d == 2L)
+
+  out <- matrix(NA, nrow=n, ncol=2L)
+  for (k in 1:n) { # use rexp_if_rate_zero_then_infinity from `R/sample.R`
+    individual_shock_1 <- rexp_if_rate_zero_then_infinity(1L, alpha)
+    individual_shock_2 <- rexp_if_rate_zero_then_infinity(1L, alpha)
+    global_shock <- rexp_if_rate_zero_then_infinity(1L, beta)
+    out[k, ] <- pmin(c(individual_shock_1, individual_shock_2), rep(global_shock, 2L))
   }
 
   out
