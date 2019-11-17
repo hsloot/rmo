@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • rmo</title>
+<title>Sampler for LFM with CPP subordinator — rmo_lfm_cpp • rmo</title>
 
 
 <!-- jquery -->
@@ -35,7 +35,9 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Sampler for LFM with CPP subordinator — rmo_lfm_cpp" />
+<meta property="og:description" content="Sampler for LFM with CPP subordinator" />
+<meta name="twitter:card" content="summary" />
 
 
 
@@ -54,7 +56,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -123,66 +125,89 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Sampler for LFM with CPP subordinator</h1>
+    
+    <div class="hidden name"><code>rmo_lfm_cpp.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    <p>Sampler for LFM with CPP subordinator</p>
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
+    <pre class="usage"><span class='fu'>rmo_lfm_cpp</span>(<span class='no'>n</span>, <span class='no'>d</span>, <span class='no'>rate</span>, <span class='no'>rate_killing</span>, <span class='no'>rate_drift</span>, <span class='no'>rjump_name</span>, <span class='no'>rjump_arg_list</span>)</pre>
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="rmo.html">rmo</a></code> </p>
-        </td>
-        <td><p>rmo: A package for the Marshall-Olkin distribution.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="rmo_arnold.html">rmo_arnold()</a></code> </p>
-        </td>
-        <td><p>Sampling from the Arnold model</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="rmo_esm.html">rmo_esm()</a></code> </p>
-        </td>
-        <td><p>Sampling from the exogenous shock model</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="rmo_ex_arnold.html">rmo_ex_arnold()</a></code> </p>
-        </td>
-        <td><p>Sampling from the modified Arnold model for exchangeable MO</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="rmo_lfm_cpp.html">rmo_lfm_cpp()</a></code> </p>
-        </td>
-        <td><p>Sampler for LFM with CPP subordinator</p></td>
-      </tr>
-    </tbody>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>n</th>
+      <td><p>number of samples</p></td>
+    </tr>
+    <tr>
+      <th>d</th>
+      <td><p>dimension</p></td>
+    </tr>
+    <tr>
+      <th>rate</th>
+      <td><p>rate of CPP subordinator</p></td>
+    </tr>
+    <tr>
+      <th>rate_killing</th>
+      <td><p>killing rate of CPP subordinator</p></td>
+    </tr>
+    <tr>
+      <th>rate_drift</th>
+      <td><p>drift rate of CPP subordinator</p></td>
+    </tr>
+    <tr>
+      <th>rjump_name</th>
+      <td><p>name of jump sampling function</p></td>
+    </tr>
+    <tr>
+      <th>rjump_arg_list</th>
+      <td><p>list with named arguments for jump sampling function</p></td>
+    </tr>
     </table>
-  </div>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>An <code>n x d</code> array with <code>n</code> independent samples of the corresponding
+<code>d</code> variate extendible Marshall-Olkin distribution.</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>rmo_lfm_cpp</span>(<span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fl'>0.5</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='st'>"rposval"</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='st'>"value"</span><span class='kw'>=</span><span class='fl'>1</span>))</div><div class='output co'>#&gt;            [,1]       [,2]
+#&gt;  [1,] 1.1955130 1.02416435
+#&gt;  [2,] 3.1083162 0.55074221
+#&gt;  [3,] 2.9470626 2.94706256
+#&gt;  [4,] 0.1302607 0.13026066
+#&gt;  [5,] 2.4930924 6.78621471
+#&gt;  [6,] 2.4830646 2.48306458
+#&gt;  [7,] 4.4297558 4.42975581
+#&gt;  [8,] 1.6691409 1.66914090
+#&gt;  [9,] 8.6360952 0.04978157
+#&gt; [10,] 4.5293321 4.33496630</div><div class='input'><span class='fu'>rmo_lfm_cpp</span>(<span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fl'>0.5</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='st'>"rexp"</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='st'>"rate"</span><span class='kw'>=</span><span class='fl'>2</span>))</div><div class='output co'>#&gt;              [,1]       [,2]
+#&gt;  [1,]  1.69363058  1.6936306
+#&gt;  [2,]  8.74893014  8.7489301
+#&gt;  [3,] 14.85849052  3.3625388
+#&gt;  [4,]  0.06506575 20.3856509
+#&gt;  [5,]  3.66914291  3.6691429
+#&gt;  [6,]  9.46858572  6.0037359
+#&gt;  [7,]  5.18804869  1.3766536
+#&gt;  [8,]  1.97287526  0.1197391
+#&gt;  [9,]  2.14800981  2.1480098
+#&gt; [10,] 12.66381257  1.4623702</div><div class='input'>
+</div></pre>
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
+      <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#value">Value</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
+
   </div>
 </div>
 
