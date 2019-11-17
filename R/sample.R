@@ -194,6 +194,11 @@ rmo_ex_arnold_sorted <- function(d, generator_list) {
 
 #' Sampler for LFM with CPP subordinator
 #'
+#' Draws `n` independent samples from a `d` variate extendible Marshall-Olkin
+#' distribution corresponding to a LFM with a compound Poisson subordinator.
+#' For more information on this algorithm, see
+#' J.-F. Mai, M. Scherer, "Simulating Copulas", World Scientific (2017).
+#'
 #' @param n number of samples
 #' @param d dimension
 #' @param rate rate of CPP subordinator
