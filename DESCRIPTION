@@ -22,7 +22,9 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
 Collate:
+    'aaa.R'
     'sets.R'
+    'assert.R'
     'sample.R'
 URL: https://hsloot.github.io/rmo/
 BugReports: https://github.com/hsloot/rmo/issues
