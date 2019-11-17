@@ -299,10 +299,7 @@ rposval <- function(n, value=1) {
 #' @keywords internal
 #' @noRd
 sample_cpp <- function(rate, rate_killing, rate_drift, rjump_name, rjump_arg_list, minmax_value) {
-  assert_that(is_positive_number(rate), is_nonnegative_number(rate_killing),
-    is_nonnegative_number(rate_drift), is_positive_number(minmax_value),
-    is_rjump_name(rjump_name), is_rjump_arg_list(rjump_name, rjump_arg_list),
-    is_positive_number(minmax_value))
+  assert_that(is_positive_number(minmax_value))
 
   times <- 0
   values <- 0
