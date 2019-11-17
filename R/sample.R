@@ -269,12 +269,9 @@ rexp_if_rate_zero_then_infinity <- function(n, rate) { # nolint
 #'
 #' @include assert.R
 #'
-#' @importFrom assertthat assert_that is.count
 #' @keywords internal
 #' @noRd
 rposval <- function(n, value=1) {
-  assert_that(is.count(n), is_positive_number(value))
-
   rep(value, times=n)
 }
 
@@ -296,7 +293,6 @@ rposval <- function(n, value=1) {
 #'
 #' @include assert.R
 #'
-#' @importFrom assertthat assert_that
 #' @importFrom stats rexp
 #'
 #' @keywords internal
