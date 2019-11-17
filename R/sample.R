@@ -187,7 +187,31 @@ rmo_ex_arnold_sorted <- function(d, generator_list) {
 rexp_if_rate_zero_then_infinity <- function(n, rate) { # nolint
   if (rate == 0) {
     return(rep(Inf, n))
-  } else {
-    return(rexp(n, rate))
   }
+
+  rexp(n, rate)
+}
+
+#' A dummy sampling function for deterministic, positive values
+#'
+#' @param n number of samples
+#' @param value value to sample
+#'
+#' @return A `n` elements numeric vector with value `value` in each component
+#'
+#' @examples
+#' rposval(10L) ## rep(1, 10L)
+#' rposval(10L, pi) ## rep(pi, 10L)
+#'
+#' @family samplers
+#'
+#' @include assert.R
+#'
+#' @importFrom assertthat assert_that is.count
+#' @keywords internal
+#' @noRd
+rposval <- function(n, value=1) {
+  assert_that(is.count(n), is_positive_number(value))
+
+  rep(value, times=n)
 }
