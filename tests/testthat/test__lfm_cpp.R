@@ -1,4 +1,4 @@
-context("Lévy-frailty model with compound Poisson subordinator")
+context("Levy-frailty model with compound Poisson subordinator")
 use_seed <- 1632L
 
 test_that("biv. LFM-CPP implementation works as intended for exp. jumps", {

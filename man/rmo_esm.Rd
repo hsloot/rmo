@@ -61,10 +61,5 @@ Other samplers:
 \code{\link{rmo_esm_cuadras_auge}()},
 \code{\link{rmo_ex_arnold}()},
 \code{\link{rmo_lfm_cpp}()}
-
-Other samplers: 
-\code{\link{rmo_esm_cuadras_auge}()},
-\code{\link{rmo_ex_arnold}()},
-\code{\link{rmo_lfm_cpp}()}
 }
 \concept{samplers}

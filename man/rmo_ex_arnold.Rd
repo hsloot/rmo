@@ -28,7 +28,7 @@ distribution with shock rates \code{ex_intensities}.
 \itemize{
 \item The \emph{exchangeable} shock intensities must be stored in a vector of length
 \eqn{d}.
-\item The entry \eqn{\mathrm{ex_intensities}_{i}}{ex_intensities[i]} is the
+\item The entry \eqn{{exintensities}_{i}}{ex_intensities[i]} is the
 intensity of a shock corresponding to a set with \eqn{i} elements.
 }
 }

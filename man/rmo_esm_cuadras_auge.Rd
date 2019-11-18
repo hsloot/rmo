@@ -40,7 +40,7 @@ rmo_esm_cuadras_auge(10L, 2L, 1, 0)      ## independence
 
 }
 \seealso{
-rmo_esm
+\code{\link{rmo_esm}}
 
 Other samplers: 
 \code{\link{rmo_esm}()},

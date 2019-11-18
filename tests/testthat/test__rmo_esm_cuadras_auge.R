@@ -1,4 +1,4 @@
-context("Cuadras-Augé exogenous shock model")
+context("Cuadras-Auge exogenous shock model")
 use_seed <- 1623L
 
 test_that("Cuadras-Augé implementation works as intended", {

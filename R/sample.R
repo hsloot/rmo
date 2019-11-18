@@ -65,8 +65,6 @@ rmo_esm <- function(n, d, intensities) {
 #' independent and identically disctributed samples of a \eqn{d} variate
 #' Marshall-Olkin distribution with parameters `intensities`.
 #'
-#' @family samplers
-#'
 #' @examples
 #' rmo_arnold(10L, 2L, c(0.4, 0.3, 0.2))
 #' rmo_arnold(10L, 2L, c(1, 1, 0))         ## independence
@@ -121,7 +119,7 @@ rmo_arnold <- function(n, d, intensities) {
 #'
 #' - The *exchangeable* shock intensities must be stored in a vector of length
 #' \eqn{d}.
-#' - The entry \eqn{\mathrm{ex_intensities}_{i}}{ex_intensities[i]} is the
+#' - The entry \eqn{{exintensities}_{i}}{ex_intensities[i]} is the
 #' intensity of a shock corresponding to a set with \eqn{i} elements.
 #'
 #' @section References:
@@ -223,7 +221,7 @@ rmo_ex_arnold_sorted <- function(d, generator_list) {
 #' - `rate_killing` is the *killing intensity* of the compound Poisson
 #' subordinator: the probability that the compound Poisson subordinator jumps to
 #' its graveyard-state \eqn{\infty} between \eqn{t} and \eqn{s} is \eqn{1 -
-#' \exp{\{-\mathrm{rate_killing} (s-t)\}}}{1-exp{-rate_killing * (s-t)}}.
+#' \exp{\{-{ratekilling} (s-t)\}}}{1-exp{-rate_killing * (s-t)}}.
 #'
 #' @param n number of samples
 #' @param d dimension

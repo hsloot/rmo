@@ -52,7 +52,7 @@ exponentially distributed with rate \code{rate}.
 \item \code{rate_killing} is the \emph{killing intensity} of the compound Poisson
 subordinator: the probability that the compound Poisson subordinator jumps to
 its graveyard-state \eqn{\infty} between \eqn{t} and \eqn{s} is \eqn{1 -
-\exp{\{-\mathrm{rate_killing} (s-t)\}}}{1-exp{-rate_killing * (s-t)}}.
+\exp{\{-{ratekilling} (s-t)\}}}{1-exp{-rate_killing * (s-t)}}.
 }
 }
 \section{References}{
