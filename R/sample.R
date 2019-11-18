@@ -269,7 +269,7 @@ rmo_lfm_cpp <- function(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_
   for (k in 1:n) {
     unit_exponentials <- rexp(d)
     cpp_subordinator <- sample_cpp(rate, rate_killing, rate_drift,
-      rjump_name, rjump_arg_list, max(unit_exponentials))
+      rjump_name, rjump_arg_list, unit_exponentials)
     out[k, ] <- vapply(1:d, function(x) min(cpp_subordinator[cpp_subordinator[, 2] >= unit_exponentials[[x]], 1]), FUN.VALUE=0.5) # nolint
   }
 
@@ -374,7 +374,9 @@ rposval <- function(n, value=1) {
 #' with non-negative jump distribution.
 #'
 #' @inheritParams rmo_lfm_cpp
-#' @param minmax_value the smallest allowed maximal value of process
+#' @param barrier_values a vector of barrier values from the LFM to properly
+#' incorporate first exit times over these `barrier_values` if killing or drift
+#' is present.
 #'
 #' @return A named `k x 2` array with names `c("t", "value")`, where `k` is
 #' random and each row represents a time-value tupel for a jump in the compound
@@ -385,18 +387,48 @@ rposval <- function(n, value=1) {
 #'
 #' @keywords internal
 #' @noRd
-sample_cpp <- function(rate, rate_killing, rate_drift, rjump_name, rjump_arg_list, minmax_value) {
+sample_cpp <- function(rate, rate_killing, rate_drift, rjump_name, rjump_arg_list, barrier_values) { # nolint
+  if (rate_drift>0) {
+    barrier_values <- sort(barrier_values)
+  } else {
+    barrier_values <- max(barrier_values)
+  }
 
   times <- 0
   values <- 0
-  while (sum(values) < minmax_value) {
-    waiting_time <- rexp(1, rate)
-    jump_value <- do.call(rjump_name, args=c("n"=1, rjump_arg_list))
-    kill_value <- ifelse(rexp_if_rate_zero_then_infinity(1, rate_killing) <= waiting_time, Inf, 0)
-    drift_value <- waiting_time * rate_drift
+  for (i in seq_along(barrier_values)) {
+    while (sum(values) < barrier_values[i]) {
+      waiting_time <- rexp(1, rate)
+      jump_value <- do.call(rjump_name, args=c("n"=1, rjump_arg_list))
+      killing_time <- rexp_if_rate_zero_then_infinity(1, rate_killing)
 
-    times <- c(times, waiting_time)
-    values <- c(values, kill_value + drift_value + jump_value)
+      if (killing_time <= waiting_time) {
+        if (rate_drift>0 && (barrier_values[[i]] - sum(values))/rate_drift<=killing_time) {
+          intermediate_time <- (barrier_values[i] - sum(values)) / rate_drift
+          intermediate_value <- intermediate_time * rate_drift
+          times <- c(times, intermediate_time)
+          values <- c(values, intermediate_value)
+          killing_time <- killing_time - intermediate_time
+        }
+
+        times <- c(times, killing_time)
+        values <- c(values, Inf)
+      } else {
+        if (rate_drift>0 && (barrier_values[[i]] - sum(values))/rate_drift <= waiting_time) {
+          intermediate_time <- (barrier_values[i] - sum(values)) / rate_drift
+          intermediate_value <- intermediate_time * rate_drift
+          times <- c(times, intermediate_time)
+          values <- c(values, intermediate_value)
+          waiting_time <- waiting_time - intermediate_time
+        }
+
+        times <- c(times, waiting_time)
+        values <- c(values, waiting_time * rate_drift + jump_value)
+      }
+
+      times <- c(times, waiting_time)
+      values <- c(values, waiting_time * rate_drift + jump_value)
+    }
   }
 
   cbind("t"=cumsum(times), "value"=cumsum(values))
