@@ -252,6 +252,46 @@ test__rmo_esm_cuadras_auge_bivariate_R <- function(n, d, alpha, beta) { # nolint
 }
 
 
+## #### Specialised implementaions ####
+##
+
+#' Alternative implementation of ind.-case via LFM
+#'
+#' @keywords internal
+#' @noRd
+test__rmo_lfm_cpp_independence_R <- function(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list) { # nolint
+  assertthat::assert_that(assertthat::is.count(n), assertthat::is.count(d),
+    is_positive_number(rate_drift),
+    is_rjump_name(rjump_name), is_rjump_arg_list(rjump_name, rjump_arg_list)) ## dummy test
+
+  out <- matrix(NA, nrow=n, ncol=d)
+  for (k in 1:n) {
+    unit_exponentials <- rexp(d, 1)
+    out[k, ] <- unit_exponentials / rate_drift
+  }
+
+  out
+}
+
+
+#' Alternative implementation of com.-case via LFM
+#'
+#' @keywords internal
+#' @noRd
+test__rmo_lfm_cpp_comonotone_R <- function(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list) { # nolint
+  assertthat::assert_that(assertthat::is.count(n), assertthat::is.count(d),
+    is_positive_number(rate_killing),
+    is_rjump_name(rjump_name), is_rjump_arg_list(rjump_name, rjump_arg_list)) ## dummy test
+
+  out <- matrix(NA, nrow=n, ncol=d)
+  for (k in 1:n) {
+    unit_exponentials <- rexp(d, 1) ## dummy
+    out[k, ] <- rexp(1L, rate_killing)
+  }
+
+  out
+}
+
 ## #### Altenative implementations ####
 
 #' Alternative implementation of exchangeable Arnold model
