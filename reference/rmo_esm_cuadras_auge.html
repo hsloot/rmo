@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Sampler for Cuadras-Augé distribution — rmo_esm_cuadras_auge • rmo</title>
+<title>Sample from Cuadras-Auge distribution — rmo_esm_cuadras_auge • rmo</title>
 
 
 <!-- jquery -->
@@ -35,10 +35,9 @@
 
 
 
-<meta property="og:title" content="Sampler for Cuadras-Augé distribution — rmo_esm_cuadras_auge" />
+<meta property="og:title" content="Sample from Cuadras-Auge distribution — rmo_esm_cuadras_auge" />
 <meta property="og:description" content="Draws n independent samples from a d variate Cuadras-Augé distribution
-with the exogenous shock model. This is a specialised version of
-rmo_esm." />
+with parameters alpha and beta." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -129,15 +128,14 @@ rmo_esm." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Sampler for Cuadras-Augé distribution</h1>
+    <h1>Sample from Cuadras-Auge distribution</h1>
     
     <div class="hidden name"><code>rmo_esm_cuadras_auge.Rd</code></div>
     </div>
 
     <div class="ref-description">
     <p>Draws <code>n</code> independent samples from a <code>d</code> variate Cuadras-Augé distribution
-with the <em>exogenous shock model</em>. This is a specialised version of
-<code>rmo_esm</code>.</p>
+with parameters <code>alpha</code> and <code>beta</code>.</p>
     </div>
 
     <pre class="usage"><span class='fu'>rmo_esm_cuadras_auge</span>(<span class='no'>n</span>, <span class='no'>d</span>, <span class='no'>alpha</span>, <span class='no'>beta</span>)</pre>
@@ -165,41 +163,60 @@ with the <em>exogenous shock model</em>. This is a specialised version of
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An \(n \times d\) array matrix with rows corresponding to
+    <p><code>rmo_esm_cuadras_auge</code> implements an optimized version of the
+<em>exogenous shock model</em> representation for the Cuadras-Augé family and
+returns an \(n \times d\) array matrix with rows corresponding to
 the independent samples of size \(d\).</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    
+<ul>
+<li><p><code>alpha</code> is the shock intensity of shocks that affect only single
+compoenents.</p></li>
+<li><p><code>beta</code> is the shock intensity of the global shock that affects all
+components.</p></li>
+</ul>
+
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>rmo_esm</p>
+<p>Other samplers: 
+<code><a href='rmo_esm.html'>rmo_esm</a>()</code>,
+<code><a href='rmo_ex_arnold.html'>rmo_ex_arnold</a>()</code>,
+<code><a href='rmo_lfm_cpp.html'>rmo_lfm_cpp</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>rmo_esm_cuadras_auge</span>(<span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fl'>0.5</span>, <span class='fl'>0.2</span>)</div><div class='output co'>#&gt;            [,1]      [,2]
-#&gt;  [1,] 0.7462768 1.1154629
-#&gt;  [2,] 0.1112249 0.1112249
-#&gt;  [3,] 0.2915526 0.8488557
-#&gt;  [4,] 0.8983756 0.4099967
-#&gt;  [5,] 1.0366335 1.3443012
-#&gt;  [6,] 2.7244538 2.9817862
-#&gt;  [7,] 0.6239305 0.4080154
-#&gt;  [8,] 2.0208317 0.9914585
-#&gt;  [9,] 0.9847499 0.4676582
-#&gt; [10,] 2.6411234 0.7176585</div><div class='input'><span class='fu'>rmo_esm_cuadras_auge</span>(<span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fl'>0</span>, <span class='fl'>1</span>)      <span class='co'>## comonotone</span></div><div class='output co'>#&gt;             [,1]       [,2]
-#&gt;  [1,] 0.34689565 0.34689565
-#&gt;  [2,] 1.17822671 1.17822671
-#&gt;  [3,] 0.46104855 0.46104855
-#&gt;  [4,] 0.51208218 0.51208218
-#&gt;  [5,] 0.08567431 0.08567431
-#&gt;  [6,] 1.67551998 1.67551998
-#&gt;  [7,] 0.45389771 0.45389771
-#&gt;  [8,] 0.27537110 0.27537110
-#&gt;  [9,] 1.27878700 1.27878700
-#&gt; [10,] 0.03479680 0.03479680</div><div class='input'><span class='fu'>rmo_esm_cuadras_auge</span>(<span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fl'>1</span>, <span class='fl'>0</span>)      <span class='co'>## independence</span></div><div class='output co'>#&gt;             [,1]       [,2]
-#&gt;  [1,] 0.15237484 1.47353128
-#&gt;  [2,] 0.60255025 0.51610724
-#&gt;  [3,] 0.06513033 0.09360955
-#&gt;  [4,] 2.61426561 1.24654619
-#&gt;  [5,] 1.76510947 0.38145170
-#&gt;  [6,] 0.35041701 0.13600901
-#&gt;  [7,] 1.24153229 0.30068780
-#&gt;  [8,] 0.62919241 2.21487791
-#&gt;  [9,] 0.05366065 0.52694965
-#&gt; [10,] 0.83457045 3.58954107</div><div class='input'>
+    <pre class="examples"><div class='input'><span class='fu'>rmo_esm_cuadras_auge</span>(<span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fl'>0.5</span>, <span class='fl'>0.2</span>)</div><div class='output co'>#&gt;             [,1]      [,2]
+#&gt;  [1,] 2.81351114 1.4757833
+#&gt;  [2,] 2.19013958 1.0040554
+#&gt;  [3,] 0.06142121 0.2362183
+#&gt;  [4,] 0.60437696 0.6043770
+#&gt;  [5,] 0.41500161 1.2218549
+#&gt;  [6,] 0.93164267 1.8606310
+#&gt;  [7,] 0.56776506 2.0050025
+#&gt;  [8,] 0.83000158 0.7906217
+#&gt;  [9,] 2.06028393 0.2676391
+#&gt; [10,] 0.37363346 1.1158825</div><div class='input'><span class='fu'>rmo_esm_cuadras_auge</span>(<span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fl'>0</span>, <span class='fl'>1</span>)      <span class='co'>## comonotone</span></div><div class='output co'>#&gt;             [,1]       [,2]
+#&gt;  [1,] 0.22027539 0.22027539
+#&gt;  [2,] 2.14951551 2.14951551
+#&gt;  [3,] 1.21293415 1.21293415
+#&gt;  [4,] 3.45901982 3.45901982
+#&gt;  [5,] 0.10312832 0.10312832
+#&gt;  [6,] 1.39260818 1.39260818
+#&gt;  [7,] 0.03253287 0.03253287
+#&gt;  [8,] 0.49232446 0.49232446
+#&gt;  [9,] 0.02419059 0.02419059
+#&gt; [10,] 1.13985958 1.13985958</div><div class='input'><span class='fu'>rmo_esm_cuadras_auge</span>(<span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fl'>1</span>, <span class='fl'>0</span>)      <span class='co'>## independence</span></div><div class='output co'>#&gt;             [,1]       [,2]
+#&gt;  [1,] 0.95179766 0.37453354
+#&gt;  [2,] 0.03117124 0.23960932
+#&gt;  [3,] 9.15313311 0.81848123
+#&gt;  [4,] 0.00278538 0.10580041
+#&gt;  [5,] 1.83457146 0.26476943
+#&gt;  [6,] 0.68774057 0.45952242
+#&gt;  [7,] 3.00186797 1.02844045
+#&gt;  [8,] 0.49854530 0.14163011
+#&gt;  [9,] 1.23387958 1.26415490
+#&gt; [10,] 1.39129122 0.05221346</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -207,6 +224,8 @@ the independent samples of size \(d\).</p>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
+      <li><a href="#details">Details</a></li>
+      <li><a href="#see-also">See also</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 
