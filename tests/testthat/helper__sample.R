@@ -265,7 +265,7 @@ test__rmo_lfm_cpp_bivariate_rposval_R <- function(n, rate, rate_killing, rate_dr
 
           times <- c(times, waiting_time)
           values <- c(values, waiting_time * rate_drift + jump_value)
-        } 
+        }
       }
     }
 
@@ -308,7 +308,7 @@ test__rmo_esm_cuadras_auge_bivariate_R <- function(n, d, alpha, beta) { # nolint
 }
 
 
-## #### Specialised implementaions ####
+## #### Specialised implementations ####
 ##
 
 #' Alternative implementation of ind.-case via LFM
@@ -341,7 +341,7 @@ test__rmo_lfm_cpp_comonotone_R <- function(n, d, rate, rate_killing, rate_drift,
 
   out <- matrix(NA, nrow=n, ncol=d)
   for (k in 1:n) {
-    unit_exponentials <- rexp(d, 1) ## dummy
+    stopifnot(all(rexp(d, 1) >= 0)) ## dummy
     out[k, ] <- rexp(1L, rate_killing)
   }
 
