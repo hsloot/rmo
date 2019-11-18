@@ -148,8 +148,10 @@ test__rmo_ex_arnold_bivariate_R <- function(n, d, ex_intensities) { # nolint
 #' @noRd
 test__rmo_lfm_cpp_bivariate_R <- function(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list) { # nolint
   assertthat::assert_that(assertthat::is.count(n), assertthat::is.count(d),
-    is_positive_number(rate), is_nonnegative_number(rate_killing),
-    is_nonnegative_number(rate_drift), is_rjump_name(rjump_name),
+    is_nonnegative_number(rate), is_nonnegative_number(rate_killing),
+    is_nonnegative_number(rate_drift),
+    is_positive_number(rate + rate_killing + rate_drift),
+    is_rjump_name(rjump_name),
     is_rjump_arg_list(rjump_name, rjump_arg_list), d == 2L)
 
     if (rjump_name == "rexp") {
@@ -181,11 +183,11 @@ test__rmo_lfm_cpp_bivariate_rexp_R <- function(n, rate, rate_killing, rate_drift
     values <- 0
     for (i in seq_along(barrier_values)) {
       while (sum(values) < barrier_values[i]) {
-        waiting_time <- rexp(1, rate)
-        jump_value <- rexp(1, jump_rate)
+        waiting_time <- rexp_if_rate_zero_then_infinity(1, rate)
+        jump_value <- rexp_if_rate_zero_then_infinity(1, jump_rate)
         killing_time <- rexp_if_rate_zero_then_infinity(1, rate_killing)
 
-        if (killing_time <= waiting_time) {
+        if (killing_time < Inf && killing_time <= waiting_time) {
           if (rate_drift>0 && (barrier_values[[i]] - sum(values))/rate_drift<=killing_time) {
             intermediate_time <- (barrier_values[i] - sum(values)) / rate_drift
             intermediate_value <- intermediate_time * rate_drift
@@ -208,9 +210,6 @@ test__rmo_lfm_cpp_bivariate_rexp_R <- function(n, rate, rate_killing, rate_drift
           times <- c(times, waiting_time)
           values <- c(values, waiting_time * rate_drift + jump_value)
         }
-
-        times <- c(times, waiting_time)
-        values <- c(values, waiting_time * rate_drift + jump_value)
       }
     }
 
@@ -241,10 +240,10 @@ test__rmo_lfm_cpp_bivariate_rposval_R <- function(n, rate, rate_killing, rate_dr
     values <- 0
     for (i in seq_along(barrier_values)) {
       while (sum(values) < barrier_values[i]) {
-        waiting_time <- rexp(1, rate)
+        waiting_time <- rexp_if_rate_zero_then_infinity(1, rate)
         killing_time <- rexp_if_rate_zero_then_infinity(1, rate_killing)
 
-        if (killing_time <= waiting_time) {
+        if (killing_time < Inf && killing_time <= waiting_time) {
           if (rate_drift>0 && (barrier_values[[i]] - sum(values))/rate_drift<=killing_time) {
             intermediate_time <- (barrier_values[i] - sum(values)) / rate_drift
             intermediate_value <- intermediate_time * rate_drift
@@ -266,10 +265,7 @@ test__rmo_lfm_cpp_bivariate_rposval_R <- function(n, rate, rate_killing, rate_dr
 
           times <- c(times, waiting_time)
           values <- c(values, waiting_time * rate_drift + jump_value)
-        }
-
-        times <- c(times, waiting_time)
-        values <- c(values, waiting_time * rate_drift + jump_value)
+        } 
       }
     }
 

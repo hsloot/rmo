@@ -261,8 +261,9 @@ rmo_ex_arnold_sorted <- function(d, generator_list) {
 #' @export
 #' @name rmo_lfm_cpp
 rmo_lfm_cpp <- function(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list = list()) {
-  assert_that(is.count(n), is.count(d), is_positive_number(rate),
+  assert_that(is.count(n), is.count(d), is_nonnegative_number(rate),
     is_nonnegative_number(rate_killing), is_nonnegative_number(rate_drift),
+    is_positive_number(rate + rate_killing + rate_drift),
     is_rjump_name(rjump_name), is_rjump_arg_list(rjump_name, rjump_arg_list))
 
   out <- matrix(NA, nrow=n, ncol=d)
@@ -397,12 +398,12 @@ sample_cpp <- function(rate, rate_killing, rate_drift, rjump_name, rjump_arg_lis
   times <- 0
   values <- 0
   for (i in seq_along(barrier_values)) {
-    while (sum(values) < barrier_values[i]) {
-      waiting_time <- rexp(1, rate)
+    while (sum(values) < barrier_values[[i]]) {
+      waiting_time <- rexp_if_rate_zero_then_infinity(1, rate)
       jump_value <- do.call(rjump_name, args=c("n"=1, rjump_arg_list))
       killing_time <- rexp_if_rate_zero_then_infinity(1, rate_killing)
 
-      if (killing_time <= waiting_time) {
+      if (killing_time < Inf && killing_time <= waiting_time) {
         if (rate_drift>0 && (barrier_values[[i]] - sum(values))/rate_drift<=killing_time) {
           intermediate_time <- (barrier_values[i] - sum(values)) / rate_drift
           intermediate_value <- intermediate_time * rate_drift
@@ -425,9 +426,6 @@ sample_cpp <- function(rate, rate_killing, rate_drift, rjump_name, rjump_arg_lis
         times <- c(times, waiting_time)
         values <- c(values, waiting_time * rate_drift + jump_value)
       }
-
-      times <- c(times, waiting_time)
-      values <- c(values, waiting_time * rate_drift + jump_value)
     }
   }
 
