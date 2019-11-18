@@ -297,7 +297,7 @@ rmo_lfm_cpp <- function(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_
 #' returns an \eqn{n \times d}{n x d} array matrix with rows corresponding to
 #' the independent samples of size \eqn{d}.
 #'
-#' @seealso rmo_esm
+#' @seealso \code{\link{rmo_esm}}
 #' @family samplers
 #'
 #' @examples
