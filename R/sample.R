@@ -1,34 +1,48 @@
-## #### Samplers for MO distributions ####
+## #### Sample from MO distributions ####
 ##
 
-#' Sampling from the exogenous shock model
+#' Sample from a Marshall--Olkin distribution
 #'
 #' Draws `n` independent samples from a `d` variate Marshall-Olkin distribution
-#' with shock rates `intensities` using the *exogenous shock model algorithm*.
-#' The shock rates must be stored in a vector of length \eqn{2^d-1}. For more information
-#' on this algorithm, see J.-F. Mai, M. Scherer, "Simulating Copulas", World Scientific (2017).
+#' with shock rates `intensities`.
+#'
+#' - The shock intensities must be stored in a vector of length \eqn{2^d-1}.
+#' - A shock intensity of zero corresponds to an almost surely infinite shock.
+#' - We use a binary representation to map a non-empty subset \eqn{I} of \eqn{\{
+#' 1, \ldots, d\}}{{1, \ldots, d}} to integers \eqn{1, \ldots, 2^d-1}. In
+#' particular, \eqn{i} is a component in the set corresponding for \eqn{j} iff
+#' \eqn{j = \sum_{k=0}^d a_k 2^k}{\sum a[k] * 2^k} and \eqn{a_i = 0}{a[i] = 0}.
 #'
 #' @param n number of samples
 #' @param d dimension
-#' @param intensities shock model intensity rates
+#' @param intensities Marshall-Olkin intensity rates
 #'
-#' @return an \eqn{n \times d}{n x d} matrix with rows corresponding to the independent
-#' samples of size \eqn{d}.
+#' @return `rmo_esm` implements the *exogenous shock model* representation and
+#' returns an \eqn{n \times d}{n x d} numeric matrix with the rows corresponding
+#' to independent and identically disctributed samples of a \eqn{d} variate
+#' Marshall-Olkin distribution with parameters `intensities`.
+#'
+#' @section References: For more information on these algorithms, see J.-F. Mai,
+#' M. Scherer, "Simulating Copulas", World Scientific (2017), pp. 104 psqq.
+#'
+#' @family samplers
 #'
 #' @examples
-#' # sample 10 times from a bivariate Marshall-Olkin distribution with parameters
-#' # with c(1, 1, 1) using the exogenous shock model algorithm
-#' rmo_esm(10, 2, c(1, 1, 1))
+#' rmo_esm(10L, 2L, c(0.4, 0.3, 0.2))
+#' rmo_esm(10L, 2L, c(1, 1, 0))         ## independence
+#' rmo_esm(10L, 2L, c(0, 0, 1))         ## comonotone
 #'
-#' @export
+#' @include assert.R sets.R
 #' @importFrom stats rexp
 #' @importFrom assertthat assert_that is.count
-#' @include sets.R
+#'
+#' @export
+#' @name rmo_esm
 rmo_esm <- function(n, d, intensities) {
   assert_that(is.count(n), is.count(d), is_mo_parameter(intensities),
     length(intensities) == 2^d-1)
 
-  out <- matrix(nrow=n, ncol=d)
+  out <- matrix(NA, nrow=n, ncol=d)
   for (k in 1:n) {
     value <- rep(Inf, d)
     for (j in 1:(2^d - 1)) {
@@ -44,32 +58,25 @@ rmo_esm <- function(n, d, intensities) {
   out
 }
 
-#' Sampling from the Arnold model
+#' @rdname rmo_esm
 #'
-#' Draws `n` independent samples from a `d` variate Marshall-Olkin distribution
-#' with shock rates `intensities` using the *Arnold model algorithm*. The shock
-#' rates must be stored in a vactor of length \eqn{2^d-1}. For more information
-#' on this algorithm, see J.-F. Mai, M. SCherer, "Simulating Copulas", World Scientific (2017).
+#' @return `rmo_arnold` implements the *Arnold model* representation and returns
+#' an \eqn{n \times d}{n x d} numeric matrix with the rows corresponding to
+#' independent and identically disctributed samples of a \eqn{d} variate
+#' Marshall-Olkin distribution with parameters `intensities`.
 #'
-#' @param n number of samples
-#' @param d dimension
-#' @param intensities shock model intensity rates
-#'
-#' @return an \eqn{n \times d}{n x d} matrix with rows corresponding to the independent
-#' samples of size \eqn{d}.
+#' @family samplers
 #'
 #' @examples
-#' # sample 10 times from a bivariate Marshall-Olkin distribution with parameters
-#' # with c(1, 1, 1) using the Arnold model algorithm
-#' rmo_arnold(10, 2, c(1, 1, 1))
-#' # sample 10 times from a bivariate Marshall-Olkin distribution with parameters
-#' # with c(0.5, 0.4, 0.6) using the Arnold model algorithm
-#' rmo_arnold(10, 2, c(0.5, 0.4, 0.6))
+#' rmo_arnold(10L, 2L, c(0.4, 0.3, 0.2))
+#' rmo_arnold(10L, 2L, c(1, 1, 0))         ## independence
+#' rmo_arnold(10L, 2L, c(0, 0, 1))         ## comonotone
 #'
-#' @export
+#' @include assert.R sets.R
 #' @importFrom stats rexp
 #' @importFrom assertthat assert_that is.count
-#' @include sets.R
+#'
+#' @export
 rmo_arnold <- function(n, d, intensities) {
   assert_that(is.count(n), is.count(d), is_mo_parameter(intensities),
     length(intensities) == 2^d-1)
@@ -102,37 +109,53 @@ rmo_arnold <- function(n, d, intensities) {
 }
 
 
-## #### Samplers for exMO distributions ####
+## #### Sample from exMO distribution ####
 ##
 
 
 
-#' Sampling from the modified Arnold model for exchangeable MO
+#' Sample from an exchangeable MO distribution
 #'
 #' Draws `n` independent samples from a `d` variate exchangeable Marshall-Olkin
-#' distribution with shock rates `intensities` using the *exogenous shock model algorithm*.
-#' The shock rates must be stored in a vector of length \eqn{2^d-1}. For more information
-#' on this algorithm, see J.-F. Mai, M. Scherer, "Simulating Copulas", World Scientific (2017).
+#' distribution with shock rates `ex_intensities`.
+#'
+#' - The *exchangeable* shock intensities must be stored in a vector of length
+#' \eqn{d}.
+#' - The entry \eqn{\mathrm{ex_intensities}_{i}}{ex_intensities[i]} is the
+#' intensity of a shock corresponding to a set with \eqn{i} elements.
+#'
+#' @section References:
+#' For more information on this algorithm, see J.-F. Mai, M. Scherer,
+#' "Simulating Copulas", World Scientific (2017), pp. 122 psqq.
 #'
 #' @param n number of samples
 #' @param d dimension
-#' @param ex_intensities shock model intensity rates (length \eqn{d})
+#' @param ex_intensities exchangeable Marshall-Olkin intensity rates
 #'
-#' @return an \eqn{n \times d}{n x d} matrix with rows corresponding to the
-#' independent samples of size \eqn{d}.
+#' @return `rmo_ex_arnold` implements the modified Arnold model for the
+#' exchangeable subclass and returns an \eqn{n \times d}{n x d} numeric matrix
+#' with the rows corresponding to independent and identically disctributed
+#' samples of a \eqn{d} variate exchangeable Marshall-Olkin distribution with
+#' exchangeable parameters `ex_intensities`.
+#'
+#' @family samplers
 #'
 #' @examples
-#' # sample 10 times from a bivariate exchangeable Marshall-Olkin distribution
-#' # with parameters with c(1, 1) using the generalised Arnold model for the
-#' # exchangeable subclass
-#' rmo_ex_arnold(10, 2, c(1, 1))
+#' rmo_ex_arnold(10, 2, c(0.4, 0.2))
+#' rmo_ex_arnold(10, 2, c(1, 0))      ## independence
+#' rmo_ex_arnold(10, 2, c(0, 1))      ## comonotone
+#'
+#' @include assert.R
+#' @importFrom assertthat assert_that is.count
 #'
 #' @export
-#' @importFrom assertthat assert_that is.count
+#' @name rmo_ex_arnold
 rmo_ex_arnold <- function(n, d, ex_intensities) {
   assert_that(is.count(n), is.count(d), is_exmo_parameter(ex_intensities),
     length(ex_intensities) == d)
 
+  ## store total_intensity and transition_probs for all possible states
+  ## (number of destroyed components) in a list
   generator_list <- list()
   for (i in 1:d) {
     transition_probs <- vapply(1:i, function(x) sum(vapply(0:(d-i), function(y) choose((d-i), y) * ex_intensities[[x + y]], FUN.VALUE=0.5)) , FUN.VALUE=0.5) * vapply(1:i, function(x) choose(i, x), FUN.VALUE = 0.5) # nolint intermediate result
@@ -152,25 +175,20 @@ rmo_ex_arnold <- function(n, d, ex_intensities) {
   out
 }
 
-#' Sampling from a sorted version of an exchangeable exMO distribution
+#' @rdname rmo_ex_arnold
 #'
-#' Samples *one* random vector which has the distribution of an ascendingly
-#' sorted sample of an exchangeable Marshall-Olkin distribution with the
-#' exchangeable shock intensities `ex_intensities`.
-#'
-#' @param d dimension
 #' @param generator_list `list` of length `d` with the i-th element containing
-#'   named elements with the  `total_intensity` and `transition_probs` of the
-#'   i-marginal exMO model.
+#'   named elements with the `total_intensity` and `transition_probs` of the
+#'   marginal exMO model mit `i` components.
 #'
-#' @return A `numeric` vector of length `d`.
+#' @return `rmo_ex_arnold_sorted` draws *one* sample from an ascendigly ordered
+#' exchangeable Marshall--Olkin distribution and return a numeric vector of
+#' length `d`.
 #'
-#' The function currently does *not* perform any argument checks and calls
-#' itself recursively. For more information
-#' on this algorithm, see
-#' J.-F. Mai, M. Scherer, "Simulating Copulas", World Scientific (2017).
+#' @family samplers
 #'
 #' @importFrom stats rexp
+#'
 #' @keywords internal
 #' @noRd
 rmo_ex_arnold_sorted <- function(d, generator_list) {
@@ -189,38 +207,60 @@ rmo_ex_arnold_sorted <- function(d, generator_list) {
 }
 
 
-## #### Samplers for extMO distributions ####
+## #### Sample from extMO distributions ####
 ##
 
-#' Sampler for LFM with CPP subordinator
+#' Sample with LFM and CPP subordinator
 #'
 #' Draws `n` independent samples from a `d` variate extendible Marshall-Olkin
-#' distribution corresponding to a LFM with a compound Poisson subordinator.
-#' For more information on this algorithm, see
-#' J.-F. Mai, M. Scherer, "Simulating Copulas", World Scientific (2017).
+#' distribution corresponding to a LFM with a compound Poisson subordinator with
+#' parameters `rate`, `rate_killing`, `rate_drift`, `rjump_name`, and
+#' `rjump_arg_list`.
+#'
+#' - `rate` is the *jump intensity* of the compound Poisson subordinator:
+#' at each given point-in-time, the waiting time to the next jump is
+#' exponentially distributed with rate `rate`.
+#' - `rate_killing` is the *killing intensity* of the compound Poisson
+#' subordinator: the probability that the compound Poisson subordinator jumps to
+#' its graveyard-state \eqn{\infty} between \eqn{t} and \eqn{s} is \eqn{1 -
+#' \exp{\{-\mathrm{rate_killing} (s-t)\}}}{1-exp{-rate_killing * (s-t)}}.
 #'
 #' @param n number of samples
 #' @param d dimension
 #' @param rate rate of CPP subordinator
 #' @param rate_killing killing rate of CPP subordinator
 #' @param rate_drift drift rate of CPP subordinator
-#' @param rjump_name name of jump sampling function
+#' @param rjump_name name of jump sampling function for jumps of CPP
+#' subordinator
 #' @param rjump_arg_list list with named arguments for jump sampling function
+#' for jumps of CPP subordinator
 #'
-#' @return An `n x d` array with `n` independent samples of the corresponding
-#'  `d` variate extendible Marshall-Olkin distribution.
+#' @return `rmo_lfm_cpp` implements the Lévy-frailty model representation with a
+#' compound Poisson subordinator and returns an \eqn{n \times d}{n x d} numeric
+#' matrix with the rows corresponding to independent and identically
+#' disctributed samples of the corresponding `d` variate extendible
+#' Marshall-Olkin distribution.
+#'
+#' @section References: For more information on this algorithm, see J.-F. Mai,
+#' M. Scherer, "Simulating Copulas", World Scientific (2017), pp. 140 psqq.
 #'
 #' @examples
-#' rmo_lfm_cpp(10L, 2L, 0.5, 0, 0, "rposval", list("value"=1))
+#' rmo_lfm_cpp(10L, 2L, 0.5, 0.1, 0.2, "rposval", list("value"=1))
 #' rmo_lfm_cpp(10L, 2L, 0.5, 0, 0, "rexp", list("rate"=2))
+#' \dontrun{
+#' rmo_lfm_cpp(10L, 2L, 0, 0, 1, "rposval", list("value"=1))  ## independence
+#' rmo_lfm_cpp(10L, 2L, 0, 1, 0, "rposval", list("value"=1))  ## comonotone
+#' }
+#'
+#' @family samplers
 #'
 #' @include assert.R
-#'
 #' @importFrom assertthat assert_that is.count
 #' @importFrom stats rexp
 #'
 #' @export
-rmo_lfm_cpp <- function(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list) {
+#' @name rmo_lfm_cpp
+rmo_lfm_cpp <- function(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list = list()) {
   assert_that(is.count(n), is.count(d), is_positive_number(rate),
     is_nonnegative_number(rate_killing), is_nonnegative_number(rate_drift),
     is_rjump_name(rjump_name), is_rjump_arg_list(rjump_name, rjump_arg_list))
@@ -237,19 +277,28 @@ rmo_lfm_cpp <- function(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_
 }
 
 
-#' Sampler for Cuadras-Augé distribution
+#' Sample from Cuadras-Auge distribution
 #'
 #' Draws `n` independent samples from a `d` variate Cuadras-Augé distribution
-#' with the *exogenous shock model*. This is a specialised version of
-#' `rmo_esm`.
+#' with parameters `alpha` and `beta`.
+#'
+#' - `alpha` is the shock intensity of shocks that affect only single
+#' compoenents.
+#' - `beta` is the shock intensity of the global shock that affects all
+#' components.
 #'
 #' @param n number of samples
 #' @param d dimension
 #' @param alpha rate of individual shocks
 #' @param beta rate of global shock
 #'
-#' @return An \eqn{n \times d}{n x d} array matrix with rows corresponding to
-#'  the independent samples of size \eqn{d}.
+#' @return `rmo_esm_cuadras_auge` implements an optimized version of the
+#' *exogenous shock model* representation for the Cuadras-Augé family and
+#' returns an \eqn{n \times d}{n x d} array matrix with rows corresponding to
+#' the independent samples of size \eqn{d}.
+#'
+#' @seealso rmo_esm
+#' @family samplers
 #'
 #' @examples
 #' rmo_esm_cuadras_auge(10L, 2L, 0.5, 0.2)
@@ -260,6 +309,7 @@ rmo_lfm_cpp <- function(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_
 #' @importFrom assertthat assert_that is.count
 #'
 #' @export
+#' @name rmo_esm_cuadras_auge
 rmo_esm_cuadras_auge <- function(n, d, alpha, beta) {
   assert_that(is.count(n), is.count(d), is_nonnegative_number(alpha),
     is_nonnegative_number(beta), alpha + beta > 0)
@@ -279,14 +329,15 @@ rmo_esm_cuadras_auge <- function(n, d, alpha, beta) {
 ## #### Auxiliary samplers ####
 ##
 
-#' Wrapper for `rexp`
+#' A wrapper for `rexp`
 #'
-#' A wrapper for `rexp` with special treatment for the case
+#' Wraps an `ifelse`-clause arround `rexp` with special treatment for the case
 #' `rate=0`.
 #'
 #' @inheritParams stats::rexp
 #'
 #' @importFrom stats rexp
+#'
 #' @keywords internal
 #' @noRd
 rexp_if_rate_zero_then_infinity <- function(n, rate) { # nolint
@@ -302,15 +353,13 @@ rexp_if_rate_zero_then_infinity <- function(n, rate) { # nolint
 #' @param n number of samples
 #' @param value value to sample
 #'
-#' @return A `n` elements numeric vector with value `value` in each component
+#' @return A `n` elements numeric vector with `value` in each component
 #'
 #' @examples
 #' rposval(10L)       ## rep(1, 10L)
 #' rposval(10L, pi)   ## rep(pi, 10L)
 #'
 #' @family samplers
-#'
-#' @include assert.R
 #'
 #' @keywords internal
 #' @noRd
@@ -319,23 +368,19 @@ rposval <- function(n, value=1) {
 }
 
 
-#' Sampler for a CPP process with positive jumps
+#' @rdname rmo_lfm_cpp
 #'
 #' A sampling function for a (possibly killed) compound Poisson subordinator
 #' with non-negative jump distribution.
 #'
-#' @param rate rate of CPP subordinator
-#' @param rate_killing killing rate of CPP subordinator
-#' @param rate_drift drift rate of CPP subordinator
-#' @param rjump_name name of jump sampling function
-#' @param rjump_arg_list list with named arguments for jump sampling function
+#' @inheritParams rmo_lfm_cpp
 #' @param minmax_value the smallest allowed maximal value of process
 #'
-#' @return A named `k x 2` array with names `c("t", "value")`,
-#'   where `k` is random.
+#' @return A named `k x 2` array with names `c("t", "value")`, where `k` is
+#' random and each row represents a time-value tupel for a jump in the compound
+#' Poisson subordinator.
 #'
 #' @include assert.R
-#'
 #' @importFrom stats rexp
 #'
 #' @keywords internal

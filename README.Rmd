@@ -24,20 +24,23 @@ set.seed(1623)
 [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/hsloot/rmo?branch=master&svg=true)](https://ci.appveyor.com/project/hsloot/rmo)
 [![Codecov test coverage](https://codecov.io/gh/hsloot/rmo/branch/master/graph/badge.svg)](https://codecov.io/gh/hsloot/rmo?branch=master)
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
-[![Last-changedate](https://img.shields.io/badge/last%20change-`r gsub('-', '--', Sys.Date())`-yellowgreen.svg)](/commits/master)
+[![Last-changedate](https://img.shields.io/badge/last%20change-`r gsub('-','--', Sys.Date())`-yellowgreen.svg)](/commits/master)
 <!-- badges: end -->
 
 An R package for the *Marshall-Olkin distribution*: algorithms for the construction, simulation and estimation.
 
 ## Motivation
 
-While the academic literature on the Marshall-Olkin distributions is extensive, an intuitive and easy to use implementation is still missing. This project aims to provide an `R` package makes it simple and fun to use Marshall-Olkin distributions for research and real-world applications.
+While the academic literature on the Marshall-Olkin distributions is extensive,
+an intuitive and easy to use implementation is still missing. This project aims
+to provide an `R` package makes it simple and fun to use Marshall-Olkin
+distributions for research and real-world applications.
 
 ## Installation
 
 You can install the development version from [GitHub](https://github.com/) with:
 
-``` r
+```{r, include=TRUE, eval=FALSE}
 # install.packages("devtools")
 devtools::install_github("hsloot/rmo")
 ```
@@ -46,13 +49,38 @@ devtools::install_github("hsloot/rmo")
 
 ```{r, include=TRUE}
 # library(rmo)
-rmo_esm(n = 10, d = 2, intensities = c(1, 1, 1))
+rmo_esm(n=10L, d=2L, intensities=c(1, 1, 1))
 ```
 
 
+## Roadmap for future development
+
+We are planning to develop the package incrementally. The packages API might
+change frequently without deprication. The goal is to implement prototypes of
+the algorithms in `R` and refactor them in compiled code afterwards. The
+original `R` implementations are supposed to serve as test functions in the
+unit-test harness. Our next steps are:
+
+- __Version 0.1__: Implementation of various sampling routines for
+  (sub-)families of Marshall--Olkin distributions in `R`.
+- __Version 0.2__: Re-implementation of these sampling routines in `C++` with
+  `Rcpp` to improve performance.
+
+Other ideas for the future:
+
+- Implementation of estimation routines (__help wanted__).
+- An *OOP* implementation of the Marshall--Olkin distribution with the ultimate
+  goal to facilitate a hierarchical construction of Marshall--Olkin
+  distributions.
+
 ## Contributing
 
-Contribution is highly appreciated. Contribution can range from improving the documentation, writing tests, or raising issues and feature requests to implementing feature requests or fixing bugs. If you consider to contribute, have a look at our [contribution guide](.github/CONTRIBUTING.md). 
+Contribution is highly appreciated. Contribution can range from improving the
+documentation, writing tests, or raising issues and feature requests to
+implementing feature requests or fixing bugs. If you consider to contribute,
+have a look at our [contribution guide](.github/CONTRIBUTING.md).
+
+
 
 ## License
 

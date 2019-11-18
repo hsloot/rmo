@@ -2,7 +2,7 @@
 % Please edit documentation in R/sample.R
 \name{rmo_esm_cuadras_auge}
 \alias{rmo_esm_cuadras_auge}
-\title{Sampler for Cuadras-Augé distribution}
+\title{Sample from Cuadras-Auge distribution}
 \usage{
 rmo_esm_cuadras_auge(n, d, alpha, beta)
 }
@@ -16,13 +16,22 @@ rmo_esm_cuadras_auge(n, d, alpha, beta)
 \item{beta}{rate of global shock}
 }
 \value{
-An \eqn{n \times d}{n x d} array matrix with rows corresponding to
+\code{rmo_esm_cuadras_auge} implements an optimized version of the
+\emph{exogenous shock model} representation for the Cuadras-Augé family and
+returns an \eqn{n \times d}{n x d} array matrix with rows corresponding to
 the independent samples of size \eqn{d}.
 }
 \description{
 Draws \code{n} independent samples from a \code{d} variate Cuadras-Augé distribution
-with the \emph{exogenous shock model}. This is a specialised version of
-\code{rmo_esm}.
+with parameters \code{alpha} and \code{beta}.
+}
+\details{
+\itemize{
+\item \code{alpha} is the shock intensity of shocks that affect only single
+compoenents.
+\item \code{beta} is the shock intensity of the global shock that affects all
+components.
+}
 }
 \examples{
 rmo_esm_cuadras_auge(10L, 2L, 0.5, 0.2)
@@ -30,3 +39,12 @@ rmo_esm_cuadras_auge(10L, 2L, 0, 1)      ## comonotone
 rmo_esm_cuadras_auge(10L, 2L, 1, 0)      ## independence
 
 }
+\seealso{
+rmo_esm
+
+Other samplers: 
+\code{\link{rmo_esm}()},
+\code{\link{rmo_ex_arnold}()},
+\code{\link{rmo_lfm_cpp}()}
+}
+\concept{samplers}

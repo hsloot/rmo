@@ -16,7 +16,7 @@ status](https://ci.appveyor.com/api/projects/status/github/hsloot/rmo?branch=mas
 coverage](https://codecov.io/gh/hsloot/rmo/branch/master/graph/badge.svg)](https://codecov.io/gh/hsloot/rmo?branch=master)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
-[![Last-changedate](https://img.shields.io/badge/last%20change-2019--11--17-yellowgreen.svg)](/commits/master)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2019--11--18-yellowgreen.svg)](/commits/master)
 <!-- badges: end -->
 
 An R package for the *Marshall-Olkin distribution*: algorithms for the
@@ -44,7 +44,7 @@ devtools::install_github("hsloot/rmo")
 
 ``` r
 # library(rmo)
-rmo_esm(n = 10, d = 2, intensities = c(1, 1, 1))
+rmo_esm(n=10L, d=2L, intensities=c(1, 1, 1))
 #>              [,1]        [,2]
 #>  [1,] 0.220396393 0.220396393
 #>  [2,] 0.268882997 0.702705410
@@ -57,6 +57,26 @@ rmo_esm(n = 10, d = 2, intensities = c(1, 1, 1))
 #>  [9,] 0.220026223 1.290835243
 #> [10,] 0.035544062 1.518556226
 ```
+
+## Roadmap for future development
+
+We are planning to develop the package incrementally. The packages API
+might change frequently without deprication. The goal is to implement
+prototypes of the algorithms in `R` and refactor them in compiled code
+afterwards. The original `R` implementations are supposed to serve as
+test functions in the unit-test harness. Our next steps are:
+
+  - **Version 0.1**: Implementation of various sampling routines for
+    (sub-)families of Marshall–Olkin distributions in `R`.
+  - **Version 0.2**: Re-implementation of these sampling routines in
+    `C++` with `Rcpp` to improve performance.
+
+Other ideas for the future:
+
+  - Implementation of estimation routines (**help wanted**).
+  - An *OOP* implementation of the Marshall–Olkin distribution with the
+    ultimate goal to facilitate a hierarchical construction of
+    Marshall–Olkin distributions.
 
 ## Contributing
 

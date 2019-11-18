@@ -2,9 +2,17 @@
 % Please edit documentation in R/sample.R
 \name{rmo_lfm_cpp}
 \alias{rmo_lfm_cpp}
-\title{Sampler for LFM with CPP subordinator}
+\title{Sample with LFM and CPP subordinator}
 \usage{
-rmo_lfm_cpp(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list)
+rmo_lfm_cpp(
+  n,
+  d,
+  rate,
+  rate_killing,
+  rate_drift,
+  rjump_name,
+  rjump_arg_list = list()
+)
 }
 \arguments{
 \item{n}{number of samples}
@@ -17,22 +25,54 @@ rmo_lfm_cpp(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list)
 
 \item{rate_drift}{drift rate of CPP subordinator}
 
-\item{rjump_name}{name of jump sampling function}
+\item{rjump_name}{name of jump sampling function for jumps of CPP
+subordinator}
 
-\item{rjump_arg_list}{list with named arguments for jump sampling function}
+\item{rjump_arg_list}{list with named arguments for jump sampling function
+for jumps of CPP subordinator}
 }
 \value{
-An \verb{n x d} array with \code{n} independent samples of the corresponding
-\code{d} variate extendible Marshall-Olkin distribution.
+\code{rmo_lfm_cpp} implements the Lévy-frailty model representation with a
+compound Poisson subordinator and returns an \eqn{n \times d}{n x d} numeric
+matrix with the rows corresponding to independent and identically
+disctributed samples of the corresponding \code{d} variate extendible
+Marshall-Olkin distribution.
 }
 \description{
 Draws \code{n} independent samples from a \code{d} variate extendible Marshall-Olkin
-distribution corresponding to a LFM with a compound Poisson subordinator.
-For more information on this algorithm, see
-J.-F. Mai, M. Scherer, "Simulating Copulas", World Scientific (2017).
+distribution corresponding to a LFM with a compound Poisson subordinator with
+parameters \code{rate}, \code{rate_killing}, \code{rate_drift}, \code{rjump_name}, and
+\code{rjump_arg_list}.
 }
+\details{
+\itemize{
+\item \code{rate} is the \emph{jump intensity} of the compound Poisson subordinator:
+at each given point-in-time, the waiting time to the next jump is
+exponentially distributed with rate \code{rate}.
+\item \code{rate_killing} is the \emph{killing intensity} of the compound Poisson
+subordinator: the probability that the compound Poisson subordinator jumps to
+its graveyard-state \eqn{\infty} between \eqn{t} and \eqn{s} is \eqn{1 -
+\exp{\{-\mathrm{rate_killing} (s-t)\}}}{1-exp{-rate_killing * (s-t)}}.
+}
+}
+\section{References}{
+ For more information on this algorithm, see J.-F. Mai,
+M. Scherer, "Simulating Copulas", World Scientific (2017), pp. 140 psqq.
+}
+
 \examples{
-rmo_lfm_cpp(10L, 2L, 0.5, 0, 0, "rposval", list("value"=1))
+rmo_lfm_cpp(10L, 2L, 0.5, 0.1, 0.2, "rposval", list("value"=1))
 rmo_lfm_cpp(10L, 2L, 0.5, 0, 0, "rexp", list("rate"=2))
+\dontrun{
+rmo_lfm_cpp(10L, 2L, 0, 0, 1, "rposval", list("value"=1))  ## independence
+rmo_lfm_cpp(10L, 2L, 0, 1, 0, "rposval", list("value"=1))  ## comonotone
+}
 
 }
+\seealso{
+Other samplers: 
+\code{\link{rmo_esm_cuadras_auge}()},
+\code{\link{rmo_esm}()},
+\code{\link{rmo_ex_arnold}()}
+}
+\concept{samplers}

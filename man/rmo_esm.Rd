@@ -2,30 +2,69 @@
 % Please edit documentation in R/sample.R
 \name{rmo_esm}
 \alias{rmo_esm}
-\title{Sampling from the exogenous shock model}
+\alias{rmo_arnold}
+\title{Sample from a Marshall--Olkin distribution}
 \usage{
 rmo_esm(n, d, intensities)
+
+rmo_arnold(n, d, intensities)
 }
 \arguments{
 \item{n}{number of samples}
 
 \item{d}{dimension}
 
-\item{intensities}{shock model intensity rates}
+\item{intensities}{Marshall-Olkin intensity rates}
 }
 \value{
-an \eqn{n \times d}{n x d} matrix with rows corresponding to the independent
-samples of size \eqn{d}.
+\code{rmo_esm} implements the \emph{exogenous shock model} representation and
+returns an \eqn{n \times d}{n x d} numeric matrix with the rows corresponding
+to independent and identically disctributed samples of a \eqn{d} variate
+Marshall-Olkin distribution with parameters \code{intensities}.
+
+\code{rmo_arnold} implements the \emph{Arnold model} representation and returns
+an \eqn{n \times d}{n x d} numeric matrix with the rows corresponding to
+independent and identically disctributed samples of a \eqn{d} variate
+Marshall-Olkin distribution with parameters \code{intensities}.
 }
 \description{
 Draws \code{n} independent samples from a \code{d} variate Marshall-Olkin distribution
-with shock rates \code{intensities} using the \emph{exogenous shock model algorithm}.
-The shock rates must be stored in a vector of length \eqn{2^d-1}. For more information
-on this algorithm, see J.-F. Mai, M. Scherer, "Simulating Copulas", World Scientific (2017).
+with shock rates \code{intensities}.
 }
+\details{
+\itemize{
+\item The shock intensities must be stored in a vector of length \eqn{2^d-1}.
+\item A shock intensity of zero corresponds to an almost surely infinite shock.
+\item We use a binary representation to map a non-empty subset \eqn{I} of \eqn{\{
+1, \ldots, d\}}{{1, \ldots, d}} to integers \eqn{1, \ldots, 2^d-1}. In
+particular, \eqn{i} is a component in the set corresponding for \eqn{j} iff
+\eqn{j = \sum_{k=0}^d a_k 2^k}{\sum a[k] * 2^k} and \eqn{a_i = 0}{a[i] = 0}.
+}
+}
+\section{References}{
+ For more information on these algorithms, see J.-F. Mai,
+M. Scherer, "Simulating Copulas", World Scientific (2017), pp. 104 psqq.
+}
+
 \examples{
-# sample 10 times from a bivariate Marshall-Olkin distribution with parameters
-# with c(1, 1, 1) using the exogenous shock model algorithm
-rmo_esm(10, 2, c(1, 1, 1))
+rmo_esm(10L, 2L, c(0.4, 0.3, 0.2))
+rmo_esm(10L, 2L, c(1, 1, 0))         ## independence
+rmo_esm(10L, 2L, c(0, 0, 1))         ## comonotone
+
+rmo_arnold(10L, 2L, c(0.4, 0.3, 0.2))
+rmo_arnold(10L, 2L, c(1, 1, 0))         ## independence
+rmo_arnold(10L, 2L, c(0, 0, 1))         ## comonotone
 
 }
+\seealso{
+Other samplers: 
+\code{\link{rmo_esm_cuadras_auge}()},
+\code{\link{rmo_ex_arnold}()},
+\code{\link{rmo_lfm_cpp}()}
+
+Other samplers: 
+\code{\link{rmo_esm_cuadras_auge}()},
+\code{\link{rmo_ex_arnold}()},
+\code{\link{rmo_lfm_cpp}()}
+}
+\concept{samplers}

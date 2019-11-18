@@ -2,7 +2,7 @@
 % Please edit documentation in R/sample.R
 \name{rmo_ex_arnold}
 \alias{rmo_ex_arnold}
-\title{Sampling from the modified Arnold model for exchangeable MO}
+\title{Sample from an exchangeable MO distribution}
 \usage{
 rmo_ex_arnold(n, d, ex_intensities)
 }
@@ -11,22 +11,43 @@ rmo_ex_arnold(n, d, ex_intensities)
 
 \item{d}{dimension}
 
-\item{ex_intensities}{shock model intensity rates (length \eqn{d})}
+\item{ex_intensities}{exchangeable Marshall-Olkin intensity rates}
 }
 \value{
-an \eqn{n \times d}{n x d} matrix with rows corresponding to the
-independent samples of size \eqn{d}.
+\code{rmo_ex_arnold} implements the modified Arnold model for the
+exchangeable subclass and returns an \eqn{n \times d}{n x d} numeric matrix
+with the rows corresponding to independent and identically disctributed
+samples of a \eqn{d} variate exchangeable Marshall-Olkin distribution with
+exchangeable parameters \code{ex_intensities}.
 }
 \description{
 Draws \code{n} independent samples from a \code{d} variate exchangeable Marshall-Olkin
-distribution with shock rates \code{intensities} using the \emph{exogenous shock model algorithm}.
-The shock rates must be stored in a vector of length \eqn{2^d-1}. For more information
-on this algorithm, see J.-F. Mai, M. Scherer, "Simulating Copulas", World Scientific (2017).
+distribution with shock rates \code{ex_intensities}.
 }
+\details{
+\itemize{
+\item The \emph{exchangeable} shock intensities must be stored in a vector of length
+\eqn{d}.
+\item The entry \eqn{\mathrm{ex_intensities}_{i}}{ex_intensities[i]} is the
+intensity of a shock corresponding to a set with \eqn{i} elements.
+}
+}
+\section{References}{
+
+For more information on this algorithm, see J.-F. Mai, M. Scherer,
+"Simulating Copulas", World Scientific (2017), pp. 122 psqq.
+}
+
 \examples{
-# sample 10 times from a bivariate exchangeable Marshall-Olkin distribution
-# with parameters with c(1, 1) using the generalised Arnold model for the
-# exchangeable subclass
-rmo_ex_arnold(10, 2, c(1, 1))
+rmo_ex_arnold(10, 2, c(0.4, 0.2))
+rmo_ex_arnold(10, 2, c(1, 0))      ## independence
+rmo_ex_arnold(10, 2, c(0, 1))      ## comonotone
 
 }
+\seealso{
+Other samplers: 
+\code{\link{rmo_esm_cuadras_auge}()},
+\code{\link{rmo_esm}()},
+\code{\link{rmo_lfm_cpp}()}
+}
+\concept{samplers}
