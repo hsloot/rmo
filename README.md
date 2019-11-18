@@ -7,7 +7,7 @@
 
 ![minimal R
 version](https://img.shields.io/badge/R%3E%3D-3.6.1-6666ff.svg)
-![packageversion](https://img.shields.io/badge/Package%20version-0.0.0.9000-orange.svg?style=flat-square)
+![packageversion](https://img.shields.io/badge/Package%20version-0.1.0-orange.svg?style=flat-square)
 [![Travis build
 status](https://travis-ci.org/hsloot/rmo.svg?branch=master)](https://travis-ci.org/hsloot/rmo)
 [![AppVeyor build
@@ -61,7 +61,7 @@ rmo_esm(n=10L, d=2L, intensities=c(1, 1, 1))
 ## Roadmap for future development
 
 We are planning to develop the package incrementally. The packages API
-might change frequently without deprication. The goal is to implement
+might change frequently without deprecation. The goal is to implement
 prototypes of the algorithms in `R` and refactor them in compiled code
 afterwards. The original `R` implementations are supposed to serve as
 test functions in the unit-test harness. Our next steps are:
@@ -88,4 +88,4 @@ guide](.github/CONTRIBUTING.md).
 
 ## License
 
-MIT [Henrik Sloot]()
+MIT Henrik Sloot

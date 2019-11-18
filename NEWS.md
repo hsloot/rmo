@@ -1,3 +1,9 @@
+# rmo 0.1.0
+
+- Added pure `R` implementations of various sampling algorithms: `rmo_esm`, 
+`rmo_arnold`, `rmo_ex_arnold`, `rmo_lfm_cpp`, and `rmo_esm_cuadras_auge`.
+
+
 # rmo 0.0.0.9000
 
 - Added a `NEWS.md` file to track changes to the package.
