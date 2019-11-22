@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">rmo</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9000</span>
       </span>
     </div>
 
@@ -91,7 +91,7 @@
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#rmo" class="anchor"></a>rmo</h1></div>
 <!-- badges: start -->
-<p><img src="https://img.shields.io/badge/R%3E%3D-3.6.1-6666ff.svg" alt="minimal R version"><img src="https://img.shields.io/badge/Package%20version-0.1.0-orange.svg?style=flat-square" alt="packageversion"><a href="https://travis-ci.org/hsloot/rmo"><img src="https://travis-ci.org/hsloot/rmo.svg?branch=master" alt="Travis build status"></a> <a href="https://ci.appveyor.com/project/hsloot/rmo"><img src="https://ci.appveyor.com/api/projects/status/github/hsloot/rmo?branch=master&amp;svg=true" alt="AppVeyor build status"></a> <a href="https://codecov.io/gh/hsloot/rmo?branch=master"><img src="https://codecov.io/gh/hsloot/rmo/branch/master/graph/badge.svg" alt="Codecov test coverage"></a> <a href="https://www.tidyverse.org/lifecycle/#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a> <a href="/commits/master"><img src="https://img.shields.io/badge/last%20change-2019--11--18-yellowgreen.svg" alt="Last-changedate"></a> <!-- badges: end --></p>
+<p><img src="https://img.shields.io/badge/R%3E%3D-3.6.1-6666ff.svg" alt="minimal R version"><img src="https://img.shields.io/badge/Package%20version-0.1.0.9000-orange.svg?style=flat-square" alt="packageversion"><a href="https://travis-ci.org/hsloot/rmo"><img src="https://travis-ci.org/hsloot/rmo.svg?branch=master" alt="Travis build status"></a> <a href="https://ci.appveyor.com/project/hsloot/rmo"><img src="https://ci.appveyor.com/api/projects/status/github/hsloot/rmo?branch=master&amp;svg=true" alt="AppVeyor build status"></a> <a href="https://codecov.io/gh/hsloot/rmo?branch=master"><img src="https://codecov.io/gh/hsloot/rmo/branch/master/graph/badge.svg" alt="Codecov test coverage"></a> <a href="https://www.tidyverse.org/lifecycle/#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a> <a href="/commits/master"><img src="https://img.shields.io/badge/last%20change-2019--11--22-yellowgreen.svg" alt="Last-changedate"></a> <!-- badges: end --></p>
 <p>An R package for the <em>Marshall-Olkin distribution</em>: algorithms for the construction, simulation and estimation.</p>
 <div id="motivation" class="section level2">
 <h2 class="hasAnchor">
@@ -127,8 +127,6 @@
 <a href="#roadmap-for-future-development" class="anchor"></a>Roadmap for future development</h2>
 <p>We are planning to develop the package incrementally. The packages API might change frequently without deprecation. The goal is to implement prototypes of the algorithms in <code>R</code> and refactor them in compiled code afterwards. The original <code>R</code> implementations are supposed to serve as test functions in the unit-test harness. Our next steps are:</p>
 <ul>
-<li>
-<strong>Version 0.1</strong>: Implementation of various sampling routines for (sub-)families of Marshall–Olkin distributions in <code>R</code>.</li>
 <li>
 <strong>Version 0.2</strong>: Re-implementation of these sampling routines in <code>C++</code> with <code>Rcpp</code> to improve performance.</li>
 </ul>
