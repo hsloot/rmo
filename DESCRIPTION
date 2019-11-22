@@ -1,6 +1,6 @@
 Package: rmo
 Title: A package for the Marshall-Olkin distribution
-Version: 0.1.0
+Version: 0.1.0.9000
 Authors@R:
   person(given = "Sloot",
     family = "Henrik",

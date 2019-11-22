@@ -7,7 +7,7 @@
 
 ![minimal R
 version](https://img.shields.io/badge/R%3E%3D-3.6.1-6666ff.svg)
-![packageversion](https://img.shields.io/badge/Package%20version-0.1.0-orange.svg?style=flat-square)
+![packageversion](https://img.shields.io/badge/Package%20version-0.1.0.9000-orange.svg?style=flat-square)
 [![Travis build
 status](https://travis-ci.org/hsloot/rmo.svg?branch=master)](https://travis-ci.org/hsloot/rmo)
 [![AppVeyor build
@@ -16,7 +16,7 @@ status](https://ci.appveyor.com/api/projects/status/github/hsloot/rmo?branch=mas
 coverage](https://codecov.io/gh/hsloot/rmo/branch/master/graph/badge.svg)](https://codecov.io/gh/hsloot/rmo?branch=master)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
-[![Last-changedate](https://img.shields.io/badge/last%20change-2019--11--18-yellowgreen.svg)](/commits/master)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2019--11--22-yellowgreen.svg)](/commits/master)
 <!-- badges: end -->
 
 An R package for the *Marshall-Olkin distribution*: algorithms for the
@@ -66,8 +66,6 @@ prototypes of the algorithms in `R` and refactor them in compiled code
 afterwards. The original `R` implementations are supposed to serve as
 test functions in the unit-test harness. Our next steps are:
 
-  - **Version 0.1**: Implementation of various sampling routines for
-    (sub-)families of Marshall–Olkin distributions in `R`.
   - **Version 0.2**: Re-implementation of these sampling routines in
     `C++` with `Rcpp` to improve performance.
 
