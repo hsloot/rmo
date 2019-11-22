@@ -11,7 +11,8 @@ Description:
   The package contains an implementation of the Marshall-Olkin distribution and methods for estimation, simulation, and construction.
 License: MIT + file LICENSE
 Imports:
-    assertthat
+    assertthat,
+    Rcpp
 Suggests:
     testthat,
     covr,
@@ -22,10 +23,14 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.0.0
 Collate:
+    'RcppExports.R'
     'sets.R'
     'assert.R'
     'rmo.R'
     'sample.R'
+    'zzz.R'
 URL: https://hsloot.github.io/rmo/
 BugReports: https://github.com/hsloot/rmo/issues
 Language: en-GB
+LinkingTo: 
+    Rcpp
