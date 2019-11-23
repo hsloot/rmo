@@ -9,7 +9,7 @@ Authors@R:
     comment = c(ORCID = "0000-0001-8582-7776"))
 Description:
   The package contains an implementation of the Marshall-Olkin distribution and methods for estimation, simulation, and construction.
-License: MIT + file LICENSE
+License: GPL-3
 Imports:
     assertthat,
     Rcpp
