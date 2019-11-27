@@ -72,7 +72,7 @@ rjump_arg_list." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rmo</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
       </span>
     </div>
 
@@ -239,10 +239,29 @@ M. Scherer, "Simulating Copulas", World Scientific (2017), pp. 140 psqq.</p>
 #&gt;  [7,]  4.1571849 11.1076425
 #&gt;  [8,]  1.3897280  1.3897280
 #&gt;  [9,]  0.4064594  1.2095294
-#&gt; [10,]  1.4631810  0.9971864</div><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'>rmo_lfm_cpp</span>(<span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>1</span>, <span class='st'>"rposval"</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='st'>"value"</span><span class='kw'>=</span><span class='fl'>1</span>))  <span class='co'>## independence</span>
-<span class='fu'>rmo_lfm_cpp</span>(<span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>0</span>, <span class='st'>"rposval"</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='st'>"value"</span><span class='kw'>=</span><span class='fl'>1</span>))  <span class='co'>## comonotone</span>
-}</div></pre>
+#&gt; [10,]  1.4631810  0.9971864</div><div class='input'>
+<span class='fu'>rmo_lfm_cpp</span>(<span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>1</span>, <span class='st'>"rposval"</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='st'>"value"</span><span class='kw'>=</span><span class='fl'>1</span>))  <span class='co'>## independence</span></div><div class='output co'>#&gt;             [,1]       [,2]
+#&gt;  [1,] 1.29953920 6.92432903
+#&gt;  [2,] 1.36501132 0.52786872
+#&gt;  [3,] 0.58895533 1.40646782
+#&gt;  [4,] 0.06081897 1.25410909
+#&gt;  [5,] 0.35004695 2.58293262
+#&gt;  [6,] 1.96600090 1.06611532
+#&gt;  [7,] 0.15579552 0.38183566
+#&gt;  [8,] 0.94246480 0.77757018
+#&gt;  [9,] 0.95607280 0.63237537
+#&gt; [10,] 0.09183088 0.02670447</div><div class='input'><span class='fu'>rmo_lfm_cpp</span>(<span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>0</span>, <span class='st'>"rposval"</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='st'>"value"</span><span class='kw'>=</span><span class='fl'>1</span>))  <span class='co'>## comonotone</span></div><div class='output co'>#&gt;             [,1]       [,2]
+#&gt;  [1,] 2.13003743 2.13003743
+#&gt;  [2,] 0.38143820 0.38143820
+#&gt;  [3,] 2.66359687 2.66359687
+#&gt;  [4,] 1.27157350 1.27157350
+#&gt;  [5,] 0.07748686 0.07748686
+#&gt;  [6,] 0.70599219 0.70599219
+#&gt;  [7,] 0.30400037 0.30400037
+#&gt;  [8,] 0.69140711 0.69140711
+#&gt;  [9,] 1.01687513 1.01687513
+#&gt; [10,] 1.25896015 1.25896015</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -261,7 +280,7 @@ M. Scherer, "Simulating Copulas", World Scientific (2017), pp. 140 psqq.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Sloot Henrik.</p>
+  <p>Developed by Henrik Sloot.</p>
 </div>
 
 <div class="pkgdown">
