@@ -8,7 +8,7 @@
   "description": "\n  The package contains an implementation of the Marshall-Olkin distribution and methods for estimation, simulation, and construction.",
   "name": "rmo: A package for the Marshall-Olkin distribution",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -19,8 +19,8 @@
   "author": [
     {
       "@type": "Person",
-      "givenName": "Sloot",
-      "familyName": "Henrik",
+      "givenName": "Henrik",
+      "familyName": "Sloot",
       "email": "henrik.sloot@gmail.com",
       "@id": "https://orcid.org/0000-0001-8582-7776"
     }
@@ -31,8 +31,8 @@
   "maintainer": [
     {
       "@type": "Person",
-      "givenName": "Sloot",
-      "familyName": "Henrik",
+      "givenName": "Henrik",
+      "familyName": "Sloot",
       "email": "henrik.sloot@gmail.com",
       "@id": "https://orcid.org/0000-0001-8582-7776"
     }
@@ -104,7 +104,7 @@
   "codeRepository": "https://hsloot.github.io/rmo/",
   "releaseNotes": "https://github.com/hsloot/rmo/blob/master/NEWS.md",
   "readme": "https://github.com/hsloot/rmo/blob/master/README.md",
-  "fileSize": "13.292KB",
+  "fileSize": "13.488KB",
   "contIntegration": [
     "https://travis-ci.org/hsloot/rmo",
     "https://ci.appveyor.com/project/hsloot/rmo",
