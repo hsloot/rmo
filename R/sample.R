@@ -419,7 +419,7 @@ sample_cpp <- function(rate, rate_killing, rate_drift, rjump_name, rjump_arg_lis
           values <- c(values, intermediate_value)
           waiting_time <- waiting_time - intermediate_time
         }
-        if (rate>0) { ## waiting_time<Inf
+        if (rate>0) { ## waiting_time<Inf # nolint
           times <- c(times, waiting_time)
           values <- c(values, waiting_time * rate_drift + jump_value)
         }
