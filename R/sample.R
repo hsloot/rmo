@@ -245,10 +245,9 @@ rmo_ex_arnold_sorted <- function(d, generator_list) {
 #' @examples
 #' rmo_lfm_cpp(10L, 2L, 0.5, 0.1, 0.2, "rposval", list("value"=1))
 #' rmo_lfm_cpp(10L, 2L, 0.5, 0, 0, "rexp", list("rate"=2))
-#' \dontrun{
+#'
 #' rmo_lfm_cpp(10L, 2L, 0, 0, 1, "rposval", list("value"=1))  ## independence
 #' rmo_lfm_cpp(10L, 2L, 0, 1, 0, "rposval", list("value"=1))  ## comonotone
-#' }
 #'
 #' @family samplers
 #'
@@ -420,9 +419,10 @@ sample_cpp <- function(rate, rate_killing, rate_drift, rjump_name, rjump_arg_lis
           values <- c(values, intermediate_value)
           waiting_time <- waiting_time - intermediate_time
         }
-
-        times <- c(times, waiting_time)
-        values <- c(values, waiting_time * rate_drift + jump_value)
+        if (rate>0) { ## waiting_time<Inf
+          times <- c(times, waiting_time)
+          values <- c(values, waiting_time * rate_drift + jump_value)
+        }
       }
     }
   }

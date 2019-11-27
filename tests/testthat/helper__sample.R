@@ -207,8 +207,10 @@ test__rmo_lfm_cpp_bivariate_rexp_R <- function(n, rate, rate_killing, rate_drift
             waiting_time <- waiting_time - intermediate_time
           }
 
-          times <- c(times, waiting_time)
-          values <- c(values, waiting_time * rate_drift + jump_value)
+          if (rate>0) { ## waiting_time<Inf
+            times <- c(times, waiting_time)
+            values <- c(values, waiting_time * rate_drift + jump_value)
+          }
         }
       }
     }
@@ -262,9 +264,10 @@ test__rmo_lfm_cpp_bivariate_rposval_R <- function(n, rate, rate_killing, rate_dr
             values <- c(values, intermediate_value)
             waiting_time <- waiting_time - intermediate_time
           }
-
-          times <- c(times, waiting_time)
-          values <- c(values, waiting_time * rate_drift + jump_value)
+          if (rate>0) { ## waiting_time<Inf
+            times <- c(times, waiting_time)
+            values <- c(values, waiting_time * rate_drift + jump_value)
+          }
         }
       }
     }

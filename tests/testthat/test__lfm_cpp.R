@@ -41,6 +41,15 @@ test_that("biv. LFM-CPP implementation works as intended for det. jumps", {
     args, n, use_seed)
 })
 
+test_that("LFM-CPP implementation works as indended for independence case", {
+  n <- 25L
+
+  args <- list("d"= 5L, "rate"=0, "rate_killing"=0, "rate_drift"=2,
+    "rjump_name" = "rposval", "rjump_arg_list" = list("value"=1))
+  expect_equal_sampling_result("rmo_lfm_cpp", "test__rmo_lfm_cpp_independence_R",
+    args, n, use_seed)
+})
+
 test_that("LFM-CPP implementation works as indended for comonotone case", {
   n <- 25L
 
