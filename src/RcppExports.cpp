@@ -5,20 +5,50 @@
 
 using namespace Rcpp;
 
-// timesTwo
-NumericVector timesTwo(NumericVector x);
-RcppExport SEXP _rmo_timesTwo(SEXP xSEXP) {
+// rmo_esm
+NumericMatrix rmo_esm(unsigned int n, unsigned int d, NumericVector intensities);
+RcppExport SEXP _rmo_rmo_esm(SEXP nSEXP, SEXP dSEXP, SEXP intensitiesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(timesTwo(x));
+    Rcpp::traits::input_parameter< unsigned int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< unsigned int >::type d(dSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type intensities(intensitiesSEXP);
+    rcpp_result_gen = Rcpp::wrap(rmo_esm(n, d, intensities));
+    return rcpp_result_gen;
+END_RCPP
+}
+// rmo_arnold
+NumericMatrix rmo_arnold(unsigned int n, unsigned int d, NumericVector intensities);
+RcppExport SEXP _rmo_rmo_arnold(SEXP nSEXP, SEXP dSEXP, SEXP intensitiesSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< unsigned int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< unsigned int >::type d(dSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type intensities(intensitiesSEXP);
+    rcpp_result_gen = Rcpp::wrap(rmo_arnold(n, d, intensities));
+    return rcpp_result_gen;
+END_RCPP
+}
+// rmo_ex_arnold
+NumericMatrix rmo_ex_arnold(unsigned int n, unsigned int d, NumericVector ex_intensities);
+RcppExport SEXP _rmo_rmo_ex_arnold(SEXP nSEXP, SEXP dSEXP, SEXP ex_intensitiesSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< unsigned int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< unsigned int >::type d(dSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type ex_intensities(ex_intensitiesSEXP);
+    rcpp_result_gen = Rcpp::wrap(rmo_ex_arnold(n, d, ex_intensities));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_rmo_timesTwo", (DL_FUNC) &_rmo_timesTwo, 1},
+    {"_rmo_rmo_esm", (DL_FUNC) &_rmo_rmo_esm, 3},
+    {"_rmo_rmo_arnold", (DL_FUNC) &_rmo_rmo_arnold, 3},
+    {"_rmo_rmo_ex_arnold", (DL_FUNC) &_rmo_rmo_ex_arnold, 3},
     {NULL, NULL, 0}
 };
 

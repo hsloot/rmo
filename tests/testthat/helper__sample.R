@@ -8,6 +8,9 @@
 if (!"assertthat" %in% .packages()) {
   library("assertthat", character.only = TRUE, quietly = TRUE, warn.conflicts = FALSE)
 }
+## Use pre R 3.6.x sample RNG since the new one is not yet
+## implemented in Rcpp.
+suppressWarnings(RNGkind(sample.kind="Rounding"))
 
 ## #### Bivariate implementations ####
 ##
@@ -387,15 +390,122 @@ test__rmo_ex_arnold_alternative_R <- function(n, d, ex_intensities) { # nolint
       transition_probs <- transition_probs / total_intensity
 
       waiting_time <- rexp(1, total_intensity)
-      num_affected <- sample.int(d_tmp, 1, replace=TRUE, prob=transition_probs)
+      num_affected <- sample.int(d_tmp, 1, replace=FALSE, prob=transition_probs)
 
       out[i, (d-d_tmp+1):d] <- out[i, (d-d_tmp+1):d] + waiting_time
       d_tmp <- d_tmp - num_affected
     }
 
-    perm <- sample.int(d, d, replace = FALSE)
+    perm <- sample.int(d, d, replace=FALSE)
     out[i, ] <- out[i, perm]
   }
 
   out
+}
+
+
+
+## #### Old implementations in R ####
+##
+
+#' @keywords internal
+#' @noRd
+test__rmo_esm_R <- function(n, d, intensities) { # nolint
+  assert_that(is.count(n), is.count(d), is_mo_parameter(intensities),
+    length(intensities) == 2^d-1)
+
+  out <- matrix(NA, nrow=n, ncol=d)
+  for (k in 1:n) {
+    value <- rep(Inf, d)
+    for (j in 1:(2^d - 1)) {
+      shock_time <- rexp_if_rate_zero_then_infinity(1, intensities[[j]])
+      for (i in 1:d) {
+        if (is_within(i, j))
+          value[i] <- min(c(value[[i]], shock_time))
+      }
+    }
+    out[k, ] <- value
+  }
+
+  out
+}
+
+
+#' @keywords internal
+#' @noRd
+test__rmo_arnold_R <- function(n, d, intensities) { # nolint
+  assert_that(is.count(n), is.count(d), is_mo_parameter(intensities),
+    length(intensities) == 2^d-1)
+
+  total_intensity <- sum(intensities)
+  transition_probs <- intensities / total_intensity
+
+  out <- matrix(nrow=n, ncol=d)
+  for (k in 1:n) {
+    destroyed <- logical(d)
+    value <- numeric(d)
+
+    while (!all(destroyed)) {
+      waiting_time <- rexp(1, total_intensity)
+      affected <- sample.int(n=2^d-1, size=1, replace=FALSE, prob=transition_probs)
+
+      for (i in 1:d) {
+        if (!destroyed[[i]]) {
+          if (is_within(i, affected)) {
+            destroyed[[i]] <- TRUE
+          }
+          value[[i]] <- value[[i]] + waiting_time
+        }
+      }
+    }
+    out[k, ] <- value
+  }
+
+  out
+}
+
+
+#' @keywords internal
+#' @noRd
+test__rmo_ex_arnold_R <- function(n, d, ex_intensities) { # nolint
+  assert_that(is.count(n), is.count(d), is_exmo_parameter(ex_intensities),
+    length(ex_intensities) == d)
+
+  ## store total_intensity and transition_probs for all possible states
+  ## (number of destroyed components) in a list
+  generator_list <- list()
+  for (i in 1:d) {
+    transition_probs <- vapply(1:i, function(x) sum(vapply(0:(d-i), function(y) choose((d-i), y) * ex_intensities[[x + y]], FUN.VALUE=0.5)) , FUN.VALUE=0.5) * vapply(1:i, function(x) choose(i, x), FUN.VALUE = 0.5) # nolint intermediate result
+    total_intensity <- sum(transition_probs)
+    transition_probs <- transition_probs / total_intensity
+    generator_list[[i]] <- list("total_intensity" = total_intensity,
+                                "transition_probs" = transition_probs)
+  }
+
+  out <- matrix(0, nrow=n, ncol=d)
+  for (k in 1:n) {
+    value <- test__rmo_ex_arnold_sorted_R(d, generator_list)
+    perm <- sample.int(d, d, replace = FALSE)
+    out[k, ] <- value[perm]
+  }
+
+  out
+}
+
+
+#' @keywords internal
+#' @noRd
+test__rmo_ex_arnold_sorted_R <- function(d, generator_list) { # nolint
+  total_intensity <- generator_list[[d]]$total_intensity
+  transition_probs <- generator_list[[d]]$transition_probs
+
+  waiting_time <- rexp(1, total_intensity)
+  num_affected <- sample.int(d, 1, replace=FALSE, prob=transition_probs)
+
+  if (d == num_affected) {
+    return(rep(waiting_time, d))
+  }
+
+  waiting_time + c(rep(0, num_affected),
+              test__rmo_ex_arnold_sorted_R(d-num_affected, generator_list))
 }
