@@ -61,3 +61,21 @@ test_that("Alternative implementation", {
   expect_equal_sampling_result("rmo_ex_arnold", "test__rmo_ex_arnold_alternative_R",
                                args, n, use_seed)
 })
+
+
+
+## Test that the C++ implementation of the Arnold
+## model delivers the same result as the `R` implementation.
+test_that("Exchangeable Arnold model implementation in C++", {
+  n <- 25L
+
+  # all equal
+  args <- list("d" = 7L, "ex_intensities" = rep(0.5, 7L))
+  expect_equal_sampling_result("rmo_ex_arnold", "test__rmo_ex_arnold_R",
+                               args, n, use_seed)
+
+  # d=4 + exchangeable
+  args <-list("d" = 4L, "ex_intensities" = 1/(1:4L))
+  expect_equal_sampling_result("rmo_ex_arnold", "test__rmo_ex_arnold_R",
+                               args, n, use_seed)
+})

@@ -44,3 +44,24 @@ test_that("Arnold model implementation for d = 2", {
   expect_equal_sampling_result("rmo_arnold", "test__rmo_arnold_bivariate_R",
                                args, n, use_seed)
 })
+
+
+
+## Test that the C++ implementation of the Arnold
+## model delivers the same result as the `R` implementation.
+test_that("Arnold model implementation in C++", {
+  n <- 25L
+
+  # all equal
+  args <- list("d" = 7L, "intensities" = rep(0.5, 2^7-1))
+  expect_equal_sampling_result("rmo_arnold", "test__rmo_arnold_R",
+                               args, n, use_seed)
+
+  # d=4 + exchangeable
+  args <-list("d" = 4L, "intensities" = sapply(1:(2^4-1), function(x) {
+    cardinality <- sum(sapply(1:4L, function(y) is_within(y, x)))
+    1 / cardinality
+  }))
+  expect_equal_sampling_result("rmo_arnold", "test__rmo_arnold_R",
+                               args, n, use_seed)
+})

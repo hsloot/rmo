@@ -1,7 +1,7 @@
 context("Exogenous shock model")
 use_seed <- 1632L
 
-## Test that the implementation exogenous shock model
+## Test that the implementation of the exogenous shock model
 ## works as expected for d = 2 and different choices
 ## for the intensity vector.
 test_that("ESM implementation for d = 2", {
@@ -40,5 +40,25 @@ test_that("ESM implementation for d = 2", {
   ## independence
   args[["intensities"]] <- c(1, 1, 0)
   expect_equal_sampling_result("rmo_esm", "test__rmo_esm_bivariate_R",
+                               args, n, use_seed)
+})
+
+
+## Test that the C++ implementation of the exogenous shock
+## model delivers the same result as the `R` implementation.
+test_that("ESM implementation in C++", {
+  n <- 25L
+
+  # all equal
+  args <- list("d" = 7L, "intensities" = rep(0.5, 2^7-1))
+  expect_equal_sampling_result("rmo_esm", "test__rmo_esm_R",
+                               args, n, use_seed)
+
+  # d=4 + exchangeable
+  args <-list("d" = 4L, "intensities" = sapply(1:(2^4-1), function(x) {
+    cardinality <- sum(sapply(1:4L, function(y) is_within(y, x)))
+    1 / cardinality
+  }))
+  expect_equal_sampling_result("rmo_esm", "test__rmo_esm_R",
                                args, n, use_seed)
 })
