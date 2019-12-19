@@ -9,6 +9,41 @@ NULL
 #' @noRd
 NULL
 
+#' Sample from Cuadras-Auge distribution
+#'
+#' Draws `n` independent samples from a `d` variate Cuadras-Augé distribution
+#' with parameters `alpha` and `beta`.
+#'
+#' - `alpha` is the shock intensity of shocks that affect only single
+#' compoenents.
+#' - `beta` is the shock intensity of the global shock that affects all
+#' components.
+#'
+#' @param n number of samples
+#' @param d dimension
+#' @param alpha rate of individual shocks
+#' @param beta rate of global shock
+#'
+#' @return `rmo_esm_cuadras_auge` implements an optimized version of the
+#' *exogenous shock model* representation for the Cuadras-Augé family and
+#' returns an \eqn{n \times d}{n x d} array matrix with rows corresponding to
+#' the independent samples of size \eqn{d}.
+#'
+#' @seealso \code{\link{rmo_esm}}
+#' @family samplers
+#'
+#' @examples
+#' rmo_esm_cuadras_auge(10L, 2L, 0.5, 0.2)
+#' rmo_esm_cuadras_auge(10L, 2L, 0, 1)      ## comonotone
+#' rmo_esm_cuadras_auge(10L, 2L, 1, 0)      ## independence
+#'
+#' @include assert.R
+#' @importFrom assertthat assert_that is.count
+#'
+#' @export
+#' @name rmo_esm_cuadras_auge
+NULL
+
 #' Sample from a Marshall--Olkin distribution
 #'
 #' Draws `n` independent samples from a `d` variate Marshall-Olkin distribution

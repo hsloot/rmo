@@ -509,3 +509,22 @@ test__rmo_ex_arnold_sorted_R <- function(d, generator_list) { # nolint
   waiting_time + c(rep(0, num_affected),
               test__rmo_ex_arnold_sorted_R(d-num_affected, generator_list))
 }
+
+
+
+
+#' @keywords internal
+#' @noRd
+test__rmo_esm_cuadras_auge_R <- function(n, d, alpha, beta) { # nolint
+  assert_that(is.count(n), is.count(d), is_nonnegative_number(alpha),
+    is_nonnegative_number(beta), alpha + beta > 0)
+
+  out <- matrix(NA, nrow=n, ncol=d)
+  for (k in 1:n) { # use rexp_if_rate_zero_then_infinity from `R/sample.R`
+    individual_shocks <- rexp_if_rate_zero_then_infinity(d, alpha)
+    global_shock <- rexp_if_rate_zero_then_infinity(1L, beta)
+    out[k, ] <- pmin(individual_shocks, rep(global_shock, d))
+  }
+
+  out
+}

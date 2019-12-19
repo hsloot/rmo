@@ -248,3 +248,59 @@ NumericMatrix rmo_ex_arnold(unsigned int n, unsigned int d, NumericVector ex_int
 	}
 	return wrap( out );
 }
+
+
+
+
+//' Sample from Cuadras-Auge distribution
+//'
+//' Draws `n` independent samples from a `d` variate Cuadras-Augé distribution
+//' with parameters `alpha` and `beta`.
+//'
+//' - `alpha` is the shock intensity of shocks that affect only single
+//' compoenents.
+//' - `beta` is the shock intensity of the global shock that affects all
+//' components.
+//'
+//' @param n number of samples
+//' @param d dimension
+//' @param alpha rate of individual shocks
+//' @param beta rate of global shock
+//'
+//' @return `rmo_esm_cuadras_auge` implements an optimized version of the
+//' *exogenous shock model* representation for the Cuadras-Augé family and
+//' returns an \eqn{n \times d}{n x d} array matrix with rows corresponding to
+//' the independent samples of size \eqn{d}.
+//'
+//' @seealso \code{\link{rmo_esm}}
+//' @family samplers
+//'
+//' @examples
+//' rmo_esm_cuadras_auge(10L, 2L, 0.5, 0.2)
+//' rmo_esm_cuadras_auge(10L, 2L, 0, 1)      ## comonotone
+//' rmo_esm_cuadras_auge(10L, 2L, 1, 0)      ## independence
+//'
+//' @include assert.R
+//' @importFrom assertthat assert_that is.count
+//'
+//' @export
+//' @name rmo_esm_cuadras_auge
+NumericMatrix rmo_esm_cuadras_auge(unsigned int n, unsigned int d, double alpha, double beta) { // alpha, beta >= 0
+	NumericVector individual_shocks;
+	double global_shock;
+
+	NumericMatrix out(n, d);
+	for (unsigned int k=0; k<n; k++) {
+		if ((d*k) % C_CHECK_USR_INTERRUP == 0)
+			checkUserInterrupt();
+
+		individual_shocks = Rcpp::rexp(d, alpha);
+		global_shock = exp_rand() / beta;
+
+		for (unsigned int i=0; i<d; i++) {
+			out(k, i) = min2(individual_shocks[i], global_shock);
+		}
+	}
+
+	return wrap( out );
+}
