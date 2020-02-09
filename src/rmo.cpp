@@ -305,3 +305,123 @@ NumericMatrix rmo_esm_cuadras_auge(unsigned int n, unsigned int d, double alpha,
 
 	return wrap( out );
 }
+
+
+
+//' @rdname rmo_lfm_cpp
+//'
+//' A sampling function for a (possibly killed) compound Poisson subordinator
+//' with non-negative jump distribution.
+//'
+//' @inheritParams rmo_lfm_cpp
+//' @param barrier_values a vector of barrier values from the LFM to properly
+//' incorporate first exit times over these `barrier_values` if killing or drift
+//' is present.
+//'
+//' @return A named `k x 2` array with names `c("t", "value")`, where `k` is
+//' random and each row represents a time-value tupel for a jump in the compound
+//' Poisson subordinator.
+//'
+//' @include assert.R
+//' @importFrom stats rexp
+//'
+//' @keywords internal
+//' @noRd
+// [[Rcpp::export]]
+NumericMatrix sample_cpp(double rate, double rate_killing, double rate_drift, Function rjump, List rjump_arg_list, NumericVector barrier_values) {
+	barrier_values = clone(barrier_values);
+	if (rate_drift>0) {
+		std::sort(barrier_values.begin(), barrier_values.end());
+	} else {
+		barrier_values = NumericVector(1, max(barrier_values));
+	}
+
+	double waiting_time;
+	double jump_value;
+	double killing_time;
+
+	double current_value;
+
+	double intermediate_time;
+	double intermediate_value;
+
+	Function do_call("do.call");
+	rjump_arg_list.push_back(1, "n");
+
+	std::vector<double> times(1);
+	std::vector<double> values(1);
+	for (unsigned int i=0; i<barrier_values.size(); i++) {
+		current_value = std::accumulate(values.begin(), values.end(), 0.);
+		while (current_value < barrier_values[i]) {
+			waiting_time = ((0 == rate) ? R_PosInf : R::exp_rand()/rate);
+			// requires RNGstate synchronisation
+			PutRNGstate();
+			jump_value = as<double>(do_call(rjump, rjump_arg_list));
+			GetRNGstate();
+			killing_time = ((0 == rate_killing) ? R_PosInf : R::exp_rand()/rate_killing);
+
+			if (killing_time < R_PosInf && killing_time <= waiting_time) {
+				if (rate_drift > 0 && (barrier_values[i] - current_value)/rate_drift <= killing_time) {
+					intermediate_time = (barrier_values[i] - current_value) / rate_drift;
+					intermediate_value = intermediate_time * rate_drift;
+					times.push_back(intermediate_time);
+					values.push_back(intermediate_value);
+					killing_time -= intermediate_time;
+				}
+
+				times.push_back(killing_time);
+				values.push_back(R_PosInf);
+			} else {
+				if (rate_drift > 0 && (barrier_values[i] - current_value)/rate_drift <= waiting_time) {
+					intermediate_time = (barrier_values[i] - current_value)/rate_drift;
+					intermediate_value = intermediate_time * rate_drift;
+					times.push_back(intermediate_time);
+					values.push_back(intermediate_value);
+					waiting_time -= intermediate_time;
+				}
+
+				times.push_back(waiting_time);
+				values.push_back(waiting_time * rate_drift + jump_value);
+			}
+			current_value = std::accumulate(values.begin(), values.end(), 0.);
+		}
+	}
+
+	NumericMatrix out(times.size(), 2);
+	for (unsigned int i=0; i<times.size(); i++) {
+	  out(i, 0) = (0 == i ? times[0] : out(i-1, 0) + times[i]);
+	  out(i, 1) =(0 == i ? values[0] : out(i-1, 1) + values[i]);
+	}
+	colnames(out) = CharacterVector::create("t", "value");
+
+	return out;
+}
+
+
+//' @keywords internal
+//' @noRd
+// [[Rcpp::export]]
+NumericMatrix Rcpp__rmo_lfm_cpp(unsigned int n, unsigned int d, double rate, double rate_killing, double rate_drift, Function rjump, List rjump_arg_list) {
+  NumericVector unit_exponentials(d);
+  NumericMatrix cpp_subordinator;
+  IntegerVector idx;
+  NumericVector tmp;
+  unsigned int count;
+
+  NumericMatrix out(n, d);
+  for (unsigned int k=0; k<n; k++) {
+    unit_exponentials = Rcpp::rexp(d);
+    cpp_subordinator = sample_cpp(rate, rate_killing, rate_drift, rjump, rjump_arg_list, unit_exponentials);
+    for (unsigned int i=0; i<d; i++) {
+      count = 0;
+      while (cpp_subordinator(count, 1) < unit_exponentials[i] && count < cpp_subordinator.nrow())
+        count += 1;
+
+      if (cpp_subordinator.nrow() == count)
+        stop("internal error: exponential value out of subordinator range");
+
+      out(k, i) = cpp_subordinator(count, 0);
+    }
+  }
+  return out;
+}

@@ -528,3 +528,50 @@ test__rmo_esm_cuadras_auge_R <- function(n, d, alpha, beta) { # nolint
 
   out
 }
+
+
+#' @keywords internal
+#' @noRd
+test__sample_cpp_R <- function(rate, rate_killing, rate_drift, rjump, rjump_arg_list, barrier_values) { # nolint
+  if (rate_drift>0) {
+    barrier_values <- sort(barrier_values)
+  } else {
+    barrier_values <- max(barrier_values)
+  }
+
+  times <- 0
+  values <- 0
+  for (i in seq_along(barrier_values)) {
+    while (sum(values) < barrier_values[[i]]) {
+      waiting_time <- rexp_if_rate_zero_then_infinity(1, rate)
+      jump_value <- do.call(rjump, args=c("n"=1, rjump_arg_list))
+      killing_time <- rexp_if_rate_zero_then_infinity(1, rate_killing)
+
+      if (killing_time < Inf && killing_time <= waiting_time) {
+        if (rate_drift>0 && (barrier_values[[i]] - sum(values))/rate_drift<=killing_time) {
+          intermediate_time <- (barrier_values[i] - sum(values)) / rate_drift
+          intermediate_value <- intermediate_time * rate_drift
+          times <- c(times, intermediate_time)
+          values <- c(values, intermediate_value)
+          killing_time <- killing_time - intermediate_time
+        }
+
+        times <- c(times, killing_time)
+        values <- c(values, Inf)
+      } else {
+        if (rate_drift>0 && (barrier_values[[i]] - sum(values))/rate_drift <= waiting_time) {
+          intermediate_time <- (barrier_values[i] - sum(values)) / rate_drift
+          intermediate_value <- intermediate_time * rate_drift
+          times <- c(times, intermediate_time)
+          values <- c(values, intermediate_value)
+          waiting_time <- waiting_time - intermediate_time
+        }
+
+        times <- c(times, waiting_time)
+        values <- c(values, waiting_time * rate_drift + jump_value)
+      }
+    }
+  }
+
+  cbind("t"=cumsum(times), "value"=cumsum(values))
+}

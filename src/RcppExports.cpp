@@ -58,12 +58,47 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// sample_cpp
+NumericMatrix sample_cpp(double rate, double rate_killing, double rate_drift, Function rjump, List rjump_arg_list, NumericVector barrier_values);
+RcppExport SEXP _rmo_sample_cpp(SEXP rateSEXP, SEXP rate_killingSEXP, SEXP rate_driftSEXP, SEXP rjumpSEXP, SEXP rjump_arg_listSEXP, SEXP barrier_valuesSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< double >::type rate(rateSEXP);
+    Rcpp::traits::input_parameter< double >::type rate_killing(rate_killingSEXP);
+    Rcpp::traits::input_parameter< double >::type rate_drift(rate_driftSEXP);
+    Rcpp::traits::input_parameter< Function >::type rjump(rjumpSEXP);
+    Rcpp::traits::input_parameter< List >::type rjump_arg_list(rjump_arg_listSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type barrier_values(barrier_valuesSEXP);
+    rcpp_result_gen = Rcpp::wrap(sample_cpp(rate, rate_killing, rate_drift, rjump, rjump_arg_list, barrier_values));
+    return rcpp_result_gen;
+END_RCPP
+}
+// Rcpp__rmo_lfm_cpp
+NumericMatrix Rcpp__rmo_lfm_cpp(unsigned int n, unsigned int d, double rate, double rate_killing, double rate_drift, Function rjump, List rjump_arg_list);
+RcppExport SEXP _rmo_Rcpp__rmo_lfm_cpp(SEXP nSEXP, SEXP dSEXP, SEXP rateSEXP, SEXP rate_killingSEXP, SEXP rate_driftSEXP, SEXP rjumpSEXP, SEXP rjump_arg_listSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< unsigned int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< unsigned int >::type d(dSEXP);
+    Rcpp::traits::input_parameter< double >::type rate(rateSEXP);
+    Rcpp::traits::input_parameter< double >::type rate_killing(rate_killingSEXP);
+    Rcpp::traits::input_parameter< double >::type rate_drift(rate_driftSEXP);
+    Rcpp::traits::input_parameter< Function >::type rjump(rjumpSEXP);
+    Rcpp::traits::input_parameter< List >::type rjump_arg_list(rjump_arg_listSEXP);
+    rcpp_result_gen = Rcpp::wrap(Rcpp__rmo_lfm_cpp(n, d, rate, rate_killing, rate_drift, rjump, rjump_arg_list));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_rmo_rmo_esm", (DL_FUNC) &_rmo_rmo_esm, 3},
     {"_rmo_rmo_arnold", (DL_FUNC) &_rmo_rmo_arnold, 3},
     {"_rmo_rmo_ex_arnold", (DL_FUNC) &_rmo_rmo_ex_arnold, 3},
     {"_rmo_rmo_esm_cuadras_auge", (DL_FUNC) &_rmo_rmo_esm_cuadras_auge, 4},
+    {"_rmo_sample_cpp", (DL_FUNC) &_rmo_sample_cpp, 6},
+    {"_rmo_Rcpp__rmo_lfm_cpp", (DL_FUNC) &_rmo_Rcpp__rmo_lfm_cpp, 7},
     {NULL, NULL, 0}
 };
 

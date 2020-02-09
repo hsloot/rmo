@@ -29,19 +29,24 @@ format_args <- function(args, ...) {
 #'
 #' @seealso \code{\link[testthat]{expect_equal}}
 #' @seealso \url{https://testthat.r-lib.org/articles/custom-expectation.html}
-expect_equal_sampling_result <- function(object, expected, arguments, n = 100L,
+expect_equal_sampling_result <- function(object, expected, arguments, n,
     use_seed = 1623L, ...) {
   act <- testthat::quasi_label(rlang::enquo(object), NULL, arg = "object")
   exp <- testthat::quasi_label(rlang::enquo(expected), NULL, arg = "expected")
   args <- testthat::quasi_label(rlang::enquo(arguments), "Arguments", arg = "arguments")
 
   assertthat::assert_that(assertthat::is.string(act$val), assertthat::is.string(exp$val),
-    assertthat::is.count(n), assertthat::is.count(use_seed))
+    missing(n) || assertthat::is.count(n), assertthat::is.count(use_seed))
 
+  if (!missing(n)) {
+    arg_list <- c("n" = n, args$val)
+  } else {
+    arg_list <- args$val
+  }
   set.seed(use_seed)
-  x <- do.call(act$val, args = c("n" = n, args$val))
+  x <- do.call(act$val, args = arg_list)
   set.seed(use_seed)
-  y <- do.call(exp$val, args = c("n" = n, args$val))
+  y <- do.call(exp$val, args = arg_list)
 
   comp <- testthat::compare(x, y, ...)
   testthat::expect(
@@ -53,7 +58,7 @@ expect_equal_sampling_result <- function(object, expected, arguments, n = 100L,
       "\n%s:",
       "\n%s",
       "\n\n%s"
-      ), act$lab, exp$lab, use_seed, n, args$lab,
+    ), act$lab, exp$lab, use_seed, ifelse(!missing(n), n, 1L), args$lab,
       format_args(args$val, justify = "right", digits = 2L), comp$message),
     info = NULL
   )
