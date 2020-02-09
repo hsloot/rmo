@@ -44,11 +44,26 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// rmo_esm_cuadras_auge
+NumericMatrix rmo_esm_cuadras_auge(unsigned int n, unsigned int d, double alpha, double beta);
+RcppExport SEXP _rmo_rmo_esm_cuadras_auge(SEXP nSEXP, SEXP dSEXP, SEXP alphaSEXP, SEXP betaSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< unsigned int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< unsigned int >::type d(dSEXP);
+    Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP);
+    Rcpp::traits::input_parameter< double >::type beta(betaSEXP);
+    rcpp_result_gen = Rcpp::wrap(rmo_esm_cuadras_auge(n, d, alpha, beta));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_rmo_rmo_esm", (DL_FUNC) &_rmo_rmo_esm, 3},
     {"_rmo_rmo_arnold", (DL_FUNC) &_rmo_rmo_arnold, 3},
     {"_rmo_rmo_ex_arnold", (DL_FUNC) &_rmo_rmo_ex_arnold, 3},
+    {"_rmo_rmo_esm_cuadras_auge", (DL_FUNC) &_rmo_rmo_esm_cuadras_auge, 4},
     {NULL, NULL, 0}
 };
 

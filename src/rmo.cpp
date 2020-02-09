@@ -285,6 +285,7 @@ NumericMatrix rmo_ex_arnold(unsigned int n, unsigned int d, NumericVector ex_int
 //'
 //' @export
 //' @name rmo_esm_cuadras_auge
+// [[Rcpp::export]]
 NumericMatrix rmo_esm_cuadras_auge(unsigned int n, unsigned int d, double alpha, double beta) { // alpha, beta >= 0
 	NumericVector individual_shocks;
 	double global_shock;
@@ -295,7 +296,7 @@ NumericMatrix rmo_esm_cuadras_auge(unsigned int n, unsigned int d, double alpha,
 			checkUserInterrupt();
 
 		individual_shocks = Rcpp::rexp(d, alpha);
-		global_shock = exp_rand() / beta;
+		global_shock = ((0 == beta) ? R_PosInf : exp_rand() / beta);
 
 		for (unsigned int i=0; i<d; i++) {
 			out(k, i) = min2(individual_shocks[i], global_shock);

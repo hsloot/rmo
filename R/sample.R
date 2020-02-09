@@ -69,54 +69,6 @@ rmo_lfm_cpp <- function(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_
 }
 
 
-#' Sample from Cuadras-Auge distribution
-#'
-#' Draws `n` independent samples from a `d` variate Cuadras-Augé distribution
-#' with parameters `alpha` and `beta`.
-#'
-#' - `alpha` is the shock intensity of shocks that affect only single
-#' compoenents.
-#' - `beta` is the shock intensity of the global shock that affects all
-#' components.
-#'
-#' @param n number of samples
-#' @param d dimension
-#' @param alpha rate of individual shocks
-#' @param beta rate of global shock
-#'
-#' @return `rmo_esm_cuadras_auge` implements an optimized version of the
-#' *exogenous shock model* representation for the Cuadras-Augé family and
-#' returns an \eqn{n \times d}{n x d} array matrix with rows corresponding to
-#' the independent samples of size \eqn{d}.
-#'
-#' @seealso \code{\link{rmo_esm}}
-#' @family samplers
-#'
-#' @examples
-#' rmo_esm_cuadras_auge(10L, 2L, 0.5, 0.2)
-#' rmo_esm_cuadras_auge(10L, 2L, 0, 1)      ## comonotone
-#' rmo_esm_cuadras_auge(10L, 2L, 1, 0)      ## independence
-#'
-#' @include assert.R
-#' @importFrom assertthat assert_that is.count
-#'
-#' @export
-#' @name rmo_esm_cuadras_auge
-rmo_esm_cuadras_auge <- function(n, d, alpha, beta) {
-  assert_that(is.count(n), is.count(d), is_nonnegative_number(alpha),
-    is_nonnegative_number(beta), alpha + beta > 0)
-
-  out <- matrix(NA, nrow=n, ncol=d)
-  for (k in 1:n) { # use rexp_if_rate_zero_then_infinity from `R/sample.R`
-    individual_shocks <- rexp_if_rate_zero_then_infinity(d, alpha)
-    global_shock <- rexp_if_rate_zero_then_infinity(1L, beta)
-    out[k, ] <- pmin(individual_shocks, rep(global_shock, d))
-  }
-
-  out
-}
-
-
 
 ## #### Auxiliary samplers ####
 ##
