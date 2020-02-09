@@ -11,3 +11,22 @@ if (!"assertthat" %in% .packages()) {
 ## Use pre R 3.6.x sample RNG since the new one is not yet
 ## implemented in Rcpp.
 suppressWarnings(RNGkind(sample.kind="Rounding"))
+
+#' A wrapper for `rexp`
+#'
+#' Wraps an `ifelse`-clause arround `rexp` with special treatment for the case
+#' `rate=0`.
+#'
+#' @inheritParams stats::rexp
+#'
+#' @importFrom stats rexp
+#'
+#' @keywords internal
+#' @noRd
+rexp_if_rate_zero_then_infinity <- function(n, rate) { # nolint
+  if (0 == rate) {
+    return(rep(Inf, n))
+  }
+
+  rexp(n, rate)
+}

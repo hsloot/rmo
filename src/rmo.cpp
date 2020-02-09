@@ -286,8 +286,6 @@ NumericMatrix sample_cpp(double rate, double rate_killing, double rate_drift, Fu
 NumericMatrix Rcpp__rmo_lfm_cpp(unsigned int n, unsigned int d, double rate, double rate_killing, double rate_drift, Function rjump, List rjump_arg_list) {
   NumericVector unit_exponentials(d);
   NumericMatrix cpp_subordinator;
-  IntegerVector idx;
-  NumericVector tmp;
   unsigned int count;
 
   NumericMatrix out(n, d);

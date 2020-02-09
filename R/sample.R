@@ -230,25 +230,6 @@ rmo_lfm_cpp <- function(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_
 ## #### Auxiliary samplers ####
 ##
 
-#' A wrapper for `rexp`
-#'
-#' Wraps an `ifelse`-clause arround `rexp` with special treatment for the case
-#' `rate=0`.
-#'
-#' @inheritParams stats::rexp
-#'
-#' @importFrom stats rexp
-#'
-#' @keywords internal
-#' @noRd
-rexp_if_rate_zero_then_infinity <- function(n, rate) { # nolint
-  if (rate == 0) {
-    return(rep(Inf, n))
-  }
-
-  rexp(n, rate)
-}
-
 #' A dummy sampling function for deterministic, positive values
 #'
 #' @param n number of samples

@@ -1,5 +1,6 @@
 #' Bivariate implementation of the exchangeable Arnold model
 #'
+#' @rdname rmo_ex_arnold
 #' @keywords internal
 #' @noRd
 test__rmo_ex_arnold_bivariate_R <- function(n, d, ex_intensities) { # nolint
@@ -33,6 +34,7 @@ test__rmo_ex_arnold_bivariate_R <- function(n, d, ex_intensities) { # nolint
 
 #' Alternative implementation of the exchangeable Arnold model in `R`
 #'
+#' @rdname rmo_ex_arnold
 #' @keywords internal
 #' @noRd
 test__rmo_ex_arnold_alternative_R <- function(n, d, ex_intensities) { # nolint
@@ -68,6 +70,7 @@ test__rmo_ex_arnold_alternative_R <- function(n, d, ex_intensities) { # nolint
 
 #' Original implementation of the exchangeable Arnold model in `R`
 #'
+#' @rdname rmo_ex_arnold
 #' @keywords internal
 #' @noRd
 test__rmo_ex_arnold_R <- function(n, d, ex_intensities) { # nolint
@@ -92,6 +95,7 @@ test__rmo_ex_arnold_R <- function(n, d, ex_intensities) { # nolint
   out
 }
 
+#' @rdname rmo_ex_arnold
 #' @keywords internal
 #' @noRd
 test__rmo_ex_arnold_sorted_R <- function(d, generator_list) { # nolint
