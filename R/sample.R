@@ -3,7 +3,7 @@
 
 #' Sample with LFM and CPP subordinator
 #'
-#' Draws `n` independent samples from a `d` variate extendible Marshall-Olkin
+#' Draws `n` independent samples from a `d`-variate extendible Marshall-Olkin
 #' distribution corresponding to a LFM with a compound Poisson subordinator with
 #' parameters `rate`, `rate_killing`, `rate_drift`, `rjump_name`, and
 #' `rjump_arg_list`.
@@ -29,7 +29,7 @@
 #' @return `rmo_lfm_cpp` implements the Lévy-frailty model representation with a
 #' compound Poisson subordinator and returns an \eqn{n \times d}{n x d} numeric
 #' matrix with the rows corresponding to independent and identically
-#' disctributed samples of the corresponding `d` variate extendible
+#' distributed samples of the corresponding `d`-variate extendible
 #' Marshall-Olkin distribution.
 #'
 #' @section References: For more information on this algorithm, see J.-F. Mai,

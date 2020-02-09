@@ -15,7 +15,7 @@ NULL
 #' with parameters `alpha` and `beta`.
 #'
 #' - `alpha` is the shock intensity of shocks that affect only single
-#' compoenents.
+#' components.
 #' - `beta` is the shock intensity of the global shock that affects all
 #' components.
 #'
@@ -46,15 +46,15 @@ NULL
 
 #' Sample from a Marshall--Olkin distribution
 #'
-#' Draws `n` independent samples from a `d` variate Marshall-Olkin distribution
+#' Draws `n` independent samples from a `d`-variate Marshall-Olkin distribution
 #' with shock rates `intensities`.
 #'
 #' - The shock intensities must be stored in a vector of length \eqn{2^d-1}.
 #' - A shock intensity of zero corresponds to an almost surely infinite shock.
-#' - We use a binary representation to map a non-empty subset \eqn{I} of \eqn{\{
-#' 1, \ldots, d\}}{{1, \ldots, d}} to integers \eqn{1, \ldots, 2^d-1}. In
-#' particular, \eqn{i} is a component in the set corresponding for \eqn{j} iff
-#' \eqn{j = \sum_{k=0}^d a_k 2^k}{\sum a[k] * 2^k} and \eqn{a_i = 0}{a[i] = 0}.
+#' - We use a binary representation to map a non-empty subset \eqn{J} of \eqn{\{
+#' 1, \ldots, d\}}{{1, \ldots, d}} to integers \eqn{j} of \eqn{1, \ldots, 2^d-1}. In
+#' particular, \eqn{i} is a component in the set \eqn{J} corresponding to the integer \eqn{j} iff
+#' \eqn{j = \sum_{k=0}^\infty a_k 2^k}{\sum a[k] * 2^k} and \eqn{a_{i-1} = 1}{a[i-1] = 1}.
 #'
 #' @param n number of samples
 #' @param d dimension
@@ -62,7 +62,7 @@ NULL
 #'
 #' @return `rmo_esm` implements the *exogenous shock model* representation and
 #' returns an \eqn{n \times d}{n x d} numeric matrix with the rows corresponding
-#' to independent and identically disctributed samples of a \eqn{d} variate
+#' to independent and identically distributed samples of a \eqn{d} variate
 #' Marshall-Olkin distribution with parameters `intensities`.
 #'
 #' @section References: For more information on these algorithms, see J.-F. Mai,
@@ -89,7 +89,7 @@ rmo_esm <- function(n, d, intensities) {
 #'
 #' @return `rmo_arnold` implements the *Arnold model* representation and returns
 #' an \eqn{n \times d}{n x d} numeric matrix with the rows corresponding to
-#' independent and identically disctributed samples of a \eqn{d} variate
+#' independent and identically distributed samples of a \eqn{d} variate
 #' Marshall-Olkin distribution with parameters `intensities`.
 #'
 #' @examples

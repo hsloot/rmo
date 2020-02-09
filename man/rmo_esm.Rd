@@ -19,26 +19,26 @@ rmo_arnold(n, d, intensities)
 \value{
 \code{rmo_esm} implements the \emph{exogenous shock model} representation and
 returns an \eqn{n \times d}{n x d} numeric matrix with the rows corresponding
-to independent and identically disctributed samples of a \eqn{d} variate
+to independent and identically distributed samples of a \eqn{d} variate
 Marshall-Olkin distribution with parameters \code{intensities}.
 
 \code{rmo_arnold} implements the \emph{Arnold model} representation and returns
 an \eqn{n \times d}{n x d} numeric matrix with the rows corresponding to
-independent and identically disctributed samples of a \eqn{d} variate
+independent and identically distributed samples of a \eqn{d} variate
 Marshall-Olkin distribution with parameters \code{intensities}.
 }
 \description{
-Draws \code{n} independent samples from a \code{d} variate Marshall-Olkin distribution
+Draws \code{n} independent samples from a \code{d}-variate Marshall-Olkin distribution
 with shock rates \code{intensities}.
 }
 \details{
 \itemize{
 \item The shock intensities must be stored in a vector of length \eqn{2^d-1}.
 \item A shock intensity of zero corresponds to an almost surely infinite shock.
-\item We use a binary representation to map a non-empty subset \eqn{I} of \eqn{\{
-1, \ldots, d\}}{{1, \ldots, d}} to integers \eqn{1, \ldots, 2^d-1}. In
-particular, \eqn{i} is a component in the set corresponding for \eqn{j} iff
-\eqn{j = \sum_{k=0}^d a_k 2^k}{\sum a[k] * 2^k} and \eqn{a_i = 0}{a[i] = 0}.
+\item We use a binary representation to map a non-empty subset \eqn{J} of \eqn{\{
+1, \ldots, d\}}{{1, \ldots, d}} to integers \eqn{j} of \eqn{1, \ldots, 2^d-1}. In
+particular, \eqn{i} is a component in the set \eqn{J} corresponding to the integer \eqn{j} iff
+\eqn{j = \sum_{k=0}^\infty a_k 2^k}{\sum a[k] * 2^k} and \eqn{a_{i-1} = 1}{a[i-1] = 1}.
 }
 }
 \section{References}{
