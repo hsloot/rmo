@@ -1,11 +1,13 @@
 context("Exogenous shock model")
 use_seed <- 1632L
 
-## Test that the implementation of the exogenous shock model
-## works as expected for d = 2 and different choices
-## for the intensity vector.
+
+## #### Test implementation for d=2 ####
+#
+# Test that the implementation of the exogenous shock model works as expected
+# for d = 2 and different choices for the intensity vector.
 test_that("ESM implementation for d = 2", {
-  n <- 25L
+  n <- 25L # we use a default number of 25 simulations
 
   ## all equal
   args <- list("d" = 2L, "intensities" = c(1, 1, 1))
@@ -44,21 +46,35 @@ test_that("ESM implementation for d = 2", {
 })
 
 
-## Test that the C++ implementation of the exogenous shock
-## model delivers the same result as the `R` implementation.
+
+## #### Test implementation against original `R` version ####
+#
+# Test that the Rcpp implementation of the exogenous shock model delivers the
+# same result as the `R` implementation for various dimensions and choices of
+# parameters.
 test_that("ESM implementation in C++", {
-  n <- 25L
+  n <- 25L # we use a default number of 25 simulations
 
   # all equal
-  args <- list("d" = 7L, "intensities" = rep(0.5, 2^7-1))
+  d <- 7L
+  intensities <- rep(0.5, times=2^d-1)
+  args <- list("d" = d, "intensities" = intensities)
   expect_equal_sampling_result("rmo_esm", "test__rmo_esm_R",
-                               args, n, use_seed)
+    args, n, use_seed)
 
   # d=4 + exchangeable
-  args <-list("d" = 4L, "intensities" = sapply(1:(2^4-1), function(x) {
-    cardinality <- sum(sapply(1:4L, function(y) is_within(y, x)))
+  d <- 4L
+  intensities <- sapply(1:(2^d-1), function(x) {
+    cardinality <- sum(sapply(1:d, function(y) {
+      is_within(y, x)
+    }))
+
     1 / cardinality
-  }))
+  })
+  args <-list("d" = 4L, "intensities" = intensities)
   expect_equal_sampling_result("rmo_esm", "test__rmo_esm_R",
-                               args, n, use_seed)
+    args, n, use_seed)
+
+  ## TODO: Implement tests based on the parametrisation with Bernstein
+  ## functions to get realistic test-cases.
 })

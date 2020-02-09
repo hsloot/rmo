@@ -5,48 +5,60 @@
 
 using namespace Rcpp;
 
-// rmo_esm
-NumericMatrix rmo_esm(unsigned int n, unsigned int d, NumericVector intensities);
-RcppExport SEXP _rmo_rmo_esm(SEXP nSEXP, SEXP dSEXP, SEXP intensitiesSEXP) {
+// is_within
+bool is_within(unsigned int i, unsigned int j);
+RcppExport SEXP _rmo_is_within(SEXP iSEXP, SEXP jSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< unsigned int >::type i(iSEXP);
+    Rcpp::traits::input_parameter< unsigned int >::type j(jSEXP);
+    rcpp_result_gen = Rcpp::wrap(is_within(i, j));
+    return rcpp_result_gen;
+END_RCPP
+}
+// Rcpp__rmo_esm
+NumericMatrix Rcpp__rmo_esm(unsigned int n, unsigned int d, NumericVector intensities);
+RcppExport SEXP _rmo_Rcpp__rmo_esm(SEXP nSEXP, SEXP dSEXP, SEXP intensitiesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< unsigned int >::type n(nSEXP);
     Rcpp::traits::input_parameter< unsigned int >::type d(dSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type intensities(intensitiesSEXP);
-    rcpp_result_gen = Rcpp::wrap(rmo_esm(n, d, intensities));
+    rcpp_result_gen = Rcpp::wrap(Rcpp__rmo_esm(n, d, intensities));
     return rcpp_result_gen;
 END_RCPP
 }
-// rmo_arnold
-NumericMatrix rmo_arnold(unsigned int n, unsigned int d, NumericVector intensities);
-RcppExport SEXP _rmo_rmo_arnold(SEXP nSEXP, SEXP dSEXP, SEXP intensitiesSEXP) {
+// Rcpp__rmo_arnold
+NumericMatrix Rcpp__rmo_arnold(unsigned int n, unsigned int d, NumericVector intensities);
+RcppExport SEXP _rmo_Rcpp__rmo_arnold(SEXP nSEXP, SEXP dSEXP, SEXP intensitiesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< unsigned int >::type n(nSEXP);
     Rcpp::traits::input_parameter< unsigned int >::type d(dSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type intensities(intensitiesSEXP);
-    rcpp_result_gen = Rcpp::wrap(rmo_arnold(n, d, intensities));
+    rcpp_result_gen = Rcpp::wrap(Rcpp__rmo_arnold(n, d, intensities));
     return rcpp_result_gen;
 END_RCPP
 }
-// rmo_ex_arnold
-NumericMatrix rmo_ex_arnold(unsigned int n, unsigned int d, NumericVector ex_intensities);
-RcppExport SEXP _rmo_rmo_ex_arnold(SEXP nSEXP, SEXP dSEXP, SEXP ex_intensitiesSEXP) {
+// Rcpp__rmo_ex_arnold
+NumericMatrix Rcpp__rmo_ex_arnold(unsigned int n, unsigned int d, NumericVector ex_intensities);
+RcppExport SEXP _rmo_Rcpp__rmo_ex_arnold(SEXP nSEXP, SEXP dSEXP, SEXP ex_intensitiesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< unsigned int >::type n(nSEXP);
     Rcpp::traits::input_parameter< unsigned int >::type d(dSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type ex_intensities(ex_intensitiesSEXP);
-    rcpp_result_gen = Rcpp::wrap(rmo_ex_arnold(n, d, ex_intensities));
+    rcpp_result_gen = Rcpp::wrap(Rcpp__rmo_ex_arnold(n, d, ex_intensities));
     return rcpp_result_gen;
 END_RCPP
 }
-// rmo_esm_cuadras_auge
-NumericMatrix rmo_esm_cuadras_auge(unsigned int n, unsigned int d, double alpha, double beta);
-RcppExport SEXP _rmo_rmo_esm_cuadras_auge(SEXP nSEXP, SEXP dSEXP, SEXP alphaSEXP, SEXP betaSEXP) {
+// Rcpp__rmo_esm_cuadras_auge
+NumericMatrix Rcpp__rmo_esm_cuadras_auge(unsigned int n, unsigned int d, double alpha, double beta);
+RcppExport SEXP _rmo_Rcpp__rmo_esm_cuadras_auge(SEXP nSEXP, SEXP dSEXP, SEXP alphaSEXP, SEXP betaSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -54,7 +66,7 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< unsigned int >::type d(dSEXP);
     Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP);
     Rcpp::traits::input_parameter< double >::type beta(betaSEXP);
-    rcpp_result_gen = Rcpp::wrap(rmo_esm_cuadras_auge(n, d, alpha, beta));
+    rcpp_result_gen = Rcpp::wrap(Rcpp__rmo_esm_cuadras_auge(n, d, alpha, beta));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -93,10 +105,11 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_rmo_rmo_esm", (DL_FUNC) &_rmo_rmo_esm, 3},
-    {"_rmo_rmo_arnold", (DL_FUNC) &_rmo_rmo_arnold, 3},
-    {"_rmo_rmo_ex_arnold", (DL_FUNC) &_rmo_rmo_ex_arnold, 3},
-    {"_rmo_rmo_esm_cuadras_auge", (DL_FUNC) &_rmo_rmo_esm_cuadras_auge, 4},
+    {"_rmo_is_within", (DL_FUNC) &_rmo_is_within, 2},
+    {"_rmo_Rcpp__rmo_esm", (DL_FUNC) &_rmo_Rcpp__rmo_esm, 3},
+    {"_rmo_Rcpp__rmo_arnold", (DL_FUNC) &_rmo_Rcpp__rmo_arnold, 3},
+    {"_rmo_Rcpp__rmo_ex_arnold", (DL_FUNC) &_rmo_Rcpp__rmo_ex_arnold, 3},
+    {"_rmo_Rcpp__rmo_esm_cuadras_auge", (DL_FUNC) &_rmo_Rcpp__rmo_esm_cuadras_auge, 4},
     {"_rmo_sample_cpp", (DL_FUNC) &_rmo_sample_cpp, 6},
     {"_rmo_Rcpp__rmo_lfm_cpp", (DL_FUNC) &_rmo_Rcpp__rmo_lfm_cpp, 7},
     {NULL, NULL, 0}

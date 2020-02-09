@@ -1,5 +1,169 @@
+## #### Sample from MO distributions ####
+##
+
+
+#' Sample from a Marshall--Olkin distribution
+#'
+#' Draws `n` independent samples from a `d`-variate Marshall-Olkin distribution
+#' with shock rates `intensities`.
+#'
+#' - The shock intensities must be stored in a vector of length \eqn{2^d-1}.
+#' - A shock intensity of zero corresponds to an almost surely infinite shock.
+#' - We use a binary representation to map a non-empty subset \eqn{J} of \eqn{\{
+#' 1, \ldots, d\}}{{1, \ldots, d}} to integers \eqn{j} of \eqn{1, \ldots, 2^d-1}. In
+#' particular, \eqn{i} is a component in the set \eqn{J} corresponding to the integer \eqn{j} iff
+#' \eqn{j = \sum_{k=0}^\infty a_k 2^k}{\sum a[k] * 2^k} and \eqn{a_{i-1} = 1}{a[i-1] = 1}.
+#'
+#' @param n number of samples
+#' @param d dimension
+#' @param intensities Marshall-Olkin intensity rates
+#'
+#' @return `rmo_esm` implements the *exogenous shock model* representation and
+#' returns an \eqn{n \times d}{n x d} numeric matrix with the rows corresponding
+#' to independent and identically distributed samples of a \eqn{d} variate
+#' Marshall-Olkin distribution with parameters `intensities`.
+#'
+#' @section References: For more information on these algorithms, see J.-F. Mai,
+#' M. Scherer, "Simulating Copulas", World Scientific (2017), pp. 104 psqq.
+#'
+#' @family samplers
+#'
+#' @examples
+#' rmo_esm(10L, 2L, c(0.4, 0.3, 0.2))
+#' rmo_esm(10L, 2L, c(1, 1, 0))         ## independence
+#' rmo_esm(10L, 2L, c(0, 0, 1))         ## comonotone
+#'
+#' @include assert.R RcppExports.R
+#' @importFrom stats rexp
+#' @importFrom assertthat assert_that is.count
+#'
+#' @export
+#' @name rmo_esm
+rmo_esm <- function(n, d, intensities) {
+  assert_that(is.count(n), is.count(d), is_mo_parameter(intensities),
+    length(intensities) == 2^d-1)
+
+  Rcpp__rmo_esm(n, d, intensities)
+}
+
+
+#' @rdname rmo_esm
+#'
+#' @return `rmo_arnold` implements the *Arnold model* representation and returns
+#' an \eqn{n \times d}{n x d} numeric matrix with the rows corresponding to
+#' independent and identically distributed samples of a \eqn{d} variate
+#' Marshall-Olkin distribution with parameters `intensities`.
+#'
+#' @examples
+#' rmo_arnold(10L, 2L, c(0.4, 0.3, 0.2))
+#' rmo_arnold(10L, 2L, c(1, 1, 0))         ## independence
+#' rmo_arnold(10L, 2L, c(0, 0, 1))         ## comonotone
+#'
+#' @include assert.R RcppExports.R
+#' @importFrom stats rexp
+#' @importFrom assertthat assert_that is.count
+#'
+#' @export
+rmo_arnold <- function(n, d, intensities) {
+  assert_that(is.count(n), is.count(d), is_mo_parameter(intensities),
+    length(intensities) == 2^d-1)
+
+  Rcpp__rmo_arnold(n, d, intensities)
+}
+
+
+
+## #### Sample from exMO distribution ####
+##
+
+#' Sample from an exchangeable MO distribution
+#'
+#' Draws `n` independent samples from a `d` variate exchangeable Marshall-Olkin
+#' distribution with shock rates `ex_intensities`.
+#'
+#' - The *exchangeable* shock intensities must be stored in a vector of length
+#' \eqn{d}.
+#' - The entry \eqn{{exintensities}_{i}}{ex_intensities[i]} is the
+#' intensity of a shock corresponding to a set with \eqn{i} elements.
+#'
+#' @section References:
+#' For more information on this algorithm, see J.-F. Mai, M. Scherer,
+#' "Simulating Copulas", World Scientific (2017), pp. 122 psqq.
+#'
+#' @param n number of samples
+#' @param d dimension
+#' @param ex_intensities exchangeable Marshall-Olkin intensity rates
+#'
+#' @return `rmo_ex_arnold` implements the modified Arnold model for the
+#' exchangeable subclass and returns an \eqn{n \times d}{n x d} numeric matrix
+#' with the rows corresponding to independent and identically disctributed
+#' samples of a \eqn{d} variate exchangeable Marshall-Olkin distribution with
+#' exchangeable parameters `ex_intensities`.
+#'
+#' @family samplers
+#'
+#' @examples
+#' rmo_ex_arnold(10, 2, c(0.4, 0.2))
+#' rmo_ex_arnold(10, 2, c(1, 0))      ## independence
+#' rmo_ex_arnold(10, 2, c(0, 1))      ## comonotone
+#'
+#' @include assert.R
+#' @importFrom assertthat assert_that is.count
+#'
+#' @export
+#' @name rmo_ex_arnold
+rmo_ex_arnold <- function(n, d, ex_intensities) {
+  assert_that(is.count(n), is.count(d), is_exmo_parameter(ex_intensities),
+    length(ex_intensities) == d)
+
+  Rcpp__rmo_ex_arnold(n, d, ex_intensities)
+}
+
 ## #### Sample from extMO distributions ####
 ##
+
+
+#' Sample from Cuadras-Auge distribution
+#'
+#' Draws `n` independent samples from a `d` variate Cuadras-Augé distribution
+#' with parameters `alpha` and `beta`.
+#'
+#' - `alpha` is the shock intensity of shocks that affect only single
+#' components.
+#' - `beta` is the shock intensity of the global shock that affects all
+#' components.
+#'
+#' @param n number of samples
+#' @param d dimension
+#' @param alpha rate of individual shocks
+#' @param beta rate of global shock
+#'
+#' @return `rmo_esm_cuadras_auge` implements an optimized version of the
+#' *exogenous shock model* representation for the Cuadras-Augé family and
+#' returns an \eqn{n \times d}{n x d} array matrix with rows corresponding to
+#' the independent samples of size \eqn{d}.
+#'
+#' @seealso \code{\link{rmo_esm}}
+#' @family samplers
+#'
+#' @examples
+#' rmo_esm_cuadras_auge(10L, 2L, 0.5, 0.2)
+#' rmo_esm_cuadras_auge(10L, 2L, 0, 1)      ## comonotone
+#' rmo_esm_cuadras_auge(10L, 2L, 1, 0)      ## independence
+#'
+#' @include assert.R
+#' @importFrom assertthat assert_that is.count
+#'
+#' @export
+#' @name rmo_esm_cuadras_auge
+rmo_esm_cuadras_auge <- function(n, d, alpha, beta) {
+  assert_that(is.count(n), is.count(d), is_nonnegative_number(alpha),
+    is_nonnegative_number(beta), alpha + beta > 0)
+
+  Rcpp__rmo_esm_cuadras_auge(n, d, alpha, beta)
+}
+
+
 
 #' Sample with LFM and CPP subordinator
 #'

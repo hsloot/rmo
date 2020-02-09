@@ -1,6 +1,6 @@
 #' @keywords internal
 #' @noRd
-is_within <- function(i, j) {
+test__is_within_R <- function(i, j) {
   count <- 1
   while (j > 0) {
     if (1 == (j %% 2) && count == i)

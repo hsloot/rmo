@@ -1,6 +1,11 @@
 context("Sample compound Poisson process")
 use_seed <- 1632L
 
+## #### Test implementation with exponentially distributed jumps for d=2 ####
+#
+# Test that the implementation of the Compound Poisson process LFM with
+# exponentially distributed jumps works as expected for d = 2 and different
+# choices of parameters.
 test_that("biv. CPP implementation works as intended for exp. jumps", {
   set.seed(use_seed-543L)
   d <- 2L
@@ -25,6 +30,12 @@ test_that("biv. CPP implementation works as intended for exp. jumps", {
     args, use_seed=use_seed)
 })
 
+
+## #### Test implementation with deterministic jumps for d=2 ####
+#
+# Test that the implementation of the Compound Poisson process with
+# deterministic jumps works as expected for d = 2 and different
+# choices of parameters.
 test_that("biv. CPP implementation works as intended for det. jumps", {
   set.seed(use_seed-543L)
   d <- 2L
@@ -49,6 +60,12 @@ test_that("biv. CPP implementation works as intended for det. jumps", {
     args, use_seed=use_seed)
 })
 
+
+## #### Test implementation for the comonotone case ####
+#
+# Test that the implementation of the Compound Poisson process with
+# deterministic jumps works as expected for d = 2 and different
+# choices of parameters.
 test_that("CPP implementation works as indended for comonotone case", {
   set.seed(use_seed-543L)
   d <- 5L
@@ -61,3 +78,6 @@ test_that("CPP implementation works as indended for comonotone case", {
   expect_equal_sampling_result("sample_cpp", "test__sample_cpp_R",
     args, use_seed=use_seed)
 })
+
+
+## TODO: Implement tests for the independence case.
