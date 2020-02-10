@@ -2,8 +2,7 @@
 
 - Bugfix for `rmo:::sample_cpp` which is used in `rmo_lfm_cpp`. The former 
 implementation did not properly account for the case, when the CPP drifts
-over several barriers during a waiting period.
-period, the 
+over several barriers during a waiting period. 
 
 # rmo 0.1.1
 
