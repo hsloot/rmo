@@ -1,6 +1,6 @@
 context("Arnold model")
 use_seed <- 1632L
-
+n <- 100L
 
 ## #### Test implementation for the bivariate case ####
 #
@@ -8,8 +8,6 @@ use_seed <- 1632L
 # case and different choices for the intensity vector.
 
 test_that("Arnold model implementation for d = 2", {
-  n <- 25L # We use a default number of 25 simulations.
-
   ## all equal
   args <- list("d" = 2L, "intensities" = c(1, 1, 1))
   expect_equal_sampling_result("rmo_arnold", "test__rmo_arnold_bivariate_R",
@@ -51,8 +49,6 @@ test_that("Arnold model implementation for d = 2", {
 ## Test that the C++ implementation of the Arnold
 ## model delivers the same result as the `R` implementation.
 test_that("Arnold model implementation in C++", {
-  n <- 25L # We use a default number of 25 simulations.
-
   # all equal
   d <- 7L
   intensities <- rep(0.5, times=2^d-1)

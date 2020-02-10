@@ -1,5 +1,6 @@
 context("Exogenous shock model")
 use_seed <- 1632L
+n <- 100L
 
 
 ## #### Test implementation for the bivariate case ####
@@ -7,8 +8,6 @@ use_seed <- 1632L
 # Test that the implementation of the exogenous shock model works as expected
 # for the bivaraite case and different choices for the intensity vector.
 test_that("ESM implementation for d = 2", {
-  n <- 25L # we use a default number of 25 simulations
-
   ## all equal
   args <- list("d" = 2L, "intensities" = c(1, 1, 1))
   expect_equal_sampling_result("rmo_esm", "test__rmo_esm_bivariate_R",
@@ -53,8 +52,6 @@ test_that("ESM implementation for d = 2", {
 # same result as the `R` implementation for various dimensions and choices of
 # parameters.
 test_that("ESM implementation in C++", {
-  n <- 25L # we use a default number of 25 simulations
-
   # all equal
   d <- 7L
   intensities <- rep(0.5, times=2^d-1)

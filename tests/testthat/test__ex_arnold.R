@@ -1,5 +1,7 @@
 context("Exchangeable Arnold model")
 use_seed <- 1632L
+n <- 100L
+
 
 ## #### Test implementation for the bivariate case ####
 #
@@ -7,8 +9,6 @@ use_seed <- 1632L
 # exchangeable distributions works as intended for the bivariate case and
 # different choices for the ex_intensity vector.
 test_that("Exchangeable Arnold model for d = 2", {
-  n <- 25L # we use a default number of 25 simulations
-
   ## all equal
   args <- list("d" = 2L, ex_intensities = c(1, 1))
   expect_equal_sampling_result("rmo_ex_arnold", "test__rmo_ex_arnold_bivariate_R",
@@ -42,8 +42,6 @@ test_that("Exchangeable Arnold model for d = 2", {
 # Test that alternativ eimplementation based on the `a` parameters is equivalent
 # for d equalling 5 and different choices for the ex_intensity vector.
 test_that("Alternative implementation in R for d>2", {
-  n <- 25L # we use a default number of 25 simulations
-
   ## all equal
   d <- 5L
   ex_intensities <- rep(1, times=d)
@@ -74,8 +72,6 @@ test_that("Alternative implementation in R for d>2", {
 # as the original `R` implementation for various dimensions and choices of
 # parameters.
 test_that("Exchangeable Arnold model implementation in C++", {
-  n <- 25L # we use a default number of 25 simulations
-
   # all equal
   d <- 7L
   ex_intensities <- rep(0.5, times=d)
