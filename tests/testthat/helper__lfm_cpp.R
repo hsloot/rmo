@@ -17,6 +17,8 @@ test__rmo_lfm_cpp_bivariate_R <- function(n, d, rate, rate_killing, rate_drift, 
 #' @keywords internal
 #' @noRd
 test__rmo_lfm_cpp_bivariate_rexp_R <- function(n, rate, rate_killing, rate_drift, jump_rate) { # nolint
+  stopifnot(rexp(1L, jump_rate) > 0) ## dummy
+
   out <- matrix(NA, nrow=n, ncol=2L)
   for (k in 1:n) {
     unit_exponentials <- rexp(2L, 1)
