@@ -10,4 +10,5 @@ if (!"assertthat" %in% .packages()) {
 }
 ## Use pre R 3.6.x sample RNG since the new one is not yet
 ## implemented in Rcpp.
-suppressWarnings(RNGkind(kind="Mersenne-Twister", normal.kind = "Inversion", sample.kind="Rounding"))
+suppressWarnings(RNGkind(kind="Mersenne-Twister", normal.kind = "Inversion",
+                         sample.kind="Rounding"))
