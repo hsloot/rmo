@@ -36,7 +36,7 @@
 
 
 <meta property="og:title" content="Sample from a Marshall--Olkin distribution — rmo_esm" />
-<meta property="og:description" content="Draws n independent samples from a d variate Marshall-Olkin distribution
+<meta property="og:description" content="Draws n independent samples from a d-variate Marshall-Olkin distribution
 with shock rates intensities." />
 <meta name="twitter:card" content="summary" />
 
@@ -70,7 +70,7 @@ with shock rates intensities." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rmo</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.0</span>
       </span>
     </div>
 
@@ -134,7 +134,7 @@ with shock rates intensities." />
     </div>
 
     <div class="ref-description">
-    <p>Draws <code>n</code> independent samples from a <code>d</code> variate Marshall-Olkin distribution
+    <p>Draws <code>n</code> independent samples from a <code>d</code>-variate Marshall-Olkin distribution
 with shock rates <code>intensities</code>.</p>
     </div>
 
@@ -163,11 +163,11 @@ with shock rates <code>intensities</code>.</p>
 
     <p><code>rmo_esm</code> implements the <em>exogenous shock model</em> representation and
 returns an \(n \times d\) numeric matrix with the rows corresponding
-to independent and identically disctributed samples of a \(d\) variate
+to independent and identically distributed samples of a \(d\) variate
 Marshall-Olkin distribution with parameters <code>intensities</code>.</p>
 <p><code>rmo_arnold</code> implements the <em>Arnold model</em> representation and returns
 an \(n \times d\) numeric matrix with the rows corresponding to
-independent and identically disctributed samples of a \(d\) variate
+independent and identically distributed samples of a \(d\) variate
 Marshall-Olkin distribution with parameters <code>intensities</code>.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
@@ -175,10 +175,10 @@ Marshall-Olkin distribution with parameters <code>intensities</code>.</p>
 <ul>
 <li><p>The shock intensities must be stored in a vector of length \(2^d-1\).</p></li>
 <li><p>A shock intensity of zero corresponds to an almost surely infinite shock.</p></li>
-<li><p>We use a binary representation to map a non-empty subset \(I\) of \(\{
-1, \ldots, d\}\) to integers \(1, \ldots, 2^d-1\). In
-particular, \(i\) is a component in the set corresponding for \(j\) iff
-\(j = \sum_{k=0}^d a_k 2^k\) and \(a_i = 0\).</p></li>
+<li><p>We use a binary representation to map a non-empty subset \(J\) of \(\{
+1, \ldots, d\}\) to integers \(j\) of \(1, \ldots, 2^d-1\). In
+particular, \(i\) is a component in the set \(J\) corresponding to the integer \(j\) iff
+\(j = \sum_{k=0}^\infty a_k 2^k\) and \(a_{i-1} = 1\).</p></li>
 </ul>
 
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>

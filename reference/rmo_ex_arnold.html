@@ -70,7 +70,7 @@ distribution with shock rates ex_intensities." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rmo</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.0</span>
       </span>
     </div>
 
@@ -188,27 +188,27 @@ intensity of a shock corresponding to a set with \(i\) elements.</p></li>
 <code><a href='rmo_lfm_cpp.html'>rmo_lfm_cpp</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>rmo_ex_arnold</span>(<span class='fl'>10</span>, <span class='fl'>2</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.4</span>, <span class='fl'>0.2</span>))</div><div class='output co'>#&gt;            [,1]       [,2]
-#&gt;  [1,] 2.6866876 0.68832679
-#&gt;  [2,] 2.4743825 2.47438250
-#&gt;  [3,] 3.6066340 2.33361037
-#&gt;  [4,] 0.4235068 0.42350683
-#&gt;  [5,] 2.2507877 2.25078765
-#&gt;  [6,] 2.4315769 1.16246327
-#&gt;  [7,] 1.6585730 2.33794804
-#&gt;  [8,] 4.0042539 0.52152228
-#&gt;  [9,] 2.5934059 3.50166206
-#&gt; [10,] 1.2868070 0.05664471</div><div class='input'><span class='fu'>rmo_ex_arnold</span>(<span class='fl'>10</span>, <span class='fl'>2</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>0</span>))      <span class='co'>## independence</span></div><div class='output co'>#&gt;             [,1]       [,2]
-#&gt;  [1,] 0.28202017 0.25023985
-#&gt;  [2,] 0.11967045 0.06686906
-#&gt;  [3,] 1.15918305 0.00124707
-#&gt;  [4,] 1.00598250 1.92822463
-#&gt;  [5,] 2.75497176 0.73936227
-#&gt;  [6,] 0.47776296 1.26149492
-#&gt;  [7,] 0.05949120 2.35306153
-#&gt;  [8,] 0.67849649 2.52381421
-#&gt;  [9,] 0.02016214 0.26575979
-#&gt; [10,] 0.35167474 0.44108507</div><div class='input'><span class='fu'>rmo_ex_arnold</span>(<span class='fl'>10</span>, <span class='fl'>2</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>1</span>))      <span class='co'>## comonotone</span></div><div class='output co'>#&gt;            [,1]      [,2]
+    <pre class="examples"><div class='input'><span class='fu'>rmo_ex_arnold</span>(<span class='fl'>10</span>, <span class='fl'>2</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.4</span>, <span class='fl'>0.2</span>))</div><div class='output co'>#&gt;             [,1]      [,2]
+#&gt;  [1,] 0.68832679 2.6866876
+#&gt;  [2,] 2.47438250 2.4743825
+#&gt;  [3,] 3.60663403 2.3336104
+#&gt;  [4,] 0.42350683 0.4235068
+#&gt;  [5,] 2.25078765 2.2507877
+#&gt;  [6,] 2.43157692 1.1624633
+#&gt;  [7,] 1.65857297 2.3379480
+#&gt;  [8,] 4.00425389 0.5215223
+#&gt;  [9,] 2.59340590 3.5016621
+#&gt; [10,] 0.05664471 1.2868070</div><div class='input'><span class='fu'>rmo_ex_arnold</span>(<span class='fl'>10</span>, <span class='fl'>2</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>0</span>))      <span class='co'>## independence</span></div><div class='output co'>#&gt;            [,1]       [,2]
+#&gt;  [1,] 0.2502398 0.28202017
+#&gt;  [2,] 0.1196705 0.06686906
+#&gt;  [3,] 1.1591830 0.00124707
+#&gt;  [4,] 1.0059825 1.92822463
+#&gt;  [5,] 2.7549718 0.73936227
+#&gt;  [6,] 1.2614949 0.47776296
+#&gt;  [7,] 0.0594912 2.35306153
+#&gt;  [8,] 0.6784965 2.52381421
+#&gt;  [9,] 0.2657598 0.02016214
+#&gt; [10,] 0.4410851 0.35167474</div><div class='input'><span class='fu'>rmo_ex_arnold</span>(<span class='fl'>10</span>, <span class='fl'>2</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>1</span>))      <span class='co'>## comonotone</span></div><div class='output co'>#&gt;            [,1]      [,2]
 #&gt;  [1,] 0.3716193 0.3716193
 #&gt;  [2,] 0.2781220 0.2781220
 #&gt;  [3,] 0.8172443 0.8172443
