@@ -1,3 +1,5 @@
+# nolint start
+
 #+ setup
 library("rmo")
 library("magrittr")
@@ -5,24 +7,24 @@ library("ggplot2")
 library("microbenchmark")
 
 #+ r parameter
+## We use a compound Poisson process with intensity `rate` and fixed
+## deterministic jumps of size `eta`. Additionally, we allow killing
+## and a drift.
 use_seed <- 1632L
 n <- 1e2L
 d <- 7L
 
-alpha <- 0.5
-beta <- 0.3
-rate <- 1 # dummy
+rate <- 0.5
+eta <- 2
 rate_killing <- beta
 rate_drift <- alpha
 
 psi <- function(x) {
-  ifelse(x > 0, rate_killing, 0) + rate_drift * x
+  ifelse(x > 0, rate_killing, 0) + rate_drift * x +
+    rate * (1 - exp(-eta * x))
 }
-a <- round(psi(1:d) - psi(0:(d-1)), 2)
 ex_intensities <- vapply(1:d, function(x) {
-  sum(vapply(0:(x-1), function(y) {
-    (-1)^y * choose(x-1, y) * a[[d-x+y+1]]
-  }, FUN.VALUE=0.5))
+  (-1)^(x+1) * diff(psi((d-x)+0:x), differences = x)
 }, FUN.VALUE=0.5)
 intensities <- numeric(2^d-1)
 for (j in 1:(2^d-1)) {
@@ -65,3 +67,5 @@ mb1 %>%
   autoplot()
 mb2 %>%
   autoplot()
+
+# nolint end
