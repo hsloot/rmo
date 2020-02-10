@@ -26,8 +26,8 @@ Collate:
     'assert.R'
     'RcppExports.R'
     'rmo.R'
-    'utils.R'
     'sample.R'
+    'utils.R'
     'zzz.R'
 URL: https://hsloot.github.io/rmo/
 BugReports: https://github.com/hsloot/rmo/issues

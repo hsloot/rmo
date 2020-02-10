@@ -217,14 +217,15 @@ NumericMatrix sample_cpp(double rate, double rate_killing, double rate_drift, Fu
 	} else {
 		barrier_values = NumericVector(1, max(barrier_values));
 	}
+	unsigned int d = barrier_values.size();
 
 	double waiting_time;
 	double jump_value;
-	double killing_time;
+	double killing_waiting_time;
 
 	double current_value;
 
-	double intermediate_time;
+	double intermediate_waiting_time;
 	double intermediate_value;
 
 	Function do_call("do.call");
@@ -232,48 +233,49 @@ NumericMatrix sample_cpp(double rate, double rate_killing, double rate_drift, Fu
 
 	std::vector<double> times(1);
 	std::vector<double> values(1);
-	for (unsigned int i=0; i<barrier_values.size(); i++) {
-		current_value = std::accumulate(values.begin(), values.end(), 0.);
-		while (current_value < barrier_values[i]) {
+	for (unsigned int i=0; i<d; i++) {
+		while (values.back() < barrier_values[i]) {
 			waiting_time = ((0. == rate) ? R_PosInf : R::exp_rand()/rate);
 			// requires RNGstate synchronisation
 			PutRNGstate();
 			jump_value = as<double>(do_call(rjump, rjump_arg_list));
 			GetRNGstate();
-			killing_time = ((0. == rate_killing) ? R_PosInf : R::exp_rand()/rate_killing);
+			killing_waiting_time = ((0. == rate_killing) ? R_PosInf : R::exp_rand()/rate_killing);
 
-			if (killing_time < R_PosInf && killing_time <= waiting_time) {
-				if (rate_drift > 0. && (barrier_values[i] - current_value)/rate_drift <= killing_time) {
-					intermediate_time = (barrier_values[i] - current_value) / rate_drift;
-					intermediate_value = intermediate_time * rate_drift;
-					times.push_back(intermediate_time);
-					values.push_back(intermediate_value);
-					killing_time -= intermediate_time;
+			if (killing_waiting_time < R_PosInf && killing_waiting_time <= waiting_time) {
+				for (unsigned int j=i; j<d; j++) {
+					if (rate_drift > 0. && (barrier_values[j] - values.back())/rate_drift <= killing_waiting_time) {
+						intermediate_waiting_time = (barrier_values[j] - values.back()) / rate_drift;
+						times.push_back(times.back() + intermediate_waiting_time);
+						values.push_back(barrier_values[j]);
+						killing_waiting_time -= intermediate_waiting_time;
+					}
 				}
 
-				times.push_back(killing_time);
+				times.push_back(times.back() + killing_waiting_time);
 				values.push_back(R_PosInf);
 			} else {
-				if (rate_drift > 0. && (barrier_values[i] - current_value)/rate_drift <= waiting_time) {
-					intermediate_time = (barrier_values[i] - current_value)/rate_drift;
-					intermediate_value = intermediate_time * rate_drift;
-					times.push_back(intermediate_time);
-					values.push_back(intermediate_value);
-					waiting_time -= intermediate_time;
+				for (unsigned int j=i; j<d; j++) {
+					if (rate_drift > 0. && (barrier_values[j] - values.back())/rate_drift <= waiting_time) {
+						intermediate_waiting_time = (barrier_values[j] - values.back())/rate_drift;
+						times.push_back(times.back() + intermediate_waiting_time);
+						values.push_back(barrier_values[j]);
+						waiting_time -= intermediate_waiting_time;
+					}
 				}
+
 				if (rate > 0.) { // waiting_time < R_PosInf
-					times.push_back(waiting_time);
-					values.push_back(waiting_time * rate_drift + jump_value);
+					times.push_back(times.back() + waiting_time);
+					values.push_back(values.back() + waiting_time * rate_drift + jump_value);
 				}
-			}
-			current_value = std::accumulate(values.begin(), values.end(), 0.);
+			} 
 		}
 	}
 
 	NumericMatrix out(times.size(), 2);
 	for (unsigned int i=0; i<times.size(); i++) {
-	  out(i, 0) = (0 == i ? times[0] : out(i-1, 0) + times[i]);
-	  out(i, 1) = (0 == i ? values[0] : out(i-1, 1) + values[i]);
+	  out(i, 0) = times[i];
+	  out(i, 1) = values[i];
 	}
 	colnames(out) = CharacterVector::create("t", "value");
 
