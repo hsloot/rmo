@@ -22,14 +22,15 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.0.2
-Collate: 
+Collate:
     'assert.R'
     'RcppExports.R'
     'rmo.R'
+    'utils.R'
     'sample.R'
     'zzz.R'
 URL: https://hsloot.github.io/rmo/
 BugReports: https://github.com/hsloot/rmo/issues
 Language: en-GB
-LinkingTo: 
+LinkingTo:
     Rcpp

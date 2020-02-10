@@ -4,14 +4,22 @@
 - Changed License to GPL-3 (because of `Rcpp`-package)
 - Extended unit testing with original `R`-based implementations
 
+
+# rmo 0.1.2
+
+- Bugfix for `rmo:::sample_cpp` which is used in `rmo_lfm_cpp`. The former
+implementation did not properly account for the case, when the CPP drifts
+over several barriers during a waiting period.
+
+
 # rmo 0.1.1
 
-- Bugfix for `rmo:::sample_cpp` which is used in `rmo_lfm_cpp` (case `rate == 0` was not properly handled). 
+- Bugfix for `rmo:::sample_cpp` which is used in `rmo_lfm_cpp` (case `rate == 0` was not properly handled).
 - Implemented more test for `rmo_lfm_cpp` in independence case
 
 # rmo 0.1.0
 
-- Added pure `R` implementations of various sampling algorithms: `rmo_esm`, 
+- Added pure `R` implementations of various sampling algorithms: `rmo_esm`,
 `rmo_arnold`, `rmo_ex_arnold`, `rmo_lfm_cpp`, and `rmo_esm_cuadras_auge`.
 
 
