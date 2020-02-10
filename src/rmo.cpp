@@ -261,9 +261,10 @@ NumericMatrix sample_cpp(double rate, double rate_killing, double rate_drift, Fu
 					values.push_back(intermediate_value);
 					waiting_time -= intermediate_time;
 				}
-
-				times.push_back(waiting_time);
-				values.push_back(waiting_time * rate_drift + jump_value);
+				if (rate > 0.) { // waiting_time < R_PosInf
+					times.push_back(waiting_time);
+					values.push_back(waiting_time * rate_drift + jump_value);
+				}
 			}
 			current_value = std::accumulate(values.begin(), values.end(), 0.);
 		}
