@@ -178,44 +178,47 @@ test__rmo_lfm_cpp_bivariate_rexp_R <- function(n, rate, rate_killing, rate_drift
     } else {
       barrier_values <- max(unit_exponentials)
     }
+    d <- length(barrier_values)
 
     times <- 0
     values <- 0
-    for (i in seq_along(barrier_values)) {
-      while (sum(values) < barrier_values[i]) {
+    for (i in 1:d) {
+      while (last(values) < barrier_values[[i]]) {
         waiting_time <- rexp_if_rate_zero_then_infinity(1, rate)
         jump_value <- rexp_if_rate_zero_then_infinity(1, jump_rate)
-        killing_time <- rexp_if_rate_zero_then_infinity(1, rate_killing)
+        killing_waiting_time <- rexp_if_rate_zero_then_infinity(1, rate_killing)
 
-        if (killing_time < Inf && killing_time <= waiting_time) {
-          if (rate_drift>0 && (barrier_values[[i]] - sum(values))/rate_drift<=killing_time) {
-            intermediate_time <- (barrier_values[i] - sum(values)) / rate_drift
-            intermediate_value <- intermediate_time * rate_drift
-            times <- c(times, intermediate_time)
-            values <- c(values, intermediate_value)
-            killing_time <- killing_time - intermediate_time
+        if (killing_waiting_time < Inf && killing_waiting_time <= waiting_time) {
+          for (j in i:d) {
+            if (rate_drift>0 && (barrier_values[[j]] - last(values))/rate_drift<=killing_waiting_time) {
+              intermediate_waiting_time <- (barrier_values[[j]] - last(values)) / rate_drift
+              times <- c(times, laste(times) + intermediate_waiting_time)
+              values <- c(values, barrier_values[[j]])
+              killing_waiting_time <- killing_waiting_time - intermediate_waiting_time
+            }
           }
 
-          times <- c(times, killing_time)
+          times <- c(times, last(times) + killing_waiting_time)
           values <- c(values, Inf)
         } else {
-          if (rate_drift>0 && (barrier_values[[i]] - sum(values))/rate_drift <= waiting_time) {
-            intermediate_time <- (barrier_values[i] - sum(values)) / rate_drift
-            intermediate_value <- intermediate_time * rate_drift
-            times <- c(times, intermediate_time)
-            values <- c(values, intermediate_value)
-            waiting_time <- waiting_time - intermediate_time
+          for (j in i:d) {
+            if (rate_drift>0 && (barrier_values[[j]] - last(values))/rate_drift <= waiting_time) {
+              intermediate_waiting_time <- (barrier_values[[j]] - last(values)) / rate_drift
+              times <- c(times, last(times) + intermediate_waiting_time)
+              values <- c(values, barrier_values[[j]])
+              waiting_time <- waiting_time - intermediate_waiting_time
+            }
           }
 
           if (rate>0) { ## waiting_time<Inf # nolint
-            times <- c(times, waiting_time)
-            values <- c(values, waiting_time * rate_drift + jump_value)
+            times <- c(times, last(times) + waiting_time)
+            values <- c(values, last(values) + waiting_time * rate_drift + jump_value)
           }
         }
       }
     }
 
-    cpp_subordinator <- cbind("t"=cumsum(times), "values"=cumsum(values))
+    cpp_subordinator <- cbind("t"=times, "values"=values)
     out[k, ] <- vapply(1:2L, function(x) min(cpp_subordinator[cpp_subordinator[, 2] >= unit_exponentials[[x]], 1]), FUN.VALUE=0.5) # nolint
   }
 
@@ -237,42 +240,48 @@ test__rmo_lfm_cpp_bivariate_rposval_R <- function(n, rate, rate_killing, rate_dr
     } else {
       barrier_values <- max(unit_exponentials)
     }
+    d <- length(barrier_values)
 
     times <- 0
     values <- 0
-    for (i in seq_along(barrier_values)) {
-      while (sum(values) < barrier_values[i]) {
+    for (i in 1:d) {
+      while (last(values) < barrier_values[i]) {
         waiting_time <- rexp_if_rate_zero_then_infinity(1, rate)
-        killing_time <- rexp_if_rate_zero_then_infinity(1, rate_killing)
+        killing_waiting_time <- rexp_if_rate_zero_then_infinity(1, rate_killing)
 
-        if (killing_time < Inf && killing_time <= waiting_time) {
-          if (rate_drift>0 && (barrier_values[[i]] - sum(values))/rate_drift<=killing_time) {
-            intermediate_time <- (barrier_values[i] - sum(values)) / rate_drift
-            intermediate_value <- intermediate_time * rate_drift
-            times <- c(times, intermediate_time)
-            values <- c(values, intermediate_value)
-            killing_time <- killing_time - intermediate_time
+        if (killing_waiting_time < Inf && killing_waiting_time <= waiting_time) {
+          for (j in i:d) {
+            if (rate_drift>0 && (barrier_values[[j]] - last(values))/rate_drift<=killing_waiting_time) {
+              intermediate_waiting_time <- (barrier_values[[j]] - last(values)) / rate_drift
+              intermediate_value <- barrier_values[[j]]
+              times <- c(times, last(times) + intermediate_waiting_time)
+              values <- c(values, intermediate_value)
+              killing_waiting_time <- killing_waiting_time - intermediate_waiting_time
+            }
           }
 
-          times <- c(times, killing_time)
+          times <- c(times, last(times) + killing_waiting_time)
           values <- c(values, Inf)
         } else {
-          if (rate_drift>0 && (barrier_values[[i]] - sum(values))/rate_drift <= waiting_time) {
-            intermediate_time <- (barrier_values[i] - sum(values)) / rate_drift
-            intermediate_value <- intermediate_time * rate_drift
-            times <- c(times, intermediate_time)
-            values <- c(values, intermediate_value)
-            waiting_time <- waiting_time - intermediate_time
+          for (j in i:d) {
+            if (rate_drift>0 && (barrier_values[[j]] - last(values))/rate_drift <= waiting_time) {
+              intermediate_waiting_time <- (barrier_values[[j]] - last(values)) / rate_drift
+              intermediate_value <- barrier_values[[j]]
+              times <- c(times, last(times) + intermediate_waiting_time)
+              values <- c(values, intermediate_value)
+              waiting_time <- waiting_time - intermediate_waiting_time
+            }
           }
+
           if (rate>0) { ## waiting_time<Inf # nolint
-            times <- c(times, waiting_time)
-            values <- c(values, waiting_time * rate_drift + jump_value)
+            times <- c(times, last(times) + waiting_time)
+            values <- c(values, last(values) + waiting_time * rate_drift + jump_value)
           }
         }
       }
     }
 
-    cpp_subordinator <- cbind("t"=cumsum(times), "values"=cumsum(values))
+    cpp_subordinator <- cbind("t"=times, "values"=values)
     out[k, ] <- vapply(1:2L, function(x) min(cpp_subordinator[cpp_subordinator[, 2] >= unit_exponentials[[x]], 1]), FUN.VALUE=0.5) # nolint
   }
 
