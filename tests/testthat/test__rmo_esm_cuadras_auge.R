@@ -2,10 +2,10 @@ context("Cuadras-Auge exogenous shock model")
 use_seed <- 1623L
 
 
-## #### Test implementation for d=2 ####
+## #### Test implementation for the bivariate case ####
 #
 # Test that the implementation of the Cuadras-Augé ESM works as expected for
-# d = 2 and different choices for the intensity vector.
+# the bivariate case and different choices for the intensity vector.
 test_that("Cuadras-Augé implementation works as intended", {
   n <- 25L # we use a default number of 25 simulations
 

@@ -1,11 +1,11 @@
 context("Sample compound Poisson process")
 use_seed <- 1632L
 
-## #### Test implementation with exponentially distributed jumps for d=2 ####
+## #### Test implementation with exp. dist. jumps for the bivariate case ####
 #
 # Test that the implementation of the Compound Poisson process LFM with
-# exponentially distributed jumps works as expected for d = 2 and different
-# choices of parameters.
+# exponentially distributed jumps works as expected for the bivariate case
+# and different choices of parameters.
 test_that("biv. CPP implementation works as intended for exp. jumps", {
   set.seed(use_seed-543L)
   d <- 2L
@@ -31,10 +31,10 @@ test_that("biv. CPP implementation works as intended for exp. jumps", {
 })
 
 
-## #### Test implementation with deterministic jumps for d=2 ####
+## #### Test implementation with det. jumps for the bivariate case ####
 #
 # Test that the implementation of the Compound Poisson process with
-# deterministic jumps works as expected for d = 2 and different
+# deterministic jumps works as expected for bivariate case and different
 # choices of parameters.
 test_that("biv. CPP implementation works as intended for det. jumps", {
   set.seed(use_seed-543L)

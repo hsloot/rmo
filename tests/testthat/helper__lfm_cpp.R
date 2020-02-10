@@ -65,7 +65,7 @@ test__rmo_lfm_cpp_bivariate_rexp_R <- function(n, rate, rate_killing, rate_drift
     }
 
     cpp_subordinator <- cbind("t"=cumsum(times), "values"=cumsum(values))
-    out[k, ] <- vapply(1:2L, function(x){
+    out[k, ] <- vapply(1:2L, function(x) {
       min(cpp_subordinator[cpp_subordinator[, 2] >= unit_exponentials[[x]], 1])
     }, FUN.VALUE=0.5) # nolint
   }
@@ -173,7 +173,7 @@ test__rmo_lfm_cpp_comonotone_R <- function(n, d, rate, rate_killing, rate_drift,
 #' @rdname rmo_lfm_cpp
 #' @keywords internal
 #' @noRd
-test__rmo_lfm_cpp_R <- function(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list = list()) {
+test__rmo_lfm_cpp_R <- function(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list = list()) { # nolint
   assert_that(is.count(n), is.count(d), is_nonnegative_number(rate),
     is_nonnegative_number(rate_killing), is_nonnegative_number(rate_drift),
     is_positive_number(rate + rate_killing + rate_drift),
@@ -184,7 +184,9 @@ test__rmo_lfm_cpp_R <- function(n, d, rate, rate_killing, rate_drift, rjump_name
     unit_exponentials <- rexp(d)
     cpp_subordinator <- test__sample_cpp_R(rate, rate_killing, rate_drift,
       rjump_name, rjump_arg_list, unit_exponentials)
-    out[k, ] <- vapply(1:d, function(x) min(cpp_subordinator[cpp_subordinator[, 2] >= unit_exponentials[[x]], 1]), FUN.VALUE=0.5) # nolint
+    out[k, ] <- vapply(1:d, function(x) {
+      min(cpp_subordinator[cpp_subordinator[, 2] >= unit_exponentials[[x]], 1])
+    }, FUN.VALUE=0.5)
   }
 
   out

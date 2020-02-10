@@ -1,11 +1,11 @@
 context("Levy-frailty model with compound Poisson subordinator")
 use_seed <- 1632L
 
-## #### Test implementation with exponentially distributed jumps for d=2 ####
+## #### Test implementation with exp. dist. jumps for the bivariate case ####
 #
 # Test that the implementation of the Compound Poisson process LFM with
-# exponentially distributed jumps works as expected for d = 2 and different
-# choices of parameters.
+# exponentially distributed jumps works as expected for the bivaraite case
+# and different choices of parameters.
 test_that("biv. LFM-CPP implementation works as intended for exp. jumps", {
   n <- 25L # we use a default number of 25 simulations
 
@@ -26,10 +26,10 @@ test_that("biv. LFM-CPP implementation works as intended for exp. jumps", {
     args, n, use_seed)
 })
 
-## #### Test implementation with deterministic jumps for d=2 ####
+## #### Test implementation with det. jumps for the bivariate case  ####
 #
 # Test that the implementation of the Compound Poisson process LFM with
-# deterministic jumps works as expected for d = 2 and different
+# deterministic jumps works as expected for the bivariate case and different
 # choices of parameters.
 test_that("biv. LFM-CPP implementation works as intended for det. jumps", {
   n <- 25L # we use a default number of 25 simulations
