@@ -403,7 +403,9 @@ sample_cpp <- function(rate, rate_killing, rate_drift, rjump_name, rjump_arg_lis
 
       if (killing_waiting_time < Inf && killing_waiting_time <= waiting_time) {
         for (j in i:d) {
-          if (rate_drift>0 && (barrier_values[[j]] - last(values))/rate_drift<=killing_waiting_time) {
+          if (rate_drift>0 &&
+              (barrier_values[[j]] - last(values)) /
+                rate_drift<=killing_waiting_time) {
             intermediate_waiting_time <- (barrier_values[[j]] - last(values)) / rate_drift
             times <- c(times, last(times) + intermediate_waiting_time)
             values <- c(values, barrier_values[[j]])
@@ -415,7 +417,8 @@ sample_cpp <- function(rate, rate_killing, rate_drift, rjump_name, rjump_arg_lis
         values <- c(values, Inf)
       } else {
         for (j in i:d) {
-          if (rate_drift>0 && (barrier_values[[j]] - last(values))/rate_drift <= waiting_time) {
+          if (rate_drift>0 &&
+              (barrier_values[[j]] - last(values))/rate_drift <= waiting_time) {
             intermediate_waiting_time <- (barrier_values[[j]] - last(values)) / rate_drift
             times <- c(times, last(times) + intermediate_waiting_time)
             values <- c(values, barrier_values[[j]])

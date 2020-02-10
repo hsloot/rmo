@@ -190,9 +190,10 @@ test__rmo_lfm_cpp_bivariate_rexp_R <- function(n, rate, rate_killing, rate_drift
 
         if (killing_waiting_time < Inf && killing_waiting_time <= waiting_time) {
           for (j in i:d) {
-            if (rate_drift>0 && (barrier_values[[j]] - last(values))/rate_drift<=killing_waiting_time) {
+            if (rate_drift>0 &&
+                (barrier_values[[j]] - last(values))/rate_drift<=killing_waiting_time) {
               intermediate_waiting_time <- (barrier_values[[j]] - last(values)) / rate_drift
-              times <- c(times, laste(times) + intermediate_waiting_time)
+              times <- c(times, last(times) + intermediate_waiting_time)
               values <- c(values, barrier_values[[j]])
               killing_waiting_time <- killing_waiting_time - intermediate_waiting_time
             }
@@ -251,7 +252,8 @@ test__rmo_lfm_cpp_bivariate_rposval_R <- function(n, rate, rate_killing, rate_dr
 
         if (killing_waiting_time < Inf && killing_waiting_time <= waiting_time) {
           for (j in i:d) {
-            if (rate_drift>0 && (barrier_values[[j]] - last(values))/rate_drift<=killing_waiting_time) {
+            if (rate_drift>0 &&
+                (barrier_values[[j]] - last(values))/rate_drift<=killing_waiting_time) {
               intermediate_waiting_time <- (barrier_values[[j]] - last(values)) / rate_drift
               intermediate_value <- barrier_values[[j]]
               times <- c(times, last(times) + intermediate_waiting_time)
@@ -264,7 +266,8 @@ test__rmo_lfm_cpp_bivariate_rposval_R <- function(n, rate, rate_killing, rate_dr
           values <- c(values, Inf)
         } else {
           for (j in i:d) {
-            if (rate_drift>0 && (barrier_values[[j]] - last(values))/rate_drift <= waiting_time) {
+            if (rate_drift>0 &&
+                (barrier_values[[j]] - last(values))/rate_drift <= waiting_time) {
               intermediate_waiting_time <- (barrier_values[[j]] - last(values)) / rate_drift
               intermediate_value <- barrier_values[[j]]
               times <- c(times, last(times) + intermediate_waiting_time)
