@@ -247,3 +247,22 @@ rmo_lfm_cpp <- function(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_
 rposval <- function(n, value=1) {
   rep(value, times=n)
 }
+
+#' A wrapper for `rexp`
+#'
+#' Wraps an `ifelse`-clause arround `rexp` with special treatment for the case
+#' `rate=0`.
+#'
+#' @inheritParams stats::rexp
+#'
+#' @importFrom stats rexp
+#'
+#' @keywords internal
+#' @noRd
+rexp_if_rate_zero_then_infinity <- function(n, rate) { # nolint
+  if (0 == rate) {
+    return(rep(Inf, n))
+  }
+
+  rexp(n, rate)
+}
