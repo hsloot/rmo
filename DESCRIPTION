@@ -1,6 +1,6 @@
 Package: rmo
 Title: A package for the Marshall-Olkin distribution
-Version: 0.1.2.9000
+Version: 0.2.0.0000
 Authors@R:
   person(given = "Henrik",
     family = "Sloot",
@@ -9,9 +9,10 @@ Authors@R:
     comment = c(ORCID = "0000-0001-8582-7776"))
 Description:
   The package contains an implementation of the Marshall-Olkin distribution and methods for estimation, simulation, and construction.
-License: MIT + file LICENSE
+License: GPL-3
 Imports:
-    assertthat
+    assertthat,
+    Rcpp
 Suggests:
     testthat,
     covr,
@@ -22,11 +23,14 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.0.2
 Collate:
-    'sets.R'
     'assert.R'
+    'RcppExports.R'
     'rmo.R'
-    'utils.R'
     'sample.R'
+    'utils.R'
+    'zzz.R'
 URL: https://hsloot.github.io/rmo/
 BugReports: https://github.com/hsloot/rmo/issues
 Language: en-GB
+LinkingTo:
+    Rcpp

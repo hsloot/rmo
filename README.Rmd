@@ -60,10 +60,14 @@ We are planning to develop the package incrementally. The packages API might
 change frequently without deprecation. The goal is to implement prototypes of
 the algorithms in `R` and refactor them in compiled code afterwards. The
 original `R` implementations are supposed to serve as test functions in the
-unit-test harness. Our next steps are:
+unit-test harness. 
 
-- __Version 0.2__: Re-implementation of these sampling routines in `C++` with
-  `Rcpp` to improve performance.
+As of now, we have completed the reimplementation of all sampling algorithms 
+in `Rcpp`. Our next steps are:
+
+- __Version 0.3__: Refactor and document test and write new test cases to 
+  increase the coverage. Provide non trivial exchangeable and 
+  non-exchangeable parametrisations for testing.
 
 Other ideas for the future:
 
@@ -83,4 +87,4 @@ have a look at our [contribution guide](.github/CONTRIBUTING.md).
 
 ## License
 
-MIT Henrik Sloot
+GPL-3 Henrik Sloot

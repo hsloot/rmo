@@ -35,11 +35,11 @@ for jumps of CPP subordinator}
 \code{rmo_lfm_cpp} implements the Lévy-frailty model representation with a
 compound Poisson subordinator and returns an \eqn{n \times d}{n x d} numeric
 matrix with the rows corresponding to independent and identically
-disctributed samples of the corresponding \code{d} variate extendible
+distributed samples of the corresponding \code{d}-variate extendible
 Marshall-Olkin distribution.
 }
 \description{
-Draws \code{n} independent samples from a \code{d} variate extendible Marshall-Olkin
+Draws \code{n} independent samples from a \code{d}-variate extendible Marshall-Olkin
 distribution corresponding to a LFM with a compound Poisson subordinator with
 parameters \code{rate}, \code{rate_killing}, \code{rate_drift}, \code{rjump_name}, and
 \code{rjump_arg_list}.

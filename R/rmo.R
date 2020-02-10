@@ -1,3 +1,9 @@
+## usethis namespace: start
+#' @useDynLib rmo, .registration = TRUE
+#' @importFrom Rcpp sourceCpp
+## usethis namespace: end
+NULL
+
 #' rmo: A package for the Marshall-Olkin distribution.
 #'
 #' The package contains an implementation of the sampling algorithms related

@@ -7,7 +7,7 @@
 
 ![minimal R
 version](https://img.shields.io/badge/R%3E%3D-3.6.0-6666ff.svg)
-![packageversion](https://img.shields.io/badge/Package%20version-0.1.2.9000-orange.svg?style=flat-square)
+![packageversion](https://img.shields.io/badge/Package%20version-0.2.0.0000-orange.svg?style=flat-square)
 [![Project Status: WIP – Initial development is in progress, but there
 has not yet been a stable, usable release suitable for the
 public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
@@ -67,10 +67,14 @@ We are planning to develop the package incrementally. The packages API
 might change frequently without deprecation. The goal is to implement
 prototypes of the algorithms in `R` and refactor them in compiled code
 afterwards. The original `R` implementations are supposed to serve as
-test functions in the unit-test harness. Our next steps are:
+test functions in the unit-test harness.
 
-  - **Version 0.2**: Re-implementation of these sampling routines in
-    `C++` with `Rcpp` to improve performance.
+As of now, we have completed the reimplementation of all sampling
+algorithms in `Rcpp`. Our next steps are:
+
+  - **Version 0.3**: Refactor and document test and write new test cases
+    to increase the coverage. Provide non trivial exchangeable and
+    non-exchangeable parametrisations for testing.
 
 Other ideas for the future:
 
@@ -89,4 +93,4 @@ guide](.github/CONTRIBUTING.md).
 
 ## License
 
-MIT Henrik Sloot
+GPL-3 Henrik Sloot

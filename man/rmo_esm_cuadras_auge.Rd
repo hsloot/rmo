@@ -28,7 +28,7 @@ with parameters \code{alpha} and \code{beta}.
 \details{
 \itemize{
 \item \code{alpha} is the shock intensity of shocks that affect only single
-compoenents.
+components.
 \item \code{beta} is the shock intensity of the global shock that affects all
 components.
 }
