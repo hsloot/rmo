@@ -259,7 +259,7 @@ rposval <- function(n, value=1) {
 #'
 #' @keywords internal
 #' @noRd
-rexp_if_rate_zero_then_infinity <- function(n, rate) { # nolint
+rexp_if_rate_zero_then_infinity <- function(n, rate) { # only used in tests # nolint
   if (0 == rate) {
     return(rep(Inf, n))
   }
