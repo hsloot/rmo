@@ -1,10 +1,13 @@
+#+ setup
 library("rmo")
 library("magrittr")
 library("ggplot2")
 library("microbenchmark")
 
-n <- 100L
-d <- 5L
+#+ r parameter
+use_seed <- 1632L
+n <- 1e2L
+d <- 7L
 
 alpha <- 0.5
 beta <- 0.3
@@ -30,31 +33,35 @@ for (j in 1:(2^d-1)) {
   intensities[j] <- ex_intensities[[tmp]]
 }
 
-set.seed(1632L)
-microbenchmark(
+#+ r v0.2.0
+set.seed(use_seed)
+mb1 <- microbenchmark(
   ESM = rmo_esm(n, d, intensities),
   Arnold = rmo_arnold(n, d, intensities),
   Ex_Arnold = rmo_ex_arnold(n, d, ex_intensities),
   LFM_CPP = rmo_lfm_cpp(n, d, rate, rate_killing, rate_drift,
     rjump_name = "rposval", rjump_arg_list = list("value"=1)),
   Cuadras_Auge = rmo_esm_cuadras_auge(n, d, alpha, beta)
-) %>%
-  autoplot
+)
 detach("package:rmo", unload = TRUE)
 
+#+ r v0.1.2
 tmpdir <- tempdir()
-devtools::install_github("hsloot/rmo@v0.1.1", lib = tmpdir)
+suppressMessages(devtools::install_github("hsloot/rmo@v0.1.2", lib = tmpdir, quiet = TRUE))
 library(rmo, lib.loc = tmpdir)
 set.seed(1632L)
-microbenchmark(
+mb2 <- microbenchmark(
   ESM = rmo_esm(n, d, intensities),
   Arnold = rmo_arnold(n, d, intensities),
   Ex_Arnold = rmo_ex_arnold(n, d, ex_intensities),
   LFM_CPP = rmo_lfm_cpp(n, d, rate, rate_killing, rate_drift,
     rjump_name = "rposval", rjump_arg_list = list("value"=1)),
   Cuadras_Auge = rmo_esm_cuadras_auge(n, d, alpha, beta)
-) %>%
-  autoplot
-
+)
 detach("package:rmo", unload = TRUE)
-print(unlink(tmpdir, recursive = TRUE))
+invisible(print(unlink(tmpdir, recursive = TRUE)))
+
+mb1 %>%
+  autoplot()
+mb2 %>%
+  autoplot()
