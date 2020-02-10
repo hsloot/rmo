@@ -212,7 +212,7 @@ NumericMatrix Rcpp__rmo_esm_cuadras_auge(unsigned int n, unsigned int d, double 
 // [[Rcpp::export]]
 NumericMatrix sample_cpp(double rate, double rate_killing, double rate_drift, Function rjump, List rjump_arg_list, NumericVector barrier_values) {
 	barrier_values = clone(barrier_values);
-	if (rate_drift>0) {
+	if (rate_drift>0.) {
 		std::sort(barrier_values.begin(), barrier_values.end());
 	} else {
 		barrier_values = NumericVector(1, max(barrier_values));
@@ -235,15 +235,15 @@ NumericMatrix sample_cpp(double rate, double rate_killing, double rate_drift, Fu
 	for (unsigned int i=0; i<barrier_values.size(); i++) {
 		current_value = std::accumulate(values.begin(), values.end(), 0.);
 		while (current_value < barrier_values[i]) {
-			waiting_time = ((0 == rate) ? R_PosInf : R::exp_rand()/rate);
+			waiting_time = ((0. == rate) ? R_PosInf : R::exp_rand()/rate);
 			// requires RNGstate synchronisation
 			PutRNGstate();
 			jump_value = as<double>(do_call(rjump, rjump_arg_list));
 			GetRNGstate();
-			killing_time = ((0 == rate_killing) ? R_PosInf : R::exp_rand()/rate_killing);
+			killing_time = ((0. == rate_killing) ? R_PosInf : R::exp_rand()/rate_killing);
 
 			if (killing_time < R_PosInf && killing_time <= waiting_time) {
-				if (rate_drift > 0 && (barrier_values[i] - current_value)/rate_drift <= killing_time) {
+				if (rate_drift > 0. && (barrier_values[i] - current_value)/rate_drift <= killing_time) {
 					intermediate_time = (barrier_values[i] - current_value) / rate_drift;
 					intermediate_value = intermediate_time * rate_drift;
 					times.push_back(intermediate_time);
@@ -254,7 +254,7 @@ NumericMatrix sample_cpp(double rate, double rate_killing, double rate_drift, Fu
 				times.push_back(killing_time);
 				values.push_back(R_PosInf);
 			} else {
-				if (rate_drift > 0 && (barrier_values[i] - current_value)/rate_drift <= waiting_time) {
+				if (rate_drift > 0. && (barrier_values[i] - current_value)/rate_drift <= waiting_time) {
 					intermediate_time = (barrier_values[i] - current_value)/rate_drift;
 					intermediate_value = intermediate_time * rate_drift;
 					times.push_back(intermediate_time);
@@ -273,7 +273,7 @@ NumericMatrix sample_cpp(double rate, double rate_killing, double rate_drift, Fu
 	NumericMatrix out(times.size(), 2);
 	for (unsigned int i=0; i<times.size(); i++) {
 	  out(i, 0) = (0 == i ? times[0] : out(i-1, 0) + times[i]);
-	  out(i, 1) =(0 == i ? values[0] : out(i-1, 1) + values[i]);
+	  out(i, 1) = (0 == i ? values[0] : out(i-1, 1) + values[i]);
 	}
 	colnames(out) = CharacterVector::create("t", "value");
 

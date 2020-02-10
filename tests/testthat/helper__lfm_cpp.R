@@ -196,14 +196,14 @@ test__rmo_lfm_cpp_R <- function(n, d, rate, rate_killing, rate_drift, rjump_name
 #' @keywords internal
 #' @noRd
 test__sample_cpp_R <- function(rate, rate_killing, rate_drift, rjump, rjump_arg_list, barrier_values) { # nolint
-  if (rate_drift>0) {
+  if (rate_drift>0.) {
     barrier_values <- sort(barrier_values)
   } else {
     barrier_values <- max(barrier_values)
   }
 
-  times <- 0
-  values <- 0
+  times <- 0.
+  values <- 0.
   for (i in seq_along(barrier_values)) {
     while (sum(values) < barrier_values[[i]]) {
       waiting_time <- rexp_if_rate_zero_then_infinity(1, rate)
@@ -211,7 +211,7 @@ test__sample_cpp_R <- function(rate, rate_killing, rate_drift, rjump, rjump_arg_
       killing_time <- rexp_if_rate_zero_then_infinity(1, rate_killing)
 
       if (killing_time < Inf && killing_time <= waiting_time) {
-        if (rate_drift>0 && (barrier_values[[i]] - sum(values))/rate_drift<=killing_time) {
+        if (rate_drift>0. && (barrier_values[[i]] - sum(values))/rate_drift<=killing_time) {
           intermediate_time <- (barrier_values[[i]] - sum(values)) / rate_drift
           intermediate_value <- intermediate_time * rate_drift
           times <- c(times, intermediate_time)
@@ -222,14 +222,14 @@ test__sample_cpp_R <- function(rate, rate_killing, rate_drift, rjump, rjump_arg_
         times <- c(times, killing_time)
         values <- c(values, Inf)
       } else {
-        if (rate_drift>0 && (barrier_values[[i]] - sum(values))/rate_drift <= waiting_time) {
+        if (rate_drift>0. && (barrier_values[[i]] - sum(values))/rate_drift <= waiting_time) {
           intermediate_time <- (barrier_values[[i]] - sum(values)) / rate_drift
           intermediate_value <- intermediate_time * rate_drift
           times <- c(times, intermediate_time)
           values <- c(values, intermediate_value)
           waiting_time <- waiting_time - intermediate_time
         }
-        if (rate>0) { ## waiting_time<Inf # nolint
+        if (rate>0.) { ## waiting_time<Inf # nolint
           times <- c(times, waiting_time)
           values <- c(values, waiting_time * rate_drift + jump_value)
         }

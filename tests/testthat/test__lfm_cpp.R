@@ -56,7 +56,7 @@ test_that("biv. LFM-CPP implementation works as intended for det. jumps", {
 # Test that the implementation of the Compound Poisson process LFM with
 # exponentially distributed jumps works as expected for the multivariate case
 # and different choices of parameters.
-test_that("biv. LFM-CPP implementation works as intended for exp. jumps", {
+test_that("mult. LFM-CPP implementation works as intended for exp. jumps", {
   ## rate = 0.5, rate_killing = 0, rate_drift = 0, jump_rate = 2
   args <- list("d"=7L, "rate"=0.5, "rate_killing"=0, "rate_drift"=0,
                "rjump_name" = "rexp", "rjump_arg_list" = list("rate"=2))
@@ -79,7 +79,7 @@ test_that("biv. LFM-CPP implementation works as intended for exp. jumps", {
 # Test that the implementation of the Compound Poisson process LFM with
 # deterministic jumps works as expected for the multivariate case and different
 # choices of parameters.
-test_that("biv. LFM-CPP implementation works as intended for det. jumps", {
+test_that("mult. LFM-CPP implementation works as intended for det. jumps", {
   ## rate = 0.5, rate_killing = 0, rate_drift = 0, jump_rate = 2
   args <- list("d"=7L, "rate"=0.5, "rate_killing"=0, "rate_drift"=0,
                "rjump_name" = "rposval", "rjump_arg_list" = list("value"=1))
