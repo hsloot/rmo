@@ -1,3 +1,8 @@
+# rmo 0.1.1
+
+- Bugfix for `rmo:::sample_cpp` which is used in `rmo_lfm_cpp` (case `rate == 0` was not properly handled). 
+- Implemented more test for `rmo_lfm_cpp` in independence case
+
 # rmo 0.1.0
 
 - Added pure `R` implementations of various sampling algorithms: `rmo_esm`, 

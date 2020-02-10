@@ -51,11 +51,24 @@ test_that("biv. LFM-CPP implementation works as intended for det. jumps", {
     args, n, use_seed)
 })
 
+
+## #### Test implementation for the independence case ####
+#
+# Test that the implementation of the Compound Poisson process LFM with
+# deterministic jumps works as expected for the independence case in d = 2.
+test_that("LFM-CPP implementation works as indended for independence case", {
+  n <- 25L
+
+  args <- list("d"= 5L, "rate"=0, "rate_killing"=0, "rate_drift"=2,
+    "rjump_name" = "rposval", "rjump_arg_list" = list("value"=1))
+  expect_equal_sampling_result("rmo_lfm_cpp", "test__rmo_lfm_cpp_independence_R",
+    args, n, use_seed)
+})
+
 ## #### Test implementation for the comonotone case ####
 #
 # Test that the implementation of the Compound Poisson process LFM with
-# deterministic jumps works as expected for d = 2 and different
-# choices of parameters.
+# deterministic jumps works as expected for the comonotone case in d = 2.
 test_that("LFM-CPP implementation works as indended for comonotone case", {
   n <- 25L # we use a default number of 25 simulations
 
@@ -64,8 +77,5 @@ test_that("LFM-CPP implementation works as indended for comonotone case", {
   expect_equal_sampling_result("rmo_lfm_cpp", "test__rmo_lfm_cpp_comonotone_R",
     args, n, use_seed)
 })
-
-
-## TODO: Implement tests for the independence case.
 
 ## TODO: Implement test with the original implementation in `R`

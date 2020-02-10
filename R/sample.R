@@ -202,10 +202,9 @@ rmo_esm_cuadras_auge <- function(n, d, alpha, beta) {
 #' @examples
 #' rmo_lfm_cpp(10L, 2L, 0.5, 0.1, 0.2, "rposval", list("value"=1))
 #' rmo_lfm_cpp(10L, 2L, 0.5, 0, 0, "rexp", list("rate"=2))
-#' \dontrun{
+#'
 #' rmo_lfm_cpp(10L, 2L, 0, 0, 1, "rposval", list("value"=1))  ## independence
 #' rmo_lfm_cpp(10L, 2L, 0, 1, 0, "rposval", list("value"=1))  ## comonotone
-#' }
 #'
 #' @family samplers
 #'

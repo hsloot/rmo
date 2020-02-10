@@ -1,9 +1,9 @@
 Package: rmo
 Title: A package for the Marshall-Olkin distribution
-Version: 0.1.0.9000
+Version: 0.1.1.9000
 Authors@R:
-  person(given = "Sloot",
-    family = "Henrik",
+  person(given = "Henrik",
+    family = "Sloot",
     role = c("aut", "cre"),
     email = "henrik.sloot@gmail.com",
     comment = c(ORCID = "0000-0001-8582-7776"))
