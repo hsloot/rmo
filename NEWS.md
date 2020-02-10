@@ -1,3 +1,9 @@
+# rmo 0.2.0
+
+- Reimplementation of all sampling algorithms in `Rcpp`
+- Changed License to GPL-3 (because of `Rcpp`-package)
+- Extended unit testing with original `R`-based implementations
+
 # rmo 0.1.1
 
 - Bugfix for `rmo:::sample_cpp` which is used in `rmo_lfm_cpp` (case `rate == 0` was not properly handled). 
