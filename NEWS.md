@@ -1,3 +1,7 @@
+# rmo 0.2.1
+
+- Refactoring and additional tests
+
 # rmo 0.2.0
 
 - Reimplementation of all sampling algorithms in `Rcpp`

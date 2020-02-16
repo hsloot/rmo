@@ -7,15 +7,9 @@ static const unsigned int C_CHECK_USR_INTERRUP = 100000;
 
 //' @keywords internal
 //' @noRd
-inline unsigned int pow2(const unsigned int &i) {
-	return 1 << i;
-} // inline unsigned int pow2(const unsigned int &i);
-
-//' @keywords internal
-//' @noRd
 // [[Rcpp::export]]
 bool is_within(const unsigned int &i, const unsigned int &j) {
-	return (j / pow2(i-1)) % 2 == 1;
+	return (j >> (i-1)) % 2 == 1;
 } // bool is_within(const unsigned int &i, const unsigned int &j);
 
 //' @keywords internal
