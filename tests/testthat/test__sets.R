@@ -24,3 +24,12 @@ test_that("binary mapping is reversible", {
   expect_equal(binary_mapping_identity(1523), 1523)
   expect_equal(binary_mapping_identity(124352435), 124352435)
 })
+
+
+test_that("is_within returns `FALSE` if 2^(i-1)>j", {
+  expect_equal(is_within(3L, 3L), FALSE)
+  expect_equal(is_within(4L, 2L), FALSE)
+  expect_equal(is_within(5L, 2L), FALSE)
+  expect_equal(is_within(5L, 3L), FALSE)
+  expect_equal(is_within(1e5L, 3L), FALSE)
+})
