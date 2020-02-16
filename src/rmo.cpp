@@ -9,19 +9,8 @@ static const unsigned int C_CHECK_USR_INTERRUP = 100000;
 //' @noRd
 // [[Rcpp::export]]
 bool is_within(unsigned int i, unsigned int j) {
-	if (1 + log2(j+1) < i) // j >= 2^(i-1)-1  <=> 1+log2(j+1) >= i
-		return false;
-
-	int count = 1;
-	while (j>0) {
-		if (1 == (j%2) && count == i)
-			return true;
-		j /= 2;
-		count++;
-	}
-
-	return false;
-} // bool is_within(int i, int j);
+	return j / (1 << (i-1)) % 2 == 1;
+} // inline bool is_within(int i, int j);
 
 //' @keywords internal
 //' @noRd
@@ -268,7 +257,7 @@ NumericMatrix sample_cpp(double rate, double rate_killing, double rate_drift, Fu
 					times.push_back(times.back() + waiting_time);
 					values.push_back(values.back() + waiting_time * rate_drift + jump_value);
 				}
-			} 
+			}
 		}
 	}
 
