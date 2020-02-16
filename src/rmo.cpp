@@ -5,11 +5,15 @@ using namespace Rcpp;
 
 static const unsigned int C_CHECK_USR_INTERRUP = 100000;
 
+inline unsigned int pow2(unsigned int i) {
+	return 1 << i;
+}
+
 //' @keywords internal
 //' @noRd
 // [[Rcpp::export]]
 bool is_within(unsigned int i, unsigned int j) {
-	return j / (1 << (i-1)) % 2 == 1;
+	return (j / pow2(i-1)) % 2 == 1;
 } // inline bool is_within(int i, int j);
 
 //' @keywords internal
