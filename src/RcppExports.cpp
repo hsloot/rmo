@@ -6,13 +6,13 @@
 using namespace Rcpp;
 
 // is_within
-bool is_within(unsigned int i, unsigned int j);
+bool is_within(const unsigned int& i, const unsigned int& j);
 RcppExport SEXP _rmo_is_within(SEXP iSEXP, SEXP jSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< unsigned int >::type i(iSEXP);
-    Rcpp::traits::input_parameter< unsigned int >::type j(jSEXP);
+    Rcpp::traits::input_parameter< const unsigned int& >::type i(iSEXP);
+    Rcpp::traits::input_parameter< const unsigned int& >::type j(jSEXP);
     rcpp_result_gen = Rcpp::wrap(is_within(i, j));
     return rcpp_result_gen;
 END_RCPP

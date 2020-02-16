@@ -7,6 +7,10 @@ NULL
 
 #' @keywords internal
 #' @noRd
+NULL
+
+#' @keywords internal
+#' @noRd
 is_within <- function(i, j) {
     .Call(`_rmo_is_within`, i, j)
 }
