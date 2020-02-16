@@ -1,0 +1,175 @@
+---
+title: "The binary representation of the MO parameter"
+references:
+- id: Mai2017a
+  title: Simulating copulas
+  author:
+  - family: Mai
+    given: Jan-Frederik
+  - family: Scherer
+    given: Matthias
+  publisher: World Scientific
+  edition: 2nd
+  DOI: 10.1142/10265
+  type: book
+  issued:
+    year: 2017
+nocite: |
+  @Mai2017a
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  eval=FALSE
+)
+```
+
+The [Marshall--Olkin distribution](The-Marshall-Olkin-distribution.html) is a multivariate distribution which is for dimension \( d \) parametrised by \( 2^d-1 \) non-negative parameters for each non-empty subset \( \emptyset \neq I \subseteq {\{ 1 , \ldots, d\}} \).
+To represent such a distribution in a computer program, we need an efficient way to represent all \( 2^d-1 \) parameters.
+The current best-practice, see [@Mai2017a, p. 109], is to identify all \( 2^d-1 \) non-empty subsets with a natural number in \( 1, \ldots , 2^d-1 \) via a binary representation.
+
+
+## The binary representation
+
+Each natural (non-zero) number \( j \) can be represented by a 0-1-sequence \( c = {\{ c_k \}}_{k \in \mathbb{N}} \in {\{ 0, 1 \}}^\mathbb{N} \) with
+\[
+  j
+    = \sum_{k=0}^\infty c_k 2^k ,
+\]
+where \( 2^0 = 1 \) and all but finitely many \( c_k \) are zero.
+
+__Proof:__
+The statement is true for \( j = 1 \) with \( c_0 = 1 \) and \( c_k = 0,\ k > 0 \).
+This representation is also unique.
+Assume now that the statement is true for all natural numbers smaller than \( j \).
+If \( j \) is divisible by \( 2 \), then there exists by induction assumption a sequence \( \tilde{c} = {\{ \tilde{c}_k \}}_{k \in \mathbb{N}} \) for \( j/2 \) with
+\[
+  j/2
+    = \sum_{k=0}^\infty \tilde{c}_k 2^k .
+\]
+Consequently,
+\[
+  j
+    = \sum_{k=1}^\infty \tilde{c}_{k-1} 2^{k}
+\]
+and we can choose \( c_0 = 0 \) and \( c_k = \tilde{c}_{k-1},\ k > 0 \).
+If \( j \) is not divisible by \( 2 \), then \( j-1 \) is and there exists by induction assumption a sequence \( \tilde{c} = {\{ \tilde{c}_k \}}_{k \in \mathbb{N}} \) for \( (j-1)/2 \) with
+\[
+  (j-1)/2
+    = \sum_{k=0}^\infty \tilde{c}_k 2^k .
+\]
+Consequently,
+\[
+  j
+    = 1 + \sum_{k=1}^\infty \tilde{c}_{k-1} 2^{k}
+\]
+and we can choose \( c_0 = 1 \) and \( c_k = \tilde{c}_{k-1},\ k > 0 \).
+Since each summand with a positive \( c_k \) contributes an amount bigger or equal to \( 1 \) to the sum, it is clear that all but finitely many \( c_k \) must be equal to zero.
+
+
+## Uniqueness of the binary representation
+
+It can be proven by induction that the binary representation is unique.
+To see this, consider two sequences \( \hat{c} = {\{ \hat{c}_k \}}_{k\in\mathbb{N}} , c = {\{ c_k \}}_{k \in \mathbb{N}} \in {\{ 0 , 1 \}}^\mathbb{N} \) with
+\[
+  \sum_{k=0}^\infty c_k 2^k
+    = \sum_{k=0}^\infty \hat{c}_k 2^k .
+\]
+It is easy to see, that this number is even iff \( c_0 = 0 \) and odd iff \( c_0 = 1 \).
+Hence, we can w.l.o.g. assume that \( c_0 = \hat{c}_0 = 0 \), i.e. the number is even.
+By dividing both sides by two, we obtain
+\[
+  \sum_{k=0}^\infty c_{k+1} 2^k
+    = \sum_{k=0}^\infty \hat{c}_{k+1} 2^k .
+\]
+With the induction assumption, we get the claim.
+
+
+## Integer division
+
+Integer division is defined as follows
+\[
+  / : \mathbb{N}_0^2 \to \mathbb{N}_0, {(k, n)} \mapsto \sup{\{ j \in \mathbb{N}_0 \ :\ j\cdot k \leq n  \}} .
+\]
+For \( n = 2 \) an equivalent definition is
+\[
+  k / 2
+    = \begin{cases}
+      i & k = i \cdot 2,\ k\ \text{even or}\ k=0 , \\
+      (k-1)/2 & k\ \text{odd} .
+    \end{cases}
+\]
+
+If we define
+\[
+  2^n
+    = \underbrace{2 \cdot \ldots \cdot 2}_{n\ \text{times}} ,
+\]
+we can easily see that
+\[
+  j / 2^n
+    = j \underbrace{/ 2 / \ldots / 2}_{n\ \text{times}} .
+\]
+
+This means
+\[
+  j / 2^n
+    = \left( \sum_{k=0}^\infty c_k 2^k \right) / 2^n
+    = \sum_{k=0}^\infty c_{n+k} 2^k .
+\]
+Consquently, we have
+\[
+  c_n = (j / 2^n)\ \mathrm{mod}\ 2 .
+\]
+
+
+
+## Iterating through binary representations
+
+A natural question is, if we can easily determine the binary representation of \( j+1 \) directly from the binary representation of \( j \).
+
+Consider a natural number with its binary representation
+\[
+  j = \sum_{k=0}^\infty c_k 2^k
+\]
+and let
+\[
+  k^\ast
+    = \min{\{ i \ :\ c_i = 0 \}} .
+\]
+Then (by the geometric sum formula)
+\[
+  1
+    = 2^{k^\ast} - \left( 2^{k^\ast} - 1 \right)
+    = 2^{k^\ast} - \sum_{i=0}^{k^\ast-1} 2^i .
+\]
+Hence, with
+\[
+  \tilde{c}_k
+    = \begin{cases}
+      0 & k < k^\ast , \\
+      1 & k = k^\ast , \\
+      c_k & k > k^\ast ,
+    \end{cases}
+\]
+we have
+\[
+  j+1
+    = \sum_{k=0}^\infty \tilde{c}_k 2^k .
+\]
+
+
+## The MO parameter mapping
+
+We choose the following bijections to store all Marshall-Olkin parameters in a vector of length \( 2^d-1 \):
+\[
+  T : \mathcal{P}{(\{ 1 , \ldots, d\} \backslash {\{ 0 \}})} \to \{ 1 , \ldots, 2^d-1 \},\ I \mapsto \sum_{i=1}^{d} 1_{\{ i \in I \}} 2^{(i-1)} .
+\]
+\[
+  T^{-1} : \{ 1 , \ldots, 2^d-1 \} \to \mathcal{P}{(\{ 1 , \ldots, d\} \backslash {\{ 0 \}})},\ j \mapsto {\{ i \ :\ (j / 2^{(i-1)}) \ \mathrm{mod}\ 2 = 1 \}} .
+\]
+
+
+## References
