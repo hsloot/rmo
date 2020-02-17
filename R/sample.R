@@ -40,8 +40,8 @@
 #' @export
 #' @name rmo_esm
 rmo_esm <- function(n, d, intensities) {
-  assert_that(is.count(n), is.count(d), is_mo_parameter(intensities),
-    length(intensities) == 2^d-1)
+  assert_that(is.count(n), is_32bit_complient_dimension(d),
+    is_mo_parameter(intensities), length(intensities) == 2^d-1)
 
   Rcpp__rmo_esm(n, d, intensities)
 }
@@ -65,8 +65,8 @@ rmo_esm <- function(n, d, intensities) {
 #'
 #' @export
 rmo_arnold <- function(n, d, intensities) {
-  assert_that(is.count(n), is.count(d), is_mo_parameter(intensities),
-    length(intensities) == 2^d-1)
+  assert_that(is.count(n), is_32bit_complient_dimension(d),
+    is_mo_parameter(intensities), length(intensities) == 2^d-1)
 
   Rcpp__rmo_arnold(n, d, intensities)
 }
@@ -113,7 +113,7 @@ rmo_arnold <- function(n, d, intensities) {
 #' @export
 #' @name rmo_ex_arnold
 rmo_ex_arnold <- function(n, d, ex_intensities) {
-  assert_that(is.count(n), is.count(d), is_exmo_parameter(ex_intensities),
+  assert_that(is.count(n), is_dimension(d), is_exmo_parameter(ex_intensities),
     length(ex_intensities) == d)
 
   Rcpp__rmo_ex_arnold(n, d, ex_intensities)
@@ -157,7 +157,7 @@ rmo_ex_arnold <- function(n, d, ex_intensities) {
 #' @export
 #' @name rmo_esm_cuadras_auge
 rmo_esm_cuadras_auge <- function(n, d, alpha, beta) {
-  assert_that(is.count(n), is.count(d), is_nonnegative_number(alpha),
+  assert_that(is.count(n), is_dimension(d), is_nonnegative_number(alpha),
     is_nonnegative_number(beta), alpha + beta > 0)
 
   Rcpp__rmo_esm_cuadras_auge(n, d, alpha, beta)
@@ -215,7 +215,7 @@ rmo_esm_cuadras_auge <- function(n, d, alpha, beta) {
 #' @export
 #' @name rmo_lfm_cpp
 rmo_lfm_cpp <- function(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list = list()) {
-  assert_that(is.count(n), is.count(d), is_nonnegative_number(rate),
+  assert_that(is.count(n), is_dimension(d), is_nonnegative_number(rate),
     is_nonnegative_number(rate_killing), is_nonnegative_number(rate_drift),
     is_positive_number(rate + rate_killing + rate_drift),
     is_rjump_name(rjump_name), is_rjump_arg_list(rjump_name, rjump_arg_list))

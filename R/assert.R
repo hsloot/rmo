@@ -5,6 +5,8 @@ ERR_MARGINRATE_NOT_POS = "%s does not have positive marginal rates"
 ERR_NOT_SCALAR_X_NUMBER = "%s is not %s number"
 ERR_NOT_RJUMP_NAME = "%s is not allowed name for cpp jump distribution"
 ERR_NOT_RJUMP_ARGS = "%s is not valid arglist for cpp jump distribution for %s"
+ERR_NOT_DIMENSION = "%s is not a valid dimension"
+ERR_NOT_32BIT_COMPLIENT_DIMENSION = "%s is not a valid 32bit dimension"
 # nolint end
 
 
@@ -76,6 +78,67 @@ is_nonnegative_number <- function(x) {
 #' @noRd
 on_failure(is_nonnegative_number) <- function(call, env) {
   sprintf(ERR_NOT_SCALAR_X_NUMBER, deparse(call$x), "non-negative")
+}
+
+
+#' Miscellaneous assertions for dimension parameters
+#'
+#' @inheritParams assertthat::is.scalar
+#'
+#' @return `is_dimension` returns `TRUE` if `x` is a count variable and
+#'   `x>1L`.
+#'
+#' @examples
+#' assertthat::see_if(is_dimension(-1L))  ## FALSE
+#' assertthat::see_if(is_dimension("2"))  ## FALSE
+#' assertthat::see_if(is_dimension(2L))   ## TRUE
+#' assertthat::see_if(is_dimension(15))   ## TRUE
+#' assertthat::see_if(is_dimension(31L))  ## TRUE
+#' assertthat::see_if(is_dimension(32L))  ## TRUE
+#'
+#' @family assertions
+#'
+#' @importFrom assertthat is.count
+#' @keywords internal
+#' @noRd
+is_dimension <- function(x) {
+  is.count(x) && x>1L
+}
+
+#' @importFrom assertthat on_failure<-
+#' @keywords internal
+#' @noRd
+on_failure(is_dimension) <- function(call, env) {
+  sprintf(ERR_NOT_DIMENSION, deparse(call$x))
+}
+
+#' @rdname is_dimension
+#'
+#' @return `is_32bit_complient_dimension` returns `TRUE` if `x` is a
+#' count variable, `x>1L`, and `x<32L`.
+#'
+#' @examples
+#' assertthat::see_if(is_dimension(-1L))  ## FALSE
+#' assertthat::see_if(is_dimension("2"))  ## FALSE
+#' assertthat::see_if(is_dimension(2L))   ## TRUE
+#' assertthat::see_if(is_dimension(15))   ## TRUE
+#' assertthat::see_if(is_dimension(31L))  ## TRUE
+#' assertthat::see_if(is_dimension(32L))  ## FALSE
+#'
+#' @family assertions
+#'
+#' @importFrom assertthat is.count
+#' @keywords internal
+#' @noRd
+is_32bit_complient_dimension <- function(x) {
+  is_dimension(x) && x<32L
+}
+
+#' @importFrom assertthat on_failure<-
+#' @keywords internal
+#' @noRd
+on_failure(is_32bit_complient_dimension) <- function(call, env) {
+  sprintf(ERR_NOT_32BIT_COMPLIENT_DIMENSION, deparse(call$x))
 }
 
 

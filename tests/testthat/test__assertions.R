@@ -43,6 +43,39 @@ test_that("`is_nonnegative_number` assertion works as intended", {
     regexp=sprintf(ERR_NOT_SCALAR_X_NUMBER, "*", "non-negative"))
 })
 
+test_that("`is_dimension` assertion works as intended", {
+  expect_true(assert_that(is_dimension(2L)))
+  expect_true(assert_that(is_dimension(15)))
+  expect_true(assert_that(is_dimension(31L)))
+  expect_true(assert_that(is_dimension(32L)))
+
+  expect_error(assert_that(is_dimension(-1L)),
+    regexp=sprintf(ERR_NOT_DIMENSION, "*"))
+  expect_error(assert_that(is_dimension(0)),
+    regexp=sprintf(ERR_NOT_DIMENSION, "*"))
+  expect_error(assert_that(is_dimension("2")),
+    regexp=sprintf(ERR_NOT_DIMENSION, "*"))
+  expect_error(assert_that(is_dimension(c(2L, 3L))),
+    regexp=sprintf(ERR_NOT_DIMENSION, "*"))
+})
+
+test_that("`is_32bit_complient_dimension` assertion works as intended", {
+  expect_true(assert_that(is_32bit_complient_dimension(2L)))
+  expect_true(assert_that(is_32bit_complient_dimension(15)))
+  expect_true(assert_that(is_32bit_complient_dimension(31L)))
+
+  expect_error(assert_that(is_32bit_complient_dimension(-1L)),
+    regexp=sprintf(ERR_NOT_32BIT_COMPLIENT_DIMENSION, "*"))
+  expect_error(assert_that(is_32bit_complient_dimension(0)),
+    regexp=sprintf(ERR_NOT_32BIT_COMPLIENT_DIMENSION, "*"))
+  expect_error(assert_that(is_32bit_complient_dimension("2")),
+    regexp=sprintf(ERR_NOT_32BIT_COMPLIENT_DIMENSION, "*"))
+  expect_error(assert_that(is_32bit_complient_dimension(c(2L, 3L))),
+    regexp=sprintf(ERR_NOT_32BIT_COMPLIENT_DIMENSION, "*"))
+  expect_error(assert_that(is_32bit_complient_dimension(32L)),
+    regexp=sprintf(ERR_NOT_32BIT_COMPLIENT_DIMENSION, "*"))
+})
+
 test_that("`is_rjump_name` assertion works as intended", {
   expect_true(assert_that(is_rjump_name("rexp")))
 
