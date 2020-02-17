@@ -33,7 +33,7 @@ NumericMatrix Rcpp__rmo_esm(unsigned int n, unsigned int d, NumericVector intens
     out(k, _) = value;
   }
   return wrap( out );
-}
+} // NumericMatrix Rcpp__rmo_esm(unsigned int n, unsigned int d, NumericVector intensities);
 
 
 //' @keywords internal
@@ -74,7 +74,7 @@ NumericMatrix Rcpp__rmo_arnold(unsigned int n, unsigned int d, NumericVector int
   }
 
   return wrap( out );
-}
+} // NumericMatrix Rcpp__rmo_arnold(unsigned int n, unsigned int d, NumericVector intensities);
 
 
 //' @keywords internal
@@ -130,7 +130,7 @@ NumericMatrix Rcpp__rmo_ex_arnold(unsigned int n, unsigned int d, NumericVector 
     out(k, _) = values;
   }
   return wrap( out );
-}
+} // NumericMatrix Rcpp__rmo_ex_arnold(unsigned int n, unsigned int d, NumericVector ex_intensities);
 
 
 
@@ -155,7 +155,7 @@ NumericMatrix Rcpp__rmo_esm_cuadras_auge(unsigned int n, unsigned int d, double 
   }
 
   return wrap( out );
-}
+} // NumericMatrix Rcpp__rmo_esm_cuadras_auge(unsigned int n, unsigned int d, double alpha, double beta);
 
 
 
@@ -249,7 +249,7 @@ NumericMatrix sample_cpp(double rate, double rate_killing, double rate_drift, Fu
   colnames(out) = CharacterVector::create("t", "value");
 
   return out;
-}
+} // NumericMatrix sample_cpp(double rate, double rate_killing, double rate_drift, Function rjump, List rjump_arg_list, NumericVector barrier_values);
 
 
 //' @keywords internal
@@ -276,4 +276,4 @@ NumericMatrix Rcpp__rmo_lfm_cpp(unsigned int n, unsigned int d, double rate, dou
     }
   }
   return out;
-}
+} // NumericMatrix Rcpp__rmo_lfm_cpp(unsigned int n, unsigned int d, double rate, double rate_killing, double rate_drift, Function rjump, List rjump_arg_list);
