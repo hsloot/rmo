@@ -3,10 +3,6 @@
 
 #' @keywords internal
 #' @noRd
-NULL
-
-#' @keywords internal
-#' @noRd
 Rcpp__rmo_esm <- function(n, d, intensities) {
     .Call(`_rmo_Rcpp__rmo_esm`, n, d, intensities)
 }

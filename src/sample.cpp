@@ -1,25 +1,11 @@
 #include <Rcpp.h>
 #include <math.h>
 #include "sets.h"
+#include "math.h"
 
 using namespace Rcpp;
 
 static const unsigned int C_CHECK_USR_INTERRUP = 100000;
-
-//' @keywords internal
-//' @noRd
-double min2(double a, double b) {
-  if (a == R_PosInf && b == R_PosInf) {
-    return R_PosInf;
-  } else if (a == R_PosInf) {
-    return b;
-  } else if (b == R_PosInf) {
-    return a;
-  }
-  return (a < b ? a : b);
-} // double min2(double a, double b);
-
-
 
 //' @keywords internal
 //' @noRd
