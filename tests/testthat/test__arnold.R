@@ -60,7 +60,7 @@ test_that("Arnold model implementation in C++", {
   d <- 4L
   intensities <- sapply(1:(2^d-1), function(x) {
     cardinality <- sum(sapply(1:d, function(y) {
-      is_within(y, x)
+      Rcpp__is_within(y, x)
     }))
 
     1 / cardinality

@@ -1,11 +1,11 @@
 context("Set functions")
 
 test_that("is_within work as expected in bivariate setting", {
-  expect_equal(is_within(1L, 1L), TRUE)
-  expect_equal(is_within(1L, 2L), FALSE)
-  expect_equal(is_within(2L, 2L), TRUE)
-  expect_equal(is_within(1L, 3L), TRUE)
-  expect_equal(is_within(2L, 3L), TRUE)
+  expect_equal(Rcpp__is_within(1L, 1L), TRUE)
+  expect_equal(Rcpp__is_within(1L, 2L), FALSE)
+  expect_equal(Rcpp__is_within(2L, 2L), TRUE)
+  expect_equal(Rcpp__is_within(1L, 3L), TRUE)
+  expect_equal(Rcpp__is_within(2L, 3L), TRUE)
 })
 
 test_that("binary mapping is reversible", {
@@ -13,7 +13,7 @@ test_that("binary mapping is reversible", {
   i <- 0
   j <- 0
   while (j < n) {
-  j <- j+is_within(i+1, n)*2^i
+  j <- j+Rcpp__is_within(i+1, n)*2^i
   i <- i+1
   }
   j
@@ -27,9 +27,9 @@ test_that("binary mapping is reversible", {
 
 
 test_that("is_within returns `FALSE` if 2^(i-1)>j", {
-  expect_equal(is_within(3L, 3L), FALSE)
-  expect_equal(is_within(4L, 2L), FALSE)
-  expect_equal(is_within(5L, 2L), FALSE)
-  expect_equal(is_within(5L, 3L), FALSE)
-  expect_equal(is_within(1e5L, 3L), FALSE)
+  expect_equal(Rcpp__is_within(3L, 3L), FALSE)
+  expect_equal(Rcpp__is_within(4L, 2L), FALSE)
+  expect_equal(Rcpp__is_within(5L, 2L), FALSE)
+  expect_equal(Rcpp__is_within(5L, 3L), FALSE)
+  expect_equal(Rcpp__is_within(1e5L, 3L), FALSE)
 })

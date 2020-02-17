@@ -5,18 +5,6 @@
 
 using namespace Rcpp;
 
-// is_within
-bool is_within(const unsigned int& i, const unsigned int& j);
-RcppExport SEXP _rmo_is_within(SEXP iSEXP, SEXP jSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const unsigned int& >::type i(iSEXP);
-    Rcpp::traits::input_parameter< const unsigned int& >::type j(jSEXP);
-    rcpp_result_gen = Rcpp::wrap(is_within(i, j));
-    return rcpp_result_gen;
-END_RCPP
-}
 // Rcpp__rmo_esm
 NumericMatrix Rcpp__rmo_esm(unsigned int n, unsigned int d, NumericVector intensities);
 RcppExport SEXP _rmo_Rcpp__rmo_esm(SEXP nSEXP, SEXP dSEXP, SEXP intensitiesSEXP) {
@@ -103,15 +91,27 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// Rcpp__is_within
+bool Rcpp__is_within(const unsigned int& i, const unsigned int& j);
+RcppExport SEXP _rmo_Rcpp__is_within(SEXP iSEXP, SEXP jSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const unsigned int& >::type i(iSEXP);
+    Rcpp::traits::input_parameter< const unsigned int& >::type j(jSEXP);
+    rcpp_result_gen = Rcpp::wrap(Rcpp__is_within(i, j));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_rmo_is_within", (DL_FUNC) &_rmo_is_within, 2},
     {"_rmo_Rcpp__rmo_esm", (DL_FUNC) &_rmo_Rcpp__rmo_esm, 3},
     {"_rmo_Rcpp__rmo_arnold", (DL_FUNC) &_rmo_Rcpp__rmo_arnold, 3},
     {"_rmo_Rcpp__rmo_ex_arnold", (DL_FUNC) &_rmo_Rcpp__rmo_ex_arnold, 3},
     {"_rmo_Rcpp__rmo_esm_cuadras_auge", (DL_FUNC) &_rmo_Rcpp__rmo_esm_cuadras_auge, 4},
     {"_rmo_sample_cpp", (DL_FUNC) &_rmo_sample_cpp, 6},
     {"_rmo_Rcpp__rmo_lfm_cpp", (DL_FUNC) &_rmo_Rcpp__rmo_lfm_cpp, 7},
+    {"_rmo_Rcpp__is_within", (DL_FUNC) &_rmo_Rcpp__is_within, 2},
     {NULL, NULL, 0}
 };
 
