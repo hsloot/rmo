@@ -40,8 +40,8 @@
 #' @export
 #' @name rmo_esm
 rmo_esm <- function(n, d, intensities) {
-  assert_that(is.count(n), is.count(d), is_mo_parameter(intensities),
-    length(intensities) == 2^d-1)
+  assert_that(is.count(n), is_32bit_complient_dimension(d),
+    is_mo_parameter(intensities), length(intensities) == 2^d-1)
 
   Rcpp__rmo_esm(n, d, intensities)
 }
@@ -65,8 +65,8 @@ rmo_esm <- function(n, d, intensities) {
 #'
 #' @export
 rmo_arnold <- function(n, d, intensities) {
-  assert_that(is.count(n), is.count(d), is_mo_parameter(intensities),
-    length(intensities) == 2^d-1)
+  assert_that(is.count(n), is_32bit_complient_dimension(d),
+    is_mo_parameter(intensities), length(intensities) == 2^d-1)
 
   Rcpp__rmo_arnold(n, d, intensities)
 }

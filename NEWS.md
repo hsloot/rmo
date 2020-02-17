@@ -1,6 +1,7 @@
 # rmo 0.2.1
 
 - Refactoring and additional tests
+- Fix problem with `int32` is `is_within` function
 
 # rmo 0.2.0
 
