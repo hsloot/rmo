@@ -107,7 +107,7 @@ is_mo_parameter <- function(intensities) {
   marginal_intensities <- numeric(d)
   for (i in 1:d) {
     for (j in 1:(2^d-1)) {
-      if (is_within(i, j)) {
+      if (Rcpp__is_within(i, j)) {
         marginal_intensities[i] <- marginal_intensities[[i]] + intensities[[j]]
       }
     }

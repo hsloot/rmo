@@ -7,12 +7,6 @@ NULL
 
 #' @keywords internal
 #' @noRd
-is_within <- function(i, j) {
-    .Call(`_rmo_is_within`, i, j)
-}
-
-#' @keywords internal
-#' @noRd
 Rcpp__rmo_esm <- function(n, d, intensities) {
     .Call(`_rmo_Rcpp__rmo_esm`, n, d, intensities)
 }
@@ -62,5 +56,11 @@ sample_cpp <- function(rate, rate_killing, rate_drift, rjump, rjump_arg_list, ba
 #' @noRd
 Rcpp__rmo_lfm_cpp <- function(n, d, rate, rate_killing, rate_drift, rjump, rjump_arg_list) {
     .Call(`_rmo_Rcpp__rmo_lfm_cpp`, n, d, rate, rate_killing, rate_drift, rjump, rjump_arg_list)
+}
+
+#' @keywords internal
+#' @noRd
+Rcpp__is_within <- function(i, j) {
+    .Call(`_rmo_Rcpp__is_within`, i, j)
 }
 
