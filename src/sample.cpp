@@ -263,10 +263,10 @@ NumericMatrix Rcpp__rmo_lfm_cpp(unsigned int n, unsigned int d, double rate, dou
     cpp_subordinator = sample_cpp(rate, rate_killing, rate_drift, rjump, rjump_arg_list, unit_exponentials);
     for (unsigned int i=0; i<d; i++) {
       count = 0;
-      while (cpp_subordinator(count, 1) < unit_exponentials[i] && count < cpp_subordinator.nrow())
+      while (cpp_subordinator(count, 1) < unit_exponentials[i] && count < (unsigned int) cpp_subordinator.nrow())
         count += 1;
 
-      if (cpp_subordinator.nrow() == count)
+      if ((unsigned int) cpp_subordinator.nrow() == count)
         stop("internal error: exponential value out of subordinator range");
 
       out(k, i) = cpp_subordinator(count, 0);
