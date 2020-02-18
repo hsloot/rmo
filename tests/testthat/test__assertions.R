@@ -1,21 +1,23 @@
 context("Custom assertions")
 
 test_that("`is_mo_parameter` assertion works as intended", {
-  expect_true(assert_that(is_mo_parameter(2, c(0, 0, 1))))
-  expect_true(assert_that(is_mo_parameter(2, c(1, 1, 0))))
-  expect_true(assert_that(is_mo_parameter(2, c(1, 1, 1))))
+  d <- 2L
+  expect_true(assert_that(is_mo_parameter(d, intensities=c(0, 0, 1))))
+  expect_true(assert_that(is_mo_parameter(d, intensities=c(1, 1, 0))))
+  expect_true(assert_that(is_mo_parameter(d, intensities=c(1, 1, 1))))
 
-  expect_error(assert_that(is_mo_parameter(2, c(0, 0, 0))),
-    regexp=sprintf(ERR_NOT_MO_INTENSITIES, "*", 2))
+  expect_error(assert_that(is_mo_parameter(d, intensities=c(0, 0, 0))),
+    regexp=sprintf(ERR_NOT_MO_INTENSITIES, "*", d))
 })
 
 test_that("`is_ex_mo_parameter` assertion works as intended", {
-  expect_true(assert_that(is_ex_mo_parameter(2, c(0, 1))))
-  expect_true(assert_that(is_ex_mo_parameter(2, c(1, 0))))
-  expect_true(assert_that(is_ex_mo_parameter(2, c(1, 1))))
+  d <- 2L
+  expect_true(assert_that(is_ex_mo_parameter(d, ex_intensities=c(0, 1))))
+  expect_true(assert_that(is_ex_mo_parameter(d, ex_intensities=c(1, 0))))
+  expect_true(assert_that(is_ex_mo_parameter(d, ex_intensities=c(1, 1))))
 
-  expect_error(assert_that(is_ex_mo_parameter(2, c(0, 0))),
-    regexp=sprintf(ERR_NOT_EX_MO_INTENSITIES, "*", 2))
+  expect_error(assert_that(is_ex_mo_parameter(d, ex_intensities=c(0, 0))),
+    regexp=sprintf(ERR_NOT_EX_MO_INTENSITIES, "*", d))
 })
 
 test_that("`is_positive_number` assertion works as intended", {
@@ -87,5 +89,8 @@ test_that("`is_rjump_param` assertion works as intended", {
   expect_true(assert_that(is_rjump_param("rexp", list("rate"=0.5))))
 
   expect_error(assert_that(is_rjump_param("rexp", list("scale"=2))),
+    regexp=sprintf(ERR_NOT_RJUMP_ARGS, "*", "[.]*"))
+
+  expect_error(assert_that(is_rjump_param("rexp", list("rate"=-1))),
     regexp=sprintf(ERR_NOT_RJUMP_ARGS, "*", "[.]*"))
 })
