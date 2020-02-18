@@ -1,4 +1,4 @@
-context("Custom assertions")
+context("Custom assertions") ## TODO: Implement more tests for higher dimensions
 
 test_that("`is_mo_parameter` assertion works as intended", {
   d <- 2L
@@ -7,7 +7,13 @@ test_that("`is_mo_parameter` assertion works as intended", {
   expect_true(assert_that(is_mo_parameter(d, intensities=c(1, 1, 1))))
 
   expect_error(assert_that(is_mo_parameter(d, intensities=c(0, 0, 0))),
-    regexp=sprintf(ERR_NOT_MO_INTENSITIES, "*", d))
+    regexp=sprintf(ERR_NOT_MO_INTENSITIES, "*", "d"))
+  expect_error(assert_that(is_mo_parameter(d, intensities=c(-1, 0, 0))),
+    regexp=sprintf(ERR_NOT_MO_INTENSITIES, "*", "d"))
+  expect_error(assert_that(is_mo_parameter(d, intensities=c(1, 1))),
+    regexp=sprintf(ERR_NOT_MO_INTENSITIES, "*", "d"))
+  expect_error(assert_that(is_mo_parameter(d, intensities=c("1", "1", "1"))),
+    regexp=sprintf(ERR_NOT_MO_INTENSITIES, "*", "d"))
 })
 
 test_that("`is_ex_mo_parameter` assertion works as intended", {
@@ -17,7 +23,13 @@ test_that("`is_ex_mo_parameter` assertion works as intended", {
   expect_true(assert_that(is_ex_mo_parameter(d, ex_intensities=c(1, 1))))
 
   expect_error(assert_that(is_ex_mo_parameter(d, ex_intensities=c(0, 0))),
-    regexp=sprintf(ERR_NOT_EX_MO_INTENSITIES, "*", d))
+    regexp=sprintf(ERR_NOT_EX_MO_INTENSITIES, "*", "d"))
+  expect_error(assert_that(is_ex_mo_parameter(d, ex_intensities=c(-1, 0))),
+    regexp=sprintf(ERR_NOT_EX_MO_INTENSITIES, "*", "d"))
+  expect_error(assert_that(is_ex_mo_parameter(d, ex_intensities=c(1, 1, 1))),
+    regexp=sprintf(ERR_NOT_EX_MO_INTENSITIES, "*", "d"))
+  expect_error(assert_that(is_ex_mo_parameter(d, ex_intensities=c("1", "1"))),
+    regexp=sprintf(ERR_NOT_EX_MO_INTENSITIES, "*", "d"))
 })
 
 test_that("`is_positive_number` assertion works as intended", {
@@ -86,9 +98,11 @@ test_that("`is_rjump_name` assertion works as intended", {
 })
 
 test_that("`is_rjump_param` assertion works as intended", {
-  expect_true(assert_that(is_rjump_param("rexp", list("rate"=0.5))))
+  expect_true(assert_that(is_rjump_param(
+    rjump_name="rexp", rjump_arg_list=list("rate"=0.5))))
 
-  expect_error(assert_that(is_rjump_param("rexp", list("scale"=2))),
+  expect_error(assert_that(is_rjump_param(
+    rjump_name="rexp", rjump_arg_list=list("scale"=2))),
     regexp=sprintf(ERR_NOT_RJUMP_ARGS, "*", "[.]*"))
 
   expect_error(assert_that(is_rjump_param("rexp", list("rate"=-1))),
