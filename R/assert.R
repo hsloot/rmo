@@ -1,12 +1,13 @@
 ## #### Assertion error messages #####
 ##
 # nolint start
-ERR_MARGINRATE_NOT_POS = "%s does not have positive marginal rates"
 ERR_NOT_SCALAR_X_NUMBER = "%s is not %s number"
 ERR_NOT_RJUMP_NAME = "%s is not allowed name for cpp jump distribution"
 ERR_NOT_RJUMP_ARGS = "%s is not valid arglist for cpp jump distribution for %s"
 ERR_NOT_DIMENSION = "%s is not a valid dimension"
 ERR_NOT_32BIT_COMPLIENT_DIMENSION = "%s is not a valid 32bit dimension"
+ERR_NOT_MO_INTENSITIES = "%s is not a valid Marshall-Olkin intensity vector for dimension %s"
+ERR_NOT_EX_MO_INTENSITIES = "%s is not a valid ex. Marshall-Olkin intensity vector for dimension %s"
 # nolint end
 
 
@@ -80,12 +81,16 @@ on_failure(is_nonnegative_number) <- function(call, env) {
   sprintf(ERR_NOT_SCALAR_X_NUMBER, deparse(call$x), "non-negative")
 }
 
+## #### Assertions for MO params ####
+##
 
-#' Miscellaneous assertions for dimension parameters
+#' Miscellaneous assertions MO parameters
 #'
 #' @inheritParams assertthat::is.scalar
 #'
-#' @return `is_dimension` returns `TRUE` if `x` is a count variable and
+#' @return `TRUE`/`FALSE`
+#'
+#' @details `is_dimension` returns `TRUE` if `x` is a count variable and
 #'   `x>1L`.
 #'
 #' @examples
@@ -114,8 +119,10 @@ on_failure(is_dimension) <- function(call, env) {
 
 #' @rdname is_dimension
 #'
-#' @return `is_32bit_complient_dimension` returns `TRUE` if `x` is a
-#' count variable, `x>1L`, and `x<32L`.
+#' @details Since `R` can only represent 32bit `integers` properly
+#' (higher integers are internally represented as `double`), we get
+#' problems passing `intensities` vectors to `Rcpp` for classical
+#' Marshall-Olkin models in \eqn{d>31}.
 #'
 #' @examples
 #' assertthat::see_if(is_dimension(-1L))  ## FALSE
@@ -141,41 +148,43 @@ on_failure(is_32bit_complient_dimension) <- function(call, env) {
   sprintf(ERR_NOT_32BIT_COMPLIENT_DIMENSION, deparse(call$x))
 }
 
-
-## #### Assertions for MO params ####
-##
-
-#' Assertion for the  `intensities` parameter
+#' @rdname is_dimension
 #'
-#' Assert if `intensities` is a valid Marshall-Olkin  parameter.
-#' For this, the provided numeric vector must non-negative
-#' and fulfil the property
+#' @details
+#' `is_mo_parameter` asserts if `d` and `intensities` are a
+#' valid Marshall-Olkin parameterisation.
+#' - `d` must be a 32bit complient dimension
+#' - `intensities` must be a non-negeative, numeric vector with
+#' length equal to \eqn{2^d-1}
+#' - The implied marginal rates from `intensities` must be all
+#' strictly positive, i.e.
 #' \deqn{
 #'   \sum_{I \ni i} \lambda_i > 0 \forall i \in \{ 1, \ldots, d\} .
 #' }
 #'
+#' @param d A dimension parameter
 #' @param intensities A numeric vector intended to be the shock rates of
 #'   a Marshall-Olkin distribution.
-#'
-#' @return TRUE/FALSE
 #'
 #' @importFrom assertthat assert_that on_failure<-
 #' @include RcppExports.R
 #' @keywords internal
 #' @noRd
-is_mo_parameter <- function(intensities) {
-  assert_that(is.numeric(intensities), length(intensities) >= 1, all(intensities >= 0))
-  assert_that(log2(length(intensities)+1) %% 1 == 0)
-  d <- log2(length(intensities)+1)
+is_mo_parameter <- function(d, intensities) {
+  assert_that(is_32bit_complient_dimension(d))
+  if (!is.numeric(intensities) || !(length(intensities) == 2^d-1) ||
+      any(intensities<0))
+    return(FALSE)
+
   marginal_intensities <- numeric(d)
   for (i in 1:d) {
     for (j in 1:(2^d-1)) {
       if (Rcpp__is_within(i, j)) {
-        marginal_intensities[i] <- marginal_intensities[[i]] + intensities[[j]]
+        marginal_intensities[i] <- marginal_intensities[[i]] +
+          intensities[[j]]
       }
     }
   }
-
   all(marginal_intensities > 0)
 }
 
@@ -183,42 +192,35 @@ is_mo_parameter <- function(intensities) {
 #' @keywords internal
 #' @noRd
 on_failure(is_mo_parameter) <- function(call, env) {
-  sprintf(ERR_MARGINRATE_NOT_POS, deparse(call$intensities))
+  sprintf(ERR_NOT_MO_INTENSITIES, deparse(call$intensities), deparse(call$d))
 }
 
-
-## #### Assertions for exMO params ####
-##
-
-#' Assertion for the `ex_intensities` parameter
+#' @rdname is_dimension
 #'
-#' Assert if `ex_intensities` is a valid exchangeable Marshall-Olkin parameter.
-#' For this, the numeric vector must be non-negative and fulfil the property
-#' \deqn{
-#'   \sum_{j=0}^{d-1} \choose{d-1}{j} \lambda_{j+1} > 0 .
-#' }
+#' @details
+#' `is_ex_mo_parameter` asserts if `d` and `ex_intensities` are a valid
+#' parametrisation of the exchangeable Marshall-Olkin distribution, i.e.
+#' - `d` is a valid dimension
+#' - `ex_intensities` is a non-negative, numeric vector of length equal to `d`
+#' - at least one entry of `ex_intensities` is strictly positive
 #'
 #' @param ex_intensity A numeric vector intended to be the shock rates of
 #'   a Marshall-Olkin distribution.
 #'
-#' @return TRUE/FALSE
-#'
 #' @importFrom assertthat assert_that
 #' @keywords internal
 #' @noRd
-is_exmo_parameter <- function(ex_intensities) {
-  assert_that(is.numeric(ex_intensities), length(ex_intensities) >= 1, all(ex_intensities >= 0))
-  d <- length(ex_intensities)
-  marginal_intensity <- sum(vapply(0:(d-1), function(y) choose(d-1, y) * ex_intensities[[y+1]], FUN.VALUE=0.5)) # nolint
-
-  marginal_intensity > 0
+is_ex_mo_parameter <- function(d, ex_intensities) {
+  assert_that(is_dimension(d))
+  (is.numeric(ex_intensities) && (length(ex_intensities) == d) &&
+    all(ex_intensities>=0) && any(ex_intensities>0))
 }
 
 #' @importFrom assertthat on_failure<-
 #' @keywords internal
 #' @noRd
-on_failure(is_exmo_parameter) <- function(call, env) {
-  sprintf(ERR_MARGINRATE_NOT_POS, deparse(call$ex_intensities))
+on_failure(is_ex_mo_parameter) <- function(call, env) {
+  sprintf(ERR_NOT_EX_MO_INTENSITIES, deparse(call$ex_intensities), deparse(call$d))
 }
 
 
@@ -229,7 +231,9 @@ on_failure(is_exmo_parameter) <- function(call, env) {
 #'
 #' @param rjump_name name of sampling function for jump distribution
 #'
-#' @return `is_rjump_name` returns `TRUE` if `rjump_name` is a `string`
+#' @returns `TRUE`/`FALSE`
+#'
+#' @details `is_rjump_name` returns `TRUE` if `rjump_name` is a `string`
 #'   and is contained in list of allowed distributions and `FALSE` otherwise.
 #'
 #' @examples
@@ -260,13 +264,14 @@ on_failure(is_rjump_name) <- function(call, env) {
 #'
 #' @param rjump_arg_list argument list for `rjump_name`
 #'
-#' @return `is_rjump_arg_list` returns `TRUE` if a call to `do.call` with
+#' @details
+#' `is_rjump_param` returns `TRUE` if a call to `do.call` with
 #'   `rjump_name` and `args=c("n" = 1, rjump_arg_list)` is successful and
 #'   `FALSE` otherwise.
 #'
 #' @examples
-#' assertthat::see_if(is_rjump_arg_list("rexp", list()))            ## FALSE
-#' assertthat::see_if(is_rjump_arg_list("rexp", list("rate"=0.5)))  ## TRUE
+#' assertthat::see_if(is_rjump_param("rexp", list()))            ## FALSE
+#' assertthat::see_if(is_rjump_param("rexp", list("rate"=0.5)))  ## TRUE
 #'
 #' @family assertions
 #'
@@ -274,7 +279,7 @@ on_failure(is_rjump_name) <- function(call, env) {
 #'
 #' @keywords internal
 #' @noRd
-is_rjump_arg_list <- function(rjump_name, rjump_arg_list) {
+is_rjump_param <- function(rjump_name, rjump_arg_list) {
   assert_that(is_rjump_name(rjump_name), is.list(rjump_arg_list))
   if (!get(rjump_name) %has_args% names(rjump_arg_list)) {
     return(FALSE)
@@ -287,6 +292,18 @@ is_rjump_arg_list <- function(rjump_name, rjump_arg_list) {
 #‘ @importFrom assertthat on_failure<-
 #' @keywords internal
 #' @noRd
-on_failure(is_rjump_arg_list) <- function(call, env) {
+on_failure(is_rjump_param) <- function(call, env) {
   sprintf(ERR_NOT_RJUMP_ARGS, deparse(call$rjump_arg_list), deparse(call$rjump_name))
+}
+
+#' @importFrom assertthat assert_that
+#' @keywords internal
+#' @noRd
+is_lfm_cpp_param <- function(d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list) {
+  assert_that(is_dimension(d))
+  assert_that(is_nonnegative_number(rate), is_nonnegative_number(rate_killing),
+    is_nonnegative_number(rate_drift),
+    is_positive_number(rate + rate_killing + rate_drift),
+    is_rjump_param(rjump_name, rjump_arg_list))
+  TRUE
 }

@@ -1,21 +1,21 @@
 context("Custom assertions")
 
 test_that("`is_mo_parameter` assertion works as intended", {
-  expect_true(assert_that(is_mo_parameter(c(0, 0, 1))))
-  expect_true(assert_that(is_mo_parameter(c(1, 1, 0))))
-  expect_true(assert_that(is_mo_parameter(c(1, 1, 1))))
+  expect_true(assert_that(is_mo_parameter(2, c(0, 0, 1))))
+  expect_true(assert_that(is_mo_parameter(2, c(1, 1, 0))))
+  expect_true(assert_that(is_mo_parameter(2, c(1, 1, 1))))
 
-  expect_error(assert_that(is_mo_parameter(c(0, 0, 0))),
-    regexp=sprintf(ERR_MARGINRATE_NOT_POS, "*"))
+  expect_error(assert_that(is_mo_parameter(2, c(0, 0, 0))),
+    regexp=sprintf(ERR_NOT_MO_INTENSITIES, "*", 2))
 })
 
-test_that("`is_exmo_parameter` assertion works as intended", {
-  expect_true(assert_that(is_exmo_parameter(c(0, 1))))
-  expect_true(assert_that(is_exmo_parameter(c(1, 0))))
-  expect_true(assert_that(is_exmo_parameter(c(1, 1))))
+test_that("`is_ex_mo_parameter` assertion works as intended", {
+  expect_true(assert_that(is_ex_mo_parameter(2, c(0, 1))))
+  expect_true(assert_that(is_ex_mo_parameter(2, c(1, 0))))
+  expect_true(assert_that(is_ex_mo_parameter(2, c(1, 1))))
 
-  expect_error(assert_that(is_exmo_parameter(c(0, 0))),
-    regexp=sprintf(ERR_MARGINRATE_NOT_POS, "*"))
+  expect_error(assert_that(is_ex_mo_parameter(2, c(0, 0))),
+    regexp=sprintf(ERR_NOT_EX_MO_INTENSITIES, "*", 2))
 })
 
 test_that("`is_positive_number` assertion works as intended", {
@@ -83,9 +83,9 @@ test_that("`is_rjump_name` assertion works as intended", {
     regexp=sprintf(ERR_NOT_RJUMP_NAME, "*"))
 })
 
-test_that("`is_rjump_arg_list` assertion works as intended", {
-  expect_true(assert_that(is_rjump_arg_list("rexp", list("rate"=0.5))))
+test_that("`is_rjump_param` assertion works as intended", {
+  expect_true(assert_that(is_rjump_param("rexp", list("rate"=0.5))))
 
-  expect_error(assert_that(is_rjump_arg_list("rexp", list("scale"=2))),
+  expect_error(assert_that(is_rjump_param("rexp", list("scale"=2))),
     regexp=sprintf(ERR_NOT_RJUMP_ARGS, "*", "[.]*"))
 })

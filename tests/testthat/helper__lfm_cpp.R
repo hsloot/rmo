@@ -148,7 +148,7 @@ test__rmo_lfm_cpp_bivariate_rposval_R <- function(n, rate, rate_killing, rate_dr
 test__rmo_lfm_cpp_independence_R <- function(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list) { # nolint
   assertthat::assert_that(assertthat::is.count(n), assertthat::is.count(d),
     is_positive_number(rate_drift),
-    is_rjump_name(rjump_name), is_rjump_arg_list(rjump_name, rjump_arg_list)) ## dummy test
+    is_rjump_name(rjump_name), is_rjump_param(rjump_name, rjump_arg_list)) ## dummy test
 
   out <- matrix(NA, nrow=n, ncol=d)
   for (k in 1:n) {
@@ -166,7 +166,7 @@ test__rmo_lfm_cpp_independence_R <- function(n, d, rate, rate_killing, rate_drif
 test__rmo_lfm_cpp_comonotone_R <- function(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list) { # nolint
   assertthat::assert_that(assertthat::is.count(n), assertthat::is.count(d),
     is_positive_number(rate_killing),
-    is_rjump_name(rjump_name), is_rjump_arg_list(rjump_name, rjump_arg_list)) ## dummy test
+    is_rjump_name(rjump_name), is_rjump_param(rjump_name, rjump_arg_list)) ## dummy test
 
   out <- matrix(NA, nrow=n, ncol=d)
   for (k in 1:n) {
@@ -187,7 +187,7 @@ test__rmo_lfm_cpp_R <- function(n, d, rate, rate_killing, rate_drift, rjump_name
   assert_that(is.count(n), is.count(d), is_nonnegative_number(rate),
     is_nonnegative_number(rate_killing), is_nonnegative_number(rate_drift),
     is_positive_number(rate + rate_killing + rate_drift),
-    is_rjump_name(rjump_name), is_rjump_arg_list(rjump_name, rjump_arg_list))
+    is_rjump_name(rjump_name), is_rjump_param(rjump_name, rjump_arg_list))
 
   out <- matrix(NA, nrow=n, ncol=d)
   for (k in 1:n) {
