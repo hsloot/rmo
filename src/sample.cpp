@@ -192,10 +192,7 @@ NumericMatrix sample_cpp(double rate, double rate_killing, double rate_drift, Fu
   double jump_value;
   double killing_waiting_time;
 
-  double current_value;
-
   double intermediate_waiting_time;
-  double intermediate_value;
 
   Function do_call("do.call");
   rjump_arg_list.push_back(1, "n");
