@@ -1,7 +1,8 @@
-## #### Assertion error messages #####
-##
+# #### Assertion error messages #####
+#
+
 # nolint start
-ERR_NOT_SCALAR_X_NUMBER = "%s is not %s number"
+ERR_NOT_SCALAR_X_NUMBER = "%s is not a %s number"
 ERR_NOT_RJUMP_NAME = "%s is not allowed name for cpp jump distribution"
 ERR_NOT_RJUMP_ARGS = "%s is not valid arglist for cpp jump distribution for %s"
 ERR_NOT_DIMENSION = "%s is not a valid dimension"
@@ -11,18 +12,16 @@ ERR_NOT_EX_MO_INTENSITIES = "%s is not a valid ex. Marshall-Olkin intensity vect
 # nolint end
 
 
-## #### Miscellaneous custom assertions ####
-##
+
+# #### Miscellaneous custom assertions ####
+#
 
 #' Custom assertions for scalar values
 #'
 #' Miscellaneous implementations of assertions for scalar values,
-#' e.g. to assert that a value is a positive or non-negative number.
+#' e.g. to assert that a value is a positive or a non-negative number.
 #'
 #' @inheritParams assertthat::is.scalar
-#'
-#' @return `is_positive_number` returns `TRUE` if `x` is a strictly positive,
-#'   scalar number and `FALSE` otherwise.
 #'
 #' @examples
 #' assertthat::see_if(is_positive_number(-1))       ## FALSE
@@ -51,10 +50,8 @@ on_failure(is_positive_number) <- function(call, env) {
   sprintf(ERR_NOT_SCALAR_X_NUMBER, deparse(call$x), "positive")
 }
 
+
 #' @rdname is_positive_number
-#'
-#' @return `is_nonnegative_number` returns `TRUE` if `x` is a strictly non-negative,
-#'   scalar number and `FALSE` otherwise.
 #'
 #' @examples
 #' assertthat::see_if(is_nonnegative_number(-1))      ## FALSE
@@ -81,17 +78,14 @@ on_failure(is_nonnegative_number) <- function(call, env) {
   sprintf(ERR_NOT_SCALAR_X_NUMBER, deparse(call$x), "non-negative")
 }
 
-## #### Assertions for MO params ####
-##
 
-#' Miscellaneous assertions MO parameters
+
+# #### Assertion for dimension parameters ####
+#
+
+#' Assertions dimension parameters
 #'
 #' @inheritParams assertthat::is.scalar
-#'
-#' @return `TRUE`/`FALSE`
-#'
-#' @details `is_dimension` returns `TRUE` if `x` is a count variable and
-#'   `x>1L`.
 #'
 #' @examples
 #' assertthat::see_if(is_dimension(-1L))  ## FALSE
@@ -104,6 +98,7 @@ on_failure(is_nonnegative_number) <- function(call, env) {
 #' @family assertions
 #'
 #' @importFrom assertthat is.count
+#'
 #' @keywords internal
 #' @noRd
 is_dimension <- function(x) {
@@ -116,6 +111,7 @@ is_dimension <- function(x) {
 on_failure(is_dimension) <- function(call, env) {
   sprintf(ERR_NOT_DIMENSION, deparse(call$x))
 }
+
 
 #' @rdname is_dimension
 #'
@@ -134,7 +130,6 @@ on_failure(is_dimension) <- function(call, env) {
 #'
 #' @family assertions
 #'
-#' @importFrom assertthat is.count
 #' @keywords internal
 #' @noRd
 is_32bit_compliant_dimension <- function(x) {
@@ -148,7 +143,12 @@ on_failure(is_32bit_compliant_dimension) <- function(call, env) {
   sprintf(ERR_NOT_32BIT_COMPLIENT_DIMENSION, deparse(call$x))
 }
 
-#' @rdname is_dimension
+
+
+# #### Assertions for MO params ####
+#
+
+#' Assertion for MO parameter
 #'
 #' @details
 #' `is_mo_parameter` asserts if `d` and `intensities` are a
@@ -162,12 +162,9 @@ on_failure(is_32bit_compliant_dimension) <- function(call, env) {
 #'   \sum_{I \ni i} \lambda_i > 0 \forall i \in \{ 1, \ldots, d\} .
 #' }
 #'
-#' @param d A dimension parameter
-#' @param intensities A numeric vector intended to be the shock rates of
-#'   a Marshall-Olkin distribution.
-#'
 #' @importFrom assertthat assert_that on_failure<-
 #' @include RcppExports.R
+#'
 #' @keywords internal
 #' @noRd
 is_mo_parameter <- function(d, intensities) {
@@ -195,7 +192,8 @@ on_failure(is_mo_parameter) <- function(call, env) {
   sprintf(ERR_NOT_MO_INTENSITIES, deparse(call$intensities), deparse(call$d))
 }
 
-#' @rdname is_dimension
+
+#' Assertion for exMO parameter
 #'
 #' @details
 #' `is_ex_mo_parameter` asserts if `d` and `ex_intensities` are a valid
@@ -203,9 +201,6 @@ on_failure(is_mo_parameter) <- function(call, env) {
 #' - `d` is a valid dimension
 #' - `ex_intensities` is a non-negative, numeric vector of length equal to `d`
 #' - at least one entry of `ex_intensities` is strictly positive
-#'
-#' @param ex_intensity A numeric vector intended to be the shock rates of
-#'   a Marshall-Olkin distribution.
 #'
 #' @importFrom assertthat assert_that
 #' @keywords internal
@@ -224,17 +219,43 @@ on_failure(is_ex_mo_parameter) <- function(call, env) {
 }
 
 
-## #### Assertions for CPP jump distr. params ####
-##
+#' Assertion for the Lévy-fraily MO parameter
+#'
+#' @importFrom assertthat assert_that
+#'
+#' @keywords internal
+#' @noRd
+is_lfm_cpp_parameter <- function(d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list) {
+  assert_that(is_dimension(d))
+  assert_that(is_nonnegative_number(rate), is_nonnegative_number(rate_killing),
+    is_nonnegative_number(rate_drift),
+    is_positive_number(rate + rate_killing + rate_drift),
+    is_rjump_parameter(rjump_name, rjump_arg_list))
+  TRUE
+}
 
-#' Assertion for jump distribution and params
+
+#' Assertion for the multivariate Cuadras-Augé parameter
 #'
-#' @param rjump_name name of sampling function for jump distribution
+#' @importFrom assertthat assert_that
+#' @keywords internal
+#' @noRd
+is_cuadras_auge_parameter <- function(d, alpha, beta) {
+  assert_that(is_dimension(d), is_nonnegative_number(alpha),
+    is_nonnegative_number(beta), is_positive_number(alpha + beta))
+  TRUE
+}
+
+
+
+# #### Assertions for CPP jump distribution params ####
+#
+
+#' Assertion for jump distribution name
 #'
-#' @returns `TRUE`/`FALSE`
-#'
-#' @details `is_rjump_name` returns `TRUE` if `rjump_name` is a `string`
-#'   and is contained in list of allowed distributions and `FALSE` otherwise.
+#' @details
+#' As of now, we only allow the exponential distribution
+#'   or fixed jump sizes.
 #'
 #' @examples
 #' assertthat::see_if(is_rjump_name("rnorm")) ## FALSE
@@ -243,6 +264,7 @@ on_failure(is_ex_mo_parameter) <- function(call, env) {
 #' @family assertions
 #'
 #' @importFrom assertthat assert_that is.string
+#'
 #' @keywords internal
 #' @noRd
 is_rjump_name <- function(rjump_name) {
@@ -260,14 +282,11 @@ on_failure(is_rjump_name) <- function(call, env) {
 }
 
 
-#' @rdname is_rjump_name
-#'
-#' @param rjump_arg_list argument list for `rjump_name`
+#' Assertion for jump distribution parameter
 #'
 #' @details
-#' `is_rjump_parameter` returns `TRUE` if a call to `do.call` with
-#'   `rjump_name` and `args=c("n" = 1, rjump_arg_list)` is successful and
-#'   `FALSE` otherwise.
+#' Performs a test run with the given name and parameter list and
+#'  throws an error if this is unsuccessful. Warning: Modifies RNG state.
 #'
 #' @examples
 #' assertthat::see_if(is_rjump_parameter("rexp", list()))            ## FALSE
@@ -294,43 +313,4 @@ is_rjump_parameter <- function(rjump_name, rjump_arg_list) {
 #' @noRd
 on_failure(is_rjump_parameter) <- function(call, env) {
   sprintf(ERR_NOT_RJUMP_ARGS, deparse(call$rjump_arg_list), deparse(call$rjump_name))
-}
-
-#' @importFrom assertthat assert_that
-#' @keywords internal
-#' @noRd
-is_lfm_cpp_parameter <- function(d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list) {
-  assert_that(is_dimension(d))
-  assert_that(is_nonnegative_number(rate), is_nonnegative_number(rate_killing),
-    is_nonnegative_number(rate_drift),
-    is_positive_number(rate + rate_killing + rate_drift),
-    is_rjump_parameter(rjump_name, rjump_arg_list))
-  TRUE
-}
-
-
-#' @rdname is_dimension
-#'
-#' @details
-#' `is_cuadras_auge_parameter` asserts if `d` `alpha`, and `beta` are a
-#' valid parameterisation for a multivariate Caudras-Augé distribution.
-#' - `d` must be a dimension
-#' - `alpha` must be a non-negeative number
-#' - `beta` must be a non-negeative number
-#' - `alpha + beta` must be a negeative number
-#'
-#' @param d A dimension parameter
-#' @param alpha A non-negative number
-#' @param beta A non-negative number
-#'
-#' @importFrom assertthat assert_that on_failure<-
-#' @keywords internal
-#' @noRd
-#' @importFrom assertthat assert_that
-#' @keywords internal
-#' @noRd
-is_cuadras_auge_parameter <- function(d, alpha, beta) {
-  assert_that(is_dimension(d), is_nonnegative_number(alpha),
-    is_nonnegative_number(beta), is_positive_number(alpha + beta))
-  TRUE
 }
