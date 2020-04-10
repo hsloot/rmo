@@ -13,9 +13,6 @@ ERR_X_NOT_Y_FOR_Z <- paste(ERR_X_NOT_Y, "for %3$s")
 
 #' Custom assertions for scalar values
 #'
-#' Miscellaneous implementations of assertions for scalar values,
-#' e.g. to assert that a value is a positive or a non-negative number.
-#'
 #' @inheritParams assertthat::is.scalar
 #'
 #' @examples
@@ -35,7 +32,7 @@ ERR_X_NOT_Y_FOR_Z <- paste(ERR_X_NOT_Y, "for %3$s")
 #' @keywords internal
 #' @noRd
 is_positive_number <- function(x) {
-  is.number(x) &&  x>0
+  is.number(x) &&  (x>0)
 }
 
 #' @importFrom assertthat on_failure<-
@@ -81,6 +78,8 @@ on_failure(is_nonnegative_number) <- function(call, env) {
 #' assertthat:see_if(is_nonnegative_vector(c(1, 0)))        ## TRUE
 #' assertthat:see_if(is_nonnegative_vector(c(1, -1)))       ## FALSE
 #'
+#' @family assertions
+#'
 #' @keywords internal
 #' @noRd
 is_nonnegative_vector <- function(x) {
@@ -103,6 +102,8 @@ on_failure(is_nonnegative_vector) <- function(call, env) {
 #' assertthat:see_if(is_nonzero_vector(0))              ## FALSE
 #' assertthat:see_if(is_nonzero_vector(c(0, 0)))        ## TRUE
 #'
+#' @family assertions
+#'
 #' @keywords internal
 #' @noRd
 is_nonzero_vector <- function(x) {
@@ -120,8 +121,10 @@ on_failure(is_nonzero_vector) <- function(call, env) {
 #' Assert if a vector has a certain length
 #'
 #' @examples
-#' assertthat::see_if(has_length(rep(1, 5), 5))     ## TRUE
-#' assertthat::seeif(has_length(c(1, 2, 3), 5))     ## FALSE
+#' assertthat::see_if(has_length(rep(1, 5), 5))      ## TRUE
+#' assertthat::see_if(has_length(c(1, 2, 3), 5))     ## FALSE
+#'
+#' @family assertions
 #'
 #' @keywords internal
 #' @noRd
@@ -140,7 +143,7 @@ on_failure(has_length) <- function(call, env) {
 
 
 
-# #### Assertion for dimension parameters ####
+# #### Assertions for dimension parameters ####
 #
 
 #' Assertions dimension parameters
@@ -178,15 +181,15 @@ on_failure(is_dimension) <- function(call, env) {
 #' @details Since `R` can only represent 32bit `integers` properly
 #' (higher integers are internally represented as `double`), we get
 #' problems passing `intensities` vectors to `Rcpp` for classical
-#' Marshall-Olkin models in \eqn{d>31}.
+#' Marshall-Olkin models for \eqn{d>31}.
 #'
 #' @examples
-#' assertthat::see_if(is_dimension(-1L))  ## FALSE
-#' assertthat::see_if(is_dimension("2"))  ## FALSE
-#' assertthat::see_if(is_dimension(2L))   ## TRUE
-#' assertthat::see_if(is_dimension(15))   ## TRUE
-#' assertthat::see_if(is_dimension(31L))  ## TRUE
-#' assertthat::see_if(is_dimension(32L))  ## FALSE
+#' assertthat::see_if(is_32bit_compliant_dimension(-1L))  ## FALSE
+#' assertthat::see_if(is_32bit_compliant_dimension("2"))  ## FALSE
+#' assertthat::see_if(is_32bit_compliant_dimension(2L))   ## TRUE
+#' assertthat::see_if(is_32bit_compliant_dimension(15))   ## TRUE
+#' assertthat::see_if(is_32bit_compliant_dimension(31L))  ## TRUE
+#' assertthat::see_if(is_32bit_compliant_dimension(32L))  ## FALSE
 #'
 #' @family assertions
 #'
@@ -212,7 +215,7 @@ on_failure(is_32bit_compliant_dimension) <- function(call, env) {
 #'
 #' @details
 #' `is_mo_parameter` asserts if `d` and `intensities` are a
-#' valid Marshall-Olkin parameterisation.
+#' valid Marshall-Olkin parametrisation.
 #' - `d` must be a 32bit compliant dimension
 #' - `intensities` must be a non-negeative, numeric vector with
 #' length equal to \eqn{2^d-1}
@@ -224,6 +227,8 @@ on_failure(is_32bit_compliant_dimension) <- function(call, env) {
 #'
 #' @importFrom assertthat assert_that on_failure<-
 #' @include RcppExports.R
+#'
+#' @family assertions
 #'
 #' @keywords internal
 #' @noRd
@@ -346,7 +351,7 @@ on_failure(is_rjump_name) <- function(call, env) {
 #'
 #' @details
 #' Performs a test run with the given name and parameter list and
-#'  throws an error if this is unsuccessful. Warning: Modifies RNG state.
+#'  throws an error if this is unsuccessful. 
 #'
 #' @examples
 #' assertthat::see_if(is_rjump_parameter("rexp", list()))            ## FALSE
