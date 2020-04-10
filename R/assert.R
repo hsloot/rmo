@@ -1,14 +1,9 @@
 # #### Assertion error messages #####
 #
 
-# nolint start
-ERR_NOT_SCALAR_X_NUMBER = "%s is not a %s number"
-ERR_NOT_RJUMP_NAME = "%s is not allowed name for cpp jump distribution"
-ERR_NOT_RJUMP_ARGS = "%s is not valid arglist for cpp jump distribution for %s"
-ERR_NOT_DIMENSION = "%s is not a valid dimension"
-ERR_NOT_32BIT_COMPLIENT_DIMENSION = "%s is not a valid 32bit dimension"
-ERR_NOT_MO_INTENSITIES = "%s is not a valid Marshall-Olkin intensity vector for dimension %s"
-ERR_NOT_EX_MO_INTENSITIES = "%s is not a valid ex. Marshall-Olkin intensity vector for dimension %s"
+# nolint start 
+ERR_X_NOT_Y <- "%1$s not %2$s"
+ERR_X_NOT_Y_FOR_Z <- paste(ERR_X_NOT_Y, "for %3$s")
 # nolint end
 
 
@@ -47,7 +42,7 @@ is_positive_number <- function(x) {
 #' @keywords internal
 #' @noRd
 on_failure(is_positive_number) <- function(call, env) {
-  sprintf(ERR_NOT_SCALAR_X_NUMBER, deparse(call$x), "positive")
+  sprintf(ERR_X_NOT_Y, deparse(call$x), "positive number")
 }
 
 
@@ -75,7 +70,7 @@ is_nonnegative_number <- function(x) {
 #' @keywords internal
 #' @noRd
 on_failure(is_nonnegative_number) <- function(call, env) {
-  sprintf(ERR_NOT_SCALAR_X_NUMBER, deparse(call$x), "non-negative")
+  sprintf(ERR_X_NOT_Y, deparse(call$x), "non-negative number")
 }
 
 
@@ -109,7 +104,7 @@ is_dimension <- function(x) {
 #' @keywords internal
 #' @noRd
 on_failure(is_dimension) <- function(call, env) {
-  sprintf(ERR_NOT_DIMENSION, deparse(call$x))
+  sprintf(ERR_X_NOT_Y, deparse(call$x), "dimension parameter")
 }
 
 
@@ -140,7 +135,7 @@ is_32bit_compliant_dimension <- function(x) {
 #' @keywords internal
 #' @noRd
 on_failure(is_32bit_compliant_dimension) <- function(call, env) {
-  sprintf(ERR_NOT_32BIT_COMPLIENT_DIMENSION, deparse(call$x))
+  sprintf(ERR_X_NOT_Y, deparse(call$x), "32bit compliant dimension parameter")
 }
 
 
@@ -189,7 +184,8 @@ is_mo_parameter <- function(d, intensities) {
 #' @keywords internal
 #' @noRd
 on_failure(is_mo_parameter) <- function(call, env) {
-  sprintf(ERR_NOT_MO_INTENSITIES, deparse(call$intensities), deparse(call$d))
+  sprintf(ERR_X_NOT_Y_FOR_Z, deparse(call$intensities),
+          "MO parameter", paste("dimension", deparse(call$d)))
 }
 
 
@@ -215,7 +211,8 @@ is_ex_mo_parameter <- function(d, ex_intensities) {
 #' @keywords internal
 #' @noRd
 on_failure(is_ex_mo_parameter) <- function(call, env) {
-  sprintf(ERR_NOT_EX_MO_INTENSITIES, deparse(call$ex_intensities), deparse(call$d))
+  sprintf(ERR_X_NOT_Y_FOR_Z, deparse(call$ex_intensities),
+          "exMO parameter", paste("dimension", deparse(call$d)))
 }
 
 
@@ -278,7 +275,8 @@ is_rjump_name <- function(rjump_name) {
 #' @keywords internal
 #' @noRd
 on_failure(is_rjump_name) <- function(call, env) {
-  sprintf(ERR_NOT_RJUMP_NAME, deparse(call$rjump_name))
+  sprintf(ERR_X_NOT_Y, deparse(call$rjump_name),
+    "allowed cpp jump distribution")
 }
 
 
@@ -312,5 +310,6 @@ is_rjump_parameter <- function(rjump_name, rjump_arg_list) {
 #' @keywords internal
 #' @noRd
 on_failure(is_rjump_parameter) <- function(call, env) {
-  sprintf(ERR_NOT_RJUMP_ARGS, deparse(call$rjump_arg_list), deparse(call$rjump_name))
+  sprintf(ERR_X_NOT_Y_FOR_Z, deparse(call$rjump_arg_list),
+    "argument list", deparse(call$rjump_name))
 }
