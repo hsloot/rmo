@@ -1,36 +1,5 @@
 context("Custom assertions") ## TODO: Implement more tests for higher dimensions
 
-test_that("`is_mo_parameter` assertion works as intended", {
-  d <- 2L
-  expect_true(assert_that(is_mo_parameter(d, intensities=c(0, 0, 1))))
-  expect_true(assert_that(is_mo_parameter(d, intensities=c(1, 1, 0))))
-  expect_true(assert_that(is_mo_parameter(d, intensities=c(1, 1, 1))))
-
-  expect_error(assert_that(is_mo_parameter(d, intensities=c(0, 0, 0))),
-    regexp=sprintf(ERR_X_NOT_Y_FOR_Z, "*", "MO parameter", "dimension d"))
-  expect_error(assert_that(is_mo_parameter(d, intensities=c(-1, 0, 0))),
-    regexp=sprintf(ERR_X_NOT_Y_FOR_Z, "*", "MO parameter", "dimension d"))
-  expect_error(assert_that(is_mo_parameter(d, intensities=c(1, 1))),
-    regexp=sprintf(ERR_X_NOT_Y_FOR_Z, "*", "MO parameter", "dimension d"))
-  expect_error(assert_that(is_mo_parameter(d, intensities=c("1", "1", "1"))),
-    regexp=sprintf(ERR_X_NOT_Y_FOR_Z, "*", "MO parameter", "dimension d"))
-})
-
-test_that("`is_ex_mo_parameter` assertion works as intended", {
-  d <- 2L
-  expect_true(assert_that(is_ex_mo_parameter(d, ex_intensities=c(0, 1))))
-  expect_true(assert_that(is_ex_mo_parameter(d, ex_intensities=c(1, 0))))
-  expect_true(assert_that(is_ex_mo_parameter(d, ex_intensities=c(1, 1))))
-
-  expect_error(assert_that(is_ex_mo_parameter(d, ex_intensities=c(0, 0))),
-    regexp=sprintf(ERR_X_NOT_Y_FOR_Z, "*", "exMO parameter", "dimension d"))
-  expect_error(assert_that(is_ex_mo_parameter(d, ex_intensities=c(-1, 0))),
-    regexp=sprintf(ERR_X_NOT_Y_FOR_Z, "*", "exMO parameter", "dimension d"))
-  expect_error(assert_that(is_ex_mo_parameter(d, ex_intensities=c(1, 1, 1))),
-    regexp=sprintf(ERR_X_NOT_Y_FOR_Z, "*", "exMO parameter", "dimension d"))
-  expect_error(assert_that(is_ex_mo_parameter(d, ex_intensities=c("1", "1"))),
-    regexp=sprintf(ERR_X_NOT_Y_FOR_Z, "*", "exMO parameter", "dimension d"))
-})
 
 test_that("`is_positive_number` assertion works as intended", {
   expect_true(assert_that(is_positive_number(0.5)))
@@ -90,6 +59,46 @@ test_that("`is_32bit_compliant_dimension` assertion works as intended", {
     regexp=sprintf(ERR_X_NOT_Y, "*", "32bit compliant dimension parameter"))
 })
 
+
+test_that("`is_mo_parameter` assertion works as intended", {
+  d <- 2L
+  expect_true(assert_that(is_mo_parameter(d, intensities=c(0, 0, 1))))
+  expect_true(assert_that(is_mo_parameter(d, intensities=c(1, 1, 0))))
+  expect_true(assert_that(is_mo_parameter(d, intensities=c(1, 1, 1))))
+
+  expect_error(assert_that(is_mo_parameter(d, intensities=c(0, 0, 0))),
+    regexp=sprintf(ERR_X_NOT_Y_FOR_Z, "*", "MO parameter", "dimension d"))
+  expect_error(assert_that(is_mo_parameter(d, intensities=c(-1, 0, 0))),
+    regexp=sprintf(ERR_X_NOT_Y_FOR_Z, "*", "MO parameter", "dimension d"))
+  expect_error(assert_that(is_mo_parameter(d, intensities=c(1, 1))),
+    regexp=sprintf(ERR_X_NOT_Y_FOR_Z, "*", "MO parameter", "dimension d"))
+  expect_error(assert_that(is_mo_parameter(d, intensities=c("1", "1", "1"))),
+    regexp=sprintf(ERR_X_NOT_Y_FOR_Z, "*", "MO parameter", "dimension d"))
+})
+
+test_that("`is_ex_mo_parameter` assertion works as intended", {
+  d <- 2L
+  expect_true(assert_that(is_ex_mo_parameter(d, ex_intensities=c(0, 1))))
+  expect_true(assert_that(is_ex_mo_parameter(d, ex_intensities=c(1, 0))))
+  expect_true(assert_that(is_ex_mo_parameter(d, ex_intensities=c(1, 1))))
+
+  expect_error(assert_that(is_ex_mo_parameter(d, ex_intensities=c(0, 0))),
+    regexp=sprintf(ERR_X_NOT_Y_FOR_Z, "*", "exMO parameter", "dimension d"))
+  expect_error(assert_that(is_ex_mo_parameter(d, ex_intensities=c(-1, 0))),
+    regexp=sprintf(ERR_X_NOT_Y_FOR_Z, "*", "exMO parameter", "dimension d"))
+  expect_error(assert_that(is_ex_mo_parameter(d, ex_intensities=c(1, 1, 1))),
+    regexp=sprintf(ERR_X_NOT_Y_FOR_Z, "*", "exMO parameter", "dimension d"))
+  expect_error(assert_that(is_ex_mo_parameter(d, ex_intensities=c("1", "1"))),
+    regexp=sprintf(ERR_X_NOT_Y_FOR_Z, "*", "exMO parameter", "dimension d"))
+})
+
+test_that("`is_cuadras_auge_parameter` assertion works as intended", {
+  expect_true(assert_that(is_cuadras_auge_parameter(2L, 0, 0.5)))
+  expect_true(assert_that(is_cuadras_auge_parameter(6L, 0.5, 0)))
+  expect_true(assert_that(is_cuadras_auge_parameter(3L, 1.5, 0.5)))
+})
+
+
 test_that("`is_rjump_name` assertion works as intended", {
   expect_true(assert_that(is_rjump_name("rexp")))
 
@@ -108,11 +117,4 @@ test_that("`is_rjump_parameter` assertion works as intended", {
   expect_error(assert_that(is_rjump_parameter(
     rjump_name="rexp", rjump_arg_list=list("rate"=-1))),
     regexp=sprintf(ERR_X_NOT_Y_FOR_Z, "*", "argument list", "*"))
-})
-
-
-test_that("`is_cuadras_auge_parameter` assertion works as intended", {
-  expect_true(assert_that(is_cuadras_auge_parameter(2L, 0, 0.5)))
-  expect_true(assert_that(is_cuadras_auge_parameter(6L, 0.5, 0)))
-  expect_true(assert_that(is_cuadras_auge_parameter(3L, 1.5, 0.5)))
 })
