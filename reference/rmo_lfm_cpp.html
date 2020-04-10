@@ -10,23 +10,27 @@
 
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -40,7 +44,6 @@
 distribution corresponding to a LFM with a compound Poisson subordinator with
 parameters rate, rate_killing, rate_drift, rjump_name, and
 rjump_arg_list." />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -58,7 +61,7 @@ rjump_arg_list." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -72,7 +75,7 @@ rjump_arg_list." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rmo</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.9004</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.9005</span>
       </span>
     </div>
 
@@ -119,7 +122,12 @@ rjump_arg_list." />
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/hsloot/rmo/">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -134,7 +142,7 @@ rjump_arg_list." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Sample with LFM and CPP subordinator</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/hsloot/rmo/blob/master/R/sample.R'><code>R/sample.R</code></a></small>
     <div class="hidden name"><code>rmo_lfm_cpp.Rd</code></div>
     </div>
 
@@ -232,51 +240,44 @@ M. Scherer, "Simulating Copulas", World Scientific (2017), pp. 140 psqq.</p>
 #&gt;  [7,] 0.2061563 0.2061563
 #&gt;  [8,] 2.4362132 2.7844158
 #&gt;  [9,] 0.1776062 0.1776062
-#&gt; [10,] 0.2341490 0.1096488</div><div class='input'><span class='fu'>rmo_lfm_cpp</span>(<span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fl'>0.5</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='st'>"rexp"</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='st'>"rate"</span><span class='kw'>=</span><span class='fl'>2</span>))</div><div class='output co'>#&gt;             [,1]       [,2]
-#&gt;  [1,]  1.6269882  4.6085298
-#&gt;  [2,]  6.1571251  6.4251133
-#&gt;  [3,]  8.0175440  2.3281082
-#&gt;  [4,] 10.4896824 13.3182855
-#&gt;  [5,] 17.2426682 18.9168472
-#&gt;  [6,]  3.3909483  1.2996616
-#&gt;  [7,]  4.1571849 11.1076425
-#&gt;  [8,]  1.3897280  1.3897280
-#&gt;  [9,]  0.4064594  1.2095294
-#&gt; [10,]  1.4631810  0.9971864</div><div class='input'>
+#&gt; [10,] 0.2341490 0.1096488</div><div class='input'><span class='fu'>rmo_lfm_cpp</span>(<span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fl'>0.5</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='st'>"rexp"</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='st'>"rate"</span><span class='kw'>=</span><span class='fl'>2</span>))</div><div class='output co'>#&gt;              [,1]        [,2]
+#&gt;  [1,] 11.91809943  9.59231542
+#&gt;  [2,]  0.48587751  0.48587751
+#&gt;  [3,]  2.49043851  2.31018646
+#&gt;  [4,]  1.34824690  1.34824690
+#&gt;  [5,] 11.28755170  4.01577216
+#&gt;  [6,]  2.21402669  1.61283188
+#&gt;  [7,]  0.01210665  5.14202710
+#&gt;  [8,]  9.28832798  0.01358033
+#&gt;  [9,] 20.81885859 38.53618972
+#&gt; [10,]  8.06176721  5.16586525</div><div class='input'>
 <span class='fu'>rmo_lfm_cpp</span>(<span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>1</span>, <span class='st'>"rposval"</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='st'>"value"</span><span class='kw'>=</span><span class='fl'>1</span>))  <span class='co'>## independence</span></div><div class='output co'>#&gt;             [,1]       [,2]
-#&gt;  [1,] 1.29953920 6.92432903
-#&gt;  [2,] 1.36501132 0.52786872
-#&gt;  [3,] 0.58895533 1.40646782
-#&gt;  [4,] 0.06081897 1.25410909
-#&gt;  [5,] 0.35004695 2.58293262
-#&gt;  [6,] 1.96600090 1.06611532
-#&gt;  [7,] 0.15579552 0.38183566
-#&gt;  [8,] 0.94246480 0.77757018
-#&gt;  [9,] 0.95607280 0.63237537
-#&gt; [10,] 0.09183088 0.02670447</div><div class='input'><span class='fu'>rmo_lfm_cpp</span>(<span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>0</span>, <span class='st'>"rposval"</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='st'>"value"</span><span class='kw'>=</span><span class='fl'>1</span>))  <span class='co'>## comonotone</span></div><div class='output co'>#&gt;             [,1]       [,2]
-#&gt;  [1,] 2.13003743 2.13003743
-#&gt;  [2,] 0.38143820 0.38143820
-#&gt;  [3,] 2.66359687 2.66359687
-#&gt;  [4,] 1.27157350 1.27157350
-#&gt;  [5,] 0.07748686 0.07748686
-#&gt;  [6,] 0.70599219 0.70599219
-#&gt;  [7,] 0.30400037 0.30400037
-#&gt;  [8,] 0.69140711 0.69140711
-#&gt;  [9,] 1.01687513 1.01687513
-#&gt; [10,] 1.25896015 1.25896015</div><div class='input'>
+#&gt;  [1,] 0.77757018 0.95607280
+#&gt;  [2,] 0.63237537 0.09183088
+#&gt;  [3,] 0.02670447 2.35334572
+#&gt;  [4,] 0.89676529 2.13003743
+#&gt;  [5,] 0.14312169 0.35597612
+#&gt;  [6,] 0.38143820 1.18679047
+#&gt;  [7,] 2.64709041 2.66359687
+#&gt;  [8,] 0.54960317 1.59825883
+#&gt;  [9,] 1.27157350 0.44061157
+#&gt; [10,] 1.04602658 0.07748686</div><div class='input'><span class='fu'>rmo_lfm_cpp</span>(<span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>0</span>, <span class='st'>"rposval"</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='st'>"value"</span><span class='kw'>=</span><span class='fl'>1</span>))  <span class='co'>## comonotone</span></div><div class='output co'>#&gt;             [,1]       [,2]
+#&gt;  [1,] 0.70599219 0.70599219
+#&gt;  [2,] 0.30400037 0.30400037
+#&gt;  [3,] 0.69140711 0.69140711
+#&gt;  [4,] 1.01687513 1.01687513
+#&gt;  [5,] 1.25896015 1.25896015
+#&gt;  [6,] 0.06768541 0.06768541
+#&gt;  [7,] 0.75107487 0.75107487
+#&gt;  [8,] 0.38081033 0.38081033
+#&gt;  [9,] 4.21740975 4.21740975
+#&gt; [10,] 0.56941945 0.56941945</div><div class='input'>
 </div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#references">References</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -287,7 +288,7 @@ M. Scherer, "Simulating Copulas", World Scientific (2017), pp. 140 psqq.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

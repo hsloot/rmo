@@ -1,5 +1,5 @@
 pandoc: '2.2'
-pkgdown: 1.4.1
+pkgdown: 1.5.1
 pkgdown_sha: ~
 articles:
   Cuadras-Auge-distributions: Cuadras-Auge-distributions.html
@@ -8,4 +8,5 @@ articles:
   The-Levy-frailty-model: The-Levy-frailty-model.html
   The-Marshall-Olkin-distribution: The-Marshall-Olkin-distribution.html
   The-binary-representation: The-binary-representation.html
+last_built: 2020-04-10T18:36Z
 
