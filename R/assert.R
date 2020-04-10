@@ -153,7 +153,7 @@ on_failure(is_32bit_complient_dimension) <- function(call, env) {
 #' @details
 #' `is_mo_parameter` asserts if `d` and `intensities` are a
 #' valid Marshall-Olkin parameterisation.
-#' - `d` must be a 32bit complient dimension
+#' - `d` must be a 32bit compliant dimension
 #' - `intensities` must be a non-negeative, numeric vector with
 #' length equal to \eqn{2^d-1}
 #' - The implied marginal rates from `intensities` must be all
@@ -305,5 +305,32 @@ is_lfm_cpp_param <- function(d, rate, rate_killing, rate_drift, rjump_name, rjum
     is_nonnegative_number(rate_drift),
     is_positive_number(rate + rate_killing + rate_drift),
     is_rjump_param(rjump_name, rjump_arg_list))
+  TRUE
+}
+
+
+#' @rdname is_dimension
+#'
+#' @details
+#' `is_cuadras_auge_param` asserts if `d` `alpha`, and `beta` are a
+#' valid parameterisation for a multivariate Caudras-Augé distribution.
+#' - `d` must be a dimension
+#' - `alpha` must be a non-negeative number
+#' - `beta` must be a non-negeative number
+#' - `alpha + beta` must be a negeative number
+#'
+#' @param d A dimension parameter
+#' @param alpha A non-negative number
+#' @param beta A non-negative number
+#'
+#' @importFrom assertthat assert_that on_failure<-
+#' @keywords internal
+#' @noRd
+#' @importFrom assertthat assert_that
+#' @keywords internal
+#' @noRd
+is_cuadras_auge_param <- function(d, alpha, beta) {
+  assert_that(is_dimension(d), is_nonnegative_number(alpha),
+    is_nonnegative_number(beta), is_positive_number(alpha + beta))
   TRUE
 }
