@@ -228,7 +228,8 @@ on_failure(is_32bit_compliant_dimension) <- function(call, env) {
 #' @keywords internal
 #' @noRd
 is_mo_parameter <- function(d, intensities) {
-  assert_that(is_32bit_compliant_dimension(d), is_nonnegative_vector(intensities), intensities %has_length% (2^d-1))
+  assert_that(is_32bit_compliant_dimension(d),
+    is_nonnegative_vector(intensities), intensities %has_length% (2^d-1))
 
   marginal_intensities <- numeric(d)
   for (i in 1:d) {
@@ -362,8 +363,10 @@ is_rjump_parameter <- function(rjump_name, rjump_arg_list) {
   if (!get(rjump_name) %has_args% names(rjump_arg_list)) {
     return(FALSE)
   }
+  # nolint start
   seed <- .Random.seed
   on.exit(.Random.seed <<- seed) # `.Random.seed` must be modified in global env
+  # nolint end
   suppressWarnings(x <- try(do.call(rjump_name, args=c("n"=1, rjump_arg_list)), silent=TRUE))
   !is.error(x) && !is.na(x) && is_nonnegative_number(x)
 }

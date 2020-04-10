@@ -154,8 +154,7 @@ rmo_ex_arnold <- function(n, d, ex_intensities) {
 #' @export
 #' @name rmo_esm_cuadras_auge
 rmo_esm_cuadras_auge <- function(n, d, alpha, beta) {
-  assert_that(is.count(n), is_dimension(d), is_nonnegative_number(alpha),
-    is_nonnegative_number(beta), alpha + beta > 0)
+  assert_that(is.count(n), is_cuadras_auge_parameter(d, alpha, beta))
 
   Rcpp__rmo_esm_cuadras_auge(n, d, alpha, beta)
 }
