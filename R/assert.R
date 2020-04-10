@@ -301,8 +301,9 @@ is_rjump_parameter <- function(rjump_name, rjump_arg_list) {
   if (!get(rjump_name) %has_args% names(rjump_arg_list)) {
     return(FALSE)
   }
-
-  suppressWarnings(x <- try(do.call(rjump_name, args=c("n"=1, rjump_arg_list)), silent=TRUE))
+  seed <- .Random.seed
+  on.exit(.Random.seed <<- seed) # `.Random.seed` must be modified in global env
+  suppressWarnings(x <- try(do.call(rjump_name, args=c("n"=1, rjump_arg_list)), silent=TRUE)) 
   !is.error(x) && !is.na(x) && is_nonnegative_number(x)
 }
 
