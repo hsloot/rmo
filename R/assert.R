@@ -1,27 +1,19 @@
-## #### Assertion error messages #####
-##
+# #### Assertion error messages #####
+#
+
 # nolint start
-ERR_MARGINRATE_NOT_POS = "%s does not have positive marginal rates"
-ERR_NOT_SCALAR_X_NUMBER = "%s is not %s number"
-ERR_NOT_RJUMP_NAME = "%s is not allowed name for cpp jump distribution"
-ERR_NOT_RJUMP_ARGS = "%s is not valid arglist for cpp jump distribution for %s"
-ERR_NOT_DIMENSION = "%s is not a valid dimension"
-ERR_NOT_32BIT_COMPLIENT_DIMENSION = "%s is not a valid 32bit dimension"
+ERR_X_NOT_Y <- "%1$s not %2$s"
+ERR_X_NOT_Y_FOR_Z <- paste(ERR_X_NOT_Y, "for %3$s")
 # nolint end
 
 
-## #### Miscellaneous custom assertions ####
-##
+
+# #### Miscellaneous custom assertions ####
+#
 
 #' Custom assertions for scalar values
 #'
-#' Miscellaneous implementations of assertions for scalar values,
-#' e.g. to assert that a value is a positive or non-negative number.
-#'
 #' @inheritParams assertthat::is.scalar
-#'
-#' @return `is_positive_number` returns `TRUE` if `x` is a strictly positive,
-#'   scalar number and `FALSE` otherwise.
 #'
 #' @examples
 #' assertthat::see_if(is_positive_number(-1))       ## FALSE
@@ -40,20 +32,18 @@ ERR_NOT_32BIT_COMPLIENT_DIMENSION = "%s is not a valid 32bit dimension"
 #' @keywords internal
 #' @noRd
 is_positive_number <- function(x) {
-  is.number(x) &&  x>0
+  is.number(x) &&  (x>0)
 }
 
 #' @importFrom assertthat on_failure<-
 #' @keywords internal
 #' @noRd
 on_failure(is_positive_number) <- function(call, env) {
-  sprintf(ERR_NOT_SCALAR_X_NUMBER, deparse(call$x), "positive")
+  sprintf(ERR_X_NOT_Y, deparse(call$x), "positive number")
 }
 
+
 #' @rdname is_positive_number
-#'
-#' @return `is_nonnegative_number` returns `TRUE` if `x` is a strictly non-negative,
-#'   scalar number and `FALSE` otherwise.
 #'
 #' @examples
 #' assertthat::see_if(is_nonnegative_number(-1))      ## FALSE
@@ -77,16 +67,88 @@ is_nonnegative_number <- function(x) {
 #' @keywords internal
 #' @noRd
 on_failure(is_nonnegative_number) <- function(call, env) {
-  sprintf(ERR_NOT_SCALAR_X_NUMBER, deparse(call$x), "non-negative")
+  sprintf(ERR_X_NOT_Y, deparse(call$x), "non-negative number")
 }
 
 
-#' Miscellaneous assertions for dimension parameters
+#' Custom assertions for numeric vectors
+#'
+#' @examples
+#' assertthat:see_if(is_nonnegative_vector(1))              ## TRUE
+#' assertthat:see_if(is_nonnegative_vector(c(1, 0)))        ## TRUE
+#' assertthat:see_if(is_nonnegative_vector(c(1, -1)))       ## FALSE
+#'
+#' @family assertions
+#'
+#' @keywords internal
+#' @noRd
+is_nonnegative_vector <- function(x) {
+  is.numeric(x) && all(x >= 0)
+}
+
+#' @importFrom assertthat on_failure<-
+#' @keywords internal
+#' @noRd
+on_failure(is_nonnegative_vector) <- function(call, env) {
+  sprintf(ERR_X_NOT_Y, deparse(call$x), "non-negative vector")
+}
+
+#' @rdname is_nonnegative_vector
+#'
+#' @examples
+#' assertthat:see_if(is_nonzero_vector(1))              ## TRUE
+#' assertthat:see_if(is_nonzero_vector(c(1, 0)))        ## TRUE
+#' assertthat:see_if(is_nonzero_vector(c(1, -1)))       ## TRUE
+#' assertthat:see_if(is_nonzero_vector(0))              ## FALSE
+#' assertthat:see_if(is_nonzero_vector(c(0, 0)))        ## TRUE
+#'
+#' @family assertions
+#'
+#' @keywords internal
+#' @noRd
+is_nonzero_vector <- function(x) {
+  is.numeric(x) && any(x != 0)
+}
+
+#' @importFrom assertthat on_failure<-
+#' @keywords internal
+#' @noRd
+on_failure(is_nonzero_vector) <- function(call, env) {
+  sprintf(ERR_X_NOT_Y, deparse(call$x), "non-zero vector")
+}
+
+
+#' Assert if a vector has a certain length
+#'
+#' @examples
+#' assertthat::see_if(has_length(rep(1, 5), 5))      ## TRUE
+#' assertthat::see_if(has_length(c(1, 2, 3), 5))     ## FALSE
+#'
+#' @family assertions
+#'
+#' @keywords internal
+#' @noRd
+has_length <- function(x, n) {
+  is.vector(x) && (length(x) == n)
+}
+
+#' @importFrom assertthat on_failure<-
+#' @keywords internal
+#' @noRd
+on_failure(has_length) <- function(call, env) {
+  sprintf(ERR_X_NOT_Y, deparse(call$x), paste("of length", deparse(call$n)))
+}
+
+`%has_length%` <- has_length
+
+
+
+# #### Assertions for dimension parameters ####
+#
+
+#' Assertions dimension parameters
 #'
 #' @inheritParams assertthat::is.scalar
-#'
-#' @return `is_dimension` returns `TRUE` if `x` is a count variable and
-#'   `x>1L`.
 #'
 #' @examples
 #' assertthat::see_if(is_dimension(-1L))  ## FALSE
@@ -99,6 +161,7 @@ on_failure(is_nonnegative_number) <- function(call, env) {
 #' @family assertions
 #'
 #' @importFrom assertthat is.count
+#'
 #' @keywords internal
 #' @noRd
 is_dimension <- function(x) {
@@ -109,73 +172,79 @@ is_dimension <- function(x) {
 #' @keywords internal
 #' @noRd
 on_failure(is_dimension) <- function(call, env) {
-  sprintf(ERR_NOT_DIMENSION, deparse(call$x))
+  sprintf(ERR_X_NOT_Y, deparse(call$x), "dimension parameter")
 }
+
 
 #' @rdname is_dimension
 #'
-#' @return `is_32bit_complient_dimension` returns `TRUE` if `x` is a
-#' count variable, `x>1L`, and `x<32L`.
+#' @details Since `R` can only represent 32bit `integers` properly
+#' (higher integers are internally represented as `double`), we get
+#' problems passing `intensities` vectors to `Rcpp` for classical
+#' Marshall-Olkin models for \eqn{d>31}.
 #'
 #' @examples
-#' assertthat::see_if(is_dimension(-1L))  ## FALSE
-#' assertthat::see_if(is_dimension("2"))  ## FALSE
-#' assertthat::see_if(is_dimension(2L))   ## TRUE
-#' assertthat::see_if(is_dimension(15))   ## TRUE
-#' assertthat::see_if(is_dimension(31L))  ## TRUE
-#' assertthat::see_if(is_dimension(32L))  ## FALSE
+#' assertthat::see_if(is_32bit_compliant_dimension(-1L))  ## FALSE
+#' assertthat::see_if(is_32bit_compliant_dimension("2"))  ## FALSE
+#' assertthat::see_if(is_32bit_compliant_dimension(2L))   ## TRUE
+#' assertthat::see_if(is_32bit_compliant_dimension(15))   ## TRUE
+#' assertthat::see_if(is_32bit_compliant_dimension(31L))  ## TRUE
+#' assertthat::see_if(is_32bit_compliant_dimension(32L))  ## FALSE
 #'
 #' @family assertions
 #'
-#' @importFrom assertthat is.count
 #' @keywords internal
 #' @noRd
-is_32bit_complient_dimension <- function(x) {
+is_32bit_compliant_dimension <- function(x) {
   is_dimension(x) && x<32L
 }
 
 #' @importFrom assertthat on_failure<-
 #' @keywords internal
 #' @noRd
-on_failure(is_32bit_complient_dimension) <- function(call, env) {
-  sprintf(ERR_NOT_32BIT_COMPLIENT_DIMENSION, deparse(call$x))
+on_failure(is_32bit_compliant_dimension) <- function(call, env) {
+  sprintf(ERR_X_NOT_Y, deparse(call$x), "32bit compliant dimension parameter")
 }
 
 
-## #### Assertions for MO params ####
-##
 
-#' Assertion for the  `intensities` parameter
+# #### Assertions for MO params ####
+#
+
+#' Assertion for MO parameter
 #'
-#' Assert if `intensities` is a valid Marshall-Olkin  parameter.
-#' For this, the provided numeric vector must non-negative
-#' and fulfil the property
+#' @details
+#' `is_mo_parameter` asserts if `d` and `intensities` are a
+#' valid Marshall-Olkin parametrisation.
+#' - `d` must be a 32bit compliant dimension
+#' - `intensities` must be a non-negeative, numeric vector with
+#' length equal to \eqn{2^d-1}
+#' - The implied marginal rates from `intensities` must be all
+#' strictly positive, i.e.
 #' \deqn{
 #'   \sum_{I \ni i} \lambda_i > 0 \forall i \in \{ 1, \ldots, d\} .
 #' }
 #'
-#' @param intensities A numeric vector intended to be the shock rates of
-#'   a Marshall-Olkin distribution.
-#'
-#' @return TRUE/FALSE
-#'
 #' @importFrom assertthat assert_that on_failure<-
 #' @include RcppExports.R
+#'
+#' @family assertions
+#'
 #' @keywords internal
 #' @noRd
-is_mo_parameter <- function(intensities) {
-  assert_that(is.numeric(intensities), length(intensities) >= 1, all(intensities >= 0))
-  assert_that(log2(length(intensities)+1) %% 1 == 0)
-  d <- log2(length(intensities)+1)
+is_mo_parameter <- function(d, intensities) {
+  assert_that(is_32bit_compliant_dimension(d),
+    is_nonnegative_vector(intensities), intensities %has_length% (2^d-1))
+
   marginal_intensities <- numeric(d)
   for (i in 1:d) {
     for (j in 1:(2^d-1)) {
       if (Rcpp__is_within(i, j)) {
-        marginal_intensities[i] <- marginal_intensities[[i]] + intensities[[j]]
+        marginal_intensities[i] <- marginal_intensities[[i]] +
+          intensities[[j]]
       }
     }
   }
-
   all(marginal_intensities > 0)
 }
 
@@ -183,54 +252,74 @@ is_mo_parameter <- function(intensities) {
 #' @keywords internal
 #' @noRd
 on_failure(is_mo_parameter) <- function(call, env) {
-  sprintf(ERR_MARGINRATE_NOT_POS, deparse(call$intensities))
+  sprintf(ERR_X_NOT_Y_FOR_Z, deparse(call$intensities),
+          "MO parameter", paste("dimension", deparse(call$d)))
 }
 
 
-## #### Assertions for exMO params ####
-##
-
-#' Assertion for the `ex_intensities` parameter
+#' Assertion for exMO parameter
 #'
-#' Assert if `ex_intensities` is a valid exchangeable Marshall-Olkin parameter.
-#' For this, the numeric vector must be non-negative and fulfil the property
-#' \deqn{
-#'   \sum_{j=0}^{d-1} \choose{d-1}{j} \lambda_{j+1} > 0 .
-#' }
-#'
-#' @param ex_intensity A numeric vector intended to be the shock rates of
-#'   a Marshall-Olkin distribution.
-#'
-#' @return TRUE/FALSE
+#' @details
+#' `is_ex_mo_parameter` asserts if `d` and `ex_intensities` are a valid
+#' parametrisation of the exchangeable Marshall-Olkin distribution, i.e.
+#' - `d` is a valid dimension
+#' - `ex_intensities` is a non-negative, numeric vector of length equal to `d`
+#' - at least one entry of `ex_intensities` is strictly positive
 #'
 #' @importFrom assertthat assert_that
 #' @keywords internal
 #' @noRd
-is_exmo_parameter <- function(ex_intensities) {
-  assert_that(is.numeric(ex_intensities), length(ex_intensities) >= 1, all(ex_intensities >= 0))
-  d <- length(ex_intensities)
-  marginal_intensity <- sum(vapply(0:(d-1), function(y) choose(d-1, y) * ex_intensities[[y+1]], FUN.VALUE=0.5)) # nolint
-
-  marginal_intensity > 0
+is_ex_mo_parameter <- function(d, ex_intensities) {
+  assert_that(is_dimension(d), is_nonnegative_vector(ex_intensities),
+    is_nonzero_vector(ex_intensities), ex_intensities %has_length% d)
 }
 
 #' @importFrom assertthat on_failure<-
 #' @keywords internal
 #' @noRd
-on_failure(is_exmo_parameter) <- function(call, env) {
-  sprintf(ERR_MARGINRATE_NOT_POS, deparse(call$ex_intensities))
+on_failure(is_ex_mo_parameter) <- function(call, env) {
+  sprintf(ERR_X_NOT_Y_FOR_Z, deparse(call$ex_intensities),
+          "exMO parameter", paste("dimension", deparse(call$d)))
 }
 
 
-## #### Assertions for CPP jump distr. params ####
-##
+#' Assertion for the Lévy-fraily MO parameter
+#'
+#' @importFrom assertthat assert_that
+#'
+#' @keywords internal
+#' @noRd
+is_lfm_cpp_mo_parameter <- function(d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list) {
+  assert_that(is_dimension(d))
+  assert_that(is_nonnegative_number(rate), is_nonnegative_number(rate_killing),
+    is_nonnegative_number(rate_drift),
+    is_positive_number(rate + rate_killing + rate_drift),
+    is_rjump_parameter(rjump_name, rjump_arg_list))
+  TRUE
+}
 
-#' Assertion for jump distribution and params
+
+#' Assertion for the multivariate Cuadras-Augé parameter
 #'
-#' @param rjump_name name of sampling function for jump distribution
+#' @importFrom assertthat assert_that
+#' @keywords internal
+#' @noRd
+is_cuadras_auge_parameter <- function(d, alpha, beta) {
+  assert_that(is_dimension(d), is_nonnegative_number(alpha),
+    is_nonnegative_number(beta), is_positive_number(alpha + beta))
+  TRUE
+}
+
+
+
+# #### Assertions for CPP jump distribution params ####
+#
+
+#' Assertion for jump distribution name
 #'
-#' @return `is_rjump_name` returns `TRUE` if `rjump_name` is a `string`
-#'   and is contained in list of allowed distributions and `FALSE` otherwise.
+#' @details
+#' As of now, we only allow the exponential distribution
+#'   or fixed jump sizes.
 #'
 #' @examples
 #' assertthat::see_if(is_rjump_name("rnorm")) ## FALSE
@@ -239,6 +328,7 @@ on_failure(is_exmo_parameter) <- function(call, env) {
 #' @family assertions
 #'
 #' @importFrom assertthat assert_that is.string
+#'
 #' @keywords internal
 #' @noRd
 is_rjump_name <- function(rjump_name) {
@@ -252,21 +342,20 @@ is_rjump_name <- function(rjump_name) {
 #' @keywords internal
 #' @noRd
 on_failure(is_rjump_name) <- function(call, env) {
-  sprintf(ERR_NOT_RJUMP_NAME, deparse(call$rjump_name))
+  sprintf(ERR_X_NOT_Y, deparse(call$rjump_name),
+    "allowed cpp jump distribution")
 }
 
 
-#' @rdname is_rjump_name
+#' Assertion for jump distribution parameter
 #'
-#' @param rjump_arg_list argument list for `rjump_name`
-#'
-#' @return `is_rjump_arg_list` returns `TRUE` if a call to `do.call` with
-#'   `rjump_name` and `args=c("n" = 1, rjump_arg_list)` is successful and
-#'   `FALSE` otherwise.
+#' @details
+#' Performs a test run with the given name and parameter list and
+#'  throws an error if this is unsuccessful.
 #'
 #' @examples
-#' assertthat::see_if(is_rjump_arg_list("rexp", list()))            ## FALSE
-#' assertthat::see_if(is_rjump_arg_list("rexp", list("rate"=0.5)))  ## TRUE
+#' assertthat::see_if(is_rjump_parameter("rexp", list()))            ## FALSE
+#' assertthat::see_if(is_rjump_parameter("rexp", list("rate"=0.5)))  ## TRUE
 #'
 #' @family assertions
 #'
@@ -274,12 +363,15 @@ on_failure(is_rjump_name) <- function(call, env) {
 #'
 #' @keywords internal
 #' @noRd
-is_rjump_arg_list <- function(rjump_name, rjump_arg_list) {
+is_rjump_parameter <- function(rjump_name, rjump_arg_list) {
   assert_that(is_rjump_name(rjump_name), is.list(rjump_arg_list))
   if (!get(rjump_name) %has_args% names(rjump_arg_list)) {
     return(FALSE)
   }
-
+  # nolint start
+  seed <- .Random.seed
+  on.exit(.Random.seed <<- seed) # `.Random.seed` must be modified in global env
+  # nolint end
   suppressWarnings(x <- try(do.call(rjump_name, args=c("n"=1, rjump_arg_list)), silent=TRUE))
   !is.error(x) && !is.na(x) && is_nonnegative_number(x)
 }
@@ -287,6 +379,7 @@ is_rjump_arg_list <- function(rjump_name, rjump_arg_list) {
 #‘ @importFrom assertthat on_failure<-
 #' @keywords internal
 #' @noRd
-on_failure(is_rjump_arg_list) <- function(call, env) {
-  sprintf(ERR_NOT_RJUMP_ARGS, deparse(call$rjump_arg_list), deparse(call$rjump_name))
+on_failure(is_rjump_parameter) <- function(call, env) {
+  sprintf(ERR_X_NOT_Y_FOR_Z, deparse(call$rjump_arg_list),
+    "argument list", deparse(call$rjump_name))
 }
