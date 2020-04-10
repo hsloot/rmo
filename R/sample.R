@@ -213,7 +213,7 @@ rmo_esm_cuadras_auge <- function(n, d, alpha, beta) {
 #' @name rmo_lfm_cpp
 rmo_lfm_cpp <- function(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list = list()) {
   assert_that(is.count(n),
-    is_lfm_cpp_param(d, rate, rate_killing, rate_drift,
+    is_lfm_cpp_parameter(d, rate, rate_killing, rate_drift,
       rjump_name, rjump_arg_list))
   rjump <- get(rjump_name)
 

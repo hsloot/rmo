@@ -265,13 +265,13 @@ on_failure(is_rjump_name) <- function(call, env) {
 #' @param rjump_arg_list argument list for `rjump_name`
 #'
 #' @details
-#' `is_rjump_param` returns `TRUE` if a call to `do.call` with
+#' `is_rjump_parameter` returns `TRUE` if a call to `do.call` with
 #'   `rjump_name` and `args=c("n" = 1, rjump_arg_list)` is successful and
 #'   `FALSE` otherwise.
 #'
 #' @examples
-#' assertthat::see_if(is_rjump_param("rexp", list()))            ## FALSE
-#' assertthat::see_if(is_rjump_param("rexp", list("rate"=0.5)))  ## TRUE
+#' assertthat::see_if(is_rjump_parameter("rexp", list()))            ## FALSE
+#' assertthat::see_if(is_rjump_parameter("rexp", list("rate"=0.5)))  ## TRUE
 #'
 #' @family assertions
 #'
@@ -279,7 +279,7 @@ on_failure(is_rjump_name) <- function(call, env) {
 #'
 #' @keywords internal
 #' @noRd
-is_rjump_param <- function(rjump_name, rjump_arg_list) {
+is_rjump_parameter <- function(rjump_name, rjump_arg_list) {
   assert_that(is_rjump_name(rjump_name), is.list(rjump_arg_list))
   if (!get(rjump_name) %has_args% names(rjump_arg_list)) {
     return(FALSE)
@@ -292,19 +292,19 @@ is_rjump_param <- function(rjump_name, rjump_arg_list) {
 #‘ @importFrom assertthat on_failure<-
 #' @keywords internal
 #' @noRd
-on_failure(is_rjump_param) <- function(call, env) {
+on_failure(is_rjump_parameter) <- function(call, env) {
   sprintf(ERR_NOT_RJUMP_ARGS, deparse(call$rjump_arg_list), deparse(call$rjump_name))
 }
 
 #' @importFrom assertthat assert_that
 #' @keywords internal
 #' @noRd
-is_lfm_cpp_param <- function(d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list) {
+is_lfm_cpp_parameter <- function(d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list) {
   assert_that(is_dimension(d))
   assert_that(is_nonnegative_number(rate), is_nonnegative_number(rate_killing),
     is_nonnegative_number(rate_drift),
     is_positive_number(rate + rate_killing + rate_drift),
-    is_rjump_param(rjump_name, rjump_arg_list))
+    is_rjump_parameter(rjump_name, rjump_arg_list))
   TRUE
 }
 
@@ -312,7 +312,7 @@ is_lfm_cpp_param <- function(d, rate, rate_killing, rate_drift, rjump_name, rjum
 #' @rdname is_dimension
 #'
 #' @details
-#' `is_cuadras_auge_param` asserts if `d` `alpha`, and `beta` are a
+#' `is_cuadras_auge_parameter` asserts if `d` `alpha`, and `beta` are a
 #' valid parameterisation for a multivariate Caudras-Augé distribution.
 #' - `d` must be a dimension
 #' - `alpha` must be a non-negeative number
@@ -329,7 +329,7 @@ is_lfm_cpp_param <- function(d, rate, rate_killing, rate_drift, rjump_name, rjum
 #' @importFrom assertthat assert_that
 #' @keywords internal
 #' @noRd
-is_cuadras_auge_param <- function(d, alpha, beta) {
+is_cuadras_auge_parameter <- function(d, alpha, beta) {
   assert_that(is_dimension(d), is_nonnegative_number(alpha),
     is_nonnegative_number(beta), is_positive_number(alpha + beta))
   TRUE

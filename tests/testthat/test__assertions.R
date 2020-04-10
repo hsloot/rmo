@@ -97,28 +97,28 @@ test_that("`is_rjump_name` assertion works as intended", {
     regexp=sprintf(ERR_NOT_RJUMP_NAME, "*"))
 })
 
-test_that("`is_rjump_param` assertion works as intended", {
-  expect_true(assert_that(is_rjump_param(
+test_that("`is_rjump_parameter` assertion works as intended", {
+  expect_true(assert_that(is_rjump_parameter(
     rjump_name="rexp", rjump_arg_list=list("rate"=0.5))))
 
-  expect_error(assert_that(is_rjump_param(
+  expect_error(assert_that(is_rjump_parameter(
     rjump_name="rexp", rjump_arg_list=list("scale"=2))),
     regexp=sprintf(ERR_NOT_RJUMP_ARGS, "*", "[.]*"))
 
-  expect_error(assert_that(is_rjump_param("rexp", list("rate"=-1))),
+  expect_error(assert_that(is_rjump_parameter("rexp", list("rate"=-1))),
     regexp=sprintf(ERR_NOT_RJUMP_ARGS, "*", "[.]*"))
 })
 
 
-test_that("`is_cuadras_auge_param` assertion works as intended", {
-  expect_true(assert_that(is_cuadras_auge_param(2L, 0, 0.5)))
-  expect_true(assert_that(is_cuadras_auge_param(6L, 0.5, 0)))
-  expect_true(assert_that(is_cuadras_auge_param(3L, 1.5, 0.5)))
+test_that("`is_cuadras_auge_parameter` assertion works as intended", {
+  expect_true(assert_that(is_cuadras_auge_parameter(2L, 0, 0.5)))
+  expect_true(assert_that(is_cuadras_auge_parameter(6L, 0.5, 0)))
+  expect_true(assert_that(is_cuadras_auge_parameter(3L, 1.5, 0.5)))
 
-  expect_error(assert_that(is_cuadras_auge_param(1L, 0.5, 1.5)),
+  expect_error(assert_that(is_cuadras_auge_parameter(1L, 0.5, 1.5)),
     regexp=sprintf(ERR_NOT_DIMENSION, ".*"))
-  expect_error(assert_that(is_cuadras_auge_param(5L, 0, 0)),
+  expect_error(assert_that(is_cuadras_auge_parameter(5L, 0, 0)),
     regexp=sprintf(ERR_NOT_SCALAR_X_NUMBER, ".*", "positive"))
-  expect_error(assert_that(is_cuadras_auge_param(5L, -1, 2)),
+  expect_error(assert_that(is_cuadras_auge_parameter(5L, -1, 2)),
     regexp=sprintf(ERR_NOT_SCALAR_X_NUMBER, ".*", "non-negative"))
 })
