@@ -73,20 +73,20 @@ test_that("`is_dimension` assertion works as intended", {
     regexp=sprintf(ERR_NOT_DIMENSION, "*"))
 })
 
-test_that("`is_32bit_complient_dimension` assertion works as intended", {
-  expect_true(assert_that(is_32bit_complient_dimension(2L)))
-  expect_true(assert_that(is_32bit_complient_dimension(15)))
-  expect_true(assert_that(is_32bit_complient_dimension(31L)))
+test_that("`is_32bit_compliant_dimension` assertion works as intended", {
+  expect_true(assert_that(is_32bit_compliant_dimension(2L)))
+  expect_true(assert_that(is_32bit_compliant_dimension(15)))
+  expect_true(assert_that(is_32bit_compliant_dimension(31L)))
 
-  expect_error(assert_that(is_32bit_complient_dimension(-1L)),
+  expect_error(assert_that(is_32bit_compliant_dimension(-1L)),
     regexp=sprintf(ERR_NOT_32BIT_COMPLIENT_DIMENSION, "*"))
-  expect_error(assert_that(is_32bit_complient_dimension(0)),
+  expect_error(assert_that(is_32bit_compliant_dimension(0)),
     regexp=sprintf(ERR_NOT_32BIT_COMPLIENT_DIMENSION, "*"))
-  expect_error(assert_that(is_32bit_complient_dimension("2")),
+  expect_error(assert_that(is_32bit_compliant_dimension("2")),
     regexp=sprintf(ERR_NOT_32BIT_COMPLIENT_DIMENSION, "*"))
-  expect_error(assert_that(is_32bit_complient_dimension(c(2L, 3L))),
+  expect_error(assert_that(is_32bit_compliant_dimension(c(2L, 3L))),
     regexp=sprintf(ERR_NOT_32BIT_COMPLIENT_DIMENSION, "*"))
-  expect_error(assert_that(is_32bit_complient_dimension(32L)),
+  expect_error(assert_that(is_32bit_compliant_dimension(32L)),
     regexp=sprintf(ERR_NOT_32BIT_COMPLIENT_DIMENSION, "*"))
 })
 

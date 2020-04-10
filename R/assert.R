@@ -137,14 +137,14 @@ on_failure(is_dimension) <- function(call, env) {
 #' @importFrom assertthat is.count
 #' @keywords internal
 #' @noRd
-is_32bit_complient_dimension <- function(x) {
+is_32bit_compliant_dimension <- function(x) {
   is_dimension(x) && x<32L
 }
 
 #' @importFrom assertthat on_failure<-
 #' @keywords internal
 #' @noRd
-on_failure(is_32bit_complient_dimension) <- function(call, env) {
+on_failure(is_32bit_compliant_dimension) <- function(call, env) {
   sprintf(ERR_NOT_32BIT_COMPLIENT_DIMENSION, deparse(call$x))
 }
 
@@ -171,7 +171,7 @@ on_failure(is_32bit_complient_dimension) <- function(call, env) {
 #' @keywords internal
 #' @noRd
 is_mo_parameter <- function(d, intensities) {
-  assert_that(is_32bit_complient_dimension(d))
+  assert_that(is_32bit_compliant_dimension(d))
   if (!is.numeric(intensities) || !(length(intensities) == 2^d-1) ||
       any(intensities<0))
     return(FALSE)
