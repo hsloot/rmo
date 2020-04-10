@@ -351,7 +351,7 @@ on_failure(is_rjump_name) <- function(call, env) {
 #'
 #' @details
 #' Performs a test run with the given name and parameter list and
-#'  throws an error if this is unsuccessful. 
+#'  throws an error if this is unsuccessful.
 #'
 #' @examples
 #' assertthat::see_if(is_rjump_parameter("rexp", list()))            ## FALSE
