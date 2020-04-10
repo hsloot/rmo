@@ -74,6 +74,71 @@ on_failure(is_nonnegative_number) <- function(call, env) {
 }
 
 
+#' Custom assertions for numeric vectors
+#'
+#' @examples
+#' assertthat:see_if(is_nonnegative_vector(1))              ## TRUE
+#' assertthat:see_if(is_nonnegative_vector(c(1, 0)))        ## TRUE
+#' assertthat:see_if(is_nonnegative_vector(c(1, -1)))       ## FALSE
+#'
+#' @keywords internal
+#' @noRd
+is_nonnegative_vector <- function(x) {
+  is.numeric(x) && all(x >= 0)
+}
+
+#' @importFrom assertthat on_failure<-
+#' @keywords internal
+#' @noRd
+on_failure(is_nonnegative_vector) <- function(call, env) {
+  sprintf(ERR_X_NOT_Y, deparse(call$x), "non-negative vector")
+}
+
+#' @rdname is_nonnegative_vector
+#'
+#' @examples
+#' assertthat:see_if(is_nonzero_vector(1))              ## TRUE
+#' assertthat:see_if(is_nonzero_vector(c(1, 0)))        ## TRUE
+#' assertthat:see_if(is_nonzero_vector(c(1, -1)))       ## TRUE
+#' assertthat:see_if(is_nonzero_vector(0))              ## FALSE
+#' assertthat:see_if(is_nonzero_vector(c(0, 0)))        ## TRUE
+#'
+#' @keywords internal
+#' @noRd
+is_nonzero_vector <- function(x) {
+  is.numeric(x) && any(x != 0)
+}
+
+#' @importFrom assertthat on_failure<-
+#' @keywords internal
+#' @noRd
+on_failure(is_nonzero_vector) <- function(call, env) {
+  sprintf(ERR_X_NOT_Y, deparse(call$x), "non-zero vector")
+}
+
+
+#' Assert if a vector has a certain length
+#'
+#' @examples
+#' assertthat::see_if(has_length(rep(1, 5), 5))     ## TRUE
+#' assertthat::seeif(has_length(c(1, 2, 3), 5))     ## FALSE
+#'
+#' @keywords internal
+#' @noRd
+has_length <- function(x, n) {
+  is.vector(x) && (length(x) == n)
+}
+
+#' @importFrom assertthat on_failure<-
+#' @keywords internal
+#' @noRd
+on_failure(has_length) <- function(call, env) {
+  sprintf(ERR_X_NOT_Y, deparse(call$x), paste("of length", deparse(call$n)))
+}
+
+`%has_length%` <- has_length
+
+
 
 # #### Assertion for dimension parameters ####
 #
@@ -163,10 +228,7 @@ on_failure(is_32bit_compliant_dimension) <- function(call, env) {
 #' @keywords internal
 #' @noRd
 is_mo_parameter <- function(d, intensities) {
-  assert_that(is_32bit_compliant_dimension(d))
-  if (!is.numeric(intensities) || !(length(intensities) == 2^d-1) ||
-      any(intensities<0))
-    return(FALSE)
+  assert_that(is_32bit_compliant_dimension(d), is_nonnegative_vector(intensities), intensities %has_length% (2^d-1))
 
   marginal_intensities <- numeric(d)
   for (i in 1:d) {
@@ -202,9 +264,8 @@ on_failure(is_mo_parameter) <- function(call, env) {
 #' @keywords internal
 #' @noRd
 is_ex_mo_parameter <- function(d, ex_intensities) {
-  assert_that(is_dimension(d))
-  (is.numeric(ex_intensities) && (length(ex_intensities) == d) &&
-    all(ex_intensities>=0) && any(ex_intensities>0))
+  assert_that(is_dimension(d), is_nonnegative_vector(ex_intensities),
+    is_nonzero_vector(ex_intensities), ex_intensities %has_length% d)
 }
 
 #' @importFrom assertthat on_failure<-
@@ -303,7 +364,7 @@ is_rjump_parameter <- function(rjump_name, rjump_arg_list) {
   }
   seed <- .Random.seed
   on.exit(.Random.seed <<- seed) # `.Random.seed` must be modified in global env
-  suppressWarnings(x <- try(do.call(rjump_name, args=c("n"=1, rjump_arg_list)), silent=TRUE)) 
+  suppressWarnings(x <- try(do.call(rjump_name, args=c("n"=1, rjump_arg_list)), silent=TRUE))
   !is.error(x) && !is.na(x) && is_nonnegative_number(x)
 }
 
