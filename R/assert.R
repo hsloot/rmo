@@ -1,7 +1,7 @@
 # #### Assertion error messages #####
 #
 
-# nolint start 
+# nolint start
 ERR_X_NOT_Y <- "%1$s not %2$s"
 ERR_X_NOT_Y_FOR_Z <- paste(ERR_X_NOT_Y, "for %3$s")
 # nolint end
@@ -222,7 +222,7 @@ on_failure(is_ex_mo_parameter) <- function(call, env) {
 #'
 #' @keywords internal
 #' @noRd
-is_lfm_cpp_parameter <- function(d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list) {
+is_lfm_cpp_mo_parameter <- function(d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list) {
   assert_that(is_dimension(d))
   assert_that(is_nonnegative_number(rate), is_nonnegative_number(rate_killing),
     is_nonnegative_number(rate_drift),
