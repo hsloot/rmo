@@ -1,6 +1,6 @@
 Package: rmo
 Title: A package for the Marshall-Olkin distribution
-Version: 0.2.0.9005
+Version: 0.2.0.9006
 Authors@R:
   person(given = "Henrik",
     family = "Sloot",
@@ -12,7 +12,8 @@ Description:
 License: GPL-3
 Imports:
     assertthat,
-    Rcpp
+    Rcpp,
+    methods
 Suggests:
     testthat,
     covr,
@@ -25,6 +26,7 @@ RoxygenNote: 7.0.2
 Collate:
     'assert.R'
     'RcppExports.R'
+    'bernstein.R'
     'rmo.R'
     'sample.R'
     'utils.R'
