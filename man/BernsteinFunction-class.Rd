@@ -30,6 +30,12 @@ the subordinator to infinity.
 \item \eqn{\nu} determines the arrival-rate and shock-size distribution
 for the jumps of the Lévy subordinator.
 }
+
+For a theoretic treatment of Bernstein function, we refer to
+\insertCite{Schilling2012a}{rmo}.
+}
+\references{
+\insertAllCited{}
 }
 \seealso{
 \linkS4class{ConstantBernsteinFunction},
