@@ -117,7 +117,7 @@ LinearBernsteinFunction <- setClass("LinearBernsteinFunction", # nolint
 #'
 #' @importFrom methods setMethod
 #' @include assert.R
-#' 
+#'
 #' @export
 setMethod("valueOf",
   signature = c("LinearBernsteinFunction", "numeric", "integer"),

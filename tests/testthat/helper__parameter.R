@@ -3,7 +3,7 @@
 #' @keywords internal
 #' @noRd
 bf2ex_intensities <- function(d, bf) {
-	sapply(1:d, function(i) valueOf(bf, d-i, i))
+  sapply(1:d, function(i) valueOf(bf, d-i, i))
 }
 
 #' @keywords internal
@@ -105,7 +105,7 @@ intensities_gamma <- function(d, a) {
 
 #' @keywords internal
 #' @noRd
-intensities_hierarchical <- function(d1, d2, lambda, eta, a, alpha) {
+intensities_hierarchical <- function(d1, d2, lambda, eta, a, alpha) { # nolint
   ex_intensities_0 <- ex_intensities_poisson(d1+d2, lambda, eta)
   ex_intensities_1 <- ex_intensities_gamma(d1, a)
   ex_intensities_2 <- ex_intensities_alpha_stable(d2, alpha)
