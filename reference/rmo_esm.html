@@ -73,7 +73,7 @@ with shock rates intensities." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rmo</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.9006</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.9007</span>
       </span>
     </div>
 
@@ -158,11 +158,11 @@ with shock rates <code>intensities</code>.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>n</th>
-      <td><p>number of samples</p></td>
+      <td><p>Number of samples</p></td>
     </tr>
     <tr>
       <th>d</th>
-      <td><p>dimension</p></td>
+      <td><p>Dimension</p></td>
     </tr>
     <tr>
       <th>intensities</th>
@@ -173,32 +173,62 @@ with shock rates <code>intensities</code>.</p>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p><code>rmo_esm</code> implements the <em>exogenous shock model</em> representation and
-returns an \(n \times d\) numeric matrix with the rows corresponding
-to independent and identically distributed samples of a \(d\) variate
-Marshall-Olkin distribution with parameters <code>intensities</code>.</p>
+returns an \(n \times d\) numeric matrix with the rows
+corresponding to independent and identically distributed samples of a
+\(d\) variate Marshall-Olkin distribution with parameters <code>intensities</code>.</p>
 <p><code>rmo_arnold</code> implements the <em>Arnold model</em> representation and returns
 an \(n \times d\) numeric matrix with the rows corresponding to
 independent and identically distributed samples of a \(d\) variate
 Marshall-Olkin distribution with parameters <code>intensities</code>.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    
-<ul>
-<li><p>The shock intensities must be stored in a vector of length \(2^d-1\).</p></li>
-<li><p>A shock intensity of zero corresponds to an almost surely infinite shock.</p></li>
-<li><p>We use a binary representation to map a non-empty subset \(J\) of \(\{
-1, \ldots, d\}\) to integers \(j\) of \(1, \ldots, 2^d-1\). In
-particular, \(i\) is a component in the set \(J\) corresponding to the integer \(j\) iff
-\(j = \sum_{k=0}^\infty a_k 2^k\) and \(a_{i-1} = 1\).</p></li>
+    <p><strong>The shock intensities</strong>:</p><ul>
+<li><p>The shock <code>intensities</code> must be stored in a vector of length
+\(2^d-1\).</p></li>
+<li><p>A shock intensity of zero corresponds to an almost surely infinite
+shock.</p></li>
+<li><p>We use a binary representation to map a non-empty subset \(J\)
+of \(\{ 1, \ldots, d\}\) to integers \(j\) of
+\(1, \ldots, 2^d-1\).
+In particular, \(i\) is a component in the set \(J\) corresponding to
+the integer \(j\) if, and only if,
+\(j = \sum_{k=0}^\infty a_k 2^k\)
+and \(a_{i-1} = 1\).</p></li>
 </ul>
 
+<p><strong>The exogenous shock model</strong> simulates a Marshall--Olkin distributed random
+vector via exponentially distributed shock times for all non-empty subsets,
+see (see pp. 104 psqq. Mai and Scherer 2017)
+ and
+(Marshall and Olkin 1967)
+.</p>
+<p><strong>The Arnold model</strong> simulates a Marshall--Olkin distributed random variable
+by simulating a marked homogeneous Poisson process and where the
+inter-arrival times correspond to shock shock-arrival times and the
+marks to the specific shocks, see (see Sec. 3.1.2 Mai and Scherer 2017)
+
+and (Arnold 1975)
+.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>For more information on these algorithms, see J.-F. Mai,
-M. Scherer, "Simulating Copulas", World Scientific (2017), pp. 104 psqq.</p>
+    <p>Arnold BC (1975).
+&#8220;A characterization of the exponential distribution by multivariate geometric compounding.&#8221;
+<em>Sankhy\=a: The Indian Journal of Statistics, Series A</em>, <b>37</b>(1), 164--173.<br /><br /> Mai J, Scherer M (2017).
+<em>Simulating copulas: stochastic models, sampling algorithms and applications</em>,  Series in Quantitative Finance, 2 edition.
+World Scientific.
+doi: <a href='https://doi.org/10.1142/10265'>10.1142/10265</a>
+.<br /><br /> Marshall AW, Olkin I (1967).
+&#8220;A multivariate exponential distribution.&#8221;
+<em>Journal of the American Statistical Association</em>, <b>62</b>(317), 30--44.
+doi: <a href='https://doi.org/10.2307/2282907'>10.2307/2282907</a>
+.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other samplers: 
+<code><a href='rmo_esm_cuadras_auge.html'>rmo_esm_cuadras_auge</a>()</code>,
+<code><a href='rmo_ex_arnold.html'>rmo_ex_arnold</a>()</code>,
+<code><a href='rmo_lfm_cpp.html'>rmo_lfm_cpp</a>()</code></p>
+<p>Other samplers: 
 <code><a href='rmo_esm_cuadras_auge.html'>rmo_esm_cuadras_auge</a>()</code>,
 <code><a href='rmo_ex_arnold.html'>rmo_ex_arnold</a>()</code>,
 <code><a href='rmo_lfm_cpp.html'>rmo_lfm_cpp</a>()</code></p></div>
