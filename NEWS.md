@@ -3,7 +3,9 @@
 - Refactoring and additional tests
 - Fix problem with `int32` is `is_within` function
 - Refactor custom assertions
-- Add S4 classes for evaluating Bernstein Functions and their higher-order alternating, iterated forward differences.
+- Add S4 classes for evaluating Bernstein Functions and their higher-order alternating, iterated forward differences
+- Better test cases and increased test coverage
+- Refactor `Rcpp__rmo_esm` for increased performance
 
 # rmo 0.2.0
 

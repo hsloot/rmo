@@ -15,7 +15,7 @@ ex_intensities2intensities <- function(ex_intensities) {
   for (j in seq_along(intensities)) {
     count <- 0
     for (i in 1:d) {
-      count <- count + Rcpp__is_within(i, j)
+      count <- count + rmo:::Rcpp__is_within(i, j)
     }
     intensities[j] <- ex_intensities[count]
   }
@@ -50,6 +50,21 @@ ex_intensities_linear <- function(d, scale) {
 #' @noRd
 intensities_linear <- function(d, scale) {
   ex_intensities2intensities(ex_intensities_linear(d, scale))
+}
+
+
+#' @keywords internal
+#' @noRd
+ex_intensities_cuadras_auge <- function(d, alpha, beta) {
+  ex_intensities_linear(d, scale=alpha) +
+    ex_intensities_constant(d, constant=beta)
+}
+
+#' @keywords internal
+#' @noRd
+intensities_cuadras_auge <- function(d, alpha, beta) {
+  ex_intensities2intensities(ex_intensities_cuadras_auge(d,
+    alpha=alpha, beta=beta))
 }
 
 
@@ -115,10 +130,10 @@ intensities_hierarchical <- function(d1, d2, lambda, eta, a, alpha) { # nolint
     count_1 <- 0
     count_2 <- 0
     for (i in 1:d1) {
-      count_1 <- count_1 + Rcpp__is_within(i, j)
+      count_1 <- count_1 + rmo:::Rcpp__is_within(i, j)
     }
     for (i in 1:d2) {
-      count_2 <- count_2 + Rcpp__is_within(d1+i, j)
+      count_2 <- count_2 + rmo:::Rcpp__is_within(d1+i, j)
     }
 
     if (count_1 > 0 && count_2 == 0) {

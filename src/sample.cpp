@@ -20,12 +20,14 @@ NumericMatrix Rcpp__rmo_esm(unsigned int n, unsigned int d, NumericVector intens
       checkUserInterrupt();
 
     value = NumericVector(d, R_PosInf);
-    for (unsigned int j=0; j < pow(2., d)-1; j++) {
+    for (unsigned int j=0; j < (1<<d)-1; j++) {
       intensity = intensities[j];
-      shock_time = (intensity == 0 ? R_PosInf : R::exp_rand() / intensity);
-      for (unsigned int i=0; i<d; i++) {
-        if (is_within(i+1, j+1)) {
-          value[i] = min2(value[i], shock_time);
+      if (intensity > 0) {
+        shock_time = R::exp_rand() / intensity;
+        for (unsigned int i=0; i<d; i++) {
+          if (is_within(i+1, j+1)) {
+            value[i] = min2(value[i], shock_time);
+          }
         }
       }
     }
