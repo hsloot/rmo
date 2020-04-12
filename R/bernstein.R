@@ -429,7 +429,7 @@ setMethod("valueOf",
 #' @importFrom methods new setClass
 #'
 #' @export GammaBernsteinFunction
-GammaBernsteinFunction <- setClass("GammaBernsteinFunction",
+GammaBernsteinFunction <- setClass("GammaBernsteinFunction", # nolint
   contains="BernsteinFunction",
   slots=c(a = "numeric"))
 

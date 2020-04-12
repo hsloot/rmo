@@ -37,7 +37,7 @@ test_that("`valueOf` for `ConstantBernsteinFunction`", {
 
   y <- sort(unique(union(x, x+k)))
   expect_equal(valueOf(bf, x, difference_order=k),
-    (-1)^(k-1) * diff(valueOf(bf, y, difference_order=0L), differences=k)[1:length(x)])
+    (-1) ^ (k-1) * diff(valueOf(bf, y, difference_order=0L), differences=k)[seq_along(x)])
 
   x <- seq(0.3, 10.3, by=1)
   expect_equal(valueOf(bf, x, difference_order=0L),
@@ -45,7 +45,7 @@ test_that("`valueOf` for `ConstantBernsteinFunction`", {
 
   y <- sort(unique(union(x, x+k)))
   expect_equal(valueOf(bf, x, difference_order=k),
-    (-1)^(k-1) * diff(valueOf(bf, y, difference_order=0L), differences=k)[1:length(x)])
+    (-1) ^ (k-1) * diff(valueOf(bf, y, difference_order=0L), differences=k)[seq_along(x)])
 })
 
 test_that("`valueOf` for `LinearBernsteinFunction`", {
@@ -59,7 +59,7 @@ test_that("`valueOf` for `LinearBernsteinFunction`", {
 
   y <- sort(unique(union(x, x+k)))
   expect_equal(valueOf(bf, x, difference_order=k),
-    (-1)^(k-1) * diff(valueOf(bf, y, difference_order=0L), differences=k)[1:length(x)])
+    (-1) ^ (k-1) * diff(valueOf(bf, y, difference_order=0L), differences=k)[seq_along(x)])
 
   x <- seq(0.3, 10.3, by=1)
   expect_equal(valueOf(bf, x, difference_order=0L),
@@ -67,7 +67,7 @@ test_that("`valueOf` for `LinearBernsteinFunction`", {
 
   y <- sort(unique(union(x, x+k)))
   expect_equal(valueOf(bf, x, difference_order=k),
-    (-1)^(k-1) * diff(valueOf(bf, y, difference_order=0L), differences=k)[1:length(x)])
+    (-1) ^ (k-1) * diff(valueOf(bf, y, difference_order=0L), differences=k)[seq_along(x)])
 })
 
 test_that("`valueOf` for `PoissonBernsteinFunction`", {
@@ -78,15 +78,15 @@ test_that("`valueOf` for `PoissonBernsteinFunction`", {
 
   x <- seq(0, 10, by=1)
   expect_equal(valueOf(bf, x, difference_order=0L),
-    lambda*(1 - exp(-eta*x)))
+    lambda * (1 - exp(-eta*x)))
 
   y <- sort(unique(union(x, x+k)))
   expect_equal(valueOf(bf, x, difference_order=k),
-    (-1)^(k-1) * diff(valueOf(bf, y, difference_order=0L), differences=k)[1:length(x)])
+    lambda * exp(-eta*x) * (1 - exp(-eta))^k)
 
   x <- seq(0.3, 10.3, by=1)
   expect_equal(valueOf(bf, x, difference_order=0L),
-    lambda*(1 - exp(-eta*x)))
+    lambda * (1 - exp(-eta*x)))
 
   y <- sort(unique(union(x, x+k)))
   expect_equal(valueOf(bf, x, difference_order=k),
@@ -104,7 +104,7 @@ test_that("`valueOf` for `AlphaStableBernsteinFunction`", {
 
   y <- sort(unique(union(x, x+k)))
   expect_equal(valueOf(bf, x, difference_order=k),
-    (-1)^(k-1) * diff(valueOf(bf, y, difference_order=0L), differences=k)[1:length(x)])
+    (-1) ^ (k-1) * diff(valueOf(bf, y, difference_order=0L), differences=k)[seq_along(x)])
 
   x <- seq(0.3, 10.3, by=1)
   expect_equal(valueOf(bf, x, difference_order=0L),
@@ -112,7 +112,7 @@ test_that("`valueOf` for `AlphaStableBernsteinFunction`", {
 
   y <- sort(unique(union(x, x+k)))
   expect_equal(valueOf(bf, x, difference_order=k),
-    (-1)^(k-1) * diff(valueOf(bf, y, difference_order=0L), differences=k)[1:length(x)])
+    (-1) ^ (k-1) * diff(valueOf(bf, y, difference_order=0L), differences=k)[seq_along(x)])
 })
 
 test_that("`valueOf` for `GammaBernsteinFunction`", {
@@ -126,7 +126,7 @@ test_that("`valueOf` for `GammaBernsteinFunction`", {
 
   y <- sort(unique(union(x, x+k)))
   expect_equal(valueOf(bf, x, difference_order=k),
-    (-1)^(k-1) * diff(valueOf(bf, y, difference_order=0L), differences=k)[1:length(x)])
+    (-1) ^ (k-1) * diff(valueOf(bf, y, difference_order=0L), differences=k)[seq_along(x)])
 
   x <- seq(0.3, 10.3, by=1)
   expect_equal(valueOf(bf, x, difference_order=0L),
@@ -134,7 +134,7 @@ test_that("`valueOf` for `GammaBernsteinFunction`", {
 
   y <- sort(unique(union(x, x+k)))
   expect_equal(valueOf(bf, x, difference_order=k),
-    (-1)^(k-1) * diff(valueOf(bf, y, difference_order=0L), differences=k)[1:length(x)])
+    (-1) ^ (k-1) * diff(valueOf(bf, y, difference_order=0L), differences=k)[seq_along(x)])
 })
 
 test_that("`valueOf` for `ScaledBernsteinFunction`", {
@@ -150,7 +150,7 @@ test_that("`valueOf` for `ScaledBernsteinFunction`", {
 
   y <- sort(unique(union(x, x+k)))
   expect_equal(valueOf(bf, x, difference_order=k),
-    (-1)^(k-1) * diff(valueOf(bf, y, difference_order=0L), differences=k)[1:length(x)])
+    (-1) ^ (k-1) * diff(valueOf(bf, y, difference_order=0L), differences=k)[seq_along(x)])
 
   x <- seq(0.3, 10.3, by=1)
   expect_equal(valueOf(bf, x, difference_order=0L),
@@ -158,7 +158,7 @@ test_that("`valueOf` for `ScaledBernsteinFunction`", {
 
   y <- sort(unique(union(x, x+k)))
   expect_equal(valueOf(bf, x, difference_order=k),
-    (-1)^(k-1) * diff(valueOf(bf, y, difference_order=0L), differences=k)[1:length(x)])
+    (-1) ^ (k-1) * diff(valueOf(bf, y, difference_order=0L), differences=k)[seq_along(x)])
 })
 
 test_that("`valueOf` for `SumOfBernsteinFunctions`", {
@@ -180,7 +180,7 @@ test_that("`valueOf` for `SumOfBernsteinFunctions`", {
 
   y <- sort(unique(union(x, x+k)))
   expect_equal(valueOf(bf, x, difference_order=k),
-    (-1)^(k-1) * diff(valueOf(bf, y, difference_order=0L), differences=k)[1:length(x)])
+    (-1) ^ (k-1) * diff(valueOf(bf, y, difference_order=0L), differences=k)[seq_along(x)])
 
   x <- seq(0.3, 10.3, by=1)
   expect_equal(valueOf(bf, x, difference_order=0L),
@@ -188,5 +188,5 @@ test_that("`valueOf` for `SumOfBernsteinFunctions`", {
 
   y <- sort(unique(union(x, x+k)))
   expect_equal(valueOf(bf, x, difference_order=k),
-    (-1)^(k-1) * diff(valueOf(bf, y, difference_order=0L), differences=k)[1:length(x)])
+    (-1) ^ (k-1) * diff(valueOf(bf, y, difference_order=0L), differences=k)[seq_along(x)])
 })
