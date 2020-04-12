@@ -72,6 +72,10 @@ test_that("`valueOf` for `LinearBernsteinFunction`", {
   expect_equal(valueOf(bf, x, difference_order=0L),
     x*scale)
 
+  y <- sort(unique(union(x, x+1L)))
+  expect_equal(valueOf(bf, x, difference_order=1L),
+    (-1) ^ (1L-1) * diff(valueOf(bf, y, difference_order=0L), differences=1L)[seq_along(x)])
+
   y <- sort(unique(union(x, x+k)))
   expect_equal(valueOf(bf, x, difference_order=k),
     (-1) ^ (k-1) * diff(valueOf(bf, y, difference_order=0L), differences=k)[seq_along(x)])
@@ -83,6 +87,10 @@ test_that("`valueOf` for `LinearBernsteinFunction`", {
   y <- sort(unique(union(x, x+k)))
   expect_equal(valueOf(bf, x, difference_order=k),
     (-1) ^ (k-1) * diff(valueOf(bf, y, difference_order=0L), differences=k)[seq_along(x)])
+
+  y <- sort(unique(union(x, x+1L)))
+  expect_equal(valueOf(bf, x, difference_order=1L),
+    (-1) ^ (1L-1) * diff(valueOf(bf, y, difference_order=0L), differences=1L)[seq_along(x)])
 })
 
 test_that("`valueOf` for `PoissonBernsteinFunction`", {
