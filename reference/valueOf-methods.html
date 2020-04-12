@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Articles • rmo</title>
+<title>Returns values for Bernstein functions — valueOf • rmo</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,12 @@
 
 
 
-<meta property="og:title" content="Articles" />
+<meta property="og:title" content="Returns values for Bernstein functions — valueOf" />
+<meta property="og:description" content="This method allows you to calculate the values for a Bernstein function
+and its higher-order, alternating iterated forward differences, i.e.
+$$
+  {(-1)}^{k} \Delta^k \psi(x), x &amp;gt; 0.
+$$" />
 
 
 
@@ -58,7 +63,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-article-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -137,28 +142,77 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Articles</h1>
+    <h1>Returns values for Bernstein functions</h1>
+    <small class="dont-index">Source: <a href='https://github.com/hsloot/rmo/blob/master/R/bernstein.R'><code>R/bernstein.R</code></a></small>
+    <div class="hidden name"><code>valueOf-methods.Rd</code></div>
     </div>
 
-    <div class="section ">
-      <h3>All vignettes</h3>
-      <p class="section-desc"></p>
-
-      <dl>
-        <dt><a href="Cuadras-Auge-distributions.html">Cuadras-Augé distributions</a></dt>
-        <dd></dt>
-        <dt><a href="Exchangeable-Marshall-Olkin-distributions.html">Exchangeable Marshall--Olkin distributions</a></dt>
-        <dd></dt>
-        <dt><a href="Mixing-Marshall-Olkin-distributions.html">Mixing Marshall--Olkin distributions</a></dt>
-        <dd></dt>
-        <dt><a href="The-Levy-frailty-model.html">The Lévy frailty model</a></dt>
-        <dd></dt>
-        <dt><a href="The-Marshall-Olkin-distribution.html">The Marshall-Olkin distribution</a></dt>
-        <dd></dt>
-        <dt><a href="The-binary-representation.html">The binary representation of the MO parameter</a></dt>
-        <dd></dt>
-      </dl>
+    <div class="ref-description">
+    <p>This method allows you to calculate the values for a Bernstein function
+and its higher-order, alternating iterated forward differences, i.e.
+$$
+  {(-1)}^{k} \Delta^k \psi(x), x &gt; 0.
+$$</p>
     </div>
+
+    <pre class="usage"><span class='fu'>valueOf</span>(<span class='no'>object</span>, <span class='no'>x</span>, <span class='no'>difference_order</span>)
+
+<span class='co'># S4 method for LinearBernsteinFunction,numeric,integer</span>
+<span class='fu'>valueOf</span>(<span class='no'>object</span>, <span class='no'>x</span>, <span class='kw'>difference_order</span> <span class='kw'>=</span> <span class='fl'>0</span>)
+
+<span class='co'># S4 method for ConstantBernsteinFunction,numeric,integer</span>
+<span class='fu'>valueOf</span>(<span class='no'>object</span>, <span class='no'>x</span>, <span class='kw'>difference_order</span> <span class='kw'>=</span> <span class='fl'>0</span>)
+
+<span class='co'># S4 method for ScaledBernsteinFunction,numeric,integer</span>
+<span class='fu'>valueOf</span>(<span class='no'>object</span>, <span class='no'>x</span>, <span class='kw'>difference_order</span> <span class='kw'>=</span> <span class='fl'>0</span>)
+
+<span class='co'># S4 method for SumOfBernsteinFunctions,numeric,integer</span>
+<span class='fu'>valueOf</span>(<span class='no'>object</span>, <span class='no'>x</span>, <span class='kw'>difference_order</span> <span class='kw'>=</span> <span class='fl'>0</span>)
+
+<span class='co'># S4 method for PoissonBernsteinFunction,numeric,integer</span>
+<span class='fu'>valueOf</span>(<span class='no'>object</span>, <span class='no'>x</span>, <span class='kw'>difference_order</span> <span class='kw'>=</span> <span class='fl'>0</span>)
+
+<span class='co'># S4 method for AlphaStableBernsteinFunction,numeric,integer</span>
+<span class='fu'>valueOf</span>(<span class='no'>object</span>, <span class='no'>x</span>, <span class='kw'>difference_order</span> <span class='kw'>=</span> <span class='fl'>0</span>)
+
+<span class='co'># S4 method for GammaBernsteinFunction,numeric,integer</span>
+<span class='fu'>valueOf</span>(<span class='no'>object</span>, <span class='no'>x</span>, <span class='kw'>difference_order</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
+
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>object</th>
+      <td><p>The Bernstein function object.</p></td>
+    </tr>
+    <tr>
+      <th>x</th>
+      <td><p>The value at which the Bernstein function is to be evaluated.</p></td>
+    </tr>
+    <tr>
+      <th>difference_order</th>
+      <td><p>The order of the alternating iterated forward
+differences taken on the Bernstein function (\(k\) in
+the representation).</p></td>
+    </tr>
+    </table>
+
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><a href='BernsteinFunction-class.html'>BernsteinFunction</a></p>
+<p><a href='LinearBernsteinFunction-class.html'>LinearBernsteinFunction</a></p>
+<p><a href='ConstantBernsteinFunction-class.html'>ConstantBernsteinFunction</a></p>
+<p><a href='ScaledBernsteinFunction-class.html'>ScaledBernsteinFunction</a></p>
+<p><a href='SumOfBernsteinFunctions-class.html'>SumOfBernsteinFunctions</a></p>
+<p><a href='PoissonBernsteinFunction-class.html'>PoissonBernsteinFunction</a></p>
+<p><a href='AlphaStableBernsteinFunction-class.html'>AlphaStableBernsteinFunction</a></p>
+<p><a href='GammaBernsteinFunction-class.html'>GammaBernsteinFunction</a></p></div>
+
+  </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
