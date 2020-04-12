@@ -9,6 +9,10 @@ test_that("Test initialisation of BernsteinFunction classes", {
     class="PoissonBernsteinFunction")
   expect_s4_class(AlphaStableBernsteinFunction(alpha=0.6),
     class="AlphaStableBernsteinFunction")
+  # expect_error(AlphaStableBernsteinFunction(alpha=-0.5))
+  # expect_error(AlphaStableBernsteinFunction(alpha=0))
+  # expect_error(AlphaStableBernsteinFunction(alpha=1))
+  # expect_error(AlphaStableBernsteinFunction(alpha=1.5))
   expect_s4_class(GammaBernsteinFunction(a=0.7),
     class="GammaBernsteinFunction")
   expect_s4_class(ScaledBernsteinFunction(scale=0.5,
@@ -19,4 +23,170 @@ test_that("Test initialisation of BernsteinFunction classes", {
     second=ScaledBernsteinFunction(scale=0.5,
       original=AlphaStableBernsteinFunction(alpha=0.6))),
     class="SumOfBernsteinFunctions")
+})
+
+
+test_that("`valueOf` for `ConstantBernsteinFunction`", {
+  k <- 5L
+  constant <- 0.3
+  bf <- ConstantBernsteinFunction(constant=constant)
+
+  x <- seq(0, 10, by=1)
+  expect_equal(valueOf(bf, x, difference_order=0L),
+    ifelse(x==0, 0, constant))
+
+  y <- sort(unique(union(x, x+k)))
+  expect_equal(valueOf(bf, x, difference_order=k),
+    (-1)^(k-1) * diff(valueOf(bf, y, difference_order=0L), differences=k)[1:length(x)])
+
+  x <- seq(0.3, 10.3, by=1)
+  expect_equal(valueOf(bf, x, difference_order=0L),
+    ifelse(x==0, 0, constant))
+
+  y <- sort(unique(union(x, x+k)))
+  expect_equal(valueOf(bf, x, difference_order=k),
+    (-1)^(k-1) * diff(valueOf(bf, y, difference_order=0L), differences=k)[1:length(x)])
+})
+
+test_that("`valueOf` for `LinearBernsteinFunction`", {
+  k <- 5L
+  scale <- 0.4
+  bf <- LinearBernsteinFunction(scale=scale)
+
+  x <- seq(0, 10, by=1)
+  expect_equal(valueOf(bf, x, difference_order=0L),
+    x*scale)
+
+  y <- sort(unique(union(x, x+k)))
+  expect_equal(valueOf(bf, x, difference_order=k),
+    (-1)^(k-1) * diff(valueOf(bf, y, difference_order=0L), differences=k)[1:length(x)])
+
+  x <- seq(0.3, 10.3, by=1)
+  expect_equal(valueOf(bf, x, difference_order=0L),
+    x*scale)
+
+  y <- sort(unique(union(x, x+k)))
+  expect_equal(valueOf(bf, x, difference_order=k),
+    (-1)^(k-1) * diff(valueOf(bf, y, difference_order=0L), differences=k)[1:length(x)])
+})
+
+test_that("`valueOf` for `PoissonBernsteinFunction`", {
+  k <- 5L
+  lambda <- 0.4
+  eta <- 0.2
+  bf <- PoissonBernsteinFunction(lambda=lambda, eta=eta)
+
+  x <- seq(0, 10, by=1)
+  expect_equal(valueOf(bf, x, difference_order=0L),
+    lambda*(1 - exp(-eta*x)))
+
+  y <- sort(unique(union(x, x+k)))
+  expect_equal(valueOf(bf, x, difference_order=k),
+    (-1)^(k-1) * diff(valueOf(bf, y, difference_order=0L), differences=k)[1:length(x)])
+
+  x <- seq(0.3, 10.3, by=1)
+  expect_equal(valueOf(bf, x, difference_order=0L),
+    lambda*(1 - exp(-eta*x)))
+
+  y <- sort(unique(union(x, x+k)))
+  expect_equal(valueOf(bf, x, difference_order=k),
+    lambda * exp(-eta*x) * (1 - exp(-eta))^k)
+})
+
+test_that("`valueOf` for `AlphaStableBernsteinFunction`", {
+  k <- 5L
+  alpha <- 0.5
+  bf <- AlphaStableBernsteinFunction(alpha=alpha)
+
+  x <- seq(0, 10, by=1)
+  expect_equal(valueOf(bf, x, difference_order=0L),
+    x^alpha)
+
+  y <- sort(unique(union(x, x+k)))
+  expect_equal(valueOf(bf, x, difference_order=k),
+    (-1)^(k-1) * diff(valueOf(bf, y, difference_order=0L), differences=k)[1:length(x)])
+
+  x <- seq(0.3, 10.3, by=1)
+  expect_equal(valueOf(bf, x, difference_order=0L),
+    x^alpha)
+
+  y <- sort(unique(union(x, x+k)))
+  expect_equal(valueOf(bf, x, difference_order=k),
+    (-1)^(k-1) * diff(valueOf(bf, y, difference_order=0L), differences=k)[1:length(x)])
+})
+
+test_that("`valueOf` for `GammaBernsteinFunction`", {
+  k <- 5L
+  a <- 0.3
+  bf <- GammaBernsteinFunction(a=a)
+
+  x <- seq(0, 10, by=1)
+  expect_equal(valueOf(bf, x, difference_order=0L),
+    log(1 + x/a))
+
+  y <- sort(unique(union(x, x+k)))
+  expect_equal(valueOf(bf, x, difference_order=k),
+    (-1)^(k-1) * diff(valueOf(bf, y, difference_order=0L), differences=k)[1:length(x)])
+
+  x <- seq(0.3, 10.3, by=1)
+  expect_equal(valueOf(bf, x, difference_order=0L),
+    log(1 + x/a))
+
+  y <- sort(unique(union(x, x+k)))
+  expect_equal(valueOf(bf, x, difference_order=k),
+    (-1)^(k-1) * diff(valueOf(bf, y, difference_order=0L), differences=k)[1:length(x)])
+})
+
+test_that("`valueOf` for `ScaledBernsteinFunction`", {
+  k <- 5L
+  alpha <- 0.4
+  scale <- 0.2
+  bf <- ScaledBernsteinFunction(scale=scale,
+    original=AlphaStableBernsteinFunction(alpha=alpha))
+
+  x <- seq(0, 10, by=1)
+  expect_equal(valueOf(bf, x, difference_order=0L),
+    scale * x^alpha)
+
+  y <- sort(unique(union(x, x+k)))
+  expect_equal(valueOf(bf, x, difference_order=k),
+    (-1)^(k-1) * diff(valueOf(bf, y, difference_order=0L), differences=k)[1:length(x)])
+
+  x <- seq(0.3, 10.3, by=1)
+  expect_equal(valueOf(bf, x, difference_order=0L),
+    scale * x^alpha)
+
+  y <- sort(unique(union(x, x+k)))
+  expect_equal(valueOf(bf, x, difference_order=k),
+    (-1)^(k-1) * diff(valueOf(bf, y, difference_order=0L), differences=k)[1:length(x)])
+})
+
+test_that("`valueOf` for `SumOfBernsteinFunctions`", {
+  k <- 5L
+  constant <- 0.1
+  scale <- 0.2
+  lambda <- 0.4
+  eta <- 0.5
+  bf <- SumOfBernsteinFunctions(
+    first=SumOfBernsteinFunctions(
+      first=ConstantBernsteinFunction(constant=constant),
+      second=LinearBernsteinFunction(scale=scale)
+    ),
+    second=PoissonBernsteinFunction(lambda=lambda, eta=eta))
+
+  x <- seq(0, 10, by=1)
+  expect_equal(valueOf(bf, x, difference_order=0L),
+    ifelse(x==0, 0, constant) + scale*x + lambda * (1 - exp(-eta*x)))
+
+  y <- sort(unique(union(x, x+k)))
+  expect_equal(valueOf(bf, x, difference_order=k),
+    (-1)^(k-1) * diff(valueOf(bf, y, difference_order=0L), differences=k)[1:length(x)])
+
+  x <- seq(0.3, 10.3, by=1)
+  expect_equal(valueOf(bf, x, difference_order=0L),
+    ifelse(x==0, 0, constant) + scale*x + lambda * (1 - exp(-eta*x)))
+
+  y <- sort(unique(union(x, x+k)))
+  expect_equal(valueOf(bf, x, difference_order=k),
+    (-1)^(k-1) * diff(valueOf(bf, y, difference_order=0L), differences=k)[1:length(x)])
 })
