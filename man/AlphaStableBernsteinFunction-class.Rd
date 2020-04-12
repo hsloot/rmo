@@ -10,17 +10,23 @@ For the \eqn{\alpha}-stable Lévy subordinator with \eqn{0 < \alpha < 1},
 the corresponding Bernstein function is the power function with exponent
 \eqn{\alpha}, i.e.
 \deqn{
-  \psi(x) = x^\alpha, x > 0.
+  \psi(x) = x^\alpha, x>0.
 }
 }
 \details{
-For the \eqn{\alpha}-stable Bernstein function, the higher order
-alternatingiterated forward differences are not known in closed form. But we
-can use numerical integration (here: \code{\link[stats]{integrate}}) to
-approximate it with the following representation:
+For the \eqn{\alpha}-stable Bernstein function, the higher order alternating
+iterated forward differences are known in closed form but cannot be evaluated
+numerically without the danger of loss of significance. But we can use
+numerical integration (here: \code{\link[stats]{integrate}}) to approximate
+it with the following representation:
 \deqn{
-  {(-1)}^{k} \Delta^k \psi(x) = \int_0^\infty e^{-ux} (1-e^{-u})^k \alpha / \Gamma(1-\alpha) u^{-1-\alpha} du, x > 0 .
+  {(-1)}^{k-1} \Delta^k \psi(x)
+   = \int_0^\infty e^{-ux} (1-e^{-u})^k
+     \alpha / \Gamma(1-\alpha) u^{-1-\alpha} du, x>0, k>0 .
 }
+
+This Bernstein function is no. 1 in the list of complete Bernstein functions
+in Chp. 16 of \insertCite{Schilling2012a}{rmo}.
 }
 \section{Slots}{
 
@@ -31,6 +37,9 @@ approximate it with the following representation:
 \examples{
 bf <- AlphaStableBernsteinFunction(alpha=0.5)
 
+}
+\references{
+\insertAllCited{}
 }
 \seealso{
 \linkS4class{BernsteinFunction}

@@ -13,12 +13,15 @@ License: GPL-3
 Imports:
     assertthat,
     Rcpp,
-    methods
+    methods,
+    Rdpack
 Suggests:
     testthat,
     covr,
     rmarkdown,
     rlang
+RdMacros:
+    Rdpack
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)

@@ -1,3 +1,5 @@
+# #### Virtual classes of Bernstein functions ####
+
 #' Virtual Class \code{BernsteinFunction} for Bernstein Functions
 #'
 #' A virtual superclass for all implementations of the various classes of
@@ -25,6 +27,12 @@
 #'     for the jumps of the Lévy subordinator.
 #' }
 #'
+#' For a theoretic treatment of Bernstein function, we refer to
+#' \insertCite{Schilling2012a}{rmo}.
+#'
+#' @references
+#'   \insertAllCited{}
+#'
 #' @seealso \linkS4class{ConstantBernsteinFunction},
 #'   \linkS4class{LinearBernsteinFunction},
 #'   \linkS4class{PoissonBernsteinFunction},
@@ -34,6 +42,10 @@
 #' @importFrom methods new setClass
 setClass("BernsteinFunction", # nolint
   contains = "VIRTUAL")
+
+
+
+# #### Generic function for `valueOf` ####
 
 #' Returns values for Bernstein functions
 #'
@@ -61,6 +73,9 @@ setGeneric("valueOf",
   })
 
 
+
+# #### Linear and constant Bernstein function ####
+
 #' Class for the \emph{linear Bernstein function}
 #'
 #' @examples
@@ -85,7 +100,6 @@ setGeneric("valueOf",
 LinearBernsteinFunction <- setClass("LinearBernsteinFunction", # nolint
   contains = "BernsteinFunction",
   slots = c(scale = "numeric"))
-
 
 #' @rdname valueOf-methods
 #' @aliases valueOf,LinearBernsteinFunction,numeric,integer,ANY-method
@@ -143,7 +157,7 @@ ConstantBernsteinFunction <- setClass("ConstantBernsteinFunction", # nolint
 #' @importFrom methods setMethod
 #' @include assert.R
 #' @export
-setMethod("valueOf",
+setMethod("valueOf", # nolint
   signature = c("ConstantBernsteinFunction", "numeric", "integer"),
   definition = function(object, x, difference_order = 0) {
     assert_that(is_nonnegative_number(difference_order),
@@ -157,6 +171,9 @@ setMethod("valueOf",
       return(0)
   })
 
+
+
+# #### Classes for operations on Bernstein functions ####
 
 #' Class for \emph{scaled Bernstein functions}
 #'
@@ -227,7 +244,6 @@ SumOfBernsteinFunctions <- setClass("SumOfBernsteinFunctions", # nolint
   contains = "BernsteinFunction",
   slots = c(first = "BernsteinFunction", second = "BernsteinFunction"))
 
-
 #' @rdname valueOf-methods
 #' @aliases valueOf,SumOfBernsteinFunctions,numeric,integer,ANY-method
 #'
@@ -243,6 +259,9 @@ setMethod("valueOf",
       valueOf(object@second, x, object@difference_order)
   })
 
+
+
+# #### The Poisson Bernstein functions ####
 
 #' Class for the \emph{Poisson Bernstein function}
 #'
@@ -263,7 +282,7 @@ setMethod("valueOf",
 #' For the Poisson Bernstein function, the higher-order alternatig iterated
 #' foward differences can be calculated in closed form:
 #' \deqn{
-#'   {(-1)}^k \Delta^k \psi(x) = e^{-u\eta} (1-e^{-\eta})^k
+#'   {(-1)}^{k-1} \Delta^k \psi(x) = e^{-u\eta} (1-e^{-\eta})^k, x>0, k>0.
 #' }
 #'
 #' @seealso \linkS4class{BernsteinFunction}
@@ -298,6 +317,9 @@ setMethod("valueOf",
   })
 
 
+
+# #### Algebraic Bernstein functions ####
+
 #' Class for the \emph{\eqn{\alpha}-stable Bernstein function}
 #'
 #' @examples
@@ -310,17 +332,26 @@ setMethod("valueOf",
 #' the corresponding Bernstein function is the power function with exponent
 #' \eqn{\alpha}, i.e.
 #' \deqn{
-#'   \psi(x) = x^\alpha, x > 0.
+#'   \psi(x) = x^\alpha, x>0.
 #' }
 #'
 #' @details
-#' For the \eqn{\alpha}-stable Bernstein function, the higher order
-#' alternatingiterated forward differences are not known in closed form. But we
-#' can use numerical integration (here: \code{\link[stats]{integrate}}) to
-#' approximate it with the following representation:
+#' For the \eqn{\alpha}-stable Bernstein function, the higher order alternating
+#' iterated forward differences are known in closed form but cannot be evaluated
+#' numerically without the danger of loss of significance. But we can use
+#' numerical integration (here: \code{\link[stats]{integrate}}) to approximate
+#' it with the following representation:
 #' \deqn{
-#'   {(-1)}^{k} \Delta^k \psi(x) = \int_0^\infty e^{-ux} (1-e^{-u})^k \alpha / \Gamma(1-\alpha) u^{-1-\alpha} du, x > 0 .
+#'   {(-1)}^{k-1} \Delta^k \psi(x)
+#'    = \int_0^\infty e^{-ux} (1-e^{-u})^k
+#'      \alpha / \Gamma(1-\alpha) u^{-1-\alpha} du, x>0, k>0 .
 #' }
+#'
+#' This Bernstein function is no. 1 in the list of complete Bernstein functions
+#' in Chp. 16 of \insertCite{Schilling2012a}{rmo}.
+#'
+#' @references
+#'   \insertAllCited{}
 #'
 #' @seealso \linkS4class{BernsteinFunction}
 #'
@@ -347,15 +378,84 @@ setMethod("valueOf",
       is_nonnegative_number(x))
 
     if (difference_order > 0) {
-      levy_density  <- function(u) {
-        object@alpha / gamma(1 - object@alpha) * u^(-1-object@alpha)
-      }
       integrate(
-         # TODO: print precision information?
         f=function(u) {
-          exp(-x * u) * (1 - exp(-u))^difference_order * levy_density(u)
+          exp(-x * u) * (1 - exp(-u))^difference_order *
+            object@alpha / gamma(1-object@alpha) * u ^ (-1-object@alpha) ## Lévy density
         }, lower = 0, upper = Inf)$value
     } else {
       x^object@alpha
+    }
+  })
+
+
+
+# #### Logarithmic Bernstein functions ####
+
+#' Class for the \emph{Gamma Bernstein function}
+#'
+#' @examples
+#' bf <- GammaBernsteinFunction(a=2)
+#'
+#' @slot a Scale parameter for the Lévy measure.
+#'
+#' @description
+#' The \emph{Gamma Bernstein function}, is the Bernstein function of a
+#' subordinator with a (scaled) Gamma distribution. The representation is
+#' for \eqn{a > 0}
+#' \deqn{
+#'   \psi(x) = \log(1 + \frac{x}{a}), x > 0.
+#' }
+#'
+#' @details
+#' For this Bernstein function, the higher-order alternating iterated forward
+#' differences are known in closed form but cannot be evaluated numerically
+#' without the danger of loss of significance. But we can use numerical
+#' integration (here: \code{\link[stats]{integrate}}) to approximate it with the
+#' following representation:
+#' \deqn{
+#'   {(-1)}^{k-1} \Delta^{k} \psi(x)
+#'     = \int_{0}^{\infty} e^{-ux} {(1 - e^{-u})}^{k}
+#'       e^{-au} / u du, x>0, k>0.
+#' }
+#'
+#' This Bernstein function is no. 26 in the list of complete Bernstein functions
+#' in Chp. 16 of \insertCite{Schilling2012a}{rmo}.
+#'
+#' @references
+#'   \insertAllCited{}
+#'
+#' @seealso \linkS4class{BernsteinFunction}
+#'
+#' @importFrom methods new setClass
+#'
+#' @export GammaBernsteinFunction
+GammaBernsteinFunction <- setClass("GammaBernsteinFunction",
+  contains="BernsteinFunction",
+  slots=c(a = "numeric"))
+
+#' @rdname valueOf-methods
+#' @aliases valueOf,GammaBernsteinFunction,numeric,integer,ANY-method
+#'
+#' @seealso \linkS4class{GammaBernsteinFunction}
+#'
+#' @importFrom methods setMethod
+#' @importFrom stats integrate
+#' @include assert.R
+#' @export
+setMethod("valueOf",
+  signature = c("GammaBernsteinFunction", "numeric", "integer"),
+  definition = function(object, x, difference_order=0) {
+    assert_that(is_nonnegative_number(difference_order),
+      is_nonnegative_number(x))
+
+    if (difference_order > 0) {
+      integrate(
+        f=function(u) {
+          exp(-x*u) * (1 - exp(-u))^difference_order *
+            exp(-object@a*u)/u ## Lévy density
+        }, lower = 0, upper = Inf)$value
+    } else {
+      log(1 + x/object@a)
     }
   })
