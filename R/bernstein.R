@@ -66,6 +66,7 @@ setClass("BernsteinFunction", # nolint
 #' @rdname valueOf-methods
 #'
 #' @seealso \linkS4class{BernsteinFunction}
+#'
 #' @export
 setGeneric("valueOf",
   def=function(object, x, difference_order) {
@@ -95,11 +96,19 @@ setGeneric("valueOf",
 #' @seealso \linkS4class{BernsteinFunction}
 #'
 #' @importFrom methods new setClass
+#' @include assert.R
 #'
 #' @export LinearBernsteinFunction
 LinearBernsteinFunction <- setClass("LinearBernsteinFunction", # nolint
   contains = "BernsteinFunction",
-  slots = c(scale = "numeric"))
+  slots = c(scale = "numeric"),
+  validity = function(object) {
+    if (!is_nonnegative_number(object@scale)) {
+      return("scale must be non-negative number")
+    }
+
+    TRUE
+  })
 
 #' @rdname valueOf-methods
 #' @aliases valueOf,LinearBernsteinFunction,numeric,integer,ANY-method
@@ -108,6 +117,7 @@ LinearBernsteinFunction <- setClass("LinearBernsteinFunction", # nolint
 #'
 #' @importFrom methods setMethod
 #' @include assert.R
+#' 
 #' @export
 setMethod("valueOf",
   signature = c("LinearBernsteinFunction", "numeric", "integer"),
@@ -143,11 +153,19 @@ setMethod("valueOf",
 #' @seealso \linkS4class{BernsteinFunction}
 #'
 #' @importFrom methods new setClass
+#' @include assert.R
 #'
 #' @export ConstantBernsteinFunction
 ConstantBernsteinFunction <- setClass("ConstantBernsteinFunction", # nolint
   contains = "BernsteinFunction",
-  slots = c(constant = "numeric"))
+  slots = c(constant = "numeric"),
+  validity = function(object) {
+    if (!is_nonnegative_number(object@constant)) {
+      return("constant must be non-negative number")
+    }
+
+    TRUE
+  })
 
 #' @rdname valueOf-methods
 #' @aliases valueOf,ConstantBernsteinFunction,numeric,integer,ANY-method
@@ -156,6 +174,7 @@ ConstantBernsteinFunction <- setClass("ConstantBernsteinFunction", # nolint
 #'
 #' @importFrom methods setMethod
 #' @include assert.R
+#'
 #' @export
 setMethod("valueOf", # nolint
   signature = c("ConstantBernsteinFunction", "numeric", "integer"),
@@ -195,11 +214,19 @@ setMethod("valueOf", # nolint
 #' @seealso \linkS4class{BernsteinFunction}
 #'
 #' @importFrom methods new setClass
+#' @include assert.R
 #'
 #' @export ScaledBernsteinFunction
 ScaledBernsteinFunction <- setClass("ScaledBernsteinFunction", # nolint
   contains = "BernsteinFunction",
-  slots = c(scale = "numeric", original = "BernsteinFunction"))
+  slots = c(scale = "numeric", original = "BernsteinFunction"),
+  validity = function(object) {
+    if (!is_nonnegative_number(object@scale)) {
+      return("scale must be non-negative number")
+    }
+
+    TRUE
+  })
 
 #' @rdname valueOf-methods
 #' @aliases valueOf,ScaledBernsteinFunction,numeric,integer,ANY-method
@@ -208,6 +235,7 @@ ScaledBernsteinFunction <- setClass("ScaledBernsteinFunction", # nolint
 #'
 #' @importFrom methods setMethod
 #' @include assert.R
+#'
 #' @export
 setMethod("valueOf",
   signature = c("ScaledBernsteinFunction", "numeric", "integer"),
@@ -250,6 +278,7 @@ SumOfBernsteinFunctions <- setClass("SumOfBernsteinFunctions", # nolint
 #'
 #' @importFrom methods setMethod
 #' @include assert.R
+#'
 #' @export
 setMethod("valueOf",
   signature = c("SumOfBernsteinFunctions", "numeric", "integer"),
@@ -287,11 +316,20 @@ setMethod("valueOf",
 #' @seealso \linkS4class{BernsteinFunction}
 #'
 #' @importFrom methods new setClass
+#' @include assert.R
 #'
 #' @export PoissonBernsteinFunction
 PoissonBernsteinFunction <- setClass("PoissonBernsteinFunction", # nolint
   contains = "BernsteinFunction",
-  slots = c("lambda", "eta"))
+  slots = c("lambda", "eta"),
+  validity = function(object) {
+    if (!is_nonnegative_number(object@lambda) ||
+          !is_nonnegative_number(object@eta)) {
+      return("lambda and eta must be positive numbers")
+    }
+
+    TRUE
+  })
 
 #' @rdname valueOf-methods
 #' @aliases valueOf,PoissonBernsteinFunction,numeric,integer,ANY-method
@@ -300,6 +338,7 @@ PoissonBernsteinFunction <- setClass("PoissonBernsteinFunction", # nolint
 #'
 #' @importFrom methods setMethod
 #' @include assert.R
+#'
 #' @export
 setMethod("valueOf",
   signature = c("PoissonBernsteinFunction", "numeric", "integer"),
@@ -355,11 +394,20 @@ setMethod("valueOf",
 #' @seealso \linkS4class{BernsteinFunction}
 #'
 #' @importFrom methods new setClass
+#' @importFrom assertthat is.number
+#' @include assert.R
 #'
 #' @export AlphaStableBernsteinFunction
 AlphaStableBernsteinFunction <- setClass("AlphaStableBernsteinFunction", # nolint
   contains = "BernsteinFunction",
-  slots = c("alpha"))
+  slots = c("alpha"),
+  validity = function(object) {
+    if (!is_positive_number(object@alpha) || object@alpha >= 1) {
+      return("alpha must be number between 0 and 1")
+    }
+
+    TRUE
+  })
 
 #' @rdname valueOf-methods
 #' @aliases valueOf,AlphaStableBernsteinFunction,numeric,integer,ANY-method
@@ -369,6 +417,7 @@ AlphaStableBernsteinFunction <- setClass("AlphaStableBernsteinFunction", # nolin
 #' @importFrom methods setMethod
 #' @importFrom stats integrate
 #' @include assert.R
+#'
 #' @export
 setMethod("valueOf",
   signature = c("AlphaStableBernsteinFunction", "numeric", "integer"),
@@ -427,11 +476,19 @@ setMethod("valueOf",
 #' @seealso \linkS4class{BernsteinFunction}
 #'
 #' @importFrom methods new setClass
+#' @include assert.R
 #'
 #' @export GammaBernsteinFunction
 GammaBernsteinFunction <- setClass("GammaBernsteinFunction", # nolint
   contains="BernsteinFunction",
-  slots=c(a = "numeric"))
+  slots=c(a = "numeric"),
+  validity = function(object) {
+    if (!is_positive_number(object@a)) {
+      return("a must be positive number")
+    }
+
+    TRUE
+  })
 
 #' @rdname valueOf-methods
 #' @aliases valueOf,GammaBernsteinFunction,numeric,integer,ANY-method
@@ -441,6 +498,7 @@ GammaBernsteinFunction <- setClass("GammaBernsteinFunction", # nolint
 #' @importFrom methods setMethod
 #' @importFrom stats integrate
 #' @include assert.R
+#'
 #' @export
 setMethod("valueOf",
   signature = c("GammaBernsteinFunction", "numeric", "integer"),
