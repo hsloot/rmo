@@ -4,27 +4,37 @@
 
 #' Sample from a Marshall--Olkin distribution
 #'
+#' @description
 #' Draws `n` independent samples from a `d`-variate Marshall-Olkin distribution
 #' with shock rates `intensities`.
 #'
-#' - The shock intensities must be stored in a vector of length \eqn{2^d-1}.
-#' - A shock intensity of zero corresponds to an almost surely infinite shock.
-#' - We use a binary representation to map a non-empty subset \eqn{J} of \eqn{\{
-#' 1, \ldots, d\}}{{1, \ldots, d}} to integers \eqn{j} of \eqn{1, \ldots, 2^d-1}. In
-#' particular, \eqn{i} is a component in the set \eqn{J} corresponding to the integer \eqn{j} iff
-#' \eqn{j = \sum_{k=0}^\infty a_k 2^k}{\sum a[k] * 2^k} and \eqn{a_{i-1} = 1}{a[i-1] = 1}.
-#'
-#' @param n number of samples
-#' @param d dimension
+#' @param n Number of samples
+#' @param d Dimension
 #' @param intensities Marshall-Olkin intensity rates
 #'
-#' @return `rmo_esm` implements the *exogenous shock model* representation and
-#' returns an \eqn{n \times d}{n x d} numeric matrix with the rows corresponding
-#' to independent and identically distributed samples of a \eqn{d} variate
-#' Marshall-Olkin distribution with parameters `intensities`.
+#' @details
+#' __The shock intensities__:
+#' - The shock `intensities` must be stored in a vector of length
+#'    \eqn{2^d-1}.
+#' - A shock intensity of zero corresponds to an almost surely infinite
+#'    shock.
+#' - We use a binary representation to map a non-empty subset \eqn{J}
+#'    of \eqn{\{ 1, \ldots, d\}}{{1, \ldots, d}} to integers \eqn{j} of
+#'    \eqn{1, \ldots, 2^d-1}.
+#'    In particular, \eqn{i} is a component in the set \eqn{J} corresponding to
+#'    the integer \eqn{j} if, and only if,
+#'    \eqn{j = \sum_{k=0}^\infty a_k 2^k}{\sum a[k] * 2^k}
+#'    and \eqn{a_{i-1} = 1}{a[i-1] = 1}.
 #'
-#' @section References: For more information on these algorithms, see J.-F. Mai,
-#' M. Scherer, "Simulating Copulas", World Scientific (2017), pp. 104 psqq.
+#' __The exogenous shock model__ simulates a Marshall--Olkin distributed random
+#' vector via exponentially distributed shock times for all non-empty subsets,
+#' see \insertCite{@see pp. 104 psqq. @Mai2017a}{rmo} and
+#' \insertCite{Marshall1967a}{rmo}.
+#'
+#' @return `rmo_esm` implements the *exogenous shock model* representation and
+#'   returns an \eqn{n \times d}{n x d} numeric matrix with the rows
+#'   corresponding to independent and identically distributed samples of a
+#'   \eqn{d} variate Marshall-Olkin distribution with parameters `intensities`.
 #'
 #' @family samplers
 #'
@@ -32,6 +42,9 @@
 #' rmo_esm(10L, 2L, c(0.4, 0.3, 0.2))
 #' rmo_esm(10L, 2L, c(1, 1, 0))         ## independence
 #' rmo_esm(10L, 2L, c(0, 0, 1))         ## comonotone
+#'
+#' @references
+#'  \insertAllCited{}
 #'
 #' @include assert.R RcppExports.R
 #' @importFrom stats rexp
@@ -48,15 +61,24 @@ rmo_esm <- function(n, d, intensities) {
 
 #' @rdname rmo_esm
 #'
+#' @details
+#' __The Arnold model__ simulates a Marshall--Olkin distributed random variable
+#' by simulating a marked homogeneous Poisson process and where the
+#' inter-arrival times correspond to shock shock-arrival times and the
+#' marks to the specific shocks, see \insertCite{@see Sec. 3.1.2 @Mai2017a}{rmo}
+#' and \insertCite{Arnold1975a}{rmo}.
+#'
 #' @return `rmo_arnold` implements the *Arnold model* representation and returns
-#' an \eqn{n \times d}{n x d} numeric matrix with the rows corresponding to
-#' independent and identically distributed samples of a \eqn{d} variate
-#' Marshall-Olkin distribution with parameters `intensities`.
+#'  an \eqn{n \times d}{n x d} numeric matrix with the rows corresponding to
+#'  independent and identically distributed samples of a \eqn{d} variate
+#'  Marshall-Olkin distribution with parameters `intensities`.
 #'
 #' @examples
 #' rmo_arnold(10L, 2L, c(0.4, 0.3, 0.2))
 #' rmo_arnold(10L, 2L, c(1, 1, 0))         ## independence
 #' rmo_arnold(10L, 2L, c(0, 0, 1))         ## comonotone
+#'
+#' @family samplers
 #'
 #' @include assert.R RcppExports.R
 #' @importFrom stats rexp
