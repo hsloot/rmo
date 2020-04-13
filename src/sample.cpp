@@ -22,7 +22,7 @@ NumericMatrix Rcpp__rmo_esm(unsigned int n, unsigned int d, NumericVector intens
     value = NumericVector(d, R_PosInf);
     for (unsigned int j=0; j < (1<<d)-1; j++) {
       intensity = intensities[j];
-      if (intensity > 0) {
+      if (intensity > 0.) {
         shock_time = R::exp_rand() / intensity;
         for (unsigned int i=0; i<d; i++) {
           if (is_within(i+1, j+1)) {
@@ -149,7 +149,7 @@ NumericMatrix Rcpp__rmo_esm_cuadras_auge(unsigned int n, unsigned int d, double 
       checkUserInterrupt();
 
     individual_shocks = Rcpp::rexp(d, alpha);
-    global_shock = ((0 == beta) ? R_PosInf : exp_rand() / beta);
+    global_shock = ((0. == beta) ? R_PosInf : exp_rand() / beta);
 
     for (unsigned int i=0; i<d; i++) {
       out(k, i) = min2(individual_shocks[i], global_shock);
