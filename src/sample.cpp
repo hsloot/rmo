@@ -1,4 +1,5 @@
 #include <Rcpp.h>
+#include <mo.hpp>
 #include <math.h>
 #include "sets.h"
 #include "math.h"
@@ -10,31 +11,33 @@ static const unsigned int C_CHECK_USR_INTERRUP = 100000;
 //' @keywords internal
 //' @noRd
 // [[Rcpp::export]]
-NumericMatrix Rcpp__rmo_esm(unsigned int n, unsigned int d, NumericVector intensities) {
-  double intensity, shock_time;
-  NumericVector value;
+NumericMatrix Rcpp__rmo_esm(unsigned int n, unsigned int d, const NumericVector& intensities) {
+  double shock_time;
+  std::unique_ptr<mo::stats::ExpGenerator> exp_generator{new mo::stats::RExpGenerator()};
 
-  NumericMatrix out(n, d);
+  if ((1<<d)-1 != intensities.size())
+    std::range_error("intensities.size() != 2^d-1");
+
+  NumericMatrix out(no_init(n, d));
   for (unsigned int k=0; k<n; k++) {
     if ((d*k) % C_CHECK_USR_INTERRUP == 0)
       checkUserInterrupt();
-
-    value = NumericVector(d, R_PosInf);
-    for (unsigned int j=0; j < (1<<d)-1; j++) {
-      intensity = intensities[j];
-      if (intensity > 0.) {
-        shock_time = R::exp_rand() / intensity;
-        for (unsigned int i=0; i<d; i++) {
+    MatrixRow<REALSXP> values = out(k, _);
+    std::fill(values.begin(), values.end(), R_PosInf);
+    for (R_xlen_t j=0; j<(1<<d)-1; j++) {
+    // dont't use intensities.size() for performance
+      if (intensities[j] > 0.) {
+        shock_time = (*exp_generator.get())(intensities[j]);
+        for (R_xlen_t i=0; i<d; i++) {
+        // don't use values.size() for performance
           if (is_within(i+1, j+1)) {
-            value[i] = min2(value[i], shock_time);
+              values[i] = min2(values[i], shock_time);
           }
         }
       }
     }
-
-    out(k, _) = value;
   }
-  return wrap( out );
+  return out;
 } // NumericMatrix Rcpp__rmo_esm(unsigned int n, unsigned int d, NumericVector intensities);
 
 

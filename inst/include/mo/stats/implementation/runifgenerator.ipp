@@ -6,10 +6,10 @@
 
 namespace mo {
 namespace stats {
-  
+
 RUnifGenerator01::RUnifGenerator01() {}
 
-double RUnifGenerator01::operator()() const {
+inline double RUnifGenerator01::operator()() const {
   return R::unif_rand();
 }
 

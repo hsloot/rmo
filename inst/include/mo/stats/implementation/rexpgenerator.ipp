@@ -16,12 +16,12 @@ RExpGenerator::RExpGenerator(double rate) :
     std::range_error("rate < 0.");
 }
 
-double RExpGenerator::operator()() const {
+inline double RExpGenerator::operator()() const {
   return (*this)(rate_);
 }
 
 // WARNING: no check on rate
-double RExpGenerator::operator()(const double& rate) const {
+inline double RExpGenerator::operator()(const double& rate) const {
   return 0. == rate ? R_PosInf : (R_PosInf == rate ? 0. : R::exp_rand() / rate);
 }
 

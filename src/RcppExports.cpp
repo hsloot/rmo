@@ -6,14 +6,14 @@
 using namespace Rcpp;
 
 // Rcpp__rmo_esm
-NumericMatrix Rcpp__rmo_esm(unsigned int n, unsigned int d, NumericVector intensities);
+NumericMatrix Rcpp__rmo_esm(unsigned int n, unsigned int d, const NumericVector& intensities);
 RcppExport SEXP _rmo_Rcpp__rmo_esm(SEXP nSEXP, SEXP dSEXP, SEXP intensitiesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< unsigned int >::type n(nSEXP);
     Rcpp::traits::input_parameter< unsigned int >::type d(dSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type intensities(intensitiesSEXP);
+    Rcpp::traits::input_parameter< const NumericVector& >::type intensities(intensitiesSEXP);
     rcpp_result_gen = Rcpp::wrap(Rcpp__rmo_esm(n, d, intensities));
     return rcpp_result_gen;
 END_RCPP

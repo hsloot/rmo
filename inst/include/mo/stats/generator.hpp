@@ -15,8 +15,8 @@ class UnivariateGenerator : public Generator {
 
 class ExpGenerator : public UnivariateGenerator {
 public:
-  virtual double operator()() const = 0;
-  virtual double operator()(const double& rate) const = 0;
+  virtual inline double operator()() const = 0;
+  virtual inline double operator()(const double& rate) const = 0;
 }; // mo
 
 class UnifGenerator : public UnivariateGenerator {
@@ -36,8 +36,8 @@ public:
   RExpGenerator& operator=(const RExpGenerator& other) = default;
   RExpGenerator& operator=(RExpGenerator&& other) = default;
 
-  virtual double operator()() const override;
-  virtual double operator()(const double& rate) const override;
+  virtual inline double operator()() const override;
+  virtual inline double operator()(const double& rate) const override;
 private:
   double rate_;
 }; // RExpGenerator
@@ -51,7 +51,7 @@ public:
   RUnifGenerator01& operator=(const RUnifGenerator01& other) = default;
   RUnifGenerator01& operator=(RUnifGenerator01&& other) = default;
 
-  virtual double operator()() const override; 
+  virtual inline double operator()() const override; 
 }; // RUnifGenerator
 
 } // stats
