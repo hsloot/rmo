@@ -11,7 +11,7 @@ static const unsigned int C_CHECK_USR_INTERRUP = 100000;
 //' @keywords internal
 //' @noRd
 // [[Rcpp::export]]
-NumericMatrix Rcpp__rmo_esm(unsigned int n, unsigned int d, const NumericVector& intensities) {
+NumericMatrix Rcpp__rmo_esm(R_xlen_t n, R_xlen_t d, const NumericVector& intensities) {
   double shock_time;
   std::unique_ptr<mo::stats::ExpGenerator> exp_generator{new mo::stats::RExpGenerator()};
 
@@ -19,7 +19,7 @@ NumericMatrix Rcpp__rmo_esm(unsigned int n, unsigned int d, const NumericVector&
     std::range_error("intensities.size() != 2^d-1");
 
   NumericMatrix out(no_init(n, d));
-  for (unsigned int k=0; k<n; k++) {
+  for (R_xlen_t k=0; k<n; k++) {
     if ((d*k) % C_CHECK_USR_INTERRUP == 0)
       checkUserInterrupt();
     MatrixRow<REALSXP> values = out(k, _);
