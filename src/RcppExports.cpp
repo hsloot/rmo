@@ -45,15 +45,15 @@ BEGIN_RCPP
 END_RCPP
 }
 // Rcpp__rmo_esm_cuadras_auge
-NumericMatrix Rcpp__rmo_esm_cuadras_auge(unsigned int n, unsigned int d, double alpha, double beta);
+NumericMatrix Rcpp__rmo_esm_cuadras_auge(const R_xlen_t n, const R_xlen_t d, const double alpha, const double beta);
 RcppExport SEXP _rmo_Rcpp__rmo_esm_cuadras_auge(SEXP nSEXP, SEXP dSEXP, SEXP alphaSEXP, SEXP betaSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< unsigned int >::type n(nSEXP);
-    Rcpp::traits::input_parameter< unsigned int >::type d(dSEXP);
-    Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP);
-    Rcpp::traits::input_parameter< double >::type beta(betaSEXP);
+    Rcpp::traits::input_parameter< const R_xlen_t >::type n(nSEXP);
+    Rcpp::traits::input_parameter< const R_xlen_t >::type d(dSEXP);
+    Rcpp::traits::input_parameter< const double >::type alpha(alphaSEXP);
+    Rcpp::traits::input_parameter< const double >::type beta(betaSEXP);
     rcpp_result_gen = Rcpp::wrap(Rcpp__rmo_esm_cuadras_auge(n, d, alpha, beta));
     return rcpp_result_gen;
 END_RCPP

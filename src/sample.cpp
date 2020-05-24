@@ -12,10 +12,11 @@ static const unsigned int C_CHECK_USR_INTERRUP = 100000;
 //' @noRd
 // [[Rcpp::export]]
 NumericMatrix Rcpp__rmo_esm(R_xlen_t n, R_xlen_t d, const NumericVector& intensities) {
-  std::unique_ptr<mo::stats::ExpGenerator> exp_generator{new mo::stats::RExpGenerator(1.)};
   auto num_shocks = intensities.size();
   if ((1<<d)-1 != num_shocks)
     std::range_error("intensities.size() != 2^d-1");
+
+  std::unique_ptr<mo::stats::ExpGenerator> exp_generator{new mo::stats::RExpGenerator(1.)};
 
   NumericMatrix out(no_init(n, d));
   for (R_xlen_t k=0; k<n; k++) {
@@ -26,7 +27,7 @@ NumericMatrix Rcpp__rmo_esm(R_xlen_t n, R_xlen_t d, const NumericVector& intensi
     for (R_xlen_t j=0; j<num_shocks; j++) {
     // dont't use intensities.size() for performance
       if (intensities[j] > 0.) {
-        auto shock_time = (*exp_generator.get())(intensities[j]);
+        auto shock_time = (*exp_generator)(intensities[j]);
         for (R_xlen_t i=0; i<d; i++) {
         // don't use values.size() for performance
           if (mo::math::is_within(i, j)) {
@@ -37,7 +38,7 @@ NumericMatrix Rcpp__rmo_esm(R_xlen_t n, R_xlen_t d, const NumericVector& intensi
     }
   }
   return out;
-} // NumericMatrix Rcpp__rmo_esm(R_xlen_t n, R_xlen_t d, const NumericVector& intensities);
+}
 
 
 //' @keywords internal
@@ -141,25 +142,28 @@ NumericMatrix Rcpp__rmo_ex_arnold(unsigned int n, unsigned int d, NumericVector 
 //' @keywords internal
 //' @noRd
 // [[Rcpp::export]]
-NumericMatrix Rcpp__rmo_esm_cuadras_auge(unsigned int n, unsigned int d, double alpha, double beta) { // alpha, beta >= 0
-  NumericVector individual_shocks;
-  double global_shock;
+NumericMatrix Rcpp__rmo_esm_cuadras_auge(const R_xlen_t n, const R_xlen_t d, const double alpha, const double beta) { // alpha, beta >= 0
+  if (alpha < 0. || beta < 0.)
+    std::range_error("alpha or beta < 0");
 
-  NumericMatrix out(n, d);
-  for (unsigned int k=0; k<n; k++) {
+  std::unique_ptr<mo::stats::ExpGenerator> exp_generator{new mo::stats::RExpGenerator(1.)};
+
+  NumericMatrix out(no_init(n, d));
+  for (R_xlen_t k=0; k<n; k++) {
+  // dont't use out.nrow() for performance
     if ((d*k) % C_CHECK_USR_INTERRUP == 0)
       checkUserInterrupt();
 
-    individual_shocks = Rcpp::rexp(d, alpha);
-    global_shock = ((0. == beta) ? R_PosInf : exp_rand() / beta);
-
-    for (unsigned int i=0; i<d; i++) {
-      out(k, i) = min2(individual_shocks[i], global_shock);
+    auto global_shock = (*exp_generator)(beta);
+    MatrixRow<REALSXP> values = out(k, _);
+    for (auto& value : values) {
+      auto individual_shock = (*exp_generator)(alpha);
+      value = mo::math::min(individual_shock, global_shock);
     }
   }
 
-  return wrap( out );
-} // NumericMatrix Rcpp__rmo_esm_cuadras_auge(unsigned int n, unsigned int d, double alpha, double beta);
+  return out;
+}
 
 
 
