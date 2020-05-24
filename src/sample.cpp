@@ -12,10 +12,9 @@ static const unsigned int C_CHECK_USR_INTERRUP = 100000;
 //' @noRd
 // [[Rcpp::export]]
 NumericMatrix Rcpp__rmo_esm(R_xlen_t n, R_xlen_t d, const NumericVector& intensities) {
-  double shock_time;
   std::unique_ptr<mo::stats::ExpGenerator> exp_generator{new mo::stats::RExpGenerator(1.)};
-
-  if ((1<<d)-1 != intensities.size())
+  auto num_shocks = intensities.size();
+  if ((1<<d)-1 != num_shocks)
     std::range_error("intensities.size() != 2^d-1");
 
   NumericMatrix out(no_init(n, d));
@@ -24,10 +23,10 @@ NumericMatrix Rcpp__rmo_esm(R_xlen_t n, R_xlen_t d, const NumericVector& intensi
       checkUserInterrupt();
     MatrixRow<REALSXP> values = out(k, _);
     std::fill(values.begin(), values.end(), R_PosInf);
-    for (R_xlen_t j=0; j<(1<<d)-1; j++) {
+    for (R_xlen_t j=0; j<num_shocks; j++) {
     // dont't use intensities.size() for performance
       if (intensities[j] > 0.) {
-        shock_time = (*exp_generator.get())(intensities[j]);
+        auto shock_time = (*exp_generator.get())(intensities[j]);
         for (R_xlen_t i=0; i<d; i++) {
         // don't use values.size() for performance
           if (mo::math::is_within(i, j)) {
