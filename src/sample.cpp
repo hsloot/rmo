@@ -13,7 +13,7 @@ static const unsigned int C_CHECK_USR_INTERRUP = 100000;
 // [[Rcpp::export]]
 NumericMatrix Rcpp__rmo_esm(R_xlen_t n, R_xlen_t d, const NumericVector& intensities) {
   double shock_time;
-  std::unique_ptr<mo::stats::ExpGenerator> exp_generator{new mo::stats::RExpGenerator()};
+  std::unique_ptr<mo::stats::ExpGenerator> exp_generator{new mo::stats::RExpGenerator(1.)};
 
   if ((1<<d)-1 != intensities.size())
     std::range_error("intensities.size() != 2^d-1");
@@ -30,15 +30,15 @@ NumericMatrix Rcpp__rmo_esm(R_xlen_t n, R_xlen_t d, const NumericVector& intensi
         shock_time = (*exp_generator.get())(intensities[j]);
         for (R_xlen_t i=0; i<d; i++) {
         // don't use values.size() for performance
-          if (is_within(i+1, j+1)) {
-              values[i] = min2(values[i], shock_time);
+          if (mo::math::is_within(i, j)) {
+              values[i] = mo::math::min(values[i], shock_time);
           }
         }
       }
     }
   }
   return out;
-} // NumericMatrix Rcpp__rmo_esm(unsigned int n, unsigned int d, NumericVector intensities);
+} // NumericMatrix Rcpp__rmo_esm(R_xlen_t n, R_xlen_t d, const NumericVector& intensities);
 
 
 //' @keywords internal

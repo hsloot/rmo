@@ -64,8 +64,10 @@ detach("package:rmo", unload = TRUE)
 #+ r plot-results-first
 mb1 %>%
   autoplot()
+mb1
 mb2 %>%
   autoplot()
+mb2
 
 
 
@@ -74,6 +76,7 @@ mb2 %>%
 #' We also test the speed on a general, asymmetric parametrisation
 #' to assure that there are non performance decreases.
 #+ r parameters-second
+library(rmo)
 lambda <- 0.2
 eta <- 0.5
 alpha <- 0.4
@@ -83,7 +86,6 @@ intensities <- intensities_hierarchical(d1, d2, lambda=lambda,
   eta=eta, alpha=alpha, a=a)
 
 #+ r v0.2.0.9007-second
-library(rmo)
 set.seed(use_seed)
 mb1 <- microbenchmark(
   ESM = rmo_esm(n, d, intensities=intensities),
@@ -106,8 +108,10 @@ detach("package:rmo", unload = TRUE)
 #+ r plot-results-second
 mb1 %>%
   autoplot()
+mb1
 mb2 %>%
   autoplot()
+mb2
 
 # print(unlink(tmpdir, recursive = TRUE))
 # nolint end
