@@ -22,3 +22,12 @@ NumericVector Rcppmo_th_unif(R_xlen_t n) {
 
   return out;
 }
+
+// [[Rcpp::export]]
+NumericVector Rcppmo_th_int(R_xlen_t n, NumericVector probabilities) {
+  NumericVector out(no_init(n));
+  std::unique_ptr<mo::stats::IntGenerator> int_gen{new mo::stats::RIntGenerator(probabilities)};
+  std::generate(out.begin(), out.end(), (*static_cast<mo::stats::RIntGenerator*>(int_gen.get())));
+
+  return out;
+}
