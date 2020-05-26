@@ -2,6 +2,7 @@
 #define MO_HPP
 
 #include <mo/stats/generator.hpp>
+#include <mo/stats/walker.hpp>
 #include <mo/math/misc.hpp>
 #include <mo/math/sets.hpp>
 

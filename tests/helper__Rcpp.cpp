@@ -33,6 +33,15 @@ NumericVector Rcppmo_th_int(const R_xlen_t& n, const NumericVector& probabilitie
 }
 
 // [[Rcpp::export]]
+NumericVector Rcppmo_th_perm(const R_xlen_t& n, const NumericVector& probabilities) {
+  NumericVector out(no_init(n));
+  std::unique_ptr<mo::stats::SampleWalker> int_gen{new mo::stats::RSampleWalker(probabilities)};
+  std::generate(out.begin(), out.end(), (*static_cast<mo::stats::RSampleWalker*>(int_gen.get())));
+
+  return out;
+}
+
+// [[Rcpp::export]]
 NumericVector Rcppmo_th_fixeddbl(const R_xlen_t& n, const double& value) {
   NumericVector out(no_init(n));
   std::unique_ptr<mo::stats::FixedDblGenerator> fixeddbl_gen{new mo::stats::FixedDblGenerator(value)};

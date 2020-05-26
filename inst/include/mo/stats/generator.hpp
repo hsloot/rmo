@@ -17,6 +17,23 @@ public:
   virtual inline T operator()() const = 0;
 }; // UnivariateGenerator
 
+class ExpGenerator : public UnivariateGenerator<double> {
+public:
+  virtual inline double operator()() const = 0;
+  virtual inline double operator()(const double& rate) const = 0;
+}; // ExpGenerator
+
+class UnifGenerator : public UnivariateGenerator<double> {
+public:
+
+  virtual double operator()() const = 0;
+}; // UnifGenerator
+
+class IntGenerator : public UnivariateGenerator<R_xlen_t> {
+public:
+  virtual inline R_xlen_t operator()() const = 0;
+}; // IntGenerator
+
 class FixedDblGenerator : public UnivariateGenerator<double> {
 public:
   FixedDblGenerator() = default;
@@ -27,29 +44,12 @@ public:
   FixedDblGenerator& operator=(const FixedDblGenerator& other) = default;
   FixedDblGenerator& operator=(FixedDblGenerator&& other) = default;
 
-  virtual inline double operator()() const override;
-  virtual inline double operator()(const double& value) const;
+  virtual inline double operator()() const override final;
+  virtual inline double operator()(const double& value) const final;
 private:
   double value_ = 1.;
-};
+}; // FixedDblGenerator
 
-
-class ExpGenerator : public UnivariateGenerator<double> {
-public:
-  virtual inline double operator()() const = 0;
-  virtual inline double operator()(const double& rate) const = 0;
-}; // mo
-
-class UnifGenerator : public UnivariateGenerator<double> {
-public:
-
-  virtual double operator()() const = 0;
-}; // mo
-
-class IntGenerator : public UnivariateGenerator<R_xlen_t> {
-public:
-  virtual inline R_xlen_t operator()() const = 0;
-};
 
 class RExpGenerator : public ExpGenerator {
 public:
@@ -61,8 +61,8 @@ public:
   RExpGenerator& operator=(const RExpGenerator& other) = default;
   RExpGenerator& operator=(RExpGenerator&& other) = default;
 
-  virtual inline double operator()() const override;
-  virtual inline double operator()(const double& rate) const override;
+  virtual inline double operator()() const override final;
+  virtual inline double operator()(const double& rate) const override final;
 
 private:
   double rate_;
@@ -77,9 +77,8 @@ public:
   RUnifGenerator01& operator=(const RUnifGenerator01& other) = default;
   RUnifGenerator01& operator=(RUnifGenerator01&& other) = default;
 
-  virtual inline double operator()() const override;
+  virtual inline double operator()() const override final;
 }; // RUnifGenerator
-
 
 class RIntGenerator : public IntGenerator {
 public:
@@ -92,13 +91,13 @@ public:
   RIntGenerator& operator=(const RIntGenerator& other);
   RIntGenerator& operator=(RIntGenerator&& other) = default;
 
-  virtual inline R_xlen_t operator()() const override;
+  virtual inline R_xlen_t operator()() const override final;
 
 private:
   std::vector<double> cumulative_probabilities_;
   std::vector<int> original_order_;
   std::unique_ptr<UnifGenerator> unif_generator_;
-};
+}; // RIntGenerator
 
 } // stats
 } // mo

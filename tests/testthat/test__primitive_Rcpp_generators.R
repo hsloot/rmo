@@ -48,3 +48,39 @@ test_that("RIntGenerator works as expected", {
   expect_equal_sampling_result("Rcppmo_th_int", "sample_int_base_0",
     args, n, use_seed)
 })
+
+test_that("RSamplewalker works as expected", {
+  assign("perm_base_0",
+    function(n, probabilities) {
+      -1+sample.int(
+        n=length(probabilities),
+        size=n, prob = probabilities, replace=FALSE)
+  }, env = globalenv())
+  probabilities <- c(8, 7, 3, 10, 6, 1, 2, 9, 5, 4)
+  n <- length(probabilities)
+  args <- list("probabilities" = probabilities)
+  expect_equal_sampling_result(
+    "Rcppmo_th_perm", "perm_base_0",
+    args, n, use_seed)
+
+  probabilities <- probabilities / sum(probabilities)
+  n <- length(probabilities)
+  args <- list("probabilities" = probabilities)
+  expect_equal_sampling_result(
+    "Rcppmo_th_perm", "perm_base_0",
+    args, n, use_seed)
+
+  probabilities <- rep(1, 10) / 10
+  n <- length(probabilities)
+  args <- list("probabilities" = probabilities)
+  expect_equal_sampling_result(
+    "Rcppmo_th_perm", "perm_base_0",
+    args, n, use_seed)
+
+  probabilities <- c(10, 20, 0.1)
+  n <- length(probabilities)
+  args <- list("probabilities" = probabilities)
+  expect_equal_sampling_result(
+    "Rcppmo_th_perm", "perm_base_0",
+    args, n, use_seed)
+})

@@ -17,7 +17,7 @@ inline double FixedDblGenerator::operator()(const double& value) const {
     return value;
 }
 
-}
-}
+} // stats
+} // mo
 
 #endif // MO_STATS_IMPLEMENTATION_FIXEDDBLGENERATOR_IPP
