@@ -11,7 +11,7 @@ static const unsigned int C_CHECK_USR_INTERRUP = 100000;
 //' @keywords internal
 //' @noRd
 // [[Rcpp::export]]
-NumericMatrix Rcpp__rmo_esm(R_xlen_t n, R_xlen_t d, const NumericVector& intensities) {
+NumericMatrix Rcpp__rmo_esm(const R_xlen_t& n, R_xlen_t d, const NumericVector& intensities) {
   auto num_shocks = intensities.size();
   if ((1<<d)-1 != num_shocks)
     std::range_error("intensities.size() != 2^d-1");
@@ -44,7 +44,7 @@ NumericMatrix Rcpp__rmo_esm(R_xlen_t n, R_xlen_t d, const NumericVector& intensi
 //' @keywords internal
 //' @noRd
 // [[Rcpp::export]]
-NumericMatrix Rcpp__rmo_arnold(R_xlen_t n, R_xlen_t d, const NumericVector& intensities) {
+NumericMatrix Rcpp__rmo_arnold(const R_xlen_t& n, const R_xlen_t& d, const NumericVector& intensities) {
 
   auto total_intensity = sum(intensities);
   std::unique_ptr<mo::stats::ExpGenerator> exp_generator{new mo::stats::RExpGenerator(total_intensity)};
@@ -81,7 +81,7 @@ NumericMatrix Rcpp__rmo_arnold(R_xlen_t n, R_xlen_t d, const NumericVector& inte
 //' @keywords internal
 //' @noRd
 // [[Rcpp::export]]
-NumericMatrix Rcpp__rmo_ex_arnold(unsigned int n, unsigned int d, NumericVector ex_intensities) {
+NumericMatrix Rcpp__rmo_ex_arnold(const R_xlen_t& n, const R_xlen_t& d, const NumericVector& ex_intensities) {
 
   std::vector<std::unique_ptr<mo::stats::ExpGenerator>> exp_generators(d);
   std::vector<std::unique_ptr<mo::stats::IntGenerator>> int_generators(d);
@@ -127,7 +127,7 @@ NumericMatrix Rcpp__rmo_ex_arnold(unsigned int n, unsigned int d, NumericVector 
 //' @keywords internal
 //' @noRd
 // [[Rcpp::export]]
-NumericMatrix Rcpp__rmo_esm_cuadras_auge(const R_xlen_t n, const R_xlen_t d, const double alpha, const double beta) { // alpha, beta >= 0
+NumericMatrix Rcpp__rmo_esm_cuadras_auge(const R_xlen_t& n, const R_xlen_t& d, const double& alpha, const double& beta) { // alpha, beta >= 0
   if (alpha < 0. || beta < 0.)
     std::range_error("alpha or beta < 0");
 
