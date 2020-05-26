@@ -10,16 +10,16 @@ namespace stats {
 
 template<typename T>
 RIntGenerator::RIntGenerator(const T& probabilities) :
-    cumulative_probabilities_(Rcpp::as<std::vector<double>>(probabilities)),
+    cumulative_probabilities_(probabilities.begin(), probabilities.end()),
     original_order_(probabilities.size()),
     unif_generator_(new RUnifGenerator01()) {
   // TODO: check that probabilities in not degenerated
   std::iota(original_order_.begin(), original_order_.end(), 0);
   auto n = cumulative_probabilities_.size();
 
-  Rf_revsort(&(*cumulative_probabilities_.begin()), &(*original_order_.begin()), n);
+  Rf_revsort(cumulative_probabilities_.data(), original_order_.data(), (int) n);
   for (R_xlen_t i=0; i<n; i++)
-    cumulative_probabilities_[i] += 0==i ? 0. : cumulative_probabilities_[i-1];
+    cumulative_probabilities_[i] += (0==i ? 0. : cumulative_probabilities_[i-1]);
   auto total_mass = cumulative_probabilities_.back();
   for (R_xlen_t i=0; i<n; i++)
     cumulative_probabilities_[i] /= total_mass;

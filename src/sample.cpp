@@ -19,11 +19,11 @@ NumericMatrix Rcpp__rmo_esm(R_xlen_t n, R_xlen_t d, const NumericVector& intensi
   std::unique_ptr<mo::stats::ExpGenerator> exp_generator{new mo::stats::RExpGenerator(1.)};
 
   NumericMatrix out(no_init(n, d));
+  std::fill(out.begin(), out.end(), R_PosInf);
   for (R_xlen_t k=0; k<n; k++) {
     if ((d*k) % C_CHECK_USR_INTERRUP == 0)
       checkUserInterrupt();
     MatrixRow<REALSXP> values = out(k, _);
-    std::fill(values.begin(), values.end(), R_PosInf);
     for (R_xlen_t j=0; j<num_shocks; j++) {
     // dont't use intensities.size() for performance
       if (intensities[j] > 0.) {
@@ -44,41 +44,37 @@ NumericMatrix Rcpp__rmo_esm(R_xlen_t n, R_xlen_t d, const NumericVector& intensi
 //' @keywords internal
 //' @noRd
 // [[Rcpp::export]]
-NumericMatrix Rcpp__rmo_arnold(unsigned int n, unsigned int d, NumericVector intensities) {
-  double total_intensity, waiting_time;
-  unsigned int affected;
-  LogicalVector destroyed;
-  NumericVector transition_probs, values;
+NumericMatrix Rcpp__rmo_arnold(R_xlen_t n, R_xlen_t d, const NumericVector& intensities) {
 
-  total_intensity = sum(intensities);
-  transition_probs = intensities / total_intensity;
+  auto total_intensity = sum(intensities);
+  std::unique_ptr<mo::stats::ExpGenerator> exp_generator{new mo::stats::RExpGenerator(total_intensity)};
+  std::unique_ptr<mo::stats::IntGenerator> int_generator{new mo::stats::RIntGenerator(intensities)};
 
   NumericMatrix out(n, d);
   for (unsigned int k=0; k<n; k++) {
     if ((d*k) % C_CHECK_USR_INTERRUP == 0)
       checkUserInterrupt();
 
-    destroyed = LogicalVector(d, false);
-    values = NumericVector(d, 0.);
+    std::vector<bool> destroyed(d);
+    std::fill(destroyed.begin(), destroyed.end(), false);
 
-    while (is_false(all(destroyed))) {
-      waiting_time = R::exp_rand() / total_intensity;
-      affected = sample((int) pow(2., d)-1, 1, false, transition_probs, true)[0];
+    MatrixRow<REALSXP> values = out(k, _);
+    while (!std::all_of(destroyed.begin(), destroyed.end(), [](bool v) { return v; })) {
+      auto waiting_time = (*exp_generator)();
+      auto affected = (*int_generator)();
 
-      for (unsigned int i=0; i<d; i++) {
+      for (R_xlen_t i=0; i<d; i++) {
         if (!destroyed[i]) {
           values[i] += waiting_time;
-          if (is_within(i+1, affected)) {
+          if (mo::math::is_within(i, affected)) {
             destroyed[i] = true;
           }
         }
       }
     }
-
-    out(k, _) = values;
   }
 
-  return wrap( out );
+  return out;
 } // NumericMatrix Rcpp__rmo_arnold(unsigned int n, unsigned int d, NumericVector intensities);
 
 
@@ -86,28 +82,22 @@ NumericMatrix Rcpp__rmo_arnold(unsigned int n, unsigned int d, NumericVector int
 //' @noRd
 // [[Rcpp::export]]
 NumericMatrix Rcpp__rmo_ex_arnold(unsigned int n, unsigned int d, NumericVector ex_intensities) {
-  double tmp, waiting_time;
-  unsigned int state;
-  double total_intensity;
-  NumericVector transition_probs;
-  NumericVector values;
-  IntegerVector perm;
 
-  NumericMatrix generator_matrix(d+1, d+1);
-  for (unsigned int i=0; i<d+1; i++) {
-    for (unsigned int j=0; j<d+1; j++) {
-      if (j < i) {
-        generator_matrix(i, j) = 0.;
-      } else if (j > i) {
-        tmp = 0.;
-        for (unsigned int k=0; k<i+1; k++) {
-          tmp += R::choose(i, k) * ex_intensities[k+j-i-1];
-        }
-        tmp *= R::choose(d-i, (j-i));
-        generator_matrix(i, j) = tmp;
+  std::vector<std::unique_ptr<mo::stats::ExpGenerator>> exp_generators(d);
+  std::vector<std::unique_ptr<mo::stats::IntGenerator>> int_generators(d);
+  for (int i=0; i<d; i++) {
+    std::vector<double> intensities(d-i);
+    for (int j=0; j<d-i; j++) {
+      for (int k=0; k<i+1; k++) {
+        intensities[j] += R::choose(i, k) * ex_intensities[k+j];
       }
+      intensities[j] *= R::choose(d-i, j+1);
     }
-    generator_matrix(i, i) = -sum(generator_matrix(i, _));
+    auto total_intensity = 0.;
+    for (const auto& intensity : intensities)
+      total_intensity += intensity;
+    exp_generators[i].reset(new mo::stats::RExpGenerator(total_intensity));
+    int_generators[i].reset(new mo::stats::RIntGenerator(intensities));
   }
 
   NumericMatrix out(n, d);
@@ -115,27 +105,22 @@ NumericMatrix Rcpp__rmo_ex_arnold(unsigned int n, unsigned int d, NumericVector 
     if ((d*k) % C_CHECK_USR_INTERRUP == 0)
       checkUserInterrupt();
 
-    values = NumericVector(d, 0.);
-    state = 0;
+    std::vector<double> values(d);
+    auto state = 0;
     while (state < d) {
-      total_intensity = -generator_matrix(state, state);
-      transition_probs = NumericVector(d-state, 0.);
-      for (unsigned int i=state+1; i<d+1; i++) {
-        transition_probs[i-state-1] = generator_matrix(state, i) / total_intensity;
-      }
-      waiting_time = R::exp_rand() / total_intensity;
-      for (unsigned int i=state; i<d; i++) {
+      auto waiting_time = (*exp_generators[state])();
+      for (int i=state; i<d; i++) {
         values[i] += waiting_time;
       }
-      state += 1 + sample(d-state, 1, false, transition_probs, false)[0];
+      state += 1 + (*int_generators[state])();
     }
 
-    perm = sample(d, d, false, R_NilValue, false); // Use `RNGkind(sample.kind="Rounding")` for comparison, since R.3.6.x not implemented in Rcpp
-    values = values[perm];
-    out(k, _) = values;
+    auto perm = sample(d, d, false, R_NilValue, false); // Use `RNGkind(sample.kind="Rounding")` for comparison, since R.3.6.x not implemented in Rcpp
+    for (int i=0; i<d; i++)
+      out(k, i) = values[perm[i]];
   }
-  return wrap( out );
-} // NumericMatrix Rcpp__rmo_ex_arnold(unsigned int n, unsigned int d, NumericVector ex_intensities);
+  return out;
+}
 
 
 

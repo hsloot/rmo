@@ -36,5 +36,10 @@ test_that("RIntGenerator works as expected", {
   args <- list("probabilities" = probabilities)
   expect_equal_sampling_result("Rcppmo_th_int", "sample_int_base_0",
     args, n, use_seed)
+
+  probabilities <- c(10, 20, 0.1)
+  args <- list("probabilities" = probabilities)
+  expect_equal_sampling_result("Rcppmo_th_int", "sample_int_base_0",
+    args, n, use_seed)
 })
 

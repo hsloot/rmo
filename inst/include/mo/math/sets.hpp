@@ -7,7 +7,7 @@ namespace math {
 template<typename T>
 inline bool is_within(const T &i, const T &j)  {
   return ((j+1) >> i) % 2 == 1;
-} 
+}
 
 } // math
 } // mo
