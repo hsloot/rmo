@@ -14,6 +14,12 @@ test_that("RUnifGenerator works as expected", {
     args, n, use_seed)
 })
 
+test_that("FixedDblGenerator works as expected", {
+  args <- list("value" = 1)
+  expect_equal_sampling_result("rposval", "Rcppmo_th_fixeddbl",
+    args, n, use_seed)
+})
+
 test_that("RIntGenerator works as expected", {
   assign("sample_int_base_0",
     function(n, probabilities) {
@@ -42,4 +48,3 @@ test_that("RIntGenerator works as expected", {
   expect_equal_sampling_result("Rcppmo_th_int", "sample_int_base_0",
     args, n, use_seed)
 })
-

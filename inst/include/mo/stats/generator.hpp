@@ -17,6 +17,22 @@ public:
   virtual inline T operator()() const = 0;
 }; // UnivariateGenerator
 
+class FixedDblGenerator : public UnivariateGenerator<double> {
+public:
+  FixedDblGenerator() = default;
+  FixedDblGenerator(const FixedDblGenerator& other) = default;
+  FixedDblGenerator(FixedDblGenerator&& other) = default;
+  FixedDblGenerator(const double& value);
+
+  FixedDblGenerator& operator=(const FixedDblGenerator& other) = default;
+  FixedDblGenerator& operator=(FixedDblGenerator&& other) = default;
+
+  virtual inline double operator()() const override;
+  virtual inline double operator()(const double& value) const;
+private:
+  double value_ = 1.;
+};
+
 
 class ExpGenerator : public UnivariateGenerator<double> {
 public:
@@ -90,5 +106,6 @@ private:
 #include <mo/stats/implementation/rexpgenerator.ipp>
 #include <mo/stats/implementation/runifgenerator.ipp>
 #include <mo/stats/implementation/rintgenerator.ipp>
+#include <mo/stats/implementation/fixeddblgenerator.ipp>
 
 #endif // MO_STATS_GENERATOR_HPP
