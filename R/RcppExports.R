@@ -25,6 +25,12 @@ Rcpp__rmo_esm_cuadras_auge <- function(n, d, alpha, beta) {
     .Call(`_rmo_Rcpp__rmo_esm_cuadras_auge`, n, d, alpha, beta)
 }
 
+#' @keywords internal
+#' @noRd
+Rcpp__rmo_lfm_cpp <- function(n, d, rate, rate_killing, rate_drift, rjump, rjump_arg_list) {
+    .Call(`_rmo_Rcpp__rmo_lfm_cpp`, n, d, rate, rate_killing, rate_drift, rjump, rjump_arg_list)
+}
+
 #' @rdname rmo_lfm_cpp
 #'
 #' A sampling function for a (possibly killed) compound Poisson subordinator
@@ -46,12 +52,6 @@ Rcpp__rmo_esm_cuadras_auge <- function(n, d, alpha, beta) {
 #' @noRd
 sample_cpp <- function(rate, rate_killing, rate_drift, rjump, rjump_arg_list, barrier_values) {
     .Call(`_rmo_sample_cpp`, rate, rate_killing, rate_drift, rjump, rjump_arg_list, barrier_values)
-}
-
-#' @keywords internal
-#' @noRd
-Rcpp__rmo_lfm_cpp <- function(n, d, rate, rate_killing, rate_drift, rjump, rjump_arg_list) {
-    .Call(`_rmo_Rcpp__rmo_lfm_cpp`, n, d, rate, rate_killing, rate_drift, rjump, rjump_arg_list)
 }
 
 #' @keywords internal

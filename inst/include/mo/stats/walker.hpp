@@ -2,7 +2,7 @@
 #define MO_STATS_WALKER_HPP
 
 #include <vector>
-#include <Rcpp.h>
+#include <Rinternals.h> // for R_xlen_t
 
 namespace mo {
 namespace stats {

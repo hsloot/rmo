@@ -1,7 +1,7 @@
 #ifndef MO_STATS_GENERATOR_HPP
 #define MO_STATS_GENERATOR_HPP
 
-#include <Rcpp.h>
+#include <Rinternals.h> // for R_xlen_t
 
 namespace mo {
 namespace stats {

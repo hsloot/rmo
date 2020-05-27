@@ -11,24 +11,30 @@ static const unsigned int C_CHECK_USR_INTERRUP = 100000;
 //' @keywords internal
 //' @noRd
 // [[Rcpp::export]]
-NumericMatrix Rcpp__rmo_esm(const R_xlen_t& n, R_xlen_t d, const NumericVector& intensities) {
+NumericMatrix Rcpp__rmo_esm(
+    const R_xlen_t& n, R_xlen_t d,
+    const NumericVector& intensities) {
+  using ExpGenerator = mo::stats::ExpGenerator;
+  using RExpGenerator = mo::stats::RExpGenerator;
+
   auto num_shocks = intensities.size();
   if ((1<<d)-1 != num_shocks)
     std::range_error("intensities.size() != 2^d-1");
 
-  std::unique_ptr<mo::stats::ExpGenerator> exp_generator{new mo::stats::RExpGenerator(1.)};
+  std::unique_ptr<ExpGenerator> exp_generator{new RExpGenerator(1.)};
 
   NumericMatrix out(no_init(n, d));
   std::fill(out.begin(), out.end(), R_PosInf);
   for (R_xlen_t k=0; k<n; k++) {
     if ((d*k) % C_CHECK_USR_INTERRUP == 0)
       checkUserInterrupt();
+
     MatrixRow<REALSXP> values = out(k, _);
     for (R_xlen_t j=0; j<num_shocks; j++) {
     // dont't use intensities.size() for performance
       if (intensities[j] > 0.) {
         auto shock_time = (*exp_generator)(intensities[j]);
-        for (R_xlen_t i=0; i<d; i++) {
+        for (int i=0; i<d; i++) {
         // don't use values.size() for performance
           if (mo::math::is_within(i, j)) {
               values[i] = mo::math::min(values[i], shock_time);
@@ -44,14 +50,21 @@ NumericMatrix Rcpp__rmo_esm(const R_xlen_t& n, R_xlen_t d, const NumericVector& 
 //' @keywords internal
 //' @noRd
 // [[Rcpp::export]]
-NumericMatrix Rcpp__rmo_arnold(const R_xlen_t& n, const R_xlen_t& d, const NumericVector& intensities) {
+NumericMatrix Rcpp__rmo_arnold(
+    const R_xlen_t& n, const int& d,
+    const NumericVector& intensities) {
+  using ExpGenerator = mo::stats::ExpGenerator;
+  using RExpGenerator = mo::stats::RExpGenerator;
+  using IntGenerator = mo::stats::IntGenerator;
+  using RIntGenerator = mo::stats::RIntGenerator;
+
 
   auto total_intensity = sum(intensities);
-  std::unique_ptr<mo::stats::ExpGenerator> exp_generator{new mo::stats::RExpGenerator(total_intensity)};
-  std::unique_ptr<mo::stats::IntGenerator> int_generator{new mo::stats::RIntGenerator(intensities)};
+  std::unique_ptr<ExpGenerator> exp_generator{new RExpGenerator(total_intensity)};
+  std::unique_ptr<IntGenerator> int_generator{new RIntGenerator(intensities)};
 
   NumericMatrix out(n, d);
-  for (unsigned int k=0; k<n; k++) {
+  for (R_xlen_t k=0; k<n; k++) {
     if ((d*k) % C_CHECK_USR_INTERRUP == 0)
       checkUserInterrupt();
 
@@ -63,7 +76,7 @@ NumericMatrix Rcpp__rmo_arnold(const R_xlen_t& n, const R_xlen_t& d, const Numer
       auto waiting_time = (*exp_generator)();
       auto affected = (*int_generator)();
 
-      for (R_xlen_t i=0; i<d; i++) {
+      for (int i=0; i<d; i++) {
         if (!destroyed[i]) {
           values[i] += waiting_time;
           if (mo::math::is_within(i, affected)) {
@@ -77,14 +90,21 @@ NumericMatrix Rcpp__rmo_arnold(const R_xlen_t& n, const R_xlen_t& d, const Numer
   return out;
 } // NumericMatrix Rcpp__rmo_arnold(unsigned int n, unsigned int d, NumericVector intensities);
 
+// IntegerVector rpermutation(const R_xlen_t& n);
 
 //' @keywords internal
 //' @noRd
 // [[Rcpp::export]]
-NumericMatrix Rcpp__rmo_ex_arnold(const R_xlen_t& n, const R_xlen_t& d, const NumericVector& ex_intensities) {
+NumericMatrix Rcpp__rmo_ex_arnold(
+    const R_xlen_t& n, const int& d,
+    const NumericVector& ex_intensities) {
+  using ExpGenerator = mo::stats::ExpGenerator;
+  using RExpGenerator = mo::stats::RExpGenerator;
+  using IntGenerator = mo::stats::IntGenerator;
+  using RIntGenerator = mo::stats::RIntGenerator;
 
-  std::vector<std::unique_ptr<mo::stats::ExpGenerator>> exp_generators(d);
-  std::vector<std::unique_ptr<mo::stats::IntGenerator>> int_generators(d);
+  std::vector<std::unique_ptr<ExpGenerator>> exp_generators(d);
+  std::vector<std::unique_ptr<IntGenerator>> int_generators(d);
   for (int i=0; i<d; i++) {
     std::vector<double> intensities(d-i);
     for (int j=0; j<d-i; j++) {
@@ -96,12 +116,12 @@ NumericMatrix Rcpp__rmo_ex_arnold(const R_xlen_t& n, const R_xlen_t& d, const Nu
     auto total_intensity = 0.;
     for (const auto& intensity : intensities)
       total_intensity += intensity;
-    exp_generators[i].reset(new mo::stats::RExpGenerator(total_intensity));
-    int_generators[i].reset(new mo::stats::RIntGenerator(intensities));
+    exp_generators[i].reset(new RExpGenerator(total_intensity));
+    int_generators[i].reset(new RIntGenerator(intensities));
   }
 
   NumericMatrix out(n, d);
-  for (unsigned int k=0; k<n; k++) {
+  for (R_xlen_t k=0; k<n; k++) {
     if ((d*k) % C_CHECK_USR_INTERRUP == 0)
       checkUserInterrupt();
 
@@ -127,11 +147,16 @@ NumericMatrix Rcpp__rmo_ex_arnold(const R_xlen_t& n, const R_xlen_t& d, const Nu
 //' @keywords internal
 //' @noRd
 // [[Rcpp::export]]
-NumericMatrix Rcpp__rmo_esm_cuadras_auge(const R_xlen_t& n, const R_xlen_t& d, const double& alpha, const double& beta) { // alpha, beta >= 0
+NumericMatrix Rcpp__rmo_esm_cuadras_auge(
+    const R_xlen_t& n, const int& d,
+    const double& alpha, const double& beta) { // alpha, beta >= 0
+  using ExpGenerator = mo::stats::ExpGenerator;
+  using RExpGenerator = mo::stats::RExpGenerator;
+
   if (alpha < 0. || beta < 0.)
     std::range_error("alpha or beta < 0");
 
-  std::unique_ptr<mo::stats::ExpGenerator> exp_generator{new mo::stats::RExpGenerator(1.)};
+  std::unique_ptr<ExpGenerator> exp_generator{new RExpGenerator(1.)};
 
   NumericMatrix out(no_init(n, d));
   for (R_xlen_t k=0; k<n; k++) {
@@ -147,6 +172,38 @@ NumericMatrix Rcpp__rmo_esm_cuadras_auge(const R_xlen_t& n, const R_xlen_t& d, c
     }
   }
 
+  return out;
+}
+
+
+NumericMatrix sample_cpp(
+  double rate, double rate_killing, double rate_drift,
+  Function rjump, List rjump_arg_list, NumericVector barrier_values);
+
+
+//' @keywords internal
+//' @noRd
+// [[Rcpp::export]]
+NumericMatrix Rcpp__rmo_lfm_cpp(unsigned int n, unsigned int d, double rate, double rate_killing, double rate_drift, Function rjump, List rjump_arg_list) {
+  NumericVector unit_exponentials(d);
+  NumericMatrix cpp_subordinator;
+  unsigned int count;
+
+  NumericMatrix out(n, d);
+  for (unsigned int k=0; k<n; k++) {
+    unit_exponentials = Rcpp::rexp(d);
+    cpp_subordinator = sample_cpp(rate, rate_killing, rate_drift, rjump, rjump_arg_list, unit_exponentials);
+    for (unsigned int i=0; i<d; i++) {
+      count = 0;
+      while (cpp_subordinator(count, 1) < unit_exponentials[i] && count < (unsigned int) cpp_subordinator.nrow())
+        count += 1;
+
+      if ((unsigned int) cpp_subordinator.nrow() == count)
+        stop("internal error: exponential value out of subordinator range");
+
+      out(k, i) = cpp_subordinator(count, 0);
+    }
+  }
   return out;
 }
 
@@ -239,31 +296,4 @@ NumericMatrix sample_cpp(double rate, double rate_killing, double rate_drift, Fu
   colnames(out) = CharacterVector::create("t", "value");
 
   return out;
-} // NumericMatrix sample_cpp(double rate, double rate_killing, double rate_drift, Function rjump, List rjump_arg_list, NumericVector barrier_values);
-
-
-//' @keywords internal
-//' @noRd
-// [[Rcpp::export]]
-NumericMatrix Rcpp__rmo_lfm_cpp(unsigned int n, unsigned int d, double rate, double rate_killing, double rate_drift, Function rjump, List rjump_arg_list) {
-  NumericVector unit_exponentials(d);
-  NumericMatrix cpp_subordinator;
-  unsigned int count;
-
-  NumericMatrix out(n, d);
-  for (unsigned int k=0; k<n; k++) {
-    unit_exponentials = Rcpp::rexp(d);
-    cpp_subordinator = sample_cpp(rate, rate_killing, rate_drift, rjump, rjump_arg_list, unit_exponentials);
-    for (unsigned int i=0; i<d; i++) {
-      count = 0;
-      while (cpp_subordinator(count, 1) < unit_exponentials[i] && count < (unsigned int) cpp_subordinator.nrow())
-        count += 1;
-
-      if ((unsigned int) cpp_subordinator.nrow() == count)
-        stop("internal error: exponential value out of subordinator range");
-
-      out(k, i) = cpp_subordinator(count, 0);
-    }
-  }
-  return out;
-} // NumericMatrix Rcpp__rmo_lfm_cpp(unsigned int n, unsigned int d, double rate, double rate_killing, double rate_drift, Function rjump, List rjump_arg_list);
+}

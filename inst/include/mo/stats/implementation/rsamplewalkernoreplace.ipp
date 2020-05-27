@@ -38,7 +38,7 @@ inline R_xlen_t RSampleWalkerNoReplace::operator()() {
       break;
   }
 
-  auto rval = original_order_[j];
+  R_xlen_t rval = original_order_[j];
   total_mass_ -= probabilities_[j];
   probabilities_.erase(probabilities_.begin()+j);
   original_order_.erase(original_order_.begin()+j);

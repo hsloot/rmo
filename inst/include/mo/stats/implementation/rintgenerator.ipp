@@ -1,8 +1,8 @@
 #ifndef MO_STATS_GENERATOR_IMPLEMENTATION_RINTGENERATOR_IPP
 #define MO_STATS_GENERATOR_IMPLEMENTATION_RINTGENERATOR_IPP
 
-#include <R_ext/Utils.h>
-#include <Rcpp.h>
+#include <Rinternals.h> // for R_xlen_t
+#include <R_ext/Utils.h> // for Rf_revsort
 #include <mo/stats/generator.hpp>
 
 namespace mo {
