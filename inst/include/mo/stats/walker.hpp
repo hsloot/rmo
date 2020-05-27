@@ -34,6 +34,11 @@ public:
   virtual inline R_xlen_t operator()() = 0;
 }; // SampleWalkerNoReplace
 
+class UnifSampleWalkerNoReplace : public UnivariateWalker<R_xlen_t> {
+public:
+  virtual inline R_xlen_t operator()() = 0;
+}; // UnifSampleWalkerNoReplace
+
 
 class RSampleWalkerNoReplace : public SampleWalkerNoReplace {
 public:
@@ -54,9 +59,27 @@ private:
   std::vector<int> original_order_;
 }; // RSampleWalkerNoReplace
 
+class RUnifSampleWalkerNoReplace : public UnifSampleWalkerNoReplace {
+public:
+  RUnifSampleWalkerNoReplace() = delete;
+  RUnifSampleWalkerNoReplace(const RUnifSampleWalkerNoReplace& other) = default;
+  RUnifSampleWalkerNoReplace(RUnifSampleWalkerNoReplace&& other) = default;
+  RUnifSampleWalkerNoReplace(const R_xlen_t& n);
+
+  RUnifSampleWalkerNoReplace& operator=(const RUnifSampleWalkerNoReplace& other) = default;
+  RUnifSampleWalkerNoReplace& operator=(RUnifSampleWalkerNoReplace&& other) = default;
+
+  virtual inline R_xlen_t operator()() override final;
+
+private:
+  R_xlen_t n_;
+  std::vector<R_xlen_t> values_;
+}; // RUnifSampleWalkerNoReplace
+
 } // stats
 } // mo
 
 #include <mo/stats/implementation/rsamplewalkernoreplace.ipp>
+#include <mo/stats/implementation/runifsamplewalkernoreplace.ipp>
 
 #endif // MO_STATS_WALKER_HPP

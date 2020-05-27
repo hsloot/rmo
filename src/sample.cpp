@@ -88,9 +88,9 @@ NumericMatrix Rcpp__rmo_arnold(
   }
 
   return out;
-} // NumericMatrix Rcpp__rmo_arnold(unsigned int n, unsigned int d, NumericVector intensities);
+}
 
-// IntegerVector rpermutation(const R_xlen_t& n);
+std::vector<R_xlen_t> rpermutation(const R_xlen_t& n);
 
 //' @keywords internal
 //' @noRd
@@ -135,7 +135,7 @@ NumericMatrix Rcpp__rmo_ex_arnold(
       state += 1 + (*int_generators[state])();
     }
 
-    auto perm = sample(d, d, false, R_NilValue, false); // Use `RNGkind(sample.kind="Rounding")` for comparison, since R.3.6.x not implemented in Rcpp
+    auto perm = rpermutation(d); // Use `RNGkind(sample.kind="Rounding")` for comparison, since R.3.6.x not implemented in Rcpp
     for (int i=0; i<d; i++)
       out(k, i) = values[perm[i]];
   }
@@ -171,6 +171,20 @@ NumericMatrix Rcpp__rmo_esm_cuadras_auge(
       value = mo::math::min(individual_shock, global_shock);
     }
   }
+
+  return out;
+}
+
+
+std::vector<R_xlen_t> rpermutation(
+    const R_xlen_t& n) {
+  using UnifSampleWalkerNoReplace = mo::stats::UnifSampleWalkerNoReplace;
+  using RUnifSampleWalkerNoReplace = mo::stats::RUnifSampleWalkerNoReplace;
+
+  std::unique_ptr<UnifSampleWalkerNoReplace> gen{new RUnifSampleWalkerNoReplace(n)};
+  std::vector<R_xlen_t> out(n);
+
+  std::generate(out.begin(), out.end(), (*static_cast<RUnifSampleWalkerNoReplace*>(gen.get())));
 
   return out;
 }

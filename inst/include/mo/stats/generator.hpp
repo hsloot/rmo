@@ -1,6 +1,7 @@
 #ifndef MO_STATS_GENERATOR_HPP
 #define MO_STATS_GENERATOR_HPP
 
+#include <vector>
 #include <Rinternals.h> // for R_xlen_t
 
 namespace mo {
@@ -30,6 +31,11 @@ public:
 }; // UnifGenerator
 
 class IntGenerator : public UnivariateGenerator<R_xlen_t> {
+public:
+  virtual inline R_xlen_t operator()() const = 0;
+}; // IntGenerator
+
+class UnifIntGenerator : public UnivariateGenerator<R_xlen_t> {
 public:
   virtual inline R_xlen_t operator()() const = 0;
 }; // IntGenerator
@@ -83,10 +89,10 @@ public:
 class RIntGenerator : public IntGenerator {
 public:
   RIntGenerator() = delete;
-  template<typename T>
-  RIntGenerator(const T& probabilities);
   RIntGenerator(const RIntGenerator& other);
   RIntGenerator(RIntGenerator&& other) = default;
+  template<typename T>
+  RIntGenerator(const T& probabilities);
 
   RIntGenerator& operator=(const RIntGenerator& other);
   RIntGenerator& operator=(RIntGenerator&& other) = default;
@@ -99,12 +105,29 @@ private:
   std::unique_ptr<UnifGenerator> unif_generator_;
 }; // RIntGenerator
 
+class RUnifIntGenerator : public UnifIntGenerator {
+public:
+  RUnifIntGenerator() = delete;
+  RUnifIntGenerator(const RUnifIntGenerator& other) = default;
+  RUnifIntGenerator(RUnifIntGenerator&& other) = default;
+  RUnifIntGenerator(const R_xlen_t& n);
+
+  RUnifIntGenerator& operator=(const RUnifIntGenerator& other) = default;
+  RUnifIntGenerator& operator=(RUnifIntGenerator&& other) = default;
+
+  virtual inline R_xlen_t operator()() const override final;
+
+private:
+  R_xlen_t n_;
+}; // RUniformIntGenerator
+
 } // stats
 } // mo
 
 #include <mo/stats/implementation/rexpgenerator.ipp>
 #include <mo/stats/implementation/runifgenerator.ipp>
 #include <mo/stats/implementation/rintgenerator.ipp>
+#include <mo/stats/implementation/runifintgenerator.ipp>
 #include <mo/stats/implementation/fixeddblgenerator.ipp>
 
 #endif // MO_STATS_GENERATOR_HPP
