@@ -1,5 +1,5 @@
-#ifndef MO_STATS_IMPLEMENTATION_RSAMPLEWALKER_IPP
-#define MO_STATS_IMPLEMENTATION_RSAMPLEWALKER_IPP
+#ifndef MO_STATS_IMPLEMENTATION_RSAMPLEWALKERNOREPLACE_IPP
+#define MO_STATS_IMPLEMENTATION_RSAMPLEWALKERNOREPLACE_IPP
 
 #include <vector>
 #include <R_ext/Utils.h>
@@ -11,7 +11,7 @@ namespace mo {
 namespace stats {
 
 template<typename T>
-RSampleWalker::RSampleWalker(const T& probabilities) :
+RSampleWalkerNoReplace::RSampleWalkerNoReplace(const T& probabilities) :
     n_(probabilities.size()),
     probabilities_(probabilities.begin(), probabilities.end()),
     original_order_(probabilities.size()) {
@@ -24,7 +24,7 @@ RSampleWalker::RSampleWalker(const T& probabilities) :
   Rf_revsort(probabilities_.data(), original_order_.data(), (int) n_);
 }
 
-inline R_xlen_t RSampleWalker::operator()() {
+inline R_xlen_t RSampleWalkerNoReplace::operator()() {
   if (n_ == 0)
     std::runtime_error("Walker finished");
 
@@ -51,4 +51,4 @@ inline R_xlen_t RSampleWalker::operator()() {
 } // stats
 } // mo
 
-#endif // MO_STATS_IMPLEMENTATION_RSAMPLEWALKER_IPP
+#endif // MO_STATS_IMPLEMENTATION_RSAMPLEWALKERNOREPLACE_IPP

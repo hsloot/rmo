@@ -29,22 +29,22 @@ public:
 }; // UnivariateProcessWalker
 
 
-class SampleWalker : public UnivariateWalker<R_xlen_t> {
+class SampleWalkerNoReplace : public UnivariateWalker<R_xlen_t> {
 public:
   virtual inline R_xlen_t operator()() = 0;
-}; // SampleWalker
+}; // SampleWalkerNoReplace
 
 
-class RSampleWalker : public SampleWalker {
+class RSampleWalkerNoReplace : public SampleWalkerNoReplace {
 public:
-  RSampleWalker() = delete;
-  RSampleWalker(const RSampleWalker& other) = default;
-  RSampleWalker(RSampleWalker&& other) = default;
+  RSampleWalkerNoReplace() = delete;
+  RSampleWalkerNoReplace(const RSampleWalkerNoReplace& other) = default;
+  RSampleWalkerNoReplace(RSampleWalkerNoReplace&& other) = default;
   template<typename T>
-  RSampleWalker(const T& probabilities);
+  RSampleWalkerNoReplace(const T& probabilities);
 
-  RSampleWalker& operator=(const RSampleWalker& other) = default;
-  RSampleWalker& operator=(RSampleWalker&& other) = default;
+  RSampleWalkerNoReplace& operator=(const RSampleWalkerNoReplace& other) = default;
+  RSampleWalkerNoReplace& operator=(RSampleWalkerNoReplace&& other) = default;
 
   virtual inline R_xlen_t operator()() override final;
 private:
@@ -52,11 +52,11 @@ private:
   double total_mass_ = 0.;
   std::vector<double> probabilities_;
   std::vector<int> original_order_;
-}; // RSampleWalker
+}; // RSampleWalkerNoReplace
 
 } // stats
 } // mo
 
-#include <mo/stats/implementation/rsamplewalker.ipp>
+#include <mo/stats/implementation/rsamplewalkernoreplace.ipp>
 
 #endif // MO_STATS_WALKER_HPP
