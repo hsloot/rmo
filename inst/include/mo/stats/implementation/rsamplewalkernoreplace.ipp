@@ -14,7 +14,8 @@ template<typename T>
 RSampleWalkerNoReplace::RSampleWalkerNoReplace(const T& probabilities) :
     n_(probabilities.size()),
     probabilities_(probabilities.begin(), probabilities.end()),
-    original_order_(probabilities.size()) {
+    original_order_(probabilities.size()),
+    unif_generator_(new RUnifGenerator01()) {
   for (const auto& probability : probabilities_)
     total_mass_ += probability;
   for (auto& probability : probabilities_)
@@ -24,12 +25,31 @@ RSampleWalkerNoReplace::RSampleWalkerNoReplace(const T& probabilities) :
   Rf_revsort(probabilities_.data(), original_order_.data(), (int) n_);
 }
 
+RSampleWalkerNoReplace::RSampleWalkerNoReplace(const RSampleWalkerNoReplace& other) :
+    n_(other.n_),
+    total_mass_(other.total_mass_),
+    probabilities_(other.probabilities_),
+    original_order_(other.original_order_),
+    unif_generator_(new RUnifGenerator01()) {
+}
+
+RSampleWalkerNoReplace& RSampleWalkerNoReplace::operator=(const RSampleWalkerNoReplace& other) {
+  if (this != &other) {
+    n_ = other.n_;
+    total_mass_ = other.total_mass_;
+    probabilities_ = other.probabilities_;
+    original_order_ = other.original_order_;
+    unif_generator_.reset(new RUnifGenerator01());
+  }
+
+  return *this;
+}
+
 inline R_xlen_t RSampleWalkerNoReplace::operator()() {
   if (n_ == 0)
     std::runtime_error("Walker finished");
 
-  std::unique_ptr<UnifGenerator> unif_generator{new RUnifGenerator01()};
-  auto rT = (*unif_generator)() * total_mass_ ;
+  auto rT = (*unif_generator_)() * total_mass_ ;
   auto mass = 0.;
   auto j = 0;
   for (; j<n_-1; j++) {
@@ -43,7 +63,6 @@ inline R_xlen_t RSampleWalkerNoReplace::operator()() {
   probabilities_.erase(probabilities_.begin()+j);
   original_order_.erase(original_order_.begin()+j);
   n_--;
-
 
   return rval;
 }

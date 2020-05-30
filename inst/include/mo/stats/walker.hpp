@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <Rinternals.h> // for R_xlen_t
+#include <mo/stats/generator.hpp>
 
 namespace mo {
 namespace stats {
@@ -43,12 +44,12 @@ public:
 class RSampleWalkerNoReplace : public SampleWalkerNoReplace {
 public:
   RSampleWalkerNoReplace() = delete;
-  RSampleWalkerNoReplace(const RSampleWalkerNoReplace& other) = default;
+  RSampleWalkerNoReplace(const RSampleWalkerNoReplace& other);
   RSampleWalkerNoReplace(RSampleWalkerNoReplace&& other) = default;
   template<typename T>
   RSampleWalkerNoReplace(const T& probabilities);
 
-  RSampleWalkerNoReplace& operator=(const RSampleWalkerNoReplace& other) = default;
+  RSampleWalkerNoReplace& operator=(const RSampleWalkerNoReplace& other);
   RSampleWalkerNoReplace& operator=(RSampleWalkerNoReplace&& other) = default;
 
   virtual inline R_xlen_t operator()() override final;
@@ -57,6 +58,7 @@ private:
   double total_mass_ = 0.;
   std::vector<double> probabilities_;
   std::vector<int> original_order_;
+  std::unique_ptr<UnifGenerator> unif_generator_;
 }; // RSampleWalkerNoReplace
 
 class RUnifSampleWalkerNoReplace : public UnifSampleWalkerNoReplace {

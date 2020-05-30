@@ -134,8 +134,14 @@ NumericMatrix Rcpp__rmo_ex_arnold(
       }
       state += 1 + (*int_generators[state])();
     }
+    // auto perm = sample(d, d, false, R_NilValue, false); // Use `RNGkind(sample.kind="Rounding")` for comparison, since R.3.6.x not implemented in Rcpp
+    auto perm = rpermutation(d);
+    /***
+    TODO: It seems that using Rcpp::sample is slightly faster. Can this be a
+    consequence of the low dimensino of the test-cases? Is this overhead from
+    the generator class?
+    */
 
-    auto perm = rpermutation(d); // Use `RNGkind(sample.kind="Rounding")` for comparison, since R.3.6.x not implemented in Rcpp
     for (int i=0; i<d; i++)
       out(k, i) = values[perm[i]];
   }
@@ -184,7 +190,8 @@ std::vector<R_xlen_t> rpermutation(
   std::unique_ptr<UnifSampleWalkerNoReplace> gen{new RUnifSampleWalkerNoReplace(n)};
   std::vector<R_xlen_t> out(n);
 
-  std::generate(out.begin(), out.end(), (*static_cast<RUnifSampleWalkerNoReplace*>(gen.get())));
+  for (auto& v : out)
+    v = (*gen)();
 
   return out;
 }
