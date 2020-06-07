@@ -1,5 +1,5 @@
-#ifndef MO_STATS_WALKER_IMPL_RSAMPLEWALKERNOREPLACE_IPP
-#define MO_STATS_WALKER_IMPL_RSAMPLEWALKERNOREPLACE_IPP
+#ifndef MO_STATS_WALKER_IMPL_COUNTNOREPLACEWALKER_IPP
+#define MO_STATS_WALKER_IMPL_COUNTNOREPLACEWALKER_IPP
 
 #include <vector>
 #include <R_ext/Utils.h>
@@ -12,7 +12,7 @@ namespace stats {
 
 template<typename RNGPolicy>
 template<typename T>
-SampleWalkerNoReplace<RNGPolicy>::SampleWalkerNoReplace(const T& probabilities) :
+CountNoReplaceWalker<RNGPolicy>::CountNoReplaceWalker(const T& probabilities) :
     n_(probabilities.size()),
     probabilities_(probabilities.begin(), probabilities.end()),
     original_order_(probabilities.size()),
@@ -28,7 +28,7 @@ SampleWalkerNoReplace<RNGPolicy>::SampleWalkerNoReplace(const T& probabilities) 
 
 
 template<typename RNGPolicy>
-inline R_xlen_t SampleWalkerNoReplace<RNGPolicy>::operator()() {
+inline R_xlen_t CountNoReplaceWalker<RNGPolicy>::operator()() {
   if (n_ == 0)
     std::runtime_error("Walker finished");
 
@@ -53,4 +53,4 @@ inline R_xlen_t SampleWalkerNoReplace<RNGPolicy>::operator()() {
 } // stats
 } // mo
 
-#endif // MO_STATS_WALKER_IMPL_RSAMPLEWALKERNOREPLACE_IPP
+#endif // MO_STATS_WALKER_IMPL_COUNTNOREPLACEWALKER_IPP

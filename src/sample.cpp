@@ -55,11 +55,11 @@ NumericMatrix Rcpp__rmo_arnold(
     const NumericVector& intensities) {
   using RRNGPolicy = mo::stats::RRNGPolicy;
   using ExpGenerator = mo::stats::ExpGenerator<RRNGPolicy>;
-  using CountGenerator = mo::stats::CountGenerator<RRNGPolicy>;
+  using CountReplaceGenerator = mo::stats::CountReplaceGenerator<RRNGPolicy>;
 
   auto total_intensity = sum(intensities);
   std::unique_ptr<ExpGenerator> exp_generator{new ExpGenerator(total_intensity)};
-  std::unique_ptr<CountGenerator> count_generator{new CountGenerator(intensities)};
+  std::unique_ptr<CountReplaceGenerator> count_generator{new CountReplaceGenerator(intensities)};
 
   NumericMatrix out(n, d);
   for (R_xlen_t k=0; k<n; k++) {
@@ -96,11 +96,11 @@ NumericMatrix Rcpp__rmo_ex_arnold(
     const NumericVector& ex_intensities) {
   using RRNGPolicy = mo::stats::RRNGPolicy;
   using ExpGenerator = mo::stats::ExpGenerator<RRNGPolicy>;
-  using CountGenerator = mo::stats::CountGenerator<RRNGPolicy>;
+  using CountReplaceGenerator = mo::stats::CountReplaceGenerator<RRNGPolicy>;
   using PermutationGenerator = mo::stats::PermutationGenerator<std::vector<R_xlen_t>, RRNGPolicy>;
 
   std::vector<std::unique_ptr<ExpGenerator>> exp_generators(d);
-  std::vector<std::unique_ptr<CountGenerator>> count_generators(d);
+  std::vector<std::unique_ptr<CountReplaceGenerator>> count_generators(d);
   std::unique_ptr<PermutationGenerator> permutation_generator{new PermutationGenerator(d)};
   for (int i=0; i<d; i++) {
     std::vector<double> intensities(d-i);
@@ -114,7 +114,7 @@ NumericMatrix Rcpp__rmo_ex_arnold(
     for (const auto& intensity : intensities)
       total_intensity += intensity;
     exp_generators[i].reset(new ExpGenerator(total_intensity));
-    count_generators[i].reset(new CountGenerator(intensities));
+    count_generators[i].reset(new CountReplaceGenerator(intensities));
   }
 
   NumericMatrix out(n, d);

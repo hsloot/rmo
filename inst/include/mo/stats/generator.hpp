@@ -68,18 +68,18 @@ private:
 }; // ExpGenerator
 
 template<typename RNGPolicy = RRNGPolicy>
-class CountGenerator : public UnivariateGenerator<R_xlen_t, RNGPolicy> {
+class CountReplaceGenerator : public UnivariateGenerator<R_xlen_t, RNGPolicy> {
 public:
-  CountGenerator() = delete;
-  CountGenerator(const CountGenerator& other) = default;
-  CountGenerator(CountGenerator&& other) = default;
+  CountReplaceGenerator() = delete;
+  CountReplaceGenerator(const CountReplaceGenerator& other) = default;
+  CountReplaceGenerator(CountReplaceGenerator&& other) = default;
   template<typename T>
-  CountGenerator(const T& probabilities);
+  CountReplaceGenerator(const T& probabilities);
 
-  virtual ~CountGenerator() {}
+  virtual ~CountReplaceGenerator() {}
 
-  CountGenerator& operator=(const CountGenerator& other) = default;
-  CountGenerator& operator=(CountGenerator&& other) = default;
+  CountReplaceGenerator& operator=(const CountReplaceGenerator& other) = default;
+  CountReplaceGenerator& operator=(CountReplaceGenerator&& other) = default;
 
   virtual inline R_xlen_t operator()() override final;
 
@@ -88,20 +88,20 @@ private:
   std::vector<int> original_order_;
 
   RNGPolicy rng_;
-}; // CountGenerator
+}; // CountReplaceGenerator
 
 template<typename RNGPolicy = RRNGPolicy>
-class UnifCountGenerator : public UnivariateGenerator<R_xlen_t, RNGPolicy> {
+class UnifCountReplaceGenerator : public UnivariateGenerator<R_xlen_t, RNGPolicy> {
 public:
-  UnifCountGenerator() = delete;
-  UnifCountGenerator(const UnifCountGenerator& other) = default;
-  UnifCountGenerator(UnifCountGenerator&& other) = default;
-  UnifCountGenerator(const R_xlen_t& n);
+  UnifCountReplaceGenerator() = delete;
+  UnifCountReplaceGenerator(const UnifCountReplaceGenerator& other) = default;
+  UnifCountReplaceGenerator(UnifCountReplaceGenerator&& other) = default;
+  UnifCountReplaceGenerator(const R_xlen_t& n);
 
-  virtual ~UnifCountGenerator() {}
+  virtual ~UnifCountReplaceGenerator() {}
 
-  UnifCountGenerator& operator=(const UnifCountGenerator& other) = default;
-  UnifCountGenerator& operator=(UnifCountGenerator&& other) = default;
+  UnifCountReplaceGenerator& operator=(const UnifCountReplaceGenerator& other) = default;
+  UnifCountReplaceGenerator& operator=(UnifCountReplaceGenerator&& other) = default;
 
   virtual inline R_xlen_t operator()() override final;
 
@@ -109,7 +109,7 @@ private:
   R_xlen_t n_;
 
   RNGPolicy rng_;
-}; // UniformCountGenerator
+}; // UniformCountReplaceGenerator
 
 
 template<typename VECTOR, typename RNGPolicy = RRNGPolicy>
@@ -137,10 +137,10 @@ private:
 } // stats
 } // mo
 
-#include <mo/stats/generator_impl/rexpgenerator.ipp>
-#include <mo/stats/generator_impl/rintgenerator.ipp>
-#include <mo/stats/generator_impl/runifintgenerator.ipp>
-#include <mo/stats/generator_impl/fixeddblgenerator.ipp>
-#include <mo/stats/generator_impl/rpermutationgenerator.ipp>
+#include <mo/stats/generator_impl/exp_generator.ipp>
+#include <mo/stats/generator_impl/count_replace_generator.ipp>
+#include <mo/stats/generator_impl/unif_count_replace_generator.ipp>
+#include <mo/stats/generator_impl/fixed_dbl_generator.ipp>
+#include <mo/stats/generator_impl/permutation_generator.ipp>
 
 #endif // MO_STATS_GENERATOR_HPP

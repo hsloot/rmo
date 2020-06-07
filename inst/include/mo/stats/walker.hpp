@@ -31,18 +31,18 @@ public:
 }; // UnivariateProcessWalker
 
 template<typename RNGPolicy = RRNGPolicy>
-class SampleWalkerNoReplace : public UnivariateWalker<R_xlen_t, RNGPolicy> {
+class CountNoReplaceWalker : public UnivariateWalker<R_xlen_t, RNGPolicy> {
 public:
-  SampleWalkerNoReplace() = delete;
-  SampleWalkerNoReplace(const SampleWalkerNoReplace& other) = default;
-  SampleWalkerNoReplace(SampleWalkerNoReplace&& other) = default;
+  CountNoReplaceWalker() = delete;
+  CountNoReplaceWalker(const CountNoReplaceWalker& other) = default;
+  CountNoReplaceWalker(CountNoReplaceWalker&& other) = default;
   template<typename T>
-  SampleWalkerNoReplace(const T& probabilities);
+  CountNoReplaceWalker(const T& probabilities);
 
-  virtual ~SampleWalkerNoReplace() {}
+  virtual ~CountNoReplaceWalker() {}
 
-  SampleWalkerNoReplace& operator=(const SampleWalkerNoReplace& other) = default;
-  SampleWalkerNoReplace& operator=(SampleWalkerNoReplace&& other) = default;
+  CountNoReplaceWalker& operator=(const CountNoReplaceWalker& other) = default;
+  CountNoReplaceWalker& operator=(CountNoReplaceWalker&& other) = default;
 
   virtual inline R_xlen_t operator()() override final;
 private:
@@ -52,20 +52,20 @@ private:
   std::vector<int> original_order_;
 
   RNGPolicy rng_;
-}; // SampleWalkerNoReplace
+}; // CountNoReplaceWalker
 
 template<typename RNGPolicy = RRNGPolicy>
-class UnifSampleWalkerNoReplace : public UnivariateWalker<R_xlen_t, RNGPolicy>  {
+class UnifCountNoReplaceWalker : public UnivariateWalker<R_xlen_t, RNGPolicy>  {
 public:
-  UnifSampleWalkerNoReplace() = delete;
-  UnifSampleWalkerNoReplace(const UnifSampleWalkerNoReplace& other) = default;
-  UnifSampleWalkerNoReplace(UnifSampleWalkerNoReplace&& other) = default;
-  UnifSampleWalkerNoReplace(const R_xlen_t& n);
+  UnifCountNoReplaceWalker() = delete;
+  UnifCountNoReplaceWalker(const UnifCountNoReplaceWalker& other) = default;
+  UnifCountNoReplaceWalker(UnifCountNoReplaceWalker&& other) = default;
+  UnifCountNoReplaceWalker(const R_xlen_t& n);
 
-  virtual ~UnifSampleWalkerNoReplace() {}
+  virtual ~UnifCountNoReplaceWalker() {}
 
-  UnifSampleWalkerNoReplace& operator=(const UnifSampleWalkerNoReplace& other) = default;
-  UnifSampleWalkerNoReplace& operator=(UnifSampleWalkerNoReplace&& other) = default;
+  UnifCountNoReplaceWalker& operator=(const UnifCountNoReplaceWalker& other) = default;
+  UnifCountNoReplaceWalker& operator=(UnifCountNoReplaceWalker&& other) = default;
 
   virtual inline R_xlen_t operator()() override final;
 
@@ -74,12 +74,12 @@ private:
   std::vector<R_xlen_t> values_;
 
   RNGPolicy rng_;
-}; // UnifSampleWalkerNoReplace
+}; // UnifCountNoReplaceWalker
 
 } // stats
 } // mo
 
-#include <mo/stats/walker_impl/rsamplewalkernoreplace.ipp>
-#include <mo/stats/walker_impl/runifsamplewalkernoreplace.ipp>
+#include <mo/stats/walker_impl/count_no_replace_walker.ipp>
+#include <mo/stats/walker_impl/unif_count_no_replace_walker.ipp>
 
 #endif // MO_STATS_WALKER_HPP

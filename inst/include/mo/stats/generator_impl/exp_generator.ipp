@@ -1,5 +1,5 @@
-#ifndef MO_STATS_GENERATOR_IMPL_REXPGENERATOR_IPP
-#define MO_STATS_GENERATOR_IMPL_REXPGENERATOR_IPP
+#ifndef MO_STATS_GENERATOR_IMPL_EXPGENERATOR_IPP
+#define MO_STATS_GENERATOR_IMPL_EXPGENERATOR_IPP
 
 #include <Rcpp.h>
 #include <mo/stats/generator.hpp>
@@ -28,4 +28,4 @@ inline double ExpGenerator<RNGPolicy>::operator()(const double& rate) {
 } // stats
 } // mo
 
-#endif // MO_STATS_GENERATOR_IMPL_REXPGENERATOR_IPP
+#endif // MO_STATS_GENERATOR_IMPL_EXPGENERATOR_IPP

@@ -1,5 +1,5 @@
-#ifndef MO_STATS_GENERATOR_IMPL_RINTGENERATOR_IPP
-#define MO_STATS_GENERATOR_IMPL_RINTGENERATOR_IPP
+#ifndef MO_STATS_GENERATOR_IMPL_COUNTREPLACEGENERATOR_IPP
+#define MO_STATS_GENERATOR_IMPL_COUNTREPLACEGENERATOR_IPP
 
 #include <Rinternals.h> // for R_xlen_t
 #include <R_ext/Utils.h> // for Rf_revsort
@@ -10,7 +10,7 @@ namespace stats {
 
 template<typename RNGPolicy>
 template<typename T>
-CountGenerator<RNGPolicy>::CountGenerator(const T& probabilities) :
+CountReplaceGenerator<RNGPolicy>::CountReplaceGenerator(const T& probabilities) :
     cumulative_probabilities_(probabilities.begin(), probabilities.end()),
     original_order_(probabilities.size()),
     rng_() {
@@ -27,7 +27,7 @@ CountGenerator<RNGPolicy>::CountGenerator(const T& probabilities) :
 }
 
 template<typename RNGPolicy>
-inline R_xlen_t CountGenerator<RNGPolicy>::operator()() {
+inline R_xlen_t CountReplaceGenerator<RNGPolicy>::operator()() {
   auto rT = rng_.unif_rand();
   for (R_xlen_t j=0; j<cumulative_probabilities_.size(); j++) {
     if (cumulative_probabilities_[j] >= rT)
@@ -39,4 +39,4 @@ inline R_xlen_t CountGenerator<RNGPolicy>::operator()() {
 } // stats
 } // mo
 
-#endif // MO_STATS_GENERATOR_IMPL_RINTGENERATOR_IPP
+#endif // MO_STATS_GENERATOR_IMPL_COUNTREPLACEGENERATOR_IPP

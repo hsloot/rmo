@@ -1,5 +1,5 @@
-#ifndef MO_STATS_WALKER_IMPL_RUNIFSAMPLEWALKERNOREPLACE_IPP
-#define MO_STATS_WALKER_IMPL_RUNIFSAMPLEWALKERNOREPLACE_IPP
+#ifndef MO_STATS_WALKER_IMPL_UNIFCOUNTNOREPLACEWALKER_IPP
+#define MO_STATS_WALKER_IMPL_UNIFCOUNTNOREPLACEWALKER_IPP
 
 #include <mo/stats/walker.hpp>
 #include <Rinternals.h> // for R_xlen_t
@@ -9,7 +9,7 @@ namespace mo {
 namespace stats {
 
 template<typename RNGPolicy>
-UnifSampleWalkerNoReplace<RNGPolicy>::UnifSampleWalkerNoReplace(const R_xlen_t& n) :
+UnifCountNoReplaceWalker<RNGPolicy>::UnifCountNoReplaceWalker(const R_xlen_t& n) :
     n_(n),
     values_(n) {
   if (n_ < 1)
@@ -18,7 +18,7 @@ UnifSampleWalkerNoReplace<RNGPolicy>::UnifSampleWalkerNoReplace(const R_xlen_t& 
 }
 
 template<typename RNGPolicy>
-inline R_xlen_t UnifSampleWalkerNoReplace<RNGPolicy>::operator()() {
+inline R_xlen_t UnifCountNoReplaceWalker<RNGPolicy>::operator()() {
   if (n_ == 0)
     std::runtime_error("Walker finished");
   R_xlen_t index = (R_xlen_t) rng_.R_unif_index(n_);
@@ -34,4 +34,4 @@ inline R_xlen_t UnifSampleWalkerNoReplace<RNGPolicy>::operator()() {
 } // stats
 } // mo
 
-#endif // MO_STATS_WALKER_IMPL_RUNIFSAMPLEWALKERNOREPLACE_IPP
+#endif // MO_STATS_WALKER_IMPL_UNIFCOUNTNOREPLACEWALKER_IPP
