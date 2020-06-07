@@ -81,7 +81,7 @@ private:
 } // stats
 } // mo
 
-#include <mo/stats/implementation/rsamplewalkernoreplace.ipp>
-#include <mo/stats/implementation/runifsamplewalkernoreplace.ipp>
+#include <mo/stats/walker_impl/rsamplewalkernoreplace.ipp>
+#include <mo/stats/walker_impl/runifsamplewalkernoreplace.ipp>
 
 #endif // MO_STATS_WALKER_HPP

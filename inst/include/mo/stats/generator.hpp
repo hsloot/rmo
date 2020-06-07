@@ -157,11 +157,11 @@ private:
 } // stats
 } // mo
 
-#include <mo/stats/implementation/rexpgenerator.ipp>
-#include <mo/stats/implementation/runifgenerator.ipp>
-#include <mo/stats/implementation/rintgenerator.ipp>
-#include <mo/stats/implementation/runifintgenerator.ipp>
-#include <mo/stats/implementation/fixeddblgenerator.ipp>
-#include <mo/stats/implementation/rpermutationgenerator.ipp>
+#include <mo/stats/generator_impl/rexpgenerator.ipp>
+#include <mo/stats/generator_impl/runifgenerator.ipp>
+#include <mo/stats/generator_impl/rintgenerator.ipp>
+#include <mo/stats/generator_impl/runifintgenerator.ipp>
+#include <mo/stats/generator_impl/fixeddblgenerator.ipp>
+#include <mo/stats/generator_impl/rpermutationgenerator.ipp>
 
 #endif // MO_STATS_GENERATOR_HPP

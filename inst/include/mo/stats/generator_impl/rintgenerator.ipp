@@ -1,5 +1,5 @@
-#ifndef MO_STATS_GENERATOR_IMPLEMENTATION_RINTGENERATOR_IPP
-#define MO_STATS_GENERATOR_IMPLEMENTATION_RINTGENERATOR_IPP
+#ifndef MO_STATS_GENERATOR_IMPL_RINTGENERATOR_IPP
+#define MO_STATS_GENERATOR_IMPL_RINTGENERATOR_IPP
 
 #include <Rinternals.h> // for R_xlen_t
 #include <R_ext/Utils.h> // for Rf_revsort
@@ -51,4 +51,4 @@ inline R_xlen_t RIntGenerator::operator()() const {
 } // stats
 } // mo
 
-#endif // MO_STATS_GENERATOR_IMPLEMENTATION_RINTGENERATOR_IPP
+#endif // MO_STATS_GENERATOR_IMPL_RINTGENERATOR_IPP
