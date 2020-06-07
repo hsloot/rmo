@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <Rinternals.h> // for R_xlen_t
+#include <mo/stats/rngpolicy.hpp>
 
 namespace mo {
 namespace stats {
@@ -12,153 +13,131 @@ public:
   virtual ~Generator() = default;
 }; // Generator
 
-template<typename SCALAR>
+template<typename SCALAR, typename RNGPolicy = RRNGPolicy>
 class UnivariateGenerator : public Generator {
 public:
-  virtual inline SCALAR operator()() const = 0;
+  virtual inline SCALAR operator()() = 0;
 }; // UnivariateGenerator
 
-template<typename VECTOR>
+template<typename VECTOR, typename RNGPolicy = RRNGPolicy>
 class MultivariateGenerator : public Generator {
 public:
-  virtual inline VECTOR operator()() const = 0;
-  virtual inline void operator()(VECTOR& out) const = 0;
+  virtual inline VECTOR operator()() = 0;
+  virtual inline void operator()(VECTOR& out) = 0;
 }; // MultivariateGenerator
 
-
-class ExpGenerator : public UnivariateGenerator<double> {
-public:
-  virtual inline double operator()() const = 0;
-  virtual inline double operator()(const double& rate) const = 0;
-}; // ExpGenerator
-
-class UnifGenerator : public UnivariateGenerator<double> {
-public:
-
-  virtual double operator()() const = 0;
-}; // UnifGenerator
-
-class IntGenerator : public UnivariateGenerator<R_xlen_t> {
-public:
-  virtual inline R_xlen_t operator()() const = 0;
-}; // IntGenerator
-
-class UnifIntGenerator : public UnivariateGenerator<R_xlen_t> {
-public:
-  virtual inline R_xlen_t operator()() const = 0;
-}; // IntGenerator
-
-class FixedDblGenerator : public UnivariateGenerator<double> {
+template<typename RNGPolicy = RRNGPolicy>
+class FixedDblGenerator : public UnivariateGenerator<double, RNGPolicy> {
 public:
   FixedDblGenerator() = default;
   FixedDblGenerator(const FixedDblGenerator& other) = default;
   FixedDblGenerator(FixedDblGenerator&& other) = default;
   FixedDblGenerator(const double& value);
 
+  virtual ~FixedDblGenerator() {}
+
   FixedDblGenerator& operator=(const FixedDblGenerator& other) = default;
   FixedDblGenerator& operator=(FixedDblGenerator&& other) = default;
 
-  virtual inline double operator()() const override final;
-  virtual inline double operator()(const double& value) const final;
+  virtual inline double operator()() override final;
+  inline double operator()(const double& value);
 private:
   double value_ = 1.;
 }; // FixedDblGenerator
 
-template<typename VECTOR>
-class PermutationGenerator : public MultivariateGenerator<VECTOR> {
+template<typename RNGPolicy = RRNGPolicy>
+class ExpGenerator : public UnivariateGenerator<double, RNGPolicy> {
 public:
-  virtual inline VECTOR operator()() const = 0;
-  virtual inline void operator()(VECTOR& out) const = 0;
-}; // PermutationGenerator
+  ExpGenerator() = default;
+  ExpGenerator(const ExpGenerator& other) = default;
+  ExpGenerator(ExpGenerator&& other) = default;
+  ExpGenerator(const double& rate);
 
+  virtual ~ExpGenerator() {}
 
-class RExpGenerator : public ExpGenerator {
-public:
-  RExpGenerator();
-  RExpGenerator(const RExpGenerator& other) = default;
-  RExpGenerator(RExpGenerator&& other) = default;
-  RExpGenerator(double rate);
+  ExpGenerator& operator=(const ExpGenerator& other) = default;
+  ExpGenerator& operator=(ExpGenerator&& other) = default;
 
-  RExpGenerator& operator=(const RExpGenerator& other) = default;
-  RExpGenerator& operator=(RExpGenerator&& other) = default;
-
-  virtual inline double operator()() const override final;
-  virtual inline double operator()(const double& rate) const override final;
+  virtual inline double operator()() override final;
+  inline double operator()(const double& rate);
 
 private:
-  double rate_;
-}; // RExpGenerator
+  double rate_ = 1.;
 
-class RUnifGenerator01 : public UnifGenerator {
+  RNGPolicy rng_;
+}; // ExpGenerator
+
+template<typename RNGPolicy = RRNGPolicy>
+class CountGenerator : public UnivariateGenerator<R_xlen_t, RNGPolicy> {
 public:
-  RUnifGenerator01();
-  RUnifGenerator01(const RUnifGenerator01& other) = default;
-  RUnifGenerator01(RUnifGenerator01&& other) = default;
-
-  RUnifGenerator01& operator=(const RUnifGenerator01& other) = default;
-  RUnifGenerator01& operator=(RUnifGenerator01&& other) = default;
-
-  virtual inline double operator()() const override final;
-}; // RUnifGenerator
-
-class RIntGenerator : public IntGenerator {
-public:
-  RIntGenerator() = delete;
-  RIntGenerator(const RIntGenerator& other);
-  RIntGenerator(RIntGenerator&& other) = default;
+  CountGenerator() = delete;
+  CountGenerator(const CountGenerator& other) = default;
+  CountGenerator(CountGenerator&& other) = default;
   template<typename T>
-  RIntGenerator(const T& probabilities);
+  CountGenerator(const T& probabilities);
 
-  RIntGenerator& operator=(const RIntGenerator& other);
-  RIntGenerator& operator=(RIntGenerator&& other) = default;
+  virtual ~CountGenerator() {}
 
-  virtual inline R_xlen_t operator()() const override final;
+  CountGenerator& operator=(const CountGenerator& other) = default;
+  CountGenerator& operator=(CountGenerator&& other) = default;
+
+  virtual inline R_xlen_t operator()() override final;
 
 private:
   std::vector<double> cumulative_probabilities_;
   std::vector<int> original_order_;
-  std::unique_ptr<UnifGenerator> unif_generator_;
-}; // RIntGenerator
 
-class RUnifIntGenerator : public UnifIntGenerator {
+  RNGPolicy rng_;
+}; // CountGenerator
+
+template<typename RNGPolicy = RRNGPolicy>
+class UnifCountGenerator : public UnivariateGenerator<R_xlen_t, RNGPolicy> {
 public:
-  RUnifIntGenerator() = delete;
-  RUnifIntGenerator(const RUnifIntGenerator& other) = default;
-  RUnifIntGenerator(RUnifIntGenerator&& other) = default;
-  RUnifIntGenerator(const R_xlen_t& n);
+  UnifCountGenerator() = delete;
+  UnifCountGenerator(const UnifCountGenerator& other) = default;
+  UnifCountGenerator(UnifCountGenerator&& other) = default;
+  UnifCountGenerator(const R_xlen_t& n);
 
-  RUnifIntGenerator& operator=(const RUnifIntGenerator& other) = default;
-  RUnifIntGenerator& operator=(RUnifIntGenerator&& other) = default;
+  virtual ~UnifCountGenerator() {}
 
-  virtual inline R_xlen_t operator()() const override final;
+  UnifCountGenerator& operator=(const UnifCountGenerator& other) = default;
+  UnifCountGenerator& operator=(UnifCountGenerator&& other) = default;
+
+  virtual inline R_xlen_t operator()() override final;
 
 private:
   R_xlen_t n_;
-}; // RUniformIntGenerator
 
-template<typename VECTOR>
-class RPermutationGenerator : public PermutationGenerator<VECTOR> {
+  RNGPolicy rng_;
+}; // UniformCountGenerator
+
+
+template<typename VECTOR, typename RNGPolicy = RRNGPolicy>
+class PermutationGenerator : public MultivariateGenerator<VECTOR, RNGPolicy> {
 public:
-  RPermutationGenerator();
-  RPermutationGenerator(const RPermutationGenerator& other) = default;
-  RPermutationGenerator(RPermutationGenerator&& other) = default;
-  RPermutationGenerator(const R_xlen_t& n);
+  PermutationGenerator() = delete;
+  PermutationGenerator(const PermutationGenerator& other) = default;
+  PermutationGenerator(PermutationGenerator&& other) = default;
+  PermutationGenerator(const R_xlen_t& n);
 
-  RPermutationGenerator& operator=(const RPermutationGenerator& other) = default;
-  RPermutationGenerator& operator=(RPermutationGenerator&& other) = default;
+  virtual ~PermutationGenerator() {}
 
-  virtual inline VECTOR operator()() const override final;
-  virtual inline void operator()(VECTOR& out) const override final;
+  PermutationGenerator& operator=(const PermutationGenerator& other) = default;
+  PermutationGenerator& operator=(PermutationGenerator&& other) = default;
+
+  virtual inline VECTOR operator()() override final;
+  virtual inline void operator()(VECTOR& out) override final;
 
 private:
-  R_xlen_t n_ = 1;
+  R_xlen_t n_;
+
+  RNGPolicy rng_;
 };
 
 } // stats
 } // mo
 
 #include <mo/stats/generator_impl/rexpgenerator.ipp>
-#include <mo/stats/generator_impl/runifgenerator.ipp>
 #include <mo/stats/generator_impl/rintgenerator.ipp>
 #include <mo/stats/generator_impl/runifintgenerator.ipp>
 #include <mo/stats/generator_impl/fixeddblgenerator.ipp>

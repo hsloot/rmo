@@ -8,7 +8,8 @@
 namespace mo {
 namespace stats {
 
-RUnifSampleWalkerNoReplace::RUnifSampleWalkerNoReplace(const R_xlen_t& n) :
+template<typename RNGPolicy>
+UnifSampleWalkerNoReplace<RNGPolicy>::UnifSampleWalkerNoReplace(const R_xlen_t& n) :
     n_(n),
     values_(n) {
   if (n_ < 1)
@@ -16,10 +17,11 @@ RUnifSampleWalkerNoReplace::RUnifSampleWalkerNoReplace(const R_xlen_t& n) :
   std::iota(values_.begin(), values_.end(), 0);
 }
 
-inline R_xlen_t RUnifSampleWalkerNoReplace::operator()() {
+template<typename RNGPolicy>
+inline R_xlen_t UnifSampleWalkerNoReplace<RNGPolicy>::operator()() {
   if (n_ == 0)
     std::runtime_error("Walker finished");
-  R_xlen_t index = (R_xlen_t) ::R_unif_index(n_);
+  R_xlen_t index = (R_xlen_t) rng_.R_unif_index(n_);
   --n_;
   R_xlen_t rval = values_[index];
   values_[index] = values_.back();

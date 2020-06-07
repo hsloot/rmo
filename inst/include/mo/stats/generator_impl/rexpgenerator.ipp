@@ -7,22 +7,22 @@
 namespace mo {
 namespace stats {
 
-RExpGenerator::RExpGenerator() :
-    RExpGenerator(1.) {}
-
-RExpGenerator::RExpGenerator(double rate) :
+template<typename RNGPolicy>
+ExpGenerator<RNGPolicy>::ExpGenerator(const double& rate) :
     rate_(rate) {
   if (rate_ < 0.)
     std::range_error("rate < 0.");
 }
 
-inline double RExpGenerator::operator()() const {
+template<typename RNGPolicy>
+inline double ExpGenerator<RNGPolicy>::operator()() {
   return (*this)(rate_);
 }
 
 // WARNING: no check on rate
-inline double RExpGenerator::operator()(const double& rate) const {
-  return 0. == rate ? R_PosInf : (R_PosInf == rate ? 0. : R::exp_rand() / rate);
+template<typename RNGPolicy>
+inline double ExpGenerator<RNGPolicy>::operator()(const double& rate) {
+  return 0. == rate ? R_PosInf : (R_PosInf == rate ? 0. : rng_.exp_rand() / rate);
 }
 
 } // stats

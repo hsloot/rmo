@@ -8,11 +8,12 @@
 namespace mo {
 namespace stats {
 
+template<typename RNGPolicy>
 template<typename T>
-RIntGenerator::RIntGenerator(const T& probabilities) :
+CountGenerator<RNGPolicy>::CountGenerator(const T& probabilities) :
     cumulative_probabilities_(probabilities.begin(), probabilities.end()),
     original_order_(probabilities.size()),
-    unif_generator_(new RUnifGenerator01()) {
+    rng_() {
   // TODO: check that probabilities in not degenerated
   std::iota(original_order_.begin(), original_order_.end(), 0);
   auto n = cumulative_probabilities_.size();
@@ -25,22 +26,9 @@ RIntGenerator::RIntGenerator(const T& probabilities) :
     cumulative_probabilities_[i] /= total_mass;
 }
 
-RIntGenerator::RIntGenerator(const RIntGenerator& other) :
-    cumulative_probabilities_(other.cumulative_probabilities_),
-    original_order_(other.original_order_),
-    unif_generator_(new RUnifGenerator01()) {}
-
-RIntGenerator& RIntGenerator::operator=(const RIntGenerator& other) {
-  if (this != &other) {
-    cumulative_probabilities_ = other.cumulative_probabilities_;
-    original_order_ = other.original_order_;
-    unif_generator_.reset(new RUnifGenerator01());
-  }
-  return *this;
-}
-
-inline R_xlen_t RIntGenerator::operator()() const {
-  auto rT = (*unif_generator_)();
+template<typename RNGPolicy>
+inline R_xlen_t CountGenerator<RNGPolicy>::operator()() {
+  auto rT = rng_.unif_rand();
   for (R_xlen_t j=0; j<cumulative_probabilities_.size(); j++) {
     if (cumulative_probabilities_[j] >= rT)
       return original_order_[j];

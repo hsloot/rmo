@@ -9,25 +9,12 @@ using namespace Rcpp;
 // [[Rcpp::export]]
 NumericVector Rcppmo_th_rexp(
     const R_xlen_t& n, const double& rate=1.) {
+  using RRNGPolicy = mo::stats::RRNGPolicy;
+  using ExpGenerator = mo::stats::ExpGenerator<RRNGPolicy>;
   NumericVector out(no_init(n));
-  using ExpGenerator = mo::stats::ExpGenerator;
-  using RExpGenerator = mo::stats::RExpGenerator;
 
-  std::unique_ptr<ExpGenerator> exp_gen{new RExpGenerator(rate)};
-  std::generate(out.begin(), out.end(), (*static_cast<RExpGenerator*>(exp_gen.get())));
-
-  return out;
-}
-
-// [[Rcpp::export]]
-NumericVector Rcppmo_th_unif(
-    const R_xlen_t& n) {
-  using UnifGenerator = mo::stats::UnifGenerator;
-  using RUnifGenerator01 = mo::stats::RUnifGenerator01;
-
-  NumericVector out(no_init(n));
-  std::unique_ptr<UnifGenerator> unif01_gen{new RUnifGenerator01()};
-  std::generate(out.begin(), out.end(), (*static_cast<RUnifGenerator01*>(unif01_gen.get())));
+  std::unique_ptr<ExpGenerator> exp_generator{new ExpGenerator(rate)};
+  std::generate(out.begin(), out.end(), (*static_cast<ExpGenerator*>(exp_generator.get())));
 
   return out;
 }
@@ -35,12 +22,12 @@ NumericVector Rcppmo_th_unif(
 // [[Rcpp::export]]
 IntegerVector Rcppmo_th_int(
     const R_xlen_t& n, const NumericVector& probabilities) {
-  using IntGenerator = mo::stats::IntGenerator;
-  using RIntGenerator = mo::stats::RIntGenerator;
+  using RRNGPolicy = mo::stats::RRNGPolicy;
+  using CountGenerator = mo::stats::CountGenerator<RRNGPolicy>;
 
   IntegerVector out(no_init(n));
-  std::unique_ptr<IntGenerator> int_gen{new RIntGenerator(probabilities)};
-  std::generate(out.begin(), out.end(), (*static_cast<RIntGenerator*>(int_gen.get())));
+  std::unique_ptr<CountGenerator> count_generator{new CountGenerator(probabilities)};
+  std::generate(out.begin(), out.end(), (*static_cast<CountGenerator*>(count_generator.get())));
 
   return out;
 }
@@ -48,12 +35,12 @@ IntegerVector Rcppmo_th_int(
 // [[Rcpp::export]]
 IntegerVector Rcppmo_th_perm(
     const R_xlen_t& n, const NumericVector& probabilities) {
-  using SampleWalkerNoReplace = mo::stats::SampleWalkerNoReplace;
-  using RSampleWalkerNoReplace = mo::stats::RSampleWalkerNoReplace;
+  using RRNGPolicy = mo::stats::RRNGPolicy;
+  using SampleWalkerNoReplace = mo::stats::SampleWalkerNoReplace<RRNGPolicy>;
 
   IntegerVector out(no_init(n));
-  std::unique_ptr<SampleWalkerNoReplace> int_gen{new RSampleWalkerNoReplace(probabilities)};
-  std::generate(out.begin(), out.end(), (*static_cast<RSampleWalkerNoReplace*>(int_gen.get())));
+  std::unique_ptr<SampleWalkerNoReplace> sample_walker{new SampleWalkerNoReplace(probabilities)};
+  std::generate(out.begin(), out.end(), (*static_cast<SampleWalkerNoReplace*>(sample_walker.get())));
 
   return out;
 }
@@ -61,11 +48,12 @@ IntegerVector Rcppmo_th_perm(
 // [[Rcpp::export]]
 NumericVector Rcppmo_th_fixeddbl(
     const R_xlen_t& n, const double& value) {
-  using FixedDblGenerator = mo::stats::FixedDblGenerator;
+  using RRNGPolicy = mo::stats::RRNGPolicy;
+  using FixedDblGenerator = mo::stats::FixedDblGenerator<RRNGPolicy>;
 
   NumericVector out(no_init(n));
-  std::unique_ptr<FixedDblGenerator> fixeddbl_gen{new FixedDblGenerator(value)};
-  std::generate(out.begin(), out.end(), (*static_cast<FixedDblGenerator*>(fixeddbl_gen.get())));
+  std::unique_ptr<FixedDblGenerator> fixeddbl_generator{new FixedDblGenerator(value)};
+  std::generate(out.begin(), out.end(), (*static_cast<FixedDblGenerator*>(fixeddbl_generator.get())));
 
   return out;
 }
@@ -77,14 +65,11 @@ IntegerVector Rcppmo_th_sample_int(
     const bool& replace,
     const Nullable<NumericVector>& prob = R_NilValue,
     const bool& useHash = false) {
-  using UnifIntGenerator = mo::stats::UnifIntGenerator;
-  using IntGenerator = mo::stats::IntGenerator;
-  using UnifSampleWalkerNoReplace = mo::stats::UnifSampleWalkerNoReplace;
-  using SampleWalkerNoReplace = mo::stats::SampleWalkerNoReplace;
-  using RUnifIntGenerator = mo::stats::RUnifIntGenerator;
-  using RIntGenerator = mo::stats::RIntGenerator;
-  using RUnifSampleWalkerNoReplace = mo::stats::RUnifSampleWalkerNoReplace;
-  using RSampleWalkerNoReplace = mo::stats::RSampleWalkerNoReplace;
+  using RRNGPolicy = mo::stats::RRNGPolicy;
+  using UnifCountGenerator = mo::stats::UnifCountGenerator<RRNGPolicy>;
+  using CountGenerator = mo::stats::CountGenerator<RRNGPolicy>;
+  using UnifSampleWalkerNoReplace = mo::stats::UnifSampleWalkerNoReplace<RRNGPolicy>;
+  using SampleWalkerNoReplace = mo::stats::SampleWalkerNoReplace<RRNGPolicy>;
 
   if (useHash)
     std::logic_error("Function not yet implemented");
@@ -92,8 +77,8 @@ IntegerVector Rcppmo_th_sample_int(
   IntegerVector out(no_init(size));
   if (replace) {
     if (flag_uniform) {
-      std::unique_ptr<UnifIntGenerator> gen{new RUnifIntGenerator(n)};
-      std::generate(out.begin(), out.end(), (*static_cast<RUnifIntGenerator*>(gen.get())));
+      std::unique_ptr<UnifCountGenerator> gen{new UnifCountGenerator(n)};
+      std::generate(out.begin(), out.end(), (*static_cast<UnifCountGenerator*>(gen.get())));
     } else {
       NumericVector prob_(prob);
       R_xlen_t nc = 0;
@@ -103,17 +88,17 @@ IntegerVector Rcppmo_th_sample_int(
       if (nc > 200)
         std::logic_error("Function not yet implemented");
 
-      std::unique_ptr<IntGenerator> gen{new RIntGenerator(prob_)};
-      std::generate(out.begin(), out.end(), (*static_cast<RIntGenerator*>(gen.get())));
+      std::unique_ptr<CountGenerator> gen{new CountGenerator(prob_)};
+      std::generate(out.begin(), out.end(), (*static_cast<CountGenerator*>(gen.get())));
     }
   } else {
     if (flag_uniform) {
-      std::unique_ptr<UnifSampleWalkerNoReplace> gen{new RUnifSampleWalkerNoReplace(n)};
-      std::generate(out.begin(), out.end(), (*static_cast<RUnifSampleWalkerNoReplace*>(gen.get())));
+      std::unique_ptr<UnifSampleWalkerNoReplace> gen{new UnifSampleWalkerNoReplace(n)};
+      std::generate(out.begin(), out.end(), (*static_cast<UnifSampleWalkerNoReplace*>(gen.get())));
     } else {
       NumericVector prob_(prob);
-      std::unique_ptr<SampleWalkerNoReplace> gen{new RSampleWalkerNoReplace(prob_)};
-      std::generate(out.begin(), out.end(), (*static_cast<RSampleWalkerNoReplace*>(gen.get())));
+      std::unique_ptr<SampleWalkerNoReplace> gen{new SampleWalkerNoReplace(prob_)};
+      std::generate(out.begin(), out.end(), (*static_cast<SampleWalkerNoReplace*>(gen.get())));
     }
   }
 

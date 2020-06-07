@@ -6,14 +6,17 @@
 namespace mo {
 namespace stats {
 
-FixedDblGenerator::FixedDblGenerator(const double& value) :
+template<typename RNGPolicy>
+FixedDblGenerator<RNGPolicy>::FixedDblGenerator(const double& value) :
     value_(value) {}
 
-inline double FixedDblGenerator::operator()() const {
+template<typename RNGPolicy>
+inline double FixedDblGenerator<RNGPolicy>::operator()() {
     return value_;
 }
 
-inline double FixedDblGenerator::operator()(const double& value) const {
+template<typename RNGPolicy>
+inline double FixedDblGenerator<RNGPolicy>::operator()(const double& value) {
     return value;
 }
 

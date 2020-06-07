@@ -8,14 +8,17 @@
 namespace mo {
 namespace stats {
 
-RUnifIntGenerator::RUnifIntGenerator(const R_xlen_t& n) :
-    n_(n) {
+template<typename RNGPolicy>
+UnifCountGenerator<RNGPolicy>::UnifCountGenerator(const R_xlen_t& n) :
+    n_(n),
+    rng_() {
   if (n_ < 1)
     std::range_error("n < 1");
 }
 
-inline R_xlen_t RUnifIntGenerator::operator()() const {
-  return ::R_unif_index(n_);
+template<typename RNGPolicy>
+inline R_xlen_t UnifCountGenerator<RNGPolicy>::operator()() {
+  return rng_.R_unif_index(n_);
 }
 
 } // stats

@@ -4,6 +4,7 @@
 #include <vector>
 #include <Rinternals.h> // for R_xlen_t
 #include <mo/stats/generator.hpp>
+#include <mo/stats/rngpolicy.hpp>
 
 namespace mo {
 namespace stats {
@@ -13,13 +14,13 @@ public:
   virtual ~Walker() {}
 }; // Walker
 
-template<typename T>
+template<typename T, typename RNGPolicy = RRNGPolicy>
 class UnivariateWalker : public Walker {
 public:
   virtual T operator()();
 }; // UnivariateWalker
 
-template<typename T, typename S>
+template<typename T, typename S, typename RNGPolicy = RRNGPolicy>
 class UnivariateProcessWalker : public Walker {
 public:
   struct ReturnValue {
@@ -29,28 +30,19 @@ public:
   virtual inline ReturnValue operator()();
 }; // UnivariateProcessWalker
 
-
-class SampleWalkerNoReplace : public UnivariateWalker<R_xlen_t> {
+template<typename RNGPolicy = RRNGPolicy>
+class SampleWalkerNoReplace : public UnivariateWalker<R_xlen_t, RNGPolicy> {
 public:
-  virtual inline R_xlen_t operator()() = 0;
-}; // SampleWalkerNoReplace
-
-class UnifSampleWalkerNoReplace : public UnivariateWalker<R_xlen_t> {
-public:
-  virtual inline R_xlen_t operator()() = 0;
-}; // UnifSampleWalkerNoReplace
-
-
-class RSampleWalkerNoReplace : public SampleWalkerNoReplace {
-public:
-  RSampleWalkerNoReplace() = delete;
-  RSampleWalkerNoReplace(const RSampleWalkerNoReplace& other);
-  RSampleWalkerNoReplace(RSampleWalkerNoReplace&& other) = default;
+  SampleWalkerNoReplace() = delete;
+  SampleWalkerNoReplace(const SampleWalkerNoReplace& other) = default;
+  SampleWalkerNoReplace(SampleWalkerNoReplace&& other) = default;
   template<typename T>
-  RSampleWalkerNoReplace(const T& probabilities);
+  SampleWalkerNoReplace(const T& probabilities);
 
-  RSampleWalkerNoReplace& operator=(const RSampleWalkerNoReplace& other);
-  RSampleWalkerNoReplace& operator=(RSampleWalkerNoReplace&& other) = default;
+  virtual ~SampleWalkerNoReplace() {}
+
+  SampleWalkerNoReplace& operator=(const SampleWalkerNoReplace& other) = default;
+  SampleWalkerNoReplace& operator=(SampleWalkerNoReplace&& other) = default;
 
   virtual inline R_xlen_t operator()() override final;
 private:
@@ -58,25 +50,31 @@ private:
   double total_mass_ = 0.;
   std::vector<double> probabilities_;
   std::vector<int> original_order_;
-  std::unique_ptr<UnifGenerator> unif_generator_;
-}; // RSampleWalkerNoReplace
 
-class RUnifSampleWalkerNoReplace : public UnifSampleWalkerNoReplace {
+  RNGPolicy rng_;
+}; // SampleWalkerNoReplace
+
+template<typename RNGPolicy = RRNGPolicy>
+class UnifSampleWalkerNoReplace : public UnivariateWalker<R_xlen_t, RNGPolicy>  {
 public:
-  RUnifSampleWalkerNoReplace() = delete;
-  RUnifSampleWalkerNoReplace(const RUnifSampleWalkerNoReplace& other) = default;
-  RUnifSampleWalkerNoReplace(RUnifSampleWalkerNoReplace&& other) = default;
-  RUnifSampleWalkerNoReplace(const R_xlen_t& n);
+  UnifSampleWalkerNoReplace() = delete;
+  UnifSampleWalkerNoReplace(const UnifSampleWalkerNoReplace& other) = default;
+  UnifSampleWalkerNoReplace(UnifSampleWalkerNoReplace&& other) = default;
+  UnifSampleWalkerNoReplace(const R_xlen_t& n);
 
-  RUnifSampleWalkerNoReplace& operator=(const RUnifSampleWalkerNoReplace& other) = default;
-  RUnifSampleWalkerNoReplace& operator=(RUnifSampleWalkerNoReplace&& other) = default;
+  virtual ~UnifSampleWalkerNoReplace() {}
+
+  UnifSampleWalkerNoReplace& operator=(const UnifSampleWalkerNoReplace& other) = default;
+  UnifSampleWalkerNoReplace& operator=(UnifSampleWalkerNoReplace&& other) = default;
 
   virtual inline R_xlen_t operator()() override final;
 
 private:
   R_xlen_t n_;
   std::vector<R_xlen_t> values_;
-}; // RUnifSampleWalkerNoReplace
+
+  RNGPolicy rng_;
+}; // UnifSampleWalkerNoReplace
 
 } // stats
 } // mo

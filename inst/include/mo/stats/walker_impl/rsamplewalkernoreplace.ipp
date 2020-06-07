@@ -10,12 +10,13 @@
 namespace mo {
 namespace stats {
 
+template<typename RNGPolicy>
 template<typename T>
-RSampleWalkerNoReplace::RSampleWalkerNoReplace(const T& probabilities) :
+SampleWalkerNoReplace<RNGPolicy>::SampleWalkerNoReplace(const T& probabilities) :
     n_(probabilities.size()),
     probabilities_(probabilities.begin(), probabilities.end()),
     original_order_(probabilities.size()),
-    unif_generator_(new RUnifGenerator01()) {
+    rng_() {
   for (const auto& probability : probabilities_)
     total_mass_ += probability;
   for (auto& probability : probabilities_)
@@ -25,31 +26,13 @@ RSampleWalkerNoReplace::RSampleWalkerNoReplace(const T& probabilities) :
   Rf_revsort(probabilities_.data(), original_order_.data(), (int) n_);
 }
 
-RSampleWalkerNoReplace::RSampleWalkerNoReplace(const RSampleWalkerNoReplace& other) :
-    n_(other.n_),
-    total_mass_(other.total_mass_),
-    probabilities_(other.probabilities_),
-    original_order_(other.original_order_),
-    unif_generator_(new RUnifGenerator01()) {
-}
 
-RSampleWalkerNoReplace& RSampleWalkerNoReplace::operator=(const RSampleWalkerNoReplace& other) {
-  if (this != &other) {
-    n_ = other.n_;
-    total_mass_ = other.total_mass_;
-    probabilities_ = other.probabilities_;
-    original_order_ = other.original_order_;
-    unif_generator_.reset(new RUnifGenerator01());
-  }
-
-  return *this;
-}
-
-inline R_xlen_t RSampleWalkerNoReplace::operator()() {
+template<typename RNGPolicy>
+inline R_xlen_t SampleWalkerNoReplace<RNGPolicy>::operator()() {
   if (n_ == 0)
     std::runtime_error("Walker finished");
 
-  auto rT = (*unif_generator_)() * total_mass_ ;
+  auto rT = rng_.unif_rand() * total_mass_ ;
   auto mass = 0.;
   auto j = 0;
   for (; j<n_-1; j++) {

@@ -6,29 +6,26 @@
 namespace mo {
 namespace stats {
 
-template<typename VECTOR>
-RPermutationGenerator<VECTOR>::RPermutationGenerator() :
-    RPermutationGenerator<VECTOR>(1) {}
+template<typename VECTOR, typename RNGPolicy>
+PermutationGenerator<VECTOR, RNGPolicy>::PermutationGenerator(const R_xlen_t& n) :
+    n_(n),
+    rng_() {}
 
-template<typename VECTOR>
-RPermutationGenerator<VECTOR>::RPermutationGenerator(const R_xlen_t& n) :
-    n_(n) {}
-
-template<typename VECTOR>
-inline void RPermutationGenerator<VECTOR>::operator()(VECTOR& out) const {
+template<typename VECTOR, typename RNGPolicy>
+inline void PermutationGenerator<VECTOR, RNGPolicy>::operator()(VECTOR& out) {
   std::vector<R_xlen_t> values(this->n_);
   std::iota(values.begin(), values.end(), 0);
 
   for (auto n=this->n_; n>0; n--) {
-    R_xlen_t index = static_cast<R_xlen_t>(::R_unif_index(n));
+    R_xlen_t index = rng_.R_unif_index(n);
     out[this->n_-n] = values[index];
     values[index] = values.back();
     values.pop_back();
   }
 }
 
-template<typename VECTOR>
-inline VECTOR RPermutationGenerator<VECTOR>::operator()() const {
+template<typename VECTOR, typename RNGPolicy>
+inline VECTOR PermutationGenerator<VECTOR, RNGPolicy>::operator()() {
   VECTOR out(this->n_);
   (*this)(out);
   return out;

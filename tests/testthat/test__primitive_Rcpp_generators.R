@@ -8,12 +8,6 @@ test_that("RExpGenerator works as expected", {
     args, n, use_seed)
 })
 
-test_that("RUnifGenerator works as expected", {
-  args <- list()
-  expect_equal_sampling_result("runif", "Rcppmo_th_unif",
-    args, n, use_seed)
-})
-
 test_that("FixedDblGenerator works as expected", {
   args <- list("value" = 1)
   expect_equal_sampling_result("rposval", "Rcppmo_th_fixeddbl",
@@ -91,7 +85,7 @@ test_that("sample.int reimplementation works as expected", {
   # custom expectations.
   # TODO: There should be a better way to produce meaningful
   # parametrisations.
-  # TODO: These tests should be refactored in a seperate test file. 
+  # TODO: These tests should be refactored in a seperate test file.
   suppressWarnings(RNGkind(
     kind="Mersenne-Twister", normal.kind = "Inversion",
     sample.kind="Rejection"))
