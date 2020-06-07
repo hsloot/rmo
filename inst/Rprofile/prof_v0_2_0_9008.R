@@ -9,6 +9,10 @@ source(system.file(
   "Rsource", "parameter_generator.R",
   package="rmo", mustWork=TRUE))
 
+## Use pre R 3.6.x sample RNG since the new one is not yet
+## implemented in Rcpp.
+suppressWarnings(RNGkind(kind="Mersenne-Twister", normal.kind = "Inversion", sample.kind="Rounding"))
+
 n <- 1e4L
 d1 <- 2L
 d2 <- 3L
