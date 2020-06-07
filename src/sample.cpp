@@ -102,9 +102,12 @@ NumericMatrix Rcpp__rmo_ex_arnold(
   using RExpGenerator = mo::stats::RExpGenerator;
   using IntGenerator = mo::stats::IntGenerator;
   using RIntGenerator = mo::stats::RIntGenerator;
+  using PermutationGenerator = mo::stats::PermutationGenerator<std::vector<R_xlen_t>>;
+  using RPermutationGenerator = mo::stats::RPermutationGenerator<std::vector<R_xlen_t>>;
 
   std::vector<std::unique_ptr<ExpGenerator>> exp_generators(d);
   std::vector<std::unique_ptr<IntGenerator>> int_generators(d);
+  std::unique_ptr<PermutationGenerator> permutation_generator{new RPermutationGenerator(d)};
   for (int i=0; i<d; i++) {
     std::vector<double> intensities(d-i);
     for (int j=0; j<d-i; j++) {
@@ -135,10 +138,11 @@ NumericMatrix Rcpp__rmo_ex_arnold(
       state += 1 + (*int_generators[state])();
     }
     // auto perm = sample(d, d, false, R_NilValue, false); // Use `RNGkind(sample.kind="Rounding")` for comparison, since R.3.6.x not implemented in Rcpp
-    auto perm = rpermutation(d);
+    // auto perm = rpermutation(d);
+    auto perm = (*permutation_generator)();
     /***
     TODO: It seems that using Rcpp::sample is slightly faster. Can this be a
-    consequence of the low dimensino of the test-cases? Is this overhead from
+    consequence of the low dimension of the test-cases? Is seems that this is overhead from using std::vector.
     the generator class?
     */
 

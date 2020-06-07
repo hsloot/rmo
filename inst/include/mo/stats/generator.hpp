@@ -12,11 +12,19 @@ public:
   virtual ~Generator() = default;
 }; // Generator
 
-template<typename T>
+template<typename SCALAR>
 class UnivariateGenerator : public Generator {
 public:
-  virtual inline T operator()() const = 0;
+  virtual inline SCALAR operator()() const = 0;
 }; // UnivariateGenerator
+
+template<typename VECTOR>
+class MultivariateGenerator : public Generator {
+public:
+  virtual inline VECTOR operator()() const = 0;
+  virtual inline void operator()(VECTOR& out) const = 0;
+}; // MultivariateGenerator
+
 
 class ExpGenerator : public UnivariateGenerator<double> {
 public:
@@ -55,6 +63,13 @@ public:
 private:
   double value_ = 1.;
 }; // FixedDblGenerator
+
+template<typename VECTOR>
+class PermutationGenerator : public MultivariateGenerator<VECTOR> {
+public:
+  virtual inline VECTOR operator()() const = 0;
+  virtual inline void operator()(VECTOR& out) const = 0;
+}; // PermutationGenerator
 
 
 class RExpGenerator : public ExpGenerator {
@@ -121,6 +136,24 @@ private:
   R_xlen_t n_;
 }; // RUniformIntGenerator
 
+template<typename VECTOR>
+class RPermutationGenerator : public PermutationGenerator<VECTOR> {
+public:
+  RPermutationGenerator();
+  RPermutationGenerator(const RPermutationGenerator& other) = default;
+  RPermutationGenerator(RPermutationGenerator&& other) = default;
+  RPermutationGenerator(const R_xlen_t& n);
+
+  RPermutationGenerator& operator=(const RPermutationGenerator& other) = default;
+  RPermutationGenerator& operator=(RPermutationGenerator&& other) = default;
+
+  virtual inline VECTOR operator()() const override final;
+  virtual inline void operator()(VECTOR& out) const override final;
+
+private:
+  R_xlen_t n_ = 1;
+};
+
 } // stats
 } // mo
 
@@ -129,5 +162,6 @@ private:
 #include <mo/stats/implementation/rintgenerator.ipp>
 #include <mo/stats/implementation/runifintgenerator.ipp>
 #include <mo/stats/implementation/fixeddblgenerator.ipp>
+#include <mo/stats/implementation/rpermutationgenerator.ipp>
 
 #endif // MO_STATS_GENERATOR_HPP
