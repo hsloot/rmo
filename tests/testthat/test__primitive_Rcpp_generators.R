@@ -6,6 +6,9 @@ test_that("RExpGenerator works as expected", {
   args <- list("rate" = 0.5)
   expect_equal_sampling_result("rexp", "Rcppmo_th_rexp",
     args, n, use_seed)
+  args <- list("rate" = 2)
+  expect_equal_sampling_result("rexp", "Rcppmo_th_rexp",
+    args, n, use_seed)
 })
 
 test_that("FixedDblGenerator works as expected", {

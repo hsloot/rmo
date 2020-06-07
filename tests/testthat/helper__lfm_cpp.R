@@ -178,7 +178,7 @@ test__rmo_lfm_cpp_comonotone_R <- function(n, d, rate, rate_killing, rate_drift,
 #' @rdname rmo_lfm_cpp
 #' @keywords internal
 #' @noRd
-test__rmo_lfm_cpp_R <- function(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list = list()) { # nolint 
+test__rmo_lfm_cpp_R <- function(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list = list()) { # nolint
 
   out <- matrix(NA, nrow=n, ncol=d)
   for (k in 1:n) {
@@ -196,7 +196,11 @@ test__rmo_lfm_cpp_R <- function(n, d, rate, rate_killing, rate_drift, rjump_name
 #' @rdname rmo_lfm_cpp
 #' @keywords internal
 #' @noRd
-test__sample_cpp_R <- function(rate, rate_killing, rate_drift, rjump, rjump_arg_list, barrier_values) { # nolint
+test__sample_cpp_R <- function(rate, rate_killing, rate_drift, rjump_name, rjump_arg_list, barrier_values) { # nolint
+  if ("rexp" == rjump_name)
+    rjump <- match.fun(stats::rexp)
+  else if ("rposval" == rjump_name)
+    rjump <- match.fun(rposval)
 
   if (rate_drift>0.) {
     barrier_values <- sort(barrier_values)

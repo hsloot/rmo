@@ -21,7 +21,7 @@ template<typename RNGPolicy>
 inline R_xlen_t UnifCountNoReplaceWalker<RNGPolicy>::operator()() {
   if (n_ == 0)
     std::runtime_error("Walker finished");
-  R_xlen_t index = (R_xlen_t) rng_.R_unif_index(n_);
+  R_xlen_t index = rng_.R_unif_index(n_);
   --n_;
   R_xlen_t rval = values_[index];
   values_[index] = values_.back();

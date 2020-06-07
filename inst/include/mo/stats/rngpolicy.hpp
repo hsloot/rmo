@@ -29,8 +29,6 @@ public:
   virtual inline R_xlen_t R_unif_index(const R_xlen_t& n) override final;
   virtual inline double exp_rand() override final;
   virtual inline double norm_rand() override final;
-private:
-  Rcpp::RNGScope rng_scope_;
 };
 
 } // stats

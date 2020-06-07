@@ -182,13 +182,13 @@ NumericMatrix Rcpp__rmo_esm_cuadras_auge(
 
 NumericMatrix sample_cpp(
   double rate, double rate_killing, double rate_drift,
-  Function rjump, List rjump_arg_list, NumericVector barrier_values);
+  std::string rjump_name, List rjump_arg_list, NumericVector barrier_values);
 
 
 //' @keywords internal
 //' @noRd
 // [[Rcpp::export]]
-NumericMatrix Rcpp__rmo_lfm_cpp(unsigned int n, unsigned int d, double rate, double rate_killing, double rate_drift, Function rjump, List rjump_arg_list) {
+NumericMatrix Rcpp__rmo_lfm_cpp(unsigned int n, unsigned int d, double rate, double rate_killing, double rate_drift, std::string rjump_name, List rjump_arg_list) {
   NumericVector unit_exponentials(d);
   NumericMatrix cpp_subordinator;
   unsigned int count;
@@ -196,7 +196,7 @@ NumericMatrix Rcpp__rmo_lfm_cpp(unsigned int n, unsigned int d, double rate, dou
   NumericMatrix out(n, d);
   for (unsigned int k=0; k<n; k++) {
     unit_exponentials = Rcpp::rexp(d);
-    cpp_subordinator = sample_cpp(rate, rate_killing, rate_drift, rjump, rjump_arg_list, unit_exponentials);
+    cpp_subordinator = sample_cpp(rate, rate_killing, rate_drift, rjump_name, rjump_arg_list, unit_exponentials);
     for (unsigned int i=0; i<d; i++) {
       count = 0;
       while (cpp_subordinator(count, 1) < unit_exponentials[i] && count < (unsigned int) cpp_subordinator.nrow())
@@ -211,6 +211,22 @@ NumericMatrix Rcpp__rmo_lfm_cpp(unsigned int n, unsigned int d, double rate, dou
   return out;
 }
 
+
+template<typename RNGPolicy = mo::stats::RRNGPolicy>
+std::unique_ptr<mo::stats::UnivariateGenerator<double, RNGPolicy>> get_univariate_generator(std::string name, List args) {
+  std::unique_ptr<mo::stats::UnivariateGenerator<double, RNGPolicy>> out;
+  if ("rexp" == name) {
+    double rate = args["rate"];
+    out.reset(new mo::stats::ExpGenerator<RNGPolicy>(rate));
+  } else if ("rposval" == name) {
+    double value = args["value"];
+    out.reset(new mo::stats::FixedDblGenerator<RNGPolicy>(value));
+  } else {
+    std::logic_error("wrong input");
+  }
+
+  return std::move( out );
+}
 
 
 //' @rdname rmo_lfm_cpp
@@ -233,13 +249,15 @@ NumericMatrix Rcpp__rmo_lfm_cpp(unsigned int n, unsigned int d, double rate, dou
 //' @keywords internal
 //' @noRd
 // [[Rcpp::export]]
-NumericMatrix sample_cpp(double rate, double rate_killing, double rate_drift, Function rjump, List rjump_arg_list, NumericVector barrier_values) {
+NumericMatrix sample_cpp(double rate, double rate_killing, double rate_drift, std::string rjump_name, List rjump_arg_list, NumericVector barrier_values) {
   barrier_values = clone(barrier_values);
   if (rate_drift>0.) {
     std::sort(barrier_values.begin(), barrier_values.end());
   } else {
     barrier_values = NumericVector(1, max(barrier_values));
   }
+  using RRNGPolicy = mo::stats::RRNGPolicy;
+  using UnivariateGenerator = mo::stats::UnivariateGenerator<double, RRNGPolicy>;
   unsigned int d = barrier_values.size();
 
   double waiting_time;
@@ -248,8 +266,9 @@ NumericMatrix sample_cpp(double rate, double rate_killing, double rate_drift, Fu
 
   double intermediate_waiting_time;
 
-  Function do_call("do.call");
-  rjump_arg_list.push_back(1, "n");
+  // Function do_call("do.call");
+  // rjump_arg_list.push_back(1, "n");
+  std::unique_ptr<UnivariateGenerator> jump_generator = get_univariate_generator<RRNGPolicy>(rjump_name, rjump_arg_list);
 
   std::vector<double> times(1);
   std::vector<double> values(1);
@@ -257,9 +276,10 @@ NumericMatrix sample_cpp(double rate, double rate_killing, double rate_drift, Fu
     while (values.back() < barrier_values[i]) {
       waiting_time = ((0. == rate) ? R_PosInf : R::exp_rand()/rate);
       // requires RNGstate synchronisation
-      PutRNGstate();
-      jump_value = as<double>(do_call(rjump, rjump_arg_list));
-      GetRNGstate();
+      //PutRNGstate();
+      // jump_value = as<double>(do_call(rjump, rjump_arg_list));
+      // GetRNGstate();
+      jump_value = (*jump_generator)();
       killing_waiting_time = ((0. == rate_killing) ? R_PosInf : R::exp_rand()/rate_killing);
 
       if (killing_waiting_time < R_PosInf && killing_waiting_time <= waiting_time) {

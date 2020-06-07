@@ -36,7 +36,8 @@ mb1 <- bench::mark(
   ESM = rmo:::Rcpp__rmo_esm(n, d, intensities=intensities),
   Arnold = rmo:::Rcpp__rmo_arnold(n, d, intensities=intensities),
   Ex_Arnold = rmo:::Rcpp__rmo_ex_arnold(n, d, ex_intensities=ex_intensities),
-  Cuadras_Auge = rmo_esm_cuadras_auge(n, d, alpha, beta),
+  LFM = rmo:::Rcpp__rmo_lfm_cpp(n, d, 0, alpha, beta, "rposval", list("value"=1)),
+  Cuadras_Auge = rmo:::Rcpp__rmo_esm_cuadras_auge(n, d, alpha, beta),
   min_iterations = 100L,
   check=FALSE
 )
@@ -56,6 +57,7 @@ bp1 <- bench::press(
       ESM = rmo:::Rcpp__rmo_esm(n, d, intensities=intensities),
       Arnold = rmo:::Rcpp__rmo_arnold(n, d, intensities=intensities),
       Ex_Arnold = rmo:::Rcpp__rmo_ex_arnold(n, d, ex_intensities=ex_intensities),
+      LFM = rmo:::Rcpp__rmo_lfm_cpp(n, d, 0, alpha, beta, "rposval", list("value"=1)),
       Cuadras_Auge = rmo:::Rcpp__rmo_esm_cuadras_auge(n, d, alpha, beta),
       min_iterations = 100L,
       check=FALSE
@@ -66,7 +68,36 @@ bp1 <- bench::press(
 bp1 %>%
   unnest(cols = c("expression", "d", "time", "gc", "mem_alloc")) %>%
   filter(gc == "none") %>%
-  mutate(expression = factor(expression, levels = c("Cuadras_Auge", "Ex_Arnold", "Arnold", "ESM"))) %>%
+  mutate(expression = factor(expression, levels = c("Cuadras_Auge", "LFM", "Ex_Arnold", "Arnold", "ESM"))) %>%
+  ggplot(aes(x = d, y = time)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = F, colour = "grey50", formula = y ~ x + I(x^2)) +
+  theme(legend.position = "bottom") +
+  facet_grid(expression ~ .)
+
+d_max <- 20
+bp2 <- bench::press(
+  d = (1:(d_max%/%2))*2,
+  {
+    ex_intensities <- ex_intensities_cuadras_auge(d, alpha=alpha, beta=beta)
+    intensities <- intensities_cuadras_auge(d, alpha=alpha, beta=beta)
+    force(ex_intensities)
+    force(intensities)
+    bench::mark(
+      Ex_Arnold = rmo:::Rcpp__rmo_ex_arnold(n, d, ex_intensities=ex_intensities),
+      LFM = rmo:::Rcpp__rmo_lfm_cpp(n, d, 0, alpha, beta, "rposval", list("value"=1)),
+      Cuadras_Auge = rmo:::Rcpp__rmo_esm_cuadras_auge(n, d, alpha, beta),
+      min_iterations = 100L,
+      check=FALSE
+    )
+  }
+)
+d_max <- 10
+
+bp2 %>%
+  unnest(cols = c("expression", "d", "time", "gc", "mem_alloc")) %>%
+  filter(gc == "none") %>%
+  mutate(expression = factor(expression, levels = c("Cuadras_Auge", "LFM", "Ex_Arnold"))) %>%
   ggplot(aes(x = d, y = time)) +
   geom_point() +
   geom_smooth(method = "lm", se = F, colour = "grey50", formula = y ~ x + I(x^2)) +

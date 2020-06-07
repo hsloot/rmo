@@ -59,8 +59,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // Rcpp__rmo_lfm_cpp
-NumericMatrix Rcpp__rmo_lfm_cpp(unsigned int n, unsigned int d, double rate, double rate_killing, double rate_drift, Function rjump, List rjump_arg_list);
-RcppExport SEXP _rmo_Rcpp__rmo_lfm_cpp(SEXP nSEXP, SEXP dSEXP, SEXP rateSEXP, SEXP rate_killingSEXP, SEXP rate_driftSEXP, SEXP rjumpSEXP, SEXP rjump_arg_listSEXP) {
+NumericMatrix Rcpp__rmo_lfm_cpp(unsigned int n, unsigned int d, double rate, double rate_killing, double rate_drift, std::string rjump_name, List rjump_arg_list);
+RcppExport SEXP _rmo_Rcpp__rmo_lfm_cpp(SEXP nSEXP, SEXP dSEXP, SEXP rateSEXP, SEXP rate_killingSEXP, SEXP rate_driftSEXP, SEXP rjump_nameSEXP, SEXP rjump_arg_listSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -69,25 +69,25 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< double >::type rate(rateSEXP);
     Rcpp::traits::input_parameter< double >::type rate_killing(rate_killingSEXP);
     Rcpp::traits::input_parameter< double >::type rate_drift(rate_driftSEXP);
-    Rcpp::traits::input_parameter< Function >::type rjump(rjumpSEXP);
+    Rcpp::traits::input_parameter< std::string >::type rjump_name(rjump_nameSEXP);
     Rcpp::traits::input_parameter< List >::type rjump_arg_list(rjump_arg_listSEXP);
-    rcpp_result_gen = Rcpp::wrap(Rcpp__rmo_lfm_cpp(n, d, rate, rate_killing, rate_drift, rjump, rjump_arg_list));
+    rcpp_result_gen = Rcpp::wrap(Rcpp__rmo_lfm_cpp(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list));
     return rcpp_result_gen;
 END_RCPP
 }
 // sample_cpp
-NumericMatrix sample_cpp(double rate, double rate_killing, double rate_drift, Function rjump, List rjump_arg_list, NumericVector barrier_values);
-RcppExport SEXP _rmo_sample_cpp(SEXP rateSEXP, SEXP rate_killingSEXP, SEXP rate_driftSEXP, SEXP rjumpSEXP, SEXP rjump_arg_listSEXP, SEXP barrier_valuesSEXP) {
+NumericMatrix sample_cpp(double rate, double rate_killing, double rate_drift, std::string rjump_name, List rjump_arg_list, NumericVector barrier_values);
+RcppExport SEXP _rmo_sample_cpp(SEXP rateSEXP, SEXP rate_killingSEXP, SEXP rate_driftSEXP, SEXP rjump_nameSEXP, SEXP rjump_arg_listSEXP, SEXP barrier_valuesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< double >::type rate(rateSEXP);
     Rcpp::traits::input_parameter< double >::type rate_killing(rate_killingSEXP);
     Rcpp::traits::input_parameter< double >::type rate_drift(rate_driftSEXP);
-    Rcpp::traits::input_parameter< Function >::type rjump(rjumpSEXP);
+    Rcpp::traits::input_parameter< std::string >::type rjump_name(rjump_nameSEXP);
     Rcpp::traits::input_parameter< List >::type rjump_arg_list(rjump_arg_listSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type barrier_values(barrier_valuesSEXP);
-    rcpp_result_gen = Rcpp::wrap(sample_cpp(rate, rate_killing, rate_drift, rjump, rjump_arg_list, barrier_values));
+    rcpp_result_gen = Rcpp::wrap(sample_cpp(rate, rate_killing, rate_drift, rjump_name, rjump_arg_list, barrier_values));
     return rcpp_result_gen;
 END_RCPP
 }

@@ -27,8 +27,8 @@ Rcpp__rmo_esm_cuadras_auge <- function(n, d, alpha, beta) {
 
 #' @keywords internal
 #' @noRd
-Rcpp__rmo_lfm_cpp <- function(n, d, rate, rate_killing, rate_drift, rjump, rjump_arg_list) {
-    .Call(`_rmo_Rcpp__rmo_lfm_cpp`, n, d, rate, rate_killing, rate_drift, rjump, rjump_arg_list)
+Rcpp__rmo_lfm_cpp <- function(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list) {
+    .Call(`_rmo_Rcpp__rmo_lfm_cpp`, n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list)
 }
 
 #' @rdname rmo_lfm_cpp
@@ -50,8 +50,8 @@ Rcpp__rmo_lfm_cpp <- function(n, d, rate, rate_killing, rate_drift, rjump, rjump
 #'
 #' @keywords internal
 #' @noRd
-sample_cpp <- function(rate, rate_killing, rate_drift, rjump, rjump_arg_list, barrier_values) {
-    .Call(`_rmo_sample_cpp`, rate, rate_killing, rate_drift, rjump, rjump_arg_list, barrier_values)
+sample_cpp <- function(rate, rate_killing, rate_drift, rjump_name, rjump_arg_list, barrier_values) {
+    .Call(`_rmo_sample_cpp`, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list, barrier_values)
 }
 
 #' @keywords internal
