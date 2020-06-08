@@ -50,6 +50,11 @@ inline R_xlen_t CountNoReplaceWalker<RNGPolicy>::operator()() {
   return rval;
 }
 
+template<typename RNGPolicy>
+inline std::unique_ptr<UnivariateWalker<R_xlen_t, RNGPolicy>> CountNoReplaceWalker<RNGPolicy>::clone() const {
+  return std::move( std::unique_ptr<UnivariateWalker<R_xlen_t, RNGPolicy>>(new CountNoReplaceWalker<RNGPolicy>(*this)) );
+}
+
 } // stats
 } // mo
 

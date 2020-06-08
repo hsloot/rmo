@@ -25,6 +25,11 @@ inline double ExpGenerator<RNGPolicy>::operator()(const double& rate) {
   return 0. == rate ? R_PosInf : (R_PosInf == rate ? 0. : rng_.exp_rand() / rate);
 }
 
+template<typename RNGPolicy>
+inline std::unique_ptr<UnivariateGenerator<double, RNGPolicy>> ExpGenerator<RNGPolicy>::clone() const {
+  return std::move( std::unique_ptr<UnivariateGenerator<double, RNGPolicy>>(new ExpGenerator<RNGPolicy>(*this)) );
+}
+
 } // stats
 } // mo
 

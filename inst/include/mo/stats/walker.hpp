@@ -14,20 +14,24 @@ public:
   virtual ~Walker() {}
 }; // Walker
 
-template<typename T, typename RNGPolicy = RRNGPolicy>
+template<typename SCALAR, typename RNGPolicy = RRNGPolicy>
 class UnivariateWalker : public Walker {
 public:
-  virtual T operator()();
+  virtual SCALAR operator()();
+
+  virtual inline std::unique_ptr<UnivariateWalker> clone() const = 0;
 }; // UnivariateWalker
 
-template<typename T, typename S, typename RNGPolicy = RRNGPolicy>
+template<typename TSCALAR, typename VSCALAR, typename RNGPolicy = RRNGPolicy>
 class UnivariateProcessWalker : public Walker {
 public:
   struct ReturnValue {
-    S index;
-    T value;
+    TSCALAR index;
+    VSCALAR value;
   };
   virtual inline ReturnValue operator()();
+
+  virtual inline std::unique_ptr<UnivariateProcessWalker> clone() const = 0;
 }; // UnivariateProcessWalker
 
 template<typename RNGPolicy = RRNGPolicy>
@@ -45,6 +49,9 @@ public:
   CountNoReplaceWalker& operator=(CountNoReplaceWalker&& other) = default;
 
   virtual inline R_xlen_t operator()() override final;
+
+  virtual inline std::unique_ptr<UnivariateWalker<R_xlen_t, RNGPolicy>> clone() const override final;
+
 private:
   R_xlen_t n_;
   double total_mass_ = 0.;
@@ -68,6 +75,8 @@ public:
   UnifCountNoReplaceWalker& operator=(UnifCountNoReplaceWalker&& other) = default;
 
   virtual inline R_xlen_t operator()() override final;
+
+  virtual inline std::unique_ptr<UnivariateWalker<R_xlen_t, RNGPolicy>> clone() const override final;
 
 private:
   R_xlen_t n_;

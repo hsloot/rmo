@@ -17,6 +17,8 @@ template<typename SCALAR, typename RNGPolicy = RRNGPolicy>
 class UnivariateGenerator : public Generator {
 public:
   virtual inline SCALAR operator()() = 0;
+
+  virtual inline std::unique_ptr<UnivariateGenerator> clone() const = 0;
 }; // UnivariateGenerator
 
 template<typename VECTOR, typename RNGPolicy = RRNGPolicy>
@@ -24,6 +26,8 @@ class MultivariateGenerator : public Generator {
 public:
   virtual inline VECTOR operator()() = 0;
   virtual inline void operator()(VECTOR& out) = 0;
+
+  virtual inline std::unique_ptr<MultivariateGenerator> clone() const = 0;
 }; // MultivariateGenerator
 
 template<typename RNGPolicy = RRNGPolicy>
@@ -41,6 +45,9 @@ public:
 
   virtual inline double operator()() override final;
   inline double operator()(const double& value);
+
+  virtual inline std::unique_ptr<UnivariateGenerator<double, RNGPolicy>> clone() const override final;
+
 private:
   double value_ = 1.;
 }; // FixedDblGenerator
@@ -60,6 +67,8 @@ public:
 
   virtual inline double operator()() override final;
   inline double operator()(const double& rate);
+
+  virtual inline std::unique_ptr<UnivariateGenerator<double, RNGPolicy>> clone() const override final;
 
 private:
   double rate_ = 1.;
@@ -83,6 +92,8 @@ public:
 
   virtual inline R_xlen_t operator()() override final;
 
+  virtual inline std::unique_ptr<UnivariateGenerator<R_xlen_t, RNGPolicy>> clone() const override final;
+
 private:
   std::vector<double> cumulative_probabilities_;
   std::vector<int> original_order_;
@@ -104,6 +115,8 @@ public:
   UnifCountReplaceGenerator& operator=(UnifCountReplaceGenerator&& other) = default;
 
   virtual inline R_xlen_t operator()() override final;
+
+  virtual inline std::unique_ptr<UnivariateGenerator<R_xlen_t, RNGPolicy>> clone() const override final;
 
 private:
   R_xlen_t n_;
@@ -127,6 +140,8 @@ public:
 
   virtual inline VECTOR operator()() override final;
   virtual inline void operator()(VECTOR& out) override final;
+
+  virtual inline std::unique_ptr<MultivariateGenerator<VECTOR, RNGPolicy>> clone() const override final;
 
 private:
   R_xlen_t n_;

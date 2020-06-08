@@ -20,6 +20,11 @@ inline double FixedDblGenerator<RNGPolicy>::operator()(const double& value) {
     return value;
 }
 
+template<typename RNGPolicy>
+inline std::unique_ptr<UnivariateGenerator<double, RNGPolicy>> FixedDblGenerator<RNGPolicy>::clone() const {
+  return std::move( std::unique_ptr<UnivariateGenerator<double, RNGPolicy>>(new FixedDblGenerator<RNGPolicy>(*this)) );
+}
+
 } // stats
 } // mo
 
