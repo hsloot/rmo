@@ -75,7 +75,7 @@ bp1 %>%
   theme(legend.position = "bottom") +
   facet_grid(expression ~ .)
 
-d_max <- 20
+d_max <- 18
 bp2 <- bench::press(
   d = (1:(d_max%/%2))*2,
   {
