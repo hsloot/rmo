@@ -75,12 +75,11 @@ bp1 %>%
   theme(legend.position = "bottom") +
   facet_grid(expression ~ .)
 
-d_max <- 18
+d_max <- 125
 bp2 <- bench::press(
   d = (1:(d_max%/%2))*2,
   {
     ex_intensities <- ex_intensities_cuadras_auge(d, alpha=alpha, beta=beta)
-    intensities <- intensities_cuadras_auge(d, alpha=alpha, beta=beta)
     force(ex_intensities)
     force(intensities)
     bench::mark(

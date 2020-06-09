@@ -174,10 +174,10 @@ NumericMatrix Rcpp__rmo_esm_cuadras_auge(
 std::unique_ptr<UnivariateGenerator> get_univariate_generator(
     const std::string& name, const List& args);
 
-NumericMatrix sample_cpp(
+std::vector<std::pair<double, double>> sample_cpp_internal(
     const double& rate, const double& rate_killing, const double& rate_drift,
     const std::string& rjump_name, const List& rjump_arg_list,
-    const NumericVector& barrier_values);
+    const std::vector<double>& barrier_values);
 
 
 //' @keywords internal
@@ -188,59 +188,40 @@ NumericMatrix Rcpp__rmo_lfm_cpp(
     const double& rate, const double& rate_killing, const double& rate_drift,
     const std::string& rjump_name, const List& rjump_arg_list) {
   std::unique_ptr<ExpGenerator> bv_generator{new ExpGenerator(1.)};
-  NumericVector unit_exponentials(d);
-  NumericMatrix cpp_subordinator;
+  std::vector<double> unit_exponentials(d);
+  std::vector<std::pair<double, double>> cpp_subordinator;
   int count;
 
   NumericMatrix out(n, d);
   for (R_xlen_t k=0; k<n; k++) {
     std::generate(unit_exponentials.begin(), unit_exponentials.end(),
       *bv_generator);
-    cpp_subordinator = sample_cpp(rate, rate_killing, rate_drift, rjump_name, rjump_arg_list, unit_exponentials);
+    cpp_subordinator = sample_cpp_internal(rate, rate_killing, rate_drift, rjump_name, rjump_arg_list, unit_exponentials);
     for (int i=0; i<d; i++) {
       count = 0;
-      while (cpp_subordinator(count, 1) < unit_exponentials[i] && count < cpp_subordinator.nrow())
+      while (cpp_subordinator[count].second < unit_exponentials[i] && count < cpp_subordinator.size())
         count += 1;
 
-      if (cpp_subordinator.nrow() == count)
+      if (cpp_subordinator.size() == count)
         stop("internal error: exponential value out of subordinator range");
 
-      out(k, i) = cpp_subordinator(count, 0);
+      out(k, i) = cpp_subordinator[count].first;
     }
   }
   return out;
 }
 
 
-//' @rdname rmo_lfm_cpp
-//'
-//' A sampling function for a (possibly killed) compound Poisson subordinator
-//' with non-negative jump distribution.
-//'
-//' @inheritParams rmo_lfm_cpp
-//' @param barrier_values a vector of barrier values from the LFM to properly
-//' incorporate first exit times over these `barrier_values` if killing or drift
-//' is present.
-//'
-//' @return A named `k x 2` array with names `c("t", "value")`, where `k` is
-//' random and each row represents a time-value tupel for a jump in the compound
-//' Poisson subordinator.
-//'
-//' @include assert.R
-//' @importFrom stats rexp
-//'
-//' @keywords internal
-//' @noRd
-// [[Rcpp::export]]
-NumericMatrix sample_cpp(
+std::vector<std::pair<double, double>> sample_cpp_internal(
       const double& rate, const double& rate_killing, const double& rate_drift,
       const std::string& rjump_name, const List& rjump_arg_list,
-      const NumericVector& barrier_values) {
-  NumericVector barrier_values_ = clone(barrier_values);
+      const std::vector<double>& barrier_values) {
+  std::vector<double> barrier_values_;
   if (rate_drift>0.) {
+    barrier_values_ = std::vector<double>(barrier_values);
     std::sort(barrier_values_.begin(), barrier_values_.end());
   } else {
-    barrier_values_ = NumericVector(1, max(barrier_values_));
+    barrier_values_ = std::vector<double>(1, *std::max_element(barrier_values.begin(), barrier_values.end()));
   }
   std::unique_ptr<ExpGenerator> wt_generator{new ExpGenerator(rate)};
   std::unique_ptr<ExpGenerator> kt_generator{new ExpGenerator(rate_killing)};
@@ -249,48 +230,80 @@ NumericMatrix sample_cpp(
 
   double killing_time = (*kt_generator)();
 
-  std::vector<double> times(1, 0.);
-  std::vector<double> values(1, 0.);
+  double time = 0.;
+  double value = 0.;
+  std::vector<std::pair<double, double>> out(1, {time, value});
+  /**
+   * Explanation:
+   *  - the expected maximum value of d iid unit exponentials
+   *    is O(d)
+   *  - 5 is chosen as a conservative factor but should ultimately
+   *    be replaced by a more meaningful metric (e.g. mean of the
+   *    jump distribution)
+   * replace d*5. by an estimate
+   * of the
+   */
+  int estimated_length = 0;
+  if (rate > 0.)
+    estimated_length = d*5;
+  if (rate_drift > 0.)
+  estimated_length += d;
+  out.reserve(estimated_length*2);
   for (int i=0; i<d; i++) {
-    while (values.back() < barrier_values_[i]) {
+    while (value < barrier_values_[i]) {
       double waiting_time = (*wt_generator)();
-      double killing_waiting_time = killing_time - times.back();
+      double killing_waiting_time = killing_time - time;
       double jump_value = (*jump_generator)();
 
       if (killing_waiting_time < R_PosInf && killing_waiting_time <= waiting_time) {
         for (int j=i; j<d; j++) {
-          if (rate_drift > 0. && (barrier_values_[j] - values.back())/rate_drift <= killing_waiting_time) {
-            double intermediate_waiting_time = (barrier_values_[j] - values.back()) / rate_drift;
-            times.push_back(times.back() + intermediate_waiting_time);
-            values.push_back(barrier_values_[j]);
+          if (rate_drift > 0. && (barrier_values_[j] - value)/rate_drift <= killing_waiting_time) {
+            double intermediate_waiting_time = (barrier_values_[j] - value) / rate_drift;
+            time += intermediate_waiting_time;
+            value = barrier_values_[j];
+            out.push_back({time, value});
             killing_waiting_time -= intermediate_waiting_time;
           }
         }
 
-        times.push_back(times.back() + killing_waiting_time);
-        values.push_back(R_PosInf);
+        time = killing_time;
+        value = R_PosInf;
+        out.push_back({time, value});
       } else {
         for (int j=i; j<d; j++) {
-          if (rate_drift > 0. && (barrier_values_[j] - values.back())/rate_drift <= waiting_time) {
-            double intermediate_waiting_time = (barrier_values_[j] - values.back())/rate_drift;
-            times.push_back(times.back() + intermediate_waiting_time);
-            values.push_back(barrier_values_[j]);
+          if (rate_drift > 0. && (barrier_values_[j] - value)/rate_drift <= waiting_time) {
+            double intermediate_waiting_time = (barrier_values_[j] - value)/rate_drift;
+            time += intermediate_waiting_time;
+            value = barrier_values_[j];
+            out.push_back({time, value});
             waiting_time -= intermediate_waiting_time;
           }
         }
 
         if (rate > 0.) { // waiting_time < R_PosInf
-          times.push_back(times.back() + waiting_time);
-          values.push_back(values.back() + waiting_time * rate_drift + jump_value);
+          time += waiting_time;
+          value += waiting_time * rate_drift + jump_value;
+          out.push_back({time, value});
         }
       }
     }
   }
 
-  NumericMatrix out(times.size(), 2);
-  for (R_xlen_t i=0; i<times.size(); i++) {
-    out(i, 0) = times[i];
-    out(i, 1) = values[i];
+  return out;
+}
+
+//' @keywords internal
+//' @noRd
+// [[Rcpp::export]]
+NumericMatrix sample_cpp(
+      const double& rate, const double& rate_killing, const double& rate_drift,
+      const std::string& rjump_name, const List& rjump_arg_list,
+      const NumericVector& barrier_values) {
+  std::vector<std::pair<double, double>> cpp_subordinator = sample_cpp_internal(rate, rate_killing, rate_drift, rjump_name, rjump_arg_list, Rcpp::as<std::vector<double>>(barrier_values));
+  NumericMatrix out(cpp_subordinator.size(), 2);
+  for (R_xlen_t i=0; i<cpp_subordinator.size(); i++) {
+    out(i, 0) = cpp_subordinator[i].first;
+    out(i, 1) = cpp_subordinator[i].second;
   }
   colnames(out) = CharacterVector::create("t", "value");
 

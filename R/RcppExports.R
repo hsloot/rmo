@@ -31,23 +31,6 @@ Rcpp__rmo_lfm_cpp <- function(n, d, rate, rate_killing, rate_drift, rjump_name, 
     .Call(`_rmo_Rcpp__rmo_lfm_cpp`, n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list)
 }
 
-#' @rdname rmo_lfm_cpp
-#'
-#' A sampling function for a (possibly killed) compound Poisson subordinator
-#' with non-negative jump distribution.
-#'
-#' @inheritParams rmo_lfm_cpp
-#' @param barrier_values a vector of barrier values from the LFM to properly
-#' incorporate first exit times over these `barrier_values` if killing or drift
-#' is present.
-#'
-#' @return A named `k x 2` array with names `c("t", "value")`, where `k` is
-#' random and each row represents a time-value tupel for a jump in the compound
-#' Poisson subordinator.
-#'
-#' @include assert.R
-#' @importFrom stats rexp
-#'
 #' @keywords internal
 #' @noRd
 sample_cpp <- function(rate, rate_killing, rate_drift, rjump_name, rjump_arg_list, barrier_values) {

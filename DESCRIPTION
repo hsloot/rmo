@@ -27,8 +27,8 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.0
 Collate:
-    'assert.R'
     'RcppExports.R'
+    'assert.R'
     'bernstein.R'
     'rmo.R'
     'sample.R'
