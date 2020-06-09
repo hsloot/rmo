@@ -247,23 +247,20 @@ NumericMatrix sample_cpp(
   std::unique_ptr<UnivariateGenerator> jump_generator = get_univariate_generator(rjump_name, rjump_arg_list);
   R_xlen_t d = barrier_values_.size();
 
-  double waiting_time;
-  double jump_value;
-  double killing_waiting_time = (*kt_generator)();
+  double killing_time = (*kt_generator)();
 
-  double intermediate_waiting_time;
-
-  std::vector<double> times(1);
-  std::vector<double> values(1);
+  std::vector<double> times(1, 0.);
+  std::vector<double> values(1, 0.);
   for (int i=0; i<d; i++) {
     while (values.back() < barrier_values_[i]) {
-      waiting_time = (*wt_generator)();
-      jump_value = (*jump_generator)();
+      double waiting_time = (*wt_generator)();
+      double killing_waiting_time = killing_time - times.back();
+      double jump_value = (*jump_generator)();
 
       if (killing_waiting_time < R_PosInf && killing_waiting_time <= waiting_time) {
         for (int j=i; j<d; j++) {
           if (rate_drift > 0. && (barrier_values_[j] - values.back())/rate_drift <= killing_waiting_time) {
-            intermediate_waiting_time = (barrier_values_[j] - values.back()) / rate_drift;
+            double intermediate_waiting_time = (barrier_values_[j] - values.back()) / rate_drift;
             times.push_back(times.back() + intermediate_waiting_time);
             values.push_back(barrier_values_[j]);
             killing_waiting_time -= intermediate_waiting_time;
@@ -275,7 +272,7 @@ NumericMatrix sample_cpp(
       } else {
         for (int j=i; j<d; j++) {
           if (rate_drift > 0. && (barrier_values_[j] - values.back())/rate_drift <= waiting_time) {
-            intermediate_waiting_time = (barrier_values_[j] - values.back())/rate_drift;
+            double intermediate_waiting_time = (barrier_values_[j] - values.back())/rate_drift;
             times.push_back(times.back() + intermediate_waiting_time);
             values.push_back(barrier_values_[j]);
             waiting_time -= intermediate_waiting_time;

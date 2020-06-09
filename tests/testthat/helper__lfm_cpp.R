@@ -29,13 +29,14 @@ test__rmo_lfm_cpp_bivariate_rexp_R <- function(n, rate, rate_killing, rate_drift
     }
     d <- length(barrier_values)
 
-    killing_waiting_time <- rexp_if_rate_zero_then_infinity(1, rate_killing)
+    killing_time <- rexp_if_rate_zero_then_infinity(1, rate_killing)
 
     times <- 0.
     values <- 0.
     for (i in 1:d) {
       while (last(values) < barrier_values[[i]]) {
         waiting_time <- rexp_if_rate_zero_then_infinity(1, rate)
+        killing_waiting_time <- killing_time - last(times)
         jump_value <- rexp_if_rate_zero_then_infinity(1, jump_rate)
 
         if (killing_waiting_time < Inf && killing_waiting_time <= waiting_time) {
@@ -91,13 +92,14 @@ test__rmo_lfm_cpp_bivariate_rposval_R <- function(n, rate, rate_killing, rate_dr
     }
     d <- length(barrier_values)
 
-    killing_waiting_time <- rexp_if_rate_zero_then_infinity(1, rate_killing)
+    killing_time <- rexp_if_rate_zero_then_infinity(1, rate_killing)
 
     times <- 0.
     values <- 0.
     for (i in 1:d) {
       while (last(values) < barrier_values[i]) {
         waiting_time <- rexp_if_rate_zero_then_infinity(1, rate)
+        killing_waiting_time <- killing_time - last(times)
 
         if (killing_waiting_time < Inf && killing_waiting_time <= waiting_time) {
           for (j in i:d) {
@@ -211,13 +213,14 @@ test__sample_cpp_R <- function(rate, rate_killing, rate_drift, rjump_name, rjump
   }
   d <- length(barrier_values)
 
-  killing_waiting_time <- rexp_if_rate_zero_then_infinity(1, rate_killing)
+  killing_time <- rexp_if_rate_zero_then_infinity(1, rate_killing)
 
   times <- 0.
   values <- 0.
   for (i in 1:d) {
     while (last(values) < barrier_values[[i]]) {
       waiting_time <- rexp_if_rate_zero_then_infinity(1, rate)
+      killing_waiting_time <- killing_time - last(times)
       jump_value <- do.call(rjump, args=c("n"=1, rjump_arg_list))
 
       if (killing_waiting_time < Inf && killing_waiting_time <= waiting_time) {
