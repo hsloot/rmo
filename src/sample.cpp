@@ -249,7 +249,7 @@ NumericMatrix sample_cpp(
 
   double waiting_time;
   double jump_value;
-  double killing_waiting_time;
+  double killing_waiting_time = (*kt_generator)();
 
   double intermediate_waiting_time;
 
@@ -259,7 +259,6 @@ NumericMatrix sample_cpp(
     while (values.back() < barrier_values_[i]) {
       waiting_time = (*wt_generator)();
       jump_value = (*jump_generator)();
-      killing_waiting_time = (*kt_generator)();
 
       if (killing_waiting_time < R_PosInf && killing_waiting_time <= waiting_time) {
         for (int j=i; j<d; j++) {
