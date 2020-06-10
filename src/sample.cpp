@@ -172,7 +172,7 @@ NumericMatrix Rcpp__rmo_esm_cuadras_auge(
 std::unique_ptr<RealUnivariateGenerator> get_univariate_generator(
     const std::string& name, const List& args);
 
-std::vector<std::pair<double, double>> sample_cpp_internal(
+std::vector<std::pair<double, double>> sample_cpp(
     const double& rate, const double& rate_killing, const double& rate_drift,
     const std::string& rjump_name, const List& rjump_arg_list,
     const std::vector<double>& barrier_values);
@@ -194,7 +194,7 @@ NumericMatrix Rcpp__rmo_lfm_cpp(
   for (R_xlen_t k=0; k<n; k++) {
     std::generate(unit_exponentials.begin(), unit_exponentials.end(),
       *bv_generator);
-    cpp_subordinator = sample_cpp_internal(rate, rate_killing, rate_drift, rjump_name, rjump_arg_list, unit_exponentials);
+    cpp_subordinator = sample_cpp(rate, rate_killing, rate_drift, rjump_name, rjump_arg_list, unit_exponentials);
     for (int i=0; i<d; i++) {
       count = 0;
       while (cpp_subordinator[count].second < unit_exponentials[i] && count < cpp_subordinator.size())
@@ -210,7 +210,7 @@ NumericMatrix Rcpp__rmo_lfm_cpp(
 }
 
 
-std::vector<std::pair<double, double>> sample_cpp_internal(
+std::vector<std::pair<double, double>> sample_cpp(
       const double& rate, const double& rate_killing, const double& rate_drift,
       const std::string& rjump_name, const List& rjump_arg_list,
       const std::vector<double>& barrier_values) {
@@ -297,7 +297,7 @@ NumericMatrix sample_cpp(
       const double& rate, const double& rate_killing, const double& rate_drift,
       const std::string& rjump_name, const List& rjump_arg_list,
       const NumericVector& barrier_values) {
-  std::vector<std::pair<double, double>> cpp_subordinator = sample_cpp_internal(rate, rate_killing, rate_drift, rjump_name, rjump_arg_list, Rcpp::as<std::vector<double>>(barrier_values));
+  std::vector<std::pair<double, double>> cpp_subordinator = sample_cpp(rate, rate_killing, rate_drift, rjump_name, rjump_arg_list, Rcpp::as<std::vector<double>>(barrier_values));
   NumericMatrix out(cpp_subordinator.size(), 2);
   for (R_xlen_t i=0; i<cpp_subordinator.size(); i++) {
     out(i, 0) = cpp_subordinator[i].first;
