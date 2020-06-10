@@ -21,11 +21,6 @@ inline R_xlen_t UnifCountReplaceGenerator<RNGPolicy>::operator()() {
   return rng_.R_unif_index(n_);
 }
 
-template<typename RNGPolicy>
-inline std::unique_ptr<UnivariateGenerator<R_xlen_t, RNGPolicy>> UnifCountReplaceGenerator<RNGPolicy>::clone() const {
-  return std::move( std::unique_ptr<UnivariateGenerator<R_xlen_t, RNGPolicy>>(new UnifCountReplaceGenerator<RNGPolicy>(*this)) );
-}
-
 } // stats
 } // mo
 

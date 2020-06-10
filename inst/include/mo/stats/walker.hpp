@@ -18,8 +18,6 @@ template<typename SCALAR, typename RNGPolicy = RRNGPolicy>
 class UnivariateWalker : public Walker {
 public:
   virtual SCALAR operator()();
-
-  virtual inline std::unique_ptr<UnivariateWalker> clone() const = 0;
 }; // UnivariateWalker
 
 template<typename TSCALAR, typename VSCALAR, typename RNGPolicy = RRNGPolicy>
@@ -30,8 +28,6 @@ public:
     VSCALAR value;
   };
   virtual inline ReturnValue operator()();
-
-  virtual inline std::unique_ptr<UnivariateProcessWalker> clone() const = 0;
 }; // UnivariateProcessWalker
 
 template<typename RNGPolicy = RRNGPolicy>
@@ -49,8 +45,6 @@ public:
   CountNoReplaceWalker& operator=(CountNoReplaceWalker&& other) = default;
 
   virtual inline R_xlen_t operator()() override final;
-
-  virtual inline std::unique_ptr<UnivariateWalker<R_xlen_t, RNGPolicy>> clone() const override final;
 
 private:
   R_xlen_t n_;
@@ -75,8 +69,6 @@ public:
   UnifCountNoReplaceWalker& operator=(UnifCountNoReplaceWalker&& other) = default;
 
   virtual inline R_xlen_t operator()() override final;
-
-  virtual inline std::unique_ptr<UnivariateWalker<R_xlen_t, RNGPolicy>> clone() const override final;
 
 private:
   R_xlen_t n_;

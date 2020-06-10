@@ -36,11 +36,6 @@ inline R_xlen_t CountReplaceGenerator<RNGPolicy>::operator()() {
   return cumulative_probabilities_.size();
 }
 
-template<typename RNGPolicy>
-inline std::unique_ptr<UnivariateGenerator<R_xlen_t, RNGPolicy>> CountReplaceGenerator<RNGPolicy>::clone() const {
-  return std::move( std::unique_ptr<UnivariateGenerator<R_xlen_t, RNGPolicy>>(new CountReplaceGenerator<RNGPolicy>(*this)) );
-}
-
 } // stats
 } // mo
 

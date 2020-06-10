@@ -31,11 +31,6 @@ inline VECTOR PermutationGenerator<VECTOR, RNGPolicy>::operator()() {
   return out;
 }
 
-template<typename VECTOR, typename RNGPolicy>
-inline std::unique_ptr<MultivariateGenerator<VECTOR, RNGPolicy>> PermutationGenerator<VECTOR, RNGPolicy>::clone() const {
-  return std::move( std::unique_ptr<MultivariateGenerator<VECTOR, RNGPolicy>>(new PermutationGenerator<VECTOR, RNGPolicy>(*this)) );
-}
-
 } // stats
 } // mo
 

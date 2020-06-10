@@ -75,7 +75,7 @@ bp1 %>%
   theme(legend.position = "bottom") +
   facet_grid(expression ~ .)
 
-d_max <- 125
+d_max <- 50
 bp2 <- bench::press(
   d = (1:(d_max%/%2))*2,
   {
@@ -91,8 +91,6 @@ bp2 <- bench::press(
     )
   }
 )
-d_max <- 10
-
 bp2 %>%
   unnest(cols = c("expression", "d", "time", "gc", "mem_alloc")) %>%
   filter(gc == "none") %>%
@@ -102,6 +100,9 @@ bp2 %>%
   geom_smooth(method = "lm", se = F, colour = "grey50", formula = y ~ x + I(x^2)) +
   theme(legend.position = "bottom") +
   facet_grid(expression ~ .)
+d_max <- 10
+
+
 
 detach("package:rmo", unload = TRUE)
 
@@ -212,6 +213,7 @@ intensities <- intensities_poisson(d, lambda=lambda, eta=eta)
 mb5 <- bench::mark(
   ESM = rmo:::Rcpp__rmo_esm(n, d, intensities=intensities),
   Arnold = rmo:::Rcpp__rmo_arnold(n, d, intensities=intensities),
+  LFM = rmo:::Rcpp__rmo_lfm_cpp(n, d, lambda, 0, 0, "rposval", list("value"=eta)),
   Ex_Arnold = rmo:::Rcpp__rmo_ex_arnold(n, d, ex_intensities=ex_intensities),
   min_iterations = 100L,
   check=FALSE
@@ -231,6 +233,7 @@ bp3 <- bench::press(
     bench::mark(
       ESM = rmo:::Rcpp__rmo_esm(n, d, intensities=intensities),
       Arnold = rmo:::Rcpp__rmo_arnold(n, d, intensities=intensities),
+      LFM = rmo:::Rcpp__rmo_lfm_cpp(n, d, lambda, 0, 0, "rposval", list("value"=eta)),
       Ex_Arnold = rmo:::Rcpp__rmo_ex_arnold(n, d, ex_intensities=ex_intensities),
       min_iterations = 100L,
       check=FALSE
@@ -242,13 +245,39 @@ bp3 %>%
   unnest(cols = c("expression", "d", "time", "gc", "mem_alloc")) %>%
   filter(gc == "none") %>%
   mutate(expression = factor(
-    expression, levels = c("Cuadras_Auge", "Ex_Arnold", "Arnold", "ESM")
+    expression, levels = c("Cuadras_Auge", "Ex_Arnold", "LFM", "Arnold", "ESM")
     )) %>%
   ggplot(aes(x = d, y = time)) +
   geom_point() +
   geom_smooth(method = "lm", se = F, colour = "grey50", formula = y ~ x + I(x^2)) +
   theme(legend.position = "bottom") +
   facet_grid(expression ~ .)
+
+d_max <- 50
+bp3a <- bench::press(
+  d = (1:(d_max%/%2))*2,
+  {
+    ex_intensities <- ex_intensities_cuadras_auge(d, alpha=alpha, beta=beta)
+    force(ex_intensities)
+    force(intensities)
+    bench::mark(
+      Ex_Arnold = rmo:::Rcpp__rmo_ex_arnold(n, d, ex_intensities=ex_intensities),
+      LFM = rmo:::Rcpp__rmo_lfm_cpp(n, d, 0, alpha, beta, "rposval", list("value"=1)),
+      min_iterations = 100L,
+      check=FALSE
+    )
+  }
+)
+bp3a %>%
+  unnest(cols = c("expression", "d", "time", "gc", "mem_alloc")) %>%
+  filter(gc == "none") %>%
+  mutate(expression = factor(expression, levels = c("LFM", "Ex_Arnold"))) %>%
+  ggplot(aes(x = d, y = time)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = F, colour = "grey50", formula = y ~ x + I(x^2)) +
+  theme(legend.position = "bottom") +
+  facet_grid(expression ~ .)
+d_max <- 10
 
 detach("package:rmo", unload = TRUE)
 

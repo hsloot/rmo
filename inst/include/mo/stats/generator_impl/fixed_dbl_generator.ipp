@@ -21,8 +21,15 @@ inline double FixedDblGenerator<RNGPolicy>::operator()(const double& value) {
 }
 
 template<typename RNGPolicy>
-inline std::unique_ptr<UnivariateGenerator<double, RNGPolicy>> FixedDblGenerator<RNGPolicy>::clone() const {
-  return std::move( std::unique_ptr<UnivariateGenerator<double, RNGPolicy>>(new FixedDblGenerator<RNGPolicy>(*this)) );
+inline std::unique_ptr<RealUnivariateGenerator<double, RNGPolicy>> FixedDblGenerator<RNGPolicy>::clone() const {
+  return std::move( std::unique_ptr<RealUnivariateGenerator<double, RNGPolicy>>(new FixedDblGenerator<RNGPolicy>(*this)) );
+}
+
+template<typename RNGPolicy>
+inline double FixedDblGenerator<RNGPolicy>::laplace(const double& x) const {
+  if (x < 0.)
+    std::range_error("x < 0.");
+  return exp(-x*value_);
 }
 
 } // stats

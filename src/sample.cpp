@@ -8,7 +8,7 @@ static const R_xlen_t C_CHECK_USR_INTERRUP = 100000;
 
 using namespace Rcpp;
 using mo::stats::RRNGPolicy;
-using UnivariateGenerator = mo::stats::UnivariateGenerator<double, RRNGPolicy>;
+using RealUnivariateGenerator = mo::stats::RealUnivariateGenerator<double, RRNGPolicy>;
 using ExpGenerator = mo::stats::ExpGenerator<RRNGPolicy>;
 using FixedDblGenerator = mo::stats::FixedDblGenerator<RRNGPolicy>;
 using CountReplaceGenerator = mo::stats::CountReplaceGenerator<RRNGPolicy>;
@@ -171,7 +171,7 @@ NumericMatrix Rcpp__rmo_esm_cuadras_auge(
   return out;
 }
 
-std::unique_ptr<UnivariateGenerator> get_univariate_generator(
+std::unique_ptr<RealUnivariateGenerator> get_univariate_generator(
     const std::string& name, const List& args);
 
 std::vector<std::pair<double, double>> sample_cpp_internal(
@@ -225,7 +225,7 @@ std::vector<std::pair<double, double>> sample_cpp_internal(
   }
   std::unique_ptr<ExpGenerator> wt_generator{new ExpGenerator(rate)};
   std::unique_ptr<ExpGenerator> kt_generator{new ExpGenerator(rate_killing)};
-  std::unique_ptr<UnivariateGenerator> jump_generator = get_univariate_generator(rjump_name, rjump_arg_list);
+  std::unique_ptr<RealUnivariateGenerator> jump_generator = get_univariate_generator(rjump_name, rjump_arg_list);
   R_xlen_t d = barrier_values_.size();
 
   double killing_time = (*kt_generator)();
@@ -245,10 +245,10 @@ std::vector<std::pair<double, double>> sample_cpp_internal(
    */
   int estimated_length = 0;
   if (rate > 0.)
-    estimated_length = d*5;
+    estimated_length += std::ceil(1. + std::log(1. - std::pow(1. - 0.05, 1./d)) / std::log(1 - (*jump_generator).laplace(1.)));
   if (rate_drift > 0.)
   estimated_length += d;
-  out.reserve(estimated_length*2);
+  out.reserve(estimated_length);
   for (int i=0; i<d; i++) {
     while (value < barrier_values_[i]) {
       double waiting_time = (*wt_generator)();
@@ -310,9 +310,9 @@ NumericMatrix sample_cpp(
   return out;
 }
 
-std::unique_ptr<UnivariateGenerator> get_univariate_generator(
+std::unique_ptr<RealUnivariateGenerator> get_univariate_generator(
     const std::string& name, const List& args) {
-  std::unique_ptr<UnivariateGenerator> out;
+  std::unique_ptr<RealUnivariateGenerator> out;
   if ("rexp" == name) {
     double rate = args["rate"];
     out.reset(new ExpGenerator(rate));

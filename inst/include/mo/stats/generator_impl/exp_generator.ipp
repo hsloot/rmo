@@ -26,9 +26,18 @@ inline double ExpGenerator<RNGPolicy>::operator()(const double& rate) {
 }
 
 template<typename RNGPolicy>
-inline std::unique_ptr<UnivariateGenerator<double, RNGPolicy>> ExpGenerator<RNGPolicy>::clone() const {
-  return std::move( std::unique_ptr<UnivariateGenerator<double, RNGPolicy>>(new ExpGenerator<RNGPolicy>(*this)) );
+inline std::unique_ptr<RealUnivariateGenerator<double, RNGPolicy>> ExpGenerator<RNGPolicy>::clone() const {
+  return std::move( std::unique_ptr<RealUnivariateGenerator<double, RNGPolicy>>(new ExpGenerator<RNGPolicy>(*this)) );
 }
+
+template<typename RNGPolicy>
+inline double ExpGenerator<RNGPolicy>::laplace(const double& x) const {
+  if (x < 0.)
+    std::range_error("x < 0.");
+
+  return 0. == rate_ ? 0. : (R_PosInf == rate_ ? 1. : rate_/(rate_ + x));
+}
+
 
 } // stats
 } // mo
