@@ -1,8 +1,6 @@
 #include <Rcpp.h>
 #include <mo.hpp>
 #include <math.h>
-#include "sets.h"
-#include "math.h"
 
 static const R_xlen_t C_CHECK_USR_INTERRUP = 100000;
 

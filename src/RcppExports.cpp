@@ -92,13 +92,13 @@ BEGIN_RCPP
 END_RCPP
 }
 // Rcpp__is_within
-bool Rcpp__is_within(const unsigned int& i, const unsigned int& j);
+bool Rcpp__is_within(const R_xlen_t& i, const R_xlen_t& j);
 RcppExport SEXP _rmo_Rcpp__is_within(SEXP iSEXP, SEXP jSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const unsigned int& >::type i(iSEXP);
-    Rcpp::traits::input_parameter< const unsigned int& >::type j(jSEXP);
+    Rcpp::traits::input_parameter< const R_xlen_t& >::type i(iSEXP);
+    Rcpp::traits::input_parameter< const R_xlen_t& >::type j(jSEXP);
     rcpp_result_gen = Rcpp::wrap(Rcpp__is_within(i, j));
     return rcpp_result_gen;
 END_RCPP
