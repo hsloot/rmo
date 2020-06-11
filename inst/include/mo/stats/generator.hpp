@@ -13,11 +13,20 @@ public:
   virtual ~Generator() = default;
 }; // Generator
 
+
 template<typename SCALAR, typename RNGPolicy = RRNGPolicy>
 class UnivariateGenerator : public Generator {
 public:
   virtual inline SCALAR operator()() = 0;
 }; // UnivariateGenerator
+
+template<typename VECTOR, typename RNGPolicy = RRNGPolicy>
+class MultivariateGenerator : public Generator {
+public:
+  virtual inline VECTOR operator()() = 0;
+  virtual inline void operator()(VECTOR& out) = 0;
+}; // MultivariateGenerator
+
 
 template<typename SCALAR, typename RNGPolicy = RRNGPolicy>
 class RealUnivariateGenerator : public UnivariateGenerator<SCALAR, RNGPolicy> {
@@ -27,12 +36,6 @@ public:
   virtual inline SCALAR laplace(const SCALAR& x) const = 0;
 };
 
-template<typename VECTOR, typename RNGPolicy = RRNGPolicy>
-class MultivariateGenerator : public Generator {
-public:
-  virtual inline VECTOR operator()() = 0;
-  virtual inline void operator()(VECTOR& out) = 0;
-}; // MultivariateGenerator
 
 template<typename RNGPolicy = RRNGPolicy>
 class FixedDblGenerator : public RealUnivariateGenerator<double, RNGPolicy> {
