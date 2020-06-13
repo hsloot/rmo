@@ -10,8 +10,8 @@ namespace stats {
 template<typename RNGPolicy>
 ExpGenerator<RNGPolicy>::ExpGenerator(const double& rate) :
     rate_(rate) {
-  if (rate_ < 0.) // # nocov start
-    std::range_error("rate < 0."); // # nocov end
+  if (rate_ < 0.)
+    std::range_error("rate < 0."); // # nocov
 }
 
 template<typename RNGPolicy>
@@ -32,8 +32,8 @@ inline std::unique_ptr<RealUnivariateGenerator<double, RNGPolicy>> ExpGenerator<
 
 template<typename RNGPolicy>
 inline double ExpGenerator<RNGPolicy>::laplace(const double& x) const {
-  if (x < 0.) // # nocov start
-    std::range_error("x < 0."); // # nocov end
+  if (x < 0.)
+    std::range_error("x < 0."); // # nocov
 
   return 0. == rate_ ? 0. : (R_PosInf == rate_ ? 1. : rate_/(rate_ + x));
 }

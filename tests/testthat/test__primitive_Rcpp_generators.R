@@ -9,6 +9,20 @@ test_that("RExpGenerator works as expected", {
   args <- list("rate" = 2)
   expect_equal_sampling_result("rexp", "Rcppmo_th_rexp",
     args, n, use_seed)
+  rexp_rate_is_zero <<- function(n, rate) {
+    stopifnot(rate == 0.)
+    rep(Inf, times=n)
+  }
+  args <- list("rate" = 0)
+  expect_equal_sampling_result("rexp_rate_is_zero", "Rcppmo_th_rexp",
+    args, n, use_seed)
+  rexp_rate_is_inf <<- function(n, rate) {
+    stopifnot(rate == Inf)
+    rep(0., times=n)
+  }
+  args <- list("rate" = Inf)
+  expect_equal_sampling_result("rexp_rate_is_inf", "Rcppmo_th_rexp",
+    args, n, use_seed)
 })
 
 test_that("FixedDblGenerator works as expected", {

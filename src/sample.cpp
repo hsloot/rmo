@@ -21,7 +21,7 @@ NumericMatrix Rcpp__rmo_esm(
     const NumericVector& intensities) {
   auto num_shocks = intensities.size();
   if ((1<<d)-1 != num_shocks)
-    std::range_error("intensities.size() != 2^d-1");
+    std::range_error("intensities.size() != 2^d-1"); // # nocov
 
   std::unique_ptr<ExpGenerator> exp_generator{new ExpGenerator()};
 
@@ -148,7 +148,7 @@ NumericMatrix Rcpp__rmo_esm_cuadras_auge(
     const R_xlen_t& n, const int& d,
     const double& alpha, const double& beta) { // alpha, beta >= 0
   if (alpha < 0. || beta < 0.)
-    std::range_error("alpha or beta < 0");
+    std::range_error("alpha or beta < 0"); // # nocov
 
   std::unique_ptr<ExpGenerator> exp_generator{new ExpGenerator()};
 
@@ -199,9 +199,6 @@ NumericMatrix Rcpp__rmo_lfm_cpp(
       count = 0;
       while (cpp_subordinator[count].second < unit_exponentials[i] && count < cpp_subordinator.size())
         count += 1;
-
-      if (cpp_subordinator.size() == count)
-        stop("internal error: exponential value out of subordinator range");
 
       out(k, i) = cpp_subordinator[count].first;
     }
@@ -318,7 +315,7 @@ std::unique_ptr<RealUnivariateGenerator> get_univariate_generator(
     double value = args["value"];
     out.reset(new FixedDblGenerator(value));
   } else {
-    std::logic_error("wrong input");
+    std::logic_error("wrong input"); // # nocov
   }
 
   return out;
