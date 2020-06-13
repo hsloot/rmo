@@ -19,9 +19,9 @@ double RRNGPolicy::exp_rand() {
   return static_cast<double>( ::exp_rand() );
 }
 
-double RRNGPolicy::norm_rand() {
+double RRNGPolicy::norm_rand() { // # nocov start
   return static_cast<double>( ::norm_rand() );
-}
+} // # nocov end
 
 } // stats
 } // mo
