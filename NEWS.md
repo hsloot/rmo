@@ -5,7 +5,7 @@
 - Refactor custom assertions
 - Add S4 classes for evaluating Bernstein Functions and their higher-order alternating, iterated forward differences
 - Better test cases and increased test coverage
-- Refactor `Rcpp__rmo_esm` for increased performance
+- Refactor all sampling methods for increased performance
 
 # rmo 0.2.0
 
