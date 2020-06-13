@@ -9,14 +9,14 @@ test_that("RExpGenerator works as expected", {
   args <- list("rate" = 2)
   expect_equal_sampling_result("rexp", "Rcppmo_th_rexp",
     args, n, use_seed)
-  rexp_rate_is_zero <<- function(n, rate) {
+  rexp_rate_is_zero <- function(n, rate) {
     stopifnot(rate == 0.)
     rep(Inf, times=n)
   }
   args <- list("rate" = 0)
   expect_equal_sampling_result("rexp_rate_is_zero", "Rcppmo_th_rexp",
     args, n, use_seed)
-  rexp_rate_is_inf <<- function(n, rate) {
+  rexp_rate_is_inf <- function(n, rate) {
     stopifnot(rate == Inf)
     rep(0., times=n)
   }
@@ -32,13 +32,12 @@ test_that("FixedDblGenerator works as expected", {
 })
 
 test_that("RIntGenerator works as expected", {
-  assign("sample_int_base_0",
-    function(n, probabilities) {
-      sapply(1:n, function(x) -1+sample.int(
-        n=length(probabilities),
-        size=1, prob = probabilities, replace=FALSE)
-      )
-  }, env = globalenv())
+  sample_int_base_0 <- function(n, probabilities) {
+    sapply(1:n, function(x) -1+sample.int(
+      n=length(probabilities),
+      size=1, prob = probabilities, replace=FALSE)
+    )
+  }
   probabilities <- c(8, 7, 3, 10, 6, 1, 2, 9, 5, 4)
   args <- list("probabilities" = probabilities)
   expect_equal_sampling_result("Rcppmo_th_int", "sample_int_base_0",
@@ -61,12 +60,11 @@ test_that("RIntGenerator works as expected", {
 })
 
 test_that("RSamplewalker works as expected", {
-  assign("perm_base_0",
-    function(n, probabilities) {
-      -1+sample.int(
-        n=length(probabilities),
-        size=n, prob = probabilities, replace=FALSE)
-  }, env = globalenv())
+  perm_base_0 <- function(n, probabilities) {
+    -1+sample.int(
+      n=length(probabilities),
+      size=n, prob = probabilities, replace=FALSE)
+  }
   probabilities <- c(8, 7, 3, 10, 6, 1, 2, 9, 5, 4)
   n <- length(probabilities)
   args <- list("probabilities" = probabilities)
@@ -104,7 +102,7 @@ test_that("sample.int reimplementation works as expected", {
   # parametrisations.
   # TODO: These tests should be refactored in a seperate test file.
   suppressWarnings(RNGkind(
-    kind="Mersenne-Twister", normal.kind = "Inversion",
+    kind="default", normal.kind = "default",
     sample.kind="Rejection"))
 
   args <- list("n" = 10, "size" = 10, "replace" = FALSE, "useHash" = FALSE)
@@ -155,7 +153,7 @@ test_that("sample.int reimplementation works as expected", {
 
 
   suppressWarnings(RNGkind(
-    kind="Mersenne-Twister", normal.kind = "Inversion",
+    kind="default", normal.kind = "default",
     sample.kind="Rounding"))
 
   args <- list("n" = 10, "size" = 10, "replace" = FALSE, "useHash" = FALSE)

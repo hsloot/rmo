@@ -7,19 +7,17 @@
 
 ![minimal R
 version](https://img.shields.io/badge/R%3E%3D-3.6.0-6666ff.svg)
-![packageversion](https://img.shields.io/badge/Package%20version-0.2.1.0000-orange.svg?style=flat-square)
+![packageversion](https://img.shields.io/badge/Package%20version-0.2.1-orange.svg?style=flat-square)
 [![Project Status: WIP – Initial development is in progress, but there
 has not yet been a stable, usable release suitable for the
 public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
-[![Travis build
-status](https://travis-ci.org/hsloot/rmo.svg?branch=master)](https://travis-ci.org/hsloot/rmo)
-[![AppVeyor build
-status](https://ci.appveyor.com/api/projects/status/github/hsloot/rmo?branch=master&svg=true)](https://ci.appveyor.com/project/hsloot/rmo)
-[![Codecov test
-coverage](https://codecov.io/gh/hsloot/rmo/branch/master/graph/badge.svg)](https://codecov.io/gh/hsloot/rmo?branch=master)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
-[![Last-changedate](https://img.shields.io/badge/last%20change-2020--06--13-yellowgreen.svg)](/commits/master)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2020--06--14-yellowgreen.svg)](/commits/master)
+[![R build
+status](https://github.com/hsloot/rmo/workflows/R-CMD-check/badge.svg)](https://github.com/hsloot/rmo/actions)
+[![Codecov test
+coverage](https://codecov.io/gh/hsloot/rmo/branch/master/graph/badge.svg)](https://codecov.io/gh/hsloot/rmo?branch=master)
 <!-- badges: end -->
 
 An R package for the *Marshall-Olkin distribution*: algorithms for the

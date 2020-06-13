@@ -30,7 +30,7 @@ format_args <- function(args, ...) {
 #' @seealso \code{\link[testthat]{expect_equal}}
 #' @seealso \url{https://testthat.r-lib.org/articles/custom-expectation.html}
 expect_equal_sampling_result <- function(object, expected, arguments, n,
-    use_seed = 1623L, ...) {
+    use_seed = 1623L, env = parent.frame(), ...) {
   act <- testthat::quasi_label(rlang::enquo(object), NULL, arg = "object")
   exp <- testthat::quasi_label(rlang::enquo(expected), NULL, arg = "expected")
   args <- testthat::quasi_label(rlang::enquo(arguments), "Arguments", arg = "arguments")
@@ -44,9 +44,9 @@ expect_equal_sampling_result <- function(object, expected, arguments, n,
     arg_list <- args$val
   }
   set.seed(use_seed)
-  x <- do.call(act$val, args = arg_list)
+  x <- do.call(act$val, args = arg_list, envir = env)
   set.seed(use_seed)
-  y <- do.call(exp$val, args = arg_list)
+  y <- do.call(exp$val, args = arg_list, envir = env)
 
   comp <- testthat::compare(x, y, ...)
   testthat::expect(

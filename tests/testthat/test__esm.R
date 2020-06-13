@@ -5,7 +5,7 @@ n <- 100L
 # #### Test implementation for the bivariate case ####
 #
 # Test that the implementation of the exogenous shock model works as expected
-# for the bivaraite case and different choices for the intensity vector.
+# for the bivariate case and different choices for the intensity vector.
 test_that("ESM implementation for d = 2", {
   d <- 2L
 
