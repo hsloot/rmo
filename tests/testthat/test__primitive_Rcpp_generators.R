@@ -107,7 +107,7 @@ test_that("sample.int reimplementation works as expected", {
       sample.kind="Rejection"))
   } else {
     suppressWarnings(RNGkind(
-      kind="default", normal.kind = "default")
+      kind="default", normal.kind = "default"))
   }
 
   args <- list("n" = 10, "size" = 10, "replace" = FALSE, "useHash" = FALSE)
@@ -163,7 +163,7 @@ test_that("sample.int reimplementation works as expected", {
       sample.kind="Rounding"))
   } else {
     suppressWarnings(RNGkind(
-      kind="default", normal.kind = "default")
+      kind="default", normal.kind = "default"))
   }
 
   args <- list("n" = 10, "size" = 10, "replace" = FALSE, "useHash" = FALSE)
