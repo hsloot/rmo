@@ -34,7 +34,7 @@ Collate:
     'sample.R'
     'utils.R'
     'zzz.R'
-URL: https://hsloot.github.io/rmo/
+URL: https://github.com/hsloot/rmo
 BugReports: https://github.com/hsloot/rmo/issues
 Language: en-GB
 LinkingTo:
