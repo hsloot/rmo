@@ -236,9 +236,8 @@ rmo_lfm_cpp <- function(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_
   assert_that(is.count(n),
     is_lfm_cpp_mo_parameter(d, rate, rate_killing, rate_drift,
       rjump_name, rjump_arg_list))
-  rjump <- get(rjump_name)
 
-  Rcpp__rmo_lfm_cpp(n, d, rate, rate_killing, rate_drift, rjump, rjump_arg_list)
+  Rcpp__rmo_lfm_cpp(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list)
 }
 
 

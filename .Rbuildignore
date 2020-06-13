@@ -18,3 +18,5 @@
 ^vignettes/The-Levy-frailty-model\.Rmd
 ^vignettes/The-binary-representation\.Rmd
 ^\.lintr$
+^\.clang_complete$
+^\.editorconfig$
