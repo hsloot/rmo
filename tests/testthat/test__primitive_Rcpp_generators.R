@@ -101,9 +101,14 @@ test_that("sample.int reimplementation works as expected", {
   # TODO: There should be a better way to produce meaningful
   # parametrisations.
   # TODO: These tests should be refactored in a seperate test file.
-  suppressWarnings(RNGkind(
-    kind="default", normal.kind = "default",
-    sample.kind="Rejection"))
+  if (require_R_version("3.6.0")) {
+    suppressWarnings(RNGkind(
+      kind="default", normal.kind = "default",
+      sample.kind="Rejection"))
+  } else {
+    suppressWarnings(RNGkind(
+      kind="default", normal.kind = "default")
+  }
 
   args <- list("n" = 10, "size" = 10, "replace" = FALSE, "useHash" = FALSE)
   set.seed(use_seed)
@@ -152,9 +157,14 @@ test_that("sample.int reimplementation works as expected", {
   expect_equal(act, exp)
 
 
-  suppressWarnings(RNGkind(
-    kind="default", normal.kind = "default",
-    sample.kind="Rounding"))
+  if (require_R_version("3.6.0")) {
+    suppressWarnings(RNGkind(
+      kind="default", normal.kind = "default",
+      sample.kind="Rounding"))
+  } else {
+    suppressWarnings(RNGkind(
+      kind="default", normal.kind = "default")
+  }
 
   args <- list("n" = 10, "size" = 10, "replace" = FALSE, "useHash" = FALSE)
   set.seed(use_seed)
