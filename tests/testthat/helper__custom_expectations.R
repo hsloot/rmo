@@ -102,7 +102,7 @@ expect_equal_rn_generation <- function(
 
 RNG_kind_arg_list_default <- function() {
   out <- list("kind" = "default", "normal.kind" = "default")
-  if (require_R_version() >= "3.6.0")
+  if (require_R_version("3.6.0"))
     out["sample.kind"] <- "default"
   out
 }
