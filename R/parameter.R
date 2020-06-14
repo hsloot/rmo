@@ -1,8 +1,8 @@
 #' @keywords internal
 #' @noRd
-bf2ex_intensities <- function(d, bf) {
+bf2ex_intensities <- function(d, bf) { # nocov start
   sapply(1:d, function(i) valueOf(bf, d-i, i))
-}
+} # nocov end
 
 #' @keywords internal
 #' @noRd
