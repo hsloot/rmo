@@ -240,45 +240,8 @@ rmo_lfm_cpp <- function(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_
   Rcpp__rmo_lfm_cpp(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list)
 }
 
-
-
-## #### Auxiliary samplers ####
-##
-
-#' A dummy sampling function for deterministic, positive values
-#'
-#' @param n number of samples
-#' @param value value to sample
-#'
-#' @return A `n` elements numeric vector with `value` in each component
-#'
-#' @examples
-#' rposval(10L)       ## rep(1, 10L)
-#' rposval(10L, pi)   ## rep(pi, 10L)
-#'
-#' @family samplers
-#'
 #' @keywords internal
 #' @noRd
-rposval <- function(n, value=1) {
+rposval <- function(n, value=1) { # only needed for assertions
   rep(value, times=n)
-}
-
-#' A wrapper for `rexp`
-#'
-#' Wraps an `ifelse`-clause arround `rexp` with special treatment for the case
-#' `rate=0`.
-#'
-#' @inheritParams stats::rexp
-#'
-#' @importFrom stats rexp
-#'
-#' @keywords internal
-#' @noRd
-rexp_if_rate_zero_then_infinity <- function(n, rate) { # only used in tests # nolint
-  if (0 == rate) {
-    return(rep(Inf, n))
-  }
-
-  rexp(n, rate)
 }

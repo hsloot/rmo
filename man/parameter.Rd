@@ -43,19 +43,26 @@ intensities_gamma(d, a)
 \arguments{
 \item{d}{Dimension of the distribution}
 
-\item{constant}{Rate for global shock, passed to \code{constant} parameter for \linkS4class{ConstantBernsteinFunction}}
+\item{constant}{Rate for global shock, passed to \code{constant} parameter for
+\linkS4class{ConstantBernsteinFunction}}
 
-\item{scale}{Rates for individual shocks, passed to \code{scale} parameter for \linkS4class{LinearBernsteinFunction}}
+\item{scale}{Rates for individual shocks, passed to \code{scale} parameter for
+\linkS4class{LinearBernsteinFunction}}
 
-\item{alpha}{Alpha parameter for alpha-stable subordinator, passed to \code{alpha} parameter of \linkS4class{AlphaStableBernsteinFunction}}
+\item{alpha}{Alpha parameter for alpha-stable subordinator, passed to \code{alpha}
+parameter of \linkS4class{AlphaStableBernsteinFunction}}
 
-\item{beta}{Rate for global shock, passed to \code{constant} parameter for \linkS4class{ConstantBernsteinFunction}}
+\item{beta}{Rate for global shock, passed to \code{constant} parameter for
+\linkS4class{ConstantBernsteinFunction}}
 
-\item{lambda}{Rate for Poisson process, passed to \code{lambda} parameter \linkS4class{PoissonBernsteinFunction}}
+\item{lambda}{Rate for Poisson process, passed to \code{lambda} parameter
+\linkS4class{PoissonBernsteinFunction}}
 
-\item{eta}{Jump size for Poisson process, passed to \code{eta} parameter of \linkS4class{PoissonBernsteinFunction}}
+\item{eta}{Jump size for Poisson process, passed to \code{eta} parameter of
+\linkS4class{PoissonBernsteinFunction}}
 
-\item{a}{Shape parameter for Gamma subordinator, passed to \code{a} parameter of \linkS4class{GammaBernsteinFunction}}
+\item{a}{Shape parameter for Gamma subordinator, passed to \code{a} parameter of
+\linkS4class{GammaBernsteinFunction}}
 }
 \description{
 The following functions are convenience wrappers to create \code{intensities}

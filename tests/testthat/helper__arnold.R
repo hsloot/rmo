@@ -48,7 +48,7 @@ test__rmo_arnold_R <- function(n, d, intensities) { # nolint
 
       for (i in 1:d) {
         if (!destroyed[[i]]) {
-          if (test__is_within_R(i, affected)) {
+          if (test__is_within(i, affected)) {
             destroyed[[i]] <- TRUE
           }
           value[[i]] <- value[[i]] + waiting_time
