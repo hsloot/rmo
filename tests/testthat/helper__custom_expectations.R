@@ -1,67 +1,112 @@
-## This file contains custom expectations to be used in
-## unit tests.
-##
-if (!"assertthat" %in% .packages()) {
-  library("assertthat", character.only = TRUE, quietly = TRUE, warn.conflicts = FALSE)
-}
-if (!"rlang" %in% .packages()) {
-  library("rlang", character.only = TRUE, quietly = TRUE, warn.conflicts = FALSE)
-}
-
-
-format_args <- function(args, ...) {
-  paste(paste0(" * ", names(args), " = \n\t", format(args, ...)), collapse = "\n")
-}
-
-## #### Compare simulation results ####
-##
-
-#' Compare the output of two sampling algorithms
+#' `expect*` for two random number generation functions
 #'
-#' Implementation of a custom expectation to compare two sampling algorithms
-#' for a given number of samples and arguments.
+#' Implementation of a custom expectation which can be used with
+#' `testthat` to write consistent code to test functions for random
+#' number generation.
 #'
-#' @param object Name of the first sampling algorithm
-#' @param expected Name of the second sampling algorithm
-#' @param arguments Parameters for both algorithms (expected to be the same)
+#' @param rn_generator Name/function of the random number generation method
+#' @param rn_generator_test Name/function of the corresponding test
+#'   implementation
+#' @param arg_list Argument list for both methods
 #' @param n Number of samples
-#' @param use_seed The seed which is set before each call to sampling algorithm
+#' @param use_seed The seed (which is reset before each callto an RNG method)
+#' @param RNG_kind_arg_list A list with arguments for `RNGkind`
+#' @param set_seed A function to reset the seed
+#' @param RNG_kind A function to choose the underlying RNG
+#' @param \\dots Further parameters for `[testthat::compare()]`
+#'
+#' The function appends `arg_list` with `c("n" = n)` if `n` is provided,
+#' initialises the RNG with `rlang::exec(RNG_kind, !!!RNG_kind_arg_list)`
+#' (this can be avoided by setting `RNG_kind_arg_list = NULL`), and
+#' calls `rn_generator` and `rn_generator_test` with provided arguments via
+#' `[rlang::exec()]`.
+#' Each call is preceeded by a call to `set_seed(use_seed)` to ensure
+#' reproducibility.
+#'
+#' @examples
+#' rexp_test <- function(n, rate) {
+#'  sapply(1:n, function(x) stats::rexp(1L, rate))
+#' }
+#' testthat::test_that("rexp equal to rexp_test?", {
+#'  expect_equal_rn_generation(
+#'    stats::rexp, rexp_test,
+#'    list("rate" = 2), 10L, use_seed=1623L)
+#' })
 #'
 #' @seealso \code{\link[testthat]{expect_equal}}
 #' @seealso \url{https://testthat.r-lib.org/articles/custom-expectation.html}
-expect_equal_sampling_result <- function(object, expected, arguments, n,
-    use_seed = 1623L, env = parent.frame(), ...) {
-  act <- testthat::quasi_label(rlang::enquo(object), NULL, arg = "object")
-  exp <- testthat::quasi_label(rlang::enquo(expected), NULL, arg = "expected")
-  args <- testthat::quasi_label(rlang::enquo(arguments), "Arguments", arg = "arguments")
+expect_equal_rn_generation <- function(
+    rn_generator,
+    rn_generator_test,
+    arg_list,
+    n,
+    use_seed,
+    RNG_kind_arg_list = list( # nolint
+      "kind" = "default", "normal.kind" = "default", "sample.kind" = "default"
+    ),
+    set_seed = base::set.seed,
+    RNG_kind = base::RNGkind, # nolint
+    env = parent.frame(), ...) {
+  ## Capture rn_generator, rn_generator_test, and arguments with labels
+  rn_generator <- testthat::quasi_label(
+    rlang::enquo(rn_generator), NULL, arg = "rn_generator")
+  rn_generator_test <- testthat::quasi_label(
+    rlang::enquo(rn_generator_test), NULL, arg = "rn_generator_test")
+  arg_list <- testthat::quasi_label(
+    rlang::enquo(arg_list), "Arguments", arg = "arg_list")
 
-  assertthat::assert_that(assertthat::is.string(act$val), assertthat::is.string(exp$val),
-    missing(n) || assertthat::is.count(n), assertthat::is.count(use_seed))
+  ## Conventional checks to catch user errors early on
+  assertthat::assert_that(
+    assertthat::is.string(rn_generator$val) ||
+      rlang::is_function(rn_generator$val),
+    assertthat::is.string(rn_generator_test$val) ||
+      rlang::is_function(rn_generator_test$val),
+    missing(n) ||
+      assertthat::is.count(n),
+    assertthat::is.count(use_seed))
 
+  ## Set up call arguments
   if (!missing(n)) {
-    arg_list <- c("n" = n, args$val)
-  } else {
-    arg_list <- args$val
+    arg_list$val <- c("n" = n, arg_list$val)
   }
-  set.seed(use_seed)
-  x <- do.call(act$val, args = arg_list, envir = env)
-  set.seed(use_seed)
-  y <- do.call(exp$val, args = arg_list, envir = env)
+
+  ## Set up RNG
+  if (!is.null(RNG_kind_arg_list))
+    rlang::exec(RNG_kind, !!!RNG_kind_arg_list, .env = env)
+
+  ## Evaluate expressions and compare results
+  set_seed(use_seed)
+  x <- rlang::exec(rn_generator$val, !!!arg_list$val, .env = env)
+  set_seed(use_seed)
+  y <- rlang::exec(rn_generator_test$val, !!!arg_list$val, .env = env)
 
   comp <- testthat::compare(x, y, ...)
+
+  ## Create testthat output
   testthat::expect(
-    comp$equal,
-    sprintf(paste0(
-      "Sample results of %s not equal to those of %s.",
-      "\nSeed: %s",
-      "\nNumber of simulations: %s",
-      "\n%s:",
-      "\n%s",
-      "\n\n%s"
-    ), act$lab, exp$lab, use_seed, ifelse(!missing(n), n, 1L), args$lab,
-      format_args(args$val, justify = "right", digits = 2L), comp$message),
-    info = NULL
+    ok = comp$equal,
+    failure_message = sprintf(
+      paste0(
+        "Random number generation results of %s not equal to those of %s.",
+        "\nSeed: %s",
+        "\n%s:",
+        "\n%s",
+        "\n\n%s"
+      ),
+      rn_generator$lab, rn_generator_test$lab, use_seed,
+      arg_list$lab,
+      format_args(arg_list$val, justify = "right", digits = 2L),
+      comp$message)
   )
 
-  invisible(act$val)
+  invisible(rn_generator$val)
+}
+
+format_args <- function(args, ...) {
+  paste(
+    paste0(
+      " * ", names(args), " = \n\t", format(args, ...)
+    ),
+    collapse = "\n"
+  )
 }

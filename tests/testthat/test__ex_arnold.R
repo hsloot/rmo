@@ -11,27 +11,32 @@ n <- 100L
 test_that("Exchangeable Arnold model for d = 2", {
   ## all equal
   args <- list("d" = 2L, ex_intensities = c(1, 1))
-  expect_equal_sampling_result("rmo_ex_arnold", "test__rmo_ex_arnold_bivariate_R",
+  expect_equal_rn_generation(
+    "rmo_ex_arnold", "test__rmo_ex_arnold_bivariate_R",
     args, n, use_seed)
 
   ## low, high
   args[["ex_intensities"]] <- c(0.5, 2)
-  expect_equal_sampling_result("rmo_ex_arnold", "test__rmo_ex_arnold_bivariate_R",
+  expect_equal_rn_generation(
+    "rmo_ex_arnold", "test__rmo_ex_arnold_bivariate_R",
     args, n, use_seed)
 
   ## high, low
   args[["ex_intensities"]] <- c(3, 0.2)
-  expect_equal_sampling_result("rmo_ex_arnold", "test__rmo_ex_arnold_bivariate_R",
+  expect_equal_rn_generation(
+    "rmo_ex_arnold", "test__rmo_ex_arnold_bivariate_R",
     args, n, use_seed)
 
   ## comonotone
   args[["ex_intensities"]] <- c(0, 1)
-  expect_equal_sampling_result("rmo_ex_arnold", "test__rmo_ex_arnold_bivariate_R",
+  expect_equal_rn_generation(
+    "rmo_ex_arnold", "test__rmo_ex_arnold_bivariate_R",
     args, n, use_seed)
 
   ## independence
   args[["ex_intensities"]] <- c(1, 0)
-  expect_equal_sampling_result("rmo_ex_arnold", "test__rmo_ex_arnold_bivariate_R",
+  expect_equal_rn_generation(
+    "rmo_ex_arnold", "test__rmo_ex_arnold_bivariate_R",
     args, n, use_seed)
 })
 
@@ -46,22 +51,25 @@ test_that("Alternative implementation in R for d>2", {
   d <- 5L
   ex_intensities <- rep(1, times=d)
   args <- list("d" = d, "ex_intensities" = ex_intensities)
-  expect_equal_sampling_result("rmo_ex_arnold", "test__rmo_ex_arnold_alternative_R",
+  expect_equal_rn_generation(
+    "rmo_ex_arnold", "test__rmo_ex_arnold_alternative_R",
     args, n, use_seed)
 
   ## heterogeneous ex_intensity vector
   args[["ex_intensities"]] <- c(0.4, 0.3, 0.2, 0.2, 0.1)
-  expect_equal_sampling_result("rmo_ex_arnold", "test__rmo_ex_arnold_alternative_R",
+  expect_equal_rn_generation(
+    "rmo_ex_arnold", "test__rmo_ex_arnold_alternative_R",
     args, n, use_seed)
 
   ## comonotone
   args[["ex_intensities"]] <- c(0, 0, 0, 0, 1)
-  expect_equal_sampling_result("rmo_ex_arnold", "test__rmo_ex_arnold_alternative_R",
+  expect_equal_rn_generation("rmo_ex_arnold", "test__rmo_ex_arnold_alternative_R",
     args, n, use_seed)
 
   ## independence
   args[["ex_intensities"]] <- c(1, 0, 0, 0, 0)
-  expect_equal_sampling_result("rmo_ex_arnold", "test__rmo_ex_arnold_alternative_R",
+  expect_equal_rn_generation(
+    "rmo_ex_arnold", "test__rmo_ex_arnold_alternative_R",
     args, n, use_seed)
 })
 
@@ -76,14 +84,16 @@ test_that("Exchangeable Arnold model implementation in C++", {
   d <- 7L
   ex_intensities <- rep(0.5, times=d)
   args <- list("d" = d, "ex_intensities" = ex_intensities)
-  expect_equal_sampling_result("rmo_ex_arnold", "test__rmo_ex_arnold_R",
+  expect_equal_rn_generation(
+    "rmo_ex_arnold", "test__rmo_ex_arnold_R",
     args, n, use_seed)
 
   # d equals 4 and exchangeable
   d <- 4L
   ex_intensities <- 1 / (1:4L)
   args <-list("d" = 4L, "ex_intensities" = ex_intensities)
-  expect_equal_sampling_result("rmo_ex_arnold", "test__rmo_ex_arnold_R",
+  expect_equal_rn_generation(
+    "rmo_ex_arnold", "test__rmo_ex_arnold_R",
     args, n, use_seed)
 
   ## TODO: Implement tests based on the parametrisation with Bernstein
