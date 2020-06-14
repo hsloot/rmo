@@ -100,7 +100,7 @@ expect_equal_rn_generation <- function(
   invisible(rn_generator$val)
 }
 
-RNG_kind_arg_list_default <- function() {
+RNG_kind_arg_list_default <- function() { # nolint
   out <- list("kind" = "default", "normal.kind" = "default")
   if (require_R_version("3.6.0"))
     out["sample.kind"] <- "default"

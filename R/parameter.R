@@ -41,7 +41,8 @@ ex_intensities2intensities <- function(ex_intensities) {
 #' @md
 NULL
 
-#' @param constant Rate for global shock, passed to `constant` parameter for [ConstantBernsteinFunction-class]
+#' @param constant Rate for global shock, passed to `constant` parameter for
+#'   [ConstantBernsteinFunction-class]
 #'
 #' @seealso [ConstantBernsteinFunction-class]
 #'
@@ -50,23 +51,24 @@ NULL
 #'
 #' @export
 #' @rdname parameter
-ex_intensities_constant <- function(d, constant) {
+ex_intensities_constant <- function(d, constant) { # nocov start
   bf <- ConstantBernsteinFunction(constant=constant)
   bf2ex_intensities(d, bf)
-}
+} # nocov end
 
 #' @examples
 #' intensities_constant(10L, constant=1)
 #'
 #' @export
 #' @rdname parameter
-intensities_constant <- function(d, constant) {
+intensities_constant <- function(d, constant) { # nocov start
   ex_intensities2intensities(
     ex_intensities_constant(d, constant))
-}
+} # nocov end
 
 
-#' @param scale Rates for individual shocks, passed to `scale` parameter for [LinearBernsteinFunction-class]
+#' @param scale Rates for individual shocks, passed to `scale` parameter for
+#'   [LinearBernsteinFunction-class]
 #'
 #' @seealso [LinearBernsteinFunction-class]
 #'
@@ -75,47 +77,53 @@ intensities_constant <- function(d, constant) {
 #'
 #' @export
 #' @rdname parameter
-ex_intensities_linear <- function(d, scale) {
+ex_intensities_linear <- function(d, scale) { # nocov start
   bf <- LinearBernsteinFunction(scale=scale)
   bf2ex_intensities(d, bf)
-}
+} # nocov end
 
 #' @examples
 #' intensities_linear(10L, scale=1)
 #'
 #' @export
 #' @rdname parameter
-intensities_linear <- function(d, scale) {
-  ex_intensities2intensities(ex_intensities_linear(d, scale))
-}
+intensities_linear <- function(d, scale) { # nocov start
+  ex_intensities2intensities(
+    ex_intensities_linear(d, scale))
+} # nocov end
 
 
-#' @param alpha Rate for individual shocks, passed to `scale` parameter for [LinearBernsteinFunction-class]
-#' @param beta Rate for global shock, passed to `constant` parameter for [ConstantBernsteinFunction-class]
+#' @param alpha Rate for individual shocks, passed to `scale` parameter for
+#'   [LinearBernsteinFunction-class]
+#' @param beta Rate for global shock, passed to `constant` parameter for
+#'   [ConstantBernsteinFunction-class]
 #'
 #' @examples
 #' ex_intensities_cuadras_auge(10L, alpha=1, beta=0.5)
 #'
 #' @export
 #' @rdname parameter
-ex_intensities_cuadras_auge <- function(d, alpha, beta) {
+ex_intensities_cuadras_auge <- function(d, alpha, beta) { # nocov start
   ex_intensities_linear(d, scale=alpha) +
     ex_intensities_constant(d, constant=beta)
-}
+} # nocov end
 
 #' @examples
 #' intensities_cuadras_auge(10L, alpha=1, beta=0.5)
 #'
 #' @export
 #' @rdname parameter
-intensities_cuadras_auge <- function(d, alpha, beta) {
-  ex_intensities2intensities(ex_intensities_cuadras_auge(d,
+intensities_cuadras_auge <- function(d, alpha, beta) { # nocov start
+  ex_intensities2intensities(
+    ex_intensities_cuadras_auge(d,
     alpha=alpha, beta=beta))
-}
+} # nocov end
 
 
-#' @param lambda Rate for Poisson process, passed to `lambda` parameter [PoissonBernsteinFunction-class]
-#' @param eta Jump size for Poisson process, passed to `eta` parameter of [PoissonBernsteinFunction-class]
+#' @param lambda Rate for Poisson process, passed to `lambda` parameter
+#'   [PoissonBernsteinFunction-class]
+#' @param eta Jump size for Poisson process, passed to `eta` parameter of
+#'   [PoissonBernsteinFunction-class]
 #'
 #' @seealso [PoissonBernsteinFunction-class]
 #'
@@ -124,22 +132,24 @@ intensities_cuadras_auge <- function(d, alpha, beta) {
 #'
 #' @export
 #' @rdname parameter
-ex_intensities_poisson <- function(d, lambda, eta) {
+ex_intensities_poisson <- function(d, lambda, eta) { # nocov start
   bf <- PoissonBernsteinFunction(lambda=lambda, eta=eta)
   bf2ex_intensities(d, bf)
-}
+} # nocov end
 
 #' @examples
 #' intensities_poisson(10L, lambda = 0.5, eta = 0.2)
 #'
 #' @export
 #' @rdname parameter
-intensities_poisson <- function(d, lambda, eta) {
-  ex_intensities2intensities(ex_intensities_poisson(d, lambda, eta))
-}
+intensities_poisson <- function(d, lambda, eta) { # nocov start
+  ex_intensities2intensities(
+    ex_intensities_poisson(d, lambda, eta))
+} # nocov end
 
 
-#' @param alpha Alpha parameter for alpha-stable subordinator, passed to `alpha` parameter of [AlphaStableBernsteinFunction-class]
+#' @param alpha Alpha parameter for alpha-stable subordinator, passed to `alpha`
+#'   parameter of [AlphaStableBernsteinFunction-class]
 #'
 #' @seealso [AlphaStableBernsteinFunction-class]
 #'
@@ -148,22 +158,24 @@ intensities_poisson <- function(d, lambda, eta) {
 #'
 #' @export
 #' @rdname parameter
-ex_intensities_alpha_stable <- function(d, alpha) {
+ex_intensities_alpha_stable <- function(d, alpha) { # nocov start
   bf <- AlphaStableBernsteinFunction(alpha=alpha)
   bf2ex_intensities(d, bf)
-}
+} # nocov end
 
 #' @examples
 #' intensities_alpha_stable(10L, alpha=0.4)
 #'
 #' @export
 #' @rdname parameter
-intensities_alpha_stable <- function(d, alpha) {
-  ex_intensities2intensities(ex_intensities_alpha_stable(d, alpha))
-}
+intensities_alpha_stable <- function(d, alpha) { # nocov start
+  ex_intensities2intensities(
+    ex_intensities_alpha_stable(d, alpha))
+} # nocov end
 
 
-#' @param a Shape parameter for Gamma subordinator, passed to `a` parameter of [GammaBernsteinFunction-class]
+#' @param a Shape parameter for Gamma subordinator, passed to `a` parameter of
+#'   [GammaBernsteinFunction-class]
 #'
 #' @seealso [GammaBernsteinFunction-class]
 #'
@@ -172,16 +184,17 @@ intensities_alpha_stable <- function(d, alpha) {
 #'
 #' @export
 #' @rdname parameter
-ex_intensities_gamma <- function(d, a) {
+ex_intensities_gamma <- function(d, a) { # nocov start
   bf <- GammaBernsteinFunction(a=a)
   bf2ex_intensities(d, bf)
-}
+} # nocov end
 
 #' @examples
 #' intensities_gamma(10L, a=0.3)
 #'
 #' @export
 #' @rdname parameter
-intensities_gamma <- function(d, a) {
-  ex_intensities2intensities(ex_intensities_gamma(d, a))
-}
+intensities_gamma <- function(d, a) { # nocov start
+  ex_intensities2intensities(
+    ex_intensities_gamma(d, a))
+} # nocov end
