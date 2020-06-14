@@ -87,7 +87,7 @@ test_that("Arnold model implementation for d>2", {
     "rmo_arnold", "test__rmo_arnold",
     args, n, use_seed)
 
-  ## Alpha-Stable
+  ## Alpha-stable
   args[["intensities"]] <- intensities_alpha_stable(d, alpha=0.25)
   expect_equal_rn_generation(
     "rmo_arnold", "test__rmo_arnold",
