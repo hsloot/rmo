@@ -30,6 +30,7 @@ Collate:
     'RcppExports.R'
     'assert.R'
     'bernstein.R'
+    'parameter.R'
     'rmo.R'
     'sample.R'
     'utils.R'
