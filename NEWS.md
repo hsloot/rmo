@@ -3,7 +3,9 @@
 - Refactoring and additional tests
 - Fix problem with `int32` is `is_within` function
 - Refactor custom assertions
-- Add S4 classes for evaluating Bernstein Functions and their higher-order alternating, iterated forward differences
+- Add S4 classes for evaluating Bernstein Functions and their higher-order
+    alternating, iterated forward differences
+- Provide simple functions to create meaningful distribution parameters
 - Better test cases and increased test coverage
 - Refactor all sampling methods for increased performance
 

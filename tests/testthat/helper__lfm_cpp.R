@@ -74,7 +74,7 @@ test__rmo_lfm_cpp <- function(
 #' @rdname rmo_lfm_cpp
 #' @keywords internal
 #' @noRd
-test__sample_cpp <- function(
+test__sample_cpp <- function( # nolint
     rate, rate_killing, rate_drift,
     rjump_name, rjump_arg_list,
     barrier_values) {
@@ -96,14 +96,14 @@ test__sample_cpp <- function(
   d <- length(barrier_values)
 
   ## sample killing time
-  killing_time <- rexp_(1, rate_killing)
+  killing_time <- rexp_(1, rate_killing) # nolint
 
   times <- 0.
   values <- 0.
   for (i in 1:d) {
     while (last(values) < barrier_values[[i]]) {
       ## sample waiting time as well as jump value and reduce killing time
-      waiting_time <- rexp_(1, rate)
+      waiting_time <- rexp_(1, rate) # nolint
       killing_waiting_time <- killing_time - last(times)
       jump_value <- do.call(rjump, args=c("n"=1, rjump_arg_list))
 

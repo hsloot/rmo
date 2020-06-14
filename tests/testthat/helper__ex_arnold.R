@@ -84,7 +84,7 @@ test__rmo_ex_arnold_alternative <- function(n, d, ex_intensities) { # nolint
           sum(
             vapply(0:(i-1),
             function(k) {
-              (-1)^(k) * choose(i-1, k) * ex_a_alive[[d_alive-i+k+1]]
+              (-1) ^ (k) * choose(i-1, k) * ex_a_alive[[d_alive-i+k+1]]
             },
             FUN.VALUE=0.5))
         },

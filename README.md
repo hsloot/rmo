@@ -13,7 +13,7 @@ has not yet been a stable, usable release suitable for the
 public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
-[![Last-changedate](https://img.shields.io/badge/last%20change-2020--06--14-yellowgreen.svg)](/commits/master)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2020--06--15-yellowgreen.svg)](/commits/master)
 [![R build
 status](https://github.com/hsloot/rmo/workflows/R-CMD-check/badge.svg)](https://github.com/hsloot/rmo/actions)
 [![Codecov test

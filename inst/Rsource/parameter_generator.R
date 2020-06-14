@@ -3,9 +3,9 @@
 #' @keywords internal
 #' @noRd
 intensities_hierarchical <- function(d1, d2, lambda, eta, a, alpha) { # nolint
-  ex_intensities_0 <- ex_intensities_poisson(d1+d2, lambda, eta)
-  ex_intensities_1 <- ex_intensities_gamma(d1, a)
-  ex_intensities_2 <- ex_intensities_alpha_stable(d2, alpha)
+  ex_intensities_0 <- rmo::ex_intensities_poisson(d1+d2, lambda, eta)
+  ex_intensities_1 <- rmo::ex_intensities_gamma(d1, a)
+  ex_intensities_2 <- rmo::ex_intensities_alpha_stable(d2, alpha)
 
   intensities <- rmo:::ex_intensities2intensities(ex_intensities_0)
   for (j in seq_along(intensities)) {
