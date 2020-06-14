@@ -13,20 +13,24 @@ test_that("biv. CPP implementation works as intended for exp. jumps", {
   set.seed(use_seed)
 
   ## rate = 0.5, rate_killing = 0, rate_drift = 0, jump_rate = 2
-  args <- list("rate"=0.5, "rate_killing"=0, "rate_drift"=0,
+  args <- list(
+    "rate"=0.5, "rate_killing"=0, "rate_drift"=0,
     "rjump_name" = "rexp", "rjump_arg_list" = list("rate"=2),
     "barrier_values"=barrier_values)
-  expect_equal_sampling_result("sample_cpp", "test__sample_cpp_R",
+  expect_equal_rn_generation(
+    "sample_cpp", "test__sample_cpp_R",
     args, use_seed=use_seed)
 
   ## rate = 0.5, rate_killing = 0.2, rate_drift = 0, jump_rate = 2
   args[["rate_killing"]] <- 0.2
-  expect_equal_sampling_result("sample_cpp", "test__sample_cpp_R",
+  expect_equal_rn_generation(
+    "sample_cpp", "test__sample_cpp_R",
     args, use_seed=use_seed)
 
   ## rate = 0.5, rate_killing = 0.2, rate_drift = 0.1, jump_rate = 2
   args[["rate_drift"]] <- 0.1
-  expect_equal_sampling_result("sample_cpp", "test__sample_cpp_R",
+  expect_equal_rn_generation(
+    "sample_cpp", "test__sample_cpp_R",
     args, use_seed=use_seed)
 })
 
@@ -43,20 +47,24 @@ test_that("biv. CPP implementation works as intended for det. jumps", {
   set.seed(1623L)
 
   ## rate = 0.5, rate_killing = 0, rate_drift = 0, jump_rate = 2
-  args <- list("rate"=0.5, "rate_killing"=0, "rate_drift"=0,
+  args <- list(
+    "rate"=0.5, "rate_killing"=0, "rate_drift"=0,
     "rjump_name" = "rposval", "rjump_arg_list" = list("value"=1),
     "barrier_values"=barrier_values)
-  expect_equal_sampling_result("sample_cpp", "test__sample_cpp_R",
+  expect_equal_rn_generation(
+    "sample_cpp", "test__sample_cpp_R",
     args, use_seed=use_seed)
 
   ## rate = 0.5, rate_killing = 0.2, rate_drift = 0, jump_rate = 2
   args[["rate_killing"]] <- 0.2
-  expect_equal_sampling_result("sample_cpp", "test__sample_cpp_R",
+  expect_equal_rn_generation(
+    "sample_cpp", "test__sample_cpp_R",
     args, use_seed=use_seed)
 
   ## rate = 0.5, rate_killing = 0.2, rate_drift = 0.1, jump_rate = 2
   args[["rate_drift"]] <- 0.1
-  expect_equal_sampling_result("sample_cpp", "test__sample_cpp_R",
+  expect_equal_rn_generation(
+    "sample_cpp", "test__sample_cpp_R",
     args, use_seed=use_seed)
 })
 
@@ -72,10 +80,12 @@ test_that("CPP implementation works as indended for comonotone case", {
   barrier_values <- rexp(2L)
   set.seed(1623L)
 
-  args <- list("rate"=0, "rate_killing"=1, "rate_drift"=0,
+  args <- list(
+    "rate"=0, "rate_killing"=1, "rate_drift"=0,
     "rjump_name" = "rposval", "rjump_arg_list" = list("value"=1),
     "barrier_values"=barrier_values)
-  expect_equal_sampling_result("sample_cpp", "test__sample_cpp_R",
+  expect_equal_rn_generation(
+    "sample_cpp", "test__sample_cpp_R",
     args, use_seed=use_seed)
 })
 
