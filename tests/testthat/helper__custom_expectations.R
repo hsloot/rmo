@@ -41,9 +41,7 @@ expect_equal_rn_generation <- function(
     arg_list,
     n,
     use_seed,
-    RNG_kind_arg_list = list( # nolint
-      "kind" = "default", "normal.kind" = "default", "sample.kind" = "default"
-    ),
+    RNG_kind_arg_list = RNG_kind_arg_list_default(), # nolint
     set_seed = base::set.seed,
     RNG_kind = base::RNGkind, # nolint
     env = parent.frame(), ...) {
@@ -100,6 +98,13 @@ expect_equal_rn_generation <- function(
   )
 
   invisible(rn_generator$val)
+}
+
+RNG_kind_arg_list_default <- function() {
+  out <- list("kind" = "default", "normal.kind" = "default")
+  if (require_R_version() >= "3.6.0")
+    out["sample.kind"] <- "default"
+  out
 }
 
 format_args <- function(args, ...) {
