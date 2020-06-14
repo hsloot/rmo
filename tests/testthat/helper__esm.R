@@ -7,11 +7,11 @@ test__rmo_esm_bivariate <- function(n, d, intensities) { # nolint
   out <- matrix(0, nrow = n, ncol = 2)
     for (i in 1:n) {
       ## individual shock for component 1
-      shock_for_1 <- rexp_if_rate_zero_then_infinity(1, intensities[[1]])
+      shock_for_1 <- rexp_(1, intensities[[1]])
       ## individual shock for component 2
-      shock_for_2 <- rexp_if_rate_zero_then_infinity(1, intensities[[2]])
+      shock_for_2 <- rexp_(1, intensities[[2]])
       ## global shock for both compoenents
-      shock_for_1_and_2 <- rexp_if_rate_zero_then_infinity(1, intensities[[3]])
+      shock_for_1_and_2 <- rexp_(1, intensities[[3]])
 
       out[i, ] <- pmin(c(shock_for_1, shock_for_2), shock_for_1_and_2)
     }
@@ -34,7 +34,7 @@ test__rmo_esm <- function(n, d, intensities) { # nolint
     ## iterate over all shocks
     for (j in 1:(2^d - 1)) {
       ## sample shock time
-      shock_time <- rexp_if_rate_zero_then_infinity(1, intensities[[j]])
+      shock_time <- rexp_(1, intensities[[j]])
       ## iterate over all components, check if current shock concerns it,
       ## and update value if that is the case.
       for (i in 1:d) {
