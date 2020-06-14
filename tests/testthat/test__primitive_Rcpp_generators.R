@@ -110,7 +110,7 @@ test_that("sample.int reimplementation works as expected", {
       kind="default", normal.kind = "default"))
   }
 
-  args <- list("n" = 10, "size" = 10, "replace" = FALSE, "useHash" = FALSE)
+  args <- list("n" = 10, "size" = 10, "replace" = FALSE)
   set.seed(use_seed)
   act <- do.call("Rcppmo_th_sample_int", args = args)
   set.seed(use_seed)

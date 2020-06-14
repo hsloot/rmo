@@ -21,8 +21,7 @@ R_xlen_t RRNGPolicy::R_unif_index(const R_xlen_t& n) {
       as the sample population and the number of samples are smaller
       than `INT_MAX`, this emulation should yield the same results.
      */
-    R_xlen_t out =  static_cast<R_xlen_t>( n * ::unif_rand() );
-  return out;
+  return out =  static_cast<R_xlen_t>( floor(n * ::unif_rand()) );
 #endif
 }
 
