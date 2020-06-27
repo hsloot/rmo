@@ -20,3 +20,4 @@
 ^\.lintr$
 ^\.clang_complete$
 ^\.editorconfig$
+^other$
