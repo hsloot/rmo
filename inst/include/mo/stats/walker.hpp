@@ -1,8 +1,8 @@
 #ifndef MO_STATS_WALKER_HPP
 #define MO_STATS_WALKER_HPP
 
+#include <cstddef> // for std::size_t
 #include <vector>
-#include <Rinternals.h> // for R_xlen_t
 #include <mo/stats/generator.hpp>
 #include <mo/stats/rngpolicy.hpp>
 
@@ -14,24 +14,24 @@ public:
   virtual ~Walker() {}
 }; // Walker
 
-template<typename SCALAR, typename RNGPolicy = RRNGPolicy>
+template<typename Scalar, typename RNGPolicy = RRNGPolicy>
 class UnivariateWalker : public Walker {
 public:
-  virtual SCALAR operator()();
+  virtual Scalar operator()();
 }; // UnivariateWalker
 
-template<typename TSCALAR, typename VSCALAR, typename RNGPolicy = RRNGPolicy>
+template<typename Scalar, typename RNGPolicy = RRNGPolicy>
 class UnivariateProcessWalker : public Walker {
 public:
   struct ReturnValue {
-    TSCALAR index;
-    VSCALAR value;
+    Scalar index;
+    Scalar value;
   };
   virtual inline ReturnValue operator()();
 }; // UnivariateProcessWalker
 
 template<typename RNGPolicy = RRNGPolicy>
-class CountNoReplaceWalker : public UnivariateWalker<R_xlen_t, RNGPolicy> {
+class CountNoReplaceWalker : public UnivariateWalker<std::size_t, RNGPolicy> {
 public:
   CountNoReplaceWalker() = delete;
   CountNoReplaceWalker(const CountNoReplaceWalker& other) = default;
@@ -44,35 +44,35 @@ public:
   CountNoReplaceWalker& operator=(const CountNoReplaceWalker& other) = default;
   CountNoReplaceWalker& operator=(CountNoReplaceWalker&& other) = default;
 
-  virtual inline R_xlen_t operator()() override final;
+  virtual inline std::size_t operator()() override final;
 
 private:
-  R_xlen_t n_;
+  std::size_t n_;
   double total_mass_ = 0.;
   std::vector<double> probabilities_;
-  std::vector<int> original_order_;
+  std::vector<std::size_t> original_order_;
 
   RNGPolicy rng_;
 }; // CountNoReplaceWalker
 
 template<typename RNGPolicy = RRNGPolicy>
-class UnifCountNoReplaceWalker : public UnivariateWalker<R_xlen_t, RNGPolicy>  {
+class UnifCountNoReplaceWalker : public UnivariateWalker<std::size_t, RNGPolicy>  {
 public:
   UnifCountNoReplaceWalker() = delete;
   UnifCountNoReplaceWalker(const UnifCountNoReplaceWalker& other) = default;
   UnifCountNoReplaceWalker(UnifCountNoReplaceWalker&& other) = default;
-  UnifCountNoReplaceWalker(const R_xlen_t& n);
+  UnifCountNoReplaceWalker(const std::size_t n);
 
   virtual ~UnifCountNoReplaceWalker() {}
 
   UnifCountNoReplaceWalker& operator=(const UnifCountNoReplaceWalker& other) = default;
   UnifCountNoReplaceWalker& operator=(UnifCountNoReplaceWalker&& other) = default;
 
-  virtual inline R_xlen_t operator()() override final;
+  virtual inline std::size_t operator()() override final;
 
 private:
-  R_xlen_t n_;
-  std::vector<R_xlen_t> values_;
+  std::size_t n_;
+  std::vector<std::size_t> values_;
 
   RNGPolicy rng_;
 }; // UnifCountNoReplaceWalker

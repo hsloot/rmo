@@ -7,7 +7,7 @@ namespace mo {
 namespace stats {
 
 template<typename RNGPolicy>
-FixedDblGenerator<RNGPolicy>::FixedDblGenerator(const double& value) :
+FixedDblGenerator<RNGPolicy>::FixedDblGenerator(const double value) :
     value_(value) {
   if (value_ < 0.)
     std::range_error("value < 0."); // # nocov
@@ -19,7 +19,7 @@ inline double FixedDblGenerator<RNGPolicy>::operator()() {
 }
 
 template<typename RNGPolicy>
-inline double FixedDblGenerator<RNGPolicy>::operator()(const double& value) {
+inline double FixedDblGenerator<RNGPolicy>::operator()(const double value) {
     return value;
 }
 
@@ -29,7 +29,7 @@ inline std::unique_ptr<RealUnivariateGenerator<double, RNGPolicy>> FixedDblGener
 } // # nocov end
 
 template<typename RNGPolicy>
-inline double FixedDblGenerator<RNGPolicy>::laplace(const double& x) const {
+inline double FixedDblGenerator<RNGPolicy>::laplace(const double x) const {
   if (x < 0.)
     std::range_error("x < 0."); // # nocov
   return exp(-x*value_);

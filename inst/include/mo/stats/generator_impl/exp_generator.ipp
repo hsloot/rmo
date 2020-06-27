@@ -8,7 +8,7 @@ namespace mo {
 namespace stats {
 
 template<typename RNGPolicy>
-ExpGenerator<RNGPolicy>::ExpGenerator(const double& rate) :
+ExpGenerator<RNGPolicy>::ExpGenerator(const double rate) :
     rate_(rate) {
   if (rate_ < 0.)
     std::range_error("rate < 0."); // # nocov
@@ -21,7 +21,7 @@ inline double ExpGenerator<RNGPolicy>::operator()() {
 
 // WARNING: no check on rate
 template<typename RNGPolicy>
-inline double ExpGenerator<RNGPolicy>::operator()(const double& rate) {
+inline double ExpGenerator<RNGPolicy>::operator()(const double rate) {
   return 0. == rate ? R_PosInf : (R_PosInf == rate ? 0. : rng_.exp_rand() / rate);
 }
 
@@ -31,7 +31,7 @@ inline std::unique_ptr<RealUnivariateGenerator<double, RNGPolicy>> ExpGenerator<
 } // # nocov end
 
 template<typename RNGPolicy>
-inline double ExpGenerator<RNGPolicy>::laplace(const double& x) const {
+inline double ExpGenerator<RNGPolicy>::laplace(const double x) const {
   if (x < 0.)
     std::range_error("x < 0."); // # nocov
 

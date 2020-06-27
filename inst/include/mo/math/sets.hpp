@@ -1,12 +1,12 @@
 #ifndef MO_MATH_SETS_HPP
 #define MO_MATH_SETS_HPP
 
-#include <Rinternals.h> // for R_xlen_t
+#include <cstddef>
 
 namespace mo {
 namespace math {
 
-inline bool is_within(const int& i, const R_xlen_t& j)  {
+inline bool is_within(const std::size_t i, const std::size_t j)  {
   return ((j+1) >> i) % 2 == 1;
 }
 

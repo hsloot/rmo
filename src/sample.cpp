@@ -17,7 +17,7 @@ using PermutationGenerator = mo::stats::PermutationGenerator<std::vector<R_xlen_
 //' @noRd
 // [[Rcpp::export]]
 NumericMatrix Rcpp__rmo_esm(
-    const R_xlen_t& n, R_xlen_t d,
+    const R_xlen_t n, const R_xlen_t d,
     const NumericVector& intensities) {
   auto num_shocks = intensities.size();
   if ((1<<d)-1 != num_shocks)
@@ -53,7 +53,7 @@ NumericMatrix Rcpp__rmo_esm(
 //' @noRd
 // [[Rcpp::export]]
 NumericMatrix Rcpp__rmo_arnold(
-    const R_xlen_t& n, const int& d,
+    const R_xlen_t n, const int d,
     const NumericVector& intensities) {
   auto total_intensity = sum(intensities);
   std::unique_ptr<ExpGenerator> exp_generator{new ExpGenerator(total_intensity)};
@@ -90,7 +90,7 @@ NumericMatrix Rcpp__rmo_arnold(
 //' @noRd
 // [[Rcpp::export]]
 NumericMatrix Rcpp__rmo_ex_arnold(
-    const R_xlen_t& n, const int& d,
+    const R_xlen_t n, const int d,
     const NumericVector& ex_intensities) {
   std::vector<std::unique_ptr<ExpGenerator>> exp_generators(d);
   std::vector<std::unique_ptr<CountReplaceGenerator>> count_generators(d);
@@ -145,8 +145,8 @@ NumericMatrix Rcpp__rmo_ex_arnold(
 //' @noRd
 // [[Rcpp::export]]
 NumericMatrix Rcpp__rmo_esm_cuadras_auge(
-    const R_xlen_t& n, const int& d,
-    const double& alpha, const double& beta) { // alpha, beta >= 0
+    const R_xlen_t n, const int d,
+    const double alpha, const double beta) { // alpha, beta >= 0
   if (alpha < 0. || beta < 0.)
     std::range_error("alpha or beta < 0"); // # nocov
 
@@ -170,11 +170,11 @@ NumericMatrix Rcpp__rmo_esm_cuadras_auge(
 }
 
 std::unique_ptr<RealUnivariateGenerator> get_univariate_generator(
-    const std::string& name, const List& args);
+    const std::string name, const List& args);
 
 std::vector<std::pair<double, double>> sample_cpp(
-    const double& rate, const double& rate_killing, const double& rate_drift,
-    const std::string& rjump_name, const List& rjump_arg_list,
+    const double rate, const double rate_killing, const double rate_drift,
+    const std::string rjump_name, const List& rjump_arg_list,
     const std::vector<double>& barrier_values);
 
 
@@ -182,9 +182,9 @@ std::vector<std::pair<double, double>> sample_cpp(
 //' @noRd
 // [[Rcpp::export]]
 NumericMatrix Rcpp__rmo_lfm_cpp(
-    const R_xlen_t& n, const R_xlen_t& d,
-    const double& rate, const double& rate_killing, const double& rate_drift,
-    const std::string& rjump_name, const List& rjump_arg_list) {
+    const R_xlen_t n, const R_xlen_t d,
+    const double rate, const double rate_killing, const double rate_drift,
+    const std::string rjump_name, const List& rjump_arg_list) {
   std::unique_ptr<ExpGenerator> bv_generator{new ExpGenerator(1.)};
   std::vector<double> unit_exponentials(d);
   std::vector<std::pair<double, double>> cpp_subordinator;
@@ -208,8 +208,8 @@ NumericMatrix Rcpp__rmo_lfm_cpp(
 
 
 std::vector<std::pair<double, double>> sample_cpp(
-      const double& rate, const double& rate_killing, const double& rate_drift,
-      const std::string& rjump_name, const List& rjump_arg_list,
+      const double rate, const double rate_killing, const double rate_drift,
+      const std::string rjump_name, const List& rjump_arg_list,
       const std::vector<double>& barrier_values) {
   std::vector<double> barrier_values_;
   if (rate_drift>0.) {
@@ -291,8 +291,8 @@ std::vector<std::pair<double, double>> sample_cpp(
 //' @noRd
 // [[Rcpp::export]]
 NumericMatrix sample_cpp(
-      const double& rate, const double& rate_killing, const double& rate_drift,
-      const std::string& rjump_name, const List& rjump_arg_list,
+      const double rate, const double rate_killing, const double rate_drift,
+      const std::string rjump_name, const List& rjump_arg_list,
       const NumericVector& barrier_values) {
   std::vector<std::pair<double, double>> cpp_subordinator = sample_cpp(rate, rate_killing, rate_drift, rjump_name, rjump_arg_list, Rcpp::as<std::vector<double>>(barrier_values));
   NumericMatrix out(cpp_subordinator.size(), 2);
@@ -306,7 +306,7 @@ NumericMatrix sample_cpp(
 }
 
 std::unique_ptr<RealUnivariateGenerator> get_univariate_generator(
-    const std::string& name, const List& args) {
+    const std::string name, const List& args) {
   std::unique_ptr<RealUnivariateGenerator> out;
   if ("rexp" == name) {
     double rate = args["rate"];

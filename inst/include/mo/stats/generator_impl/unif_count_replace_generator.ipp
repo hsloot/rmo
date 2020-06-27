@@ -1,15 +1,14 @@
 #ifndef MO_STATS_GENERATOR_IMPL_UNIFCOUNTREPLACEGENERATOR_IPP
 #define MO_STATS_GENERATOR_IMPL_UNIFCOUNTREPLACEGENERATOR_IPP
 
+#include <cstddef> // for std::size_t
 #include <mo/stats/generator.hpp>
-#include <Rinternals.h> // for R_xlen_t
-#include <Rmath.h>
 
 namespace mo {
 namespace stats {
 
 template<typename RNGPolicy>
-UnifCountReplaceGenerator<RNGPolicy>::UnifCountReplaceGenerator(const R_xlen_t& n) :
+UnifCountReplaceGenerator<RNGPolicy>::UnifCountReplaceGenerator(const std::size_t n) :
     n_(n),
     rng_() {
   if (n_ < 1)
@@ -17,7 +16,7 @@ UnifCountReplaceGenerator<RNGPolicy>::UnifCountReplaceGenerator(const R_xlen_t& 
 }
 
 template<typename RNGPolicy>
-inline R_xlen_t UnifCountReplaceGenerator<RNGPolicy>::operator()() {
+inline std::size_t UnifCountReplaceGenerator<RNGPolicy>::operator()() {
   return rng_.R_unif_index(n_);
 }
 

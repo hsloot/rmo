@@ -1,11 +1,11 @@
 #ifndef MO_STATS_WALKER_IMPL_COUNTNOREPLACEWALKER_IPP
 #define MO_STATS_WALKER_IMPL_COUNTNOREPLACEWALKER_IPP
 
+#include <cstddef> // for std::size_t
 #include <vector>
-#include <R_ext/Utils.h>
-#include <Rcpp.h>
 #include <mo/stats/generator.hpp>
 #include <mo/stats/walker.hpp>
+#include <mo/utils/sort.hpp>
 
 namespace mo {
 namespace stats {
@@ -23,12 +23,12 @@ CountNoReplaceWalker<RNGPolicy>::CountNoReplaceWalker(const T& probabilities) :
     probability /= total_mass_;
   total_mass_ = 1.;
   std::iota(original_order_.begin(), original_order_.end(), 0);
-  Rf_revsort(probabilities_.data(), original_order_.data(), (int) n_);
+  utils::reverse_sort(probabilities_, original_order_);
 }
 
 
 template<typename RNGPolicy>
-inline R_xlen_t CountNoReplaceWalker<RNGPolicy>::operator()() {
+inline std::size_t CountNoReplaceWalker<RNGPolicy>::operator()() {
   if (n_ == 0)
     std::runtime_error("Walker finished");
 
@@ -41,7 +41,7 @@ inline R_xlen_t CountNoReplaceWalker<RNGPolicy>::operator()() {
       break;
   }
 
-  R_xlen_t rval = original_order_[j];
+  std::size_t rval = original_order_[j];
   total_mass_ -= probabilities_[j];
   probabilities_.erase(probabilities_.begin()+j);
   original_order_.erase(original_order_.begin()+j);

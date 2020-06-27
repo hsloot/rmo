@@ -8,7 +8,7 @@ using namespace Rcpp;
 
 // [[Rcpp::export]]
 NumericVector Rcppmo_th_rexp(
-    const R_xlen_t& n, const double& rate=1.) {
+    const R_xlen_t n, const double rate=1.) {
   using RRNGPolicy = mo::stats::RRNGPolicy;
   using ExpGenerator = mo::stats::ExpGenerator<RRNGPolicy>;
   NumericVector out(no_init(n));
@@ -21,7 +21,7 @@ NumericVector Rcppmo_th_rexp(
 
 // [[Rcpp::export]]
 IntegerVector Rcppmo_th_int(
-    const R_xlen_t& n, const NumericVector& probabilities) {
+    const R_xlen_t n, const NumericVector& probabilities) {
   using RRNGPolicy = mo::stats::RRNGPolicy;
   using CountReplaceGenerator = mo::stats::CountReplaceGenerator<RRNGPolicy>;
 
@@ -34,7 +34,7 @@ IntegerVector Rcppmo_th_int(
 
 // [[Rcpp::export]]
 IntegerVector Rcppmo_th_perm(
-    const R_xlen_t& n, const NumericVector& probabilities) {
+    const R_xlen_t n, const NumericVector& probabilities) {
   using RRNGPolicy = mo::stats::RRNGPolicy;
   using CountNoReplaceWalker = mo::stats::CountNoReplaceWalker<RRNGPolicy>;
 
@@ -47,7 +47,7 @@ IntegerVector Rcppmo_th_perm(
 
 // [[Rcpp::export]]
 NumericVector Rcppmo_th_fixeddbl(
-    const R_xlen_t& n, const double& value) {
+    const R_xlen_t n, const double value) {
   using RRNGPolicy = mo::stats::RRNGPolicy;
   using FixedDblGenerator = mo::stats::FixedDblGenerator<RRNGPolicy>;
 
@@ -60,11 +60,11 @@ NumericVector Rcppmo_th_fixeddbl(
 
 // [[Rcpp::export]]
 IntegerVector Rcppmo_th_sample_int(
-    const R_xlen_t& n,
-    const R_xlen_t& size,
-    const bool& replace,
+    const R_xlen_t n,
+    const R_xlen_t size,
+    const bool replace,
     const Nullable<NumericVector>& prob = R_NilValue,
-    const bool& useHash = false) {
+    const bool useHash = false) {
   using RRNGPolicy = mo::stats::RRNGPolicy;
   using UnifCountReplaceGenerator = mo::stats::UnifCountReplaceGenerator<RRNGPolicy>;
   using CountReplaceGenerator = mo::stats::CountReplaceGenerator<RRNGPolicy>;
