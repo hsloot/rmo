@@ -2,7 +2,7 @@ context("Rcpp generators")
 use_seed <- 1632L
 n <- 1e5L
 
-test_that("RExpGenerator works as expected", {
+test_that("ExpGenerator works as expected", {
   args <- list("rate" = 0.5)
   expect_equal_rn_generation(
     "rexp", "mo_internal__rexp",
@@ -42,7 +42,7 @@ test_that("CountReplaceGenerator works as expected", {
       1:n,
       function(x) {
         sample.int(
-          n=length(probabilities), size=1,
+          n=d, size=1,
           prob = probabilities, replace=FALSE) - 1
       }
     )
@@ -70,12 +70,17 @@ test_that("CountReplaceGenerator works as expected", {
   expect_equal_rn_generation(
     "mo_internal__count_replace", "sample_count_replace_base_0",
     args, n, use_seed)
+
+    args <- list("d" = 10, "probabilities"= NULL)
+    expect_equal_rn_generation(
+      "mo_internal__count_replace", "sample_count_replace_base_0",
+      args, n, use_seed)
 })
 
 test_that("CountNoReplaceWalker works as expected", {
   sample_count_noreplace_base_0 <- function(n, d = length(probabilities), probabilities = NULL) {
     -1+sample.int(
-      n=length(probabilities), size=n,
+      n=d, size=n,
       prob = probabilities, replace=FALSE)
   }
   probabilities <- c(8, 7, 3, 10, 6, 1, 2, 9, 5, 4)
@@ -104,6 +109,32 @@ test_that("CountNoReplaceWalker works as expected", {
   args <- list("d" = length(probabilities), "probabilities" = probabilities)
   expect_equal_rn_generation(
     "mo_internal__count_noreplace", "sample_count_noreplace_base_0",
+    args, n, use_seed)
+
+  n <- 10
+  args <- list("d" = n, "probabilities" = NULL)
+  expect_equal_rn_generation(
+    "mo_internal__count_noreplace", "sample_count_noreplace_base_0",
+    args, n, use_seed)
+})
+
+
+test_that("UnifPermuationGenerator works as expected", {
+  sample_perm_base_0 <- function(n) {
+    -1+sample.int(
+      n=n, size=n, replace=FALSE)
+  }
+
+  args <- list()
+
+  n <- 10
+  expect_equal_rn_generation(
+    "mo_internal__perm", "sample_perm_base_0",
+    args, n, use_seed)
+
+  n <- 100
+  expect_equal_rn_generation(
+    "mo_internal__perm", "sample_perm_base_0",
     args, n, use_seed)
 })
 

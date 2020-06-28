@@ -5,18 +5,6 @@
 
 using namespace Rcpp;
 
-// Rcpp__is_within
-bool Rcpp__is_within(const R_xlen_t i, const R_xlen_t j);
-RcppExport SEXP _rmo_Rcpp__is_within(SEXP iSEXP, SEXP jSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const R_xlen_t >::type i(iSEXP);
-    Rcpp::traits::input_parameter< const R_xlen_t >::type j(jSEXP);
-    rcpp_result_gen = Rcpp::wrap(Rcpp__is_within(i, j));
-    return rcpp_result_gen;
-END_RCPP
-}
 // mo_internal__rexp
 NumericVector mo_internal__rexp(const R_xlen_t n, const double rate);
 RcppExport SEXP _rmo_mo_internal__rexp(SEXP nSEXP, SEXP rateSEXP) {
@@ -90,6 +78,18 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< const Nullable<NumericVector>& >::type prob(probSEXP);
     Rcpp::traits::input_parameter< const bool >::type useHash(useHashSEXP);
     rcpp_result_gen = Rcpp::wrap(mo_internal__sample_int(n, size, replace, prob, useHash));
+    return rcpp_result_gen;
+END_RCPP
+}
+// Rcpp__is_within
+bool Rcpp__is_within(const R_xlen_t i, const R_xlen_t j);
+RcppExport SEXP _rmo_Rcpp__is_within(SEXP iSEXP, SEXP jSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const R_xlen_t >::type i(iSEXP);
+    Rcpp::traits::input_parameter< const R_xlen_t >::type j(jSEXP);
+    rcpp_result_gen = Rcpp::wrap(Rcpp__is_within(i, j));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -181,13 +181,13 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_rmo_Rcpp__is_within", (DL_FUNC) &_rmo_Rcpp__is_within, 2},
     {"_rmo_mo_internal__rexp", (DL_FUNC) &_rmo_mo_internal__rexp, 2},
     {"_rmo_mo_internal__fixeddbl", (DL_FUNC) &_rmo_mo_internal__fixeddbl, 2},
     {"_rmo_mo_internal__count_replace", (DL_FUNC) &_rmo_mo_internal__count_replace, 3},
     {"_rmo_mo_internal__count_noreplace", (DL_FUNC) &_rmo_mo_internal__count_noreplace, 3},
     {"_rmo_mo_internal__perm", (DL_FUNC) &_rmo_mo_internal__perm, 1},
     {"_rmo_mo_internal__sample_int", (DL_FUNC) &_rmo_mo_internal__sample_int, 5},
+    {"_rmo_Rcpp__is_within", (DL_FUNC) &_rmo_Rcpp__is_within, 2},
     {"_rmo_Rcpp__rmo_esm", (DL_FUNC) &_rmo_Rcpp__rmo_esm, 3},
     {"_rmo_Rcpp__rmo_arnold", (DL_FUNC) &_rmo_Rcpp__rmo_arnold, 3},
     {"_rmo_Rcpp__rmo_ex_arnold", (DL_FUNC) &_rmo_Rcpp__rmo_ex_arnold, 3},
