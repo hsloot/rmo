@@ -167,11 +167,6 @@ NumericMatrix Rcpp__rmo_esm_cuadras_auge(
 std::unique_ptr<RealUnivariateGenerator<double, RRNGPolicy>> get_univariate_generator(
     const std::string name, const List& args);
 
-std::vector<std::pair<double, double>> sample_cpp(
-    const double rate, const double rate_killing, const double rate_drift,
-    const std::string rjump_name, const List& rjump_arg_list,
-    const std::vector<double>& barrier_values);
-
 
 //' @keywords internal
 //' @noRd
@@ -180,126 +175,65 @@ NumericMatrix Rcpp__rmo_lfm_cpp(
     const R_xlen_t n, const R_xlen_t d,
     const double rate, const double rate_killing, const double rate_drift,
     const std::string rjump_name, const List& rjump_arg_list) {
-  std::unique_ptr<ExpGenerator<RRNGPolicy>> bv_generator{new ExpGenerator<RRNGPolicy>(1.)};
-  std::vector<double> unit_exponentials(d);
-  std::vector<std::pair<double, double>> cpp_subordinator;
-  int count;
+  ExpGenerator<RRNGPolicy> bv_generator(1.);
+  ExpGenerator<RRNGPolicy> kt_generator(rate_killing);
+  ExpGenerator<RRNGPolicy> wt_generator(rate);
+  std::unique_ptr<RealUnivariateGenerator<double, RRNGPolicy>> jump_generator = get_univariate_generator(rjump_name, rjump_arg_list);
+  std::vector<double> barriers(d);
 
   NumericMatrix out(n, d);
   for (R_xlen_t k=0; k<n; k++) {
-    std::generate(unit_exponentials.begin(), unit_exponentials.end(),
-      *bv_generator);
-    cpp_subordinator = sample_cpp(rate, rate_killing, rate_drift, rjump_name, rjump_arg_list, unit_exponentials);
-    for (int i=0; i<d; i++) {
-      count = 0;
-      while (cpp_subordinator[count].second < unit_exponentials[i] && count < cpp_subordinator.size())
-        count += 1;
+    std::generate(barriers.begin(), barriers.end(),
+      bv_generator);
+    auto killing_time = kt_generator();
 
-      out(k, i) = cpp_subordinator[count].first;
-    }
-  }
-  return out;
-}
+    auto time = 0.;
+    auto value = 0.;
+    auto idx = mo::utils::sort_index(barriers);
+    for (R_xlen_t i=0; i<d; i++) {
+      while (
+          i<d &&
+          value < barriers[idx[i]]) {
+        auto tt_jump = wt_generator();
+        auto tt_killing = killing_time - time;
+        auto value_jump = (*jump_generator)();
 
-
-std::vector<std::pair<double, double>> sample_cpp(
-      const double rate, const double rate_killing, const double rate_drift,
-      const std::string rjump_name, const List& rjump_arg_list,
-      const std::vector<double>& barrier_values) {
-  std::vector<double> barrier_values_;
-  if (rate_drift>0.) {
-    barrier_values_ = std::vector<double>(barrier_values);
-    std::sort(barrier_values_.begin(), barrier_values_.end());
-  } else {
-    barrier_values_ = std::vector<double>(1, *std::max_element(barrier_values.begin(), barrier_values.end()));
-  }
-  std::unique_ptr<ExpGenerator<RRNGPolicy>> wt_generator{new ExpGenerator<RRNGPolicy>(rate)};
-  std::unique_ptr<ExpGenerator<RRNGPolicy>> kt_generator{new ExpGenerator<RRNGPolicy>(rate_killing)};
-  std::unique_ptr<RealUnivariateGenerator<double, RRNGPolicy>> jump_generator = get_univariate_generator(rjump_name, rjump_arg_list);
-  R_xlen_t d = barrier_values_.size();
-
-  double killing_time = (*kt_generator)();
-
-  double time = 0.;
-  double value = 0.;
-  std::vector<std::pair<double, double>> out(1, {time, value});
-  /**
-   * Explanation:
-   *  - the expected maximum value of d iid unit exponentials
-   *    is O(d)
-   *  - 5 is chosen as a conservative factor but should ultimately
-   *    be replaced by a more meaningful metric (e.g. mean of the
-   *    jump distribution)
-   * replace d*5. by an estimate
-   * of the
-   */
-  int estimated_length = 0;
-  if (rate > 0.)
-    estimated_length += std::ceil(1. + std::log(1. - std::pow(1. - 0.05, 1./d)) / std::log(1 - (*jump_generator).laplace(1.)));
-  if (rate_drift > 0.)
-  estimated_length += d;
-  out.reserve(estimated_length);
-  for (int i=0; i<d; i++) {
-    while (value < barrier_values_[i]) {
-      double waiting_time = (*wt_generator)();
-      double killing_waiting_time = killing_time - time;
-      double jump_value = (*jump_generator)();
-
-      if (killing_waiting_time < R_PosInf && killing_waiting_time <= waiting_time) {
-        for (int j=i; j<d; j++) {
-          if (rate_drift > 0. && (barrier_values_[j] - value)/rate_drift <= killing_waiting_time) {
-            double intermediate_waiting_time = (barrier_values_[j] - value) / rate_drift;
-            time += intermediate_waiting_time;
-            value = barrier_values_[j];
-            out.push_back({time, value});
-            killing_waiting_time -= intermediate_waiting_time;
+        if (tt_killing < R_PosInf && tt_killing <= tt_jump) {
+          while (i<d && rate_drift > 0. &&
+              (barriers[idx[i]] - value)/rate_drift <= tt_killing) {
+            auto tt_drift = (barriers[idx[i]] - value) / rate_drift;
+            time += tt_drift;
+            value = barriers[idx[i]];
+            tt_killing -= tt_drift;
+            out(k, idx[i++]) = time;
           }
-        }
-
-        time = killing_time;
-        value = R_PosInf;
-        out.push_back({time, value});
-      } else {
-        for (int j=i; j<d; j++) {
-          if (rate_drift > 0. && (barrier_values_[j] - value)/rate_drift <= waiting_time) {
-            double intermediate_waiting_time = (barrier_values_[j] - value)/rate_drift;
-            time += intermediate_waiting_time;
-            value = barrier_values_[j];
-            out.push_back({time, value});
-            waiting_time -= intermediate_waiting_time;
+          time = killing_time;
+          value = R_PosInf;
+          while (i<d) out(k, idx[i++]) = time;
+        } else {
+          while (i<d && rate_drift > 0. &&
+              (barriers[idx[i]] - value)/rate_drift <= tt_jump) {
+            auto tt_drift = (barriers[idx[i]] - value)/rate_drift;
+            time += tt_drift;
+            value = barriers[idx[i]];
+            tt_jump -= tt_drift;
+            out(k, idx[i++]) = time;
           }
-        }
-
-        if (rate > 0.) { // waiting_time < R_PosInf
-          time += waiting_time;
-          value += waiting_time * rate_drift + jump_value;
-          out.push_back({time, value});
+          if (tt_jump < R_PosInf) {
+            time += tt_jump;
+            value += tt_jump * rate_drift + value_jump;
+          }
+          while (i<d && value >= barriers[idx[i]]) out(k, idx[i++]) = time;
         }
       }
     }
   }
-
   return out;
 }
+
 
 //' @keywords internal
 //' @noRd
-// [[Rcpp::export]]
-NumericMatrix sample_cpp(
-      const double rate, const double rate_killing, const double rate_drift,
-      const std::string rjump_name, const List& rjump_arg_list,
-      const NumericVector& barrier_values) {
-  std::vector<std::pair<double, double>> cpp_subordinator = sample_cpp(rate, rate_killing, rate_drift, rjump_name, rjump_arg_list, Rcpp::as<std::vector<double>>(barrier_values));
-  NumericMatrix out(cpp_subordinator.size(), 2);
-  for (R_xlen_t i=0; i<cpp_subordinator.size(); i++) {
-    out(i, 0) = cpp_subordinator[i].first;
-    out(i, 1) = cpp_subordinator[i].second;
-  }
-  colnames(out) = CharacterVector::create("t", "value");
-
-  return out;
-}
-
 std::unique_ptr<RealUnivariateGenerator<double, RRNGPolicy>> get_univariate_generator(
     const std::string name, const List& args) {
   std::unique_ptr<RealUnivariateGenerator<double, RRNGPolicy>> out;

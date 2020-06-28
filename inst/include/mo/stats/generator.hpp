@@ -34,8 +34,6 @@ template<typename Scalar, typename RNGPolicy>
 class RealUnivariateGenerator : public UnivariateGenerator<Scalar, RNGPolicy> {
 public:
   virtual inline std::unique_ptr<RealUnivariateGenerator> clone() const = 0;
-
-  virtual inline Scalar laplace(const Scalar x) const = 0;
 };
 
 
@@ -56,8 +54,6 @@ public:
   inline double operator()(const double value);
 
   virtual inline std::unique_ptr<RealUnivariateGenerator<double, RNGPolicy>> clone() const override final;
-
-  virtual inline double laplace(const double x) const override final;
 
 private:
   double value_ = 1.;
@@ -80,8 +76,6 @@ public:
   inline double operator()(const double rate);
 
   virtual inline std::unique_ptr<RealUnivariateGenerator<double, RNGPolicy>> clone() const override final;
-
-  virtual inline double laplace(const double x) const override final;
 
 private:
   double rate_ = 1.;

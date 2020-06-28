@@ -29,11 +29,6 @@ inline std::unique_ptr<RealUnivariateGenerator<double, RNGPolicy>> FixedDblGener
   return std::move( std::unique_ptr<RealUnivariateGenerator<double, RNGPolicy>>(new FixedDblGenerator<RNGPolicy>(*this)) );
 } // # nocov end
 
-template<typename RNGPolicy>
-inline double FixedDblGenerator<RNGPolicy>::laplace(const double x) const {
-  return exp(-x*value_);
-}
-
 } // stats
 } // mo
 

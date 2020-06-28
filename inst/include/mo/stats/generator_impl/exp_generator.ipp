@@ -32,13 +32,6 @@ inline std::unique_ptr<RealUnivariateGenerator<double, RNGPolicy>> ExpGenerator<
   return std::move( std::unique_ptr<RealUnivariateGenerator<double, RNGPolicy>>(new ExpGenerator<RNGPolicy>(*this)) );
 } // # nocov end
 
-template<typename RNGPolicy>
-inline double ExpGenerator<RNGPolicy>::laplace(const double x) const {
-  if (0. == rate_) return 0.;
-  else if (std::numeric_limits<double>::infinity() == rate_) return 1.;
-  else return rate_/(rate_ + x);
-}
-
 
 } // stats
 } // mo

@@ -5,11 +5,11 @@ n <- 1e5L
 test_that("ExpGenerator works as expected", {
   args <- list("rate" = 0.5)
   expect_equal_rn_generation(
-    "rexp", "mo_internal__rexp",
+    "mo_internal__rexp", "rexp",
     args, n, use_seed)
   args <- list("rate" = 2)
   expect_equal_rn_generation(
-    "rexp", "mo_internal__rexp",
+    "mo_internal__rexp", "rexp",
     args, n, use_seed)
   rexp_rate_is_zero <- function(n, rate) {
     stopifnot(rate == 0.)
@@ -17,7 +17,7 @@ test_that("ExpGenerator works as expected", {
   }
   args <- list("rate" = 0)
   expect_equal_rn_generation(
-    "rexp_rate_is_zero", "mo_internal__rexp",
+    "mo_internal__rexp", "rexp_rate_is_zero",
     args, n, use_seed)
   rexp_rate_is_inf <- function(n, rate) {
     stopifnot(rate == Inf)
@@ -25,7 +25,7 @@ test_that("ExpGenerator works as expected", {
   }
   args <- list("rate" = Inf)
   expect_equal_rn_generation(
-    "rexp_rate_is_inf", "mo_internal__rexp",
+    "mo_internal__rexp", "rexp_rate_is_inf",
     args, n, use_seed)
 })
 
