@@ -10,7 +10,7 @@ inline double min(const double a, const double b) {
   if (
       std::numeric_limits<double>::infinity() == a &&
       std::numeric_limits<double>::infinity() == b) {
-    return std::numeric_limits<double>::infinity();
+    return std::numeric_limits<double>::infinity(); // # nocov
   } else if (std::numeric_limits<double>::infinity() == a) {
     return b;
   } else if (std::numeric_limits<double>::infinity() == b) {

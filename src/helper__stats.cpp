@@ -75,7 +75,7 @@ IntegerVector mo_internal__sample_int(
     const Nullable<NumericVector>& prob = R_NilValue,
     const bool useHash = false) {
   if (useHash)
-    std::logic_error("Function not yet implemented");
+    std::logic_error("Function not yet implemented"); // # nocov
   auto flag_uniform = prob.isNull();
   IntegerVector out(no_init(size));
   if (replace) {
@@ -89,7 +89,7 @@ IntegerVector mo_internal__sample_int(
         if (n * p >= 0.1)
           ++nc;
       if (nc > 200)
-        std::logic_error("Function not yet implemented");
+        std::logic_error("Function not yet implemented"); // # nocov
 
       CountReplaceGenerator<RRNGPolicy> gen(prob_);
       std::generate(out.begin(), out.end(), gen);

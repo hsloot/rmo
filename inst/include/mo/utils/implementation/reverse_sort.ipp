@@ -29,8 +29,6 @@ void reverse_sort(SortVector& a, IndexVector& ib) {
   *  along with this program; if not, a copy is available at
   *  https://www.R-project.org/Licenses/
   */
-  if (a.size() != ib.size())
-    std::length_error("a and ib are of different size");
 
   if (a.size() <= 1) return;
   auto n = a.size();
