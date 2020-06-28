@@ -7,24 +7,28 @@ Rcpp__is_within <- function(i, j) {
     .Call(`_rmo_Rcpp__is_within`, i, j)
 }
 
-Rcppmo_th_rexp <- function(n, rate = 1.) {
-    .Call(`_rmo_Rcppmo_th_rexp`, n, rate)
+mo_internal__rexp <- function(n, rate = 1.) {
+    .Call(`_rmo_mo_internal__rexp`, n, rate)
 }
 
-Rcppmo_th_fixeddbl <- function(n, value) {
-    .Call(`_rmo_Rcppmo_th_fixeddbl`, n, value)
+mo_internal__fixeddbl <- function(n, value) {
+    .Call(`_rmo_mo_internal__fixeddbl`, n, value)
 }
 
-Rcppmo_th_int <- function(n, probabilities) {
-    .Call(`_rmo_Rcppmo_th_int`, n, probabilities)
+mo_internal__count_replace <- function(n, d, probabilities = NULL) {
+    .Call(`_rmo_mo_internal__count_replace`, n, d, probabilities)
 }
 
-Rcppmo_th_perm <- function(n, probabilities) {
-    .Call(`_rmo_Rcppmo_th_perm`, n, probabilities)
+mo_internal__count_noreplace <- function(n, d, probabilities = NULL) {
+    .Call(`_rmo_mo_internal__count_noreplace`, n, d, probabilities)
 }
 
-Rcppmo_th_sample_int <- function(n, size, replace, prob = NULL, useHash = FALSE) {
-    .Call(`_rmo_Rcppmo_th_sample_int`, n, size, replace, prob, useHash)
+mo_internal__perm <- function(n) {
+    .Call(`_rmo_mo_internal__perm`, n)
+}
+
+mo_internal__sample_int <- function(n, size, replace, prob = NULL, useHash = FALSE) {
+    .Call(`_rmo_mo_internal__sample_int`, n, size, replace, prob, useHash)
 }
 
 #' @keywords internal

@@ -6,7 +6,7 @@ using namespace Rcpp;
 using namespace mo::stats;
 
 // [[Rcpp::export]]
-NumericVector Rcppmo_th_rexp(
+NumericVector mo_internal__rexp(
     const R_xlen_t n, const double rate=1.) {
   NumericVector out(no_init(n));
 
@@ -17,7 +17,7 @@ NumericVector Rcppmo_th_rexp(
 }
 
 // [[Rcpp::export]]
-NumericVector Rcppmo_th_fixeddbl(
+NumericVector mo_internal__fixeddbl(
     const R_xlen_t n, const double value) {
   NumericVector out(no_init(n));
   FixedDblGenerator<RRNGPolicy> fixeddbl_generator(value);
@@ -26,28 +26,49 @@ NumericVector Rcppmo_th_fixeddbl(
   return out;
 }
 
+
 // [[Rcpp::export]]
-IntegerVector Rcppmo_th_int(
-    const R_xlen_t n, const NumericVector& probabilities) {
+IntegerVector mo_internal__count_replace(
+    const R_xlen_t n, const R_xlen_t d, const Nullable<NumericVector> probabilities = R_NilValue) {
   IntegerVector out(no_init(n));
-  CountReplaceGenerator<RRNGPolicy> count_generator(probabilities);
-  std::generate(out.begin(), out.end(), count_generator);
+  if (probabilities.isNotNull()) {
+    CountReplaceGenerator<RRNGPolicy> generator(as<NumericVector>(probabilities));
+    std::generate(out.begin(), out.end(), generator);
+  } else {
+    UnifCountReplaceGenerator<RRNGPolicy> generator(d);
+    std::generate(out.begin(), out.end(), generator);
+  }
 
   return out;
 }
 
 // [[Rcpp::export]]
-IntegerVector Rcppmo_th_perm(
-    const R_xlen_t n, const NumericVector& probabilities) {
+IntegerVector mo_internal__count_noreplace(
+    const R_xlen_t n, const R_xlen_t d, const Nullable<NumericVector> probabilities = R_NilValue) {
   IntegerVector out(no_init(n));
-  CountNoReplaceWalker<RRNGPolicy> sample_walker(probabilities);
-  std::generate(out.begin(), out.end(), sample_walker);
+  if (probabilities.isNotNull()) {
+    CountNoReplaceWalker<RRNGPolicy> generator(as<NumericVector>(probabilities));
+    std::generate(out.begin(), out.end(), generator);
+  } else {
+    UnifCountNoReplaceWalker<RRNGPolicy> generator(d);
+    std::generate(out.begin(), out.end(), generator);
+  }
 
   return out;
 }
 
 // [[Rcpp::export]]
-IntegerVector Rcppmo_th_sample_int(
+IntegerVector mo_internal__perm(
+    const R_xlen_t n) {
+  IntegerVector out(no_init(n));
+
+  UnifPermutationGenerator<IntegerVector, RRNGPolicy> perm_generator(n);
+
+  return perm_generator();
+}
+
+// [[Rcpp::export]]
+IntegerVector mo_internal__sample_int(
     const R_xlen_t n,
     const R_xlen_t size,
     const bool replace,
