@@ -1,4 +1,8 @@
-#include <mo.hpp>
+#include <Rcpp.h>
+
+#include <rmo.hpp>
+
+using namespace Rcpp;
 
 //' @keywords internal
 //' @noRd

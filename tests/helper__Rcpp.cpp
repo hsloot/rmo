@@ -2,7 +2,7 @@
 // [[Rcpp::depends(rmo)]]
 
 #include <Rcpp.h>
-#include <mo.hpp>
+#include <rmo.hpp>
 
 using namespace Rcpp;
 

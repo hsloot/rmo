@@ -2,18 +2,21 @@
 #define MO_STATS_GENERATOR_IMPL_PERMUTATIONGENERATOR_IPP
 
 #include <cstddef> // for std::size_t
+#include <vector>
+#include <numeric>
+
 #include <mo/stats/generator.hpp>
 
 namespace mo {
 namespace stats {
 
-template<typename VECTOR, typename RNGPolicy>
-PermutationGenerator<VECTOR, RNGPolicy>::PermutationGenerator(const std::size_t n) :
+template<typename Vector, typename RNGPolicy>
+PermutationGenerator<Vector, RNGPolicy>::PermutationGenerator(const std::size_t n) :
     n_(n),
     rng_() {}
 
-template<typename VECTOR, typename RNGPolicy>
-inline void PermutationGenerator<VECTOR, RNGPolicy>::operator()(VECTOR& out) {
+template<typename Vector, typename RNGPolicy>
+inline void PermutationGenerator<Vector, RNGPolicy>::operator()(Vector& out) {
   std::vector<std::size_t> values(this->n_);
   std::iota(values.begin(), values.end(), 0);
 
@@ -25,9 +28,9 @@ inline void PermutationGenerator<VECTOR, RNGPolicy>::operator()(VECTOR& out) {
   }
 }
 
-template<typename VECTOR, typename RNGPolicy>
-inline VECTOR PermutationGenerator<VECTOR, RNGPolicy>::operator()() {
-  VECTOR out(this->n_);
+template<typename Vector, typename RNGPolicy>
+inline Vector PermutationGenerator<Vector, RNGPolicy>::operator()() {
+  Vector out(this->n_);
   (*this)(out);
   return out;
 }

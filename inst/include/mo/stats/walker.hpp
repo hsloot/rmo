@@ -2,7 +2,7 @@
 #define MO_STATS_WALKER_HPP
 
 #include <cstddef> // for std::size_t
-#include <vector>
+
 #include <mo/stats/generator.hpp>
 #include <mo/stats/rngpolicy.hpp>
 
@@ -14,30 +14,20 @@ public:
   virtual ~Walker() {}
 }; // Walker
 
-template<typename Scalar, typename RNGPolicy = RRNGPolicy>
+template<typename Scalar, typename RNGPolicy>
 class UnivariateWalker : public Walker {
 public:
   virtual Scalar operator()();
 }; // UnivariateWalker
 
-template<typename Scalar, typename RNGPolicy = RRNGPolicy>
-class UnivariateProcessWalker : public Walker {
-public:
-  struct ReturnValue {
-    Scalar index;
-    Scalar value;
-  };
-  virtual inline ReturnValue operator()();
-}; // UnivariateProcessWalker
-
-template<typename RNGPolicy = RRNGPolicy>
+template<typename RNGPolicy>
 class CountNoReplaceWalker : public UnivariateWalker<std::size_t, RNGPolicy> {
 public:
   CountNoReplaceWalker() = delete;
   CountNoReplaceWalker(const CountNoReplaceWalker& other) = default;
   CountNoReplaceWalker(CountNoReplaceWalker&& other) = default;
-  template<typename T>
-  CountNoReplaceWalker(const T& probabilities);
+  template<typename Vector>
+  CountNoReplaceWalker(const Vector& probabilities);
 
   virtual ~CountNoReplaceWalker() {}
 
@@ -55,7 +45,7 @@ private:
   RNGPolicy rng_;
 }; // CountNoReplaceWalker
 
-template<typename RNGPolicy = RRNGPolicy>
+template<typename RNGPolicy>
 class UnifCountNoReplaceWalker : public UnivariateWalker<std::size_t, RNGPolicy>  {
 public:
   UnifCountNoReplaceWalker() = delete;

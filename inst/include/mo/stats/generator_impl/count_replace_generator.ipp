@@ -2,6 +2,9 @@
 #define MO_STATS_GENERATOR_IMPL_COUNTREPLACEGENERATOR_IPP
 
 #include <cstddef> // for std::size_t
+#include <vector>
+#include <numeric>
+
 #include <mo/stats/generator.hpp>
 #include <mo/utils/sort.hpp>
 
@@ -9,12 +12,11 @@ namespace mo {
 namespace stats {
 
 template<typename RNGPolicy>
-template<typename T>
-CountReplaceGenerator<RNGPolicy>::CountReplaceGenerator(const T& probabilities) :
+template<typename Vector>
+CountReplaceGenerator<RNGPolicy>::CountReplaceGenerator(const Vector& probabilities) :
     cumulative_probabilities_(probabilities.begin(), probabilities.end()),
     original_order_(probabilities.size()),
     rng_() {
-  // TODO: check that probabilities in not degenerated
   std::iota(original_order_.begin(), original_order_.end(), 0);
   auto n = cumulative_probabilities_.size();
 

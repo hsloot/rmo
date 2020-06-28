@@ -1,17 +1,15 @@
 #ifndef MO_UTILS_IMPLEMENTATION_REVSORT_IPP
 #define MO_UTILS_IMPLEMENTATION_REVSORT_IPP
 
-#include <exception>
 #include <vector>
-#include <R_ext/Utils.h>
 
 namespace mo {
 
 namespace utils {
 
 // adapted from https://github.com/wch/r-source/blob/trunk/src/main/sort.c
-template<typename T, typename S>
-void reverse_sort(T& a, S& ib) {
+template<typename SortVector, typename IndexVector>
+void reverse_sort(SortVector& a, IndexVector& ib) {
   /*
   *  R : A Computer Language for Statistical Data Analysis
   *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka

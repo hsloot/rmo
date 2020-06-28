@@ -3,6 +3,8 @@
 
 #include <cstddef> // for std::size_t
 #include <vector>
+#include <numeric>
+
 #include <mo/stats/generator.hpp>
 #include <mo/stats/walker.hpp>
 #include <mo/utils/sort.hpp>
@@ -11,8 +13,8 @@ namespace mo {
 namespace stats {
 
 template<typename RNGPolicy>
-template<typename T>
-CountNoReplaceWalker<RNGPolicy>::CountNoReplaceWalker(const T& probabilities) :
+template<typename Vector>
+CountNoReplaceWalker<RNGPolicy>::CountNoReplaceWalker(const Vector& probabilities) :
     n_(probabilities.size()),
     probabilities_(probabilities.begin(), probabilities.end()),
     original_order_(probabilities.size()),
@@ -29,9 +31,6 @@ CountNoReplaceWalker<RNGPolicy>::CountNoReplaceWalker(const T& probabilities) :
 
 template<typename RNGPolicy>
 inline std::size_t CountNoReplaceWalker<RNGPolicy>::operator()() {
-  if (n_ == 0)
-    std::runtime_error("Walker finished");
-
   auto rT = rng_.unif_rand() * total_mass_ ;
   auto mass = 0.;
   auto j = 0;

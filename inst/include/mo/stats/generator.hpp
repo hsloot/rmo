@@ -2,7 +2,9 @@
 #define MO_STATS_GENERATOR_HPP
 
 #include <cstddef> // for std::size_t
+#include <memory>
 #include <vector>
+
 #include <mo/stats/rngpolicy.hpp>
 
 namespace mo {
@@ -14,13 +16,13 @@ public:
 }; // Generator
 
 
-template<typename Scalar, typename RNGPolicy = RRNGPolicy>
+template<typename Scalar, typename RNGPolicy>
 class UnivariateGenerator : public Generator {
 public:
   virtual inline Scalar operator()() = 0;
 }; // UnivariateGenerator
 
-template<typename Vector, typename RNGPolicy = RRNGPolicy>
+template<typename Vector, typename RNGPolicy>
 class MultivariateGenerator : public Generator {
 public:
   virtual inline Vector operator()() = 0;
@@ -28,7 +30,7 @@ public:
 }; // MultivariateGenerator
 
 
-template<typename Scalar, typename RNGPolicy = RRNGPolicy>
+template<typename Scalar, typename RNGPolicy>
 class RealUnivariateGenerator : public UnivariateGenerator<Scalar, RNGPolicy> {
 public:
   virtual inline std::unique_ptr<RealUnivariateGenerator> clone() const = 0;
@@ -37,7 +39,7 @@ public:
 };
 
 
-template<typename RNGPolicy = RRNGPolicy>
+template<typename RNGPolicy>
 class FixedDblGenerator : public RealUnivariateGenerator<double, RNGPolicy> {
 public:
   FixedDblGenerator() = default;
@@ -61,7 +63,7 @@ private:
   double value_ = 1.;
 }; // FixedDblGenerator
 
-template<typename RNGPolicy = RRNGPolicy>
+template<typename RNGPolicy>
 class ExpGenerator : public RealUnivariateGenerator<double, RNGPolicy> {
 public:
   ExpGenerator() = default;
@@ -87,14 +89,14 @@ private:
   RNGPolicy rng_;
 }; // ExpGenerator
 
-template<typename RNGPolicy = RRNGPolicy>
+template<typename RNGPolicy>
 class CountReplaceGenerator : public UnivariateGenerator<std::size_t, RNGPolicy> {
 public:
   CountReplaceGenerator() = delete;
   CountReplaceGenerator(const CountReplaceGenerator& other) = default;
   CountReplaceGenerator(CountReplaceGenerator&& other) = default;
-  template<typename T>
-  CountReplaceGenerator(const T& probabilities);
+  template<typename Vector>
+  CountReplaceGenerator(const Vector& probabilities);
 
   virtual ~CountReplaceGenerator() {}
 
@@ -110,7 +112,7 @@ private:
   RNGPolicy rng_;
 }; // CountReplaceGenerator
 
-template<typename RNGPolicy = RRNGPolicy>
+template<typename RNGPolicy>
 class UnifCountReplaceGenerator : public UnivariateGenerator<std::size_t, RNGPolicy> {
 public:
   UnifCountReplaceGenerator() = delete;
@@ -132,7 +134,7 @@ private:
 }; // UniformCountReplaceGenerator
 
 
-template<typename Vector, typename RNGPolicy = RRNGPolicy>
+template<typename Vector, typename RNGPolicy>
 class PermutationGenerator : public MultivariateGenerator<Vector, RNGPolicy> {
 public:
   PermutationGenerator() = delete;

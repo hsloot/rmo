@@ -3,12 +3,12 @@ An introduction to `rmo`
 
 ## Summary
 
-In this notebook, we will benchmark the runtime of the various sampling
+In this notebook, we will benchmark the run-time of the various sampling
 algorithms which are implemented in this package.
 
 ## Setup
 
-Appart from this package, we require the following packages:
+Apart from this package, we require the following packages:
 
   - `bench` (for benchmarks),
   - `magrittr`, `dplyr`, `tidyr` (data manipulation), and

@@ -1,13 +1,11 @@
 #ifndef MO_UTILS_SORT_HPP
 #define MO_UTILS_SORT_HPP
 
-#include <vector>
-
 namespace mo {
 namespace utils {
 
-template<typename T, typename S>
-void reverse_sort(T& a, S& ib);
+template<typename SortVector, typename IndexVector>
+void reverse_sort(SortVector& a, IndexVector& ib);
 
 } // utils
 } // mo

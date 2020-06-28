@@ -2,13 +2,11 @@
 #define MO_MATH_MISC_HPP
 
 #include <limits>
-#include <Rcpp.h>
 
 namespace mo {
 namespace math {
 
-template<typename T>
-inline T min(const T a, const T b) {
+inline double min(const double a, const double b) {
   if (
       std::numeric_limits<double>::infinity() == a &&
       std::numeric_limits<double>::infinity() == b) {
