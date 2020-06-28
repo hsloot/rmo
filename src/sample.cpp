@@ -1,5 +1,3 @@
-#include <memory>
-
 #include <Rcpp.h>
 
 #include <rmo.hpp>
@@ -7,12 +5,7 @@
 static const R_xlen_t C_CHECK_USR_INTERRUP = 100000;
 
 using namespace Rcpp;
-using mo::stats::RRNGPolicy;
-using RealUnivariateGenerator = mo::stats::RealUnivariateGenerator<double, RRNGPolicy>;
-using ExpGenerator = mo::stats::ExpGenerator<RRNGPolicy>;
-using FixedDblGenerator = mo::stats::FixedDblGenerator<RRNGPolicy>;
-using CountReplaceGenerator = mo::stats::CountReplaceGenerator<RRNGPolicy>;
-using PermutationGenerator = mo::stats::PermutationGenerator<std::vector<R_xlen_t>, RRNGPolicy>;
+using namespace mo::stats;
 
 
 //' @keywords internal
@@ -25,7 +18,7 @@ NumericMatrix Rcpp__rmo_esm(
   if ((1<<d)-1 != num_shocks)
     std::range_error("intensities.size() != 2^d-1"); // # nocov
 
-  std::unique_ptr<ExpGenerator> exp_generator{new ExpGenerator()};
+  std::unique_ptr<ExpGenerator<RRNGPolicy>> exp_generator{new ExpGenerator<RRNGPolicy>()};
 
   NumericMatrix out(no_init(n, d));
   std::fill(out.begin(), out.end(), R_PosInf);
@@ -58,8 +51,8 @@ NumericMatrix Rcpp__rmo_arnold(
     const R_xlen_t n, const int d,
     const NumericVector& intensities) {
   auto total_intensity = sum(intensities);
-  std::unique_ptr<ExpGenerator> exp_generator{new ExpGenerator(total_intensity)};
-  std::unique_ptr<CountReplaceGenerator> count_generator{new CountReplaceGenerator(intensities)};
+  std::unique_ptr<ExpGenerator<RRNGPolicy>> exp_generator{new ExpGenerator<RRNGPolicy>(total_intensity)};
+  std::unique_ptr<CountReplaceGenerator<RRNGPolicy>> count_generator{new CountReplaceGenerator<RRNGPolicy>(intensities)};
 
   NumericMatrix out(n, d);
   for (R_xlen_t k=0; k<n; k++) {
@@ -94,9 +87,9 @@ NumericMatrix Rcpp__rmo_arnold(
 NumericMatrix Rcpp__rmo_ex_arnold(
     const R_xlen_t n, const int d,
     const NumericVector& ex_intensities) {
-  std::vector<std::unique_ptr<ExpGenerator>> exp_generators(d);
-  std::vector<std::unique_ptr<CountReplaceGenerator>> count_generators(d);
-  std::unique_ptr<PermutationGenerator> permutation_generator{new PermutationGenerator(d)};
+  std::vector<std::unique_ptr<ExpGenerator<RRNGPolicy>>> exp_generators(d);
+  std::vector<std::unique_ptr<CountReplaceGenerator<RRNGPolicy>>> count_generators(d);
+  std::unique_ptr<PermutationGenerator<std::vector<R_xlen_t>, RRNGPolicy>> permutation_generator{new PermutationGenerator<std::vector<R_xlen_t>, RRNGPolicy>(d)};
   for (int i=0; i<d; i++) {
     std::vector<double> intensities(d-i);
     for (int j=0; j<d-i; j++) {
@@ -108,8 +101,8 @@ NumericMatrix Rcpp__rmo_ex_arnold(
     auto total_intensity = 0.;
     for (const auto& intensity : intensities)
       total_intensity += intensity;
-    exp_generators[i].reset(new ExpGenerator(total_intensity));
-    count_generators[i].reset(new CountReplaceGenerator(intensities));
+    exp_generators[i].reset(new ExpGenerator<RRNGPolicy>(total_intensity));
+    count_generators[i].reset(new CountReplaceGenerator<RRNGPolicy>(intensities));
   }
 
   NumericMatrix out(n, d);
@@ -152,7 +145,7 @@ NumericMatrix Rcpp__rmo_esm_cuadras_auge(
   if (alpha < 0. || beta < 0.)
     std::range_error("alpha or beta < 0"); // # nocov
 
-  std::unique_ptr<ExpGenerator> exp_generator{new ExpGenerator()};
+  std::unique_ptr<ExpGenerator<RRNGPolicy>> exp_generator{new ExpGenerator<RRNGPolicy>()};
 
   NumericMatrix out(no_init(n, d));
   for (R_xlen_t k=0; k<n; k++) {
@@ -171,7 +164,7 @@ NumericMatrix Rcpp__rmo_esm_cuadras_auge(
   return out;
 }
 
-std::unique_ptr<RealUnivariateGenerator> get_univariate_generator(
+std::unique_ptr<RealUnivariateGenerator<double, RRNGPolicy>> get_univariate_generator(
     const std::string name, const List& args);
 
 std::vector<std::pair<double, double>> sample_cpp(
@@ -187,7 +180,7 @@ NumericMatrix Rcpp__rmo_lfm_cpp(
     const R_xlen_t n, const R_xlen_t d,
     const double rate, const double rate_killing, const double rate_drift,
     const std::string rjump_name, const List& rjump_arg_list) {
-  std::unique_ptr<ExpGenerator> bv_generator{new ExpGenerator(1.)};
+  std::unique_ptr<ExpGenerator<RRNGPolicy>> bv_generator{new ExpGenerator<RRNGPolicy>(1.)};
   std::vector<double> unit_exponentials(d);
   std::vector<std::pair<double, double>> cpp_subordinator;
   int count;
@@ -220,9 +213,9 @@ std::vector<std::pair<double, double>> sample_cpp(
   } else {
     barrier_values_ = std::vector<double>(1, *std::max_element(barrier_values.begin(), barrier_values.end()));
   }
-  std::unique_ptr<ExpGenerator> wt_generator{new ExpGenerator(rate)};
-  std::unique_ptr<ExpGenerator> kt_generator{new ExpGenerator(rate_killing)};
-  std::unique_ptr<RealUnivariateGenerator> jump_generator = get_univariate_generator(rjump_name, rjump_arg_list);
+  std::unique_ptr<ExpGenerator<RRNGPolicy>> wt_generator{new ExpGenerator<RRNGPolicy>(rate)};
+  std::unique_ptr<ExpGenerator<RRNGPolicy>> kt_generator{new ExpGenerator<RRNGPolicy>(rate_killing)};
+  std::unique_ptr<RealUnivariateGenerator<double, RRNGPolicy>> jump_generator = get_univariate_generator(rjump_name, rjump_arg_list);
   R_xlen_t d = barrier_values_.size();
 
   double killing_time = (*kt_generator)();
@@ -307,15 +300,15 @@ NumericMatrix sample_cpp(
   return out;
 }
 
-std::unique_ptr<RealUnivariateGenerator> get_univariate_generator(
+std::unique_ptr<RealUnivariateGenerator<double, RRNGPolicy>> get_univariate_generator(
     const std::string name, const List& args) {
-  std::unique_ptr<RealUnivariateGenerator> out;
+  std::unique_ptr<RealUnivariateGenerator<double, RRNGPolicy>> out;
   if ("rexp" == name) {
     double rate = args["rate"];
-    out.reset(new ExpGenerator(rate));
+    out.reset(new ExpGenerator<RRNGPolicy>(rate));
   } else if ("rposval" == name) {
     double value = args["value"];
-    out.reset(new FixedDblGenerator(value));
+    out.reset(new FixedDblGenerator<RRNGPolicy>(value));
   } else {
     std::logic_error("wrong input"); // # nocov
   }

@@ -4,7 +4,6 @@
 #include <vector>
 
 namespace mo {
-
 namespace utils {
 
 // adapted from https://github.com/wch/r-source/blob/trunk/src/main/sort.c
@@ -77,7 +76,6 @@ void reverse_sort(SortVector& a, IndexVector& ib) {
 }
 
 } // utils
-
 } // mo
 
 #endif // MO_UTILS_IMPLEMENTATION_REVSORT_IPP

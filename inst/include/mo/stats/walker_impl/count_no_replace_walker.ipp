@@ -16,6 +16,7 @@ template<typename RNGPolicy>
 template<typename Vector>
 CountNoReplaceWalker<RNGPolicy>::CountNoReplaceWalker(const Vector& probabilities) :
     n_(probabilities.size()),
+    total_mass_(0.),
     probabilities_(probabilities.begin(), probabilities.end()),
     original_order_(probabilities.size()),
     rng_() {

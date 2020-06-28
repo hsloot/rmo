@@ -13,7 +13,8 @@ namespace stats {
 template<typename RNGPolicy>
 UnifCountNoReplaceWalker<RNGPolicy>::UnifCountNoReplaceWalker(const std::size_t n) :
     n_(n),
-    values_(n) {
+    values_(n),
+    rng_() {
   std::iota(values_.begin(), values_.end(), 0);
 }
 

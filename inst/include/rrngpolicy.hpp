@@ -4,10 +4,9 @@
 #include <Rversion.h>
 #include <Rmath.h>
 
-#include <mo/stats/generator.hpp>
+#include <mo/stats/rngpolicy.hpp>
 
 namespace mo {
-
 namespace stats {
 
 class RRNGPolicy : public RNGPolicy {
@@ -55,7 +54,6 @@ double RRNGPolicy::norm_rand() { // # nocov start
 } // # nocov end
 
 } // stats
-
 } // mo
 
 #endif // RMO_RRNGGENERATOR_HPP

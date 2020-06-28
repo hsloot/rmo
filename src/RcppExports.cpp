@@ -5,6 +5,81 @@
 
 using namespace Rcpp;
 
+// Rcpp__is_within
+bool Rcpp__is_within(const R_xlen_t i, const R_xlen_t j);
+RcppExport SEXP _rmo_Rcpp__is_within(SEXP iSEXP, SEXP jSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const R_xlen_t >::type i(iSEXP);
+    Rcpp::traits::input_parameter< const R_xlen_t >::type j(jSEXP);
+    rcpp_result_gen = Rcpp::wrap(Rcpp__is_within(i, j));
+    return rcpp_result_gen;
+END_RCPP
+}
+// Rcppmo_th_rexp
+NumericVector Rcppmo_th_rexp(const R_xlen_t n, const double rate);
+RcppExport SEXP _rmo_Rcppmo_th_rexp(SEXP nSEXP, SEXP rateSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const R_xlen_t >::type n(nSEXP);
+    Rcpp::traits::input_parameter< const double >::type rate(rateSEXP);
+    rcpp_result_gen = Rcpp::wrap(Rcppmo_th_rexp(n, rate));
+    return rcpp_result_gen;
+END_RCPP
+}
+// Rcppmo_th_fixeddbl
+NumericVector Rcppmo_th_fixeddbl(const R_xlen_t n, const double value);
+RcppExport SEXP _rmo_Rcppmo_th_fixeddbl(SEXP nSEXP, SEXP valueSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const R_xlen_t >::type n(nSEXP);
+    Rcpp::traits::input_parameter< const double >::type value(valueSEXP);
+    rcpp_result_gen = Rcpp::wrap(Rcppmo_th_fixeddbl(n, value));
+    return rcpp_result_gen;
+END_RCPP
+}
+// Rcppmo_th_int
+IntegerVector Rcppmo_th_int(const R_xlen_t n, const NumericVector& probabilities);
+RcppExport SEXP _rmo_Rcppmo_th_int(SEXP nSEXP, SEXP probabilitiesSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const R_xlen_t >::type n(nSEXP);
+    Rcpp::traits::input_parameter< const NumericVector& >::type probabilities(probabilitiesSEXP);
+    rcpp_result_gen = Rcpp::wrap(Rcppmo_th_int(n, probabilities));
+    return rcpp_result_gen;
+END_RCPP
+}
+// Rcppmo_th_perm
+IntegerVector Rcppmo_th_perm(const R_xlen_t n, const NumericVector& probabilities);
+RcppExport SEXP _rmo_Rcppmo_th_perm(SEXP nSEXP, SEXP probabilitiesSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const R_xlen_t >::type n(nSEXP);
+    Rcpp::traits::input_parameter< const NumericVector& >::type probabilities(probabilitiesSEXP);
+    rcpp_result_gen = Rcpp::wrap(Rcppmo_th_perm(n, probabilities));
+    return rcpp_result_gen;
+END_RCPP
+}
+// Rcppmo_th_sample_int
+IntegerVector Rcppmo_th_sample_int(const R_xlen_t n, const R_xlen_t size, const bool replace, const Nullable<NumericVector>& prob, const bool useHash);
+RcppExport SEXP _rmo_Rcppmo_th_sample_int(SEXP nSEXP, SEXP sizeSEXP, SEXP replaceSEXP, SEXP probSEXP, SEXP useHashSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const R_xlen_t >::type n(nSEXP);
+    Rcpp::traits::input_parameter< const R_xlen_t >::type size(sizeSEXP);
+    Rcpp::traits::input_parameter< const bool >::type replace(replaceSEXP);
+    Rcpp::traits::input_parameter< const Nullable<NumericVector>& >::type prob(probSEXP);
+    Rcpp::traits::input_parameter< const bool >::type useHash(useHashSEXP);
+    rcpp_result_gen = Rcpp::wrap(Rcppmo_th_sample_int(n, size, replace, prob, useHash));
+    return rcpp_result_gen;
+END_RCPP
+}
 // Rcpp__rmo_esm
 NumericMatrix Rcpp__rmo_esm(const R_xlen_t n, const R_xlen_t d, const NumericVector& intensities);
 RcppExport SEXP _rmo_Rcpp__rmo_esm(SEXP nSEXP, SEXP dSEXP, SEXP intensitiesSEXP) {
@@ -91,27 +166,20 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// Rcpp__is_within
-bool Rcpp__is_within(const R_xlen_t i, const R_xlen_t j);
-RcppExport SEXP _rmo_Rcpp__is_within(SEXP iSEXP, SEXP jSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const R_xlen_t >::type i(iSEXP);
-    Rcpp::traits::input_parameter< const R_xlen_t >::type j(jSEXP);
-    rcpp_result_gen = Rcpp::wrap(Rcpp__is_within(i, j));
-    return rcpp_result_gen;
-END_RCPP
-}
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_rmo_Rcpp__is_within", (DL_FUNC) &_rmo_Rcpp__is_within, 2},
+    {"_rmo_Rcppmo_th_rexp", (DL_FUNC) &_rmo_Rcppmo_th_rexp, 2},
+    {"_rmo_Rcppmo_th_fixeddbl", (DL_FUNC) &_rmo_Rcppmo_th_fixeddbl, 2},
+    {"_rmo_Rcppmo_th_int", (DL_FUNC) &_rmo_Rcppmo_th_int, 2},
+    {"_rmo_Rcppmo_th_perm", (DL_FUNC) &_rmo_Rcppmo_th_perm, 2},
+    {"_rmo_Rcppmo_th_sample_int", (DL_FUNC) &_rmo_Rcppmo_th_sample_int, 5},
     {"_rmo_Rcpp__rmo_esm", (DL_FUNC) &_rmo_Rcpp__rmo_esm, 3},
     {"_rmo_Rcpp__rmo_arnold", (DL_FUNC) &_rmo_Rcpp__rmo_arnold, 3},
     {"_rmo_Rcpp__rmo_ex_arnold", (DL_FUNC) &_rmo_Rcpp__rmo_ex_arnold, 3},
     {"_rmo_Rcpp__rmo_esm_cuadras_auge", (DL_FUNC) &_rmo_Rcpp__rmo_esm_cuadras_auge, 4},
     {"_rmo_Rcpp__rmo_lfm_cpp", (DL_FUNC) &_rmo_Rcpp__rmo_lfm_cpp, 7},
     {"_rmo_sample_cpp", (DL_FUNC) &_rmo_sample_cpp, 6},
-    {"_rmo_Rcpp__is_within", (DL_FUNC) &_rmo_Rcpp__is_within, 2},
     {NULL, NULL, 0}
 };
 

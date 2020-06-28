@@ -17,12 +17,12 @@ PermutationGenerator<Vector, RNGPolicy>::PermutationGenerator(const std::size_t 
 
 template<typename Vector, typename RNGPolicy>
 inline void PermutationGenerator<Vector, RNGPolicy>::operator()(Vector& out) {
-  std::vector<std::size_t> values(this->n_);
+  std::vector<std::size_t> values(n_);
   std::iota(values.begin(), values.end(), 0);
 
-  for (auto n=this->n_; n>0; n--) {
+  for (auto n=n_; n>0; n--) {
     std::size_t index = rng_.R_unif_index(n);
-    out[this->n_-n] = values[index];
+    out[n_-n] = values[index];
     values[index] = values.back();
     values.pop_back();
   }
@@ -30,7 +30,7 @@ inline void PermutationGenerator<Vector, RNGPolicy>::operator()(Vector& out) {
 
 template<typename Vector, typename RNGPolicy>
 inline Vector PermutationGenerator<Vector, RNGPolicy>::operator()() {
-  Vector out(this->n_);
+  Vector out(n_);
   (*this)(out);
   return out;
 }

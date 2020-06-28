@@ -17,7 +17,7 @@ public:
 template<typename Scalar, typename RNGPolicy>
 class UnivariateWalker : public Walker {
 public:
-  virtual Scalar operator()();
+  virtual inline Scalar operator()() = 0;
 }; // UnivariateWalker
 
 template<typename RNGPolicy>
@@ -38,7 +38,7 @@ public:
 
 private:
   std::size_t n_;
-  double total_mass_ = 0.;
+  double total_mass_;
   std::vector<double> probabilities_;
   std::vector<std::size_t> original_order_;
 

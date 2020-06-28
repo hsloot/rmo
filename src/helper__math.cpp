@@ -4,7 +4,7 @@
 
 using namespace Rcpp;
 
-//' @keywords internal
+//' @keywords internal helper
 //' @noRd
 // [[Rcpp::export]]
 bool Rcpp__is_within(const R_xlen_t i, const R_xlen_t j) {

@@ -11,7 +11,8 @@ namespace stats {
 
 template<typename RNGPolicy>
 ExpGenerator<RNGPolicy>::ExpGenerator(const double rate) :
-    rate_(rate) {}
+    rate_(rate),
+    rng_() {}
 
 template<typename RNGPolicy>
 inline double ExpGenerator<RNGPolicy>::operator()() {
