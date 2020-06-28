@@ -135,17 +135,17 @@ private:
 
 
 template<typename Vector, typename RNGPolicy>
-class PermutationGenerator : public MultivariateGenerator<Vector, RNGPolicy> {
+class UnifPermutationGenerator : public MultivariateGenerator<Vector, RNGPolicy> {
 public:
-  PermutationGenerator() = delete;
-  PermutationGenerator(const PermutationGenerator& other) = default;
-  PermutationGenerator(PermutationGenerator&& other) = default;
-  PermutationGenerator(const std::size_t n);
+  UnifPermutationGenerator() = delete;
+  UnifPermutationGenerator(const UnifPermutationGenerator& other) = default;
+  UnifPermutationGenerator(UnifPermutationGenerator&& other) = default;
+  UnifPermutationGenerator(const std::size_t n);
 
-  virtual ~PermutationGenerator() {}
+  virtual ~UnifPermutationGenerator() {}
 
-  PermutationGenerator& operator=(const PermutationGenerator& other) = default;
-  PermutationGenerator& operator=(PermutationGenerator&& other) = default;
+  UnifPermutationGenerator& operator=(const UnifPermutationGenerator& other) = default;
+  UnifPermutationGenerator& operator=(UnifPermutationGenerator&& other) = default;
 
   virtual inline Vector operator()() override final;
   virtual inline void operator()(Vector& out) override final;
@@ -163,6 +163,6 @@ private:
 #include <mo/stats/generator_impl/count_replace_generator.ipp>
 #include <mo/stats/generator_impl/unif_count_replace_generator.ipp>
 #include <mo/stats/generator_impl/fixed_dbl_generator.ipp>
-#include <mo/stats/generator_impl/permutation_generator.ipp>
+#include <mo/stats/generator_impl/unif_permutation_generator.ipp>
 
 #endif // MO_STATS_GENERATOR_HPP

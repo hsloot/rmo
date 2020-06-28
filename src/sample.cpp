@@ -89,7 +89,7 @@ NumericMatrix Rcpp__rmo_ex_arnold(
     const NumericVector& ex_intensities) {
   std::vector<std::unique_ptr<ExpGenerator<RRNGPolicy>>> exp_generators(d);
   std::vector<std::unique_ptr<CountReplaceGenerator<RRNGPolicy>>> count_generators(d);
-  std::unique_ptr<PermutationGenerator<std::vector<R_xlen_t>, RRNGPolicy>> permutation_generator{new PermutationGenerator<std::vector<R_xlen_t>, RRNGPolicy>(d)};
+  std::unique_ptr<UnifPermutationGenerator<std::vector<R_xlen_t>, RRNGPolicy>> permutation_generator{new UnifPermutationGenerator<std::vector<R_xlen_t>, RRNGPolicy>(d)};
   for (int i=0; i<d; i++) {
     std::vector<double> intensities(d-i);
     for (int j=0; j<d-i; j++) {
