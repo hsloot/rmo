@@ -151,29 +151,29 @@ parameters for the MO distribution and <code>ex_intensities</code> parameters fo
 exMO distribution.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ex_intensities_constant</span>(<span class='no'>d</span>, <span class='no'>constant</span>)
+    <pre class="usage"><span class='fu'>ex_intensities_constant</span>(<span class='kw'>d</span>, <span class='kw'>constant</span>)
 
-<span class='fu'>intensities_constant</span>(<span class='no'>d</span>, <span class='no'>constant</span>)
+<span class='fu'>intensities_constant</span>(<span class='kw'>d</span>, <span class='kw'>constant</span>)
 
-<span class='fu'>ex_intensities_linear</span>(<span class='no'>d</span>, <span class='no'>scale</span>)
+<span class='fu'>ex_intensities_linear</span>(<span class='kw'>d</span>, <span class='kw'>scale</span>)
 
-<span class='fu'>intensities_linear</span>(<span class='no'>d</span>, <span class='no'>scale</span>)
+<span class='fu'>intensities_linear</span>(<span class='kw'>d</span>, <span class='kw'>scale</span>)
 
-<span class='fu'>ex_intensities_cuadras_auge</span>(<span class='no'>d</span>, <span class='no'>alpha</span>, <span class='no'>beta</span>)
+<span class='fu'>ex_intensities_cuadras_auge</span>(<span class='kw'>d</span>, <span class='kw'>alpha</span>, <span class='kw'>beta</span>)
 
-<span class='fu'>intensities_cuadras_auge</span>(<span class='no'>d</span>, <span class='no'>alpha</span>, <span class='no'>beta</span>)
+<span class='fu'>intensities_cuadras_auge</span>(<span class='kw'>d</span>, <span class='kw'>alpha</span>, <span class='kw'>beta</span>)
 
-<span class='fu'>ex_intensities_poisson</span>(<span class='no'>d</span>, <span class='no'>lambda</span>, <span class='no'>eta</span>)
+<span class='fu'>ex_intensities_poisson</span>(<span class='kw'>d</span>, <span class='kw'>lambda</span>, <span class='kw'>eta</span>)
 
-<span class='fu'>intensities_poisson</span>(<span class='no'>d</span>, <span class='no'>lambda</span>, <span class='no'>eta</span>)
+<span class='fu'>intensities_poisson</span>(<span class='kw'>d</span>, <span class='kw'>lambda</span>, <span class='kw'>eta</span>)
 
-<span class='fu'>ex_intensities_alpha_stable</span>(<span class='no'>d</span>, <span class='no'>alpha</span>)
+<span class='fu'>ex_intensities_alpha_stable</span>(<span class='kw'>d</span>, <span class='kw'>alpha</span>)
 
-<span class='fu'>intensities_alpha_stable</span>(<span class='no'>d</span>, <span class='no'>alpha</span>)
+<span class='fu'>intensities_alpha_stable</span>(<span class='kw'>d</span>, <span class='kw'>alpha</span>)
 
-<span class='fu'>ex_intensities_gamma</span>(<span class='no'>d</span>, <span class='no'>a</span>)
+<span class='fu'>ex_intensities_gamma</span>(<span class='kw'>d</span>, <span class='kw'>a</span>)
 
-<span class='fu'>intensities_gamma</span>(<span class='no'>d</span>, <span class='no'>a</span>)</pre>
+<span class='fu'>intensities_gamma</span>(<span class='kw'>d</span>, <span class='kw'>a</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -185,37 +185,37 @@ exMO distribution.</p>
     <tr>
       <th>constant</th>
       <td><p>Rate for global shock, passed to <code>constant</code> parameter for
-<a href='ConstantBernsteinFunction-class.html'>ConstantBernsteinFunction</a></p></td>
+ConstantBernsteinFunction</p></td>
     </tr>
     <tr>
       <th>scale</th>
       <td><p>Rates for individual shocks, passed to <code>scale</code> parameter for
-<a href='LinearBernsteinFunction-class.html'>LinearBernsteinFunction</a></p></td>
+LinearBernsteinFunction</p></td>
     </tr>
     <tr>
       <th>alpha</th>
       <td><p>Alpha parameter for alpha-stable subordinator, passed to <code>alpha</code>
-parameter of <a href='AlphaStableBernsteinFunction-class.html'>AlphaStableBernsteinFunction</a></p></td>
+parameter of AlphaStableBernsteinFunction</p></td>
     </tr>
     <tr>
       <th>beta</th>
       <td><p>Rate for global shock, passed to <code>constant</code> parameter for
-<a href='ConstantBernsteinFunction-class.html'>ConstantBernsteinFunction</a></p></td>
+ConstantBernsteinFunction</p></td>
     </tr>
     <tr>
       <th>lambda</th>
       <td><p>Rate for Poisson process, passed to <code>lambda</code> parameter
-<a href='PoissonBernsteinFunction-class.html'>PoissonBernsteinFunction</a></p></td>
+PoissonBernsteinFunction</p></td>
     </tr>
     <tr>
       <th>eta</th>
       <td><p>Jump size for Poisson process, passed to <code>eta</code> parameter of
-<a href='PoissonBernsteinFunction-class.html'>PoissonBernsteinFunction</a></p></td>
+PoissonBernsteinFunction</p></td>
     </tr>
     <tr>
       <th>a</th>
       <td><p>Shape parameter for Gamma subordinator, passed to <code>a</code> parameter of
-<a href='GammaBernsteinFunction-class.html'>GammaBernsteinFunction</a></p></td>
+GammaBernsteinFunction</p></td>
     </tr>
     </table>
 
@@ -225,16 +225,16 @@ parameter of <a href='AlphaStableBernsteinFunction-class.html'>AlphaStableBernst
 for the respective Bernstein function.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='valueOf-methods.html'>valueOf()</a></code></p>
-<p><a href='ConstantBernsteinFunction-class.html'>ConstantBernsteinFunction</a></p>
-<p><a href='LinearBernsteinFunction-class.html'>LinearBernsteinFunction</a></p>
-<p><a href='PoissonBernsteinFunction-class.html'>PoissonBernsteinFunction</a></p>
-<p><a href='AlphaStableBernsteinFunction-class.html'>AlphaStableBernsteinFunction</a></p>
-<p><a href='GammaBernsteinFunction-class.html'>GammaBernsteinFunction</a></p></div>
+    <div class='dont-index'><p><code>valueOf()</code></p>
+<p>ConstantBernsteinFunction</p>
+<p>LinearBernsteinFunction</p>
+<p>PoissonBernsteinFunction</p>
+<p>AlphaStableBernsteinFunction</p>
+<p>GammaBernsteinFunction</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>ex_intensities_constant</span>(<span class='fl'>10L</span>, <span class='kw'>constant</span><span class='kw'>=</span><span class='fl'>1</span>)</div><div class='output co'>#&gt;  [1] 0 0 0 0 0 0 0 0 0 1</div><div class='input'>
-<span class='fu'>intensities_constant</span>(<span class='fl'>10L</span>, <span class='kw'>constant</span><span class='kw'>=</span><span class='fl'>1</span>)</div><div class='output co'>#&gt;    [1] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+    <pre class="examples"><div class='input'><span class='fu'>ex_intensities_constant</span>(<span class='fl'>10L</span>, constant=<span class='fl'>1</span>)</div><div class='output co'>#&gt;  [1] 0 0 0 0 0 0 0 0 0 1</div><div class='input'>
+<span class='fu'>intensities_constant</span>(<span class='fl'>10L</span>, constant=<span class='fl'>1</span>)</div><div class='output co'>#&gt;    [1] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 #&gt;   [38] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 #&gt;   [75] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 #&gt;  [112] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
@@ -262,8 +262,8 @@ for the respective Bernstein function.</p>
 #&gt;  [926] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 #&gt;  [963] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 #&gt; [1000] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1</div><div class='input'>
-<span class='fu'>ex_intensities_linear</span>(<span class='fl'>10L</span>, <span class='kw'>scale</span><span class='kw'>=</span><span class='fl'>1</span>)</div><div class='output co'>#&gt;  [1] 1 0 0 0 0 0 0 0 0 0</div><div class='input'>
-<span class='fu'>intensities_linear</span>(<span class='fl'>10L</span>, <span class='kw'>scale</span><span class='kw'>=</span><span class='fl'>1</span>)</div><div class='output co'>#&gt;    [1] 1 1 0 1 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0
+<span class='fu'>ex_intensities_linear</span>(<span class='fl'>10L</span>, scale=<span class='fl'>1</span>)</div><div class='output co'>#&gt;  [1] 1 0 0 0 0 0 0 0 0 0</div><div class='input'>
+<span class='fu'>intensities_linear</span>(<span class='fl'>10L</span>, scale=<span class='fl'>1</span>)</div><div class='output co'>#&gt;    [1] 1 1 0 1 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0
 #&gt;   [38] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0
 #&gt;   [75] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 #&gt;  [112] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
@@ -291,8 +291,8 @@ for the respective Bernstein function.</p>
 #&gt;  [926] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 #&gt;  [963] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 #&gt; [1000] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0</div><div class='input'>
-<span class='fu'>ex_intensities_cuadras_auge</span>(<span class='fl'>10L</span>, <span class='kw'>alpha</span><span class='kw'>=</span><span class='fl'>1</span>, <span class='kw'>beta</span><span class='kw'>=</span><span class='fl'>0.5</span>)</div><div class='output co'>#&gt;  [1] 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.5</div><div class='input'>
-<span class='fu'>intensities_cuadras_auge</span>(<span class='fl'>10L</span>, <span class='kw'>alpha</span><span class='kw'>=</span><span class='fl'>1</span>, <span class='kw'>beta</span><span class='kw'>=</span><span class='fl'>0.5</span>)</div><div class='output co'>#&gt;    [1] 1.0 1.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0
+<span class='fu'>ex_intensities_cuadras_auge</span>(<span class='fl'>10L</span>, alpha=<span class='fl'>1</span>, beta=<span class='fl'>0.5</span>)</div><div class='output co'>#&gt;  [1] 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.5</div><div class='input'>
+<span class='fu'>intensities_cuadras_auge</span>(<span class='fl'>10L</span>, alpha=<span class='fl'>1</span>, beta=<span class='fl'>0.5</span>)</div><div class='output co'>#&gt;    [1] 1.0 1.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0
 #&gt;   [19] 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0
 #&gt;   [37] 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
 #&gt;   [55] 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
@@ -349,9 +349,9 @@ for the respective Bernstein function.</p>
 #&gt;  [973] 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
 #&gt;  [991] 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
 #&gt; [1009] 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.5</div><div class='input'>
-<span class='fu'>ex_intensities_poisson</span>(<span class='fl'>10L</span>, <span class='kw'>lambda</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>eta</span> <span class='kw'>=</span> <span class='fl'>0.2</span>)</div><div class='output co'>#&gt;  [1] 1.498180e-02 3.317012e-03 7.343957e-04 1.625972e-04 3.599948e-05
+<span class='fu'>ex_intensities_poisson</span>(<span class='fl'>10L</span>, lambda = <span class='fl'>0.5</span>, eta = <span class='fl'>0.2</span>)</div><div class='output co'>#&gt;  [1] 1.498180e-02 3.317012e-03 7.343957e-04 1.625972e-04 3.599948e-05
 #&gt;  [6] 7.970383e-06 1.764665e-06 3.907017e-07 8.650242e-08 1.915188e-08</div><div class='input'>
-<span class='fu'>intensities_poisson</span>(<span class='fl'>10L</span>, <span class='kw'>lambda</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>eta</span> <span class='kw'>=</span> <span class='fl'>0.2</span>)</div><div class='output co'>#&gt;    [1] 1.498180e-02 1.498180e-02 3.317012e-03 1.498180e-02 3.317012e-03
+<span class='fu'>intensities_poisson</span>(<span class='fl'>10L</span>, lambda = <span class='fl'>0.5</span>, eta = <span class='fl'>0.2</span>)</div><div class='output co'>#&gt;    [1] 1.498180e-02 1.498180e-02 3.317012e-03 1.498180e-02 3.317012e-03
 #&gt;    [6] 3.317012e-03 7.343957e-04 1.498180e-02 3.317012e-03 3.317012e-03
 #&gt;   [11] 7.343957e-04 3.317012e-03 7.343957e-04 7.343957e-04 1.625972e-04
 #&gt;   [16] 1.498180e-02 3.317012e-03 3.317012e-03 7.343957e-04 3.317012e-03
@@ -556,9 +556,9 @@ for the respective Bernstein function.</p>
 #&gt; [1011] 3.907017e-07 1.764665e-06 3.907017e-07 3.907017e-07 8.650242e-08
 #&gt; [1016] 1.764665e-06 3.907017e-07 3.907017e-07 8.650242e-08 3.907017e-07
 #&gt; [1021] 8.650242e-08 8.650242e-08 1.915188e-08</div><div class='input'>
-<span class='fu'>ex_intensities_alpha_stable</span>(<span class='fl'>10L</span>, <span class='kw'>alpha</span><span class='kw'>=</span><span class='fl'>0.4</span>)</div><div class='output co'>#&gt;  [1] 0.1036617452 0.0071662495 0.0014960791 0.0005852365 0.0003744767
+<span class='fu'>ex_intensities_alpha_stable</span>(<span class='fl'>10L</span>, alpha=<span class='fl'>0.4</span>)</div><div class='output co'>#&gt;  [1] 0.1036617452 0.0071662495 0.0014960791 0.0005852365 0.0003744767
 #&gt;  [6] 0.0003743594 0.0005871745 0.0015328705 0.0079714534 0.4582209864</div><div class='input'>
-<span class='fu'>intensities_alpha_stable</span>(<span class='fl'>10L</span>, <span class='kw'>alpha</span><span class='kw'>=</span><span class='fl'>0.4</span>)</div><div class='output co'>#&gt;    [1] 0.1036617452 0.1036617452 0.0071662495 0.1036617452 0.0071662495
+<span class='fu'>intensities_alpha_stable</span>(<span class='fl'>10L</span>, alpha=<span class='fl'>0.4</span>)</div><div class='output co'>#&gt;    [1] 0.1036617452 0.1036617452 0.0071662495 0.1036617452 0.0071662495
 #&gt;    [6] 0.0071662495 0.0014960791 0.1036617452 0.0071662495 0.0071662495
 #&gt;   [11] 0.0014960791 0.0071662495 0.0014960791 0.0014960791 0.0005852365
 #&gt;   [16] 0.1036617452 0.0071662495 0.0071662495 0.0014960791 0.0071662495
@@ -763,9 +763,9 @@ for the respective Bernstein function.</p>
 #&gt; [1011] 0.0015328705 0.0005871745 0.0015328705 0.0015328705 0.0079714534
 #&gt; [1016] 0.0005871745 0.0015328705 0.0015328705 0.0079714534 0.0015328705
 #&gt; [1021] 0.0079714534 0.0079714534 0.4582209864</div><div class='input'>
-<span class='fu'>ex_intensities_gamma</span>(<span class='fl'>10L</span>, <span class='kw'>a</span><span class='kw'>=</span><span class='fl'>0.3</span>)</div><div class='output co'>#&gt;  [1] 0.1021294951 0.0116293902 0.0029928910 0.0013283758 0.0009249064
+<span class='fu'>ex_intensities_gamma</span>(<span class='fl'>10L</span>, a=<span class='fl'>0.3</span>)</div><div class='output co'>#&gt;  [1] 0.1021294951 0.0116293902 0.0029928910 0.0013283758 0.0009249064
 #&gt;  [6] 0.0009781465 0.0015833472 0.0041379909 0.0202328832 0.3363658546</div><div class='input'>
-<span class='fu'>intensities_gamma</span>(<span class='fl'>10L</span>, <span class='kw'>a</span><span class='kw'>=</span><span class='fl'>0.3</span>)</div><div class='output co'>#&gt;    [1] 0.1021294951 0.1021294951 0.0116293902 0.1021294951 0.0116293902
+<span class='fu'>intensities_gamma</span>(<span class='fl'>10L</span>, a=<span class='fl'>0.3</span>)</div><div class='output co'>#&gt;    [1] 0.1021294951 0.1021294951 0.0116293902 0.1021294951 0.0116293902
 #&gt;    [6] 0.0116293902 0.0029928910 0.1021294951 0.0116293902 0.0116293902
 #&gt;   [11] 0.0029928910 0.0116293902 0.0029928910 0.0029928910 0.0013283758
 #&gt;   [16] 0.1021294951 0.0116293902 0.0116293902 0.0029928910 0.0116293902
@@ -969,8 +969,7 @@ for the respective Bernstein function.</p>
 #&gt; [1006] 0.0041379909 0.0202328832 0.0009781465 0.0015833472 0.0015833472
 #&gt; [1011] 0.0041379909 0.0015833472 0.0041379909 0.0041379909 0.0202328832
 #&gt; [1016] 0.0015833472 0.0041379909 0.0041379909 0.0202328832 0.0041379909
-#&gt; [1021] 0.0202328832 0.0202328832 0.3363658546</div><div class='input'>
-</div></pre>
+#&gt; [1021] 0.0202328832 0.0202328832 0.3363658546</div><div class='input'></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

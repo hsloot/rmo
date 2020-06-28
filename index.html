@@ -112,14 +112,17 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>You can install the development version from <a href="https://github.com/">GitHub</a> with:</p>
-<div class="sourceCode" id="cb1"><pre class="r"><span class="co"># install.packages("devtools")</span>
-<span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu">install_github</span>(<span class="st">"hsloot/rmo"</span>)</pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="co"># install.packages("devtools")</span>
+<span class="kw">devtools</span>::<span class="fu">install_github</span>(<span class="st">"hsloot/rmo"</span>)
+</pre></div>
 </div>
 <div id="example" class="section level2">
 <h2 class="hasAnchor">
 <a href="#example" class="anchor"></a>Example</h2>
-<div class="sourceCode" id="cb2"><pre class="r"><span class="co"># library(rmo)</span>
-<span class="fu"><a href="reference/rmo_esm.html">rmo_esm</a></span>(<span class="kw">n</span><span class="kw">=</span><span class="fl">10L</span>, <span class="kw">d</span><span class="kw">=</span><span class="fl">2L</span>, <span class="kw">intensities</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span>))
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="co"># library(rmo)</span>
+<span class="fu"><a href="reference/rmo_esm.html">rmo_esm</a></span>(n=<span class="fl">10L</span>, d=<span class="fl">2L</span>, intensities=<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span>))
 <span class="co">#&gt;              [,1]        [,2]</span>
 <span class="co">#&gt;  [1,] 0.220396393 0.220396393</span>
 <span class="co">#&gt;  [2,] 0.268882997 0.702705410</span>
@@ -130,7 +133,8 @@
 <span class="co">#&gt;  [7,] 0.936079929 0.493162846</span>
 <span class="co">#&gt;  [8,] 2.060125742 0.691868769</span>
 <span class="co">#&gt;  [9,] 0.220026223 1.290835243</span>
-<span class="co">#&gt; [10,] 0.035544062 1.518556226</span></pre></div>
+<span class="co">#&gt; [10,] 0.035544062 1.518556226</span>
+</pre></div>
 </div>
 <div id="roadmap-for-future-development" class="section level2">
 <h2 class="hasAnchor">
