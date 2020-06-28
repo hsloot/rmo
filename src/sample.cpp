@@ -201,10 +201,10 @@ NumericMatrix Rcpp__rmo_lfm_cpp(
         if (tt_killing < R_PosInf && tt_killing <= tt_jump) {
           while (i<d && rate_drift > 0. &&
               (barriers[idx[i]] - value)/rate_drift <= tt_killing) {
-            auto tt_drift = (barriers[idx[i]] - value) / rate_drift;
-            time += tt_drift;
+            auto tt_barrier = (barriers[idx[i]] - value) / rate_drift;
+            time += tt_barrier;
             value = barriers[idx[i]];
-            tt_killing -= tt_drift;
+            tt_killing -= tt_barrier;
             out(k, idx[i++]) = time;
           }
           time = killing_time;
@@ -213,10 +213,10 @@ NumericMatrix Rcpp__rmo_lfm_cpp(
         } else {
           while (i<d && rate_drift > 0. &&
               (barriers[idx[i]] - value)/rate_drift <= tt_jump) {
-            auto tt_drift = (barriers[idx[i]] - value)/rate_drift;
-            time += tt_drift;
+            auto tt_barrier = (barriers[idx[i]] - value)/rate_drift;
+            time += tt_barrier;
             value = barriers[idx[i]];
-            tt_jump -= tt_drift;
+            tt_jump -= tt_barrier;
             out(k, idx[i++]) = time;
           }
           if (tt_jump < R_PosInf) {
