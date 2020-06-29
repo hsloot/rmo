@@ -9,3 +9,9 @@
 {"file":"cuadras-auge.R","name":"LFM","time":"2020-06-29T18:53:38Z","os":"macOS","mean":0.00016,"sd":0.00032,"p0":0.00014,"p25":0.00014,"p50":0.00015,"p75":0.00015,"p100":0.01835,"n_itr":3187,"n_gc":1,"total_time":0.49989,"mem_alloc":14600}
 {"file":"cuadras-auge.R","name":"Arnold","time":"2020-06-29T18:53:38Z","os":"macOS","mean":0.00099,"sd":0.00071,"p0":0.00081,"p25":0.00086,"p50":0.0009,"p75":0.00099,"p100":0.01647,"n_itr":507,"n_gc":1,"total_time":0.5008,"mem_alloc":14600}
 {"file":"cuadras-auge.R","name":"ESM","time":"2020-06-29T18:53:38Z","os":"macOS","mean":0.00275,"sd":0.00023,"p0":0.0026,"p25":0.00262,"p50":0.00268,"p75":0.00279,"p100":0.00429,"n_itr":182,"n_gc":0,"total_time":0.50134,"mem_alloc":14600}
+
+{"file":"cuadras-auge.R","name":"CuadrasAuge","time":"2020-06-29T18:54:04Z","os":"macOS","mean":0.00016,"sd":0.00328,"p0":0.00008,"p25":0.00008,"p50":0.00009,"p75":0.0001,"p100":0.18366,"n_itr":3137,"n_gc":1,"total_time":0.4999,"mem_alloc":14600}
+{"file":"cuadras-auge.R","name":"ExArnold","time":"2020-06-29T18:54:04Z","os":"macOS","mean":0.00036,"sd":0.00046,"p0":0.00026,"p25":0.00027,"p50":0.0003,"p75":0.00038,"p100":0.01651,"n_itr":1385,"n_gc":1,"total_time":0.50019,"mem_alloc":14600}
+{"file":"cuadras-auge.R","name":"LFM","time":"2020-06-29T18:54:04Z","os":"macOS","mean":0.00017,"sd":0.00031,"p0":0.00014,"p25":0.00015,"p50":0.00015,"p75":0.00017,"p100":0.01676,"n_itr":2869,"n_gc":1,"total_time":0.49995,"mem_alloc":14600}
+{"file":"cuadras-auge.R","name":"Arnold","time":"2020-06-29T18:54:04Z","os":"macOS","mean":0.00103,"sd":0.00024,"p0":0.00081,"p25":0.00089,"p50":0.00094,"p75":0.0011,"p100":0.00334,"n_itr":488,"n_gc":0,"total_time":0.50062,"mem_alloc":14600}
+{"file":"cuadras-auge.R","name":"ESM","time":"2020-06-29T18:54:04Z","os":"macOS","mean":0.00337,"sd":0.00078,"p0":0.0026,"p25":0.0028,"p50":0.0031,"p75":0.00377,"p100":0.00596,"n_itr":149,"n_gc":0,"total_time":0.50262,"mem_alloc":14600}
