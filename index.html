@@ -122,7 +122,6 @@
 <h2 class="hasAnchor">
 <a href="#example" class="anchor"></a>Example</h2>
 <div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="co"># library(rmo)</span>
 <span class="fu"><a href="reference/rmo_esm.html">rmo_esm</a></span>(n=<span class="fl">10L</span>, d=<span class="fl">2L</span>, intensities=<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span>))
 <span class="co">#&gt;              [,1]        [,2]</span>
 <span class="co">#&gt;  [1,] 0.220396393 0.220396393</span>
@@ -136,6 +135,26 @@
 <span class="co">#&gt;  [9,] 0.220026223 1.290835243</span>
 <span class="co">#&gt; [10,] 0.035544062 1.518556226</span>
 </pre></div>
+<div id="approximate-an-alpha-stable-bf" class="section level3">
+<h3 class="hasAnchor">
+<a href="#approximate-an-alpha-stable-bf" class="anchor"></a>Approximate an Alpha-Stable BF</h3>
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="kw">alpha</span> <span class="op">&lt;-</span> <span class="fl">0.5</span>
+<span class="kw">bf</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/AlphaStableBernsteinFunction-class.html">AlphaStableBernsteinFunction</a></span>(alpha=<span class="kw">alpha</span>)
+
+<span class="kw">x0</span> <span class="op">&lt;-</span> <span class="fl">5e-4</span>
+<span class="kw">bf_approx</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/SumOfBernsteinFunctions-class.html">SumOfBernsteinFunctions</a></span>(
+  first=<span class="fu"><a href="reference/LinearBernsteinFunction-class.html">LinearBernsteinFunction</a></span>(
+    scale = <span class="kw">alpha</span><span class="op">*</span><span class="kw">x0</span><span class="op">^</span>(<span class="fl">1</span><span class="op">-</span><span class="kw">alpha</span>)<span class="op">/</span>(<span class="fl">1</span><span class="op">-</span><span class="kw">alpha</span>)<span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/Special.html">gamma</a></span>(<span class="fl">1</span><span class="op">-</span><span class="kw">alpha</span>)
+  ),
+  second=<span class="fu"><a href="reference/ScaledBernsteinFunction-class.html">ScaledBernsteinFunction</a></span>(
+    scale = <span class="kw">x0</span><span class="op">^</span>(<span class="op">-</span><span class="kw">alpha</span>)<span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/Special.html">gamma</a></span>(<span class="fl">1</span><span class="op">-</span><span class="kw">alpha</span>),
+    original = <span class="fu"><a href="reference/ParetoBernsteinFunction-class.html">ParetoBernsteinFunction</a></span>(alpha=<span class="kw">alpha</span>, x0=<span class="kw">x0</span>)
+  )
+)
+</pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-5-1.png" width="100%"></p>
+</div>
 </div>
 <div id="roadmap-for-future-development" class="section level2">
 <h2 class="hasAnchor">
@@ -201,7 +220,7 @@
 <ul class="list-unstyled">
 <li><a href="https://www.repostatus.org/#wip"><img src="https://www.repostatus.org/badges/latest/wip.svg" alt="Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public."></a></li>
 <li><a href="https://www.tidyverse.org/lifecycle/#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
-<li><a href="/commits/master"><img src="https://img.shields.io/badge/last%20change-2020--06--29-yellowgreen.svg" alt="Last-changedate"></a></li>
+<li><a href="/commits/master"><img src="https://img.shields.io/badge/last%20change-2020--06--30-yellowgreen.svg" alt="Last-changedate"></a></li>
 <li><a href="https://github.com/hsloot/rmo/actions"><img src="https://github.com/hsloot/rmo/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
 <li><a href="https://codecov.io/gh/hsloot/rmo?branch=master"><img src="https://codecov.io/gh/hsloot/rmo/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
 </ul>
