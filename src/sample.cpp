@@ -19,8 +19,7 @@ NumericMatrix Rcpp__rmo_esm(
 
   NumericMatrix out(no_init(n, d));
   for (R_xlen_t k=0; k<n; k++) {
-    if ((d*k) % C_CHECK_USR_INTERRUP == 0)
-      checkUserInterrupt();
+    if ((d*k) % C_CHECK_USR_INTERRUP == 0) checkUserInterrupt();
 
     MatrixRow<REALSXP> values = out(k, _);
     esm_generator(values);
@@ -39,8 +38,7 @@ NumericMatrix Rcpp__rmo_arnold(
 
   NumericMatrix out(no_init(n, d));
   for (R_xlen_t k=0; k<n; k++) {
-    if ((d*k) % C_CHECK_USR_INTERRUP == 0)
-      checkUserInterrupt();
+    if ((d*k) % C_CHECK_USR_INTERRUP == 0) checkUserInterrupt();
 
     MatrixRow<REALSXP> values = out(k, _);
     arnold_generator(values);
@@ -81,11 +79,10 @@ NumericMatrix Rcpp__rmo_esm_cuadras_auge(
 
   NumericMatrix out(no_init(n, d));
   for (R_xlen_t k=0; k<n; k++) {
-    if ((d*k) % C_CHECK_USR_INTERRUP == 0)
-      checkUserInterrupt();
+    if ((d*k) % C_CHECK_USR_INTERRUP == 0) checkUserInterrupt();
 
-      MatrixRow<REALSXP> values = out(k, _);
-      cuadras_auge_generator(values);
+    MatrixRow<REALSXP> values = out(k, _);
+    cuadras_auge_generator(values);
   }
 
   return out;

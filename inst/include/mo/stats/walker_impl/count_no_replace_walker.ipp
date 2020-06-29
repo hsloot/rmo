@@ -34,7 +34,7 @@ template<typename RNGPolicy>
 inline std::size_t CountNoReplaceWalker<RNGPolicy>::operator()() {
   auto rT = rng_.unif_rand() * total_mass_ ;
   auto mass = 0.;
-  auto j = 0;
+  std::size_t j = 0;
   for (; j<n_-1; j++) {
     mass += probabilities_[j];
     if (rT <= mass)

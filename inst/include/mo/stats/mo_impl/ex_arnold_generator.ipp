@@ -39,7 +39,7 @@ template<typename Vector, typename RNGPolicy>
 void ExArnoldGenerator<Vector, RNGPolicy>::operator()(
     Vector& out) {
   std::vector<double> values(d_);
-  auto state = 0;
+  std::size_t state = 0;
   while (state < d_) {
     auto waiting_time = (*wt_generators_[state])();
     for (std::size_t i=state; i<d_; i++) values[i] += waiting_time;
