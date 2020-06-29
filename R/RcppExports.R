@@ -5,6 +5,10 @@ mo_internal__rexp <- function(n, rate = 1.) {
     .Call(`_rmo_mo_internal__rexp`, n, rate)
 }
 
+mo_internal__rpareto <- function(n, alpha, x0) {
+    .Call(`_rmo_mo_internal__rpareto`, n, alpha, x0)
+}
+
 mo_internal__fixeddbl <- function(n, value) {
     .Call(`_rmo_mo_internal__fixeddbl`, n, value)
 }

@@ -29,6 +29,17 @@ test_that("ExpGenerator works as expected", {
     args, n, use_seed)
 })
 
+test_that("ParetoGenerator works as expected", {
+  args <- list("alpha" = 0.5, "x0" = 0.1)
+  expect_equal_rn_generation(
+    "mo_internal__rpareto", "rpareto",
+    args, n, use_seed)
+  args <- list("alpha" = 0.1, "x0" = 2)
+  expect_equal_rn_generation(
+    "mo_internal__rpareto", "rpareto",
+    args, n, use_seed)
+})
+
 test_that("FixedDblGenerator works as expected", {
   args <- list("value" = 1)
   expect_equal_rn_generation(

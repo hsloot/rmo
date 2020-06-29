@@ -83,6 +83,31 @@ private:
 }; // ExpGenerator
 
 template<typename RNGPolicy>
+class ParetoGenerator : public RealUnivariateGenerator<double, RNGPolicy> {
+public:
+  ParetoGenerator() = default;
+  ParetoGenerator(const ParetoGenerator& other) = default;
+  ParetoGenerator(ParetoGenerator&& other) = default;
+  ParetoGenerator(const double alpha, const double x0);
+
+  virtual ~ParetoGenerator() {}
+
+  ParetoGenerator& operator=(const ParetoGenerator& other) = default;
+  ParetoGenerator& operator=(ParetoGenerator&& other) = default;
+
+  virtual inline double operator()() override final;
+  inline double operator()(const double alpha, const double x0);
+
+  virtual inline std::unique_ptr<RealUnivariateGenerator<double, RNGPolicy>> clone() const override final;
+
+private:
+  double alpha_;
+  double x0_;
+
+  RNGPolicy rng_;
+}; // ParetoGenerator
+
+template<typename RNGPolicy>
 class CountReplaceGenerator : public UnivariateGenerator<std::size_t, RNGPolicy> {
 public:
   CountReplaceGenerator() = delete;
@@ -153,6 +178,7 @@ private:
 } // mo
 
 #include <mo/stats/generator_impl/exp_generator.ipp>
+#include <mo/stats/generator_impl/pareto_generator.ipp>
 #include <mo/stats/generator_impl/count_replace_generator.ipp>
 #include <mo/stats/generator_impl/unif_count_replace_generator.ipp>
 #include <mo/stats/generator_impl/fixed_dbl_generator.ipp>

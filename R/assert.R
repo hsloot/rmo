@@ -333,7 +333,7 @@ is_cuadras_auge_parameter <- function(d, alpha, beta) {
 #' @noRd
 is_rjump_name <- function(rjump_name) {
   assert_that(is.string(rjump_name))
-  allowed_names <- c("rexp", "rposval")
+  allowed_names <- c("rexp", "rposval", "rpareto")
 
   rjump_name %in% allowed_names
 }

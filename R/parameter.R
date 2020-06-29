@@ -198,3 +198,31 @@ intensities_gamma <- function(d, a) { # nocov start
   ex_intensities2intensities(
     ex_intensities_gamma(d, a))
 } # nocov end
+
+
+#' @param alpha Alpha parameter for Pareto CPP, passed to `alpha`
+#'   parameter of [ParetoBernsteinFunction-class]
+#' @param x0 Cutoff parameter for Pareto CPP, passed to `x0`
+#'   parameter of [ParetoBernsteinFunction-class]
+#'
+#' @seealso [ParetoBernsteinFunction-class]
+#'
+#' @examples
+#' ex_intensities_pareto(10L, alpha=0.4, x0=5e-4)
+#'
+#' @export
+#' @rdname parameter
+ex_intensities_pareto <- function(d, alpha, x0) { # nocov start
+  bf <- ParetoBernsteinFunction(alpha=alpha, x0=x0)
+  bf2ex_intensities(d, bf)
+} # nocov end
+
+#' @examples
+#' intensities_pareto(10L, alpha=0.4, x0=5e-4)
+#'
+#' @export
+#' @rdname parameter
+intensities_pareto <- function(d, alpha, x0) { # nocov start
+  ex_intensities2intensities(
+    ex_intensities_pareto(d, alpha, x0))
+} # nocov end

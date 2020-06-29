@@ -14,6 +14,8 @@
 \alias{intensities_alpha_stable}
 \alias{ex_intensities_gamma}
 \alias{intensities_gamma}
+\alias{ex_intensities_pareto}
+\alias{intensities_pareto}
 \title{Convenience functions to MO parameters}
 \usage{
 ex_intensities_constant(d, constant)
@@ -39,6 +41,10 @@ intensities_alpha_stable(d, alpha)
 ex_intensities_gamma(d, a)
 
 intensities_gamma(d, a)
+
+ex_intensities_pareto(d, alpha, x0)
+
+intensities_pareto(d, alpha, x0)
 }
 \arguments{
 \item{d}{Dimension of the distribution}
@@ -49,8 +55,8 @@ intensities_gamma(d, a)
 \item{scale}{Rates for individual shocks, passed to \code{scale} parameter for
 \linkS4class{LinearBernsteinFunction}}
 
-\item{alpha}{Alpha parameter for alpha-stable subordinator, passed to \code{alpha}
-parameter of \linkS4class{AlphaStableBernsteinFunction}}
+\item{alpha}{Alpha parameter for Pareto CPP, passed to \code{alpha}
+parameter of \linkS4class{ParetoBernsteinFunction}}
 
 \item{beta}{Rate for global shock, passed to \code{constant} parameter for
 \linkS4class{ConstantBernsteinFunction}}
@@ -63,6 +69,9 @@ parameter of \linkS4class{AlphaStableBernsteinFunction}}
 
 \item{a}{Shape parameter for Gamma subordinator, passed to \code{a} parameter of
 \linkS4class{GammaBernsteinFunction}}
+
+\item{x0}{Cutoff parameter for Pareto CPP, passed to \code{x0}
+parameter of \linkS4class{ParetoBernsteinFunction}}
 }
 \description{
 The following functions are convenience wrappers to create \code{intensities}
@@ -98,6 +107,10 @@ ex_intensities_gamma(10L, a=0.3)
 
 intensities_gamma(10L, a=0.3)
 
+ex_intensities_pareto(10L, alpha=0.4, x0=5e-4)
+
+intensities_pareto(10L, alpha=0.4, x0=5e-4)
+
 }
 \seealso{
 \code{\link[=valueOf]{valueOf()}}
@@ -111,4 +124,6 @@ intensities_gamma(10L, a=0.3)
 \linkS4class{AlphaStableBernsteinFunction}
 
 \linkS4class{GammaBernsteinFunction}
+
+\linkS4class{ParetoBernsteinFunction}
 }

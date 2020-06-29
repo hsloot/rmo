@@ -126,7 +126,11 @@ std::unique_ptr<RealUnivariateGenerator<double, RRNGPolicy>> get_univariate_gene
   } else if ("rposval" == name) {
     double value = args["value"];
     out.reset(new FixedDblGenerator<RRNGPolicy>(value));
-  } else {
+  } else if ("rpareto" == name) { // #nocov start
+    double alpha = args["alpha"];
+    double x0 = args["x0"];
+    out.reset(new ParetoGenerator<RRNGPolicy>(alpha, x0));
+  } else { // # nocov end
     std::logic_error("wrong input"); // # nocov
   }
 

@@ -13,7 +13,7 @@ has not yet been a stable, usable release suitable for the
 public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
-[![Last-changedate](https://img.shields.io/badge/last%20change-2020--06--29-yellowgreen.svg)](/commits/master)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2020--06--30-yellowgreen.svg)](/commits/master)
 [![R build
 status](https://github.com/hsloot/rmo/workflows/R-CMD-check/badge.svg)](https://github.com/hsloot/rmo/actions)
 [![Codecov test
@@ -44,7 +44,6 @@ devtools::install_github("hsloot/rmo")
 ## Example
 
 ``` r
-# library(rmo)
 rmo_esm(n=10L, d=2L, intensities=c(1, 1, 1))
 #>              [,1]        [,2]
 #>  [1,] 0.220396393 0.220396393
@@ -58,6 +57,26 @@ rmo_esm(n=10L, d=2L, intensities=c(1, 1, 1))
 #>  [9,] 0.220026223 1.290835243
 #> [10,] 0.035544062 1.518556226
 ```
+
+### Approximate an Alpha-Stable BF
+
+``` r
+alpha <- 0.5
+bf <- AlphaStableBernsteinFunction(alpha=alpha)
+
+x0 <- 5e-4
+bf_approx <- SumOfBernsteinFunctions(
+  first=LinearBernsteinFunction(
+    scale = alpha*x0^(1-alpha)/(1-alpha)/gamma(1-alpha)
+  ),
+  second=ScaledBernsteinFunction(
+    scale = x0^(-alpha)/gamma(1-alpha),
+    original = ParetoBernsteinFunction(alpha=alpha, x0=x0)
+  )
+)
+```
+
+<img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" />
 
 ## Roadmap for future development
 

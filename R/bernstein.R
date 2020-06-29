@@ -516,3 +516,89 @@ setMethod("valueOf",
       log(1 + x/object@a)
     }
   })
+
+
+# #### Other Bernstein functions ####
+
+#' Class for the \emph{Pareto Bernstein function}
+#'
+#' @examples
+#' bf <- ParetoBernsteinFunction(alpha = 0.2, x0=1)
+#'
+#' @slot alpha The index \eqn{\alpha}
+#' @slot x0 The cutoff point \eqn{x_0}
+#'
+#' @description
+#' For the Pareto-jump compound Poisson process with
+#' index \eqn{0 < \alpha < 1} and cutoff point \eqn{x0},
+#' the corresponding Bernstein function is
+#' \deqn{
+#'   \psi(x)
+#'   = 1 - e^{-x x_0} + (x_0 x)^\alpha \Gamma(1-\alpha, x_0 x) ,
+#'   x>0 .
+#' }
+#'
+#' @details
+#' For this Bernstein function, the higher order alternating must
+#' be evaluated numerically using the integral representation
+#' \deqn{
+#'   {(-1)}^{k-1} \Delta^k \psi(x)
+#'   = \int_{x_0}^\infty e^{-ux} (1-e^{-u})^k
+#'   \alpha \frac{{x_0}^\alpha}{t^{1+\alpha}} du,
+#'   x>0, k>0 .
+#' }
+#'
+#' The Pareto Bernstein function, in combination with a linear
+#' Bernstein function can be used to approximate the Bernstein
+#' function of an \eqn{\alpha}-stable Subordinator, see
+#' Sec. 5.3 of \insertCite{Fernandez2015a}{rmo}.
+#'
+#' @references
+#'   \insertAllCited{}
+#'
+#' @seealso [BernsteinFunction-class]
+#'
+#' @importFrom methods new setClass
+#' @include assert.R
+#'
+#' @export ParetoBernsteinFunction
+ParetoBernsteinFunction <- setClass("ParetoBernsteinFunction", # nolint
+  contains = "BernsteinFunction",
+  slots = c("alpha", "x0"),
+  validity = function(object) {
+    if (!is_positive_number(object@alpha) || object@alpha >= 1 ||
+        !is_positive_number(object@x0)) {
+          return("alpha must be between 0 and 1 and x0 positive")
+    }
+
+    TRUE
+  })
+
+#' @rdname valueOf-methods
+#' @aliases valueOf,ParetoBernsteinFunction,numeric,integer,ANY-method
+#'
+#' @seealso [ParetoBernsteinFunction-class]
+#'
+#' @importFrom methods setMethod
+#' @importFrom stats integrate pgamma
+#' @include assert.R
+#'
+#' @export
+setMethod("valueOf",
+  signature = c("ParetoBernsteinFunction", "numeric", "integer"),
+  definition = function(object, x, difference_order=0) {
+    assert_that(is_nonnegative_number(difference_order),
+      is_nonnegative_vector(x))
+
+    if (difference_order > 0) {
+      sapply(x, function(y) integrate(
+        f=function(u) {
+          exp(-y * u) * (1-exp(-u))^difference_order *
+            object@alpha * (object@x0 / u) ^ (object@alpha) / u ## Lévy density
+        }, lower=object@x0, upper=Inf)$value)
+    } else {
+      1 - exp(-object@x0*x) + (x*object@x0) ^ (object@alpha) *
+        pgamma(object@x0*x, 1-object@alpha, lower.tail=FALSE) *
+        gamma(1-object@alpha)
+    }
+  })

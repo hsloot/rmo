@@ -31,6 +31,11 @@ test_that("Test initialisation of BernsteinFunction classes", {
   expect_error(GammaBernsteinFunction(a=-1))
 
   expect_s4_class(
+    ParetoBernsteinFunction(alpha=0.7, x0=1),
+    class="ParetoBernsteinFunction")
+  expect_error(ParetoBernsteinFunction(alpha=-1, x0=1))
+
+  expect_s4_class(
     ScaledBernsteinFunction(scale=0.5, original=GammaBernsteinFunction(a=0.7)),
     class="ScaledBernsteinFunction")
   expect_error(ScaledBernsteinFunction(scale=-1,
@@ -184,6 +189,37 @@ test_that("`valueOf` for `GammaBernsteinFunction`", {
 
   x <- seq(0.3, 10.3, by=1)
   expect_equal(valueOf(bf, x, difference_order=0L), log(1 + x/a))
+
+  y <- sort(unique(union(x, x+k)))
+  expect_equal(
+    valueOf(bf, x, difference_order=k),
+    (-1) ^ (k-1) * diff(
+      valueOf(bf, y, difference_order=0L),
+      differences=k)[seq_along(x)])
+})
+
+test_that("`valueOf` for `ParetoBernsteinFunction`", {
+  k <- 5L
+  alpha <- 0.05
+  x0 <- 0.5
+  bf <- ParetoBernsteinFunction(alpha=alpha, x0=x0)
+
+  x <- seq(0, 10, by=1)
+  expect_equal(valueOf(bf, x, difference_order=0L),
+    1-exp(-x0*x) + (x*x0) ^ (alpha) *
+    pgamma(x0*x, 1-alpha, lower=FALSE) * gamma(1-alpha))
+
+  y <- sort(unique(union(x, x+k)))
+  expect_equal(
+    valueOf(bf, x, difference_order=k),
+    (-1) ^ (k-1) * diff(
+      valueOf(bf, y, difference_order=0L),
+      differences=k)[seq_along(x)])
+
+  x <- seq(0.3, 10.3, by=1)
+  expect_equal(valueOf(bf, x, difference_order=0L),
+    1-exp(-x0*x) + (x*x0) ^ (alpha) *
+    pgamma(x0*x, 1-alpha, lower=FALSE) * gamma(1-alpha))
 
   y <- sort(unique(union(x, x+k)))
   expect_equal(

@@ -4,7 +4,7 @@ output: github_document
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-```{r, include = FALSE}
+```{r, include = FALSE, message=FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -12,6 +12,8 @@ knitr::opts_chunk$set(
   out.width = "100%"
 )
 library(rmo)
+library(tidyverse)
+library(ggplot2)
 set.seed(1623)
 ```
 
@@ -48,9 +50,39 @@ devtools::install_github("hsloot/rmo")
 ## Example
 
 ```{r, include=TRUE}
-# library(rmo)
 rmo_esm(n=10L, d=2L, intensities=c(1, 1, 1))
 ```
+
+### Approximate an Alpha-Stable BF
+
+```{r, include=TRUE}
+alpha <- 0.5
+bf <- AlphaStableBernsteinFunction(alpha=alpha)
+
+x0 <- 5e-4
+bf_approx <- SumOfBernsteinFunctions(
+  first=LinearBernsteinFunction(
+    scale = alpha*x0^(1-alpha)/(1-alpha)/gamma(1-alpha)
+  ),
+  second=ScaledBernsteinFunction(
+    scale = x0^(-alpha)/gamma(1-alpha),
+    original = ParetoBernsteinFunction(alpha=alpha, x0=x0)
+  )
+)
+```
+
+```{r,echo=FALSE, eval=TRUE}
+d <- 15
+tibble(
+  i = 1:d,
+  original = sapply(1:d, function(i) valueOf(bf, d-i, i)),
+  approximation = sapply(1:d, function(i) valueOf(bf_approx, d-i, i))
+) %>%
+  gather("type", "ex_intensity[i]", -i) %>%
+  ggplot(aes(x=i, y=`ex_intensity[i]`, colour=type)) + 
+    geom_point()
+```
+
 
 
 ## Roadmap for future development

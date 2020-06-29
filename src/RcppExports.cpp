@@ -17,6 +17,19 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// mo_internal__rpareto
+NumericVector mo_internal__rpareto(const R_xlen_t n, const double alpha, const double x0);
+RcppExport SEXP _rmo_mo_internal__rpareto(SEXP nSEXP, SEXP alphaSEXP, SEXP x0SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const R_xlen_t >::type n(nSEXP);
+    Rcpp::traits::input_parameter< const double >::type alpha(alphaSEXP);
+    Rcpp::traits::input_parameter< const double >::type x0(x0SEXP);
+    rcpp_result_gen = Rcpp::wrap(mo_internal__rpareto(n, alpha, x0));
+    return rcpp_result_gen;
+END_RCPP
+}
 // mo_internal__fixeddbl
 NumericVector mo_internal__fixeddbl(const R_xlen_t n, const double value);
 RcppExport SEXP _rmo_mo_internal__fixeddbl(SEXP nSEXP, SEXP valueSEXP) {
@@ -166,6 +179,7 @@ END_RCPP
 
 static const R_CallMethodDef CallEntries[] = {
     {"_rmo_mo_internal__rexp", (DL_FUNC) &_rmo_mo_internal__rexp, 2},
+    {"_rmo_mo_internal__rpareto", (DL_FUNC) &_rmo_mo_internal__rpareto, 3},
     {"_rmo_mo_internal__fixeddbl", (DL_FUNC) &_rmo_mo_internal__fixeddbl, 2},
     {"_rmo_mo_internal__count_replace", (DL_FUNC) &_rmo_mo_internal__count_replace, 3},
     {"_rmo_mo_internal__count_noreplace", (DL_FUNC) &_rmo_mo_internal__count_noreplace, 3},

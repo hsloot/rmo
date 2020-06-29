@@ -245,3 +245,10 @@ rmo_lfm_cpp <- function(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_
 rposval <- function(n, value=1) { # only needed for assertions
   rep(value, times=n)
 }
+
+#' @importFrom stats runif
+#' @keywords internal
+#' @noRd
+rpareto <- function(n, alpha, x0) { # only needed for assertions
+  x0 / (runif(n)) ^ (1/alpha)
+}

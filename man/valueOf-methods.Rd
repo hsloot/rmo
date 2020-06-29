@@ -17,6 +17,8 @@
 \alias{valueOf,AlphaStableBernsteinFunction,numeric,integer,ANY-method}
 \alias{valueOf,GammaBernsteinFunction,numeric,integer-method}
 \alias{valueOf,GammaBernsteinFunction,numeric,integer,ANY-method}
+\alias{valueOf,ParetoBernsteinFunction,numeric,integer-method}
+\alias{valueOf,ParetoBernsteinFunction,numeric,integer,ANY-method}
 \title{Returns values for Bernstein functions}
 \usage{
 valueOf(object, x, difference_order)
@@ -34,6 +36,8 @@ valueOf(object, x, difference_order)
 \S4method{valueOf}{AlphaStableBernsteinFunction,numeric,integer}(object, x, difference_order = 0)
 
 \S4method{valueOf}{GammaBernsteinFunction,numeric,integer}(object, x, difference_order = 0)
+
+\S4method{valueOf}{ParetoBernsteinFunction,numeric,integer}(object, x, difference_order = 0)
 }
 \arguments{
 \item{object}{The Bernstein function object.}
@@ -67,4 +71,6 @@ and its higher-order, alternating iterated forward differences, i.e.
 \linkS4class{AlphaStableBernsteinFunction}
 
 \linkS4class{GammaBernsteinFunction}
+
+\linkS4class{ParetoBernsteinFunction}
 }

@@ -17,6 +17,17 @@ NumericVector mo_internal__rexp(
 }
 
 // [[Rcpp::export]]
+NumericVector mo_internal__rpareto(
+    const R_xlen_t n, const double alpha, const double x0) {
+  NumericVector out(no_init(n));
+
+  ParetoGenerator<RRNGPolicy> pareto_generator(alpha, x0);
+  std::generate(out.begin(), out.end(), pareto_generator);
+
+  return out;
+}
+
+// [[Rcpp::export]]
 NumericVector mo_internal__fixeddbl(
     const R_xlen_t n, const double value) {
   NumericVector out(no_init(n));
