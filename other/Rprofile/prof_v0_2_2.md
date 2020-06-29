@@ -1,24 +1,24 @@
-Comparison of 0.2.1 and 0.2.0
+Comparison of 0.2.2 and 0.2.1
 ================
 
 ``` r
 tmpdir <- tempdir()
 suppressMessages(remotes::install_github(
-  "hsloot/rmo@v0.2.0", lib = tmpdir, quiet = TRUE))
+  "hsloot/rmo@v0.2.1", lib = tmpdir, quiet = TRUE))
 ```
 
 ``` r
 library("tidyverse")
 ```
 
-    ## ── Attaching packages ─────────────────────────────────────────────── tidyverse 1.3.0 ──
+    ## ── Attaching packages ──────────────────────────────────────────── tidyverse 1.3.0 ──
 
-    ## ✓ ggplot2 3.3.0     ✓ purrr   0.3.4
-    ## ✓ tibble  3.0.1     ✓ dplyr   0.8.5
+    ## ✓ ggplot2 3.3.1     ✓ purrr   0.3.4
+    ## ✓ tibble  3.0.1     ✓ dplyr   1.0.0
     ## ✓ tidyr   1.1.0     ✓ stringr 1.4.0
     ## ✓ readr   1.3.1     ✓ forcats 0.5.0
 
-    ## ── Conflicts ────────────────────────────────────────────────── tidyverse_conflicts() ──
+    ## ── Conflicts ─────────────────────────────────────────────── tidyverse_conflicts() ──
     ## x dplyr::filter() masks stats::filter()
     ## x dplyr::lag()    masks stats::lag()
 
@@ -186,7 +186,7 @@ bp1 %>%
   facet_grid(d + alpha ~ beta)
 ```
 
-![](prof_v0_2_1_0000_files/figure-gfm/ca-press-v0.2.1-1.png)<!-- -->
+![](prof_v0_2_2_files/figure-gfm/ca-press-v0.2.2-1.png)<!-- -->
 
 ``` r
 detach("package:rmo", unload = TRUE)
@@ -212,7 +212,7 @@ bp1_prev <- bench::press(
       Ex_Arnold = rmo:::Rcpp__rmo_ex_arnold(
         n, d, ex_intensities=ex_intensities),
       LFM = rmo:::Rcpp__rmo_lfm_cpp(
-        n, d, 0, alpha, beta, rmo:::rposval, list("value"=1)),
+        n, d, 0, alpha, beta, "rposval", list("value"=1)),
       Cuadras_Auge = rmo:::Rcpp__rmo_esm_cuadras_auge(
         n, d, alpha, beta),
       min_iterations = 100L,
@@ -274,7 +274,7 @@ bp1_prev %>%
   facet_grid(d + alpha ~ beta)
 ```
 
-![](prof_v0_2_1_0000_files/figure-gfm/ca-press-v0.2.0-1.png)<!-- -->
+![](prof_v0_2_2_files/figure-gfm/ca-press-v0.2.1-1.png)<!-- -->
 
 ``` r
 detach("package:rmo", unload = TRUE)
@@ -389,7 +389,7 @@ bp2 %>%
   facet_grid(d + lambda ~ eta) 
 ```
 
-![](prof_v0_2_1_0000_files/figure-gfm/Poisson-press-v0.2.1-1.png)<!-- -->
+![](prof_v0_2_2_files/figure-gfm/Poisson-press-v0.2.2-1.png)<!-- -->
 
 ``` r
 detach("package:rmo", unload = TRUE)
@@ -415,7 +415,7 @@ bp2_prev <- bench::press(
       Ex_Arnold = rmo:::Rcpp__rmo_ex_arnold(
         n, d, ex_intensities=ex_intensities),
       LFM = rmo:::Rcpp__rmo_lfm_cpp(
-        n, d, lambda, 0, 0, rmo:::rposval, list("value"=eta)),
+        n, d, lambda, 0, 0, "rposval", list("value"=eta)),
       min_iterations = 100L,
       check=FALSE
     )
@@ -475,7 +475,7 @@ bp2_prev %>%
   facet_grid(d + lambda ~ eta) 
 ```
 
-![](prof_v0_2_1_0000_files/figure-gfm/Poisson-press-v0.2.0-1.png)<!-- -->
+![](prof_v0_2_2_files/figure-gfm/Poisson-press-v0.2.1-1.png)<!-- -->
 
 ``` r
 detach("package:rmo", unload = TRUE)

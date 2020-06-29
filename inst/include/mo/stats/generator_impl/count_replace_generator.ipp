@@ -35,7 +35,7 @@ inline std::size_t CountReplaceGenerator<RNGPolicy>::operator()() {
     if (cumulative_probabilities_[j] >= rT)
       return original_order_[j];
   }
-  return cumulative_probabilities_.size();
+  return cumulative_probabilities_.size(); // # nocov
 }
 
 } // stats

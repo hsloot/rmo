@@ -25,7 +25,6 @@ public:
 template<typename Vector, typename RNGPolicy>
 class MultivariateGenerator : public Generator {
 public:
-  virtual inline Vector operator()() = 0;
   virtual inline void operator()(Vector& out) = 0;
 }; // MultivariateGenerator
 
@@ -141,7 +140,7 @@ public:
   UnifPermutationGenerator& operator=(const UnifPermutationGenerator& other) = default;
   UnifPermutationGenerator& operator=(UnifPermutationGenerator&& other) = default;
 
-  virtual inline Vector operator()() override final;
+  virtual inline Vector operator()() final;
   virtual inline void operator()(Vector& out) override final;
 
 private:

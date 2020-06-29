@@ -6,5 +6,6 @@
 #include <mo/utils/sort.hpp>
 #include <mo/stats/generator.hpp>
 #include <mo/stats/walker.hpp>
+#include <mo/stats/mo.hpp>
 
 #endif // MO_HPP

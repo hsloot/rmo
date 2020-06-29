@@ -1,0 +1,138 @@
+#ifndef MO_STATS_MO_HPP
+#define MO_STATS_MO_HPP
+
+#include <cstddef> // for std::size_t
+#include <vector>
+#include <memory>
+
+#include <mo/stats/rngpolicy.hpp>
+#include <mo/stats/generator.hpp>
+
+namespace mo {
+namespace stats {
+
+template<typename Vector, typename RNGPolicy>
+class ESMGenerator : public MultivariateGenerator<Vector, RNGPolicy> {
+public:
+  ESMGenerator() = delete;
+  ESMGenerator(const ESMGenerator& other) = default;
+  ESMGenerator(ESMGenerator&& other) = default;
+
+  template<typename VectorIn>
+  ESMGenerator(const std::size_t d, const VectorIn& intensities);
+
+  ESMGenerator& operator=(const ESMGenerator& other) = default;
+  ESMGenerator& operator=(ESMGenerator&& other) = default;
+
+  virtual inline void operator()(Vector& out) override final;
+
+private:
+  std::size_t d_;
+  std::vector<double> intensities_;
+  ExpGenerator<RNGPolicy> exp_generator_;
+}; // ESMGenerator
+
+
+template<typename Vector, typename RNGPolicy>
+class CuadrasAugeGenerator : public MultivariateGenerator<Vector, RNGPolicy> {
+public:
+  CuadrasAugeGenerator() = delete;
+  CuadrasAugeGenerator(const CuadrasAugeGenerator& other) = default;
+  CuadrasAugeGenerator(CuadrasAugeGenerator&& other) = default;
+
+  CuadrasAugeGenerator(
+    const std::size_t d, const double alpha, const double beta);
+
+  CuadrasAugeGenerator& operator=(const CuadrasAugeGenerator& other) = default;
+  CuadrasAugeGenerator& operator=(CuadrasAugeGenerator&& other) = default;
+
+  virtual inline void operator()(Vector& out) override final;
+
+private:
+  std::size_t d_;
+  double alpha_;
+  double beta_;
+  ExpGenerator<RNGPolicy> exp_generator_;
+}; // CuadrasAugeGenerator
+
+
+template<typename Vector, typename RNGPolicy>
+class ArnoldGenerator : public MultivariateGenerator<Vector, RNGPolicy> {
+public:
+  ArnoldGenerator() = delete;
+  ArnoldGenerator(const ArnoldGenerator& other) = default;
+  ArnoldGenerator(ArnoldGenerator&& other) = default;
+
+  template<typename VectorIn>
+  ArnoldGenerator(const std::size_t d, const VectorIn& intensities);
+
+  ArnoldGenerator& operator=(const ArnoldGenerator& other) = default;
+  ArnoldGenerator& operator=(ArnoldGenerator&& other) = default;
+
+  virtual inline void operator()(Vector& out) override final;
+
+private:
+  std::size_t d_;
+  ExpGenerator<RNGPolicy> wt_generator_;
+  CountReplaceGenerator<RNGPolicy> shock_generator_;
+}; // ArnoldGenerator
+
+
+template<typename Vector, typename RNGPolicy>
+class ExArnoldGenerator : public MultivariateGenerator<Vector, RNGPolicy> {
+public:
+  ExArnoldGenerator() = delete;
+  ExArnoldGenerator(const ExArnoldGenerator& other) = default;
+  ExArnoldGenerator(ExArnoldGenerator&& other) = default;
+
+  template<typename VectorIn>
+  ExArnoldGenerator(const std::size_t d, const VectorIn& ex_intensities);
+
+  ExArnoldGenerator& operator=(const ExArnoldGenerator& other) = default;
+  ExArnoldGenerator& operator=(ExArnoldGenerator&& other) = default;
+
+  virtual inline void operator()(Vector& out) override final;
+
+private:
+  std::size_t d_;
+  UnifPermutationGenerator<std::vector<std::size_t>, RNGPolicy> perm_generator_;
+  std::vector<std::unique_ptr<ExpGenerator<RNGPolicy>>> wt_generators_;
+  std::vector<std::unique_ptr<CountReplaceGenerator<RNGPolicy>>> shock_generators_;
+}; // ExArnoldGenerator
+
+
+template<typename Vector, typename RNGPolicy>
+class LFMCPPGenerator : public MultivariateGenerator<Vector, RNGPolicy> {
+public:
+  LFMCPPGenerator() = delete;
+  LFMCPPGenerator(const LFMCPPGenerator& other);
+  LFMCPPGenerator(LFMCPPGenerator&& other) = default;
+
+  LFMCPPGenerator(
+    const std::size_t d, const double rate, const double rate_killing,
+    const double rate_drift, std::unique_ptr<RealUnivariateGenerator<double, RNGPolicy>>& jump_generator);
+
+  LFMCPPGenerator& operator=(const LFMCPPGenerator& other);
+  LFMCPPGenerator& operator=(LFMCPPGenerator&& other) = default;
+
+  virtual inline void operator()(Vector& out) override final;
+
+private:
+  std::size_t d_;
+  double rate_drift_;
+  ExpGenerator<RNGPolicy> bv_generator_;
+  ExpGenerator<RNGPolicy> wt_generator_;
+  ExpGenerator<RNGPolicy> kt_generator_;
+  std::unique_ptr<RealUnivariateGenerator<double, RNGPolicy>> jump_generator_;
+}; // ExArnoldGenerator
+
+} // stats
+} // mo
+
+#include <mo/stats/mo_impl/esm_generator.ipp>
+#include <mo/stats/mo_impl/arnold_generator.ipp>
+#include <mo/stats/mo_impl/ex_arnold_generator.ipp>
+#include <mo/stats/mo_impl/cuadras_auge_generator.ipp>
+#include <mo/stats/mo_impl/lfm_cpp_generator.ipp>
+
+#endif // MO_STATS_MO_HPP
