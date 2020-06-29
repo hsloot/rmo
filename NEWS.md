@@ -1,3 +1,9 @@
+# rmo 0.2.2
+
+- Improve internal representation
+- Internal support library now entirely written in C++
+- Make LFM more extendible
+
 # rmo 0.2.1
 
 - Refactoring and additional tests

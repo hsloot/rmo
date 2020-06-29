@@ -6,7 +6,7 @@
 <!-- badges: start -->
 
 ![minimal R
-version](https://img.shields.io/badge/R%3E%3D-3.6.0-6666ff.svg)
+version](https://img.shields.io/badge/R%3E%3D-3.4.0-6666ff.svg)
 ![packageversion](https://img.shields.io/badge/Package%20version-0.2.2-orange.svg?style=flat-square)
 [![Project Status: WIP – Initial development is in progress, but there
 has not yet been a stable, usable release suitable for the

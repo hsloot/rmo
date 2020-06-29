@@ -5,7 +5,7 @@
   ],
   "@type": "SoftwareSourceCode",
   "identifier": "rmo",
-  "description": "\n  The package contains an implementation of the Marshall-Olkin distribution and methods for estimation, simulation, and construction.",
+  "description": "\n  The package contains an implementation of the Marshall-Olkin distribution and \n  methods for estimation, simulation, and construction.",
   "name": "rmo: A package for the Marshall-Olkin distribution",
   "license": "https://spdx.org/licenses/GPL-3.0",
   "version": "0.2.2",
@@ -90,6 +90,12 @@
   "softwareRequirements": [
     {
       "@type": "SoftwareApplication",
+      "identifier": "R",
+      "name": "R",
+      "version": ">=3.4.0"
+    },
+    {
+      "@type": "SoftwareApplication",
       "identifier": "assertthat",
       "name": "assertthat",
       "provider": {
@@ -133,7 +139,6 @@
   "codeRepository": "https://github.com/hsloot/rmo",
   "releaseNotes": "https://github.com/hsloot/rmo/blob/master/NEWS.md",
   "readme": "https://github.com/hsloot/rmo/blob/master/README.md",
-  "fileSize": "53.391KB",
   "contIntegration": [
     "https://travis-ci.org/hsloot/rmo",
     "https://ci.appveyor.com/project/hsloot/rmo",

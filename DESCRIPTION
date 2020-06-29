@@ -8,8 +8,11 @@ Authors@R:
     email = "henrik.sloot@gmail.com",
     comment = c(ORCID = "0000-0001-8582-7776"))
 Description:
-  The package contains an implementation of the Marshall-Olkin distribution and methods for estimation, simulation, and construction.
+  The package contains an implementation of the Marshall-Olkin distribution and 
+  methods for estimation, simulation, and construction.
 License: GPL-3
+Depends:
+  R (>=3.4.0)
 Imports:
     assertthat,
     Rcpp,
