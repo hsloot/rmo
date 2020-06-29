@@ -21,3 +21,4 @@
 ^\.clang_complete$
 ^\.editorconfig$
 ^other$
+^build$
