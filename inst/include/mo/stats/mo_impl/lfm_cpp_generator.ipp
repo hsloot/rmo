@@ -36,12 +36,12 @@ LFMCPPGenerator<Vector, RNGPolicy>::LFMCPPGenerator(
 template<typename Vector, typename RNGPolicy>
 LFMCPPGenerator<Vector, RNGPolicy>& LFMCPPGenerator<Vector, RNGPolicy>::operator=(const LFMCPPGenerator<Vector, RNGPolicy>& other) {
   if (this != &other) {
-    d_(other.d_);
-    rate_drift_(other.rate_drift_);
-    bv_generator_(other.bv_generator_);
-    wt_generator_(other.wt_generator_);
-    kt_generator_(other.kt_generator_);
-    jump_generator_((*other.jump_generator_).clone());
+    d_ = other.d;
+    rate_drift_ = other.rate_drift_;
+    bv_generator_ = other.bv_generator_;
+    wt_generator_ = other.wt_generator_;
+    kt_generator_ = other.kt_generator_;
+    jump_generator_ = (*other.jump_generator_).clone();
   }
   return *this;
 }
