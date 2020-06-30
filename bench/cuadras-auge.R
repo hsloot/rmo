@@ -6,9 +6,12 @@ pkgload::load_all()
 #' For the CPP LFM parameterisation with *no* jump, but drift and killing, we
 #' chose the parameters \( \alpha = 0.6 \) (drift) and \( \beta = 0.2 \) (rate
 #' killing). #+ r parameters
+n <- 1e3
 d <- 15
+
 alpha <- 0.6
 beta <- 0.2
+
 intensities <- intensities_cuadras_auge(d, alpha, beta)
 ex_intensities <- ex_intensities_cuadras_auge(d, alpha, beta)
 

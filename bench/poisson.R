@@ -9,8 +9,10 @@ pkgload::load_all()
 #+ r parameters
 n <- 1e3
 d <- 15
+
 lambda <- 1
 eta <- 0.5
+
 intensities <- intensities_poisson(d, lambda, eta)
 ex_intensities <- ex_intensities_poisson(d, lambda, eta)
 
