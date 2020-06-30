@@ -7,8 +7,8 @@
 \title{Class for the \emph{Gamma Bernstein function}}
 \description{
 The \emph{Gamma Bernstein function}, is the Bernstein function of a
-subordinator with a (scaled) Gamma distribution. The representation is
-for \eqn{a > 0}
+subordinator with a (scaled) Gamma distribution. The representation is for
+\eqn{a > 0}
 \deqn{
   \psi(x) = \log(1 + \frac{x}{a}), x > 0.
 }
@@ -17,12 +17,12 @@ for \eqn{a > 0}
 For this Bernstein function, the higher-order alternating iterated forward
 differences are known in closed form but cannot be evaluated numerically
 without the danger of loss of significance. But we can use numerical
-integration (here: \code{\link[stats]{integrate}}) to approximate it with the
+integration (here: \code{\link[stats:integrate]{stats::integrate()}}) to approximate it with the
 following representation:
 \deqn{
   {(-1)}^{k-1} \Delta^{k} \psi(x)
     = \int_{0}^{\infty} e^{-ux} {(1 - e^{-u})}^{k}
-      e^{-au} / u du, x>0, k>0.
+      \frac{e^{-au}}{u} du, x>0, k>0.
 }
 
 This Bernstein function is no. 26 in the list of complete Bernstein functions

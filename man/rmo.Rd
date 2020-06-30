@@ -5,8 +5,8 @@
 \alias{rmo}
 \title{rmo: A package for the Marshall-Olkin distribution.}
 \description{
-The package contains an implementation of the sampling algorithms related
-to the Marshall-Olkin distribution.
+The package contains an implementation of the sampling algorithms related to
+the Marshall-Olkin distribution.
 }
 \section{Sampling}{
 

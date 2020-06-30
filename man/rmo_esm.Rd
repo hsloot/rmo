@@ -54,9 +54,9 @@ see \insertCite{@see pp. 104 psqq. @Mai2017a}{rmo} and
 
 \strong{The Arnold model} simulates a Marshall--Olkin distributed random variable
 by simulating a marked homogeneous Poisson process and where the
-inter-arrival times correspond to shock shock-arrival times and the
-marks to the specific shocks, see \insertCite{@see Sec. 3.1.2 @Mai2017a}{rmo}
-and \insertCite{Arnold1975a}{rmo}.
+inter-arrival times correspond to shock shock-arrival times and the marks to
+the specific shocks, see \insertCite{@see Sec. 3.1.2 @Mai2017a}{rmo} and
+\insertCite{Arnold1975a}{rmo}.
 }
 \examples{
 rmo_esm(10L, 2L, c(0.4, 0.3, 0.2))

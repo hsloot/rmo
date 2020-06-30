@@ -7,8 +7,8 @@
 \title{Class for the \emph{constant Bernstein function}}
 \description{
 A \emph{constant Bernstein function} is a Bernstein function with only a
-constant part (for \eqn{x > 0}), i.e. \eqn{b = 0} and \eqn{\nu = 0}.
-In particular,
+constant part (for \eqn{x > 0}), i.e. \eqn{b = 0} and \eqn{\nu = 0}. In
+particular,
 \deqn{
   \psi(x) = a , x > 0
 }

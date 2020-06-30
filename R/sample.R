@@ -64,9 +64,9 @@ rmo_esm <- function(n, d, intensities) {
 #' @details
 #' __The Arnold model__ simulates a Marshall--Olkin distributed random variable
 #' by simulating a marked homogeneous Poisson process and where the
-#' inter-arrival times correspond to shock shock-arrival times and the
-#' marks to the specific shocks, see \insertCite{@see Sec. 3.1.2 @Mai2017a}{rmo}
-#' and \insertCite{Arnold1975a}{rmo}.
+#' inter-arrival times correspond to shock shock-arrival times and the marks to
+#' the specific shocks, see \insertCite{@see Sec. 3.1.2 @Mai2017a}{rmo} and
+#' \insertCite{Arnold1975a}{rmo}.
 #'
 #' @return `rmo_arnold` implements the *Arnold model* representation and returns
 #'  an \eqn{n \times d}{n x d} numeric matrix with the rows corresponding to

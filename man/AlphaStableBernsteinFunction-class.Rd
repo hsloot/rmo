@@ -17,12 +17,12 @@ the corresponding Bernstein function is the power function with exponent
 For the \eqn{\alpha}-stable Bernstein function, the higher order alternating
 iterated forward differences are known in closed form but cannot be evaluated
 numerically without the danger of loss of significance. But we can use
-numerical integration (here: \code{\link[stats]{integrate}}) to approximate
-it with the following representation:
+numerical integration (here: \code{\link[stats:integrate]{stats::integrate()}}) to approximate it with the
+following representation:
 \deqn{
   {(-1)}^{k-1} \Delta^k \psi(x)
    = \int_0^\infty e^{-ux} (1-e^{-u})^k
-     \alpha / \Gamma(1-\alpha) u^{-1-\alpha} du, x>0, k>0 .
+     \alpha \frac{1}{\Gamma(1-\alpha) u^{1+\alpha}} du, x>0, k>0 .
 }
 
 This Bernstein function is no. 1 in the list of complete Bernstein functions

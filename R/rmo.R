@@ -7,8 +7,8 @@ NULL
 
 #' rmo: A package for the Marshall-Olkin distribution.
 #'
-#' The package contains an implementation of the sampling algorithms related
-#' to the Marshall-Olkin distribution.
+#' The package contains an implementation of the sampling algorithms related to
+#' the Marshall-Olkin distribution.
 #'
 #' @section Sampling:
 #' - Sample with the *exogenous shock model* from arbitrary Marshall-Olkin

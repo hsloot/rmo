@@ -7,12 +7,11 @@
 #' \deqn{
 #'  \psi(x) = a + b x + \int_0^\infty (1 - e^{-ux}) \nu(du) , x > 0
 #' }
-#' for non-negative constants \eqn{a, b \geq 0}, called \emph{killing rate}
-#' and \emph{drift}, and a \emph{Lévy measure}
-#' \eqn{\nu} on \eqn{(0, \infty)}.
+#' for non-negative constants \eqn{a, b \geq 0}, called \emph{killing rate} and
+#' \emph{drift}, and a \emph{Lévy measure} \eqn{\nu} on \eqn{(0, \infty)}.
 #'
-#' Bernstein functions have a 1-1 relationship to Lévy subordinators s.t.
-#' for every Bernstein function \eqn{\psi}, there exists a Lévy subordinator
+#' Bernstein functions have a 1-1 relationship to Lévy subordinators s.t. for
+#' every Bernstein function \eqn{\psi}, there exists a Lévy subordinator
 #' \eqn{\Lambda} with
 #' \deqn{
 #'   E[e^{-x \Lambda_t}]
@@ -33,12 +32,12 @@
 #' @references
 #'   \insertAllCited{}
 #'
-#' @seealso \linkS4class{ConstantBernsteinFunction},
-#'   \linkS4class{LinearBernsteinFunction},
-#'   \linkS4class{PoissonBernsteinFunction},
-#'   \linkS4class{AlphaStableBernsteinFunction},
-#'   \linkS4class{ScaledBernsteinFunction},
-#'   \linkS4class{SumOfBernsteinFunctions}
+#' @seealso [ConstantBernsteinFunction-class],
+#'   [LinearBernsteinFunction-class],
+#'   [PoissonBernsteinFunction-class],
+#'   [AlphaStableBernsteinFunction-class],
+#'   [ScaledBernsteinFunction-class],
+#'   [SumOfBernsteinFunctions-class]
 #' @importFrom methods new setClass
 setClass("BernsteinFunction", # nolint
   contains = "VIRTUAL")
@@ -50,8 +49,8 @@ setClass("BernsteinFunction", # nolint
 #' Returns values for Bernstein functions
 #'
 #' @description
-#' This method allows you to calculate the values for a Bernstein function
-#' and its higher-order, alternating iterated forward differences, i.e.
+#' This method allows you to calculate the values for a Bernstein function and
+#' its higher-order, alternating iterated forward differences, i.e.
 #' \deqn{
 #'   {(-1)}^{k} \Delta^k \psi(x), x > 0.
 #' }
@@ -65,7 +64,7 @@ setClass("BernsteinFunction", # nolint
 #' @docType methods
 #' @rdname valueOf-methods
 #'
-#' @seealso \linkS4class{BernsteinFunction}
+#' @seealso [BernsteinFunction-class]
 #'
 #' @export
 setGeneric("valueOf",
@@ -86,14 +85,13 @@ setGeneric("valueOf",
 #'   (i.e. \eqn{b} in the representation)
 #'
 #' @description
-#' \emph{A linear Bernstein function} is a Bernstein function with only
-#' a drift, i.e. \eqn{a = 0} and \eqn{\nu = 0}.
-#' In particular,
+#' \emph{A linear Bernstein function} is a Bernstein function with only a drift,
+#' i.e. \eqn{a = 0} and \eqn{\nu = 0}. In particular,
 #' \deqn{
 #'  \psi(x) = b x, x > 0.
 #' }
 #'
-#' @seealso \linkS4class{BernsteinFunction}
+#' @seealso [BernsteinFunction-class]
 #'
 #' @importFrom methods new setClass
 #' @include assert.R
@@ -113,7 +111,7 @@ LinearBernsteinFunction <- setClass("LinearBernsteinFunction", # nolint
 #' @rdname valueOf-methods
 #' @aliases valueOf,LinearBernsteinFunction,numeric,integer,ANY-method
 #'
-#' @seealso \linkS4class{LinearBernsteinFunction}
+#' @seealso [LinearBernsteinFunction-class]
 #'
 #' @importFrom methods setMethod
 #' @include assert.R
@@ -144,13 +142,13 @@ setMethod("valueOf",
 #'
 #' @description
 #' A \emph{constant Bernstein function} is a Bernstein function with only a
-#' constant part (for \eqn{x > 0}), i.e. \eqn{b = 0} and \eqn{\nu = 0}.
-#' In particular,
+#' constant part (for \eqn{x > 0}), i.e. \eqn{b = 0} and \eqn{\nu = 0}. In
+#' particular,
 #' \deqn{
 #'   \psi(x) = a , x > 0
 #' }
 #'
-#' @seealso \linkS4class{BernsteinFunction}
+#' @seealso [BernsteinFunction-class]
 #'
 #' @importFrom methods new setClass
 #' @include assert.R
@@ -170,7 +168,7 @@ ConstantBernsteinFunction <- setClass("ConstantBernsteinFunction", # nolint
 #' @rdname valueOf-methods
 #' @aliases valueOf,ConstantBernsteinFunction,numeric,integer,ANY-method
 #'
-#' @seealso \linkS4class{ConstantBernsteinFunction}
+#' @seealso [ConstantBernsteinFunction-class]
 #'
 #' @importFrom methods setMethod
 #' @include assert.R
@@ -211,7 +209,7 @@ setMethod("valueOf", # nolint
 #' }
 #' is also a Bernstein function.
 #'
-#' @seealso \linkS4class{BernsteinFunction}
+#' @seealso [BernsteinFunction-class]
 #'
 #' @importFrom methods new setClass
 #' @include assert.R
@@ -231,7 +229,7 @@ ScaledBernsteinFunction <- setClass("ScaledBernsteinFunction", # nolint
 #' @rdname valueOf-methods
 #' @aliases valueOf,ScaledBernsteinFunction,numeric,integer,ANY-method
 #'
-#' @seealso \linkS4class{ScaledBernsteinFunction}
+#' @seealso [ScaledBernsteinFunction-class]
 #'
 #' @importFrom methods setMethod
 #' @include assert.R
@@ -255,14 +253,14 @@ setMethod("valueOf",
 #' @slot second The second summand (Bernstein function).
 #'
 #' @description
-#' Bernstein functions are stable under addition, i.e. if \eqn{\psi_1}
-#' and \eqn{\psi_2} are two Bernstein functions, then
+#' Bernstein functions are stable under addition, i.e. if \eqn{\psi_1} and
+#' \eqn{\psi_2} are two Bernstein functions, then
 #' \deqn{
 #'   x \mapsto \psi_1(x) + \psi_2(x) , x>0,
 #' }
 #' is also a Bernstein function.
 #'
-#' @seealso \linkS4class{BernsteinFunction}
+#' @seealso [BernsteinFunction-class]
 #'
 #' @importFrom methods new setClass
 #'
@@ -274,7 +272,7 @@ SumOfBernsteinFunctions <- setClass("SumOfBernsteinFunctions", # nolint
 #' @rdname valueOf-methods
 #' @aliases valueOf,SumOfBernsteinFunctions,numeric,integer,ANY-method
 #'
-#' @seealso \linkS4class{SumOfBernsteinFunctions}
+#' @seealso [SumOfBernsteinFunctions-class]
 #'
 #' @importFrom methods setMethod
 #' @include assert.R
@@ -313,7 +311,7 @@ setMethod("valueOf",
 #'   {(-1)}^{k-1} \Delta^k \psi(x) = e^{-u\eta} (1-e^{-\eta})^k, x>0, k>0.
 #' }
 #'
-#' @seealso \linkS4class{BernsteinFunction}
+#' @seealso [BernsteinFunction-class]
 #'
 #' @importFrom methods new setClass
 #' @include assert.R
@@ -334,7 +332,7 @@ PoissonBernsteinFunction <- setClass("PoissonBernsteinFunction", # nolint
 #' @rdname valueOf-methods
 #' @aliases valueOf,PoissonBernsteinFunction,numeric,integer,ANY-method
 #'
-#' @seealso \linkS4class{PoissonBernsteinFunction}
+#' @seealso [PoissonBernsteinFunction-class]
 #'
 #' @importFrom methods setMethod
 #' @include assert.R
@@ -377,12 +375,12 @@ setMethod("valueOf",
 #' For the \eqn{\alpha}-stable Bernstein function, the higher order alternating
 #' iterated forward differences are known in closed form but cannot be evaluated
 #' numerically without the danger of loss of significance. But we can use
-#' numerical integration (here: \code{\link[stats]{integrate}}) to approximate
-#' it with the following representation:
+#' numerical integration (here: [stats::integrate()]) to approximate it with the
+#' following representation:
 #' \deqn{
 #'   {(-1)}^{k-1} \Delta^k \psi(x)
 #'    = \int_0^\infty e^{-ux} (1-e^{-u})^k
-#'      \alpha / \Gamma(1-\alpha) u^{-1-\alpha} du, x>0, k>0 .
+#'      \alpha \frac{1}{\Gamma(1-\alpha) u^{1+\alpha}} du, x>0, k>0 .
 #' }
 #'
 #' This Bernstein function is no. 1 in the list of complete Bernstein functions
@@ -391,7 +389,7 @@ setMethod("valueOf",
 #' @references
 #'   \insertAllCited{}
 #'
-#' @seealso \linkS4class{BernsteinFunction}
+#' @seealso [BernsteinFunction-class]
 #'
 #' @importFrom methods new setClass
 #' @importFrom assertthat is.number
@@ -412,7 +410,7 @@ AlphaStableBernsteinFunction <- setClass("AlphaStableBernsteinFunction", # nolin
 #' @rdname valueOf-methods
 #' @aliases valueOf,AlphaStableBernsteinFunction,numeric,integer,ANY-method
 #'
-#' @seealso \linkS4class{AlphaStableBernsteinFunction}
+#' @seealso [AlphaStableBernsteinFunction-class]
 #'
 #' @importFrom methods setMethod
 #' @importFrom stats integrate
@@ -449,8 +447,8 @@ setMethod("valueOf",
 #'
 #' @description
 #' The \emph{Gamma Bernstein function}, is the Bernstein function of a
-#' subordinator with a (scaled) Gamma distribution. The representation is
-#' for \eqn{a > 0}
+#' subordinator with a (scaled) Gamma distribution. The representation is for
+#' \eqn{a > 0}
 #' \deqn{
 #'   \psi(x) = \log(1 + \frac{x}{a}), x > 0.
 #' }
@@ -459,12 +457,12 @@ setMethod("valueOf",
 #' For this Bernstein function, the higher-order alternating iterated forward
 #' differences are known in closed form but cannot be evaluated numerically
 #' without the danger of loss of significance. But we can use numerical
-#' integration (here: \code{\link[stats]{integrate}}) to approximate it with the
+#' integration (here: [stats::integrate()]) to approximate it with the
 #' following representation:
 #' \deqn{
 #'   {(-1)}^{k-1} \Delta^{k} \psi(x)
 #'     = \int_{0}^{\infty} e^{-ux} {(1 - e^{-u})}^{k}
-#'       e^{-au} / u du, x>0, k>0.
+#'       \frac{e^{-au}}{u} du, x>0, k>0.
 #' }
 #'
 #' This Bernstein function is no. 26 in the list of complete Bernstein functions
@@ -473,7 +471,7 @@ setMethod("valueOf",
 #' @references
 #'   \insertAllCited{}
 #'
-#' @seealso \linkS4class{BernsteinFunction}
+#' @seealso [BernsteinFunction-class]
 #'
 #' @importFrom methods new setClass
 #' @include assert.R
@@ -493,7 +491,7 @@ GammaBernsteinFunction <- setClass("GammaBernsteinFunction", # nolint
 #' @rdname valueOf-methods
 #' @aliases valueOf,GammaBernsteinFunction,numeric,integer,ANY-method
 #'
-#' @seealso \linkS4class{GammaBernsteinFunction}
+#' @seealso [GammaBernsteinFunction-class]
 #'
 #' @importFrom methods setMethod
 #' @importFrom stats integrate
@@ -529,9 +527,8 @@ setMethod("valueOf",
 #' @slot x0 The cutoff point \eqn{x_0}
 #'
 #' @description
-#' For the Pareto-jump compound Poisson process with
-#' index \eqn{0 < \alpha < 1} and cutoff point \eqn{x0},
-#' the corresponding Bernstein function is
+#' For the Pareto-jump compound Poisson process with index \eqn{0 < \alpha < 1}
+#' and cutoff point \eqn{x0}, the corresponding Bernstein function is
 #' \deqn{
 #'   \psi(x)
 #'   = 1 - e^{-x x_0} + (x_0 x)^\alpha \Gamma(1-\alpha, x_0 x) ,
@@ -539,8 +536,11 @@ setMethod("valueOf",
 #' }
 #'
 #' @details
-#' For this Bernstein function, the higher order alternating must
-#' be evaluated numerically using the integral representation
+#' For this Bernstein function, the higher-order alternating iterated forward
+#' differences are known in closed form but cannot be evaluated numerically
+#' without the danger of loss of significance. But we can use numerical
+#' integration (here: [stats::integrate()]) to approximate it with the following
+#' representation:
 #' \deqn{
 #'   {(-1)}^{k-1} \Delta^k \psi(x)
 #'   = \int_{x_0}^\infty e^{-ux} (1-e^{-u})^k
@@ -548,10 +548,10 @@ setMethod("valueOf",
 #'   x>0, k>0 .
 #' }
 #'
-#' The Pareto Bernstein function, in combination with a linear
-#' Bernstein function can be used to approximate the Bernstein
-#' function of an \eqn{\alpha}-stable Subordinator, see
-#' Sec. 5.3 of \insertCite{Fernandez2015a}{rmo}.
+#' The Pareto Bernstein function, in combination with a linear Bernstein
+#' function can be used to approximate the Bernstein function of an
+#' \eqn{\alpha}-stable Subordinator, see Sec. 5.3 of
+#' \insertCite{Fernandez2015a}{rmo}.
 #'
 #' @references
 #'   \insertAllCited{}

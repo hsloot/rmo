@@ -6,9 +6,8 @@
 \alias{LinearBernsteinFunction}
 \title{Class for the \emph{linear Bernstein function}}
 \description{
-\emph{A linear Bernstein function} is a Bernstein function with only
-a drift, i.e. \eqn{a = 0} and \eqn{\nu = 0}.
-In particular,
+\emph{A linear Bernstein function} is a Bernstein function with only a drift,
+i.e. \eqn{a = 0} and \eqn{\nu = 0}. In particular,
 \deqn{
  \psi(x) = b x, x > 0.
 }

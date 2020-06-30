@@ -6,9 +6,8 @@
 \alias{ParetoBernsteinFunction}
 \title{Class for the \emph{Pareto Bernstein function}}
 \description{
-For the Pareto-jump compound Poisson process with
-index \eqn{0 < \alpha < 1} and cutoff point \eqn{x0},
-the corresponding Bernstein function is
+For the Pareto-jump compound Poisson process with index \eqn{0 < \alpha < 1}
+and cutoff point \eqn{x0}, the corresponding Bernstein function is
 \deqn{
   \psi(x)
   = 1 - e^{-x x_0} + (x_0 x)^\alpha \Gamma(1-\alpha, x_0 x) ,
@@ -16,8 +15,11 @@ the corresponding Bernstein function is
 }
 }
 \details{
-For this Bernstein function, the higher order alternating must
-be evaluated numerically using the integral representation
+For this Bernstein function, the higher-order alternating iterated forward
+differences are known in closed form but cannot be evaluated numerically
+without the danger of loss of significance. But we can use numerical
+integration (here: \code{\link[stats:integrate]{stats::integrate()}}) to approximate it with the following
+representation:
 \deqn{
   {(-1)}^{k-1} \Delta^k \psi(x)
   = \int_{x_0}^\infty e^{-ux} (1-e^{-u})^k
@@ -25,10 +27,10 @@ be evaluated numerically using the integral representation
   x>0, k>0 .
 }
 
-The Pareto Bernstein function, in combination with a linear
-Bernstein function can be used to approximate the Bernstein
-function of an \eqn{\alpha}-stable Subordinator, see
-Sec. 5.3 of \insertCite{Fernandez2015a}{rmo}.
+The Pareto Bernstein function, in combination with a linear Bernstein
+function can be used to approximate the Bernstein function of an
+\eqn{\alpha}-stable Subordinator, see Sec. 5.3 of
+\insertCite{Fernandez2015a}{rmo}.
 }
 \section{Slots}{
 

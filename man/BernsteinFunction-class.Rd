@@ -10,13 +10,12 @@ Bernstein functions which have a representaion
 \deqn{
  \psi(x) = a + b x + \int_0^\infty (1 - e^{-ux}) \nu(du) , x > 0
 }
-for non-negative constants \eqn{a, b \geq 0}, called \emph{killing rate}
-and \emph{drift}, and a \emph{Lévy measure}
-\eqn{\nu} on \eqn{(0, \infty)}.
+for non-negative constants \eqn{a, b \geq 0}, called \emph{killing rate} and
+\emph{drift}, and a \emph{Lévy measure} \eqn{\nu} on \eqn{(0, \infty)}.
 }
 \details{
-Bernstein functions have a 1-1 relationship to Lévy subordinators s.t.
-for every Bernstein function \eqn{\psi}, there exists a Lévy subordinator
+Bernstein functions have a 1-1 relationship to Lévy subordinators s.t. for
+every Bernstein function \eqn{\psi}, there exists a Lévy subordinator
 \eqn{\Lambda} with
 \deqn{
   E[e^{-x \Lambda_t}]

@@ -49,8 +49,8 @@ differences taken on the Bernstein function (\eqn{k} in
 the representation).}
 }
 \description{
-This method allows you to calculate the values for a Bernstein function
-and its higher-order, alternating iterated forward differences, i.e.
+This method allows you to calculate the values for a Bernstein function and
+its higher-order, alternating iterated forward differences, i.e.
 \deqn{
   {(-1)}^{k} \Delta^k \psi(x), x > 0.
 }
