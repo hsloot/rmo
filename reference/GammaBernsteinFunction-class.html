@@ -41,8 +41,8 @@
 
 <meta property="og:title" content="Class for the <em>Gamma Bernstein function</em> — GammaBernsteinFunction-class" />
 <meta property="og:description" content="The Gamma Bernstein function, is the Bernstein function of a
-subordinator with a (scaled) Gamma distribution. The representation is
-for \(a &amp;gt; 0\)
+subordinator with a (scaled) Gamma distribution. The representation is for
+\(a &amp;gt; 0\)
 $$
   \psi(x) = \log(1 + \frac{x}{a}), x &amp;gt; 0.
 $$" />
@@ -150,8 +150,8 @@ $$" />
 
     <div class="ref-description">
     <p>The <em>Gamma Bernstein function</em>, is the Bernstein function of a
-subordinator with a (scaled) Gamma distribution. The representation is
-for \(a &gt; 0\)
+subordinator with a (scaled) Gamma distribution. The representation is for
+\(a &gt; 0\)
 $$
   \psi(x) = \log(1 + \frac{x}{a}), x &gt; 0.
 $$</p>
@@ -164,12 +164,12 @@ $$</p>
     <p>For this Bernstein function, the higher-order alternating iterated forward
 differences are known in closed form but cannot be evaluated numerically
 without the danger of loss of significance. But we can use numerical
-integration (here: <code><a href='https://rdrr.io/r/stats/integrate.html'>integrate</a></code>) to approximate it with the
+integration (here: <code><a href='https://rdrr.io/r/stats/integrate.html'>stats::integrate()</a></code>) to approximate it with the
 following representation:
 $$
   {(-1)}^{k-1} \Delta^{k} \psi(x)
     = \int_{0}^{\infty} e^{-ux} {(1 - e^{-u})}^{k}
-      e^{-au} / u du, x&gt;0, k&gt;0.
+      \frac{e^{-au}}{u} du, x&gt;0, k&gt;0.
 $$</p>
 <p>This Bernstein function is no. 26 in the list of complete Bernstein functions
 in Chp. 16 of (Schilling et al. 2012)

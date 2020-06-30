@@ -40,9 +40,8 @@
 
 
 <meta property="og:title" content="Class for the <em>Pareto Bernstein function</em> — ParetoBernsteinFunction-class" />
-<meta property="og:description" content="For the Pareto-jump compound Poisson process with
-index \(0 &amp;lt; \alpha &amp;lt; 1\) and cutoff point \(x0\),
-the corresponding Bernstein function is
+<meta property="og:description" content="For the Pareto-jump compound Poisson process with index \(0 &amp;lt; \alpha &amp;lt; 1\)
+and cutoff point \(x0\), the corresponding Bernstein function is
 $$
   \psi(x)
   = 1 - e^{-x x_0} + (x_0 x)^\alpha \Gamma(1-\alpha, x_0 x) ,
@@ -151,9 +150,8 @@ $$" />
     </div>
 
     <div class="ref-description">
-    <p>For the Pareto-jump compound Poisson process with
-index \(0 &lt; \alpha &lt; 1\) and cutoff point \(x0\),
-the corresponding Bernstein function is
+    <p>For the Pareto-jump compound Poisson process with index \(0 &lt; \alpha &lt; 1\)
+and cutoff point \(x0\), the corresponding Bernstein function is
 $$
   \psi(x)
   = 1 - e^{-x x_0} + (x_0 x)^\alpha \Gamma(1-\alpha, x_0 x) ,
@@ -165,18 +163,21 @@ $$</p>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>For this Bernstein function, the higher order alternating must
-be evaluated numerically using the integral representation
+    <p>For this Bernstein function, the higher-order alternating iterated forward
+differences are known in closed form but cannot be evaluated numerically
+without the danger of loss of significance. But we can use numerical
+integration (here: <code><a href='https://rdrr.io/r/stats/integrate.html'>stats::integrate()</a></code>) to approximate it with the following
+representation:
 $$
   {(-1)}^{k-1} \Delta^k \psi(x)
   = \int_{x_0}^\infty e^{-ux} (1-e^{-u})^k
   \alpha \frac{{x_0}^\alpha}{t^{1+\alpha}} du,
   x&gt;0, k&gt;0 .
 $$</p>
-<p>The Pareto Bernstein function, in combination with a linear
-Bernstein function can be used to approximate the Bernstein
-function of an \(\alpha\)-stable Subordinator, see
-Sec. 5.3 of (Loroño 2015)
+<p>The Pareto Bernstein function, in combination with a linear Bernstein
+function can be used to approximate the Bernstein function of an
+\(\alpha\)-stable Subordinator, see Sec. 5.3 of
+(Loroño 2015)
 .</p>
     <h2 class="hasAnchor" id="slots"><a class="anchor" href="#slots"></a>Slots</h2>
 
