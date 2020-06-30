@@ -27,17 +27,17 @@ valueOf(object, x, difference_order)
 
 \S4method{valueOf}{ConstantBernsteinFunction,numeric,integer}(object, x, difference_order = 0)
 
-\S4method{valueOf}{ScaledBernsteinFunction,numeric,integer}(object, x, difference_order = 0)
+\S4method{valueOf}{ScaledBernsteinFunction,numeric,integer}(object, x, difference_order = 0L)
 
-\S4method{valueOf}{SumOfBernsteinFunctions,numeric,integer}(object, x, difference_order = 0)
+\S4method{valueOf}{SumOfBernsteinFunctions,numeric,integer}(object, x, difference_order = 0L)
 
-\S4method{valueOf}{PoissonBernsteinFunction,numeric,integer}(object, x, difference_order = 0)
+\S4method{valueOf}{PoissonBernsteinFunction,numeric,integer}(object, x, difference_order = 0L)
 
-\S4method{valueOf}{AlphaStableBernsteinFunction,numeric,integer}(object, x, difference_order = 0)
+\S4method{valueOf}{AlphaStableBernsteinFunction,numeric,integer}(object, x, difference_order = 0L)
 
-\S4method{valueOf}{GammaBernsteinFunction,numeric,integer}(object, x, difference_order = 0)
+\S4method{valueOf}{GammaBernsteinFunction,numeric,integer}(object, x, difference_order = 0L)
 
-\S4method{valueOf}{ParetoBernsteinFunction,numeric,integer}(object, x, difference_order = 0)
+\S4method{valueOf}{ParetoBernsteinFunction,numeric,integer}(object, x, difference_order = 0L)
 }
 \arguments{
 \item{object}{The Bernstein function object.}

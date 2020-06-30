@@ -1,7 +1,7 @@
 #' @keywords internal
 #' @noRd
 bf2ex_intensities <- function(d, bf) { # nocov start
-  sapply(1:d, function(i) valueOf(bf, d-i, i))
+  sapply(1:d, function(i) valueOf(bf, d-i, as.integer(i)))
 } # nocov end
 
 #' @keywords internal

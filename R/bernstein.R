@@ -237,7 +237,7 @@ ScaledBernsteinFunction <- setClass("ScaledBernsteinFunction", # nolint
 #' @export
 setMethod("valueOf",
   signature = c("ScaledBernsteinFunction", "numeric", "integer"),
-  definition = function(object, x, difference_order=0) {
+  definition = function(object, x, difference_order=0L) {
     object@scale * valueOf(object@original, x, difference_order)
   })
 
@@ -280,7 +280,7 @@ SumOfBernsteinFunctions <- setClass("SumOfBernsteinFunctions", # nolint
 #' @export
 setMethod("valueOf",
   signature = c("SumOfBernsteinFunctions", "numeric", "integer"),
-  definition = function(object, x, difference_order=0) {
+  definition = function(object, x, difference_order=0L) {
     valueOf(object@first, x, difference_order) +
       valueOf(object@second, x, difference_order)
   })
@@ -340,7 +340,7 @@ PoissonBernsteinFunction <- setClass("PoissonBernsteinFunction", # nolint
 #' @export
 setMethod("valueOf",
   signature = c("PoissonBernsteinFunction", "numeric", "integer"),
-  definition = function(object, x, difference_order=0) {
+  definition = function(object, x, difference_order=0L) {
     assert_that(is_nonnegative_number(difference_order),
       is_nonnegative_vector(x))
 
@@ -419,18 +419,20 @@ AlphaStableBernsteinFunction <- setClass("AlphaStableBernsteinFunction", # nolin
 #' @export
 setMethod("valueOf",
   signature = c("AlphaStableBernsteinFunction", "numeric", "integer"),
-  definition = function(object, x, difference_order=0) {
+  definition = function(object, x, difference_order=0L) {
     assert_that(is_nonnegative_number(difference_order),
       is_nonnegative_vector(x))
 
-    if (difference_order > 0) {
+    if (0L == difference_order) {
+      x^object@alpha
+    } else if (1L == difference_order) {
+      valueOf(object, x+1, 0L) - valueOf(object, x, 0L)
+    } else {
       sapply(x, function(y) integrate(
         f=function(u) {
           exp(-y * u) * (1 - exp(-u))^difference_order *
             object@alpha / gamma(1-object@alpha) * u ^ (-1-object@alpha) ## Lévy density
         }, lower = 0, upper = Inf)$value)
-    } else {
-      x^object@alpha
     }
   })
 
@@ -500,11 +502,11 @@ GammaBernsteinFunction <- setClass("GammaBernsteinFunction", # nolint
 #' @export
 setMethod("valueOf",
   signature = c("GammaBernsteinFunction", "numeric", "integer"),
-  definition = function(object, x, difference_order=0) {
+  definition = function(object, x, difference_order=0L) {
     assert_that(is_nonnegative_number(difference_order),
       is_nonnegative_vector(x))
 
-    if (difference_order > 0) {
+    if (0L < difference_order) {
       sapply(x, function(y) integrate(
         f=function(u) {
           exp(-y*u) * (1 - exp(-u))^difference_order *
@@ -586,19 +588,21 @@ ParetoBernsteinFunction <- setClass("ParetoBernsteinFunction", # nolint
 #' @export
 setMethod("valueOf",
   signature = c("ParetoBernsteinFunction", "numeric", "integer"),
-  definition = function(object, x, difference_order=0) {
+  definition = function(object, x, difference_order=0L) {
     assert_that(is_nonnegative_number(difference_order),
       is_nonnegative_vector(x))
 
-    if (difference_order > 0) {
+    if (0L == difference_order) {
+      1 - exp(-object@x0*x) + (x*object@x0) ^ (object@alpha) *
+        pgamma(object@x0*x, 1-object@alpha, lower.tail=FALSE) *
+        gamma(1-object@alpha)
+    } else if (1L == difference_order) {
+      valueOf(object, x+1, 0L) - valueOf(object, x, 0L)
+    } else {
       sapply(x, function(y) integrate(
         f=function(u) {
           exp(-y * u) * (1-exp(-u))^difference_order *
             object@alpha * (object@x0 / u) ^ (object@alpha) / u ## Lévy density
         }, lower=object@x0, upper=Inf)$value)
-    } else {
-      1 - exp(-object@x0*x) + (x*object@x0) ^ (object@alpha) *
-        pgamma(object@x0*x, 1-object@alpha, lower.tail=FALSE) *
-        gamma(1-object@alpha)
     }
   })

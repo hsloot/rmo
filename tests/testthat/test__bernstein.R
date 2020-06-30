@@ -146,7 +146,6 @@ test_that("`valueOf` for `PoissonBernsteinFunction`", {
 })
 
 test_that("`valueOf` for `AlphaStableBernsteinFunction`", {
-  k <- 5L
   alpha <- 0.5
   bf <- AlphaStableBernsteinFunction(alpha=alpha)
 
@@ -154,6 +153,15 @@ test_that("`valueOf` for `AlphaStableBernsteinFunction`", {
   expect_equal(valueOf(bf, x, difference_order=0L),
     x^alpha)
 
+  k <- 1L
+  y <- sort(unique(union(x, x+k)))
+  expect_equal(
+    valueOf(bf, x, difference_order=k),
+    (-1) ^ (k-1) * diff(
+      valueOf(bf, y, difference_order=0L),
+      differences=k)[seq_along(x)])
+
+  k <- 5L
   y <- sort(unique(union(x, x+k)))
   expect_equal(
     valueOf(bf, x, difference_order=k),
@@ -199,7 +207,6 @@ test_that("`valueOf` for `GammaBernsteinFunction`", {
 })
 
 test_that("`valueOf` for `ParetoBernsteinFunction`", {
-  k <- 5L
   alpha <- 0.05
   x0 <- 0.5
   bf <- ParetoBernsteinFunction(alpha=alpha, x0=x0)
@@ -209,6 +216,15 @@ test_that("`valueOf` for `ParetoBernsteinFunction`", {
     1-exp(-x0*x) + (x*x0) ^ (alpha) *
     pgamma(x0*x, 1-alpha, lower=FALSE) * gamma(1-alpha))
 
+  k <- 1L
+  y <- sort(unique(union(x, x+k)))
+  expect_equal(
+    valueOf(bf, x, difference_order=k),
+    (-1) ^ (k-1) * diff(
+      valueOf(bf, y, difference_order=0L),
+      differences=k)[seq_along(x)])
+
+  k <- 5L
   y <- sort(unique(union(x, x+k)))
   expect_equal(
     valueOf(bf, x, difference_order=k),
