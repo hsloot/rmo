@@ -1,18 +1,18 @@
+#+ r load-all
 pkgload::load_all()
 
-## Number of samples
-n <- 1e3
-
-## Dimension
+#' ## Only killing and drift ##
+#'
+#' For the CPP LFM parameterisation with *no* jump, but drift and killing, we
+#' chose the parameters \( \alpha = 0.6 \) (drift) and \( \beta = 0.2 \) (rate
+#' killing). #+ r parameters
 d <- 15
-
-## Parameters for the Cuadras-Augé distribution
 alpha <- 0.6
 beta <- 0.2
 intensities <- intensities_cuadras_auge(d, alpha, beta)
 ex_intensities <- ex_intensities_cuadras_auge(d, alpha, beta)
 
-## Run benchmark
+#+ r bench
 bench::mark(
   CuadrasAuge = rmo:::Rcpp__rmo_esm_cuadras_auge(n, d, alpha, beta),
   ExArnold = rmo:::Rcpp__rmo_ex_arnold(n, d, ex_intensities),
@@ -21,5 +21,4 @@ bench::mark(
   Arnold = rmo:::Rcpp__rmo_arnold(n, d, intensities),
   ESM = rmo:::Rcpp__rmo_esm( n, d, intensities),
   min_iterations = 100L,
-  check=FALSE
-)
+  check=FALSE)
