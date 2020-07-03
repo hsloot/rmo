@@ -1,6 +1,8 @@
 #ifndef MO_STATS_GENERATOR_IMPL_PARETOGENERATOR_IPP
 #define MO_STATS_GENERATOR_IMPL_PARETOGENERATOR_IPP
 
+#include <cmath>
+
 #include <memory>
 #include <utility>
 
