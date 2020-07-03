@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Class for the <em>constant Bernstein function</em> — ConstantBernsteinFunction-class • rmo</title>
+<title>Class for the Exponential jump CPP Bernstein function — ExponentialBernsteinFunction-class • rmo</title>
 
 
 <!-- jquery -->
@@ -39,12 +39,11 @@
 
 
 
-<meta property="og:title" content="Class for the <em>constant Bernstein function</em> — ConstantBernsteinFunction-class" />
-<meta property="og:description" content="A constant Bernstein function is a Bernstein function with only a
-constant part (for \(x &amp;gt; 0\)), i.e. \(b = 0\) and \(\nu = 0\). In
-particular,
+<meta property="og:title" content="Class for the Exponential jump CPP Bernstein function — ExponentialBernsteinFunction-class" />
+<meta property="og:description" content="For the Exponential jump CPP subordinator with \(\lambda &amp;gt; 0\),
+the corresponding Bernstein function is
 $$
-  \psi(x) = a , x &amp;gt; 0
+  \psi(x) = \frac{x}{x + \lambda}, x&amp;gt;0.
 $$" />
 
 
@@ -143,37 +142,53 @@ $$" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Class for the <em>constant Bernstein function</em></h1>
+    <h1>Class for the Exponential jump CPP Bernstein function</h1>
     <small class="dont-index">Source: <a href='https://github.com/hsloot/rmo/blob/master/R/bernstein.R'><code>R/bernstein.R</code></a></small>
-    <div class="hidden name"><code>ConstantBernsteinFunction-class.Rd</code></div>
+    <div class="hidden name"><code>ExponentialBernsteinFunction-class.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>A <em>constant Bernstein function</em> is a Bernstein function with only a
-constant part (for \(x &gt; 0\)), i.e. \(b = 0\) and \(\nu = 0\). In
-particular,
+    <p>For the Exponential jump CPP subordinator with \(\lambda &gt; 0\),
+the corresponding Bernstein function is
 $$
-  \psi(x) = a , x &gt; 0
+  \psi(x) = \frac{x}{x + \lambda}, x&gt;0.
 $$</p>
     </div>
 
 
 
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>For the Exponential jump CPP Bernstein function, the higher order
+alternating iterated forward differences are known in closed form:
+$$
+  {(-1)}^{k-1} \Delta^k \psi(x)
+   = \lambda \cdot B(k+1, x+\lambda), x&gt;0, k&gt;0 .
+$$</p>
+<p>This Bernstein function is no. 4 in the list of complete Bernstein functions
+in Chp. 16 of (Schilling et al. 2012)
+.</p>
     <h2 class="hasAnchor" id="slots"><a class="anchor" href="#slots"></a>Slots</h2>
 
     
 
 <dl>
-<dt><code>constant</code></dt><dd><p>The non-negative <em>killing</em> parameter (i.e. \(a\)
-in the representation)</p></dd>
+<dt><code>lambda</code></dt><dd><p>The index \(\lambda\).</p></dd>
 
 </dl>
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+
+    <p>Schilling RL, Song R, Vondracek Z (2012).
+<em>Bernstein functions</em>, 2 edition.
+De Gruyter.
+doi: <a href='https://doi.org/10.1515/9783110269338'>10.1515/9783110269338</a>
+.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>BernsteinFunction</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>bf</span> <span class='op'>&lt;-</span> <span class='fu'>ConstantBernsteinFunction</span>(constant = <span class='fl'>0.2</span>)
+    <pre class="examples"><div class='input'><span class='kw'>bf</span> <span class='op'>&lt;-</span> <span class='fu'>ExponentialBernsteinFunction</span>(lambda=<span class='fl'>0.5</span>)
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
