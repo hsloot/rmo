@@ -174,6 +174,32 @@ intensities_alpha_stable <- function(d, alpha) { # nocov start
 } # nocov end
 
 
+#' @param lambda lambda parameter for Exponential-jump CPP subordinator, passed to `lambda`
+#'   parameter of [ExponentialBernsteinFunction-class]
+#'
+#' @seealso [ExponentialBernsteinFunction-class]
+#'
+#' @examples
+#' ex_intensities_exponential(10L, lambda=0.4)
+#'
+#' @export
+#' @rdname parameter
+ex_intensities_exponential <- function(d, lambda) { # nocov start
+  bf <- ExponentialBernsteinFunction(lambda=lambda)
+  bf2ex_intensities(d, bf)
+} # nocov end
+
+#' @examples
+#' intensities_exponential(10L, lambda=0.4)
+#'
+#' @export
+#' @rdname parameter
+intensities_exponential <- function(d, lambda) { # nocov start
+  ex_intensities2intensities(
+    ex_intensities_exponential(d, lambda))
+} # nocov end
+
+
 #' @param a Shape parameter for Gamma subordinator, passed to `a` parameter of
 #'   [GammaBernsteinFunction-class]
 #'

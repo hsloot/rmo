@@ -15,6 +15,8 @@
 \alias{valueOf,PoissonBernsteinFunction,numeric,integer,ANY-method}
 \alias{valueOf,AlphaStableBernsteinFunction,numeric,integer-method}
 \alias{valueOf,AlphaStableBernsteinFunction,numeric,integer,ANY-method}
+\alias{valueOf,ExponentialBernsteinFunction,numeric,integer-method}
+\alias{valueOf,ExponentialBernsteinFunction,numeric,integer,ANY-method}
 \alias{valueOf,GammaBernsteinFunction,numeric,integer-method}
 \alias{valueOf,GammaBernsteinFunction,numeric,integer,ANY-method}
 \alias{valueOf,ParetoBernsteinFunction,numeric,integer-method}
@@ -34,6 +36,8 @@ valueOf(object, x, difference_order)
 \S4method{valueOf}{PoissonBernsteinFunction,numeric,integer}(object, x, difference_order = 0L)
 
 \S4method{valueOf}{AlphaStableBernsteinFunction,numeric,integer}(object, x, difference_order = 0L)
+
+\S4method{valueOf}{ExponentialBernsteinFunction,numeric,integer}(object, x, difference_order = 0L)
 
 \S4method{valueOf}{GammaBernsteinFunction,numeric,integer}(object, x, difference_order = 0L)
 
@@ -69,6 +73,8 @@ its higher-order, alternating iterated forward differences, i.e.
 \linkS4class{PoissonBernsteinFunction}
 
 \linkS4class{AlphaStableBernsteinFunction}
+
+\linkS4class{ExponentialBernsteinFunction}
 
 \linkS4class{GammaBernsteinFunction}
 

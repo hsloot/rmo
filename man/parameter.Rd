@@ -12,6 +12,8 @@
 \alias{intensities_poisson}
 \alias{ex_intensities_alpha_stable}
 \alias{intensities_alpha_stable}
+\alias{ex_intensities_exponential}
+\alias{intensities_exponential}
 \alias{ex_intensities_gamma}
 \alias{intensities_gamma}
 \alias{ex_intensities_pareto}
@@ -38,6 +40,10 @@ ex_intensities_alpha_stable(d, alpha)
 
 intensities_alpha_stable(d, alpha)
 
+ex_intensities_exponential(d, lambda)
+
+intensities_exponential(d, lambda)
+
 ex_intensities_gamma(d, a)
 
 intensities_gamma(d, a)
@@ -61,8 +67,8 @@ parameter of \linkS4class{ParetoBernsteinFunction}}
 \item{beta}{Rate for global shock, passed to \code{constant} parameter for
 \linkS4class{ConstantBernsteinFunction}}
 
-\item{lambda}{Rate for Poisson process, passed to \code{lambda} parameter
-\linkS4class{PoissonBernsteinFunction}}
+\item{lambda}{lambda parameter for Exponential-jump CPP subordinator, passed to \code{lambda}
+parameter of \linkS4class{ExponentialBernsteinFunction}}
 
 \item{eta}{Jump size for Poisson process, passed to \code{eta} parameter of
 \linkS4class{PoissonBernsteinFunction}}
@@ -103,6 +109,10 @@ ex_intensities_alpha_stable(10L, alpha=0.4)
 
 intensities_alpha_stable(10L, alpha=0.4)
 
+ex_intensities_exponential(10L, lambda=0.4)
+
+intensities_exponential(10L, lambda=0.4)
+
 ex_intensities_gamma(10L, a=0.3)
 
 intensities_gamma(10L, a=0.3)
@@ -122,6 +132,8 @@ intensities_pareto(10L, alpha=0.4, x0=5e-4)
 \linkS4class{PoissonBernsteinFunction}
 
 \linkS4class{AlphaStableBernsteinFunction}
+
+\linkS4class{ExponentialBernsteinFunction}
 
 \linkS4class{GammaBernsteinFunction}
 

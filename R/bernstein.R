@@ -438,6 +438,78 @@ setMethod("valueOf",
 
 
 
+  #' Class for the Exponential jump CPP Bernstein function
+  #'
+  #' @examples
+  #' bf <- ExponentialBernsteinFunction(lambda=0.5)
+  #'
+  #' @slot lambda The index \eqn{\lambda}.
+  #'
+  #' @description
+  #' For the Exponential jump CPP subordinator with \eqn{\lambda > 0},
+  #' the corresponding Bernstein function is
+  #' \deqn{
+  #'   \psi(x) = \frac{x}{x + \lambda}, x>0.
+  #' }
+  #'
+  #' @details
+  #' For the Exponential jump CPP Bernstein function, the higher order
+  #' alternating iterated forward differences are known in closed form:
+  #' \deqn{
+  #'   {(-1)}^{k-1} \Delta^k \psi(x)
+  #'    = \lambda \cdot B(k+1, x+\lambda), x>0, k>0 .
+  #' }
+  #'
+  #' This Bernstein function is no. 4 in the list of complete Bernstein functions
+  #' in Chp. 16 of \insertCite{Schilling2012a}{rmo}.
+  #'
+  #' @references
+  #'   \insertAllCited{}
+  #'
+  #' @seealso [BernsteinFunction-class]
+  #'
+  #' @importFrom methods new setClass
+  #' @importFrom assertthat is.number
+  #' @include assert.R
+  #'
+  #' @export ExponentialBernsteinFunction
+  ExponentialBernsteinFunction <- setClass("ExponentialBernsteinFunction", # nolint
+    contains = "BernsteinFunction",
+    slots = c("lambda"),
+    validity = function(object) {
+      if (!is_positive_number(object@lambda)) {
+        return("lambda must be positive number")
+      }
+
+      TRUE
+    })
+
+  #' @rdname valueOf-methods
+  #' @aliases valueOf,ExponentialBernsteinFunction,numeric,integer,ANY-method
+  #'
+  #' @seealso [ExponentialBernsteinFunction-class]
+  #'
+  #' @importFrom methods setMethod
+  #' @importFrom stats integrate
+  #' @include assert.R
+  #'
+  #' @export
+  setMethod("valueOf",
+    signature = c("ExponentialBernsteinFunction", "numeric", "integer"),
+    definition = function(object, x, difference_order=0L) {
+      assert_that(is_nonnegative_number(difference_order),
+        is_nonnegative_vector(x))
+
+      if (0L == difference_order) {
+        x / (x + object@lambda)
+      } else {
+        sapply(x, function(y) {
+          beta(difference_order+1, y+object@lambda) * object@lambda
+        })
+      }
+    })
+
+
 # #### Logarithmic Bernstein functions ####
 
 #' Class for the \emph{Gamma Bernstein function}

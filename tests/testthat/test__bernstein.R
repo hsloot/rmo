@@ -180,6 +180,45 @@ test_that("`valueOf` for `AlphaStableBernsteinFunction`", {
       differences=k)[seq_along(x)])
 })
 
+
+test_that("`valueOf` for ExponentialBernsteinFunction`", {
+  lambda <- 0.5
+  bf <- ExponentialBernsteinFunction(lambda=lambda)
+
+  x <- seq(0, 10, by=1)
+  expect_equal(valueOf(bf, x, difference_order=0L),
+    x / (x + lambda))
+
+  k <- 1L
+  y <- sort(unique(union(x, x+k)))
+  expect_equal(
+    valueOf(bf, x, difference_order=k),
+    (-1) ^ (k-1) * diff(
+      valueOf(bf, y, difference_order=0L),
+      differences=k)[seq_along(x)])
+
+  k <- 5L
+  y <- sort(unique(union(x, x+k)))
+  expect_equal(
+    valueOf(bf, x, difference_order=k),
+    (-1) ^ (k-1) * diff(
+      valueOf(bf, y, difference_order=0L),
+      differences=k)[seq_along(x)])
+
+  x <- seq(0.3, 10.3, by=1)
+  expect_equal(
+    valueOf(bf, x, difference_order=0L),
+    x / (x + lambda)
+  )
+
+  y <- sort(unique(union(x, x+k)))
+  expect_equal(
+    valueOf(bf, x, difference_order=k),
+    (-1) ^ (k-1) * diff(
+      valueOf(bf, y, difference_order=0L),
+      differences=k)[seq_along(x)])
+})
+
 test_that("`valueOf` for `GammaBernsteinFunction`", {
   k <- 5L
   a <- 0.3
