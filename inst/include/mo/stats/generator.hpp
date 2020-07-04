@@ -44,7 +44,7 @@ public:
   FixedDblGenerator(FixedDblGenerator&& other) = default;
   FixedDblGenerator(const double value);
 
-  virtual ~FixedDblGenerator() {}
+  virtual ~FixedDblGenerator() = default;
 
   FixedDblGenerator& operator=(const FixedDblGenerator& other) = default;
   FixedDblGenerator& operator=(FixedDblGenerator&& other) = default;
@@ -66,7 +66,7 @@ public:
   ExpGenerator(ExpGenerator&& other) = default;
   ExpGenerator(const double rate);
 
-  virtual ~ExpGenerator() {}
+  virtual ~ExpGenerator() = default;
 
   ExpGenerator& operator=(const ExpGenerator& other) = default;
   ExpGenerator& operator=(ExpGenerator&& other) = default;
@@ -90,7 +90,7 @@ public:
   ParetoGenerator(ParetoGenerator&& other) = default;
   ParetoGenerator(const double alpha, const double x0);
 
-  virtual ~ParetoGenerator() {}
+  virtual ~ParetoGenerator() = default;
 
   ParetoGenerator& operator=(const ParetoGenerator& other) = default;
   ParetoGenerator& operator=(ParetoGenerator&& other) = default;
@@ -101,8 +101,8 @@ public:
   virtual inline std::unique_ptr<RealUnivariateGenerator<double, RNGPolicy>> clone() const override final;
 
 private:
-  double alpha_;
-  double x0_;
+  double alpha_ = 1.;
+  double x0_ = 1.;
 
   RNGPolicy rng_;
 }; // ParetoGenerator
@@ -116,7 +116,7 @@ public:
   template<typename Vector>
   CountReplaceGenerator(const Vector& probabilities);
 
-  virtual ~CountReplaceGenerator() {}
+  virtual ~CountReplaceGenerator() = default;
 
   CountReplaceGenerator& operator=(const CountReplaceGenerator& other) = default;
   CountReplaceGenerator& operator=(CountReplaceGenerator&& other) = default;
@@ -138,7 +138,7 @@ public:
   UnifCountReplaceGenerator(UnifCountReplaceGenerator&& other) = default;
   UnifCountReplaceGenerator(const std::size_t n);
 
-  virtual ~UnifCountReplaceGenerator() {}
+  virtual ~UnifCountReplaceGenerator() = default;
 
   UnifCountReplaceGenerator& operator=(const UnifCountReplaceGenerator& other) = default;
   UnifCountReplaceGenerator& operator=(UnifCountReplaceGenerator&& other) = default;
@@ -160,7 +160,7 @@ public:
   UnifPermutationGenerator(UnifPermutationGenerator&& other) = default;
   UnifPermutationGenerator(const std::size_t n);
 
-  virtual ~UnifPermutationGenerator() {}
+  virtual ~UnifPermutationGenerator() = default;
 
   UnifPermutationGenerator& operator=(const UnifPermutationGenerator& other) = default;
   UnifPermutationGenerator& operator=(UnifPermutationGenerator&& other) = default;

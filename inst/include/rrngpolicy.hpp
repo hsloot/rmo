@@ -15,7 +15,7 @@ public:
   RRNGPolicy(const RRNGPolicy& other) = default;
   RRNGPolicy(RRNGPolicy&& other) = default;
 
-  ~RRNGPolicy() {}
+  virtual ~RRNGPolicy() = default;
 
   RRNGPolicy& operator=(const RRNGPolicy& other) = default;
   RRNGPolicy& operator=(RRNGPolicy&& other) = default;

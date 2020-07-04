@@ -11,7 +11,7 @@ namespace stats {
 
 class Walker {
 public:
-  virtual ~Walker() {}
+  virtual ~Walker() = default;
 }; // Walker
 
 template<typename Scalar, typename RNGPolicy>
@@ -29,7 +29,7 @@ public:
   template<typename Vector>
   CountNoReplaceWalker(const Vector& probabilities);
 
-  virtual ~CountNoReplaceWalker() {}
+  virtual ~CountNoReplaceWalker() = default;
 
   CountNoReplaceWalker& operator=(const CountNoReplaceWalker& other) = default;
   CountNoReplaceWalker& operator=(CountNoReplaceWalker&& other) = default;
@@ -53,7 +53,7 @@ public:
   UnifCountNoReplaceWalker(UnifCountNoReplaceWalker&& other) = default;
   UnifCountNoReplaceWalker(const std::size_t n);
 
-  virtual ~UnifCountNoReplaceWalker() {}
+  virtual ~UnifCountNoReplaceWalker() = default;
 
   UnifCountNoReplaceWalker& operator=(const UnifCountNoReplaceWalker& other) = default;
   UnifCountNoReplaceWalker& operator=(UnifCountNoReplaceWalker&& other) = default;

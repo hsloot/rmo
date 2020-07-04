@@ -21,6 +21,8 @@ public:
   template<typename VectorIn>
   ESMGenerator(const std::size_t d, const VectorIn& intensities);
 
+  virtual ~ESMGenerator() = default;
+
   ESMGenerator& operator=(const ESMGenerator& other) = default;
   ESMGenerator& operator=(ESMGenerator&& other) = default;
 
@@ -42,6 +44,8 @@ public:
 
   CuadrasAugeGenerator(
     const std::size_t d, const double alpha, const double beta);
+
+  virtual ~CuadrasAugeGenerator() = default;
 
   CuadrasAugeGenerator& operator=(const CuadrasAugeGenerator& other) = default;
   CuadrasAugeGenerator& operator=(CuadrasAugeGenerator&& other) = default;
@@ -66,6 +70,8 @@ public:
   template<typename VectorIn>
   ArnoldGenerator(const std::size_t d, const VectorIn& intensities);
 
+  virtual ~ArnoldGenerator() = default;
+
   ArnoldGenerator& operator=(const ArnoldGenerator& other) = default;
   ArnoldGenerator& operator=(ArnoldGenerator&& other) = default;
 
@@ -87,6 +93,8 @@ public:
 
   template<typename VectorIn>
   ExArnoldGenerator(const std::size_t d, const VectorIn& ex_intensities);
+
+  virtual ~ExArnoldGenerator() = default;
 
   ExArnoldGenerator& operator=(const ExArnoldGenerator& other) = default;
   ExArnoldGenerator& operator=(ExArnoldGenerator&& other) = default;
@@ -111,6 +119,8 @@ public:
   LFMCPPGenerator(
     const std::size_t d, const double rate, const double rate_killing,
     const double rate_drift, std::unique_ptr<RealUnivariateGenerator<double, RNGPolicy>>& jump_generator);
+
+  virtual ~LFMCPPGenerator() = default;
 
   LFMCPPGenerator& operator=(const LFMCPPGenerator& other);
   LFMCPPGenerator& operator=(LFMCPPGenerator&& other) = default;
