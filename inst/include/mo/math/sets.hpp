@@ -9,7 +9,7 @@ namespace math {
 
 template<typename T>
 inline bool is_within(const T i, const T j)  {
-  static_assert(std::is_unsigned<T>::value, "type not unsigned");
+  static_assert(std::is_unsigned<T>::value, "type not unsigned"); // # nocov
   return ((j+1) >> i) % 2 == 1;
 }
 

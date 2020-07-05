@@ -41,7 +41,7 @@ inline std::size_t CountReplaceGenerator<RNGPolicy>::operator()() {
     cumulative_probabilities_.begin(), cumulative_probabilities_.end(), u);
 
   if (*it < u)
-    throw std::logic_error("cumulative probabilities too small");
+    throw std::logic_error("cumulative probabilities too small"); // # nocov
 
   return original_order_[it - cumulative_probabilities_.begin()];
 }

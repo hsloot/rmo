@@ -9,8 +9,8 @@ namespace math {
 
 template<typename T>
 inline T min(const T a, const T b) {
-  static_assert(std::numeric_limits<T>::is_iec559,
-    "type not IEEE 754 conformant");
+  static_assert(std::numeric_limits<T>::is_iec559, // # nocov
+    "type not IEEE 754 conformant"); // # nocov
   if (
       std::numeric_limits<T>::infinity() == a &&
       std::numeric_limits<T>::infinity() == b) {
