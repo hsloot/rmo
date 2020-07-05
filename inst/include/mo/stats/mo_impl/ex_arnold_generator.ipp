@@ -15,8 +15,8 @@ template<typename Vector, typename RNGPolicy>
 template<typename VectorIn>
 ExArnoldGenerator<Vector, RNGPolicy>::ExArnoldGenerator(
     const std::size_t d, const VectorIn& ex_intensities) :
-    d_(d),
-    perm_generator_(d),
+    d_{ d },
+    perm_generator_{ d },
     wt_generators_(d),
     shock_generators_(d) {
   for (std::size_t i=0; i<d_; i++) {
@@ -27,17 +27,16 @@ ExArnoldGenerator<Vector, RNGPolicy>::ExArnoldGenerator(
       }
       intensities[j] *= math::binomial_coefficient(d-i, j+1);
     }
-    auto total_intensity = 0.;
-    for (const auto intensity : intensities) total_intensity += intensity;
-    wt_generators_[i].reset(new ExpGenerator<RNGPolicy>(total_intensity));
-    shock_generators_[i].reset(new CountReplaceGenerator<RNGPolicy>(intensities));
+    auto total_intensity = std::accumulate(
+      intensities.begin(), intensities.end(), 0.);
+    wt_generators_[i].reset(new ExpGenerator<RNGPolicy>{total_intensity});
+    shock_generators_[i].reset(new CountReplaceGenerator<RNGPolicy>{intensities});
   }
 }
 
 
 template<typename Vector, typename RNGPolicy>
-void ExArnoldGenerator<Vector, RNGPolicy>::operator()(
-    Vector& out) {
+inline void ExArnoldGenerator<Vector, RNGPolicy>::operator()(Vector& out) {
   std::vector<double> values(d_);
   std::size_t state = 0;
   while (state < d_) {

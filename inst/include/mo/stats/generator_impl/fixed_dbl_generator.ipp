@@ -11,7 +11,7 @@ namespace stats {
 
 template<typename RNGPolicy>
 FixedDblGenerator<RNGPolicy>::FixedDblGenerator(const double value) :
-    value_(value) {
+    value_{ value } {
 }
 
 template<typename RNGPolicy>

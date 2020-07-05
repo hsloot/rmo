@@ -12,13 +12,13 @@ namespace stats {
 template<typename Vector, typename RNGPolicy>
 CuadrasAugeGenerator<Vector, RNGPolicy>::CuadrasAugeGenerator(
     const std::size_t d, const double alpha, const double beta) :
-    d_(d),
-    alpha_(alpha),
-    beta_(beta),
-    exp_generator_(1.) {}
+    d_{ d },
+    alpha_{ alpha },
+    beta_{ beta },
+    exp_generator_{} {}
 
 template<typename Vector, typename RNGPolicy>
-void CuadrasAugeGenerator<Vector, RNGPolicy>::operator()(Vector& out) {
+inline void CuadrasAugeGenerator<Vector, RNGPolicy>::operator()(Vector& out) {
   std::fill(out.begin(), out.end(), std::numeric_limits<double>::infinity());
   auto global_shock = exp_generator_(beta_);
   for (auto& value : out) {

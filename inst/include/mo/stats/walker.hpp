@@ -17,7 +17,7 @@ public:
 template<typename Scalar, typename RNGPolicy>
 class UnivariateWalker : public Walker {
 public:
-  virtual inline Scalar operator()() = 0;
+  virtual Scalar operator()() = 0;
 }; // UnivariateWalker
 
 template<typename RNGPolicy>
@@ -34,15 +34,14 @@ public:
   CountNoReplaceWalker& operator=(const CountNoReplaceWalker& other) = default;
   CountNoReplaceWalker& operator=(CountNoReplaceWalker&& other) = default;
 
-  virtual inline std::size_t operator()() override final;
+  virtual std::size_t operator()() override final;
 
 private:
-  std::size_t n_;
-  double total_mass_;
-  std::vector<double> probabilities_;
-  std::vector<std::size_t> original_order_;
+  double total_mass_{ 1. };
+  std::vector<double> probabilities_{};
+  std::vector<std::size_t> original_order_{};
 
-  RNGPolicy rng_;
+  RNGPolicy rng_{};
 }; // CountNoReplaceWalker
 
 template<typename RNGPolicy>
@@ -58,13 +57,13 @@ public:
   UnifCountNoReplaceWalker& operator=(const UnifCountNoReplaceWalker& other) = default;
   UnifCountNoReplaceWalker& operator=(UnifCountNoReplaceWalker&& other) = default;
 
-  virtual inline std::size_t operator()() override final;
+  virtual std::size_t operator()() override final;
 
 private:
-  std::size_t n_;
-  std::vector<std::size_t> values_;
+  std::size_t n_{ 1 };
+  std::vector<std::size_t> values_{};
 
-  RNGPolicy rng_;
+  RNGPolicy rng_{};
 }; // UnifCountNoReplaceWalker
 
 } // stats

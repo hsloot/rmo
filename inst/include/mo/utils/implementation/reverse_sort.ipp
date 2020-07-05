@@ -7,8 +7,8 @@ namespace mo {
 namespace utils {
 
 // adapted from https://github.com/wch/r-source/blob/trunk/src/main/sort.c
-template<typename SortVector, typename IndexVector>
-void reverse_sort(SortVector& a, IndexVector& ib) {
+template<typename Vector, typename IndexVector>
+inline void reverse_sort(Vector& a, IndexVector& ib) {
   /*
   *  R : A Computer Language for Statistical Data Analysis
   *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka

@@ -16,13 +16,13 @@ template<typename Vector, typename RNGPolicy>
 template<typename VectorIn>
 ArnoldGenerator<Vector, RNGPolicy>::ArnoldGenerator(
     const std::size_t d, const VectorIn& intensities) :
-    d_(d),
-    wt_generator_(std::accumulate(intensities.begin(), intensities.end(), 0.)),
-    shock_generator_(intensities) {}
+    d_{ d },
+    wt_generator_{
+      std::accumulate(intensities.begin(), intensities.end(), 0.) },
+    shock_generator_{ std::move(intensities) } {}
 
 template<typename Vector, typename RNGPolicy>
-void ArnoldGenerator<Vector, RNGPolicy>::operator()(
-    Vector& out) {
+inline void ArnoldGenerator<Vector, RNGPolicy>::operator()(Vector& out) {
   std::fill(out.begin(), out.end(), 0.);
   std::vector<bool> destroyed(d_, false);
 

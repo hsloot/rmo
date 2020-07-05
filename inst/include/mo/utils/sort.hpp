@@ -8,10 +8,10 @@ namespace mo {
 namespace utils {
 
 template<typename Vector>
-std::vector<std::size_t> sort_index(const Vector& x);
+inline std::vector<std::size_t> sort_index(const Vector& x);
 
-template<typename SortVector, typename IndexVector>
-void reverse_sort(SortVector& a, IndexVector& ib);
+template<typename Vector, typename IndexVector>
+inline void reverse_sort(Vector& a, IndexVector& ib);
 
 } // utils
 } // mo

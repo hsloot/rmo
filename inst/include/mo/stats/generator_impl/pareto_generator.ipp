@@ -12,10 +12,11 @@ namespace mo {
 namespace stats {
 
 template<typename RNGPolicy>
-ParetoGenerator<RNGPolicy>::ParetoGenerator(const double alpha, const double x0) :
-    alpha_(alpha),
-    x0_(x0),
-    rng_() {}
+ParetoGenerator<RNGPolicy>::ParetoGenerator(
+    const double alpha, const double x0) :
+    alpha_{ alpha },
+    x0_{ x0 },
+    rng_{} {}
 
 template<typename RNGPolicy>
 inline double ParetoGenerator<RNGPolicy>::operator()() {
@@ -23,15 +24,16 @@ inline double ParetoGenerator<RNGPolicy>::operator()() {
 }
 
 template<typename RNGPolicy>
-inline double ParetoGenerator<RNGPolicy>::operator()(const double alpha, const double x0) {
+inline double ParetoGenerator<RNGPolicy>::operator()(
+    const double alpha, const double x0) {
   return x0 / std::pow(rng_.unif_rand(), 1/alpha);
 }
 
 template<typename RNGPolicy> // # nocov start
-inline std::unique_ptr<RealUnivariateGenerator<double, RNGPolicy>> ParetoGenerator<RNGPolicy>::clone() const {
+inline std::unique_ptr<RealUnivariateGenerator<double, RNGPolicy>>
+ParetoGenerator<RNGPolicy>::clone() const {
   return std::move( std::unique_ptr<RealUnivariateGenerator<double, RNGPolicy>>(new ParetoGenerator<RNGPolicy>(*this)) );
 } // # nocov end
-
 
 } // stats
 } // mo

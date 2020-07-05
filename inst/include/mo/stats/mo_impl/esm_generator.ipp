@@ -15,12 +15,12 @@ template<typename Vector, typename RNGPolicy>
 template<typename VectorIn>
 ESMGenerator<Vector, RNGPolicy>::ESMGenerator(
     const std::size_t d, const VectorIn& intensities) :
-    d_(d),
-    intensities_(intensities.begin(), intensities.end()),
-    exp_generator_(1.) {}
+    d_{ d },
+    intensities_{ intensities.begin(), intensities.end() },
+    exp_generator_{} {}
 
 template<typename Vector, typename RNGPolicy>
-void ESMGenerator<Vector, RNGPolicy>::operator()(Vector& out) {
+inline void ESMGenerator<Vector, RNGPolicy>::operator()(Vector& out) {
   std::fill(out.begin(), out.end(), std::numeric_limits<double>::infinity());
   for (std::size_t j=0, num_shocks=intensities_.size(); j<num_shocks; j++) {
     if (intensities_[j] > 0.) {

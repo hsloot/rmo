@@ -9,9 +9,10 @@ namespace mo {
 namespace stats {
 
 template<typename RNGPolicy>
-UnifCountReplaceGenerator<RNGPolicy>::UnifCountReplaceGenerator(const std::size_t n) :
-    n_(n),
-    rng_() {
+UnifCountReplaceGenerator<RNGPolicy>::UnifCountReplaceGenerator(
+    const std::size_t n) :
+    n_{ n },
+    rng_{} {
 }
 
 template<typename RNGPolicy>

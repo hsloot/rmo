@@ -19,20 +19,20 @@ public:
 template<typename Scalar, typename RNGPolicy>
 class UnivariateGenerator : public Generator {
 public:
-  virtual inline Scalar operator()() = 0;
+  virtual Scalar operator()() = 0;
 }; // UnivariateGenerator
 
 template<typename Vector, typename RNGPolicy>
 class MultivariateGenerator : public Generator {
 public:
-  virtual inline void operator()(Vector& out) = 0;
+  virtual void operator()(Vector& out) = 0;
 }; // MultivariateGenerator
 
 
 template<typename Scalar, typename RNGPolicy>
 class RealUnivariateGenerator : public UnivariateGenerator<Scalar, RNGPolicy> {
 public:
-  virtual inline std::unique_ptr<RealUnivariateGenerator> clone() const = 0;
+  virtual std::unique_ptr<RealUnivariateGenerator> clone() const = 0;
 };
 
 
@@ -49,13 +49,13 @@ public:
   FixedDblGenerator& operator=(const FixedDblGenerator& other) = default;
   FixedDblGenerator& operator=(FixedDblGenerator&& other) = default;
 
-  virtual inline double operator()() override final;
+  virtual double operator()() override final;
   inline double operator()(const double value);
 
-  virtual inline std::unique_ptr<RealUnivariateGenerator<double, RNGPolicy>> clone() const override final;
+  virtual std::unique_ptr<RealUnivariateGenerator<double, RNGPolicy>> clone() const override final;
 
 private:
-  double value_ = 1.;
+  double value_{ 1. };
 }; // FixedDblGenerator
 
 template<typename RNGPolicy>
@@ -71,15 +71,15 @@ public:
   ExpGenerator& operator=(const ExpGenerator& other) = default;
   ExpGenerator& operator=(ExpGenerator&& other) = default;
 
-  virtual inline double operator()() override final;
+  virtual double operator()() override final;
   inline double operator()(const double rate);
 
-  virtual inline std::unique_ptr<RealUnivariateGenerator<double, RNGPolicy>> clone() const override final;
+  virtual std::unique_ptr<RealUnivariateGenerator<double, RNGPolicy>> clone() const override final;
 
 private:
-  double rate_ = 1.;
+  double rate_{ 1. };
 
-  RNGPolicy rng_;
+  RNGPolicy rng_{};
 }; // ExpGenerator
 
 template<typename RNGPolicy>
@@ -95,16 +95,16 @@ public:
   ParetoGenerator& operator=(const ParetoGenerator& other) = default;
   ParetoGenerator& operator=(ParetoGenerator&& other) = default;
 
-  virtual inline double operator()() override final;
+  virtual double operator()() override final;
   inline double operator()(const double alpha, const double x0);
 
-  virtual inline std::unique_ptr<RealUnivariateGenerator<double, RNGPolicy>> clone() const override final;
+  virtual std::unique_ptr<RealUnivariateGenerator<double, RNGPolicy>> clone() const override final;
 
 private:
-  double alpha_ = 1.;
-  double x0_ = 1.;
+  double alpha_{ 1. };
+  double x0_{ 1. };
 
-  RNGPolicy rng_;
+  RNGPolicy rng_{};
 }; // ParetoGenerator
 
 template<typename RNGPolicy>
@@ -121,13 +121,13 @@ public:
   CountReplaceGenerator& operator=(const CountReplaceGenerator& other) = default;
   CountReplaceGenerator& operator=(CountReplaceGenerator&& other) = default;
 
-  virtual inline std::size_t operator()() override final;
+  virtual std::size_t operator()() override final;
 
 private:
-  std::vector<double> cumulative_probabilities_;
-  std::vector<std::size_t> original_order_;
+  std::vector<double> cumulative_probabilities_{};
+  std::vector<std::size_t> original_order_{};
 
-  RNGPolicy rng_;
+  RNGPolicy rng_{};
 }; // CountReplaceGenerator
 
 template<typename RNGPolicy>
@@ -143,12 +143,12 @@ public:
   UnifCountReplaceGenerator& operator=(const UnifCountReplaceGenerator& other) = default;
   UnifCountReplaceGenerator& operator=(UnifCountReplaceGenerator&& other) = default;
 
-  virtual inline std::size_t operator()() override final;
+  virtual std::size_t operator()() override final;
 
 private:
-  std::size_t n_;
+  std::size_t n_{ 1 };
 
-  RNGPolicy rng_;
+  RNGPolicy rng_{};
 }; // UniformCountReplaceGenerator
 
 
@@ -165,13 +165,13 @@ public:
   UnifPermutationGenerator& operator=(const UnifPermutationGenerator& other) = default;
   UnifPermutationGenerator& operator=(UnifPermutationGenerator&& other) = default;
 
-  virtual inline Vector operator()() final;
-  virtual inline void operator()(Vector& out) override final;
+  virtual Vector operator()() final;
+  virtual void operator()(Vector& out) override final;
 
 private:
-  std::size_t n_;
+  std::size_t n_{ 1 };
 
-  RNGPolicy rng_;
+  RNGPolicy rng_{};
 };
 
 } // stats

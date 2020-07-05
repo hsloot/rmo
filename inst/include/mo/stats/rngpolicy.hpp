@@ -8,10 +8,12 @@ namespace stats {
 
 class RNGPolicy {
 public:
-  virtual inline double unif_rand() = 0;
-  virtual inline std::size_t R_unif_index(const std::size_t n) = 0;
-  virtual inline double exp_rand() = 0;
-  virtual inline double norm_rand() = 0;
+  virtual ~RNGPolicy() = default;
+
+  virtual double unif_rand() = 0;
+  virtual std::size_t R_unif_index(const std::size_t n) = 0;
+  virtual double exp_rand() = 0;
+  virtual double norm_rand() = 0;
 };
 
 } // stats

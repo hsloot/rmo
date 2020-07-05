@@ -11,19 +11,21 @@ namespace mo {
 namespace stats {
 
 template<typename Vector, typename RNGPolicy>
-UnifPermutationGenerator<Vector, RNGPolicy>::UnifPermutationGenerator(const std::size_t n) :
-    n_(n),
-    rng_() {}
+UnifPermutationGenerator<Vector, RNGPolicy>::UnifPermutationGenerator(
+    const std::size_t n) :
+    n_{ n },
+    rng_{} {}
 
 template<typename Vector, typename RNGPolicy>
-inline void UnifPermutationGenerator<Vector, RNGPolicy>::operator()(Vector& out) {
+inline void UnifPermutationGenerator<Vector, RNGPolicy>::operator()(
+    Vector& out) {
   std::vector<std::size_t> values(n_);
   std::iota(values.begin(), values.end(), 0);
 
-  for (auto n=n_; n>0; n--) {
-    std::size_t index = rng_.R_unif_index(n);
-    out[n_-n] = values[index];
-    values[index] = values.back();
+  for (auto it=out.begin(); it != out.end(); ++it) {
+    auto value = values.begin() + rng_.R_unif_index(values.size());
+    *it = *value;
+    *value = values.back();
     values.pop_back();
   }
 }

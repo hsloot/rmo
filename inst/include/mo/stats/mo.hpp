@@ -26,12 +26,12 @@ public:
   ESMGenerator& operator=(const ESMGenerator& other) = default;
   ESMGenerator& operator=(ESMGenerator&& other) = default;
 
-  virtual inline void operator()(Vector& out) override final;
+  virtual void operator()(Vector& out) override final;
 
 private:
-  std::size_t d_;
-  std::vector<double> intensities_;
-  ExpGenerator<RNGPolicy> exp_generator_;
+  std::size_t d_{ 2 };
+  std::vector<double> intensities_{};
+  ExpGenerator<RNGPolicy> exp_generator_{};
 }; // ESMGenerator
 
 
@@ -50,13 +50,13 @@ public:
   CuadrasAugeGenerator& operator=(const CuadrasAugeGenerator& other) = default;
   CuadrasAugeGenerator& operator=(CuadrasAugeGenerator&& other) = default;
 
-  virtual inline void operator()(Vector& out) override final;
+  virtual void operator()(Vector& out) override final;
 
 private:
-  std::size_t d_;
-  double alpha_;
-  double beta_;
-  ExpGenerator<RNGPolicy> exp_generator_;
+  std::size_t d_{ 2 };
+  double alpha_{ 1. };
+  double beta_{ 1. };
+  ExpGenerator<RNGPolicy> exp_generator_{};
 }; // CuadrasAugeGenerator
 
 
@@ -75,12 +75,12 @@ public:
   ArnoldGenerator& operator=(const ArnoldGenerator& other) = default;
   ArnoldGenerator& operator=(ArnoldGenerator&& other) = default;
 
-  virtual inline void operator()(Vector& out) override final;
+  virtual void operator()(Vector& out) override final;
 
 private:
-  std::size_t d_;
-  ExpGenerator<RNGPolicy> wt_generator_;
-  CountReplaceGenerator<RNGPolicy> shock_generator_;
+  std::size_t d_{ 2 };
+  ExpGenerator<RNGPolicy> wt_generator_{};
+  CountReplaceGenerator<RNGPolicy> shock_generator_{};
 }; // ArnoldGenerator
 
 
@@ -99,13 +99,14 @@ public:
   ExArnoldGenerator& operator=(const ExArnoldGenerator& other) = default;
   ExArnoldGenerator& operator=(ExArnoldGenerator&& other) = default;
 
-  virtual inline void operator()(Vector& out) override final;
+  virtual void operator()(Vector& out) override final;
 
 private:
-  std::size_t d_;
-  UnifPermutationGenerator<std::vector<std::size_t>, RNGPolicy> perm_generator_;
-  std::vector<std::unique_ptr<ExpGenerator<RNGPolicy>>> wt_generators_;
-  std::vector<std::unique_ptr<CountReplaceGenerator<RNGPolicy>>> shock_generators_;
+  std::size_t d_{ 2 };
+  UnifPermutationGenerator<std::vector<std::size_t>, RNGPolicy>
+    perm_generator_{};
+  std::vector<std::unique_ptr<ExpGenerator<RNGPolicy>>> wt_generators_{};
+  std::vector<std::unique_ptr<CountReplaceGenerator<RNGPolicy>>> shock_generators_{};
 }; // ExArnoldGenerator
 
 
@@ -125,7 +126,7 @@ public:
   LFMCPPGenerator& operator=(const LFMCPPGenerator& other);
   LFMCPPGenerator& operator=(LFMCPPGenerator&& other) = default;
 
-  virtual inline void operator()(Vector& out) override final;
+  virtual void operator()(Vector& out) override final;
 
 private:
   std::size_t d_;

@@ -15,23 +15,23 @@ namespace stats {
 
 template<typename Vector, typename RNGPolicy>
 LFMCPPGenerator<Vector, RNGPolicy>::LFMCPPGenerator(const LFMCPPGenerator<Vector, RNGPolicy>& other) :
-    d_(other.d_),
-    rate_drift_(other.rate_drift_),
-    bv_generator_(other.bv_generator_),
-    wt_generator_(other.wt_generator_),
-    kt_generator_(other.kt_generator_),
-    jump_generator_((*other.jump_generator_).clone()) {}
+    d_{ other.d_ },
+    rate_drift_{ other.rate_drift_ },
+    bv_generator_{ other.bv_generator_ },
+    wt_generator_{ other.wt_generator_ },
+    kt_generator_{ other.kt_generator_ },
+    jump_generator_{ (*other.jump_generator_).clone() } {}
 
 template<typename Vector, typename RNGPolicy>
 LFMCPPGenerator<Vector, RNGPolicy>::LFMCPPGenerator(
     const std::size_t d, const double rate, const double rate_killing,
     const double rate_drift,  std::unique_ptr<RealUnivariateGenerator<double, RNGPolicy>>& jump_generator) :
-    d_(d),
-    rate_drift_(rate_drift),
-    bv_generator_(1.0),
-    wt_generator_(rate),
-    kt_generator_(rate_killing),
-    jump_generator_((*jump_generator).clone()) {}
+    d_{ d },
+    rate_drift_{ rate_drift },
+    bv_generator_{},
+    wt_generator_{ rate },
+    kt_generator_{ rate_killing },
+    jump_generator_{ (*jump_generator).clone() } {}
 
 template<typename Vector, typename RNGPolicy>
 LFMCPPGenerator<Vector, RNGPolicy>& LFMCPPGenerator<Vector, RNGPolicy>::operator=(const LFMCPPGenerator<Vector, RNGPolicy>& other) {
@@ -47,7 +47,7 @@ LFMCPPGenerator<Vector, RNGPolicy>& LFMCPPGenerator<Vector, RNGPolicy>::operator
 }
 
 template<typename Vector, typename RNGPolicy>
-void LFMCPPGenerator<Vector, RNGPolicy>::operator()(Vector& out) {
+inline void LFMCPPGenerator<Vector, RNGPolicy>::operator()(Vector& out) {
   std::vector<double> barriers(d_);
   std::generate(barriers.begin(), barriers.end(), bv_generator_);
   auto killing_time = kt_generator_();

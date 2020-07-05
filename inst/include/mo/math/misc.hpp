@@ -7,14 +7,17 @@
 namespace mo {
 namespace math {
 
-inline double min(const double a, const double b) {
+template<typename T>
+inline T min(const T a, const T b) {
+  static_assert(std::numeric_limits<T>::is_iec559,
+    "type not IEEE 754 conformant");
   if (
-      std::numeric_limits<double>::infinity() == a &&
-      std::numeric_limits<double>::infinity() == b) {
-    return std::numeric_limits<double>::infinity(); // # nocov
-  } else if (std::numeric_limits<double>::infinity() == a) {
+      std::numeric_limits<T>::infinity() == a &&
+      std::numeric_limits<T>::infinity() == b) {
+    return std::numeric_limits<T>::infinity(); // # nocov
+  } else if (std::numeric_limits<T>::infinity() == a) {
     return b;
-  } else if (std::numeric_limits<double>::infinity() == b) {
+  } else if (std::numeric_limits<T>::infinity() == b) {
     return a;
   }
   return (a < b ? a : b);
@@ -22,7 +25,7 @@ inline double min(const double a, const double b) {
 
 template<typename T>
 inline T binomial_coefficient(const T n, const T k) {
-  if (k > n) std::range_error("k > n"); // # nocov
+  if (k > n) throw std::domain_error("k > n"); // # nocov
   if (0 == k) return 1;
   if (k > (n/2)) return binomial_coefficient(n, n-k);
 
