@@ -1,7 +1,7 @@
 #ifndef MO_STATS_GENERATOR_HPP
 #define MO_STATS_GENERATOR_HPP
 
-#include <cstddef> // for std::size_t
+#include <cstddef>
 #include <memory>
 #include <vector>
 
@@ -11,80 +11,79 @@ namespace mo {
 namespace stats {
 
 class Generator {
-public:
+ public:
   virtual ~Generator() = default;
-}; // Generator
+};  // Generator
 
-
-template<typename Scalar, typename RNGPolicy>
+template <typename Scalar, typename RNGPolicy>
 class UnivariateGenerator : public Generator {
-public:
+ public:
   virtual Scalar operator()() = 0;
-}; // UnivariateGenerator
+};  // UnivariateGenerator
 
-template<typename Vector, typename RNGPolicy>
+template <typename Vector, typename RNGPolicy>
 class MultivariateGenerator : public Generator {
-public:
+ public:
   virtual void operator()(Vector& out) = 0;
-}; // MultivariateGenerator
+};  // MultivariateGenerator
 
-
-template<typename Scalar, typename RNGPolicy>
+template <typename Scalar, typename RNGPolicy>
 class RealUnivariateGenerator : public UnivariateGenerator<Scalar, RNGPolicy> {
-public:
+ public:
   virtual std::unique_ptr<RealUnivariateGenerator> clone() const = 0;
 };
 
-
-template<typename RNGPolicy>
+template <typename RNGPolicy>
 class FixedDblGenerator : public RealUnivariateGenerator<double, RNGPolicy> {
-public:
+ public:
   FixedDblGenerator() = default;
   FixedDblGenerator(const FixedDblGenerator& other) = default;
   FixedDblGenerator(FixedDblGenerator&& other) = default;
-  FixedDblGenerator(const double value);
+  explicit FixedDblGenerator(const double value);
 
   virtual ~FixedDblGenerator() = default;
 
   FixedDblGenerator& operator=(const FixedDblGenerator& other) = default;
   FixedDblGenerator& operator=(FixedDblGenerator&& other) = default;
 
-  virtual double operator()() override final;
+  double operator()() final;
   inline double operator()(const double value);
 
-  virtual std::unique_ptr<RealUnivariateGenerator<double, RNGPolicy>> clone() const override final;
+  std::unique_ptr<RealUnivariateGenerator<double, RNGPolicy>> clone()
+      const final;
 
-private:
-  double value_{ 1. };
-}; // FixedDblGenerator
+ private:
+  double value_{1.};
+};  // FixedDblGenerator
 
-template<typename RNGPolicy>
+template <typename RNGPolicy>
 class ExpGenerator : public RealUnivariateGenerator<double, RNGPolicy> {
-public:
+ public:
   ExpGenerator() = default;
   ExpGenerator(const ExpGenerator& other) = default;
   ExpGenerator(ExpGenerator&& other) = default;
-  ExpGenerator(const double rate);
+  explicit ExpGenerator(const double rate);
 
   virtual ~ExpGenerator() = default;
 
   ExpGenerator& operator=(const ExpGenerator& other) = default;
   ExpGenerator& operator=(ExpGenerator&& other) = default;
 
-  virtual double operator()() override final;
+  double operator()() final;
   inline double operator()(const double rate);
 
-  virtual std::unique_ptr<RealUnivariateGenerator<double, RNGPolicy>> clone() const override final;
+  std::unique_ptr<RealUnivariateGenerator<double, RNGPolicy>> clone()
+      const final;
 
-private:
-  double rate_{ 1. };
+ private:
+  double rate_{1.};
 
   RNGPolicy rng_{};
-}; // ExpGenerator
+};  // ExpGenerator
 
-template<typename RNGPolicy>
+template <typename RNGPolicy>
 class ParetoGenerator : public RealUnivariateGenerator<double, RNGPolicy> {
-public:
+ public:
   ParetoGenerator() = default;
   ParetoGenerator(const ParetoGenerator& other) = default;
   ParetoGenerator(ParetoGenerator&& other) = default;
@@ -95,93 +94,101 @@ public:
   ParetoGenerator& operator=(const ParetoGenerator& other) = default;
   ParetoGenerator& operator=(ParetoGenerator&& other) = default;
 
-  virtual double operator()() override final;
+  double operator()() final;
   inline double operator()(const double alpha, const double x0);
 
-  virtual std::unique_ptr<RealUnivariateGenerator<double, RNGPolicy>> clone() const override final;
+  std::unique_ptr<RealUnivariateGenerator<double, RNGPolicy>> clone()
+      const final;
 
-private:
-  double alpha_{ 1. };
-  double x0_{ 1. };
+ private:
+  double alpha_{1.};
+  double x0_{1.};
 
   RNGPolicy rng_{};
-}; // ParetoGenerator
+};  // ParetoGenerator
 
-template<typename RNGPolicy>
-class CountReplaceGenerator : public UnivariateGenerator<std::size_t, RNGPolicy> {
-public:
+template <typename RNGPolicy>
+class CountReplaceGenerator
+    : public UnivariateGenerator<std::size_t, RNGPolicy> {
+ public:
   CountReplaceGenerator() = delete;
   CountReplaceGenerator(const CountReplaceGenerator& other) = default;
   CountReplaceGenerator(CountReplaceGenerator&& other) = default;
-  template<typename Vector>
-  CountReplaceGenerator(const Vector& probabilities);
+  template <typename Vector>
+  explicit CountReplaceGenerator(const Vector& probabilities);
 
   virtual ~CountReplaceGenerator() = default;
 
-  CountReplaceGenerator& operator=(const CountReplaceGenerator& other) = default;
+  CountReplaceGenerator& operator=(const CountReplaceGenerator& other) =
+      default;
   CountReplaceGenerator& operator=(CountReplaceGenerator&& other) = default;
 
-  virtual std::size_t operator()() override final;
+  std::size_t operator()() final;
 
-private:
+ private:
   std::vector<double> cumulative_probabilities_{};
   std::vector<std::size_t> original_order_{};
 
   RNGPolicy rng_{};
-}; // CountReplaceGenerator
+};  // CountReplaceGenerator
 
-template<typename RNGPolicy>
-class UnifCountReplaceGenerator : public UnivariateGenerator<std::size_t, RNGPolicy> {
-public:
+template <typename RNGPolicy>
+class UnifCountReplaceGenerator
+    : public UnivariateGenerator<std::size_t, RNGPolicy> {
+ public:
   UnifCountReplaceGenerator() = delete;
   UnifCountReplaceGenerator(const UnifCountReplaceGenerator& other) = default;
   UnifCountReplaceGenerator(UnifCountReplaceGenerator&& other) = default;
-  UnifCountReplaceGenerator(const std::size_t n);
+  explicit UnifCountReplaceGenerator(const std::size_t n);
 
   virtual ~UnifCountReplaceGenerator() = default;
 
-  UnifCountReplaceGenerator& operator=(const UnifCountReplaceGenerator& other) = default;
-  UnifCountReplaceGenerator& operator=(UnifCountReplaceGenerator&& other) = default;
+  UnifCountReplaceGenerator& operator=(const UnifCountReplaceGenerator& other) =
+      default;
+  UnifCountReplaceGenerator& operator=(UnifCountReplaceGenerator&& other) =
+      default;
 
-  virtual std::size_t operator()() override final;
+  std::size_t operator()() final;
 
-private:
-  std::size_t n_{ 1 };
+ private:
+  std::size_t n_{1};
 
   RNGPolicy rng_{};
-}; // UniformCountReplaceGenerator
+};  // UniformCountReplaceGenerator
 
-
-template<typename Vector, typename RNGPolicy>
-class UnifPermutationGenerator : public MultivariateGenerator<Vector, RNGPolicy> {
-public:
+template <typename Vector, typename RNGPolicy>
+class UnifPermutationGenerator
+    : public MultivariateGenerator<Vector, RNGPolicy> {
+ public:
   UnifPermutationGenerator() = delete;
   UnifPermutationGenerator(const UnifPermutationGenerator& other) = default;
   UnifPermutationGenerator(UnifPermutationGenerator&& other) = default;
-  UnifPermutationGenerator(const std::size_t n);
+  explicit UnifPermutationGenerator(const std::size_t n);
 
   virtual ~UnifPermutationGenerator() = default;
 
-  UnifPermutationGenerator& operator=(const UnifPermutationGenerator& other) = default;
-  UnifPermutationGenerator& operator=(UnifPermutationGenerator&& other) = default;
+  UnifPermutationGenerator& operator=(const UnifPermutationGenerator& other) =
+      default;
+  UnifPermutationGenerator& operator=(UnifPermutationGenerator&& other) =
+      default;
 
-  virtual Vector operator()() final;
-  virtual void operator()(Vector& out) override final;
+  Vector operator()();
+  void operator()(Vector& out) final;
 
-private:
-  std::size_t n_{ 1 };
+ private:
+  std::size_t n_{1};
 
   RNGPolicy rng_{};
 };
 
-} // stats
-} // mo
+}  // namespace stats
+}  // namespace mo
 
-#include <mo/stats/generator_impl/exp_generator.ipp>
-#include <mo/stats/generator_impl/pareto_generator.ipp>
 #include <mo/stats/generator_impl/count_replace_generator.ipp>
-#include <mo/stats/generator_impl/unif_count_replace_generator.ipp>
+#include <mo/stats/generator_impl/exp_generator.ipp>
 #include <mo/stats/generator_impl/fixed_dbl_generator.ipp>
+#include <mo/stats/generator_impl/pareto_generator.ipp>
+#include <mo/stats/generator_impl/unif_count_replace_generator.ipp>
 #include <mo/stats/generator_impl/unif_permutation_generator.ipp>
 
-#endif // MO_STATS_GENERATOR_HPP
+#endif  // MO_STATS_GENERATOR_HPP

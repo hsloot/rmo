@@ -1,13 +1,13 @@
 #ifndef MO_STATS_RNGPOLICY_HPP
 #define MO_STATS_RNGPOLICY_HPP
 
-#include <cstddef> // for std::size_t
+#include <cstddef>  // for std::size_t
 
 namespace mo {
 namespace stats {
 
 class RNGPolicy {
-public:
+ public:
   virtual ~RNGPolicy() = default;
 
   virtual double unif_rand() = 0;
@@ -16,7 +16,7 @@ public:
   virtual double norm_rand() = 0;
 };
 
-} // stats
-} // mo
+}  // namespace stats
+}  // namespace mo
 
-#endif // MO_STATS_RNGPOLICY_HPP
+#endif  // MO_STATS_RNGPOLICY_HPP

@@ -22,3 +22,6 @@
 ^\.editorconfig$
 ^other$
 ^bench$
+^\.vscode$
+^\.clang.format$
+^CPPLINT.cfg$

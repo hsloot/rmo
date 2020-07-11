@@ -9,27 +9,28 @@
 namespace mo {
 namespace stats {
 
-template<typename RNGPolicy>
-FixedDblGenerator<RNGPolicy>::FixedDblGenerator(const double value) :
-    value_{ value } {
-}
+template <typename RNGPolicy>
+FixedDblGenerator<RNGPolicy>::FixedDblGenerator(const double value)
+    : value_{value} {}
 
-template<typename RNGPolicy>
+template <typename RNGPolicy>
 inline double FixedDblGenerator<RNGPolicy>::operator()() {
-    return value_;
+  return value_;
 }
 
-template<typename RNGPolicy>
+template <typename RNGPolicy>
 inline double FixedDblGenerator<RNGPolicy>::operator()(const double value) {
-    return value;
+  return value;
 }
 
-template<typename RNGPolicy> // # nocov start
-inline std::unique_ptr<RealUnivariateGenerator<double, RNGPolicy>> FixedDblGenerator<RNGPolicy>::clone() const {
-  return std::move( std::unique_ptr<RealUnivariateGenerator<double, RNGPolicy>>(new FixedDblGenerator<RNGPolicy>(*this)) );
-} // # nocov end
+template <typename RNGPolicy>  // # nocov start
+inline std::unique_ptr<RealUnivariateGenerator<double, RNGPolicy>>
+FixedDblGenerator<RNGPolicy>::clone() const {
+  return std::move(std::unique_ptr<RealUnivariateGenerator<double, RNGPolicy>>(
+      new FixedDblGenerator<RNGPolicy>(*this)));
+}  // # nocov end
 
-} // stats
-} // mo
+}  // namespace stats
+}  // namespace mo
 
-#endif // MO_STATS_GENERATOR_IMPL_FIXEDDBLGENERATOR_IPP
+#endif  // MO_STATS_GENERATOR_IMPL_FIXEDDBLGENERATOR_IPP

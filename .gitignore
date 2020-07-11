@@ -35,5 +35,8 @@ vignettes/*.pdf
 # Shiny token, see https://shiny.rstudio.com/articles/shinyapps.html
 rsconnect/
 docs/
+
 .clang_complete
+rmo.code-workspace
+.vscode
 docs

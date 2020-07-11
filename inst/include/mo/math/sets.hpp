@@ -7,13 +7,13 @@
 namespace mo {
 namespace math {
 
-template<typename T>
-inline bool is_within(const T i, const T j)  {
-  static_assert(std::is_unsigned<T>::value, "type not unsigned"); // # nocov
-  return ((j+1) >> i) % 2 == 1;
+template <typename T>
+inline bool is_within(const T i, const T j) {
+  static_assert(std::is_unsigned<T>::value, "type not unsigned");  // # nocov
+  return ((j + 1) >> i) % 2 == 1;
 }
 
-} // math
-} // mo
+}  // namespace math
+}  // namespace mo
 
-#endif // MO_MATH_SETS_HPP
+#endif  // MO_MATH_SETS_HPP

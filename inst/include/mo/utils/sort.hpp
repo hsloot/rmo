@@ -7,16 +7,16 @@
 namespace mo {
 namespace utils {
 
-template<typename Vector>
+template <typename Vector>
 inline std::vector<std::size_t> sort_index(const Vector& x);
 
-template<typename Vector, typename IndexVector>
+template <typename Vector, typename IndexVector>
 inline void reverse_sort(Vector& a, IndexVector& ib);
 
-} // utils
-} // mo
+}  // namespace utils
+}  // namespace mo
 
-#include <mo/utils/implementation/sort_index.ipp>
 #include <mo/utils/implementation/reverse_sort.ipp>
+#include <mo/utils/implementation/sort_index.ipp>
 
-#endif // MO_UTILS_SORT_HPP
+#endif  // MO_UTILS_SORT_HPP

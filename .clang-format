@@ -1,0 +1,13 @@
+---
+Language: Cpp
+BasedOnStyle: Google
+IncludeBlocks: Regroup
+IncludeCategories:
+  - Regex:           '^(<mo/)'
+    Priority:        2
+  - Regex:           '<[[:alnum:]._]+>'
+    Priority:        1
+  - Regex:           '.*'
+    Priority:        3
+    SortPriority:    0
+...
