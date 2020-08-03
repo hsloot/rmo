@@ -5,10 +5,10 @@
   ],
   "@type": "SoftwareSourceCode",
   "identifier": "rmo",
-  "description": "\n  The package contains an implementation of the Marshall-Olkin distribution and \n  methods for estimation, simulation, and construction.",
+  "description": "\n  The package contains an implementation of the Marshall-Olkin distribution and\n  methods for estimation, simulation, and construction.",
   "name": "rmo: A package for the Marshall-Olkin distribution",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "0.2.2.9000",
+  "version": "0.2.3",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -155,5 +155,5 @@
     "mathematical-modelling"
   ],
   "issueTracker": "https://github.com/hsloot/rmo/issues",
-  "fileSize": "89.268KB"
+  "fileSize": "91.569KB"
 }

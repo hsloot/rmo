@@ -1,6 +1,6 @@
 Package: rmo
 Title: A package for the Marshall-Olkin distribution
-Version: 0.2.2.9001
+Version: 0.2.3
 Authors@R:
   person(given = "Henrik",
     family = "Sloot",
@@ -8,7 +8,7 @@ Authors@R:
     email = "henrik.sloot@gmail.com",
     comment = c(ORCID = "0000-0001-8582-7776"))
 Description:
-  The package contains an implementation of the Marshall-Olkin distribution and 
+  The package contains an implementation of the Marshall-Olkin distribution and
   methods for estimation, simulation, and construction.
 License: GPL-3
 Depends:

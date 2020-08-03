@@ -1,6 +1,7 @@
 # rmo 0.2.3
 
 - Implement Pareto jumps and Pareto CPP Bernstein function
+- Implement Exponential-jump CPP Bernstein function
 
 # rmo 0.2.2
 
