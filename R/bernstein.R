@@ -105,7 +105,7 @@ LinearBernsteinFunction <- setClass("LinearBernsteinFunction", # nolint
       return("scale must be non-negative number")
     }
 
-    TRUE
+    invisible(TRUE)
   })
 
 #' @rdname valueOf-methods
@@ -162,7 +162,7 @@ ConstantBernsteinFunction <- setClass("ConstantBernsteinFunction", # nolint
       return("constant must be non-negative number")
     }
 
-    TRUE
+    invisible(TRUE)
   })
 
 #' @rdname valueOf-methods
@@ -223,7 +223,7 @@ ScaledBernsteinFunction <- setClass("ScaledBernsteinFunction", # nolint
       return("scale must be non-negative number")
     }
 
-    TRUE
+    invisible(TRUE)
   })
 
 #' @rdname valueOf-methods
@@ -319,14 +319,14 @@ setMethod("valueOf",
 #' @export PoissonBernsteinFunction
 PoissonBernsteinFunction <- setClass("PoissonBernsteinFunction", # nolint
   contains = "BernsteinFunction",
-  slots = c("lambda", "eta"),
+  slots = c(lambda = "numeric", eta = "numeric"),
   validity = function(object) {
     if (!is_nonnegative_number(object@lambda) ||
           !is_nonnegative_number(object@eta)) {
       return("lambda and eta must be positive numbers")
     }
 
-    TRUE
+    invisible(TRUE)
   })
 
 #' @rdname valueOf-methods
@@ -398,13 +398,13 @@ setMethod("valueOf",
 #' @export AlphaStableBernsteinFunction
 AlphaStableBernsteinFunction <- setClass("AlphaStableBernsteinFunction", # nolint
   contains = "BernsteinFunction",
-  slots = c("alpha"),
+  slots = c(alpha = "numeric"),
   validity = function(object) {
     if (!is_positive_number(object@alpha) || object@alpha >= 1) {
       return("alpha must be number between 0 and 1")
     }
 
-    TRUE
+    invisible(TRUE)
   })
 
 #' @rdname valueOf-methods
@@ -438,76 +438,156 @@ setMethod("valueOf",
 
 
 
-  #' Class for the Exponential jump CPP Bernstein function
-  #'
-  #' @examples
-  #' bf <- ExponentialBernsteinFunction(lambda=0.5)
-  #'
-  #' @slot lambda The index \eqn{\lambda}.
-  #'
-  #' @description
-  #' For the Exponential jump CPP subordinator with \eqn{\lambda > 0},
-  #' the corresponding Bernstein function is
-  #' \deqn{
-  #'   \psi(x) = \frac{x}{x + \lambda}, x>0.
-  #' }
-  #'
-  #' @details
-  #' For the Exponential jump CPP Bernstein function, the higher order
-  #' alternating iterated forward differences are known in closed form:
-  #' \deqn{
-  #'   {(-1)}^{k-1} \Delta^k \psi(x)
-  #'    = \lambda \cdot B(k+1, x+\lambda), x>0, k>0 .
-  #' }
-  #'
-  #' This Bernstein function is no. 4 in the list of complete Bernstein functions
-  #' in Chp. 16 of \insertCite{Schilling2012a}{rmo}.
-  #'
-  #' @references
-  #'   \insertAllCited{}
-  #'
-  #' @seealso [BernsteinFunction-class]
-  #'
-  #' @importFrom methods new setClass
-  #' @importFrom assertthat is.number
-  #' @include assert.R
-  #'
-  #' @export ExponentialBernsteinFunction
-  ExponentialBernsteinFunction <- setClass("ExponentialBernsteinFunction", # nolint
-    contains = "BernsteinFunction",
-    slots = c("lambda"),
-    validity = function(object) {
-      if (!is_positive_number(object@lambda)) {
-        return("lambda must be positive number")
-      }
+#' Class for the \emph{Inverse Gaussian Bernstein function}
+#'
+#' @examples
+#' bf <- InverseGaussianBernsteinFunction(eta=0.3)
+#'
+#' @slot eta The distribution parameter (drift of the
+#'   underlying Gaussian process)
+#'
+#' @description
+#' For the inverse Gaussian Lévy subordinator with \eqn{\eta > 0},
+#' the corresponding Bernstein function is the function
+#' \deqn{
+#'   \psi(x) = \sqrt{2x + \eta^2} - \eta, x>0.
+#' }
+#'
+#' @details
+#' For the inverse Gaussian Bernstein function, the higher-order alternating
+#' iterated forward differences are not known in closed-form, but
+#' we can use numerical integration (here: [stats::integrate()])
+#' to approximate it with the following representation:
+#' \deqn{
+#'  {(-1)}^{k-1} \Delta^{k} \psi(x)
+#'    = \int_0^\infty e^{-ux} (1-e^{-u})^k \frac{1}{\sqrt{2\pi}
+#'      u^{3/2}} e^{-\frac{1}{2}\eta^2 u} du, x>0, k>0.
+#' }
+#'
+#' This Bernstein function can be found on p. 309 in \insertCite{Mai2017a}{rmo}.
+#'
+#' @references
+#'  \insertAllCited{}
+#'
+#' @seealso [BernsteinFunction-class]
+#'
+#' @importFrom methods new setClass
+#' @importFrom assertthat is.number
+#' @include assert.R
+#'
+#' @export InverseGaussianBernsteinFunction
+InverseGaussianBernsteinFunction <- setClass("InverseGaussianBernsteinFunction", # nolint
+  contains = "BernsteinFunction",
+  slots = c(eta = "numeric"),
+  validity = function(object) {
+    if (!is_positive_number(object@eta)) {
+      return("eta must be positive number")
+    }
 
-      TRUE
-    })
+    invisible(TRUE)
+  })
 
-  #' @rdname valueOf-methods
-  #' @aliases valueOf,ExponentialBernsteinFunction,numeric,integer,ANY-method
-  #'
-  #' @seealso [ExponentialBernsteinFunction-class]
-  #'
-  #' @importFrom methods setMethod
-  #' @importFrom stats integrate
-  #' @include assert.R
-  #'
-  #' @export
-  setMethod("valueOf",
-    signature = c("ExponentialBernsteinFunction", "numeric", "integer"),
-    definition = function(object, x, difference_order=0L) {
-      assert_that(is_nonnegative_number(difference_order),
-        is_nonnegative_vector(x))
+#' @rdname valueOf-methods
+#' @aliases valueOf,InverseGaussianBernsteinFunction,numeric,integer,ANY-method
+#'
+#' @seealso [InverseGaussianBernsteinFunction-class]
+#'
+#' @importFrom methods setMethod
+#' @importFrom stats integrate
+#' @include assert.R
+#'
+#' @export
+setMethod("valueOf",
+  signature = c("InverseGaussianBernsteinFunction", "numeric", "integer"),
+  definition = function(object, x, difference_order=0L) {
+    assert_that(is_nonnegative_number(difference_order),
+      is_nonnegative_vector(x))
 
-      if (0L == difference_order) {
-        x / (x + object@lambda)
-      } else {
-        sapply(x, function(y) {
-          beta(difference_order+1, y+object@lambda) * object@lambda
-        })
-      }
-    })
+    if (0L == difference_order) {
+      sqrt(2*x + object@eta^2) - object@eta
+    } else if (1L == difference_order) {
+      valueOf(object, x+1, 0L) - valueOf(object, x, 0L)
+    } else {
+      sapply(x, function(y) integrate(
+        f=function(u) {
+          exp(-y*u) * (1 - exp(-u))^difference_order *
+            1/sqrt(2*pi * u^3) * exp(-0.5*object@eta^2*u) ## Lévy density
+        }, lower=0, upper=Inf)$value)
+    }
+  })
+
+
+
+#' Class for the Exponential jump CPP Bernstein function
+#'
+#' @examples
+#' bf <- ExponentialBernsteinFunction(lambda=0.5)
+#'
+#' @slot lambda The index \eqn{\lambda}.
+#'
+#' @description
+#' For the Exponential jump CPP subordinator with \eqn{\lambda > 0},
+#' the corresponding Bernstein function is
+#' \deqn{
+#'   \psi(x) = \frac{x}{x + \lambda}, x>0.
+#' }
+#'
+#' @details
+#' For the Exponential jump CPP Bernstein function, the higher order
+#' alternating iterated forward differences are known in closed form:
+#' \deqn{
+#'   {(-1)}^{k-1} \Delta^k \psi(x)
+#'    = \lambda \cdot B(k+1, x+\lambda), x>0, k>0 .
+#' }
+#'
+#' This Bernstein function is no. 4 in the list of complete Bernstein functions
+#' in Chp. 16 of \insertCite{Schilling2012a}{rmo}.
+#'
+#' @references
+#'   \insertAllCited{}
+#'
+#' @seealso [BernsteinFunction-class]
+#'
+#' @importFrom methods new setClass
+#' @importFrom assertthat is.number
+#' @include assert.R
+#'
+#' @export ExponentialBernsteinFunction
+ExponentialBernsteinFunction <- setClass("ExponentialBernsteinFunction", # nolint
+  contains = "BernsteinFunction",
+  slots = c("lambda" = "numeric"),
+  validity = function(object) {
+    if (!is_positive_number(object@lambda)) {
+      return("lambda must be positive number")
+    }
+
+    invisible(TRUE)
+  })
+
+#' @rdname valueOf-methods
+#' @aliases valueOf,ExponentialBernsteinFunction,numeric,integer,ANY-method
+#'
+#' @seealso [ExponentialBernsteinFunction-class]
+#'
+#' @importFrom methods setMethod
+#' @importFrom stats integrate
+#' @include assert.R
+#'
+#' @export
+setMethod("valueOf",
+  signature = c("ExponentialBernsteinFunction", "numeric", "integer"),
+  definition = function(object, x, difference_order=0L) {
+    assert_that(is_nonnegative_number(difference_order),
+      is_nonnegative_vector(x))
+
+    if (0L == difference_order) {
+      x / (x + object@lambda)
+    } else {
+      sapply(x, function(y) {
+        beta(difference_order+1, y+object@lambda) * object@lambda
+      })
+    }
+  })
 
 
 # #### Logarithmic Bernstein functions ####
@@ -559,7 +639,7 @@ GammaBernsteinFunction <- setClass("GammaBernsteinFunction", # nolint
       return("a must be positive number")
     }
 
-    TRUE
+    invisible(TRUE)
   })
 
 #' @rdname valueOf-methods
@@ -638,14 +718,14 @@ setMethod("valueOf",
 #' @export ParetoBernsteinFunction
 ParetoBernsteinFunction <- setClass("ParetoBernsteinFunction", # nolint
   contains = "BernsteinFunction",
-  slots = c("alpha", "x0"),
+  slots = c(alpha = "numeric", x0 = "numeric"),
   validity = function(object) {
     if (!is_positive_number(object@alpha) || object@alpha >= 1 ||
         !is_positive_number(object@x0)) {
           return("alpha must be between 0 and 1 and x0 positive")
     }
 
-    TRUE
+    invisible(TRUE)
   })
 
 #' @rdname valueOf-methods

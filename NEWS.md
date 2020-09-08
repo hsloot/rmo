@@ -1,3 +1,7 @@
+# rmo 0.2.4
+
+- Implementation of the Inverse Gaussian Bernstein function
+
 # rmo 0.2.3
 
 - Implement Pareto jumps and Pareto CPP Bernstein function

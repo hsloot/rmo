@@ -252,3 +252,29 @@ intensities_pareto <- function(d, alpha, x0) { # nocov start
   ex_intensities2intensities(
     ex_intensities_pareto(d, alpha, x0))
 } # nocov end
+
+
+#' @param eta `eta` parameter for the inverse Gaussian BF, passed to `eta`
+#'   parameter of [InverseGaussianBernsteinFunction-class]
+#'
+#' @seealso [InverseGaussianBernsteinFunction-class]
+#'
+#' @examples
+#' ex_intensities_inverse_gaussian(10L, eta=0.4)
+#'
+#' @export
+#' @rdname parameter
+ex_intensities_inverse_gaussian <- function(d, eta) { # nocov start
+  bf <- InverseGaussianBernsteinFunction(eta=eta)
+  bf2ex_intensities(d, bf)
+} # nocov end
+
+#' @examples
+#' intensities_inverse_gaussian(10L, eta=0.4)
+#'
+#' @export
+#' @rdname parameter
+intensities_inverse_gaussian <- function(d, eta) { # nocov start
+  ex_intensities2intensities(
+    ex_intensities_inverse_gaussian(d, eta))
+} # nocov end

@@ -18,6 +18,8 @@
 \alias{intensities_gamma}
 \alias{ex_intensities_pareto}
 \alias{intensities_pareto}
+\alias{ex_intensities_inverse_gaussian}
+\alias{intensities_inverse_gaussian}
 \title{Convenience functions to MO parameters}
 \usage{
 ex_intensities_constant(d, constant)
@@ -51,6 +53,10 @@ intensities_gamma(d, a)
 ex_intensities_pareto(d, alpha, x0)
 
 intensities_pareto(d, alpha, x0)
+
+ex_intensities_inverse_gaussian(d, eta)
+
+intensities_inverse_gaussian(d, eta)
 }
 \arguments{
 \item{d}{Dimension of the distribution}
@@ -70,8 +76,8 @@ parameter of \linkS4class{ParetoBernsteinFunction}}
 \item{lambda}{lambda parameter for Exponential-jump CPP subordinator, passed to \code{lambda}
 parameter of \linkS4class{ExponentialBernsteinFunction}}
 
-\item{eta}{Jump size for Poisson process, passed to \code{eta} parameter of
-\linkS4class{PoissonBernsteinFunction}}
+\item{eta}{\code{eta} parameter for the inverse Gaussian BF, passed to \code{eta}
+parameter of \linkS4class{InverseGaussianBernsteinFunction}}
 
 \item{a}{Shape parameter for Gamma subordinator, passed to \code{a} parameter of
 \linkS4class{GammaBernsteinFunction}}
@@ -121,6 +127,10 @@ ex_intensities_pareto(10L, alpha=0.4, x0=5e-4)
 
 intensities_pareto(10L, alpha=0.4, x0=5e-4)
 
+ex_intensities_inverse_gaussian(10L, eta=0.4)
+
+intensities_inverse_gaussian(10L, eta=0.4)
+
 }
 \seealso{
 \code{\link[=valueOf]{valueOf()}}
@@ -138,4 +148,6 @@ intensities_pareto(10L, alpha=0.4, x0=5e-4)
 \linkS4class{GammaBernsteinFunction}
 
 \linkS4class{ParetoBernsteinFunction}
+
+\linkS4class{InverseGaussianBernsteinFunction}
 }
