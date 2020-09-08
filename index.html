@@ -13,7 +13,7 @@
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="A package for the Marshall-Olkin distribution">
 <meta property="og:description" content="
-  The package contains an implementation of the Marshall-Olkin distribution and 
+  The package contains an implementation of the Marshall-Olkin distribution and
   methods for estimation, simulation, and construction.">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">rmo</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.2.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.3</span>
       </span>
     </div>
 
@@ -113,46 +113,40 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>You can install the development version from <a href="https://github.com/">GitHub</a> with:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="co"># install.packages("devtools")</span>
-<span class="kw">devtools</span>::<span class="fu">install_github</span>(<span class="st">"hsloot/rmo"</span>)
-</pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># install.packages("devtools")</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">"hsloot/rmo"</span>)</span></code></pre></div>
 </div>
 <div id="example" class="section level2">
 <h2 class="hasAnchor">
 <a href="#example" class="anchor"></a>Example</h2>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="fu"><a href="reference/rmo_esm.html">rmo_esm</a></span>(n=<span class="fl">10L</span>, d=<span class="fl">2L</span>, intensities=<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span>))
-<span class="co">#&gt;              [,1]        [,2]</span>
-<span class="co">#&gt;  [1,] 0.220396393 0.220396393</span>
-<span class="co">#&gt;  [2,] 0.268882997 0.702705410</span>
-<span class="co">#&gt;  [3,] 0.071347906 0.071347906</span>
-<span class="co">#&gt;  [4,] 0.185663070 0.185663070</span>
-<span class="co">#&gt;  [5,] 0.007869681 0.007869681</span>
-<span class="co">#&gt;  [6,] 0.441468786 0.441468786</span>
-<span class="co">#&gt;  [7,] 0.936079929 0.493162846</span>
-<span class="co">#&gt;  [8,] 2.060125742 0.691868769</span>
-<span class="co">#&gt;  [9,] 0.220026223 1.290835243</span>
-<span class="co">#&gt; [10,] 0.035544062 1.518556226</span>
-</pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">rmo_esm</span>(<span class="dt">n=</span>10L, <span class="dt">d=</span>2L, <span class="dt">intensities=</span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="co">#&gt;              [,1]        [,2]</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="co">#&gt;  [1,] 0.220396393 0.220396393</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="co">#&gt;  [2,] 0.268882997 0.702705410</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="co">#&gt;  [3,] 0.071347906 0.071347906</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="co">#&gt;  [4,] 0.185663070 0.185663070</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="co">#&gt;  [5,] 0.007869681 0.007869681</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="co">#&gt;  [6,] 0.441468786 0.441468786</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a><span class="co">#&gt;  [7,] 0.936079929 0.493162846</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a><span class="co">#&gt;  [8,] 2.060125742 0.691868769</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a><span class="co">#&gt;  [9,] 0.220026223 1.290835243</span></span>
+<span id="cb2-12"><a href="#cb2-12"></a><span class="co">#&gt; [10,] 0.035544062 1.518556226</span></span></code></pre></div>
 <div id="approximate-an-alpha-stable-bf" class="section level3">
 <h3 class="hasAnchor">
 <a href="#approximate-an-alpha-stable-bf" class="anchor"></a>Approximate an Alpha-Stable BF</h3>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="kw">alpha</span> <span class="op">&lt;-</span> <span class="fl">0.5</span>
-<span class="kw">bf</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/AlphaStableBernsteinFunction-class.html">AlphaStableBernsteinFunction</a></span>(alpha=<span class="kw">alpha</span>)
-
-<span class="kw">x0</span> <span class="op">&lt;-</span> <span class="fl">5e-4</span>
-<span class="kw">bf_approx</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/SumOfBernsteinFunctions-class.html">SumOfBernsteinFunctions</a></span>(
-  first=<span class="fu"><a href="reference/LinearBernsteinFunction-class.html">LinearBernsteinFunction</a></span>(
-    scale = <span class="kw">alpha</span><span class="op">*</span><span class="kw">x0</span><span class="op">^</span>(<span class="fl">1</span><span class="op">-</span><span class="kw">alpha</span>)<span class="op">/</span>(<span class="fl">1</span><span class="op">-</span><span class="kw">alpha</span>)<span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/Special.html">gamma</a></span>(<span class="fl">1</span><span class="op">-</span><span class="kw">alpha</span>)
-  ),
-  second=<span class="fu"><a href="reference/ScaledBernsteinFunction-class.html">ScaledBernsteinFunction</a></span>(
-    scale = <span class="kw">x0</span><span class="op">^</span>(<span class="op">-</span><span class="kw">alpha</span>)<span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/Special.html">gamma</a></span>(<span class="fl">1</span><span class="op">-</span><span class="kw">alpha</span>),
-    original = <span class="fu"><a href="reference/ParetoBernsteinFunction-class.html">ParetoBernsteinFunction</a></span>(alpha=<span class="kw">alpha</span>, x0=<span class="kw">x0</span>)
-  )
-)
-</pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>alpha &lt;-<span class="st"> </span><span class="fl">0.5</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>bf &lt;-<span class="st"> </span><span class="kw">AlphaStableBernsteinFunction</span>(<span class="dt">alpha=</span>alpha)</span>
+<span id="cb3-3"><a href="#cb3-3"></a></span>
+<span id="cb3-4"><a href="#cb3-4"></a>x0 &lt;-<span class="st"> </span><span class="fl">5e-4</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a>bf_approx &lt;-<span class="st"> </span><span class="kw">SumOfBernsteinFunctions</span>(</span>
+<span id="cb3-6"><a href="#cb3-6"></a>  <span class="dt">first=</span><span class="kw">LinearBernsteinFunction</span>(</span>
+<span id="cb3-7"><a href="#cb3-7"></a>    <span class="dt">scale =</span> alpha<span class="op">*</span>x0<span class="op">^</span>(<span class="dv">1</span><span class="op">-</span>alpha)<span class="op">/</span>(<span class="dv">1</span><span class="op">-</span>alpha)<span class="op">/</span><span class="kw">gamma</span>(<span class="dv">1</span><span class="op">-</span>alpha)</span>
+<span id="cb3-8"><a href="#cb3-8"></a>  ),</span>
+<span id="cb3-9"><a href="#cb3-9"></a>  <span class="dt">second=</span><span class="kw">ScaledBernsteinFunction</span>(</span>
+<span id="cb3-10"><a href="#cb3-10"></a>    <span class="dt">scale =</span> x0<span class="op">^</span>(<span class="op">-</span>alpha)<span class="op">/</span><span class="kw">gamma</span>(<span class="dv">1</span><span class="op">-</span>alpha),</span>
+<span id="cb3-11"><a href="#cb3-11"></a>    <span class="dt">original =</span> <span class="kw">ParetoBernsteinFunction</span>(<span class="dt">alpha=</span>alpha, <span class="dt">x0=</span>x0)</span>
+<span id="cb3-12"><a href="#cb3-12"></a>  )</span>
+<span id="cb3-13"><a href="#cb3-13"></a>)</span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-5-1.png" width="100%"></p>
 </div>
 </div>
@@ -220,7 +214,7 @@
 <ul class="list-unstyled">
 <li><a href="https://www.repostatus.org/#wip"><img src="https://www.repostatus.org/badges/latest/wip.svg" alt="Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public."></a></li>
 <li><a href="https://www.tidyverse.org/lifecycle/#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
-<li><a href="/commits/master"><img src="https://img.shields.io/badge/last%20change-2020--07--03-yellowgreen.svg" alt="Last-changedate"></a></li>
+<li><a href="/commits/master"><img src="https://img.shields.io/badge/last%20change-2020--08--03-yellowgreen.svg" alt="Last-changedate"></a></li>
 <li><a href="https://github.com/hsloot/rmo/actions"><img src="https://github.com/hsloot/rmo/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
 <li><a href="https://codecov.io/gh/hsloot/rmo?branch=master"><img src="https://codecov.io/gh/hsloot/rmo/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
 </ul>
@@ -234,7 +228,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.9000.</p>
 </div>
 
       </footer>
