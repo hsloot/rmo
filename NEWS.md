@@ -1,3 +1,7 @@
+# rmo 0.2.5
+
+- Include more tests
+
 # rmo 0.2.4
 
 - Implementation of the Inverse Gaussian Bernstein function

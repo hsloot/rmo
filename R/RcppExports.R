@@ -29,6 +29,18 @@ mo_internal__sample_int <- function(n, size, replace, prob = NULL, useHash = FAL
     .Call(`_rmo_mo_internal__sample_int`, n, size, replace, prob, useHash)
 }
 
+mo_internal__reverse_sort <- function(a, ib) {
+    invisible(.Call(`_rmo_mo_internal__reverse_sort`, a, ib))
+}
+
+mo_internal__revsort_orig <- function(a, ib) {
+    invisible(.Call(`_rmo_mo_internal__revsort_orig`, a, ib))
+}
+
+mo_internal__sort_index <- function(x) {
+    .Call(`_rmo_mo_internal__sort_index`, x)
+}
+
 #' @keywords internal helper
 #' @noRd
 Rcpp__is_within <- function(i, j) {

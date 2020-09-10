@@ -94,6 +94,39 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// mo_internal__reverse_sort
+void mo_internal__reverse_sort(NumericVector& a, IntegerVector& ib);
+RcppExport SEXP _rmo_mo_internal__reverse_sort(SEXP aSEXP, SEXP ibSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector& >::type a(aSEXP);
+    Rcpp::traits::input_parameter< IntegerVector& >::type ib(ibSEXP);
+    mo_internal__reverse_sort(a, ib);
+    return R_NilValue;
+END_RCPP
+}
+// mo_internal__revsort_orig
+void mo_internal__revsort_orig(NumericVector& a, IntegerVector& ib);
+RcppExport SEXP _rmo_mo_internal__revsort_orig(SEXP aSEXP, SEXP ibSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector& >::type a(aSEXP);
+    Rcpp::traits::input_parameter< IntegerVector& >::type ib(ibSEXP);
+    mo_internal__revsort_orig(a, ib);
+    return R_NilValue;
+END_RCPP
+}
+// mo_internal__sort_index
+IntegerVector mo_internal__sort_index(NumericVector& x);
+RcppExport SEXP _rmo_mo_internal__sort_index(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector& >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(mo_internal__sort_index(x));
+    return rcpp_result_gen;
+END_RCPP
+}
 // Rcpp__is_within
 bool Rcpp__is_within(const R_xlen_t i, const R_xlen_t j);
 RcppExport SEXP _rmo_Rcpp__is_within(SEXP iSEXP, SEXP jSEXP) {
@@ -185,6 +218,9 @@ static const R_CallMethodDef CallEntries[] = {
     {"_rmo_mo_internal__count_noreplace", (DL_FUNC) &_rmo_mo_internal__count_noreplace, 3},
     {"_rmo_mo_internal__perm", (DL_FUNC) &_rmo_mo_internal__perm, 1},
     {"_rmo_mo_internal__sample_int", (DL_FUNC) &_rmo_mo_internal__sample_int, 5},
+    {"_rmo_mo_internal__reverse_sort", (DL_FUNC) &_rmo_mo_internal__reverse_sort, 2},
+    {"_rmo_mo_internal__revsort_orig", (DL_FUNC) &_rmo_mo_internal__revsort_orig, 2},
+    {"_rmo_mo_internal__sort_index", (DL_FUNC) &_rmo_mo_internal__sort_index, 1},
     {"_rmo_Rcpp__is_within", (DL_FUNC) &_rmo_Rcpp__is_within, 2},
     {"_rmo_Rcpp__rmo_esm", (DL_FUNC) &_rmo_Rcpp__rmo_esm, 3},
     {"_rmo_Rcpp__rmo_arnold", (DL_FUNC) &_rmo_Rcpp__rmo_arnold, 3},
