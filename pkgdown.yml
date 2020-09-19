@@ -1,6 +1,12 @@
 pandoc: 2.7.3
-pkgdown: 1.6.0
+pkgdown: 1.6.1
 pkgdown_sha: ~
-articles: []
-last_built: 2020-09-10T21:58Z
+articles:
+  Cuadras-Auge-distributions: Cuadras-Auge-distributions.html
+  Exchangeable-Marshall-Olkin-distributions: Exchangeable-Marshall-Olkin-distributions.html
+  Mixing-Marshall-Olkin-distributions: Mixing-Marshall-Olkin-distributions.html
+  The-Levy-frailty-model: The-Levy-frailty-model.html
+  The-Marshall-Olkin-distribution: The-Marshall-Olkin-distribution.html
+  The-binary-representation: The-binary-representation.html
+last_built: 2020-09-19T12:59Z
 
