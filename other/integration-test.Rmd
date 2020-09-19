@@ -12,7 +12,7 @@ knitr::opts_chunk$set(
 
 ```{r setup, include=FALSE, message=FALSE}
 library(rmo)
-
+set.seed(1623L)
 n <- 1e4L
 
 ks_test <- function(n, d, FUN, intensities) {
