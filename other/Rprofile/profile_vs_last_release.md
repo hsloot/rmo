@@ -1,31 +1,5 @@
-Comparison of 0.2.5 and 0.2.4
+Comparison of v0.2.5 and v0.2.4
 ================
-
-    tmpdir <- tempdir()
-    suppressMessages(remotes::install_github(
-      "hsloot/rmo@v0.2.4", lib = tmpdir, quiet = TRUE))
-
-    library("tidyverse")
-
-    ## ── Attaching packages ────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.3.0 ──
-
-    ## ✓ ggplot2 3.3.2     ✓ purrr   0.3.4
-    ## ✓ tibble  3.0.3     ✓ dplyr   1.0.2
-    ## ✓ tidyr   1.1.2     ✓ stringr 1.4.0
-    ## ✓ readr   1.3.1     ✓ forcats 0.5.0
-
-    ## ── Conflicts ───────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
-    ## x dplyr::filter() masks stats::filter()
-    ## x dplyr::lag()    masks stats::lag()
-
-    library("purrr")
-
-    library("bench")
-    library("ggplot2")
-
-    source(system.file(
-      "Rsource", "parameter_generator.R",
-      package="rmo", mustWork=TRUE))
 
 General notes
 -------------
@@ -33,18 +7,11 @@ General notes
 -   The assertions can take up a large part of the runtime, depending on
     the algorithm. Hence, we will directly call the C++ methods without
     performing parameter checks before.
--   We have to use the pre R 3.6.x sample RNG, since the new one is not
-    yet implemented in Rcpp.
 
 <!-- -->
 
-    suppressWarnings(
-      RNGkind(
-        kind="Mersenne-Twister", 
-        normal.kind = "Inversion", 
-        sample.kind="Rounding"))
-
     n <- 1e2L
+    min_iterations <- 10L
 
 Global Shock Model / Cuadras-Augé Parameter
 -------------------------------------------
@@ -82,16 +49,16 @@ algortihms).
     alpha <- c(0.1, 0.4, 0.8)
     beta <- c(0.1, 0.4, 0.8)
 
-    params <- tibble(expand.grid(
+    dparams <- tibble(expand.grid(
       "d" = d,
       "alpha" = alpha,
       "beta" = beta
     ))
 
-    ex_intensity_list <- force(pmap(params, ~{
+    ex_intensity_list <- force(pmap(dparams, ~{
       ex_intensities_cuadras_auge(..1, alpha=..2, beta=..2)
     }))
-    intensity_list <- force(pmap(params, ~{
+    intensity_list <- force(pmap(dparams, ~{
       intensities_cuadras_auge(..1, alpha=..2, beta=..2)
     }))
 
@@ -101,9 +68,9 @@ algortihms).
       "beta" = beta,
       {
         idx <- which(
-          params$d == d &
-            params$alpha == alpha &
-            params$beta == beta)
+          dparams$d == d &
+            dparams$alpha == alpha &
+            dparams$beta == beta)
         ex_intensities <- ex_intensity_list[[idx]]
         intensities <- intensity_list[[idx]]
 
@@ -118,50 +85,11 @@ algortihms).
             n, d, 0, alpha, beta, "rposval", list("value"=1)),
           Cuadras_Auge = rmo:::Rcpp__rmo_esm_cuadras_auge(
             n, d, alpha, beta),
-          min_iterations = 100L,
+          min_iterations = min_iterations,
           check=FALSE
         )
       }
     )
-
-    ## Running with:
-    ##        d alpha  beta
-
-    ##  1     3   0.1   0.1
-
-    ##  2     6   0.1   0.1
-
-    ##  3     3   0.4   0.1
-
-    ##  4     6   0.4   0.1
-
-    ##  5     3   0.8   0.1
-
-    ##  6     6   0.8   0.1
-
-    ##  7     3   0.1   0.4
-
-    ##  8     6   0.1   0.4
-
-    ##  9     3   0.4   0.4
-
-    ## 10     6   0.4   0.4
-
-    ## 11     3   0.8   0.4
-
-    ## 12     6   0.8   0.4
-
-    ## 13     3   0.1   0.8
-
-    ## 14     6   0.1   0.8
-
-    ## 15     3   0.4   0.8
-
-    ## 16     6   0.4   0.8
-
-    ## 17     3   0.8   0.8
-
-    ## 18     6   0.8   0.8
 
     bp1 %>%
       unnest(cols = c("time", "gc")) %>%
@@ -174,7 +102,7 @@ algortihms).
       ggplot2::coord_flip() +
       facet_grid(d + alpha ~ beta)
 
-![](profile_files/figure-gfm/ca-press-new-1.png)<!-- -->
+![](profile_vs_last_release_files/figure-gfm/ca-press-new-1.png)<!-- -->
 
     detach("package:rmo", unload = TRUE)
     library(rmo, lib.loc = tmpdir)
@@ -185,9 +113,9 @@ algortihms).
       "beta" = beta,
       {
         idx <- which(
-          params$d == d &
-            params$alpha == alpha &
-            params$beta == beta)
+          dparams$d == d &
+            dparams$alpha == alpha &
+            dparams$beta == beta)
         ex_intensities <- ex_intensity_list[[idx]]
         intensities <- intensity_list[[idx]]
 
@@ -202,50 +130,11 @@ algortihms).
             n, d, 0, alpha, beta, "rposval", list("value"=1)),
           Cuadras_Auge = rmo:::Rcpp__rmo_esm_cuadras_auge(
             n, d, alpha, beta),
-          min_iterations = 100L,
+          min_iterations = min_iterations,
           check=FALSE
         )
       }
     )
-
-    ## Running with:
-    ##        d alpha  beta
-
-    ##  1     3   0.1   0.1
-
-    ##  2     6   0.1   0.1
-
-    ##  3     3   0.4   0.1
-
-    ##  4     6   0.4   0.1
-
-    ##  5     3   0.8   0.1
-
-    ##  6     6   0.8   0.1
-
-    ##  7     3   0.1   0.4
-
-    ##  8     6   0.1   0.4
-
-    ##  9     3   0.4   0.4
-
-    ## 10     6   0.4   0.4
-
-    ## 11     3   0.8   0.4
-
-    ## 12     6   0.8   0.4
-
-    ## 13     3   0.1   0.8
-
-    ## 14     6   0.1   0.8
-
-    ## 15     3   0.4   0.8
-
-    ## 16     6   0.4   0.8
-
-    ## 17     3   0.8   0.8
-
-    ## 18     6   0.8   0.8
 
     bp1_prev %>%
       unnest(cols = c("time", "gc")) %>%
@@ -258,7 +147,7 @@ algortihms).
       ggplot2::coord_flip() +
       facet_grid(d + alpha ~ beta)
 
-![](profile_files/figure-gfm/ca-press-old-1.png)<!-- -->
+![](profile_vs_last_release_files/figure-gfm/ca-press-old-1.png)<!-- -->
 
     detach("package:rmo", unload = TRUE)
 
@@ -276,16 +165,16 @@ with medium cardinality.
     lambda <- c(0.7, 1, 1.3)
     eta <- c(0.7, 1, 1.3)
 
-    params <- tibble(expand.grid(
+    dparams <- tibble(expand.grid(
       "d" = d,
       "lambda" = lambda,
       "eta" = eta
     ))
 
-    ex_intensity_list <- force(pmap(params, ~{
+    ex_intensity_list <- force(pmap(dparams, ~{
       ex_intensities_poisson(..1, lambda=..2, eta=..2)
     }))
-    intensity_list <- force(pmap(params, ~{
+    intensity_list <- force(pmap(dparams, ~{
       intensities_poisson(..1, lambda=..2, eta=..2)
     }))
 
@@ -295,9 +184,9 @@ with medium cardinality.
       "eta" = eta,
       {
         idx <- which(
-          params$d == d &
-            params$lambda == lambda &
-            params$eta == eta)
+          dparams$d == d &
+            dparams$lambda == lambda &
+            dparams$eta == eta)
         ex_intensities <- ex_intensity_list[[idx]]
         intensities <- intensity_list[[idx]]
 
@@ -310,50 +199,11 @@ with medium cardinality.
             n, d, ex_intensities=ex_intensities),
           LFM = rmo:::Rcpp__rmo_lfm_cpp(
             n, d, lambda, 0, 0, "rposval", list("value"=eta)),
-          min_iterations = 100L,
+          min_iterations = min_iterations,
           check=FALSE
         )
       }
     )
-
-    ## Running with:
-    ##        d lambda   eta
-
-    ##  1     3    0.7   0.7
-
-    ##  2     6    0.7   0.7
-
-    ##  3     3    1     0.7
-
-    ##  4     6    1     0.7
-
-    ##  5     3    1.3   0.7
-
-    ##  6     6    1.3   0.7
-
-    ##  7     3    0.7   1
-
-    ##  8     6    0.7   1
-
-    ##  9     3    1     1
-
-    ## 10     6    1     1
-
-    ## 11     3    1.3   1
-
-    ## 12     6    1.3   1
-
-    ## 13     3    0.7   1.3
-
-    ## 14     6    0.7   1.3
-
-    ## 15     3    1     1.3
-
-    ## 16     6    1     1.3
-
-    ## 17     3    1.3   1.3
-
-    ## 18     6    1.3   1.3
 
     bp2 %>%
       unnest(cols = c("time", "gc")) %>%
@@ -364,9 +214,9 @@ with medium cardinality.
       ggplot(aes(expression, time, colour = gc)) +
       ggbeeswarm::geom_quasirandom() +
       ggplot2::coord_flip() +
-      facet_grid(d + lambda ~ eta) 
+      facet_grid(d + lambda ~ eta)
 
-![](profile_files/figure-gfm/Poisson-press-new-1.png)<!-- -->
+![](profile_vs_last_release_files/figure-gfm/Poisson-press-new-1.png)<!-- -->
 
     detach("package:rmo", unload = TRUE)
     library(rmo, lib.loc = tmpdir)
@@ -377,9 +227,9 @@ with medium cardinality.
       "eta" = eta,
       {
         idx <- which(
-          params$d == d &
-            params$lambda == lambda &
-            params$eta == eta)
+          dparams$d == d &
+            dparams$lambda == lambda &
+            dparams$eta == eta)
         ex_intensities <- ex_intensity_list[[idx]]
         intensities <- intensity_list[[idx]]
 
@@ -392,50 +242,11 @@ with medium cardinality.
             n, d, ex_intensities=ex_intensities),
           LFM = rmo:::Rcpp__rmo_lfm_cpp(
             n, d, lambda, 0, 0, "rposval", list("value"=eta)),
-          min_iterations = 100L,
+          min_iterations = min_iterations,
           check=FALSE
         )
       }
     )
-
-    ## Running with:
-    ##        d lambda   eta
-
-    ##  1     3    0.7   0.7
-
-    ##  2     6    0.7   0.7
-
-    ##  3     3    1     0.7
-
-    ##  4     6    1     0.7
-
-    ##  5     3    1.3   0.7
-
-    ##  6     6    1.3   0.7
-
-    ##  7     3    0.7   1
-
-    ##  8     6    0.7   1
-
-    ##  9     3    1     1
-
-    ## 10     6    1     1
-
-    ## 11     3    1.3   1
-
-    ## 12     6    1.3   1
-
-    ## 13     3    0.7   1.3
-
-    ## 14     6    0.7   1.3
-
-    ## 15     3    1     1.3
-
-    ## 16     6    1     1.3
-
-    ## 17     3    1.3   1.3
-
-    ## 18     6    1.3   1.3
 
     bp2_prev %>%
       unnest(cols = c("time", "gc")) %>%
@@ -446,8 +257,145 @@ with medium cardinality.
       ggplot(aes(expression, time, colour = gc)) +
       ggbeeswarm::geom_quasirandom() +
       ggplot2::coord_flip() +
-      facet_grid(d + lambda ~ eta) 
+      facet_grid(d + lambda ~ eta)
 
-![](profile_files/figure-gfm/Poisson-press-old-1.png)<!-- -->
+![](profile_vs_last_release_files/figure-gfm/Poisson-press-old-1.png)<!-- -->
+
+    detach("package:rmo", unload = TRUE)
+
+Pareto LFM parametrisation
+--------------------------
+
+We use this parametrisation to compare the LFM and the exchangeable
+Arnold model in higher dimensions. This parametrisation is more
+unfavorable for the LFM, since Pareto jumps are computationally more
+expensive than fixed size jumps or exponential jumps.
+
+    library(rmo)
+
+    # n <- 1e3L
+
+    d <- c(5L, 25L, 125L)
+    rate <- c(0.5, 2)
+    alpha <- c(0.1, 0.6, 0.9)
+    x0 <- c(1e-4)
+
+    dparams <- tibble(expand.grid(
+      "d" = d,
+      "alpha" = alpha,
+      "x0" = x0,
+      "rate" = rate
+    ))
+
+    ex_intensity_list <- force(pmap(dparams, ~{
+      ex_intensities_pareto(..1, alpha=..2, x0=..3) / ..4
+    }))
+
+    bp3 <- bench::press(
+      "d" = d,
+      "alpha" = alpha,
+      "x0" = x0,
+      "rate" = rate,
+      {
+        idx <- which(
+          dparams$d == d &
+            dparams$alpha == alpha &
+            dparams$x0 == x0 & 
+            dparams$rate == rate)
+        ex_intensities <- ex_intensity_list[[idx]]
+
+        bench::mark(
+          Ex_Arnold = rmo:::Rcpp__rmo_ex_arnold(
+            n, d, ex_intensities=ex_intensities),
+          LFM = rmo:::Rcpp__rmo_lfm_cpp(
+            n, d, rate, 0, 0, "rpareto", list("alpha"=alpha, "x0"=x0)),
+          min_iterations = min_iterations,
+          check=FALSE
+        )
+      }
+    )
+
+    bp3 %>%
+      unnest(cols = c("time", "gc")) %>%
+      mutate(expression = factor(
+        expression,
+        levels = c("Ex_Arnold", "LFM")
+        )) %>%
+      ggplot(aes(expression, time, colour = gc)) +
+      ggbeeswarm::geom_quasirandom() +
+      ggplot2::coord_flip() +
+      facet_grid(rate + alpha + x0 ~ d)
+
+![](profile_vs_last_release_files/figure-gfm/Pareto-press-new-1.png)<!-- -->
+
+    bp3 %>%
+      unnest(cols = c("time", "gc")) %>%
+      mutate(expression = factor(
+        expression,
+        levels = c("Ex_Arnold", "LFM")
+        )) %>%
+      filter(gc == "none") %>%
+      ggplot(aes(x=d, y=time)) +
+      geom_point() +
+      geom_smooth(method = "lm", se = FALSE, colour = "grey50", formula = y ~ x + I(x^2)) +
+      theme(legend.position = "bottom") +
+      facet_grid(rate + alpha + x0 ~ expression)
+
+![](profile_vs_last_release_files/figure-gfm/Pareto-press-new-2.png)<!-- -->
+
+    detach("package:rmo", unload = TRUE)
+    library(rmo, lib.loc = tmpdir)
+
+    bp3_prev <- bench::press(
+      "d" = d,
+      "alpha" = alpha,
+      "x0" = x0,
+      "rate" = rate,
+      {
+        idx <- which(
+          dparams$d == d &
+            dparams$alpha == alpha &
+            dparams$x0 == x0 & 
+            dparams$rate == rate)
+        ex_intensities <- ex_intensity_list[[idx]]
+
+        bench::mark(
+          Ex_Arnold = rmo:::Rcpp__rmo_ex_arnold(
+            n, d, ex_intensities=ex_intensities),
+          LFM = rmo:::Rcpp__rmo_lfm_cpp(
+            n, d, rate, 0, 0, "rpareto", list("alpha"=alpha, "x0"=x0)),
+          min_iterations = min_iterations,
+          check=FALSE
+        )
+      }
+    )
+
+    bp3_prev %>%
+      unnest(cols = c("time", "gc")) %>%
+      mutate(expression = factor(
+        expression,
+        levels = c("Ex_Arnold", "LFM")
+        )) %>%
+      ggplot(aes(expression, time, colour = gc)) +
+      ggbeeswarm::geom_quasirandom() +
+      ggplot2::coord_flip() +
+      facet_grid(rate + alpha + x0 ~ d)
+
+![](profile_vs_last_release_files/figure-gfm/Pareto-press-old-1.png)<!-- -->
+
+    bp3_prev %>%
+      unnest(cols = c("time", "gc")) %>%
+      mutate(expression = factor(
+        expression,
+        levels = c("Ex_Arnold", "LFM")
+        )) %>%
+      filter(gc == "none") %>%
+      ggplot(aes(x=d, y=time)) +
+      geom_point() +
+      geom_smooth(method = "lm", se = FALSE, colour = "grey50", formula = y ~ x + I(x^2)) +
+      theme(legend.position = "bottom") +
+      facet_grid(rate + alpha + x0 ~ expression)
+
+![](profile_vs_last_release_files/figure-gfm/Pareto-press-old-2.png)<!-- -->
 
     detach("package:rmo", unload = TRUE)
