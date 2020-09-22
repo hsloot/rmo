@@ -1,5 +1,5 @@
 ---
-title: "Comparison of 0.2.2 and 0.2.1"
+title: "Comparison of 0.2.5 and 0.2.4"
 output: github_document
 ---
 
@@ -7,14 +7,14 @@ output: github_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r install-previous version}
+```{r install-previous version, include=FALSE, message=FALSE}
 tmpdir <- tempdir()
 suppressMessages(remotes::install_github(
-  "hsloot/rmo@v0.2.1", lib = tmpdir, quiet = TRUE))
+  "hsloot/rmo@v0.2.4", lib = tmpdir, quiet = TRUE))
 ```
 
 
-```{r load-packages}
+```{r load-packages, include=FALSE, message=FALSE}
 library("tidyverse")
 library("purrr")
 
@@ -93,7 +93,7 @@ intensity_list <- force(pmap(params, ~{
 }))
 ```
 
-```{r ca-press-v0.2.2}
+```{r ca-press-new}
 bp1 <- bench::press(
   "d" = d,
   "alpha" = alpha,
@@ -135,7 +135,7 @@ bp1 %>%
   facet_grid(d + alpha ~ beta)
 ```
 
-```{r ca-press-v0.2.1}
+```{r ca-press-old}
 detach("package:rmo", unload = TRUE)
 library(rmo, lib.loc = tmpdir)
 
@@ -211,7 +211,7 @@ intensity_list <- force(pmap(params, ~{
 }))
 ```
 
-```{r Poisson-press-v0.2.2}
+```{r Poisson-press-new}
 bp2 <- bench::press(
   "d" = d,
   "lambda" = lambda,
@@ -251,7 +251,7 @@ bp2 %>%
   facet_grid(d + lambda ~ eta) 
 ```
 
-```{r Poisson-press-v0.2.1}
+```{r Poisson-press-old}
 detach("package:rmo", unload = TRUE)
 library(rmo, lib.loc = tmpdir)
 

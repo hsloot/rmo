@@ -76,6 +76,23 @@ Example
 
 <img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" />
 
+Word of caution for high dimensions
+-----------------------------------
+
+While the package, including the simulation algorithms, is extensively
+tested with unit tests, it can happen to run into unexpected results for
+certain parametrisations in high dimensions. The reason for this are
+numerical issues with very small and very large numbers. We tried to
+program defensively to avoid these problems, but if the dimension is
+high enough and the parametrisation leads to values below the double
+precision, at some point numerical issues are inevitable. For this
+reason, we encourage users to produce statistical tests suitable for
+their use-case. An example can be found in
+<https://github.com/hsloot/rmo/blob/master/other/integration-test.Rmd>.
+If you are encountering statistical problems, please submit an [issue
+report](https://github.com/hsloot/rmo/issues/new?assignees=&labels=bug&template=statistical_report.md&title=%5BSTAT%5D)
+including a [reprex](https://github.com/tidyverse/reprex).
+
 Roadmap for future development
 ------------------------------
 
