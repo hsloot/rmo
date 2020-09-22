@@ -264,7 +264,7 @@ intensities_pareto <- function(d, alpha, x0) { # nocov start
 #'
 #' @export
 #' @rdname parameter
-ex_intensities_inverse_gaussian <- function(d, eta) { # nocov start
+ex_intensities_inverse_gaussian <- function(d, eta) { # nolint # nocov start
   bf <- InverseGaussianBernsteinFunction(eta=eta)
   bf2ex_intensities(d, bf)
 } # nocov end

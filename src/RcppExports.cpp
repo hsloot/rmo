@@ -5,6 +5,31 @@
 
 using namespace Rcpp;
 
+// mo_internal__binomial_coefficient
+std::size_t mo_internal__binomial_coefficient(const std::size_t n, const std::size_t k);
+RcppExport SEXP _rmo_mo_internal__binomial_coefficient(SEXP nSEXP, SEXP kSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const std::size_t >::type n(nSEXP);
+    Rcpp::traits::input_parameter< const std::size_t >::type k(kSEXP);
+    rcpp_result_gen = Rcpp::wrap(mo_internal__binomial_coefficient(n, k));
+    return rcpp_result_gen;
+END_RCPP
+}
+// mo_internal__binomial_coefficient_factor
+double mo_internal__binomial_coefficient_factor(const double x, const std::size_t n, const std::size_t k);
+RcppExport SEXP _rmo_mo_internal__binomial_coefficient_factor(SEXP xSEXP, SEXP nSEXP, SEXP kSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const double >::type x(xSEXP);
+    Rcpp::traits::input_parameter< const std::size_t >::type n(nSEXP);
+    Rcpp::traits::input_parameter< const std::size_t >::type k(kSEXP);
+    rcpp_result_gen = Rcpp::wrap(mo_internal__binomial_coefficient_factor(x, n, k));
+    return rcpp_result_gen;
+END_RCPP
+}
 // mo_internal__rexp
 NumericVector mo_internal__rexp(const R_xlen_t n, const double rate);
 RcppExport SEXP _rmo_mo_internal__rexp(SEXP nSEXP, SEXP rateSEXP) {
@@ -211,6 +236,8 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_rmo_mo_internal__binomial_coefficient", (DL_FUNC) &_rmo_mo_internal__binomial_coefficient, 2},
+    {"_rmo_mo_internal__binomial_coefficient_factor", (DL_FUNC) &_rmo_mo_internal__binomial_coefficient_factor, 3},
     {"_rmo_mo_internal__rexp", (DL_FUNC) &_rmo_mo_internal__rexp, 2},
     {"_rmo_mo_internal__rpareto", (DL_FUNC) &_rmo_mo_internal__rpareto, 3},
     {"_rmo_mo_internal__fixeddbl", (DL_FUNC) &_rmo_mo_internal__fixeddbl, 2},

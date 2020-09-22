@@ -11,20 +11,37 @@
 namespace mo {
 namespace stats {
 
+inline std::vector<double> increment_ex_intensities_sm(
+    const std::vector<double>& x) {
+  std::vector<double> out(++x.begin(), x.end());
+  std::transform(out.begin(), out.end(), x.begin(), out.begin(),
+                 std::plus<double>());
+  return out;
+}
+
+inline std::vector<double> scale_ex_intensities_sm(std::vector<double> x) {
+  std::size_t j = 1;
+  std::transform(x.begin(), x.end(), x.begin(), [&](double y) {
+    return math::binomial_coefficient_factor(y, x.size(), (j++));
+  });
+
+  return x;
+}
+
 template <typename Vector, typename RNGPolicy>
 template <typename VectorIn>
 ExArnoldGenerator<Vector, RNGPolicy>::ExArnoldGenerator(
     const std::size_t d, const VectorIn& ex_intensities)
     : d_{d}, perm_generator_{d}, wt_generators_(d), shock_generators_(d) {
+  std::vector<double> ex_intensities_sm(ex_intensities.begin(),
+                                        ex_intensities.end());
   for (std::size_t i = 0; i < d_; i++) {
-    std::vector<double> intensities(d - i);
-    for (std::size_t j = 0; j < d - i; j++) {
-      for (std::size_t k = 0; k < i + 1; k++) {
-        intensities[j] +=
-            math::binomial_coefficient(i, k) * ex_intensities[k + j];
-      }
-      intensities[j] *= math::binomial_coefficient(d - i, j + 1);
-    }
+    if (0 < i)
+      ex_intensities_sm = increment_ex_intensities_sm(ex_intensities_sm);
+
+    std::vector<double> intensities =
+        scale_ex_intensities_sm(ex_intensities_sm);
+
     auto total_intensity =
         std::accumulate(intensities.begin(), intensities.end(), 0.);
     wt_generators_[i].reset(new ExpGenerator<RNGPolicy>{total_intensity});
