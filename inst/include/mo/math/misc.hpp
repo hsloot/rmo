@@ -31,6 +31,17 @@ inline T binomial_coefficient(const T n, const T k) {
   return n * binomial_coefficient(n - 1, k - 1) / k;
 }
 
+template <typename T>
+inline double binomial_coefficient_factor(const double x, const T n,
+                                          const T k) {
+  if (k > n) throw std::domain_error("k > n");  // # nocov
+  if (0 == k) return x;
+  if (k > (n / 2)) return binomial_coefficient_factor(x, n, n - k);
+
+  return (static_cast<double>(n) / static_cast<double>(k)) *
+         binomial_coefficient_factor(x, n - 1, k - 1);
+}
+
 }  // namespace math
 }  // namespace mo
 

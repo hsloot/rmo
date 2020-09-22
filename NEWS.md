@@ -1,6 +1,8 @@
 # rmo 0.2.5
 
 - Include more tests
+- Include statistical tests for an integration test
+- Fix problem with large binomial coefficients
 
 # rmo 0.2.4
 
