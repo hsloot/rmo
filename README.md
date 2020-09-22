@@ -90,7 +90,7 @@ reason, we encourage users to produce statistical tests suitable for
 their use-case. An example can be found in
 <https://github.com/hsloot/rmo/blob/master/other/integration-test.Rmd>.
 If you are encountering statistical problems, please submit an [issue
-report](https://github.com/hsloot/rmo/issues/new?assignees=&labels=bug&template=statistical_report.md&title=%5BSTAT%5D)
+report](https://github.com/hsloot/rmo/issues/new?assignees=&labels=bug&template=statistical_problem.md&title=%5BSTAT%5D)
 including a [reprex](https://github.com/tidyverse/reprex).
 
 Roadmap for future development
