@@ -150,6 +150,11 @@
 <p><img src="reference/figures/README-unnamed-chunk-5-1.png" width="100%"></p>
 </div>
 </div>
+<div id="word-of-caution-for-high-dimensions" class="section level2">
+<h2 class="hasAnchor">
+<a href="#word-of-caution-for-high-dimensions" class="anchor"></a>Word of caution for high dimensions</h2>
+<p>While the package, including the simulation algorithms, is extensively tested with unit tests, it can happen to run into unexpected results for certain parametrisations in high dimensions. The reason for this are numerical issues with very small and very large numbers. We tried to program defensively to avoid these problems, but if the dimension is high enough and the parametrisation leads to values below the double precision, at some point numerical issues are inevitable. For this reason, we encourage users to produce statistical tests suitable for their use-case. An example can be found in <a href="https://github.com/hsloot/rmo/blob/master/other/integration-test.Rmd" class="uri">https://github.com/hsloot/rmo/blob/master/other/integration-test.Rmd</a>. If you are encountering statistical problems, please submit an <a href="https://github.com/hsloot/rmo/issues/new?assignees=&amp;labels=bug&amp;template=statistical_report.md&amp;title=%5BSTAT%5D">issue report</a> including a <a href="https://github.com/tidyverse/reprex">reprex</a>.</p>
+</div>
 <div id="roadmap-for-future-development" class="section level2">
 <h2 class="hasAnchor">
 <a href="#roadmap-for-future-development" class="anchor"></a>Roadmap for future development</h2>
