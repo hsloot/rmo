@@ -6,7 +6,7 @@
 using namespace Rcpp;
 
 // mo_internal__binomial_coefficient
-std::size_t mo_internal__binomial_coefficient(const std::size_t n, const std::size_t k);
+double mo_internal__binomial_coefficient(const std::size_t n, const std::size_t k);
 RcppExport SEXP _rmo_mo_internal__binomial_coefficient(SEXP nSEXP, SEXP kSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;

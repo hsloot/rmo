@@ -5,8 +5,8 @@ using namespace Rcpp;
 using namespace mo::math;
 
 // [[Rcpp::export]]
-std::size_t mo_internal__binomial_coefficient(const std::size_t n, const std::size_t k) {
-  return binomial_coefficient(n, k);
+double mo_internal__binomial_coefficient(const std::size_t n, const std::size_t k) {
+  return binomial_coefficient(static_cast<double>(n), static_cast<double>(k));
 }
 
 // [[Rcpp::export]]
