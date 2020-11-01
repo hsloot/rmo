@@ -235,6 +235,8 @@ BEGIN_RCPP
 END_RCPP
 }
 
+RcppExport SEXP run_testthat_tests(SEXP);
+
 static const R_CallMethodDef CallEntries[] = {
     {"_rmo_mo_internal__binomial_coefficient", (DL_FUNC) &_rmo_mo_internal__binomial_coefficient, 2},
     {"_rmo_mo_internal__binomial_coefficient_factor", (DL_FUNC) &_rmo_mo_internal__binomial_coefficient_factor, 3},
@@ -254,6 +256,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_rmo_Rcpp__rmo_ex_arnold", (DL_FUNC) &_rmo_Rcpp__rmo_ex_arnold, 3},
     {"_rmo_Rcpp__rmo_esm_cuadras_auge", (DL_FUNC) &_rmo_Rcpp__rmo_esm_cuadras_auge, 4},
     {"_rmo_Rcpp__rmo_lfm_cpp", (DL_FUNC) &_rmo_Rcpp__rmo_lfm_cpp, 7},
+    {"run_testthat_tests", (DL_FUNC) &run_testthat_tests, 1},
     {NULL, NULL, 0}
 };
 

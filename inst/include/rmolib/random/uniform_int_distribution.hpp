@@ -1,0 +1,149 @@
+#pragma once
+
+#include <cmath>
+#include <limits>
+#include <stdexcept>
+#include <type_traits>
+
+namespace rmolib {
+
+namespace random {
+
+// type_trait for identifying possible alternative implementations of
+// a uniform_real_distribution<>::param_type
+template <typename _T, class = void>
+struct is_uniform_int_param_type : public std::false_type {};
+
+template <typename _T>
+struct is_uniform_int_param_type<
+    _T, typename std::enable_if<decltype(
+            std::declval<_T&>().lower(),
+            std::true_type())::value&& decltype(std::declval<_T&>().upper(),
+                                                std::true_type())::value>::type>
+    : public std::true_type {};
+
+template <typename _T>
+constexpr bool is_uniform_int_param_type_v =
+    is_uniform_int_param_type<_T>::value;
+
+template <typename _IntType>
+class uniform_int_distribution {
+ public:
+  using result_type = _IntType;
+
+  class param_type {
+   public:
+    using distribution_type = uniform_int_distribution;
+
+    param_type() = default;
+    explicit param_type(const _IntType lower, const _IntType upper)
+        : lower_{lower}, length_{upper - lower} {
+      __validate_input(lower_, lower_ + length_);
+    }
+
+    // Used for construction from a different specialization
+    template <typename _UniformIntParamType,
+              typename std::enable_if<
+                  !std::is_convertible_v<_UniformIntParamType, param_type> &&
+                      is_uniform_int_param_type_v<_UniformIntParamType>,
+                  int>::type = 0>
+    explicit param_type(_UniformIntParamType&& parm)
+        : param_type{parm.lower(), parm.upper()} {}
+
+    // compiler generated ctor and assignment op is sufficient
+
+    auto lower() const { return lower_; }
+    auto upper() const { return lower_ + length_; }
+
+    friend class uniform_int_distribution;
+
+    friend bool operator==(const param_type& lhs, const param_type& rhs) {
+      return lhs.lower_ == rhs.lower_ && lhs.length_ == rhs.length_;
+    }
+
+    friend bool operator!=(const param_type& lhs, const param_type& rhs) {
+      return !(lhs == rhs);
+    }
+
+   private:
+    _IntType lower_{0};
+    _IntType length_{std::numeric_limits<_IntType>::max()};
+
+    void __validate_input(const _IntType lower,
+                          const _IntType upper) const {
+      if (upper <= lower)
+        throw std::domain_error("upper - lower must be positive");
+    }
+
+    static_assert(
+        std::is_integral<_IntType>::value,
+        "Class template rmolib::random::uniform_int_distribution<> must be "
+        "parametrized with integral type");
+  };
+
+  uniform_int_distribution() = default;
+
+  explicit uniform_int_distribution(const _IntType lower,
+                                    const _IntType upper)
+      : parm_{lower, upper} {}
+  uniform_int_distribution(const param_type& parm) : parm_{parm} {}
+
+  // compiler generated ctor and assignment op is sufficient
+
+  void reset() {}
+
+  auto min() const { return lower(); }
+  auto max() const { return upper(); }
+
+  auto lower() const { return parm_.lower(); }
+  auto upper() const { return parm_.upper(); }
+
+  param_type param() const { return parm_; }
+  void param(const param_type& parm) { parm_ = parm; }
+
+  template <typename _EngineType>
+  result_type operator()(_EngineType& engine) {
+    return (*this)(engine, parm_);
+  }
+
+  template <typename _EngineType>
+  result_type operator()(_EngineType& engine, const param_type& parm) {
+      return parm.lower_ +
+             unit_uniform_int_distribution(engine, parm.length_);
+  }
+
+  friend bool operator==(const uniform_int_distribution& lhs,
+                         const uniform_int_distribution& rhs) {
+    return lhs.parm_ == rhs.parm_;
+  }
+
+  friend bool operator!=(const uniform_int_distribution& lhs,
+                         const uniform_int_distribution& rhs) {
+    return lhs.parm_ != rhs.parm_;
+  }
+
+ private:
+  param_type parm_{};
+
+  template <typename _EngineType>
+  result_type unit_uniform_int_distribution(_EngineType& engine,
+                                            const _IntType n);
+};
+
+/*
+  // TODO: implement
+
+  template <class _CharType, class _Traits, class _RealType>
+  std::basic_ostream<_CharType, _Traits>&
+  operator<<(std::basic_ostream<_CharType, _Traits>& os,
+            uniform_int_distribution<_RealType>& dist);
+
+  template <class _CharType, class _Traits, class _RealType>
+  std::basic_istream<_CharType, _Traits>&
+  operator>>(std::basic_istream<_CharType, _Traits>& is,
+             uniform_int_distribution<_RealType>& dist);
+*/
+
+}  // namespace random
+
+}  // namespace rmolib
