@@ -1,6 +1,6 @@
 #include <limits>
 
-#include <r_engine.hpp>
+#include <r_engine.h>
 #include <rmolib/random/deterministic_distribution.hpp>
 #include <testthat.h>
 

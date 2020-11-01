@@ -1,7 +1,7 @@
 #include <algorithm>
 #include <cmath>
 
-#include <r_engine.hpp>
+#include <r_engine.h>
 #include <rmolib/random/pareto_distribution.hpp>
 #include <rmolib/random/uniform_real_distribution.hpp>
 #include <testthat.h>

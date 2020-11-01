@@ -26,7 +26,7 @@ struct is_pareto_param_type<
 template <typename _T>
 constexpr bool is_pareto_param_type_v = is_pareto_param_type<_T>::value;
 
-template <typename _RealType, typename _UnitUniformRealDistribution>
+template <typename _RealType, typename _UnitUniformRealDistributionType>
 class pareto_distribution {
  public:
   using result_type = _RealType;
@@ -133,22 +133,24 @@ class pareto_distribution {
 
  private:
   param_type param_{};
-  _UnitUniformRealDistribution unit_uniform_real_distribution_{};
+  _UnitUniformRealDistributionType unit_uniform_real_distribution_{};
 
   void init_unit_uniform_real_distribution() {
-    if constexpr (std::is_constructible_v<_UnitUniformRealDistribution,
+    if constexpr (std::is_constructible_v<_UnitUniformRealDistributionType,
                                           const _RealType, const _RealType>) {
       // TODO:
-      // static_assert(is_distribution_type<_UnitUniformRealDistribution>)
-      using unit_param_type = typename _UnitUniformRealDistribution::param_type;
+      // static_assert(is_distribution_type<_UnitUniformRealDistributionType>)
+      using unit_param_type =
+          typename _UnitUniformRealDistributionType::param_type;
       unit_uniform_real_distribution_.param(
           unit_param_type{_RealType{0}, _RealType{1}});
     }
   }
 
   static_assert(
-      std::is_same<result_type,
-                   typename _UnitUniformRealDistribution::result_type>::value,
+      std::is_same<
+          result_type,
+          typename _UnitUniformRealDistributionType::result_type>::value,
       "Class template rmolib::random::pareto_distribution<> must be "
       "parametrized with unit_uniform_real_distribution-type with matching "
       "result_type");
@@ -157,16 +159,15 @@ class pareto_distribution {
 /*
   // TODO: implement
 
-  template <class _CharType, class _Traits, typename _RealType, typename
-  _UnitUniformRealDistribution> std::basic_ostream<_CharType, _Traits>&
+  template <class _CharType, class _Traits, class _RealType>
+  std::basic_ostream<_CharType, _Traits>&
   operator<<(std::basic_ostream<_CharType, _Traits>& os,
-            pareto_distribution<_RealType, _UnitUniformRealDistribution>& dist);
+            pareto_distribution<_RealType>& dist);
 
-  template <class _CharType, class _Traits, typename _RealType, typename
-  _UnitUniformRealDistribution> std::basic_istream<_CharType, _Traits>&
+  template <class _CharType, class _Traits, class _RealType>
+  std::basic_istream<_CharType, _Traits>&
   operator>>(std::basic_istream<_CharType, _Traits>& is,
-             pareto_distribution<_RealType, _UnitUniformRealDistribution>&
-  dist);
+             pareto_distribution<_RealType>& dist);
 */
 
 }  // namespace random
