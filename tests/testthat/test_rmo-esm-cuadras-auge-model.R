@@ -1,4 +1,3 @@
-context("Cuadras-Auge exogenous shock model")
 use_seed <- 1623L
 n <- 1e2L
 

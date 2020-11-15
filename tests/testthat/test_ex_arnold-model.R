@@ -1,4 +1,3 @@
-context("Exchangeable Arnold model")
 use_seed <- 1632L
 n <- 100L
 

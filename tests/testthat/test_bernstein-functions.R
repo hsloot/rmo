@@ -1,5 +1,3 @@
-context("Bernstein Function S4 class")
-
 test_that("Test initialisation of BernsteinFunction classes", {
   expect_s4_class(ConstantBernsteinFunction(constant=0.5),
     class="ConstantBernsteinFunction")
