@@ -149,7 +149,7 @@ distribution with shock rates ex_intensities." />
 distribution with shock rates <code>ex_intensities</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>rmo_ex_arnold</span>(<span class='kw'>n</span>, <span class='kw'>d</span>, <span class='kw'>ex_intensities</span>)</pre>
+    <pre class="usage"><span class='fu'>rmo_ex_arnold</span><span class='op'>(</span><span class='va'>n</span>, <span class='va'>d</span>, <span class='va'>ex_intensities</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -199,7 +199,7 @@ intensity of a shock corresponding to a set with \(i\) elements.</p></li>
 <code><a href='rmo_lfm_cpp.html'>rmo_lfm_cpp</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>rmo_ex_arnold</span>(<span class='fl'>10</span>, <span class='fl'>2</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.4</span>, <span class='fl'>0.2</span>))
+    <pre class="examples"><div class='input'><span class='fu'>rmo_ex_arnold</span><span class='op'>(</span><span class='fl'>10</span>, <span class='fl'>2</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.4</span>, <span class='fl'>0.2</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;            [,1]       [,2]
 #&gt;  [1,] 2.6866876 0.68832679
 #&gt;  [2,] 2.4743825 2.47438250
@@ -210,7 +210,7 @@ intensity of a shock corresponding to a set with \(i\) elements.</p></li>
 #&gt;  [7,] 1.6585730 2.33794804
 #&gt;  [8,] 4.0042539 0.52152228
 #&gt;  [9,] 2.5934059 3.50166206
-#&gt; [10,] 1.2868070 0.05664471</div><div class='input'><span class='fu'>rmo_ex_arnold</span>(<span class='fl'>10</span>, <span class='fl'>2</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>0</span>))      <span class='co'>## independence</span>
+#&gt; [10,] 1.2868070 0.05664471</div><div class='input'><span class='fu'>rmo_ex_arnold</span><span class='op'>(</span><span class='fl'>10</span>, <span class='fl'>2</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>0</span><span class='op'>)</span><span class='op'>)</span>      <span class='co'>## independence</span>
 </div><div class='output co'>#&gt;             [,1]       [,2]
 #&gt;  [1,] 0.28202017 0.25023985
 #&gt;  [2,] 0.11967045 0.06686906
@@ -221,7 +221,7 @@ intensity of a shock corresponding to a set with \(i\) elements.</p></li>
 #&gt;  [7,] 0.05949120 2.35306153
 #&gt;  [8,] 0.67849649 2.52381421
 #&gt;  [9,] 0.02016214 0.26575979
-#&gt; [10,] 0.35167474 0.44108507</div><div class='input'><span class='fu'>rmo_ex_arnold</span>(<span class='fl'>10</span>, <span class='fl'>2</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>1</span>))      <span class='co'>## comonotone</span>
+#&gt; [10,] 0.35167474 0.44108507</div><div class='input'><span class='fu'>rmo_ex_arnold</span><span class='op'>(</span><span class='fl'>10</span>, <span class='fl'>2</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>      <span class='co'>## comonotone</span>
 </div><div class='output co'>#&gt;            [,1]      [,2]
 #&gt;  [1,] 0.3716193 0.3716193
 #&gt;  [2,] 0.2781220 0.2781220

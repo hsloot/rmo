@@ -149,9 +149,9 @@ with shock rates intensities." />
 with shock rates <code>intensities</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>rmo_esm</span>(<span class='kw'>n</span>, <span class='kw'>d</span>, <span class='kw'>intensities</span>)
+    <pre class="usage"><span class='fu'>rmo_esm</span><span class='op'>(</span><span class='va'>n</span>, <span class='va'>d</span>, <span class='va'>intensities</span><span class='op'>)</span>
 
-<span class='fu'>rmo_arnold</span>(<span class='kw'>n</span>, <span class='kw'>d</span>, <span class='kw'>intensities</span>)</pre>
+<span class='fu'>rmo_arnold</span><span class='op'>(</span><span class='va'>n</span>, <span class='va'>d</span>, <span class='va'>intensities</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -213,13 +213,13 @@ the specific shocks, see (see Sec. 3.1.2 Mai and Scherer 2017)
 
     <p>Arnold BC (1975).
 &#8220;A characterization of the exponential distribution by multivariate geometric compounding.&#8221;
-<em>Sankhy\=a: The Indian Journal of Statistics, Series A</em>, <b>37</b>(1), 164--173.<br /><br /> Mai J, Scherer M (2017).
-<em>Simulating copulas: stochastic models, sampling algorithms and applications</em>,  Series in Quantitative Finance, 2 edition.
+<em>Sankhy\=aThe Indian Journal of Statistics, Series A</em>, <b>37</b>, 164--173.<br /><br /> Mai J, Scherer M (2017).
+<em>Simulating copulas: stochastic models, sampling algorithms and applications</em>, 2 edition.
 World Scientific.
 doi: <a href='https://doi.org/10.1142/10265'>10.1142/10265</a>
 .<br /><br /> Marshall AW, Olkin I (1967).
 &#8220;A multivariate exponential distribution.&#8221;
-<em>Journal of the American Statistical Association</em>, <b>62</b>(317), 30--44.
+<em>Journal of the American Statistical Association</em>, <b>62</b>, 30--44.
 doi: <a href='https://doi.org/10.2307/2282907'>10.2307/2282907</a>
 .</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
@@ -234,7 +234,7 @@ doi: <a href='https://doi.org/10.2307/2282907'>10.2307/2282907</a>
 <code><a href='rmo_lfm_cpp.html'>rmo_lfm_cpp</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>rmo_esm</span>(<span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.4</span>, <span class='fl'>0.3</span>, <span class='fl'>0.2</span>))
+    <pre class="examples"><div class='input'><span class='fu'>rmo_esm</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.4</span>, <span class='fl'>0.3</span>, <span class='fl'>0.2</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;            [,1]      [,2]
 #&gt;  [1,] 1.0076089 1.0076089
 #&gt;  [2,] 4.1099047 4.2610808
@@ -245,7 +245,7 @@ doi: <a href='https://doi.org/10.2307/2282907'>10.2307/2282907</a>
 #&gt;  [7,] 0.9791194 1.2570400
 #&gt;  [8,] 1.0321692 0.4166710
 #&gt;  [9,] 1.3488047 1.3488047
-#&gt; [10,] 0.3157354 0.3157354</div><div class='input'><span class='fu'>rmo_esm</span>(<span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>0</span>))         <span class='co'>## independence</span>
+#&gt; [10,] 0.3157354 0.3157354</div><div class='input'><span class='fu'>rmo_esm</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>0</span><span class='op'>)</span><span class='op'>)</span>         <span class='co'>## independence</span>
 </div><div class='output co'>#&gt;            [,1]      [,2]
 #&gt;  [1,] 0.8346728 2.1228993
 #&gt;  [2,] 1.1099744 0.6503988
@@ -256,7 +256,7 @@ doi: <a href='https://doi.org/10.2307/2282907'>10.2307/2282907</a>
 #&gt;  [7,] 0.7070553 1.2010309
 #&gt;  [8,] 0.1198257 0.2667298
 #&gt;  [9,] 0.2012750 0.7386326
-#&gt; [10,] 0.8533478 0.9709052</div><div class='input'><span class='fu'>rmo_esm</span>(<span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>1</span>))         <span class='co'>## comonotone</span>
+#&gt; [10,] 0.8533478 0.9709052</div><div class='input'><span class='fu'>rmo_esm</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>         <span class='co'>## comonotone</span>
 </div><div class='output co'>#&gt;             [,1]       [,2]
 #&gt;  [1,] 1.42692257 1.42692257
 #&gt;  [2,] 0.10330351 0.10330351
@@ -268,7 +268,7 @@ doi: <a href='https://doi.org/10.2307/2282907'>10.2307/2282907</a>
 #&gt;  [8,] 0.01530056 0.01530056
 #&gt;  [9,] 0.32071861 0.32071861
 #&gt; [10,] 0.02358263 0.02358263</div><div class='input'>
-<span class='fu'>rmo_arnold</span>(<span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.4</span>, <span class='fl'>0.3</span>, <span class='fl'>0.2</span>))
+<span class='fu'>rmo_arnold</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.4</span>, <span class='fl'>0.3</span>, <span class='fl'>0.2</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;               [,1]        [,2]
 #&gt;  [1,] 0.7545132037 0.745672082
 #&gt;  [2,] 0.0004255575 0.611343385
@@ -279,7 +279,7 @@ doi: <a href='https://doi.org/10.2307/2282907'>10.2307/2282907</a>
 #&gt;  [7,] 0.4477469270 0.447746927
 #&gt;  [8,] 0.4688249994 1.424578000
 #&gt;  [9,] 0.0034628925 0.003462892
-#&gt; [10,] 1.2844908831 2.504649150</div><div class='input'><span class='fu'>rmo_arnold</span>(<span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>0</span>))         <span class='co'>## independence</span>
+#&gt; [10,] 1.2844908831 2.504649150</div><div class='input'><span class='fu'>rmo_arnold</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>0</span><span class='op'>)</span><span class='op'>)</span>         <span class='co'>## independence</span>
 </div><div class='output co'>#&gt;            [,1]      [,2]
 #&gt;  [1,] 0.5942469 0.1642855
 #&gt;  [2,] 0.5251676 0.4902827
@@ -290,7 +290,7 @@ doi: <a href='https://doi.org/10.2307/2282907'>10.2307/2282907</a>
 #&gt;  [7,] 0.1169146 4.5708246
 #&gt;  [8,] 0.0173984 1.0590224
 #&gt;  [9,] 0.8139989 0.6232731
-#&gt; [10,] 0.2183484 0.0680045</div><div class='input'><span class='fu'>rmo_arnold</span>(<span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>1</span>))         <span class='co'>## comonotone</span>
+#&gt; [10,] 0.2183484 0.0680045</div><div class='input'><span class='fu'>rmo_arnold</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>         <span class='co'>## comonotone</span>
 </div><div class='output co'>#&gt;             [,1]       [,2]
 #&gt;  [1,] 2.21487791 2.21487791
 #&gt;  [2,] 0.52694965 0.52694965
