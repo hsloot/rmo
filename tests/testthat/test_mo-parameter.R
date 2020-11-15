@@ -1,5 +1,3 @@
-context("Parameter")
-
 test_that("conversion from ex_intensities to intensities", {
   expect_equal(
     ex_intensities2intensities(

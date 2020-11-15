@@ -1,5 +1,3 @@
-context("sort functions")
-
 test_that("`reverse_sort` works as expected", {
   a1 <- c(1, 5, 3, 4, 2, 1, 5)
   id1 <- seq_along(a1)

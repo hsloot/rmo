@@ -1,4 +1,4 @@
-context("Custom assertions") ## TODO: Implement more tests for higher dimensions
+## TODO: Implement more tests for higher dimensions
 
 
 test_that("`is_positive_number` assertion works as intended", {

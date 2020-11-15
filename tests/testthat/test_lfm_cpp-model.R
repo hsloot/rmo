@@ -1,4 +1,3 @@
-context("Levy-frailty model with compound Poisson subordinator")
 use_seed <- 1632L
 n <- 100L
 

@@ -1,4 +1,3 @@
-context("Rcpp generators")
 use_seed <- 1632L
 n <- 1e5L
 

@@ -1,5 +1,3 @@
-context("Set functions")
-
 test_that("is_within work as expected in bivariate setting", {
   expect_equal(Rcpp__is_within(1L, 1L), TRUE)
   expect_equal(Rcpp__is_within(1L, 2L), FALSE)

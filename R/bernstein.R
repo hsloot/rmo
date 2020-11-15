@@ -432,7 +432,9 @@ setMethod("valueOf",
         f=function(u) {
           exp(-y * u) * (1 - exp(-u))^difference_order *
             object@alpha / gamma(1-object@alpha) * u ^ (-1-object@alpha) ## Lévy density
-        }, lower = 0, upper = Inf)$value)
+        }, lower = 0, upper = Inf,
+        ## use lower tolerance to pass all.equal
+        rel.tol = .Machine$double.eps^0.5)$value)
     }
   })
 
@@ -512,7 +514,9 @@ setMethod("valueOf",
         f=function(u) {
           exp(-y*u) * (1 - exp(-u))^difference_order *
             1/sqrt(2*pi * u^3) * exp(-0.5*object@eta^2*u) ## Lévy density
-        }, lower=0, upper=Inf)$value)
+        }, lower=0, upper=Inf,
+        ## use lower tolerance to pass all.equal
+        rel.tol = .Machine$double.eps^0.5)$value)
     }
   })
 
@@ -755,6 +759,8 @@ setMethod("valueOf",
         f=function(u) {
           exp(-y * u) * (1-exp(-u))^difference_order *
             object@alpha * (object@x0 / u) ^ (object@alpha) / u ## Lévy density
-        }, lower=object@x0, upper=Inf)$value)
+        }, lower=object@x0, upper=Inf,
+        ## use lower tolerance to pass all.equal
+        rel.tol = .Machine$double.eps^0.5)$value)
     }
   })

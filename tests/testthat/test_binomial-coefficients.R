@@ -1,5 +1,3 @@
-context("binomial coefficient functions")
-
 test_that("`binomial_coefficient` works as expected", {
   n <- 50
   x <- matrix(0, nrow = n, ncol = n + 1)
