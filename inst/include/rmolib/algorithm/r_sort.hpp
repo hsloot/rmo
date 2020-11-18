@@ -13,23 +13,23 @@ namespace internal {
 // heap_parent
 
 template <typename _RandomAccessIterator>
-inline auto _r_heap_parent(_RandomAccessIterator first,
+inline auto r_heap_parent(_RandomAccessIterator first,
                            _RandomAccessIterator child) {
   // first == node --> -1 / 2 = 0 --> return first;
   return std::next(first, (std::distance(first, child) - 1) / 2);
 }
 
 template <typename _RandomAccessIterator>
-inline auto _r_last_parent(_RandomAccessIterator first,
+inline auto r_last_parent(_RandomAccessIterator first,
                            _RandomAccessIterator last) {
   auto last_child = next(last, -1);
-  return _r_heap_parent(first, last_child);
+  return r_heap_parent(first, last_child);
 };
 
 // heap_child
 
 template <typename _RandomAccessIterator, bool left = false>
-inline auto _r_heap_child(_RandomAccessIterator first,
+inline auto r_heap_child(_RandomAccessIterator first,
                           _RandomAccessIterator last,
                           _RandomAccessIterator parent) {
   const auto n = std::distance(first, last);
@@ -41,45 +41,45 @@ inline auto _r_heap_child(_RandomAccessIterator first,
 }
 
 template <typename _RandomAccessIterator>
-inline auto _r_heap_left_child(_RandomAccessIterator first,
+inline auto r_heap_left_child(_RandomAccessIterator first,
                                _RandomAccessIterator last,
                                _RandomAccessIterator parent) {
-  return _r_heap_child<_RandomAccessIterator, false>(first, last, parent);
+  return r_heap_child<_RandomAccessIterator, false>(first, last, parent);
 }
 
 template <typename _RandomAccessIterator>
-inline auto _r_heap_right_child(_RandomAccessIterator first,
+inline auto r_heap_right_child(_RandomAccessIterator first,
                                 _RandomAccessIterator last,
                                 _RandomAccessIterator parent) {
-  return _r_heap_child<_RandomAccessIterator, true>(first, last, parent);
+  return r_heap_child<_RandomAccessIterator, true>(first, last, parent);
 }
 
 //
 template <typename _RandomAccessIterator, typename _CompareOperator>
-inline void _r_heap_sift_down(_RandomAccessIterator first,
+inline void r_heap_sift_down(_RandomAccessIterator first,
                               _RandomAccessIterator last,
                               _RandomAccessIterator node,
                               _CompareOperator comp) {
   auto largest = node;
-  auto left = _r_heap_left_child(first, last, node);
-  auto right = _r_heap_right_child(first, last, node);
+  auto left = r_heap_left_child(first, last, node);
+  auto right = r_heap_right_child(first, last, node);
   if (comp(*largest, *left)) largest = left;
   if (comp(*largest, *right)) largest = right;
   if (node != largest) {
     std::swap(*node, *largest);
-    _r_heap_sift_down(first, last, largest, comp);
+    r_heap_sift_down(first, last, largest, comp);
   }
 }
 
 template <typename _RandomAccessIterator, typename _CompareOperator>
-inline void _r_heap_sift_up(_RandomAccessIterator first,
+inline void r_heap_sift_up(_RandomAccessIterator first,
                             _RandomAccessIterator last,
                             _RandomAccessIterator node, _CompareOperator comp) {
-  auto parent = _r_heap_parent(first, node);
+  auto parent = r_heap_parent(first, node);
   if (comp(*parent, *node)) {
     std::swap(*node, *parent);
     node = parent;
-    _r_heap_sift_up(first, last, node, comp);
+    r_heap_sift_up(first, last, node, comp);
   }
 }
 
@@ -90,7 +90,7 @@ inline void _r_heap_sift_up(_RandomAccessIterator first,
 template <typename _RandomAccessIterator, typename _CompareOperator>
 inline void r_push_heap(_RandomAccessIterator first, _RandomAccessIterator last,
                         _CompareOperator comp) {
-  internal::_r_heap_sift_up(first, last, next(last, -1), comp);
+  internal::r_heap_sift_up(first, last, next(last, -1), comp);
 }
 
 template <typename _RandomAccessIterator, typename _CompareOperator>
@@ -110,7 +110,7 @@ inline void r_pop_heap(_RandomAccessIterator first, _RandomAccessIterator last,
   if (std::distance(first, last) > 1) {
     std::advance(last, -1);
     std::swap(*first, *last);
-    internal::_r_heap_sift_down(first, last, first, comp);
+    internal::r_heap_sift_down(first, last, first, comp);
   }
 }
 
@@ -128,8 +128,8 @@ inline void r_pop_heap(_RandomAccessIterator first,
 template <typename _RandomAccessIterator, typename _CompareOperator>
 inline void r_make_heap(_RandomAccessIterator first, _RandomAccessIterator last,
                         _CompareOperator comp) {
-  for (auto parent = internal::_r_last_parent(first, last);; --parent) {
-    internal::_r_heap_sift_down(first, last, parent, comp);
+  for (auto parent = internal::r_last_parent(first, last);; --parent) {
+    internal::r_heap_sift_down(first, last, parent, comp);
     if (first == parent) break;
   }
 }

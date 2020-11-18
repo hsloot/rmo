@@ -3,15 +3,12 @@
 #include <functional>
 
 #include <Rcpp.h>
-#include <r_engine.h>
+#include <r_engine.hpp>
 #include <rmolib/random/r_discrete_distribution.hpp>
 #include <rmolib/random/uniform_real_distribution.hpp>
 #include <testthat.h>
 
 #include "testutils-approxequals.h"
-
-#define RMO_TEST_CONFIG_N 30
-#define RMO_TEST_CONFIG_SEED 1623.
 
 #define RMO_TEST_DIST_NAME r_discrete_distribution
 #define RMO_TEST_DIST_NAME_STRING "r_discrete_distribution"

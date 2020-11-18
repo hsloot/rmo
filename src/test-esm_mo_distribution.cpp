@@ -44,7 +44,7 @@ class generic_param_type {
   template <typename _MOParamType,
             typename std::enable_if<
                 !std::is_convertible_v<_MOParamType, generic_param_type> &&
-                    rmolib::random::internal::is_mo_param_type_v<_MOParamType>,
+                    rmolib::random::is_mo_param_type_v<_MOParamType>,
                 int>::type = 0>
   explicit generic_param_type(_MOParamType&& parm)
       : dim_{parm.dim()}, intensities_{parm.intensities()} {}

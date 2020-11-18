@@ -69,8 +69,7 @@ class uniform_int_distribution {
     _IntType lower_{0};
     _IntType length_{std::numeric_limits<_IntType>::max()};
 
-    void __validate_input(const _IntType lower,
-                          const _IntType upper) const {
+    void __validate_input(const _IntType lower, const _IntType upper) const {
       if (upper <= lower)
         throw std::domain_error("upper - lower must be positive");
     }
@@ -83,8 +82,7 @@ class uniform_int_distribution {
 
   uniform_int_distribution() = default;
 
-  explicit uniform_int_distribution(const _IntType lower,
-                                    const _IntType upper)
+  explicit uniform_int_distribution(const _IntType lower, const _IntType upper)
       : parm_{lower, upper} {}
   uniform_int_distribution(const param_type& parm) : parm_{parm} {}
 
@@ -108,8 +106,7 @@ class uniform_int_distribution {
 
   template <typename _EngineType>
   result_type operator()(_EngineType& engine, const param_type& parm) {
-      return parm.lower_ +
-             unit_uniform_int_distribution(engine, parm.length_);
+    return parm.lower_ + unit_uniform_int_distribution(engine, parm.length_);
   }
 
   friend bool operator==(const uniform_int_distribution& lhs,
@@ -133,15 +130,15 @@ class uniform_int_distribution {
 /*
   // TODO: implement
 
-  template <class _CharType, class _Traits, class _RealType>
+  template <class _CharType, class _Traits, class _IntType>
   std::basic_ostream<_CharType, _Traits>&
   operator<<(std::basic_ostream<_CharType, _Traits>& os,
-            uniform_int_distribution<_RealType>& dist);
+            uniform_int_distribution<_IntType>& dist);
 
-  template <class _CharType, class _Traits, class _RealType>
+  template <class _CharType, class _Traits, class _IntType>
   std::basic_istream<_CharType, _Traits>&
   operator>>(std::basic_istream<_CharType, _Traits>& is,
-             uniform_int_distribution<_RealType>& dist);
+             uniform_int_distribution<_IntType>& dist);
 */
 
 }  // namespace random

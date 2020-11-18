@@ -1,6 +1,6 @@
 #include <limits>
 
-#include <r_engine.h>
+#include <r_engine.hpp>
 #include <rmolib/random/exponential_distribution.hpp>
 #include <testthat.h>
 

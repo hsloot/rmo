@@ -13,6 +13,12 @@ namespace rmolib {
 
 namespace random {
 
+template <typename _T>
+using is_mo_param_type = internal::is_mo_param_type<_T>;
+
+template <typename _T>
+constexpr bool is_mo_param_type_v = internal::is_mo_param_type_v<_T>;
+
 template <typename _Container,
           typename _UnitExponentialDistribution =
               exponential_distribution<typename _Container::value_type>>
@@ -48,7 +54,7 @@ class esm_mo_distribution {
     template <typename _MOParamType,
               typename std::enable_if<
                   !std::is_convertible_v<_MOParamType, param_type> &&
-                      internal::is_mo_param_type_v<_MOParamType>,
+                      is_mo_param_type_v<_MOParamType>,
                   int>::type = 0>
     explicit param_type(_MOParamType&& parm)
         : param_type{parm.dim(), parm.intensities()} {}
@@ -144,18 +150,18 @@ class esm_mo_distribution {
   template <typename _EngineType, typename _OutputContainer>
   void operator()(_EngineType& engine, const param_type& parm,
                   _OutputContainer& out) {
-    // TODO: check compatibility
+    // TODO: static_assert if _OutputContainer::value_type is compatible
     using size_type = typename _Container::size_type;
 
-    std::fill(out.begin(), out.end(),
-              std::numeric_limits<value_type>::infinity());
+    std::fill(out.begin(), out.end(), std::numeric_limits<value_type>::infinity());
     for (size_type j = 0, num_shocks = parm.intensities_.size(); j < num_shocks;
          ++j) {
       if (parm.intensities_[j] > 0) {
         auto shock_time =
             unit_exponential_distribution_(engine) / parm.intensities_[j];
         for (size_type i = 0; i < parm.dim_; ++i) {
-          if (internal::is_within(i, j)) out[i] = std::min(out[i], shock_time);
+          if (internal::is_within(i, j))
+            out[i] = std::min(out[i], shock_time);
         }
       }
     }
