@@ -27,7 +27,7 @@ template <typename _T>
 constexpr bool is_discrete_param_type_v = is_discrete_param_type<_T>::value;
 
 template <typename _IntType, typename _WeightType,
-          typename _UnitUniformRealDistributionType>
+          typename _UnitUniformRealDistribution>
 class r_discrete_distribution {
  public:
   using result_type = _IntType;
@@ -50,8 +50,8 @@ class r_discrete_distribution {
         : param_type{wl.begin(), wl.end()} {}
 
     template <class _UnaryFunctor>
-    param_type(typename std::vector<_WeightType>::size_type count, _WeightType xmin,
-               _WeightType xmax, _UnaryFunctor unary_op) {
+    param_type(typename std::vector<_WeightType>::size_type count,
+               _WeightType xmin, _WeightType xmax, _UnaryFunctor unary_op) {
       using size_t = typename std::vector<_WeightType>::size_type;
 
       count += static_cast<size_t>(count == 0);
@@ -205,10 +205,10 @@ class r_discrete_distribution {
     init_unit_uniform_real_distribution();
   }
 
-  // TODO
   // template <class UnaryOperation>
   template <typename _UnaryOperation>
-  r_discrete_distribution(typename std::vector<_WeightType>::size_type count, _WeightType xmin, _WeightType xmax,
+  r_discrete_distribution(typename std::vector<_WeightType>::size_type count,
+                          _WeightType xmin, _WeightType xmax,
                           _UnaryOperation unary_op)
       : parm_{count, xmin, xmax, unary_op} {
     init_unit_uniform_real_distribution();
@@ -262,24 +262,22 @@ class r_discrete_distribution {
 
  private:
   param_type parm_{};
-  _UnitUniformRealDistributionType unit_uniform_real_distribution_{};
+  _UnitUniformRealDistribution unit_uniform_real_distribution_{};
 
   void init_unit_uniform_real_distribution() {
-    if constexpr (std::is_constructible_v<_UnitUniformRealDistributionType,
+    if constexpr (std::is_constructible_v<_UnitUniformRealDistribution,
                                           const _WeightType,
                                           const _WeightType>) {
       // TODO:
-      // static_assert(is_distribution_type<_UnitUniformRealDistributionType>)
-      using unit_param_type =
-          typename _UnitUniformRealDistributionType::param_type;
+      // static_assert(is_distribution_type<_UnitUniformRealDistribution>)
+      using unit_param_type = typename _UnitUniformRealDistribution::param_type;
       unit_uniform_real_distribution_.param(unit_param_type{0., 1.});
     }
   }
 
   static_assert(
-      std::is_same<
-          _WeightType,
-          typename _UnitUniformRealDistributionType::result_type>::value,
+      std::is_same<_WeightType,
+                   typename _UnitUniformRealDistribution::result_type>::value,
       "Class template rmolib::random::discrete_distribution<> must be "
       "parametrized with unit_uniform_real_distribution-type with matching "
       "result_type and _WeightType");
@@ -288,15 +286,19 @@ class r_discrete_distribution {
 /*
   // TODO: implement
 
-  template <class _CharType, class _Traits, class _RealType>
+  template <class _CharType, class _Traits, typename _IntType, typename
+  _WeighType, typename _UnitUniformRealDistribution>
   std::basic_ostream<_CharType, _Traits>&
   operator<<(std::basic_ostream<_CharType, _Traits>& os,
-            r_discrete_distribution<_RealType>& dist);
+            r_discrete_distribution<_IntType, _WeightType,
+  _UnitUniformRealDistribution>& dist);
 
-  template <class _CharType, class _Traits, class _RealType>
+  template <class _CharType, class _Traits, typename _IntType, typename
+  _WeighType, typename _UnitUniformRealDistribution>
   std::basic_istream<_CharType, _Traits>&
   operator>>(std::basic_istream<_CharType, _Traits>& is,
-             r_discrete_distribution<_RealType>& dist);
+             r_discrete_distribution<_IntType, _WeightType,
+  _UnitUniformRealDistribution>& dist);
 */
 
 }  // namespace random

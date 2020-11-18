@@ -1,5 +1,7 @@
 #include <Rcpp.h>
 #include <rmo.hpp>
+#include <r_engine.hpp>
+#include <rmolib/distribution.hpp>
 
 static const R_xlen_t C_CHECK_USR_INTERRUP = 100000;
 
@@ -11,14 +13,20 @@ using namespace mo::stats;
 // [[Rcpp::export]]
 NumericMatrix Rcpp__rmo_esm(const R_xlen_t n, const R_xlen_t d,
                             const NumericVector& intensities) {
-  ESMGenerator<MatrixRow<REALSXP>, RRNGPolicy> esm_generator(d, intensities);
+  using esm_mo_distribution = rmolib::esm_mo_distribution<std::vector<double>>;
+  using param_type = esm_mo_distribution::param_type;
+
+  r_engine engine{};
+  esm_mo_distribution dist{};
+  param_type parm(d, intensities.begin(), intensities.end());
+
 
   NumericMatrix out(no_init(n, d));
   for (R_xlen_t k = 0; k < n; k++) {
     if ((d * k) % C_CHECK_USR_INTERRUP == 0) checkUserInterrupt();
 
     MatrixRow<REALSXP> values = out(k, _);
-    esm_generator(values);
+    dist(engine, parm, values);
   }
   return out;
 }

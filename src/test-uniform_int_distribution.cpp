@@ -1,4 +1,4 @@
-#include <r_engine.h>
+#include <r_engine.hpp>
 #include <rmolib/random/uniform_int_distribution.hpp>
 #include <testthat.h>
 
