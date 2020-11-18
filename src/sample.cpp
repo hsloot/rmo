@@ -1,7 +1,6 @@
 #include <Rcpp.h>
 #include <r_engine.hpp>
 #include <rmo.hpp>
-#include <r_engine.hpp>
 #include <rmolib/distribution.hpp>
 
 static const R_xlen_t C_CHECK_USR_INTERRUP = 100000;
@@ -20,7 +19,6 @@ NumericMatrix Rcpp__rmo_esm(const R_xlen_t n, const R_xlen_t d,
   r_engine engine{};
   esm_mo_distribution dist{};
   param_type parm(d, intensities.begin(), intensities.end());
-
 
   NumericMatrix out(no_init(n, d));
   for (R_xlen_t k = 0; k < n; k++) {
