@@ -5,6 +5,7 @@
 
 #include "random/deterministic_distribution.hpp"
 #include "random/esm_mo_distribution.hpp"
+#include "random/arnold_mo_distribution.hpp"
 #include "random/exponential_distribution.hpp"
 #include "random/pareto_distribution.hpp"
 #include "random/r_discrete_distribution.hpp"
@@ -43,6 +44,10 @@ using r_discrete_distribution =
 template <typename _Container>
 using esm_mo_distribution = random::esm_mo_distribution<
     _Container, exponential_distribution<typename _Container::value_type>>;
+
+template <typename _Container>
+using arnold_mo_distribution = random::arnold_mo_distribution<
+    _Container, exponential_distribution<typename _Container::value_type>, r_discrete_distribution<typename _Container::size_type, typename _Container::value_type>>;
 
 // -----------------------------------------------------------------------------
 // public interfaces to alternative distributions sampling methods à la abseil
@@ -91,9 +96,16 @@ _IntType RDiscrete(_EngineType& engine, _InputIterator first,
 }
 
 template <typename _Container, typename _EngineType>
-_Container EsmMO(_EngineType& engine, const typename _Container::size_type dim,
+_Container ExogenousShockModel(_EngineType& engine, const typename _Container::size_type dim,
                  const _Container intensities) {
   esm_mo_distribution<_Container> dist{dim, intensities};
+  return dist(engine);
+}
+
+template <typename _Container, typename _EngineType>
+_Container ArnoldModel(_EngineType& engine, const typename _Container::size_type dim,
+                 const _Container intensities) {
+  arnold_mo_distribution<_Container> dist{dim, intensities};
   return dist(engine);
 }
 

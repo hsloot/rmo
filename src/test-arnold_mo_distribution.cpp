@@ -4,13 +4,16 @@
 
 #include <Rcpp.h>
 #include <r_engine.hpp>
-#include <rmolib/random/esm_mo_distribution.hpp>
+#include <rmolib/random/arnold_mo_distribution.hpp>
+#include <rmolib/random/exponential_distribution.hpp>
+#include <rmolib/random/r_discrete_distribution.hpp>
+#include <rmolib/random/uniform_real_distribution.hpp>
 #include <testthat.h>
 
 #include "testutils-approxequals.h"
 
-#define RMO_TEST_DIST_NAME esm_mo_distribution
-#define RMO_TEST_DIST_NAME_STRING "esm_mo_distribution"
+#define RMO_TEST_DIST_NAME arnold_mo_distribution
+#define RMO_TEST_DIST_NAME_STRING "arnold_mo_distribution"
 
 #define RMO_TEST_ARG_LIST                                                  \
   {                                                                        \
@@ -25,12 +28,16 @@
   CATCH_CHECK_THAT(__DIST__.intensities(),          \
                    EqualsApprox(__PARAMS__.intensities()));
 
+using uniform_real_distribution =
+    rmolib::random::uniform_real_distribution<double>;
 using exponential_distribution =
     rmolib::random::exponential_distribution<double>;
-using esm_mo_distribution =
-    rmolib::random::esm_mo_distribution<std::vector<double>,
-                                        exponential_distribution>;
-using param_type = esm_mo_distribution::param_type;
+using r_discrete_distribution =
+    rmolib::random::r_discrete_distribution<std::size_t, double,
+                                            uniform_real_distribution>;
+using arnold_mo_distribution = rmolib::random::arnold_mo_distribution<
+    std::vector<double>, exponential_distribution, r_discrete_distribution>;
+using param_type = arnold_mo_distribution::param_type;
 
 class generic_param_type {
  public:
