@@ -13,11 +13,11 @@ using namespace mo::stats;
 // [[Rcpp::export]]
 NumericMatrix Rcpp__rmo_esm(const R_xlen_t n, const R_xlen_t d,
                             const NumericVector& intensities) {
-  using esm_mo_distribution = rmolib::esm_mo_distribution<std::vector<double>>;
-  using param_type = esm_mo_distribution::param_type;
+  using distribution_type = rmolib::esm_mo_distribution<std::vector<double>>;
+  using param_type = distribution_type::param_type;
 
   r_engine engine{};
-  esm_mo_distribution dist{};
+  distribution_type dist{};
   param_type parm(d, intensities.begin(), intensities.end());
 
   NumericMatrix out(no_init(n, d));
@@ -35,11 +35,12 @@ NumericMatrix Rcpp__rmo_esm(const R_xlen_t n, const R_xlen_t d,
 // [[Rcpp::export]]
 NumericMatrix Rcpp__rmo_arnold(const R_xlen_t n, const int d,
                                const NumericVector& intensities) {
-  using arnold_mo_distribution = rmolib::arnold_mo_distribution<std::vector<double>>;
-  using param_type = arnold_mo_distribution::param_type;
+  using distribution_type =
+      rmolib::arnold_mo_distribution<std::vector<double>>;
+  using param_type = distribution_type::param_type;
 
   r_engine engine{};
-  arnold_mo_distribution dist{};
+  distribution_type dist{};
   param_type parm(d, intensities.begin(), intensities.end());
 
   NumericMatrix out(no_init(n, d));
@@ -77,15 +78,20 @@ NumericMatrix Rcpp__rmo_ex_arnold(const R_xlen_t n, const int d,
 NumericMatrix Rcpp__rmo_esm_cuadras_auge(const R_xlen_t n, const int d,
                                          const double alpha,
                                          const double beta) {
-  CuadrasAugeGenerator<MatrixRow<REALSXP>, RRNGPolicy> cuadras_auge_generator(
-      d, alpha, beta);
+  using distribution_type =
+      rmolib::cuadras_auge_distribution<std::vector<double>>;
+  using param_type = distribution_type::param_type;
+
+  r_engine engine{};
+  distribution_type dist{};
+  param_type parm(d, alpha, beta);
 
   NumericMatrix out(no_init(n, d));
   for (R_xlen_t k = 0; k < n; k++) {
     if ((d * k) % C_CHECK_USR_INTERRUP == 0) checkUserInterrupt();
 
     MatrixRow<REALSXP> values = out(k, _);
-    cuadras_auge_generator(values);
+    dist(engine, parm, values);
   }
 
   return out;

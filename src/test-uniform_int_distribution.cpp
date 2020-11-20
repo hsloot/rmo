@@ -44,4 +44,4 @@ class generic_param_type {
   int upper_{std::numeric_limits<int>::max()};
 };
 
-#include "test-real_distribution.h"
+#include "test-distribution.h"

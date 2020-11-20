@@ -44,4 +44,4 @@ class generic_param_type {
   double lambda_{1.};
 };
 
-#include "test-real_distribution.h"
+#include "test-distribution.h"

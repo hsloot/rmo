@@ -20,8 +20,7 @@ template <typename _Container,
           typename _UnitExponentialDistribution =
               exponential_distribution<typename _Container::value_type>,
           typename _DiscreteDistribution = r_discrete_distribution<
-              typename _Container::size_type, typename _Container::value_type,
-              uniform_real_distribution<typename _Container::value_type>>>
+              typename _Container::size_type, typename _Container::value_type>>
 class arnold_mo_distribution {
  public:
   using result_type = _Container;
@@ -214,7 +213,7 @@ class arnold_mo_distribution {
       "Class template rmolib::random::arnold_mo_distribution<> must be "
       "parametrized with discrete_distribution-type with matching "
       "size_type");
-};  // namespace random
+};
 
 /*
   // TODO: implement

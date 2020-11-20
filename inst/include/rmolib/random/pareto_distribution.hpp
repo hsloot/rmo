@@ -5,12 +5,14 @@
 #include <stdexcept>
 #include <type_traits>
 
+#include "rmolib/random/uniform_real_distribution.hpp"
+
 namespace rmolib {
 
 namespace random {
 
 // type_trait for identifying possible alternative implementations of
-// a uniform_real_distribution<>::param_type
+// a pareto_distribution<>::param_type
 template <typename _T, class = void>
 struct is_pareto_param_type : public std::false_type {};
 
@@ -26,7 +28,7 @@ struct is_pareto_param_type<
 template <typename _T>
 constexpr bool is_pareto_param_type_v = is_pareto_param_type<_T>::value;
 
-template <typename _RealType, typename _UnitUniformRealDistribution>
+template <typename _RealType, typename _UnitUniformRealDistribution = uniform_real_distribution<_RealType>>
 class pareto_distribution {
  public:
   using result_type = _RealType;
@@ -48,8 +50,8 @@ class pareto_distribution {
                   !std::is_convertible_v<_ParetoParamType, param_type> &&
                       is_pareto_param_type_v<_ParetoParamType>,
                   int>::type = 0>
-    explicit param_type(_ParetoParamType&& param)
-        : param_type{param.alpha(), param.lower_bound()} {}
+    explicit param_type(_ParetoParamType&& parm)
+        : param_type{parm.alpha(), parm.lower_bound()} {}
 
     // compiler generated ctor and assignment op is sufficient
 

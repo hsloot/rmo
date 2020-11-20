@@ -97,14 +97,12 @@ class exponential_distribution {
 
   template <typename _EngineType>
   result_type operator()(_EngineType& engine, const param_type& parm) {
-    result_type out;
-    if (0. == parm.lambda_)
-      out = std::numeric_limits<result_type>::infinity();
-    else if (std::numeric_limits<result_type>::infinity() == parm.lambda_)
-      out = 0.;
+    if (_RealType{0} == parm.lambda_)
+      return std::numeric_limits<_RealType>::infinity();
+    else if (std::numeric_limits<_RealType>::infinity() == parm.lambda_)
+      return _RealType{0};
     else
-      out = unit_exponential_distribution(engine) / parm.lambda_;
-    return out;
+      return unit_exponential_distribution(engine) / parm.lambda_;
   }
 
   friend bool operator==(const exponential_distribution& lhs,

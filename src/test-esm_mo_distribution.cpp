@@ -57,4 +57,4 @@ class generic_param_type {
   std::vector<double> intensities_;
 };
 
-#include "test-real_distribution.h"
+#include "test-distribution.h"
