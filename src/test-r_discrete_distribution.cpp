@@ -4,8 +4,8 @@
 
 #include <Rcpp.h>
 #include <r_engine.hpp>
-#include <rmolib/random/r_discrete_distribution.hpp>
-#include <rmolib/random/uniform_real_distribution.hpp>
+#include <rmolib/random/univariate/r_discrete_distribution.hpp>
+#include <rmolib/random/univariate/uniform_real_distribution.hpp>
 #include <testthat.h>
 
 #include "testutils-approxequals.h"

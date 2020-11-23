@@ -4,7 +4,7 @@
 
 #include <Rcpp.h>
 #include <r_engine.hpp>
-#include <rmolib/random/esm_mo_distribution.hpp>
+#include <rmolib/random/multivariate/esm_mo_distribution.hpp>
 #include <testthat.h>
 
 #include "testutils-approxequals.h"

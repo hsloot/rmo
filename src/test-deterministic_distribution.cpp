@@ -1,7 +1,7 @@
 #include <limits>
 
 #include <r_engine.hpp>
-#include <rmolib/random/deterministic_distribution.hpp>
+#include <rmolib/random/univariate/deterministic_distribution.hpp>
 #include <testthat.h>
 
 #define RMO_TEST_DIST_NAME deterministic_distribution

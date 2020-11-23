@@ -5,7 +5,7 @@
 
 #include <Rcpp.h>
 #include <boost/random.hpp>
-#include <rmolib/random/uniform_real_distribution.hpp>
+#include <rmolib/random/univariate/uniform_real_distribution.hpp>
 
 // // [[Rcpp::export]]
 // void construct_rmolib() {

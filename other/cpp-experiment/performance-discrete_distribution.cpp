@@ -5,7 +5,7 @@
 
 #include <Rcpp.h>
 #include <boost/random.hpp>
-#include <rmolib/random/r_discrete_distribution.hpp>
+#include <rmolib/random/univariate/r_discrete_distribution.hpp>
 
 // [[Rcpp::export]]
 void construct_rmolib(Rcpp::NumericVector probs) {

@@ -7,7 +7,7 @@
 #include <vector>
 
 #include "rmolib/algorithm/r_sort.hpp"
-#include "rmolib/random/uniform_real_distribution.hpp"
+#include "rmolib/random/univariate/uniform_real_distribution.hpp"
 
 namespace rmolib {
 
@@ -28,7 +28,8 @@ template <typename _T>
 constexpr bool is_discrete_param_type_v = is_discrete_param_type<_T>::value;
 
 template <typename _IntType, typename _WeightType,
-          typename _UnitUniformRealDistribution = uniform_real_distribution<_WeightType>>
+          typename _UnitUniformRealDistribution =
+              uniform_real_distribution<_WeightType>>
 class r_discrete_distribution {
  public:
   using result_type = _IntType;

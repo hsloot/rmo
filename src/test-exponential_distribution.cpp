@@ -1,7 +1,7 @@
 #include <limits>
 
 #include <r_engine.hpp>
-#include <rmolib/random/exponential_distribution.hpp>
+#include <rmolib/random/univariate/exponential_distribution.hpp>
 #include <testthat.h>
 
 #define RMO_TEST_DIST_NAME exponential_distribution

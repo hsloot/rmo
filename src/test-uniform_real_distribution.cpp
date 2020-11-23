@@ -1,5 +1,5 @@
 #include <r_engine.hpp>
-#include <rmolib/random/uniform_real_distribution.hpp>
+#include <rmolib/random/univariate/uniform_real_distribution.hpp>
 #include <testthat.h>
 
 #define RMO_TEST_DIST_NAME uniform_real_distribution

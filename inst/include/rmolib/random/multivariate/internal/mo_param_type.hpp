@@ -15,10 +15,10 @@ struct is_mo_param_type : public std::false_type {};
 
 template <typename _T>
 struct is_mo_param_type<
-    _T, typename std::enable_if<decltype(
-            std::declval<_T&>().intensities(),
-            std::true_type())::value&& decltype(std::declval<_T&>().dim(),
-                                                std::true_type())::value>::type>
+    _T,
+    typename std::enable_if<
+        decltype(std::declval<_T&>().dim(), std::true_type())::value&& decltype(
+            std::declval<_T&>().intensities(), std::true_type())::value>::type>
     : public std::true_type {};
 
 template <typename _T>

@@ -4,8 +4,8 @@
 
 #include <Rcpp.h>
 #include <r_engine.hpp>
-#include <rmolib/random/cuadras_auge_distribution.hpp>
-#include <rmolib/random/exponential_distribution.hpp>
+#include <rmolib/random/multivariate/cuadras_auge_distribution.hpp>
+#include <rmolib/random/univariate/exponential_distribution.hpp>
 #include <testthat.h>
 
 #include "testutils-approxequals.h"

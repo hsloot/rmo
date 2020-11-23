@@ -3,9 +3,9 @@
 #include <cmath>
 
 #include <Rcpp.h>
-#include <rmolib/random/exponential_distribution.hpp>
-#include <rmolib/random/uniform_int_distribution.hpp>
-#include <rmolib/random/uniform_real_distribution.hpp>
+#include <rmolib/random/univariate/exponential_distribution.hpp>
+#include <rmolib/random/univariate/uniform_int_distribution.hpp>
+#include <rmolib/random/univariate/uniform_real_distribution.hpp>
 
 struct r_engine {};
 

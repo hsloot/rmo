@@ -4,7 +4,7 @@
 #include <limits>
 #include <type_traits>
 
-#include "rmolib/random/exponential_distribution.hpp"
+#include "rmolib/random/univariate/exponential_distribution.hpp"
 
 namespace rmolib {
 

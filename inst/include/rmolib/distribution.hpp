@@ -3,15 +3,15 @@
 #include <type_traits>
 #include <vector>
 
-#include "random/arnold_mo_distribution.hpp"
-#include "random/cuadras_auge_distribution.hpp"
-#include "random/deterministic_distribution.hpp"
-#include "random/esm_mo_distribution.hpp"
-#include "random/exponential_distribution.hpp"
-#include "random/pareto_distribution.hpp"
-#include "random/r_discrete_distribution.hpp"
-#include "random/uniform_int_distribution.hpp"
-#include "random/uniform_real_distribution.hpp"
+#include "random/multivariate/arnold_mo_distribution.hpp"
+#include "random/multivariate/cuadras_auge_distribution.hpp"
+#include "random/multivariate/esm_mo_distribution.hpp"
+#include "random/univariate/deterministic_distribution.hpp"
+#include "random/univariate/exponential_distribution.hpp"
+#include "random/univariate/pareto_distribution.hpp"
+#include "random/univariate/r_discrete_distribution.hpp"
+#include "random/univariate/uniform_int_distribution.hpp"
+#include "random/univariate/uniform_real_distribution.hpp"
 
 namespace rmolib {
 
@@ -154,7 +154,8 @@ void ArnoldModel(_EngineType& engine,
 
 template <typename _EngineType, typename _RealType, typename _OutputContainer>
 void CuadrasAuge(_EngineType& engine, const typename std::size_t dim,
-                 const _RealType alpha, const _RealType beta, _OutputContainer& out) {
+                 const _RealType alpha, const _RealType beta,
+                 _OutputContainer& out) {
   using value_type = std::remove_reference_t<_RealType>;
   using distribution_type = cuadras_auge_distribution<std::vector<value_type>>;
   using param_type = typename distribution_type::param_type;
