@@ -47,5 +47,22 @@ inline int uniform_int_distribution<int>::unit_uniform_int_distribution(
 #endif
 }
 
+template <>
+template <>
+inline std::size_t uniform_int_distribution<std::size_t>::unit_uniform_int_distribution(
+    r_engine& engine, const std::size_t n) {
+#if defined(R_VERSION) && R_VERSION >= R_Version(3, 4, 0)
+  return ::R_unif_index(static_cast<double>(n));
+#else
+  /*
+    Sample cannot be reimplemented fully backwards compatible because
+    of logic changes in between R 3.3 and R 3.4. However, as long
+    as the sample population and the number of samples are smaller
+    than `INT_MAX`, this emulation should yield the same results.
+   */
+  return std::floor(static_cast<double>(n * ::unif_rand()));
+#endif
+}
+
 }  // namespace random
 }  // namespace rmolib

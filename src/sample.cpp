@@ -35,8 +35,7 @@ NumericMatrix Rcpp__rmo_esm(const R_xlen_t n, const R_xlen_t d,
 // [[Rcpp::export]]
 NumericMatrix Rcpp__rmo_arnold(const R_xlen_t n, const int d,
                                const NumericVector& intensities) {
-  using distribution_type =
-      rmolib::arnold_mo_distribution<std::vector<double>>;
+  using distribution_type = rmolib::arnold_mo_distribution<std::vector<double>>;
   using param_type = distribution_type::param_type;
 
   r_engine engine{};
@@ -59,16 +58,26 @@ NumericMatrix Rcpp__rmo_arnold(const R_xlen_t n, const int d,
 // [[Rcpp::export]]
 NumericMatrix Rcpp__rmo_ex_arnold(const R_xlen_t n, const int d,
                                   const NumericVector& ex_intensities) {
-  ExArnoldGenerator<MatrixRow<REALSXP>, RRNGPolicy> ex_arnold_generator(
-      d, ex_intensities);
+  using markovian_exmo_distribution =
+      rmolib::markovian_exmo_distribution<std::vector<double>>;
+  using param_type = markovian_exmo_distribution::param_type;
+
+  r_engine engine{};
+  markovian_exmo_distribution dist{};
+  param_type parm(d, ex_intensities.begin(), ex_intensities.end());
 
   NumericMatrix out(no_init(n, d));
   for (R_xlen_t k = 0; k < n; k++) {
     if ((d * k) % C_CHECK_USR_INTERRUP == 0) checkUserInterrupt();
 
     MatrixRow<REALSXP> values = out(k, _);
-    ex_arnold_generator(values);
+    dist(engine, parm, values);
+    // R's sample.int produces a final (redundant) selection of the
+    // last remaining value see
+    // https://github.com/wch/r-source/blob/613bdfd0e1d3fc9984142d5da3da448adf2438c7/src/main/random.c#L461
+    [[maybe_unused]] auto dummy = ::R_unif_index(1.);
   }
+
   return out;
 }
 

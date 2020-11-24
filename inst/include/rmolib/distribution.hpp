@@ -6,6 +6,7 @@
 #include "random/multivariate/arnold_mo_distribution.hpp"
 #include "random/multivariate/cuadras_auge_distribution.hpp"
 #include "random/multivariate/esm_mo_distribution.hpp"
+#include "random/multivariate/markovian_exmo_distribution.hpp"
 #include "random/univariate/deterministic_distribution.hpp"
 #include "random/univariate/exponential_distribution.hpp"
 #include "random/univariate/pareto_distribution.hpp"
@@ -49,6 +50,13 @@ using esm_mo_distribution = random::esm_mo_distribution<
 template <typename _Container = std::vector<double>>
 using arnold_mo_distribution = random::arnold_mo_distribution<
     _Container, exponential_distribution<typename _Container::value_type>,
+    r_discrete_distribution<typename _Container::size_type,
+                            typename _Container::value_type>>;
+
+template <typename _Container = std::vector<double>>
+using markovian_exmo_distribution = random::markovian_exmo_distribution<
+    _Container, exponential_distribution<typename _Container::value_type>,
+    uniform_int_distribution<typename _Container::size_type>,
     r_discrete_distribution<typename _Container::size_type,
                             typename _Container::value_type>>;
 
@@ -146,6 +154,21 @@ void ArnoldModel(_EngineType& engine,
   using value_type =
       std::remove_reference_t<typename _InputIterator::value_type>;
   using distribution_type = arnold_mo_distribution<std::vector<value_type>>;
+  using param_type = typename distribution_type::param_type;
+
+  distribution_type dist{};
+  dist(engine, param_type{dim, first, last}, out);
+}
+
+template <typename _EngineType, typename _InputIterator,
+          typename _OutputContainer>
+void MarkovianModel(_EngineType& engine,
+                 const typename _OutputContainer::size_type dim,
+                 _InputIterator first, _InputIterator last,
+                 _OutputContainer& out) {
+  using value_type =
+      std::remove_reference_t<typename _InputIterator::value_type>;
+  using distribution_type = markovian_exmo_distribution<std::vector<value_type>>;
   using param_type = typename distribution_type::param_type;
 
   distribution_type dist{};
