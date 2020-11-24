@@ -19,10 +19,9 @@ struct is_pareto_param_type : public std::false_type {};
 template <typename _T>
 struct is_pareto_param_type<
     _T,
-    typename std::enable_if<decltype(
-        std::declval<_T&>().alpha(),
-        std::true_type())::value&& decltype(std::declval<_T&>().lower_bound(),
-                                            std::true_type())::value>::type>
+    std::enable_if_t<decltype(std::declval<_T&>().alpha(), std::true_type())::
+                         value&& decltype(std::declval<_T&>().lower_bound(),
+                                          std::true_type())::value>>
     : public std::true_type {};
 
 template <typename _T>
@@ -46,11 +45,11 @@ class pareto_distribution {
     }
 
     // Used for construction from a different specialization
-    template <typename _ParetoParamType,
-              typename std::enable_if<
-                  !std::is_convertible_v<_ParetoParamType, param_type> &&
-                      is_pareto_param_type_v<_ParetoParamType>,
-                  int>::type = 0>
+    template <
+        typename _ParetoParamType,
+        std::enable_if_t<!std::is_convertible_v<_ParetoParamType, param_type> &&
+                             is_pareto_param_type_v<_ParetoParamType>,
+                         int> = 0>
     explicit param_type(_ParetoParamType&& parm)
         : param_type{parm.alpha(), parm.lower_bound()} {}
 
@@ -85,7 +84,7 @@ class pareto_distribution {
     }
 
     static_assert(
-        std::is_floating_point<_RealType>::value &&
+        std::is_floating_point_v<_RealType> &&
             std::numeric_limits<_RealType>::is_iec559,
         "Class template rmolib::random::pareto_distribution<> must be "
         "parametrized with IEEE 759 conformant floating-point number");
@@ -150,8 +149,8 @@ class pareto_distribution {
   }
 
   static_assert(
-      std::is_same<result_type,
-                   typename _UnitUniformRealDistribution::result_type>::value,
+      std::is_same_v<result_type,
+                     typename _UnitUniformRealDistribution::result_type>,
       "Class template rmolib::random::pareto_distribution<> must be "
       "parametrized with unit_uniform_real_distribution-type with matching "
       "result_type");

@@ -15,8 +15,8 @@ struct is_exponential_param_type : public std::false_type {};
 
 template <typename _T>
 struct is_exponential_param_type<
-    _T, typename std::enable_if<decltype(std::declval<_T&>().lambda(),
-                                         std::true_type())::value>::type>
+    _T, std::enable_if_t<decltype(std::declval<_T&>().lambda(),
+                                  std::true_type())::value>>
     : public std::true_type {};
 
 template <typename _T>
@@ -39,10 +39,10 @@ class exponential_distribution {
 
     // Used for construction from a different specialization
     template <typename _ExponentialParamType,
-              typename std::enable_if<
+              std::enable_if_t<
                   !std::is_convertible_v<_ExponentialParamType, param_type> &&
                       is_exponential_param_type_v<_ExponentialParamType>,
-                  int>::type = 0>
+                  int> = 0>
     explicit param_type(_ExponentialParamType&& parm)
         : param_type{parm.lambda()} {}
 
@@ -68,7 +68,7 @@ class exponential_distribution {
     }
 
     static_assert(
-        std::is_floating_point<_RealType>::value &&
+        std::is_floating_point_v<_RealType> &&
             std::numeric_limits<_RealType>::is_iec559,
         "Class template rmolib::random::exponential_distribution<> must be "
         "parametrized with IEEE 759 conformant floating-point number");

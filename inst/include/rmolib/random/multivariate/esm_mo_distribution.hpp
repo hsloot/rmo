@@ -37,19 +37,17 @@ class esm_mo_distribution {
     }
 
     explicit param_type(size_type dim, _Container intensities)
-        : dim_{dim}, intensities_{intensities} {
-      __validate_input();
-    }
+        : param_type{dim, intensities.begin(), intensities.end()} {}
 
     param_type(size_type dim, std::initializer_list<value_type> wl)
         : param_type{dim, wl.begin(), wl.end()} {}
 
     // Used for construction from a different specialization
-    template <typename _MOParamType,
-              typename std::enable_if<
-                  !std::is_convertible_v<_MOParamType, param_type> &&
-                      internal::is_mo_param_type_v<_MOParamType>,
-                  int>::type = 0>
+    template <
+        typename _MOParamType,
+        std::enable_if_t<!std::is_convertible_v<_MOParamType, param_type> &&
+                             internal::is_mo_param_type_v<_MOParamType>,
+                         int> = 0>
     explicit param_type(_MOParamType&& parm)
         : param_type{parm.dim(), parm.intensities()} {}
 
@@ -83,7 +81,7 @@ class esm_mo_distribution {
     }
 
     static_assert(
-        std::is_floating_point<value_type>::value,
+        std::is_floating_point_v<value_type>,
         "Class template rmolib::random::esm_mo_distribution<> must be "
         "parametrized with floating point type");
   };
@@ -185,8 +183,8 @@ class esm_mo_distribution {
   }
 
   static_assert(
-      std::is_same<value_type,
-                   typename _UnitExponentialDistribution::result_type>::value,
+      std::is_same_v<value_type,
+                     typename _UnitExponentialDistribution::result_type>,
       "Class template rmolib::random::esm_mo_distribution<> must be "
       "parametrized with unit_exponential_distribution-type with matching "
       "result_type");

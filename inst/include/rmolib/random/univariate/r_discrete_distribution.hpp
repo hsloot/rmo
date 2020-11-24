@@ -20,8 +20,8 @@ struct is_discrete_param_type : public std::false_type {};
 
 template <typename _T>
 struct is_discrete_param_type<
-    _T, typename std::enable_if<decltype(std::declval<_T&>().probabilities(),
-                                         std::true_type())::value>::type>
+    _T, std::enable_if_t<decltype(std::declval<_T&>().probabilities(),
+                                  std::true_type())::value>>
     : public std::true_type {};
 
 template <typename _T>
@@ -69,10 +69,10 @@ class r_discrete_distribution {
 
     // Used for construction from a different specialization
     template <typename _DiscreteParamType,
-              typename std::enable_if<
+              std::enable_if_t<
                   !std::is_convertible_v<_DiscreteParamType, param_type> &&
                       is_discrete_param_type_v<_DiscreteParamType>,
-                  int>::type = 0>
+                  int> = 0>
     explicit param_type(_DiscreteParamType&& parm)
         : param_type{parm.probabilities()} {}
 
@@ -184,7 +184,7 @@ class r_discrete_distribution {
     }
 
     static_assert(
-        std::is_integral<_IntType>::value,
+        std::is_integral_v<_IntType>,
         "Class template rmolib::random::r_discrete_distribution<> must be "
         "parametrized with integral type");
   };
@@ -278,8 +278,8 @@ class r_discrete_distribution {
   }
 
   static_assert(
-      std::is_same<_WeightType,
-                   typename _UnitUniformRealDistribution::result_type>::value,
+      std::is_same_v<_WeightType,
+                     typename _UnitUniformRealDistribution::result_type>,
       "Class template rmolib::random::discrete_distribution<> must be "
       "parametrized with unit_uniform_real_distribution-type with matching "
       "result_type and _WeightType");

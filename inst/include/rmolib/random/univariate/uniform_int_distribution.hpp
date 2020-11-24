@@ -16,10 +16,10 @@ struct is_uniform_int_param_type : public std::false_type {};
 
 template <typename _T>
 struct is_uniform_int_param_type<
-    _T, typename std::enable_if<decltype(
+    _T, std::enable_if_t<decltype(
             std::declval<_T&>().lower(),
             std::true_type())::value&& decltype(std::declval<_T&>().upper(),
-                                                std::true_type())::value>::type>
+                                                std::true_type())::value>>
     : public std::true_type {};
 
 template <typename _T>
@@ -43,10 +43,10 @@ class uniform_int_distribution {
 
     // Used for construction from a different specialization
     template <typename _UniformIntParamType,
-              typename std::enable_if<
+              std::enable_if_t<
                   !std::is_convertible_v<_UniformIntParamType, param_type> &&
                       is_uniform_int_param_type_v<_UniformIntParamType>,
-                  int>::type = 0>
+                  int> = 0>
     explicit param_type(_UniformIntParamType&& parm)
         : param_type{parm.lower(), parm.upper()} {}
 
@@ -75,7 +75,7 @@ class uniform_int_distribution {
     }
 
     static_assert(
-        std::is_integral<_IntType>::value,
+        std::is_integral_v<_IntType>,
         "Class template rmolib::random::uniform_int_distribution<> must be "
         "parametrized with integral type");
   };

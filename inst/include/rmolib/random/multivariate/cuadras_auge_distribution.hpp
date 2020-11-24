@@ -18,11 +18,11 @@ struct is_cuadras_auge_param_type : public std::false_type {};
 template <typename _T>
 struct is_cuadras_auge_param_type<
     _T,
-    typename std::enable_if<
+    std::enable_if_t<
         decltype(std::declval<_T&>().dim(), std::true_type())::value&& decltype(
             std::declval<_T&>().alpha(),
             std::true_type())::value&& decltype(std::declval<_T&>().beta(),
-                                                std::true_type())::value>::type>
+                                                std::true_type())::value>>
     : public std::true_type {};
 
 template <typename _T>
@@ -50,10 +50,10 @@ class cuadras_auge_distribution {
 
     // Used for construction from a different specialization
     template <typename _CuadrasAugeParamType,
-              typename std::enable_if<
+              std::enable_if_t<
                   !std::is_convertible_v<_CuadrasAugeParamType, param_type> &&
                       is_cuadras_auge_param_type_v<_CuadrasAugeParamType>,
-                  int>::type = 0>
+                  int> = 0>
     explicit param_type(_CuadrasAugeParamType&& parm)
         : param_type{parm.dim(), parm.alpha(), parm.beta()} {}
 
@@ -153,8 +153,8 @@ class cuadras_auge_distribution {
   _ExponentialDistribution exponential_distribution_{};
 
   static_assert(
-      std::is_same<value_type,
-                   typename _ExponentialDistribution::result_type>::value,
+      std::is_same_v<value_type,
+                     typename _ExponentialDistribution::result_type>,
       "Class template rmolib::random::cuadras_auge_distribution<> must be "
       "parametrized with unit_exponential_distribution-type with matching "
       "result_type");

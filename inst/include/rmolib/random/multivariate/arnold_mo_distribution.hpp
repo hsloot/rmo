@@ -49,11 +49,11 @@ class arnold_mo_distribution {
         : param_type{dim, wl.begin(), wl.end()} {}
 
     // Used for construction from a different specialization
-    template <typename _MOParamType,
-              typename std::enable_if<
-                  !std::is_convertible_v<_MOParamType, param_type> &&
-                      internal::is_mo_param_type_v<_MOParamType>,
-                  int>::type = 0>
+    template <
+        typename _MOParamType,
+        std::enable_if_t<!std::is_convertible_v<_MOParamType, param_type> &&
+                             internal::is_mo_param_type_v<_MOParamType>,
+                         int> = 0>
     explicit param_type(_MOParamType&& parm)
         : param_type{parm.dim(), parm.intensities()} {}
 
@@ -92,7 +92,7 @@ class arnold_mo_distribution {
     }
 
     static_assert(
-        std::is_floating_point<value_type>::value,
+        std::is_floating_point_v<value_type>,
         "Class template rmolib::random::arnold_mo_distribution<> must be "
         "parametrized with floating point type");
   };
@@ -199,16 +199,15 @@ class arnold_mo_distribution {
   }
 
   static_assert(
-      std::is_same<value_type,
-                   typename _UnitExponentialDistribution::result_type>::value,
+      std::is_same_v<value_type,
+                     typename _UnitExponentialDistribution::result_type>,
       "Class template rmolib::random::arnold_mo_distribution<> must be "
       "parametrized with unit_exponential_distribution-type with matching "
       "result_type");
 
   // TODO: check static_assert
   static_assert(
-      std::is_same<size_type,
-                   typename _DiscreteDistribution::result_type>::value,
+      std::is_same_v<size_type, typename _DiscreteDistribution::result_type>,
       "Class template rmolib::random::arnold_mo_distribution<> must be "
       "parametrized with discrete_distribution-type with matching "
       "size_type");

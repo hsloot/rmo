@@ -16,10 +16,10 @@ struct is_uniform_real_param_type : public std::false_type {};
 
 template <typename _T>
 struct is_uniform_real_param_type<
-    _T, typename std::enable_if<decltype(
+    _T, std::enable_if_t<decltype(
             std::declval<_T&>().lower(),
             std::true_type())::value&& decltype(std::declval<_T&>().upper(),
-                                                std::true_type())::value>::type>
+                                                std::true_type())::value>>
     : public std::true_type {};
 
 template <typename _T>
@@ -44,10 +44,10 @@ class uniform_real_distribution {
 
     // Used for construction from a different specialization
     template <typename _UniformParamType,
-              typename std::enable_if<
+              std::enable_if_t<
                   !std::is_convertible_v<_UniformParamType, param_type> &&
                       is_uniform_real_param_type_v<_UniformParamType>,
-                  int>::type = 0>
+                  int> = 0>
     explicit param_type(_UniformParamType&& param)
         : param_type{param.lower(), param.upper()} {}
 
@@ -70,8 +70,7 @@ class uniform_real_distribution {
     _RealType lower_{0.};
     _RealType length_{1.};
 
-    void __validate_input(const _RealType lower,
-                          const _RealType upper) const {
+    void __validate_input(const _RealType lower, const _RealType upper) const {
       auto is_finite = [](const auto x) {
         return std::abs(x) < std::numeric_limits<_RealType>::infinity();
       };
@@ -84,7 +83,7 @@ class uniform_real_distribution {
     }
 
     static_assert(
-        std::is_floating_point<_RealType>::value &&
+        std::is_floating_point_v<_RealType> &&
             std::numeric_limits<_RealType>::is_iec559,
         "Class template rmolib::random::uniform_real_distribution<> must be "
         "parametrized with IEEE 759 conformant floating-point number");
@@ -117,8 +116,8 @@ class uniform_real_distribution {
 
   template <typename _EngineType>
   result_type operator()(_EngineType& engine, const param_type& param) {
-      return param.lower_ +
-             param.length_ * unit_uniform_real_distribution(engine);
+    return param.lower_ +
+           param.length_ * unit_uniform_real_distribution(engine);
   }
 
   friend bool operator==(const uniform_real_distribution& lhs,

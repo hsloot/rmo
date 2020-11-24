@@ -14,8 +14,8 @@ struct is_deterministic_param_type : public std::false_type {};
 
 template <typename _T>
 struct is_deterministic_param_type<
-    _T, typename std::enable_if<decltype(std::declval<_T&>().value(),
-                                         std::true_type())::value>::type>
+    _T, std::enable_if_t<decltype(std::declval<_T&>().value(),
+                                  std::true_type())::value>>
     : public std::true_type {};
 
 template <typename _T>
@@ -39,10 +39,10 @@ class deterministic_distribution {
 
     // Used for construction from a different specialization
     template <typename _DeterministicParamType,
-              typename std::enable_if<
+              std::enable_if_t<
                   !std::is_convertible_v<_DeterministicParamType, param_type> &&
                       is_deterministic_param_type_v<_DeterministicParamType>,
-                  int>::type = 0>
+                  int> = 0>
     explicit param_type(_DeterministicParamType&& parm)
         : param_type{parm.value()} {}
 
@@ -66,7 +66,7 @@ class deterministic_distribution {
     void __validate_input(const _RealType value) const {}
 
     static_assert(
-        std::is_floating_point<_RealType>::value &&
+        std::is_floating_point_v<_RealType> &&
             std::numeric_limits<_RealType>::is_iec559,
         "Class template rmolib::random::deterministic_distribution<> must be "
         "parametrized with IEEE 759 conformant floating-point number");
