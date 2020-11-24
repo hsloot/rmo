@@ -10,6 +10,7 @@
 #include "rmolib/random/multivariate/internal/mo_param_type.hpp"
 #include "rmolib/random/univariate/exponential_distribution.hpp"
 #include "rmolib/random/univariate/r_discrete_distribution.hpp"
+#include "rmolib/math/next_integral_value.hpp"
 
 namespace rmolib {
 
@@ -163,7 +164,7 @@ class arnold_mo_distribution {
                         [](bool v) { return v; })) {
       auto waiting_time =
           unit_exponential_distribution_(engine) / parm.total_intensity_;
-      auto affected = discrete_distribution_(engine, parm.discrete_parm_);
+      auto affected = math::next_integral_value(discrete_distribution_(engine, parm.discrete_parm_));
 
       for (size_type i = 0; i < parm.dim_; ++i) {
         if (!destroyed[i]) {

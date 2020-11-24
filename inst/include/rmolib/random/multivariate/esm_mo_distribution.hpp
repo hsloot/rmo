@@ -147,11 +147,11 @@ class esm_mo_distribution {
 
     std::fill(out.begin(), out.end(),
               std::numeric_limits<value_type>::infinity());
-    for (size_type j = 0, num_shocks = parm.intensities_.size(); j < num_shocks;
+    for (size_type j = 1, num_shocks = parm.intensities_.size(); j <= num_shocks;
          ++j) {
-      if (parm.intensities_[j] > 0) {
+      if (parm.intensities_[j-1] > 0) {
         auto shock_time =
-            unit_exponential_distribution_(engine) / parm.intensities_[j];
+            unit_exponential_distribution_(engine) / parm.intensities_[j-1];
         for (size_type i = 0; i < parm.dim_; ++i) {
           if (internal::is_within(i, j)) out[i] = std::min(out[i], shock_time);
         }
