@@ -13,7 +13,7 @@ using namespace mo::stats;
 // [[Rcpp::export]]
 NumericMatrix Rcpp__rmo_esm(const R_xlen_t n, const R_xlen_t d,
                             const NumericVector& intensities) {
-  using dist_t = rmolib::esm_mo_distribution<std::vector<double>>;
+  using dist_t = rmolib::esm_mo_distribution<double>;
   using parm_t = dist_t::param_type;
 
   r_engine engine{};
@@ -21,7 +21,7 @@ NumericMatrix Rcpp__rmo_esm(const R_xlen_t n, const R_xlen_t d,
   parm_t parm(d, intensities.begin(), intensities.end());
 
   NumericMatrix out(no_init(n, d));
-  for (R_xlen_t k = 0; k < n; k++) {
+  for (R_xlen_t k = 0; k < n; ++k) {
     if ((d * k) % C_CHECK_USR_INTERRUP == 0) checkUserInterrupt();
 
     MatrixRow<REALSXP> values = out(k, _);

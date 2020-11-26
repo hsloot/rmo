@@ -28,18 +28,21 @@
 using exponential_distribution =
     rmolib::random::exponential_distribution<double>;
 using esm_mo_distribution =
-    rmolib::random::esm_mo_distribution<std::vector<double>,
-                                        exponential_distribution>;
+    rmolib::random::esm_mo_distribution<double, exponential_distribution>;
 using param_type = esm_mo_distribution::param_type;
 
 class generic_param_type {
  public:
-  // compiler generated ctor and assignment op is sufficient
+
+  generic_param_type() = default;
 
   template <typename _InputIterator>
-  explicit generic_param_type(std::size_t dim, _InputIterator first,
+  explicit generic_param_type(const std::size_t dim, _InputIterator first,
                               _InputIterator last)
       : dim_{dim}, intensities_{first, last} {}
+
+  explicit generic_param_type(const std::size_t dim, std::initializer_list<double> wl)
+      : generic_param_type{dim, wl.begin(), wl.end()} {}
 
   template <typename _MOParamType,
             typename std::enable_if<
@@ -49,12 +52,14 @@ class generic_param_type {
   explicit generic_param_type(_MOParamType&& parm)
       : dim_{parm.dim()}, intensities_{parm.intensities()} {}
 
-  std::size_t dim() const { return dim_; }
-  std::vector<double> intensities() const { return intensities_; }
+  // compiler generated ctor and assignment op is sufficient
+
+  auto dim() const { return dim_; }
+  auto intensities() const { return intensities_; }
 
  private:
-  std::size_t dim_;
-  std::vector<double> intensities_;
+  std::size_t dim_{1};
+  std::vector<double> intensities_{1.};
 };
 
 #include "test-distribution.h"

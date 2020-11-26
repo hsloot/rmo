@@ -43,9 +43,9 @@ using r_discrete_distribution =
     random::r_discrete_distribution<_IntType, _WeightType,
                                     uniform_real_distribution<_WeightType>>;
 
-template <typename _Container = std::vector<double>>
-using esm_mo_distribution = random::esm_mo_distribution<
-    _Container, exponential_distribution<typename _Container::value_type>>;
+template <typename _RealType = std::vector<double>>
+using esm_mo_distribution =
+    random::esm_mo_distribution<_RealType, exponential_distribution<_RealType>>;
 
 template <typename _Container = std::vector<double>>
 using arnold_mo_distribution = random::arnold_mo_distribution<
@@ -130,19 +130,17 @@ _IntType RDiscrete(_EngineType& engine, _InputIterator first,
   return dist(engine, param_type{first, last});
 }
 
-template <typename _EngineType, typename _InputIterator,
-          typename _OutputContainer>
-void ExogenousShockModel(_EngineType& engine,
-                         const typename _OutputContainer::size_type dim,
-                         _InputIterator first, _InputIterator last,
-                         _OutputContainer& out) {
-  using value_type =
-      std::remove_reference_t<typename _InputIterator::value_type>;
-  using distribution_type = esm_mo_distribution<std::vector<value_type>>;
-  using param_type = typename distribution_type::param_type;
+template <typename _EngineType, typename _InputIterator>
+auto ExogenousShockModel(_EngineType& engine,
+                         const std::size_t dim,
+                         _InputIterator first, _InputIterator last) {
+  using value_t =
+      std::remove_reference_t<typename _InputIterator::value_t>;
+  using dist_t = esm_mo_distribution<value_t>;
+  using param_t = typename dist_t::param_type;
 
-  distribution_type dist{};
-  dist(engine, param_type{dim, first, last}, out);
+  dist_t dist{};
+  return dist(engine, param_t{dim, first, last});
 }
 
 template <typename _EngineType, typename _InputIterator,
@@ -163,12 +161,13 @@ void ArnoldModel(_EngineType& engine,
 template <typename _EngineType, typename _InputIterator,
           typename _OutputContainer>
 void MarkovianModel(_EngineType& engine,
-                 const typename _OutputContainer::size_type dim,
-                 _InputIterator first, _InputIterator last,
-                 _OutputContainer& out) {
+                    const typename _OutputContainer::size_type dim,
+                    _InputIterator first, _InputIterator last,
+                    _OutputContainer& out) {
   using value_type =
       std::remove_reference_t<typename _InputIterator::value_type>;
-  using distribution_type = markovian_exmo_distribution<std::vector<value_type>>;
+  using distribution_type =
+      markovian_exmo_distribution<std::vector<value_type>>;
   using param_type = typename distribution_type::param_type;
 
   distribution_type dist{};

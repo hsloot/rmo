@@ -3,43 +3,44 @@
 #include <cmath>
 #include <limits>
 #include <type_traits>
+#include <utility>
 #include <vector>
 
+#include "rmolib/bit/bit_fill.hpp"
 #include "rmolib/random/multivariate/internal/is_within.hpp"
 #include "rmolib/random/multivariate/internal/mo_param_type.hpp"
 #include "rmolib/random/univariate/exponential_distribution.hpp"
+#include "rmolib/type_traits/is_safe_numeric_cast.hpp"
+#include "rmolib/type_traits/iterator.hpp"
 
 namespace rmolib {
 
 namespace random {
 
-template <typename _Container,
-          typename _UnitExponentialDistribution =
-              exponential_distribution<typename _Container::value_type>>
+template <typename _RealType, typename _ExponentialDistribution =
+                                  exponential_distribution<_RealType>>
 class esm_mo_distribution {
  public:
-  using result_type = _Container;
-
-  using value_type = typename _Container::value_type;
-  using size_type = typename _Container::size_type;
+  using result_type = std::vector<_RealType>;
 
   class param_type {
    public:
     using distribution_type = esm_mo_distribution;
 
-    param_type() = default;
+    param_type() { __init_empty(); }
 
     template <typename _InputIterator>
-    explicit param_type(size_type dim, _InputIterator first,
+    explicit param_type(const std::size_t dim, _InputIterator first,
                         _InputIterator last)
-        : dim_{dim}, intensities_{first, last} {
-      __validate_input();
+        : dim_(dim) {
+      __init(first, last);
     }
 
-    explicit param_type(size_type dim, _Container intensities)
+    template <typename _Container>
+    explicit param_type(const std::size_t dim, _Container intensities)
         : param_type{dim, intensities.begin(), intensities.end()} {}
 
-    param_type(size_type dim, std::initializer_list<value_type> wl)
+    param_type(const std::size_t dim, std::initializer_list<_RealType> wl)
         : param_type{dim, wl.begin(), wl.end()} {}
 
     // Used for construction from a different specialization
@@ -55,12 +56,18 @@ class esm_mo_distribution {
 
     auto dim() const { return dim_; }
 
-    auto intensities() const { return intensities_; }
+    auto intensities() const {
+      const std::size_t size = bit::bit_fill<std::size_t>(0, dim_, true);
+      std::vector<_RealType> out(size, _RealType{0});
+      for (const auto [i, shock_parm] : shocks_)
+        out[i - 1] = shock_parm.lambda();
+      return out;
+    }
 
     friend class esm_mo_distribution;
 
     friend bool operator==(const param_type& lhs, const param_type& rhs) {
-      return lhs.dim_ == rhs.dim_ && lhs.intensities_ == rhs.intensities_;
+      return lhs.dim_ == rhs.dim_ && lhs.shocks_ == rhs.shocks_;
     }
 
     friend bool operator!=(const param_type& lhs, const param_type& rhs) {
@@ -68,20 +75,72 @@ class esm_mo_distribution {
     }
 
    private:
-    size_type dim_{1};
-    _Container intensities_{{value_type{1}}};
+    using exponential_parm_t = typename _ExponentialDistribution::param_type;
 
-    void __validate_input() const {
-      if (!((size_type{1} << dim_) == intensities_.size() + size_type{1}))
-        throw std::domain_error("intensities vector has wrongsize");
+    std::size_t dim_{1};
+    std::vector<std::pair<std::size_t,        // shock set (bit representation)
+                          exponential_parm_t  // shock intensity
+                          >>
+        shocks_{};
 
-      if (!std::all_of(intensities_.begin(), intensities_.end(),
-                       [](const auto v) { return v >= 0; }))
-        throw std::domain_error("negative intensities not allowed");
+    template <typename _ForwardIterator>
+    void __validate_input(const std::size_t dim, _ForwardIterator first,
+                          _ForwardIterator last) const {
+      using std::distance;
+
+      if (!(bit::bit_fill<std::size_t>(0, dim_, true) == distance(first, last)))
+        throw std::domain_error("intensities vector has wrong size");
+    }
+
+    void __init_empty() {
+      using std::make_pair;
+      shocks_.clear();
+      shocks_.emplace_back(
+          make_pair(std::size_t{1}, exponential_parm_t{_RealType{1}}));
+      shocks_.shrink_to_fit();
+    }
+
+    template <class _InputIterator>
+    void __init(_InputIterator first, _InputIterator last,
+                std::input_iterator_tag) {
+      std::vector<_RealType> tmp(first, last);
+      __init(tmp.begin(), tmp.end());
+    }
+
+    template <class _ForwardIterator>
+    void __init(_ForwardIterator first, _ForwardIterator last,
+                std::forward_iterator_tag) {
+      using std::distance;
+      using std::make_pair;
+
+      __validate_input(dim_, first, last);
+
+      shocks_.reserve(distance(first, last));
+      for (auto it = first; it != last; ++it) {
+        if (*it > 0)
+          shocks_.emplace_back(
+              make_pair(static_cast<std::size_t>(distance(first, it) + 1),
+                        exponential_parm_t{*it}));
+      }
+      shocks_.shrink_to_fit();
+    }
+
+    template <typename _InputIterator>
+    void __init(_InputIterator first, _InputIterator last) {
+      static_assert(type_traits::is_input_iterator_v<_InputIterator>,
+                    "Class template rmolib::random::esm_mo_distribution<>: "
+                    "_InputIterator only be initialized with input iterator");
+      if (first == last) {
+        __init_empty();
+      } else {
+        using category =
+            typename std::iterator_traits<_InputIterator>::iterator_category;
+        __init(first, last, category{});
+      }
     }
 
     static_assert(
-        std::is_floating_point_v<value_type>,
+        std::is_floating_point_v<_RealType>,
         "Class template rmolib::random::esm_mo_distribution<> must be "
         "parametrized with floating point type");
   };
@@ -89,36 +148,32 @@ class esm_mo_distribution {
   esm_mo_distribution() = default;
 
   template <typename _InputIterator>
-  explicit esm_mo_distribution(size_type dim, _InputIterator first,
+  explicit esm_mo_distribution(const std::size_t dim, _InputIterator first,
                                _InputIterator last)
-      : parm_{dim, first, last} {
-    init_unit_exponential_distribution();
-  }
+      : parm_{dim, first, last} {}
 
-  explicit esm_mo_distribution(size_type dim, _Container intensities)
+  template <typename _InputContainer>
+  explicit esm_mo_distribution(const std::size_t dim,
+                               _InputContainer intensities)
       : parm_{dim, intensities} {}
 
-  explicit esm_mo_distribution(size_type dim,
-                               std::initializer_list<value_type>& wl)
-      : parm_{dim, wl.begin(), wl.end()} {
-    init_unit_exponential_distribution();
-  }
+  explicit esm_mo_distribution(const std::size_t dim,
+                               std::initializer_list<_RealType>& wl)
+      : parm_{dim, wl.begin(), wl.end()} {}
 
-  explicit esm_mo_distribution(const param_type& parm) : parm_{parm} {
-    init_unit_exponential_distribution();
-  }
+  explicit esm_mo_distribution(const param_type& parm) : parm_{parm} {}
 
   // compiler generated ctor and assignment op is sufficient
 
   void reset() {}
 
   auto min() const {
-    result_type out(parm_.dim(), value_type{0});
-    out.front() = value_type{-1};
+    result_type out(parm_.dim(), _RealType{0});
+    out.front() = _RealType{-1};
     return out;
   }
   auto max() const {
-    return result_type(dim(), std::numeric_limits<value_type>::infinity());
+    return result_type(dim(), std::numeric_limits<_RealType>::infinity());
   }
 
   auto dim() const { return parm_.dim(); }
@@ -139,22 +194,19 @@ class esm_mo_distribution {
     return out;
   }
 
-  template <typename _EngineType, typename _OutputContainer>
+  template <typename _EngineType, typename _Container>
   void operator()(_EngineType& engine, const param_type& parm,
-                  _OutputContainer& out) {
+                  _Container& out) {
     // TODO: check compatibility
-    using size_type = typename _Container::size_type;
+    using std::fill;
 
-    std::fill(out.begin(), out.end(),
-              std::numeric_limits<value_type>::infinity());
-    for (size_type j = 1, num_shocks = parm.intensities_.size(); j <= num_shocks;
-         ++j) {
-      if (parm.intensities_[j-1] > 0) {
-        auto shock_time =
-            unit_exponential_distribution_(engine) / parm.intensities_[j-1];
-        for (size_type i = 0; i < parm.dim_; ++i) {
-          if (internal::is_within(i, j)) out[i] = std::min(out[i], shock_time);
-        }
+    fill(out.begin(), out.end(), std::numeric_limits<_RealType>::infinity());
+    const auto dim = out.size();
+    for (const auto [set, shock_parm] : parm.shocks_) {
+      const auto time = exponential_distribution_(engine, shock_parm);
+      for (std::size_t i = 0; i < dim; ++i) {
+        if (internal::is_within<std::size_t>(i, set))
+          out[i] = std::min(out[i], time);
       }
     }
   }
@@ -171,38 +223,28 @@ class esm_mo_distribution {
 
  private:
   param_type parm_{};
-  _UnitExponentialDistribution unit_exponential_distribution_{};
+  _ExponentialDistribution exponential_distribution_{};
 
-  void init_unit_exponential_distribution() {
-    if constexpr (std::is_constructible_v<_UnitExponentialDistribution,
-                                          const value_type>) {
-      // static_assert(is_distribution_type<_UnitExponentialDistribution>)
-      using unit_param_type = typename _UnitExponentialDistribution::param_type;
-      unit_exponential_distribution_.param(unit_param_type{1.});
-    }
-  }
-
-  static_assert(
-      std::is_same_v<value_type,
-                     typename _UnitExponentialDistribution::result_type>,
-      "Class template rmolib::random::esm_mo_distribution<> must be "
-      "parametrized with unit_exponential_distribution-type with matching "
-      "result_type");
+  static_assert(type_traits::is_safe_numeric_cast_v<
+                    _RealType, typename _ExponentialDistribution::result_type>,
+                "Class template rmolib::random::esm_mo_distribution<> must be "
+                "parametrized with exponential_distribution-type with suitable "
+                "result_type");
 };
 
 /*
   // TODO: implement
 
   template <class _CharType, class _Traits, typename _Container, typename
-  _UnitExponentialDistribution> std::basic_ostream<_CharType, _Traits>&
+  _ExponentialDistribution> std::basic_ostream<_CharType, _Traits>&
   operator<<(std::basic_ostream<_CharType, _Traits>& os,
-            esm_mo_distribution<_Container, _UnitExponentialDistribution>&
+            esm_mo_distribution<_Container, _ExponentialDistribution>&
   dist);
 
   template <class _CharType, class _Traits, typename _Container, typename
-  _UnitExponentialDistribution> std::basic_istream<_CharType, _Traits>&
+  _ExponentialDistribution> std::basic_istream<_CharType, _Traits>&
   operator>>(std::basic_istream<_CharType, _Traits>& is,
-             esm_mo_distribution<_Container, _UnitExponentialDistribution>&
+             esm_mo_distribution<_Container, _ExponentialDistribution>&
   dist);
 */
 

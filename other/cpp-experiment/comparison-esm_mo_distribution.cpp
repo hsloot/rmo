@@ -1,8 +1,8 @@
 // [[Rcpp::plugins(cpp17)]]
 // [[Rcpp::depends(rmo)]]
 
-#include <random>
 #include <algorithm>
+#include <random>
 
 #include <Rcpp.h>
 #include <r_engine.hpp>
@@ -14,17 +14,17 @@ using namespace Rcpp;
 static const R_xlen_t C_CHECK_USR_INTERRUP = 100000;
 
 // [[Rcpp::export]]
-Rcpp::NumericMatrix sample_esm_rmolib(const int n, const std::size_t d,
-                                      const Rcpp::NumericVector intensities) {
-  using esm_mo_distribution = rmolib::esm_mo_distribution<std::vector<double>>;
-  using param_type = esm_mo_distribution::param_type;
+Rcpp::NumericMatrix sample_esm_rmolib(const std::size_t n, const std::size_t d,
+                                      const Rcpp::NumericVector& intensities) {
+  using dist_t = rmolib::esm_mo_distribution<double>;
+  using parm_t = dist_t::param_type;
 
   r_engine engine{};
-  esm_mo_distribution dist{};
-  param_type parm(d, intensities.begin(), intensities.end());
+  dist_t dist{};
+  parm_t parm(d, intensities.begin(), intensities.end());
 
   NumericMatrix out(no_init(n, d));
-  for (R_xlen_t k = 0; k < n; k++) {
+  for (R_xlen_t k = 0; k < n; ++k) {
     if ((d * k) % C_CHECK_USR_INTERRUP == 0) checkUserInterrupt();
 
     MatrixRow<REALSXP> values = out(k, _);
@@ -33,19 +33,19 @@ Rcpp::NumericMatrix sample_esm_rmolib(const int n, const std::size_t d,
   return out;
 }
 
-
 // [[Rcpp::export]]
-Rcpp::NumericMatrix sample_esm_rmolib_copy(const int n, const std::size_t d,
-                                      const Rcpp::NumericVector intensities) {
-  using esm_mo_distribution = rmolib::esm_mo_distribution<std::vector<double>>;
-  using param_type = esm_mo_distribution::param_type;
+Rcpp::NumericMatrix sample_esm_rmolib_copy(
+    const std::size_t n, const std::size_t d,
+    const Rcpp::NumericVector& intensities) {
+  using dist_t = rmolib::esm_mo_distribution<double>;
+  using parm_t = dist_t::param_type;
 
   r_engine engine{};
-  esm_mo_distribution dist{};
-  param_type parm(d, intensities.begin(), intensities.end());
+  dist_t dist{};
+  parm_t parm(d, intensities.begin(), intensities.end());
 
   NumericMatrix out(no_init(n, d));
-  for (R_xlen_t k = 0; k < n; k++) {
+  for (R_xlen_t k = 0; k < n; ++k) {
     if ((d * k) % C_CHECK_USR_INTERRUP == 0) checkUserInterrupt();
 
     MatrixRow<REALSXP> values = out(k, _);
@@ -56,13 +56,13 @@ Rcpp::NumericMatrix sample_esm_rmolib_copy(const int n, const std::size_t d,
 }
 
 // [[Rcpp::export]]
-Rcpp::NumericMatrix sample_esm_old(const int n, const std::size_t d,
-                                   const Rcpp::NumericVector intensities) {
+Rcpp::NumericMatrix sample_esm_old(const std::size_t n, const std::size_t d,
+                                   const Rcpp::NumericVector& intensities) {
   mo::stats::ESMGenerator<MatrixRow<REALSXP>, mo::stats::RRNGPolicy>
       esm_generator(d, intensities);
 
   NumericMatrix out(no_init(n, d));
-  for (R_xlen_t k = 0; k < n; k++) {
+  for (R_xlen_t k = 0; k < n; ++k) {
     if ((d * k) % C_CHECK_USR_INTERRUP == 0) checkUserInterrupt();
 
     MatrixRow<REALSXP> values = out(k, _);
