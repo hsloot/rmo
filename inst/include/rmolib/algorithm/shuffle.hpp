@@ -5,7 +5,7 @@
 #include <type_traits>
 
 #include "rmolib/math/next_integral_value.hpp"
-#include "rmolib/type_traits/integral.hpp"
+#include "rmolib/type_traits/is_safe_numeric_cast.hpp"
 #include "rmolib/type_traits/iterator.hpp"
 
 namespace rmolib {
@@ -25,7 +25,8 @@ void shuffle(_RandomAccessIterator first, _RandomAccessIterator last,
       type_traits::is_random_access_iterator_v<_RandomAccessIterator>,
       "shuffle<>: _RandomAccessIterator is not a random access iterator");
   static_assert(
-      type_traits::is_integral_base_of_v<size_t, typename distr_t::result_type>,
+      type_traits::is_safe_numeric_cast_v<typename distr_t::result_type,
+                                          size_t>,
       "shuffle<>: _UniformIntDistribution::result_type to large");
 
   auto n = last - first;

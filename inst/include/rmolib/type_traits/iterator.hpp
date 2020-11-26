@@ -30,6 +30,7 @@ template <typename _Iterator>
 struct is_output_iterator
     : public iterator_internal::has_iterator_category<_Iterator,
                                              std::output_iterator_tag> {};
+//! true if _Iterator's category derives from std::output_iterator_tag
 template <typename _Iterator>
 constexpr bool is_output_iterator_v = is_output_iterator<_Iterator>::value;
 
@@ -38,6 +39,7 @@ template <typename _Iterator>
 struct is_input_iterator
     : public iterator_internal::has_iterator_category<_Iterator,
                                              std::input_iterator_tag> {};
+//! true if _Iterator's category derives from std::input_iterator_tag
 template <typename _Iterator>
 constexpr bool is_input_iterator_v = is_input_iterator<_Iterator>::value;
 
@@ -46,6 +48,7 @@ template <typename _Iterator>
 struct is_forward_iterator
     : public iterator_internal::has_iterator_category<_Iterator,
                                              std::forward_iterator_tag> {};
+//! true if _Iterator's category derives from std::forward_iterator_tag
 template <typename _Iterator>
 constexpr bool is_forward_iterator_v = is_forward_iterator<_Iterator>::value;
 
@@ -55,6 +58,7 @@ struct is_bidirectional_iterator
     : public iterator_internal::has_iterator_category<_Iterator,
                                              std::bidirectional_iterator_tag> {
 };
+//! true if _Iterator's category derives from std::bidirectional_iterator_tag
 template <typename _Iterator>
 constexpr bool is_bidirectional_iterator_v =
     is_bidirectional_iterator<_Iterator>::value;
@@ -65,6 +69,7 @@ struct is_random_access_iterator
     : public iterator_internal::has_iterator_category<_Iterator,
                                              std::random_access_iterator_tag> {
 };
+//! true if _Iterator's category derives from std::random_access_iterator_tag
 template <typename _Iterator>
 constexpr bool is_random_access_iterator_v =
     is_random_access_iterator<_Iterator>::value;

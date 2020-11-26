@@ -13,12 +13,12 @@ using namespace mo::stats;
 // [[Rcpp::export]]
 NumericMatrix Rcpp__rmo_esm(const R_xlen_t n, const R_xlen_t d,
                             const NumericVector& intensities) {
-  using distribution_type = rmolib::esm_mo_distribution<std::vector<double>>;
-  using param_type = distribution_type::param_type;
+  using dist_t = rmolib::esm_mo_distribution<std::vector<double>>;
+  using parm_t = dist_t::param_type;
 
   r_engine engine{};
-  distribution_type dist{};
-  param_type parm(d, intensities.begin(), intensities.end());
+  dist_t dist{};
+  parm_t parm(d, intensities.begin(), intensities.end());
 
   NumericMatrix out(no_init(n, d));
   for (R_xlen_t k = 0; k < n; k++) {
@@ -35,12 +35,12 @@ NumericMatrix Rcpp__rmo_esm(const R_xlen_t n, const R_xlen_t d,
 // [[Rcpp::export]]
 NumericMatrix Rcpp__rmo_arnold(const R_xlen_t n, const int d,
                                const NumericVector& intensities) {
-  using distribution_type = rmolib::arnold_mo_distribution<std::vector<double>>;
-  using param_type = distribution_type::param_type;
+  using dist_t = rmolib::arnold_mo_distribution<std::vector<double>>;
+  using parm_t = dist_t::param_type;
 
   r_engine engine{};
-  distribution_type dist{};
-  param_type parm(d, intensities.begin(), intensities.end());
+  dist_t dist{};
+  parm_t parm(d, intensities.begin(), intensities.end());
 
   NumericMatrix out(no_init(n, d));
   for (R_xlen_t k = 0; k < n; k++) {
@@ -58,13 +58,13 @@ NumericMatrix Rcpp__rmo_arnold(const R_xlen_t n, const int d,
 // [[Rcpp::export]]
 NumericMatrix Rcpp__rmo_ex_arnold(const R_xlen_t n, const int d,
                                   const NumericVector& ex_intensities) {
-  using markovian_exmo_distribution =
+  using dist_t =
       rmolib::markovian_exmo_distribution<std::vector<double>>;
-  using param_type = markovian_exmo_distribution::param_type;
+  using parm_t = dist_t::param_type;
 
   r_engine engine{};
-  markovian_exmo_distribution dist{};
-  param_type parm(d, ex_intensities.begin(), ex_intensities.end());
+  dist_t dist{};
+  parm_t parm(d, ex_intensities.begin(), ex_intensities.end());
 
   NumericMatrix out(no_init(n, d));
   for (R_xlen_t k = 0; k < n; k++) {
@@ -87,13 +87,13 @@ NumericMatrix Rcpp__rmo_ex_arnold(const R_xlen_t n, const int d,
 NumericMatrix Rcpp__rmo_esm_cuadras_auge(const R_xlen_t n, const int d,
                                          const double alpha,
                                          const double beta) {
-  using distribution_type =
+  using dist_t =
       rmolib::cuadras_auge_distribution<std::vector<double>>;
-  using param_type = distribution_type::param_type;
+  using parm_t = dist_t::param_type;
 
   r_engine engine{};
-  distribution_type dist{};
-  param_type parm(d, alpha, beta);
+  dist_t dist{};
+  parm_t parm(d, alpha, beta);
 
   NumericMatrix out(no_init(n, d));
   for (R_xlen_t k = 0; k < n; k++) {

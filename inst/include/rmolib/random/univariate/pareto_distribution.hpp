@@ -6,6 +6,7 @@
 #include <type_traits>
 
 #include "rmolib/random/univariate/uniform_real_distribution.hpp"
+#include "rmolib/type_traits/is_safe_numeric_cast.hpp"
 
 namespace rmolib {
 
@@ -140,19 +141,20 @@ class pareto_distribution {
   void init_unit_uniform_real_distribution() {
     if constexpr (std::is_constructible_v<_UnitUniformRealDistribution,
                                           const _RealType, const _RealType>) {
-      // TODO:
-      // static_assert(is_distribution_type<_UnitUniformRealDistribution>)
-      using unit_param_type = typename _UnitUniformRealDistribution::param_type;
-      unit_uniform_real_distribution_.param(
-          unit_param_type{_RealType{0}, _RealType{1}});
+      using unit_dist_t = _UnitUniformRealDistribution;
+      using unit_parm_t = typename unit_dist_t::param_type;
+      using std::swap;
+
+      auto tmp = unit_dist_t{unit_parm_t{_RealType{0}, _RealType{1}}};
+      swap(unit_uniform_real_distribution_, tmp);
     }
   }
 
   static_assert(
-      std::is_same_v<result_type,
-                     typename _UnitUniformRealDistribution::result_type>,
+      type_traits::is_safe_numeric_cast_v<
+          result_type, typename _UnitUniformRealDistribution::result_type>,
       "Class template rmolib::random::pareto_distribution<> must be "
-      "parametrized with unit_uniform_real_distribution-type with matching "
+      "parametrized with unit_uniform_real_distribution-type convertible to "
       "result_type");
 };
 
