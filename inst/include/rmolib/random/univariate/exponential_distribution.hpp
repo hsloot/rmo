@@ -75,8 +75,21 @@ class exponential_distribution {
   };
 
   exponential_distribution() = default;
+
   explicit exponential_distribution(const _RealType lambda) : parm_{lambda} {}
-  exponential_distribution(const param_type& parm) : parm_{parm} {}
+
+  explicit exponential_distribution(const param_type& parm) : parm_{parm} {}
+
+  // Used for construction from a different specialization
+  template <typename _ExponentialParamType,
+            std::enable_if_t<
+                !std::is_convertible_v<_ExponentialParamType,
+                                       exponential_distribution> &&
+                    !std::is_convertible_v<_ExponentialParamType, param_type> &&
+                    is_exponential_param_type_v<_ExponentialParamType>,
+                int> = 0>
+  explicit exponential_distribution(_ExponentialParamType&& parm)
+      : parm_{std::forward<_ExponentialParamType>(parm)} {}
 
   // compiler generated ctor and assignment op is sufficient
 

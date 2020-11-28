@@ -75,7 +75,20 @@ class deterministic_distribution {
   deterministic_distribution() = default;
 
   explicit deterministic_distribution(const _RealType value) : parm_{value} {}
-  deterministic_distribution(const param_type& parm) : parm_{parm} {}
+
+  explicit deterministic_distribution(const param_type& parm) : parm_{parm} {}
+
+  // Used for construction from a different specialization
+  template <
+      typename _DeterministicParamType,
+      std::enable_if_t<
+          !std::is_convertible_v<_DeterministicParamType,
+                                 deterministic_distribution> &&
+              !std::is_convertible_v<_DeterministicParamType, param_type> &&
+              is_deterministic_param_type_v<_DeterministicParamType>,
+          int> = 0>
+  explicit deterministic_distribution(_DeterministicParamType&& parm)
+      : parm_{std::forward<_DeterministicParamType>(parm)} {}
 
   // compiler generated ctor and assignment op is sufficient
 

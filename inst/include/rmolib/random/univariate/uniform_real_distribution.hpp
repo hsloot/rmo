@@ -48,8 +48,8 @@ class uniform_real_distribution {
                   !std::is_convertible_v<_UniformParamType, param_type> &&
                       is_uniform_real_param_type_v<_UniformParamType>,
                   int> = 0>
-    explicit param_type(_UniformParamType&& param)
-        : param_type{param.lower(), param.upper()} {}
+    explicit param_type(_UniformParamType&& parm)
+        : param_type{parm.lower(), parm.upper()} {}
 
     // compiler generated ctor and assignment op is sufficient
 
@@ -93,8 +93,19 @@ class uniform_real_distribution {
 
   explicit uniform_real_distribution(const _RealType lower,
                                      const _RealType upper)
-      : param_{lower, upper} {}
-  uniform_real_distribution(const param_type& param) : param_{param} {}
+      : parm_{lower, upper} {}
+  explicit uniform_real_distribution(const param_type& parm) : parm_{parm} {}
+
+  // Used for construction from a different specialization
+  template <typename _UniformParamType,
+            std::enable_if_t<
+                !std::is_convertible_v<_UniformParamType,
+                                       uniform_real_distribution> &&
+                    !std::is_convertible_v<_UniformParamType, param_type> &&
+                    is_uniform_real_param_type_v<_UniformParamType>,
+                int> = 0>
+  explicit uniform_real_distribution(_UniformParamType&& parm)
+      : parm_{std::forward<_UniformParamType>(parm)} {}
 
   // compiler generated ctor and assignment op is sufficient
 
@@ -103,35 +114,34 @@ class uniform_real_distribution {
   auto min() const { return lower(); }
   auto max() const { return upper(); }
 
-  auto lower() const { return param_.lower(); }
-  auto upper() const { return param_.upper(); }
+  auto lower() const { return parm_.lower(); }
+  auto upper() const { return parm_.upper(); }
 
-  param_type param() const { return param_; }
-  void param(const param_type& param) { param_ = param; }
+  param_type param() const { return parm_; }
+  void param(const param_type& parm) { parm_ = parm; }
 
   template <typename _EngineType>
   result_type operator()(_EngineType& engine) {
-    return (*this)(engine, param_);
+    return (*this)(engine, parm_);
   }
 
   template <typename _EngineType>
-  result_type operator()(_EngineType& engine, const param_type& param) {
-    return param.lower_ +
-           param.length_ * unit_uniform_real_distribution(engine);
+  result_type operator()(_EngineType& engine, const param_type& parm) {
+    return parm.lower_ + parm.length_ * unit_uniform_real_distribution(engine);
   }
 
   friend bool operator==(const uniform_real_distribution& lhs,
                          const uniform_real_distribution& rhs) {
-    return lhs.param_ == rhs.param_;
+    return lhs.parm_ == rhs.parm_;
   }
 
   friend bool operator!=(const uniform_real_distribution& lhs,
                          const uniform_real_distribution& rhs) {
-    return lhs.param_ != rhs.param_;
+    return lhs.parm_ != rhs.parm_;
   }
 
  private:
-  param_type param_{};
+  param_type parm_{};
 
   template <typename _EngineType>
   result_type unit_uniform_real_distribution(_EngineType& engine);

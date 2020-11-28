@@ -90,6 +90,17 @@ class cuadras_auge_distribution {
 
   explicit cuadras_auge_distribution(const param_type& parm) : parm_{parm} {}
 
+  // Used for construction from a different specialization
+  template <typename _CuadrasAugeParamType,
+            std::enable_if_t<
+                !std::is_convertible_v<_CuadrasAugeParamType,
+                                       cuadras_auge_distribution> &&
+                    !std::is_convertible_v<_CuadrasAugeParamType, param_type> &&
+                    is_cuadras_auge_param_type_v<_CuadrasAugeParamType>,
+                int> = 0>
+  explicit cuadras_auge_distribution(_CuadrasAugeParamType&& parm)
+      : parm_{std::forward<_CuadrasAugeParamType>(parm)} {}
+
   // compiler generated ctor and assignment op is sufficient
 
   void reset() {}

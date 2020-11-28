@@ -142,6 +142,17 @@ class markovian_exmo_distribution {
 
   explicit markovian_exmo_distribution(const param_type& parm) : parm_{parm} {}
 
+  // Used for construction from a different specialization
+  template <
+      typename _ExMOParamType,
+      std::enable_if_t<
+          !std::is_convertible_v<_ExMOParamType, markovian_exmo_distribution> &&
+              !std::is_convertible_v<_ExMOParamType, param_type> &&
+              internal::is_exmo_param_type_v<_ExMOParamType>,
+          int> = 0>
+  explicit markovian_exmo_distribution(_ExMOParamType&& parm)
+      : parm_{std::forward<_ExMOParamType>(parm)} {}
+
   // compiler generated ctor and assignment op is sufficient
 
   void reset() {}
@@ -185,15 +196,17 @@ class markovian_exmo_distribution {
       state += math::next_integral_value(
           discrete_distribution_(engine, parm.discrete_parms_[state]));
     }
-    auto shuffle = [&uniform_int_distribution_=uniform_int_distribution_,&engine](auto& out) {
-      std::vector<std::remove_reference_t<decltype(out[0])>> cpy{out.begin(), out.end()};
+    auto shuffle = [&uniform_int_distribution_ = uniform_int_distribution_,
+                    &engine](auto& out) {
+      std::vector<std::remove_reference_t<decltype(out[0])>> cpy{out.begin(),
+                                                                 out.end()};
       std::vector<std::size_t> perm(cpy.size());
       std::iota(perm.begin(), perm.end(), 0);
-      algorithm::shuffle(perm.begin(), perm.end(), engine, uniform_int_distribution_);
+      algorithm::shuffle(perm.begin(), perm.end(), engine,
+                         uniform_int_distribution_);
       // for r comparability
       std::reverse(perm.begin(), perm.end());
-      for (auto i=0; i<cpy.size(); ++i)
-        out[i] = cpy[perm[i]];
+      for (auto i = 0; i < cpy.size(); ++i) out[i] = cpy[perm[i]];
     };
     shuffle(out);
   }

@@ -95,10 +95,21 @@ class pareto_distribution {
 
   explicit pareto_distribution(const _RealType alpha,
                                const _RealType lower_bound)
-      : param_{alpha, lower_bound} {}
-  pareto_distribution(const param_type& param) : param_{param} {
+      : parm_{alpha, lower_bound} {}
+
+  explicit pareto_distribution(const param_type& param) : parm_{param} {
     init_unit_uniform_real_distribution();
   }
+
+  // Used for construction from a different specialization
+  template <typename _ParetoParamType,
+            std::enable_if_t<
+                !std::is_convertible_v<_ParetoParamType, pareto_distribution> &&
+                    !std::is_convertible_v<_ParetoParamType, param_type> &&
+                    is_pareto_param_type_v<_ParetoParamType>,
+                int> = 0>
+  explicit pareto_distribution(_ParetoParamType&& parm)
+      : parm_{std::forward<_ParetoParamType>(parm)} {}
 
   // compiler generated ctor and assignment op is sufficient
 
@@ -107,15 +118,15 @@ class pareto_distribution {
   auto min() const { return lower_bound(); }
   auto max() const { return std::numeric_limits<result_type>::infinity(); }
 
-  auto alpha() const { return param_.alpha(); }
-  auto lower_bound() const { return param_.lower_bound(); }
+  auto alpha() const { return parm_.alpha(); }
+  auto lower_bound() const { return parm_.lower_bound(); }
 
-  param_type param() const { return param_; }
-  void param(const param_type& param) { param_ = param; }
+  param_type param() const { return parm_; }
+  void param(const param_type& param) { parm_ = param; }
 
   template <typename _EngineType>
   result_type operator()(_EngineType& engine) {
-    return (*this)(engine, param_);
+    return (*this)(engine, parm_);
   }
 
   template <typename _EngineType>
@@ -126,16 +137,16 @@ class pareto_distribution {
 
   friend bool operator==(const pareto_distribution& lhs,
                          const pareto_distribution& rhs) {
-    return lhs.param_ == rhs.param_;
+    return lhs.parm_ == rhs.parm_;
   }
 
   friend bool operator!=(const pareto_distribution& lhs,
                          const pareto_distribution& rhs) {
-    return lhs.param_ != rhs.param_;
+    return lhs.parm_ != rhs.parm_;
   }
 
  private:
-  param_type param_{};
+  param_type parm_{};
   _UnitUniformRealDistribution unit_uniform_real_distribution_{};
 
   void init_unit_uniform_real_distribution() {

@@ -84,7 +84,18 @@ class uniform_int_distribution {
 
   explicit uniform_int_distribution(const _IntType lower, const _IntType upper)
       : parm_{lower, upper} {}
-  uniform_int_distribution(const param_type& parm) : parm_{parm} {}
+  explicit uniform_int_distribution(const param_type& parm) : parm_{parm} {}
+
+  // Used for construction from a different specialization
+  template <typename _UniformIntParamType,
+            std::enable_if_t<
+                !std::is_convertible_v<_UniformIntParamType,
+                                       uniform_int_distribution> &&
+                    !std::is_convertible_v<_UniformIntParamType, param_type> &&
+                    is_uniform_int_param_type_v<_UniformIntParamType>,
+                int> = 0>
+  explicit uniform_int_distribution(_UniformIntParamType&& parm)
+      : parm_{std::forward<_UniformIntParamType>(parm)} {}
 
   // compiler generated ctor and assignment op is sufficient
 

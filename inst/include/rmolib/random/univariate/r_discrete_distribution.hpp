@@ -52,8 +52,9 @@ class r_discrete_distribution {
         : param_type{wl.begin(), wl.end()} {}
 
     template <class _UnaryFunctor>
-    param_type(typename std::vector<_WeightType>::size_type count,
-               _WeightType xmin, _WeightType xmax, _UnaryFunctor unary_op) {
+    explicit param_type(typename std::vector<_WeightType>::size_type count,
+                        _WeightType xmin, _WeightType xmax,
+                        _UnaryFunctor unary_op) {
       using size_t = typename std::vector<_WeightType>::size_type;
 
       count += static_cast<size_t>(count == 0);
@@ -209,9 +210,9 @@ class r_discrete_distribution {
 
   // template <class UnaryOperation>
   template <typename _UnaryOperation>
-  r_discrete_distribution(typename std::vector<_WeightType>::size_type count,
-                          _WeightType xmin, _WeightType xmax,
-                          _UnaryOperation unary_op)
+  explicit r_discrete_distribution(
+      typename std::vector<_WeightType>::size_type count, _WeightType xmin,
+      _WeightType xmax, _UnaryOperation unary_op)
       : parm_{count, xmin, xmax, unary_op} {
     init_unit_uniform_real_distribution();
   }
@@ -219,6 +220,17 @@ class r_discrete_distribution {
   explicit r_discrete_distribution(const param_type& parm) : parm_{parm} {
     init_unit_uniform_real_distribution();
   }
+
+  // Used for construction from a different specialization
+  template <
+      typename _DiscreteParamType,
+      std::enable_if_t<
+          !std::is_convertible_v<_DiscreteParamType, r_discrete_distribution> &&
+              !std::is_convertible_v<_DiscreteParamType, param_type> &&
+              is_discrete_param_type_v<_DiscreteParamType>,
+          int> = 0>
+  explicit r_discrete_distribution(_DiscreteParamType&& parm)
+      : parm_{std::forward<_DiscreteParamType>(parm)} {}
 
   // compiler generated ctor and assignment op is sufficient
 

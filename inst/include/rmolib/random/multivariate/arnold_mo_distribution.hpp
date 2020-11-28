@@ -6,11 +6,11 @@
 #include <type_traits>
 #include <vector>
 
+#include "rmolib/math/next_integral_value.hpp"
 #include "rmolib/random/multivariate/internal/is_within.hpp"
 #include "rmolib/random/multivariate/internal/mo_param_type.hpp"
 #include "rmolib/random/univariate/exponential_distribution.hpp"
 #include "rmolib/random/univariate/r_discrete_distribution.hpp"
-#include "rmolib/math/next_integral_value.hpp"
 
 namespace rmolib {
 
@@ -120,6 +120,18 @@ class arnold_mo_distribution {
     init_unit_exponential_distribution();
   }
 
+  // Used for construction from a different specialization
+  template <typename _MOParamType,
+            std::enable_if_t<
+                !std::is_convertible_v<_MOParamType, arnold_mo_distribution> &&
+                    !std::is_convertible_v<_MOParamType, param_type> &&
+                    internal::is_mo_param_type_v<_MOParamType>,
+                int> = 0>
+  explicit arnold_mo_distribution(_MOParamType&& parm)
+      : parm_{std::forward<_MOParamType>(parm)} {
+    init_unit_exponential_distribution();
+  }
+
   // compiler generated ctor and assignment op is sufficient
 
   void reset() {}
@@ -164,7 +176,8 @@ class arnold_mo_distribution {
                         [](bool v) { return v; })) {
       auto waiting_time =
           unit_exponential_distribution_(engine) / parm.total_intensity_;
-      auto affected = math::next_integral_value(discrete_distribution_(engine, parm.discrete_parm_));
+      auto affected = math::next_integral_value(
+          discrete_distribution_(engine, parm.discrete_parm_));
 
       for (size_type i = 0; i < parm.dim_; ++i) {
         if (!destroyed[i]) {

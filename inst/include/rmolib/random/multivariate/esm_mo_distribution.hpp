@@ -157,11 +157,21 @@ class esm_mo_distribution {
                                _InputContainer intensities)
       : parm_{dim, intensities} {}
 
-  explicit esm_mo_distribution(const std::size_t dim,
-                               std::initializer_list<_RealType>& wl)
+  esm_mo_distribution(const std::size_t dim,
+                      std::initializer_list<_RealType>& wl)
       : parm_{dim, wl.begin(), wl.end()} {}
 
   explicit esm_mo_distribution(const param_type& parm) : parm_{parm} {}
+
+  // Used for construction from a different specialization
+  template <typename _MOParamType,
+            std::enable_if_t<
+                !std::is_convertible_v<_MOParamType, esm_mo_distribution> &&
+                    !std::is_convertible_v<_MOParamType, param_type> &&
+                    internal::is_mo_param_type_v<_MOParamType>,
+                int> = 0>
+  explicit esm_mo_distribution(_MOParamType&& parm)
+      : parm_{std::forward<_MOParamType>(parm)} {}
 
   // compiler generated ctor and assignment op is sufficient
 
