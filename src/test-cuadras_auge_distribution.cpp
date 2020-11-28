@@ -28,7 +28,7 @@
 
 using exponential_dist_t = rmolib::random::exponential_distribution<double>;
 using cuadras_auge_dist_t =
-    rmolib::random::cuadras_auge_distribution<std::vector<double>,
+    rmolib::random::cuadras_auge_distribution<double,
                                               exponential_dist_t>;
 using parm_t = cuadras_auge_dist_t::param_type;
 

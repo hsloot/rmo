@@ -16,16 +16,16 @@ static const R_xlen_t C_CHECK_USR_INTERRUP = 100000;
 //' @keywords internal
 //' @noRd
 // [[Rcpp::export]]
-NumericMatrix sample_cuadras_auge_rmolib(const R_xlen_t n, const int d,
+NumericMatrix sample_cuadras_auge_rmolib(const std::size_t n,
+                                         const std::size_t d,
                                          const double alpha,
                                          const double beta) {
-  using cuadras_auge_distribution =
-      rmolib::cuadras_auge_distribution<std::vector<double>>;
-  using param_type = cuadras_auge_distribution::param_type;
+  using cuadras_auge_dist_t = rmolib::cuadras_auge_distribution<double>;
+  using parm_t = cuadras_auge_dist_t::param_type;
 
   r_engine engine{};
-  cuadras_auge_distribution dist{};
-  param_type parm(d, alpha, beta);
+  cuadras_auge_dist_t dist{};
+  parm_t parm(d, alpha, beta);
 
   NumericMatrix out(no_init(n, d));
   for (R_xlen_t k = 0; k < n; k++) {
@@ -39,15 +39,16 @@ NumericMatrix sample_cuadras_auge_rmolib(const R_xlen_t n, const int d,
 }
 
 // [[Rcpp::export]]
-NumericMatrix sample_cuadras_auge_rmolib_copy(const int n, const std::size_t d,
-                                      const double alpha, const double beta) {
-  using cuadras_auge_distribution =
-      rmolib::cuadras_auge_distribution<std::vector<double>>;
-  using param_type = cuadras_auge_distribution::param_type;
+NumericMatrix sample_cuadras_auge_rmolib_copy(const std::size_t n,
+                                              const std::size_t d,
+                                              const double alpha,
+                                              const double beta) {
+  using cuadras_auge_dist_t = rmolib::cuadras_auge_distribution<double>;
+  using parm_t = cuadras_auge_dist_t::param_type;
 
   r_engine engine{};
-  cuadras_auge_distribution dist{};
-  param_type parm(d, alpha, beta);
+  cuadras_auge_dist_t dist{};
+  parm_t parm(d, alpha, beta);
 
   NumericMatrix out(no_init(n, d));
   for (R_xlen_t k = 0; k < n; k++) {
@@ -61,9 +62,8 @@ NumericMatrix sample_cuadras_auge_rmolib_copy(const int n, const std::size_t d,
 }
 
 // [[Rcpp::export]]
-NumericMatrix sample_cuadras_auge_old(const R_xlen_t n, const int d,
-                                         const double alpha,
-                                         const double beta) {
+NumericMatrix sample_cuadras_auge_old(const std::size_t n, const std::size_t d,
+                                      const double alpha, const double beta) {
   mo::stats::CuadrasAugeGenerator<MatrixRow<REALSXP>, mo::stats::RRNGPolicy>
       cuadras_auge_generator(d, alpha, beta);
 

@@ -59,10 +59,9 @@ using markovian_exmo_distribution = random::markovian_exmo_distribution<
     r_discrete_distribution<typename _Container::size_type,
                             typename _Container::value_type>>;
 
-template <typename _Container = std::vector<double>>
+template <typename _RealType = double>
 using cuadras_auge_distribution = random::cuadras_auge_distribution<
-    _Container, exponential_distribution<
-                    std::remove_reference_t<typename _Container::value_type>>>;
+    _RealType, exponential_distribution<_RealType>>;
 
 // -----------------------------------------------------------------------------
 // public interfaces to alternative distributions sampling methods à la abseil
@@ -130,7 +129,7 @@ _IntType RDiscrete(_EngineType& engine, _InputIterator first,
 }
 
 template <typename _EngineType, typename _InputIterator>
-auto ExogenousShockModel(_EngineType& engine, const std::size_t dim,
+auto ExogenousShock(_EngineType& engine, const std::size_t dim,
                          _InputIterator first, _InputIterator last) {
   using std::iterator_traits;
   using value_t = std::remove_reference_t<typename iterator_traits<_InputIterator>::value_type>;
@@ -142,7 +141,7 @@ auto ExogenousShockModel(_EngineType& engine, const std::size_t dim,
 }
 
 template <typename _EngineType, typename _InputIterator>
-void ArnoldModel(_EngineType& engine, const std::size_t dim,
+void Arnold(_EngineType& engine, const std::size_t dim,
                          _InputIterator first, _InputIterator last) {
   using std::iterator_traits;
   using value_t = std::remove_reference_t<typename iterator_traits<_InputIterator>::value_type>;
@@ -169,16 +168,14 @@ void MarkovianModel(_EngineType& engine,
   dist(engine, param_type{dim, first, last}, out);
 }
 
-template <typename _EngineType, typename _RealType, typename _OutputContainer>
-void CuadrasAuge(_EngineType& engine, const typename std::size_t dim,
-                 const _RealType alpha, const _RealType beta,
-                 _OutputContainer& out) {
-  using value_type = std::remove_reference_t<_RealType>;
-  using distribution_type = cuadras_auge_distribution<std::vector<value_type>>;
-  using param_type = typename distribution_type::param_type;
+template <typename _EngineType, typename _RealType>
+void CuadrasAuge(_EngineType& engine, const std::size_t dim,
+                 const _RealType alpha, const _RealType beta) {
+  using dist_t = cuadras_auge_distribution<_RealType>;
+  using parm_t = typename dist_t::param_type;
 
-  distribution_type dist{};
-  dist(engine, param_type{dim, alpha, beta}, out);
+  dist_t dist{};
+  return dist(engine, parm_t{dim, alpha, beta});
 }
 
 }  // namespace rmolib

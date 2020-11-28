@@ -88,7 +88,7 @@ NumericMatrix Rcpp__rmo_esm_cuadras_auge(const R_xlen_t n, const int d,
                                          const double alpha,
                                          const double beta) {
   using dist_t =
-      rmolib::cuadras_auge_distribution<std::vector<double>>;
+      rmolib::cuadras_auge_distribution<double>;
   using parm_t = dist_t::param_type;
 
   r_engine engine{};

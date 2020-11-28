@@ -5,6 +5,7 @@
 #include <type_traits>
 
 #include "rmolib/random/univariate/exponential_distribution.hpp"
+#include "rmolib/type_traits/is_safe_numeric_cast.hpp"
 
 namespace rmolib {
 
@@ -29,14 +30,11 @@ template <typename _T>
 constexpr bool is_cuadras_auge_param_type_v =
     is_cuadras_auge_param_type<_T>::value;
 
-template <typename _Container,
-          typename _ExponentialDistribution =
-              exponential_distribution<typename _Container::value_type>>
+template <typename _RealType, typename _ExponentialDistribution =
+                                  exponential_distribution<_RealType>>
 class cuadras_auge_distribution {
  public:
-  using result_type = _Container;
-  using value_type = typename _Container::value_type;
-  using size_type = typename _Container::size_type;
+  using result_type = std::vector<_RealType>;
 
   class param_type {
    public:
@@ -44,8 +42,8 @@ class cuadras_auge_distribution {
 
     param_type() = default;
 
-    explicit param_type(size_type dim, const value_type alpha,
-                        const value_type beta)
+    explicit param_type(const std::size_t dim, const _RealType alpha,
+                        const _RealType beta)
         : dim_{dim}, alpha_parm_{alpha}, beta_parm_{beta} {}
 
     // Used for construction from a different specialization
@@ -75,17 +73,18 @@ class cuadras_auge_distribution {
     }
 
    private:
-    using exponential_param_type =
-        typename _ExponentialDistribution::param_type;
-    size_type dim_{1};
-    exponential_param_type alpha_parm_{value_type{1}};
-    exponential_param_type beta_parm_{value_type{0}};
+    using exponential_parm_t = typename _ExponentialDistribution::param_type;
+
+    std::size_t dim_{1};
+    exponential_parm_t alpha_parm_{_RealType{1}};
+    exponential_parm_t beta_parm_{_RealType{0}};
   };
 
   cuadras_auge_distribution() = default;
 
-  explicit cuadras_auge_distribution(size_type dim, const value_type alpha,
-                                     const value_type beta)
+  explicit cuadras_auge_distribution(const std::size_t dim,
+                                     const _RealType alpha,
+                                     const _RealType beta)
       : parm_{dim, alpha, beta} {}
 
   explicit cuadras_auge_distribution(const param_type& parm) : parm_{parm} {}
@@ -105,13 +104,9 @@ class cuadras_auge_distribution {
 
   void reset() {}
 
-  auto min() const {
-    result_type out(parm_.dim(), value_type{0});
-    out.front() = value_type{-1};
-    return out;
-  }
+  auto min() const { return result_type(dim(), _RealType{-1}); }
   auto max() const {
-    return result_type(dim(), std::numeric_limits<value_type>::infinity());
+    return result_type(dim(), std::numeric_limits<_RealType>::infinity());
   }
 
   auto dim() const { return parm_.dim(); }
@@ -134,17 +129,9 @@ class cuadras_auge_distribution {
   template <typename _Engine, typename _OutputContainer>
   void operator()(_Engine& engine, const param_type& parm,
                   _OutputContainer& out) {
-    // reference must be remove to use Rcpp::NumericVector or
-    // Rcpp::MatrixRow<REALSXP> as _OutputContainer
-    using value_type =
-        std::remove_reference_t<typename _OutputContainer::value_type>;
-
-    std::fill(out.begin(), out.end(),
-              std::numeric_limits<value_type>::infinity());
-    auto global_shock = exponential_distribution_(engine, parm.beta_parm_);
+    const auto global_shock = exponential_dist_(engine, parm.beta_parm_);
     for (auto& value : out) {
-      auto individual_shock =
-          exponential_distribution_(engine, parm.alpha_parm_);
+      const auto individual_shock = exponential_dist_(engine, parm.alpha_parm_);
       value = std::min(individual_shock, global_shock);
     }
   }
@@ -161,29 +148,29 @@ class cuadras_auge_distribution {
 
  private:
   param_type parm_{};
-  _ExponentialDistribution exponential_distribution_{};
+  _ExponentialDistribution exponential_dist_{};
 
   static_assert(
-      std::is_same_v<value_type,
-                     typename _ExponentialDistribution::result_type>,
+      type_traits::is_safe_numeric_cast_v<
+          _RealType, typename _ExponentialDistribution::result_type>,
       "Class template rmolib::random::cuadras_auge_distribution<> must be "
-      "parametrized with unit_exponential_distribution-type with matching "
+      "parametrized with unit_exponential_distribution-type with suitable "
       "result_type");
 };
 
 /*
   // TODO: implement
 
-  template <class _CharType, class _Traits, typename _Container, typename
+  template <class _CharType, class _Traits, typename _RealType, typename
   _ExponentialDistribution> std::basic_ostream<_CharType, _Traits>&
   operator<<(std::basic_ostream<_CharType, _Traits>& os,
-            cuadras_auge_distribution<_Container, _ExponentialDistribution>&
+            cuadras_auge_distribution<_RealType, _ExponentialDistribution>&
   dist);
 
-  template <class _CharType, class _Traits, typename _Container, typename
+  template <class _CharType, class _Traits, typename _RealType, typename
   _ExponentialDistribution> std::basic_istream<_CharType, _Traits>&
   operator>>(std::basic_istream<_CharType, _Traits>& is,
-             cuadras_auge_distribution<_Container,
+             cuadras_auge_distribution<_RealType,
   _ExponentialDistribution>& dist);
 */
 
