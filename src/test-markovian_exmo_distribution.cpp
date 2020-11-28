@@ -21,7 +21,7 @@
     generic_parm_t{}, generic_parm_t{std::size_t{3}, {1., 1., 1.}}, \
         generic_parm_t{std::size_t{6}, {0., 1., 2., 4., 5., 6.}},   \
         generic_parm_t {                                            \
-      std::size_t{6}, { 2., 1., 0.5, 0.2, 0.3, 4., .7 }             \
+      std::size_t{6}, { 2., 1., 0.5, 0.2, 0.3, 4. }             \
     }                                                               \
   }
 
@@ -38,8 +38,7 @@ using r_discrete_dist_t =
     rmolib::random::r_discrete_distribution<std::size_t, double,
                                             uniform_real_dist_t>;
 using markovian_exmo_dist_t = rmolib::random::markovian_exmo_distribution<
-    std::vector<double>, exponential_dist_t, uniform_int_dist_t,
-    r_discrete_dist_t>;
+    double, exponential_dist_t, uniform_int_dist_t, r_discrete_dist_t>;
 using parm_t = markovian_exmo_dist_t::param_type;
 
 class generic_param_type {

@@ -1,3 +1,8 @@
+# rmo 0.2.6
+
+- Complete refactoring of C++ backend: Distribution classes satisfy a multivariate
+  version of the named requirement *RandomNumberDistribution*
+
 # rmo 0.2.5
 
 - Include more tests

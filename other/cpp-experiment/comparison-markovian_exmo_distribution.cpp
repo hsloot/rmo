@@ -16,15 +16,14 @@ static const R_xlen_t C_CHECK_USR_INTERRUP = 100000;
 //' @keywords internal
 //' @noRd
 // [[Rcpp::export]]
-NumericMatrix sample_markovian_rmolib(const R_xlen_t n, const int d,
+NumericMatrix sample_markovian_rmolib(const std::size_t n, const std::size_t d,
                                       const NumericVector& ex_intensities) {
-  using markovian_exmo_distribution =
-      rmolib::markovian_exmo_distribution<std::vector<double>>;
-  using param_type = markovian_exmo_distribution::param_type;
+  using markovian_exmo_dist_t = rmolib::markovian_exmo_distribution<double>;
+  using parm_t = markovian_exmo_dist_t::param_type;
 
   r_engine engine{};
-  markovian_exmo_distribution dist{};
-  param_type parm(d, ex_intensities.begin(), ex_intensities.end());
+  markovian_exmo_dist_t dist{};
+  parm_t parm(d, ex_intensities.begin(), ex_intensities.end());
 
   NumericMatrix out(no_init(n, d));
   for (R_xlen_t k = 0; k < n; k++) {
@@ -33,7 +32,8 @@ NumericMatrix sample_markovian_rmolib(const R_xlen_t n, const int d,
     MatrixRow<REALSXP> values = out(k, _);
     dist(engine, parm, values);
     // R's sample.int produces a final (redundant) selection of the
-    // last remaining value see https://github.com/wch/r-source/blob/613bdfd0e1d3fc9984142d5da3da448adf2438c7/src/main/random.c#L461
+    // last remaining value see
+    // https://github.com/wch/r-source/blob/613bdfd0e1d3fc9984142d5da3da448adf2438c7/src/main/random.c#L461
     [[maybe_unused]] auto dummy = ::R_unif_index(1.);
   }
 
@@ -42,15 +42,14 @@ NumericMatrix sample_markovian_rmolib(const R_xlen_t n, const int d,
 
 // [[Rcpp::export]]
 NumericMatrix sample_markovian_rmolib_copy(
-    const int n, const std::size_t d,
-    const Rcpp::NumericVector ex_intensities) {
-  using markovian_exmo_distribution =
-      rmolib::markovian_exmo_distribution<std::vector<double>>;
-  using param_type = markovian_exmo_distribution::param_type;
+    const std::size_t n, const std::size_t d,
+    const Rcpp::NumericVector& ex_intensities) {
+  using markovian_exmo_dist_t = rmolib::markovian_exmo_distribution<double>;
+  using parm_t = markovian_exmo_dist_t::param_type;
 
   r_engine engine{};
-  markovian_exmo_distribution dist{};
-  param_type parm(d, ex_intensities.begin(), ex_intensities.end());
+  markovian_exmo_dist_t dist{};
+  parm_t parm(d, ex_intensities.begin(), ex_intensities.end());
 
   NumericMatrix out(no_init(n, d));
   for (R_xlen_t k = 0; k < n; k++) {
@@ -65,10 +64,10 @@ NumericMatrix sample_markovian_rmolib_copy(
 }
 
 // [[Rcpp::export]]
-NumericMatrix sample_markovian_old(const int n, const std::size_t d,
-                                   const Rcpp::NumericVector ex_intensities) {
-  mo::stats::ExArnoldGenerator<MatrixRow<REALSXP>, mo::stats::RRNGPolicy> ex_arnold_generator(
-      d, ex_intensities);
+NumericMatrix sample_markovian_old(const std::size_t n, const std::size_t d,
+                                   const Rcpp::NumericVector& ex_intensities) {
+  mo::stats::ExArnoldGenerator<MatrixRow<REALSXP>, mo::stats::RRNGPolicy>
+      ex_arnold_generator(d, ex_intensities);
 
   NumericMatrix out(no_init(n, d));
   for (R_xlen_t k = 0; k < n; k++) {

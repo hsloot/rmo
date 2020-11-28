@@ -6,31 +6,28 @@
 #include <type_traits>
 #include <vector>
 
-#include "rmolib/algorithm/shuffle.hpp"
+#include "rmolib/algorithm/r_shuffle.hpp"
 #include "rmolib/math/binomial_coefficient.hpp"
 #include "rmolib/math/next_integral_value.hpp"
 #include "rmolib/random/multivariate/internal/exmo_param_type.hpp"
 #include "rmolib/random/univariate/exponential_distribution.hpp"
 #include "rmolib/random/univariate/r_discrete_distribution.hpp"
 #include "rmolib/random/univariate/uniform_int_distribution.hpp"
+#include "rmolib/type_traits/is_safe_numeric_cast.hpp"
 
 namespace rmolib {
 
 namespace random {
 
-template <typename _Container,
-          typename _ExponentialDistribution =
-              exponential_distribution<typename _Container::value_type>,
-          typename _UniformIntDistribution =
-              uniform_int_distribution<typename _Container::size_type>,
-          typename _DiscreteDistribution = r_discrete_distribution<
-              typename _Container::size_type, typename _Container::value_type>>
+template <
+    typename _RealType,
+    typename _ExponentialDistribution = exponential_distribution<_RealType>,
+    typename _UniformIntDistribution = uniform_int_distribution<std::size_t>,
+    typename _DiscreteDistribution =
+        r_discrete_distribution<std::size_t, _RealType>>
 class markovian_exmo_distribution {
  public:
-  using result_type = _Container;
-
-  using value_type = typename _Container::value_type;
-  using size_type = typename _Container::size_type;
+  using result_type = std::vector<_RealType>;
 
   class param_type {
    public:
@@ -39,39 +36,15 @@ class markovian_exmo_distribution {
     param_type() = default;
 
     template <typename _ForwardIterator>
-    explicit param_type(size_type dim, _ForwardIterator first,
+    explicit param_type(const std::size_t dim, _ForwardIterator first,
                         _ForwardIterator last)
-        : dim_{dim}, total_intensities_parm_(dim_), discrete_parms_(dim_) {
-      auto next_submodel = [](auto& v) {
-        std::transform(v.cbegin() + 1, v.cend(), v.cbegin(), v.begin(),
-                       std::plus<double>());
-        v.pop_back();
-      };
-      auto scale_ex_intensities = [](auto v) {
-        std::transform(v.cbegin(), v.cend(), v.begin(),
-                       [j = std::size_t{0}, d = v.size()](double x) mutable {
-                         return math::multiply_binomial_coefficient(x, d, ++j);
-                       });
-        return v;
-      };
-
-      std::vector<value_type> ex_intensities{first, last};
-      for (std::size_t i = 0; i < total_intensities_parm_.size(); ++i) {
-        auto scaled_ex_intensities = scale_ex_intensities(ex_intensities);
-
-        total_intensities_parm_[i] = exponential_param_t{
-            std::accumulate(scaled_ex_intensities.cbegin(),
-                            scaled_ex_intensities.cend(), value_type{0})};
-        discrete_parms_[i] = discrete_param_t{scaled_ex_intensities};
-        next_submodel(ex_intensities);
-      }
+        : dim_{dim} {
+      __init(first, last);
     }
 
-    explicit param_type(size_type dim, _Container ex_intensities)
+    template <typename _Container>
+    explicit param_type(const std::size_t dim, const _Container& ex_intensities)
         : param_type{dim, ex_intensities.begin(), ex_intensities.end()} {}
-
-    param_type(size_type dim, std::initializer_list<value_type> wl)
-        : param_type{dim, wl.begin(), wl.end()} {}
 
     // Used for construction from a different specialization
     template <
@@ -86,10 +59,11 @@ class markovian_exmo_distribution {
 
     auto dim() const { return dim_; }
     auto ex_intensities() const {
-      auto total_intensity = total_intensities_parm_[0].lambda();
-      auto out = discrete_parms_[0].probabilities();
+      const auto& [intensity_parm, discrete_parm] = markov_parm_.front();
+      auto total_intensity = intensity_parm.lambda();
+      auto out = discrete_parm.probabilities();
       std::transform(out.cbegin(), out.cend(), out.begin(),
-                     std::bind(std::multiplies<value_type>{},
+                     std::bind(std::multiplies<_RealType>{},
                                std::placeholders::_1, total_intensity));
       std::transform(out.cbegin(), out.cend(), out.begin(),
                      [j = std::size_t{0}, d = out.size()](auto v) mutable {
@@ -102,9 +76,7 @@ class markovian_exmo_distribution {
     friend class markovian_exmo_distribution;
 
     friend bool operator==(const param_type& lhs, const param_type& rhs) {
-      return lhs.dim_ == rhs.dim_ &&
-             lhs.total_intensities_parm_ == rhs.total_intensities_parm_ &&
-             lhs.discrete_parms_ == rhs.discrete_parms_;
+      return lhs.dim_ == rhs.dim_ && lhs.markov_parm_ == rhs.markov_parm_;
     }
 
     friend bool operator!=(const param_type& lhs, const param_type& rhs) {
@@ -112,16 +84,92 @@ class markovian_exmo_distribution {
     }
 
    private:
-    typedef typename _ExponentialDistribution::param_type exponential_param_t;
+    using exponential_param_t = typename _ExponentialDistribution::param_type;
     using discrete_param_t = typename _DiscreteDistribution::param_type;
 
-    size_type dim_{1};
-    std::vector<exponential_param_t> total_intensities_parm_{
-        {exponential_param_t{}}};
-    std::vector<discrete_param_t> discrete_parms_{{discrete_param_t{}}};
+    std::size_t dim_{1};
+    std::vector<std::pair<exponential_param_t, discrete_param_t>>
+        markov_parm_{};
+
+    template <typename _ForwardIterator>
+    void __validate_input(const std::size_t dim, _ForwardIterator first,
+                          _ForwardIterator last) const {
+      using std::distance;
+
+      if (!(dim == distance(first, last)))
+        throw std::domain_error("ex_intensities vector has wrong length");
+    }
+
+    void __init_empty() {
+      markov_parm_ = {
+          std::make_pair(exponential_param_t{}, discrete_param_t{})};
+    }
+
+    template <typename _ForwardIterator>
+    void __init_empty(_ForwardIterator first, _ForwardIterator last) {
+      __validate_input(dim_, first, last);
+      __init_empty();
+    }
+
+    template <typename _InputIterator>
+    void __init(_InputIterator first, _InputIterator last,
+                std::input_iterator_tag) {
+      std::vector<_RealType> tmp(first, last);
+      __init(tmp.begin(), tmp.end());
+    }
+
+    template <typename _InputIterator>
+    void __init(_InputIterator first, _InputIterator last,
+                std::forward_iterator_tag) {
+      __validate_input(dim_, first, last);
+
+      auto next_submodel = [](auto& v) {
+        std::transform(v.cbegin() + 1, v.cend(), v.cbegin(), v.begin(),
+                       std::plus<double>());
+        v.pop_back();
+      };
+      auto scale_ex_intensities = [](auto v) {
+        std::transform(v.cbegin(), v.cend(), v.begin(),
+                       [j = std::size_t{0}, d = v.size()](double x) mutable {
+                         return math::multiply_binomial_coefficient(x, d, ++j);
+                       });
+        return v;
+      };
+
+      markov_parm_.clear();
+      std::vector<_RealType> ex_intensities{first, last};
+      while (!ex_intensities.empty()) {
+        auto scaled_ex_intensities = scale_ex_intensities(ex_intensities);
+        auto intensity_parm = exponential_param_t{
+            std::accumulate(scaled_ex_intensities.cbegin(),
+                            scaled_ex_intensities.cend(), _RealType{0})};
+        auto discrete_parm = discrete_param_t{scaled_ex_intensities};
+        markov_parm_.emplace_back(std::make_pair(std::move(intensity_parm),
+                                                 std::move(discrete_parm)));
+
+        next_submodel(ex_intensities);
+      }
+      markov_parm_.shrink_to_fit();
+    }
+
+    template <typename _InputIterator>
+    void __init(_InputIterator first, _InputIterator last) {
+      static_assert(
+          type_traits::is_input_iterator_v<_InputIterator>,
+          "Class template rmolib::random::markovian_exmo_distribution<>: "
+          "_InputIterator only be initialized with input iterator");
+      if (first == last) {
+        __init_empty(first, last);
+      } else {
+        using std::iterator_traits;
+        using iterator_tag =
+            typename iterator_traits<_InputIterator>::iterator_category;
+        __init(first, last, iterator_tag{});
+      }
+    }
 
     static_assert(
-        std::is_floating_point_v<value_type>,
+        std::is_floating_point_v<_RealType>,
         "Class template rmolib::random::markovian_exmo_distribution<> must be "
         "parametrized with floating point type");
   };
@@ -129,16 +177,15 @@ class markovian_exmo_distribution {
   markovian_exmo_distribution() = default;
 
   template <typename _ForwardIterator>
-  explicit markovian_exmo_distribution(size_type dim, _ForwardIterator first,
+  explicit markovian_exmo_distribution(const std::size_t dim,
+                                       _ForwardIterator first,
                                        _ForwardIterator last)
       : parm_{dim, first, last} {}
 
-  explicit markovian_exmo_distribution(size_type dim, _Container ex_intensities)
+  template <typename _Container>
+  explicit markovian_exmo_distribution(const std::size_t dim,
+                                       const _Container& ex_intensities)
       : parm_{dim, ex_intensities} {}
-
-  explicit markovian_exmo_distribution(size_type dim,
-                                       std::initializer_list<value_type>& wl)
-      : parm_{dim, wl.begin(), wl.end()} {}
 
   explicit markovian_exmo_distribution(const param_type& parm) : parm_{parm} {}
 
@@ -157,13 +204,9 @@ class markovian_exmo_distribution {
 
   void reset() {}
 
-  auto min() const {
-    result_type out(parm_.dim(), value_type{0});
-    out.front() = value_type{-1};
-    return out;
-  }
+  auto min() const { return result_type(dim(), _RealType{-1}); }
   auto max() const {
-    return result_type(dim(), std::numeric_limits<value_type>::infinity());
+    return result_type(dim(), std::numeric_limits<_RealType>::infinity());
   }
 
   auto dim() const { return parm_.dim(); }
@@ -184,31 +227,20 @@ class markovian_exmo_distribution {
     return out;
   }
 
-  template <typename _EngineType, typename _OutputContainer>
-  void operator()(_EngineType& engine, const param_type& parm,
-                  _OutputContainer& out) {
-    std::fill(out.begin(), out.end(), 0);
-    size_type state{0};
-    while (state < parm.dim_) {
-      auto waiting_time = exponential_distribution_(
-          engine, parm.total_intensities_parm_[state]);
-      for (size_type i = state; i < parm.dim_; ++i) out[i] += waiting_time;
-      state += math::next_integral_value(
-          discrete_distribution_(engine, parm.discrete_parms_[state]));
+  template <typename _Engine, typename _Container>
+  void operator()(_Engine& engine, const param_type& parm,
+                  _Container& out) {
+    auto state = std::make_pair(_RealType{0}, std::size_t{0});
+    auto& [time, number_dead] = state;
+    auto dim = out.size();
+    while (number_dead != dim) {
+      std::size_t number_dead_before_transition = number_dead;
+      state = __markov_process(engine, parm.markov_parm_, state);
+      for (std::size_t i = number_dead_before_transition; i < number_dead; ++i)
+        out[i] = time;
     }
-    auto shuffle = [&uniform_int_distribution_ = uniform_int_distribution_,
-                    &engine](auto& out) {
-      std::vector<std::remove_reference_t<decltype(out[0])>> cpy{out.begin(),
-                                                                 out.end()};
-      std::vector<std::size_t> perm(cpy.size());
-      std::iota(perm.begin(), perm.end(), 0);
-      algorithm::shuffle(perm.begin(), perm.end(), engine,
+    algorithm::r_shuffle(out.begin(), out.end(), engine,
                          uniform_int_distribution_);
-      // for r comparability
-      std::reverse(perm.begin(), perm.end());
-      for (auto i = 0; i < cpy.size(); ++i) out[i] = cpy[perm[i]];
-    };
-    shuffle(out);
   }
 
   friend bool operator==(const markovian_exmo_distribution& lhs,
@@ -222,22 +254,37 @@ class markovian_exmo_distribution {
   }
 
  private:
+  using exponential_parm_t = typename _ExponentialDistribution::param_type;
+  using discrete_parm_t = typename _DiscreteDistribution::param_type;
+  using markov_parm_t =
+      std::vector<std::pair<exponential_parm_t, discrete_parm_t>>;
+
   param_type parm_{};
   _UniformIntDistribution uniform_int_distribution_{};
   _ExponentialDistribution exponential_distribution_{};
   _DiscreteDistribution discrete_distribution_{};
 
+  template <typename _Engine>
+  auto __markov_process(_Engine& engine, const markov_parm_t& parm,
+                        std::pair<_RealType, std::size_t> state) {
+    auto& [time, location] = state;
+    const auto& [intensity_parm, discrete_parm] = parm[location];
+    time += exponential_distribution_(engine, intensity_parm);
+    location += math::next_integral_value(
+        discrete_distribution_(engine, discrete_parm));
+    return state;
+  }
+
   static_assert(
-      std::is_same<value_type,
-                   typename _ExponentialDistribution::result_type>::value,
+      type_traits::is_safe_numeric_cast_v<
+          _RealType, typename _ExponentialDistribution::result_type>,
       "Class template rmolib::random::markovian_exmo_distribution<> must be "
       "parametrized with exponential_distribution-type with matching "
       "result_type");
 
-  // TODO: check static_assert
   static_assert(
-      std::is_same<size_type,
-                   typename _DiscreteDistribution::result_type>::value,
+      type_traits::is_safe_numeric_cast_v<
+          std::size_t, typename _DiscreteDistribution::result_type>,
       "Class template rmolib::random::markovian_exmo_distribution<> must be "
       "parametrized with discrete_distribution-type with matching "
       "size_type");
@@ -246,16 +293,16 @@ class markovian_exmo_distribution {
 /*
   // TODO: implement
 
-  template <class _CharType, class _Traits, typename _Container, typename
+  template <class _CharType, class _Traits, typename _RealType, typename
   _ExponentialDistribution> std::basic_ostream<_CharType, _Traits>&
   operator<<(std::basic_ostream<_CharType, _Traits>& os,
-            markovian_exmo_distribution<_Container,
+            markovian_exmo_distribution<_RealType,
   _ExponentialDistribution>& dist);
 
-  template <class _CharType, class _Traits, typename _Container, typename
+  template <class _CharType, class _Traits, typename _RealType, typename
   _ExponentialDistribution> std::basic_istream<_CharType, _Traits>&
   operator>>(std::basic_istream<_CharType, _Traits>& is,
-             markovian_exmo_distribution<_Container,
+             markovian_exmo_distribution<_RealType,
   _ExponentialDistribution>& dist);
 */
 

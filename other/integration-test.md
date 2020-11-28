@@ -2,7 +2,7 @@ Integration tests
 ================
 
 ![packageversion](https://img.shields.io/badge/Package%20version-0.2.5.9000-orange.svg?style=flat-square)
-[![Last-changedate](https://img.shields.io/badge/last%20change-2020--11--25-yellowgreen.svg)](/commits/master)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2020--11--29-yellowgreen.svg)](/commits/master)
 
 ## The overall minimum
 

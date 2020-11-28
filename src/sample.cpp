@@ -59,7 +59,7 @@ NumericMatrix Rcpp__rmo_arnold(const R_xlen_t n, const int d,
 NumericMatrix Rcpp__rmo_ex_arnold(const R_xlen_t n, const int d,
                                   const NumericVector& ex_intensities) {
   using dist_t =
-      rmolib::markovian_exmo_distribution<std::vector<double>>;
+      rmolib::markovian_exmo_distribution<double>;
   using parm_t = dist_t::param_type;
 
   r_engine engine{};
