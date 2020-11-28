@@ -35,7 +35,7 @@ NumericMatrix Rcpp__rmo_esm(const R_xlen_t n, const R_xlen_t d,
 // [[Rcpp::export]]
 NumericMatrix Rcpp__rmo_arnold(const R_xlen_t n, const int d,
                                const NumericVector& intensities) {
-  using dist_t = rmolib::arnold_mo_distribution<std::vector<double>>;
+  using dist_t = rmolib::arnold_mo_distribution<double>;
   using parm_t = dist_t::param_type;
 
   r_engine engine{};

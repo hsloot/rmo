@@ -85,7 +85,7 @@ class generic_param_type {
       for (auto it = first; it != last; ++it) p_.emplace_back(*it);
       p_.shrink_to_fit();
       std::transform(p_.cbegin(), p_.cend(), p_.begin(),
-                [mass = std:accumulate(p_.begin(), p_.end(), 0.)](auto val) {
+                [mass = std::accumulate(p_.begin(), p_.end(), 0.)](auto val) {
                   return val / mass;
                 });
     }

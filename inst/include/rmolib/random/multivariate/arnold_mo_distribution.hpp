@@ -3,51 +3,47 @@
 #include <algorithm>
 #include <cmath>
 #include <limits>
+#include <stdexcept>
 #include <type_traits>
 #include <vector>
 
+#include "rmolib/bit/bit_fill.hpp"
 #include "rmolib/math/next_integral_value.hpp"
 #include "rmolib/random/multivariate/internal/is_within.hpp"
 #include "rmolib/random/multivariate/internal/mo_param_type.hpp"
 #include "rmolib/random/univariate/exponential_distribution.hpp"
 #include "rmolib/random/univariate/r_discrete_distribution.hpp"
+#include "rmolib/type_traits/is_safe_numeric_cast.hpp"
 
 namespace rmolib {
 
 namespace random {
 
-template <typename _Container,
-          typename _UnitExponentialDistribution =
-              exponential_distribution<typename _Container::value_type>,
-          typename _DiscreteDistribution = r_discrete_distribution<
-              typename _Container::size_type, typename _Container::value_type>>
+template <typename _RealType,
+          typename _ExponentialDistribution =
+              exponential_distribution<_RealType>,
+          typename _DiscreteDistribution =
+              r_discrete_distribution<std::size_t, _RealType>>
 class arnold_mo_distribution {
  public:
-  using result_type = _Container;
-
-  using value_type = typename _Container::value_type;
-  using size_type = typename _Container::size_type;
+  using result_type = std::vector<_RealType>;
 
   class param_type {
    public:
     using distribution_type = arnold_mo_distribution;
 
-    param_type() = default;
+    param_type() { __init_empty(); }
 
     template <typename _ForwardIterator>
-    explicit param_type(size_type dim, _ForwardIterator first,
+    explicit param_type(const std::size_t dim, _ForwardIterator first,
                         _ForwardIterator last)
-        : dim_{dim},
-          total_intensity_{std::accumulate(first, last, value_type{0})},
-          discrete_parm_{first, last} {
-      __validate_input();
+        : dim_{dim} {
+      __init(first, last);
     }
 
-    explicit param_type(size_type dim, _Container intensities)
+    template <typename _Container>
+    explicit param_type(const std::size_t dim, const _Container& intensities)
         : param_type{dim, intensities.begin(), intensities.end()} {}
-
-    param_type(size_type dim, std::initializer_list<value_type> wl)
-        : param_type{dim, wl.begin(), wl.end()} {}
 
     // Used for construction from a different specialization
     template <
@@ -64,16 +60,16 @@ class arnold_mo_distribution {
     auto intensities() const {
       auto out = discrete_parm_.probabilities();
       std::transform(out.cbegin(), out.cend(), out.begin(),
-                     std::bind(std::multiplies<value_type>(),
-                               std::placeholders::_1, total_intensity_));
+                     [total_intensity = poisson_parm_.lambda()](auto v) {
+                       return v * total_intensity;
+                     });
       return out;
     }
 
     friend class arnold_mo_distribution;
 
     friend bool operator==(const param_type& lhs, const param_type& rhs) {
-      return lhs.dim_ == rhs.dim_ &&
-             lhs.total_intensity_ == rhs.total_intensity_ &&
+      return lhs.dim_ == rhs.dim_ && lhs.poisson_parm_ == rhs.poisson_parm_ &&
              lhs.discrete_parm_ == rhs.discrete_parm_;
     }
 
@@ -82,18 +78,66 @@ class arnold_mo_distribution {
     }
 
    private:
-    size_type dim_{1};
-    value_type total_intensity_{1};
-    typename _DiscreteDistribution::param_type discrete_parm_{{value_type{1}}};
+    using exponential_parm_t = typename _ExponentialDistribution::param_type;
+    using discrete_parm_t = typename _DiscreteDistribution::param_type;
 
-    void __validate_input() const {
-      if (!((size_type{1} << dim_) ==
-            discrete_parm_.probabilities().size() + size_type{1}))
+    std::size_t dim_{1};
+    exponential_parm_t poisson_parm_{};
+    discrete_parm_t discrete_parm_{};
+
+    template <typename _ForwardIterator>
+    void __validate_input(const std::size_t dim, _ForwardIterator first,
+                          _ForwardIterator last) const {
+      using std::distance;
+
+      if (!(bit::bit_fill<std::size_t>(0, dim, true) == distance(first, last)))
         throw std::domain_error("intensities vector has wrong size");
+
+      if (!(std::accumulate(first, last, _RealType{0}) > 0))
+        throw std::domain_error("Poisson intensity must be positive");
+    }
+
+    void __init_empty() {
+      poisson_parm_ = exponential_parm_t{_RealType{1}};
+      discrete_parm_ = {_RealType{1}};
+    }
+
+    template <typename _InputIterator>
+    void __init_empty(_InputIterator first, _InputIterator last) {
+      __validate_input(dim_, first, last);
+      __init_empty();
+    }
+
+    template <typename _InputIterator>
+    void __init(_InputIterator first, _InputIterator last,
+                std::input_iterator_tag) {
+      std::vector<_RealType> tmp{first, last};
+      __init(tmp.begin(), tmp.end());
+    }
+
+    template <typename _ForwardIterator>
+    void __init(_ForwardIterator first, _ForwardIterator last,
+                std::forward_iterator_tag) {
+      __validate_input(dim_, first, last);
+      poisson_parm_ =
+          exponential_parm_t{std::accumulate(first, last, _RealType{0})};
+      discrete_parm_ = discrete_parm_t{first, last};
+    }
+
+    template <typename _InputIterator>
+    void __init(_InputIterator first, _InputIterator last) {
+      if (first == last) {
+        __init_empty(first, last);
+      } else {
+        using std::iterator_traits;
+        using iterator_tag =
+            typename iterator_traits<_InputIterator>::iterator_category;
+        __init(first, last, iterator_tag{});
+      }
     }
 
     static_assert(
-        std::is_floating_point_v<value_type>,
+        std::is_floating_point_v<_RealType>,
         "Class template rmolib::random::arnold_mo_distribution<> must be "
         "parametrized with floating point type");
   };
@@ -101,24 +145,16 @@ class arnold_mo_distribution {
   arnold_mo_distribution() = default;
 
   template <typename _ForwardIterator>
-  explicit arnold_mo_distribution(size_type dim, _ForwardIterator first,
+  explicit arnold_mo_distribution(const std::size_t dim, _ForwardIterator first,
                                   _ForwardIterator last)
-      : parm_{dim, first, last} {
-    init_unit_exponential_distribution();
-  }
+      : parm_{dim, first, last} {}
 
-  explicit arnold_mo_distribution(size_type dim, _Container intensities)
+  template <typename _Container>
+  explicit arnold_mo_distribution(const std::size_t dim,
+                                  const _Container& intensities)
       : parm_{dim, intensities} {}
 
-  explicit arnold_mo_distribution(size_type dim,
-                                  std::initializer_list<value_type>& wl)
-      : parm_{dim, wl.begin(), wl.end()} {
-    init_unit_exponential_distribution();
-  }
-
-  explicit arnold_mo_distribution(const param_type& parm) : parm_{parm} {
-    init_unit_exponential_distribution();
-  }
+  explicit arnold_mo_distribution(const param_type& parm) : parm_{parm} {}
 
   // Used for construction from a different specialization
   template <typename _MOParamType,
@@ -128,21 +164,15 @@ class arnold_mo_distribution {
                     internal::is_mo_param_type_v<_MOParamType>,
                 int> = 0>
   explicit arnold_mo_distribution(_MOParamType&& parm)
-      : parm_{std::forward<_MOParamType>(parm)} {
-    init_unit_exponential_distribution();
-  }
+      : parm_{std::forward<_MOParamType>(parm)} {}
 
   // compiler generated ctor and assignment op is sufficient
 
   void reset() {}
 
-  auto min() const {
-    result_type out(parm_.dim(), value_type{0});
-    out.front() = value_type{-1};
-    return out;
-  }
+  auto min() const { return result_type(dim(), _RealType{-1}); }
   auto max() const {
-    return result_type(dim(), std::numeric_limits<value_type>::infinity());
+    return result_type(dim(), std::numeric_limits<_RealType>::infinity());
   }
 
   auto dim() const { return parm_.dim(); }
@@ -151,40 +181,31 @@ class arnold_mo_distribution {
   param_type param() const { return parm_; }
   void param(const param_type& parm) { parm_ = parm; }
 
-  template <typename _EngineType>
-  result_type operator()(_EngineType& engine) {
+  template <typename _Engine>
+  result_type operator()(_Engine& engine) {
     return (*this)(engine, parm_);
   }
 
-  template <typename _EngineType>
-  result_type operator()(_EngineType& engine, const param_type& parm) {
+  template <typename _Engine>
+  result_type operator()(_Engine& engine, const param_type& parm) {
     result_type out(parm.dim_);
     (*this)(engine, parm, out);
     return out;
   }
 
-  template <typename _EngineType, typename _OutputContainer>
-  void operator()(_EngineType& engine, const param_type& parm,
-                  _OutputContainer& out) {
+  template <typename _Engine, typename _Container>
+  void operator()(_Engine& engine, const param_type& parm, _Container& out) {
     // TODO: check compatibility
-    using size_type = typename _Container::size_type;
+    const auto dim = out.size();
+    const auto all = bit::bit_fill<std::size_t>(0, dim, true);
+    auto state = std::make_pair(_RealType{0}, std::size_t{0});
+    auto& [time, dead] = state;
+    while (dead != all) {
+      std::size_t alive_before_transition = ~dead & all;
+      state = __poisson_process(engine, parm, state);
 
-    std::fill(out.begin(), out.end(), value_type{0});
-    std::vector<bool> destroyed(parm.dim_, false);
-
-    while (!std::all_of(destroyed.begin(), destroyed.end(),
-                        [](bool v) { return v; })) {
-      auto waiting_time =
-          unit_exponential_distribution_(engine) / parm.total_intensity_;
-      auto affected = math::next_integral_value(
-          discrete_distribution_(engine, parm.discrete_parm_));
-
-      for (size_type i = 0; i < parm.dim_; ++i) {
-        if (!destroyed[i]) {
-          out[i] += waiting_time;
-          if (internal::is_within(i, affected)) destroyed[i] = true;
-        }
-      }
+      for (std::size_t i = 0; i < dim; ++i)
+        if (internal::is_within(i, alive_before_transition)) out[i] = time;
     }
   }
 
@@ -200,46 +221,48 @@ class arnold_mo_distribution {
 
  private:
   param_type parm_{};
-  _UnitExponentialDistribution unit_exponential_distribution_{};
-  _DiscreteDistribution discrete_distribution_{};
+  _ExponentialDistribution exponential_dist_{};
+  _DiscreteDistribution discrete_dist_{};
 
-  void init_unit_exponential_distribution() {
-    if constexpr (std::is_constructible_v<_UnitExponentialDistribution,
-                                          const value_type>) {
-      // static_assert(is_distribution_type<_UnitExponentialDistribution>)
-      using unit_param_type = typename _UnitExponentialDistribution::param_type;
-      unit_exponential_distribution_.param(unit_param_type{1.});
-    }
+  template <typename _Engine>
+  auto __poisson_process(_Engine& engine, const param_type& parm,
+                         std::pair<_RealType, std::size_t> state) {
+    auto& [time, location] = state;
+    time += exponential_dist_(engine, parm.poisson_parm_);
+    location |=
+        math::next_integral_value(discrete_dist_(engine, parm.discrete_parm_));
+    return state;
   }
 
   static_assert(
-      std::is_same_v<value_type,
-                     typename _UnitExponentialDistribution::result_type>,
+      type_traits::is_safe_numeric_cast_v<
+          _RealType, typename _ExponentialDistribution::result_type>,
       "Class template rmolib::random::arnold_mo_distribution<> must be "
-      "parametrized with unit_exponential_distribution-type with matching "
+      "parametrized with unit_exponential_distribution-type with suitable "
       "result_type");
 
   // TODO: check static_assert
   static_assert(
-      std::is_same_v<size_type, typename _DiscreteDistribution::result_type>,
+      type_traits::is_safe_numeric_cast_v<
+          std::size_t, typename _DiscreteDistribution::result_type>,
       "Class template rmolib::random::arnold_mo_distribution<> must be "
-      "parametrized with discrete_distribution-type with matching "
-      "size_type");
+      "parametrized with discrete_distribution-type with suitable "
+      "result_type");
 };
 
 /*
   // TODO: implement
 
-  template <class _CharType, class _Traits, typename _Container, typename
+  template <class _CharType, class _Traits, typename _RealType, typename
   _UnitExponentialDistribution> std::basic_ostream<_CharType, _Traits>&
   operator<<(std::basic_ostream<_CharType, _Traits>& os,
-            arnold_mo_distribution<_Container, _UnitExponentialDistribution>&
+            arnold_mo_distribution<_RealType, _UnitExponentialDistribution>&
   dist);
 
-  template <class _CharType, class _Traits, typename _Container, typename
+  template <class _CharType, class _Traits, typename _RealType, typename
   _UnitExponentialDistribution> std::basic_istream<_CharType, _Traits>&
   operator>>(std::basic_istream<_CharType, _Traits>& is,
-             arnold_mo_distribution<_Container, _UnitExponentialDistribution>&
+             arnold_mo_distribution<_RealType, _UnitExponentialDistribution>&
   dist);
 */
 

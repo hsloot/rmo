@@ -43,15 +43,14 @@ using r_discrete_distribution =
     random::r_discrete_distribution<_IntType, _WeightType,
                                     uniform_real_distribution<_WeightType>>;
 
-template <typename _RealType = std::vector<double>>
+template <typename _RealType = double>
 using esm_mo_distribution =
     random::esm_mo_distribution<_RealType, exponential_distribution<_RealType>>;
 
-template <typename _Container = std::vector<double>>
+template <typename _RealType = double>
 using arnold_mo_distribution = random::arnold_mo_distribution<
-    _Container, exponential_distribution<typename _Container::value_type>,
-    r_discrete_distribution<typename _Container::size_type,
-                            typename _Container::value_type>>;
+    _RealType, exponential_distribution<_RealType>,
+    r_discrete_distribution<std::size_t, _RealType>>;
 
 template <typename _Container = std::vector<double>>
 using markovian_exmo_distribution = random::markovian_exmo_distribution<
@@ -131,31 +130,27 @@ _IntType RDiscrete(_EngineType& engine, _InputIterator first,
 }
 
 template <typename _EngineType, typename _InputIterator>
-auto ExogenousShockModel(_EngineType& engine,
-                         const std::size_t dim,
+auto ExogenousShockModel(_EngineType& engine, const std::size_t dim,
                          _InputIterator first, _InputIterator last) {
-  using value_t =
-      std::remove_reference_t<typename _InputIterator::value_t>;
+  using std::iterator_traits;
+  using value_t = std::remove_reference_t<typename iterator_traits<_InputIterator>::value_type>;
   using dist_t = esm_mo_distribution<value_t>;
-  using param_t = typename dist_t::param_type;
+  using parm_t = typename dist_t::param_type;
 
   dist_t dist{};
-  return dist(engine, param_t{dim, first, last});
+  return dist(engine, parm_t{dim, first, last});
 }
 
-template <typename _EngineType, typename _InputIterator,
-          typename _OutputContainer>
-void ArnoldModel(_EngineType& engine,
-                 const typename _OutputContainer::size_type dim,
-                 _InputIterator first, _InputIterator last,
-                 _OutputContainer& out) {
-  using value_type =
-      std::remove_reference_t<typename _InputIterator::value_type>;
-  using distribution_type = arnold_mo_distribution<std::vector<value_type>>;
-  using param_type = typename distribution_type::param_type;
+template <typename _EngineType, typename _InputIterator>
+void ArnoldModel(_EngineType& engine, const std::size_t dim,
+                         _InputIterator first, _InputIterator last) {
+  using std::iterator_traits;
+  using value_t = std::remove_reference_t<typename iterator_traits<_InputIterator>::value_type>;
+  using dist_t = arnold_mo_distribution<value_t>;
+  using parm_t = typename dist_t::param_type;
 
-  distribution_type dist{};
-  dist(engine, param_type{dim, first, last}, out);
+  dist_t dist{};
+  return dist(engine, parm_t{dim, first, last});
 }
 
 template <typename _EngineType, typename _InputIterator,

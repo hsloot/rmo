@@ -2,6 +2,7 @@
 
 #include <cmath>
 #include <limits>
+#include <stdexcept>
 #include <type_traits>
 #include <utility>
 #include <vector>
@@ -37,11 +38,8 @@ class esm_mo_distribution {
     }
 
     template <typename _Container>
-    explicit param_type(const std::size_t dim, _Container intensities)
+    explicit param_type(const std::size_t dim, const _Container& intensities)
         : param_type{dim, intensities.begin(), intensities.end()} {}
-
-    param_type(const std::size_t dim, std::initializer_list<_RealType> wl)
-        : param_type{dim, wl.begin(), wl.end()} {}
 
     // Used for construction from a different specialization
     template <
@@ -94,20 +92,27 @@ class esm_mo_distribution {
 
     void __init_empty() {
       using std::make_pair;
+
       shocks_.clear();
       shocks_.emplace_back(
           make_pair(std::size_t{1}, exponential_parm_t{_RealType{1}}));
       shocks_.shrink_to_fit();
     }
 
-    template <class _InputIterator>
+    template <typename _InputIterator>
+    void __init_empty(_InputIterator first, _InputIterator last) {
+      __validate_input(dim_, first, last);
+      __init_empty();
+    }
+
+    template <typename _InputIterator>
     void __init(_InputIterator first, _InputIterator last,
                 std::input_iterator_tag) {
       std::vector<_RealType> tmp(first, last);
       __init(tmp.begin(), tmp.end());
     }
 
-    template <class _ForwardIterator>
+    template <typename _ForwardIterator>
     void __init(_ForwardIterator first, _ForwardIterator last,
                 std::forward_iterator_tag) {
       using std::distance;
@@ -132,11 +137,12 @@ class esm_mo_distribution {
                     "Class template rmolib::random::esm_mo_distribution<>: "
                     "_InputIterator only be initialized with input iterator");
       if (first == last) {
-        __init_empty();
+        __init_empty(first, last);
       } else {
-        using category =
-            typename std::iterator_traits<_InputIterator>::iterator_category;
-        __init(first, last, category{});
+        using std::iterator_traits;
+        using iterator_tag =
+            typename iterator_traits<_InputIterator>::iterator_category;
+        __init(first, last, iterator_tag{});
       }
     }
 
@@ -153,14 +159,10 @@ class esm_mo_distribution {
                                _InputIterator last)
       : parm_{dim, first, last} {}
 
-  template <typename _InputContainer>
+  template <typename _Container>
   explicit esm_mo_distribution(const std::size_t dim,
-                               _InputContainer intensities)
+                               const _Container& intensities)
       : parm_{dim, intensities} {}
-
-  esm_mo_distribution(const std::size_t dim,
-                      std::initializer_list<_RealType>& wl)
-      : parm_{dim, wl.begin(), wl.end()} {}
 
   explicit esm_mo_distribution(const param_type& parm) : parm_{parm} {}
 
@@ -209,9 +211,8 @@ class esm_mo_distribution {
   void operator()(_EngineType& engine, const param_type& parm,
                   _Container& out) {
     // TODO: check compatibility
-    using std::fill;
-
-    fill(out.begin(), out.end(), std::numeric_limits<_RealType>::infinity());
+    std::fill(out.begin(), out.end(),
+              std::numeric_limits<_RealType>::infinity());
     const auto dim = out.size();
     for (const auto [set, shock_parm] : parm.shocks_) {
       const auto time = exponential_distribution_(engine, shock_parm);
@@ -246,16 +247,16 @@ class esm_mo_distribution {
 /*
   // TODO: implement
 
-  template <class _CharType, class _Traits, typename _Container, typename
+  template <class _CharType, class _Traits, typename _RealType, typename
   _ExponentialDistribution> std::basic_ostream<_CharType, _Traits>&
   operator<<(std::basic_ostream<_CharType, _Traits>& os,
-            esm_mo_distribution<_Container, _ExponentialDistribution>&
+            esm_mo_distribution<_RealType, _ExponentialDistribution>&
   dist);
 
-  template <class _CharType, class _Traits, typename _Container, typename
+  template <class _CharType, class _Traits, typename _RealType, typename
   _ExponentialDistribution> std::basic_istream<_CharType, _Traits>&
   operator>>(std::basic_istream<_CharType, _Traits>& is,
-             esm_mo_distribution<_Container, _ExponentialDistribution>&
+             esm_mo_distribution<_RealType, _ExponentialDistribution>&
   dist);
 */
 

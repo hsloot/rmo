@@ -35,7 +35,7 @@ using r_discrete_dist_t =
     rmolib::random::r_discrete_distribution<std::size_t, double,
                                             uniform_real_dist_t>;
 using arnold_mo_dist_t = rmolib::random::arnold_mo_distribution<
-    std::vector<double>, exponential_dist_t, r_discrete_dist_t>;
+    double, exponential_dist_t, r_discrete_dist_t>;
 using parm_t = arnold_mo_dist_t::param_type;
 
 class generic_param_type {

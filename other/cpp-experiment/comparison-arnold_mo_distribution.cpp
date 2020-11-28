@@ -16,15 +16,14 @@ static const R_xlen_t C_CHECK_USR_INTERRUP = 100000;
 //' @keywords internal
 //' @noRd
 // [[Rcpp::export]]
-NumericMatrix sample_arnold_rmolib(const R_xlen_t n, const int d,
-                               const NumericVector& intensities) {
-  using arnold_mo_distribution =
-      rmolib::arnold_mo_distribution<std::vector<double>>;
-  using param_type = arnold_mo_distribution::param_type;
+NumericMatrix sample_arnold_rmolib(const std::size_t n, const std::size_t d,
+                                   const NumericVector& intensities) {
+  using arnold_mo_dist_t = rmolib::arnold_mo_distribution<double>;
+  using parm_t = arnold_mo_dist_t::param_type;
 
   r_engine engine{};
-  arnold_mo_distribution dist{};
-  param_type parm(d, intensities.begin(), intensities.end());
+  arnold_mo_dist_t dist{};
+  parm_t parm(d, intensities.begin(), intensities.end());
 
   NumericMatrix out(no_init(n, d));
   for (R_xlen_t k = 0; k < n; k++) {
@@ -39,14 +38,14 @@ NumericMatrix sample_arnold_rmolib(const R_xlen_t n, const int d,
 
 // [[Rcpp::export]]
 NumericMatrix sample_arnold_rmolib_copy(
-    const int n, const std::size_t d, const Rcpp::NumericVector intensities) {
-  using arnold_mo_distribution =
-      rmolib::arnold_mo_distribution<std::vector<double>>;
-  using param_type = arnold_mo_distribution::param_type;
+    const std::size_t n, const std::size_t d,
+    const Rcpp::NumericVector& intensities) {
+  using arnold_mo_dist_t = rmolib::arnold_mo_distribution<double>;
+  using parm_t = arnold_mo_dist_t::param_type;
 
   r_engine engine{};
-  arnold_mo_distribution dist{};
-  param_type parm(d, intensities.begin(), intensities.end());
+  arnold_mo_dist_t dist{};
+  parm_t parm(d, intensities.begin(), intensities.end());
 
   NumericMatrix out(no_init(n, d));
   for (R_xlen_t k = 0; k < n; k++) {
@@ -60,10 +59,10 @@ NumericMatrix sample_arnold_rmolib_copy(
 }
 
 // [[Rcpp::export]]
-NumericMatrix sample_arnold_old(const int n, const std::size_t d,
-                               const Rcpp::NumericVector intensities) {
-  mo::stats::ArnoldGenerator<MatrixRow<REALSXP>, mo::stats::RRNGPolicy> arnold_generator(d,
-                                                                   intensities);
+NumericMatrix sample_arnold_old(const std::size_t n, const std::size_t d,
+                                const Rcpp::NumericVector& intensities) {
+  mo::stats::ArnoldGenerator<MatrixRow<REALSXP>, mo::stats::RRNGPolicy>
+      arnold_generator(d, intensities);
 
   NumericMatrix out(no_init(n, d));
   for (R_xlen_t k = 0; k < n; k++) {
