@@ -12,15 +12,16 @@
 
 #include "testutils-approxequals.h"
 
-#define RMO_TEST_DIST_NAME arnold_mo_distribution
+#define RMO_TEST_DIST_NAME arnold_mo_dist_t
 #define RMO_TEST_DIST_NAME_STRING "arnold_mo_distribution"
 
-#define RMO_TEST_ARG_LIST                                                  \
-  {                                                                        \
-    param_type{}, param_type{std::size_t{2}, {1., 1., 1.}},                \
-        param_type{std::size_t{3}, {0., 1., 2., 4., 5., 6.}}, param_type { \
-      std::size_t{3}, { 2., 1., 0.5, 0.2, 0.3, 4., .7 }                    \
-    }                                                                      \
+#define RMO_TEST_ARG_LIST                                             \
+  {                                                                   \
+    generic_parm_t{}, generic_parm_t{std::size_t{2}, {1., 1., 1.}},   \
+        generic_parm_t{std::size_t{3}, {0., 1., 2., 3., 4., 5., 6.}}, \
+        generic_parm_t {                                              \
+      std::size_t{3}, { 2., 1., 0.5, 0.2, 0.3, 4., .7 }               \
+    }                                                                 \
   }
 
 #define RMO_TEST_CHECK_PARAMS(__DIST__, __PARAMS__) \
@@ -28,25 +29,26 @@
   CATCH_CHECK_THAT(__DIST__.intensities(),          \
                    EqualsApprox(__PARAMS__.intensities()));
 
-using uniform_real_distribution =
-    rmolib::random::uniform_real_distribution<double>;
-using exponential_distribution =
-    rmolib::random::exponential_distribution<double>;
-using r_discrete_distribution =
+using uniform_real_dist_t = rmolib::random::uniform_real_distribution<double>;
+using exponential_dist_t = rmolib::random::exponential_distribution<double>;
+using r_discrete_dist_t =
     rmolib::random::r_discrete_distribution<std::size_t, double,
-                                            uniform_real_distribution>;
-using arnold_mo_distribution = rmolib::random::arnold_mo_distribution<
-    std::vector<double>, exponential_distribution, r_discrete_distribution>;
-using param_type = arnold_mo_distribution::param_type;
+                                            uniform_real_dist_t>;
+using arnold_mo_dist_t = rmolib::random::arnold_mo_distribution<
+    std::vector<double>, exponential_dist_t, r_discrete_dist_t>;
+using parm_t = arnold_mo_dist_t::param_type;
 
 class generic_param_type {
  public:
-  // compiler generated ctor and assignment op is sufficient
+  generic_param_type() = default;
 
   template <typename _InputIterator>
-  explicit generic_param_type(std::size_t dim, _InputIterator first,
+  explicit generic_param_type(const std::size_t dim, _InputIterator first,
                               _InputIterator last)
       : dim_{dim}, intensities_{first, last} {}
+
+  generic_param_type(const std::size_t dim, std::initializer_list<double> wl)
+      : generic_param_type{dim, wl.begin(), wl.end()} {}
 
   template <typename _MOParamType,
             typename std::enable_if<
@@ -56,12 +58,15 @@ class generic_param_type {
   explicit generic_param_type(_MOParamType&& parm)
       : dim_{parm.dim()}, intensities_{parm.intensities()} {}
 
-  std::size_t dim() const { return dim_; }
-  std::vector<double> intensities() const { return intensities_; }
+  // compiler generated ctor and assignment op is sufficient
+
+  auto dim() const { return dim_; }
+  auto intensities() const { return intensities_; }
 
  private:
-  std::size_t dim_;
-  std::vector<double> intensities_;
+  std::size_t dim_{1};
+  std::vector<double> intensities_ = {1.};
 };
+using generic_parm_t = generic_param_type;
 
 #include "test-distribution.h"

@@ -6,29 +6,29 @@
 #include <rmolib/random/univariate/uniform_real_distribution.hpp>
 #include <testthat.h>
 
-#define RMO_TEST_DIST_NAME pareto_distribution
+#define RMO_TEST_DIST_NAME pareto_dist_t
 #define RMO_TEST_DIST_NAME_STRING "pareto_distribution"
 
-#define RMO_TEST_ARG_LIST                                                 \
-  {                                                                       \
-    param_type{}, param_type{1., 1.}, param_type{.5, 0.005}, param_type { \
-      2., 005                                                             \
-    }                                                                     \
+#define RMO_TEST_ARG_LIST                                                \
+  {                                                                      \
+    generic_parm_t{}, generic_parm_t{1., 1.}, generic_parm_t{.5, 0.005}, \
+        generic_parm_t {                                                 \
+      2., 005                                                            \
+    }                                                                    \
   }
 
 #define RMO_TEST_CHECK_PARAMS(__DIST__, __PARAMS__)    \
   expect_true(__DIST__.alpha() == __PARAMS__.alpha()); \
   expect_true(__DIST__.lower_bound() == __PARAMS__.lower_bound());
 
-using uniform_real_distribution =
-    rmolib::random::uniform_real_distribution<double>;
-using pareto_distribution =
-    rmolib::random::pareto_distribution<double, uniform_real_distribution>;
-using param_type = pareto_distribution::param_type;
+using uniform_real_dist_t = rmolib::random::uniform_real_distribution<double>;
+using pareto_dist_t =
+    rmolib::random::pareto_distribution<double, uniform_real_dist_t>;
+using parm_t = pareto_dist_t::param_type;
 
 class generic_param_type {
  public:
-  // compiler generated ctor and assignment op is sufficient
+  generic_param_type() = default;
 
   explicit generic_param_type(const double alpha, const double lower_bound)
       : alpha_{alpha}, lower_bound_{lower_bound} {}
@@ -41,12 +41,15 @@ class generic_param_type {
   explicit generic_param_type(_ParetoParamType&& param)
       : alpha_{param.alpha()}, lower_bound_{param.lower_bound()} {}
 
-  double alpha() const { return alpha_; }
-  double lower_bound() const { return lower_bound_; }
+  // compiler generated ctor and assignment op is sufficient
+
+  auto alpha() const { return alpha_; }
+  auto lower_bound() const { return lower_bound_; }
 
  private:
   double alpha_{1.};
   double lower_bound_{1.};
 };
+using generic_parm_t = generic_param_type;
 
 #include "test-distribution.h"

@@ -13,15 +13,16 @@
 
 #include "testutils-approxequals.h"
 
-#define RMO_TEST_DIST_NAME markovian_exmo_distribution
+#define RMO_TEST_DIST_NAME markovian_exmo_dist_t
 #define RMO_TEST_DIST_NAME_STRING "markovian_exmo_distribution"
 
-#define RMO_TEST_ARG_LIST                                                  \
-  {                                                                        \
-    param_type{}, param_type{std::size_t{3}, {1., 1., 1.}},                \
-        param_type{std::size_t{6}, {0., 1., 2., 4., 5., 6.}}, param_type { \
-      std::size_t{6}, { 2., 1., 0.5, 0.2, 0.3, 4., .7 }                    \
-    }                                                                      \
+#define RMO_TEST_ARG_LIST                                           \
+  {                                                                 \
+    generic_parm_t{}, generic_parm_t{std::size_t{3}, {1., 1., 1.}}, \
+        generic_parm_t{std::size_t{6}, {0., 1., 2., 4., 5., 6.}},   \
+        generic_parm_t {                                            \
+      std::size_t{6}, { 2., 1., 0.5, 0.2, 0.3, 4., .7 }             \
+    }                                                               \
   }
 
 #define RMO_TEST_CHECK_PARAMS(__DIST__, __PARAMS__) \
@@ -29,28 +30,29 @@
   CATCH_CHECK_THAT(__DIST__.ex_intensities(),       \
                    EqualsApprox(__PARAMS__.ex_intensities()));
 
-using uniform_real_distribution =
-    rmolib::random::uniform_real_distribution<double>;
-using uniform_int_distribution =
+using uniform_real_dist_t = rmolib::random::uniform_real_distribution<double>;
+using uniform_int_dist_t =
     rmolib::random::uniform_int_distribution<std::size_t>;
-using exponential_distribution =
-    rmolib::random::exponential_distribution<double>;
-using r_discrete_distribution =
+using exponential_dist_t = rmolib::random::exponential_distribution<double>;
+using r_discrete_dist_t =
     rmolib::random::r_discrete_distribution<std::size_t, double,
-                                            uniform_real_distribution>;
-using markovian_exmo_distribution = rmolib::random::markovian_exmo_distribution<
-    std::vector<double>, exponential_distribution, uniform_int_distribution,
-    r_discrete_distribution>;
-using param_type = markovian_exmo_distribution::param_type;
+                                            uniform_real_dist_t>;
+using markovian_exmo_dist_t = rmolib::random::markovian_exmo_distribution<
+    std::vector<double>, exponential_dist_t, uniform_int_dist_t,
+    r_discrete_dist_t>;
+using parm_t = markovian_exmo_dist_t::param_type;
 
 class generic_param_type {
  public:
-  // compiler generated ctor and assignment op is sufficient
+  generic_param_type() = default;
 
   template <typename _InputIterator>
-  explicit generic_param_type(std::size_t dim, _InputIterator first,
+  explicit generic_param_type(const std::size_t dim, _InputIterator first,
                               _InputIterator last)
       : dim_{dim}, ex_intensities_{first, last} {}
+
+  generic_param_type(const std::size_t dim, std::initializer_list<double> wl)
+      : generic_param_type{dim, wl.begin(), wl.end()} {}
 
   template <
       typename _ExMOParamType,
@@ -61,12 +63,15 @@ class generic_param_type {
   explicit generic_param_type(_ExMOParamType&& parm)
       : dim_{parm.dim()}, ex_intensities_{parm.ex_intensities()} {}
 
-  std::size_t dim() const { return dim_; }
-  std::vector<double> ex_intensities() const { return ex_intensities_; }
+  // compiler generated ctor and assignment op is sufficient
+
+  auto dim() const { return dim_; }
+  auto ex_intensities() const { return ex_intensities_; }
 
  private:
-  std::size_t dim_;
-  std::vector<double> ex_intensities_;
+  std::size_t dim_{1};
+  std::vector<double> ex_intensities_ = {1.};
 };
+using generic_parm_t = generic_param_type;
 
 #include "test-distribution.h"

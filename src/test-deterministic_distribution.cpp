@@ -4,27 +4,27 @@
 #include <rmolib/random/univariate/deterministic_distribution.hpp>
 #include <testthat.h>
 
-#define RMO_TEST_DIST_NAME deterministic_distribution
+#define RMO_TEST_DIST_NAME deterministic_dist_t
 #define RMO_TEST_DIST_NAME_STRING "deterministic_distribution"
 
-#define RMO_TEST_ARG_LIST                                                 \
-  {                                                                       \
-    param_type{1.}, param_type{.5}, param_type{0.},                       \
-        param_type{std::numeric_limits<double>::infinity()}, param_type { \
-      2.                                                                  \
-    }                                                                     \
+#define RMO_TEST_ARG_LIST                                        \
+  {                                                              \
+    generic_parm_t{1.}, generic_parm_t{.5}, generic_parm_t{0.},  \
+        generic_parm_t{std::numeric_limits<double>::infinity()}, \
+        generic_parm_t {                                         \
+      2.                                                         \
+    }                                                            \
   }
 
 #define RMO_TEST_CHECK_PARAMS(__DIST__, __PARAMS__) \
   expect_true(__DIST__.value() == __PARAMS__.value());
 
-using deterministic_distribution =
-    rmolib::random::deterministic_distribution<double>;
-using param_type = deterministic_distribution::param_type;
+using deterministic_dist_t = rmolib::random::deterministic_distribution<double>;
+using parm_t = deterministic_dist_t::param_type;
 
 class generic_param_type {
  public:
-  // compiler generated ctor and assignment op is sufficient
+  generic_param_type() = default;
 
   explicit generic_param_type(const double value) : value_{value} {}
 
@@ -38,10 +38,13 @@ class generic_param_type {
   explicit generic_param_type(_DeterministicParamType&& param)
       : value_{param.value()} {}
 
-  double value() const { return value_; }
+  // compiler generated ctor and assignment op is sufficient
+
+  auto value() const { return value_; }
 
  private:
   double value_{1};
 };
+using generic_parm_t = generic_param_type;
 
 #include "test-distribution.h"

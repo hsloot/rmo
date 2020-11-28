@@ -2,28 +2,27 @@
 #include <rmolib/random/univariate/uniform_real_distribution.hpp>
 #include <testthat.h>
 
-#define RMO_TEST_DIST_NAME uniform_real_distribution
+#define RMO_TEST_DIST_NAME uniform_real_dist_t
 #define RMO_TEST_DIST_NAME_STRING "uniform_real_distribution"
 
-#define RMO_TEST_ARG_LIST                                                      \
-  {                                                                            \
-    param_type{}, param_type{0., 1.}, param_type{0., 3.}, param_type{-3., 0.}, \
-        param_type {                                                           \
-      -1., 1.                                                                  \
-    }                                                                          \
+#define RMO_TEST_ARG_LIST                                             \
+  {                                                                   \
+    generic_parm_t{}, generic_parm_t{0., 1.}, generic_parm_t{0., 3.}, \
+        generic_parm_t{-3., 0.}, generic_parm_t {                     \
+      -1., 1.                                                         \
+    }                                                                 \
   }
 
 #define RMO_TEST_CHECK_PARAMS(__DIST__, __PARAMS__)    \
   expect_true(__DIST__.lower() == __PARAMS__.lower()); \
   expect_true(__DIST__.upper() == __PARAMS__.upper());
 
-using uniform_real_distribution =
-    rmolib::random::uniform_real_distribution<double>;
-using param_type = uniform_real_distribution::param_type;
+using uniform_real_dist_t = rmolib::random::uniform_real_distribution<double>;
+using parm_t = uniform_real_dist_t::param_type;
 
 class generic_param_type {
  public:
-  // compiler generated ctor and assignment op is sufficient
+  generic_param_type() = default;
 
   explicit generic_param_type(const double lower, const double upper)
       : lower_{lower}, upper_{upper} {}
@@ -37,12 +36,15 @@ class generic_param_type {
   explicit generic_param_type(_UniformParamType&& param)
       : lower_{param.lower()}, upper_{param.upper()} {}
 
-  double lower() const { return lower_; }
-  double upper() const { return upper_; }
+  // compiler generated ctor and assignment op is sufficient
+
+  auto lower() const { return lower_; }
+  auto upper() const { return upper_; }
 
  private:
-  double lower_{0.};
-  double upper_{1.};
+  double lower_{0};
+  double upper_{1};
 };
+using generic_parm_t = generic_param_type;
 
 #include "test-distribution.h"

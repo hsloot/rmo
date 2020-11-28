@@ -52,9 +52,10 @@ class r_discrete_distribution {
         : param_type{wl.begin(), wl.end()} {}
 
     template <class _UnaryFunctor>
-    explicit param_type(typename std::vector<_WeightType>::size_type count,
-                        _WeightType xmin, _WeightType xmax,
-                        _UnaryFunctor unary_op) {
+    explicit param_type(
+        typename std::vector<_WeightType>::size_type count,
+        const _WeightType xmin, const _WeightType xmax,
+        _UnaryFunctor unary_op) {
       using size_t = typename std::vector<_WeightType>::size_type;
 
       count += static_cast<size_t>(count == 0);
@@ -140,6 +141,7 @@ class r_discrete_distribution {
     void __init(_ForwardIterator first, _ForwardIterator last,
                 std::forward_iterator_tag) {
       __validate_input(first, last);
+      cumulative_probabilities_.clear();
       cumulative_probabilities_.reserve(std::distance(first, last));
 
       _IntType idx{0};
@@ -147,6 +149,7 @@ class r_discrete_distribution {
         if (*it < 0) throw std::domain_error("negative probability");
         cumulative_probabilities_.emplace_back(std::make_pair(idx++, *it));
       }
+      cumulative_probabilities_.shrink_to_fit();
 
       // sort probabilities in descending order
       algorithm::r_sort(cumulative_probabilities_.begin(),
@@ -211,8 +214,8 @@ class r_discrete_distribution {
   // template <class UnaryOperation>
   template <typename _UnaryOperation>
   explicit r_discrete_distribution(
-      typename std::vector<_WeightType>::size_type count, _WeightType xmin,
-      _WeightType xmax, _UnaryOperation unary_op)
+      typename std::vector<_WeightType>::size_type count,
+      const _WeightType xmin, const _WeightType xmax, _UnaryOperation unary_op)
       : parm_{count, xmin, xmax, unary_op} {
     init_unit_uniform_real_distribution();
   }

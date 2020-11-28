@@ -88,7 +88,7 @@ class esm_mo_distribution {
                           _ForwardIterator last) const {
       using std::distance;
 
-      if (!(bit::bit_fill<std::size_t>(0, dim_, true) == distance(first, last)))
+      if (!(bit::bit_fill<std::size_t>(0, dim, true) == distance(first, last)))
         throw std::domain_error("intensities vector has wrong size");
     }
 
@@ -115,6 +115,7 @@ class esm_mo_distribution {
 
       __validate_input(dim_, first, last);
 
+      shocks_.clear();
       shocks_.reserve(distance(first, last));
       for (auto it = first; it != last; ++it) {
         if (*it > 0)
