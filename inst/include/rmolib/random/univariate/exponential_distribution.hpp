@@ -109,13 +109,13 @@ class exponential_distribution {
   param_type param() const { return parm_; }
   void param(const param_type& parm) { parm_ = parm; }
 
-  template <typename _EngineType>
-  result_type operator()(_EngineType& engine) {
+  template <typename _Engine>
+  result_type operator()(_Engine& engine) {
     return (*this)(engine, parm_);
   }
 
-  template <typename _EngineType>
-  result_type operator()(_EngineType& engine, const param_type& parm) {
+  template <typename _Engine>
+  result_type operator()(_Engine& engine, const param_type& parm) {
     if (_RealType{0} == parm.lambda_)
       return std::numeric_limits<_RealType>::infinity();
     else if (std::numeric_limits<_RealType>::infinity() == parm.lambda_)
@@ -131,14 +131,14 @@ class exponential_distribution {
 
   friend bool operator!=(const exponential_distribution& lhs,
                          const exponential_distribution& rhs) {
-    return lhs.parm_ != rhs.parm_;
+    return !(lhs == rhs);
   }
 
  private:
   param_type parm_{};
 
-  template <typename _EngineType>
-  result_type unit_exponential_distribution(_EngineType& engine);
+  template <typename _Engine>
+  result_type unit_exponential_distribution(_Engine& engine);
 };
 
 /*

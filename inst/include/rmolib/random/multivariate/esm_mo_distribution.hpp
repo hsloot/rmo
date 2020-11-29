@@ -33,13 +33,13 @@ class esm_mo_distribution {
     template <typename _InputIterator>
     explicit param_type(const std::size_t dim, _InputIterator first,
                         _InputIterator last)
-        : dim_(dim) {
+        : dim_{dim} {
       __init(first, last);
     }
 
     template <typename _Container>
     explicit param_type(const std::size_t dim, const _Container& intensities)
-        : param_type{dim, intensities.begin(), intensities.end()} {}
+        : param_type{dim, intensities.cbegin(), intensities.cend()} {}
 
     // Used for construction from a different specialization
     template <
@@ -91,12 +91,8 @@ class esm_mo_distribution {
     }
 
     void __init_empty() {
-      using std::make_pair;
-
-      shocks_.clear();
-      shocks_.emplace_back(
-          make_pair(std::size_t{1}, exponential_parm_t{_RealType{1}}));
-      shocks_.shrink_to_fit();
+      shocks_ = {
+          std::make_pair(std::size_t{1}, exponential_parm_t{_RealType{1}})};
     }
 
     template <typename _InputIterator>
@@ -109,14 +105,13 @@ class esm_mo_distribution {
     void __init(_InputIterator first, _InputIterator last,
                 std::input_iterator_tag) {
       std::vector<_RealType> tmp(first, last);
-      __init(tmp.begin(), tmp.end());
+      __init(tmp.cbegin(), tmp.cend());
     }
 
     template <typename _ForwardIterator>
     void __init(_ForwardIterator first, _ForwardIterator last,
                 std::forward_iterator_tag) {
       using std::distance;
-      using std::make_pair;
 
       __validate_input(dim_, first, last);
 
@@ -125,8 +120,8 @@ class esm_mo_distribution {
       for (auto it = first; it != last; ++it) {
         if (*it > 0)
           shocks_.emplace_back(
-              make_pair(static_cast<std::size_t>(distance(first, it) + 1),
-                        exponential_parm_t{*it}));
+              std::make_pair(static_cast<std::size_t>(distance(first, it) + 1),
+                             exponential_parm_t{*it}));
       }
       shocks_.shrink_to_fit();
     }
@@ -180,11 +175,7 @@ class esm_mo_distribution {
 
   void reset() {}
 
-  auto min() const {
-    result_type out(parm_.dim(), _RealType{0});
-    out.front() = _RealType{-1};
-    return out;
-  }
+  auto min() const { return result_type(dim(), _RealType{-1}); }
   auto max() const {
     return result_type(dim(), std::numeric_limits<_RealType>::infinity());
   }
@@ -195,27 +186,26 @@ class esm_mo_distribution {
   param_type param() const { return parm_; }
   void param(const param_type& parm) { parm_ = parm; }
 
-  template <typename _EngineType>
-  result_type operator()(_EngineType& engine) {
+  template <typename _Engine>
+  result_type operator()(_Engine& engine) {
     return (*this)(engine, parm_);
   }
 
-  template <typename _EngineType>
-  result_type operator()(_EngineType& engine, const param_type& parm) {
+  template <typename _Engine>
+  result_type operator()(_Engine& engine, const param_type& parm) {
     result_type out(parm.dim_);
     (*this)(engine, parm, out);
     return out;
   }
 
-  template <typename _EngineType, typename _Container>
-  void operator()(_EngineType& engine, const param_type& parm,
-                  _Container& out) {
+  template <typename _Engine, typename _Container>
+  void operator()(_Engine& engine, const param_type& parm, _Container& out) {
     // TODO: check compatibility
     std::fill(out.begin(), out.end(),
               std::numeric_limits<_RealType>::infinity());
     const auto dim = out.size();
     for (const auto& [set, shock_parm] : parm.shocks_) {
-      const auto time = exponential_distribution_(engine, shock_parm);
+      const auto time = exponential_dist_(engine, shock_parm);
       for (std::size_t i = 0; i < dim; ++i) {
         if (internal::is_within<std::size_t>(i, set))
           out[i] = std::min(out[i], time);
@@ -230,12 +220,12 @@ class esm_mo_distribution {
 
   friend bool operator!=(const esm_mo_distribution& lhs,
                          const esm_mo_distribution& rhs) {
-    return lhs.parm_ != rhs.parm_;
+    return !(lhs == rhs);
   }
 
  private:
   param_type parm_{};
-  _ExponentialDistribution exponential_distribution_{};
+  _ExponentialDistribution exponential_dist_{};
 
   static_assert(type_traits::is_safe_numeric_cast_v<
                     _RealType, typename _ExponentialDistribution::result_type>,

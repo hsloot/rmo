@@ -81,7 +81,7 @@ class pareto_distribution {
 
     void __validate_input(const _RealType alpha,
                           const _RealType lower_bound) const {
-      auto is_finite = [](auto x) {
+      auto is_finite = [](const auto x) {
         return std::abs(x) < std::numeric_limits<_RealType>::infinity();
       };
 
@@ -103,7 +103,7 @@ class pareto_distribution {
                                const _RealType lower_bound)
       : parm_{alpha, lower_bound} {}
 
-  explicit pareto_distribution(const param_type& param) : parm_{param} {
+  explicit pareto_distribution(const param_type& parm) : parm_{parm} {
     init_unit_uniform_real_distribution();
   }
 
@@ -128,17 +128,17 @@ class pareto_distribution {
   auto lower_bound() const { return parm_.lower_bound(); }
 
   param_type param() const { return parm_; }
-  void param(const param_type& param) { parm_ = param; }
+  void param(const param_type& parm) { parm_ = parm; }
 
-  template <typename _EngineType>
-  result_type operator()(_EngineType& engine) {
+  template <typename _Engine>
+  result_type operator()(_Engine& engine) {
     return (*this)(engine, parm_);
   }
 
-  template <typename _EngineType>
-  result_type operator()(_EngineType& engine, const param_type& param) {
-    return param.lower_bound_ /
-           std::pow(unit_uniform_real_distribution_(engine), 1. / param.alpha_);
+  template <typename _Engine>
+  result_type operator()(_Engine& engine, const param_type& parm) {
+    return parm.lower_bound_ /
+           std::pow(unit_uniform_real_dist_(engine), 1. / parm.alpha_);
   }
 
   friend bool operator==(const pareto_distribution& lhs,
@@ -148,12 +148,12 @@ class pareto_distribution {
 
   friend bool operator!=(const pareto_distribution& lhs,
                          const pareto_distribution& rhs) {
-    return lhs.parm_ != rhs.parm_;
+    return !(lhs == rhs);
   }
 
  private:
   param_type parm_{};
-  _UnitUniformRealDistribution unit_uniform_real_distribution_{};
+  _UnitUniformRealDistribution unit_uniform_real_dist_{};
 
   void init_unit_uniform_real_distribution() {
     if constexpr (std::is_constructible_v<_UnitUniformRealDistribution,
@@ -163,7 +163,7 @@ class pareto_distribution {
       using std::swap;
 
       auto tmp = unit_dist_t{unit_parm_t{_RealType{0}, _RealType{1}}};
-      swap(unit_uniform_real_distribution_, tmp);
+      swap(unit_uniform_real_dist_, tmp);
     }
   }
 

@@ -126,13 +126,15 @@ class uniform_real_distribution {
   param_type param() const { return parm_; }
   void param(const param_type& parm) { parm_ = parm; }
 
-  template <typename _EngineType>
-  result_type operator()(_EngineType& engine) {
+  template <typename _Engine>
+  result_type operator()(_Engine& engine) {
     return (*this)(engine, parm_);
   }
 
-  template <typename _EngineType>
-  result_type operator()(_EngineType& engine, const param_type& parm) {
+  // warning: cpp distributions will generate values in [0, 1) and R
+  // distribution in (0, 1)
+  template <typename _Engine>
+  result_type operator()(_Engine& engine, const param_type& parm) {
     return parm.lower_ + parm.length_ * unit_uniform_real_distribution(engine);
   }
 
@@ -143,14 +145,14 @@ class uniform_real_distribution {
 
   friend bool operator!=(const uniform_real_distribution& lhs,
                          const uniform_real_distribution& rhs) {
-    return lhs.parm_ != rhs.parm_;
+    return !(lhs == rhs);
   }
 
  private:
   param_type parm_{};
 
-  template <typename _EngineType>
-  result_type unit_uniform_real_distribution(_EngineType& engine);
+  template <typename _Engine>
+  result_type unit_uniform_real_distribution(_Engine& engine);
 };
 
 /*

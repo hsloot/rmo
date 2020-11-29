@@ -8,6 +8,7 @@
 
 #include "rmolib/algorithm/r_sort.hpp"
 #include "rmolib/random/univariate/uniform_real_distribution.hpp"
+#include "rmolib/type_traits/is_safe_numeric_cast.hpp"
 
 namespace rmolib {
 
@@ -52,7 +53,7 @@ class r_discrete_distribution {
     }
 
     explicit param_type(const std::vector<_WeightType>& p)
-        : param_type{p.begin(), p.end()} {}
+        : param_type{p.cbegin(), p.cend()} {}
 
     param_type(std::initializer_list<_WeightType> wl)
         : param_type{wl.begin(), wl.end()} {}
@@ -64,11 +65,11 @@ class r_discrete_distribution {
       using size_t = typename std::vector<_WeightType>::size_type;
 
       count += static_cast<size_t>(count == 0);
-      double delta = (xmax - xmin) / count;
+      const double delta = (xmax - xmin) / count;
 
       std::vector<_WeightType> tmp;
       tmp.reserve(count);
-      for (size_t k = 0; k < count; ++k) {
+      for (auto k = std::size_t{0}; k < count; ++k) {
         tmp.emplace_back(unary_op(xmin + k * delta + delta / 2));
       }
       __init(tmp.cbegin(), tmp.cend());
@@ -88,12 +89,12 @@ class r_discrete_distribution {
     auto probabilities() const {
       std::vector<std::pair<_IntType, _WeightType>> probabilities{};
       probabilities.reserve(cumulative_probabilities_.size());
-
       std::adjacent_difference(
           cumulative_probabilities_.cbegin(), cumulative_probabilities_.cend(),
-          std::back_inserter(probabilities), [](const auto& x, const auto& y) {
-            return std::make_pair(std::get<0>(x),
-                                  std::get<1>(x) - std::get<1>(y));
+          std::back_inserter(probabilities),
+          [](const auto& val, const auto& acc) {
+            return std::make_pair(std::get<0>(val),
+                                  std::get<1>(val) - std::get<1>(acc));
           });
 
       std::sort(probabilities.begin(), probabilities.end(),
@@ -103,8 +104,8 @@ class r_discrete_distribution {
 
       std::vector<_WeightType> out;
       out.reserve(probabilities.size());
-      for (const auto& p : probabilities)
-        out.emplace_back(std::move(std::get<1>(p)));
+      for (const auto& [_ignore, p] : probabilities) out.emplace_back(p);
+      out.shrink_to_fit();
 
       return out;
     }
@@ -145,15 +146,15 @@ class r_discrete_distribution {
     template <class _ForwardIterator>
     void __init(_ForwardIterator first, _ForwardIterator last,
                 std::forward_iterator_tag) {
+      using std::distance;
+
       __validate_input(first, last);
       cumulative_probabilities_.clear();
-      cumulative_probabilities_.reserve(std::distance(first, last));
+      cumulative_probabilities_.reserve(distance(first, last));
 
-      _IntType idx{0};
-      for (auto it = first; it != last; ++it) {
-        if (*it < 0) throw std::domain_error("negative probability");
-        cumulative_probabilities_.emplace_back(std::make_pair(idx++, *it));
-      }
+      for (auto [it, idx] = std::make_pair(first, _IntType{0}); it != last;
+           ++it, ++idx)
+        cumulative_probabilities_.emplace_back(std::make_pair(idx, *it));
       cumulative_probabilities_.shrink_to_fit();
 
       // sort probabilities in descending order
@@ -166,18 +167,19 @@ class r_discrete_distribution {
       // accumulate probabilities
       std::partial_sum(
           cumulative_probabilities_.cbegin(), cumulative_probabilities_.cend(),
-          cumulative_probabilities_.begin(), [](const auto& x, const auto& y) {
-            return std::make_pair(std::get<0>(y),
-                                  std::get<1>(x) + std::get<1>(y));
+          cumulative_probabilities_.begin(),
+          [](const auto& sum, const auto& val) {
+            return std::make_pair(std::get<0>(val),
+                                  std::get<1>(sum) + std::get<1>(val));
           });
 
       // normalize probabilities
       std::transform(
           cumulative_probabilities_.cbegin(), cumulative_probabilities_.cend(),
           cumulative_probabilities_.begin(),
-          [total =
-               std::get<1>(cumulative_probabilities_.back())](const auto& cp) {
-            return std::make_pair(std::get<0>(cp), std::get<1>(cp) / total);
+          [mass =
+               std::get<1>(cumulative_probabilities_.back())](const auto& val) {
+            return std::make_pair(std::get<0>(val), std::get<1>(val) / mass);
           });
     }
 
@@ -211,8 +213,7 @@ class r_discrete_distribution {
     init_unit_uniform_real_distribution();
   }
 
-  r_discrete_distribution(std::initializer_list<_WeightType>& wl)
-      : parm_{wl.begin(), wl.end()} {
+  r_discrete_distribution(std::initializer_list<_WeightType> wl) : parm_{wl} {
     init_unit_uniform_real_distribution();
   }
 
@@ -254,21 +255,20 @@ class r_discrete_distribution {
   param_type param() const { return parm_; }
   void param(const param_type& parm) { parm_ = parm; }
 
-  template <typename _EngineType>
-  result_type operator()(_EngineType& engine) {
+  template <typename _Engine>
+  result_type operator()(_Engine& engine) {
     return (*this)(engine, parm_);
   }
 
-  template <typename _EngineType>
-  result_type operator()(_EngineType& engine, const param_type& parm) {
-    if (parm.cumulative_probabilities_.empty()) return 0;
-    auto u = unit_uniform_real_distribution_(engine);
-    auto it = std::lower_bound(parm.cumulative_probabilities_.cbegin(),
-                               parm.cumulative_probabilities_.cend(), u,
-                               [](const auto& element, const auto& value) {
-                                 return std::get<1>(element) < value;
-                               });
-
+  template <typename _Engine>
+  result_type operator()(_Engine& engine, const param_type& parm) {
+    const auto u = unit_uniform_real_distribution_(engine);
+    const auto it =
+        std::lower_bound(parm.cumulative_probabilities_.cbegin(),
+                         parm.cumulative_probabilities_.cend(), u,
+                         [](const auto& element, const auto& value) {
+                           return std::get<1>(element) < value;
+                         });
     return std::get<0>(*it);
   }
 
@@ -279,7 +279,7 @@ class r_discrete_distribution {
 
   friend bool operator!=(const r_discrete_distribution& lhs,
                          const r_discrete_distribution& rhs) {
-    return lhs.parm_ != rhs.parm_;
+    return !(lhs == rhs);
   }
 
  private:
@@ -298,8 +298,8 @@ class r_discrete_distribution {
   }
 
   static_assert(
-      std::is_same_v<_WeightType,
-                     typename _UnitUniformRealDistribution::result_type>,
+      type_traits::is_safe_numeric_cast_v<
+          _WeightType, typename _UnitUniformRealDistribution::result_type>,
       "Class template rmolib::random::discrete_distribution<> must be "
       "parametrized with unit_uniform_real_distribution-type with matching "
       "result_type and _WeightType");

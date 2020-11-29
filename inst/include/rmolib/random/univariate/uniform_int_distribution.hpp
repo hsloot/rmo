@@ -116,13 +116,13 @@ class uniform_int_distribution {
   param_type param() const { return parm_; }
   void param(const param_type& parm) { parm_ = parm; }
 
-  template <typename _EngineType>
-  result_type operator()(_EngineType& engine) {
+  template <typename _Engine>
+  result_type operator()(_Engine& engine) {
     return (*this)(engine, parm_);
   }
 
-  template <typename _EngineType>
-  result_type operator()(_EngineType& engine, const param_type& parm) {
+  template <typename _Engine>
+  result_type operator()(_Engine& engine, const param_type& parm) {
     return parm.lower_ + unit_uniform_int_distribution(engine, parm.length_);
   }
 
@@ -133,15 +133,14 @@ class uniform_int_distribution {
 
   friend bool operator!=(const uniform_int_distribution& lhs,
                          const uniform_int_distribution& rhs) {
-    return lhs.parm_ != rhs.parm_;
+    return !(lhs == rhs);
   }
 
  private:
   param_type parm_{};
 
-  template <typename _EngineType>
-  result_type unit_uniform_int_distribution(_EngineType& engine,
-                                            const _IntType n);
+  template <typename _Engine>
+  result_type unit_uniform_int_distribution(_Engine& engine, const _IntType n);
 };
 
 /*

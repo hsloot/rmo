@@ -108,13 +108,13 @@ class deterministic_distribution {
   param_type param() const { return parm_; }
   void param(const param_type& parm) { parm_ = parm; }
 
-  template <typename _EngineType>
-  result_type operator()(_EngineType& engine) {
+  template <typename _Engine>
+  result_type operator()(_Engine& engine) {
     return (*this)(engine, parm_);
   }
 
-  template <typename _EngineType>
-  result_type operator()(_EngineType& engine, const param_type& parm) {
+  template <typename _Engine>
+  result_type operator()(_Engine& engine, const param_type& parm) {
     return parm.value_;
     ;
   }
@@ -126,7 +126,7 @@ class deterministic_distribution {
 
   friend bool operator!=(const deterministic_distribution& lhs,
                          const deterministic_distribution& rhs) {
-    return lhs.parm_ != rhs.parm_;
+    return !(lhs == rhs);
   }
 
  private:

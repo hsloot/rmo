@@ -34,16 +34,16 @@ class arnold_mo_distribution {
 
     param_type() { __init_empty(); }
 
-    template <typename _ForwardIterator>
-    explicit param_type(const std::size_t dim, _ForwardIterator first,
-                        _ForwardIterator last)
+    template <typename _InputIterator>
+    explicit param_type(const std::size_t dim, _InputIterator first,
+                        _InputIterator last)
         : dim_{dim} {
       __init(first, last);
     }
 
     template <typename _Container>
     explicit param_type(const std::size_t dim, const _Container& intensities)
-        : param_type{dim, intensities.begin(), intensities.end()} {}
+        : param_type{dim, intensities.cbegin(), intensities.cend()} {}
 
     // Used for construction from a different specialization
     template <
@@ -58,9 +58,10 @@ class arnold_mo_distribution {
 
     auto dim() const { return dim_; }
     auto intensities() const {
-      auto out = discrete_parm_.probabilities();
+      const auto& [poisson_parm, discrete_parm] = compound_poisson_parm_;
+      auto out = discrete_parm.probabilities();
       std::transform(out.cbegin(), out.cend(), out.begin(),
-                     [total_intensity = poisson_parm_.lambda()](auto v) {
+                     [total_intensity = poisson_parm.lambda()](const auto v) {
                        return v * total_intensity;
                      });
       return out;
@@ -69,8 +70,7 @@ class arnold_mo_distribution {
     friend class arnold_mo_distribution;
 
     friend bool operator==(const param_type& lhs, const param_type& rhs) {
-      return lhs.dim_ == rhs.dim_ && lhs.poisson_parm_ == rhs.poisson_parm_ &&
-             lhs.discrete_parm_ == rhs.discrete_parm_;
+      return lhs.dim_ == rhs.dim_ && lhs.compound_poisson_parm_ == rhs.compound_poisson_parm_;
     }
 
     friend bool operator!=(const param_type& lhs, const param_type& rhs) {
@@ -80,10 +80,11 @@ class arnold_mo_distribution {
    private:
     using exponential_parm_t = typename _ExponentialDistribution::param_type;
     using discrete_parm_t = typename _DiscreteDistribution::param_type;
+    using compound_poisson_parm_t =
+        std::pair<exponential_parm_t, discrete_parm_t>;
 
     std::size_t dim_{1};
-    exponential_parm_t poisson_parm_{};
-    discrete_parm_t discrete_parm_{};
+    compound_poisson_parm_t compound_poisson_parm_{};
 
     template <typename _ForwardIterator>
     void __validate_input(const std::size_t dim, _ForwardIterator first,
@@ -94,12 +95,12 @@ class arnold_mo_distribution {
         throw std::domain_error("intensities vector has wrong size");
 
       if (!(std::accumulate(first, last, _RealType{0}) > 0))
-        throw std::domain_error("Poisson intensity must be positive");
+        throw std::domain_error("sum of intensities must be positive");
     }
 
     void __init_empty() {
-      poisson_parm_ = exponential_parm_t{_RealType{1}};
-      discrete_parm_ = {_RealType{1}};
+      compound_poisson_parm_ = std::make_pair(exponential_parm_t{_RealType{1}},
+                                              discrete_parm_t{_RealType{1}});
     }
 
     template <typename _InputIterator>
@@ -112,16 +113,18 @@ class arnold_mo_distribution {
     void __init(_InputIterator first, _InputIterator last,
                 std::input_iterator_tag) {
       std::vector<_RealType> tmp{first, last};
-      __init(tmp.begin(), tmp.end());
+      __init(tmp.cbegin(), tmp.cend());
     }
 
     template <typename _ForwardIterator>
     void __init(_ForwardIterator first, _ForwardIterator last,
                 std::forward_iterator_tag) {
       __validate_input(dim_, first, last);
-      poisson_parm_ =
+      auto poisson_parm =
           exponential_parm_t{std::accumulate(first, last, _RealType{0})};
-      discrete_parm_ = discrete_parm_t{first, last};
+      auto discrete_parm = discrete_parm_t{first, last};
+      compound_poisson_parm_ =
+          std::make_pair(std::move(poisson_parm), std::move(discrete_parm));
     }
 
     template <typename _InputIterator>
@@ -193,6 +196,7 @@ class arnold_mo_distribution {
     return out;
   }
 
+  //! implicitely assumes that `out.size() == dim`
   template <typename _Engine, typename _Container>
   void operator()(_Engine& engine, const param_type& parm, _Container& out) {
     // TODO: check compatibility
@@ -202,7 +206,8 @@ class arnold_mo_distribution {
     auto& [time, dead] = state;
     while (dead != all) {
       std::size_t alive_before_transition = ~dead & all;
-      state = __poisson_process(engine, parm, state);
+      state = __compound_poisson_process(engine, parm.compound_poisson_parm_,
+                                         state);
 
       for (std::size_t i = 0; i < dim; ++i)
         if (internal::is_within(i, alive_before_transition)) out[i] = time;
@@ -216,21 +221,25 @@ class arnold_mo_distribution {
 
   friend bool operator!=(const arnold_mo_distribution& lhs,
                          const arnold_mo_distribution& rhs) {
-    return lhs.parm_ != rhs.parm_;
+    return !(lhs == rhs);
   }
 
  private:
+  using compound_poisson_parm_t = typename param_type::compound_poisson_parm_t;
+
   param_type parm_{};
   _ExponentialDistribution exponential_dist_{};
   _DiscreteDistribution discrete_dist_{};
 
   template <typename _Engine>
-  auto __poisson_process(_Engine& engine, const param_type& parm,
-                         std::pair<_RealType, std::size_t> state) {
+  auto __compound_poisson_process(_Engine& engine,
+                                  const compound_poisson_parm_t& parm,
+                                  std::pair<_RealType, std::size_t> state) {
+    const auto& [poisson_parm, discrete_parm] = parm;
     auto& [time, location] = state;
-    time += exponential_dist_(engine, parm.poisson_parm_);
+    time += exponential_dist_(engine, poisson_parm);
     location |=
-        math::next_integral_value(discrete_dist_(engine, parm.discrete_parm_));
+        math::next_integral_value(discrete_dist_(engine, discrete_parm));
     return state;
   }
 
@@ -241,7 +250,6 @@ class arnold_mo_distribution {
       "parametrized with unit_exponential_distribution-type with suitable "
       "result_type");
 
-  // TODO: check static_assert
   static_assert(
       type_traits::is_safe_numeric_cast_v<
           std::size_t, typename _DiscreteDistribution::result_type>,
