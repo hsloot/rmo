@@ -49,7 +49,7 @@ class arnold_mo_distribution {
     template <
         typename _MOParamType,
         std::enable_if_t<!std::is_convertible_v<_MOParamType, param_type> &&
-                             internal::is_mo_param_type_v<_MOParamType>,
+                             is_mo_param_type_v<_MOParamType>,
                          int> = 0>
     explicit param_type(_MOParamType&& parm)
         : param_type{parm.dim(), parm.intensities()} {}
@@ -161,7 +161,7 @@ class arnold_mo_distribution {
             std::enable_if_t<
                 !std::is_convertible_v<_MOParamType, arnold_mo_distribution> &&
                     !std::is_convertible_v<_MOParamType, param_type> &&
-                    internal::is_mo_param_type_v<_MOParamType>,
+                    is_mo_param_type_v<_MOParamType>,
                 int> = 0>
   explicit arnold_mo_distribution(_MOParamType&& parm)
       : parm_{std::forward<_MOParamType>(parm)} {}

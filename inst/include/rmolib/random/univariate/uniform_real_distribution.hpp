@@ -9,18 +9,24 @@ namespace rmolib {
 
 namespace random {
 
-// type_trait for identifying possible alternative implementations of
-// a uniform_real_distribution<>::param_type
+namespace internal {
+
 template <typename _T, class = void>
-struct is_uniform_real_param_type : public std::false_type {};
+struct __is_uniform_real_param_type : public std::false_type {};
 
 template <typename _T>
-struct is_uniform_real_param_type<
+struct __is_uniform_real_param_type<
     _T, std::enable_if_t<decltype(
-            std::declval<_T&>().lower(),
-            std::true_type())::value&& decltype(std::declval<_T&>().upper(),
+            std::declval<_T>().lower(),
+            std::true_type())::value&& decltype(std::declval<_T>().upper(),
                                                 std::true_type())::value>>
     : public std::true_type {};
+
+}  // namespace internal
+
+template <typename _T>
+struct is_uniform_real_param_type
+    : public internal::__is_uniform_real_param_type<std::remove_cv_t<_T>> {};
 
 template <typename _T>
 constexpr bool is_uniform_real_param_type_v =

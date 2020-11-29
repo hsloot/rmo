@@ -50,7 +50,7 @@ class markovian_exmo_distribution {
     template <
         typename _ExMOParamType,
         std::enable_if_t<!std::is_convertible_v<_ExMOParamType, param_type> &&
-                             internal::is_exmo_param_type_v<_ExMOParamType>,
+                             is_exmo_param_type_v<_ExMOParamType>,
                          int> = 0>
     explicit param_type(_ExMOParamType&& parm)
         : param_type{parm.dim(), parm.ex_intensities()} {}
@@ -195,7 +195,7 @@ class markovian_exmo_distribution {
       std::enable_if_t<
           !std::is_convertible_v<_ExMOParamType, markovian_exmo_distribution> &&
               !std::is_convertible_v<_ExMOParamType, param_type> &&
-              internal::is_exmo_param_type_v<_ExMOParamType>,
+              is_exmo_param_type_v<_ExMOParamType>,
           int> = 0>
   explicit markovian_exmo_distribution(_ExMOParamType&& parm)
       : parm_{std::forward<_ExMOParamType>(parm)} {}
@@ -228,8 +228,7 @@ class markovian_exmo_distribution {
   }
 
   template <typename _Engine, typename _Container>
-  void operator()(_Engine& engine, const param_type& parm,
-                  _Container& out) {
+  void operator()(_Engine& engine, const param_type& parm, _Container& out) {
     auto state = std::make_pair(_RealType{0}, std::size_t{0});
     auto& [time, number_dead] = state;
     auto dim = out.size();

@@ -12,18 +12,24 @@ namespace rmolib {
 
 namespace random {
 
-// type_trait for identifying possible alternative implementations of
-// a pareto_distribution<>::param_type
+namespace internal {
+
 template <typename _T, class = void>
-struct is_pareto_param_type : public std::false_type {};
+struct __is_pareto_param_type : public std::false_type {};
 
 template <typename _T>
-struct is_pareto_param_type<
+struct __is_pareto_param_type<
     _T,
-    std::enable_if_t<decltype(std::declval<_T&>().alpha(), std::true_type())::
-                         value&& decltype(std::declval<_T&>().lower_bound(),
+    std::enable_if_t<decltype(std::declval<_T>().alpha(), std::true_type())::
+                         value&& decltype(std::declval<_T>().lower_bound(),
                                           std::true_type())::value>>
     : public std::true_type {};
+
+}  // namespace internal
+
+template <typename _T>
+struct is_pareto_param_type
+    : public internal::__is_pareto_param_type<std::remove_cv_t<_T>> {};
 
 template <typename _T>
 constexpr bool is_pareto_param_type_v = is_pareto_param_type<_T>::value;

@@ -21,7 +21,7 @@
     generic_parm_t{}, generic_parm_t{std::size_t{3}, {1., 1., 1.}}, \
         generic_parm_t{std::size_t{6}, {0., 1., 2., 4., 5., 6.}},   \
         generic_parm_t {                                            \
-      std::size_t{6}, { 2., 1., 0.5, 0.2, 0.3, 4. }             \
+      std::size_t{6}, { 2., 1., 0.5, 0.2, 0.3, 4. }                 \
     }                                                               \
   }
 
@@ -53,12 +53,11 @@ class generic_param_type {
   generic_param_type(const std::size_t dim, std::initializer_list<double> wl)
       : generic_param_type{dim, wl.begin(), wl.end()} {}
 
-  template <
-      typename _ExMOParamType,
-      std::enable_if_t<
-          !std::is_convertible_v<_ExMOParamType, generic_param_type> &&
-              rmolib::random::internal::is_exmo_param_type_v<_ExMOParamType>,
-          int> = 0>
+  template <typename _ExMOParamType,
+            std::enable_if_t<
+                !std::is_convertible_v<_ExMOParamType, generic_param_type> &&
+                    rmolib::random::is_exmo_param_type_v<_ExMOParamType>,
+                int> = 0>
   explicit generic_param_type(_ExMOParamType&& parm)
       : dim_{parm.dim()}, ex_intensities_{parm.ex_intensities()} {}
 

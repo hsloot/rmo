@@ -8,16 +8,22 @@ namespace rmolib {
 
 namespace random {
 
-// type_trait for identifying possible alternative implementations of
-// a uniform_real_distribution<>::param_type
+namespace internal {
+
 template <typename _T, class = void>
-struct is_exponential_param_type : public std::false_type {};
+struct __is_exponential_param_type : public std::false_type {};
 
 template <typename _T>
-struct is_exponential_param_type<
-    _T, std::enable_if_t<decltype(std::declval<_T&>().lambda(),
+struct __is_exponential_param_type<
+    _T, std::enable_if_t<decltype(std::declval<_T>().lambda(),
                                   std::true_type())::value>>
     : public std::true_type {};
+
+}  // namespace internal
+
+template <typename _T>
+struct is_exponential_param_type
+    : public internal::__is_exponential_param_type<std::remove_cv_t<_T>> {};
 
 template <typename _T>
 constexpr bool is_exponential_param_type_v =

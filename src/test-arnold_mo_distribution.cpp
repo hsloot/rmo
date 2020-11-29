@@ -34,8 +34,9 @@ using exponential_dist_t = rmolib::random::exponential_distribution<double>;
 using r_discrete_dist_t =
     rmolib::random::r_discrete_distribution<std::size_t, double,
                                             uniform_real_dist_t>;
-using arnold_mo_dist_t = rmolib::random::arnold_mo_distribution<
-    double, exponential_dist_t, r_discrete_dist_t>;
+using arnold_mo_dist_t =
+    rmolib::random::arnold_mo_distribution<double, exponential_dist_t,
+                                           r_discrete_dist_t>;
 using parm_t = arnold_mo_dist_t::param_type;
 
 class generic_param_type {
@@ -53,7 +54,7 @@ class generic_param_type {
   template <typename _MOParamType,
             typename std::enable_if<
                 !std::is_convertible_v<_MOParamType, generic_param_type> &&
-                    rmolib::random::internal::is_mo_param_type_v<_MOParamType>,
+                    rmolib::random::is_mo_param_type_v<_MOParamType>,
                 int>::type = 0>
   explicit generic_param_type(_MOParamType&& parm)
       : dim_{parm.dim()}, intensities_{parm.intensities()} {}

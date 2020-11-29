@@ -45,7 +45,7 @@ class esm_mo_distribution {
     template <
         typename _MOParamType,
         std::enable_if_t<!std::is_convertible_v<_MOParamType, param_type> &&
-                             internal::is_mo_param_type_v<_MOParamType>,
+                             is_mo_param_type_v<_MOParamType>,
                          int> = 0>
     explicit param_type(_MOParamType&& parm)
         : param_type{parm.dim(), parm.intensities()} {}
@@ -57,7 +57,7 @@ class esm_mo_distribution {
     auto intensities() const {
       const std::size_t size = bit::bit_fill<std::size_t>(0, dim_, true);
       std::vector<_RealType> out(size, _RealType{0});
-      for (const auto [i, shock_parm] : shocks_)
+      for (const auto& [i, shock_parm] : shocks_)
         out[i - 1] = shock_parm.lambda();
       return out;
     }
@@ -171,7 +171,7 @@ class esm_mo_distribution {
             std::enable_if_t<
                 !std::is_convertible_v<_MOParamType, esm_mo_distribution> &&
                     !std::is_convertible_v<_MOParamType, param_type> &&
-                    internal::is_mo_param_type_v<_MOParamType>,
+                    is_mo_param_type_v<_MOParamType>,
                 int> = 0>
   explicit esm_mo_distribution(_MOParamType&& parm)
       : parm_{std::forward<_MOParamType>(parm)} {}
@@ -214,7 +214,7 @@ class esm_mo_distribution {
     std::fill(out.begin(), out.end(),
               std::numeric_limits<_RealType>::infinity());
     const auto dim = out.size();
-    for (const auto [set, shock_parm] : parm.shocks_) {
+    for (const auto& [set, shock_parm] : parm.shocks_) {
       const auto time = exponential_distribution_(engine, shock_parm);
       for (std::size_t i = 0; i < dim; ++i) {
         if (internal::is_within<std::size_t>(i, set))
