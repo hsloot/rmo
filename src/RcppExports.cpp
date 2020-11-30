@@ -178,39 +178,39 @@ BEGIN_RCPP
 END_RCPP
 }
 // Rcpp__rmo_arnold
-NumericMatrix Rcpp__rmo_arnold(const R_xlen_t n, const int d, const NumericVector& intensities);
+NumericMatrix Rcpp__rmo_arnold(const std::size_t n, const std::size_t d, const NumericVector& intensities);
 RcppExport SEXP _rmo_Rcpp__rmo_arnold(SEXP nSEXP, SEXP dSEXP, SEXP intensitiesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const R_xlen_t >::type n(nSEXP);
-    Rcpp::traits::input_parameter< const int >::type d(dSEXP);
+    Rcpp::traits::input_parameter< const std::size_t >::type n(nSEXP);
+    Rcpp::traits::input_parameter< const std::size_t >::type d(dSEXP);
     Rcpp::traits::input_parameter< const NumericVector& >::type intensities(intensitiesSEXP);
     rcpp_result_gen = Rcpp::wrap(Rcpp__rmo_arnold(n, d, intensities));
     return rcpp_result_gen;
 END_RCPP
 }
 // Rcpp__rmo_ex_arnold
-NumericMatrix Rcpp__rmo_ex_arnold(const R_xlen_t n, const int d, const NumericVector& ex_intensities);
+NumericMatrix Rcpp__rmo_ex_arnold(const std::size_t n, const std::size_t d, const NumericVector& ex_intensities);
 RcppExport SEXP _rmo_Rcpp__rmo_ex_arnold(SEXP nSEXP, SEXP dSEXP, SEXP ex_intensitiesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const R_xlen_t >::type n(nSEXP);
-    Rcpp::traits::input_parameter< const int >::type d(dSEXP);
+    Rcpp::traits::input_parameter< const std::size_t >::type n(nSEXP);
+    Rcpp::traits::input_parameter< const std::size_t >::type d(dSEXP);
     Rcpp::traits::input_parameter< const NumericVector& >::type ex_intensities(ex_intensitiesSEXP);
     rcpp_result_gen = Rcpp::wrap(Rcpp__rmo_ex_arnold(n, d, ex_intensities));
     return rcpp_result_gen;
 END_RCPP
 }
 // Rcpp__rmo_esm_cuadras_auge
-NumericMatrix Rcpp__rmo_esm_cuadras_auge(const R_xlen_t n, const int d, const double alpha, const double beta);
+NumericMatrix Rcpp__rmo_esm_cuadras_auge(const std::size_t n, const std::size_t d, const double alpha, const double beta);
 RcppExport SEXP _rmo_Rcpp__rmo_esm_cuadras_auge(SEXP nSEXP, SEXP dSEXP, SEXP alphaSEXP, SEXP betaSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const R_xlen_t >::type n(nSEXP);
-    Rcpp::traits::input_parameter< const int >::type d(dSEXP);
+    Rcpp::traits::input_parameter< const std::size_t >::type n(nSEXP);
+    Rcpp::traits::input_parameter< const std::size_t >::type d(dSEXP);
     Rcpp::traits::input_parameter< const double >::type alpha(alphaSEXP);
     Rcpp::traits::input_parameter< const double >::type beta(betaSEXP);
     rcpp_result_gen = Rcpp::wrap(Rcpp__rmo_esm_cuadras_auge(n, d, alpha, beta));
