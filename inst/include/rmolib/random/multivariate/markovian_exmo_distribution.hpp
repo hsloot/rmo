@@ -216,20 +216,20 @@ class markovian_exmo_distribution {
   param_type param() const { return parm_; }
   void param(const param_type& parm) { parm_ = parm; }
 
-  template <typename _EngineType>
-  result_type operator()(_EngineType& engine) {
-    return (*this)(engine, parm_);
+  template <typename _Engine>
+  result_type operator()(_Engine&& engine) {
+    return (*this)(std::forward<_Engine>(engine), parm_);
   }
 
-  template <typename _EngineType>
-  result_type operator()(_EngineType& engine, const param_type& parm) {
+  template <typename _Engine>
+  result_type operator()(_Engine&& engine, const param_type& parm) {
     result_type out(parm.dim_);
-    (*this)(engine, parm, out);
+    (*this)(std::forward<_Engine>(engine), parm, out);
     return out;
   }
 
   template <typename _Engine, typename _Container>
-  void operator()(_Engine& engine, const param_type& parm, _Container& out) {
+  void operator()(_Engine&& engine, const param_type& parm, _Container& out) {
     auto state = std::make_pair(_RealType{0}, std::size_t{0});
     auto& [time, number_dead] = state;
     auto dim = out.size();
@@ -262,7 +262,7 @@ class markovian_exmo_distribution {
   _DiscreteDistribution discrete_dist_{};
 
   template <typename _Engine>
-  auto __markov_process(_Engine& engine, const markov_parm_t& parm,
+  auto __markov_process(_Engine&& engine, const markov_parm_t& parm,
                         std::pair<_RealType, std::size_t> state) {
     auto& [time, location] = state;
     const auto& [intensity_parm, discrete_parm] = parm[location];

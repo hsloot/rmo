@@ -120,20 +120,20 @@ class cuadras_auge_distribution {
   auto beta() const { return parm_.beta(); }
 
   template <typename _Engine>
-  result_type operator()(_Engine& engine) {
-    return (*this)(engine, parm_);
+  result_type operator()(_Engine&& engine) {
+    return (*this)(std::forward<_Engine>(engine), parm_);
   }
 
   template <typename _Engine>
-  result_type operator()(_Engine& engine, const param_type& parm) {
+  result_type operator()(_Engine&& engine, const param_type& parm) {
     result_type out(parm.dim_);
-    (*this)(engine, parm, out);
+    (*this)(std::forward<_Engine>(engine), parm, out);
 
     return out;
   }
 
   template <typename _Engine, typename _OutputContainer>
-  void operator()(_Engine& engine, const param_type& parm,
+  void operator()(_Engine&& engine, const param_type& parm,
                   _OutputContainer& out) {
     const auto global_shock = exponential_dist_(engine, parm.beta_parm_);
     for (auto& value : out) {

@@ -22,6 +22,13 @@ struct __is_uniform_real_param_type<
                                                 std::true_type())::value>>
     : public std::true_type {};
 
+template <typename _RealType, typename _Engine>
+_RealType unit_uniform_real_distribution(_Engine&& engine) {
+  typename std::remove_reference_t<_Engine> engine_t;
+  return unit_uniform_real_distribution<_RealType>(
+      std::forward<_Engine>(engine), engine_t);
+}
+
 }  // namespace internal
 
 template <typename _T>
@@ -127,15 +134,17 @@ class uniform_real_distribution {
   void param(const param_type& parm) { parm_ = parm; }
 
   template <typename _Engine>
-  result_type operator()(_Engine& engine) {
-    return (*this)(engine, parm_);
+  result_type operator()(_Engine&& engine) {
+    return (*this)(std::forward<_Engine>(engine), parm_);
   }
 
   // warning: cpp distributions will generate values in [0, 1) and R
   // distribution in (0, 1)
   template <typename _Engine>
-  result_type operator()(_Engine& engine, const param_type& parm) {
-    return parm.lower_ + parm.length_ * unit_uniform_real_distribution(engine);
+  result_type operator()(_Engine&& engine, const param_type& parm) {
+    return parm.lower_ +
+           parm.length_ * internal::unit_uniform_real_distribution<_RealType>(
+                              std::forward<_Engine>(engine));
   }
 
   friend bool operator==(const uniform_real_distribution& lhs,
@@ -150,9 +159,6 @@ class uniform_real_distribution {
 
  private:
   param_type parm_{};
-
-  template <typename _Engine>
-  result_type unit_uniform_real_distribution(_Engine& engine);
 };
 
 /*

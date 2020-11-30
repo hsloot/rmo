@@ -1,7 +1,10 @@
 #include <type_traits>
 
+// clang-format off
 #include <Rcpp.h>
-#include <r_engine.hpp>
+#include <r_engine.hpp> // must be included before <rmolib/*>
+// clang-format on
+
 #include <rmo.hpp>
 #include <rmolib/distribution.hpp>
 

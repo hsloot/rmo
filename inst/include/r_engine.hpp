@@ -3,9 +3,6 @@
 #include <cmath>
 
 #include <Rcpp.h>
-#include <rmolib/random/univariate/exponential_distribution.hpp>
-#include <rmolib/random/univariate/uniform_int_distribution.hpp>
-#include <rmolib/random/univariate/uniform_real_distribution.hpp>
 
 struct r_engine {};
 
@@ -14,26 +11,26 @@ struct r_engine {};
 // ----------------------------------------
 
 namespace rmolib {
+
 namespace random {
 
-template <>
-template <>
-inline double uniform_real_distribution<double>::unit_uniform_real_distribution(
-    r_engine& engine) {
+namespace internal {
+
+template <typename _RealType, typename _Engine>
+inline _RealType unit_uniform_real_distribution(
+    _Engine&& engine, r_engine) {
   return ::unif_rand();
 }
 
-template <>
-template <>
-inline double exponential_distribution<double>::unit_exponential_distribution(
-    r_engine& engine) {
+template <typename _RealType, typename _Engine>
+inline _RealType unit_exponential_distribution(
+    _Engine&& engine, r_engine) {
   return ::exp_rand();
 }
 
-template <>
-template <>
-inline int uniform_int_distribution<int>::unit_uniform_int_distribution(
-    r_engine& engine, const int n) {
+template <typename _IntType, typename _Engine>
+inline _IntType unit_uniform_int_distribution(
+    _Engine&& engine, const _IntType n, r_engine) {
 #if defined(R_VERSION) && R_VERSION >= R_Version(3, 4, 0)
   return ::R_unif_index(static_cast<double>(n));
 #else
@@ -47,22 +44,8 @@ inline int uniform_int_distribution<int>::unit_uniform_int_distribution(
 #endif
 }
 
-template <>
-template <>
-inline std::size_t uniform_int_distribution<std::size_t>::unit_uniform_int_distribution(
-    r_engine& engine, const std::size_t n) {
-#if defined(R_VERSION) && R_VERSION >= R_Version(3, 4, 0)
-  return ::R_unif_index(static_cast<double>(n));
-#else
-  /*
-    Sample cannot be reimplemented fully backwards compatible because
-    of logic changes in between R 3.3 and R 3.4. However, as long
-    as the sample population and the number of samples are smaller
-    than `INT_MAX`, this emulation should yield the same results.
-   */
-  return std::floor(static_cast<double>(n * ::unif_rand()));
-#endif
 }
 
 }  // namespace random
+
 }  // namespace rmolib

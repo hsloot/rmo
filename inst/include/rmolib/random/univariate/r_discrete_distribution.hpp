@@ -256,13 +256,13 @@ class r_discrete_distribution {
   void param(const param_type& parm) { parm_ = parm; }
 
   template <typename _Engine>
-  result_type operator()(_Engine& engine) {
-    return (*this)(engine, parm_);
+  result_type operator()(_Engine&& engine) {
+    return (*this)(std::forward<_Engine>(engine), parm_);
   }
 
   template <typename _Engine>
-  result_type operator()(_Engine& engine, const param_type& parm) {
-    const auto u = unit_uniform_real_distribution_(engine);
+  result_type operator()(_Engine&& engine, const param_type& parm) {
+    const auto u = unit_uniform_real_distribution_(std::forward<_Engine>(engine));
     const auto it =
         std::lower_bound(parm.cumulative_probabilities_.cbegin(),
                          parm.cumulative_probabilities_.cend(), u,

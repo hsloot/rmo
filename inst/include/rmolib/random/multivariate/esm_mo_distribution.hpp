@@ -187,19 +187,19 @@ class esm_mo_distribution {
   void param(const param_type& parm) { parm_ = parm; }
 
   template <typename _Engine>
-  result_type operator()(_Engine& engine) {
-    return (*this)(engine, parm_);
+  result_type operator()(_Engine&& engine) {
+    return (*this)(std::forward<_Engine>(engine), parm_);
   }
 
   template <typename _Engine>
-  result_type operator()(_Engine& engine, const param_type& parm) {
+  result_type operator()(_Engine&& engine, const param_type& parm) {
     result_type out(parm.dim_);
-    (*this)(engine, parm, out);
+    (*this)(std::forward<_Engine>(engine), parm, out);
     return out;
   }
 
   template <typename _Engine, typename _Container>
-  void operator()(_Engine& engine, const param_type& parm, _Container& out) {
+  void operator()(_Engine&& engine, const param_type& parm, _Container& out) {
     // TODO: check compatibility
     std::fill(out.begin(), out.end(),
               std::numeric_limits<_RealType>::infinity());

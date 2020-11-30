@@ -19,6 +19,13 @@ struct __is_exponential_param_type<
                                   std::true_type())::value>>
     : public std::true_type {};
 
+template <typename _RealType, typename _Engine>
+_RealType unit_exponential_distribution(_Engine&& engine) {
+    typename std::remove_reference_t<_Engine> engine_t;
+    return unit_exponential_distribution<_RealType>(
+        std::forward<_Engine>(engine), engine_t);
+}
+
 }  // namespace internal
 
 template <typename _T>
@@ -110,18 +117,18 @@ class exponential_distribution {
   void param(const param_type& parm) { parm_ = parm; }
 
   template <typename _Engine>
-  result_type operator()(_Engine& engine) {
-    return (*this)(engine, parm_);
+  result_type operator()(_Engine&& engine) {
+    return (*this)(std::forward<_Engine>(engine), parm_);
   }
 
   template <typename _Engine>
-  result_type operator()(_Engine& engine, const param_type& parm) {
+  result_type operator()(_Engine&& engine, const param_type& parm) {
     if (_RealType{0} == parm.lambda_)
       return std::numeric_limits<_RealType>::infinity();
     else if (std::numeric_limits<_RealType>::infinity() == parm.lambda_)
       return _RealType{0};
     else
-      return unit_exponential_distribution(engine) / parm.lambda_;
+      return internal::unit_exponential_distribution<_RealType>(std::forward<_Engine>(engine)) / parm.lambda_;
   }
 
   friend bool operator==(const exponential_distribution& lhs,
@@ -136,9 +143,6 @@ class exponential_distribution {
 
  private:
   param_type parm_{};
-
-  template <typename _Engine>
-  result_type unit_exponential_distribution(_Engine& engine);
 };
 
 /*

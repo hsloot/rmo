@@ -185,20 +185,20 @@ class arnold_mo_distribution {
   void param(const param_type& parm) { parm_ = parm; }
 
   template <typename _Engine>
-  result_type operator()(_Engine& engine) {
-    return (*this)(engine, parm_);
+  result_type operator()(_Engine&& engine) {
+    return (*this)(std::forward<_Engine>(engine), parm_);
   }
 
   template <typename _Engine>
-  result_type operator()(_Engine& engine, const param_type& parm) {
+  result_type operator()(_Engine&& engine, const param_type& parm) {
     result_type out(parm.dim_);
-    (*this)(engine, parm, out);
+    (*this)(std::forward<_Engine>(engine), parm, out);
     return out;
   }
 
   //! implicitely assumes that `out.size() == dim`
   template <typename _Engine, typename _Container>
-  void operator()(_Engine& engine, const param_type& parm, _Container& out) {
+  void operator()(_Engine&& engine, const param_type& parm, _Container& out) {
     // TODO: check compatibility
     const auto dim = out.size();
     const auto all = bit::bit_fill<std::size_t>(0, dim, true);
@@ -232,7 +232,7 @@ class arnold_mo_distribution {
   _DiscreteDistribution discrete_dist_{};
 
   template <typename _Engine>
-  auto __compound_poisson_process(_Engine& engine,
+  auto __compound_poisson_process(_Engine&& engine,
                                   const compound_poisson_parm_t& parm,
                                   std::pair<_RealType, std::size_t> state) {
     const auto& [poisson_parm, discrete_parm] = parm;

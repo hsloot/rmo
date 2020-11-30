@@ -131,14 +131,14 @@ class pareto_distribution {
   void param(const param_type& parm) { parm_ = parm; }
 
   template <typename _Engine>
-  result_type operator()(_Engine& engine) {
-    return (*this)(engine, parm_);
+  result_type operator()(_Engine&& engine) {
+    return (*this)(std::forward<_Engine>(engine), parm_);
   }
 
   template <typename _Engine>
-  result_type operator()(_Engine& engine, const param_type& parm) {
+  result_type operator()(_Engine&& engine, const param_type& parm) {
     return parm.lower_bound_ /
-           std::pow(unit_uniform_real_dist_(engine), 1. / parm.alpha_);
+           std::pow(unit_uniform_real_dist_(std::forward<_Engine>(engine)), 1. / parm.alpha_);
   }
 
   friend bool operator==(const pareto_distribution& lhs,
