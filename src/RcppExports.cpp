@@ -218,13 +218,13 @@ BEGIN_RCPP
 END_RCPP
 }
 // Rcpp__rmo_lfm_cpp
-NumericMatrix Rcpp__rmo_lfm_cpp(const R_xlen_t n, const R_xlen_t d, const double rate, const double rate_killing, const double rate_drift, const std::string rjump_name, const List& rjump_arg_list);
+NumericMatrix Rcpp__rmo_lfm_cpp(const std::size_t n, const std::size_t d, const double rate, const double rate_killing, const double rate_drift, const std::string rjump_name, const List& rjump_arg_list);
 RcppExport SEXP _rmo_Rcpp__rmo_lfm_cpp(SEXP nSEXP, SEXP dSEXP, SEXP rateSEXP, SEXP rate_killingSEXP, SEXP rate_driftSEXP, SEXP rjump_nameSEXP, SEXP rjump_arg_listSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const R_xlen_t >::type n(nSEXP);
-    Rcpp::traits::input_parameter< const R_xlen_t >::type d(dSEXP);
+    Rcpp::traits::input_parameter< const std::size_t >::type n(nSEXP);
+    Rcpp::traits::input_parameter< const std::size_t >::type d(dSEXP);
     Rcpp::traits::input_parameter< const double >::type rate(rateSEXP);
     Rcpp::traits::input_parameter< const double >::type rate_killing(rate_killingSEXP);
     Rcpp::traits::input_parameter< const double >::type rate_drift(rate_driftSEXP);

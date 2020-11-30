@@ -205,7 +205,7 @@ class markovian_exmo_distribution {
 
   void reset() {}
 
-  auto min() const { return result_type(dim(), _RealType{-1}); }
+  auto min() const { return result_type(dim(), _RealType{0}); }
   auto max() const {
     return result_type(dim(), std::numeric_limits<_RealType>::infinity());
   }

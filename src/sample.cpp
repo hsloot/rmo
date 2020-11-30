@@ -156,50 +156,32 @@ NumericMatrix Rcpp__rmo_esm_cuadras_auge(const std::size_t n,
   return caller_t::call(r_engine{}, n, d, alpha, beta);
 }
 
-std::unique_ptr<RealUnivariateGenerator<double, RRNGPolicy>>
-get_univariate_generator(const std::string name, const List& args);
 
 //' @keywords internal
 //' @noRd
 // [[Rcpp::export]]
-NumericMatrix Rcpp__rmo_lfm_cpp(const R_xlen_t n, const R_xlen_t d,
+NumericMatrix Rcpp__rmo_lfm_cpp(const std::size_t n, const std::size_t d,
                                 const double rate, const double rate_killing,
                                 const double rate_drift,
                                 const std::string rjump_name,
                                 const List& rjump_arg_list) {
-  std::unique_ptr<RealUnivariateGenerator<double, RRNGPolicy>> jump_generator =
-      get_univariate_generator(rjump_name, rjump_arg_list);
-  LFMCPPGenerator<MatrixRow<REALSXP>, RRNGPolicy> lfm_cpp_generator(
-      d, rate, rate_killing, rate_drift, jump_generator);
+  using deterministic_caller_t =
+      rcpp_distribution_caller<rmolib::lfm_deterministic_distribution<double>>;
+  using exponential_caller_t =
+      rcpp_distribution_caller<rmolib::lfm_exponential_distribution<double>>;
+  using pareto_caller_t =
+      rcpp_distribution_caller<rmolib::lfm_pareto_distribution<double>>;
 
-  NumericMatrix out(no_init(n, d));
-  for (R_xlen_t k = 0; k < n; k++) {
-    if ((d * k) % C_CHECK_USR_INTERRUP == 0) checkUserInterrupt();
-
-    MatrixRow<REALSXP> values = out(k, _);
-    lfm_cpp_generator(values);
-  }
-  return out;
-}
-
-//' @keywords internal
-//' @noRd
-std::unique_ptr<RealUnivariateGenerator<double, RRNGPolicy>>
-get_univariate_generator(const std::string name, const List& args) {
-  std::unique_ptr<RealUnivariateGenerator<double, RRNGPolicy>> out;
-  if ("rexp" == name) {
-    double rate = args["rate"];
-    out.reset(new ExpGenerator<RRNGPolicy>(rate));
-  } else if ("rposval" == name) {
-    double value = args["value"];
-    out.reset(new FixedDblGenerator<RRNGPolicy>(value));
-  } else if ("rpareto" == name) {  // #nocov start
-    double alpha = args["alpha"];
-    double x0 = args["x0"];
-    out.reset(new ParetoGenerator<RRNGPolicy>(alpha, x0));
-  } else {                            // # nocov end
-    std::logic_error("wrong input");  // # nocov
-  }
-
-  return out;
+  if ("rposval" == rjump_name)
+    return deterministic_caller_t::call(
+        r_engine{}, n, d, rate_killing, rate_drift, rate, static_cast<double>(rjump_arg_list["value"]));
+  else if ("rexp" == rjump_name)
+    return exponential_caller_t::call(
+        r_engine{}, n, d, rate_killing, rate_drift, rate, static_cast<double>(rjump_arg_list["rate"]));
+  else if ("rpareto" == rjump_name)
+    return pareto_caller_t::call(
+        r_engine{}, n, d, rate_killing, rate_drift, rate, static_cast<double>(rjump_arg_list["alpha"]),
+        static_cast<double>(rjump_arg_list["x0"]));
+  else
+    throw std::domain_error("rjump_name not supported");
 }

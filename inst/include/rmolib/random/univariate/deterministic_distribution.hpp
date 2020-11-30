@@ -100,8 +100,8 @@ class deterministic_distribution {
 
   void reset() {}
 
-  auto min() const { return -std::numeric_limits<result_type>::infinity(); }
-  auto max() const { return std::numeric_limits<result_type>::infinity(); }
+  auto min() const { return value(); }
+  auto max() const { return value(); }
 
   auto value() const { return parm_.value(); }
 

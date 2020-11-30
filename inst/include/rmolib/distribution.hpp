@@ -6,6 +6,7 @@
 #include "random/multivariate/arnold_mo_distribution.hpp"
 #include "random/multivariate/cuadras_auge_distribution.hpp"
 #include "random/multivariate/esm_mo_distribution.hpp"
+#include "random/multivariate/lfm_distribution.hpp"
 #include "random/multivariate/markovian_exmo_distribution.hpp"
 #include "random/univariate/deterministic_distribution.hpp"
 #include "random/univariate/exponential_distribution.hpp"
@@ -63,6 +64,20 @@ using cuadras_auge_distribution =
     random::cuadras_auge_distribution<_RealType,
                                       exponential_distribution<_RealType>>;
 
+template <typename _RealType = double>
+using lfm_deterministic_distribution =
+    random::lfm_distribution<_RealType, deterministic_distribution<_RealType>,
+                             exponential_distribution<_RealType>>;
+
+template <typename _RealType = double>
+using lfm_exponential_distribution =
+    random::lfm_distribution<_RealType, exponential_distribution<_RealType>,
+                             exponential_distribution<_RealType>>;
+
+template <typename _RealType = double>
+using lfm_pareto_distribution =
+    random::lfm_distribution<_RealType, pareto_distribution<_RealType>,
+                             exponential_distribution<_RealType>>;
 // -----------------------------------------------------------------------------
 // public interfaces to alternative distributions sampling methods à la abseil
 // -----------------------------------------------------------------------------
@@ -155,13 +170,10 @@ void Arnold(_EngineType& engine, const std::size_t dim, _InputIterator first,
 }
 
 template <typename _EngineType, typename _InputIterator>
-void Markovian(_EngineType& engine,
-                    const std::size_t dim,
-                    _InputIterator first, _InputIterator last) {
-  using value_t =
-      std::remove_reference_t<typename _InputIterator::value_type>;
-  using dist_t =
-      markovian_exmo_distribution<value_t>;
+void Markovian(_EngineType& engine, const std::size_t dim, _InputIterator first,
+               _InputIterator last) {
+  using value_t = std::remove_reference_t<typename _InputIterator::value_type>;
+  using dist_t = markovian_exmo_distribution<value_t>;
   using parm_t = typename dist_t::param_type;
 
   dist_t dist{};
@@ -176,6 +188,39 @@ void CuadrasAuge(_EngineType& engine, const std::size_t dim,
 
   dist_t dist{};
   return dist(engine, parm_t{dim, alpha, beta});
+}
+
+template <typename _EngineType, typename... _Args>
+void LFMDeterministic(_EngineType& engine, const std::size_t dim,
+                 _Args... args) {
+  using real_t = typename std::decay_t<std::tuple_element_t<0, std::tuple<_Args...>>>;
+  using dist_t = lfm_deterministic_distribution<real_t>;
+  using parm_t = typename dist_t::param_type;
+
+  dist_t dist{};
+  return dist(engine, parm_t{dim, std::forward<_Args>(args)...});
+}
+
+template <typename _EngineType, typename... _Args>
+void LFMExponential(_EngineType& engine, const std::size_t dim,
+                 _Args... args) {
+  using real_t = typename std::decay_t<std::tuple_element_t<0, std::tuple<_Args...>>>;
+  using dist_t = lfm_exponential_distribution<real_t>;
+  using parm_t = typename dist_t::param_type;
+
+  dist_t dist{};
+  return dist(engine, parm_t{dim, std::forward<_Args>(args)...});
+}
+
+template <typename _EngineType, typename... _Args>
+void LFMPareto(_EngineType& engine, const std::size_t dim,
+                 _Args... args) {
+  using real_t = typename std::decay_t<std::tuple_element_t<0, std::tuple<_Args...>>>;
+  using dist_t = lfm_pareto_distribution<real_t>;
+  using parm_t = typename dist_t::param_type;
+
+  dist_t dist{};
+  return dist(engine, parm_t{dim, std::forward<_Args>(args)...});
 }
 
 }  // namespace rmolib
