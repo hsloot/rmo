@@ -1,7 +1,7 @@
 #pragma once
 
-#include <type_traits>
 #include <limits>
+#include <type_traits>
 
 namespace rmolib {
 
@@ -64,9 +64,20 @@ constexpr bool have_all_same_signage_v = have_all_same_signage<_Ts...>::value;
 
 }  // namespace internal
 
-template<typename _To, typename _From>
-struct is_safe_numeric_cast : public std::integral_constant<bool, internal::are_all_numeric_v<_To, _From> && (std::numeric_limits<_To>::digits >= std::numeric_limits<_From>::digits)> {};
-template<typename _To, typename _From>
-constexpr bool is_safe_numeric_cast_v  = is_safe_numeric_cast<_To, _From>::value;
+template <typename _To, typename _From>
+struct is_safe_numeric_cast
+    : public std::integral_constant<
+          bool, internal::are_all_numeric_v<_To, _From> &&
+                    ((std::is_floating_point_v<_To> &&
+                      (std::is_integral_v<_From> ||
+                       std::numeric_limits<_To>::digits >=
+                           std::numeric_limits<_From>::digits)) ||
+                     (std::numeric_limits<_To>::digits >
+                          std::numeric_limits<_From>::digits ||
+                      (internal::have_all_same_signage_v<_To, _From> &&
+                       std::numeric_limits<_To>::digits ==
+                           std::numeric_limits<_From>::digits)))> {};
+template <typename _To, typename _From>
+constexpr bool is_safe_numeric_cast_v = is_safe_numeric_cast<_To, _From>::value;
 }  // namespace type_traits
 }  // namespace rmolib

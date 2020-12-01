@@ -5,173 +5,26 @@
 
 using namespace Rcpp;
 
-// mo_internal__binomial_coefficient
-double mo_internal__binomial_coefficient(const std::size_t n, const std::size_t k);
-RcppExport SEXP _rmo_mo_internal__binomial_coefficient(SEXP nSEXP, SEXP kSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const std::size_t >::type n(nSEXP);
-    Rcpp::traits::input_parameter< const std::size_t >::type k(kSEXP);
-    rcpp_result_gen = Rcpp::wrap(mo_internal__binomial_coefficient(n, k));
-    return rcpp_result_gen;
-END_RCPP
-}
-// mo_internal__binomial_coefficient_factor
-double mo_internal__binomial_coefficient_factor(const double x, const std::size_t n, const std::size_t k);
-RcppExport SEXP _rmo_mo_internal__binomial_coefficient_factor(SEXP xSEXP, SEXP nSEXP, SEXP kSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const double >::type x(xSEXP);
-    Rcpp::traits::input_parameter< const std::size_t >::type n(nSEXP);
-    Rcpp::traits::input_parameter< const std::size_t >::type k(kSEXP);
-    rcpp_result_gen = Rcpp::wrap(mo_internal__binomial_coefficient_factor(x, n, k));
-    return rcpp_result_gen;
-END_RCPP
-}
-// mo_internal__rexp
-NumericVector mo_internal__rexp(const R_xlen_t n, const double rate);
-RcppExport SEXP _rmo_mo_internal__rexp(SEXP nSEXP, SEXP rateSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const R_xlen_t >::type n(nSEXP);
-    Rcpp::traits::input_parameter< const double >::type rate(rateSEXP);
-    rcpp_result_gen = Rcpp::wrap(mo_internal__rexp(n, rate));
-    return rcpp_result_gen;
-END_RCPP
-}
-// mo_internal__rpareto
-NumericVector mo_internal__rpareto(const R_xlen_t n, const double alpha, const double x0);
-RcppExport SEXP _rmo_mo_internal__rpareto(SEXP nSEXP, SEXP alphaSEXP, SEXP x0SEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const R_xlen_t >::type n(nSEXP);
-    Rcpp::traits::input_parameter< const double >::type alpha(alphaSEXP);
-    Rcpp::traits::input_parameter< const double >::type x0(x0SEXP);
-    rcpp_result_gen = Rcpp::wrap(mo_internal__rpareto(n, alpha, x0));
-    return rcpp_result_gen;
-END_RCPP
-}
-// mo_internal__fixeddbl
-NumericVector mo_internal__fixeddbl(const R_xlen_t n, const double value);
-RcppExport SEXP _rmo_mo_internal__fixeddbl(SEXP nSEXP, SEXP valueSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const R_xlen_t >::type n(nSEXP);
-    Rcpp::traits::input_parameter< const double >::type value(valueSEXP);
-    rcpp_result_gen = Rcpp::wrap(mo_internal__fixeddbl(n, value));
-    return rcpp_result_gen;
-END_RCPP
-}
-// mo_internal__count_replace
-IntegerVector mo_internal__count_replace(const R_xlen_t n, const R_xlen_t d, const Nullable<NumericVector> probabilities);
-RcppExport SEXP _rmo_mo_internal__count_replace(SEXP nSEXP, SEXP dSEXP, SEXP probabilitiesSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const R_xlen_t >::type n(nSEXP);
-    Rcpp::traits::input_parameter< const R_xlen_t >::type d(dSEXP);
-    Rcpp::traits::input_parameter< const Nullable<NumericVector> >::type probabilities(probabilitiesSEXP);
-    rcpp_result_gen = Rcpp::wrap(mo_internal__count_replace(n, d, probabilities));
-    return rcpp_result_gen;
-END_RCPP
-}
-// mo_internal__count_noreplace
-IntegerVector mo_internal__count_noreplace(const R_xlen_t n, const R_xlen_t d, const Nullable<NumericVector> probabilities);
-RcppExport SEXP _rmo_mo_internal__count_noreplace(SEXP nSEXP, SEXP dSEXP, SEXP probabilitiesSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const R_xlen_t >::type n(nSEXP);
-    Rcpp::traits::input_parameter< const R_xlen_t >::type d(dSEXP);
-    Rcpp::traits::input_parameter< const Nullable<NumericVector> >::type probabilities(probabilitiesSEXP);
-    rcpp_result_gen = Rcpp::wrap(mo_internal__count_noreplace(n, d, probabilities));
-    return rcpp_result_gen;
-END_RCPP
-}
-// mo_internal__perm
-IntegerVector mo_internal__perm(const R_xlen_t n);
-RcppExport SEXP _rmo_mo_internal__perm(SEXP nSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const R_xlen_t >::type n(nSEXP);
-    rcpp_result_gen = Rcpp::wrap(mo_internal__perm(n));
-    return rcpp_result_gen;
-END_RCPP
-}
-// mo_internal__sample_int
-IntegerVector mo_internal__sample_int(const R_xlen_t n, const R_xlen_t size, const bool replace, const Nullable<NumericVector>& prob, const bool useHash);
-RcppExport SEXP _rmo_mo_internal__sample_int(SEXP nSEXP, SEXP sizeSEXP, SEXP replaceSEXP, SEXP probSEXP, SEXP useHashSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const R_xlen_t >::type n(nSEXP);
-    Rcpp::traits::input_parameter< const R_xlen_t >::type size(sizeSEXP);
-    Rcpp::traits::input_parameter< const bool >::type replace(replaceSEXP);
-    Rcpp::traits::input_parameter< const Nullable<NumericVector>& >::type prob(probSEXP);
-    Rcpp::traits::input_parameter< const bool >::type useHash(useHashSEXP);
-    rcpp_result_gen = Rcpp::wrap(mo_internal__sample_int(n, size, replace, prob, useHash));
-    return rcpp_result_gen;
-END_RCPP
-}
-// mo_internal__reverse_sort
-void mo_internal__reverse_sort(NumericVector& a, IntegerVector& ib);
-RcppExport SEXP _rmo_mo_internal__reverse_sort(SEXP aSEXP, SEXP ibSEXP) {
-BEGIN_RCPP
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector& >::type a(aSEXP);
-    Rcpp::traits::input_parameter< IntegerVector& >::type ib(ibSEXP);
-    mo_internal__reverse_sort(a, ib);
-    return R_NilValue;
-END_RCPP
-}
-// mo_internal__revsort_orig
-void mo_internal__revsort_orig(NumericVector& a, IntegerVector& ib);
-RcppExport SEXP _rmo_mo_internal__revsort_orig(SEXP aSEXP, SEXP ibSEXP) {
-BEGIN_RCPP
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector& >::type a(aSEXP);
-    Rcpp::traits::input_parameter< IntegerVector& >::type ib(ibSEXP);
-    mo_internal__revsort_orig(a, ib);
-    return R_NilValue;
-END_RCPP
-}
-// mo_internal__sort_index
-IntegerVector mo_internal__sort_index(NumericVector& x);
-RcppExport SEXP _rmo_mo_internal__sort_index(SEXP xSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector& >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(mo_internal__sort_index(x));
-    return rcpp_result_gen;
-END_RCPP
-}
 // Rcpp__is_within
-bool Rcpp__is_within(const R_xlen_t i, const R_xlen_t j);
+bool Rcpp__is_within(const std::size_t i, const std::size_t j);
 RcppExport SEXP _rmo_Rcpp__is_within(SEXP iSEXP, SEXP jSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const R_xlen_t >::type i(iSEXP);
-    Rcpp::traits::input_parameter< const R_xlen_t >::type j(jSEXP);
+    Rcpp::traits::input_parameter< const std::size_t >::type i(iSEXP);
+    Rcpp::traits::input_parameter< const std::size_t >::type j(jSEXP);
     rcpp_result_gen = Rcpp::wrap(Rcpp__is_within(i, j));
     return rcpp_result_gen;
 END_RCPP
 }
 // Rcpp__rmo_esm
-NumericMatrix Rcpp__rmo_esm(const R_xlen_t n, const R_xlen_t d, const NumericVector& intensities);
+NumericMatrix Rcpp__rmo_esm(const std::size_t n, const std::size_t d, const NumericVector& intensities);
 RcppExport SEXP _rmo_Rcpp__rmo_esm(SEXP nSEXP, SEXP dSEXP, SEXP intensitiesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const R_xlen_t >::type n(nSEXP);
-    Rcpp::traits::input_parameter< const R_xlen_t >::type d(dSEXP);
+    Rcpp::traits::input_parameter< const std::size_t >::type n(nSEXP);
+    Rcpp::traits::input_parameter< const std::size_t >::type d(dSEXP);
     Rcpp::traits::input_parameter< const NumericVector& >::type intensities(intensitiesSEXP);
     rcpp_result_gen = Rcpp::wrap(Rcpp__rmo_esm(n, d, intensities));
     return rcpp_result_gen;
@@ -234,28 +87,70 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// mo_internal__deterministic
+NumericVector mo_internal__deterministic(const std::size_t n, const double value);
+RcppExport SEXP _rmo_mo_internal__deterministic(SEXP nSEXP, SEXP valueSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const std::size_t >::type n(nSEXP);
+    Rcpp::traits::input_parameter< const double >::type value(valueSEXP);
+    rcpp_result_gen = Rcpp::wrap(mo_internal__deterministic(n, value));
+    return rcpp_result_gen;
+END_RCPP
+}
+// mo_internal__exponential
+NumericVector mo_internal__exponential(const std::size_t n, const double rate);
+RcppExport SEXP _rmo_mo_internal__exponential(SEXP nSEXP, SEXP rateSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const std::size_t >::type n(nSEXP);
+    Rcpp::traits::input_parameter< const double >::type rate(rateSEXP);
+    rcpp_result_gen = Rcpp::wrap(mo_internal__exponential(n, rate));
+    return rcpp_result_gen;
+END_RCPP
+}
+// mo_internal__pareto
+NumericVector mo_internal__pareto(const std::size_t n, const double alpha, const double x0);
+RcppExport SEXP _rmo_mo_internal__pareto(SEXP nSEXP, SEXP alphaSEXP, SEXP x0SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const std::size_t >::type n(nSEXP);
+    Rcpp::traits::input_parameter< const double >::type alpha(alphaSEXP);
+    Rcpp::traits::input_parameter< const double >::type x0(x0SEXP);
+    rcpp_result_gen = Rcpp::wrap(mo_internal__pareto(n, alpha, x0));
+    return rcpp_result_gen;
+END_RCPP
+}
+// mo_internal__rdiscrete
+IntegerVector mo_internal__rdiscrete(const std::size_t n, const std::size_t d, const Nullable<NumericVector> probabilities);
+RcppExport SEXP _rmo_mo_internal__rdiscrete(SEXP nSEXP, SEXP dSEXP, SEXP probabilitiesSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const std::size_t >::type n(nSEXP);
+    Rcpp::traits::input_parameter< const std::size_t >::type d(dSEXP);
+    Rcpp::traits::input_parameter< const Nullable<NumericVector> >::type probabilities(probabilitiesSEXP);
+    rcpp_result_gen = Rcpp::wrap(mo_internal__rdiscrete(n, d, probabilities));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 RcppExport SEXP run_testthat_tests(SEXP);
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_rmo_mo_internal__binomial_coefficient", (DL_FUNC) &_rmo_mo_internal__binomial_coefficient, 2},
-    {"_rmo_mo_internal__binomial_coefficient_factor", (DL_FUNC) &_rmo_mo_internal__binomial_coefficient_factor, 3},
-    {"_rmo_mo_internal__rexp", (DL_FUNC) &_rmo_mo_internal__rexp, 2},
-    {"_rmo_mo_internal__rpareto", (DL_FUNC) &_rmo_mo_internal__rpareto, 3},
-    {"_rmo_mo_internal__fixeddbl", (DL_FUNC) &_rmo_mo_internal__fixeddbl, 2},
-    {"_rmo_mo_internal__count_replace", (DL_FUNC) &_rmo_mo_internal__count_replace, 3},
-    {"_rmo_mo_internal__count_noreplace", (DL_FUNC) &_rmo_mo_internal__count_noreplace, 3},
-    {"_rmo_mo_internal__perm", (DL_FUNC) &_rmo_mo_internal__perm, 1},
-    {"_rmo_mo_internal__sample_int", (DL_FUNC) &_rmo_mo_internal__sample_int, 5},
-    {"_rmo_mo_internal__reverse_sort", (DL_FUNC) &_rmo_mo_internal__reverse_sort, 2},
-    {"_rmo_mo_internal__revsort_orig", (DL_FUNC) &_rmo_mo_internal__revsort_orig, 2},
-    {"_rmo_mo_internal__sort_index", (DL_FUNC) &_rmo_mo_internal__sort_index, 1},
     {"_rmo_Rcpp__is_within", (DL_FUNC) &_rmo_Rcpp__is_within, 2},
     {"_rmo_Rcpp__rmo_esm", (DL_FUNC) &_rmo_Rcpp__rmo_esm, 3},
     {"_rmo_Rcpp__rmo_arnold", (DL_FUNC) &_rmo_Rcpp__rmo_arnold, 3},
     {"_rmo_Rcpp__rmo_ex_arnold", (DL_FUNC) &_rmo_Rcpp__rmo_ex_arnold, 3},
     {"_rmo_Rcpp__rmo_esm_cuadras_auge", (DL_FUNC) &_rmo_Rcpp__rmo_esm_cuadras_auge, 4},
     {"_rmo_Rcpp__rmo_lfm_cpp", (DL_FUNC) &_rmo_Rcpp__rmo_lfm_cpp, 7},
+    {"_rmo_mo_internal__deterministic", (DL_FUNC) &_rmo_mo_internal__deterministic, 2},
+    {"_rmo_mo_internal__exponential", (DL_FUNC) &_rmo_mo_internal__exponential, 2},
+    {"_rmo_mo_internal__pareto", (DL_FUNC) &_rmo_mo_internal__pareto, 3},
+    {"_rmo_mo_internal__rdiscrete", (DL_FUNC) &_rmo_mo_internal__rdiscrete, 3},
     {"run_testthat_tests", (DL_FUNC) &run_testthat_tests, 1},
     {NULL, NULL, 0}
 };

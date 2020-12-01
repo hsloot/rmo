@@ -8,11 +8,6 @@ namespace rmolib {
 
 namespace math {
 
-template <typename _IntType>
-inline _IntType binomial_coefficient(const _IntType n, const _IntType k) {
-  return static_cast<_IntType>(multiply_binomial_coefficient(1., n, k));
-}
-
 template <typename _RealType, typename _IntType, typename _BinaryOperation>
 inline _RealType multiply_binomial_coefficient(
     const _RealType x, const _IntType n, const _IntType k,
@@ -40,6 +35,11 @@ inline _RealType multiply_binomial_coefficient(
 template <typename _RealType, typename _IntType>
 inline _RealType multiply_binomial_coefficient(const _RealType x, const _IntType n, const _IntType k) {
   return multiply_binomial_coefficient(x, n, k, std::multiplies<_RealType>{});
+}
+
+template <typename _IntType>
+inline _IntType binomial_coefficient(const _IntType n, const _IntType k) {
+  return static_cast<_IntType>(multiply_binomial_coefficient(1., n, k));
 }
 
 }  // namespace math
