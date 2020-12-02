@@ -9,6 +9,8 @@
 using exponential_dist_t = rmolib::random::exponential_distribution<double>;
 using parm_t = exponential_dist_t::param_type;
 
+namespace tests_exponential_distribution {
+
 class generic_param_type {
  public:
   generic_param_type() = default;
@@ -32,7 +34,10 @@ class generic_param_type {
  private:
   double lambda_{1};
 };
-using generic_parm_t = generic_param_type;
+
+}  // namespace tests_exponential_distribution
+
+using generic_parm_t = tests_exponential_distribution::generic_param_type;
 
 template <typename exponential_dist_t, typename generic_parm_t>
 void tester_distribution<exponential_dist_t, generic_parm_t>::__param_test(

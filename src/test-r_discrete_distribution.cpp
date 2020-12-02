@@ -17,6 +17,8 @@ using r_discrete_dist_t =
     rmolib::random::r_discrete_distribution<int, double, uniform_real_dist_t>;
 using parm_t = r_discrete_dist_t::param_type;
 
+namespace test_r_discrete_distribution {
+
 class generic_param_type {
  public:
   generic_param_type() = default;
@@ -75,7 +77,10 @@ class generic_param_type {
     }
   }
 };
-using generic_parm_t = generic_param_type;
+
+}  // namespace test_r_discrete_distribution
+
+using generic_parm_t = test_r_discrete_distribution::generic_param_type;
 
 template <typename r_discrete_dist_t, typename generic_parm_t>
 void tester_distribution<r_discrete_dist_t, generic_parm_t>::__param_test(

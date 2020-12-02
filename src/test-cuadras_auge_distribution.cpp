@@ -16,6 +16,8 @@ using cuadras_auge_dist_t =
     rmolib::random::cuadras_auge_distribution<double, exponential_dist_t>;
 using parm_t = cuadras_auge_dist_t::param_type;
 
+namespace test_cuadras_auge_distribution {
+
 class generic_param_type {
  public:
   generic_param_type() = default;
@@ -45,7 +47,10 @@ class generic_param_type {
   double alpha_{1};
   double beta_{0};
 };
-using generic_parm_t = generic_param_type;
+
+}  // namespace test_cuadras_auge_distribution
+
+using generic_parm_t = test_cuadras_auge_distribution::generic_param_type;
 
 template <typename cuadras_auge_dist_t, typename generic_parm_t>
 void tester_distribution<cuadras_auge_dist_t, generic_parm_t>::__param_test(

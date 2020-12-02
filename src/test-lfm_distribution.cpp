@@ -21,6 +21,8 @@ using lfm_dist_t =
 using jump_parm_t = pareto_dist_t::param_type;
 using parm_t = lfm_dist_t::param_type;
 
+namespace test_pareto_lfm_distribution {
+
 class generic_param_type {
  public:
   generic_param_type() = default;
@@ -58,7 +60,10 @@ class generic_param_type {
   double intensity_{1};
   jump_parm_t jump_parm_{};
 };
-using generic_parm_t = generic_param_type;
+
+}  // namespace test_pareto_lfm_distribution
+
+using generic_parm_t = test_pareto_lfm_distribution::generic_param_type;
 
 template <typename lfm_dist_t, typename generic_parm_t>
 void tester_distribution<lfm_dist_t, generic_parm_t>::__param_test(

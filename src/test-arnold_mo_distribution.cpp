@@ -23,6 +23,8 @@ using arnold_mo_dist_t =
                                            r_discrete_dist_t>;
 using parm_t = arnold_mo_dist_t::param_type;
 
+namespace test_arnold_mo_distribution {
+
 class generic_param_type {
  public:
   generic_param_type() = default;
@@ -52,7 +54,10 @@ class generic_param_type {
   std::size_t dim_{1};
   std::vector<double> intensities_ = {1.};
 };
-using generic_parm_t = generic_param_type;
+
+}  // namespace test_arnold_mo_distribution
+
+using generic_parm_t = test_arnold_mo_distribution::generic_param_type;
 
 template <typename arnold_mo_dist_t, typename generic_parm_t>
 void tester_distribution<arnold_mo_dist_t, generic_parm_t>::__param_test(

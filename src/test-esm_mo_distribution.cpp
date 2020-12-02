@@ -16,6 +16,8 @@ using esm_mo_dist_t =
     rmolib::random::esm_mo_distribution<double, exponential_dist_t>;
 using parm_t = esm_mo_dist_t::param_type;
 
+namespace test_esm_mo_distribution {
+
 class generic_param_type {
  public:
   generic_param_type() = default;
@@ -45,7 +47,10 @@ class generic_param_type {
   std::size_t dim_{1};
   std::vector<double> intensities_ = {1.};
 };
-using generic_parm_t = generic_param_type;
+
+}  // namespace test_esm_mo_distribution
+
+using generic_parm_t = test_esm_mo_distribution::generic_param_type;
 
 template <typename esm_mo_dist_t, typename generic_parm_t>
 void tester_distribution<esm_mo_dist_t, generic_parm_t>::__param_test(

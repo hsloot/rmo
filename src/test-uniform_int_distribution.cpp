@@ -7,6 +7,8 @@
 using uniform_int_dist_t = rmolib::random::uniform_int_distribution<int>;
 using parm_t = uniform_int_dist_t::param_type;
 
+namespace test_uniform_int_distribution {
+
 class generic_param_type {
  public:
   generic_param_type() = default;
@@ -32,7 +34,10 @@ class generic_param_type {
   int lower_{0};
   int upper_{std::numeric_limits<int>::max()};
 };
-using generic_parm_t = generic_param_type;
+
+}  // namespace test_uniform_int_distribution
+
+using generic_parm_t = test_uniform_int_distribution::generic_param_type;
 
 template <typename uniform_int_dist_t, typename generic_parm_t>
 void tester_distribution<uniform_int_dist_t, generic_parm_t>::__param_test(

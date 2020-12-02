@@ -9,6 +9,8 @@
 using deterministic_dist_t = rmolib::random::deterministic_distribution<double>;
 using parm_t = deterministic_dist_t::param_type;
 
+namespace test_deterministic_distribution {
+
 class generic_param_type {
  public:
   generic_param_type() = default;
@@ -32,7 +34,10 @@ class generic_param_type {
  private:
   double value_{1};
 };
-using generic_parm_t = generic_param_type;
+
+}
+
+using generic_parm_t = test_deterministic_distribution::generic_param_type;
 
 template <typename deterministic_dist_t, typename generic_parm_t>
 void tester_distribution<deterministic_dist_t, generic_parm_t>::__param_test(

@@ -25,6 +25,8 @@ using markovian_exmo_dist_t = rmolib::random::markovian_exmo_distribution<
     double, exponential_dist_t, uniform_int_dist_t, r_discrete_dist_t>;
 using parm_t = markovian_exmo_dist_t::param_type;
 
+namespace test_markovian_exmo_distribution {
+
 class generic_param_type {
  public:
   generic_param_type() = default;
@@ -54,7 +56,10 @@ class generic_param_type {
   std::size_t dim_{1};
   std::vector<double> ex_intensities_ = {1.};
 };
-using generic_parm_t = generic_param_type;
+
+}  // namespace test_markovian_exmo_distribution
+
+using generic_parm_t = test_markovian_exmo_distribution::generic_param_type;
 
 template <typename markovian_exmo_dist_t, typename generic_parm_t>
 void tester_distribution<markovian_exmo_dist_t, generic_parm_t>::__param_test(

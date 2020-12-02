@@ -7,6 +7,8 @@
 using uniform_real_dist_t = rmolib::random::uniform_real_distribution<double>;
 using parm_t = uniform_real_dist_t::param_type;
 
+namespace test_uniform_real_distribution {
+
 class generic_param_type {
  public:
   generic_param_type() = default;
@@ -32,7 +34,10 @@ class generic_param_type {
   double lower_{0};
   double upper_{1};
 };
-using generic_parm_t = generic_param_type;
+
+}  // namespace test_uniform_real_distribution
+
+using generic_parm_t = test_uniform_real_distribution::generic_param_type;
 
 template <typename uniform_real_dist_t, typename generic_parm_t>
 void tester_distribution<uniform_real_dist_t, generic_parm_t>::__param_test(
@@ -48,7 +53,6 @@ context("uniform_real_distribution") {
   const auto test_cases = {generic_parm_t{}, generic_parm_t{0., 1.},
                            generic_parm_t{0., 3.}, generic_parm_t{-3., 0.},
                            generic_parm_t{-1., 1.}};
-  auto dist_tester =
-      dist_tester_t{"uniform_real_distribution", test_cases};
+  auto dist_tester = dist_tester_t{"uniform_real_distribution", test_cases};
   dist_tester.run_tests(r_engine{});
 }
