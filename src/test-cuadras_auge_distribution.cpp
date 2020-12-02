@@ -9,27 +9,11 @@
 #include <testthat.h>
 
 #include "testutils-approxequals.h"
-
-#define RMO_TEST_DIST_NAME cuadras_auge_dist_t
-#define RMO_TEST_DIST_NAME_STRING "cuadras_auge_distribution"
-
-#define RMO_TEST_ARG_LIST                                                     \
-  {                                                                           \
-    generic_parm_t{}, generic_parm_t{std::size_t{2}, 1., 0.}, generic_parm_t{std::size_t{2}, 0., 1.}, \
-        generic_parm_t{std::size_t{3}, 0.4, 0.2}, generic_parm_t {                            \
-      std::size_t{3}, 0.7, 0.1                                                \
-    }                                                                         \
-  }
-
-#define RMO_TEST_CHECK_PARAMS(__DIST__, __PARAMS__)    \
-  expect_true(__DIST__.dim() == __PARAMS__.dim());     \
-  expect_true(__DIST__.alpha() == __PARAMS__.alpha()); \
-  expect_true(__DIST__.beta() == __PARAMS__.beta());
+#include "testutils-tester_distribution.h"
 
 using exponential_dist_t = rmolib::random::exponential_distribution<double>;
 using cuadras_auge_dist_t =
-    rmolib::random::cuadras_auge_distribution<double,
-                                              exponential_dist_t>;
+    rmolib::random::cuadras_auge_distribution<double, exponential_dist_t>;
 using parm_t = cuadras_auge_dist_t::param_type;
 
 class generic_param_type {
@@ -63,4 +47,23 @@ class generic_param_type {
 };
 using generic_parm_t = generic_param_type;
 
-#include "test-distribution.h"
+template <typename cuadras_auge_dist_t, typename generic_parm_t>
+void tester_distribution<cuadras_auge_dist_t, generic_parm_t>::__param_test(
+    const generic_param_type& test_parm) const {
+  const auto dist = distribution_type{test_parm};
+  expect_true(dist.dim() == test_parm.dim());
+  expect_true(dist.alpha() == test_parm.alpha());
+  expect_true(dist.beta() == test_parm.beta());
+}
+
+using dist_tester_t = tester_distribution<cuadras_auge_dist_t, generic_parm_t>;
+
+context("cuadras_auge_distribution") {
+  const auto test_cases = {generic_parm_t{},
+                           generic_parm_t{std::size_t{2}, 1., 0.},
+                           generic_parm_t{std::size_t{2}, 0., 1.},
+                           generic_parm_t{std::size_t{3}, 0.4, 0.2},
+                           generic_parm_t{std::size_t{3}, 0.7, 0.1}};
+  auto dist_tester = dist_tester_t{"cuadras_auge_distribution", test_cases};
+  dist_tester.run_tests(r_engine{});
+}

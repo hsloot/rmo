@@ -2,20 +2,7 @@
 #include <rmolib/random/univariate/uniform_int_distribution.hpp>
 #include <testthat.h>
 
-#define RMO_TEST_DIST_NAME uniform_int_dist_t
-#define RMO_TEST_DIST_NAME_STRING "uniform_int_distribution"
-
-#define RMO_TEST_ARG_LIST                                           \
-  {                                                                 \
-    generic_parm_t{}, generic_parm_t{0, 1}, generic_parm_t{0, 100}, \
-        generic_parm_t{-100, 0}, generic_parm_t {                   \
-      -100, 100                                                     \
-    }                                                               \
-  }
-
-#define RMO_TEST_CHECK_PARAMS(__DIST__, __PARAMS__)    \
-  expect_true(__DIST__.lower() == __PARAMS__.lower()); \
-  expect_true(__DIST__.upper() == __PARAMS__.upper());
+#include "testutils-tester_distribution.h"
 
 using uniform_int_dist_t = rmolib::random::uniform_int_distribution<int>;
 using parm_t = uniform_int_dist_t::param_type;
@@ -47,4 +34,20 @@ class generic_param_type {
 };
 using generic_parm_t = generic_param_type;
 
-#include "test-distribution.h"
+template <typename uniform_int_dist_t, typename generic_parm_t>
+void tester_distribution<uniform_int_dist_t, generic_parm_t>::__param_test(
+    const generic_param_type& test_parm) const {
+  const auto dist = distribution_type{test_parm};
+  expect_true(dist.lower() == test_parm.lower());
+  expect_true(dist.upper() == test_parm.upper());
+}
+
+using dist_tester_t = tester_distribution<uniform_int_dist_t, generic_parm_t>;
+
+context("uniform_int_distribution") {
+  const auto test_cases = {generic_parm_t{}, generic_parm_t{0, 1},
+                           generic_parm_t{0, 100}, generic_parm_t{-100, 0},
+                           generic_parm_t{-100, 100}};
+  auto dist_tester = dist_tester_t{"uniform_int_distribution", test_cases};
+  dist_tester.run_tests(r_engine{});
+}

@@ -4,20 +4,7 @@
 #include <rmolib/random/univariate/deterministic_distribution.hpp>
 #include <testthat.h>
 
-#define RMO_TEST_DIST_NAME deterministic_dist_t
-#define RMO_TEST_DIST_NAME_STRING "deterministic_distribution"
-
-#define RMO_TEST_ARG_LIST                                        \
-  {                                                              \
-    generic_parm_t{1.}, generic_parm_t{.5}, generic_parm_t{0.},  \
-        generic_parm_t{std::numeric_limits<double>::infinity()}, \
-        generic_parm_t {                                         \
-      2.                                                         \
-    }                                                            \
-  }
-
-#define RMO_TEST_CHECK_PARAMS(__DIST__, __PARAMS__) \
-  expect_true(__DIST__.value() == __PARAMS__.value());
+#include "testutils-tester_distribution.h"
 
 using deterministic_dist_t = rmolib::random::deterministic_distribution<double>;
 using parm_t = deterministic_dist_t::param_type;
@@ -47,4 +34,20 @@ class generic_param_type {
 };
 using generic_parm_t = generic_param_type;
 
-#include "test-distribution.h"
+template <typename deterministic_dist_t, typename generic_parm_t>
+void tester_distribution<deterministic_dist_t, generic_parm_t>::__param_test(
+    const generic_param_type& test_parm) const {
+  const auto dist = distribution_type{test_parm};
+  expect_true(dist.value() == test_parm.value());
+}
+
+using dist_tester_t = tester_distribution<deterministic_dist_t, generic_parm_t>;
+
+context("deterministic_distribution") {
+  const auto test_cases = {
+      generic_parm_t{1.}, generic_parm_t{.5}, generic_parm_t{0.},
+      generic_parm_t{std::numeric_limits<double>::infinity()},
+      generic_parm_t{2.}};
+  auto dist_tester = dist_tester_t{"deterministic_distribution", test_cases};
+  dist_tester.run_tests(r_engine{});
+}

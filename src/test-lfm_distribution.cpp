@@ -10,23 +10,7 @@
 #include <testthat.h>
 
 #include "testutils-approxequals.h"
-
-#define RMO_TEST_DIST_NAME lfm_dist_t
-#define RMO_TEST_DIST_NAME_STRING "lfm_distribution"
-
-#define RMO_TEST_ARG_LIST                                   \
-  {                                                         \
-    generic_parm_t{}, generic_parm_t {                      \
-      std::size_t{2}, 0., 0., 1., jump_parm_t { .5, 0.005 } \
-    }                                                       \
-  }
-
-#define RMO_TEST_CHECK_PARAMS(__DIST__, __PARAMS__) \
-  expect_true(__DIST__.dim() == __PARAMS__.dim());  \
-  expect_true(__DIST__.killing() == __PARAMS__.killing()); \
-  expect_true(__DIST__.drift() == __PARAMS__.drift()); \
-  expect_true(__DIST__.intensity() == __PARAMS__.intensity()); \
-  expect_true(__DIST__.jump_param() == __PARAMS__.jump_param()); \
+#include "testutils-tester_distribution.h"
 
 using exponential_dist_t = rmolib::random::exponential_distribution<double>;
 using uniform_real_dist_t = rmolib::random::uniform_real_distribution<double>;
@@ -76,4 +60,23 @@ class generic_param_type {
 };
 using generic_parm_t = generic_param_type;
 
-#include "test-distribution.h"
+template <typename lfm_dist_t, typename generic_parm_t>
+void tester_distribution<lfm_dist_t, generic_parm_t>::__param_test(
+    const generic_param_type& test_parm) const {
+  const auto dist = distribution_type{test_parm};
+  expect_true(dist.dim() == test_parm.dim());
+  expect_true(dist.killing() == test_parm.killing());
+  expect_true(dist.drift() == test_parm.drift());
+  expect_true(dist.intensity() == test_parm.intensity());
+  expect_true(dist.jump_param() == test_parm.jump_param());
+}
+
+using dist_tester_t = tester_distribution<lfm_dist_t, generic_parm_t>;
+
+context("pareto_lfm_distribution") {
+  const auto test_cases = {
+      generic_parm_t{},
+      generic_parm_t{std::size_t{2}, 0., 0., 1., jump_parm_t{.5, 0.005}}};
+  auto dist_tester = dist_tester_t{"pareto_lfm_distribution", test_cases};
+  dist_tester.run_tests(r_engine{});
+}

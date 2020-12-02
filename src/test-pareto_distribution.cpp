@@ -6,20 +6,7 @@
 #include <rmolib/random/univariate/uniform_real_distribution.hpp>
 #include <testthat.h>
 
-#define RMO_TEST_DIST_NAME pareto_dist_t
-#define RMO_TEST_DIST_NAME_STRING "pareto_distribution"
-
-#define RMO_TEST_ARG_LIST                                                \
-  {                                                                      \
-    generic_parm_t{}, generic_parm_t{1., 1.}, generic_parm_t{.5, 0.005}, \
-        generic_parm_t {                                                 \
-      2., 005                                                            \
-    }                                                                    \
-  }
-
-#define RMO_TEST_CHECK_PARAMS(__DIST__, __PARAMS__)    \
-  expect_true(__DIST__.alpha() == __PARAMS__.alpha()); \
-  expect_true(__DIST__.lower_bound() == __PARAMS__.lower_bound());
+#include "testutils-tester_distribution.h"
 
 using uniform_real_dist_t = rmolib::random::uniform_real_distribution<double>;
 using pareto_dist_t =
@@ -52,4 +39,19 @@ class generic_param_type {
 };
 using generic_parm_t = generic_param_type;
 
-#include "test-distribution.h"
+template <typename pareto_dist_t, typename generic_parm_t>
+void tester_distribution<pareto_dist_t, generic_parm_t>::__param_test(
+    const generic_param_type& test_parm) const {
+  const auto dist = distribution_type{test_parm};
+  expect_true(dist.alpha() == test_parm.alpha());
+  expect_true(dist.lower_bound() == test_parm.lower_bound());
+}
+
+using dist_tester_t = tester_distribution<pareto_dist_t, generic_parm_t>;
+
+context("pareto_distribution") {
+  const auto test_cases = {generic_parm_t{}, generic_parm_t{1., 1.},
+                           generic_parm_t{.5, 0.005}, generic_parm_t{2., 005}};
+  auto dist_tester = dist_tester_t{"pareto_distribution", test_cases};
+  dist_tester.run_tests(r_engine{});
+}

@@ -10,22 +10,7 @@
 #include <testthat.h>
 
 #include "testutils-approxequals.h"
-
-#define RMO_TEST_DIST_NAME r_discrete_dist_t
-#define RMO_TEST_DIST_NAME_STRING "r_discrete_distribution"
-
-#define RMO_TEST_ARG_LIST                                                      \
-  {                                                                            \
-    generic_parm_t{}, generic_parm_t{{1., 1., 1.}},                            \
-        generic_parm_t{{0., 1., 2., 4.}}, generic_parm_t{{2., 1., 0.5, 0.2}},  \
-        generic_parm_t{{0.2, 0.3, 0.2, 0.1, 0.15, 0.05}}, generic_parm_t {     \
-      7, 0.1, 0.5, [](auto&& val) { return std::forward<decltype(val)>(val); } \
-    }                                                                          \
-  }
-
-#define RMO_TEST_CHECK_PARAMS(__DIST__, __PARAMS__) \
-  CATCH_CHECK_THAT(__DIST__.probabilities(),        \
-                   EqualsApprox(__PARAMS__.probabilities()));
+#include "testutils-tester_distribution.h"
 
 using uniform_real_dist_t = rmolib::random::uniform_real_distribution<double>;
 using r_discrete_dist_t =
@@ -85,12 +70,33 @@ class generic_param_type {
       for (auto it = first; it != last; ++it) p_.emplace_back(*it);
       p_.shrink_to_fit();
       std::transform(p_.cbegin(), p_.cend(), p_.begin(),
-                [mass = std::accumulate(p_.begin(), p_.end(), 0.)](auto val) {
-                  return val / mass;
-                });
+                     [mass = std::accumulate(p_.begin(), p_.end(), 0.)](
+                         auto val) { return val / mass; });
     }
   }
 };
 using generic_parm_t = generic_param_type;
 
-#include "test-distribution.h"
+template <typename r_discrete_dist_t, typename generic_parm_t>
+void tester_distribution<r_discrete_dist_t, generic_parm_t>::__param_test(
+    const generic_param_type& test_parm) const {
+  const auto dist = distribution_type{test_parm};
+  CATCH_CHECK_THAT(dist.probabilities(),
+                   EqualsApprox(test_parm.probabilities()));
+}
+
+using dist_tester_t = tester_distribution<r_discrete_dist_t, generic_parm_t>;
+
+context("r_discrete_distribution") {
+  const auto test_cases = {
+      generic_parm_t{},
+      generic_parm_t{{1., 1., 1.}},
+      generic_parm_t{{0., 1., 2., 4.}},
+      generic_parm_t{{2., 1., 0.5, 0.2}},
+      generic_parm_t{{0.2, 0.3, 0.2, 0.1, 0.15, 0.05}},
+      generic_parm_t{7, 0.1, 0.5, [](auto&& val) {
+                       return std::forward<decltype(val)>(val);
+                     }}};
+  auto dist_tester = dist_tester_t{"r_discrete_distribution", test_cases};
+  dist_tester.run_tests(r_engine{});
+}

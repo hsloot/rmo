@@ -9,23 +9,7 @@
 #include <testthat.h>
 
 #include "testutils-approxequals.h"
-
-#define RMO_TEST_DIST_NAME esm_mo_dist_t
-#define RMO_TEST_DIST_NAME_STRING "esm_mo_distribution"
-
-#define RMO_TEST_ARG_LIST                                             \
-  {                                                                   \
-    generic_parm_t{}, generic_parm_t{std::size_t{2}, {1., 1., 1.}},   \
-        generic_parm_t{std::size_t{3}, {0., 1., 2., 3., 4., 5., 6.}}, \
-        generic_parm_t {                                              \
-      std::size_t{3}, { 2., 1., 0.5, 0.2, 0.3, 4., .7 }               \
-    }                                                                 \
-  }
-
-#define RMO_TEST_CHECK_PARAMS(__DIST__, __PARAMS__) \
-  expect_true(__DIST__.dim() == __PARAMS__.dim());  \
-  CATCH_CHECK_THAT(__DIST__.intensities(),          \
-                   EqualsApprox(__PARAMS__.intensities()));
+#include "testutils-tester_distribution.h"
 
 using exponential_dist_t = rmolib::random::exponential_distribution<double>;
 using esm_mo_dist_t =
@@ -63,4 +47,21 @@ class generic_param_type {
 };
 using generic_parm_t = generic_param_type;
 
-#include "test-distribution.h"
+template <typename esm_mo_dist_t, typename generic_parm_t>
+void tester_distribution<esm_mo_dist_t, generic_parm_t>::__param_test(
+    const generic_param_type& test_parm) const {
+  const auto dist = distribution_type{test_parm};
+  expect_true(dist.dim() == test_parm.dim());
+  CATCH_CHECK_THAT(dist.intensities(), EqualsApprox(test_parm.intensities()));
+}
+
+using dist_tester_t = tester_distribution<esm_mo_dist_t, generic_parm_t>;
+
+context("esm_mo_distribution") {
+  const auto test_cases = {
+      generic_parm_t{}, generic_parm_t{std::size_t{2}, {1., 1., 1.}},
+      generic_parm_t{std::size_t{3}, {0., 1., 2., 3., 4., 5., 6.}},
+      generic_parm_t{std::size_t{3}, {2., 1., 0.5, 0.2, 0.3, 4., .7}}};
+  auto dist_tester = dist_tester_t{"esm_mo_distribution", test_cases};
+  dist_tester.run_tests(r_engine{});
+}

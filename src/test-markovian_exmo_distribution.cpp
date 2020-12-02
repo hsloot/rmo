@@ -12,23 +12,7 @@
 #include <testthat.h>
 
 #include "testutils-approxequals.h"
-
-#define RMO_TEST_DIST_NAME markovian_exmo_dist_t
-#define RMO_TEST_DIST_NAME_STRING "markovian_exmo_distribution"
-
-#define RMO_TEST_ARG_LIST                                           \
-  {                                                                 \
-    generic_parm_t{}, generic_parm_t{std::size_t{3}, {1., 1., 1.}}, \
-        generic_parm_t{std::size_t{6}, {0., 1., 2., 4., 5., 6.}},   \
-        generic_parm_t {                                            \
-      std::size_t{6}, { 2., 1., 0.5, 0.2, 0.3, 4. }                 \
-    }                                                               \
-  }
-
-#define RMO_TEST_CHECK_PARAMS(__DIST__, __PARAMS__) \
-  expect_true(__DIST__.dim() == __PARAMS__.dim());  \
-  CATCH_CHECK_THAT(__DIST__.ex_intensities(),       \
-                   EqualsApprox(__PARAMS__.ex_intensities()));
+#include "testutils-tester_distribution.h"
 
 using uniform_real_dist_t = rmolib::random::uniform_real_distribution<double>;
 using uniform_int_dist_t =
@@ -72,4 +56,23 @@ class generic_param_type {
 };
 using generic_parm_t = generic_param_type;
 
-#include "test-distribution.h"
+template <typename markovian_exmo_dist_t, typename generic_parm_t>
+void tester_distribution<markovian_exmo_dist_t, generic_parm_t>::__param_test(
+    const generic_param_type& test_parm) const {
+  const auto dist = distribution_type{test_parm};
+  expect_true(dist.dim() == test_parm.dim());
+  CATCH_CHECK_THAT(dist.ex_intensities(),
+                   EqualsApprox(test_parm.ex_intensities()));
+}
+
+using dist_tester_t =
+    tester_distribution<markovian_exmo_dist_t, generic_parm_t>;
+
+context("markovian_exmo_distribution") {
+  const auto test_cases = {
+      generic_parm_t{}, generic_parm_t{std::size_t{3}, {1., 1., 1.}},
+      generic_parm_t{std::size_t{6}, {0., 1., 2., 4., 5., 6.}},
+      generic_parm_t{std::size_t{6}, {2., 1., 0.5, 0.2, 0.3, 4.}}};
+  auto dist_tester = dist_tester_t{"markovian_exmo_distribution", test_cases};
+  dist_tester.run_tests(r_engine{});
+}
