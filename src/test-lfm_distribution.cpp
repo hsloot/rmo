@@ -79,7 +79,7 @@ void tester_distribution<lfm_dist_t, generic_parm_t>::__param_test(
 using dist_tester_t = tester_distribution<lfm_dist_t, generic_parm_t>;
 
 context("pareto_lfm_distribution") {
-  auto test_cases = {
+  const std::vector<generic_parm_t> test_cases = {
       generic_parm_t{},
       generic_parm_t{std::size_t{2}, 0., 0., 1., jump_parm_t{.5, 0.005}}};
   auto dist_tester = dist_tester_t{"pareto_lfm_distribution", test_cases};

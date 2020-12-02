@@ -22,6 +22,10 @@ class tester_distribution {
   }
 
   tester_distribution(const std::string name,
+                      const std::vector<generic_param_type>& wl)
+      : tester_distribution{std::move(name), wl.cbegin(), wl.cend()} {}
+
+  tester_distribution(const std::string name,
                       std::initializer_list<generic_param_type> wl)
       : tester_distribution{std::move(name), wl.begin(), wl.end()} {}
 
