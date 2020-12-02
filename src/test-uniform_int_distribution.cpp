@@ -50,7 +50,7 @@ void tester_distribution<uniform_int_dist_t, generic_parm_t>::__param_test(
 using dist_tester_t = tester_distribution<uniform_int_dist_t, generic_parm_t>;
 
 context("uniform_int_distribution") {
-  const auto test_cases = {generic_parm_t{}, generic_parm_t{0, 1},
+  auto test_cases = {generic_parm_t{}, generic_parm_t{0, 1},
                            generic_parm_t{0, 100}, generic_parm_t{-100, 0},
                            generic_parm_t{-100, 100}};
   auto dist_tester = dist_tester_t{"uniform_int_distribution", test_cases};

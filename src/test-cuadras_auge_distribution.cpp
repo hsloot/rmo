@@ -64,7 +64,7 @@ void tester_distribution<cuadras_auge_dist_t, generic_parm_t>::__param_test(
 using dist_tester_t = tester_distribution<cuadras_auge_dist_t, generic_parm_t>;
 
 context("cuadras_auge_distribution") {
-  const auto test_cases = {generic_parm_t{},
+  auto test_cases = {generic_parm_t{},
                            generic_parm_t{std::size_t{2}, 1., 0.},
                            generic_parm_t{std::size_t{2}, 0., 1.},
                            generic_parm_t{std::size_t{3}, 0.4, 0.2},

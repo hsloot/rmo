@@ -74,7 +74,7 @@ using dist_tester_t =
     tester_distribution<markovian_exmo_dist_t, generic_parm_t>;
 
 context("markovian_exmo_distribution") {
-  const auto test_cases = {
+  auto test_cases = {
       generic_parm_t{}, generic_parm_t{std::size_t{3}, {1., 1., 1.}},
       generic_parm_t{std::size_t{6}, {0., 1., 2., 4., 5., 6.}},
       generic_parm_t{std::size_t{6}, {2., 1., 0.5, 0.2, 0.3, 4.}}};

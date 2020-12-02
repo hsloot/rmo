@@ -1,8 +1,6 @@
 #include <algorithm>
 
-extern "C" {
 #include <R_ext/Utils.h>
-}
 
 #include <rmolib/algorithm/r_sort.hpp>
 #include <testthat.h>

@@ -93,7 +93,7 @@ void tester_distribution<r_discrete_dist_t, generic_parm_t>::__param_test(
 using dist_tester_t = tester_distribution<r_discrete_dist_t, generic_parm_t>;
 
 context("r_discrete_distribution") {
-  const auto test_cases = {
+  auto test_cases = {
       generic_parm_t{},
       generic_parm_t{{1., 1., 1.}},
       generic_parm_t{{0., 1., 2., 4.}},
