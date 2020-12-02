@@ -5,6 +5,7 @@
 #include <type_traits>
 #include <vector>
 
+#include <r_engine.hpp>
 #include <testthat.h>
 
 template <typename _Distribution, typename _GenericParamType>
@@ -33,12 +34,16 @@ class tester_distribution {
   void run_tests(_Engine&& engine) {
     for (const auto& [test_num, generic_test_parm] : test_cases_) {
       test_that((name_ + " can be created from param_type - " +
-                std::to_string(test_num))) {
+                 std::to_string(test_num))) {
         __param_test(generic_test_parm);
       }
       test_that((name_ + "can be copied and compared - " +
-                std::to_string(test_num))) {
+                 std::to_string(test_num))) {
         __copy_test(generic_test_parm);
+      }
+      test_that((name_ + "can be sampled within bounds - " +
+                 std::to_string(test_num))) {
+        __sample_test(engine, generic_test_parm);
       }
     }
   }
@@ -47,6 +52,13 @@ class tester_distribution {
   using test_case_t = std::pair<unsigned, generic_param_type>;
   std::string name_{};
   std::vector<test_case_t> test_cases_{};
+
+  class local_rngscope {
+   public:
+    local_rngscope() { GetRNGstate(); }
+
+    ~local_rngscope() { PutRNGstate(); }
+  };
 
   void __param_test(const generic_param_type& test_parm) const;
   void __copy_test(const generic_param_type& test_parm) const {
@@ -63,17 +75,20 @@ class tester_distribution {
 
   template <typename _Engine>
   void __sample_test(_Engine&& engine, const generic_param_type& test_parm) {
-    const auto parm = param_type{test_parm};
-    const auto default_dist = distribution_type{};
-    const auto dist = distribution_type{parm};
+    if constexpr (std::is_same_v<std::decay_t<_Engine>, r_engine>)
+      local_rngscope{}; // required to avoid UB
 
-    const auto in_interval = [](const auto x, const auto a, const auto b) {
+    const auto parm = param_type{test_parm};
+    auto default_dist = distribution_type{};
+    auto dist = distribution_type{parm};
+
+    const auto is_in_interval = [](const auto x, const auto a, const auto b) {
       return x >= a && x <= b;
     };
 
-    expect_true(in_interval(dist(engine), dist.min(), dist.max()));
+    expect_true(is_in_interval(dist(engine), dist.min(), dist.max()));
     expect_true(
-        in_interval(default_dist(engine, parm), dist.min(), dist.max()));
+        is_in_interval(default_dist(engine, parm), dist.min(), dist.max()));
   }
 
   void __init_empty() {

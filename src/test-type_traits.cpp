@@ -7,42 +7,29 @@
 context("rmolib/type_traits/**") {
   using namespace rmolib::type_traits;
   test_that("is_safe_numeric_cast is correct") {
-    const auto int_to_double = is_safe_numeric_cast_v<double, int>;
-    expect_true(int_to_double);
+    expect_true((is_safe_numeric_cast_v<double, int>));
 
-    constexpr auto unsigned_to_size_t =
-        is_safe_numeric_cast_v<std::size_t, unsigned>;
-    expect_true(unsigned_to_size_t);
+    expect_true((is_safe_numeric_cast_v<std::size_t, unsigned>));
 
-    constexpr auto ptrdifft_to_sizet =
-        is_safe_numeric_cast_v<std::size_t, std::ptrdiff_t>;
-    expect_true(ptrdifft_to_sizet);
+    expect_true((is_safe_numeric_cast_v<std::size_t, std::ptrdiff_t>));
 
-    constexpr auto sizet_to_sizet =
-        is_safe_numeric_cast_v<std::size_t, std::size_t>;
-    expect_true(sizet_to_sizet);
+    expect_true((is_safe_numeric_cast_v<std::size_t, std::size_t>));
 
-    constexpr auto float_to_double = is_safe_numeric_cast_v<double, float>;
-    expect_true(float_to_double);
+    expect_true((is_safe_numeric_cast_v<double, float>));
 
-    constexpr auto long_to_short = is_safe_numeric_cast_v<short, long>;
-    expect_false(long_to_short);
+    expect_false((is_safe_numeric_cast_v<short, long>));
 
-    constexpr auto double_to_float = is_safe_numeric_cast_v<float, double>;
-    expect_false(double_to_float);
+    expect_false((is_safe_numeric_cast_v<float, double>));
   }
 
   test_that("is_*_iterator is correct") {
-    const auto input_iterator = is_input_iterator_v<decltype(
-        std::declval<std::initializer_list<double>>().begin())>;
-    expect_true(input_iterator);
+    expect_true((is_input_iterator_v<decltype(
+                     std::declval<std::initializer_list<double>>().begin())>));
 
-    const auto random_access_iterator = is_random_access_iterator_v<decltype(
-        std::declval<std::vector<double>>().begin())>;
-    expect_true(random_access_iterator);
+    expect_true((is_random_access_iterator_v<decltype(
+                     std::declval<std::vector<double>>().begin())>));
 
-    const auto output_iterator =
-        is_output_iterator_v<std::back_insert_iterator<std::vector<double>>>;
-    expect_true(output_iterator);
+    expect_true(
+        (is_output_iterator_v<std::back_insert_iterator<std::vector<double>>>));
   }
 }

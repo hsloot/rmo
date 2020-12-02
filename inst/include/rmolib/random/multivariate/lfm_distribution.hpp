@@ -52,9 +52,11 @@ class lfm_distribution {
 
     param_type() { __validate_input(); };
 
-    param_type(const std::size_t dim, const exponential_parm_t& killing_parm,
-               const _RealType drift, const exponential_parm_t& intensity_parm,
-               const jump_parm_t& jump_parm)
+    explicit param_type(const std::size_t dim,
+                        const exponential_parm_t& killing_parm,
+                        const _RealType drift,
+                        const exponential_parm_t& intensity_parm,
+                        const jump_parm_t& jump_parm)
         : dim_{dim},
           killing_parm_{killing_parm},
           drift_{drift},
@@ -62,9 +64,9 @@ class lfm_distribution {
       __validate_input();
     }
 
-    param_type(const std::size_t dim, const _RealType killing,
-               const _RealType drift, const _RealType intensity,
-               const jump_parm_t& jump_parm)
+    explicit param_type(const std::size_t dim, const _RealType killing,
+                        const _RealType drift, const _RealType intensity,
+                        const jump_parm_t& jump_parm)
         : param_type{dim, exponential_parm_t{killing}, drift,
                      exponential_parm_t{intensity}, jump_parm} {}
 
@@ -75,9 +77,9 @@ class lfm_distribution {
                 std::decay_t<std::tuple_element_t<0, std::tuple<_Args...>>>,
                 jump_parm_t>,
             int> = 0>
-    param_type(const std::size_t dim, const _RealType killing,
-               const _RealType drift, const _RealType intensity,
-               _Args&&... jump_args)
+    explicit param_type(const std::size_t dim, const _RealType killing,
+                        const _RealType drift, const _RealType intensity,
+                        _Args&&... jump_args)
         : param_type{dim, killing, drift, intensity,
                      jump_parm_t{std::forward<_Args>(jump_args)...}} {}
 
@@ -150,16 +152,16 @@ class lfm_distribution {
 
   lfm_distribution() = default;
 
-  lfm_distribution(const std::size_t dim,
-                   const exponential_parm_t& killing_parm,
-                   const _RealType drift,
-                   const exponential_parm_t& intensity_parm,
-                   const jump_parm_t& jump_parm)
+  explicit lfm_distribution(const std::size_t dim,
+                            const exponential_parm_t& killing_parm,
+                            const _RealType drift,
+                            const exponential_parm_t& intensity_parm,
+                            const jump_parm_t& jump_parm)
       : param_type{dim, killing_parm, drift, intensity_parm, jump_parm} {}
 
-  lfm_distribution(const std::size_t dim, const _RealType killing,
-                   const _RealType drift, const _RealType intensity,
-                   const jump_parm_t& jump_parm)
+  explicit lfm_distribution(const std::size_t dim, const _RealType killing,
+                            const _RealType drift, const _RealType intensity,
+                            const jump_parm_t& jump_parm)
       : param_type{dim, killing, drift, intensity, jump_parm} {}
 
   template <typename... _Args,
@@ -168,11 +170,13 @@ class lfm_distribution {
                     std::decay_t<std::tuple_element_t<0, std::tuple<_Args...>>>,
                     jump_parm_t>,
                 int> = 0>
-  lfm_distribution(const std::size_t dim, const _RealType killing,
-                   const _RealType drift, const _RealType intensity,
-                   _Args&&... jump_args)
+  explicit lfm_distribution(const std::size_t dim, const _RealType killing,
+                            const _RealType drift, const _RealType intensity,
+                            _Args&&... jump_args)
       : param_type{dim, killing, drift, intensity,
                    std::forward<_Args>(jump_args)...} {}
+
+  explicit lfm_distribution(const param_type& parm) : parm_{parm} {}
 
   // Used for construction from a different specialization
   template <typename _LFMParamType,
