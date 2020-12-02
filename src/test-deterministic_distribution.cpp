@@ -49,7 +49,7 @@ void tester_distribution<deterministic_dist_t, generic_parm_t>::__param_test(
 using dist_tester_t = tester_distribution<deterministic_dist_t, generic_parm_t>;
 
 context("deterministic_distribution") {
-  auto test_cases = {
+  const std::vector<generic_parm_t> test_cases = {
       generic_parm_t{1.}, generic_parm_t{.5}, generic_parm_t{0.},
       generic_parm_t{std::numeric_limits<double>::infinity()},
       generic_parm_t{2.}};

@@ -55,7 +55,7 @@ void tester_distribution<pareto_dist_t, generic_parm_t>::__param_test(
 using dist_tester_t = tester_distribution<pareto_dist_t, generic_parm_t>;
 
 context("pareto_distribution") {
-  auto test_cases = {generic_parm_t{}, generic_parm_t{1., 1.},
+  const std::vector<generic_parm_t> test_cases = {generic_parm_t{}, generic_parm_t{1., 1.},
                            generic_parm_t{.5, 0.005}, generic_parm_t{2., 005}};
   auto dist_tester = dist_tester_t{"pareto_distribution", test_cases};
   dist_tester.run_tests(r_engine{});

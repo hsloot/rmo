@@ -50,7 +50,7 @@ void tester_distribution<uniform_real_dist_t, generic_parm_t>::__param_test(
 using dist_tester_t = tester_distribution<uniform_real_dist_t, generic_parm_t>;
 
 context("uniform_real_distribution") {
-  auto test_cases = {generic_parm_t{}, generic_parm_t{0., 1.},
+  const std::vector<generic_parm_t> test_cases = {generic_parm_t{}, generic_parm_t{0., 1.},
                            generic_parm_t{0., 3.}, generic_parm_t{-3., 0.},
                            generic_parm_t{-1., 1.}};
   auto dist_tester = dist_tester_t{"uniform_real_distribution", test_cases};

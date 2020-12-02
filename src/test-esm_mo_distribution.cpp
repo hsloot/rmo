@@ -63,7 +63,7 @@ void tester_distribution<esm_mo_dist_t, generic_parm_t>::__param_test(
 using dist_tester_t = tester_distribution<esm_mo_dist_t, generic_parm_t>;
 
 context("esm_mo_distribution") {
-  auto test_cases = {
+  const std::vector<generic_parm_t> test_cases = {
       generic_parm_t{}, generic_parm_t{std::size_t{2}, {1., 1., 1.}},
       generic_parm_t{std::size_t{3}, {0., 1., 2., 3., 4., 5., 6.}},
       generic_parm_t{std::size_t{3}, {2., 1., 0.5, 0.2, 0.3, 4., .7}}};
