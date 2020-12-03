@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <cmath>
 #include <limits>
+#include <numeric>
 #include <stdexcept>
 #include <type_traits>
 #include <vector>
@@ -11,19 +12,14 @@
 #include "rmolib/math/next_integral_value.hpp"
 #include "rmolib/random/multivariate/internal/is_within.hpp"
 #include "rmolib/random/multivariate/internal/mo_param_type.hpp"
-#include "rmolib/random/univariate/exponential_distribution.hpp"
-#include "rmolib/random/univariate/r_discrete_distribution.hpp"
 #include "rmolib/type_traits/is_safe_numeric_cast.hpp"
 
 namespace rmolib {
 
 namespace random {
 
-template <typename _RealType,
-          typename _ExponentialDistribution =
-              exponential_distribution<_RealType>,
-          typename _DiscreteDistribution =
-              r_discrete_distribution<std::size_t, _RealType>>
+template <typename _RealType, typename _ExponentialDistribution,
+          typename _DiscreteDistribution>
 class arnold_mo_distribution {
  public:
   using result_type = std::vector<_RealType>;
@@ -70,7 +66,8 @@ class arnold_mo_distribution {
     friend class arnold_mo_distribution;
 
     friend bool operator==(const param_type& lhs, const param_type& rhs) {
-      return lhs.dim_ == rhs.dim_ && lhs.compound_poisson_parm_ == rhs.compound_poisson_parm_;
+      return lhs.dim_ == rhs.dim_ &&
+             lhs.compound_poisson_parm_ == rhs.compound_poisson_parm_;
     }
 
     friend bool operator!=(const param_type& lhs, const param_type& rhs) {

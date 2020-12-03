@@ -10,7 +10,7 @@ using namespace Rcpp;
 
 // [[Rcpp::export]]
 bool Rcpp__is_within(const std::size_t i, const std::size_t j) {
-    return rmolib::random::internal::is_within(i-1, j);
+  return rmolib::random::internal::is_within(i - 1, j);
 }
 
 // [[Rcpp::export]]
@@ -95,7 +95,10 @@ NumericMatrix Rcpp__rmo_lfm_cpp(const std::size_t n, const std::size_t d,
       rmolib::random::deterministic_distribution<double>;
   using exponential_distribution =
       rmolib::random::exponential_distribution<double>;
-  using pareto_distribution = rmolib::random::pareto_distribution<double>;
+  using uniform_real_distribution =
+      rmolib::random::uniform_real_distribution<double>;
+  using pareto_distribution =
+      rmolib::random::pareto_distribution<double, uniform_real_distribution>;
 
   if ("rposval" == rjump_name) {
     using caller_t = rcpp_distribution_caller<rmolib::random::lfm_distribution<
@@ -140,7 +143,10 @@ NumericVector mo_internal__exponential(const std::size_t n, const double rate) {
 // [[Rcpp::export]]
 NumericVector mo_internal__pareto(const std::size_t n, const double alpha,
                                   const double x0) {
-  using pareto_distribution = rmolib::random::pareto_distribution<double>;
+  using uniform_real_distribution =
+      rmolib::random::uniform_real_distribution<double>;
+  using pareto_distribution =
+      rmolib::random::pareto_distribution<double, uniform_real_distribution>;
   using caller_t = rcpp_distribution_caller<pareto_distribution>;
 
   return caller_t::call(r_engine{}, n, alpha, x0);

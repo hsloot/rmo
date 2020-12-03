@@ -2,12 +2,12 @@
 
 #include <cmath>
 #include <limits>
+#include <numeric>
 #include <stdexcept>
 #include <type_traits>
 #include <vector>
 
 #include "rmolib/algorithm/r_sort.hpp"
-#include "rmolib/random/univariate/uniform_real_distribution.hpp"
 #include "rmolib/type_traits/is_safe_numeric_cast.hpp"
 
 namespace rmolib {
@@ -31,12 +31,12 @@ template <typename _T>
 struct is_discrete_param_type
     : public internal::__is_discrete_param_type<std::remove_cv_t<_T>> {};
 
+//! true, if _T can be used to construct r_discrete_distribution<>::param_type
 template <typename _T>
 constexpr bool is_discrete_param_type_v = is_discrete_param_type<_T>::value;
 
 template <typename _IntType, typename _WeightType,
-          typename _UnitUniformRealDistribution =
-              uniform_real_distribution<_WeightType>>
+          typename _UnitUniformRealDistribution>
 class r_discrete_distribution {
  public:
   using result_type = _IntType;
@@ -262,7 +262,8 @@ class r_discrete_distribution {
 
   template <typename _Engine>
   result_type operator()(_Engine&& engine, const param_type& parm) {
-    const auto u = unit_uniform_real_distribution_(std::forward<_Engine>(engine));
+    const auto u =
+        unit_uniform_real_distribution_(std::forward<_Engine>(engine));
     const auto it =
         std::lower_bound(parm.cumulative_probabilities_.cbegin(),
                          parm.cumulative_probabilities_.cend(), u,

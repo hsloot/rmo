@@ -2,16 +2,13 @@
 
 #include <functional>
 
-#include <Rcpp.h>
-
 namespace rmolib {
 
 namespace algorithm {
 
 namespace internal {
 
-// heap_parent
-
+// heap parent
 template <typename _RandomAccessIterator>
 inline auto r_heap_parent(_RandomAccessIterator first,
                            _RandomAccessIterator child) {
@@ -26,8 +23,7 @@ inline auto r_last_parent(_RandomAccessIterator first,
   return r_heap_parent(first, last_child);
 };
 
-// heap_child
-
+// heap child
 template <typename _RandomAccessIterator, bool left = false>
 inline auto r_heap_child(_RandomAccessIterator first,
                           _RandomAccessIterator last,
@@ -54,7 +50,7 @@ inline auto r_heap_right_child(_RandomAccessIterator first,
   return r_heap_child<_RandomAccessIterator, true>(first, last, parent);
 }
 
-//
+// heap sift down
 template <typename _RandomAccessIterator, typename _CompareOperator>
 inline void r_heap_sift_down(_RandomAccessIterator first,
                               _RandomAccessIterator last,
@@ -71,6 +67,7 @@ inline void r_heap_sift_down(_RandomAccessIterator first,
   }
 }
 
+// heap sift up
 template <typename _RandomAccessIterator, typename _CompareOperator>
 inline void r_heap_sift_up(_RandomAccessIterator first,
                             _RandomAccessIterator last,
@@ -85,8 +82,7 @@ inline void r_heap_sift_up(_RandomAccessIterator first,
 
 }  // namespace internal
 
-// r_push_heap
-
+// push heap
 template <typename _RandomAccessIterator, typename _CompareOperator>
 inline void r_push_heap(_RandomAccessIterator first, _RandomAccessIterator last,
                         _CompareOperator comp) {
@@ -102,8 +98,7 @@ inline void r_push_heap(_RandomAccessIterator first,
   r_push_heap(first, last, less{});
 }
 
-// r_pop_heap
-
+// pop heap
 template <typename _RandomAccessIterator, typename _CompareOperator>
 inline void r_pop_heap(_RandomAccessIterator first, _RandomAccessIterator last,
                        _CompareOperator comp) {
@@ -123,8 +118,7 @@ inline void r_pop_heap(_RandomAccessIterator first,
   r_pop_heap(first, last, less{});
 }
 
-// r_make_heap
-
+// make heap
 template <typename _RandomAccessIterator, typename _CompareOperator>
 inline void r_make_heap(_RandomAccessIterator first, _RandomAccessIterator last,
                         _CompareOperator comp) {
@@ -143,8 +137,7 @@ inline void r_make_heap(_RandomAccessIterator first,
   r_make_heap(first, last, less{});
 }
 
-// r_sort_heap
-
+// sort heap
 template <typename _RandomAccessIterator, typename _CompareOperator>
 inline void r_sort_heap(_RandomAccessIterator first, _RandomAccessIterator last,
                         _CompareOperator comp) {
@@ -162,8 +155,7 @@ inline void r_sort_heap(_RandomAccessIterator first,
   r_sort_heap(first, last, less{});
 }
 
-// r_sort
-
+// sort
 template <typename _RandomAccessIterator, typename _CompareOperator>
 inline void r_sort(_RandomAccessIterator first, _RandomAccessIterator last,
                    _CompareOperator comp) {

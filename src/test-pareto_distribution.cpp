@@ -1,7 +1,9 @@
 #include <algorithm>
 #include <cmath>
 
-#include <r_engine.hpp>
+// clang-format off
+#include <rmolib/random/r_engine.hpp> // must be included before <rmolib/*>
+// clang-format on
 #include <rmolib/random/univariate/pareto_distribution.hpp>
 #include <rmolib/random/univariate/uniform_real_distribution.hpp>
 #include <testthat.h>
@@ -55,8 +57,9 @@ void tester_distribution<pareto_dist_t, generic_parm_t>::__param_test(
 using dist_tester_t = tester_distribution<pareto_dist_t, generic_parm_t>;
 
 context("pareto_distribution") {
-  const std::vector<generic_parm_t> test_cases = {generic_parm_t{}, generic_parm_t{1., 1.},
-                           generic_parm_t{.5, 0.005}, generic_parm_t{2., 005}};
+  const std::vector<generic_parm_t> test_cases = {
+      generic_parm_t{}, generic_parm_t{1., 1.}, generic_parm_t{.5, 0.005},
+      generic_parm_t{2., 005}};
   auto dist_tester = dist_tester_t{"pareto_distribution", test_cases};
   dist_tester.run_tests(r_engine{});
 }

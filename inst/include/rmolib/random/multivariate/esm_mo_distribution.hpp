@@ -10,7 +10,6 @@
 #include "rmolib/bit/bit_fill.hpp"
 #include "rmolib/random/multivariate/internal/is_within.hpp"
 #include "rmolib/random/multivariate/internal/mo_param_type.hpp"
-#include "rmolib/random/univariate/exponential_distribution.hpp"
 #include "rmolib/type_traits/is_safe_numeric_cast.hpp"
 #include "rmolib/type_traits/iterator.hpp"
 
@@ -18,8 +17,7 @@ namespace rmolib {
 
 namespace random {
 
-template <typename _RealType, typename _ExponentialDistribution =
-                                  exponential_distribution<_RealType>>
+template <typename _RealType, typename _ExponentialDistribution>
 class esm_mo_distribution {
  public:
   using result_type = std::vector<_RealType>;

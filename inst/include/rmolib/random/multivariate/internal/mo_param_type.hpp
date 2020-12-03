@@ -25,6 +25,7 @@ template <typename _T>
 struct is_mo_param_type
     : public internal::__is_mo_param_type<std::remove_cv_t<_T>> {};
 
+//! true, if _T can be used to construct mo_distribution<>::param_type
 template <typename _T>
 constexpr bool is_mo_param_type_v = is_mo_param_type<_T>::value;
 

@@ -32,6 +32,7 @@ template <typename _T>
 struct is_lfm_param_type
     : public internal::__is_lfm_param_type<std::remove_cv_t<_T>> {};
 
+//! true, if _T can be used to construct lfm_distribution<>::param_type
 template <typename _T>
 constexpr bool is_lfm_param_type_v = is_lfm_param_type<_T>::value;
 

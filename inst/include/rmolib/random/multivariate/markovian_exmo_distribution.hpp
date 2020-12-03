@@ -10,21 +10,14 @@
 #include "rmolib/math/binomial_coefficient.hpp"
 #include "rmolib/math/next_integral_value.hpp"
 #include "rmolib/random/multivariate/internal/exmo_param_type.hpp"
-#include "rmolib/random/univariate/exponential_distribution.hpp"
-#include "rmolib/random/univariate/r_discrete_distribution.hpp"
-#include "rmolib/random/univariate/uniform_int_distribution.hpp"
 #include "rmolib/type_traits/is_safe_numeric_cast.hpp"
 
 namespace rmolib {
 
 namespace random {
 
-template <
-    typename _RealType,
-    typename _ExponentialDistribution = exponential_distribution<_RealType>,
-    typename _UniformIntDistribution = uniform_int_distribution<std::size_t>,
-    typename _DiscreteDistribution =
-        r_discrete_distribution<std::size_t, _RealType>>
+template <typename _RealType, typename _ExponentialDistribution,
+          typename _UniformIntDistribution, typename _DiscreteDistribution>
 class markovian_exmo_distribution {
  public:
   using result_type = std::vector<_RealType>;
@@ -239,8 +232,7 @@ class markovian_exmo_distribution {
       for (std::size_t i = number_dead_before_transition; i < number_dead; ++i)
         out[i] = time;
     }
-    algorithm::r_shuffle(out.begin(), out.end(), engine,
-                         uniform_int_dist_);
+    algorithm::r_shuffle(out.begin(), out.end(), engine, uniform_int_dist_);
   }
 
   friend bool operator==(const markovian_exmo_distribution& lhs,
@@ -267,8 +259,8 @@ class markovian_exmo_distribution {
     auto& [time, location] = state;
     const auto& [intensity_parm, discrete_parm] = parm[location];
     time += exponential_dist_(engine, intensity_parm);
-    location += math::next_integral_value(
-        discrete_dist_(engine, discrete_parm));
+    location +=
+        math::next_integral_value(discrete_dist_(engine, discrete_parm));
     return state;
   }
 

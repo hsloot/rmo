@@ -1,6 +1,8 @@
 #include <limits>
 
-#include <r_engine.hpp>
+// clang-format off
+#include <rmolib/random/r_engine.hpp> // must be included before <rmolib/*>
+// clang-format on
 #include <rmolib/random/univariate/exponential_distribution.hpp>
 #include <testthat.h>
 

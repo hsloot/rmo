@@ -1,6 +1,8 @@
 #include <limits>
 
-#include <r_engine.hpp>
+// clang-format off
+#include <rmolib/random/r_engine.hpp> // must be included before <rmolib/*>
+// clang-format on
 #include <rmolib/random/univariate/deterministic_distribution.hpp>
 #include <testthat.h>
 
@@ -35,7 +37,7 @@ class generic_param_type {
   double value_{1};
 };
 
-}
+}  // namespace test_deterministic_distribution
 
 using generic_parm_t = test_deterministic_distribution::generic_param_type;
 

@@ -29,6 +29,8 @@ constexpr _UnsignedType bit_fill_zeros(const _UnsignedType position_begin,
 
 }  // namespace internal
 
+//! returns `_UnsignedType` whose bits between `position_begin` and
+//! `position_end-1` are set to 1 if `value==true` or 0 if `value==false`
 template <typename _UnsignedType>
 constexpr _UnsignedType bit_fill(const _UnsignedType position_begin,
                                  const _UnsignedType position_end,

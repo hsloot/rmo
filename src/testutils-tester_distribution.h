@@ -5,7 +5,9 @@
 #include <type_traits>
 #include <vector>
 
-#include <r_engine.hpp>
+// clang-format off
+#include <rmolib/random/r_engine.hpp> // must be included before <rmolib/*>
+// clang-format on
 #include <testthat.h>
 
 template <typename _Distribution, typename _GenericParamType>

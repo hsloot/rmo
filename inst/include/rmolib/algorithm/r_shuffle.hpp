@@ -8,7 +8,6 @@
 #include <vector>
 
 #include "rmolib/algorithm/shuffle.hpp"
-#include "rmolib/random/univariate/uniform_real_distribution.hpp"
 #include "rmolib/type_traits/iterator.hpp"
 
 namespace rmolib {

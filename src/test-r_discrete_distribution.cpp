@@ -2,9 +2,11 @@
 #include <cmath>
 #include <functional>
 #include <iterator>
+#include <numeric>
 
-#include <Rcpp.h>
-#include <r_engine.hpp>
+// clang-format off
+#include <rmolib/random/r_engine.hpp> // must be included before <rmolib/*>
+// clang-format on
 #include <rmolib/random/univariate/r_discrete_distribution.hpp>
 #include <rmolib/random/univariate/uniform_real_distribution.hpp>
 #include <testthat.h>

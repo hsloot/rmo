@@ -8,6 +8,7 @@ namespace rmolib {
 
 namespace bit {
 
+//! true, if bit at position `position` in `bitseq` is set to 1
 template <typename _UnsignedType>
 constexpr bool bit_test(const _UnsignedType bitseq,
                         const _UnsignedType position) {

@@ -64,6 +64,8 @@ constexpr bool have_all_same_signage_v = have_all_same_signage<_Ts...>::value;
 
 }  // namespace internal
 
+//! true, if cast can be performed without loss of precision; signage might be
+//! lost if cast is to unsiged type
 template <typename _To, typename _From>
 struct is_safe_numeric_cast
     : public std::integral_constant<
@@ -79,5 +81,7 @@ struct is_safe_numeric_cast
                            std::numeric_limits<_From>::digits)))> {};
 template <typename _To, typename _From>
 constexpr bool is_safe_numeric_cast_v = is_safe_numeric_cast<_To, _From>::value;
+
 }  // namespace type_traits
+
 }  // namespace rmolib

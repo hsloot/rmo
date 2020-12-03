@@ -4,7 +4,6 @@
 #include <limits>
 #include <type_traits>
 
-#include "rmolib/random/univariate/exponential_distribution.hpp"
 #include "rmolib/type_traits/is_safe_numeric_cast.hpp"
 
 namespace rmolib {
@@ -32,12 +31,12 @@ template <typename _T>
 struct is_cuadras_auge_param_type
     : public internal::__is_cuadras_auge_param_type<std::remove_cv_t<_T>> {};
 
+//! true, if _T can be used to construct cuadras_auge_distribution<>::param_type
 template <typename _T>
 constexpr bool is_cuadras_auge_param_type_v =
     is_cuadras_auge_param_type<_T>::value;
 
-template <typename _RealType, typename _ExponentialDistribution =
-                                  exponential_distribution<_RealType>>
+template <typename _RealType, typename _ExponentialDistribution>
 class cuadras_auge_distribution {
  public:
   using result_type = std::vector<_RealType>;

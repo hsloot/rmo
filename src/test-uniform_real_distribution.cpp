@@ -1,4 +1,6 @@
-#include <r_engine.hpp>
+// clang-format off
+#include <rmolib/random/r_engine.hpp> // must be included before <rmolib/*>
+// clang-format on
 #include <rmolib/random/univariate/uniform_real_distribution.hpp>
 #include <testthat.h>
 
@@ -50,9 +52,9 @@ void tester_distribution<uniform_real_dist_t, generic_parm_t>::__param_test(
 using dist_tester_t = tester_distribution<uniform_real_dist_t, generic_parm_t>;
 
 context("uniform_real_distribution") {
-  const std::vector<generic_parm_t> test_cases = {generic_parm_t{}, generic_parm_t{0., 1.},
-                           generic_parm_t{0., 3.}, generic_parm_t{-3., 0.},
-                           generic_parm_t{-1., 1.}};
+  const std::vector<generic_parm_t> test_cases = {
+      generic_parm_t{}, generic_parm_t{0., 1.}, generic_parm_t{0., 3.},
+      generic_parm_t{-3., 0.}, generic_parm_t{-1., 1.}};
   auto dist_tester = dist_tester_t{"uniform_real_distribution", test_cases};
   dist_tester.run_tests(r_engine{});
 }

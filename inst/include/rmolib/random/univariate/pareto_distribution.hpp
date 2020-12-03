@@ -5,7 +5,6 @@
 #include <stdexcept>
 #include <type_traits>
 
-#include "rmolib/random/univariate/uniform_real_distribution.hpp"
 #include "rmolib/type_traits/is_safe_numeric_cast.hpp"
 
 namespace rmolib {
@@ -31,11 +30,11 @@ template <typename _T>
 struct is_pareto_param_type
     : public internal::__is_pareto_param_type<std::remove_cv_t<_T>> {};
 
+//! true, if _T can be used to construct pareto_distribution<>::param_type
 template <typename _T>
 constexpr bool is_pareto_param_type_v = is_pareto_param_type<_T>::value;
 
-template <typename _RealType, typename _UnitUniformRealDistribution =
-                                  uniform_real_distribution<_RealType>>
+template <typename _RealType, typename _UnitUniformRealDistribution>
 class pareto_distribution {
  public:
   using result_type = _RealType;
@@ -138,7 +137,8 @@ class pareto_distribution {
   template <typename _Engine>
   result_type operator()(_Engine&& engine, const param_type& parm) {
     return parm.lower_bound_ /
-           std::pow(unit_uniform_real_dist_(std::forward<_Engine>(engine)), 1. / parm.alpha_);
+           std::pow(unit_uniform_real_dist_(std::forward<_Engine>(engine)),
+                    1. / parm.alpha_);
   }
 
   friend bool operator==(const pareto_distribution& lhs,
