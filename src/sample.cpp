@@ -72,6 +72,28 @@ NumericMatrix rtest__rmo_arnold(const std::size_t n, const std::size_t d,
 // [[Rcpp::export]]
 NumericMatrix Rcpp__rmo_ex_arnold(const std::size_t n, const std::size_t d,
                                   const NumericVector& ex_intensities) {
+  using exponential_distribution =
+      rmolib::random::exponential_distribution<double>;
+  using uniform_real_distribution =
+      rmolib::random::uniform_real_distribution<double>;
+  using uniform_int_distribution =
+      rmolib::random::uniform_int_distribution<std::size_t>;
+  using discrete_distribution =
+      rmolib::random::r_discrete_distribution<std::size_t, double,
+                                              uniform_real_distribution>;
+  using markovian_exmo_distribution =
+      rmolib::random::markovian_exmo_distribution<
+          double, exponential_distribution, uniform_int_distribution,
+          discrete_distribution, rmolib::algorithm::shuffler>;
+  using caller_t = rcpp_distribution_caller<markovian_exmo_distribution, false>;
+
+  return caller_t::call(r_engine{}, n, d, ex_intensities.begin(),
+                        ex_intensities.end());
+}
+
+// [[Rcpp::export]]
+NumericMatrix rtest__rmo_ex_arnold(const std::size_t n, const std::size_t d,
+                                   const NumericVector& ex_intensities) {
   // R's sample.int produces a final (redundant) selection of the
   // last remaining value see
   // https://github.com/wch/r-source/blob/613bdfd0e1d3fc9984142d5da3da448adf2438c7/src/main/random.c#L461
@@ -92,12 +114,6 @@ NumericMatrix Rcpp__rmo_ex_arnold(const std::size_t n, const std::size_t d,
 
   return caller_t::call(r_engine{}, n, d, ex_intensities.begin(),
                         ex_intensities.end());
-}
-
-// [[Rcpp::export]]
-NumericMatrix rtest__rmo_ex_arnold(const std::size_t n, const std::size_t d,
-                                   const NumericVector& ex_intensities) {
-  return Rcpp__rmo_ex_arnold(n, d, ex_intensities);
 }
 
 // [[Rcpp::export]]

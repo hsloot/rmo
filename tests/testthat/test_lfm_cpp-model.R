@@ -78,3 +78,5 @@ test_that("LFM-CPP implementation works as intended for det. jumps", {
     "rtest__rmo_lfm_cpp", "test__rmo_lfm_cpp",
     args, n, use_seed)
 })
+
+## TODO: add KS unit test

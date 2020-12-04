@@ -105,3 +105,5 @@ test_that("Arnold model implementation for d>2", {
     "rtest__rmo_arnold", "test__rmo_arnold",
     args, n, use_seed)
 })
+
+## TODO: add KS unit test

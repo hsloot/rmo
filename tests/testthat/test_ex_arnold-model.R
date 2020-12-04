@@ -132,3 +132,5 @@ test_that("Exchangeable Arnold model implementation in C++", {
     "rtest__rmo_ex_arnold", "test__rmo_ex_arnold",
     args, n, use_seed)
 })
+
+## TODO: add KS unit test

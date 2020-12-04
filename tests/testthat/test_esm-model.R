@@ -105,3 +105,5 @@ test_that("ESM implementation for d > 2", {
     "rtest__rmo_esm", "test__rmo_esm",
     args, n, use_seed)
 })
+
+## TODO: add KS unit test
