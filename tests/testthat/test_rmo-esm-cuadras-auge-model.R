@@ -10,22 +10,22 @@ test_that("Cuadras-Augé implementation works as intended for d=2", {
     "alpha"=1,
     "beta"=1
   )
-  expect_equal_rn_generation("rmo_esm_cuadras_auge", "test__rmo_esm_cuadras_auge_bivariate",
+  expect_equal_rn_generation("rtest__rmo_esm_cuadras_auge", "test__rmo_esm_cuadras_auge_bivariate",
     args, n, use_seed)
 
   ## independence
   args[c("alpha", "beta")] <- c(1, 0)
-  expect_equal_rn_generation("rmo_esm_cuadras_auge", "test__rmo_esm_cuadras_auge_bivariate",
+  expect_equal_rn_generation("rtest__rmo_esm_cuadras_auge", "test__rmo_esm_cuadras_auge_bivariate",
     args, n, use_seed)
 
   ## comonotone
   args[c("alpha", "beta")] <- c(0, 1)
-  expect_equal_rn_generation("rmo_esm_cuadras_auge", "test__rmo_esm_cuadras_auge_bivariate",
+  expect_equal_rn_generation("rtest__rmo_esm_cuadras_auge", "test__rmo_esm_cuadras_auge_bivariate",
     args, n, use_seed)
 
   ## alpha = 0.5, beta = 0.3
   args[c("alpha", "beta")] <- c(0.5, 0.3)
-  expect_equal_rn_generation("rmo_esm_cuadras_auge", "test__rmo_esm_cuadras_auge_bivariate",
+  expect_equal_rn_generation("rtest__rmo_esm_cuadras_auge", "test__rmo_esm_cuadras_auge_bivariate",
     args, n, use_seed)
 })
 
@@ -41,21 +41,21 @@ test_that("Cuadras-Augé ESM implementation in Rcpp", {
     "alpha"=1,
     "beta"=1
   )
-  expect_equal_rn_generation("rmo_esm_cuadras_auge", "test__rmo_esm_cuadras_auge",
+  expect_equal_rn_generation("rtest__rmo_esm_cuadras_auge", "test__rmo_esm_cuadras_auge",
     args, n, use_seed)
 
   ## independence
   args[c("alpha", "beta")] <- c(1, 0)
-  expect_equal_rn_generation("rmo_esm_cuadras_auge", "test__rmo_esm_cuadras_auge",
+  expect_equal_rn_generation("rtest__rmo_esm_cuadras_auge", "test__rmo_esm_cuadras_auge",
     args, n, use_seed)
 
   ## comonotone
   args[c("alpha", "beta")] <- c(0, 1)
-  expect_equal_rn_generation("rmo_esm_cuadras_auge", "test__rmo_esm_cuadras_auge",
+  expect_equal_rn_generation("rtest__rmo_esm_cuadras_auge", "test__rmo_esm_cuadras_auge",
     args, n, use_seed)
 
   ## alpha = 0.5, beta = 0.3
   args[c("alpha", "beta")] <- c(0.5, 0.3)
-  expect_equal_rn_generation("rmo_esm_cuadras_auge", "test__rmo_esm_cuadras_auge",
+  expect_equal_rn_generation("rtest__rmo_esm_cuadras_auge", "test__rmo_esm_cuadras_auge",
     args, n, use_seed)
 })

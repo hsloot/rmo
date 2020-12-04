@@ -9,35 +9,56 @@ Rcpp__rmo_esm <- function(n, d, intensities) {
     .Call(`_rmo_Rcpp__rmo_esm`, n, d, intensities)
 }
 
+#' @keywords internal test
+rtest__rmo_esm <- function(n, d, intensities) {
+    .Call(`_rmo_rtest__rmo_esm`, n, d, intensities)
+}
+
 Rcpp__rmo_arnold <- function(n, d, intensities) {
     .Call(`_rmo_Rcpp__rmo_arnold`, n, d, intensities)
+}
+
+rtest__rmo_arnold <- function(n, d, intensities) {
+    .Call(`_rmo_rtest__rmo_arnold`, n, d, intensities)
 }
 
 Rcpp__rmo_ex_arnold <- function(n, d, ex_intensities) {
     .Call(`_rmo_Rcpp__rmo_ex_arnold`, n, d, ex_intensities)
 }
 
+rtest__rmo_ex_arnold <- function(n, d, ex_intensities) {
+    .Call(`_rmo_rtest__rmo_ex_arnold`, n, d, ex_intensities)
+}
+
 Rcpp__rmo_esm_cuadras_auge <- function(n, d, alpha, beta) {
     .Call(`_rmo_Rcpp__rmo_esm_cuadras_auge`, n, d, alpha, beta)
+}
+
+rtest__rmo_esm_cuadras_auge <- function(n, d, alpha, beta) {
+    .Call(`_rmo_rtest__rmo_esm_cuadras_auge`, n, d, alpha, beta)
 }
 
 Rcpp__rmo_lfm_cpp <- function(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list) {
     .Call(`_rmo_Rcpp__rmo_lfm_cpp`, n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list)
 }
 
-mo_internal__deterministic <- function(n, value) {
-    .Call(`_rmo_mo_internal__deterministic`, n, value)
+rtest__rmo_lfm_cpp <- function(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list) {
+    .Call(`_rmo_rtest__rmo_lfm_cpp`, n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list)
 }
 
-mo_internal__exponential <- function(n, rate) {
-    .Call(`_rmo_mo_internal__exponential`, n, rate)
+rtest__deterministic <- function(n, value) {
+    .Call(`_rmo_rtest__deterministic`, n, value)
 }
 
-mo_internal__pareto <- function(n, alpha, x0) {
-    .Call(`_rmo_mo_internal__pareto`, n, alpha, x0)
+rtest__exponential <- function(n, rate) {
+    .Call(`_rmo_rtest__exponential`, n, rate)
 }
 
-mo_internal__rdiscrete <- function(n, d, probabilities = NULL) {
-    .Call(`_rmo_mo_internal__rdiscrete`, n, d, probabilities)
+rtest__pareto <- function(n, alpha, x0) {
+    .Call(`_rmo_rtest__pareto`, n, alpha, x0)
+}
+
+rtest__discrete <- function(n, d, probabilities = NULL) {
+    .Call(`_rmo_rtest__discrete`, n, d, probabilities)
 }
 

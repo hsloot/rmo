@@ -4,7 +4,18 @@
 // clang-format on
 
 #include "rcpp_distribution_caller.h"
-#include <rmolib/distribution.hpp>
+#include "rmolib/algorithm/r_shuffle.hpp"
+#include "rmolib/random/multivariate/arnold_mo_distribution.hpp"
+#include "rmolib/random/multivariate/cuadras_auge_distribution.hpp"
+#include "rmolib/random/multivariate/esm_mo_distribution.hpp"
+#include "rmolib/random/multivariate/lfm_distribution.hpp"
+#include "rmolib/random/multivariate/markovian_exmo_distribution.hpp"
+#include "rmolib/random/univariate/deterministic_distribution.hpp"
+#include "rmolib/random/univariate/exponential_distribution.hpp"
+#include "rmolib/random/univariate/pareto_distribution.hpp"
+#include "rmolib/random/univariate/r_discrete_distribution.hpp"
+#include "rmolib/random/univariate/uniform_int_distribution.hpp"
+#include "rmolib/random/univariate/uniform_real_distribution.hpp"
 
 using namespace Rcpp;
 
@@ -26,6 +37,13 @@ NumericMatrix Rcpp__rmo_esm(const std::size_t n, const std::size_t d,
                         intensities.begin(), intensities.end());
 }
 
+//' @keywords internal test
+// [[Rcpp::export]]
+NumericMatrix rtest__rmo_esm(const std::size_t n, const std::size_t d,
+                             const NumericVector& intensities) {
+  return Rcpp__rmo_esm(n, d, intensities);
+}
+
 // [[Rcpp::export]]
 NumericMatrix Rcpp__rmo_arnold(const std::size_t n, const std::size_t d,
                                const NumericVector& intensities) {
@@ -43,6 +61,12 @@ NumericMatrix Rcpp__rmo_arnold(const std::size_t n, const std::size_t d,
 
   return caller_t::call(r_engine{}, n, d, intensities.begin(),
                         intensities.end());
+}
+
+// [[Rcpp::export]]
+NumericMatrix rtest__rmo_arnold(const std::size_t n, const std::size_t d,
+                                const NumericVector& intensities) {
+  return Rcpp__rmo_arnold(n, d, intensities);
 }
 
 // [[Rcpp::export]]
@@ -71,6 +95,12 @@ NumericMatrix Rcpp__rmo_ex_arnold(const std::size_t n, const std::size_t d,
 }
 
 // [[Rcpp::export]]
+NumericMatrix rtest__rmo_ex_arnold(const std::size_t n, const std::size_t d,
+                                   const NumericVector& ex_intensities) {
+  return Rcpp__rmo_ex_arnold(n, d, ex_intensities);
+}
+
+// [[Rcpp::export]]
 NumericMatrix Rcpp__rmo_esm_cuadras_auge(const std::size_t n,
                                          const std::size_t d,
                                          const double alpha,
@@ -83,6 +113,14 @@ NumericMatrix Rcpp__rmo_esm_cuadras_auge(const std::size_t n,
   using caller_t = rcpp_distribution_caller<cuadras_auge_distribution>;
 
   return caller_t::call(r_engine{}, n, d, alpha, beta);
+}
+
+// [[Rcpp::export]]
+NumericMatrix rtest__rmo_esm_cuadras_auge(const std::size_t n,
+                                          const std::size_t d,
+                                          const double alpha,
+                                          const double beta) {
+  return Rcpp__rmo_esm_cuadras_auge(n, d, alpha, beta);
 }
 
 // [[Rcpp::export]]
@@ -122,8 +160,17 @@ NumericMatrix Rcpp__rmo_lfm_cpp(const std::size_t n, const std::size_t d,
 }
 
 // [[Rcpp::export]]
-NumericVector mo_internal__deterministic(const std::size_t n,
-                                         const double value) {
+NumericMatrix rtest__rmo_lfm_cpp(const std::size_t n, const std::size_t d,
+                                 const double rate, const double rate_killing,
+                                 const double rate_drift,
+                                 const std::string rjump_name,
+                                 const List& rjump_arg_list) {
+  return Rcpp__rmo_lfm_cpp(n, d, rate, rate_killing, rate_drift, rjump_name,
+                           rjump_arg_list);
+}
+
+// [[Rcpp::export]]
+NumericVector rtest__deterministic(const std::size_t n, const double value) {
   using deterministic_distribution =
       rmolib::random::deterministic_distribution<double>;
   using caller_t = rcpp_distribution_caller<deterministic_distribution>;
@@ -132,7 +179,7 @@ NumericVector mo_internal__deterministic(const std::size_t n,
 }
 
 // [[Rcpp::export]]
-NumericVector mo_internal__exponential(const std::size_t n, const double rate) {
+NumericVector rtest__exponential(const std::size_t n, const double rate) {
   using exponential_distribution =
       rmolib::random::exponential_distribution<double>;
   using caller_t = rcpp_distribution_caller<exponential_distribution>;
@@ -141,8 +188,8 @@ NumericVector mo_internal__exponential(const std::size_t n, const double rate) {
 }
 
 // [[Rcpp::export]]
-NumericVector mo_internal__pareto(const std::size_t n, const double alpha,
-                                  const double x0) {
+NumericVector rtest__pareto(const std::size_t n, const double alpha,
+                            const double x0) {
   using uniform_real_distribution =
       rmolib::random::uniform_real_distribution<double>;
   using pareto_distribution =
@@ -153,7 +200,7 @@ NumericVector mo_internal__pareto(const std::size_t n, const double alpha,
 }
 
 // [[Rcpp::export]]
-IntegerVector mo_internal__rdiscrete(
+IntegerVector rtest__discrete(
     const std::size_t n, const std::size_t d,
     const Nullable<NumericVector> probabilities = R_NilValue) {
   if (probabilities.isNotNull()) {

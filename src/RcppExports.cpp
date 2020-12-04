@@ -30,6 +30,19 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// rtest__rmo_esm
+NumericMatrix rtest__rmo_esm(const std::size_t n, const std::size_t d, const NumericVector& intensities);
+RcppExport SEXP _rmo_rtest__rmo_esm(SEXP nSEXP, SEXP dSEXP, SEXP intensitiesSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const std::size_t >::type n(nSEXP);
+    Rcpp::traits::input_parameter< const std::size_t >::type d(dSEXP);
+    Rcpp::traits::input_parameter< const NumericVector& >::type intensities(intensitiesSEXP);
+    rcpp_result_gen = Rcpp::wrap(rtest__rmo_esm(n, d, intensities));
+    return rcpp_result_gen;
+END_RCPP
+}
 // Rcpp__rmo_arnold
 NumericMatrix Rcpp__rmo_arnold(const std::size_t n, const std::size_t d, const NumericVector& intensities);
 RcppExport SEXP _rmo_Rcpp__rmo_arnold(SEXP nSEXP, SEXP dSEXP, SEXP intensitiesSEXP) {
@@ -40,6 +53,19 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< const std::size_t >::type d(dSEXP);
     Rcpp::traits::input_parameter< const NumericVector& >::type intensities(intensitiesSEXP);
     rcpp_result_gen = Rcpp::wrap(Rcpp__rmo_arnold(n, d, intensities));
+    return rcpp_result_gen;
+END_RCPP
+}
+// rtest__rmo_arnold
+NumericMatrix rtest__rmo_arnold(const std::size_t n, const std::size_t d, const NumericVector& intensities);
+RcppExport SEXP _rmo_rtest__rmo_arnold(SEXP nSEXP, SEXP dSEXP, SEXP intensitiesSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const std::size_t >::type n(nSEXP);
+    Rcpp::traits::input_parameter< const std::size_t >::type d(dSEXP);
+    Rcpp::traits::input_parameter< const NumericVector& >::type intensities(intensitiesSEXP);
+    rcpp_result_gen = Rcpp::wrap(rtest__rmo_arnold(n, d, intensities));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -56,6 +82,19 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// rtest__rmo_ex_arnold
+NumericMatrix rtest__rmo_ex_arnold(const std::size_t n, const std::size_t d, const NumericVector& ex_intensities);
+RcppExport SEXP _rmo_rtest__rmo_ex_arnold(SEXP nSEXP, SEXP dSEXP, SEXP ex_intensitiesSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const std::size_t >::type n(nSEXP);
+    Rcpp::traits::input_parameter< const std::size_t >::type d(dSEXP);
+    Rcpp::traits::input_parameter< const NumericVector& >::type ex_intensities(ex_intensitiesSEXP);
+    rcpp_result_gen = Rcpp::wrap(rtest__rmo_ex_arnold(n, d, ex_intensities));
+    return rcpp_result_gen;
+END_RCPP
+}
 // Rcpp__rmo_esm_cuadras_auge
 NumericMatrix Rcpp__rmo_esm_cuadras_auge(const std::size_t n, const std::size_t d, const double alpha, const double beta);
 RcppExport SEXP _rmo_Rcpp__rmo_esm_cuadras_auge(SEXP nSEXP, SEXP dSEXP, SEXP alphaSEXP, SEXP betaSEXP) {
@@ -67,6 +106,20 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< const double >::type alpha(alphaSEXP);
     Rcpp::traits::input_parameter< const double >::type beta(betaSEXP);
     rcpp_result_gen = Rcpp::wrap(Rcpp__rmo_esm_cuadras_auge(n, d, alpha, beta));
+    return rcpp_result_gen;
+END_RCPP
+}
+// rtest__rmo_esm_cuadras_auge
+NumericMatrix rtest__rmo_esm_cuadras_auge(const std::size_t n, const std::size_t d, const double alpha, const double beta);
+RcppExport SEXP _rmo_rtest__rmo_esm_cuadras_auge(SEXP nSEXP, SEXP dSEXP, SEXP alphaSEXP, SEXP betaSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const std::size_t >::type n(nSEXP);
+    Rcpp::traits::input_parameter< const std::size_t >::type d(dSEXP);
+    Rcpp::traits::input_parameter< const double >::type alpha(alphaSEXP);
+    Rcpp::traits::input_parameter< const double >::type beta(betaSEXP);
+    rcpp_result_gen = Rcpp::wrap(rtest__rmo_esm_cuadras_auge(n, d, alpha, beta));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -87,53 +140,70 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// mo_internal__deterministic
-NumericVector mo_internal__deterministic(const std::size_t n, const double value);
-RcppExport SEXP _rmo_mo_internal__deterministic(SEXP nSEXP, SEXP valueSEXP) {
+// rtest__rmo_lfm_cpp
+NumericMatrix rtest__rmo_lfm_cpp(const std::size_t n, const std::size_t d, const double rate, const double rate_killing, const double rate_drift, const std::string rjump_name, const List& rjump_arg_list);
+RcppExport SEXP _rmo_rtest__rmo_lfm_cpp(SEXP nSEXP, SEXP dSEXP, SEXP rateSEXP, SEXP rate_killingSEXP, SEXP rate_driftSEXP, SEXP rjump_nameSEXP, SEXP rjump_arg_listSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const std::size_t >::type n(nSEXP);
+    Rcpp::traits::input_parameter< const std::size_t >::type d(dSEXP);
+    Rcpp::traits::input_parameter< const double >::type rate(rateSEXP);
+    Rcpp::traits::input_parameter< const double >::type rate_killing(rate_killingSEXP);
+    Rcpp::traits::input_parameter< const double >::type rate_drift(rate_driftSEXP);
+    Rcpp::traits::input_parameter< const std::string >::type rjump_name(rjump_nameSEXP);
+    Rcpp::traits::input_parameter< const List& >::type rjump_arg_list(rjump_arg_listSEXP);
+    rcpp_result_gen = Rcpp::wrap(rtest__rmo_lfm_cpp(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list));
+    return rcpp_result_gen;
+END_RCPP
+}
+// rtest__deterministic
+NumericVector rtest__deterministic(const std::size_t n, const double value);
+RcppExport SEXP _rmo_rtest__deterministic(SEXP nSEXP, SEXP valueSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const std::size_t >::type n(nSEXP);
     Rcpp::traits::input_parameter< const double >::type value(valueSEXP);
-    rcpp_result_gen = Rcpp::wrap(mo_internal__deterministic(n, value));
+    rcpp_result_gen = Rcpp::wrap(rtest__deterministic(n, value));
     return rcpp_result_gen;
 END_RCPP
 }
-// mo_internal__exponential
-NumericVector mo_internal__exponential(const std::size_t n, const double rate);
-RcppExport SEXP _rmo_mo_internal__exponential(SEXP nSEXP, SEXP rateSEXP) {
+// rtest__exponential
+NumericVector rtest__exponential(const std::size_t n, const double rate);
+RcppExport SEXP _rmo_rtest__exponential(SEXP nSEXP, SEXP rateSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const std::size_t >::type n(nSEXP);
     Rcpp::traits::input_parameter< const double >::type rate(rateSEXP);
-    rcpp_result_gen = Rcpp::wrap(mo_internal__exponential(n, rate));
+    rcpp_result_gen = Rcpp::wrap(rtest__exponential(n, rate));
     return rcpp_result_gen;
 END_RCPP
 }
-// mo_internal__pareto
-NumericVector mo_internal__pareto(const std::size_t n, const double alpha, const double x0);
-RcppExport SEXP _rmo_mo_internal__pareto(SEXP nSEXP, SEXP alphaSEXP, SEXP x0SEXP) {
+// rtest__pareto
+NumericVector rtest__pareto(const std::size_t n, const double alpha, const double x0);
+RcppExport SEXP _rmo_rtest__pareto(SEXP nSEXP, SEXP alphaSEXP, SEXP x0SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const std::size_t >::type n(nSEXP);
     Rcpp::traits::input_parameter< const double >::type alpha(alphaSEXP);
     Rcpp::traits::input_parameter< const double >::type x0(x0SEXP);
-    rcpp_result_gen = Rcpp::wrap(mo_internal__pareto(n, alpha, x0));
+    rcpp_result_gen = Rcpp::wrap(rtest__pareto(n, alpha, x0));
     return rcpp_result_gen;
 END_RCPP
 }
-// mo_internal__rdiscrete
-IntegerVector mo_internal__rdiscrete(const std::size_t n, const std::size_t d, const Nullable<NumericVector> probabilities);
-RcppExport SEXP _rmo_mo_internal__rdiscrete(SEXP nSEXP, SEXP dSEXP, SEXP probabilitiesSEXP) {
+// rtest__discrete
+IntegerVector rtest__discrete(const std::size_t n, const std::size_t d, const Nullable<NumericVector> probabilities);
+RcppExport SEXP _rmo_rtest__discrete(SEXP nSEXP, SEXP dSEXP, SEXP probabilitiesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const std::size_t >::type n(nSEXP);
     Rcpp::traits::input_parameter< const std::size_t >::type d(dSEXP);
     Rcpp::traits::input_parameter< const Nullable<NumericVector> >::type probabilities(probabilitiesSEXP);
-    rcpp_result_gen = Rcpp::wrap(mo_internal__rdiscrete(n, d, probabilities));
+    rcpp_result_gen = Rcpp::wrap(rtest__discrete(n, d, probabilities));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -143,14 +213,19 @@ RcppExport SEXP run_testthat_tests(SEXP);
 static const R_CallMethodDef CallEntries[] = {
     {"_rmo_Rcpp__is_within", (DL_FUNC) &_rmo_Rcpp__is_within, 2},
     {"_rmo_Rcpp__rmo_esm", (DL_FUNC) &_rmo_Rcpp__rmo_esm, 3},
+    {"_rmo_rtest__rmo_esm", (DL_FUNC) &_rmo_rtest__rmo_esm, 3},
     {"_rmo_Rcpp__rmo_arnold", (DL_FUNC) &_rmo_Rcpp__rmo_arnold, 3},
+    {"_rmo_rtest__rmo_arnold", (DL_FUNC) &_rmo_rtest__rmo_arnold, 3},
     {"_rmo_Rcpp__rmo_ex_arnold", (DL_FUNC) &_rmo_Rcpp__rmo_ex_arnold, 3},
+    {"_rmo_rtest__rmo_ex_arnold", (DL_FUNC) &_rmo_rtest__rmo_ex_arnold, 3},
     {"_rmo_Rcpp__rmo_esm_cuadras_auge", (DL_FUNC) &_rmo_Rcpp__rmo_esm_cuadras_auge, 4},
+    {"_rmo_rtest__rmo_esm_cuadras_auge", (DL_FUNC) &_rmo_rtest__rmo_esm_cuadras_auge, 4},
     {"_rmo_Rcpp__rmo_lfm_cpp", (DL_FUNC) &_rmo_Rcpp__rmo_lfm_cpp, 7},
-    {"_rmo_mo_internal__deterministic", (DL_FUNC) &_rmo_mo_internal__deterministic, 2},
-    {"_rmo_mo_internal__exponential", (DL_FUNC) &_rmo_mo_internal__exponential, 2},
-    {"_rmo_mo_internal__pareto", (DL_FUNC) &_rmo_mo_internal__pareto, 3},
-    {"_rmo_mo_internal__rdiscrete", (DL_FUNC) &_rmo_mo_internal__rdiscrete, 3},
+    {"_rmo_rtest__rmo_lfm_cpp", (DL_FUNC) &_rmo_rtest__rmo_lfm_cpp, 7},
+    {"_rmo_rtest__deterministic", (DL_FUNC) &_rmo_rtest__deterministic, 2},
+    {"_rmo_rtest__exponential", (DL_FUNC) &_rmo_rtest__exponential, 2},
+    {"_rmo_rtest__pareto", (DL_FUNC) &_rmo_rtest__pareto, 3},
+    {"_rmo_rtest__discrete", (DL_FUNC) &_rmo_rtest__discrete, 3},
     {"run_testthat_tests", (DL_FUNC) &run_testthat_tests, 1},
     {NULL, NULL, 0}
 };
