@@ -63,7 +63,7 @@ NumericMatrix Rcpp__rmo_ex_arnold(const std::size_t n, const std::size_t d,
   using markovian_exmo_distribution =
       rmolib::random::markovian_exmo_distribution<
           double, exponential_distribution, uniform_int_distribution,
-          discrete_distribution>;
+          discrete_distribution, rmolib::algorithm::r_shuffler>;
   using caller_t = rcpp_distribution_caller<markovian_exmo_distribution, true>;
 
   return caller_t::call(r_engine{}, n, d, ex_intensities.begin(),

@@ -37,6 +37,16 @@ void shuffle(_RandomAccessIterator first, _RandomAccessIterator last,
   }
 }
 
+struct shuffler {
+  template <typename _RandomAccessIterator, typename _Engine,
+            typename _UniformIntDistribution>
+  void operator()(_RandomAccessIterator first, _RandomAccessIterator last,
+                  _Engine&& engine, _UniformIntDistribution&& dist) const {
+    return shuffle(first, last, std::forward<_Engine>(engine),
+                   std::forward<_UniformIntDistribution>(dist));
+  }
+};
+
 }  // namespace algorithm
 
 }  // namespace rmolib

@@ -10,6 +10,7 @@
 #include <rmolib/random/univariate/r_discrete_distribution.hpp>
 #include <rmolib/random/univariate/uniform_int_distribution.hpp>
 #include <rmolib/random/univariate/uniform_real_distribution.hpp>
+#include <rmolib/algorithm/r_shuffle.hpp>
 #include <testthat.h>
 
 #include "testutils-approxequals.h"
@@ -22,8 +23,9 @@ using exponential_dist_t = rmolib::random::exponential_distribution<double>;
 using r_discrete_dist_t =
     rmolib::random::r_discrete_distribution<std::size_t, double,
                                             uniform_real_dist_t>;
+using shuffler_t = rmolib::algorithm::r_shuffler;
 using markovian_exmo_dist_t = rmolib::random::markovian_exmo_distribution<
-    double, exponential_dist_t, uniform_int_dist_t, r_discrete_dist_t>;
+    double, exponential_dist_t, uniform_int_dist_t, r_discrete_dist_t, shuffler_t>;
 using parm_t = markovian_exmo_dist_t::param_type;
 
 namespace test_markovian_exmo_distribution {

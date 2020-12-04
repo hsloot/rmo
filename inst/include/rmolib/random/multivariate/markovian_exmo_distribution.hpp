@@ -5,11 +5,12 @@
 #include <limits>
 #include <type_traits>
 #include <vector>
+#include <numeric>
 
-#include "rmolib/algorithm/r_shuffle.hpp"
 #include "rmolib/math/binomial_coefficient.hpp"
 #include "rmolib/math/next_integral_value.hpp"
 #include "rmolib/random/multivariate/internal/exmo_param_type.hpp"
+#include "rmolib/type_traits/iterator.hpp"
 #include "rmolib/type_traits/is_safe_numeric_cast.hpp"
 
 namespace rmolib {
@@ -17,7 +18,7 @@ namespace rmolib {
 namespace random {
 
 template <typename _RealType, typename _ExponentialDistribution,
-          typename _UniformIntDistribution, typename _DiscreteDistribution>
+          typename _UniformIntDistribution, typename _DiscreteDistribution, typename _ShuffleOperation>
 class markovian_exmo_distribution {
  public:
   using result_type = std::vector<_RealType>;
@@ -232,7 +233,7 @@ class markovian_exmo_distribution {
       for (std::size_t i = number_dead_before_transition; i < number_dead; ++i)
         out[i] = time;
     }
-    algorithm::r_shuffle(out.begin(), out.end(), engine, uniform_int_dist_);
+    shuffle(out.begin(), out.end(), engine, uniform_int_dist_);
   }
 
   friend bool operator==(const markovian_exmo_distribution& lhs,
@@ -252,6 +253,7 @@ class markovian_exmo_distribution {
   _UniformIntDistribution uniform_int_dist_{};
   _ExponentialDistribution exponential_dist_{};
   _DiscreteDistribution discrete_dist_{};
+  _ShuffleOperation shuffle{};
 
   template <typename _Engine>
   auto __markov_process(_Engine&& engine, const markov_parm_t& parm,

@@ -3,17 +3,18 @@
 #include <type_traits>
 #include <vector>
 
-#include "random/multivariate/arnold_mo_distribution.hpp"
-#include "random/multivariate/cuadras_auge_distribution.hpp"
-#include "random/multivariate/esm_mo_distribution.hpp"
-#include "random/multivariate/lfm_distribution.hpp"
-#include "random/multivariate/markovian_exmo_distribution.hpp"
-#include "random/univariate/deterministic_distribution.hpp"
-#include "random/univariate/exponential_distribution.hpp"
-#include "random/univariate/pareto_distribution.hpp"
-#include "random/univariate/r_discrete_distribution.hpp"
-#include "random/univariate/uniform_int_distribution.hpp"
-#include "random/univariate/uniform_real_distribution.hpp"
+#include "rmolib/algorithm/r_shuffle.hpp"
+#include "rmolib/random/multivariate/arnold_mo_distribution.hpp"
+#include "rmolib/random/multivariate/cuadras_auge_distribution.hpp"
+#include "rmolib/random/multivariate/esm_mo_distribution.hpp"
+#include "rmolib/random/multivariate/lfm_distribution.hpp"
+#include "rmolib/random/multivariate/markovian_exmo_distribution.hpp"
+#include "rmolib/random/univariate/deterministic_distribution.hpp"
+#include "rmolib/random/univariate/exponential_distribution.hpp"
+#include "rmolib/random/univariate/pareto_distribution.hpp"
+#include "rmolib/random/univariate/r_discrete_distribution.hpp"
+#include "rmolib/random/univariate/uniform_int_distribution.hpp"
+#include "rmolib/random/univariate/uniform_real_distribution.hpp"
 
 namespace rmolib {
 
@@ -57,7 +58,7 @@ template <typename _RealType = double>
 using markovian_exmo_distribution = random::markovian_exmo_distribution<
     _RealType, exponential_distribution<_RealType>,
     uniform_int_distribution<std::size_t>,
-    r_discrete_distribution<std::size_t, _RealType>>;
+    r_discrete_distribution<std::size_t, _RealType>, algorithm::r_shuffler>;
 
 template <typename _RealType = double>
 using cuadras_auge_distribution =

@@ -11,6 +11,7 @@
 #include "rmolib/type_traits/iterator.hpp"
 
 namespace rmolib {
+
 namespace algorithm {
 
 //! very hacky implementation to mimic using `base::sample.int` in R to
@@ -36,5 +37,16 @@ void r_shuffle(_RandomAccessIterator first, _RandomAccessIterator last,
   for (std::size_t i = 0; i < cpy.size(); ++i) first[i] = cpy[perm[i]];
 }
 
+struct r_shuffler {
+  template <typename _RandomAccessIterator, typename _Engine,
+            typename _UniformIntDistribution>
+  void operator()(_RandomAccessIterator first, _RandomAccessIterator last,
+                  _Engine&& engine, _UniformIntDistribution&& dist) const {
+    return r_shuffle(first, last, std::forward<_Engine>(engine),
+                     std::forward<_UniformIntDistribution>(dist));
+  }
+};
+
 }  // namespace algorithm
+
 }  // namespace rmolib
