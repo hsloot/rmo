@@ -55,7 +55,10 @@
 rmo_esm <- function(n, d, intensities) {
   assert_that(is.count(n), is_mo_parameter(d, intensities))
 
+  # nolint start
+  # test `rtest__rmo_esm`
   Rcpp__rmo_esm(n, d, intensities)
+  # nolint end
 }
 
 
@@ -88,7 +91,10 @@ rmo_esm <- function(n, d, intensities) {
 rmo_arnold <- function(n, d, intensities) {
   assert_that(is.count(n), is_mo_parameter(d, intensities))
 
+  # nolint start
+  # test `rtest__rmo_arnold`
   Rcpp__rmo_arnold(n, d, intensities)
+  # nolint end
 }
 
 
@@ -135,7 +141,10 @@ rmo_arnold <- function(n, d, intensities) {
 rmo_ex_arnold <- function(n, d, ex_intensities) {
   assert_that(is.count(n), is_ex_mo_parameter(d, ex_intensities))
 
+  # nolint start
+  # test `rtest__rmo_ex_arnold`
   Rcpp__rmo_ex_arnold(n, d, ex_intensities)
+  # nolint end
 }
 
 ## #### Sample from extMO distributions ####
@@ -178,7 +187,10 @@ rmo_ex_arnold <- function(n, d, ex_intensities) {
 rmo_esm_cuadras_auge <- function(n, d, alpha, beta) {
   assert_that(is.count(n), is_cuadras_auge_parameter(d, alpha, beta))
 
+  # nolint start
+  # test `rtest__rmo_esm_cuadras_auge`
   Rcpp__rmo_esm_cuadras_auge(n, d, alpha, beta)
+  # nolint end
 }
 
 
@@ -236,8 +248,10 @@ rmo_lfm_cpp <- function(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_
   assert_that(is.count(n),
     is_lfm_cpp_mo_parameter(d, rate, rate_killing, rate_drift,
       rjump_name, rjump_arg_list))
-
+  # nolint start
+  # test `rtest__rmo_lfm_cpp`
   Rcpp__rmo_lfm_cpp(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list)
+  # nolint end
 }
 
 #' @keywords internal
