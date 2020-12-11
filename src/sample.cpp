@@ -139,6 +139,15 @@ NumericMatrix rtest__rmo_esm_cuadras_auge(const std::size_t n,
   return Rcpp__rmo_esm_cuadras_auge(n, d, alpha, beta);
 }
 
+template<typename _T>
+_T get_param(const List& parms, const std::string name) {
+  const auto names = as<std::vector<std::string>>(parms.names());
+  auto it = std::find(names.cbegin(), names.cend(), name);
+  if (it == names.end())
+    throw std::domain_error("rjump_name not supported");
+  return parms[*it];
+}
+
 // [[Rcpp::export]]
 NumericMatrix Rcpp__rmo_lfm_cpp(const std::size_t n, const std::size_t d,
                                 const double rate, const double rate_killing,
@@ -157,19 +166,25 @@ NumericMatrix Rcpp__rmo_lfm_cpp(const std::size_t n, const std::size_t d,
   if ("rposval" == rjump_name) {
     using caller_t = rcpp_distribution_caller<rmolib::random::lfm_distribution<
         double, deterministic_distribution, exponential_distribution>>;
+
+    const auto value = get_param<double>(rjump_arg_list, "value");
     return caller_t::call(r_engine{}, n, d, rate_killing, rate_drift, rate,
-                          static_cast<double>(rjump_arg_list["value"]));
+                          value);
   } else if ("rexp" == rjump_name) {
     using caller_t = rcpp_distribution_caller<rmolib::random::lfm_distribution<
         double, exponential_distribution, exponential_distribution>>;
+
+    const auto lambda = get_param<double>(rjump_arg_list, "rate");
     return caller_t::call(r_engine{}, n, d, rate_killing, rate_drift, rate,
-                          static_cast<double>(rjump_arg_list["rate"]));
+                          lambda);
   } else if ("rpareto" == rjump_name) {
     using caller_t = rcpp_distribution_caller<rmolib::random::lfm_distribution<
         double, pareto_distribution, exponential_distribution>>;
+
+    const auto alpha = get_param<double>(rjump_arg_list, "alpha");
+    const auto lower_bound = get_param<double>(rjump_arg_list, "x0");
     return caller_t::call(r_engine{}, n, d, rate_killing, rate_drift, rate,
-                          static_cast<double>(rjump_arg_list["alpha"]),
-                          static_cast<double>(rjump_arg_list["x0"]));
+                          alpha, lower_bound);
   } else {
     throw std::domain_error("rjump_name not supported");
   }
@@ -184,6 +199,11 @@ NumericMatrix rtest__rmo_lfm_cpp(const std::size_t n, const std::size_t d,
   return Rcpp__rmo_lfm_cpp(n, d, rate, rate_killing, rate_drift, rjump_name,
                            rjump_arg_list);
 }
+
+
+// ----------------------------------------------------------------------------
+// internal univariate generators, exposed for testing
+// ----------------------------------------------------------------------------
 
 // [[Rcpp::export]]
 NumericVector rtest__deterministic(const std::size_t n, const double value) {
