@@ -1,6 +1,6 @@
 // clang-format off
 #include <Rcpp.h>
-#include <r_engine.hpp> // must be included before <rmolib/*>
+#include <rmolib/random/r_engine.hpp> // must be included before <rmolib/*>
 // clang-format on
 
 #include "rcpp_distribution_caller.h"
