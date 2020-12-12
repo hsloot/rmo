@@ -73,7 +73,7 @@ distribution with shock rates ex_intensities." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rmo</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.6</span>
       </span>
     </div>
 
@@ -201,38 +201,38 @@ intensity of a shock corresponding to a set with \(i\) elements.</p></li>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>rmo_ex_arnold</span><span class='op'>(</span><span class='fl'>10</span>, <span class='fl'>2</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.4</span>, <span class='fl'>0.2</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;            [,1]       [,2]
-#&gt;  [1,] 2.6866876 0.68832679
-#&gt;  [2,] 2.4743825 2.47438250
-#&gt;  [3,] 3.6066340 2.33361037
-#&gt;  [4,] 0.4235068 0.42350683
-#&gt;  [5,] 2.2507877 2.25078765
-#&gt;  [6,] 2.4315769 1.16246327
-#&gt;  [7,] 1.6585730 2.33794804
-#&gt;  [8,] 4.0042539 0.52152228
-#&gt;  [9,] 2.5934059 3.50166206
-#&gt; [10,] 1.2868070 0.05664471</div><div class='input'><span class='fu'>rmo_ex_arnold</span><span class='op'>(</span><span class='fl'>10</span>, <span class='fl'>2</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>0</span><span class='op'>)</span><span class='op'>)</span>      <span class='co'>## independence</span>
+#&gt;  [1,] 0.6883268 2.68668763
+#&gt;  [2,] 3.7153519 3.84842384
+#&gt;  [3,] 0.7638142 0.86359679
+#&gt;  [4,] 0.0507447 0.05074470
+#&gt;  [5,] 0.4515279 0.52962264
+#&gt;  [6,] 0.1969416 0.03206982
+#&gt;  [7,] 0.8681503 0.86815035
+#&gt;  [8,] 0.2664631 1.87645994
+#&gt;  [9,] 5.7980824 4.55055850
+#&gt; [10,] 3.5016621 2.59340590</div><div class='input'><span class='fu'>rmo_ex_arnold</span><span class='op'>(</span><span class='fl'>10</span>, <span class='fl'>2</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>0</span><span class='op'>)</span><span class='op'>)</span>      <span class='co'>## independence</span>
+</div><div class='output co'>#&gt;             [,1]      [,2]
+#&gt;  [1,] 1.04661554 0.2502479
+#&gt;  [2,] 1.48962999 0.9891503
+#&gt;  [3,] 0.01589016 0.1496283
+#&gt;  [4,] 0.02640070 0.3738387
+#&gt;  [5,] 1.57013818 0.1364730
+#&gt;  [6,] 0.21542308 1.6685058
+#&gt;  [7,] 1.23581596 1.0078047
+#&gt;  [8,] 1.65762965 1.3502309
+#&gt;  [9,] 2.35306153 0.0594912
+#&gt; [10,] 1.11772768 0.3702875</div><div class='input'><span class='fu'>rmo_ex_arnold</span><span class='op'>(</span><span class='fl'>10</span>, <span class='fl'>2</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>      <span class='co'>## comonotone</span>
 </div><div class='output co'>#&gt;             [,1]       [,2]
-#&gt;  [1,] 0.28202017 0.25023985
-#&gt;  [2,] 0.11967045 0.06686906
-#&gt;  [3,] 1.15918305 0.00124707
-#&gt;  [4,] 1.00598250 1.92822463
-#&gt;  [5,] 2.75497176 0.73936227
-#&gt;  [6,] 0.47776296 1.26149492
-#&gt;  [7,] 0.05949120 2.35306153
-#&gt;  [8,] 0.67849649 2.52381421
-#&gt;  [9,] 0.02016214 0.26575979
-#&gt; [10,] 0.35167474 0.44108507</div><div class='input'><span class='fu'>rmo_ex_arnold</span><span class='op'>(</span><span class='fl'>10</span>, <span class='fl'>2</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>      <span class='co'>## comonotone</span>
-</div><div class='output co'>#&gt;            [,1]      [,2]
-#&gt;  [1,] 0.3716193 0.3716193
-#&gt;  [2,] 0.2781220 0.2781220
-#&gt;  [3,] 0.8172443 0.8172443
-#&gt;  [4,] 0.6558426 0.6558426
-#&gt;  [5,] 0.8203975 0.8203975
-#&gt;  [6,] 0.4683331 0.4683331
-#&gt;  [7,] 0.4498702 0.4498702
-#&gt;  [8,] 3.1486301 3.1486301
-#&gt;  [9,] 0.6861939 0.6861939
-#&gt; [10,] 1.4543557 1.4543557</div><div class='input'>
+#&gt;  [1,] 0.04032429 0.04032429
+#&gt;  [2,] 0.18963840 0.18963840
+#&gt;  [3,] 0.70334948 0.70334948
+#&gt;  [4,] 1.13331679 1.13331679
+#&gt;  [5,] 0.37161926 0.37161926
+#&gt;  [6,] 0.55690861 0.55690861
+#&gt;  [7,] 1.13126986 1.13126986
+#&gt;  [8,] 1.81856869 1.81856869
+#&gt;  [9,] 4.05844190 4.05844190
+#&gt; [10,] 0.28613806 0.28613806</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
