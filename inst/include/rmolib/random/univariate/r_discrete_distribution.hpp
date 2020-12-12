@@ -127,6 +127,8 @@ class r_discrete_distribution {
     void __validate_input(_ForwardIterator first, _ForwardIterator last) const {
       if (!std::all_of(first, last, [](const auto v) { return v >= 0; }))
         throw std::domain_error("negative probabilities not allowed");
+      if (std::all_of(first, last, [](const auto v) { return v == 0; }))
+        throw std::domain_error("all probabilities are zero");
     }
 
     void __init_empty() {

@@ -144,7 +144,7 @@ _T get_param(const List& parms, const std::string name) {
   const auto names = as<std::vector<std::string>>(parms.names());
   auto it = std::find(names.cbegin(), names.cend(), name);
   if (it == names.end())
-    throw std::domain_error("rjump_name not supported");
+    throw std::domain_error(name + " not provided");
   return parms[*it];
 }
 

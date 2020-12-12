@@ -78,7 +78,7 @@ class exponential_distribution {
     _RealType lambda_{1.};
 
     void __validate_input(const double lambda) const {
-      if (lambda < 0) throw std::domain_error("lambda_ must be positive");
+      if (lambda < 0) throw std::domain_error("lambda_ must be non-negative");
     }
 
     static_assert(

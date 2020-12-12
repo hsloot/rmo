@@ -1,3 +1,13 @@
+#' @noRd
+rposval <- function(n, value=1) { # only needed for assertions
+  rep(value, times=n)
+}
+
+#' @noRd
+rpareto <- function(n, alpha, x0) { # only needed for assertions
+  x0 / (stats::runif(n)) ^ (1/alpha)
+}
+
 #' Alternative implementation of ind.-case via LFM
 #'
 #' @keywords internal

@@ -53,8 +53,6 @@
 #' @export
 #' @name rmo_esm
 rmo_esm <- function(n, d, intensities) {
-  assert_that(is.count(n), is_mo_parameter(d, intensities))
-
   # nolint start
   # test `rtest__rmo_esm`
   Rcpp__rmo_esm(n, d, intensities)
@@ -89,8 +87,6 @@ rmo_esm <- function(n, d, intensities) {
 #'
 #' @export
 rmo_arnold <- function(n, d, intensities) {
-  assert_that(is.count(n), is_mo_parameter(d, intensities))
-
   # nolint start
   # test `rtest__rmo_arnold`
   Rcpp__rmo_arnold(n, d, intensities)
@@ -139,8 +135,6 @@ rmo_arnold <- function(n, d, intensities) {
 #' @export
 #' @name rmo_ex_arnold
 rmo_ex_arnold <- function(n, d, ex_intensities) {
-  assert_that(is.count(n), is_ex_mo_parameter(d, ex_intensities))
-
   # nolint start
   # test `rtest__rmo_ex_arnold`
   Rcpp__rmo_ex_arnold(n, d, ex_intensities)
@@ -185,8 +179,6 @@ rmo_ex_arnold <- function(n, d, ex_intensities) {
 #' @export
 #' @name rmo_esm_cuadras_auge
 rmo_esm_cuadras_auge <- function(n, d, alpha, beta) {
-  assert_that(is.count(n), is_cuadras_auge_parameter(d, alpha, beta))
-
   # nolint start
   # test `rtest__rmo_esm_cuadras_auge`
   Rcpp__rmo_esm_cuadras_auge(n, d, alpha, beta)
@@ -245,24 +237,8 @@ rmo_esm_cuadras_auge <- function(n, d, alpha, beta) {
 #' @export
 #' @name rmo_lfm_cpp
 rmo_lfm_cpp <- function(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list = list()) {
-  assert_that(is.count(n),
-    is_lfm_cpp_mo_parameter(d, rate, rate_killing, rate_drift,
-      rjump_name, rjump_arg_list))
   # nolint start
   # test `rtest__rmo_lfm_cpp`
   Rcpp__rmo_lfm_cpp(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list)
   # nolint end
-}
-
-#' @keywords internal
-#' @noRd
-rposval <- function(n, value=1) { # only needed for assertions
-  rep(value, times=n)
-}
-
-#' @importFrom stats runif
-#' @keywords internal
-#' @noRd
-rpareto <- function(n, alpha, x0) { # only needed for assertions
-  x0 / (runif(n)) ^ (1/alpha)
 }
