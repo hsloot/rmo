@@ -37,9 +37,6 @@ jobs:
           remotes::install_github("r-lib/bench")
         shell: Rscript {0}
 
-      - name: Fetch existing benchmarks
-        run: Rscript -e 'bench::cb_fetch()'
-
       - name: Install package
         run: R CMD INSTALL .
 
