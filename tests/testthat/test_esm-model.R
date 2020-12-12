@@ -4,13 +4,15 @@ n <- 1e2L
 # #### Test implementation for the bivariate case ####
 
 test_that("ESM implementation for d = 2", {
+  mockery::stub(rmo_esm, "Rcpp__rmo_esm", rtest__rmo_esm)
+
   ## all equal
   args <- list(
     "d" = 2L,
     "intensities" = c(1, 1, 1)
   )
   expect_equal_rn_generation(
-    "rtest__rmo_esm", "test__rmo_esm_bivariate",
+    "rmo_esm", "test__rmo_esm_bivariate",
     args, n, use_seed)
 
   ## independence
@@ -22,31 +24,31 @@ test_that("ESM implementation for d = 2", {
   ## comonotone
   args[["intensities"]] <- c(0, 0, 1)
   expect_equal_rn_generation(
-    "rtest__rmo_esm", "test__rmo_esm_bivariate",
+    "rmo_esm", "test__rmo_esm_bivariate",
     args, n, use_seed)
 
   ## exchangeable, low, high
   args[["intensities"]] <- c(0.1, 0.1, 2)
   expect_equal_rn_generation(
-    "rtest__rmo_esm", "test__rmo_esm_bivariate",
+    "rmo_esm", "test__rmo_esm_bivariate",
     args, n, use_seed)
 
   ## exchangeable, high, low
   args[["intensities"]] <- c(3, 3, 0.5)
   expect_equal_rn_generation(
-    "rtest__rmo_esm", "test__rmo_esm_bivariate",
+    "rmo_esm", "test__rmo_esm_bivariate",
     args, n, use_seed)
 
   ## Low, High, Low
   args[["intensities"]] <- c(0.5, 3, 0.2)
   expect_equal_rn_generation(
-    "rtest__rmo_esm", "test__rmo_esm_bivariate",
+    "rmo_esm", "test__rmo_esm_bivariate",
     args, n, use_seed)
 
   ## Low, Low, High
   args[["intensities"]] <- c(0.1, 0.005, 2)
   expect_equal_rn_generation(
-    "rtest__rmo_esm", "test__rmo_esm_bivariate",
+    "rmo_esm", "test__rmo_esm_bivariate",
     args, n, use_seed)
 })
 
@@ -54,6 +56,8 @@ test_that("ESM implementation for d = 2", {
 # #### Test implementation against original `R` version ####
 
 test_that("ESM implementation for d > 2", {
+  mockery::stub(rmo_esm, "Rcpp__rmo_esm", rtest__rmo_esm)
+
   ## dimension parameters
   d1 <- 3L
   d2 <- 4L

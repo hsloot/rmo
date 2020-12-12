@@ -22,8 +22,9 @@ Suggests:
     testthat,
     covr,
     rmarkdown,
-    rlang, 
-    xml2
+    rlang,
+    xml2,
+    mockery
 RdMacros:
     Rdpack
 Encoding: UTF-8

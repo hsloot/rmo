@@ -23,7 +23,9 @@ namespace test_r_discrete_distribution {
 
 class generic_param_type {
  public:
-  generic_param_type() = default;
+  generic_param_type() {
+    __init_empty();
+  }
 
   template <typename _InputIterator>
   explicit generic_param_type(_InputIterator first, _InputIterator last) {

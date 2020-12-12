@@ -53,10 +53,7 @@
 #' @export
 #' @name rmo_esm
 rmo_esm <- function(n, d, intensities) {
-  # nolint start
-  # test `rtest__rmo_esm`
   Rcpp__rmo_esm(n, d, intensities)
-  # nolint end
 }
 
 
@@ -87,10 +84,7 @@ rmo_esm <- function(n, d, intensities) {
 #'
 #' @export
 rmo_arnold <- function(n, d, intensities) {
-  # nolint start
-  # test `rtest__rmo_arnold`
   Rcpp__rmo_arnold(n, d, intensities)
-  # nolint end
 }
 
 
@@ -135,10 +129,7 @@ rmo_arnold <- function(n, d, intensities) {
 #' @export
 #' @name rmo_ex_arnold
 rmo_ex_arnold <- function(n, d, ex_intensities) {
-  # nolint start
-  # test `rtest__rmo_ex_arnold`
   Rcpp__rmo_ex_arnold(n, d, ex_intensities)
-  # nolint end
 }
 
 ## #### Sample from extMO distributions ####
@@ -179,10 +170,7 @@ rmo_ex_arnold <- function(n, d, ex_intensities) {
 #' @export
 #' @name rmo_esm_cuadras_auge
 rmo_esm_cuadras_auge <- function(n, d, alpha, beta) {
-  # nolint start
-  # test `rtest__rmo_esm_cuadras_auge`
   Rcpp__rmo_esm_cuadras_auge(n, d, alpha, beta)
-  # nolint end
 }
 
 
@@ -237,8 +225,5 @@ rmo_esm_cuadras_auge <- function(n, d, alpha, beta) {
 #' @export
 #' @name rmo_lfm_cpp
 rmo_lfm_cpp <- function(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list = list()) {
-  # nolint start
-  # test `rtest__rmo_lfm_cpp`
   Rcpp__rmo_lfm_cpp(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list)
-  # nolint end
 }

@@ -27,7 +27,9 @@ class markovian_exmo_distribution {
    public:
     using distribution_type = markovian_exmo_distribution;
 
-    param_type() = default;
+    param_type() {
+      __init_empty();
+    };
 
     template <typename _InputIterator>
     explicit param_type(const std::size_t dim, _InputIterator first,

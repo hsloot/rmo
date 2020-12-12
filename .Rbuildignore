@@ -8,6 +8,7 @@
 ^docs$
 ^pkgdown$
 ^\.travis\.yml$
+^\.covrignore$
 ^codecov\.yml$
 ^appveyor\.yml$
 ^codemeta\.json$
