@@ -11,7 +11,6 @@ knitr::opts_chunk$set(
 
 ```{r setup, include = FALSE}
 library(rmo)
-library(bench)
 ```
 
 ```{r costum_benchmark_plot, include = FALSE}
@@ -39,7 +38,7 @@ cb_plot_time <- function(x, n = 15, selected_names = NULL, selected_files = NULL
     ggplot2::geom_line(aes(group = name)) +
     ggplot2::coord_flip() +
     ggplot2::scale_x_discrete(name = NULL) +
-    scale_y_bench_time(name = NULL, base = NULL) +
+    bench::scale_y_bench_time(name = NULL, base = NULL) +
     ggplot2::facet_wrap(ggplot2::vars(
       file,
       name
@@ -48,7 +47,6 @@ cb_plot_time <- function(x, n = 15, selected_names = NULL, selected_files = NULL
 ```
 
 ```{r read-benchmarks, include=FALSE}
-bench::cb_fetch()
 results <- bench::cb_read()
 ```
 
