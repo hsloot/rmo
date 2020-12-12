@@ -11,31 +11,31 @@ test_that("Exchangeable Arnold model for d = 2", {
     ex_intensities = c(1, 1)
   )
   expect_equal_rn_generation(
-    "rmo_ex_arnold", "test__rmo_ex_arnold_bivariate",
+    "rtest__rmo_ex_arnold", "test__rmo_ex_arnold_bivariate",
     args, n, use_seed)
 
   ## independence
   args[["ex_intensities"]] <- c(1, 0)
   expect_equal_rn_generation(
-    "rmo_ex_arnold", "test__rmo_ex_arnold_bivariate",
+    "rtest__rmo_ex_arnold", "test__rmo_ex_arnold_bivariate",
     args, n, use_seed)
 
   ## comonotone
   args[["ex_intensities"]] <- c(0, 1)
   expect_equal_rn_generation(
-    "rmo_ex_arnold", "test__rmo_ex_arnold_bivariate",
+    "rtest__rmo_ex_arnold", "test__rmo_ex_arnold_bivariate",
     args, n, use_seed)
 
   ## low, high
   args[["ex_intensities"]] <- c(0.5, 2)
   expect_equal_rn_generation(
-    "rmo_ex_arnold", "test__rmo_ex_arnold_bivariate",
+    "rtest__rmo_ex_arnold", "test__rmo_ex_arnold_bivariate",
     args, n, use_seed)
 
   ## high, low
   args[["ex_intensities"]] <- c(3, 0.2)
   expect_equal_rn_generation(
-    "rmo_ex_arnold", "test__rmo_ex_arnold_bivariate",
+    "rtest__rmo_ex_arnold", "test__rmo_ex_arnold_bivariate",
     args, n, use_seed)
 })
 
@@ -51,37 +51,37 @@ test_that("Alternative implementation in R for d>2", {
     "ex_intensities" = rep(1, times=d)
   )
   expect_equal_rn_generation(
-    "rmo_ex_arnold", "test__rmo_ex_arnold_alternative",
+    "rtest__rmo_ex_arnold", "test__rmo_ex_arnold_alternative",
     args, n, use_seed)
 
   ## independence
   args[["ex_intensities"]] <- ex_intensities_linear(d, scale=0.7)
   expect_equal_rn_generation(
-    "rmo_ex_arnold", "test__rmo_ex_arnold_alternative",
+    "rtest__rmo_ex_arnold", "test__rmo_ex_arnold_alternative",
     args, n, use_seed)
 
   ## comonotone
   args[["ex_intensities"]] <- ex_intensities_constant(d, constant=0.7)
   expect_equal_rn_generation(
-    "rmo_ex_arnold", "test__rmo_ex_arnold_alternative",
+    "rtest__rmo_ex_arnold", "test__rmo_ex_arnold_alternative",
     args, n, use_seed)
 
   ## Poisson
   args[["ex_intensities"]] <- ex_intensities_poisson(d, lambda=0.2, eta=0.3)
   expect_equal_rn_generation(
-    "rmo_ex_arnold", "test__rmo_ex_arnold_alternative",
+    "rtest__rmo_ex_arnold", "test__rmo_ex_arnold_alternative",
     args, n, use_seed)
 
   ## Alpha-stable
   args[["ex_intensities"]] <- ex_intensities_alpha_stable(d, alpha=0.25)
   expect_equal_rn_generation(
-    "rmo_ex_arnold", "test__rmo_ex_arnold_alternative",
+    "rtest__rmo_ex_arnold", "test__rmo_ex_arnold_alternative",
     args, n, use_seed)
 
   ## Gamma
   args[["ex_intensities"]] <- ex_intensities_gamma(d, a=0.4)
   expect_equal_rn_generation(
-    "rmo_ex_arnold", "test__rmo_ex_arnold_alternative",
+    "rtest__rmo_ex_arnold", "test__rmo_ex_arnold_alternative",
     args, n, use_seed)
 })
 
@@ -99,36 +99,38 @@ test_that("Exchangeable Arnold model implementation in C++", {
     "ex_intensities" = rep(1, times=d)
   )
   expect_equal_rn_generation(
-    "rmo_ex_arnold", "test__rmo_ex_arnold",
+    "rtest__rmo_ex_arnold", "test__rmo_ex_arnold",
     args, n, use_seed)
 
   ## independence
   args[["ex_intensities"]] <- ex_intensities_linear(d, scale=0.7)
   expect_equal_rn_generation(
-    "rmo_ex_arnold", "test__rmo_ex_arnold",
+    "rtest__rmo_ex_arnold", "test__rmo_ex_arnold",
     args, n, use_seed)
 
   ## comonotone
   args[["ex_intensities"]] <- ex_intensities_constant(d, constant=0.7)
   expect_equal_rn_generation(
-    "rmo_ex_arnold", "test__rmo_ex_arnold",
+    "rtest__rmo_ex_arnold", "test__rmo_ex_arnold",
     args, n, use_seed)
 
   ## Poisson
   args[["ex_intensities"]] <- ex_intensities_poisson(d, lambda=0.2, eta=0.3)
   expect_equal_rn_generation(
-    "rmo_ex_arnold", "test__rmo_ex_arnold",
+    "rtest__rmo_ex_arnold", "test__rmo_ex_arnold",
     args, n, use_seed)
 
   ## Alpha-stable
   args[["ex_intensities"]] <- ex_intensities_alpha_stable(d, alpha=0.25)
   expect_equal_rn_generation(
-    "rmo_ex_arnold", "test__rmo_ex_arnold",
+    "rtest__rmo_ex_arnold", "test__rmo_ex_arnold",
     args, n, use_seed)
 
   ## Gamma
   args[["ex_intensities"]] <- ex_intensities_gamma(d, a=0.4)
   expect_equal_rn_generation(
-    "rmo_ex_arnold", "test__rmo_ex_arnold",
+    "rtest__rmo_ex_arnold", "test__rmo_ex_arnold",
     args, n, use_seed)
 })
+
+## TODO: add KS unit test

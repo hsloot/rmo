@@ -5,9 +5,12 @@ IncludeBlocks: Regroup
 IncludeCategories:
   - Regex:           '^(<mo/)'
     Priority:        2
-  - Regex:           '<[[:alnum:]._]+>'
+  - Regex:           '<[[:alpha:]_]+>'
     Priority:        1
-  - Regex:           '.*'
+  - Regex:           '<.*>'
     Priority:        3
+    SortPriority:    0
+  - Regex:           '".*"'
+    Priority:        4
     SortPriority:    0
 ...

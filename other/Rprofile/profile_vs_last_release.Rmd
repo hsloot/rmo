@@ -2,8 +2,8 @@
 title: "`r sprintf('Comparison of %s and %s', params$rel, params$oldrel)`"
 output: github_document
 params:
-  rel: "v0.2.5"
-  oldrel: "v0.2.4"
+  rel: "v0.2.6"
+  oldrel: "v0.2.5"
 ---
 
 ```{r setup, include=FALSE}

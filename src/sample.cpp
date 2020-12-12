@@ -1,129 +1,258 @@
+// clang-format off
 #include <Rcpp.h>
-#include <rmo.hpp>
+#include <rmolib/random/r_engine.hpp> // must be included before <rmolib/*>
+// clang-format on
 
-static const R_xlen_t C_CHECK_USR_INTERRUP = 100000;
+#include "rcpp_distribution_caller.h"
+#include "rmolib/algorithm/r_shuffle.hpp"
+#include "rmolib/random/multivariate/arnold_mo_distribution.hpp"
+#include "rmolib/random/multivariate/cuadras_auge_distribution.hpp"
+#include "rmolib/random/multivariate/esm_mo_distribution.hpp"
+#include "rmolib/random/multivariate/lfm_distribution.hpp"
+#include "rmolib/random/multivariate/markovian_exmo_distribution.hpp"
+#include "rmolib/random/univariate/deterministic_distribution.hpp"
+#include "rmolib/random/univariate/exponential_distribution.hpp"
+#include "rmolib/random/univariate/pareto_distribution.hpp"
+#include "rmolib/random/univariate/r_discrete_distribution.hpp"
+#include "rmolib/random/univariate/uniform_int_distribution.hpp"
+#include "rmolib/random/univariate/uniform_real_distribution.hpp"
 
 using namespace Rcpp;
-using namespace mo::stats;
 
-//' @keywords internal
-//' @noRd
 // [[Rcpp::export]]
-NumericMatrix Rcpp__rmo_esm(const R_xlen_t n, const R_xlen_t d,
+bool Rcpp__is_within(const std::size_t i, const std::size_t j) {
+  return rmolib::random::internal::is_within(i - 1, j);
+}
+
+// [[Rcpp::export]]
+NumericMatrix Rcpp__rmo_esm(const std::size_t n, const std::size_t d,
                             const NumericVector& intensities) {
-  ESMGenerator<MatrixRow<REALSXP>, RRNGPolicy> esm_generator(d, intensities);
+  using exponential_distribution =
+      rmolib::random::exponential_distribution<double>;
+  using esm_mo_distribution =
+      rmolib::random::esm_mo_distribution<double, exponential_distribution>;
+  using caller_t = rcpp_distribution_caller<esm_mo_distribution>;
 
-  NumericMatrix out(no_init(n, d));
-  for (R_xlen_t k = 0; k < n; k++) {
-    if ((d * k) % C_CHECK_USR_INTERRUP == 0) checkUserInterrupt();
-
-    MatrixRow<REALSXP> values = out(k, _);
-    esm_generator(values);
-  }
-  return out;
+  return caller_t::call(r_engine{}, n, static_cast<std::size_t>(d),
+                        intensities.begin(), intensities.end());
 }
 
-//' @keywords internal
-//' @noRd
+//' @keywords internal test
 // [[Rcpp::export]]
-NumericMatrix Rcpp__rmo_arnold(const R_xlen_t n, const int d,
+NumericMatrix rtest__rmo_esm(const std::size_t n, const std::size_t d,
+                             const NumericVector& intensities) {
+  return Rcpp__rmo_esm(n, d, intensities);
+}
+
+// [[Rcpp::export]]
+NumericMatrix Rcpp__rmo_arnold(const std::size_t n, const std::size_t d,
                                const NumericVector& intensities) {
-  ArnoldGenerator<MatrixRow<REALSXP>, RRNGPolicy> arnold_generator(d,
-                                                                   intensities);
+  using exponential_distribution =
+      rmolib::random::exponential_distribution<double>;
+  using uniform_real_distribution =
+      rmolib::random::uniform_real_distribution<double>;
+  using discrete_distribution =
+      rmolib::random::r_discrete_distribution<std::size_t, double,
+                                              uniform_real_distribution>;
+  using arnold_mo_distribution =
+      rmolib::random::arnold_mo_distribution<double, exponential_distribution,
+                                             discrete_distribution>;
+  using caller_t = rcpp_distribution_caller<arnold_mo_distribution>;
 
-  NumericMatrix out(no_init(n, d));
-  for (R_xlen_t k = 0; k < n; k++) {
-    if ((d * k) % C_CHECK_USR_INTERRUP == 0) checkUserInterrupt();
-
-    MatrixRow<REALSXP> values = out(k, _);
-    arnold_generator(values);
-  }
-
-  return out;
+  return caller_t::call(r_engine{}, n, d, intensities.begin(),
+                        intensities.end());
 }
 
-//' @keywords internal
-//' @noRd
 // [[Rcpp::export]]
-NumericMatrix Rcpp__rmo_ex_arnold(const R_xlen_t n, const int d,
+NumericMatrix rtest__rmo_arnold(const std::size_t n, const std::size_t d,
+                                const NumericVector& intensities) {
+  return Rcpp__rmo_arnold(n, d, intensities);
+}
+
+// [[Rcpp::export]]
+NumericMatrix Rcpp__rmo_ex_arnold(const std::size_t n, const std::size_t d,
                                   const NumericVector& ex_intensities) {
-  ExArnoldGenerator<MatrixRow<REALSXP>, RRNGPolicy> ex_arnold_generator(
-      d, ex_intensities);
+  using exponential_distribution =
+      rmolib::random::exponential_distribution<double>;
+  using uniform_real_distribution =
+      rmolib::random::uniform_real_distribution<double>;
+  using uniform_int_distribution =
+      rmolib::random::uniform_int_distribution<std::size_t>;
+  using discrete_distribution =
+      rmolib::random::r_discrete_distribution<std::size_t, double,
+                                              uniform_real_distribution>;
+  using markovian_exmo_distribution =
+      rmolib::random::markovian_exmo_distribution<
+          double, exponential_distribution, uniform_int_distribution,
+          discrete_distribution, rmolib::algorithm::shuffler>;
+  using caller_t = rcpp_distribution_caller<markovian_exmo_distribution, false>;
 
-  NumericMatrix out(no_init(n, d));
-  for (R_xlen_t k = 0; k < n; k++) {
-    if ((d * k) % C_CHECK_USR_INTERRUP == 0) checkUserInterrupt();
-
-    MatrixRow<REALSXP> values = out(k, _);
-    ex_arnold_generator(values);
-  }
-  return out;
+  return caller_t::call(r_engine{}, n, d, ex_intensities.begin(),
+                        ex_intensities.end());
 }
 
-//' @keywords internal
-//' @noRd
 // [[Rcpp::export]]
-NumericMatrix Rcpp__rmo_esm_cuadras_auge(const R_xlen_t n, const int d,
+NumericMatrix rtest__rmo_ex_arnold(const std::size_t n, const std::size_t d,
+                                   const NumericVector& ex_intensities) {
+  // R's sample.int produces a final (redundant) selection of the
+  // last remaining value see
+  // https://github.com/wch/r-source/blob/613bdfd0e1d3fc9984142d5da3da448adf2438c7/src/main/random.c#L461
+  using exponential_distribution =
+      rmolib::random::exponential_distribution<double>;
+  using uniform_real_distribution =
+      rmolib::random::uniform_real_distribution<double>;
+  using uniform_int_distribution =
+      rmolib::random::uniform_int_distribution<std::size_t>;
+  using discrete_distribution =
+      rmolib::random::r_discrete_distribution<std::size_t, double,
+                                              uniform_real_distribution>;
+  using markovian_exmo_distribution =
+      rmolib::random::markovian_exmo_distribution<
+          double, exponential_distribution, uniform_int_distribution,
+          discrete_distribution, rmolib::algorithm::r_shuffler>;
+  using caller_t = rcpp_distribution_caller<markovian_exmo_distribution, true>;
+
+  return caller_t::call(r_engine{}, n, d, ex_intensities.begin(),
+                        ex_intensities.end());
+}
+
+// [[Rcpp::export]]
+NumericMatrix Rcpp__rmo_esm_cuadras_auge(const std::size_t n,
+                                         const std::size_t d,
                                          const double alpha,
                                          const double beta) {
-  CuadrasAugeGenerator<MatrixRow<REALSXP>, RRNGPolicy> cuadras_auge_generator(
-      d, alpha, beta);
+  using exponential_distribution =
+      rmolib::random::exponential_distribution<double>;
+  using cuadras_auge_distribution =
+      rmolib::random::cuadras_auge_distribution<double,
+                                                exponential_distribution>;
+  using caller_t = rcpp_distribution_caller<cuadras_auge_distribution>;
 
-  NumericMatrix out(no_init(n, d));
-  for (R_xlen_t k = 0; k < n; k++) {
-    if ((d * k) % C_CHECK_USR_INTERRUP == 0) checkUserInterrupt();
-
-    MatrixRow<REALSXP> values = out(k, _);
-    cuadras_auge_generator(values);
-  }
-
-  return out;
+  return caller_t::call(r_engine{}, n, d, alpha, beta);
 }
 
-std::unique_ptr<RealUnivariateGenerator<double, RRNGPolicy>>
-get_univariate_generator(const std::string name, const List& args);
-
-//' @keywords internal
-//' @noRd
 // [[Rcpp::export]]
-NumericMatrix Rcpp__rmo_lfm_cpp(const R_xlen_t n, const R_xlen_t d,
+NumericMatrix rtest__rmo_esm_cuadras_auge(const std::size_t n,
+                                          const std::size_t d,
+                                          const double alpha,
+                                          const double beta) {
+  return Rcpp__rmo_esm_cuadras_auge(n, d, alpha, beta);
+}
+
+template<typename _T>
+_T get_param(const List& parms, const std::string name) {
+  const auto names = as<std::vector<std::string>>(parms.names());
+  auto it = std::find(names.cbegin(), names.cend(), name);
+  if (it == names.end())
+    throw std::domain_error("rjump_name not supported");
+  return parms[*it];
+}
+
+// [[Rcpp::export]]
+NumericMatrix Rcpp__rmo_lfm_cpp(const std::size_t n, const std::size_t d,
                                 const double rate, const double rate_killing,
                                 const double rate_drift,
                                 const std::string rjump_name,
                                 const List& rjump_arg_list) {
-  std::unique_ptr<RealUnivariateGenerator<double, RRNGPolicy>> jump_generator =
-      get_univariate_generator(rjump_name, rjump_arg_list);
-  LFMCPPGenerator<MatrixRow<REALSXP>, RRNGPolicy> lfm_cpp_generator(
-      d, rate, rate_killing, rate_drift, jump_generator);
+  using deterministic_distribution =
+      rmolib::random::deterministic_distribution<double>;
+  using exponential_distribution =
+      rmolib::random::exponential_distribution<double>;
+  using uniform_real_distribution =
+      rmolib::random::uniform_real_distribution<double>;
+  using pareto_distribution =
+      rmolib::random::pareto_distribution<double, uniform_real_distribution>;
 
-  NumericMatrix out(no_init(n, d));
-  for (R_xlen_t k = 0; k < n; k++) {
-    if ((d * k) % C_CHECK_USR_INTERRUP == 0) checkUserInterrupt();
+  if ("rposval" == rjump_name) {
+    using caller_t = rcpp_distribution_caller<rmolib::random::lfm_distribution<
+        double, deterministic_distribution, exponential_distribution>>;
 
-    MatrixRow<REALSXP> values = out(k, _);
-    lfm_cpp_generator(values);
+    const auto value = get_param<double>(rjump_arg_list, "value");
+    return caller_t::call(r_engine{}, n, d, rate_killing, rate_drift, rate,
+                          value);
+  } else if ("rexp" == rjump_name) {
+    using caller_t = rcpp_distribution_caller<rmolib::random::lfm_distribution<
+        double, exponential_distribution, exponential_distribution>>;
+
+    const auto lambda = get_param<double>(rjump_arg_list, "rate");
+    return caller_t::call(r_engine{}, n, d, rate_killing, rate_drift, rate,
+                          lambda);
+  } else if ("rpareto" == rjump_name) {
+    using caller_t = rcpp_distribution_caller<rmolib::random::lfm_distribution<
+        double, pareto_distribution, exponential_distribution>>;
+
+    const auto alpha = get_param<double>(rjump_arg_list, "alpha");
+    const auto lower_bound = get_param<double>(rjump_arg_list, "x0");
+    return caller_t::call(r_engine{}, n, d, rate_killing, rate_drift, rate,
+                          alpha, lower_bound);
+  } else {
+    throw std::domain_error("rjump_name not supported");
   }
-  return out;
 }
 
-//' @keywords internal
-//' @noRd
-std::unique_ptr<RealUnivariateGenerator<double, RRNGPolicy>>
-get_univariate_generator(const std::string name, const List& args) {
-  std::unique_ptr<RealUnivariateGenerator<double, RRNGPolicy>> out;
-  if ("rexp" == name) {
-    double rate = args["rate"];
-    out.reset(new ExpGenerator<RRNGPolicy>(rate));
-  } else if ("rposval" == name) {
-    double value = args["value"];
-    out.reset(new FixedDblGenerator<RRNGPolicy>(value));
-  } else if ("rpareto" == name) {  // #nocov start
-    double alpha = args["alpha"];
-    double x0 = args["x0"];
-    out.reset(new ParetoGenerator<RRNGPolicy>(alpha, x0));
-  } else {                            // # nocov end
-    std::logic_error("wrong input");  // # nocov
-  }
+// [[Rcpp::export]]
+NumericMatrix rtest__rmo_lfm_cpp(const std::size_t n, const std::size_t d,
+                                 const double rate, const double rate_killing,
+                                 const double rate_drift,
+                                 const std::string rjump_name,
+                                 const List& rjump_arg_list) {
+  return Rcpp__rmo_lfm_cpp(n, d, rate, rate_killing, rate_drift, rjump_name,
+                           rjump_arg_list);
+}
 
-  return out;
+
+// ----------------------------------------------------------------------------
+// internal univariate generators, exposed for testing
+// ----------------------------------------------------------------------------
+
+// [[Rcpp::export]]
+NumericVector rtest__deterministic(const std::size_t n, const double value) {
+  using deterministic_distribution =
+      rmolib::random::deterministic_distribution<double>;
+  using caller_t = rcpp_distribution_caller<deterministic_distribution>;
+
+  return caller_t::call(r_engine{}, n, value);
+}
+
+// [[Rcpp::export]]
+NumericVector rtest__exponential(const std::size_t n, const double rate) {
+  using exponential_distribution =
+      rmolib::random::exponential_distribution<double>;
+  using caller_t = rcpp_distribution_caller<exponential_distribution>;
+
+  return caller_t::call(r_engine{}, n, rate);
+}
+
+// [[Rcpp::export]]
+NumericVector rtest__pareto(const std::size_t n, const double alpha,
+                            const double x0) {
+  using uniform_real_distribution =
+      rmolib::random::uniform_real_distribution<double>;
+  using pareto_distribution =
+      rmolib::random::pareto_distribution<double, uniform_real_distribution>;
+  using caller_t = rcpp_distribution_caller<pareto_distribution>;
+
+  return caller_t::call(r_engine{}, n, alpha, x0);
+}
+
+// [[Rcpp::export]]
+IntegerVector rtest__discrete(
+    const std::size_t n, const std::size_t d,
+    const Nullable<NumericVector> probabilities = R_NilValue) {
+  if (probabilities.isNotNull()) {
+    using uniform_real_distribution =
+        rmolib::random::uniform_real_distribution<double>;
+    using discrete_distribution =
+        rmolib::random::r_discrete_distribution<std::size_t, double,
+                                                uniform_real_distribution>;
+    using caller_t = rcpp_distribution_caller<discrete_distribution>;
+    NumericVector p(probabilities);
+    return caller_t::call(r_engine{}, n, p.begin(), p.end());
+  } else {
+    using uniform_int_distribution =
+        rmolib::random::uniform_int_distribution<std::size_t>;
+    using caller_t = rcpp_distribution_caller<uniform_int_distribution>;
+
+    return caller_t::call(r_engine{}, n, std::size_t{0}, d);
+  }
 }
