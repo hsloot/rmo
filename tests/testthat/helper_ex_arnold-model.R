@@ -1,6 +1,8 @@
+## #### Exchangeable MO Arnold model ####
+
 #' Bivariate implementation of the exchangeable Arnold model
 #'
-#' @keywords internal
+#' @keywords internal test
 #' @noRd
 test__rmo_ex_arnold_bivariate <- function(n, d, ex_intensities) { # nolint
   ## calculate intensities and transition probabilities for
@@ -50,7 +52,7 @@ test__rmo_ex_arnold_bivariate <- function(n, d, ex_intensities) { # nolint
 #' This implementation is instable even for mediun sized dimensions and
 #' should only be used for low dimensions to test.
 #'
-#' @keywords internal
+#' @keywords internal test
 #' @noRd
 test__rmo_ex_arnold_alternative <- function(n, d, ex_intensities) { # nolint
   ## calculate the corresponding reparametrisation for the
@@ -122,10 +124,9 @@ test__rmo_ex_arnold_alternative <- function(n, d, ex_intensities) { # nolint
 }
 
 
-#' Original implementation of the exchangeable Arnold model in `R`
+#' Naive implementation of the exchangeable Arnold model in `R`
 #'
-#' @rdname rmo_ex_arnold
-#' @keywords internal
+#' @keywords internal test
 #' @noRd
 test__rmo_ex_arnold <- function(n, d, ex_intensities) { # nolint
   ## store total_intensity and transition_probs for all possible states

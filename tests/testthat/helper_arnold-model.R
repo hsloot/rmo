@@ -1,7 +1,8 @@
-#' Original implementation of the Arnold model in `R`
+## #### Arnold model ####
+
+#' Naive implementation of the Arnold model in `R`
 #'
-#' @rdname rmo_arnold
-#' @keywords internal
+#' @keywords internal test
 #' @noRd
 test__rmo_arnold <- function(n, d, intensities) { # nolint
   ## calculate total intensity as the sum of all shock

@@ -1,16 +1,8 @@
-#' @noRd
-rposval <- function(n, value=1) { # only needed for assertions
-  rep(value, times=n)
-}
-
-#' @noRd
-rpareto <- function(n, alpha, x0) { # only needed for assertions
-  x0 / (stats::runif(n)) ^ (1/alpha)
-}
+## #### Lévy frailty model ####
 
 #' Alternative implementation of ind.-case via LFM
 #'
-#' @keywords internal
+#' @keywords internal test
 #' @noRd
 test__rmo_lfm_cpp_independence <- function(
     n, d,
@@ -29,7 +21,7 @@ test__rmo_lfm_cpp_independence <- function(
 
 #' Alternative implementation of com.-case via LFM
 #'
-#' @keywords internal
+#' @keywords internal test
 #' @noRd
 test__rmo_lfm_cpp_comonotone <- function(
     n, d,
@@ -49,8 +41,7 @@ test__rmo_lfm_cpp_comonotone <- function(
 
 #' Original implementation of the Compound Poisson process LFM in `R`
 #'
-#' @rdname rmo_lfm_cpp
-#' @keywords internal
+#' @keywords internal test
 #' @noRd
 test__rmo_lfm_cpp <- function(
     n, d,
@@ -81,8 +72,7 @@ test__rmo_lfm_cpp <- function(
   out
 }
 
-#' @rdname rmo_lfm_cpp
-#' @keywords internal
+#' @keywords internal test
 #' @noRd
 test__sample_cpp <- function( # nolint
     rate, rate_killing, rate_drift,
@@ -90,9 +80,11 @@ test__sample_cpp <- function( # nolint
     barrier_values) {
   ## get jump distribution
   if ("rexp" == rjump_name)
-    rjump <- match.fun(stats::rexp)
+    rjump <- match.fun(rexp)
   else if ("rposval" == rjump_name)
     rjump <- match.fun(rposval)
+  else if ("rpareto" == rjump_name)
+    rjump <- match.fun(rpareto)
   else
     stop(sprintf("%s not implemented", rjump_name))
 
@@ -106,14 +98,14 @@ test__sample_cpp <- function( # nolint
   d <- length(barrier_values)
 
   ## sample killing time
-  killing_time <- rexp_(1, rate_killing) # nolint
+  killing_time <- rexp(1, rate_killing) # nolint
 
   times <- 0.
   values <- 0.
   for (i in 1:d) {
     while (last(values) < barrier_values[[i]]) {
       ## sample waiting time as well as jump value and reduce killing time
-      waiting_time <- rexp_(1, rate) # nolint
+      waiting_time <- rexp(1, rate) # nolint
       killing_waiting_time <- killing_time - last(times)
       jump_value <- do.call(rjump, args=c("n"=1, rjump_arg_list))
 

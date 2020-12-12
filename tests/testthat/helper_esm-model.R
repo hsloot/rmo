@@ -1,29 +1,31 @@
+## #### Exogenous shock model ####
+
 #' Bivariate implementation
 #'
-#' @rdname rmo_esm
-#' @keywords internal
+#' @noRd
+#' @keywords internal test
 #' @noRd
 test__rmo_esm_bivariate <- function(n, d, intensities) { # nolint
   out <- matrix(0, nrow = n, ncol = 2)
     for (i in 1:n) {
       ## individual shock for component 1
-      shock_for_1 <- rexp_(1, intensities[[1]]) # nolint
+      first <- rexp(1, intensities[[1]]) # nolint
       ## individual shock for component 2
-      shock_for_2 <- rexp_(1, intensities[[2]]) # nolint
+      second <- rexp(1, intensities[[2]]) # nolint
       ## global shock for both components
-      shock_for_1_and_2 <- rexp_(1, intensities[[3]]) # nolint
+      combined <- rexp(1, intensities[[3]]) # nolint
 
-      out[i, ] <- pmin(c(shock_for_1, shock_for_2), shock_for_1_and_2)
+      out[i, ] <- pmin(c(first, second), combined)
     }
 
   out
 }
 
 
-#' Original implementation in `R`
+#' Naive implementation in `R`
 #'
-#' @rdname rmo_esm
-#' @keywords internal
+#' @noRd
+#' @keywords internal test
 #' @noRd
 test__rmo_esm <- function(n, d, intensities) { # nolint
   out <- matrix(NA, nrow=n, ncol=d)
@@ -34,7 +36,7 @@ test__rmo_esm <- function(n, d, intensities) { # nolint
     ## iterate over all shocks
     for (j in 1:(2^d - 1)) {
       ## sample shock time
-      shock_time <- rexp_(1, intensities[[j]]) # nolint
+      shock_time <- rexp(1, intensities[[j]]) # nolint
       ## iterate over all components, check if current shock concerns it,
       ## and update value if that is the case.
       for (i in 1:d) {
