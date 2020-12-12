@@ -3,7 +3,7 @@ name: Documentation proposal
 about: Propose a documentation to be improved
 title: "[DOC]"
 labels: documentation, good first issue, help wanted
-assignees: ''
+assignees: hsloot
 
 ---
 

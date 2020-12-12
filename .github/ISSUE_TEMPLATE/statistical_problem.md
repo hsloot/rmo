@@ -1,10 +1,10 @@
 ---
 name: Statistical issue report
-about: You encountered statistical problems? Great! Create a report to
-  help us improve :-)
+about: You encountered statistical problems? Great! Create a report to help us improve
+  :-)
 title: "[STAT]"
 labels: bug
-assignees: ''
+assignees: hsloot
 
 ---
 

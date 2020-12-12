@@ -3,7 +3,7 @@ name: Review proposal
 about: Propose something for a code-review
 title: "[REVIEW] "
 labels: good first issue, help wanted, review
-assignees: ''
+assignees: hsloot
 
 ---
 

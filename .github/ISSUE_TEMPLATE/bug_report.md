@@ -4,7 +4,7 @@ about: You encountered an error or unexpected behaviour? Great! Create a report 
   help us improve :-)
 title: "[BUG]"
 labels: bug
-assignees: ''
+assignees: hsloot
 
 ---
 
