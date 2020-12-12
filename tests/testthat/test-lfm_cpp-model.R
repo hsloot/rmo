@@ -12,7 +12,7 @@ test_that("LFM-CPP implementation works as indended for independence case", {
     "rjump_name" = "rposval", "rjump_arg_list" = list("value"=1)
   )
   expect_equal_rn_generation(
-    "rmo_lfm_cpp", "test__rmo_lfm_cpp_independence",
+    rmo_lfm_cpp, testutils.rmo::rmo_lfm_cpp_independence,
     args, n, use_seed)
 })
 
@@ -27,7 +27,7 @@ test_that("LFM-CPP implementation works as indended for comonotone case", {
     "rjump_name" = "rposval", "rjump_arg_list" = list("value"=1)
   )
   expect_equal_rn_generation(
-    "rmo_lfm_cpp", "test__rmo_lfm_cpp_comonotone",
+    rmo_lfm_cpp, testutils.rmo::rmo_lfm_cpp_comonotone,
     args, n, use_seed)
 })
 
@@ -43,19 +43,19 @@ test_that("LFM-CPP implementation works as intended for exp. jumps", {
     "rjump_name" = "rexp", "rjump_arg_list" = list("rate"=2)
   )
   expect_equal_rn_generation(
-    "rmo_lfm_cpp", "test__rmo_lfm_cpp",
+    rmo_lfm_cpp, testutils.rmo::rmo_lfm_cpp_naive,
     args, n, use_seed)
 
   ## rate = 0.5, rate_killing = 0.2, rate_drift = 0, jump_rate = 2
   args[["rate_killing"]] <- 0.2
   expect_equal_rn_generation(
-    "rmo_lfm_cpp", "test__rmo_lfm_cpp",
+    rmo_lfm_cpp, testutils.rmo::rmo_lfm_cpp_naive,
     args, n, use_seed)
 
   ## rate = 0.5, rate_killing = 0.2, rate_drift = 0.1, jump_rate = 2
   args[["rate_drift"]] <- 0.1
   expect_equal_rn_generation(
-    "rmo_lfm_cpp", "test__rmo_lfm_cpp",
+    rmo_lfm_cpp, testutils.rmo::rmo_lfm_cpp_naive,
     args, n, use_seed)
 })
 
@@ -71,19 +71,19 @@ test_that("LFM-CPP implementation works as intended for det. jumps", {
     "rjump_name" = "rposval", "rjump_arg_list" = list("value"=1)
   )
   expect_equal_rn_generation(
-    "rmo_lfm_cpp", "test__rmo_lfm_cpp",
+    rmo_lfm_cpp, testutils.rmo::rmo_lfm_cpp_naive,
     args, n, use_seed)
 
   ## rate = 0.5, rate_killing = 0.2, rate_drift = 0, jump_rate = 2
   args[["rate_killing"]] <- 0.2
   expect_equal_rn_generation(
-    "rmo_lfm_cpp", "test__rmo_lfm_cpp",
+    rmo_lfm_cpp, testutils.rmo::rmo_lfm_cpp_naive,
     args, n, use_seed)
 
   ## rate = 0.5, rate_killing = 0.2, rate_drift = 0.1, jump_rate = 2
   args[["rate_drift"]] <- 0.1
   expect_equal_rn_generation(
-    "rmo_lfm_cpp", "test__rmo_lfm_cpp",
+    rmo_lfm_cpp, testutils.rmo::rmo_lfm_cpp_naive,
     args, n, use_seed)
 })
 

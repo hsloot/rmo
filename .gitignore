@@ -40,3 +40,9 @@ docs/
 rmo.code-workspace
 .vscode
 docs
+
+*.tmp
+
+# temporary files create by gcov
+*.gcno
+*.gcda

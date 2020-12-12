@@ -230,29 +230,3 @@ rmo_lfm_cpp <- function(n, d,
   Rcpp__rmo_lfm_cpp(n, d,
                     rate, rate_killing, rate_drift, rjump_name, rjump_arg_list)
 }
-
-#' @noRd
-#' @keywords internal test
-#' @importFrom stats rexp
-rexp <- function(n, rate = 1) {
-  if (0 == rate) {
-    return(rep(Inf, n))
-  } else if (Inf == rate) {
-    return(rep(0, n))
-  }
-
-  stats::rexp(n, rate)
-}
-
-#' @noRd
-#' @keywords internal test
-rposval <- function(n, value = 1) {
-  rep(value, times=n)
-}
-
-#' @noRd
-#' @keywords internal test
-#' @import stats runif
-rpareto <- function(n, alpha = 1, x0 = 1e-4) {
-  x0 / (stats::runif(n)) ^ (1/alpha)
-}
