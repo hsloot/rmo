@@ -12,11 +12,12 @@
 ^appveyor\.yml$
 ^codemeta\.json$
 ^vignettes/The-Marshall-Olkin-distribution\.Rmd$
-^vignettes/Mixing-Marshall-Olkin-distributions\.Rmd
-^vignettes/Exchangeable-Marshall-Olkin-distributions\.Rmd
-^vignettes/Cuadras-Auge-distributions\.Rmd
-^vignettes/The-Levy-frailty-model\.Rmd
-^vignettes/The-binary-representation\.Rmd
+^vignettes/Mixing-Marshall-Olkin-distributions\.Rmd$
+^vignettes/Exchangeable-Marshall-Olkin-distributions\.Rmd$
+^vignettes/Cuadras-Auge-distributions\.Rmd$
+^vignettes/The-Levy-frailty-model\.Rmd$
+^vignettes/The-binary-representation\.Rmd$
+^vignettes/CI-Benchmarks\.Rmd$
 ^\.lintr$
 ^\.clang_complete$
 ^\.editorconfig$

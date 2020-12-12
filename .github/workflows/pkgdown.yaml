@@ -33,7 +33,8 @@ jobs:
       - name: Install dependencies
         run: |
           remotes::install_deps(dependencies = TRUE)
-          install.packages("pkgdown")
+          install.packages(c("pkgdown", "remotes", "tidyr", "stringr", "ggplot2"))
+          remotes::install_github("r-lib/bench")
         shell: Rscript {0}
 
       - name: Install package
