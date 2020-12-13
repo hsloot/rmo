@@ -24,7 +24,9 @@ Suggests:
     rmarkdown,
     rlang,
     xml2,
-    mockery
+    mockery,
+    withr,
+    remotes
 RdMacros:
     Rdpack
 Encoding: UTF-8
@@ -39,7 +41,6 @@ Collate:
     'parameter.R'
     'rmo.R'
     'sample.R'
-    'utils.R'
     'zzz.R'
 URL: https://github.com/hsloot/rmo
 BugReports: https://github.com/hsloot/rmo/issues

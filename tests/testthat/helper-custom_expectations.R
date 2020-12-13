@@ -22,7 +22,8 @@
 #' `[rlang::exec()]`.
 #' Each call is preceeded by a call to `set_seed(use_seed)` to ensure
 #' reproducibility.
-#'
+#' @seealso \code{\link[testthat]{expect_equal}}
+#' @seealso \url{https://testthat.r-lib.org/articles/custom-expectation.html}
 #' @examples
 #' rexp_test <- function(n, rate) {
 #'  sapply(1:n, function(x) stats::rexp(1L, rate))
@@ -32,9 +33,8 @@
 #'    stats::rexp, rexp_test,
 #'    list("rate" = 2), 10L, use_seed=1623L)
 #' })
-#'
-#' @seealso \code{\link[testthat]{expect_equal}}
-#' @seealso \url{https://testthat.r-lib.org/articles/custom-expectation.html}
+#' @noRd
+#' @keywords internal test
 expect_equal_rn_generation <- function(
     rn_generator,
     rn_generator_test,
@@ -105,6 +105,14 @@ RNG_kind_arg_list_default <- function() { # nolint
   if (require_R_version("3.6.0"))
     out["sample.kind"] <- "default"
   out
+}
+
+require_R_version <- function( # nolint
+  version_string = paste(major, minor, sep="."),
+  major = R.version$major,
+  minor = R.version$minor) {
+  R_version_string <- paste(R.version$major, R.version$minor, sep=".") # nolint
+  return(1 == compareVersion(R_version_string, version_string))
 }
 
 format_args <- function(args, ...) {

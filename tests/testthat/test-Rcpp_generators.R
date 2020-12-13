@@ -4,19 +4,15 @@ n <- 1e5L
 test_that("ExpGenerator works as expected", {
   args <- list("rate" = 0.5)
   expect_equal_rn_generation(
-    "rtest__exponential", "rexp",
+    "rtest__exponential", testutils.rmo::rexp,
     args, n, use_seed)
   args <- list("rate" = 2)
   expect_equal_rn_generation(
-    "rtest__exponential", "rexp",
+    "rtest__exponential", testutils.rmo::rexp,
     args, n, use_seed)
-  rexp_rate_is_zero <- function(n, rate) {
-    stopifnot(rate == 0.)
-    rep(Inf, times=n)
-  }
   args <- list("rate" = 0)
   expect_equal_rn_generation(
-    "rtest__exponential", "rexp_rate_is_zero",
+    "rtest__exponential", testutils.rmo::rexp,
     args, n, use_seed)
   rexp_rate_is_inf <- function(n, rate) {
     stopifnot(rate == Inf)
@@ -24,25 +20,25 @@ test_that("ExpGenerator works as expected", {
   }
   args <- list("rate" = Inf)
   expect_equal_rn_generation(
-    "rtest__exponential", "rexp_rate_is_inf",
+    "rtest__exponential", testutils.rmo::rexp,
     args, n, use_seed)
 })
 
 test_that("ParetoGenerator works as expected", {
   args <- list("alpha" = 0.5, "x0" = 0.1)
   expect_equal_rn_generation(
-    "rtest__pareto", "rpareto",
+    "rtest__pareto", testutils.rmo::rpareto,
     args, n, use_seed)
   args <- list("alpha" = 0.1, "x0" = 2)
   expect_equal_rn_generation(
-    "rtest__pareto", "rpareto",
+    "rtest__pareto", testutils.rmo::rpareto,
     args, n, use_seed)
 })
 
 test_that("FixedDblGenerator works as expected", {
   args <- list("value" = 1)
   expect_equal_rn_generation(
-    "rposval", "rtest__deterministic",
+    "rtest__deterministic", testutils.rmo::rposval,
     args, n, use_seed)
 })
 
