@@ -16,7 +16,7 @@
 #' rmo_lfm_cpp_independence(10, 3, 0, 0, 1, "rposval", list("value"=1))
 #' @include sample-helper.R
 #' @export
-rmo_lfm_cpp_independence <- function(
+rmo_lfm_cpp_independence <- function( # nolint
     n, d = 2,
     rate = 0, rate_killing = 0, rate_drift = 1,
     rjump_name = "rposval", rjump_arg_list = list("value" = 0)) {

@@ -12,7 +12,7 @@
 #' rmo_esm_naive(10, 3, c(0, 0, 0, 0, 0, 0, 1)) ## comonotone
 #' @include sample-helper.R
 #' @export
-rmo_esm_naive <- function(n, d, intensities) {
+rmo_esm_naive <- function(n, d, intensities) { # nolint
   stopifnot(
     is.numeric(n) && 1L == length(n) && 0 == n %% 1 && n > 0 &&
     is.numeric(d) && 1L == length(d) && 0 == d %% 1 && d > 0 &&
@@ -55,7 +55,7 @@ rmo_esm_naive <- function(n, d, intensities) {
 #' rmo_arnold_naive(10, 3, c(0, 0, 0, 0, 0, 0, 1)) ## comonotone
 #' @include sample-helper.R
 #' @export
-rmo_arnold_naive <- function(n, d, intensities) {
+rmo_arnold_naive <- function(n, d, intensities) { # nolint
   stopifnot(
     is.numeric(n) && 1L == length(n) && 0 == n %% 1 && n > 0 &&
     is.numeric(d) && 1L == length(d) && 0 == d %% 1 && d > 0 &&
@@ -110,7 +110,7 @@ rmo_arnold_naive <- function(n, d, intensities) {
 #' rmo_ex_arnold_naive(10, 3, c(0, 0, 1)) ## comonotone
 #' @include sample-helper.R
 #' @export
-rmo_ex_arnold_naive <- function(n, d, ex_intensities) {
+rmo_ex_arnold_naive <- function(n, d, ex_intensities) { # nolint
   stopifnot(
     is.numeric(n) && 1L == length(n) && 0 == n %% 1 && n > 0 &&
     is.numeric(d) && 1L == length(d) && 0 == d %% 1 && d > 0 &&
@@ -200,7 +200,8 @@ rmo_ex_arnold_naive <- function(n, d, ex_intensities) {
 #' rmo_ex_arnold_naive_recursive(10, 3, c(0, 0, 1)) ## comonotone
 #' @include sample-helper.R
 #' @export
-rmo_ex_arnold_naive_recursive <- function(n, d = 2, ex_intensities = c(1, 0)) {
+rmo_ex_arnold_naive_recursive <- function( # nolint
+  n, d = 2, ex_intensities = c(1, 0)) {
   stopifnot(
     is.numeric(n) && 1L == length(n) && 0 == n %% 1 && n > 0 &&
     is.numeric(d) && 1L == length(d) && 0 == d %% 1 && d > 0 &&
@@ -295,7 +296,7 @@ rmo_ex_arnold_naive_recursive <- function(n, d = 2, ex_intensities = c(1, 0)) {
 #' rmo_esm_cuadras_auge_naive(10, 3, 1, 0)      ## independence
 #' @include sample-helper.R
 #' @export
-rmo_esm_cuadras_auge_naive <- function(n, d, alpha, beta) {
+rmo_esm_cuadras_auge_naive <- function(n, d, alpha, beta) { # nolint
   stopifnot(
     is.numeric(n) && 1L == length(n) && 0 == n %% 1 && n > 0 &&
     is.numeric(d) && 1L == length(d) && 0 == d %% 1 && d > 0 &&
@@ -333,7 +334,7 @@ rmo_esm_cuadras_auge_naive <- function(n, d, alpha, beta) {
 #' @noRd
 #' @include sample-helper.R
 #' @keywords internal
-sample_cpp_naive <- function(
+sample_cpp_naive <- function( # nolint
     rate = 0, rate_killing = 0, rate_drift = 1,
     rjump_name = "rposval", rjump_arg_list = list("values" = 0),
     barrier_values = rexp(2, rate = 1)) {
@@ -361,7 +362,7 @@ sample_cpp_naive <- function(
 
   times <- 0
   values <- 0
-  for (i in 1:length(barrier_values)) {
+  for (i in seq_length(barrier_values)) {
     while (last(values) < barrier_values[[i]]) {
       ## sample waiting time and update the waiting time to killing
       waiting_time <- rexp(1, rate = rate)
@@ -444,7 +445,7 @@ sample_cpp_naive <- function(
 #' rmo_lfm_cpp_naive(10, 3, 0, 1, 0, "rposval", list("value"=1))
 #' @include sample-helper.R
 #' @export
-rmo_lfm_cpp_naive <- function(
+rmo_lfm_cpp_naive <- function( # nolint
     n, d = 2,
     rate = 0, rate_killing = 0, rate_drift = 1,
     rjump_name = "rposval", rjump_arg_list = list("value" = 0)) {

@@ -12,7 +12,8 @@
 #' rmo_esm_bivariate(10, 2, c(0, 0, 1)) ## comonotone
 #' @include sample-helper.R
 #' @export
-rmo_esm_bivariate <- function(n, d = 2, intensities = c(1, 1, 0)) {
+rmo_esm_bivariate <- function( # nolint
+  n, d = 2, intensities = c(1, 1, 0)) {
   stopifnot(
     is.numeric(n) && 1L == length(n) && 0 == n %% 1 && n > 0 &&
     is.numeric(d) && 1L == length(d) && 0 == d %% 1 && d == 2 &&
@@ -53,7 +54,8 @@ rmo_esm_bivariate <- function(n, d = 2, intensities = c(1, 1, 0)) {
 #' rmo_ex_arnold_bivariate(10, 2, c(0, 1)) ## comonotone
 #' @include sample-helper.R
 #' @export
-rmo_ex_arnold_bivariate <- function(n, d = 2, ex_intensities = c(1, 0)) {
+rmo_ex_arnold_bivariate <- function( # nolint
+    n, d = 2, ex_intensities = c(1, 0)) {
   stopifnot(
     is.numeric(n) && 1L == length(n) && 0 == n %% 1 && n > 0 &&
     is.numeric(d) && 1L == length(d) && 0 == d %% 1 && d == 2 &&
@@ -107,7 +109,8 @@ rmo_ex_arnold_bivariate <- function(n, d = 2, ex_intensities = c(1, 0)) {
 #' rmo_esm_cuadras_auge_bivariate(10, 2, 1, 0)      ## independence
 #' @include sample-helper.R
 #' @export
-rmo_esm_cuadras_auge_bivariate <- function(n, d = 2, alpha = 1, beta = 0) {
+rmo_esm_cuadras_auge_bivariate <- function( # nolint
+  n, d = 2, alpha = 1, beta = 0) {
   stopifnot(
     is.numeric(n) && 1L == length(n) && 0 == n %% 1 && n > 0 &&
     is.numeric(d) && 1L == length(d) && 0 == d %% 1 && d == 2 &&

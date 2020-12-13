@@ -16,7 +16,7 @@
 #' rmo_lfm_cpp_comonotone(10, 3, 0, 1, 0, "rposval", list("value"=1))
 #' @include sample-helper.R
 #' @export
-rmo_lfm_cpp_comonotone <- function(
+rmo_lfm_cpp_comonotone <- function( # nolint
     n, d = 2,
     rate = 0, rate_killing = 1, rate_drift = 0,
     rjump_name = "rposval", rjump_arg_list = list("value" = 0)) {
@@ -34,7 +34,7 @@ rmo_lfm_cpp_comonotone <- function(
   for (k in 1:n) {
     ## we do not need it here, but we have to sample the unit exponential
     ## barriers to keep the random number generators in sync
-    barrier_values <- rexp(d, rate = 1)
+    barrier_values <- rexp(d, rate = 1) # nolint
     ## sample killing time
     killing_time <- rexp(1L, rate = rate_killing)
     out[k, ] <- killing_time
