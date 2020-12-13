@@ -1,5 +1,5 @@
-use_seed <- 1632L
-n <- 100L
+use_seed <- 1632
+n <- 100
 
 
 ## #### Test implementation for the bivariate case ####
@@ -9,33 +9,74 @@ test_that("Exchangeable Arnold model for d = 2", {
 
   ## all equal
   args <- list(
-    "d" = 2L,
-    ex_intensities = c(1, 1)
+    "d" = 2,
+    ex_intensities = rep(1, times = 2)
   )
   expect_equal_rn_generation(
     rmo_ex_arnold, testutils.rmo::rmo_ex_arnold_bivariate,
     args, n, use_seed)
 
   ## independence
-  args[["ex_intensities"]] <- c(1, 0)
+  args <- list(
+    "d" = 2,
+    ex_intensities = ex_intensities_linear(2, scale = 0.7)
+  )
   expect_equal_rn_generation(
     rmo_ex_arnold, testutils.rmo::rmo_ex_arnold_bivariate,
     args, n, use_seed)
 
   ## comonotone
-  args[["ex_intensities"]] <- c(0, 1)
+  args <- list(
+    "d" = 2,
+    ex_intensities = ex_intensities_constant(2, constant = 0.7)
+  )
   expect_equal_rn_generation(
     rmo_ex_arnold, testutils.rmo::rmo_ex_arnold_bivariate,
     args, n, use_seed)
 
-  ## low, high
-  args[["ex_intensities"]] <- c(0.5, 2)
+  ## Poisson
+  args <- list(
+    "d" = 2,
+    ex_intensities = ex_intensities_poisson(
+      2, lambda = 0.2, eta = 0.3
+    )
+  )
   expect_equal_rn_generation(
     rmo_ex_arnold, testutils.rmo::rmo_ex_arnold_bivariate,
     args, n, use_seed)
 
-  ## high, low
-  args[["ex_intensities"]] <- c(3, 0.2)
+  ## Alpha-Stable
+  args <- list(
+    "d" = 2,
+    ex_intensities = ex_intensities_alpha_stable(2, alpha = 0.25)
+  )
+  expect_equal_rn_generation(
+    rmo_ex_arnold, testutils.rmo::rmo_ex_arnold_bivariate,
+    args, n, use_seed)
+
+  ## Gamma
+  args <- list(
+    "d" = 2,
+    ex_intensities = ex_intensities_gamma(2, a = 0.4)
+  )
+  expect_equal_rn_generation(
+    rmo_ex_arnold, testutils.rmo::rmo_ex_arnold_bivariate,
+    args, n, use_seed)
+
+  ## Pareto
+  args <- list(
+    "d" = 2,
+    "ex_intensities" = ex_intensities_pareto(2, alpha = 0.4, x0 = 1e-4)
+  )
+  expect_equal_rn_generation(
+    rmo_ex_arnold, testutils.rmo::rmo_ex_arnold_bivariate,
+    args, n, use_seed)
+
+  ## Inverse-Gaussian
+  args <- list(
+    "d" = 2,
+    "ex_intensities" = ex_intensities_inverse_gaussian(2, eta = 0.5)
+  )
   expect_equal_rn_generation(
     rmo_ex_arnold, testutils.rmo::rmo_ex_arnold_bivariate,
     args, n, use_seed)
@@ -48,42 +89,78 @@ test_that("Exchangeable Arnold model for d = 2", {
 test_that("Alternative implementation in R for d>2", {
   mockery::stub(rmo_ex_arnold, "Rcpp__rmo_ex_arnold", rtest__rmo_ex_arnold)
 
-  d <- 5L
+  d <- 5
+
   ## all equal
   args <- list(
     "d" = d,
-    "ex_intensities" = rep(1, times=d)
+    "ex_intensities" = rep(1, times = d)
   )
   expect_equal_rn_generation(
     rmo_ex_arnold, testutils.rmo::rmo_ex_arnold_naive_recursive,
     args, n, use_seed)
 
   ## independence
-  args[["ex_intensities"]] <- ex_intensities_linear(d, scale=0.7)
+  args <- list(
+    "d" = d,
+    "ex_intensities" = ex_intensities_linear(d, scale = 0.7)
+  )
   expect_equal_rn_generation(
     rmo_ex_arnold, testutils.rmo::rmo_ex_arnold_naive_recursive,
     args, n, use_seed)
 
   ## comonotone
-  args[["ex_intensities"]] <- ex_intensities_constant(d, constant=0.7)
+  args <- list(
+    "d" = d,
+    "ex_intensities" = ex_intensities_constant(d, constant = 0.7)
+  )
   expect_equal_rn_generation(
     rmo_ex_arnold, testutils.rmo::rmo_ex_arnold_naive_recursive,
     args, n, use_seed)
 
   ## Poisson
-  args[["ex_intensities"]] <- ex_intensities_poisson(d, lambda=0.2, eta=0.3)
+  args <- list(
+    "d" = d,
+    "ex_intensities" = ex_intensities_poisson(
+      d, lambda = 0.2, eta = 0.3
+    )
+  )
   expect_equal_rn_generation(
     rmo_ex_arnold, testutils.rmo::rmo_ex_arnold_naive_recursive,
     args, n, use_seed)
 
   ## Alpha-stable
-  args[["ex_intensities"]] <- ex_intensities_alpha_stable(d, alpha=0.25)
+  args <- list(
+    "d" = d,
+    "ex_intensities" = ex_intensities_alpha_stable(d, alpha = 0.25)
+  )
   expect_equal_rn_generation(
     rmo_ex_arnold, testutils.rmo::rmo_ex_arnold_naive_recursive,
     args, n, use_seed)
 
   ## Gamma
-  args[["ex_intensities"]] <- ex_intensities_gamma(d, a=0.4)
+  args <- list(
+    "d" = d,
+    "ex_intensities" = ex_intensities_gamma(d, a = 0.4)
+  )
+  expect_equal_rn_generation(
+    rmo_ex_arnold, testutils.rmo::rmo_ex_arnold_naive_recursive,
+    args, n, use_seed)
+
+  ## Pareto
+  args <- list(
+    "d" = d,
+    "ex_intensities" = ex_intensities_pareto(d, alpha = 0.4, x0 = 1e-4)
+  )
+  expect_equal_rn_generation(
+    rmo_ex_arnold, testutils.rmo::rmo_ex_arnold_naive_recursive,
+    args, n, use_seed)
+
+  ## Inverse-Gaussian
+  args <- list(
+    "d" = d,
+    "ex_intensities" = ex_intensities_inverse_gaussian(d, eta = 0.5)
+  )
   expect_equal_rn_generation(
     rmo_ex_arnold, testutils.rmo::rmo_ex_arnold_naive_recursive,
     args, n, use_seed)
@@ -98,42 +175,78 @@ test_that("Alternative implementation in R for d>2", {
 test_that("Exchangeable Arnold model implementation in C++", {
   mockery::stub(rmo_ex_arnold, "Rcpp__rmo_ex_arnold", rtest__rmo_ex_arnold)
 
-  d <- 7L
+  d <- 7
+
   ## all equal
   args <- list(
     "d" = d,
-    "ex_intensities" = rep(1, times=d)
+    "ex_intensities" = rep(1, times = d)
   )
   expect_equal_rn_generation(
     rmo_ex_arnold, testutils.rmo::rmo_ex_arnold_naive,
     args, n, use_seed)
 
   ## independence
-  args[["ex_intensities"]] <- ex_intensities_linear(d, scale=0.7)
+  args <- list(
+    "d" = d,
+    "ex_intensities" = ex_intensities_linear(d, scale = 0.7)
+  )
   expect_equal_rn_generation(
     rmo_ex_arnold, testutils.rmo::rmo_ex_arnold_naive,
     args, n, use_seed)
 
   ## comonotone
-  args[["ex_intensities"]] <- ex_intensities_constant(d, constant=0.7)
+  args <- list(
+    "d" = d,
+    "ex_intensities" = ex_intensities_constant(d, constant = 0.7)
+  )
   expect_equal_rn_generation(
     rmo_ex_arnold, testutils.rmo::rmo_ex_arnold_naive,
     args, n, use_seed)
 
   ## Poisson
-  args[["ex_intensities"]] <- ex_intensities_poisson(d, lambda=0.2, eta=0.3)
+  args <- list(
+    "d" = d,
+    "ex_intensities" = ex_intensities_poisson(
+      d, lambda = 0.2, eta = 0.3
+    )
+  )
   expect_equal_rn_generation(
     rmo_ex_arnold, testutils.rmo::rmo_ex_arnold_naive,
     args, n, use_seed)
 
   ## Alpha-stable
-  args[["ex_intensities"]] <- ex_intensities_alpha_stable(d, alpha=0.25)
+  args <- list(
+    "d" = d,
+    "ex_intensities" = ex_intensities_alpha_stable(d, alpha = 0.25)
+  )
   expect_equal_rn_generation(
     rmo_ex_arnold, testutils.rmo::rmo_ex_arnold_naive,
     args, n, use_seed)
 
   ## Gamma
-  args[["ex_intensities"]] <- ex_intensities_gamma(d, a=0.4)
+  args <- list(
+    "d" = d,
+    "ex_intensities" = ex_intensities_gamma(d, a = 0.4)
+  )
+  expect_equal_rn_generation(
+    rmo_ex_arnold, testutils.rmo::rmo_ex_arnold_naive,
+    args, n, use_seed)
+
+  ## Pareto
+  args <- list(
+    "d" = d,
+    "ex_intensities" = ex_intensities_pareto(d, alpha = 0.4, x0 = 1e-4)
+  )
+  expect_equal_rn_generation(
+    rmo_ex_arnold, testutils.rmo::rmo_ex_arnold_naive,
+    args, n, use_seed)
+
+  ## Inverse-Gaussian
+  args <- list(
+    "d" = d,
+    "ex_intensities" = ex_intensities_inverse_gaussian(d, eta = 0.5)
+  )
   expect_equal_rn_generation(
     rmo_ex_arnold, testutils.rmo::rmo_ex_arnold_naive,
     args, n, use_seed)
