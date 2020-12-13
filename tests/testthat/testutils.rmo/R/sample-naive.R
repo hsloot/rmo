@@ -362,7 +362,7 @@ sample_cpp_naive <- function( # nolint
 
   times <- 0
   values <- 0
-  for (i in seq_length(barrier_values)) {
+  for (i in seq_along(barrier_values)) {
     while (last(values) < barrier_values[[i]]) {
       ## sample waiting time and update the waiting time to killing
       waiting_time <- rexp(1, rate = rate)
