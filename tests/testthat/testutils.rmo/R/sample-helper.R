@@ -1,5 +1,16 @@
+#' Test if component `i` is in set `j`
+#'
+#' @param i Component
+#' @param j Set
+#'
+#' @details
+#' The function returns `TRUE`, if the i's bit of j is set (with base 1)
 #' @seealso \url{https://hsloot.github.io/rmo/articles/The-binary-representation.html}
-#' @noRd
+#' @examples
+#' is_within(1, 1)
+#' is_within(1, 2)
+#' is_within(2, 2)
+#' is_within(1, 3)
 #' @export
 is_within <- function(i, j) { # nolint
   count <- 1
@@ -13,13 +24,31 @@ is_within <- function(i, j) { # nolint
   return(FALSE)
 }
 
-#' @noRd
+#' Last value in a vector or list
+#'
+#' @param x Vector or list
+#'
+#' @example
+#' last(rep(1, times = 5))
 #' @export
 last <- function(x) {
   x[[length(x)]]
 }
 
-#' @noRd
+#' Sample from the Exponential distribution
+#'
+#' @param n Number of samples
+#' @param rate Rate of the Exponential distribution
+#'
+#' @details
+#' Wraps [stats::rexp()] and returns zeros if `rate == Inf` and Inf-values if
+#' `rate == 0`.
+#'
+#' @examples
+#' rexp(10, rate = 1)
+#' rexp(10, rate = 0.5)
+#' stopifnot(all(rexp(10, rate = Inf) == 0))
+#' stopifnot(all(rexp(10, rate = 0) == Inf))
 #' @importFrom stats rexp
 #' @export
 rexp <- function(n, rate = 1) {
@@ -32,13 +61,26 @@ rexp <- function(n, rate = 1) {
   stats::rexp(n, rate)
 }
 
-#' @noRd
+#' Sample a deterministic value
+#'
+#' @param n Number of samples
+#' @param value The value that is supposed to be sampled
+#'
+#' @examples
+#' rposval(10, value = 0.5)
 #' @export
 rposval <- function(n, value = 1) {
   rep(value, times=n)
 }
 
-#' @noRd
+#' Sample from the Pareto distribution
+#'
+#' @param n Number of samples
+#' @param alpha Scale parameter of the Pareto distribution
+#' @param x0 Lower bound parameter of the Pareto distribution
+#'
+#' @examples
+#' rpareto(10, alpha = 1, x0 = 1e-4)
 #' @importFrom stats runif
 #' @export
 rpareto <- function(n, alpha = 1, x0 = 1e-4) {
