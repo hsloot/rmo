@@ -2,6 +2,7 @@ lib_path_restore <- .libPaths()
 local_lib <- tempdir()
 message("Loading testutils.rmo")
 remotes::install_local("testutils.rmo", type = "source", quiet = TRUE,
+                       dependencies = FALSE, build = FALSE, upgrade =FALSE,
                        lib = local_lib)
 .libPaths(c(local_lib, .libPaths()))
 

@@ -50,7 +50,7 @@ is_within <- function(i, j) { # nolint
 #'
 #' @param x Vector or list
 #'
-#' @example
+#' @examples
 #' last(rep(1, times = 5))
 #' @export
 last <- function(x) {
