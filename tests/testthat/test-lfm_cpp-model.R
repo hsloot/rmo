@@ -185,5 +185,3 @@ test_that("LFM-CPP implementation works as intended for pareto jumps", {
     rmo_lfm_cpp, testutils.rmo::rmo_lfm_cpp_naive,
     args, n, use_seed)
 })
-
-## TODO: add KS unit test

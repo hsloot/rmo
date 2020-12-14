@@ -55,5 +55,3 @@ test_that("Cuadras-Augé ESM implementation in Rcpp", {
   expect_equal_rn_generation(rmo_esm_cuadras_auge, testutils.rmo::rmo_esm_cuadras_auge_naive,
     args, n, use_seed)
 })
-
-## TODO: add KS unit test
