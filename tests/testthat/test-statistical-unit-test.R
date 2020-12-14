@@ -18,7 +18,7 @@ lfm_cpp_threshold <- total_threshold / 25 * 10
 #' @importFrom stats ks.test
 #' @noRd
 #' @keywords internal test
-ks_test <- function(n, d, FUN, intensities) {
+ks_test <- function(n, d, FUN, intensities) { # nolint
   min_rate <- sum(intensities)
   x <- min_rate * apply(FUN(n, d, intensities), 1, min)
   ks.test(x, stats::pexp)
@@ -27,7 +27,7 @@ ks_test <- function(n, d, FUN, intensities) {
 #' @importFrom stats ks.test
 #' @noRd
 #' @keywords internal test
-ex_ks_test <- function(n, d, FUN, ex_intensities) {
+ex_ks_test <- function(n, d, FUN, ex_intensities) { # nolint
   min_rate <- sum(ex_intensities * sapply(1:d, function(x) choose(d, x)))
   x <- min_rate * apply(FUN(n, d, ex_intensities), 1, min)
   ks.test(x, stats::pexp)
@@ -36,7 +36,7 @@ ex_ks_test <- function(n, d, FUN, ex_intensities) {
 #' @importFrom stats ks.test
 #' @noRd
 #' @keywords internal test
-cuadras_auge_ks_test <- function(n, d, FUN, alpha, beta) {
+cuadras_auge_ks_test <- function(n, d, FUN, alpha, beta) { # nolint
   min_rate <- (alpha * d + beta)
   x <- min_rate * apply(FUN(n, d, alpha, beta), 1, min)
   ks.test(x, stats::pexp)
@@ -70,7 +70,7 @@ lfm_bf <- function(rate, rate_killing, rate_drift, rjump_name, rjump_arg_list) {
 #' @noRd
 #' @keywords internal test
 lfm_ks_test <- function(
-    n, d, FUN,
+    n, d, FUN, # nolint
     rate, rate_killing, rate_drift,
     rjump_name, rjump_arg_list) {
   bf <- lfm_bf(rate, rate_killing, rate_drift, rjump_name, rjump_arg_list)
@@ -86,8 +86,8 @@ lfm_ks_test <- function(
 #' @noRd
 #' @keywords internal test
 expect_not_rejected <- function(htest, threshold) {
-  htest <- quasi_label(rlang::enquo(htest), arg = "htest")
-  expect(
+  htest <- testthat::quasi_label(rlang::enquo(htest), arg = "htest")
+  testthat::expect(
     ok = htest$val$p.value >= threshold,
     failure_message = sprintf(
       "Null hypothesis rejected %e < %e", htest$val$p.value, threshold

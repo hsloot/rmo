@@ -1,10 +1,11 @@
 lib_path_restore <- .libPaths()
-local_lib <- tempdir()
+local_lib <- tempfile()
+dir.create(local_lib)
+.libPaths(c(local_lib, .libPaths()))
 message("Loading testutils.rmo")
 remotes::install_local("testutils.rmo", type = "source", quiet = TRUE,
-                       dependencies = FALSE, build = FALSE, upgrade =FALSE,
-                       lib = local_lib)
-.libPaths(c(local_lib, .libPaths()))
+                       dependencies = FALSE, build = FALSE, upgrade = FALSE)
+
 
 # The auxiliary functions for parameter generation are relocated to
 # the Rsource directory such that they are available in interactive R
