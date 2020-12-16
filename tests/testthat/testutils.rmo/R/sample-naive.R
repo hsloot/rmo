@@ -385,10 +385,10 @@ sample_cpp_naive <- function( # nolint
   times <- 0
   values <- 0
   for (i in seq_along(barrier_values)) {
-    while (last(values) < barrier_values[[i]]) {
+    while (last(values) < barrier_values[[i]]) { # nolint
       ## sample waiting time and update the waiting time to killing
       waiting_time <- rexp(1, rate = rate)
-      killing_waiting_time <- killing_time - last(times)
+      killing_waiting_time <- killing_time - last(times) # nolint
       ## sample jump value
       jump_value <- do.call(rjump, args = c("n" = 1, rjump_arg_list))
 
@@ -401,15 +401,15 @@ sample_cpp_naive <- function( # nolint
                 killing_waiting_time) {
             ## if barrier is surpassed by drift before killing set the
             ## value accordingly
-            intermediate_waiting_time <- (barrier_values[[j]] - last(values)) / rate_drift
-            times <- c(times, last(times) + intermediate_waiting_time)
+            intermediate_waiting_time <- (barrier_values[[j]] - last(values)) / rate_drift # nolint
+            times <- c(times, last(times) + intermediate_waiting_time) # nolint
             values <- c(values, barrier_values[[j]])
             killing_waiting_time <- killing_waiting_time - intermediate_waiting_time
           }
         }
 
         ## all remaining barriers will be surpassed when killing happens
-        times <- c(times, last(times) + killing_waiting_time)
+        times <- c(times, last(times) + killing_waiting_time) # nolint
         values <- c(values, Inf)
       } else {
         ## if killing does not happen before the next shock, calculate the time
@@ -422,7 +422,7 @@ sample_cpp_naive <- function( # nolint
             ## surpassed by drift, set the value accordingly
             intermediate_waiting_time <- (barrier_values[[j]] - last(values)) /
                                           rate_drift
-            times <- c(times, last(times) + intermediate_waiting_time)
+            times <- c(times, last(times) + intermediate_waiting_time) # nolint
             values <- c(values, barrier_values[[j]])
             waiting_time <- waiting_time - intermediate_waiting_time
           }
@@ -431,7 +431,7 @@ sample_cpp_naive <- function( # nolint
         if (waiting_time < Inf) { ##  rate > 0 # nolint
           ## if the waiting time is not infinity, include the jump in
           ## the result set
-          times <- c(times, last(times) + waiting_time)
+          times <- c(times, last(times) + waiting_time) # nolint
           values <- c(
             values,
             last(values) + waiting_time * rate_drift + jump_value

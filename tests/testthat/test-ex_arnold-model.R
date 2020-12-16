@@ -251,5 +251,3 @@ test_that("Exchangeable Arnold model implementation in C++", {
     rmo_ex_arnold, testutils.rmo::rmo_ex_arnold_naive,
     args, n, use_seed)
 })
-
-## TODO: add KS unit test

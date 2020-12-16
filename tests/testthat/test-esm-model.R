@@ -184,5 +184,3 @@ test_that("ESM implementation for d > 2", {
     rmo_esm, testutils.rmo::rmo_esm_naive,
     args, n, use_seed)
 })
-
-## TODO: add KS unit test
