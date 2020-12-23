@@ -69,7 +69,9 @@ class discrete_distribution {
 
     auto probabilities() const {
       auto probs = std::vector<_WeightType>(n_, _WeightType{0});
-      for (const auto& [i, j, w] : alias_table_) {
+      for (auto [i, it] = std::make_pair(std::size_t{0}, alias_table_.cbegin());
+           it != alias_table_.cend(); ++it, ++i) {
+        const auto& [j, w] = *it;
         probs[i] += w;
         probs[j] += _WeightType{1} - w;
       }
@@ -93,7 +95,7 @@ class discrete_distribution {
 
    private:
     std::size_t n_{};
-    std::vector<std::tuple<_IntType, _IntType, _WeightType>> alias_table_{};
+    std::vector<std::pair<_IntType, _WeightType>> alias_table_{};
 
     template <typename _ForwardIterator>
     void __validate_input(_ForwardIterator first, _ForwardIterator last) const {
@@ -106,7 +108,7 @@ class discrete_distribution {
     void __init_empty() {
       n_ = std::size_t{1};
       alias_table_.clear();
-      alias_table_.emplace_back(_IntType{0}, _IntType{0}, _WeightType{1});
+      alias_table_.emplace_back(_IntType{0}, _WeightType{1});
       alias_table_.shrink_to_fit();
     }
 
@@ -139,16 +141,16 @@ class discrete_distribution {
       upper.reserve(n_);
 
       alias_table_.clear();
-      alias_table_.reserve(n_);
-      for (auto&& [it, i] = std::make_pair(tmp.cbegin(), _IntType{0});
-           it != tmp.cend(); ++it, ++i) {
+      alias_table_.resize(n_);
+      for (auto&& [i, it] = std::make_pair(_IntType{0}, tmp.cbegin());
+           it != tmp.cend(); ++i, ++it) {
         const auto w = *it;
         if (w < _WeightType{1}) {
           lower.emplace_back(std::make_pair(i, w));
         } else if (w > _WeightType{1}) {
           upper.emplace_back(std::make_pair(i, w));
         } else {
-          alias_table_.emplace_back(std::make_tuple(i, i, _WeightType{1}));
+          alias_table_[i] = std::make_pair(i, _WeightType{1});
         }
       }
 
@@ -157,20 +159,20 @@ class discrete_distribution {
         lower.pop_back();
         auto [iu, wu] = upper.back();
         upper.pop_back();
-        alias_table_.emplace_back(std::tuple(il, iu, wl));
+        alias_table_[il] = std::make_pair(iu, wl);
         wu += (wl - _WeightType{1});
         if (wu < _WeightType{1}) {
           lower.emplace_back(std::make_pair(iu, wu));
         } else if (wu > _WeightType{1}) {
           upper.emplace_back(std::make_pair(iu, wu));
         } else {
-          alias_table_.emplace_back(std::make_tuple(iu, iu, _WeightType{1}));
+          alias_table_[iu] = std::make_pair(iu, _WeightType{1});
         }
       }
       for (const auto& [i, w] : lower)
-        alias_table_.emplace_back(std::tuple(i, i, _WeightType{1}));
+        alias_table_[i] = std::make_pair(i, _WeightType{1});
       for (const auto& [i, w] : upper)
-        alias_table_.emplace_back(std::tuple(i, i, _WeightType{1}));
+        alias_table_[i] = std::make_pair(i, _WeightType{1});
     }
 
     template <typename _InputIterator>
@@ -255,8 +257,8 @@ class discrete_distribution {
 
     const auto uniform_int_parm =
         uniform_int_parm_t{0, parm.alias_table_.size()};
-    const auto& [i, j, p] =
-        parm.alias_table_[uniform_int_dist_(engine, uniform_int_parm)];
+    const auto i = uniform_int_dist_(engine, uniform_int_parm);
+    const auto& [j, p] = parm.alias_table_[i];
     auto out = i;
     if (p < _WeightType{1}) {
       const auto u = unit_uniform_real_dist_(engine);
