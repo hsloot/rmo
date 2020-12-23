@@ -257,11 +257,13 @@ class discrete_distribution {
         uniform_int_parm_t{0, parm.alias_table_.size()};
     const auto& [i, j, p] =
         parm.alias_table_[uniform_int_dist_(engine, uniform_int_parm)];
-    const auto u = unit_uniform_real_dist_(engine);
-    if (u <= p)
-      return i;
-    else
-      return j;
+    auto out = i;
+    if (p < _WeightType{1}) {
+      const auto u = unit_uniform_real_dist_(engine);
+      if (u > p) out = j;
+    }
+
+    return out;
   }
 
   friend bool operator==(const discrete_distribution& lhs,
