@@ -1,13 +1,13 @@
 #pragma once
 
-#include <cmath>
-#include <limits>
+#include <algorithm>
 #include <numeric>
 #include <stdexcept>
+#include <string>
 #include <type_traits>
 #include <vector>
+#include <cmath>
 
-#include "rmolib/algorithm/r_sort.hpp"
 #include "rmolib/random/univariate/internal/discrete_param_type.hpp"
 #include "rmolib/type_traits/is_safe_numeric_cast.hpp"
 
@@ -16,14 +16,15 @@ namespace rmolib {
 namespace random {
 
 template <typename _IntType, typename _WeightType,
-          typename _UnitUniformRealDistribution>
-class r_discrete_distribution {
+          typename _UnitUniformRealDistribution,
+          typename _UniformIntDistribution>
+class discrete_distribution {
  public:
   using result_type = _IntType;
 
   class param_type {
    public:
-    using distribution_type = r_discrete_distribution;
+    using distribution_type = discrete_distribution;
 
     param_type() { __init_empty(); }
 
@@ -67,33 +68,23 @@ class r_discrete_distribution {
     // compiler generated ctor and assignment op is sufficient
 
     auto probabilities() const {
-      std::vector<std::pair<_IntType, _WeightType>> probabilities{};
-      probabilities.reserve(cumulative_probabilities_.size());
-      std::adjacent_difference(
-          cumulative_probabilities_.cbegin(), cumulative_probabilities_.cend(),
-          std::back_inserter(probabilities),
-          [](const auto& val, const auto& acc) {
-            return std::make_pair(std::get<0>(val),
-                                  std::get<1>(val) - std::get<1>(acc));
-          });
+      auto probs = std::vector<_WeightType>(n_, _WeightType{0});
+      for (const auto& [i, j, w] : alias_table_) {
+        probs[i] += w;
+        probs[j] += _WeightType{1} - w;
+      }
+      std::transform(
+          probs.cbegin(), probs.cend(), probs.begin(),
+          [mass = accumulate(probs.cbegin(), probs.cend(), _WeightType{0})](
+              const auto val) { return val / mass; });
 
-      std::sort(probabilities.begin(), probabilities.end(),
-                [](const auto& l, const auto& u) {
-                  return std::get<0>(l) < std::get<0>(u);
-                });
-
-      std::vector<_WeightType> out;
-      out.reserve(probabilities.size());
-      for (const auto& [_ignore, p] : probabilities) out.emplace_back(p);
-      out.shrink_to_fit();
-
-      return out;
+      return probs;
     }
 
-    friend class r_discrete_distribution;
+    friend class discrete_distribution;
 
     friend bool operator==(const param_type& lhs, const param_type& rhs) {
-      return lhs.cumulative_probabilities_ == rhs.cumulative_probabilities_;
+      return lhs.alias_table_ == rhs.alias_table_;
     }
 
     friend bool operator!=(const param_type& lhs, const param_type& rhs) {
@@ -101,9 +92,10 @@ class r_discrete_distribution {
     }
 
    private:
-    std::vector<std::pair<_IntType, _WeightType>> cumulative_probabilities_{};
+    std::size_t n_{};
+    std::vector<std::tuple<_IntType, _IntType, _WeightType>> alias_table_{};
 
-    template <class _ForwardIterator>
+    template <typename _ForwardIterator>
     void __validate_input(_ForwardIterator first, _ForwardIterator last) const {
       if (!std::all_of(first, last, [](const auto v) { return v >= 0; }))
         throw std::domain_error("negative probabilities not allowed");
@@ -112,57 +104,92 @@ class r_discrete_distribution {
     }
 
     void __init_empty() {
-      cumulative_probabilities_.clear();
-      cumulative_probabilities_.emplace_back(
-          std::make_pair(_IntType{0}, _WeightType{1}));
-      cumulative_probabilities_.shrink_to_fit();
+      n_ = std::size_t{1};
+      alias_table_.clear();
+      alias_table_.emplace_back(_IntType{0}, _IntType{0}, _WeightType{1});
+      alias_table_.shrink_to_fit();
     }
 
-    template <class _InputIterator>
+    template <typename _InputIterator>
     void __init(_InputIterator first, _InputIterator last,
                 std::input_iterator_tag) {
-      std::vector<_WeightType> tmp(first, last);
-      __init(tmp.begin(), tmp.end());
+      auto tmp = std::vector<_WeightType>(first, last);
+      __init(tmp.cbegin(), tmp.cend());
     }
 
-    template <class _ForwardIterator>
+    template <typename _ForwardIterator>
     void __init(_ForwardIterator first, _ForwardIterator last,
                 std::forward_iterator_tag) {
       using std::distance;
 
       __validate_input(first, last);
-      cumulative_probabilities_.clear();
-      cumulative_probabilities_.reserve(distance(first, last));
-
-      for (auto [it, idx] = std::make_pair(first, _IntType{0}); it != last;
-           ++it, ++idx)
-        cumulative_probabilities_.emplace_back(std::make_pair(idx, *it));
-      cumulative_probabilities_.shrink_to_fit();
-
-      // sort probabilities in descending order
-      algorithm::r_sort(cumulative_probabilities_.begin(),
-                        cumulative_probabilities_.end(),
-                        [](const auto& l, const auto& u) {
-                          return std::get<1>(l) > std::get<1>(u);
-                        });
-
-      // accumulate probabilities
-      std::partial_sum(
-          cumulative_probabilities_.cbegin(), cumulative_probabilities_.cend(),
-          cumulative_probabilities_.begin(),
-          [](const auto& sum, const auto& val) {
-            return std::make_pair(std::get<0>(val),
-                                  std::get<1>(sum) + std::get<1>(val));
-          });
-
-      // normalize probabilities
+      n_ = distance(first, last);
+      auto tmp = std::vector<_WeightType>{};
+      tmp.reserve(n_);
       std::transform(
-          cumulative_probabilities_.cbegin(), cumulative_probabilities_.cend(),
-          cumulative_probabilities_.begin(),
-          [mass =
-               std::get<1>(cumulative_probabilities_.back())](const auto& val) {
-            return std::make_pair(std::get<0>(val), std::get<1>(val) / mass);
+          first, last, std::back_inserter(tmp),
+          [n = n_, mass = std::accumulate(first, last, _WeightType{0})](
+              const auto val) {
+            return val / mass * static_cast<_WeightType>(n);
           });
+
+      auto lower = std::vector<std::pair<_IntType, _WeightType>>{};
+      lower.reserve(n_);
+      auto upper = std::vector<std::pair<_IntType, _WeightType>>{};
+      upper.reserve(n_);
+
+      alias_table_.clear();
+      alias_table_.reserve(n_);
+      for (auto [it, i] = std::make_pair(tmp.cbegin(), _IntType{0});
+           it != tmp.cend(); ++it, ++i) {
+        const auto w = *it;
+        if (w < _WeightType{1}) {
+          lower.emplace_back(std::make_pair(i, w));
+        } else if (w > _WeightType{1}) {
+          upper.emplace_back(std::make_pair(i, w));
+        } else {
+          alias_table_.emplace_back(std::make_tuple(i, i, _WeightType{1}));
+        }
+      }
+      const auto lower_comp = [](const auto& l, const auto& u) {
+        return std::get<1>(l) > std::get<1>(u);
+      };
+      std::make_heap(lower.begin(), lower.end(), lower_comp);
+      const auto upper_comp = [](const auto& l, const auto& u) {
+        return std::get<1>(l) < std::get<1>(u);
+      };
+      std::make_heap(upper.begin(), upper.end(), upper_comp);
+
+      while (!upper.empty() && !lower.empty()) {
+        std::pop_heap(lower.begin(), lower.end(), lower_comp);
+        const auto [il, wl] = lower.back();
+        lower.pop_back();
+        std::pop_heap(upper.begin(), upper.end(), upper_comp);
+        auto [iu, wu] = upper.back();
+        upper.pop_back();
+        alias_table_.emplace_back(std::tuple(il, iu, wl));
+        wu += (wl - _WeightType{1});
+        if (wu < _WeightType{1}) {
+          lower.emplace_back(std::make_pair(iu, wu));
+          std::push_heap(lower.begin(), lower.end(), lower_comp);
+        } else if (wu > _WeightType{1}) {
+          upper.emplace_back(std::make_pair(iu, wu));
+          std::push_heap(upper.begin(), upper.end(), upper_comp);
+        } else {
+          alias_table_.emplace_back(std::make_tuple(iu, iu, _WeightType{1}));
+        }
+      }
+      while (!lower.empty()) {
+        auto [il, wl] = lower.back();
+        lower.pop_back();
+        alias_table_.emplace_back(std::tuple(il, il, _WeightType{1}));
+      }
+      while (!upper.empty()) {
+        auto [iu, wu] = upper.back();
+        upper.pop_back();
+        alias_table_.emplace_back(std::tuple(iu, iu, _WeightType{1}));
+      }
+      alias_table_.shrink_to_fit();
     }
 
     template <typename _InputIterator>
@@ -178,37 +205,36 @@ class r_discrete_distribution {
 
     static_assert(
         std::is_integral_v<_IntType>,
-        "Class template rmolib::random::r_discrete_distribution<> must be "
+        "Class template rmolib::random::discrete_distribution<> must be "
         "parametrized with integral type");
   };
 
-  r_discrete_distribution() = default;
+  discrete_distribution() = default;
 
   template <typename _InputIterator>
-  explicit r_discrete_distribution(_InputIterator first, _InputIterator last)
+  explicit discrete_distribution(_InputIterator first, _InputIterator last)
       : parm_{first, last} {
     init_unit_uniform_real_distribution();
   }
 
-  explicit r_discrete_distribution(const std::vector<_WeightType>& p)
-      : parm_{p} {
+  explicit discrete_distribution(const std::vector<_WeightType>& p) : parm_{p} {
     init_unit_uniform_real_distribution();
   }
 
-  r_discrete_distribution(std::initializer_list<_WeightType> wl) : parm_{wl} {
+  discrete_distribution(std::initializer_list<_WeightType> wl) : parm_{wl} {
     init_unit_uniform_real_distribution();
   }
 
   // template <class UnaryOperation>
   template <typename _UnaryOperation>
-  explicit r_discrete_distribution(
+  explicit discrete_distribution(
       typename std::vector<_WeightType>::size_type count,
       const _WeightType xmin, const _WeightType xmax, _UnaryOperation unary_op)
       : parm_{count, xmin, xmax, unary_op} {
     init_unit_uniform_real_distribution();
   }
 
-  explicit r_discrete_distribution(const param_type& parm) : parm_{parm} {
+  explicit discrete_distribution(const param_type& parm) : parm_{parm} {
     init_unit_uniform_real_distribution();
   }
 
@@ -216,11 +242,11 @@ class r_discrete_distribution {
   template <
       typename _DiscreteParamType,
       std::enable_if_t<
-          !std::is_convertible_v<_DiscreteParamType, r_discrete_distribution> &&
+          !std::is_convertible_v<_DiscreteParamType, discrete_distribution> &&
               !std::is_convertible_v<_DiscreteParamType, param_type> &&
               is_discrete_param_type_v<_DiscreteParamType>,
           int> = 0>
-  explicit r_discrete_distribution(_DiscreteParamType&& parm)
+  explicit discrete_distribution(_DiscreteParamType&& parm)
       : parm_{std::forward<_DiscreteParamType>(parm)} {
     init_unit_uniform_real_distribution();
   }
@@ -230,9 +256,7 @@ class r_discrete_distribution {
   void reset() {}
 
   auto min() const { return result_type{0}; }
-  auto max() const {
-    return parm_.cumulative_probabilities_.size() - result_type{1};
-  }
+  auto max() const { return parm_.n_ - result_type{1}; }
 
   auto probabilities() const { return parm_.probabilities(); }
 
@@ -246,30 +270,33 @@ class r_discrete_distribution {
 
   template <typename _Engine>
   result_type operator()(_Engine&& engine, const param_type& parm) {
-    const auto u =
-        unit_uniform_real_distribution_(std::forward<_Engine>(engine));
-    const auto it =
-        std::lower_bound(parm.cumulative_probabilities_.cbegin(),
-                         parm.cumulative_probabilities_.cend(), u,
-                         [](const auto& element, const auto& value) {
-                           return std::get<1>(element) < value;
-                         });
-    return std::get<0>(*it);
+    using uniform_int_parm_t = typename _UniformIntDistribution::param_type;
+
+    const auto uniform_int_parm =
+        uniform_int_parm_t{0, parm.alias_table_.size()};
+    const auto [i, j, p] =
+        parm.alias_table_[uniform_int_dist_(engine, uniform_int_parm)];
+    const auto u = unit_uniform_real_dist_(engine);
+    if (u <= p)
+      return i;
+    else
+      return j;
   }
 
-  friend bool operator==(const r_discrete_distribution& lhs,
-                         const r_discrete_distribution& rhs) {
+  friend bool operator==(const discrete_distribution& lhs,
+                         const discrete_distribution& rhs) {
     return lhs.parm_ == rhs.parm_;
   }
 
-  friend bool operator!=(const r_discrete_distribution& lhs,
-                         const r_discrete_distribution& rhs) {
+  friend bool operator!=(const discrete_distribution& lhs,
+                         const discrete_distribution& rhs) {
     return !(lhs == rhs);
   }
 
  private:
   param_type parm_{};
-  _UnitUniformRealDistribution unit_uniform_real_distribution_{};
+  _UnitUniformRealDistribution unit_uniform_real_dist_{};
+  _UniformIntDistribution uniform_int_dist_{};
 
   void init_unit_uniform_real_distribution() {
     if constexpr (std::is_constructible_v<_UnitUniformRealDistribution,
@@ -278,33 +305,40 @@ class r_discrete_distribution {
       // TODO:
       // static_assert(is_distribution_type<_UnitUniformRealDistribution>)
       using unit_param_type = typename _UnitUniformRealDistribution::param_type;
-      unit_uniform_real_distribution_.param(unit_param_type{0., 1.});
+      unit_uniform_real_dist_.param(unit_param_type{0., 1.});
     }
   }
 
   static_assert(
       type_traits::is_safe_numeric_cast_v<
           _WeightType, typename _UnitUniformRealDistribution::result_type>,
-      "Class template rmolib::random::r_discrete_distribution<> must be "
+      "Class template rmolib::random::discrete_distribution<> must be "
       "parametrized with unit_uniform_real_distribution-type with matching "
       "result_type and _WeightType");
+
+  static_assert(
+      type_traits::is_safe_numeric_cast_v<
+          std::size_t, typename _UniformIntDistribution::result_type>,
+      "Class template rmolib::random::discrete_distribution<> must be "
+      "parametrized with uniform_int_distribution-type with matching "
+      "result_type and std::size_t");
 };
 
 /*
   // TODO: implement
 
   template <class _CharType, class _Traits, typename _IntType, typename
-  _WeighType, typename _UnitUniformRealDistribution>
+  _WeightType, typename _UnitUniformRealDistribution>
   std::basic_ostream<_CharType, _Traits>&
   operator<<(std::basic_ostream<_CharType, _Traits>& os,
-            r_discrete_distribution<_IntType, _WeightType,
+            discrete_distribution<_IntType, _WeightType,
   _UnitUniformRealDistribution>& dist);
 
   template <class _CharType, class _Traits, typename _IntType, typename
-  _WeighType, typename _UnitUniformRealDistribution>
+  _WeightType, typename _UnitUniformRealDistribution>
   std::basic_istream<_CharType, _Traits>&
   operator>>(std::basic_istream<_CharType, _Traits>& is,
-             r_discrete_distribution<_IntType, _WeightType,
+             discrete_distribution<_IntType, _WeightType,
   _UnitUniformRealDistribution>& dist);
 */
 

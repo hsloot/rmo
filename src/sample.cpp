@@ -13,6 +13,7 @@
 #include "rmolib/random/univariate/deterministic_distribution.hpp"
 #include "rmolib/random/univariate/exponential_distribution.hpp"
 #include "rmolib/random/univariate/pareto_distribution.hpp"
+#include "rmolib/random/univariate/discrete_distribution.hpp"
 #include "rmolib/random/univariate/r_discrete_distribution.hpp"
 #include "rmolib/random/univariate/uniform_int_distribution.hpp"
 #include "rmolib/random/univariate/uniform_real_distribution.hpp"
@@ -24,12 +25,11 @@ bool Rcpp__is_within(const std::size_t i, const std::size_t j) {
   return rmolib::random::internal::is_within(i - 1, j);
 }
 
-template<typename _T>
+template <typename _T>
 _T get_param(const List& parms, const std::string name) {
   const auto names = as<std::vector<std::string>>(parms.names());
   auto it = std::find(names.cbegin(), names.cend(), name);
-  if (it == names.end())
-    throw std::domain_error(name + " not provided");
+  if (it == names.end()) throw std::domain_error(name + " not provided");
   return parms[*it];
 }
 
@@ -51,15 +51,16 @@ NumericMatrix Rcpp__rmo_esm(const std::size_t n, const std::size_t d,
 NumericMatrix Rcpp__rmo_arnold(const std::size_t n, const std::size_t d,
                                const NumericVector& intensities) {
   using exponential_distribution =
-    rmolib::random::exponential_distribution<double>;
+      rmolib::random::exponential_distribution<double>;
   using uniform_real_distribution =
-    rmolib::random::uniform_real_distribution<double>;
-  using discrete_distribution =
-    rmolib::random::r_discrete_distribution<std::size_t, double,
-                                            uniform_real_distribution>;
+      rmolib::random::uniform_real_distribution<double>;
+  using uniform_int_distribution =
+      rmolib::random::uniform_int_distribution<std::size_t>;
+  using discrete_distribution = rmolib::random::discrete_distribution<
+      std::size_t, double, uniform_real_distribution, uniform_int_distribution>;
   using arnold_mo_distribution =
-    rmolib::random::arnold_mo_distribution<double, exponential_distribution,
-                                           discrete_distribution>;
+      rmolib::random::arnold_mo_distribution<double, exponential_distribution,
+                                             discrete_distribution>;
   using caller_t = rcpp_distribution_caller<arnold_mo_distribution>;
 
   return caller_t::call(r_engine{}, n, d, intensities.begin(),
@@ -70,18 +71,17 @@ NumericMatrix Rcpp__rmo_arnold(const std::size_t n, const std::size_t d,
 NumericMatrix Rcpp__rmo_ex_arnold(const std::size_t n, const std::size_t d,
                                   const NumericVector& ex_intensities) {
   using exponential_distribution =
-    rmolib::random::exponential_distribution<double>;
+      rmolib::random::exponential_distribution<double>;
   using uniform_real_distribution =
-    rmolib::random::uniform_real_distribution<double>;
+      rmolib::random::uniform_real_distribution<double>;
   using uniform_int_distribution =
-    rmolib::random::uniform_int_distribution<std::size_t>;
-  using discrete_distribution =
-    rmolib::random::r_discrete_distribution<std::size_t, double,
-                                            uniform_real_distribution>;
+      rmolib::random::uniform_int_distribution<std::size_t>;
+  using discrete_distribution = rmolib::random::discrete_distribution<
+      std::size_t, double, uniform_real_distribution, uniform_int_distribution>;
   using markovian_exmo_distribution =
-    rmolib::random::markovian_exmo_distribution<
-      double, exponential_distribution, uniform_int_distribution,
-      discrete_distribution, rmolib::algorithm::shuffler>;
+      rmolib::random::markovian_exmo_distribution<
+          double, exponential_distribution, uniform_int_distribution,
+          discrete_distribution, rmolib::algorithm::shuffler>;
   using caller_t = rcpp_distribution_caller<markovian_exmo_distribution, false>;
 
   return caller_t::call(r_engine{}, n, d, ex_intensities.begin(),
@@ -94,10 +94,10 @@ NumericMatrix Rcpp__rmo_esm_cuadras_auge(const std::size_t n,
                                          const double alpha,
                                          const double beta) {
   using exponential_distribution =
-    rmolib::random::exponential_distribution<double>;
+      rmolib::random::exponential_distribution<double>;
   using cuadras_auge_distribution =
-    rmolib::random::cuadras_auge_distribution<double,
-                                              exponential_distribution>;
+      rmolib::random::cuadras_auge_distribution<double,
+                                                exponential_distribution>;
   using caller_t = rcpp_distribution_caller<cuadras_auge_distribution>;
 
   return caller_t::call(r_engine{}, n, d, alpha, beta);
@@ -110,31 +110,31 @@ NumericMatrix Rcpp__rmo_lfm_cpp(const std::size_t n, const std::size_t d,
                                 const std::string rjump_name,
                                 const List& rjump_arg_list) {
   using deterministic_distribution =
-    rmolib::random::deterministic_distribution<double>;
+      rmolib::random::deterministic_distribution<double>;
   using exponential_distribution =
-    rmolib::random::exponential_distribution<double>;
+      rmolib::random::exponential_distribution<double>;
   using uniform_real_distribution =
-    rmolib::random::uniform_real_distribution<double>;
+      rmolib::random::uniform_real_distribution<double>;
   using pareto_distribution =
-    rmolib::random::pareto_distribution<double, uniform_real_distribution>;
+      rmolib::random::pareto_distribution<double, uniform_real_distribution>;
 
   if ("rposval" == rjump_name) {
     using caller_t = rcpp_distribution_caller<rmolib::random::lfm_distribution<
-      double, deterministic_distribution, exponential_distribution>>;
+        double, deterministic_distribution, exponential_distribution>>;
 
     const auto value = get_param<double>(rjump_arg_list, "value");
     return caller_t::call(r_engine{}, n, d, rate_killing, rate_drift, rate,
                           value);
   } else if ("rexp" == rjump_name) {
     using caller_t = rcpp_distribution_caller<rmolib::random::lfm_distribution<
-      double, exponential_distribution, exponential_distribution>>;
+        double, exponential_distribution, exponential_distribution>>;
 
     const auto lambda = get_param<double>(rjump_arg_list, "rate");
     return caller_t::call(r_engine{}, n, d, rate_killing, rate_drift, rate,
                           lambda);
   } else if ("rpareto" == rjump_name) {
     using caller_t = rcpp_distribution_caller<rmolib::random::lfm_distribution<
-      double, pareto_distribution, exponential_distribution>>;
+        double, pareto_distribution, exponential_distribution>>;
 
     const auto alpha = get_param<double>(rjump_arg_list, "alpha");
     const auto lower_bound = get_param<double>(rjump_arg_list, "x0");
@@ -146,7 +146,6 @@ NumericMatrix Rcpp__rmo_lfm_cpp(const std::size_t n, const std::size_t d,
 }
 
 // # nocov end
-
 
 // ----------------------------------------------------------------------------
 // internal multivariate generators, exposed for testing
@@ -163,7 +162,20 @@ NumericMatrix rtest__rmo_esm(const std::size_t n, const std::size_t d,
 // [[Rcpp::export]]
 NumericMatrix rtest__rmo_arnold(const std::size_t n, const std::size_t d,
                                 const NumericVector& intensities) {
-  return Rcpp__rmo_arnold(n, d, intensities);
+  using exponential_distribution =
+      rmolib::random::exponential_distribution<double>;
+  using uniform_real_distribution =
+      rmolib::random::uniform_real_distribution<double>;
+  using discrete_distribution =
+      rmolib::random::r_discrete_distribution<std::size_t, double,
+                                              uniform_real_distribution>;
+  using arnold_mo_distribution =
+      rmolib::random::arnold_mo_distribution<double, exponential_distribution,
+                                             discrete_distribution>;
+  using caller_t = rcpp_distribution_caller<arnold_mo_distribution>;
+
+  return caller_t::call(r_engine{}, n, d, intensities.begin(),
+                        intensities.end());
 }
 
 //' @keywords internal test
