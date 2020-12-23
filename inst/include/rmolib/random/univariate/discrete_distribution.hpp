@@ -1,12 +1,12 @@
 #pragma once
 
 #include <algorithm>
+#include <cmath>
 #include <numeric>
 #include <stdexcept>
 #include <string>
 #include <type_traits>
 #include <vector>
-#include <cmath>
 
 #include "rmolib/random/univariate/internal/discrete_param_type.hpp"
 #include "rmolib/type_traits/is_safe_numeric_cast.hpp"
@@ -151,44 +151,26 @@ class discrete_distribution {
           alias_table_.emplace_back(std::make_tuple(i, i, _WeightType{1}));
         }
       }
-      const auto lower_comp = [](const auto& l, const auto& u) {
-        return std::get<1>(l) > std::get<1>(u);
-      };
-      std::make_heap(lower.begin(), lower.end(), lower_comp);
-      const auto upper_comp = [](const auto& l, const auto& u) {
-        return std::get<1>(l) < std::get<1>(u);
-      };
-      std::make_heap(upper.begin(), upper.end(), upper_comp);
 
       while (!upper.empty() && !lower.empty()) {
-        std::pop_heap(lower.begin(), lower.end(), lower_comp);
         const auto [il, wl] = lower.back();
         lower.pop_back();
-        std::pop_heap(upper.begin(), upper.end(), upper_comp);
         auto [iu, wu] = upper.back();
         upper.pop_back();
         alias_table_.emplace_back(std::tuple(il, iu, wl));
         wu += (wl - _WeightType{1});
         if (wu < _WeightType{1}) {
           lower.emplace_back(std::make_pair(iu, wu));
-          std::push_heap(lower.begin(), lower.end(), lower_comp);
         } else if (wu > _WeightType{1}) {
           upper.emplace_back(std::make_pair(iu, wu));
-          std::push_heap(upper.begin(), upper.end(), upper_comp);
         } else {
           alias_table_.emplace_back(std::make_tuple(iu, iu, _WeightType{1}));
         }
       }
-      while (!lower.empty()) {
-        const auto& [il, wl] = lower.back();
-        alias_table_.emplace_back(std::tuple(il, il, _WeightType{1}));
-        lower.pop_back();
-      }
-      while (!upper.empty()) {
-        const auto& [iu, wu] = upper.back();
-        alias_table_.emplace_back(std::tuple(iu, iu, _WeightType{1}));
-        upper.pop_back();
-      }
+      for (const auto& [i, w] : lower)
+        alias_table_.emplace_back(std::tuple(i, i, _WeightType{1}));
+      for (const auto& [i, w] : upper)
+        alias_table_.emplace_back(std::tuple(i, i, _WeightType{1}));
     }
 
     template <typename _InputIterator>
