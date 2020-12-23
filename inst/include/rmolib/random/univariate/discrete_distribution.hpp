@@ -140,7 +140,7 @@ class discrete_distribution {
 
       alias_table_.clear();
       alias_table_.reserve(n_);
-      for (auto [it, i] = std::make_pair(tmp.cbegin(), _IntType{0});
+      for (auto&& [it, i] = std::make_pair(tmp.cbegin(), _IntType{0});
            it != tmp.cend(); ++it, ++i) {
         const auto w = *it;
         if (w < _WeightType{1}) {
@@ -180,16 +180,15 @@ class discrete_distribution {
         }
       }
       while (!lower.empty()) {
-        auto [il, wl] = lower.back();
-        lower.pop_back();
+        const auto& [il, wl] = lower.back();
         alias_table_.emplace_back(std::tuple(il, il, _WeightType{1}));
+        lower.pop_back();
       }
       while (!upper.empty()) {
-        auto [iu, wu] = upper.back();
-        upper.pop_back();
+        const auto& [iu, wu] = upper.back();
         alias_table_.emplace_back(std::tuple(iu, iu, _WeightType{1}));
+        upper.pop_back();
       }
-      alias_table_.shrink_to_fit();
     }
 
     template <typename _InputIterator>
@@ -274,7 +273,7 @@ class discrete_distribution {
 
     const auto uniform_int_parm =
         uniform_int_parm_t{0, parm.alias_table_.size()};
-    const auto [i, j, p] =
+    const auto& [i, j, p] =
         parm.alias_table_[uniform_int_dist_(engine, uniform_int_parm)];
     const auto u = unit_uniform_real_dist_(engine);
     if (u <= p)
