@@ -86,7 +86,7 @@ class discrete_distribution {
     friend class discrete_distribution;
 
     friend bool operator==(const param_type& lhs, const param_type& rhs) {
-      return lhs.alias_table_ == rhs.alias_table_;
+      return lhs.n_ == rhs.n_ && lhs.alias_table_ == rhs.alias_table_;
     }
 
     friend bool operator!=(const param_type& lhs, const param_type& rhs) {
@@ -192,7 +192,9 @@ class discrete_distribution {
         "parametrized with integral type");
   };
 
-  discrete_distribution() = default;
+  discrete_distribution() {
+    init_unit_uniform_real_distribution();
+  }
 
   template <typename _InputIterator>
   explicit discrete_distribution(_InputIterator first, _InputIterator last)
@@ -313,14 +315,14 @@ class discrete_distribution {
   // TODO: implement
 
   template <class _CharType, class _Traits, typename _IntType, typename
-  _WeightType, typename _UnitUniformRealDistribution>
+  _WeightType, typename _UnitUniformRealDistribution, _UniformIntDistribution>
   std::basic_ostream<_CharType, _Traits>&
   operator<<(std::basic_ostream<_CharType, _Traits>& os,
             discrete_distribution<_IntType, _WeightType,
   _UnitUniformRealDistribution>& dist);
 
   template <class _CharType, class _Traits, typename _IntType, typename
-  _WeightType, typename _UnitUniformRealDistribution>
+  _WeightType, typename _UnitUniformRealDistribution, _UniformIntDistribution>
   std::basic_istream<_CharType, _Traits>&
   operator>>(std::basic_istream<_CharType, _Traits>& is,
              discrete_distribution<_IntType, _WeightType,

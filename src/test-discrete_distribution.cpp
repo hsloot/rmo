@@ -54,7 +54,7 @@ class generic_param_type {
   explicit generic_param_type(_DiscreteParamType&& param)
       : p_{param.probabilities()} {}
 
-  std::vector<double> probabilities() const { return p_; }
+  auto probabilities() const { return p_; }
 
   // compiler generated ctor and assignment op is sufficient
 
