@@ -5,6 +5,32 @@
 
 using namespace Rcpp;
 
+// multiply_binomial_coefficient
+double multiply_binomial_coefficient(const double x, const std::size_t n, const std::size_t k);
+RcppExport SEXP _rmo_multiply_binomial_coefficient(SEXP xSEXP, SEXP nSEXP, SEXP kSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const double >::type x(xSEXP);
+    Rcpp::traits::input_parameter< const std::size_t >::type n(nSEXP);
+    Rcpp::traits::input_parameter< const std::size_t >::type k(kSEXP);
+    rcpp_result_gen = Rcpp::wrap(multiply_binomial_coefficient(x, n, k));
+    return rcpp_result_gen;
+END_RCPP
+}
+// divide_binomial_coefficient
+double divide_binomial_coefficient(const double x, const std::size_t n, const std::size_t k);
+RcppExport SEXP _rmo_divide_binomial_coefficient(SEXP xSEXP, SEXP nSEXP, SEXP kSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const double >::type x(xSEXP);
+    Rcpp::traits::input_parameter< const std::size_t >::type n(nSEXP);
+    Rcpp::traits::input_parameter< const std::size_t >::type k(kSEXP);
+    rcpp_result_gen = Rcpp::wrap(divide_binomial_coefficient(x, n, k));
+    return rcpp_result_gen;
+END_RCPP
+}
 // Rcpp__is_within
 bool Rcpp__is_within(const std::size_t i, const std::size_t j);
 RcppExport SEXP _rmo_Rcpp__is_within(SEXP iSEXP, SEXP jSEXP) {
@@ -211,6 +237,8 @@ END_RCPP
 RcppExport SEXP run_testthat_tests(SEXP);
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_rmo_multiply_binomial_coefficient", (DL_FUNC) &_rmo_multiply_binomial_coefficient, 3},
+    {"_rmo_divide_binomial_coefficient", (DL_FUNC) &_rmo_divide_binomial_coefficient, 3},
     {"_rmo_Rcpp__is_within", (DL_FUNC) &_rmo_Rcpp__is_within, 2},
     {"_rmo_Rcpp__rmo_esm", (DL_FUNC) &_rmo_Rcpp__rmo_esm, 3},
     {"_rmo_Rcpp__rmo_arnold", (DL_FUNC) &_rmo_Rcpp__rmo_arnold, 3},
