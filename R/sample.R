@@ -110,7 +110,7 @@ rmo_arnold <- function(n, d, intensities) {
 #' @param d dimension
 #' @param ex_intensities exchangeable Marshall-Olkin intensity rates
 #'
-#' @return `rmo_ex_arnold` implements the modified Arnold model for the
+#' @return `rexmo_markovian` implements the modified Arnold model for the
 #' exchangeable subclass and returns an \eqn{n \times d}{n x d} numeric matrix
 #' with the rows corresponding to independent and identically disctributed
 #' samples of a \eqn{d} variate exchangeable Marshall-Olkin distribution with
@@ -119,17 +119,17 @@ rmo_arnold <- function(n, d, intensities) {
 #' @family samplers
 #'
 #' @examples
-#' rmo_ex_arnold(10, 2, c(0.4, 0.2))
-#' rmo_ex_arnold(10, 2, c(1, 0))      ## independence
-#' rmo_ex_arnold(10, 2, c(0, 1))      ## comonotone
+#' rexmo_markovian(10, 2, c(0.4, 0.2))
+#' rexmo_markovian(10, 2, c(1, 0))      ## independence
+#' rexmo_markovian(10, 2, c(0, 1))      ## comonotone
 #'
 #' @include assert.R
 #' @importFrom assertthat assert_that is.count
 #'
 #' @export
-#' @name rmo_ex_arnold
-rmo_ex_arnold <- function(n, d, ex_intensities) {
-  Rcpp__rmo_ex_arnold(n, d, ex_intensities)
+#' @name rexmo_markovian
+rexmo_markovian <- function(n, d, ex_intensities) {
+  Rcpp__rexmo_markovian(n, d, ex_intensities)
 }
 
 ## #### Sample from extMO distributions ####
