@@ -75,7 +75,7 @@ rjump_arg_list." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rmo</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
 
@@ -225,57 +225,57 @@ M. Scherer, "Simulating Copulas", World Scientific (2017), pp. 140 psqq.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other samplers: 
+<code><a href='rexmo_markovian.html'>rexmo_markovian</a>()</code>,
 <code><a href='rmo_esm_cuadras_auge.html'>rmo_esm_cuadras_auge</a>()</code>,
-<code><a href='rmo_esm.html'>rmo_esm</a>()</code>,
-<code><a href='rmo_ex_arnold.html'>rmo_ex_arnold</a>()</code></p></div>
+<code><a href='rmo_esm.html'>rmo_esm</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>rmo_lfm_cpp</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fl'>0.5</span>, <span class='fl'>0.1</span>, <span class='fl'>0.2</span>, <span class='st'>"rposval"</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='st'>"value"</span><span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;            [,1]      [,2]
-#&gt;  [1,] 0.9693047 0.7878149
-#&gt;  [2,] 0.4922071 0.7329467
-#&gt;  [3,] 2.0932052 2.0932052
-#&gt;  [4,] 0.5153908 4.8724263
-#&gt;  [5,] 0.1776062 0.1776062
-#&gt;  [6,] 0.1751708 0.2192977
-#&gt;  [7,] 0.1474456 0.7625475
-#&gt;  [8,] 1.9981352 0.1527698
-#&gt;  [9,] 1.2868211 1.6367988
-#&gt; [10,] 0.3389261 0.3499144</div><div class='input'><span class='fu'>rmo_lfm_cpp</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fl'>0.5</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='st'>"rexp"</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='st'>"rate"</span><span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
+#&gt;  [1,] 1.0434329 1.9678475
+#&gt;  [2,] 0.3917928 0.1943344
+#&gt;  [3,] 2.7146061 3.2672105
+#&gt;  [4,] 0.9693047 0.7878149
+#&gt;  [5,] 0.4922071 0.7329467
+#&gt;  [6,] 2.0932052 2.0932052
+#&gt;  [7,] 0.5153908 4.8724263
+#&gt;  [8,] 0.1776062 0.1776062
+#&gt;  [9,] 0.1751708 0.2192977
+#&gt; [10,] 0.1474456 0.7625475</div><div class='input'><span class='fu'>rmo_lfm_cpp</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fl'>0.5</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='st'>"rexp"</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='st'>"rate"</span><span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;              [,1]        [,2]
-#&gt;  [1,]  4.02166729  4.20191934
-#&gt;  [2,]  1.34824690  1.34824690
-#&gt;  [3,] 11.28755170  4.01577216
-#&gt;  [4,]  2.21402669  1.61283188
-#&gt;  [5,]  0.01210665  5.14202710
-#&gt;  [6,]  9.28832798  0.01358033
-#&gt;  [7,] 20.81885859 38.53618972
-#&gt;  [8,]  8.06176721  5.16586525
-#&gt;  [9,]  1.31815967  1.31815967
-#&gt; [10,]  6.34330061  7.44250694</div><div class='input'>
+#&gt;  [1,]  9.11884536  5.15626252
+#&gt;  [2,]  0.48587751  0.48587751
+#&gt;  [3,]  2.49043851  2.31018646
+#&gt;  [4,]  1.34824690  1.34824690
+#&gt;  [5,] 11.28755170  4.01577216
+#&gt;  [6,]  2.21402669  1.61283188
+#&gt;  [7,]  0.01210665  5.14202710
+#&gt;  [8,]  9.28832798  0.01358033
+#&gt;  [9,] 20.81885859 38.53618972
+#&gt; [10,]  8.06176721  5.16586525</div><div class='input'>
 <span class='fu'>rmo_lfm_cpp</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>1</span>, <span class='st'>"rposval"</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='st'>"value"</span><span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>  <span class='co'>## independence</span>
 </div><div class='output co'>#&gt;             [,1]       [,2]
-#&gt;  [1,] 1.27157350 0.44061157
-#&gt;  [2,] 1.04602658 0.07748686
-#&gt;  [3,] 0.03920342 0.09273524
-#&gt;  [4,] 0.70599219 0.11517457
-#&gt;  [5,] 1.13717158 0.30400037
-#&gt;  [6,] 0.28590440 1.66012861
-#&gt;  [7,] 0.69140711 0.02643718
-#&gt;  [8,] 0.15210404 1.01687513
-#&gt;  [9,] 1.80836899 1.14321240
-#&gt; [10,] 1.25896015 0.09659652</div><div class='input'><span class='fu'>rmo_lfm_cpp</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>0</span>, <span class='st'>"rposval"</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='st'>"value"</span><span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>  <span class='co'>## comonotone</span>
-</div><div class='output co'>#&gt;            [,1]      [,2]
-#&gt;  [1,] 0.4785016 0.4785016
-#&gt;  [2,] 0.3477127 0.3477127
-#&gt;  [3,] 1.9443705 1.9443705
-#&gt;  [4,] 2.8622615 2.8622615
-#&gt;  [5,] 0.8147494 0.8147494
-#&gt;  [6,] 0.5546123 0.5546123
-#&gt;  [7,] 1.2798431 1.2798431
-#&gt;  [8,] 0.7084776 0.7084776
-#&gt;  [9,] 0.1766266 0.1766266
-#&gt; [10,] 0.7563214 0.7563214</div><div class='input'>
+#&gt;  [1,] 0.77757018 0.95607280
+#&gt;  [2,] 0.63237537 0.09183088
+#&gt;  [3,] 0.02670447 2.35334572
+#&gt;  [4,] 0.89676529 2.13003743
+#&gt;  [5,] 0.14312169 0.35597612
+#&gt;  [6,] 0.38143820 1.18679047
+#&gt;  [7,] 2.64709041 2.66359687
+#&gt;  [8,] 0.54960317 1.59825883
+#&gt;  [9,] 1.27157350 0.44061157
+#&gt; [10,] 1.04602658 0.07748686</div><div class='input'><span class='fu'>rmo_lfm_cpp</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>0</span>, <span class='st'>"rposval"</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='st'>"value"</span><span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>  <span class='co'>## comonotone</span>
+</div><div class='output co'>#&gt;             [,1]       [,2]
+#&gt;  [1,] 0.70599219 0.70599219
+#&gt;  [2,] 0.30400037 0.30400037
+#&gt;  [3,] 0.69140711 0.69140711
+#&gt;  [4,] 1.01687513 1.01687513
+#&gt;  [5,] 1.25896015 1.25896015
+#&gt;  [6,] 0.06768541 0.06768541
+#&gt;  [7,] 0.75107487 0.75107487
+#&gt;  [8,] 0.38081033 0.38081033
+#&gt;  [9,] 4.21740975 4.21740975
+#&gt; [10,] 0.56941945 0.56941945</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

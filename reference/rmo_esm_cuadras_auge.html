@@ -73,7 +73,7 @@ with parameters alpha and beta." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rmo</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
 
@@ -192,45 +192,45 @@ components.</p></li>
 
     <div class='dont-index'><p><code><a href='rmo_esm.html'>rmo_esm</a></code></p>
 <p>Other samplers: 
+<code><a href='rexmo_markovian.html'>rexmo_markovian</a>()</code>,
 <code><a href='rmo_esm.html'>rmo_esm</a>()</code>,
-<code><a href='rmo_ex_arnold.html'>rmo_ex_arnold</a>()</code>,
 <code><a href='rmo_lfm_cpp.html'>rmo_lfm_cpp</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>rmo_esm_cuadras_auge</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fl'>0.5</span>, <span class='fl'>0.2</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;             [,1]       [,2]
-#&gt;  [1,] 0.26763914 0.82411357
-#&gt;  [2,] 0.93408365 0.93408365
-#&gt;  [3,] 1.10137697 1.10137697
-#&gt;  [4,] 0.20625665 2.78521635
-#&gt;  [5,] 0.16266436 0.04838118
-#&gt;  [6,] 1.90359533 0.74906708
-#&gt;  [7,] 0.15585619 0.15585619
-#&gt;  [8,] 0.00557076 0.21160082
-#&gt;  [9,] 0.52953886 1.37548114
-#&gt; [10,] 2.29761209 2.05688090</div><div class='input'><span class='fu'>rmo_esm_cuadras_auge</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span>      <span class='co'>## comonotone</span>
+#&gt;  [1,] 1.84448426 0.16123876
+#&gt;  [2,] 0.28233880 1.44215771
+#&gt;  [3,] 1.14005604 1.14005604
+#&gt;  [4,] 0.03690963 0.10519624
+#&gt;  [5,] 3.69063543 4.37326292
+#&gt;  [6,] 0.91271989 0.08064858
+#&gt;  [7,] 0.97207295 0.09712054
+#&gt;  [8,] 0.49912475 3.51674739
+#&gt;  [9,] 1.04423762 0.25754291
+#&gt; [10,] 0.55624395 2.41798025</div><div class='input'><span class='fu'>rmo_esm_cuadras_auge</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span>      <span class='co'>## comonotone</span>
+</div><div class='output co'>#&gt;            [,1]      [,2]
+#&gt;  [1,] 1.1312699 1.1312699
+#&gt;  [2,] 0.6884628 0.6884628
+#&gt;  [3,] 0.8172443 0.8172443
+#&gt;  [4,] 0.4268239 0.4268239
+#&gt;  [5,] 4.0584419 4.0584419
+#&gt;  [6,] 0.2529130 0.2529130
+#&gt;  [7,] 0.6558426 0.6558426
+#&gt;  [8,] 0.2861381 0.2861381
+#&gt;  [9,] 0.4169685 0.4169685
+#&gt; [10,] 0.1200703 0.1200703</div><div class='input'><span class='fu'>rmo_esm_cuadras_auge</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fl'>1</span>, <span class='fl'>0</span><span class='op'>)</span>      <span class='co'>## independence</span>
 </div><div class='output co'>#&gt;             [,1]       [,2]
-#&gt;  [1,] 0.49854530 0.49854530
-#&gt;  [2,] 0.14163011 0.14163011
-#&gt;  [3,] 1.23387958 1.23387958
-#&gt;  [4,] 1.26415490 1.26415490
-#&gt;  [5,] 1.39129122 1.39129122
-#&gt;  [6,] 0.05221346 0.05221346
-#&gt;  [7,] 0.68832679 0.68832679
-#&gt;  [8,] 1.47422373 1.47422373
-#&gt;  [9,] 1.19901650 1.19901650
-#&gt; [10,] 0.74638177 0.74638177</div><div class='input'><span class='fu'>rmo_esm_cuadras_auge</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fl'>1</span>, <span class='fl'>0</span><span class='op'>)</span>      <span class='co'>## independence</span>
-</div><div class='output co'>#&gt;             [,1]        [,2]
-#&gt;  [1,] 0.70668105 2.159284682
-#&gt;  [2,] 0.76381420 0.004528473
-#&gt;  [3,] 0.05986955 0.726852574
-#&gt;  [4,] 0.42350683 0.050744703
-#&gt;  [5,] 0.50306124 1.162463267
-#&gt;  [6,] 0.04685683 0.761468193
-#&gt;  [7,] 1.07400490 1.658572970
-#&gt;  [8,] 0.86815035 0.407625042
-#&gt;  [9,] 0.73118509 0.965998089
-#&gt; [10,] 1.05016270 0.521522277</div><div class='input'>
+#&gt;  [1,] 2.48577980 0.24300920
+#&gt;  [2,] 4.26711665 0.97890153
+#&gt;  [3,] 0.10172479 1.63717892
+#&gt;  [4,] 3.14863010 0.36928823
+#&gt;  [5,] 0.02880499 0.04497353
+#&gt;  [6,] 0.52422183 2.33358958
+#&gt;  [7,] 1.45435566 0.61939240
+#&gt;  [8,] 0.11876648 0.46745937
+#&gt;  [9,] 1.09192908 0.25013858
+#&gt; [10,] 1.53476817 0.36159723</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -73,7 +73,7 @@ with shock rates intensities." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rmo</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
 
@@ -225,83 +225,83 @@ doi: <a href='https://doi.org/10.2307/2282907'>10.2307/2282907</a>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other samplers: 
+<code><a href='rexmo_markovian.html'>rexmo_markovian</a>()</code>,
 <code><a href='rmo_esm_cuadras_auge.html'>rmo_esm_cuadras_auge</a>()</code>,
-<code><a href='rmo_ex_arnold.html'>rmo_ex_arnold</a>()</code>,
 <code><a href='rmo_lfm_cpp.html'>rmo_lfm_cpp</a>()</code></p>
 <p>Other samplers: 
+<code><a href='rexmo_markovian.html'>rexmo_markovian</a>()</code>,
 <code><a href='rmo_esm_cuadras_auge.html'>rmo_esm_cuadras_auge</a>()</code>,
-<code><a href='rmo_ex_arnold.html'>rmo_ex_arnold</a>()</code>,
 <code><a href='rmo_lfm_cpp.html'>rmo_lfm_cpp</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>rmo_esm</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.4</span>, <span class='fl'>0.3</span>, <span class='fl'>0.2</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;            [,1]      [,2]
-#&gt;  [1,] 1.0076089 1.0076089
-#&gt;  [2,] 4.1099047 4.2610808
-#&gt;  [3,] 0.1186714 0.1186714
-#&gt;  [4,] 2.4367253 4.3415338
-#&gt;  [5,] 3.2682491 6.2397622
-#&gt;  [6,] 0.1782992 0.1782992
-#&gt;  [7,] 0.9791194 1.2570400
-#&gt;  [8,] 1.0321692 0.4166710
-#&gt;  [9,] 1.3488047 1.3488047
-#&gt; [10,] 0.3157354 0.3157354</div><div class='input'><span class='fu'>rmo_esm</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>0</span><span class='op'>)</span><span class='op'>)</span>         <span class='co'>## independence</span>
-</div><div class='output co'>#&gt;            [,1]      [,2]
-#&gt;  [1,] 0.8346728 2.1228993
-#&gt;  [2,] 1.1099744 0.6503988
-#&gt;  [3,] 0.7884202 0.1400899
-#&gt;  [4,] 1.0360235 0.1925256
-#&gt;  [5,] 1.9184386 0.3760188
-#&gt;  [6,] 0.8075358 0.7125976
-#&gt;  [7,] 0.7070553 1.2010309
-#&gt;  [8,] 0.1198257 0.2667298
-#&gt;  [9,] 0.2012750 0.7386326
-#&gt; [10,] 0.8533478 0.9709052</div><div class='input'><span class='fu'>rmo_esm</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>         <span class='co'>## comonotone</span>
+</div><div class='output co'>#&gt;             [,1]      [,2]
+#&gt;  [1,] 0.26680386 0.2668039
+#&gt;  [2,] 5.62700193 1.2437947
+#&gt;  [3,] 0.55773144 0.2325658
+#&gt;  [4,] 0.05561243 0.4859210
+#&gt;  [5,] 0.42442786 1.0249917
+#&gt;  [6,] 0.44918778 1.7277225
+#&gt;  [7,] 1.31409735 4.5407563
+#&gt;  [8,] 1.02003859 1.0200386
+#&gt;  [9,] 0.78497915 2.4786463
+#&gt; [10,] 1.16914558 1.1691456</div><div class='input'><span class='fu'>rmo_esm</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>0</span><span class='op'>)</span><span class='op'>)</span>         <span class='co'>## independence</span>
 </div><div class='output co'>#&gt;             [,1]       [,2]
-#&gt;  [1,] 1.42692257 1.42692257
-#&gt;  [2,] 0.10330351 0.10330351
-#&gt;  [3,] 1.76547593 1.76547593
-#&gt;  [4,] 3.79108831 3.79108831
-#&gt;  [5,] 0.62810262 0.62810262
-#&gt;  [6,] 1.30879119 1.30879119
-#&gt;  [7,] 1.67628039 1.67628039
-#&gt;  [8,] 0.01530056 0.01530056
-#&gt;  [9,] 0.32071861 0.32071861
-#&gt; [10,] 0.02358263 0.02358263</div><div class='input'>
+#&gt;  [1,] 0.19694999 1.32056170
+#&gt;  [2,] 0.35882925 3.55473991
+#&gt;  [3,] 0.34689565 1.17822671
+#&gt;  [4,] 0.46104855 0.51208218
+#&gt;  [5,] 0.08567431 1.67551998
+#&gt;  [6,] 0.45389771 0.27537110
+#&gt;  [7,] 1.27878700 0.03479680
+#&gt;  [8,] 0.15237484 1.47353128
+#&gt;  [9,] 0.60255025 0.51610724
+#&gt; [10,] 0.06513033 0.09360955</div><div class='input'><span class='fu'>rmo_esm</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>         <span class='co'>## comonotone</span>
+</div><div class='output co'>#&gt;            [,1]      [,2]
+#&gt;  [1,] 2.6142656 2.6142656
+#&gt;  [2,] 1.2465462 1.2465462
+#&gt;  [3,] 1.7651095 1.7651095
+#&gt;  [4,] 0.3814517 0.3814517
+#&gt;  [5,] 0.3504170 0.3504170
+#&gt;  [6,] 0.1360090 0.1360090
+#&gt;  [7,] 1.2415323 1.2415323
+#&gt;  [8,] 0.3006878 0.3006878
+#&gt;  [9,] 0.6291924 0.6291924
+#&gt; [10,] 2.2148779 2.2148779</div><div class='input'>
 <span class='fu'>rmo_arnold</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.4</span>, <span class='fl'>0.3</span>, <span class='fl'>0.2</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;            [,1]       [,2]
-#&gt;  [1,] 0.7456721 7.99185031
-#&gt;  [2,] 0.3626813 5.05632063
-#&gt;  [3,] 1.4107942 0.77996676
-#&gt;  [4,] 0.6066855 1.07551051
-#&gt;  [5,] 0.4927994 0.49279940
-#&gt;  [6,] 5.5589835 5.55898347
-#&gt;  [7,] 2.0291629 0.55689628
-#&gt;  [8,] 0.9554699 0.05928975
-#&gt;  [9,] 1.1670390 1.08951709
-#&gt; [10,] 2.5744147 1.36292207</div><div class='input'><span class='fu'>rmo_arnold</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>0</span><span class='op'>)</span><span class='op'>)</span>         <span class='co'>## independence</span>
 </div><div class='output co'>#&gt;             [,1]       [,2]
-#&gt;  [1,] 0.77441055 2.27429713
-#&gt;  [2,] 0.08983756 2.29350677
-#&gt;  [3,] 0.37218196 0.15699583
-#&gt;  [4,] 2.11674557 0.07574816
-#&gt;  [5,] 0.68110233 2.75920474
-#&gt;  [6,] 2.47588392 1.30713280
-#&gt;  [7,] 0.62076615 0.93536235
-#&gt;  [8,] 0.26347483 2.18034415
-#&gt;  [9,] 0.33644625 3.08926126
-#&gt; [10,] 0.69911767 1.79043285</div><div class='input'><span class='fu'>rmo_arnold</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>         <span class='co'>## comonotone</span>
-</div><div class='output co'>#&gt;            [,1]      [,2]
-#&gt;  [1,] 4.4458792 4.4458792
-#&gt;  [2,] 0.4380279 0.4380279
-#&gt;  [3,] 0.1181092 0.1181092
-#&gt;  [4,] 0.5788407 0.5788407
-#&gt;  [5,] 4.0105157 4.0105157
-#&gt;  [6,] 1.7813850 1.7813850
-#&gt;  [7,] 2.9463298 2.9463298
-#&gt;  [8,] 3.4899371 3.4899371
-#&gt;  [9,] 0.2838825 0.2838825
-#&gt; [10,] 0.4150008 0.4150008</div><div class='input'>
+#&gt;  [1,] 3.79427775 0.05962294
+#&gt;  [2,] 5.40393171 2.87103046
+#&gt;  [3,] 3.16795179 0.72778092
+#&gt;  [4,] 0.03412289 0.03412289
+#&gt;  [5,] 1.94384269 3.85398022
+#&gt;  [6,] 1.97734914 0.63544703
+#&gt;  [7,] 0.23055645 0.23055645
+#&gt;  [8,] 0.51757926 4.80876075
+#&gt;  [9,] 1.38119456 1.73471327
+#&gt; [10,] 1.07777561 0.45784087</div><div class='input'><span class='fu'>rmo_arnold</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>0</span><span class='op'>)</span><span class='op'>)</span>         <span class='co'>## independence</span>
+</div><div class='output co'>#&gt;            [,1]         [,2]
+#&gt;  [1,] 0.1101377 8.207787e-01
+#&gt;  [2,] 1.0515201 6.963041e-01
+#&gt;  [3,] 0.4092766 3.593669e-05
+#&gt;  [4,] 1.0909632 1.392690e-03
+#&gt;  [5,] 1.0104634 1.627403e+00
+#&gt;  [6,] 1.3111097 5.739979e-01
+#&gt;  [7,] 0.3731909 4.131125e-01
+#&gt;  [8,] 0.3819071 1.776787e+00
+#&gt;  [9,] 0.4645737 2.038125e-01
+#&gt; [10,] 2.3415224 1.044819e+00</div><div class='input'><span class='fu'>rmo_arnold</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>         <span class='co'>## comonotone</span>
+</div><div class='output co'>#&gt;             [,1]       [,2]
+#&gt;  [1,] 1.30110875 1.30110875
+#&gt;  [2,] 0.05664471 0.05664471
+#&gt;  [3,] 1.97830060 1.97830060
+#&gt;  [4,] 0.50047969 0.50047969
+#&gt;  [5,] 0.03178032 0.03178032
+#&gt;  [6,] 0.13373812 0.13373812
+#&gt;  [7,] 1.25931561 1.25931561
+#&gt;  [8,] 0.34743799 0.34743799
+#&gt;  [9,] 1.15793598 1.15793598
+#&gt; [10,] 0.10258134 0.10258134</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
