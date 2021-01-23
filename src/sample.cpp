@@ -68,7 +68,7 @@ NumericMatrix Rcpp__rmo_arnold(const std::size_t n, const std::size_t d,
 }
 
 // [[Rcpp::export]]
-NumericMatrix Rcpp__rmo_ex_arnold(const std::size_t n, const std::size_t d,
+NumericMatrix Rcpp__rexmo_markovian(const std::size_t n, const std::size_t d,
                                   const NumericVector& ex_intensities) {
   using exponential_distribution =
       rmolib::random::exponential_distribution<double>;
@@ -180,7 +180,7 @@ NumericMatrix rtest__rmo_arnold(const std::size_t n, const std::size_t d,
 
 //' @keywords internal test
 // [[Rcpp::export]]
-NumericMatrix rtest__rmo_ex_arnold(const std::size_t n, const std::size_t d,
+NumericMatrix rtest__rexmo_markovian(const std::size_t n, const std::size_t d,
                                    const NumericVector& ex_intensities) {
   // R's sample.int produces a final (redundant) selection of the
   // last remaining value see

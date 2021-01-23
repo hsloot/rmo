@@ -16,8 +16,8 @@ distributions with \code{\link{rmo_esm}}. Not adviced for \code{d} much larger
 than 2.
 \item Sample with the \emph{Arnold model} from arbitrary Marshall-Olkin distributions
 with \code{\link{rmo_arnold}}.
-\item Sample with the \emph{modified Arnold model} from exchangeable Marshall-Olkin
-distributions with \code{\link{rmo_ex_arnold}}.
+\item Sample with the \emph{exchangeable Markovian model} from exchangeable
+Marshall-Olki distributions with \code{\link{rexmo_markovian}}.
 \item Sample with the \emph{Lévy-frailty model for compound Poisson subordinators}
 from the corresponding subclass of extendible Marshall-Olkin distributions
 with \code{\link{rmo_lfm_cpp}}.

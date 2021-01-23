@@ -16,8 +16,8 @@ NULL
 #'   than 2.
 #' - Sample with the *Arnold model* from arbitrary Marshall-Olkin distributions
 #'   with \code{\link{rmo_arnold}}.
-#' - Sample with the *modified Arnold model* from exchangeable Marshall-Olkin
-#'   distributions with \code{\link{rmo_ex_arnold}}.
+#' - Sample with the *exchangeable Markovian model* from exchangeable
+#'   Marshall-Olki distributions with \code{\link{rexmo_markovian}}.
 #' - Sample with the *Lévy-frailty model for compound Poisson subordinators*
 #'   from the corresponding subclass of extendible Marshall-Olkin distributions
 #'   with \code{\link{rmo_lfm_cpp}}.

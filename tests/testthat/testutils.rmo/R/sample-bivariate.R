@@ -71,12 +71,12 @@ rmo_esm_bivariate <- function( # nolint
 #'   (length == 2; all >= 0, any > 0)
 #'
 #' @examples
-#' rmo_ex_arnold_bivariate(10, 2, c(0.4, 0.3))
-#' rmo_ex_arnold_bivariate(10, 2, c(1, 0)) ## independence
-#' rmo_ex_arnold_bivariate(10, 2, c(0, 1)) ## comonotone
+#' rexmo_markovian_bivariate(10, 2, c(0.4, 0.3))
+#' rexmo_markovian_bivariate(10, 2, c(1, 0)) ## independence
+#' rexmo_markovian_bivariate(10, 2, c(0, 1)) ## comonotone
 #' @include sample-helper.R
 #' @export
-rmo_ex_arnold_bivariate <- function( # nolint
+rexmo_markovian_bivariate <- function( # nolint
     n, d = 2, ex_intensities = c(1, 0)) {
   stopifnot(
     is.numeric(n) && 1L == length(n) && 0 == n %% 1 && n > 0 &&

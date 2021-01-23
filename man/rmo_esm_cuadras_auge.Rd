@@ -43,8 +43,8 @@ rmo_esm_cuadras_auge(10L, 2L, 1, 0)      ## independence
 \code{\link{rmo_esm}}
 
 Other samplers: 
+\code{\link{rexmo_markovian}()},
 \code{\link{rmo_esm}()},
-\code{\link{rmo_ex_arnold}()},
 \code{\link{rmo_lfm_cpp}()}
 }
 \concept{samplers}

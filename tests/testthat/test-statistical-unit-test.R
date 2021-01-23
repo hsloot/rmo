@@ -188,28 +188,28 @@ test_that("Exchangeable Arnold model passes statistical unit test", {
   ))
   ex_intensities <- bf2ex_intensities(d, bf)
   expect_not_rejected(
-    ex_ks_test(n, d, rmo_ex_arnold, ex_intensities),
+    ex_ks_test(n, d, rexmo_markovian, ex_intensities),
     unit_threshold
   )
 
   bf <- testutils.rmo::fuzzy_bf(AlphaStableBernsteinFunction())
   ex_intensities <- bf2ex_intensities(d, bf)
   expect_not_rejected(
-    ex_ks_test(n, d, rmo_ex_arnold, ex_intensities),
+    ex_ks_test(n, d, rexmo_markovian, ex_intensities),
     unit_threshold
   )
 
   bf <- testutils.rmo::fuzzy_bf(InverseGaussianBernsteinFunction())
   ex_intensities <- bf2ex_intensities(d, bf)
   expect_not_rejected(
-    ex_ks_test(n, d, rmo_ex_arnold, ex_intensities),
+    ex_ks_test(n, d, rexmo_markovian, ex_intensities),
     unit_threshold
   )
 
   bf <- testutils.rmo::fuzzy_bf(ExponentialBernsteinFunction())
   ex_intensities <- bf2ex_intensities(d, bf)
   expect_not_rejected(
-    ex_ks_test(n, d, rmo_ex_arnold, ex_intensities),
+    ex_ks_test(n, d, rexmo_markovian, ex_intensities),
     unit_threshold
   )
 
@@ -221,28 +221,28 @@ test_that("Exchangeable Arnold model passes statistical unit test", {
   ))
   ex_intensities <- bf2ex_intensities(d, bf)
   expect_not_rejected(
-    ex_ks_test(n, d, rmo_ex_arnold, ex_intensities),
+    ex_ks_test(n, d, rexmo_markovian, ex_intensities),
     unit_threshold
   )
 
   bf <- testutils.rmo::fuzzy_bf(AlphaStableBernsteinFunction())
   ex_intensities <- bf2ex_intensities(d, bf)
   expect_not_rejected(
-    ex_ks_test(n, d, rmo_ex_arnold, ex_intensities),
+    ex_ks_test(n, d, rexmo_markovian, ex_intensities),
     unit_threshold
   )
 
   bf <- testutils.rmo::fuzzy_bf(InverseGaussianBernsteinFunction())
   ex_intensities <- bf2ex_intensities(d, bf)
   expect_not_rejected(
-    ex_ks_test(n, d, rmo_ex_arnold, ex_intensities),
+    ex_ks_test(n, d, rexmo_markovian, ex_intensities),
     unit_threshold
   )
 
   bf <- testutils.rmo::fuzzy_bf(ExponentialBernsteinFunction())
   ex_intensities <- bf2ex_intensities(d, bf)
   expect_not_rejected(
-    ex_ks_test(n, d, rmo_ex_arnold, ex_intensities),
+    ex_ks_test(n, d, rexmo_markovian, ex_intensities),
     unit_threshold
   )
 })
