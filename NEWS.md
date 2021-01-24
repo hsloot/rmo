@@ -1,3 +1,7 @@
+# rmo 0.3.0
+
+- Rename `rmo_ex_arnold` to `rexmo_markovian`. 
+
 # rmo 0.2.6
 
 - Complete refactored C++ backend: Distribution classes satisfy a multivariate
