@@ -117,9 +117,9 @@ rmo_arnold_naive <- function(n, d, intensities) { # nolint
 }
 
 
-## #### Exchangeable MO Arnold model ####
+## #### Exchangeable MO Markovian model ####
 
-#' Naive implementation of the exchangeable Arnold model in `R`
+#' Naive implementation of the exchangeable Markovian model in `R`
 #'
 #' @param n Number of samples (> 0)
 #' @param d Dimension (== 2)
@@ -200,7 +200,7 @@ rexmo_markovian_naive <- function(n, d, ex_intensities) { # nolint
   out
 }
 
-#' Naive (recursive) implementation of the exchangeable Arnold model in `R`
+#' Naive (recursive) implementation of the exchangeable Markovian model in `R`
 #'
 #' @param n Number of samples (> 0)
 #' @param d Dimension (== 2)
@@ -209,7 +209,7 @@ rexmo_markovian_naive <- function(n, d, ex_intensities) { # nolint
 #'
 #' @details
 #' This implementation should be equivalent to the other naive implementation of
-#' the exchangeable Arnold model. Both differ in that this implementation
+#' the exchangeable Markovian model. Both differ in that this implementation
 #' calculates transition probabilities and intensities recursively when needed
 #' and that the other one calculates them upfront.
 #'

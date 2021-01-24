@@ -110,7 +110,7 @@ rmo_arnold <- function(n, d, intensities) {
 #' @param d dimension
 #' @param ex_intensities exchangeable Marshall-Olkin intensity rates
 #'
-#' @return `rexmo_markovian` implements the modified Arnold model for the
+#' @return `rexmo_markovian` implements the Markovian model for the
 #' exchangeable subclass and returns an \eqn{n \times d}{n x d} numeric matrix
 #' with the rows corresponding to independent and identically disctributed
 #' samples of a \eqn{d} variate exchangeable Marshall-Olkin distribution with
