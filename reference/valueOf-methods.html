@@ -155,37 +155,61 @@ $$
 $$</p>
     </div>
 
-    <pre class="usage"><span class='fu'>valueOf</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>x</span>, <span class='va'>difference_order</span><span class='op'>)</span>
+    <pre class="usage"><span class='fu'>valueOf</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>x</span>, <span class='va'>difference_order</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='co'># S4 method for LinearBernsteinFunction,numeric,integer</span>
-<span class='fu'>valueOf</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>x</span>, difference_order <span class='op'>=</span> <span class='fl'>0</span><span class='op'>)</span>
+<span class='co'># S4 method for LinearBernsteinFunction</span>
+<span class='fu'>valueOf</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>x</span>, difference_order <span class='op'>=</span> <span class='fl'>0L</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='co'># S4 method for ConstantBernsteinFunction,numeric,integer</span>
-<span class='fu'>valueOf</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>x</span>, difference_order <span class='op'>=</span> <span class='fl'>0</span><span class='op'>)</span>
+<span class='co'># S4 method for ConstantBernsteinFunction</span>
+<span class='fu'>valueOf</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>x</span>, difference_order <span class='op'>=</span> <span class='fl'>0L</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='co'># S4 method for ScaledBernsteinFunction,numeric,integer</span>
-<span class='fu'>valueOf</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>x</span>, difference_order <span class='op'>=</span> <span class='fl'>0L</span><span class='op'>)</span>
+<span class='co'># S4 method for ScaledBernsteinFunction</span>
+<span class='fu'>valueOf</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>x</span>, difference_order <span class='op'>=</span> <span class='fl'>0L</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='co'># S4 method for SumOfBernsteinFunctions,numeric,integer</span>
-<span class='fu'>valueOf</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>x</span>, difference_order <span class='op'>=</span> <span class='fl'>0L</span><span class='op'>)</span>
+<span class='co'># S4 method for SumOfBernsteinFunctions</span>
+<span class='fu'>valueOf</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>x</span>, difference_order <span class='op'>=</span> <span class='fl'>0L</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='co'># S4 method for PoissonBernsteinFunction,numeric,integer</span>
-<span class='fu'>valueOf</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>x</span>, difference_order <span class='op'>=</span> <span class='fl'>0L</span><span class='op'>)</span>
+<span class='co'># S4 method for PoissonBernsteinFunction</span>
+<span class='fu'>valueOf</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>x</span>, difference_order <span class='op'>=</span> <span class='fl'>0L</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='co'># S4 method for AlphaStableBernsteinFunction,numeric,integer</span>
-<span class='fu'>valueOf</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>x</span>, difference_order <span class='op'>=</span> <span class='fl'>0L</span><span class='op'>)</span>
+<span class='co'># S4 method for AlphaStableBernsteinFunction</span>
+<span class='fu'>valueOf</span><span class='op'>(</span>
+  <span class='va'>object</span>,
+  <span class='va'>x</span>,
+  difference_order <span class='op'>=</span> <span class='fl'>0L</span>,
+  <span class='va'>...</span>,
+  tolerance <span class='op'>=</span> <span class='va'>.Machine</span><span class='op'>$</span><span class='va'>double.eps</span><span class='op'>^</span><span class='fl'>0.5</span>
+<span class='op'>)</span>
 
-<span class='co'># S4 method for InverseGaussianBernsteinFunction,numeric,integer</span>
-<span class='fu'>valueOf</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>x</span>, difference_order <span class='op'>=</span> <span class='fl'>0L</span><span class='op'>)</span>
+<span class='co'># S4 method for InverseGaussianBernsteinFunction</span>
+<span class='fu'>valueOf</span><span class='op'>(</span>
+  <span class='va'>object</span>,
+  <span class='va'>x</span>,
+  difference_order <span class='op'>=</span> <span class='fl'>0L</span>,
+  <span class='va'>...</span>,
+  tolerance <span class='op'>=</span> <span class='va'>.Machine</span><span class='op'>$</span><span class='va'>double.eps</span><span class='op'>^</span><span class='fl'>0.5</span>
+<span class='op'>)</span>
 
-<span class='co'># S4 method for ExponentialBernsteinFunction,numeric,integer</span>
-<span class='fu'>valueOf</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>x</span>, difference_order <span class='op'>=</span> <span class='fl'>0L</span><span class='op'>)</span>
+<span class='co'># S4 method for ExponentialBernsteinFunction</span>
+<span class='fu'>valueOf</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>x</span>, difference_order <span class='op'>=</span> <span class='fl'>0L</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='co'># S4 method for GammaBernsteinFunction,numeric,integer</span>
-<span class='fu'>valueOf</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>x</span>, difference_order <span class='op'>=</span> <span class='fl'>0L</span><span class='op'>)</span>
+<span class='co'># S4 method for GammaBernsteinFunction</span>
+<span class='fu'>valueOf</span><span class='op'>(</span>
+  <span class='va'>object</span>,
+  <span class='va'>x</span>,
+  difference_order <span class='op'>=</span> <span class='fl'>0L</span>,
+  <span class='va'>...</span>,
+  tolerance <span class='op'>=</span> <span class='va'>.Machine</span><span class='op'>$</span><span class='va'>double.eps</span><span class='op'>^</span><span class='fl'>0.5</span>
+<span class='op'>)</span>
 
-<span class='co'># S4 method for ParetoBernsteinFunction,numeric,integer</span>
-<span class='fu'>valueOf</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>x</span>, difference_order <span class='op'>=</span> <span class='fl'>0L</span><span class='op'>)</span></pre>
+<span class='co'># S4 method for ParetoBernsteinFunction</span>
+<span class='fu'>valueOf</span><span class='op'>(</span>
+  <span class='va'>object</span>,
+  <span class='va'>x</span>,
+  difference_order <span class='op'>=</span> <span class='fl'>0L</span>,
+  <span class='va'>...</span>,
+  tolerance <span class='op'>=</span> <span class='va'>.Machine</span><span class='op'>$</span><span class='va'>double.eps</span><span class='op'>^</span><span class='fl'>0.5</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -203,6 +227,14 @@ $$</p>
       <td><p>The order of the alternating iterated forward
 differences taken on the Bernstein function (\(k\) in
 the representation).</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Further parameter (passed to <code><a href='https://rdrr.io/r/stats/integrate.html'>stats::integrate()</a></code>)</p></td>
+    </tr>
+    <tr>
+      <th>tolerance</th>
+      <td><p>(Relative) tolerance, passed down to <code><a href='https://rdrr.io/r/stats/integrate.html'>stats::integrate()</a></code></p></td>
     </tr>
     </table>
 
