@@ -238,7 +238,7 @@ setValidity("ScaledBernsteinFunction",
 #' @export
 setMethod("valueOf", "ScaledBernsteinFunction",
   function(object, x, difference_order = 0L, ...) {
-    object@scale * valueOf(object@original, x, difference_order)
+    object@scale * valueOf(object@original, x, difference_order, ...)
   })
 
 
@@ -275,8 +275,8 @@ SumOfBernsteinFunctions <- setClass("SumOfBernsteinFunctions", # nolint
 #' @export
 setMethod("valueOf", "SumOfBernsteinFunctions",
   function(object, x, difference_order = 0L, ...) {
-    valueOf(object@first, x, difference_order) +
-      valueOf(object@second, x, difference_order)
+    valueOf(object@first, x, difference_order, ...) +
+      valueOf(object@second, x, difference_order, ...)
   })
 
 
