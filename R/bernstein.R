@@ -116,13 +116,15 @@ setValidity("LinearBernsteinFunction",
 #'
 #' @seealso [LinearBernsteinFunction-class]
 #'
-#' @importFrom checkmate qassert
+#' @importFrom checkmate qassert assert check_numeric check_complex
 #'
 #' @export
 setMethod("valueOf",
   c("LinearBernsteinFunction", "numeric", "integer"),
   function(object, x, difference_order = 0L, ...) {
-    qassert(x, "N+[0,)")
+    assert(combine = "or",
+      check_numeric(x, lower = 0, min.len = 1, any.missing = FALSE),
+      check_complex(x, min.len = 1, any.missing = FALSE))
     qassert(difference_order, "X1[0,)")
 
     if (0L == difference_order) {
@@ -173,13 +175,15 @@ setValidity("ConstantBernsteinFunction",
 #'
 #' @seealso [ConstantBernsteinFunction-class]
 #'
-#' @importFrom checkmate qassert
+#' @importFrom checkmate qassert assert check_numeric check_complex
 #'
 #' @export
 setMethod("valueOf",
   c("ConstantBernsteinFunction", "numeric", "integer"),
   function(object, x, difference_order = 0L, ...) {
-    qassert(x, "N+[0,)")
+    assert(combine = "or",
+      check_numeric(x, lower = 0, min.len = 1, any.missing = FALSE),
+      check_complex(x, min.len = 1, any.missing = FALSE))
     qassert(difference_order, "X1[0,)")
 
     if (0L == difference_order) {
@@ -326,13 +330,15 @@ setValidity("PoissonBernsteinFunction",
 #'
 #' @seealso [PoissonBernsteinFunction-class]
 #'
-#' @importFrom checkmate qassert
+#' @importFrom checkmate qassert assert check_numeric check_complex
 #'
 #' @export
 setMethod("valueOf",
   c("PoissonBernsteinFunction", "numeric", "integer"),
   function(object, x, difference_order = 0L, ...) {
-    qassert(x, "N+[0,)")
+    assert(combine = "or",
+      check_numeric(x, lower = 0, min.len = 1, any.missing = FALSE),
+      check_complex(x, min.len = 1, any.missing = FALSE))
     qassert(difference_order, "X1[0,)")
 
     if (0L == difference_order) {
@@ -404,7 +410,7 @@ setValidity("AlphaStableBernsteinFunction",
 #'
 #' @seealso [AlphaStableBernsteinFunction-class]
 #'
-#' @importFrom checkmate qassert
+#' @importFrom checkmate qassert assert check_numeric check_complex
 #' @importFrom stats integrate
 #'
 #' @export
@@ -412,7 +418,9 @@ setMethod("valueOf",
   c("AlphaStableBernsteinFunction", "numeric", "integer"),
   function(object, x, difference_order = 0L, ...,
       tolerance = .Machine$double.eps^0.5) {
-    qassert(x, "N+[0,)")
+    assert(combine = "or",
+      check_numeric(x, lower = 0, min.len = 1, any.missing = FALSE),
+      check_complex(x, min.len = 1, any.missing = FALSE))
     qassert(difference_order, "X1[0,)")
 
     if (0L == difference_order) {
@@ -489,7 +497,7 @@ setValidity("InverseGaussianBernsteinFunction",
 #'
 #' @seealso [InverseGaussianBernsteinFunction-class]
 #'
-#' @importFrom checkmate qassert
+#' @importFrom checkmate qassert assert check_numeric check_complex
 #' @importFrom stats integrate
 #'
 #' @export
@@ -497,7 +505,9 @@ setMethod("valueOf",
   c("InverseGaussianBernsteinFunction", "numeric", "integer"),
   function(object, x, difference_order = 0L, ...,
       tolerance = .Machine$double.eps^0.5) {
-    qassert(x, "N+[0,)")
+    assert(combine = "or",
+      check_numeric(x, lower = 0, min.len = 1, any.missing = FALSE),
+      check_complex(x, min.len = 1, any.missing = FALSE))
     qassert(difference_order, "X1[0,)")
 
     if (0L == difference_order) {
