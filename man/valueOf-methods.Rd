@@ -27,9 +27,9 @@
 \usage{
 valueOf(object, x, difference_order)
 
-\S4method{valueOf}{LinearBernsteinFunction,numeric,integer}(object, x, difference_order = 0)
+\S4method{valueOf}{LinearBernsteinFunction,numeric,integer}(object, x, difference_order = 0L)
 
-\S4method{valueOf}{ConstantBernsteinFunction,numeric,integer}(object, x, difference_order = 0)
+\S4method{valueOf}{ConstantBernsteinFunction,numeric,integer}(object, x, difference_order = 0L)
 
 \S4method{valueOf}{ScaledBernsteinFunction,numeric,integer}(object, x, difference_order = 0L)
 

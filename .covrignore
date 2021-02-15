@@ -1,2 +1,3 @@
 src/test-*.cpp
 src/testutils-*.h
+src/binomial.cpp

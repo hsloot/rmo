@@ -46,10 +46,6 @@
 #' @references
 #'  \insertAllCited{}
 #'
-#' @include assert.R RcppExports.R
-#' @importFrom stats rexp
-#' @importFrom assertthat assert_that is.count
-#'
 #' @export
 #' @name rmo_esm
 rmo_esm <- function(n, d, intensities) {
@@ -77,10 +73,6 @@ rmo_esm <- function(n, d, intensities) {
 #' rmo_arnold(10L, 2L, c(0, 0, 1))         ## comonotone
 #'
 #' @family samplers
-#'
-#' @include assert.R RcppExports.R
-#' @importFrom stats rexp
-#' @importFrom assertthat assert_that is.count
 #'
 #' @export
 rmo_arnold <- function(n, d, intensities) {
@@ -123,9 +115,6 @@ rmo_arnold <- function(n, d, intensities) {
 #' rexmo_markovian(10, 2, c(1, 0))      ## independence
 #' rexmo_markovian(10, 2, c(0, 1))      ## comonotone
 #'
-#' @include assert.R
-#' @importFrom assertthat assert_that is.count
-#'
 #' @export
 #' @name rexmo_markovian
 rexmo_markovian <- function(n, d, ex_intensities) {
@@ -163,9 +152,6 @@ rexmo_markovian <- function(n, d, ex_intensities) {
 #' rmo_esm_cuadras_auge(10L, 2L, 0.5, 0.2)
 #' rmo_esm_cuadras_auge(10L, 2L, 0, 1)      ## comonotone
 #' rmo_esm_cuadras_auge(10L, 2L, 1, 0)      ## independence
-#'
-#' @include assert.R
-#' @importFrom assertthat assert_that is.count
 #'
 #' @export
 #' @name rmo_esm_cuadras_auge
@@ -217,10 +203,6 @@ rmo_esm_cuadras_auge <- function(n, d, alpha, beta) {
 #' rmo_lfm_cpp(10L, 2L, 0, 1, 0, "rposval", list("value"=1))  ## comonotone
 #'
 #' @family samplers
-#'
-#' @include assert.R
-#' @importFrom assertthat assert_that is.count
-#' @importFrom stats rexp
 #'
 #' @export
 #' @name rmo_lfm_cpp

@@ -14,10 +14,10 @@ License: GPL-3
 Depends:
     R (>= 3.3.0)
 Imports:
-    assertthat,
     Rcpp,
     methods,
-    Rdpack
+    Rdpack,
+    checkmate
 Suggests:
     testthat,
     covr,
@@ -35,7 +35,6 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Collate:
     'RcppExports.R'
-    'assert.R'
     'bernstein.R'
     'catch-routine-registration.R'
     'parameter.R'
