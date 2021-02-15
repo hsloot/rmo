@@ -3,41 +3,41 @@
 \docType{methods}
 \name{valueOf}
 \alias{valueOf}
-\alias{valueOf,LinearBernsteinFunction,numeric,integer-method}
-\alias{valueOf,LinearBernsteinFunction,numeric,integer,ANY-method}
-\alias{valueOf,ConstantBernsteinFunction,numeric,integer-method}
-\alias{valueOf,ConstantBernsteinFunction,numeric,integer,ANY-method}
-\alias{valueOf,ScaledBernsteinFunction,numeric,integer-method}
-\alias{valueOf,ScaledBernsteinFunction,numeric,integer,ANY-method}
-\alias{valueOf,SumOfBernsteinFunctions,numeric,integer-method}
-\alias{valueOf,SumOfBernsteinFunctions,numeric,integer,ANY-method}
-\alias{valueOf,PoissonBernsteinFunction,numeric,integer-method}
-\alias{valueOf,PoissonBernsteinFunction,numeric,integer,ANY-method}
-\alias{valueOf,AlphaStableBernsteinFunction,numeric,integer-method}
-\alias{valueOf,AlphaStableBernsteinFunction,numeric,integer,ANY-method}
-\alias{valueOf,InverseGaussianBernsteinFunction,numeric,integer-method}
-\alias{valueOf,InverseGaussianBernsteinFunction,numeric,integer,ANY-method}
-\alias{valueOf,ExponentialBernsteinFunction,numeric,integer-method}
-\alias{valueOf,ExponentialBernsteinFunction,numeric,integer,ANY-method}
-\alias{valueOf,GammaBernsteinFunction,numeric,integer-method}
-\alias{valueOf,GammaBernsteinFunction,numeric,integer,ANY-method}
-\alias{valueOf,ParetoBernsteinFunction,numeric,integer-method}
-\alias{valueOf,ParetoBernsteinFunction,numeric,integer,ANY-method}
+\alias{valueOf,LinearBernsteinFunction-method}
+\alias{valueOf,LinearBernsteinFunction,ANY-method}
+\alias{valueOf,ConstantBernsteinFunction-method}
+\alias{valueOf,ConstantBernsteinFunction,ANY-method}
+\alias{valueOf,ScaledBernsteinFunction-method}
+\alias{valueOf,ScaledBernsteinFunction,ANY-method}
+\alias{valueOf,SumOfBernsteinFunctions-method}
+\alias{valueOf,SumOfBernsteinFunctions,ANY-method}
+\alias{valueOf,PoissonBernsteinFunction-method}
+\alias{valueOf,PoissonBernsteinFunction,ANY-method}
+\alias{valueOf,AlphaStableBernsteinFunction-method}
+\alias{valueOf,AlphaStableBernsteinFunction,ANY-method}
+\alias{valueOf,InverseGaussianBernsteinFunction-method}
+\alias{valueOf,InverseGaussianBernsteinFunction,ANY-method}
+\alias{valueOf,ExponentialBernsteinFunction-method}
+\alias{valueOf,ExponentialBernsteinFunction,ANY-method}
+\alias{valueOf,GammaBernsteinFunction-method}
+\alias{valueOf,GammaBernsteinFunction,ANY-method}
+\alias{valueOf,ParetoBernsteinFunction-method}
+\alias{valueOf,ParetoBernsteinFunction,ANY-method}
 \title{Returns values for Bernstein functions}
 \usage{
 valueOf(object, x, difference_order, ...)
 
-\S4method{valueOf}{LinearBernsteinFunction,numeric,integer}(object, x, difference_order = 0L, ...)
+\S4method{valueOf}{LinearBernsteinFunction}(object, x, difference_order = 0L, ...)
 
-\S4method{valueOf}{ConstantBernsteinFunction,numeric,integer}(object, x, difference_order = 0L, ...)
+\S4method{valueOf}{ConstantBernsteinFunction}(object, x, difference_order = 0L, ...)
 
-\S4method{valueOf}{ScaledBernsteinFunction,numeric,integer}(object, x, difference_order = 0L, ...)
+\S4method{valueOf}{ScaledBernsteinFunction}(object, x, difference_order = 0L, ...)
 
-\S4method{valueOf}{SumOfBernsteinFunctions,numeric,integer}(object, x, difference_order = 0L, ...)
+\S4method{valueOf}{SumOfBernsteinFunctions}(object, x, difference_order = 0L, ...)
 
-\S4method{valueOf}{PoissonBernsteinFunction,numeric,integer}(object, x, difference_order = 0L, ...)
+\S4method{valueOf}{PoissonBernsteinFunction}(object, x, difference_order = 0L, ...)
 
-\S4method{valueOf}{AlphaStableBernsteinFunction,numeric,integer}(
+\S4method{valueOf}{AlphaStableBernsteinFunction}(
   object,
   x,
   difference_order = 0L,
@@ -45,7 +45,7 @@ valueOf(object, x, difference_order, ...)
   tolerance = .Machine$double.eps^0.5
 )
 
-\S4method{valueOf}{InverseGaussianBernsteinFunction,numeric,integer}(
+\S4method{valueOf}{InverseGaussianBernsteinFunction}(
   object,
   x,
   difference_order = 0L,
@@ -53,9 +53,9 @@ valueOf(object, x, difference_order, ...)
   tolerance = .Machine$double.eps^0.5
 )
 
-\S4method{valueOf}{ExponentialBernsteinFunction,numeric,integer}(object, x, difference_order = 0L, ...)
+\S4method{valueOf}{ExponentialBernsteinFunction}(object, x, difference_order = 0L, ...)
 
-\S4method{valueOf}{GammaBernsteinFunction,numeric,integer}(
+\S4method{valueOf}{GammaBernsteinFunction}(
   object,
   x,
   difference_order = 0L,
@@ -63,7 +63,7 @@ valueOf(object, x, difference_order, ...)
   tolerance = .Machine$double.eps^0.5
 )
 
-\S4method{valueOf}{ParetoBernsteinFunction,numeric,integer}(
+\S4method{valueOf}{ParetoBernsteinFunction}(
   object,
   x,
   difference_order = 0L,

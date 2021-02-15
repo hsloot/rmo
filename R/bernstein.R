@@ -112,15 +112,14 @@ setValidity("LinearBernsteinFunction",
   })
 
 #' @rdname valueOf-methods
-#' @aliases valueOf,LinearBernsteinFunction,numeric,integer,ANY-method
+#' @aliases valueOf,LinearBernsteinFunction,ANY-method
 #'
 #' @seealso [LinearBernsteinFunction-class]
 #'
 #' @importFrom checkmate qassert assert check_numeric check_complex
 #'
 #' @export
-setMethod("valueOf",
-  c("LinearBernsteinFunction", "numeric", "integer"),
+setMethod("valueOf", "LinearBernsteinFunction",
   function(object, x, difference_order = 0L, ...) {
     assert(combine = "or",
       check_numeric(x, lower = 0, min.len = 1, any.missing = FALSE),
@@ -171,15 +170,14 @@ setValidity("ConstantBernsteinFunction",
   })
 
 #' @rdname valueOf-methods
-#' @aliases valueOf,ConstantBernsteinFunction,numeric,integer,ANY-method
+#' @aliases valueOf,ConstantBernsteinFunction,ANY-method
 #'
 #' @seealso [ConstantBernsteinFunction-class]
 #'
 #' @importFrom checkmate qassert assert check_numeric check_complex
 #'
 #' @export
-setMethod("valueOf",
-  c("ConstantBernsteinFunction", "numeric", "integer"),
+setMethod("valueOf", "ConstantBernsteinFunction",
   function(object, x, difference_order = 0L, ...) {
     assert(combine = "or",
       check_numeric(x, lower = 0, min.len = 1, any.missing = FALSE),
@@ -233,13 +231,12 @@ setValidity("ScaledBernsteinFunction",
   })
 
 #' @rdname valueOf-methods
-#' @aliases valueOf,ScaledBernsteinFunction,numeric,integer,ANY-method
+#' @aliases valueOf,ScaledBernsteinFunction,ANY-method
 #'
 #' @seealso [ScaledBernsteinFunction-class]
 #'
 #' @export
-setMethod("valueOf",
-  c("ScaledBernsteinFunction", "numeric", "integer"),
+setMethod("valueOf", "ScaledBernsteinFunction",
   function(object, x, difference_order = 0L, ...) {
     object@scale * valueOf(object@original, x, difference_order)
   })
@@ -271,13 +268,12 @@ SumOfBernsteinFunctions <- setClass("SumOfBernsteinFunctions", # nolint
   slots = c(first = "BernsteinFunction", second = "BernsteinFunction"))
 
 #' @rdname valueOf-methods
-#' @aliases valueOf,SumOfBernsteinFunctions,numeric,integer,ANY-method
+#' @aliases valueOf,SumOfBernsteinFunctions,ANY-method
 #'
 #' @seealso [SumOfBernsteinFunctions-class]
 #'
 #' @export
-setMethod("valueOf",
-  c("SumOfBernsteinFunctions", "numeric", "integer"),
+setMethod("valueOf", "SumOfBernsteinFunctions",
   function(object, x, difference_order = 0L, ...) {
     valueOf(object@first, x, difference_order) +
       valueOf(object@second, x, difference_order)
@@ -326,15 +322,14 @@ setValidity("PoissonBernsteinFunction",
   })
 
 #' @rdname valueOf-methods
-#' @aliases valueOf,PoissonBernsteinFunction,numeric,integer,ANY-method
+#' @aliases valueOf,PoissonBernsteinFunction,ANY-method
 #'
 #' @seealso [PoissonBernsteinFunction-class]
 #'
 #' @importFrom checkmate qassert assert check_numeric check_complex
 #'
 #' @export
-setMethod("valueOf",
-  c("PoissonBernsteinFunction", "numeric", "integer"),
+setMethod("valueOf", "PoissonBernsteinFunction",
   function(object, x, difference_order = 0L, ...) {
     assert(combine = "or",
       check_numeric(x, lower = 0, min.len = 1, any.missing = FALSE),
@@ -404,7 +399,7 @@ setValidity("AlphaStableBernsteinFunction",
   })
 
 #' @rdname valueOf-methods
-#' @aliases valueOf,AlphaStableBernsteinFunction,numeric,integer,ANY-method
+#' @aliases valueOf,AlphaStableBernsteinFunction,ANY-method
 #'
 #' @param tolerance (Relative) tolerance, passed down to [stats::integrate()]
 #'
@@ -414,8 +409,7 @@ setValidity("AlphaStableBernsteinFunction",
 #' @importFrom stats integrate
 #'
 #' @export
-setMethod("valueOf",
-  c("AlphaStableBernsteinFunction", "numeric", "integer"),
+setMethod("valueOf", "AlphaStableBernsteinFunction",
   function(object, x, difference_order = 0L, ...,
       tolerance = .Machine$double.eps^0.5) {
     assert(combine = "or",
@@ -493,7 +487,7 @@ setValidity("InverseGaussianBernsteinFunction",
   })
 
 #' @rdname valueOf-methods
-#' @aliases valueOf,InverseGaussianBernsteinFunction,numeric,integer,ANY-method
+#' @aliases valueOf,InverseGaussianBernsteinFunction,ANY-method
 #'
 #' @seealso [InverseGaussianBernsteinFunction-class]
 #'
@@ -501,8 +495,7 @@ setValidity("InverseGaussianBernsteinFunction",
 #' @importFrom stats integrate
 #'
 #' @export
-setMethod("valueOf",
-  c("InverseGaussianBernsteinFunction", "numeric", "integer"),
+setMethod("valueOf", "InverseGaussianBernsteinFunction",
   function(object, x, difference_order = 0L, ...,
       tolerance = .Machine$double.eps^0.5) {
     assert(combine = "or",
@@ -576,7 +569,7 @@ setValidity("ExponentialBernsteinFunction",
   })
 
 #' @rdname valueOf-methods
-#' @aliases valueOf,ExponentialBernsteinFunction,numeric,integer,ANY-method
+#' @aliases valueOf,ExponentialBernsteinFunction,ANY-method
 #'
 #' @seealso [ExponentialBernsteinFunction-class]
 #'
@@ -584,8 +577,7 @@ setValidity("ExponentialBernsteinFunction",
 #' @importFrom stats integrate
 #'
 #' @export
-setMethod("valueOf",
-  c("ExponentialBernsteinFunction", "numeric", "integer"),
+setMethod("valueOf", "ExponentialBernsteinFunction",
   function(object, x, difference_order = 0L, ...) {
     qassert(x, "N+[0,)")
     qassert(difference_order, "X1[0,)")
@@ -655,7 +647,7 @@ setValidity("GammaBernsteinFunction",
   })
 
 #' @rdname valueOf-methods
-#' @aliases valueOf,GammaBernsteinFunction,numeric,integer,ANY-method
+#' @aliases valueOf,GammaBernsteinFunction,ANY-method
 #'
 #' @seealso [GammaBernsteinFunction-class]
 #'
@@ -663,8 +655,7 @@ setValidity("GammaBernsteinFunction",
 #' @importFrom stats integrate
 #'
 #' @export
-setMethod("valueOf",
-  c("GammaBernsteinFunction", "numeric", "integer"),
+setMethod("valueOf", "GammaBernsteinFunction",
   function(object, x, difference_order = 0L, ...,
       tolerance = .Machine$double.eps^0.5) {
     qassert(x, "N+[0,)")
@@ -748,7 +739,7 @@ setValidity("ParetoBernsteinFunction",
   })
 
 #' @rdname valueOf-methods
-#' @aliases valueOf,ParetoBernsteinFunction,numeric,integer,ANY-method
+#' @aliases valueOf,ParetoBernsteinFunction,ANY-method
 #'
 #' @seealso [ParetoBernsteinFunction-class]
 #'
@@ -756,8 +747,7 @@ setValidity("ParetoBernsteinFunction",
 #' @importFrom stats integrate pgamma
 #'
 #' @export
-setMethod("valueOf",
-  c("ParetoBernsteinFunction", "numeric", "integer"),
+setMethod("valueOf", "ParetoBernsteinFunction",
   function(object, x, difference_order = 0L, ...,
       tolerance = .Machine$double.eps^0.5) {
     qassert(x, "N+[0,)")
