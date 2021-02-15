@@ -54,14 +54,14 @@ expect_equal_rn_generation <- function(
     rlang::enquo(arg_list), "Arguments", arg = "arg_list")
 
   ## Conventional checks to catch user errors early on
-  assertthat::assert_that(
-    assertthat::is.string(rn_generator$val) ||
-      rlang::is_function(rn_generator$val),
-    assertthat::is.string(rn_generator_test$val) ||
-      rlang::is_function(rn_generator_test$val),
-    missing(n) ||
-      assertthat::is.count(n),
-    assertthat::is.count(use_seed))
+  checkmate::assert(combine = "or",
+    checkmate::check_string(rn_generator$val),
+    checkmate::check_function(rn_generator$val))
+  checkmate::assert(combine = "or",
+    checkmate::check_string(rn_generator_test$val),
+    checkmate::check_function(rn_generator_test$val))
+  checkmate::qassert(n, "X1(0,)")
+  checkmate::qassert(n, "X1(0,)")
 
   ## Set up call arguments
   if (!missing(n)) {
