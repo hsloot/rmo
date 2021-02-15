@@ -64,6 +64,7 @@ setClass("BernsteinFunction", # nolint
 #' @param difference_order The order of the alternating iterated forward
 #'   differences taken on the Bernstein function (\eqn{k} in
 #'   the representation).
+#' @param ... Further parameter (passed to [stats::integrate()])
 #'
 #' @docType methods
 #' @rdname valueOf-methods
@@ -72,7 +73,7 @@ setClass("BernsteinFunction", # nolint
 #'
 #' @export
 setGeneric("valueOf",
-  function(object, x, difference_order) {
+  function(object, x, difference_order, ...) {
     standardGeneric("valueOf")
   })
 
@@ -120,7 +121,7 @@ setValidity("LinearBernsteinFunction",
 #' @export
 setMethod("valueOf",
   c("LinearBernsteinFunction", "numeric", "integer"),
-  function(object, x, difference_order = 0L) {
+  function(object, x, difference_order = 0L, ...) {
     qassert(x, "N+[0,)")
     qassert(difference_order, "X1[0,)")
 
@@ -177,7 +178,7 @@ setValidity("ConstantBernsteinFunction",
 #' @export
 setMethod("valueOf",
   c("ConstantBernsteinFunction", "numeric", "integer"),
-  function(object, x, difference_order = 0L) {
+  function(object, x, difference_order = 0L, ...) {
     qassert(x, "N+[0,)")
     qassert(difference_order, "X1[0,)")
 
@@ -235,7 +236,7 @@ setValidity("ScaledBernsteinFunction",
 #' @export
 setMethod("valueOf",
   c("ScaledBernsteinFunction", "numeric", "integer"),
-  function(object, x, difference_order = 0L) {
+  function(object, x, difference_order = 0L, ...) {
     object@scale * valueOf(object@original, x, difference_order)
   })
 
@@ -273,7 +274,7 @@ SumOfBernsteinFunctions <- setClass("SumOfBernsteinFunctions", # nolint
 #' @export
 setMethod("valueOf",
   c("SumOfBernsteinFunctions", "numeric", "integer"),
-  function(object, x, difference_order = 0L) {
+  function(object, x, difference_order = 0L, ...) {
     valueOf(object@first, x, difference_order) +
       valueOf(object@second, x, difference_order)
   })
@@ -330,7 +331,7 @@ setValidity("PoissonBernsteinFunction",
 #' @export
 setMethod("valueOf",
   c("PoissonBernsteinFunction", "numeric", "integer"),
-  function(object, x, difference_order = 0L) {
+  function(object, x, difference_order = 0L, ...) {
     qassert(x, "N+[0,)")
     qassert(difference_order, "X1[0,)")
 
@@ -399,6 +400,8 @@ setValidity("AlphaStableBernsteinFunction",
 #' @rdname valueOf-methods
 #' @aliases valueOf,AlphaStableBernsteinFunction,numeric,integer,ANY-method
 #'
+#' @param tolerance (Relative) tolerance, passed down to [stats::integrate()]
+#'
 #' @seealso [AlphaStableBernsteinFunction-class]
 #'
 #' @importFrom checkmate qassert
@@ -407,7 +410,8 @@ setValidity("AlphaStableBernsteinFunction",
 #' @export
 setMethod("valueOf",
   c("AlphaStableBernsteinFunction", "numeric", "integer"),
-  function(object, x, difference_order = 0L) {
+  function(object, x, difference_order = 0L, ...,
+      tolerance = .Machine$double.eps^0.5) {
     qassert(x, "N+[0,)")
     qassert(difference_order, "X1[0,)")
 
@@ -425,7 +429,7 @@ setMethod("valueOf",
             },
             lower = 0, upper = Inf,
             ## use lower tolerance to pass all.equal
-            rel.tol = .Machine$double.eps^0.5)$value
+            rel.tol = tolerance, ...)$value
           })
     }
 
@@ -491,7 +495,8 @@ setValidity("InverseGaussianBernsteinFunction",
 #' @export
 setMethod("valueOf",
   c("InverseGaussianBernsteinFunction", "numeric", "integer"),
-  function(object, x, difference_order = 0L) {
+  function(object, x, difference_order = 0L, ...,
+      tolerance = .Machine$double.eps^0.5) {
     qassert(x, "N+[0,)")
     qassert(difference_order, "X1[0,)")
 
@@ -508,7 +513,7 @@ setMethod("valueOf",
             },
             lower=0, upper=Inf,
             ## use lower tolerance to pass all.equal
-            rel.tol = .Machine$double.eps^0.5)$value
+            rel.tol = tolerance, ...)$value
           })
     }
 
@@ -571,7 +576,7 @@ setValidity("ExponentialBernsteinFunction",
 #' @export
 setMethod("valueOf",
   c("ExponentialBernsteinFunction", "numeric", "integer"),
-  function(object, x, difference_order = 0L) {
+  function(object, x, difference_order = 0L, ...) {
     qassert(x, "N+[0,)")
     qassert(difference_order, "X1[0,)")
 
@@ -650,7 +655,8 @@ setValidity("GammaBernsteinFunction",
 #' @export
 setMethod("valueOf",
   c("GammaBernsteinFunction", "numeric", "integer"),
-  function(object, x, difference_order = 0L) {
+  function(object, x, difference_order = 0L, ...,
+      tolerance = .Machine$double.eps^0.5) {
     qassert(x, "N+[0,)")
     qassert(difference_order, "X1[0,)")
 
@@ -667,7 +673,7 @@ setMethod("valueOf",
               },
               lower = 0, upper = Inf,
               ## use lower tolerance to pass all.equal
-              rel.tol = .Machine$double.eps^0.5)$value
+              rel.tol = tolerance, ...)$value
             })
     }
 
@@ -742,7 +748,8 @@ setValidity("ParetoBernsteinFunction",
 #' @export
 setMethod("valueOf",
   c("ParetoBernsteinFunction", "numeric", "integer"),
-  function(object, x, difference_order = 0L) {
+  function(object, x, difference_order = 0L, ...,
+      tolerance = .Machine$double.eps^0.5) {
     qassert(x, "N+[0,)")
     qassert(difference_order, "X1[0,)")
 
@@ -761,7 +768,7 @@ setMethod("valueOf",
             },
             lower=object@x0, upper=Inf,
             ## use lower tolerance to pass all.equal
-            rel.tol = .Machine$double.eps^0.5)$value
+            rel.tol = tolerance, ...)$value
           })
     }
 

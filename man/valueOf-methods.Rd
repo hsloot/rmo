@@ -25,27 +25,51 @@
 \alias{valueOf,ParetoBernsteinFunction,numeric,integer,ANY-method}
 \title{Returns values for Bernstein functions}
 \usage{
-valueOf(object, x, difference_order)
+valueOf(object, x, difference_order, ...)
 
-\S4method{valueOf}{LinearBernsteinFunction,numeric,integer}(object, x, difference_order = 0L)
+\S4method{valueOf}{LinearBernsteinFunction,numeric,integer}(object, x, difference_order = 0L, ...)
 
-\S4method{valueOf}{ConstantBernsteinFunction,numeric,integer}(object, x, difference_order = 0L)
+\S4method{valueOf}{ConstantBernsteinFunction,numeric,integer}(object, x, difference_order = 0L, ...)
 
-\S4method{valueOf}{ScaledBernsteinFunction,numeric,integer}(object, x, difference_order = 0L)
+\S4method{valueOf}{ScaledBernsteinFunction,numeric,integer}(object, x, difference_order = 0L, ...)
 
-\S4method{valueOf}{SumOfBernsteinFunctions,numeric,integer}(object, x, difference_order = 0L)
+\S4method{valueOf}{SumOfBernsteinFunctions,numeric,integer}(object, x, difference_order = 0L, ...)
 
-\S4method{valueOf}{PoissonBernsteinFunction,numeric,integer}(object, x, difference_order = 0L)
+\S4method{valueOf}{PoissonBernsteinFunction,numeric,integer}(object, x, difference_order = 0L, ...)
 
-\S4method{valueOf}{AlphaStableBernsteinFunction,numeric,integer}(object, x, difference_order = 0L)
+\S4method{valueOf}{AlphaStableBernsteinFunction,numeric,integer}(
+  object,
+  x,
+  difference_order = 0L,
+  ...,
+  tolerance = .Machine$double.eps^0.5
+)
 
-\S4method{valueOf}{InverseGaussianBernsteinFunction,numeric,integer}(object, x, difference_order = 0L)
+\S4method{valueOf}{InverseGaussianBernsteinFunction,numeric,integer}(
+  object,
+  x,
+  difference_order = 0L,
+  ...,
+  tolerance = .Machine$double.eps^0.5
+)
 
-\S4method{valueOf}{ExponentialBernsteinFunction,numeric,integer}(object, x, difference_order = 0L)
+\S4method{valueOf}{ExponentialBernsteinFunction,numeric,integer}(object, x, difference_order = 0L, ...)
 
-\S4method{valueOf}{GammaBernsteinFunction,numeric,integer}(object, x, difference_order = 0L)
+\S4method{valueOf}{GammaBernsteinFunction,numeric,integer}(
+  object,
+  x,
+  difference_order = 0L,
+  ...,
+  tolerance = .Machine$double.eps^0.5
+)
 
-\S4method{valueOf}{ParetoBernsteinFunction,numeric,integer}(object, x, difference_order = 0L)
+\S4method{valueOf}{ParetoBernsteinFunction,numeric,integer}(
+  object,
+  x,
+  difference_order = 0L,
+  ...,
+  tolerance = .Machine$double.eps^0.5
+)
 }
 \arguments{
 \item{object}{The Bernstein function object.}
@@ -55,6 +79,10 @@ valueOf(object, x, difference_order)
 \item{difference_order}{The order of the alternating iterated forward
 differences taken on the Bernstein function (\eqn{k} in
 the representation).}
+
+\item{...}{Further parameter (passed to \code{\link[stats:integrate]{stats::integrate()}})}
+
+\item{tolerance}{(Relative) tolerance, passed down to \code{\link[stats:integrate]{stats::integrate()}}}
 }
 \description{
 This method allows you to calculate the values for a Bernstein function and
