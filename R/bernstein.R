@@ -413,16 +413,20 @@ setMethod("valueOf",
 
     if (0L == difference_order) {
       out <- x^object@alpha
-    } else if (1L == difference_order) {
-      out <- valueOf(object, x+1, 0L) - valueOf(object, x, 0L)
     } else {
-      out <- sapply(x, function(y) integrate(
-        f=function(u) {
-          exp(-y * u) * (1 - exp(-u))^difference_order *
-            object@alpha / gamma(1-object@alpha) * u ^ (-1-object@alpha) ## Lévy density
-        }, lower = 0, upper = Inf,
-        ## use lower tolerance to pass all.equal
-        rel.tol = .Machine$double.eps^0.5)$value)
+      out <- sapply(
+        x,
+        function(.x) {
+          integrate(
+            function(u) {
+              exp(-.x * u) * (1 - exp(-u))^difference_order *
+              ## Lévy density
+              object@alpha / gamma(1-object@alpha) * u ^ (-1-object@alpha)
+            },
+            lower = 0, upper = Inf,
+            ## use lower tolerance to pass all.equal
+            rel.tol = .Machine$double.eps^0.5)$value
+          })
     }
 
     out
@@ -493,16 +497,19 @@ setMethod("valueOf",
 
     if (0L == difference_order) {
       out <- sqrt(2*x + object@eta^2) - object@eta
-    } else if (1L == difference_order) {
-      out <- valueOf(object, x+1, 0L) - valueOf(object, x, 0L)
     } else {
-      out <- sapply(x, function(y) integrate(
-        f=function(u) {
-          exp(-y*u) * (1 - exp(-u))^difference_order *
-            1/sqrt(2*pi * u^3) * exp(-0.5*object@eta^2*u) ## Lévy density
-        }, lower=0, upper=Inf,
-        ## use lower tolerance to pass all.equal
-        rel.tol = .Machine$double.eps^0.5)$value)
+      out <- sapply(
+        x,
+        function(.x) {
+          integrate(
+            function(u) {
+              exp(-.x*u) * (1 - exp(-u))^difference_order *
+              1/sqrt(2*pi * u^3) * exp(-0.5*object@eta^2*u) ## Lévy density
+            },
+            lower=0, upper=Inf,
+            ## use lower tolerance to pass all.equal
+            rel.tol = .Machine$double.eps^0.5)$value
+          })
     }
 
     out
@@ -571,9 +578,11 @@ setMethod("valueOf",
     if (0L == difference_order) {
       out <- x / (x + object@lambda)
     } else {
-      out <- sapply(x, function(y) {
-        beta(difference_order+1, y+object@lambda) * object@lambda
-      })
+      out <- sapply(
+        x,
+        function(.x) {
+          beta(difference_order+1, .x+object@lambda) * object@lambda
+        })
     }
 
     out
@@ -645,16 +654,21 @@ setMethod("valueOf",
     qassert(x, "N+[0,)")
     qassert(difference_order, "X1[0,)")
 
-    if (0L < difference_order) {
-      out <- sapply(x, function(y) integrate(
-        f=function(u) {
-          exp(-y*u) * (1 - exp(-u))^difference_order *
-            exp(-object@a*u)/u ## Lévy density
-        }, lower = 0, upper = Inf,
-        ## use lower tolerance to pass all.equal
-        rel.tol = .Machine$double.eps^0.5)$value)
-    } else {
+    if (0L == difference_order) {
       out <- log(1 + x/object@a)
+    } else {
+      out <- sapply(
+        x,
+        function(.x) {
+          integrate(
+            function(u) {
+              exp(-.x*u) * (1 - exp(-u))^difference_order *
+                exp(-object@a*u)/u ## Lévy density
+              },
+              lower = 0, upper = Inf,
+              ## use lower tolerance to pass all.equal
+              rel.tol = .Machine$double.eps^0.5)$value
+            })
     }
 
     out
@@ -736,16 +750,19 @@ setMethod("valueOf",
       out <- 1 - exp(-object@x0*x) + (x*object@x0) ^ (object@alpha) *
         pgamma(object@x0*x, 1-object@alpha, lower.tail=FALSE) *
         gamma(1-object@alpha)
-    } else if (1L == difference_order) {
-      out <- valueOf(object, x+1, 0L) - valueOf(object, x, 0L)
     } else {
-      out <- sapply(x, function(y) integrate(
-        f=function(u) {
-          exp(-y * u) * (1-exp(-u))^difference_order *
-            object@alpha * (object@x0 / u) ^ (object@alpha) / u ## Lévy density
-        }, lower=object@x0, upper=Inf,
-        ## use lower tolerance to pass all.equal
-        rel.tol = .Machine$double.eps^0.5)$value)
+      out <- sapply(
+        x,
+        function(.x) {
+          integrate(
+            function(u) {
+              exp(-.x * u) * (1 - exp(-u))^difference_order *
+              object@alpha * (object@x0 / u) ^ (object@alpha) / u ## Lévy density
+            },
+            lower=object@x0, upper=Inf,
+            ## use lower tolerance to pass all.equal
+            rel.tol = .Machine$double.eps^0.5)$value
+          })
     }
 
     out
