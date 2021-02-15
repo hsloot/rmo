@@ -1,3 +1,6 @@
+#' @importFrom methods new setClass setValidity setGeneric setMethod
+NULL
+
 # #### Virtual classes of Bernstein functions ####
 
 #' Virtual Class \code{BernsteinFunction} for Bernstein Functions
@@ -38,7 +41,8 @@
 #'   [AlphaStableBernsteinFunction-class],
 #'   [ScaledBernsteinFunction-class],
 #'   [SumOfBernsteinFunctions-class]
-#' @importFrom methods new setClass
+#'
+#' @export
 setClass("BernsteinFunction", # nolint
   contains = "VIRTUAL")
 
@@ -60,6 +64,7 @@ setClass("BernsteinFunction", # nolint
 #' @param difference_order The order of the alternating iterated forward
 #'   differences taken on the Bernstein function (\eqn{k} in
 #'   the representation).
+#' @param ... Further parameter (passed to [stats::integrate()])
 #'
 #' @docType methods
 #' @rdname valueOf-methods
@@ -68,7 +73,7 @@ setClass("BernsteinFunction", # nolint
 #'
 #' @export
 setGeneric("valueOf",
-  def=function(object, x, difference_order) {
+  function(object, x, difference_order, ...) {
     standardGeneric("valueOf")
   })
 
@@ -93,42 +98,43 @@ setGeneric("valueOf",
 #'
 #' @seealso [BernsteinFunction-class]
 #'
-#' @importFrom methods new setClass
-#' @include assert.R
-#'
 #' @export LinearBernsteinFunction
 LinearBernsteinFunction <- setClass("LinearBernsteinFunction", # nolint
   contains = "BernsteinFunction",
-  slots = c(scale = "numeric"),
-  validity = function(object) {
-    if (!is_nonnegative_number(object@scale)) {
-      return("scale must be non-negative number")
-    }
+  slots = c(scale = "numeric"))
+
+#' @importFrom checkmate qassert
+setValidity("LinearBernsteinFunction",
+  function(object) {
+    qassert(object@scale, "N1[0,)")
 
     invisible(TRUE)
   })
 
 #' @rdname valueOf-methods
-#' @aliases valueOf,LinearBernsteinFunction,numeric,integer,ANY-method
+#' @aliases valueOf,LinearBernsteinFunction,ANY-method
 #'
 #' @seealso [LinearBernsteinFunction-class]
 #'
-#' @importFrom methods setMethod
-#' @include assert.R
+#' @importFrom checkmate qassert assert check_numeric check_complex
 #'
 #' @export
-setMethod("valueOf",
-  signature = c("LinearBernsteinFunction", "numeric", "integer"),
-  definition = function(object, x, difference_order = 0) {
-    assert_that(is_nonnegative_number(difference_order),
-      is_nonnegative_vector(x))
+setMethod("valueOf", "LinearBernsteinFunction",
+  function(object, x, difference_order = 0L, ...) {
+    assert(combine = "or",
+      check_numeric(x, lower = 0, min.len = 1, any.missing = FALSE),
+      check_complex(x, min.len = 1, any.missing = FALSE))
+    qassert(difference_order, "X1[0,)")
 
-    if (difference_order == 0)
-      return(object@scale * x)
-    else if (difference_order == 1)
-      return(rep(object@scale, length(x)))
-    else
-      return(rep(0, length(x)))
+    if (0L == difference_order) {
+      out <- object@scale * x
+    } else if (1L == difference_order) {
+      out <- rep(object@scale, length(x))
+    } else {
+      out <- rep(0, length(x))
+    }
+
+    out
   })
 
 
@@ -150,41 +156,41 @@ setMethod("valueOf",
 #'
 #' @seealso [BernsteinFunction-class]
 #'
-#' @importFrom methods new setClass
-#' @include assert.R
-#'
 #' @export ConstantBernsteinFunction
 ConstantBernsteinFunction <- setClass("ConstantBernsteinFunction", # nolint
   contains = "BernsteinFunction",
-  slots = c(constant = "numeric"),
-  validity = function(object) {
-    if (!is_nonnegative_number(object@constant)) {
-      return("constant must be non-negative number")
-    }
+  slots = c(constant = "numeric"))
+
+#' @importFrom checkmate qassert
+setValidity("ConstantBernsteinFunction",
+  function(object) {
+    qassert(object@constant, "N1[0,)")
 
     invisible(TRUE)
   })
 
 #' @rdname valueOf-methods
-#' @aliases valueOf,ConstantBernsteinFunction,numeric,integer,ANY-method
+#' @aliases valueOf,ConstantBernsteinFunction,ANY-method
 #'
 #' @seealso [ConstantBernsteinFunction-class]
 #'
-#' @importFrom methods setMethod
-#' @include assert.R
+#' @importFrom checkmate qassert assert check_numeric check_complex
 #'
 #' @export
-setMethod("valueOf", # nolint
-  signature = c("ConstantBernsteinFunction", "numeric", "integer"),
-  definition = function(object, x, difference_order = 0) {
-    assert_that(is_nonnegative_number(difference_order),
-      is_nonnegative_vector(x))
+setMethod("valueOf", "ConstantBernsteinFunction",
+  function(object, x, difference_order = 0L, ...) {
+    assert(combine = "or",
+      check_numeric(x, lower = 0, min.len = 1, any.missing = FALSE),
+      check_complex(x, min.len = 1, any.missing = FALSE))
+    qassert(difference_order, "X1[0,)")
 
-    if (difference_order == 0) {
-      return(ifelse(x == 0, 0, object@constant))
+    if (0L == difference_order) {
+      out <- ifelse(x == 0, 0, object@constant)
     } else {
-      return(ifelse(x == 0, object@constant, 0))
+      out <- ifelse(x == 0, object@constant, 0)
     }
+
+    out
   })
 
 
@@ -211,33 +217,27 @@ setMethod("valueOf", # nolint
 #'
 #' @seealso [BernsteinFunction-class]
 #'
-#' @importFrom methods new setClass
-#' @include assert.R
-#'
 #' @export ScaledBernsteinFunction
 ScaledBernsteinFunction <- setClass("ScaledBernsteinFunction", # nolint
   contains = "BernsteinFunction",
-  slots = c(scale = "numeric", original = "BernsteinFunction"),
-  validity = function(object) {
-    if (!is_nonnegative_number(object@scale)) {
-      return("scale must be non-negative number")
-    }
+  slots = c(scale = "numeric", original = "BernsteinFunction"))
+
+#' @importFrom checkmate qassert
+setValidity("ScaledBernsteinFunction",
+  function(object) {
+    qassert(object@scale, "N1[0,)")
 
     invisible(TRUE)
   })
 
 #' @rdname valueOf-methods
-#' @aliases valueOf,ScaledBernsteinFunction,numeric,integer,ANY-method
+#' @aliases valueOf,ScaledBernsteinFunction,ANY-method
 #'
 #' @seealso [ScaledBernsteinFunction-class]
 #'
-#' @importFrom methods setMethod
-#' @include assert.R
-#'
 #' @export
-setMethod("valueOf",
-  signature = c("ScaledBernsteinFunction", "numeric", "integer"),
-  definition = function(object, x, difference_order=0L) {
+setMethod("valueOf", "ScaledBernsteinFunction",
+  function(object, x, difference_order = 0L, ...) {
     object@scale * valueOf(object@original, x, difference_order)
   })
 
@@ -262,25 +262,19 @@ setMethod("valueOf",
 #'
 #' @seealso [BernsteinFunction-class]
 #'
-#' @importFrom methods new setClass
-#'
 #' @export SumOfBernsteinFunctions
 SumOfBernsteinFunctions <- setClass("SumOfBernsteinFunctions", # nolint
   contains = "BernsteinFunction",
   slots = c(first = "BernsteinFunction", second = "BernsteinFunction"))
 
 #' @rdname valueOf-methods
-#' @aliases valueOf,SumOfBernsteinFunctions,numeric,integer,ANY-method
+#' @aliases valueOf,SumOfBernsteinFunctions,ANY-method
 #'
 #' @seealso [SumOfBernsteinFunctions-class]
 #'
-#' @importFrom methods setMethod
-#' @include assert.R
-#'
 #' @export
-setMethod("valueOf",
-  signature = c("SumOfBernsteinFunctions", "numeric", "integer"),
-  definition = function(object, x, difference_order=0L) {
+setMethod("valueOf", "SumOfBernsteinFunctions",
+  function(object, x, difference_order = 0L, ...) {
     valueOf(object@first, x, difference_order) +
       valueOf(object@second, x, difference_order)
   })
@@ -313,43 +307,43 @@ setMethod("valueOf",
 #'
 #' @seealso [BernsteinFunction-class]
 #'
-#' @importFrom methods new setClass
-#' @include assert.R
-#'
 #' @export PoissonBernsteinFunction
 PoissonBernsteinFunction <- setClass("PoissonBernsteinFunction", # nolint
   contains = "BernsteinFunction",
-  slots = c(lambda = "numeric", eta = "numeric"),
-  validity = function(object) {
-    if (!is_nonnegative_number(object@lambda) ||
-          !is_nonnegative_number(object@eta)) {
-      return("lambda and eta must be positive numbers")
-    }
+  slots = c(lambda = "numeric", eta = "numeric"))
+
+#' @importFrom checkmate qassert
+setValidity("PoissonBernsteinFunction",
+  function(object) {
+    qassert(object@lambda, "N1[0,)")
+    qassert(object@eta, "N1[0,)")
 
     invisible(TRUE)
   })
 
 #' @rdname valueOf-methods
-#' @aliases valueOf,PoissonBernsteinFunction,numeric,integer,ANY-method
+#' @aliases valueOf,PoissonBernsteinFunction,ANY-method
 #'
 #' @seealso [PoissonBernsteinFunction-class]
 #'
-#' @importFrom methods setMethod
-#' @include assert.R
+#' @importFrom checkmate qassert assert check_numeric check_complex
 #'
 #' @export
-setMethod("valueOf",
-  signature = c("PoissonBernsteinFunction", "numeric", "integer"),
-  definition = function(object, x, difference_order=0L) {
-    assert_that(is_nonnegative_number(difference_order),
-      is_nonnegative_vector(x))
+setMethod("valueOf", "PoissonBernsteinFunction",
+  function(object, x, difference_order = 0L, ...) {
+    assert(combine = "or",
+      check_numeric(x, lower = 0, min.len = 1, any.missing = FALSE),
+      check_complex(x, min.len = 1, any.missing = FALSE))
+    qassert(difference_order, "X1[0,)")
 
-    if (difference_order == 0) {
-      return(object@lambda * (1 - exp(-x * object@eta)))
+    if (0L == difference_order) {
+      out <- object@lambda * (1 - exp(-x * object@eta))
     } else {
-      return(object@lambda * exp(-x * object@eta) *
-        (1 - exp(-object@eta))^difference_order)
+      out <- object@lambda * exp(-x * object@eta) *
+              (1 - exp(-object@eta))^difference_order
     }
+
+    out
   })
 
 
@@ -391,51 +385,57 @@ setMethod("valueOf",
 #'
 #' @seealso [BernsteinFunction-class]
 #'
-#' @importFrom methods new setClass
-#' @importFrom assertthat is.number
-#' @include assert.R
-#'
 #' @export AlphaStableBernsteinFunction
 AlphaStableBernsteinFunction <- setClass("AlphaStableBernsteinFunction", # nolint
   contains = "BernsteinFunction",
-  slots = c(alpha = "numeric"),
-  validity = function(object) {
-    if (!is_positive_number(object@alpha) || object@alpha >= 1) {
-      return("alpha must be number between 0 and 1")
-    }
+  slots = c(alpha = "numeric"))
+
+#' @importFrom checkmate qassert
+setValidity("AlphaStableBernsteinFunction",
+  function(object) {
+    qassert(object@alpha, "N1(0,1)")
 
     invisible(TRUE)
   })
 
 #' @rdname valueOf-methods
-#' @aliases valueOf,AlphaStableBernsteinFunction,numeric,integer,ANY-method
+#' @aliases valueOf,AlphaStableBernsteinFunction,ANY-method
+#'
+#' @param tolerance (Relative) tolerance, passed down to [stats::integrate()]
 #'
 #' @seealso [AlphaStableBernsteinFunction-class]
 #'
-#' @importFrom methods setMethod
+#' @importFrom checkmate qassert assert check_numeric check_complex
 #' @importFrom stats integrate
-#' @include assert.R
 #'
 #' @export
-setMethod("valueOf",
-  signature = c("AlphaStableBernsteinFunction", "numeric", "integer"),
-  definition = function(object, x, difference_order=0L) {
-    assert_that(is_nonnegative_number(difference_order),
-      is_nonnegative_vector(x))
+setMethod("valueOf", "AlphaStableBernsteinFunction",
+  function(object, x, difference_order = 0L, ...,
+      tolerance = .Machine$double.eps^0.5) {
+    assert(combine = "or",
+      check_numeric(x, lower = 0, min.len = 1, any.missing = FALSE),
+      check_complex(x, min.len = 1, any.missing = FALSE))
+    qassert(difference_order, "X1[0,)")
 
     if (0L == difference_order) {
-      x^object@alpha
-    } else if (1L == difference_order) {
-      valueOf(object, x+1, 0L) - valueOf(object, x, 0L)
+      out <- x^object@alpha
     } else {
-      sapply(x, function(y) integrate(
-        f=function(u) {
-          exp(-y * u) * (1 - exp(-u))^difference_order *
-            object@alpha / gamma(1-object@alpha) * u ^ (-1-object@alpha) ## Lévy density
-        }, lower = 0, upper = Inf,
-        ## use lower tolerance to pass all.equal
-        rel.tol = .Machine$double.eps^0.5)$value)
+      out <- sapply(
+        x,
+        function(.x) {
+          integrate(
+            function(u) {
+              exp(-.x * u) * (1 - exp(-u))^difference_order *
+              ## Lévy density
+              object@alpha / gamma(1-object@alpha) * u ^ (-1-object@alpha)
+            },
+            lower = 0, upper = Inf,
+            ## use lower tolerance to pass all.equal
+            rel.tol = tolerance, ...)$value
+          })
     }
+
+    out
   })
 
 
@@ -473,51 +473,54 @@ setMethod("valueOf",
 #'
 #' @seealso [BernsteinFunction-class]
 #'
-#' @importFrom methods new setClass
-#' @importFrom assertthat is.number
-#' @include assert.R
-#'
 #' @export InverseGaussianBernsteinFunction
 InverseGaussianBernsteinFunction <- setClass("InverseGaussianBernsteinFunction", # nolint
   contains = "BernsteinFunction",
-  slots = c(eta = "numeric"),
-  validity = function(object) {
-    if (!is_positive_number(object@eta)) {
-      return("eta must be positive number")
-    }
+  slots = c(eta = "numeric"))
+
+#' @importFrom checkmate qassert
+setValidity("InverseGaussianBernsteinFunction",
+  function(object) {
+    qassert(object@eta, "N1(0,)")
 
     invisible(TRUE)
   })
 
 #' @rdname valueOf-methods
-#' @aliases valueOf,InverseGaussianBernsteinFunction,numeric,integer,ANY-method
+#' @aliases valueOf,InverseGaussianBernsteinFunction,ANY-method
 #'
 #' @seealso [InverseGaussianBernsteinFunction-class]
 #'
-#' @importFrom methods setMethod
+#' @importFrom checkmate qassert assert check_numeric check_complex
 #' @importFrom stats integrate
-#' @include assert.R
 #'
 #' @export
-setMethod("valueOf",
-  signature = c("InverseGaussianBernsteinFunction", "numeric", "integer"),
-  definition = function(object, x, difference_order=0L) {
-    assert_that(is_nonnegative_number(difference_order),
-      is_nonnegative_vector(x))
+setMethod("valueOf", "InverseGaussianBernsteinFunction",
+  function(object, x, difference_order = 0L, ...,
+      tolerance = .Machine$double.eps^0.5) {
+    assert(combine = "or",
+      check_numeric(x, lower = 0, min.len = 1, any.missing = FALSE),
+      check_complex(x, min.len = 1, any.missing = FALSE))
+    qassert(difference_order, "X1[0,)")
 
     if (0L == difference_order) {
-      sqrt(2*x + object@eta^2) - object@eta
-    } else if (1L == difference_order) {
-      valueOf(object, x+1, 0L) - valueOf(object, x, 0L)
+      out <- sqrt(2*x + object@eta^2) - object@eta
     } else {
-      sapply(x, function(y) integrate(
-        f=function(u) {
-          exp(-y*u) * (1 - exp(-u))^difference_order *
-            1/sqrt(2*pi * u^3) * exp(-0.5*object@eta^2*u) ## Lévy density
-        }, lower=0, upper=Inf,
-        ## use lower tolerance to pass all.equal
-        rel.tol = .Machine$double.eps^0.5)$value)
+      out <- sapply(
+        x,
+        function(.x) {
+          integrate(
+            function(u) {
+              exp(-.x*u) * (1 - exp(-u))^difference_order *
+              1/sqrt(2*pi * u^3) * exp(-0.5*object@eta^2*u) ## Lévy density
+            },
+            lower=0, upper=Inf,
+            ## use lower tolerance to pass all.equal
+            rel.tol = tolerance, ...)$value
+          })
     }
+
+    out
   })
 
 
@@ -552,45 +555,44 @@ setMethod("valueOf",
 #'
 #' @seealso [BernsteinFunction-class]
 #'
-#' @importFrom methods new setClass
-#' @importFrom assertthat is.number
-#' @include assert.R
-#'
 #' @export ExponentialBernsteinFunction
 ExponentialBernsteinFunction <- setClass("ExponentialBernsteinFunction", # nolint
   contains = "BernsteinFunction",
-  slots = c("lambda" = "numeric"),
-  validity = function(object) {
-    if (!is_positive_number(object@lambda)) {
-      return("lambda must be positive number")
-    }
+  slots = c("lambda" = "numeric"))
+
+#' @importFrom checkmate qassert
+setValidity("ExponentialBernsteinFunction",
+  function(object) {
+    qassert(object@lambda, "N1(0,)")
 
     invisible(TRUE)
   })
 
 #' @rdname valueOf-methods
-#' @aliases valueOf,ExponentialBernsteinFunction,numeric,integer,ANY-method
+#' @aliases valueOf,ExponentialBernsteinFunction,ANY-method
 #'
 #' @seealso [ExponentialBernsteinFunction-class]
 #'
-#' @importFrom methods setMethod
+#' @importFrom checkmate qassert
 #' @importFrom stats integrate
-#' @include assert.R
 #'
 #' @export
-setMethod("valueOf",
-  signature = c("ExponentialBernsteinFunction", "numeric", "integer"),
-  definition = function(object, x, difference_order=0L) {
-    assert_that(is_nonnegative_number(difference_order),
-      is_nonnegative_vector(x))
+setMethod("valueOf", "ExponentialBernsteinFunction",
+  function(object, x, difference_order = 0L, ...) {
+    qassert(x, "N+[0,)")
+    qassert(difference_order, "X1[0,)")
 
     if (0L == difference_order) {
-      x / (x + object@lambda)
+      out <- x / (x + object@lambda)
     } else {
-      sapply(x, function(y) {
-        beta(difference_order+1, y+object@lambda) * object@lambda
-      })
+      out <- sapply(
+        x,
+        function(.x) {
+          beta(difference_order+1, .x+object@lambda) * object@lambda
+        })
     }
+
+    out
   })
 
 
@@ -631,46 +633,52 @@ setMethod("valueOf",
 #'
 #' @seealso [BernsteinFunction-class]
 #'
-#' @importFrom methods new setClass
-#' @include assert.R
-#'
 #' @export GammaBernsteinFunction
 GammaBernsteinFunction <- setClass("GammaBernsteinFunction", # nolint
-  contains="BernsteinFunction",
-  slots=c(a = "numeric"),
-  validity = function(object) {
-    if (!is_positive_number(object@a)) {
-      return("a must be positive number")
-    }
+  contains = "BernsteinFunction",
+  slots = c(a = "numeric"))
+
+#' @importFrom checkmate qassert
+setValidity("GammaBernsteinFunction",
+  function(object) {
+    qassert(object@a, "N1(0,)")
 
     invisible(TRUE)
   })
 
 #' @rdname valueOf-methods
-#' @aliases valueOf,GammaBernsteinFunction,numeric,integer,ANY-method
+#' @aliases valueOf,GammaBernsteinFunction,ANY-method
 #'
 #' @seealso [GammaBernsteinFunction-class]
 #'
-#' @importFrom methods setMethod
+#' @importFrom checkmate qassert
 #' @importFrom stats integrate
-#' @include assert.R
 #'
 #' @export
-setMethod("valueOf",
-  signature = c("GammaBernsteinFunction", "numeric", "integer"),
-  definition = function(object, x, difference_order=0L) {
-    assert_that(is_nonnegative_number(difference_order),
-      is_nonnegative_vector(x))
+setMethod("valueOf", "GammaBernsteinFunction",
+  function(object, x, difference_order = 0L, ...,
+      tolerance = .Machine$double.eps^0.5) {
+    qassert(x, "N+[0,)")
+    qassert(difference_order, "X1[0,)")
 
-    if (0L < difference_order) {
-      sapply(x, function(y) integrate(
-        f=function(u) {
-          exp(-y*u) * (1 - exp(-u))^difference_order *
-            exp(-object@a*u)/u ## Lévy density
-        }, lower = 0, upper = Inf)$value)
+    if (0L == difference_order) {
+      out <- log(1 + x/object@a)
     } else {
-      log(1 + x/object@a)
+      out <- sapply(
+        x,
+        function(.x) {
+          integrate(
+            function(u) {
+              exp(-.x*u) * (1 - exp(-u))^difference_order *
+                exp(-object@a*u)/u ## Lévy density
+              },
+              lower = 0, upper = Inf,
+              ## use lower tolerance to pass all.equal
+              rel.tol = tolerance, ...)$value
+            })
     }
+
+    out
   })
 
 
@@ -716,51 +724,53 @@ setMethod("valueOf",
 #'
 #' @seealso [BernsteinFunction-class]
 #'
-#' @importFrom methods new setClass
-#' @include assert.R
-#'
 #' @export ParetoBernsteinFunction
 ParetoBernsteinFunction <- setClass("ParetoBernsteinFunction", # nolint
   contains = "BernsteinFunction",
-  slots = c(alpha = "numeric", x0 = "numeric"),
-  validity = function(object) {
-    if (!is_positive_number(object@alpha) || object@alpha >= 1 ||
-        !is_positive_number(object@x0)) {
-          return("alpha must be between 0 and 1 and x0 positive")
-    }
+  slots = c(alpha = "numeric", x0 = "numeric"))
+
+#' @importFrom checkmate qassert
+setValidity("ParetoBernsteinFunction",
+  function(object) {
+    qassert(object@alpha, "N1(0,1)")
+    qassert(object@x0, "N1(0,)")
 
     invisible(TRUE)
   })
 
 #' @rdname valueOf-methods
-#' @aliases valueOf,ParetoBernsteinFunction,numeric,integer,ANY-method
+#' @aliases valueOf,ParetoBernsteinFunction,ANY-method
 #'
 #' @seealso [ParetoBernsteinFunction-class]
 #'
-#' @importFrom methods setMethod
+#' @importFrom checkmate qassert
 #' @importFrom stats integrate pgamma
-#' @include assert.R
 #'
 #' @export
-setMethod("valueOf",
-  signature = c("ParetoBernsteinFunction", "numeric", "integer"),
-  definition = function(object, x, difference_order=0L) {
-    assert_that(is_nonnegative_number(difference_order),
-      is_nonnegative_vector(x))
+setMethod("valueOf", "ParetoBernsteinFunction",
+  function(object, x, difference_order = 0L, ...,
+      tolerance = .Machine$double.eps^0.5) {
+    qassert(x, "N+[0,)")
+    qassert(difference_order, "X1[0,)")
 
     if (0L == difference_order) {
-      1 - exp(-object@x0*x) + (x*object@x0) ^ (object@alpha) *
+      out <- 1 - exp(-object@x0*x) + (x*object@x0) ^ (object@alpha) *
         pgamma(object@x0*x, 1-object@alpha, lower.tail=FALSE) *
         gamma(1-object@alpha)
-    } else if (1L == difference_order) {
-      valueOf(object, x+1, 0L) - valueOf(object, x, 0L)
     } else {
-      sapply(x, function(y) integrate(
-        f=function(u) {
-          exp(-y * u) * (1-exp(-u))^difference_order *
-            object@alpha * (object@x0 / u) ^ (object@alpha) / u ## Lévy density
-        }, lower=object@x0, upper=Inf,
-        ## use lower tolerance to pass all.equal
-        rel.tol = .Machine$double.eps^0.5)$value)
+      out <- sapply(
+        x,
+        function(.x) {
+          integrate(
+            function(u) {
+              exp(-.x * u) * (1 - exp(-u))^difference_order *
+              object@alpha * (object@x0 / u) ^ (object@alpha) / u ## Lévy density
+            },
+            lower=object@x0, upper=Inf,
+            ## use lower tolerance to pass all.equal
+            rel.tol = tolerance, ...)$value
+          })
     }
+
+    out
   })
