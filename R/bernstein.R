@@ -56,7 +56,7 @@ setClass("BernsteinFunction", # nolint
 #' This method allows you to calculate the values for a Bernstein function and
 #' its higher-order, alternating iterated forward differences, i.e.
 #' \deqn{
-#'   {(-1)}^{k} \Delta^k \psi(x), x > 0.
+#'   {(-1)}^{k-1} \Delta^k \psi(x), x > 0.
 #' }
 #'
 #' @param object The Bernstein function object.
@@ -122,8 +122,8 @@ setValidity("LinearBernsteinFunction",
 setMethod("valueOf", "LinearBernsteinFunction",
   function(object, x, difference_order = 0L, ...) {
     assert(combine = "or",
-      check_numeric(x, lower = 0, min.len = 1, any.missing = FALSE),
-      check_complex(x, min.len = 1, any.missing = FALSE))
+      check_numeric(x, lower = 0, min.len = 1L, any.missing = FALSE),
+      check_complex(x, min.len = 1L, any.missing = FALSE))
     qassert(difference_order, "X1[0,)")
 
     if (0L == difference_order) {
@@ -180,8 +180,8 @@ setValidity("ConstantBernsteinFunction",
 setMethod("valueOf", "ConstantBernsteinFunction",
   function(object, x, difference_order = 0L, ...) {
     assert(combine = "or",
-      check_numeric(x, lower = 0, min.len = 1, any.missing = FALSE),
-      check_complex(x, min.len = 1, any.missing = FALSE))
+      check_numeric(x, lower = 0, min.len = 1L, any.missing = FALSE),
+      check_complex(x, min.len = 1L, any.missing = FALSE))
     qassert(difference_order, "X1[0,)")
 
     if (0L == difference_order) {
@@ -332,8 +332,8 @@ setValidity("PoissonBernsteinFunction",
 setMethod("valueOf", "PoissonBernsteinFunction",
   function(object, x, difference_order = 0L, ...) {
     assert(combine = "or",
-      check_numeric(x, lower = 0, min.len = 1, any.missing = FALSE),
-      check_complex(x, min.len = 1, any.missing = FALSE))
+      check_numeric(x, lower = 0, min.len = 1L, any.missing = FALSE),
+      check_complex(x, min.len = 1L, any.missing = FALSE))
     qassert(difference_order, "X1[0,)")
 
     if (0L == difference_order) {
@@ -413,8 +413,8 @@ setMethod("valueOf", "AlphaStableBernsteinFunction",
   function(object, x, difference_order = 0L, ...,
       tolerance = .Machine$double.eps^0.5) {
     assert(combine = "or",
-      check_numeric(x, lower = 0, min.len = 1, any.missing = FALSE),
-      check_complex(x, min.len = 1, any.missing = FALSE))
+      check_numeric(x, lower = 0, min.len = 1L, any.missing = FALSE),
+      check_complex(x, min.len = 1L, any.missing = FALSE))
     qassert(difference_order, "X1[0,)")
 
     if (0L == difference_order) {
@@ -499,8 +499,8 @@ setMethod("valueOf", "InverseGaussianBernsteinFunction",
   function(object, x, difference_order = 0L, ...,
       tolerance = .Machine$double.eps^0.5) {
     assert(combine = "or",
-      check_numeric(x, lower = 0, min.len = 1, any.missing = FALSE),
-      check_complex(x, min.len = 1, any.missing = FALSE))
+      check_numeric(x, lower = 0, min.len = 1L, any.missing = FALSE),
+      check_complex(x, min.len = 1L, any.missing = FALSE))
     qassert(difference_order, "X1[0,)")
 
     if (0L == difference_order) {
