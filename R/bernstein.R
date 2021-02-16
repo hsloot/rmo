@@ -1,4 +1,5 @@
 #' @importFrom methods new setClass setValidity setGeneric setMethod validObject
+#'    callNextMethod
 NULL
 
 # #### Virtual classes of Bernstein functions ####
@@ -46,6 +47,41 @@ NULL
 setClass("BernsteinFunction", # nolint
   contains = "VIRTUAL")
 
+# #### Virtual classes of Bernstein functions with Lévy densities ####
+
+#' Virtual Class \code{LevyBernsteinFunction} for Levy Bernstein Functions
+#'
+#' A virtual superclass for all Bernstein functions which can representated
+#' by a Lévy density (no drift or killing rate). That means that there exists
+#' a Lévy measure \eqn{\nu} such that
+#' \deqn{
+#'   \psi(x) = \int_0^\infty (1 - e^{-ux}) \nu(du) , x > 0 .
+#' }
+#'
+#' @seealso [BernsteinFunction-class]
+#'
+#' @export
+setClass("LevyBernsteinFunction",
+  contains = c("BernsteinFunction", "VIRTUAL"))
+
+# #### Virtual classes of Bernstein functions with Stieltjes densities ####
+
+#' Virtual Class \code{CompleteBernsteinFunction} for Complete Bernstein Functions
+#'
+#' A virtual superclass for all Bernstein functions which can representated
+#' by a Stieltjes density (no drift or killing rate). That means that there exists
+#' a Stieltjes measure \eqn{\sigma} such that
+#' \deqn{
+#'   \psi(x) = \int_0^\infty \frac{x}{x + u} \sigma(du) , x > 0 .
+#' }
+#'
+#' @seealso [LevyBernsteinFunction-class]
+#'   [BernsteinFunction-class]
+#'
+#' @export
+setClass("CompleteBernsteinFunction",
+  contains = c("LevyBernsteinFunction", "VIRTUAL"))
+
 
 
 # #### Generic function for `valueOf` ####
@@ -82,9 +118,28 @@ setGeneric("levyDensity",
     standardGeneric("levyDensity")
   })
 
-setMethod("valueOf", "BernsteinFunction",
+setGeneric("stieltjesDensity",
+  function(object) {
+    standardGeneric("stieltjesDensity")
+  })
+
+#' @rdname valueOf-methods
+#' @aliases valueOf,LevyBernsteinFunction,ANY-method
+#'
+#' @param method Method to calculate the result
+#'
+#' @seealso [LevyBernsteinFunction-class]
+#'
+#' @importFrom checkmate qassert
+#'
+#' @export
+setMethod("valueOf", "LevyBernsteinFunction",
   function(object, x, difference_order, ...,
+      method = "levy",
       tolerance = .Machine$double.eps^0.5) {
+    method <- match.arg(method)
+    qassert(x, "N+[0,)")
+    qassert(difference_order, "X1[0,)")
     levy_density <- levyDensity(object)
     if (0L == difference_order) {
       fct <- function(u, .x) {
@@ -111,6 +166,53 @@ setMethod("valueOf", "BernsteinFunction",
     }
 
     out
+  })
+
+#' @rdname valueOf-methods
+#' @aliases valueOf,CompleteBernsteinFunction,ANY-method
+#'
+#' @param method Method to calculate the result
+#'
+#' @seealso [CompleteBernsteinFunction-class]
+#'
+#' @importFrom checkmate qassert
+#'
+#' @export
+setMethod("valueOf", "CompleteBernsteinFunction",
+  function(object, x, difference_order, ...,
+      method = c("stieltjes", "levy"),
+      tolerance = .Machine$double.eps^0.5) {
+    method <- match.arg(method)
+    if (!"stieltjes" == method) {
+      return(callNextMethod())
+    }
+    qassert(x, "N+[0,)")
+    qassert(difference_order, "X1[0,)")
+    stieltjes_density <- stieltjesDensity(object)
+    if (0L == difference_order) {
+      fct <- function(u, .x) {
+        .x * beta(1, .x + u)
+      }
+    } else {
+      fct <- function(u, .x) {
+        u * beta(difference_order + 1L, .x + u)
+      }
+    }
+
+    if ("continuous" == attr(stieltjes_density, "type")) {
+      integrand_fn <- function(u, .x) {
+        fct(u, .x) * stieltjes_density(u)
+      }
+      out <- sapply(x,
+        function(.x) {
+          integrate(integrand_fn, .x = .x,
+            lower = attr(stieltjes_density, "lower"),
+            upper = attr(stieltjes_density, "upper"),
+            rel.tol = tolerance)$value
+        })
+    } else {
+      out <- as.vector(stieltjes_density$y %*% outer(stieltjes_density$x, x, fct))
+    }
   })
 
 
@@ -384,7 +486,7 @@ setMethod("valueOf", "SumOfBernsteinFunctions",
 #'
 #' @export PoissonBernsteinFunction
 PoissonBernsteinFunction <- setClass("PoissonBernsteinFunction", # nolint
-  contains = "BernsteinFunction",
+  contains = "LevyBernsteinFunction",
   slots = c(lambda = "numeric", eta = "numeric"))
 
 #' @importFrom checkmate qassert
@@ -409,7 +511,7 @@ setMethod("levyDensity", "PoissonBernsteinFunction",
   function(object) {
     structure(
       data.frame(x = object@eta, y = object@lambda),
-      type = "counting"
+      type = "discrete"
     )
   })
 
@@ -422,7 +524,12 @@ setMethod("levyDensity", "PoissonBernsteinFunction",
 #'
 #' @export
 setMethod("valueOf", "PoissonBernsteinFunction",
-  function(object, x, difference_order = 0L, ...) {
+  function(object, x, difference_order = 0L, ...,
+      method = c("default", "levy")) {
+    method <- match.arg(method)
+    if (!"default" == method) {
+      return(callNextMethod())
+    }
     assert(combine = "or",
       check_numeric(x, lower = 0, min.len = 1L, any.missing = FALSE),
       check_complex(x, min.len = 1L, any.missing = FALSE))
@@ -431,7 +538,7 @@ setMethod("valueOf", "PoissonBernsteinFunction",
     if (0L == difference_order) {
       out <- object@lambda * (1 - exp(-x * object@eta))
     } else {
-      out <- callNextMethod(object, x, difference_order, ...)
+      out <- callNextMethod()
     }
 
     out
@@ -479,7 +586,7 @@ setMethod("valueOf", "PoissonBernsteinFunction",
 #'
 #' @export AlphaStableBernsteinFunction
 AlphaStableBernsteinFunction <- setClass("AlphaStableBernsteinFunction", # nolint
-  contains = "BernsteinFunction",
+  contains = "CompleteBernsteinFunction",
   slots = c(alpha = "numeric"))
 
 #' @importFrom checkmate qassert
@@ -508,6 +615,16 @@ setMethod("levyDensity", "AlphaStableBernsteinFunction",
     )
   })
 
+setMethod("stieltjesDensity", "AlphaStableBernsteinFunction",
+  function(object) {
+    structure(
+      function(x) {
+        sin(object@alpha * pi) / pi * x^(object@alpha - 1)
+      },
+      lower = 0, upper = Inf, type = "continuous"
+    )
+  })
+
 #' @rdname valueOf-methods
 #' @aliases valueOf,AlphaStableBernsteinFunction,ANY-method
 #'
@@ -521,7 +638,12 @@ setMethod("levyDensity", "AlphaStableBernsteinFunction",
 #' @export
 setMethod("valueOf", "AlphaStableBernsteinFunction",
   function(object, x, difference_order = 0L, ...,
+      method = c("default", "levy", "stieltjes"),
       tolerance = .Machine$double.eps^0.5) {
+    method <- match.arg(method)
+    if (!"default" == method) {
+      return(callNextMethod())
+    }
     assert(combine = "or",
       check_numeric(x, lower = 0, min.len = 1L, any.missing = FALSE),
       check_complex(x, min.len = 1L, any.missing = FALSE))
@@ -530,7 +652,8 @@ setMethod("valueOf", "AlphaStableBernsteinFunction",
     if (0L == difference_order) {
       out <- x^object@alpha
     } else {
-      out <- callNextMethod(object, x, difference_order, ..., tolerance = tolerance)
+      out <- callNextMethod(object, x, difference_order, ...,
+        method = "levy", tolerance = tolerance)
     }
 
     out
@@ -574,7 +697,7 @@ setMethod("valueOf", "AlphaStableBernsteinFunction",
 #'
 #' @export InverseGaussianBernsteinFunction
 InverseGaussianBernsteinFunction <- setClass("InverseGaussianBernsteinFunction", # nolint
-  contains = "BernsteinFunction",
+  contains = "LevyBernsteinFunction",
   slots = c(eta = "numeric"))
 
 #' @importFrom checkmate qassert
@@ -614,7 +737,12 @@ setMethod("levyDensity", "InverseGaussianBernsteinFunction",
 #' @export
 setMethod("valueOf", "InverseGaussianBernsteinFunction",
   function(object, x, difference_order = 0L, ...,
+      method = c("default", "levy"),
       tolerance = .Machine$double.eps^0.5) {
+    method <- match.arg(method)
+    if (!"default" == method) {
+      return(callNextMethod())
+    }
     assert(combine = "or",
       check_numeric(x, lower = 0, min.len = 1L, any.missing = FALSE),
       check_complex(x, min.len = 1L, any.missing = FALSE))
@@ -623,7 +751,8 @@ setMethod("valueOf", "InverseGaussianBernsteinFunction",
     if (0L == difference_order) {
       out <- sqrt(2*x + object@eta^2) - object@eta
     } else {
-      out <- callNextMethod(object, x, difference_order, ..., tolerance = tolerance)
+      out <- callNextMethod(object, x, difference_order, ...,
+        method = "levy", tolerance = tolerance)
     }
 
     out
@@ -664,7 +793,7 @@ setMethod("valueOf", "InverseGaussianBernsteinFunction",
 #'
 #' @export ExponentialBernsteinFunction
 ExponentialBernsteinFunction <- setClass("ExponentialBernsteinFunction", # nolint
-  contains = "BernsteinFunction",
+  contains = "CompleteBernsteinFunction",
   slots = c("lambda" = "numeric"))
 
 #' @importFrom checkmate qassert
@@ -683,6 +812,24 @@ setMethod("initialize", "ExponentialBernsteinFunction",
     invisible(.Object)
   })
 
+setMethod("levyDensity", "ExponentialBernsteinFunction",
+  function(object) {
+    structure(
+      function(x) {
+        object@lambda * exp(-object@lambda * x)
+      },
+      lower = 0, upper = Inf, type = "continuous"
+    )
+  })
+
+setMethod("stieltjesDensity", "ExponentialBernsteinFunction",
+  function(object) {
+    structure(
+      data.frame(x = object@lambda, y = 1),
+      type = "discrete"
+    )
+  })
+
 #' @rdname valueOf-methods
 #' @aliases valueOf,ExponentialBernsteinFunction,ANY-method
 #'
@@ -693,18 +840,21 @@ setMethod("initialize", "ExponentialBernsteinFunction",
 #'
 #' @export
 setMethod("valueOf", "ExponentialBernsteinFunction",
-  function(object, x, difference_order = 0L, ...) {
+  function(object, x, difference_order = 0L, ...,
+      method = c("default", "stieltjes", "levy"),
+      tolerance = .Machine$double.eps^0.5) {
+    method <- match.arg(method)
+    if (!"default" == method) {
+      return(callNextMethod())
+    }
     qassert(x, "N+[0,)")
     qassert(difference_order, "X1[0,)")
 
     if (0L == difference_order) {
       out <- x / (x + object@lambda)
     } else {
-      out <- sapply(
-        x,
-        function(.x) {
-          beta(difference_order+1, .x+object@lambda) * object@lambda
-        })
+      out <- callNextMethod(object, x, difference_order, ...,
+        method = "stieltjes", tolerance = tolerance)
     }
 
     out
@@ -751,7 +901,7 @@ setMethod("valueOf", "ExponentialBernsteinFunction",
 #'
 #' @export GammaBernsteinFunction
 GammaBernsteinFunction <- setClass("GammaBernsteinFunction", # nolint
-  contains = "BernsteinFunction",
+  contains = "CompleteBernsteinFunction",
   slots = c(a = "numeric"))
 
 #' @importFrom checkmate qassert
@@ -780,6 +930,16 @@ setMethod("levyDensity", "GammaBernsteinFunction",
     )
   })
 
+setMethod("stieltjesDensity", "GammaBernsteinFunction",
+  function(object) {
+    structure(
+      function(x) {
+        1 / x
+      },
+      lower = object@a, upper = Inf, type = "continuous"
+    )
+  })
+
 #' @rdname valueOf-methods
 #' @aliases valueOf,GammaBernsteinFunction,ANY-method
 #'
@@ -791,14 +951,20 @@ setMethod("levyDensity", "GammaBernsteinFunction",
 #' @export
 setMethod("valueOf", "GammaBernsteinFunction",
   function(object, x, difference_order = 0L, ...,
+      method = c("default", "stieltjes", "levy"),
       tolerance = .Machine$double.eps^0.5) {
+    method <- match.arg(method)
+    if (!"default" == method) {
+      return(callNextMethod())
+    }
     qassert(x, "N+[0,)")
     qassert(difference_order, "X1[0,)")
 
     if (0L == difference_order) {
       out <- log(1 + x/object@a)
     } else {
-      out <- callNextMethod(object, x, difference_order, ..., tolerance = tolerance)
+      out <- callNextMethod(object, x, difference_order, ...,
+        method = "levy", tolerance = tolerance)
     }
 
     out
@@ -850,7 +1016,7 @@ setMethod("valueOf", "GammaBernsteinFunction",
 #'
 #' @export ParetoBernsteinFunction
 ParetoBernsteinFunction <- setClass("ParetoBernsteinFunction", # nolint
-  contains = "BernsteinFunction",
+  contains = "LevyBernsteinFunction",
   slots = c(alpha = "numeric", x0 = "numeric"))
 
 #' @importFrom checkmate qassert
@@ -892,7 +1058,12 @@ setMethod("levyDensity", "ParetoBernsteinFunction",
 #' @export
 setMethod("valueOf", "ParetoBernsteinFunction",
   function(object, x, difference_order = 0L, ...,
+      method = c("default", "stieltjes", "levy"),
       tolerance = .Machine$double.eps^0.5) {
+    method <- match.arg(method)
+    if (!"default" == method) {
+      return(callNextMethod())
+    }
     qassert(x, "N+[0,)")
     qassert(difference_order, "X1[0,)")
 
@@ -901,7 +1072,8 @@ setMethod("valueOf", "ParetoBernsteinFunction",
         pgamma(object@x0*x, 1-object@alpha, lower.tail=FALSE) *
         gamma(1-object@alpha)
     } else {
-      out <- callNextMethod(object, x, difference_order, ..., tolerance = tolerance)
+      out <- callNextMethod(object, x, difference_order, ...,
+        method = "levy", tolerance = tolerance)
     }
 
     out

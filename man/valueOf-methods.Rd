@@ -3,6 +3,10 @@
 \docType{methods}
 \name{valueOf}
 \alias{valueOf}
+\alias{valueOf,LevyBernsteinFunction-method}
+\alias{valueOf,LevyBernsteinFunction,ANY-method}
+\alias{valueOf,CompleteBernsteinFunction-method}
+\alias{valueOf,CompleteBernsteinFunction,ANY-method}
 \alias{valueOf,LinearBernsteinFunction-method}
 \alias{valueOf,LinearBernsteinFunction,ANY-method}
 \alias{valueOf,ConstantBernsteinFunction-method}
@@ -27,6 +31,24 @@
 \usage{
 valueOf(object, x, difference_order, ...)
 
+\S4method{valueOf}{LevyBernsteinFunction}(
+  object,
+  x,
+  difference_order,
+  ...,
+  method = "levy",
+  tolerance = .Machine$double.eps^0.5
+)
+
+\S4method{valueOf}{CompleteBernsteinFunction}(
+  object,
+  x,
+  difference_order,
+  ...,
+  method = c("stieltjes", "levy"),
+  tolerance = .Machine$double.eps^0.5
+)
+
 \S4method{valueOf}{LinearBernsteinFunction}(object, x, difference_order = 0L, ...)
 
 \S4method{valueOf}{ConstantBernsteinFunction}(object, x, difference_order = 0L, ...)
@@ -35,13 +57,14 @@ valueOf(object, x, difference_order, ...)
 
 \S4method{valueOf}{SumOfBernsteinFunctions}(object, x, difference_order = 0L, ...)
 
-\S4method{valueOf}{PoissonBernsteinFunction}(object, x, difference_order = 0L, ...)
+\S4method{valueOf}{PoissonBernsteinFunction}(object, x, difference_order = 0L, ..., method = c("default", "levy"))
 
 \S4method{valueOf}{AlphaStableBernsteinFunction}(
   object,
   x,
   difference_order = 0L,
   ...,
+  method = c("default", "levy", "stieltjes"),
   tolerance = .Machine$double.eps^0.5
 )
 
@@ -50,16 +73,25 @@ valueOf(object, x, difference_order, ...)
   x,
   difference_order = 0L,
   ...,
+  method = c("default", "levy"),
   tolerance = .Machine$double.eps^0.5
 )
 
-\S4method{valueOf}{ExponentialBernsteinFunction}(object, x, difference_order = 0L, ...)
+\S4method{valueOf}{ExponentialBernsteinFunction}(
+  object,
+  x,
+  difference_order = 0L,
+  ...,
+  method = c("default", "stieltjes", "levy"),
+  tolerance = .Machine$double.eps^0.5
+)
 
 \S4method{valueOf}{GammaBernsteinFunction}(
   object,
   x,
   difference_order = 0L,
   ...,
+  method = c("default", "stieltjes", "levy"),
   tolerance = .Machine$double.eps^0.5
 )
 
@@ -68,6 +100,7 @@ valueOf(object, x, difference_order, ...)
   x,
   difference_order = 0L,
   ...,
+  method = c("default", "stieltjes", "levy"),
   tolerance = .Machine$double.eps^0.5
 )
 }
@@ -82,6 +115,8 @@ the representation).}
 
 \item{...}{Further parameter (passed to \code{\link[stats:integrate]{stats::integrate()}})}
 
+\item{method}{Method to calculate the result}
+
 \item{tolerance}{(Relative) tolerance, passed down to \code{\link[stats:integrate]{stats::integrate()}}}
 }
 \description{
@@ -93,6 +128,10 @@ its higher-order, alternating iterated forward differences, i.e.
 }
 \seealso{
 \linkS4class{BernsteinFunction}
+
+\linkS4class{LevyBernsteinFunction}
+
+\linkS4class{CompleteBernsteinFunction}
 
 \linkS4class{LinearBernsteinFunction}
 
