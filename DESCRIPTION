@@ -35,8 +35,13 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Collate:
     'RcppExports.R'
-    'bernstein.R'
+    'allClass-S4.R'
+    'allInitialize-S4.R'
+    'allValidity-S4.R'
     'catch-routine-registration.R'
+    'levyDensity-S4.R'
+    'stieltjesDensity-S4.R'
+    'valueOf-S4.R'
     'parameter.R'
     'rmo.R'
     'sample.R'

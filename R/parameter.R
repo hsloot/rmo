@@ -1,3 +1,6 @@
+#' @include allClass-S4.R valueOf-S4.R
+NULL
+
 #' @keywords internal
 #' @noRd
 bf2ex_intensities <- function(d, bf) { # nocov start
@@ -33,8 +36,6 @@ ex_intensities2intensities <- function(ex_intensities) {
 #' @details For more information, please read the corresponding  documentation
 #' for the respective Bernstein function.
 #'
-#'
-#' @include bernstein.R
 #' @seealso [valueOf()]
 #'
 #' @name parameter
