@@ -34,14 +34,10 @@ in Chp. 16 of \insertCite{Schilling2012a}{rmo}.
 \item{\code{alpha}}{The index \eqn{\alpha}.}
 }}
 
-\examples{
-AlphaStableBernsteinFunction()
-AlphaStableBernsteinFunction(alpha=0.5)
-
-}
 \references{
 \insertAllCited{}
 }
 \seealso{
-\linkS4class{BernsteinFunction}
+\linkS4class{BernsteinFunction} \linkS4class{LevyBernsteinFunction}
+\linkS4class{CompleteBernsteinFunction} \link{AlphaStableBernsteinFunction-constructor}
 }

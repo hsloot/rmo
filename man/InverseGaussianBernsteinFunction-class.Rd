@@ -32,14 +32,10 @@ This Bernstein function can be found on p. 309 in \insertCite{Mai2017a}{rmo}.
 underlying Gaussian process)}
 }}
 
-\examples{
-InverseGaussianBernsteinFunction()
-InverseGaussianBernsteinFunction(eta=0.3)
-
-}
 \references{
 \insertAllCited{}
 }
 \seealso{
-\linkS4class{BernsteinFunction}
+\linkS4class{BernsteinFunction} \linkS4class{LevyBernsteinFunction}
+\link{InverseGaussianBernsteinFunction-constructor}
 }

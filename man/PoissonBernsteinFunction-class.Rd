@@ -27,11 +27,7 @@ foward differences can be calculated in closed form:
 \item{\code{eta}}{The fixed (positive) jump size of the Poisson process.}
 }}
 
-\examples{
-PoissonBernsteinFunction()
-PoissonBernsteinFunction(lambda=0.2, eta=2)
-
-}
 \seealso{
-\linkS4class{BernsteinFunction}
+\linkS4class{BernsteinFunction} \linkS4class{LevyBernsteinFunction}
+\link{PoissonBernsteinFunction-constructor}
 }

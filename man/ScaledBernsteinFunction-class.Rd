@@ -22,12 +22,6 @@ is to be multiplied.}
 \item{\code{original}}{The original Bernstein function which is to be multiplied.}
 }}
 
-\examples{
-ScaledBernsteinFunction()
-original_bf <- AlphaStableBernsteinFunction(alpha=0.5)
-ScaledBernsteinFunction(scale=2, original=original_bf)
-
-}
 \seealso{
-\linkS4class{BernsteinFunction}
+\linkS4class{BernsteinFunction} \link{ScaledBernsteinFunction-constructor}
 }

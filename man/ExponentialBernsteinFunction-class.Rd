@@ -29,14 +29,10 @@ in Chp. 16 of \insertCite{Schilling2012a}{rmo}.
 \item{\code{lambda}}{The index \eqn{\lambda}.}
 }}
 
-\examples{
-ExponentialBernsteinFunction()
-ExponentialBernsteinFunction(lambda=0.5)
-
-}
 \references{
 \insertAllCited{}
 }
 \seealso{
-\linkS4class{BernsteinFunction}
+\linkS4class{BernsteinFunction} \linkS4class{LevyBernsteinFunction}
+\linkS4class{CompleteBernsteinFunction} \link{ExponentialBernsteinFunction-constructor}
 }

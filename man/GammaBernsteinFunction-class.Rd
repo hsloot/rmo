@@ -34,14 +34,10 @@ in Chp. 16 of \insertCite{Schilling2012a}{rmo}.
 \item{\code{a}}{Scale parameter for the Lévy measure.}
 }}
 
-\examples{
-GammaBernsteinFunction()
-GammaBernsteinFunction(a=2)
-
-}
 \references{
 \insertAllCited{}
 }
 \seealso{
-\linkS4class{BernsteinFunction}
+\linkS4class{BernsteinFunction} \linkS4class{LevyBernsteinFunction}
+\linkS4class{CompleteBernsteinFunction} \link{GammaBernsteinFunction-constructor}
 }

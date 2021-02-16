@@ -21,13 +21,6 @@ is also a Bernstein function.
 \item{\code{second}}{The second summand (Bernstein function).}
 }}
 
-\examples{
-SumOfBernsteinFunctions()
-first_bf <- LinearBernsteinFunction(scale=0.2)
-second_bf <- AlphaStableBernsteinFunction(alpha=0.5)
-SumOfBernsteinFunctions(first=first_bf, second=second_bf)
-
-}
 \seealso{
-\linkS4class{BernsteinFunction}
+\linkS4class{BernsteinFunction} \link{SumOfBernsteinFunctions-constructor}
 }

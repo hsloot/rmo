@@ -20,11 +20,6 @@ particular,
 in the representation)}
 }}
 
-\examples{
-ConstantBernsteinFunction()
-ConstantBernsteinFunction(constant = 0.2)
-
-}
 \seealso{
-\linkS4class{BernsteinFunction}
+\linkS4class{BernsteinFunction} \link{ConstantBernsteinFunction-constructor}
 }
