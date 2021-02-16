@@ -77,6 +77,41 @@ setGeneric("valueOf",
     standardGeneric("valueOf")
   })
 
+setGeneric("levyDensity",
+  function(object) {
+    standardGeneric("levyDensity")
+  })
+
+setMethod("valueOf", "BernsteinFunction",
+  function(object, x, difference_order, ...,
+      tolerance = .Machine$double.eps^0.5) {
+    levy_density <- levyDensity(object)
+    if (0L == difference_order) {
+      fct <- function(u, .x) {
+        (1 - exp(-u * .x))
+      }
+    } else {
+      fct <- function(u, .x) {
+        exp(-u * .x) * (1 - exp(-u))^difference_order
+      }
+    }
+
+    if ("continuous" == attr(levy_density, "type")) {
+      integrand_fn <- function(u, .x) {
+        fct(u, .x) * levy_density(u)
+      }
+      out <- sapply(x,
+        function(.x) {
+          integrate(integrand_fn, .x = .x,
+            lower = attr(levy_density, "lower"), upper = attr(levy_density, "upper"),
+            rel.tol = tolerance)$value
+        })
+    } else {
+      out <- as.vector(levy_density$y %*% outer(levy_density$x, x, fct))
+    }
+
+    out
+  })
 
 
 # #### Linear and constant Bernstein function ####
@@ -370,6 +405,14 @@ setMethod("initialize", "PoissonBernsteinFunction",
     invisible(.Object)
   })
 
+setMethod("levyDensity", "PoissonBernsteinFunction",
+  function(object) {
+    structure(
+      data.frame(x = object@eta, y = object@lambda),
+      type = "counting"
+    )
+  })
+
 #' @rdname valueOf-methods
 #' @aliases valueOf,PoissonBernsteinFunction,ANY-method
 #'
@@ -388,8 +431,7 @@ setMethod("valueOf", "PoissonBernsteinFunction",
     if (0L == difference_order) {
       out <- object@lambda * (1 - exp(-x * object@eta))
     } else {
-      out <- object@lambda * exp(-x * object@eta) *
-              (1 - exp(-object@eta))^difference_order
+      out <- callNextMethod(object, x, difference_order, ...)
     }
 
     out
@@ -456,6 +498,16 @@ setMethod("initialize", "AlphaStableBernsteinFunction",
     invisible(.Object)
   })
 
+setMethod("levyDensity", "AlphaStableBernsteinFunction",
+  function(object) {
+    structure(
+      function(x) {
+        object@alpha / gamma(1 - object@alpha) * x ^ (-1 - object@alpha)
+      },
+      lower = 0, upper = Inf, type = "continuous"
+    )
+  })
+
 #' @rdname valueOf-methods
 #' @aliases valueOf,AlphaStableBernsteinFunction,ANY-method
 #'
@@ -478,19 +530,7 @@ setMethod("valueOf", "AlphaStableBernsteinFunction",
     if (0L == difference_order) {
       out <- x^object@alpha
     } else {
-      out <- sapply(
-        x,
-        function(.x) {
-          integrate(
-            function(u) {
-              exp(-.x * u) * (1 - exp(-u))^difference_order *
-              ## Lévy density
-              object@alpha / gamma(1-object@alpha) * u ^ (-1-object@alpha)
-            },
-            lower = 0, upper = Inf,
-            ## use lower tolerance to pass all.equal
-            rel.tol = tolerance, ...)$value
-          })
+      out <- callNextMethod(object, x, difference_order, ..., tolerance = tolerance)
     }
 
     out
@@ -553,6 +593,16 @@ setMethod("initialize", "InverseGaussianBernsteinFunction",
     invisible(.Object)
   })
 
+setMethod("levyDensity", "InverseGaussianBernsteinFunction",
+  function(object) {
+    structure(
+      function(x) {
+        1 / sqrt(2 * pi * x ^ 3) * exp(-0.5 * object@eta ^ 2 * x)
+      },
+      lower = 0, upper = Inf, type = "continuous"
+    )
+  })
+
 #' @rdname valueOf-methods
 #' @aliases valueOf,InverseGaussianBernsteinFunction,ANY-method
 #'
@@ -573,18 +623,7 @@ setMethod("valueOf", "InverseGaussianBernsteinFunction",
     if (0L == difference_order) {
       out <- sqrt(2*x + object@eta^2) - object@eta
     } else {
-      out <- sapply(
-        x,
-        function(.x) {
-          integrate(
-            function(u) {
-              exp(-.x*u) * (1 - exp(-u))^difference_order *
-              1/sqrt(2*pi * u^3) * exp(-0.5*object@eta^2*u) ## Lévy density
-            },
-            lower=0, upper=Inf,
-            ## use lower tolerance to pass all.equal
-            rel.tol = tolerance, ...)$value
-          })
+      out <- callNextMethod(object, x, difference_order, ..., tolerance = tolerance)
     }
 
     out
@@ -731,6 +770,16 @@ setMethod("initialize", "GammaBernsteinFunction",
     invisible(.Object)
   })
 
+setMethod("levyDensity", "GammaBernsteinFunction",
+  function(object) {
+    structure(
+      function(x) {
+        exp(-object@a * x) /  x
+      },
+      lower = 0, upper = Inf, type = "continuous"
+    )
+  })
+
 #' @rdname valueOf-methods
 #' @aliases valueOf,GammaBernsteinFunction,ANY-method
 #'
@@ -749,18 +798,7 @@ setMethod("valueOf", "GammaBernsteinFunction",
     if (0L == difference_order) {
       out <- log(1 + x/object@a)
     } else {
-      out <- sapply(
-        x,
-        function(.x) {
-          integrate(
-            function(u) {
-              exp(-.x*u) * (1 - exp(-u))^difference_order *
-                exp(-object@a*u)/u ## Lévy density
-              },
-              lower = 0, upper = Inf,
-              ## use lower tolerance to pass all.equal
-              rel.tol = tolerance, ...)$value
-            })
+      out <- callNextMethod(object, x, difference_order, ..., tolerance = tolerance)
     }
 
     out
@@ -833,6 +871,16 @@ setMethod("initialize", "ParetoBernsteinFunction",
     invisible(.Object)
   })
 
+setMethod("levyDensity", "ParetoBernsteinFunction",
+  function(object) {
+    structure(
+      function(x) {
+        object@alpha * (object@x0 / x) ^ (object@alpha) / x
+      },
+      lower = object@x0, upper = Inf, type = "continuous"
+    )
+  })
+
 #' @rdname valueOf-methods
 #' @aliases valueOf,ParetoBernsteinFunction,ANY-method
 #'
@@ -853,18 +901,7 @@ setMethod("valueOf", "ParetoBernsteinFunction",
         pgamma(object@x0*x, 1-object@alpha, lower.tail=FALSE) *
         gamma(1-object@alpha)
     } else {
-      out <- sapply(
-        x,
-        function(.x) {
-          integrate(
-            function(u) {
-              exp(-.x * u) * (1 - exp(-u))^difference_order *
-              object@alpha * (object@x0 / u) ^ (object@alpha) / u ## Lévy density
-            },
-            lower=object@x0, upper=Inf,
-            ## use lower tolerance to pass all.equal
-            rel.tol = tolerance, ...)$value
-          })
+      out <- callNextMethod(object, x, difference_order, ..., tolerance = tolerance)
     }
 
     out
