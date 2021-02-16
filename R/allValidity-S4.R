@@ -18,6 +18,14 @@ setValidity("ConstantBernsteinFunction",
   })
 
 #' @importFrom checkmate qassert
+setValidity("ScaledBernsteinFunction",
+  function(object) {
+    qassert(object@scale, "N1[0,)")
+
+    invisible(TRUE)
+  })
+
+#' @importFrom checkmate qassert
 setValidity("PoissonBernsteinFunction",
   function(object) {
     qassert(object@lambda, "N1[0,)")

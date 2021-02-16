@@ -1,1 +1,59 @@
 destination: docs
+
+reference:
+- title: Package
+  desc: ~
+  contents:
+  - "`rmo`"
+
+- title: Sampling functions
+  desc: ~
+  contents:
+  - matches("rmo_[a-z]+")
+  - starts_with("rexmo")
+  - "`rmo_esm_cuadras_auge`"
+  - ends_with("lfm_cpp")
+
+- title: Drop-in parameter factories
+  desc: ~
+  contents:
+  - matches("intensities")
+
+- title: Bernstein functions
+
+- subtitle: Virtual classes
+  desc: ~
+  contents:
+  - "`BernsteinFunction-class`"
+  - "`LevyBernsteinFunction-class`"
+  - "`CompleteBernsteinFunction-class`"
+
+- subtitle: Bernstein function arithmetics
+  desc: ~
+  contents:
+  - matches("ScaledBernsteinFunction-")
+  - matches("SumOfBernsteinFunctions-")
+
+- subtitle: Boundary cases
+  desc: ~
+  contents:
+  - matches("LinearBernsteinFunction-")
+  - matches("ConstantBernsteinFunction-")
+
+- subtitle: Algebraic Bernstein functions
+  desc: ~
+  contents:
+  - matches("ParetoBernsteinFunction-")
+  - matches("AlphaStableBernsteinFunction-")
+  - matches("InverseGaussianBernsteinFunction-")
+  - matches("ExponentialBernsteinFunction-")
+
+- subtitle: Logarithmic Bernstein functions
+  desc: ~
+  contents:
+  - matches("GammaBernsteinFunction-")
+
+- subtitle: Other Bernstein Functions
+  desc: ~
+  contents:
+  - matches("PoissonBernsteinFunction-")

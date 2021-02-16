@@ -1,41 +1,51 @@
 #' @include allClass-S4.R levyDensity-S4.R stieltjesDensity-S4.R
 NULL
 
-#' Returns values for Bernstein functions
+#' @describeIn BernsteinFunction-class
+#'   Calculate the values for a Bernstein function and its higher-order,
+#'   alternating iterated forward differences, i.e.
+#'   \deqn{
+#'     {(-1)}^{k-1} \Delta^k \psi(x), x > 0.
+#'   }
 #'
-#' @description
-#' This method allows you to calculate the values for a Bernstein function and
-#' its higher-order, alternating iterated forward differences, i.e.
-#' \deqn{
-#'   {(-1)}^{k-1} \Delta^k \psi(x), x > 0.
-#' }
-#'
-#' @param object The Bernstein function object.
-#' @param x The value at which the Bernstein function is to be evaluated.
+#' @inheritParams levyDensity
+#' @param x Non-negativ numeric vector at which the iterated difference of
+#'   the Bernstein function is evaluated.
 #' @param difference_order The order of the alternating iterated forward
 #'   differences taken on the Bernstein function (\eqn{k} in
 #'   the representation).
 #' @param ... Further parameter (passed to [stats::integrate()])
 #'
-#' @docType methods
-#' @rdname valueOf-methods
-#'
-#' @seealso [BernsteinFunction-class]
+#' @details
+#' The method `valueOf` is implemented different, depending on the specific
+#' Bernstein function to get the best possible accuracy:
+#' \itemize{
+#'   \item For `difference_order == 0L`, the values are calculated with closed
+#'     form formulas if possible.
+#'   \item For *linear Bernstein functions* and *constant Bernstein functions*
+#'      the iterated differences are calculated automatically.
+#'   \item For *scaled Bernstein functions* and *sums of Bernstein functions*
+#'     the result is calculted recursively.
+#'   \item For all other cases, the values are calculated using either the
+#'     Lévy-Khintchine or the Stieltjes representation. Which one is chosen,
+#'     depends on the case and can be manually overwritten with
+#'     `method = "levy"` or `method = "stieltjes"`.
+#' }
 #'
 #' @export
 setGeneric("valueOf",
-  function(object, x, difference_order, ...) {
+  function(object, x, difference_order = 0L, ...) {
     standardGeneric("valueOf")
   })
 
 
-#' @rdname valueOf-methods
+#' @describeIn LinearBernsteinFunction-class
+#'   Calculates the iterated differences of the Bernstein function, see [valueOf()]
 #' @aliases valueOf,LinearBernsteinFunction,ANY-method
 #'
-#' @seealso [LinearBernsteinFunction-class]
+#' @inheritParams valueOf
 #'
 #' @importFrom checkmate qassert assert check_numeric check_complex
-#'
 #' @export
 setMethod("valueOf", "LinearBernsteinFunction",
   function(object, x, difference_order = 0L, ...) {
@@ -56,13 +66,13 @@ setMethod("valueOf", "LinearBernsteinFunction",
   })
 
 
-#' @rdname valueOf-methods
+#' @describeIn ConstantBernsteinFunction-class
+#'   Calculates the iterated differences of the Bernstein function, see [valueOf()]
 #' @aliases valueOf,ConstantBernsteinFunction,ANY-method
 #'
-#' @seealso [ConstantBernsteinFunction-class]
+#' @inheritParams valueOf
 #'
 #' @importFrom checkmate qassert assert check_numeric check_complex
-#'
 #' @export
 setMethod("valueOf", "ConstantBernsteinFunction",
   function(object, x, difference_order = 0L, ...) {
@@ -81,10 +91,11 @@ setMethod("valueOf", "ConstantBernsteinFunction",
   })
 
 
-#' @rdname valueOf-methods
+#' @describeIn ScaledBernsteinFunction-class
+#'   Calculates the iterated differences of the Bernstein function, see [valueOf()]
 #' @aliases valueOf,ScaledBernsteinFunction,ANY-method
 #'
-#' @seealso [ScaledBernsteinFunction-class]
+#' @inheritParams valueOf
 #'
 #' @export
 setMethod("valueOf", "ScaledBernsteinFunction",
@@ -93,10 +104,11 @@ setMethod("valueOf", "ScaledBernsteinFunction",
   })
 
 
-#' @rdname valueOf-methods
+#' @describeIn SumOfBernsteinFunctions-class
+#'   Calculates the iterated differences of the Bernstein function, see [valueOf()]
 #' @aliases valueOf,SumOfBernsteinFunctions,ANY-method
 #'
-#' @seealso [SumOfBernsteinFunctions-class]
+#' @inheritParams valueOf
 #'
 #' @export
 setMethod("valueOf", "SumOfBernsteinFunctions",
@@ -106,15 +118,46 @@ setMethod("valueOf", "SumOfBernsteinFunctions",
   })
 
 
-#' @rdname valueOf-methods
+#' @describeIn LevyBernsteinFunction-class
+#'   Calculates the iterated differences of the Bernstein function, see [valueOf()]
 #' @aliases valueOf,LevyBernsteinFunction,ANY-method
 #'
-#' @param method Method to calculate the result
+#' @inheritParams valueOf
+#' @param method Method to calculate the result; use `method = "levy"` for
+#'   using the Lévy representation and `method = "stieltjes"` for using the
+#'   Stieltjes representation.
+#' @param tolerance (Relative) tolerance, passed down to [stats::integrate()]
 #'
-#' @seealso [LevyBernsteinFunction-class]
+#' @details
+#' For *continuous Lévy densities*, the values of the Bernstein function are
+#' calculated with [stats::integrate()] by using the representation
+#' \deqn{
+#'   \psi(x)
+#'     = \int_{0}^{\infty} (1 - \operatorname{e}^{-ux}) \nu(du), \quad x > 0 ,
+#' }
+#' and the values of the iterated differences are calculated by using the
+#' representation
+#' \deqn{
+#'   (-1)^{k-1} \Delta^{k} \psi(x)
+#'     = \int_{0}^{\infty} \operatorname{e}^{-ux} (1 - \operatorname{e}^{-u})^k \nu(du) ,
+#'     \quad x > 0 .
+#' }
+#'
+#' For *discrete Lévy densities* \eqn{\nu(du) = \sum_{i} y_i \delta_{u_i}(du)}, the
+#' values of the Bernstein function are calculated by using the representation
+#' \deqn{
+#'   \psi(x)
+#'     = \sum_{i} (1 - \operatorname{e}^{-u_i x}) y_i, \quad x > 0 ,
+#' }
+#' and the values of the iterated differences are calculated by using the
+#' representation
+#' \deqn{
+#'   (-1)^{k-1} \Delta^{k} \psi(x)
+#'     = \sum_{i} \operatorname{e}^{-u_i x} (1 - \operatorname{e}^{-u_i})^k y_i ,
+#'     \quad x > 0 .
+#' }
 #'
 #' @importFrom checkmate qassert
-#'
 #' @export
 setMethod("valueOf", "LevyBernsteinFunction",
   function(object, x, difference_order, ...,
@@ -151,15 +194,42 @@ setMethod("valueOf", "LevyBernsteinFunction",
     out
   })
 
-#' @rdname valueOf-methods
+#' @describeIn CompleteBernsteinFunction-class
+#'   Calculates the iterated differences of the Bernstein function, see [valueOf()]
 #' @aliases valueOf,CompleteBernsteinFunction,ANY-method
 #'
-#' @param method Method to calculate the result
+#' @inheritParams valueOf
 #'
-#' @seealso [CompleteBernsteinFunction-class]
+#' @details
+#' For *continuous Stieltjes densities*, the values of the Bernstein function are
+#' calculated with [stats::integrate()] by using the representation
+#' \deqn{
+#'   \psi(x)
+#'     = \int_{0}^{\infty} x \mathrm{Beta}(1, x + u) \sigma(du), \quad x > 0 ,
+#' }
+#' and the values of the iterated differences are calculated by using the
+#' representation
+#' \deqn{
+#'   (-1)^{k-1} \Delta^{k} \psi(x)
+#'     = \int_{0}^{\infty} u \mathrm{Beta}(k+1, x + u) \sigma(du) ,
+#'     \quad x > 0 .
+#' }
+#'
+#' For *discrete Lévy densities* \eqn{\sigma(du) = \sum_{i} y_i \delta_{u_i}(du)}, the
+#' values of the Bernstein function are calculated by using the representation
+#' \deqn{
+#'   \psi(x)
+#'     = \sum_{i} x \mathrm{Beta}(1, x + u_i) y_i, \quad x > 0 ,
+#' }
+#' and the values of the iterated differences are calculated by using the
+#' representation
+#' \deqn{
+#'   (-1)^{k-1} \Delta^{k} \psi(x)
+#'     = \sum_{i} u_i \mathrm{Beta}(k+1, x + u_i) y_i ,
+#'     \quad x > 0 .
+#' }
 #'
 #' @importFrom checkmate qassert
-#'
 #' @export
 setMethod("valueOf", "CompleteBernsteinFunction",
   function(object, x, difference_order, ...,
@@ -199,13 +269,15 @@ setMethod("valueOf", "CompleteBernsteinFunction",
   })
 
 
-#' @rdname valueOf-methods
+#' @describeIn PoissonBernsteinFunction-class
+#'   Calculates the iterated differences of the Bernstein function, see [valueOf()].
+#'   The default method for calculating the iterated differences uses the
+#'   Lévy representation.
 #' @aliases valueOf,PoissonBernsteinFunction,ANY-method
 #'
-#' @seealso [PoissonBernsteinFunction-class]
+#' @inheritParams valueOf
 #'
 #' @importFrom checkmate qassert assert check_numeric check_complex
-#'
 #' @export
 setMethod("valueOf", "PoissonBernsteinFunction",
   function(object, x, difference_order = 0L, ...,
@@ -222,23 +294,22 @@ setMethod("valueOf", "PoissonBernsteinFunction",
     if (0L == difference_order) {
       out <- object@lambda * (1 - exp(-x * object@eta))
     } else {
-      out <- callNextMethod()
+      out <- callNextMethod(object, x, difference_order, ..., method = "levy")
     }
 
     out
   })
 
 
-#' @rdname valueOf-methods
+#' @describeIn AlphaStableBernsteinFunction-class
+#'   Calculates the iterated differences of the Bernstein function, see [valueOf()].
+#'   The default method for calculating the iterated differences uses the
+#'   Lévy representation.
 #' @aliases valueOf,AlphaStableBernsteinFunction,ANY-method
 #'
-#' @param tolerance (Relative) tolerance, passed down to [stats::integrate()]
-#'
-#' @seealso [AlphaStableBernsteinFunction-class]
+#' @inheritParams valueOf
 #'
 #' @importFrom checkmate qassert assert check_numeric check_complex
-#' @importFrom stats integrate
-#'
 #' @export
 setMethod("valueOf", "AlphaStableBernsteinFunction",
   function(object, x, difference_order = 0L, ...,
@@ -264,14 +335,15 @@ setMethod("valueOf", "AlphaStableBernsteinFunction",
   })
 
 
-#' @rdname valueOf-methods
+#' @describeIn InverseGaussianBernsteinFunction-class
+#'   Calculates the iterated differences of the Bernstein function, see [valueOf()].
+#'   The default method for calculating the iterated differences uses the
+#'   Lévy representation.
 #' @aliases valueOf,InverseGaussianBernsteinFunction,ANY-method
 #'
-#' @seealso [InverseGaussianBernsteinFunction-class]
+#' @inheritParams valueOf
 #'
 #' @importFrom checkmate qassert assert check_numeric check_complex
-#' @importFrom stats integrate
-#'
 #' @export
 setMethod("valueOf", "InverseGaussianBernsteinFunction",
   function(object, x, difference_order = 0L, ...,
@@ -297,14 +369,15 @@ setMethod("valueOf", "InverseGaussianBernsteinFunction",
   })
 
 
-#' @rdname valueOf-methods
+#' @describeIn ExponentialBernsteinFunction-class
+#'   Calculates the iterated differences of the Bernstein function, see [valueOf()].
+#'   The default method for calculating the iterated differences uses the
+#'   Stieltjes representation.
 #' @aliases valueOf,ExponentialBernsteinFunction,ANY-method
 #'
-#' @seealso [ExponentialBernsteinFunction-class]
+#' @inheritParams valueOf
 #'
 #' @importFrom checkmate qassert
-#' @importFrom stats integrate
-#'
 #' @export
 setMethod("valueOf", "ExponentialBernsteinFunction",
   function(object, x, difference_order = 0L, ...,
@@ -328,14 +401,16 @@ setMethod("valueOf", "ExponentialBernsteinFunction",
   })
 
 
-#' @rdname valueOf-methods
+#' @describeIn GammaBernsteinFunction-class
+#'   Calculates the iterated differences of the Bernstein function, see [valueOf()].
+#'   The default method for calculating the iterated differences uses the
+#'   Lévy representation.
 #' @aliases valueOf,GammaBernsteinFunction,ANY-method
 #'
 #' @seealso [GammaBernsteinFunction-class]
 #'
 #' @importFrom checkmate qassert
 #' @importFrom stats integrate
-#'
 #' @export
 setMethod("valueOf", "GammaBernsteinFunction",
   function(object, x, difference_order = 0L, ...,
@@ -359,14 +434,16 @@ setMethod("valueOf", "GammaBernsteinFunction",
   })
 
 
-#' @rdname valueOf-methods
+#' @describeIn ParetoBernsteinFunction-class
+#'   Calculates the iterated differences of the Bernstein function, see [valueOf()].
+#'   The default method for calculating the iterated differences uses the
+#'   Lévy representation.
 #' @aliases valueOf,ParetoBernsteinFunction,ANY-method
 #'
-#' @seealso [ParetoBernsteinFunction-class]
+#' @inheritParams valueOf
 #'
 #' @importFrom checkmate qassert
-#' @importFrom stats integrate pgamma
-#'
+#' @importFrom stats pgamma
 #' @export
 setMethod("valueOf", "ParetoBernsteinFunction",
   function(object, x, difference_order = 0L, ...,

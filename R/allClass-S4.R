@@ -34,12 +34,17 @@ NULL
 #' @references
 #'   \insertAllCited{}
 #'
-#' @seealso [ConstantBernsteinFunction-class],
+#' @seealso [LevyBernsteinFunction-class], [CompleteBernsteinFunction-class],
+#'   [ConstantBernsteinFunction-class],
+#'   [ScaledBernsteinFunction-class],
+#'   [SumOfBernsteinFunctions-class],
 #'   [LinearBernsteinFunction-class],
 #'   [PoissonBernsteinFunction-class],
 #'   [AlphaStableBernsteinFunction-class],
-#'   [ScaledBernsteinFunction-class],
-#'   [SumOfBernsteinFunctions-class]
+#'   [ExponentialBernsteinFunction-class],
+#'   [InverseGaussianBernsteinFunction-class],
+#'   [GammaBernsteinFunction-class],
+#'   [ParetoBernsteinFunction-class]
 #'
 #' @export
 setClass("BernsteinFunction", # nolint
@@ -58,7 +63,9 @@ setClass("BernsteinFunction", # nolint
 #'  \psi(x) = b x, x > 0.
 #' }
 #'
-#' @seealso [BernsteinFunction-class] [LinearBernsteinFunction-constructor]
+#' @seealso [BernsteinFunction-class],
+#'   [LinearBernsteinFunction-constructor],
+#'   [valueOf()]
 #'
 #' @export LinearBernsteinFunction
 LinearBernsteinFunction <- setClass("LinearBernsteinFunction", # nolint
@@ -78,7 +85,9 @@ LinearBernsteinFunction <- setClass("LinearBernsteinFunction", # nolint
 #'   \psi(x) = a , x > 0
 #' }
 #'
-#' @seealso [BernsteinFunction-class] [ConstantBernsteinFunction-constructor]
+#' @seealso [BernsteinFunction-class]
+#'   [ConstantBernsteinFunction-constructor]
+#'   [valueOf()]
 #'
 #' @export ConstantBernsteinFunction
 ConstantBernsteinFunction <- setClass("ConstantBernsteinFunction", # nolint
@@ -88,11 +97,6 @@ ConstantBernsteinFunction <- setClass("ConstantBernsteinFunction", # nolint
 
 #' Class for \emph{scaled Bernstein functions}
 #'
-#' @slot scale The scalar factor with which the original Bernstein function
-#'   is to be multiplied.
-#' @slot original The original Bernstein function which is to be multiplied.
-#'
-#' @description
 #' Berstein functions are stable under (non-negative) scalar multiplication,
 #' i.e. if \eqn{\psi} is a Bernstein function and \eqn{\lambda \geq 0} , then
 #' \deqn{
@@ -100,26 +104,28 @@ ConstantBernsteinFunction <- setClass("ConstantBernsteinFunction", # nolint
 #' }
 #' is also a Bernstein function.
 #'
-#' @seealso [BernsteinFunction-class] [ScaledBernsteinFunction-constructor]
+#' @slot scale The scalar factor with which the original Bernstein function
+#'   is to be multiplied.
+#' @slot original The original Bernstein function which is to be multiplied.
+#'
+#' @seealso [BernsteinFunction-class]
+#'   [ScaledBernsteinFunction-constructor]
+#'   [valueOf()]
 #'
 #' @export ScaledBernsteinFunction
 ScaledBernsteinFunction <- setClass("ScaledBernsteinFunction", # nolint
   contains = "BernsteinFunction",
   slots = c(scale = "numeric", original = "BernsteinFunction"))
 
-#' @importFrom checkmate qassert
-setValidity("ScaledBernsteinFunction",
-  function(object) {
-    qassert(object@scale, "N1[0,)")
 
-    invisible(TRUE)
-  })
-
-
-#' Class for the \emph{sum of two Bernstein functions}
+#' Class for *input scaled Bernstein functions*
 #'
-#' @slot first The first summand (Bernstein function).
-#' @slot second The second summand (Bernstein function).
+
+
+#' Class for the *sum of two Bernstein functions*
+#'
+#' @slot first The first summand (derived from [BernsteinFunction-class]).
+#' @slot second The second summand (derived from [BernsteinFunction-class]).
 #'
 #' @description
 #' Bernstein functions are stable under addition, i.e. if \eqn{\psi_1} and
@@ -129,7 +135,9 @@ setValidity("ScaledBernsteinFunction",
 #' }
 #' is also a Bernstein function.
 #'
-#' @seealso [BernsteinFunction-class] [SumOfBernsteinFunctions-constructor]
+#' @seealso [BernsteinFunction-class]
+#'   [SumOfBernsteinFunctions-constructor]
+#'   [valueOf()]
 #'
 #' @export SumOfBernsteinFunctions
 SumOfBernsteinFunctions <- setClass("SumOfBernsteinFunctions", # nolint
@@ -146,7 +154,7 @@ SumOfBernsteinFunctions <- setClass("SumOfBernsteinFunctions", # nolint
 #'   \psi(x) = \int_0^\infty (1 - e^{-ux}) \nu(du) , x > 0 .
 #' }
 #'
-#' @seealso [BernsteinFunction-class]
+#' @seealso [BernsteinFunction-class], [valueOf()]
 #'
 #' @export
 setClass("LevyBernsteinFunction",
@@ -161,8 +169,9 @@ setClass("LevyBernsteinFunction",
 #'   \psi(x) = \int_0^\infty \frac{x}{x + u} \sigma(du) , x > 0 .
 #' }
 #'
-#' @seealso [LevyBernsteinFunction-class]
+#' @seealso [LevyBernsteinFunction-class],
 #'   [BernsteinFunction-class]
+#'   [valueOf()]
 #'
 #' @export
 setClass("CompleteBernsteinFunction",
@@ -188,8 +197,8 @@ setClass("CompleteBernsteinFunction",
 #'   {(-1)}^{k-1} \Delta^k \psi(x) = e^{-u\eta} (1-e^{-\eta})^k, x>0, k>0.
 #' }
 #'
-#' @seealso [BernsteinFunction-class] [LevyBernsteinFunction-class]
-#'   [PoissonBernsteinFunction-constructor]
+#' @seealso [BernsteinFunction-class], [LevyBernsteinFunction-class]
+#'   [PoissonBernsteinFunction-constructor], [valueOf()]
 #'
 #' @export PoissonBernsteinFunction
 PoissonBernsteinFunction <- setClass("PoissonBernsteinFunction", # nolint
@@ -197,7 +206,7 @@ PoissonBernsteinFunction <- setClass("PoissonBernsteinFunction", # nolint
   slots = c(lambda = "numeric", eta = "numeric"))
 
 
-#' Class for the \emph{\eqn{\alpha}-stable Bernstein function}
+#' Class for the *\eqn{\alpha}-stable Bernstein function*
 #'
 #' @slot alpha The index \eqn{\alpha}.
 #'
@@ -206,7 +215,7 @@ PoissonBernsteinFunction <- setClass("PoissonBernsteinFunction", # nolint
 #' the corresponding Bernstein function is the power function with exponent
 #' \eqn{\alpha}, i.e.
 #' \deqn{
-#'   \psi(x) = x^\alpha, x>0.
+#'   \psi(x) = x^\alpha, \quad x>0.
 #' }
 #'
 #' @details
@@ -227,8 +236,9 @@ PoissonBernsteinFunction <- setClass("PoissonBernsteinFunction", # nolint
 #' @references
 #'   \insertAllCited{}
 #'
-#' @seealso [BernsteinFunction-class] [LevyBernsteinFunction-class]
-#'   [CompleteBernsteinFunction-class] [AlphaStableBernsteinFunction-constructor]
+#' @seealso [BernsteinFunction-class], [LevyBernsteinFunction-class],
+#'   [CompleteBernsteinFunction-class],
+#'   '[AlphaStableBernsteinFunction-constructor], [valueOf()]
 #'
 #' @export AlphaStableBernsteinFunction
 AlphaStableBernsteinFunction <- setClass("AlphaStableBernsteinFunction", # nolint
@@ -264,8 +274,8 @@ AlphaStableBernsteinFunction <- setClass("AlphaStableBernsteinFunction", # nolin
 #' @references
 #'  \insertAllCited{}
 #'
-#' @seealso [BernsteinFunction-class] [LevyBernsteinFunction-class]
-#'   [InverseGaussianBernsteinFunction-constructor]
+#' @seealso [BernsteinFunction-class], [LevyBernsteinFunction-class],
+#'   [InverseGaussianBernsteinFunction-constructor], [valueOf()]
 #'
 #' @export InverseGaussianBernsteinFunction
 InverseGaussianBernsteinFunction <- setClass("InverseGaussianBernsteinFunction", # nolint
@@ -298,8 +308,9 @@ InverseGaussianBernsteinFunction <- setClass("InverseGaussianBernsteinFunction",
 #' @references
 #'   \insertAllCited{}
 #'
-#' @seealso [BernsteinFunction-class] [LevyBernsteinFunction-class]
-#'   [CompleteBernsteinFunction-class] [ExponentialBernsteinFunction-constructor]
+#' @seealso [BernsteinFunction-class], [LevyBernsteinFunction-class],
+#'   [CompleteBernsteinFunction-class], [ExponentialBernsteinFunction-constructor],
+#'   [valueOf()]
 #'
 #' @export ExponentialBernsteinFunction
 ExponentialBernsteinFunction <- setClass("ExponentialBernsteinFunction", # nolint
@@ -337,8 +348,9 @@ ExponentialBernsteinFunction <- setClass("ExponentialBernsteinFunction", # nolin
 #' @references
 #'   \insertAllCited{}
 #'
-#' @seealso [BernsteinFunction-class] [LevyBernsteinFunction-class]
-#'   [CompleteBernsteinFunction-class] [GammaBernsteinFunction-constructor]
+#' @seealso [BernsteinFunction-class], [LevyBernsteinFunction-class],
+#'   [CompleteBernsteinFunction-class], [GammaBernsteinFunction-constructor],
+#'   [valueOf()]
 #'
 #' @export GammaBernsteinFunction
 GammaBernsteinFunction <- setClass("GammaBernsteinFunction", # nolint
@@ -381,8 +393,8 @@ GammaBernsteinFunction <- setClass("GammaBernsteinFunction", # nolint
 #' @references
 #'   \insertAllCited{}
 #'
-#' @seealso [BernsteinFunction-class] [LevyBernsteinFunction-class]
-#'   [ParetoBernsteinFunction-constructor]
+#' @seealso [BernsteinFunction-class], [LevyBernsteinFunction-class],
+#'   [ParetoBernsteinFunction-constructor], [valueOf()]
 #'
 #' @export ParetoBernsteinFunction
 ParetoBernsteinFunction <- setClass("ParetoBernsteinFunction", # nolint
