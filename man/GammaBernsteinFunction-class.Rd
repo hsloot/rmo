@@ -35,7 +35,8 @@ in Chp. 16 of \insertCite{Schilling2012a}{rmo}.
 }}
 
 \examples{
-bf <- GammaBernsteinFunction(a=2)
+GammaBernsteinFunction()
+GammaBernsteinFunction(a=2)
 
 }
 \references{

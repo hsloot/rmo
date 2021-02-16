@@ -21,7 +21,8 @@ in the representation)}
 }}
 
 \examples{
-bf <- ConstantBernsteinFunction(constant = 0.2)
+ConstantBernsteinFunction()
+ConstantBernsteinFunction(constant = 0.2)
 
 }
 \seealso{

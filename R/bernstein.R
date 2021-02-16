@@ -1,4 +1,4 @@
-#' @importFrom methods new setClass setValidity setGeneric setMethod
+#' @importFrom methods new setClass setValidity setGeneric setMethod validObject
 NULL
 
 # #### Virtual classes of Bernstein functions ####
@@ -84,7 +84,8 @@ setGeneric("valueOf",
 #' Class for the \emph{linear Bernstein function}
 #'
 #' @examples
-#' bf <- LinearBernsteinFunction(scale = 2)
+#' LinearBernsteinFunction()
+#' LinearBernsteinFunction(scale = 2)
 #'
 #' @slot scale The non-negative \emph{drift} parameter
 #'   (i.e. \eqn{b} in the representation)
@@ -109,6 +110,14 @@ setValidity("LinearBernsteinFunction",
     qassert(object@scale, "N1[0,)")
 
     invisible(TRUE)
+  })
+
+setMethod("initialize", "LinearBernsteinFunction",
+  function(.Object, scale = 1) {
+    .Object@scale <- scale
+    validObject(.Object)
+
+    invisible(.Object)
   })
 
 #' @rdname valueOf-methods
@@ -141,7 +150,8 @@ setMethod("valueOf", "LinearBernsteinFunction",
 #' Class for the \emph{constant Bernstein function}
 #'
 #' @examples
-#' bf <- ConstantBernsteinFunction(constant = 0.2)
+#' ConstantBernsteinFunction()
+#' ConstantBernsteinFunction(constant = 0.2)
 #'
 #' @slot constant The non-negative \emph{killing} parameter (i.e. \eqn{a}
 #'   in the representation)
@@ -167,6 +177,14 @@ setValidity("ConstantBernsteinFunction",
     qassert(object@constant, "N1[0,)")
 
     invisible(TRUE)
+  })
+
+setMethod("initialize", "ConstantBernsteinFunction",
+  function(.Object, constant = 1) {
+    .Object@constant <- constant
+    validObject(.Object)
+
+    invisible(.Object)
   })
 
 #' @rdname valueOf-methods
@@ -200,8 +218,9 @@ setMethod("valueOf", "ConstantBernsteinFunction",
 #' Class for \emph{scaled Bernstein functions}
 #'
 #' @examples
+#' ScaledBernsteinFunction()
 #' original_bf <- AlphaStableBernsteinFunction(alpha=0.5)
-#' bf <- ScaledBernsteinFunction(scale=2, original=original_bf)
+#' ScaledBernsteinFunction(scale=2, original=original_bf)
 #'
 #' @slot scale The scalar factor with which the original Bernstein function
 #'   is to be multiplied.
@@ -230,6 +249,15 @@ setValidity("ScaledBernsteinFunction",
     invisible(TRUE)
   })
 
+setMethod("initialize", "ScaledBernsteinFunction",
+  function(.Object, scale = 1, original = LinearBernsteinFunction()) {
+    .Object@scale <- scale
+    .Object@original <- original
+    validObject(.Object)
+
+    invisible(.Object)
+  })
+
 #' @rdname valueOf-methods
 #' @aliases valueOf,ScaledBernsteinFunction,ANY-method
 #'
@@ -245,9 +273,10 @@ setMethod("valueOf", "ScaledBernsteinFunction",
 #' Class for the \emph{sum of two Bernstein functions}
 #'
 #' @examples
+#' SumOfBernsteinFunctions()
 #' first_bf <- LinearBernsteinFunction(scale=0.2)
 #' second_bf <- AlphaStableBernsteinFunction(alpha=0.5)
-#' bf <- SumOfBernsteinFunctions(first=first_bf, second=second_bf)
+#' SumOfBernsteinFunctions(first=first_bf, second=second_bf)
 #'
 #' @slot first The first summand (Bernstein function).
 #' @slot second The second summand (Bernstein function).
@@ -266,6 +295,16 @@ setMethod("valueOf", "ScaledBernsteinFunction",
 SumOfBernsteinFunctions <- setClass("SumOfBernsteinFunctions", # nolint
   contains = "BernsteinFunction",
   slots = c(first = "BernsteinFunction", second = "BernsteinFunction"))
+
+setMethod("initialize", "SumOfBernsteinFunctions",
+  function(.Object, first = ConstantBernsteinFunction(0.5),
+      second = LinearBernsteinFunction(0.5)) {
+    .Object@first <- first
+    .Object@second <- second
+    validObject(.Object)
+
+    invisible(.Object)
+  })
 
 #' @rdname valueOf-methods
 #' @aliases valueOf,SumOfBernsteinFunctions,ANY-method
@@ -286,7 +325,8 @@ setMethod("valueOf", "SumOfBernsteinFunctions",
 #' Class for the \emph{Poisson Bernstein function}
 #'
 #' @examples
-#' bf <- PoissonBernsteinFunction(lambda=0.2, eta=2)
+#' PoissonBernsteinFunction()
+#' PoissonBernsteinFunction(lambda=0.2, eta=2)
 #'
 #' @slot lambda The (positive) arrival rate of the underlying Poisson process.
 #' @slot eta The fixed (positive) jump size of the Poisson process.
@@ -321,6 +361,15 @@ setValidity("PoissonBernsteinFunction",
     invisible(TRUE)
   })
 
+setMethod("initialize", "PoissonBernsteinFunction",
+  function(.Object, eta = 1, lambda = 1) {
+    .Object@eta <- eta
+    .Object@lambda <- lambda
+    validObject(.Object)
+
+    invisible(.Object)
+  })
+
 #' @rdname valueOf-methods
 #' @aliases valueOf,PoissonBernsteinFunction,ANY-method
 #'
@@ -353,7 +402,8 @@ setMethod("valueOf", "PoissonBernsteinFunction",
 #' Class for the \emph{\eqn{\alpha}-stable Bernstein function}
 #'
 #' @examples
-#' bf <- AlphaStableBernsteinFunction(alpha=0.5)
+#' AlphaStableBernsteinFunction()
+#' AlphaStableBernsteinFunction(alpha=0.5)
 #'
 #' @slot alpha The index \eqn{\alpha}.
 #'
@@ -396,6 +446,14 @@ setValidity("AlphaStableBernsteinFunction",
     qassert(object@alpha, "N1(0,1)")
 
     invisible(TRUE)
+  })
+
+setMethod("initialize", "AlphaStableBernsteinFunction",
+  function(.Object, alpha = log2(2 - 0.5)) {
+    .Object@alpha <- alpha
+    validObject(.Object)
+
+    invisible(.Object)
   })
 
 #' @rdname valueOf-methods
@@ -443,7 +501,8 @@ setMethod("valueOf", "AlphaStableBernsteinFunction",
 #' Class for the \emph{Inverse Gaussian Bernstein function}
 #'
 #' @examples
-#' bf <- InverseGaussianBernsteinFunction(eta=0.3)
+#' InverseGaussianBernsteinFunction()
+#' InverseGaussianBernsteinFunction(eta=0.3)
 #'
 #' @slot eta The distribution parameter (drift of the
 #'   underlying Gaussian process)
@@ -484,6 +543,14 @@ setValidity("InverseGaussianBernsteinFunction",
     qassert(object@eta, "N1(0,)")
 
     invisible(TRUE)
+  })
+
+setMethod("initialize", "InverseGaussianBernsteinFunction",
+  function(.Object, eta = 0.5) {
+    .Object@eta <- eta
+    validObject(.Object)
+
+    invisible(.Object)
   })
 
 #' @rdname valueOf-methods
@@ -528,7 +595,8 @@ setMethod("valueOf", "InverseGaussianBernsteinFunction",
 #' Class for the Exponential jump CPP Bernstein function
 #'
 #' @examples
-#' bf <- ExponentialBernsteinFunction(lambda=0.5)
+#' ExponentialBernsteinFunction()
+#' ExponentialBernsteinFunction(lambda=0.5)
 #'
 #' @slot lambda The index \eqn{\lambda}.
 #'
@@ -568,6 +636,14 @@ setValidity("ExponentialBernsteinFunction",
     invisible(TRUE)
   })
 
+setMethod("initialize", "ExponentialBernsteinFunction",
+  function(.Object, lambda = 1) {
+    .Object@lambda <- lambda
+    validObject(.Object)
+
+    invisible(.Object)
+  })
+
 #' @rdname valueOf-methods
 #' @aliases valueOf,ExponentialBernsteinFunction,ANY-method
 #'
@@ -601,7 +677,8 @@ setMethod("valueOf", "ExponentialBernsteinFunction",
 #' Class for the \emph{Gamma Bernstein function}
 #'
 #' @examples
-#' bf <- GammaBernsteinFunction(a=2)
+#' GammaBernsteinFunction()
+#' GammaBernsteinFunction(a=2)
 #'
 #' @slot a Scale parameter for the Lévy measure.
 #'
@@ -646,6 +723,14 @@ setValidity("GammaBernsteinFunction",
     invisible(TRUE)
   })
 
+setMethod("initialize", "GammaBernsteinFunction",
+  function(.Object, a = 1) {
+    .Object@a <- a
+    validObject(.Object)
+
+    invisible(.Object)
+  })
+
 #' @rdname valueOf-methods
 #' @aliases valueOf,GammaBernsteinFunction,ANY-method
 #'
@@ -687,7 +772,8 @@ setMethod("valueOf", "GammaBernsteinFunction",
 #' Class for the \emph{Pareto Bernstein function}
 #'
 #' @examples
-#' bf <- ParetoBernsteinFunction(alpha = 0.2, x0=1)
+#' ParetoBernsteinFunction()
+#' ParetoBernsteinFunction(alpha = 0.2, x0=1)
 #'
 #' @slot alpha The index \eqn{\alpha}
 #' @slot x0 The cutoff point \eqn{x_0}
@@ -736,6 +822,15 @@ setValidity("ParetoBernsteinFunction",
     qassert(object@x0, "N1(0,)")
 
     invisible(TRUE)
+  })
+
+setMethod("initialize", "ParetoBernsteinFunction",
+  function(.Object, alpha = log2(2 - 0.5), x0 = 1e-4) {
+    .Object@alpha <- alpha
+    .Object@x0 <- x0
+    validObject(.Object)
+
+    invisible(.Object)
   })
 
 #' @rdname valueOf-methods

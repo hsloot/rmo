@@ -33,7 +33,8 @@ underlying Gaussian process)}
 }}
 
 \examples{
-bf <- InverseGaussianBernsteinFunction(eta=0.3)
+InverseGaussianBernsteinFunction()
+InverseGaussianBernsteinFunction(eta=0.3)
 
 }
 \references{

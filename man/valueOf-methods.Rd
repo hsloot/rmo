@@ -88,7 +88,7 @@ the representation).}
 This method allows you to calculate the values for a Bernstein function and
 its higher-order, alternating iterated forward differences, i.e.
 \deqn{
-  {(-1)}^{k} \Delta^k \psi(x), x > 0.
+  {(-1)}^{k-1} \Delta^k \psi(x), x > 0.
 }
 }
 \seealso{

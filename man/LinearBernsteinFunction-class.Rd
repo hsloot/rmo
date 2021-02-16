@@ -20,7 +20,8 @@ i.e. \eqn{a = 0} and \eqn{\nu = 0}. In particular,
 }}
 
 \examples{
-bf <- LinearBernsteinFunction(scale = 2)
+LinearBernsteinFunction()
+LinearBernsteinFunction(scale = 2)
 
 }
 \seealso{

@@ -41,7 +41,8 @@ function can be used to approximate the Bernstein function of an
 }}
 
 \examples{
-bf <- ParetoBernsteinFunction(alpha = 0.2, x0=1)
+ParetoBernsteinFunction()
+ParetoBernsteinFunction(alpha = 0.2, x0=1)
 
 }
 \references{

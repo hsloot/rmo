@@ -30,7 +30,8 @@ in Chp. 16 of \insertCite{Schilling2012a}{rmo}.
 }}
 
 \examples{
-bf <- ExponentialBernsteinFunction(lambda=0.5)
+ExponentialBernsteinFunction()
+ExponentialBernsteinFunction(lambda=0.5)
 
 }
 \references{

@@ -28,7 +28,8 @@ foward differences can be calculated in closed form:
 }}
 
 \examples{
-bf <- PoissonBernsteinFunction(lambda=0.2, eta=2)
+PoissonBernsteinFunction()
+PoissonBernsteinFunction(lambda=0.2, eta=2)
 
 }
 \seealso{

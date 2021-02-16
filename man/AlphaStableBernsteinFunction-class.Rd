@@ -35,7 +35,8 @@ in Chp. 16 of \insertCite{Schilling2012a}{rmo}.
 }}
 
 \examples{
-bf <- AlphaStableBernsteinFunction(alpha=0.5)
+AlphaStableBernsteinFunction()
+AlphaStableBernsteinFunction(alpha=0.5)
 
 }
 \references{

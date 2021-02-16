@@ -23,8 +23,9 @@ is to be multiplied.}
 }}
 
 \examples{
+ScaledBernsteinFunction()
 original_bf <- AlphaStableBernsteinFunction(alpha=0.5)
-bf <- ScaledBernsteinFunction(scale=2, original=original_bf)
+ScaledBernsteinFunction(scale=2, original=original_bf)
 
 }
 \seealso{

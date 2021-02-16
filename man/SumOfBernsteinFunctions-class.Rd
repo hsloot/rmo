@@ -22,9 +22,10 @@ is also a Bernstein function.
 }}
 
 \examples{
+SumOfBernsteinFunctions()
 first_bf <- LinearBernsteinFunction(scale=0.2)
 second_bf <- AlphaStableBernsteinFunction(alpha=0.5)
-bf <- SumOfBernsteinFunctions(first=first_bf, second=second_bf)
+SumOfBernsteinFunctions(first=first_bf, second=second_bf)
 
 }
 \seealso{
