@@ -20,6 +20,9 @@
   object,
   x,
   difference_order = 0L,
+  cscale = 1,
+  n = 1L,
+  k = 0L,
   ...,
   method = c("default", "stieltjes", "levy"),
   tolerance = .Machine$double.eps^0.5
@@ -40,8 +43,12 @@
 the Bernstein function is evaluated.}
 
 \item{difference_order}{The order of the alternating iterated forward
-differences taken on the Bernstein function (\eqn{k} in
+differences taken on the Bernstein function (\eqn{j} in
 the representation).}
+
+\item{cscale}{Positive number, the composit scaling factor.}
+
+\item{n}{k Non-negative numbers for the binomial factors.}
 
 \item{...}{arguments to specify properties of the new object, to
       be passed to \code{initialize()}.}

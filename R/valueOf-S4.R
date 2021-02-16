@@ -2,18 +2,21 @@
 NULL
 
 #' @describeIn BernsteinFunction-class
-#'   Calculate the values for a Bernstein function and its higher-order,
-#'   alternating iterated forward differences, i.e.
+#'   Calculate the values for a compound scaled Bernstein function and its higher-order,
+#'   alternating iterated forward differences, possibly scaled by a binomial
+#    coefficient, i.e.
 #'   \deqn{
-#'     {(-1)}^{k-1} \Delta^k \psi(x), x > 0.
+#'     {(-1)}^{j-1} \Delta^j \psi(c x), x > 0.
 #'   }
 #'
 #' @inheritParams levyDensity
 #' @param x Non-negativ numeric vector at which the iterated difference of
 #'   the Bernstein function is evaluated.
 #' @param difference_order The order of the alternating iterated forward
-#'   differences taken on the Bernstein function (\eqn{k} in
+#'   differences taken on the Bernstein function (\eqn{j} in
 #'   the representation).
+#' @param cscale Positive number, the composit scaling factor.
+#' @param n, k Non-negative numbers for the binomial factors.
 #' @param ... Further parameter (passed to [stats::integrate()])
 #'
 #' @details
@@ -34,7 +37,7 @@ NULL
 #'
 #' @export
 setGeneric("valueOf",
-  function(object, x, difference_order = 0L, ...) {
+  function(object, x, difference_order = 0L, cscale = 1, n = 1L, k = 0L, ...) {
     standardGeneric("valueOf")
   })
 
@@ -48,16 +51,19 @@ setGeneric("valueOf",
 #' @importFrom checkmate qassert assert check_numeric check_complex
 #' @export
 setMethod("valueOf", "LinearBernsteinFunction",
-  function(object, x, difference_order = 0L, ...) {
+  function(object, x, difference_order = 0L, cscale = 1, n = 1L, k = 0L, ...) {
     assert(combine = "or",
       check_numeric(x, lower = 0, min.len = 1L, any.missing = FALSE),
       check_complex(x, min.len = 1L, any.missing = FALSE))
     qassert(difference_order, "X1[0,)")
+    qassert(cscale, "N1(0,)")
+    qassert(n, "X1(0,)")
+    qassert(k, "N1[0,)")
 
     if (0L == difference_order) {
-      out <- object@scale * x
+      out <- multiply_binomial_coefficient((object@scale * cscale) * x, n, k)
     } else if (1L == difference_order) {
-      out <- rep(object@scale, length(x))
+      out <- rep(multiply_binomial_coefficient((object@scale * cscale), n, k), length(x))
     } else {
       out <- rep(0, length(x))
     }
@@ -75,16 +81,19 @@ setMethod("valueOf", "LinearBernsteinFunction",
 #' @importFrom checkmate qassert assert check_numeric check_complex
 #' @export
 setMethod("valueOf", "ConstantBernsteinFunction",
-  function(object, x, difference_order = 0L, ...) {
+  function(object, x, difference_order = 0L, cscale = 1, n = 1L, k = 0L, ...) {
     assert(combine = "or",
       check_numeric(x, lower = 0, min.len = 1L, any.missing = FALSE),
       check_complex(x, min.len = 1L, any.missing = FALSE))
     qassert(difference_order, "X1[0,)")
+    qassert(cscale, "N1(0,)")
+    qassert(n, "X1(0,)")
+    qassert(k, "N1[0,)")
 
     if (0L == difference_order) {
-      out <- ifelse(x == 0, 0, object@constant)
+      out <- ifelse(x == 0, 0, multiply_binomial_coefficient(object@constant, n, k))
     } else {
-      out <- ifelse(x == 0, object@constant, 0)
+      out <- ifelse(x == 0, multiply_binomial_coefficient(object@constant, n, k), 0)
     }
 
     out
@@ -99,8 +108,8 @@ setMethod("valueOf", "ConstantBernsteinFunction",
 #'
 #' @export
 setMethod("valueOf", "ScaledBernsteinFunction",
-  function(object, x, difference_order = 0L, ...) {
-    object@scale * valueOf(object@original, x, difference_order, ...)
+  function(object, x, difference_order = 0L, cscale = 1, n = 1L, k = 0L, ...) {
+    object@scale * valueOf(object@original, x, difference_order, cscale, n , k, ...)
   })
 
 
@@ -112,9 +121,9 @@ setMethod("valueOf", "ScaledBernsteinFunction",
 #'
 #' @export
 setMethod("valueOf", "SumOfBernsteinFunctions",
-  function(object, x, difference_order = 0L, ...) {
-    valueOf(object@first, x, difference_order, ...) +
-      valueOf(object@second, x, difference_order, ...)
+  function(object, x, difference_order = 0L, cscale = 1, n = 1L, k = 0L, ...) {
+    valueOf(object@first, x, difference_order, cscale, n, k, ...) +
+      valueOf(object@second, x, difference_order, cscale, n, k, ...)
   })
 
 
@@ -138,8 +147,8 @@ setMethod("valueOf", "SumOfBernsteinFunctions",
 #' and the values of the iterated differences are calculated by using the
 #' representation
 #' \deqn{
-#'   (-1)^{k-1} \Delta^{k} \psi(x)
-#'     = \int_{0}^{\infty} \operatorname{e}^{-ux} (1 - \operatorname{e}^{-u})^k \nu(du) ,
+#'   (-1)^{j-1} \Delta^{j} \psi(x)
+#'     = \int_{0}^{\infty} \operatorname{e}^{-ux} (1 - \operatorname{e}^{-u})^j \nu(du) ,
 #'     \quad x > 0 .
 #' }
 #'
@@ -152,34 +161,37 @@ setMethod("valueOf", "SumOfBernsteinFunctions",
 #' and the values of the iterated differences are calculated by using the
 #' representation
 #' \deqn{
-#'   (-1)^{k-1} \Delta^{k} \psi(x)
-#'     = \sum_{i} \operatorname{e}^{-u_i x} (1 - \operatorname{e}^{-u_i})^k y_i ,
+#'   (-1)^{j-1} \Delta^{j} \psi(x)
+#'     = \sum_{i} \operatorname{e}^{-u_i x} (1 - \operatorname{e}^{-u_i})^j y_i ,
 #'     \quad x > 0 .
 #' }
 #'
 #' @importFrom checkmate qassert
 #' @export
 setMethod("valueOf", "LevyBernsteinFunction",
-  function(object, x, difference_order, ...,
+  function(object, x, difference_order, cscale = 1, n = 1L, k = 0L, ...,
       method = "levy",
       tolerance = .Machine$double.eps^0.5) {
     method <- match.arg(method)
     qassert(x, "N+[0,)")
     qassert(difference_order, "X1[0,)")
+    qassert(cscale, "N1(0,)")
+    qassert(n, "X1(0,)")
+    qassert(k, "N1[0,)")
     levy_density <- levyDensity(object)
     if (0L == difference_order) {
       fct <- function(u, .x) {
-        (1 - exp(-u * .x))
+        (1 - exp(-(u * cscale) * .x))
       }
     } else {
       fct <- function(u, .x) {
-        exp(-u * .x) * (1 - exp(-u))^difference_order
+        exp(-(u * cscale) * .x) * (1 - exp(-(u * cscale)))^difference_order
       }
     }
 
     if ("continuous" == attr(levy_density, "type")) {
       integrand_fn <- function(u, .x) {
-        fct(u, .x) * levy_density(u)
+        multiply_binomial_coefficient(fct(u, .x) * levy_density(u), n, k)
       }
       out <- sapply(x,
         function(.x) {
@@ -188,7 +200,7 @@ setMethod("valueOf", "LevyBernsteinFunction",
             rel.tol = tolerance)$value
         })
     } else {
-      out <- as.vector(levy_density$y %*% outer(levy_density$x, x, fct))
+      out <- multiply_binomial_coefficient(as.vector(levy_density$y %*% outer(levy_density$x, x, fct)), n, k)
     }
 
     out
@@ -210,8 +222,8 @@ setMethod("valueOf", "LevyBernsteinFunction",
 #' and the values of the iterated differences are calculated by using the
 #' representation
 #' \deqn{
-#'   (-1)^{k-1} \Delta^{k} \psi(x)
-#'     = \int_{0}^{\infty} u \mathrm{Beta}(k+1, x + u) \sigma(du) ,
+#'   (-1)^{j-1} \Delta^{j} \psi(x)
+#'     = \int_{0}^{\infty} u \mathrm{Beta}(j+1, x + u) \sigma(du) ,
 #'     \quad x > 0 .
 #' }
 #'
@@ -224,15 +236,15 @@ setMethod("valueOf", "LevyBernsteinFunction",
 #' and the values of the iterated differences are calculated by using the
 #' representation
 #' \deqn{
-#'   (-1)^{k-1} \Delta^{k} \psi(x)
-#'     = \sum_{i} u_i \mathrm{Beta}(k+1, x + u_i) y_i ,
+#'   (-1)^{j-1} \Delta^{j} \psi(x)
+#'     = \sum_{i} u_i \mathrm{Beta}(j+1, x + u_i) y_i ,
 #'     \quad x > 0 .
 #' }
 #'
 #' @importFrom checkmate qassert
 #' @export
 setMethod("valueOf", "CompleteBernsteinFunction",
-  function(object, x, difference_order, ...,
+  function(object, x, difference_order, cscale = 1, n = 1L, k = 0L, ...,
       method = c("stieltjes", "levy"),
       tolerance = .Machine$double.eps^0.5) {
     method <- match.arg(method)
@@ -241,20 +253,23 @@ setMethod("valueOf", "CompleteBernsteinFunction",
     }
     qassert(x, "N+[0,)")
     qassert(difference_order, "X1[0,)")
+    qassert(cscale, "N1(0,)")
+    qassert(n, "X1(0,)")
+    qassert(k, "N1[0,)")
     stieltjes_density <- stieltjesDensity(object)
     if (0L == difference_order) {
       fct <- function(u, .x) {
-        .x * beta(1, .x + u)
+        .x * beta(1, .x + u / cscale)
       }
     } else {
       fct <- function(u, .x) {
-        u * beta(difference_order + 1L, .x + u)
+        (u / cscale) * beta(difference_order + 1L, .x + u / cscale)
       }
     }
 
     if ("continuous" == attr(stieltjes_density, "type")) {
       integrand_fn <- function(u, .x) {
-        fct(u, .x) * stieltjes_density(u)
+        multiply_binomial_coefficient(fct(u, .x) * stieltjes_density(u), n, k)
       }
       out <- sapply(x,
         function(.x) {
@@ -264,7 +279,7 @@ setMethod("valueOf", "CompleteBernsteinFunction",
             rel.tol = tolerance)$value
         })
     } else {
-      out <- as.vector(stieltjes_density$y %*% outer(stieltjes_density$x, x, fct))
+      out <- multiply_binomial_coefficient(as.vector(stieltjes_density$y %*% outer(stieltjes_density$x, x, fct)), n, k)
     }
   })
 
@@ -280,7 +295,7 @@ setMethod("valueOf", "CompleteBernsteinFunction",
 #' @importFrom checkmate qassert assert check_numeric check_complex
 #' @export
 setMethod("valueOf", "PoissonBernsteinFunction",
-  function(object, x, difference_order = 0L, ...,
+  function(object, x, difference_order = 0L, cscale = 1, n = 1L, k = 0L, ...,
       method = c("default", "levy")) {
     method <- match.arg(method)
     if (!"default" == method) {
@@ -290,11 +305,14 @@ setMethod("valueOf", "PoissonBernsteinFunction",
       check_numeric(x, lower = 0, min.len = 1L, any.missing = FALSE),
       check_complex(x, min.len = 1L, any.missing = FALSE))
     qassert(difference_order, "X1[0,)")
+    qassert(cscale, "N1(0,)")
+    qassert(n, "X1(0,)")
+    qassert(k, "N1[0,)")
 
     if (0L == difference_order) {
-      out <- object@lambda * (1 - exp(-x * object@eta))
+      out <- multiply_binomial_coefficient(object@lambda * (1 - exp(-(x * cscale) * object@eta)), n, k)
     } else {
-      out <- callNextMethod(object, x, difference_order, ..., method = "levy")
+      out <- callNextMethod(object, x, difference_order, cscale, n, k, ..., method = "levy")
     }
 
     out
@@ -312,7 +330,7 @@ setMethod("valueOf", "PoissonBernsteinFunction",
 #' @importFrom checkmate qassert assert check_numeric check_complex
 #' @export
 setMethod("valueOf", "AlphaStableBernsteinFunction",
-  function(object, x, difference_order = 0L, ...,
+  function(object, x, difference_order = 0L, cscale = 1, n = 1L, k = 0L, ...,
       method = c("default", "levy", "stieltjes"),
       tolerance = .Machine$double.eps^0.5) {
     method <- match.arg(method)
@@ -323,11 +341,14 @@ setMethod("valueOf", "AlphaStableBernsteinFunction",
       check_numeric(x, lower = 0, min.len = 1L, any.missing = FALSE),
       check_complex(x, min.len = 1L, any.missing = FALSE))
     qassert(difference_order, "X1[0,)")
+    qassert(cscale, "N1(0,)")
+    qassert(n, "X1(0,)")
+    qassert(k, "N1[0,)")
 
     if (0L == difference_order) {
-      out <- x^object@alpha
+      out <- multiply_binomial_coefficient((x * cscale) ^ object@alpha, n, k)
     } else {
-      out <- callNextMethod(object, x, difference_order, ...,
+      out <- callNextMethod(object, x, difference_order, cscale, n, k, ...,
         method = "levy", tolerance = tolerance)
     }
 
@@ -346,7 +367,7 @@ setMethod("valueOf", "AlphaStableBernsteinFunction",
 #' @importFrom checkmate qassert assert check_numeric check_complex
 #' @export
 setMethod("valueOf", "InverseGaussianBernsteinFunction",
-  function(object, x, difference_order = 0L, ...,
+  function(object, x, difference_order = 0L, cscale = 1, n = 1L, k = 0L, ...,
       method = c("default", "levy", "stieltjes"),
       tolerance = .Machine$double.eps^0.5) {
     method <- match.arg(method)
@@ -357,11 +378,14 @@ setMethod("valueOf", "InverseGaussianBernsteinFunction",
       check_numeric(x, lower = 0, min.len = 1L, any.missing = FALSE),
       check_complex(x, min.len = 1L, any.missing = FALSE))
     qassert(difference_order, "X1[0,)")
+    qassert(cscale, "N1(0,)")
+    qassert(n, "X1(0,)")
+    qassert(k, "N1[0,)")
 
     if (0L == difference_order) {
-      out <- sqrt(2*x + object@eta^2) - object@eta
+      out <- multiply_binomial_coefficient(sqrt(2 * (x * cscale) + object@eta ^ 2) - object@eta, n, k)
     } else {
-      out <- callNextMethod(object, x, difference_order, ...,
+      out <- callNextMethod(object, x, difference_order, cscale, n, k, ...,
         method = "levy", tolerance = tolerance)
     }
 
@@ -380,7 +404,7 @@ setMethod("valueOf", "InverseGaussianBernsteinFunction",
 #' @importFrom checkmate qassert
 #' @export
 setMethod("valueOf", "ExponentialBernsteinFunction",
-  function(object, x, difference_order = 0L, ...,
+  function(object, x, difference_order = 0L, cscale = 1, n = 1L, k = 0L,...,
       method = c("default", "stieltjes", "levy"),
       tolerance = .Machine$double.eps^0.5) {
     method <- match.arg(method)
@@ -389,11 +413,14 @@ setMethod("valueOf", "ExponentialBernsteinFunction",
     }
     qassert(x, "N+[0,)")
     qassert(difference_order, "X1[0,)")
+    qassert(cscale, "N1(0,)")
+    qassert(n, "X1(0,)")
+    qassert(k, "N1[0,)")
 
     if (0L == difference_order) {
-      out <- x / (x + object@lambda)
+      out <- multiply_binomial_coefficient((x * cscale) / ((x * cscale) + object@lambda), n, k)
     } else {
-      out <- callNextMethod(object, x, difference_order, ...,
+      out <- callNextMethod(object, x, difference_order, cscale, n, k, ...,
         method = "stieltjes", tolerance = tolerance)
     }
 
@@ -413,7 +440,7 @@ setMethod("valueOf", "ExponentialBernsteinFunction",
 #' @importFrom stats integrate
 #' @export
 setMethod("valueOf", "GammaBernsteinFunction",
-  function(object, x, difference_order = 0L, ...,
+  function(object, x, difference_order = 0L, cscale = 1, n = 1L, k = 0L, ...,
       method = c("default", "stieltjes", "levy"),
       tolerance = .Machine$double.eps^0.5) {
     method <- match.arg(method)
@@ -422,11 +449,14 @@ setMethod("valueOf", "GammaBernsteinFunction",
     }
     qassert(x, "N+[0,)")
     qassert(difference_order, "X1[0,)")
+    qassert(cscale, "N1(0,)")
+    qassert(n, "X1(0,)")
+    qassert(k, "N1[0,)")
 
     if (0L == difference_order) {
-      out <- log(1 + x/object@a)
+      out <- multiply_binomial_coefficient(log(1 + (x * cscale) / object@a), n, k)
     } else {
-      out <- callNextMethod(object, x, difference_order, ...,
+      out <- callNextMethod(object, x, difference_order, cscale, n, k, ...,
         method = "levy", tolerance = tolerance)
     }
 
@@ -446,7 +476,7 @@ setMethod("valueOf", "GammaBernsteinFunction",
 #' @importFrom stats pgamma
 #' @export
 setMethod("valueOf", "ParetoBernsteinFunction",
-  function(object, x, difference_order = 0L, ...,
+  function(object, x, difference_order = 0L, cscale = 1, n = 1L, k = 0L, ...,
       method = c("default", "stieltjes", "levy"),
       tolerance = .Machine$double.eps^0.5) {
     method <- match.arg(method)
@@ -455,13 +485,18 @@ setMethod("valueOf", "ParetoBernsteinFunction",
     }
     qassert(x, "N+[0,)")
     qassert(difference_order, "X1[0,)")
+    qassert(cscale, "N1(0,)")
+    qassert(n, "X1(0,)")
+    qassert(k, "N1[0,)")
 
     if (0L == difference_order) {
-      out <- 1 - exp(-object@x0*x) + (x*object@x0) ^ (object@alpha) *
-        pgamma(object@x0*x, 1-object@alpha, lower.tail=FALSE) *
-        gamma(1-object@alpha)
+      out <- multiply_binomial_coefficient(
+        1 - exp(-object@x0 * (x * cscale)) + (object@x0 * (x * cscale)) ^ (object@alpha) *
+          pgamma(object@x0 * (x * cscale), 1 - object@alpha, lower.tail=FALSE) *
+          gamma(1 - object@alpha),
+        n, k)
     } else {
-      out <- callNextMethod(object, x, difference_order, ...,
+      out <- callNextMethod(object, x, difference_order, cscale, n, k, ...,
         method = "levy", tolerance = tolerance)
     }
 
