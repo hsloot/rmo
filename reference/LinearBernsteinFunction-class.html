@@ -159,7 +159,7 @@ $$</p>
 <span class='fu'>initialize</span><span class='op'>(</span><span class='va'>.Object</span>, scale <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
 
 <span class='co'># S4 method for LinearBernsteinFunction</span>
-<span class='fu'><a href='BernsteinFunction-class.html'>valueOf</a></span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>x</span>, difference_order <span class='op'>=</span> <span class='fl'>0L</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+<span class='fu'><a href='BernsteinFunction-class.html'>valueOf</a></span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>x</span>, difference_order <span class='op'>=</span> <span class='fl'>0L</span>, cscale <span class='op'>=</span> <span class='fl'>1</span>, n <span class='op'>=</span> <span class='fl'>1L</span>, k <span class='op'>=</span> <span class='fl'>0L</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -186,8 +186,20 @@ the Bernstein function is evaluated.</p></td>
     <tr>
       <th>difference_order</th>
       <td><p>The order of the alternating iterated forward
-differences taken on the Bernstein function (\(k\) in
+differences taken on the Bernstein function (\(j\) in
 the representation).</p></td>
+    </tr>
+    <tr>
+      <th>cscale</th>
+      <td><p>Positive number, the composit scaling factor.</p></td>
+    </tr>
+    <tr>
+      <th>n</th>
+      <td><p>Non-negative numbers for the binomial factors.</p></td>
+    </tr>
+    <tr>
+      <th>k</th>
+      <td><p>Non-negative numbers for the binomial factors.</p></td>
     </tr>
     <tr>
       <th>...</th>

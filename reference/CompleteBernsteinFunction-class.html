@@ -164,8 +164,11 @@ $$</p>
   <span class='va'>object</span>,
   <span class='va'>x</span>,
   <span class='va'>difference_order</span>,
+  cscale <span class='op'>=</span> <span class='fl'>1</span>,
+  n <span class='op'>=</span> <span class='fl'>1L</span>,
+  k <span class='op'>=</span> <span class='fl'>0L</span>,
   <span class='va'>...</span>,
-  method <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"stieltjes"</span>, <span class='st'>"levy"</span><span class='op'>)</span>,
+  method <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"default"</span>, <span class='st'>"stieltjes"</span>, <span class='st'>"levy"</span><span class='op'>)</span>,
   tolerance <span class='op'>=</span> <span class='va'>.Machine</span><span class='op'>$</span><span class='va'>double.eps</span><span class='op'>^</span><span class='fl'>0.5</span>
 <span class='op'>)</span></pre>
 
@@ -186,8 +189,20 @@ the Bernstein function is evaluated.</p></td>
     <tr>
       <th>difference_order</th>
       <td><p>The order of the alternating iterated forward
-differences taken on the Bernstein function (\(k\) in
+differences taken on the Bernstein function (\(j\) in
 the representation).</p></td>
+    </tr>
+    <tr>
+      <th>cscale</th>
+      <td><p>Positive number, the composit scaling factor.</p></td>
+    </tr>
+    <tr>
+      <th>n</th>
+      <td><p>Non-negative numbers for the binomial factors.</p></td>
+    </tr>
+    <tr>
+      <th>k</th>
+      <td><p>Non-negative numbers for the binomial factors.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -216,8 +231,8 @@ $$
 and the values of the iterated differences are calculated by using the
 representation
 $$
-  (-1)^{k-1} \Delta^{k} \psi(x)
-    = \int_{0}^{\infty} u \mathrm{Beta}(k+1, x + u) \sigma(du) ,
+  (-1)^{j-1} \Delta^{j} \psi(x)
+    = \int_{0}^{\infty} u \mathrm{Beta}(j+1, x + u) \sigma(du) ,
     \quad x &gt; 0 .
 $$</p>
 <p>For <em>discrete Lévy densities</em> \(\sigma(du) = \sum_{i} y_i \delta_{u_i}(du)\), the
@@ -229,8 +244,8 @@ $$
 and the values of the iterated differences are calculated by using the
 representation
 $$
-  (-1)^{k-1} \Delta^{k} \psi(x)
-    = \sum_{i} u_i \mathrm{Beta}(k+1, x + u_i) y_i ,
+  (-1)^{j-1} \Delta^{j} \psi(x)
+    = \sum_{i} u_i \mathrm{Beta}(j+1, x + u_i) y_i ,
     \quad x &gt; 0 .
 $$</p>
     <h2 class="hasAnchor" id="functions"><a class="anchor" href="#functions"></a>Functions</h2>

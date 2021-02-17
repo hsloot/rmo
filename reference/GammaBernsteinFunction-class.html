@@ -144,7 +144,7 @@ $$" />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Class for the <em>Gamma Bernstein function</em></h1>
-    <small class="dont-index">Source: <a href='https://github.com/hsloot/rmo/blob/master/R/allClass-S4.R'><code>R/allClass-S4.R</code></a>, <a href='https://github.com/hsloot/rmo/blob/master/R/allInitialize-S4.R'><code>R/allInitialize-S4.R</code></a>, <a href='https://github.com/hsloot/rmo/blob/master/R/levyDensity-S4.R'><code>R/levyDensity-S4.R</code></a>, and 2 more</small>
+    <small class="dont-index">Source: <a href='https://github.com/hsloot/rmo/blob/master/R/allClass-S4.R'><code>R/allClass-S4.R</code></a>, <a href='https://github.com/hsloot/rmo/blob/master/R/allInitialize-S4.R'><code>R/allInitialize-S4.R</code></a>, <a href='https://github.com/hsloot/rmo/blob/master/R/levyDensity-S4.R'><code>R/levyDensity-S4.R</code></a>, and 1 more</small>
     <div class="hidden name"><code>GammaBernsteinFunction-class.Rd</code></div>
     </div>
 
@@ -164,17 +164,7 @@ $$</p>
 <span class='fu'><a href='LevyBernsteinFunction-class.html'>levyDensity</a></span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span>
 
 <span class='co'># S4 method for GammaBernsteinFunction</span>
-<span class='fu'><a href='CompleteBernsteinFunction-class.html'>stieltjesDensity</a></span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span>
-
-<span class='co'># S4 method for GammaBernsteinFunction</span>
-<span class='fu'><a href='BernsteinFunction-class.html'>valueOf</a></span><span class='op'>(</span>
-  <span class='va'>object</span>,
-  <span class='va'>x</span>,
-  difference_order <span class='op'>=</span> <span class='fl'>0L</span>,
-  <span class='va'>...</span>,
-  method <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"default"</span>, <span class='st'>"stieltjes"</span>, <span class='st'>"levy"</span><span class='op'>)</span>,
-  tolerance <span class='op'>=</span> <span class='va'>.Machine</span><span class='op'>$</span><span class='va'>double.eps</span><span class='op'>^</span><span class='fl'>0.5</span>
-<span class='op'>)</span></pre>
+<span class='fu'><a href='CompleteBernsteinFunction-class.html'>stieltjesDensity</a></span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -192,32 +182,6 @@ $$</p>
       <td><p>An object deriving from <a href='LevyBernsteinFunction-class.html'>LevyBernsteinFunction</a>
 (for <code>levyDensity</code>) or <a href='CompleteBernsteinFunction-class.html'>CompleteBernsteinFunction</a>
 (for <code>stieltjesDensity</code>).</p></td>
-    </tr>
-    <tr>
-      <th>x</th>
-      <td><p>Non-negativ numeric vector at which the iterated difference of
-the Bernstein function is evaluated.</p></td>
-    </tr>
-    <tr>
-      <th>difference_order</th>
-      <td><p>The order of the alternating iterated forward
-differences taken on the Bernstein function (\(k\) in
-the representation).</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>arguments to specify properties of the new object, to
-      be passed to <code>initialize()</code>.</p></td>
-    </tr>
-    <tr>
-      <th>method</th>
-      <td><p>Method to calculate the result; use <code>method = "levy"</code> for
-using the Lévy representation and <code>method = "stieltjes"</code> for using the
-Stieltjes representation.</p></td>
-    </tr>
-    <tr>
-      <th>tolerance</th>
-      <td><p>(Relative) tolerance, passed down to <code><a href='https://rdrr.io/r/stats/integrate.html'>stats::integrate()</a></code></p></td>
     </tr>
     </table>
 
@@ -243,9 +207,6 @@ in Chp. 16 of (Schilling et al. 2012)
 <li><p><code>initialize,GammaBernsteinFunction-method</code>: Constructor</p></li>
 <li><p><code>levyDensity,GammaBernsteinFunction-method</code>: see <a href='LevyBernsteinFunction-class.html'>LevyBernsteinFunction</a></p></li>
 <li><p><code>stieltjesDensity,GammaBernsteinFunction-method</code>: see <a href='CompleteBernsteinFunction-class.html'>CompleteBernsteinFunction</a></p></li>
-<li><p><code>valueOf,GammaBernsteinFunction-method</code>: Calculates the iterated differences of the Bernstein function, see <code><a href='BernsteinFunction-class.html'>valueOf()</a></code>.
-The default method for calculating the iterated differences uses the
-Lévy representation.</p></li>
 </ul>
     <h2 class="hasAnchor" id="slots"><a class="anchor" href="#slots"></a>Slots</h2>
 
@@ -281,8 +242,7 @@ doi: <a href='https://doi.org/10.1515/9783110269338'>10.1515/9783110269338</a>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><a href='BernsteinFunction-class.html'>BernsteinFunction</a>, <a href='LevyBernsteinFunction-class.html'>LevyBernsteinFunction</a>,
-<a href='CompleteBernsteinFunction-class.html'>CompleteBernsteinFunction</a>, <code><a href='BernsteinFunction-class.html'>valueOf()</a></code></p>
-<p>GammaBernsteinFunction</p></div>
+<a href='CompleteBernsteinFunction-class.html'>CompleteBernsteinFunction</a>, <code><a href='BernsteinFunction-class.html'>valueOf()</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>GammaBernsteinFunction</span><span class='op'>(</span><span class='op'>)</span>

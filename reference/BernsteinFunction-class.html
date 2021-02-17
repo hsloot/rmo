@@ -159,7 +159,7 @@ for non-negative constants \(a, b \geq 0\), called <em>killing rate</em> and
 <em>drift</em>, and a <em>Lévy measure</em> \(\nu\) on \((0, \infty)\).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>valueOf</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>x</span>, difference_order <span class='op'>=</span> <span class='fl'>0L</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>valueOf</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>x</span>, difference_order <span class='op'>=</span> <span class='fl'>0L</span>, cscale <span class='op'>=</span> <span class='fl'>1</span>, n <span class='op'>=</span> <span class='fl'>1L</span>, k <span class='op'>=</span> <span class='fl'>0L</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -178,8 +178,16 @@ the Bernstein function is evaluated.</p></td>
     <tr>
       <th>difference_order</th>
       <td><p>The order of the alternating iterated forward
-differences taken on the Bernstein function (\(k\) in
+differences taken on the Bernstein function (\(j\) in
 the representation).</p></td>
+    </tr>
+    <tr>
+      <th>cscale</th>
+      <td><p>Positive number, the composit scaling factor.</p></td>
+    </tr>
+    <tr>
+      <th>n, k</th>
+      <td><p>Non-negative numbers for the binomial factors.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -225,10 +233,10 @@ depends on the case and can be manually overwritten with
 
     
 <ul>
-<li><p><code>valueOf</code>: Calculate the values for a Bernstein function and its higher-order,
-alternating iterated forward differences, i.e.
+<li><p><code>valueOf</code>: Calculate the values for a compound scaled Bernstein function and its higher-order,
+alternating iterated forward differences, possibly scaled by a binomial
 $$
-    {(-1)}^{k-1} \Delta^k \psi(x), x &gt; 0.
+    {(-1)}^{j-1} \Delta^j \psi(c x), x &gt; 0.
   $$</p></li>
 </ul>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
