@@ -123,12 +123,12 @@ rmo_arnold_naive <- function(n, d, intensities) { # nolint
 #'
 #' @param n Number of samples (> 0)
 #' @param d Dimension (== 2)
-#' @param ex_intensities Exchangeable shock intensities
+#' @param ex_intensities (Scaled) exchangeable shock intensities
 #'   (length == 2; all >= 0, any > 0)
 #'
 #' @examples
-#' rexmo_markovian_naive(10, 3, c(0.4, 0.3, 0.2))
-#' rexmo_markovian_naive(10, 3, c(1, 0, 0)) ## independence
+#' rexmo_markovian_naive(10, 3, c(3*0.4, 2*0.3, 0.2))
+#' rexmo_markovian_naive(10, 3, c(3, 0, 0)) ## independence
 #' rexmo_markovian_naive(10, 3, c(0, 0, 1)) ## comonotone
 #' @include sample-helper.R
 #' @export
@@ -138,6 +138,9 @@ rexmo_markovian_naive <- function(n, d, ex_intensities) { # nolint
     is.numeric(d) && 1L == length(d) && 0 == d %% 1 && d > 0 &&
     is.numeric(ex_intensities) && d == length(ex_intensities) &&
       all(ex_intensities >= 0) && any(ex_intensities > 0))
+
+  ## convert to unscaled exchangeable intensities
+  ex_intensities <- sapply(1:d, function(i) ex_intensities[i] / choose(d, i))
 
   ## store transition intensities and transition probabilities for all possible
   ## states (number of destroyed components) in a list
@@ -204,7 +207,7 @@ rexmo_markovian_naive <- function(n, d, ex_intensities) { # nolint
 #'
 #' @param n Number of samples (> 0)
 #' @param d Dimension (== 2)
-#' @param ex_intensities Exchangeable shock intensities
+#' @param ex_intensities (Scaled) exchangeable shock intensities
 #'   (length == 2; all >= 0, any > 0)
 #'
 #' @details
@@ -217,8 +220,8 @@ rexmo_markovian_naive <- function(n, d, ex_intensities) { # nolint
 #' should only be used for low dimensions to test.
 #'
 #' @examples
-#' rexmo_markovian_naive_recursive(10, 3, c(0.4, 0.3, 0.2))
-#' rexmo_markovian_naive_recursive(10, 3, c(1, 0, 0)) ## independence
+#' rexmo_markovian_naive_recursive(10, 3, c(3*0.4, 2*0.3, 0.2))
+#' rexmo_markovian_naive_recursive(10, 3, c(3*1, 0, 0)) ## independence
 #' rexmo_markovian_naive_recursive(10, 3, c(0, 0, 1)) ## comonotone
 #' @include sample-helper.R
 #' @export
@@ -229,6 +232,9 @@ rexmo_markovian_naive_recursive <- function( # nolint
     is.numeric(d) && 1L == length(d) && 0 == d %% 1 && d > 0 &&
     is.numeric(ex_intensities) && d == length(ex_intensities) &&
       all(ex_intensities >= 0) && any(ex_intensities > 0))
+
+  ## convert to unscaled exchangeable intensities
+  ex_intensities <- sapply(1:d, function(i) ex_intensities[i] / choose(d, i))
 
   ## calculate the corresponding reparametrisation for the
   ## `ex_intensities` parameters with

@@ -3,22 +3,23 @@
 #include <algorithm>
 #include <cmath>
 #include <limits>
+#include <numeric>
 #include <type_traits>
 #include <vector>
-#include <numeric>
 
 #include "rmolib/math/binomial_coefficient.hpp"
 #include "rmolib/math/next_integral_value.hpp"
 #include "rmolib/random/multivariate/internal/exmo_param_type.hpp"
-#include "rmolib/type_traits/iterator.hpp"
 #include "rmolib/type_traits/is_safe_numeric_cast.hpp"
+#include "rmolib/type_traits/iterator.hpp"
 
 namespace rmolib {
 
 namespace random {
 
 template <typename _RealType, typename _ExponentialDistribution,
-          typename _UniformIntDistribution, typename _DiscreteDistribution, typename _ShuffleOperation>
+          typename _UniformIntDistribution, typename _DiscreteDistribution,
+          typename _ShuffleOperation>
 class markovian_exmo_distribution {
  public:
   using result_type = std::vector<_RealType>;
@@ -27,9 +28,7 @@ class markovian_exmo_distribution {
    public:
     using distribution_type = markovian_exmo_distribution;
 
-    param_type() {
-      __init_empty();
-    };
+    param_type() { __init_empty(); };
 
     template <typename _InputIterator>
     explicit param_type(const std::size_t dim, _InputIterator first,
@@ -61,12 +60,6 @@ class markovian_exmo_distribution {
                      [total_intensity = intensity_parm.lambda()](const auto v) {
                        return v * total_intensity;
                      });
-      std::transform(
-          out.cbegin(), out.cend(), out.begin(),
-          [j = std::size_t{0}, d = out.size()](const auto v) mutable {
-            return math::multiply_binomial_coefficient(
-                v, d, ++j, std::divides<std::remove_cv_t<decltype(v)>>{});
-          });
       return out;
     }
 
@@ -121,26 +114,24 @@ class markovian_exmo_distribution {
       __validate_input(dim_, first, last);
 
       auto next_submodel = [](auto& v) {
-        std::transform(v.cbegin() + 1, v.cend(), v.cbegin(), v.begin(),
-                       std::plus<double>());
-        v.pop_back();
-      };
-      auto scale_ex_intensities = [](auto v) {
-        std::transform(v.cbegin(), v.cend(), v.begin(),
-                       [j = std::size_t{0}, d = v.size()](double x) mutable {
-                         return math::multiply_binomial_coefficient(x, d, ++j);
+        std::transform(v.cbegin(), v.cend(), v.cbegin() + 1, v.begin(),
+                       [nom = v.size(), l = std::size_t{0}](
+                           const auto x, const auto y) mutable {
+                         ++l;
+                         return static_cast<_RealType>(nom - l) /
+                                    static_cast<_RealType>(nom) * x +
+                                static_cast<_RealType>(l + 1) /
+                                    static_cast<_RealType>(nom) * y;
                        });
-        return v;
+        v.pop_back();
       };
 
       markov_parm_.clear();
       std::vector<_RealType> ex_intensities{first, last};
       while (!ex_intensities.empty()) {
-        auto scaled_ex_intensities = scale_ex_intensities(ex_intensities);
-        auto intensity_parm = exponential_parm_t{
-            std::accumulate(scaled_ex_intensities.cbegin(),
-                            scaled_ex_intensities.cend(), _RealType{0})};
-        auto discrete_parm = discrete_parm_t{scaled_ex_intensities};
+        auto intensity_parm = exponential_parm_t{std::accumulate(
+            ex_intensities.cbegin(), ex_intensities.cend(), _RealType{0})};
+        auto discrete_parm = discrete_parm_t{ex_intensities};
         markov_parm_.emplace_back(std::make_pair(std::move(intensity_parm),
                                                  std::move(discrete_parm)));
 

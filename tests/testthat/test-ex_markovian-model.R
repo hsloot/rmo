@@ -10,7 +10,7 @@ test_that("Exchangeable Arnold model for d = 2", {
   ## all equal
   args <- list(
     "d" = 2,
-    ex_intensities = rep(1, times = 2)
+    ex_intensities = sapply(1:2, function(i) choose(2, i))
   )
   expect_equal_rn_generation(
     rexmo_markovian, testutils.rmo::rexmo_markovian_bivariate,
@@ -94,7 +94,7 @@ test_that("Alternative implementation in R for d>2", {
   ## all equal
   args <- list(
     "d" = d,
-    "ex_intensities" = rep(1, times = d)
+    "ex_intensities" = sapply(1:d, function(i) choose(d, i))
   )
   expect_equal_rn_generation(
     rexmo_markovian, testutils.rmo::rexmo_markovian_naive_recursive,
@@ -180,7 +180,7 @@ test_that("Exchangeable Arnold model implementation in C++", {
   ## all equal
   args <- list(
     "d" = d,
-    "ex_intensities" = rep(1, times = d)
+    "ex_intensities" = sapply(1:d, function(i) choose(d, i))
   )
   expect_equal_rn_generation(
     rexmo_markovian, testutils.rmo::rexmo_markovian_naive,
