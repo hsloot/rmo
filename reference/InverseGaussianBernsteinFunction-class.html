@@ -143,7 +143,7 @@ $$" />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Class for the <em>Inverse Gaussian Bernstein function</em></h1>
-    <small class="dont-index">Source: <a href='https://github.com/hsloot/rmo/blob/master/R/allClass-S4.R'><code>R/allClass-S4.R</code></a>, <a href='https://github.com/hsloot/rmo/blob/master/R/allInitialize-S4.R'><code>R/allInitialize-S4.R</code></a>, <a href='https://github.com/hsloot/rmo/blob/master/R/levyDensity-S4.R'><code>R/levyDensity-S4.R</code></a>, and 1 more</small>
+    <small class="dont-index">Source: <a href='https://github.com/hsloot/rmo/blob/master/R/allClass-S4.R'><code>R/allClass-S4.R</code></a>, <a href='https://github.com/hsloot/rmo/blob/master/R/allInitialize-S4.R'><code>R/allInitialize-S4.R</code></a>, <a href='https://github.com/hsloot/rmo/blob/master/R/levyDensity-S4.R'><code>R/levyDensity-S4.R</code></a>, and 2 more</small>
     <div class="hidden name"><code>InverseGaussianBernsteinFunction-class.Rd</code></div>
     </div>
 
@@ -162,12 +162,15 @@ $$</p>
 <span class='fu'><a href='LevyBernsteinFunction-class.html'>levyDensity</a></span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span>
 
 <span class='co'># S4 method for InverseGaussianBernsteinFunction</span>
+<span class='fu'><a href='CompleteBernsteinFunction-class.html'>stieltjesDensity</a></span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span>
+
+<span class='co'># S4 method for InverseGaussianBernsteinFunction</span>
 <span class='fu'><a href='BernsteinFunction-class.html'>valueOf</a></span><span class='op'>(</span>
   <span class='va'>object</span>,
   <span class='va'>x</span>,
   difference_order <span class='op'>=</span> <span class='fl'>0L</span>,
   <span class='va'>...</span>,
-  method <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"default"</span>, <span class='st'>"levy"</span><span class='op'>)</span>,
+  method <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"default"</span>, <span class='st'>"levy"</span>, <span class='st'>"stieltjes"</span><span class='op'>)</span>,
   tolerance <span class='op'>=</span> <span class='va'>.Machine</span><span class='op'>$</span><span class='va'>double.eps</span><span class='op'>^</span><span class='fl'>0.5</span>
 <span class='op'>)</span></pre>
 
@@ -228,6 +231,9 @@ $$
      u^{3/2}} e^{-\frac{1}{2}\eta^2 u} du, x&gt;0, k&gt;0.
 $$</p>
 <p>This Bernstein function can be found on p. 309 in (Mai and Scherer 2017)
+.
+Furthermore it is  a transformation of no. 2 in the list of complete Bernstein
+functions in Chp. 16 of (Schilling et al. 2012)
 .</p>
     <h2 class="hasAnchor" id="functions"><a class="anchor" href="#functions"></a>Functions</h2>
 
@@ -235,6 +241,7 @@ $$</p>
 <ul>
 <li><p><code>initialize,InverseGaussianBernsteinFunction-method</code>: Constructor</p></li>
 <li><p><code>levyDensity,InverseGaussianBernsteinFunction-method</code>: see <a href='LevyBernsteinFunction-class.html'>LevyBernsteinFunction</a></p></li>
+<li><p><code>stieltjesDensity,InverseGaussianBernsteinFunction-method</code>: see <a href='CompleteBernsteinFunction-class.html'>CompleteBernsteinFunction</a></p></li>
 <li><p><code>valueOf,InverseGaussianBernsteinFunction-method</code>: Calculates the iterated differences of the Bernstein function, see <code><a href='BernsteinFunction-class.html'>valueOf()</a></code>.
 The default method for calculating the iterated differences uses the
 Lévy representation.</p></li>
@@ -257,13 +264,25 @@ underlying Gaussian process)</p></dd>
     = \frac{1}{\sqrt{2 \pi u^3}} \operatorname{e}^{-\frac{1}{2} \eta^2 u} ,
     \quad u &gt; 0 .
 $$</p>
+    <h2 class="hasAnchor" id="stieltjes-density"><a class="anchor" href="#stieltjes-density"></a>Stieltjes density</h2>
+
+    
+
+<p>$$
+  \sigma(du)
+    = \frac{\sin(\pi / 2)}{\pi} \cdot \frac{\sqrt{2 x - \eta^2}}{x} , \quad u &gt; \eta^2 / 2 .
+$$</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Mai J, Scherer M (2017).
 <em>Simulating copulas: stochastic models, sampling algorithms and applications</em>,  Series in Quantitative Finance, 2 edition.
 World Scientific.
 doi: <a href='https://doi.org/10.1142/10265'>10.1142/10265</a>
-, <a href='https://doi.org/10.1142/10265'>https://doi.org/10.1142/10265</a>.</p>
+, <a href='https://doi.org/10.1142/10265'>https://doi.org/10.1142/10265</a>.<br /><br /> Schilling RL, Song R, Vondracek Z (2012).
+<em>Bernstein functions</em>, 2 edition.
+De Gruyter.
+doi: <a href='https://doi.org/10.1515/9783110269338'>10.1515/9783110269338</a>
+, <a href='https://doi.org/10.1515/9783110269338'>https://doi.org/10.1515/9783110269338</a>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><a href='BernsteinFunction-class.html'>BernsteinFunction</a>, <a href='LevyBernsteinFunction-class.html'>LevyBernsteinFunction</a>,
