@@ -6,12 +6,12 @@
 using namespace Rcpp;
 
 // multiply_binomial_coefficient
-double multiply_binomial_coefficient(const double x, const std::size_t n, const std::size_t k);
+NumericVector multiply_binomial_coefficient(const NumericVector& x, const std::size_t n, const std::size_t k);
 RcppExport SEXP _rmo_multiply_binomial_coefficient(SEXP xSEXP, SEXP nSEXP, SEXP kSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const double >::type x(xSEXP);
+    Rcpp::traits::input_parameter< const NumericVector& >::type x(xSEXP);
     Rcpp::traits::input_parameter< const std::size_t >::type n(nSEXP);
     Rcpp::traits::input_parameter< const std::size_t >::type k(kSEXP);
     rcpp_result_gen = Rcpp::wrap(multiply_binomial_coefficient(x, n, k));
@@ -19,12 +19,12 @@ BEGIN_RCPP
 END_RCPP
 }
 // divide_binomial_coefficient
-double divide_binomial_coefficient(const double x, const std::size_t n, const std::size_t k);
+NumericVector divide_binomial_coefficient(const NumericVector& x, const std::size_t n, const std::size_t k);
 RcppExport SEXP _rmo_divide_binomial_coefficient(SEXP xSEXP, SEXP nSEXP, SEXP kSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const double >::type x(xSEXP);
+    Rcpp::traits::input_parameter< const NumericVector& >::type x(xSEXP);
     Rcpp::traits::input_parameter< const std::size_t >::type n(nSEXP);
     Rcpp::traits::input_parameter< const std::size_t >::type k(kSEXP);
     rcpp_result_gen = Rcpp::wrap(divide_binomial_coefficient(x, n, k));

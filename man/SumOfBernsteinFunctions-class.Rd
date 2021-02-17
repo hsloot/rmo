@@ -17,7 +17,7 @@
   second = LinearBernsteinFunction(0.5)
 )
 
-\S4method{valueOf}{SumOfBernsteinFunctions}(object, x, difference_order = 0L, ...)
+\S4method{valueOf}{SumOfBernsteinFunctions}(object, x, difference_order = 0L, cscale = 1, n = 1L, k = 0L, ...)
 }
 \arguments{
 \item{.Object}{ An object:  see the \dQuote{Initialize Methods} section.}
@@ -34,8 +34,14 @@
 the Bernstein function is evaluated.}
 
 \item{difference_order}{The order of the alternating iterated forward
-differences taken on the Bernstein function (\eqn{k} in
+differences taken on the Bernstein function (\eqn{j} in
 the representation).}
+
+\item{cscale}{Positive number, the composit scaling factor.}
+
+\item{n}{Non-negative numbers for the binomial factors.}
+
+\item{k}{Non-negative numbers for the binomial factors.}
 
 \item{...}{arguments to specify properties of the new object, to
       be passed to \code{initialize()}.}

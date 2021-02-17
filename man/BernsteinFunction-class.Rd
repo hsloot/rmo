@@ -6,7 +6,7 @@
 \alias{valueOf}
 \title{Virtual Class \code{BernsteinFunction} for Bernstein Functions}
 \usage{
-valueOf(object, x, difference_order = 0L, ...)
+valueOf(object, x, difference_order = 0L, cscale = 1, n = 1L, k = 0L, ...)
 }
 \arguments{
 \item{object}{An object deriving from \linkS4class{LevyBernsteinFunction}
@@ -17,8 +17,12 @@ valueOf(object, x, difference_order = 0L, ...)
 the Bernstein function is evaluated.}
 
 \item{difference_order}{The order of the alternating iterated forward
-differences taken on the Bernstein function (\eqn{k} in
+differences taken on the Bernstein function (\eqn{j} in
 the representation).}
+
+\item{cscale}{Positive number, the composit scaling factor.}
+
+\item{n, k}{Non-negative numbers for the binomial factors.}
 
 \item{...}{Further parameter (passed to \code{\link[stats:integrate]{stats::integrate()}})}
 }
@@ -68,10 +72,10 @@ depends on the case and can be manually overwritten with
 }
 \section{Functions}{
 \itemize{
-\item \code{valueOf}: Calculate the values for a Bernstein function and its higher-order,
-alternating iterated forward differences, i.e.
+\item \code{valueOf}: Calculate the values for a compound scaled Bernstein function and its higher-order,
+alternating iterated forward differences, possibly scaled by a binomial
 \deqn{
-    {(-1)}^{k-1} \Delta^k \psi(x), x > 0.
+    {(-1)}^{j-1} \Delta^j \psi(c x), x > 0.
   }
 }}
 

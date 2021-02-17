@@ -15,8 +15,11 @@ stieltjesDensity(object)
   object,
   x,
   difference_order,
+  cscale = 1,
+  n = 1L,
+  k = 0L,
   ...,
-  method = c("stieltjes", "levy"),
+  method = c("default", "stieltjes", "levy"),
   tolerance = .Machine$double.eps^0.5
 )
 }
@@ -29,8 +32,14 @@ stieltjesDensity(object)
 the Bernstein function is evaluated.}
 
 \item{difference_order}{The order of the alternating iterated forward
-differences taken on the Bernstein function (\eqn{k} in
+differences taken on the Bernstein function (\eqn{j} in
 the representation).}
+
+\item{cscale}{Positive number, the composit scaling factor.}
+
+\item{n}{Non-negative numbers for the binomial factors.}
+
+\item{k}{Non-negative numbers for the binomial factors.}
 
 \item{...}{Further parameter (passed to \code{\link[stats:integrate]{stats::integrate()}})}
 
@@ -58,8 +67,8 @@ calculated with \code{\link[stats:integrate]{stats::integrate()}} by using the r
 and the values of the iterated differences are calculated by using the
 representation
 \deqn{
-  (-1)^{k-1} \Delta^{k} \psi(x)
-    = \int_{0}^{\infty} u \mathrm{Beta}(k+1, x + u) \sigma(du) ,
+  (-1)^{j-1} \Delta^{j} \psi(x)
+    = \int_{0}^{\infty} u \mathrm{Beta}(j+1, x + u) \sigma(du) ,
     \quad x > 0 .
 }
 
@@ -72,8 +81,8 @@ values of the Bernstein function are calculated by using the representation
 and the values of the iterated differences are calculated by using the
 representation
 \deqn{
-  (-1)^{k-1} \Delta^{k} \psi(x)
-    = \sum_{i} u_i \mathrm{Beta}(k+1, x + u_i) y_i ,
+  (-1)^{j-1} \Delta^{j} \psi(x)
+    = \sum_{i} u_i \mathrm{Beta}(j+1, x + u_i) y_i ,
     \quad x > 0 .
 }
 }
