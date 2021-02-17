@@ -145,7 +145,7 @@ drift, and a Lévy measure \(\nu\) on \((0, \infty)\)." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Virtual Class <code>BernsteinFunction</code> for Bernstein Functions</h1>
-    <small class="dont-index">Source: <a href='https://github.com/hsloot/rmo/blob/master/R/bernstein.R'><code>R/bernstein.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/hsloot/rmo/blob/master/R/allClass-S4.R'><code>R/allClass-S4.R</code></a>, <a href='https://github.com/hsloot/rmo/blob/master/R/valueOf-S4.R'><code>R/valueOf-S4.R</code></a></small>
     <div class="hidden name"><code>BernsteinFunction-class.Rd</code></div>
     </div>
 
@@ -159,7 +159,33 @@ for non-negative constants \(a, b \geq 0\), called <em>killing rate</em> and
 <em>drift</em>, and a <em>Lévy measure</em> \(\nu\) on \((0, \infty)\).</p>
     </div>
 
+    <pre class="usage"><span class='fu'>valueOf</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>x</span>, difference_order <span class='op'>=</span> <span class='fl'>0L</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>object</th>
+      <td><p>An object deriving from <a href='LevyBernsteinFunction-class.html'>LevyBernsteinFunction</a>
+(for <code>levyDensity</code>) or <a href='CompleteBernsteinFunction-class.html'>CompleteBernsteinFunction</a>
+(for <code>stieltjesDensity</code>).</p></td>
+    </tr>
+    <tr>
+      <th>x</th>
+      <td><p>Non-negativ numeric vector at which the iterated difference of
+the Bernstein function is evaluated.</p></td>
+    </tr>
+    <tr>
+      <th>difference_order</th>
+      <td><p>The order of the alternating iterated forward
+differences taken on the Bernstein function (\(k\) in
+the representation).</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Further parameter (passed to <code><a href='https://rdrr.io/r/stats/integrate.html'>stats::integrate()</a></code>)</p></td>
+    </tr>
+    </table>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
@@ -181,6 +207,30 @@ for the jumps of the Lévy subordinator.</p></li>
 <p>For a theoretic treatment of Bernstein function, we refer to
 (Schilling et al. 2012)
 .</p>
+<p>The method <code>valueOf</code> is implemented different, depending on the specific
+Bernstein function to get the best possible accuracy:</p><ul>
+<li><p>For <code>difference_order == 0L</code>, the values are calculated with closed
+form formulas if possible.</p></li>
+<li><p>For <em>linear Bernstein functions</em> and <em>constant Bernstein functions</em>
+the iterated differences are calculated automatically.</p></li>
+<li><p>For <em>scaled Bernstein functions</em> and <em>sums of Bernstein functions</em>
+the result is calculted recursively.</p></li>
+<li><p>For all other cases, the values are calculated using either the
+Lévy-Khintchine or the Stieltjes representation. Which one is chosen,
+depends on the case and can be manually overwritten with
+<code>method = "levy"</code> or <code>method = "stieltjes"</code>.</p></li>
+</ul>
+
+    <h2 class="hasAnchor" id="functions"><a class="anchor" href="#functions"></a>Functions</h2>
+
+    
+<ul>
+<li><p><code>valueOf</code>: Calculate the values for a Bernstein function and its higher-order,
+alternating iterated forward differences, i.e.
+$$
+    {(-1)}^{k-1} \Delta^k \psi(x), x &gt; 0.
+  $$</p></li>
+</ul>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Schilling RL, Song R, Vondracek Z (2012).
@@ -190,12 +240,17 @@ doi: <a href='https://doi.org/10.1515/9783110269338'>10.1515/9783110269338</a>
 , <a href='https://doi.org/10.1515/9783110269338'>https://doi.org/10.1515/9783110269338</a>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><a href='ConstantBernsteinFunction-class.html'>ConstantBernsteinFunction</a>,
+    <div class='dont-index'><p><a href='LevyBernsteinFunction-class.html'>LevyBernsteinFunction</a>, <a href='CompleteBernsteinFunction-class.html'>CompleteBernsteinFunction</a>,
+<a href='ConstantBernsteinFunction-class.html'>ConstantBernsteinFunction</a>,
+<a href='ScaledBernsteinFunction-class.html'>ScaledBernsteinFunction</a>,
+<a href='SumOfBernsteinFunctions-class.html'>SumOfBernsteinFunctions</a>,
 <a href='LinearBernsteinFunction-class.html'>LinearBernsteinFunction</a>,
 <a href='PoissonBernsteinFunction-class.html'>PoissonBernsteinFunction</a>,
 <a href='AlphaStableBernsteinFunction-class.html'>AlphaStableBernsteinFunction</a>,
-<a href='ScaledBernsteinFunction-class.html'>ScaledBernsteinFunction</a>,
-<a href='SumOfBernsteinFunctions-class.html'>SumOfBernsteinFunctions</a></p></div>
+<a href='ExponentialBernsteinFunction-class.html'>ExponentialBernsteinFunction</a>,
+<a href='InverseGaussianBernsteinFunction-class.html'>InverseGaussianBernsteinFunction</a>,
+<a href='GammaBernsteinFunction-class.html'>GammaBernsteinFunction</a>,
+<a href='ParetoBernsteinFunction-class.html'>ParetoBernsteinFunction</a></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

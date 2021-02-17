@@ -143,7 +143,7 @@ $$" />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Class for the <em>linear Bernstein function</em></h1>
-    <small class="dont-index">Source: <a href='https://github.com/hsloot/rmo/blob/master/R/bernstein.R'><code>R/bernstein.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/hsloot/rmo/blob/master/R/allClass-S4.R'><code>R/allClass-S4.R</code></a>, <a href='https://github.com/hsloot/rmo/blob/master/R/allInitialize-S4.R'><code>R/allInitialize-S4.R</code></a>, <a href='https://github.com/hsloot/rmo/blob/master/R/valueOf-S4.R'><code>R/valueOf-S4.R</code></a></small>
     <div class="hidden name"><code>LinearBernsteinFunction-class.Rd</code></div>
     </div>
 
@@ -155,8 +155,54 @@ $$
 $$</p>
     </div>
 
+    <pre class="usage"><span class='co'># S4 method for LinearBernsteinFunction</span>
+<span class='fu'>initialize</span><span class='op'>(</span><span class='va'>.Object</span>, scale <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
 
+<span class='co'># S4 method for LinearBernsteinFunction</span>
+<span class='fu'><a href='BernsteinFunction-class.html'>valueOf</a></span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>x</span>, difference_order <span class='op'>=</span> <span class='fl'>0L</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>.Object</th>
+      <td><p>An object:  see the &#8220;Initialize Methods&#8221; section.</p></td>
+    </tr>
+    <tr>
+      <th>scale</th>
+      <td><p>Non-negative number.</p></td>
+    </tr>
+    <tr>
+      <th>object</th>
+      <td><p>An object deriving from <a href='LevyBernsteinFunction-class.html'>LevyBernsteinFunction</a>
+(for <code>levyDensity</code>) or <a href='CompleteBernsteinFunction-class.html'>CompleteBernsteinFunction</a>
+(for <code>stieltjesDensity</code>).</p></td>
+    </tr>
+    <tr>
+      <th>x</th>
+      <td><p>Non-negativ numeric vector at which the iterated difference of
+the Bernstein function is evaluated.</p></td>
+    </tr>
+    <tr>
+      <th>difference_order</th>
+      <td><p>The order of the alternating iterated forward
+differences taken on the Bernstein function (\(k\) in
+the representation).</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>arguments to specify properties of the new object, to
+      be passed to <code>initialize()</code>.</p></td>
+    </tr>
+    </table>
+
+    <h2 class="hasAnchor" id="functions"><a class="anchor" href="#functions"></a>Functions</h2>
+
+    
+<ul>
+<li><p><code>initialize,LinearBernsteinFunction-method</code>: Constructor</p></li>
+<li><p><code>valueOf,LinearBernsteinFunction-method</code>: Calculates the iterated differences of the Bernstein function, see <code><a href='BernsteinFunction-class.html'>valueOf()</a></code></p></li>
+</ul>
     <h2 class="hasAnchor" id="slots"><a class="anchor" href="#slots"></a>Slots</h2>
 
     
@@ -168,11 +214,20 @@ $$</p>
 </dl>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><a href='BernsteinFunction-class.html'>BernsteinFunction</a></p></div>
+    <div class='dont-index'><p><a href='BernsteinFunction-class.html'>BernsteinFunction</a>,
+LinearBernsteinFunction-constructor,
+<code><a href='BernsteinFunction-class.html'>valueOf()</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>bf</span> <span class='op'>&lt;-</span> <span class='fu'>LinearBernsteinFunction</span><span class='op'>(</span>scale <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
-
+    <pre class="examples"><div class='input'><span class='fu'>LinearBernsteinFunction</span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; An object of class "LinearBernsteinFunction"
+#&gt; Slot "scale":
+#&gt; [1] 1
+#&gt; </div><div class='input'><span class='fu'>LinearBernsteinFunction</span><span class='op'>(</span>scale <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; An object of class "LinearBernsteinFunction"
+#&gt; Slot "scale":
+#&gt; [1] 2
+#&gt; </div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

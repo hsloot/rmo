@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Class for the Gamma Bernstein function — GammaBernsteinFunction-class • rmo</title>
+<title>Virtual Class CompleteBernsteinFunction for Complete Bernstein Functions — CompleteBernsteinFunction-class • rmo</title>
 
 
 <!-- jquery -->
@@ -39,12 +39,12 @@
 
 
 
-<meta property="og:title" content="Class for the Gamma Bernstein function — GammaBernsteinFunction-class" />
-<meta property="og:description" content="The Gamma Bernstein function, is the Bernstein function of a
-subordinator with a (scaled) Gamma distribution. The representation is for
-\(a &amp;gt; 0\)
+<meta property="og:title" content="Virtual Class CompleteBernsteinFunction for Complete Bernstein Functions — CompleteBernsteinFunction-class" />
+<meta property="og:description" content="A virtual superclass for all Bernstein functions which can representated
+by a Stieltjes density (no drift or killing rate). That means that there exists
+a Stieltjes measure \(\sigma\) such that
 $$
-  \psi(x) = \log(1 + \frac{x}{a}), x &amp;gt; 0.
+  \psi(x) = \int_0^\infty \frac{x}{x + u} \sigma(du) , x &amp;gt; 0 .
 $$" />
 
 
@@ -143,36 +143,29 @@ $$" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Class for the <em>Gamma Bernstein function</em></h1>
-    <small class="dont-index">Source: <a href='https://github.com/hsloot/rmo/blob/master/R/allClass-S4.R'><code>R/allClass-S4.R</code></a>, <a href='https://github.com/hsloot/rmo/blob/master/R/allInitialize-S4.R'><code>R/allInitialize-S4.R</code></a>, <a href='https://github.com/hsloot/rmo/blob/master/R/levyDensity-S4.R'><code>R/levyDensity-S4.R</code></a>, and 2 more</small>
-    <div class="hidden name"><code>GammaBernsteinFunction-class.Rd</code></div>
+    <h1>Virtual Class <code>CompleteBernsteinFunction</code> for Complete Bernstein Functions</h1>
+    <small class="dont-index">Source: <a href='https://github.com/hsloot/rmo/blob/master/R/allClass-S4.R'><code>R/allClass-S4.R</code></a>, <a href='https://github.com/hsloot/rmo/blob/master/R/stieltjesDensity-S4.R'><code>R/stieltjesDensity-S4.R</code></a>, <a href='https://github.com/hsloot/rmo/blob/master/R/valueOf-S4.R'><code>R/valueOf-S4.R</code></a></small>
+    <div class="hidden name"><code>CompleteBernsteinFunction-class.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>The <em>Gamma Bernstein function</em>, is the Bernstein function of a
-subordinator with a (scaled) Gamma distribution. The representation is for
-\(a &gt; 0\)
+    <p>A virtual superclass for all Bernstein functions which can representated
+by a Stieltjes density (no drift or killing rate). That means that there exists
+a Stieltjes measure \(\sigma\) such that
 $$
-  \psi(x) = \log(1 + \frac{x}{a}), x &gt; 0.
+  \psi(x) = \int_0^\infty \frac{x}{x + u} \sigma(du) , x &gt; 0 .
 $$</p>
     </div>
 
-    <pre class="usage"><span class='co'># S4 method for GammaBernsteinFunction</span>
-<span class='fu'>initialize</span><span class='op'>(</span><span class='va'>.Object</span>, a <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
+    <pre class="usage"><span class='fu'>stieltjesDensity</span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span>
 
-<span class='co'># S4 method for GammaBernsteinFunction</span>
-<span class='fu'><a href='LevyBernsteinFunction-class.html'>levyDensity</a></span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span>
-
-<span class='co'># S4 method for GammaBernsteinFunction</span>
-<span class='fu'><a href='CompleteBernsteinFunction-class.html'>stieltjesDensity</a></span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span>
-
-<span class='co'># S4 method for GammaBernsteinFunction</span>
+<span class='co'># S4 method for CompleteBernsteinFunction</span>
 <span class='fu'><a href='BernsteinFunction-class.html'>valueOf</a></span><span class='op'>(</span>
   <span class='va'>object</span>,
   <span class='va'>x</span>,
-  difference_order <span class='op'>=</span> <span class='fl'>0L</span>,
+  <span class='va'>difference_order</span>,
   <span class='va'>...</span>,
-  method <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"default"</span>, <span class='st'>"stieltjes"</span>, <span class='st'>"levy"</span><span class='op'>)</span>,
+  method <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"stieltjes"</span>, <span class='st'>"levy"</span><span class='op'>)</span>,
   tolerance <span class='op'>=</span> <span class='va'>.Machine</span><span class='op'>$</span><span class='va'>double.eps</span><span class='op'>^</span><span class='fl'>0.5</span>
 <span class='op'>)</span></pre>
 
@@ -180,17 +173,9 @@ $$</p>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>.Object</th>
-      <td><p>An object:  see the &#8220;Initialize Methods&#8221; section.</p></td>
-    </tr>
-    <tr>
-      <th>a</th>
-      <td><p>Positive number.</p></td>
-    </tr>
-    <tr>
       <th>object</th>
       <td><p>An object deriving from <a href='LevyBernsteinFunction-class.html'>LevyBernsteinFunction</a>
-(for <code>levyDensity</code>) or <a href='CompleteBernsteinFunction-class.html'>CompleteBernsteinFunction</a>
+(for <code>levyDensity</code>) or CompleteBernsteinFunction
 (for <code>stieltjesDensity</code>).</p></td>
     </tr>
     <tr>
@@ -206,8 +191,7 @@ the representation).</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>arguments to specify properties of the new object, to
-      be passed to <code>initialize()</code>.</p></td>
+      <td><p>Further parameter (passed to <code><a href='https://rdrr.io/r/stats/integrate.html'>stats::integrate()</a></code>)</p></td>
     </tr>
     <tr>
       <th>method</th>
@@ -223,79 +207,48 @@ Stieltjes representation.</p></td>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>For this Bernstein function, the higher-order alternating iterated forward
-differences are known in closed form but cannot be evaluated numerically
-without the danger of loss of significance. But we can use numerical
-integration (here: <code><a href='https://rdrr.io/r/stats/integrate.html'>stats::integrate()</a></code>) to approximate it with the
-following representation:
+    <p>For <em>continuous Stieltjes densities</em>, the values of the Bernstein function are
+calculated with <code><a href='https://rdrr.io/r/stats/integrate.html'>stats::integrate()</a></code> by using the representation
 $$
-  {(-1)}^{k-1} \Delta^{k} \psi(x)
-    = \int_{0}^{\infty} e^{-ux} {(1 - e^{-u})}^{k}
-      \frac{e^{-au}}{u} du, x&gt;0, k&gt;0.
+  \psi(x)
+    = \int_{0}^{\infty} x \mathrm{Beta}(1, x + u) \sigma(du), \quad x &gt; 0 ,
+$$
+and the values of the iterated differences are calculated by using the
+representation
+$$
+  (-1)^{k-1} \Delta^{k} \psi(x)
+    = \int_{0}^{\infty} u \mathrm{Beta}(k+1, x + u) \sigma(du) ,
+    \quad x &gt; 0 .
 $$</p>
-<p>This Bernstein function is no. 26 in the list of complete Bernstein functions
-in Chp. 16 of (Schilling et al. 2012)
-.</p>
+<p>For <em>discrete Lévy densities</em> \(\sigma(du) = \sum_{i} y_i \delta_{u_i}(du)\), the
+values of the Bernstein function are calculated by using the representation
+$$
+  \psi(x)
+    = \sum_{i} x \mathrm{Beta}(1, x + u_i) y_i, \quad x &gt; 0 ,
+$$
+and the values of the iterated differences are calculated by using the
+representation
+$$
+  (-1)^{k-1} \Delta^{k} \psi(x)
+    = \sum_{i} u_i \mathrm{Beta}(k+1, x + u_i) y_i ,
+    \quad x &gt; 0 .
+$$</p>
     <h2 class="hasAnchor" id="functions"><a class="anchor" href="#functions"></a>Functions</h2>
 
     
 <ul>
-<li><p><code>initialize,GammaBernsteinFunction-method</code>: Constructor</p></li>
-<li><p><code>levyDensity,GammaBernsteinFunction-method</code>: see <a href='LevyBernsteinFunction-class.html'>LevyBernsteinFunction</a></p></li>
-<li><p><code>stieltjesDensity,GammaBernsteinFunction-method</code>: see <a href='CompleteBernsteinFunction-class.html'>CompleteBernsteinFunction</a></p></li>
-<li><p><code>valueOf,GammaBernsteinFunction-method</code>: Calculates the iterated differences of the Bernstein function, see <code><a href='BernsteinFunction-class.html'>valueOf()</a></code>.
-The default method for calculating the iterated differences uses the
-Lévy representation.</p></li>
+<li><p><code>stieltjesDensity</code>: returns the <em>Stieltjes density</em> with <code>lower</code>, <code>upper</code>, and <code>type</code>
+attributes if continuous and returns a <code>data.frame</code> with named columns
+<code>x</code> (atoms) and <code>y</code> (weights) as well as a type attribute if discrete.
+The <code>type</code> attribute is either <code>"continuous"</code> or <code>"discrete"</code>.</p></li>
+<li><p><code>valueOf,CompleteBernsteinFunction-method</code>: Calculates the iterated differences of the Bernstein function, see <code><a href='BernsteinFunction-class.html'>valueOf()</a></code></p></li>
 </ul>
-    <h2 class="hasAnchor" id="slots"><a class="anchor" href="#slots"></a>Slots</h2>
-
-    
-
-<dl>
-<dt><code>a</code></dt><dd><p>Scale parameter for the Lévy measure.</p></dd>
-
-</dl>
-    <h2 class="hasAnchor" id="l-vy-density"><a class="anchor" href="#l-vy-density"></a>Lévy density</h2>
-
-    
-
-<p>$$
-  \nu(du)
-    = \frac{\operatorname{e}^{-a u}}{u}, \quad u &gt; 0 .
-$$</p>
-    <h2 class="hasAnchor" id="stieltjes-density"><a class="anchor" href="#stieltjes-density"></a>Stieltjes density</h2>
-
-    
-
-<p>$$
-  \sigma(du)
-    = 1 / x, x &gt; a .
-$$</p>
-    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
-
-    <p>Schilling RL, Song R, Vondracek Z (2012).
-<em>Bernstein functions</em>, 2 edition.
-De Gruyter.
-doi: <a href='https://doi.org/10.1515/9783110269338'>10.1515/9783110269338</a>
-, <a href='https://doi.org/10.1515/9783110269338'>https://doi.org/10.1515/9783110269338</a>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><a href='BernsteinFunction-class.html'>BernsteinFunction</a>, <a href='LevyBernsteinFunction-class.html'>LevyBernsteinFunction</a>,
-<a href='CompleteBernsteinFunction-class.html'>CompleteBernsteinFunction</a>, GammaBernsteinFunction-constructor,
-<code><a href='BernsteinFunction-class.html'>valueOf()</a></code></p>
-<p>GammaBernsteinFunction</p></div>
+    <div class='dont-index'><p><a href='LevyBernsteinFunction-class.html'>LevyBernsteinFunction</a>,
+<a href='BernsteinFunction-class.html'>BernsteinFunction</a>
+<code><a href='BernsteinFunction-class.html'>valueOf()</a></code></p></div>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>GammaBernsteinFunction</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; An object of class "GammaBernsteinFunction"
-#&gt; Slot "a":
-#&gt; [1] 1
-#&gt; </div><div class='input'><span class='fu'>GammaBernsteinFunction</span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; An object of class "GammaBernsteinFunction"
-#&gt; Slot "a":
-#&gt; [1] 2
-#&gt; </div><div class='input'>
-</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

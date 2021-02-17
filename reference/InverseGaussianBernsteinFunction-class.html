@@ -143,7 +143,7 @@ $$" />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Class for the <em>Inverse Gaussian Bernstein function</em></h1>
-    <small class="dont-index">Source: <a href='https://github.com/hsloot/rmo/blob/master/R/bernstein.R'><code>R/bernstein.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/hsloot/rmo/blob/master/R/allClass-S4.R'><code>R/allClass-S4.R</code></a>, <a href='https://github.com/hsloot/rmo/blob/master/R/allInitialize-S4.R'><code>R/allInitialize-S4.R</code></a>, <a href='https://github.com/hsloot/rmo/blob/master/R/levyDensity-S4.R'><code>R/levyDensity-S4.R</code></a>, and 1 more</small>
     <div class="hidden name"><code>InverseGaussianBernsteinFunction-class.Rd</code></div>
     </div>
 
@@ -155,7 +155,66 @@ $$
 $$</p>
     </div>
 
+    <pre class="usage"><span class='co'># S4 method for InverseGaussianBernsteinFunction</span>
+<span class='fu'>initialize</span><span class='op'>(</span><span class='va'>.Object</span>, eta <span class='op'>=</span> <span class='fl'>0.5</span><span class='op'>)</span>
 
+<span class='co'># S4 method for InverseGaussianBernsteinFunction</span>
+<span class='fu'><a href='LevyBernsteinFunction-class.html'>levyDensity</a></span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span>
+
+<span class='co'># S4 method for InverseGaussianBernsteinFunction</span>
+<span class='fu'><a href='BernsteinFunction-class.html'>valueOf</a></span><span class='op'>(</span>
+  <span class='va'>object</span>,
+  <span class='va'>x</span>,
+  difference_order <span class='op'>=</span> <span class='fl'>0L</span>,
+  <span class='va'>...</span>,
+  method <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"default"</span>, <span class='st'>"levy"</span><span class='op'>)</span>,
+  tolerance <span class='op'>=</span> <span class='va'>.Machine</span><span class='op'>$</span><span class='va'>double.eps</span><span class='op'>^</span><span class='fl'>0.5</span>
+<span class='op'>)</span></pre>
+
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>.Object</th>
+      <td><p>An object:  see the &#8220;Initialize Methods&#8221; section.</p></td>
+    </tr>
+    <tr>
+      <th>eta</th>
+      <td><p>Non-negative number.</p></td>
+    </tr>
+    <tr>
+      <th>object</th>
+      <td><p>An object deriving from <a href='LevyBernsteinFunction-class.html'>LevyBernsteinFunction</a>
+(for <code>levyDensity</code>) or <a href='CompleteBernsteinFunction-class.html'>CompleteBernsteinFunction</a>
+(for <code>stieltjesDensity</code>).</p></td>
+    </tr>
+    <tr>
+      <th>x</th>
+      <td><p>Non-negativ numeric vector at which the iterated difference of
+the Bernstein function is evaluated.</p></td>
+    </tr>
+    <tr>
+      <th>difference_order</th>
+      <td><p>The order of the alternating iterated forward
+differences taken on the Bernstein function (\(k\) in
+the representation).</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>arguments to specify properties of the new object, to
+      be passed to <code>initialize()</code>.</p></td>
+    </tr>
+    <tr>
+      <th>method</th>
+      <td><p>Method to calculate the result; use <code>method = "levy"</code> for
+using the Lévy representation and <code>method = "stieltjes"</code> for using the
+Stieltjes representation.</p></td>
+    </tr>
+    <tr>
+      <th>tolerance</th>
+      <td><p>(Relative) tolerance, passed down to <code><a href='https://rdrr.io/r/stats/integrate.html'>stats::integrate()</a></code></p></td>
+    </tr>
+    </table>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
@@ -170,6 +229,16 @@ $$
 $$</p>
 <p>This Bernstein function can be found on p. 309 in (Mai and Scherer 2017)
 .</p>
+    <h2 class="hasAnchor" id="functions"><a class="anchor" href="#functions"></a>Functions</h2>
+
+    
+<ul>
+<li><p><code>initialize,InverseGaussianBernsteinFunction-method</code>: Constructor</p></li>
+<li><p><code>levyDensity,InverseGaussianBernsteinFunction-method</code>: see <a href='LevyBernsteinFunction-class.html'>LevyBernsteinFunction</a></p></li>
+<li><p><code>valueOf,InverseGaussianBernsteinFunction-method</code>: Calculates the iterated differences of the Bernstein function, see <code><a href='BernsteinFunction-class.html'>valueOf()</a></code>.
+The default method for calculating the iterated differences uses the
+Lévy representation.</p></li>
+</ul>
     <h2 class="hasAnchor" id="slots"><a class="anchor" href="#slots"></a>Slots</h2>
 
     
@@ -179,6 +248,15 @@ $$</p>
 underlying Gaussian process)</p></dd>
 
 </dl>
+    <h2 class="hasAnchor" id="l-vy-density"><a class="anchor" href="#l-vy-density"></a>Lévy density</h2>
+
+    
+
+<p>$$
+  \nu(du)
+    = \frac{1}{\sqrt{2 \pi u^3}} \operatorname{e}^{-\frac{1}{2} \eta^2 u} ,
+    \quad u &gt; 0 .
+$$</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Mai J, Scherer M (2017).
@@ -188,11 +266,19 @@ doi: <a href='https://doi.org/10.1142/10265'>10.1142/10265</a>
 , <a href='https://doi.org/10.1142/10265'>https://doi.org/10.1142/10265</a>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><a href='BernsteinFunction-class.html'>BernsteinFunction</a></p></div>
+    <div class='dont-index'><p><a href='BernsteinFunction-class.html'>BernsteinFunction</a>, <a href='LevyBernsteinFunction-class.html'>LevyBernsteinFunction</a>,
+InverseGaussianBernsteinFunction-constructor, <code><a href='BernsteinFunction-class.html'>valueOf()</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>bf</span> <span class='op'>&lt;-</span> <span class='fu'>InverseGaussianBernsteinFunction</span><span class='op'>(</span>eta<span class='op'>=</span><span class='fl'>0.3</span><span class='op'>)</span>
-
+    <pre class="examples"><div class='input'><span class='fu'>InverseGaussianBernsteinFunction</span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; An object of class "InverseGaussianBernsteinFunction"
+#&gt; Slot "eta":
+#&gt; [1] 0.5
+#&gt; </div><div class='input'><span class='fu'>InverseGaussianBernsteinFunction</span><span class='op'>(</span>eta <span class='op'>=</span> <span class='fl'>0.3</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; An object of class "InverseGaussianBernsteinFunction"
+#&gt; Slot "eta":
+#&gt; [1] 0.3
+#&gt; </div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
