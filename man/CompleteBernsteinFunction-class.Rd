@@ -16,10 +16,10 @@ stieltjesDensity(object)
   x,
   difference_order,
   cscale = 1,
-  n = 1,
-  k = 0,
+  n = 1L,
+  k = 0L,
   ...,
-  method = c("stieltjes", "levy"),
+  method = c("default", "stieltjes", "levy"),
   tolerance = .Machine$double.eps^0.5
 )
 }
@@ -37,7 +37,9 @@ the representation).}
 
 \item{cscale}{Positive number, the composit scaling factor.}
 
-\item{n}{k Non-negative numbers for the binomial factors.}
+\item{n}{Non-negative numbers for the binomial factors.}
+
+\item{k}{Non-negative numbers for the binomial factors.}
 
 \item{...}{Further parameter (passed to \code{\link[stats:integrate]{stats::integrate()}})}
 

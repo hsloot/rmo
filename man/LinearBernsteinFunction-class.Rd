@@ -13,7 +13,7 @@
 \usage{
 \S4method{initialize}{LinearBernsteinFunction}(.Object, scale = 1)
 
-\S4method{valueOf}{LinearBernsteinFunction}(object, x, difference_order = 0L, cscale = 1, n = 1, k = 0, ...)
+\S4method{valueOf}{LinearBernsteinFunction}(object, x, difference_order = 0L, cscale = 1, n = 1L, k = 0L, ...)
 }
 \arguments{
 \item{.Object}{ An object:  see the \dQuote{Initialize Methods} section.}
@@ -33,7 +33,9 @@ the representation).}
 
 \item{cscale}{Positive number, the composit scaling factor.}
 
-\item{n}{k Non-negative numbers for the binomial factors.}
+\item{n}{Non-negative numbers for the binomial factors.}
+
+\item{k}{Non-negative numbers for the binomial factors.}
 
 \item{...}{arguments to specify properties of the new object, to
       be passed to \code{initialize()}.}

@@ -1,464 +1,519 @@
+set.seed(1623)
+
+# #### Test initialization of `BernsteinFunction`-classes ####
+
 test_that("Test initialisation of BernsteinFunction classes", {
-  expect_s4_class(ConstantBernsteinFunction(constant=0.5),
-    class="ConstantBernsteinFunction")
+  expect_s4_class(
+    testutils.rmo::fuzzy_bf(ConstantBernsteinFunction()),
+    class = "ConstantBernsteinFunction")
   expect_error
 
-  expect_s4_class(LinearBernsteinFunction(scale=0.4),
-    class="LinearBernsteinFunction")
-  expect_error(LinearBernsteinFunction(scale=-1))
-  expect_error(LinearBernsteinFunction(scale=c(1, 2)))
+  expect_s4_class(
+    testutils.rmo::fuzzy_bf(LinearBernsteinFunction()),
+    class = "LinearBernsteinFunction")
+  expect_error(LinearBernsteinFunction(scale = -1))
+  expect_error(LinearBernsteinFunction(scale = c(1, 2)))
 
   expect_s4_class(
-    PoissonBernsteinFunction(lambda=0.3, eta=0.2),
-    class="PoissonBernsteinFunction")
-  expect_error(PoissonBernsteinFunction(lambda=-1, eta=0.2))
-  expect_error(PoissonBernsteinFunction(lambda=c(1, 2), eta=0.2))
+    testutils.rmo::fuzzy_bf(PoissonBernsteinFunction()),
+    class = "PoissonBernsteinFunction")
+  expect_error(PoissonBernsteinFunction(lambda = -1, eta = 0.2))
+  expect_error(PoissonBernsteinFunction(lambda = c(1, 2), eta = 0.2))
 
   expect_s4_class(
-    AlphaStableBernsteinFunction(alpha=0.6),
-    class="AlphaStableBernsteinFunction")
-  expect_error(AlphaStableBernsteinFunction(alpha=-0.5))
-  expect_error(AlphaStableBernsteinFunction(alpha=0))
-  expect_error(AlphaStableBernsteinFunction(alpha=1))
-  expect_error(AlphaStableBernsteinFunction(alpha=1.5))
-  expect_error(AlphaStableBernsteinFunction(alpha=c(1, 2)))
+    testutils.rmo::fuzzy_bf(AlphaStableBernsteinFunction()),
+    class = "AlphaStableBernsteinFunction")
+  expect_error(AlphaStableBernsteinFunction(alpha = -0.5))
+  expect_error(AlphaStableBernsteinFunction(alpha = 0))
+  expect_error(AlphaStableBernsteinFunction(alpha = 1))
+  expect_error(AlphaStableBernsteinFunction(alpha = 1.5))
+  expect_error(AlphaStableBernsteinFunction(alpha = c(1, 2)))
 
   expect_s4_class(
-    GammaBernsteinFunction(a=0.7),
-    class="GammaBernsteinFunction")
+    testutils.rmo::fuzzy_bf(GammaBernsteinFunction()),
+    class = "GammaBernsteinFunction")
   expect_error(GammaBernsteinFunction(a=-1))
 
   expect_s4_class(
-    ParetoBernsteinFunction(alpha=0.7, x0=1),
-    class="ParetoBernsteinFunction")
-  expect_error(ParetoBernsteinFunction(alpha=-1, x0=1))
+    testutils.rmo::fuzzy_bf(ParetoBernsteinFunction()),
+    class = "ParetoBernsteinFunction")
+  expect_error(ParetoBernsteinFunction(alpha = -1))
 
   expect_s4_class(
-    ScaledBernsteinFunction(scale=0.5, original=GammaBernsteinFunction(a=0.7)),
-    class="ScaledBernsteinFunction")
-  expect_error(ScaledBernsteinFunction(scale=-1,
-    original=GammaBernsteinFunction(a=0.7)))
+    testutils.rmo::fuzzy_bf(ScaledBernsteinFunction(original=GammaBernsteinFunction())),
+    class = "ScaledBernsteinFunction")
+  expect_error(
+    ScaledBernsteinFunction(scale = -1, original=GammaBernsteinFunction()))
 
   expect_s4_class(
-    SumOfBernsteinFunctions(
-      first=LinearBernsteinFunction(scale=0.2),
-      second=ScaledBernsteinFunction(scale=0.5,
-        original=AlphaStableBernsteinFunction(alpha=0.6))),
-    class="SumOfBernsteinFunctions")
+    testutils.rmo::fuzzy_bf(
+      SumOfBernsteinFunctions(
+        first = LinearBernsteinFunction(),
+        second = ScaledBernsteinFunction(
+          original = AlphaStableBernsteinFunction()))),
+    class = "SumOfBernsteinFunctions")
 })
 
 
+# #### Helper functions and global variables ####
+
+value_of_naive <- function(f, x, difference_order = 0L, cscale = 1, n = 1L, k = 0L, ...) {
+  if (isTRUE(0L == difference_order)) {
+    out <- f(cscale * x, ...)
+  } else {
+    out <- (-1) ^ (difference_order - 1L) *
+      sapply(
+        x,
+        function(.x) {
+          diff(
+            f(cscale * (.x + (0:difference_order)), ...),
+            differences = difference_order
+          )
+        })
+  }
+
+  choose(n, k) * out
+}
+
+x <- seq(0, 10, by = 0.25)
+difference_order <- 5L
+cscale <- sqrt(2)
+n <- difference_order - 1L
+k <- n %/% 2
+
+# #### Boundary case `BernsteinFunction` classes ####
+
 test_that("`valueOf` for `ConstantBernsteinFunction`", {
-  k <- 5L
-  constant <- 0.3
-  bf <- ConstantBernsteinFunction(constant=constant)
+  bf <- testutils.rmo::fuzzy_bf(ConstantBernsteinFunction())
+  constant <- bf@constant
+  actual_fn <- function(x, constant) {
+    ifelse(0 < x, constant, 0)
+  }
 
-  x <- seq(0, 10, by=1)
-  expect_equal(
-    valueOf(bf, x, difference_order=0L),
-    ifelse(x==0, 0, constant))
+  expect_equal(valueOf(bf, x), actual_fn(x, constant))
 
-  y <- sort(unique(union(x, x+k)))
   expect_equal(
-    valueOf(bf, x, difference_order=k),
-    (-1) ^ (k-1) * diff(valueOf(bf, y, difference_order=0L), differences=k)[seq_along(x)])
+    valueOf(bf, x, difference_order = difference_order),
+    value_of_naive(actual_fn, x, difference_order, constant = constant))
 
-  x <- seq(0.3, 10.3, by=1)
   expect_equal(
-    valueOf(bf, x, difference_order=0L),
-    ifelse(x==0, 0, constant))
-
-  y <- sort(unique(union(x, x+k)))
-  expect_equal(
-    valueOf(bf, x, difference_order=k),
-    (-1) ^ (k-1) * diff(
-      valueOf(bf, y, difference_order=0L),
-      differences=k)[seq_along(x)])
+    valueOf(bf, x, difference_order = difference_order,
+            cscale = cscale, n = n, k = k),
+    value_of_naive(actual_fn, x, difference_order = difference_order,
+                   cscale = cscale, n = n, k = k,
+                   constant = constant))
 })
 
 test_that("`valueOf` for `LinearBernsteinFunction`", {
-  k <- 5L
-  scale <- 0.4
-  bf <- LinearBernsteinFunction(scale=scale)
+  bf <- testutils.rmo::fuzzy_bf(LinearBernsteinFunction())
+  scale <- bf@scale
+  actual_fn <- function(x, scale) {
+    x * scale
+  }
 
-  x <- seq(0, 10, by=1)
-  expect_equal(valueOf(bf, x, difference_order=0L), x*scale)
+  expect_equal(valueOf(bf, x), actual_fn(x, scale))
 
-  y <- sort(unique(union(x, x+1L)))
   expect_equal(
-    valueOf(bf, x, difference_order=1L),
-    (-1) ^ (1L-1) * diff(
-      valueOf(bf, y, difference_order=0L),
-      differences=1L)[seq_along(x)])
+    valueOf(bf, x, difference_order = difference_order),
+    value_of_naive(actual_fn, x, difference_order, scale = scale))
 
-  y <- sort(unique(union(x, x+k)))
   expect_equal(
-    valueOf(bf, x, difference_order=k),
-    (-1) ^ (k-1) * diff(
-      valueOf(bf, y, difference_order=0L),
-      differences=k)[seq_along(x)])
-
-  x <- seq(0.3, 10.3, by=1)
-  expect_equal(valueOf(bf, x, difference_order=0L), x*scale)
-
-  y <- sort(unique(union(x, x+k)))
-  expect_equal(
-    valueOf(bf, x, difference_order=k),
-    (-1) ^ (k-1) * diff(
-      valueOf(bf, y, difference_order=0L),
-      differences=k)[seq_along(x)])
-
-  y <- sort(unique(union(x, x+1L)))
-  expect_equal(
-    valueOf(bf, x, difference_order=1L),
-    (-1) ^ (1L-1) * diff(
-      valueOf(bf, y, difference_order=0L),
-      differences=1L)[seq_along(x)])
+    valueOf(bf, x, difference_order = difference_order,
+            cscale = cscale, n = n, k = k),
+    value_of_naive(actual_fn, x, difference_order = difference_order,
+                   cscale = cscale, n = n, k = k,
+                   scale = scale))
 })
 
-test_that("`valueOf` for `PoissonBernsteinFunction`", {
-  k <- 5L
-  lambda <- 0.4
-  eta <- 0.2
-  bf <- PoissonBernsteinFunction(lambda=lambda, eta=eta)
 
-  x <- seq(0, 10, by=1)
-  expect_equal(
-    valueOf(bf, x, difference_order=0L),
-    lambda * (1 - exp(-eta*x)))
-  expect_equal(
-    valueOf(bf, x, difference_order=0L, method = "levy"),
-    lambda * (1 - exp(-eta*x)))
+# #### Classes for `BernsteinFunction` arithmetics ####
 
-  y <- sort(unique(union(x, x+k)))
-  expect_equal(
-    valueOf(bf, x, difference_order=k),
-    lambda * exp(-eta*x) * (1 - exp(-eta))^k)
+test_that("`valueOf` for `ScaledBernsteinFunction`", {
+  bf <- testutils.rmo::fuzzy_bf(
+    ScaledBernsteinFunction(
+      original=AlphaStableBernsteinFunction()))
+  scale <- bf@scale
+  alpha <- bf@original@alpha
+  actual_fn <- function(x, scale, alpha) {
+    scale * x ^ alpha
+  }
 
-  x <- seq(0.3, 10.3, by=1)
+  expect_equal(valueOf(bf, x), actual_fn(x, scale, alpha))
   expect_equal(
-    valueOf(bf, x, difference_order=0L),
-    lambda * (1 - exp(-eta*x)))
-
-  y <- sort(unique(union(x, x+k)))
+    valueOf(bf, x, method = "stieltjes", tolerance = testthat_tolerance()),
+    actual_fn(x, scale, alpha))
   expect_equal(
-    valueOf(bf, x, difference_order=k),
-    lambda * exp(-eta*x) * (1 - exp(-eta))^k)
+    valueOf(bf, x, method = "levy", tolerance = testthat_tolerance()),
+    actual_fn(x, scale, alpha))
 
   expect_equal(
-    valueOf(bf, x, difference_order=k, method = "levy"),
-    lambda * exp(-eta*x) * (1 - exp(-eta))^k)
+    valueOf(bf, x, difference_order = difference_order, tolerance = testthat_tolerance()),
+    value_of_naive(actual_fn, x, difference_order, scale = scale, alpha = alpha))
+  expect_equal(
+    valueOf(bf, x, difference_order = difference_order,
+            method = "stieltjes", tolerance = testthat_tolerance()),
+    value_of_naive(actual_fn, x, difference_order, scale = scale, alpha = alpha))
+  expect_equal(
+    valueOf(bf, x, difference_order = difference_order,
+            method = "levy", tolerance = testthat_tolerance()),
+    value_of_naive(actual_fn, x, difference_order, scale = scale, alpha = alpha))
+
+  expect_equal(
+    valueOf(bf, x, difference_order = difference_order,
+            tolerance = testthat_tolerance(),
+            cscale = cscale, n = n, k = k),
+    value_of_naive(actual_fn, x, difference_order = difference_order,
+                   cscale = cscale, n = n, k = k,
+                   scale = scale, alpha = alpha))
+  expect_equal(
+    valueOf(bf, x, difference_order = difference_order,
+            method = "stieltjes", tolerance = testthat_tolerance(),
+            cscale = cscale, n = n, k = k),
+    value_of_naive(actual_fn, x, difference_order = difference_order,
+                   cscale = cscale, n = n, k = k,
+                   scale = scale, alpha = alpha))
+  expect_equal(
+    valueOf(bf, x, difference_order = difference_order,
+            method = "levy", tolerance = testthat_tolerance(),
+            cscale = cscale, n = n, k = k),
+    value_of_naive(actual_fn, x, difference_order = difference_order,
+                   cscale = cscale, n = n, k = k,
+                   scale = scale, alpha = alpha))
 })
+
+test_that("`valueOf` for `SumOfBernsteinFunctions`", {
+  bf <- testutils.rmo::fuzzy_bf(
+    SumOfBernsteinFunctions(
+      first = SumOfBernsteinFunctions(
+        first = ConstantBernsteinFunction(),
+        second = LinearBernsteinFunction()
+      ),
+      second = PoissonBernsteinFunction()))
+  constant <- bf@first@first@constant
+  scale <- bf@first@second@scale
+  lambda <- bf@second@lambda
+  eta <- bf@second@eta
+  actual_fn <- function(x, constant, scale, lambda, eta) {
+    ifelse(0 < x, constant, 0) + scale * x + lambda * (1 - exp(-x * eta))
+  }
+
+  expect_equal(
+    valueOf(bf, x),
+    actual_fn(x, constant, scale, lambda, eta))
+  expect_equal(
+    valueOf(bf, x, method = "levy", tolerance = testthat_tolerance()),
+    actual_fn(x, constant, scale, lambda, eta))
+
+  expect_equal(
+    valueOf(bf, x, difference_order = difference_order, tolerance = testthat_tolerance()),
+    value_of_naive(actual_fn, x, difference_order,
+                   constant = constant, scale = scale, lambda = lambda, eta = eta))
+  expect_equal(
+    valueOf(bf, x, difference_order = difference_order,
+            method = "levy", tolerance = testthat_tolerance()),
+    value_of_naive(actual_fn, x, difference_order,
+                   constant = constant, scale = scale, lambda = lambda, eta = eta))
+
+  expect_equal(
+    valueOf(bf, x, difference_order = difference_order, tolerance = testthat_tolerance(),
+            cscale = cscale, n = n, k = k),
+    value_of_naive(actual_fn, x, difference_order = difference_order,
+                   cscale = cscale, n = n, k = k,
+                   constant = constant, scale = scale, lambda = lambda, eta = eta))
+  expect_equal(
+    valueOf(bf, x, difference_order = difference_order,
+            method = "levy", tolerance = testthat_tolerance(),
+            cscale = cscale, n = n, k = k),
+    value_of_naive(actual_fn, x, difference_order = difference_order,
+                   cscale = cscale, n = n, k = k,
+                   constant = constant, scale = scale, lambda = lambda, eta = eta))
+})
+
+
+# #### Algebraic `BernsteinFunction` classes ####
 
 test_that("`valueOf` for `AlphaStableBernsteinFunction`", {
-  alpha <- 0.5
-  bf <- AlphaStableBernsteinFunction(alpha=alpha)
+  bf <- testutils.rmo::fuzzy_bf(AlphaStableBernsteinFunction())
+  alpha <- bf@alpha
+  actual_fn <- function(x, alpha) {
+    x ^ alpha
+  }
 
-  x <- seq(0, 10, by=1)
-  expect_equal(valueOf(bf, x, difference_order=0L),
-    x^alpha)
-  expect_equal(valueOf(bf, x, difference_order=0L, method = "levy"),
-    x^alpha)
-  expect_equal(valueOf(bf, x, difference_order=0L, method = "stieltjes"),
-    x^alpha)
-
-  k <- 1L
-  y <- sort(unique(union(x, x+k)))
+  expect_equal(valueOf(bf, x), actual_fn(x, alpha))
   expect_equal(
-    valueOf(bf, x, difference_order=k),
-    (-1) ^ (k-1) * diff(
-      valueOf(bf, y, difference_order=0L),
-      differences=k)[seq_along(x)])
-
-  k <- 5L
-  y <- sort(unique(union(x, x+k)))
+    valueOf(bf, x, method = "levy", tolerance = testthat_tolerance()),
+    actual_fn(x, alpha))
   expect_equal(
-    valueOf(bf, x, difference_order=k),
-    (-1) ^ (k-1) * diff(
-      valueOf(bf, y, difference_order=0L),
-      differences=k)[seq_along(x)])
-
-  x <- seq(0.3, 10.3, by=1)
-  expect_equal(valueOf(bf, x, difference_order=0L), x^alpha)
-
-  y <- sort(unique(union(x, x+k)))
-  expect_equal(
-    valueOf(bf, x, difference_order=k),
-    (-1) ^ (k-1) * diff(
-      valueOf(bf, y, difference_order=0L),
-      differences=k)[seq_along(x)])
+    valueOf(bf, x, method = "stieltjes", tolerance = testthat_tolerance()),
+    actual_fn(x, alpha))
 
   expect_equal(
-    valueOf(bf, x, difference_order=k, method = "stieltjes"),
-    (-1) ^ (k-1) * diff(
-      valueOf(bf, y, difference_order=0L),
-      differences=k)[seq_along(x)])
+    valueOf(bf, x, difference_order = difference_order, tolerance = testthat_tolerance()),
+    value_of_naive(actual_fn, x, difference_order, alpha = alpha))
   expect_equal(
-    valueOf(bf, x, difference_order=k, method = "levy"),
-    (-1) ^ (k-1) * diff(
-      valueOf(bf, y, difference_order=0L),
-      differences=k)[seq_along(x)])
+    valueOf(bf, x, difference_order = difference_order,
+            method = "levy", tolerance = testthat_tolerance()),
+    value_of_naive(actual_fn, x, difference_order, alpha = alpha))
+  expect_equal(
+    valueOf(bf, x, difference_order = difference_order,
+            method = "stieltjes", tolerance = testthat_tolerance()),
+    value_of_naive(actual_fn, x, difference_order, alpha = alpha))
+
+  expect_equal(
+    valueOf(bf, x, difference_order = difference_order,
+            tolerance = testthat_tolerance(),
+            cscale = cscale, n = n, k = k),
+    value_of_naive(actual_fn, x, difference_order = difference_order,
+                   cscale = cscale, n = n, k = k,
+                   alpha = alpha))
+  expect_equal(
+    valueOf(bf, x, difference_order = difference_order,
+            method = "stieltjes", tolerance = testthat_tolerance(),
+            cscale = cscale, n = n, k = k),
+    value_of_naive(actual_fn, x, difference_order = difference_order,
+                   cscale = cscale, n = n, k = k,
+                   alpha = alpha))
+  expect_equal(
+    valueOf(bf, x, difference_order = difference_order,
+            method = "levy", tolerance = testthat_tolerance(),
+            cscale = cscale, n = n, k = k),
+    value_of_naive(actual_fn, x, difference_order = difference_order,
+                   cscale = cscale, n = n, k = k,
+                   alpha = alpha))
 })
 
 
 test_that("`valueOf` for `InverseGaussianBernsteinFunction`", {
-  eta <- 0.3
-  bf <- InverseGaussianBernsteinFunction(eta=eta)
+  bf <- testutils.rmo::fuzzy_bf(InverseGaussianBernsteinFunction())
+  eta <- bf@eta
+  actual_fn <- function(x, eta) {
+    sqrt(2*x + eta^2) - eta
+  }
 
-  x <- seq(0, 10, by=1)
-  expect_equal(valueOf(bf, x, difference_order=0L),
-    (sqrt(2*x + eta^2) - eta))
-  expect_equal(valueOf(bf, x, difference_order=0L, method = "levy"),
-    (sqrt(2*x + eta^2) - eta))
-  expect_equal(valueOf(bf, x, difference_order=0L, method = "stieltjes"),
-    (sqrt(2*x + eta^2) - eta))
-
-  k <- 1L
-  y <- sort(unique(union(x, x+k)))
+  expect_equal(valueOf(bf, x), actual_fn(x, eta))
   expect_equal(
-    valueOf(bf, x, difference_order=k),
-    (-1) ^ (k-1) * diff(
-      valueOf(bf, y, difference_order=0L),
-      differences=k)[seq_along(x)])
-
-  k <- 5L
-  y <- sort(unique(union(x, x+k)))
+    valueOf(bf, x, method = "levy", tolerance = testthat_tolerance()),
+    actual_fn(x, eta))
   expect_equal(
-    valueOf(bf, x, difference_order=k),
-    (-1) ^ (k-1) * diff(
-      valueOf(bf, y, difference_order=0L),
-      differences=k)[seq_along(x)])
-
-  x <- seq(0.3, 10.3, by=1)
-  expect_equal(valueOf(bf, x, difference_order=0L),
-    (sqrt(2*x + eta^2) - eta))
-
-  y <- sort(unique(union(x, x+k)))
-  expect_equal(
-    valueOf(bf, x, difference_order=k),
-    (-1) ^ (k-1) * diff(
-      valueOf(bf, y, difference_order=0L),
-      differences=k)[seq_along(x)])
+    valueOf(bf, x, method = "stieltjes", tolerance = testthat_tolerance()),
+    actual_fn(x, eta))
 
   expect_equal(
-    valueOf(bf, x, difference_order=k, method = "levy"),
-    (-1) ^ (k-1) * diff(
-      valueOf(bf, y, difference_order=0L),
-      differences=k)[seq_along(x)])
+    valueOf(bf, x, difference_order = difference_order, tolerance = testthat_tolerance()),
+    value_of_naive(actual_fn, x, difference_order, eta = eta))
+  expect_equal(
+    valueOf(bf, x, difference_order = difference_order,
+            method = "levy"), tolerance = testthat_tolerance(),
+    value_of_naive(actual_fn, x, difference_order, eta = eta))
+  expect_equal(
+    valueOf(bf, x, difference_order = difference_order,
+            method = "stieltjes", tolerance = testthat_tolerance()),
+    value_of_naive(actual_fn, x, difference_order, eta = eta))
 
   expect_equal(
-    valueOf(bf, x, difference_order=k, method = "stieltjes"),
-    (-1) ^ (k-1) * diff(
-      valueOf(bf, y, difference_order=0L),
-      differences=k)[seq_along(x)])
+    valueOf(bf, x, difference_order = difference_order,
+            tolerance = testthat_tolerance(),
+            cscale = cscale, n = n, k = k),
+    value_of_naive(actual_fn, x, difference_order = difference_order,
+                   cscale = cscale, n = n, k = k,
+                   eta = eta))
+  expect_equal(
+    valueOf(bf, x, difference_order = difference_order,
+            method = "stieltjes", tolerance = testthat_tolerance(),
+            cscale = cscale, n = n, k = k),
+    value_of_naive(actual_fn, x, difference_order = difference_order,
+                   cscale = cscale, n = n, k = k,
+                   eta = eta))
+  expect_equal(
+    valueOf(bf, x, difference_order = difference_order,
+            method = "levy", tolerance = testthat_tolerance(),
+            cscale = cscale, n = n, k = k),
+    value_of_naive(actual_fn, x, difference_order = difference_order,
+                   cscale = cscale, n = n, k = k,
+                   eta = eta))
 })
 
 
 test_that("`valueOf` for ExponentialBernsteinFunction`", {
-  lambda <- 0.5
-  bf <- ExponentialBernsteinFunction(lambda=lambda)
-
-  x <- seq(0, 10, by=1)
-  expect_equal(valueOf(bf, x, difference_order=0L),
-    x / (x + lambda))
-  expect_equal(valueOf(bf, x, difference_order=0L, method = "levy"),
-    x / (x + lambda))
-  expect_equal(valueOf(bf, x, difference_order=0L, method = "stieltjes"),
-    x / (x + lambda))
-
-  k <- 1L
-  y <- sort(unique(union(x, x+k)))
-  expect_equal(
-    valueOf(bf, x, difference_order=k),
-    (-1) ^ (k-1) * diff(
-      valueOf(bf, y, difference_order=0L),
-      differences=k)[seq_along(x)])
-
-  k <- 5L
-  y <- sort(unique(union(x, x+k)))
-  expect_equal(
-    valueOf(bf, x, difference_order=k),
-    (-1) ^ (k-1) * diff(
-      valueOf(bf, y, difference_order=0L),
-      differences=k)[seq_along(x)])
-
-  x <- seq(0.3, 10.3, by=1)
-  expect_equal(
-    valueOf(bf, x, difference_order=0L),
+  bf <- testutils.rmo::fuzzy_bf(ExponentialBernsteinFunction())
+  lambda <- bf@lambda
+  actual_fn <- function(x, lambda) {
     x / (x + lambda)
-  )
+  }
 
-  y <- sort(unique(union(x, x+k)))
+  expect_equal(valueOf(bf, x), actual_fn(x, lambda))
   expect_equal(
-    valueOf(bf, x, difference_order=k),
-    (-1) ^ (k-1) * diff(
-      valueOf(bf, y, difference_order=0L),
-      differences=k)[seq_along(x)])
+    valueOf(bf, x, method = "levy", tolerance = testthat_tolerance()),
+    actual_fn(x, lambda))
+  expect_equal(
+    valueOf(bf, x, method = "stieltjes", tolerance = testthat_tolerance()),
+    actual_fn(x, lambda))
 
   expect_equal(
-    valueOf(bf, x, difference_order=k, method = "stieltjes"),
-    (-1) ^ (k-1) * diff(
-      valueOf(bf, y, difference_order=0L),
-      differences=k)[seq_along(x)])
+    valueOf(bf, x, difference_order = difference_order,
+            tolerance = testthat_tolerance()),
+    value_of_naive(actual_fn, x, difference_order, lambda = lambda))
   expect_equal(
-    valueOf(bf, x, difference_order=k, method = "levy"),
-    (-1) ^ (k-1) * diff(
-      valueOf(bf, y, difference_order=0L),
-      differences=k)[seq_along(x)])
+    valueOf(bf, x, difference_order = difference_order,
+            method = "levy", tolerance = testthat_tolerance()),
+    value_of_naive(actual_fn, x, difference_order, lambda = lambda))
+  expect_equal(
+    valueOf(bf, x, difference_order = difference_order,
+            method = "stieltjes", tolerance = testthat_tolerance()),
+    value_of_naive(actual_fn, x, difference_order, lambda = lambda))
+
+  expect_equal(
+    valueOf(bf, x, difference_order = difference_order,
+            tolerance = testthat_tolerance(),
+            cscale = cscale, n = n, k = k),
+    value_of_naive(actual_fn, x, difference_order = difference_order,
+                   cscale = cscale, n = n, k = k,
+                   lambda = lambda))
+  expect_equal(
+    valueOf(bf, x, difference_order = difference_order,
+            method = "stieltjes", tolerance = testthat_tolerance(),
+            cscale = cscale, n = n, k = k),
+    value_of_naive(actual_fn, x, difference_order = difference_order,
+                   cscale = cscale, n = n, k = k,
+                   lambda = lambda))
+  expect_equal(
+    valueOf(bf, x, difference_order = difference_order,
+            method = "levy", tolerance = testthat_tolerance(),
+            cscale = cscale, n = n, k = k),
+    value_of_naive(actual_fn, x, difference_order = difference_order,
+                   cscale = cscale, n = n, k = k,
+                   lambda = lambda))
 })
 
 test_that("`valueOf` for `GammaBernsteinFunction`", {
-  k <- 5L
-  a <- 0.3
-  bf <- GammaBernsteinFunction(a=a)
+  bf <- testutils.rmo::fuzzy_bf(GammaBernsteinFunction())
+  a <- bf@a
+  actual_fn <- function(x, a) {
+    log(1 + x / a)
+  }
 
-  x <- seq(0, 10, by=1)
-  expect_equal(valueOf(bf, x, difference_order=0L), log(1 + x/a))
-  expect_equal(valueOf(bf, x, difference_order=0L, method = "levy"),
-    log(1 + x/a))
-  expect_equal(valueOf(bf, x, difference_order=0L, method = "stieltjes"),
-    log(1 + x/a))
-
-  y <- sort(unique(union(x, x+k)))
+  expect_equal(valueOf(bf, x), actual_fn(x, a))
   expect_equal(
-    valueOf(bf, x, difference_order=k),
-    (-1) ^ (k-1) * diff(
-      valueOf(bf, y, difference_order=0L),
-      differences=k)[seq_along(x)])
-
-  x <- seq(0.3, 10.3, by=1)
-  expect_equal(valueOf(bf, x, difference_order=0L), log(1 + x/a))
-
-  y <- sort(unique(union(x, x+k)))
+    valueOf(bf, x, method = "levy", tolerance = testthat_tolerance()),
+    actual_fn(x, a))
   expect_equal(
-    valueOf(bf, x, difference_order=k),
-    (-1) ^ (k-1) * diff(
-      valueOf(bf, y, difference_order=0L),
-      differences=k)[seq_along(x)])
+    valueOf(bf, x, method = "stieltjes", tolerance = testthat_tolerance()),
+    actual_fn(x, a))
 
   expect_equal(
-    valueOf(bf, x, difference_order=k, method = "stieltjes"),
-    (-1) ^ (k-1) * diff(
-      valueOf(bf, y, difference_order=0L),
-      differences=k)[seq_along(x)])
+    valueOf(bf, x, difference_order = difference_order,
+            tolerance = testthat_tolerance()),
+    value_of_naive(actual_fn, x, difference_order, a = a))
   expect_equal(
-    valueOf(bf, x, difference_order=k, method = "levy"),
-    (-1) ^ (k-1) * diff(
-      valueOf(bf, y, difference_order=0L),
-      differences=k)[seq_along(x)])
+    valueOf(bf, x, difference_order = difference_order,
+            method = "levy", tolerance = testthat_tolerance()),
+    value_of_naive(actual_fn, x, difference_order, a = a))
+  expect_equal(
+    valueOf(bf, x, difference_order = difference_order,
+            method = "stieltjes", tolerance = testthat_tolerance()),
+    value_of_naive(actual_fn, x, difference_order, a = a))
+
+  expect_equal(
+    valueOf(bf, x, difference_order = difference_order,
+            tolerance = testthat_tolerance(),
+            cscale = cscale, n = n, k = k),
+    value_of_naive(actual_fn, x, difference_order = difference_order,
+                   cscale = cscale, n = n, k = k,
+                   a = a))
+  expect_equal(
+    valueOf(bf, x, difference_order = difference_order,
+            method = "stieltjes", tolerance = testthat_tolerance(),
+            cscale = cscale, n = n, k = k),
+    value_of_naive(actual_fn, x, difference_order = difference_order,
+                   cscale = cscale, n = n, k = k,
+                   a = a))
+  expect_equal(
+    valueOf(bf, x, difference_order = difference_order,
+            method = "levy", tolerance = testthat_tolerance(),
+            cscale = cscale, n = n, k = k),
+    value_of_naive(actual_fn, x, difference_order = difference_order,
+                   cscale = cscale, n = n, k = k,
+                   a = a))
 })
 
 test_that("`valueOf` for `ParetoBernsteinFunction`", {
-  alpha <- 0.05
-  x0 <- 0.5
-  bf <- ParetoBernsteinFunction(alpha=alpha, x0=x0)
+  bf <- testutils.rmo::fuzzy_bf(ParetoBernsteinFunction())
+  alpha <- bf@alpha
+  x0 <- bf@x0
+  actual_fn <- function(x, alpha, x0) {
+    1 - exp(-x0 * x) +
+      (x * x0) ^ (alpha) *
+        pgamma(x0 * x, 1 - alpha, lower = FALSE) *
+        gamma(1 - alpha)
+  }
 
-  x <- seq(0, 10, by=1)
-  expect_equal(valueOf(bf, x, difference_order=0L),
-    1-exp(-x0*x) + (x*x0) ^ (alpha) *
-    pgamma(x0*x, 1-alpha, lower=FALSE) * gamma(1-alpha))
-  expect_equal(valueOf(bf, x, difference_order=0L, method = "levy"),
-    1-exp(-x0*x) + (x*x0) ^ (alpha) *
-    pgamma(x0*x, 1-alpha, lower=FALSE) * gamma(1-alpha))
-
-  k <- 1L
-  y <- sort(unique(union(x, x+k)))
+  expect_equal(valueOf(bf, x), actual_fn(x, alpha, x0))
   expect_equal(
-    valueOf(bf, x, difference_order=k),
-    (-1) ^ (k-1) * diff(
-      valueOf(bf, y, difference_order=0L),
-      differences=k)[seq_along(x)])
-
-  k <- 5L
-  y <- sort(unique(union(x, x+k)))
-  expect_equal(
-    valueOf(bf, x, difference_order=k),
-    (-1) ^ (k-1) * diff(
-      valueOf(bf, y, difference_order=0L),
-      differences=k)[seq_along(x)])
-
-  x <- seq(0.3, 10.3, by=1)
-  expect_equal(valueOf(bf, x, difference_order=0L),
-    1-exp(-x0*x) + (x*x0) ^ (alpha) *
-    pgamma(x0*x, 1-alpha, lower=FALSE) * gamma(1-alpha))
-
-  y <- sort(unique(union(x, x+k)))
-  expect_equal(
-    valueOf(bf, x, difference_order=k),
-    (-1) ^ (k-1) * diff(
-      valueOf(bf, y, difference_order=0L),
-      differences=k)[seq_along(x)])
+    valueOf(bf, x, method = "levy", tolerance = testthat_tolerance()),
+    actual_fn(x, alpha, x0))
 
   expect_equal(
-    valueOf(bf, x, difference_order=k, method = "levy"),
-    (-1) ^ (k-1) * diff(
-      valueOf(bf, y, difference_order=0L),
-      differences=k)[seq_along(x)])
+    valueOf(bf, x, difference_order = difference_order,
+            tolerance = testthat_tolerance()),
+    value_of_naive(actual_fn, x, difference_order, alpha = alpha, x0 = x0))
+  expect_equal(
+    valueOf(bf, x, difference_order = difference_order,
+            method = "levy", tolerance = testthat_tolerance()),
+    value_of_naive(actual_fn, x, difference_order, alpha = alpha, x0 = x0))
+
+  expect_equal(
+    valueOf(bf, x, difference_order = difference_order,
+            tolerance = testthat_tolerance(),
+            cscale = cscale, n = n, k = k),
+    value_of_naive(actual_fn, x, difference_order = difference_order,
+                   cscale = cscale, n = n, k = k,
+                   alpha = alpha, x0 = x0))
+  expect_equal(
+    valueOf(bf, x, difference_order = difference_order,
+            method = "levy", tolerance = testthat_tolerance(),
+            cscale = cscale, n = n, k = k),
+    value_of_naive(actual_fn, x, difference_order = difference_order,
+                   cscale = cscale, n = n, k = k,
+                   alpha = alpha, x0 = x0))
 })
 
-test_that("`valueOf` for `ScaledBernsteinFunction`", {
-  k <- 5L
-  alpha <- 0.4
-  scale <- 0.2
-  bf <- ScaledBernsteinFunction(
-    scale=scale,
-    original=AlphaStableBernsteinFunction(alpha=alpha))
 
-  x <- seq(0, 10, by=1)
-  expect_equal(valueOf(bf, x, difference_order=0L), scale * x^alpha)
 
-  y <- sort(unique(union(x, x+k)))
+
+# #### Other `BernsteinFunction` classes ####
+
+test_that("`valueOf` for `PoissonBernsteinFunction`", {
+  bf <- testutils.rmo::fuzzy_bf(PoissonBernsteinFunction())
+  lambda <- bf@lambda
+  eta <- bf@eta
+  actual_fn <- function(x, lambda, eta) {
+    lambda * (1 - exp(-eta*x))
+  }
+
+  expect_equal(valueOf(bf, x), actual_fn(x, lambda, eta))
   expect_equal(
-    valueOf(bf, x, difference_order=k),
-    (-1) ^ (k-1) * diff(
-      valueOf(bf, y, difference_order=0L),
-      differences=k)[seq_along(x)])
+    valueOf(bf, x, method = "levy", tolerance = testthat_tolerance()),
+    actual_fn(x, lambda, eta))
 
-  x <- seq(0.3, 10.3, by=1)
-  expect_equal(valueOf(bf, x, difference_order=0L), scale * x^alpha)
-
-  y <- sort(unique(union(x, x+k)))
   expect_equal(
-    valueOf(bf, x, difference_order=k),
-    (-1) ^ (k-1) * diff(
-      valueOf(bf, y, difference_order=0L),
-      differences=k)[seq_along(x)])
-})
-
-test_that("`valueOf` for `SumOfBernsteinFunctions`", {
-  k <- 5L
-  constant <- 0.1
-  scale <- 0.2
-  lambda <- 0.4
-  eta <- 0.5
-  bf <- SumOfBernsteinFunctions(
-    first=SumOfBernsteinFunctions(
-      first=ConstantBernsteinFunction(constant=constant),
-      second=LinearBernsteinFunction(scale=scale)
-    ),
-    second=PoissonBernsteinFunction(lambda=lambda, eta=eta))
-
-  x <- seq(0, 10, by=1)
+    valueOf(bf, x, difference_order = difference_order,
+            tolerance = testthat_tolerance()),
+    lambda * exp(-eta * x) * (1 - exp(-eta))^difference_order)
   expect_equal(
-    valueOf(bf, x, difference_order=0L),
-    ifelse(x==0, 0, constant) + scale*x + lambda * (1 - exp(-eta*x)))
+    valueOf(bf, x, difference_order = difference_order,
+            method = "levy", tolerance = testthat_tolerance()),
+    lambda * exp(-eta*x) * (1 - exp(-eta)) ^ difference_order)
 
-  y <- sort(unique(union(x, x+k)))
   expect_equal(
-    valueOf(bf, x, difference_order=k),
-    (-1) ^ (k-1) * diff(
-      valueOf(bf, y, difference_order=0L),
-      differences=k)[seq_along(x)])
-
-  x <- seq(0.3, 10.3, by=1)
+    valueOf(bf, x, difference_order = difference_order,
+            tolerance = testthat_tolerance(),
+            cscale = cscale, n = n, k = k),
+    choose(n, k) *
+      lambda * exp(-eta * cscale*x) * (1 - exp(-eta * cscale)) ^ difference_order)
   expect_equal(
-    valueOf(bf, x, difference_order=0L),
-    ifelse(x==0, 0, constant) + scale*x + lambda * (1 - exp(-eta*x)))
-
-  y <- sort(unique(union(x, x+k)))
-  expect_equal(
-    valueOf(bf, x, difference_order=k),
-    (-1) ^ (k-1) * diff(
-      valueOf(bf, y, difference_order=0L),
-      differences=k)[seq_along(x)])
+    valueOf(bf, x, difference_order = difference_order,
+            method = "levy", tolerance = testthat_tolerance(),
+            cscale = cscale, n = n, k = k),
+    choose(n, k) *
+      lambda * exp(-eta * cscale*x) * (1 - exp(-eta * cscale)) ^ difference_order)
 })
