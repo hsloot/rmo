@@ -14,7 +14,7 @@ NULL
 #'
 #' @export
 setMethod("initialize", "LinearBernsteinFunction",
-  function(.Object, scale = 1) {
+  function(.Object, scale = 1) { # nolint
     .Object@scale <- scale
     validObject(.Object)
 
@@ -34,7 +34,7 @@ setMethod("initialize", "LinearBernsteinFunction",
 #'
 #' @export
 setMethod("initialize", "ConstantBernsteinFunction",
-  function(.Object, constant = 1) {
+  function(.Object, constant = 1) { # nolint
     .Object@constant <- constant
     validObject(.Object)
 
@@ -56,7 +56,7 @@ setMethod("initialize", "ConstantBernsteinFunction",
 #'
 #' @export
 setMethod("initialize", "ScaledBernsteinFunction",
-  function(.Object, scale = 1, original = LinearBernsteinFunction()) {
+  function(.Object, scale = 1, original = LinearBernsteinFunction()) { # nolint
     .Object@scale <- scale
     .Object@original <- original
     validObject(.Object)
@@ -80,7 +80,7 @@ setMethod("initialize", "ScaledBernsteinFunction",
 #'
 #' @export
 setMethod("initialize", "SumOfBernsteinFunctions",
-  function(.Object, first = ConstantBernsteinFunction(0.5),
+  function(.Object, first = ConstantBernsteinFunction(0.5), # nolint
       second = LinearBernsteinFunction(0.5)) {
     .Object@first <- first
     .Object@second <- second
@@ -103,7 +103,7 @@ setMethod("initialize", "SumOfBernsteinFunctions",
 #'
 #' @export
 setMethod("initialize", "PoissonBernsteinFunction",
-  function(.Object, eta = 1, lambda = 1) {
+  function(.Object, eta = 1, lambda = 1) { # nolint
     .Object@eta <- eta
     .Object@lambda <- lambda
     validObject(.Object)
@@ -124,7 +124,7 @@ setMethod("initialize", "PoissonBernsteinFunction",
 #'
 #' @export
 setMethod("initialize", "AlphaStableBernsteinFunction",
-  function(.Object, alpha = log2(2 - 0.5)) {
+  function(.Object, alpha = log2(2 - 0.5)) { # nolint
     .Object@alpha <- alpha
     validObject(.Object)
 
@@ -144,7 +144,7 @@ setMethod("initialize", "AlphaStableBernsteinFunction",
 #'
 #' @export
 setMethod("initialize", "InverseGaussianBernsteinFunction",
-  function(.Object, eta = 0.5) {
+  function(.Object, eta = 0.5) { # nolint
     .Object@eta <- eta
     validObject(.Object)
 
@@ -164,7 +164,7 @@ setMethod("initialize", "InverseGaussianBernsteinFunction",
 #'
 #' @export
 setMethod("initialize", "ExponentialBernsteinFunction",
-  function(.Object, lambda = 1) {
+  function(.Object, lambda = 1) { # nolint
     .Object@lambda <- lambda
     validObject(.Object)
 
@@ -184,7 +184,7 @@ setMethod("initialize", "ExponentialBernsteinFunction",
 #'
 #' @export
 setMethod("initialize", "GammaBernsteinFunction",
-  function(.Object, a = 1) {
+  function(.Object, a = 1) { # nolint
     .Object@a <- a
     validObject(.Object)
 
@@ -205,7 +205,7 @@ setMethod("initialize", "GammaBernsteinFunction",
 #'
 #' @export
 setMethod("initialize", "ParetoBernsteinFunction",
-  function(.Object, alpha = log2(2 - 0.5), x0 = 1e-4) {
+  function(.Object, alpha = log2(2 - 0.5), x0 = 1e-4) { # nolint
     .Object@alpha <- alpha
     .Object@x0 <- x0
     validObject(.Object)

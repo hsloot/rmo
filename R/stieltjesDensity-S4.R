@@ -32,7 +32,7 @@ setMethod("stieltjesDensity", "AlphaStableBernsteinFunction",
   function(object) {
     structure(
       function(x) {
-        sin(object@alpha * pi) / pi * x^(object@alpha - 1)
+        sin(object@alpha * pi) / pi * x ^ (object@alpha - 1)
       },
       lower = 0, upper = Inf, type = "continuous"
     )

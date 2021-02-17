@@ -126,6 +126,9 @@ test_that("`valueOf` for `PoissonBernsteinFunction`", {
   expect_equal(
     valueOf(bf, x, difference_order=0L),
     lambda * (1 - exp(-eta*x)))
+  expect_equal(
+    valueOf(bf, x, difference_order=0L, method = "levy"),
+    lambda * (1 - exp(-eta*x)))
 
   y <- sort(unique(union(x, x+k)))
   expect_equal(
@@ -141,6 +144,10 @@ test_that("`valueOf` for `PoissonBernsteinFunction`", {
   expect_equal(
     valueOf(bf, x, difference_order=k),
     lambda * exp(-eta*x) * (1 - exp(-eta))^k)
+
+  expect_equal(
+    valueOf(bf, x, difference_order=k, method = "levy"),
+    lambda * exp(-eta*x) * (1 - exp(-eta))^k)
 })
 
 test_that("`valueOf` for `AlphaStableBernsteinFunction`", {
@@ -149,6 +156,10 @@ test_that("`valueOf` for `AlphaStableBernsteinFunction`", {
 
   x <- seq(0, 10, by=1)
   expect_equal(valueOf(bf, x, difference_order=0L),
+    x^alpha)
+  expect_equal(valueOf(bf, x, difference_order=0L, method = "levy"),
+    x^alpha)
+  expect_equal(valueOf(bf, x, difference_order=0L, method = "stieltjes"),
     x^alpha)
 
   k <- 1L
@@ -176,6 +187,17 @@ test_that("`valueOf` for `AlphaStableBernsteinFunction`", {
     (-1) ^ (k-1) * diff(
       valueOf(bf, y, difference_order=0L),
       differences=k)[seq_along(x)])
+
+  expect_equal(
+    valueOf(bf, x, difference_order=k, method = "stieltjes"),
+    (-1) ^ (k-1) * diff(
+      valueOf(bf, y, difference_order=0L),
+      differences=k)[seq_along(x)])
+  expect_equal(
+    valueOf(bf, x, difference_order=k, method = "levy"),
+    (-1) ^ (k-1) * diff(
+      valueOf(bf, y, difference_order=0L),
+      differences=k)[seq_along(x)])
 })
 
 
@@ -185,6 +207,8 @@ test_that("`valueOf` for `InverseGaussianBernsteinFunction`", {
 
   x <- seq(0, 10, by=1)
   expect_equal(valueOf(bf, x, difference_order=0L),
+    (sqrt(2*x + eta^2) - eta))
+  expect_equal(valueOf(bf, x, difference_order=0L, method = "levy"),
     (sqrt(2*x + eta^2) - eta))
 
   k <- 1L
@@ -213,6 +237,12 @@ test_that("`valueOf` for `InverseGaussianBernsteinFunction`", {
     (-1) ^ (k-1) * diff(
       valueOf(bf, y, difference_order=0L),
       differences=k)[seq_along(x)])
+
+  expect_equal(
+    valueOf(bf, x, difference_order=k, method = "levy"),
+    (-1) ^ (k-1) * diff(
+      valueOf(bf, y, difference_order=0L),
+      differences=k)[seq_along(x)])
 })
 
 
@@ -222,6 +252,10 @@ test_that("`valueOf` for ExponentialBernsteinFunction`", {
 
   x <- seq(0, 10, by=1)
   expect_equal(valueOf(bf, x, difference_order=0L),
+    x / (x + lambda))
+  expect_equal(valueOf(bf, x, difference_order=0L, method = "levy"),
+    x / (x + lambda))
+  expect_equal(valueOf(bf, x, difference_order=0L, method = "stieltjes"),
     x / (x + lambda))
 
   k <- 1L
@@ -252,6 +286,17 @@ test_that("`valueOf` for ExponentialBernsteinFunction`", {
     (-1) ^ (k-1) * diff(
       valueOf(bf, y, difference_order=0L),
       differences=k)[seq_along(x)])
+
+  expect_equal(
+    valueOf(bf, x, difference_order=k, method = "stieltjes"),
+    (-1) ^ (k-1) * diff(
+      valueOf(bf, y, difference_order=0L),
+      differences=k)[seq_along(x)])
+  expect_equal(
+    valueOf(bf, x, difference_order=k, method = "levy"),
+    (-1) ^ (k-1) * diff(
+      valueOf(bf, y, difference_order=0L),
+      differences=k)[seq_along(x)])
 })
 
 test_that("`valueOf` for `GammaBernsteinFunction`", {
@@ -261,6 +306,10 @@ test_that("`valueOf` for `GammaBernsteinFunction`", {
 
   x <- seq(0, 10, by=1)
   expect_equal(valueOf(bf, x, difference_order=0L), log(1 + x/a))
+  expect_equal(valueOf(bf, x, difference_order=0L, method = "levy"),
+    log(1 + x/a))
+  expect_equal(valueOf(bf, x, difference_order=0L, method = "stieltjes"),
+    log(1 + x/a))
 
   y <- sort(unique(union(x, x+k)))
   expect_equal(
@@ -278,6 +327,17 @@ test_that("`valueOf` for `GammaBernsteinFunction`", {
     (-1) ^ (k-1) * diff(
       valueOf(bf, y, difference_order=0L),
       differences=k)[seq_along(x)])
+
+  expect_equal(
+    valueOf(bf, x, difference_order=k, method = "stieltjes"),
+    (-1) ^ (k-1) * diff(
+      valueOf(bf, y, difference_order=0L),
+      differences=k)[seq_along(x)])
+  expect_equal(
+    valueOf(bf, x, difference_order=k, method = "levy"),
+    (-1) ^ (k-1) * diff(
+      valueOf(bf, y, difference_order=0L),
+      differences=k)[seq_along(x)])
 })
 
 test_that("`valueOf` for `ParetoBernsteinFunction`", {
@@ -287,6 +347,9 @@ test_that("`valueOf` for `ParetoBernsteinFunction`", {
 
   x <- seq(0, 10, by=1)
   expect_equal(valueOf(bf, x, difference_order=0L),
+    1-exp(-x0*x) + (x*x0) ^ (alpha) *
+    pgamma(x0*x, 1-alpha, lower=FALSE) * gamma(1-alpha))
+  expect_equal(valueOf(bf, x, difference_order=0L, method = "levy"),
     1-exp(-x0*x) + (x*x0) ^ (alpha) *
     pgamma(x0*x, 1-alpha, lower=FALSE) * gamma(1-alpha))
 
@@ -314,6 +377,12 @@ test_that("`valueOf` for `ParetoBernsteinFunction`", {
   y <- sort(unique(union(x, x+k)))
   expect_equal(
     valueOf(bf, x, difference_order=k),
+    (-1) ^ (k-1) * diff(
+      valueOf(bf, y, difference_order=0L),
+      differences=k)[seq_along(x)])
+
+  expect_equal(
+    valueOf(bf, x, difference_order=k, method = "levy"),
     (-1) ^ (k-1) * diff(
       valueOf(bf, y, difference_order=0L),
       differences=k)[seq_along(x)])
