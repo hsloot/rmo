@@ -1,4 +1,4 @@
-Comparison of v0.2.6 and v0.2.5
+Comparison of v0.4.0 and v0.3.0
 ================
 
 ## General notes
@@ -78,7 +78,7 @@ bp1 <- bench::press(
         n, d, intensities=intensities),
       Arnold = rmo:::Rcpp__rmo_arnold(
         n, d, intensities=intensities),
-      Ex_Arnold = rmo:::Rcpp__rmo_ex_arnold(
+      Ex_Markovian = rmo:::Rcpp__rexmo_markovian(
         n, d, ex_intensities=ex_intensities),
       LFM = rmo:::Rcpp__rmo_lfm_cpp(
         n, d, 0, alpha, beta, "rposval", list("value"=1)),
@@ -94,7 +94,7 @@ bp1 %>%
   unnest(cols = c("time", "gc")) %>%
   mutate(expression = factor(
     expression,
-    levels = c("Cuadras_Auge", "Ex_Arnold", "LFM", "Arnold", "ESM")
+    levels = c("Cuadras_Auge", "Ex_Markovian", "LFM", "Arnold", "ESM")
     )) %>%
   ggplot(aes(expression, time, colour = gc)) +
   ggbeeswarm::geom_quasirandom() +
@@ -125,7 +125,7 @@ bp1_prev <- bench::press(
         n, d, intensities=intensities),
       Arnold = rmo:::Rcpp__rmo_arnold(
         n, d, intensities=intensities),
-      Ex_Arnold = rmo:::Rcpp__rmo_ex_arnold(
+      Ex_Markovian = rmo:::Rcpp__rexmo_markovian(
         n, d, ex_intensities=ex_intensities),
       LFM = rmo:::Rcpp__rmo_lfm_cpp(
         n, d, 0, alpha, beta, "rposval", list("value"=1)),
@@ -141,7 +141,7 @@ bp1_prev %>%
   unnest(cols = c("time", "gc")) %>%
   mutate(expression = factor(
     expression,
-    levels = c("Cuadras_Auge", "Ex_Arnold", "LFM", "Arnold", "ESM")
+    levels = c("Cuadras_Auge", "Ex_Markovian", "LFM", "Arnold", "ESM")
   )) %>%
   ggplot(aes(expression, time, colour = gc)) +
   ggbeeswarm::geom_quasirandom() +
@@ -201,7 +201,7 @@ bp2 <- bench::press(
         n, d, intensities=intensities),
       Arnold = rmo:::Rcpp__rmo_arnold(
         n, d, intensities=intensities),
-      Ex_Arnold = rmo:::Rcpp__rmo_ex_arnold(
+      Ex_Markovian = rmo:::Rcpp__rexmo_markovian(
         n, d, ex_intensities=ex_intensities),
       LFM = rmo:::Rcpp__rmo_lfm_cpp(
         n, d, lambda, 0, 0, "rposval", list("value"=eta)),
@@ -215,7 +215,7 @@ bp2 %>%
   unnest(cols = c("time", "gc")) %>%
   mutate(expression = factor(
     expression,
-    levels = c("Ex_Arnold", "LFM", "Arnold", "ESM")
+    levels = c("Ex_Markovian", "LFM", "Arnold", "ESM")
     )) %>%
   ggplot(aes(expression, time, colour = gc)) +
   ggbeeswarm::geom_quasirandom() +
@@ -246,7 +246,7 @@ bp2_prev <- bench::press(
         n, d, intensities=intensities),
       Arnold = rmo:::Rcpp__rmo_arnold(
         n, d, intensities=intensities),
-      Ex_Arnold = rmo:::Rcpp__rmo_ex_arnold(
+      Ex_Markovian = rmo:::Rcpp__rexmo_markovian(
         n, d, ex_intensities=ex_intensities),
       LFM = rmo:::Rcpp__rmo_lfm_cpp(
         n, d, lambda, 0, 0, "rposval", list("value"=eta)),
@@ -260,7 +260,7 @@ bp2_prev %>%
   unnest(cols = c("time", "gc")) %>%
   mutate(expression = factor(
     expression,
-    levels = c("Ex_Arnold", "LFM", "Arnold", "ESM")
+    levels = c("Ex_Markovian", "LFM", "Arnold", "ESM")
     )) %>%
   ggplot(aes(expression, time, colour = gc)) +
   ggbeeswarm::geom_quasirandom() +
@@ -318,7 +318,7 @@ bp3 <- bench::press(
     ex_intensities <- ex_intensity_list[[idx]]
 
     bench::mark(
-      Ex_Arnold = rmo:::Rcpp__rmo_ex_arnold(
+      Ex_Markovian = rmo:::Rcpp__rexmo_markovian(
         n, d, ex_intensities=ex_intensities),
       LFM = rmo:::Rcpp__rmo_lfm_cpp(
         n, d, rate, 0, 0, "rpareto", list("alpha"=alpha, "x0"=x0)),
@@ -332,7 +332,7 @@ bp3 %>%
   unnest(cols = c("time", "gc")) %>%
   mutate(expression = factor(
     expression,
-    levels = c("Ex_Arnold", "LFM")
+    levels = c("Ex_Markovian", "LFM")
     )) %>%
   ggplot(aes(expression, time, colour = gc)) +
   ggbeeswarm::geom_quasirandom() +
@@ -347,7 +347,7 @@ bp3 %>%
   unnest(cols = c("time", "gc")) %>%
   mutate(expression = factor(
     expression,
-    levels = c("Ex_Arnold", "LFM")
+    levels = c("Ex_Markovian", "LFM")
     )) %>%
   filter(gc == "none") %>%
   ggplot(aes(x=d, y=time)) +
@@ -377,7 +377,7 @@ bp3_prev <- bench::press(
     ex_intensities <- ex_intensity_list[[idx]]
 
     bench::mark(
-      Ex_Arnold = rmo:::Rcpp__rmo_ex_arnold(
+      Ex_Markovian = rmo:::Rcpp__rexmo_markovian(
         n, d, ex_intensities=ex_intensities),
       LFM = rmo:::Rcpp__rmo_lfm_cpp(
         n, d, rate, 0, 0, "rpareto", list("alpha"=alpha, "x0"=x0)),
@@ -391,7 +391,7 @@ bp3_prev %>%
   unnest(cols = c("time", "gc")) %>%
   mutate(expression = factor(
     expression,
-    levels = c("Ex_Arnold", "LFM")
+    levels = c("Ex_Markovian", "LFM")
     )) %>%
   ggplot(aes(expression, time, colour = gc)) +
   ggbeeswarm::geom_quasirandom() +
@@ -406,7 +406,7 @@ bp3_prev %>%
   unnest(cols = c("time", "gc")) %>%
   mutate(expression = factor(
     expression,
-    levels = c("Ex_Arnold", "LFM")
+    levels = c("Ex_Markovian", "LFM")
     )) %>%
   filter(gc == "none") %>%
   ggplot(aes(x=d, y=time)) +

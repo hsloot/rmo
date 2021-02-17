@@ -50,13 +50,13 @@ devtools::install_github("hsloot/rmo")
 ## Example
 
 ```{r, include=TRUE}
-rmo_esm(n=10L, d=2L, intensities=c(1, 1, 1))
+rmo_esm(n=10L, d=2L, intensities_alpha_stable(d=2L, alpha = log2(2 - 0.5)))
 ```
 
 ### Approximate an Alpha-Stable BF
 
 ```{r, include=TRUE}
-alpha <- 0.5
+alpha <- log2(2 - 0.5)
 bf <- AlphaStableBernsteinFunction(alpha=alpha)
 
 x0 <- 5e-4
@@ -103,17 +103,13 @@ including a [reprex](https://github.com/tidyverse/reprex).
 ## Roadmap for future development
 
 We are planning to develop the package incrementally. The packages API might
-change frequently without deprecation. The goal is to implement prototypes of
-the algorithms in `R` and refactor them in compiled code afterwards. The
-original `R` implementations are supposed to serve as test functions in the
-unit-test harness.
+change frequently without deprecation. 
+As of now, we have completed the reimplementation of all sampling algorithms in `Rcpp`. Our next steps are:
 
-As of now, we have completed the reimplementation of all sampling algorithms
-in `Rcpp`. Our next steps are:
-
-- __Version 0.3__: Refactor and document test and write new test cases to
-  increase the coverage. Provide non trivial exchangeable and
-  non-exchangeable parametrisations for testing.
+- __Version 0.5__: Refactor the `arnold_distribution` and the 
+  `markovian_exmo_distribution` to be based on a `random_walk_distribution`
+  and `markov_process`. Add a distribution to sample from the Arnold model 
+  with `ex_intensities` which does not require to store all shock intensities.
 
 Other ideas for the future:
 

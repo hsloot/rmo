@@ -1,6 +1,15 @@
+# rmo 0.4.0
+
+- Change input parameter for `rexmo_markovian` (which is now is scaled
+  exchangeable intensity). The `ex_intensities*`-methods are similarly adjusted
+  such that there should be no change necessary if these functions were used
+  to create the input parameter for `rexmo_markovian`.
+- The Bernstein function classes have been refactored and some new features have
+  been added. 
+
 # rmo 0.3.0
 
-- Rename `rmo_ex_arnold` to `rexmo_markovian`. 
+- Rename `rmo_ex_arnold` to `rexmo_markovian`.
 
 # rmo 0.2.6
 
