@@ -100,12 +100,11 @@ underlying Gaussian process)}
 \examples{
 InverseGaussianBernsteinFunction()
 InverseGaussianBernsteinFunction(eta = 0.3)
-
 }
 \references{
 \insertAllCited{}
 }
 \seealso{
 \linkS4class{BernsteinFunction}, \linkS4class{LevyBernsteinFunction},
-\link{InverseGaussianBernsteinFunction-constructor}, \code{\link[=valueOf]{valueOf()}}
+\code{\link[=valueOf]{valueOf()}}
 }

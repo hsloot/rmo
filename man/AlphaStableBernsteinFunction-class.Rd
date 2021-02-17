@@ -114,7 +114,6 @@ Lévy representation.
 \examples{
 AlphaStableBernsteinFunction()
 AlphaStableBernsteinFunction(alpha = 0.5)
-
 }
 \references{
 \insertAllCited{}
@@ -122,5 +121,5 @@ AlphaStableBernsteinFunction(alpha = 0.5)
 \seealso{
 \linkS4class{BernsteinFunction}, \linkS4class{LevyBernsteinFunction},
 \linkS4class{CompleteBernsteinFunction},
-'\link{AlphaStableBernsteinFunction-constructor}, \code{\link[=valueOf]{valueOf()}}
+\code{\link[=valueOf]{valueOf()}}
 }

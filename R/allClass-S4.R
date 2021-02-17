@@ -64,7 +64,6 @@ setClass("BernsteinFunction", # nolint
 #' }
 #'
 #' @seealso [BernsteinFunction-class],
-#'   [LinearBernsteinFunction-constructor],
 #'   [valueOf()]
 #'
 #' @export LinearBernsteinFunction
@@ -85,8 +84,7 @@ LinearBernsteinFunction <- setClass("LinearBernsteinFunction", # nolint
 #'   \psi(x) = a , x > 0
 #' }
 #'
-#' @seealso [BernsteinFunction-class]
-#'   [ConstantBernsteinFunction-constructor]
+#' @seealso [BernsteinFunction-class],
 #'   [valueOf()]
 #'
 #' @export ConstantBernsteinFunction
@@ -108,8 +106,7 @@ ConstantBernsteinFunction <- setClass("ConstantBernsteinFunction", # nolint
 #'   is to be multiplied.
 #' @slot original The original Bernstein function which is to be multiplied.
 #'
-#' @seealso [BernsteinFunction-class]
-#'   [ScaledBernsteinFunction-constructor]
+#' @seealso [BernsteinFunction-class],
 #'   [valueOf()]
 #'
 #' @export ScaledBernsteinFunction
@@ -135,8 +132,7 @@ ScaledBernsteinFunction <- setClass("ScaledBernsteinFunction", # nolint
 #' }
 #' is also a Bernstein function.
 #'
-#' @seealso [BernsteinFunction-class]
-#'   [SumOfBernsteinFunctions-constructor]
+#' @seealso [BernsteinFunction-class],
 #'   [valueOf()]
 #'
 #' @export SumOfBernsteinFunctions
@@ -198,7 +194,7 @@ setClass("CompleteBernsteinFunction",
 #' }
 #'
 #' @seealso [BernsteinFunction-class], [LevyBernsteinFunction-class]
-#'   [PoissonBernsteinFunction-constructor], [valueOf()]
+#'   [valueOf()]
 #'
 #' @export PoissonBernsteinFunction
 PoissonBernsteinFunction <- setClass("PoissonBernsteinFunction", # nolint
@@ -238,7 +234,7 @@ PoissonBernsteinFunction <- setClass("PoissonBernsteinFunction", # nolint
 #'
 #' @seealso [BernsteinFunction-class], [LevyBernsteinFunction-class],
 #'   [CompleteBernsteinFunction-class],
-#'   '[AlphaStableBernsteinFunction-constructor], [valueOf()]
+#'   [valueOf()]
 #'
 #' @export AlphaStableBernsteinFunction
 AlphaStableBernsteinFunction <- setClass("AlphaStableBernsteinFunction", # nolint
@@ -275,7 +271,7 @@ AlphaStableBernsteinFunction <- setClass("AlphaStableBernsteinFunction", # nolin
 #'  \insertAllCited{}
 #'
 #' @seealso [BernsteinFunction-class], [LevyBernsteinFunction-class],
-#'   [InverseGaussianBernsteinFunction-constructor], [valueOf()]
+#'   [valueOf()]
 #'
 #' @export InverseGaussianBernsteinFunction
 InverseGaussianBernsteinFunction <- setClass("InverseGaussianBernsteinFunction", # nolint
@@ -309,8 +305,7 @@ InverseGaussianBernsteinFunction <- setClass("InverseGaussianBernsteinFunction",
 #'   \insertAllCited{}
 #'
 #' @seealso [BernsteinFunction-class], [LevyBernsteinFunction-class],
-#'   [CompleteBernsteinFunction-class], [ExponentialBernsteinFunction-constructor],
-#'   [valueOf()]
+#'   [CompleteBernsteinFunction-class], [valueOf()]
 #'
 #' @export ExponentialBernsteinFunction
 ExponentialBernsteinFunction <- setClass("ExponentialBernsteinFunction", # nolint
@@ -349,8 +344,7 @@ ExponentialBernsteinFunction <- setClass("ExponentialBernsteinFunction", # nolin
 #'   \insertAllCited{}
 #'
 #' @seealso [BernsteinFunction-class], [LevyBernsteinFunction-class],
-#'   [CompleteBernsteinFunction-class], [GammaBernsteinFunction-constructor],
-#'   [valueOf()]
+#'   [CompleteBernsteinFunction-class], [valueOf()]
 #'
 #' @export GammaBernsteinFunction
 GammaBernsteinFunction <- setClass("GammaBernsteinFunction", # nolint
@@ -394,7 +388,7 @@ GammaBernsteinFunction <- setClass("GammaBernsteinFunction", # nolint
 #'   \insertAllCited{}
 #'
 #' @seealso [BernsteinFunction-class], [LevyBernsteinFunction-class],
-#'   [ParetoBernsteinFunction-constructor], [valueOf()]
+#'   [valueOf()]
 #'
 #' @export ParetoBernsteinFunction
 ParetoBernsteinFunction <- setClass("ParetoBernsteinFunction", # nolint

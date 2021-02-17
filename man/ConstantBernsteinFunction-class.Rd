@@ -59,10 +59,8 @@ in the representation)}
 \examples{
 ConstantBernsteinFunction()
 ConstantBernsteinFunction(constant = 0.2)
-
 }
 \seealso{
-\linkS4class{BernsteinFunction}
-\link{ConstantBernsteinFunction-constructor}
+\linkS4class{BernsteinFunction},
 \code{\link[=valueOf]{valueOf()}}
 }

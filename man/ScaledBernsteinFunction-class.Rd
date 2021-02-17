@@ -64,10 +64,8 @@ is to be multiplied.}
 ScaledBernsteinFunction()
 original_bf <- AlphaStableBernsteinFunction(alpha = 0.5)
 ScaledBernsteinFunction(scale = 2, original = original_bf)
-
 }
 \seealso{
-\linkS4class{BernsteinFunction}
-\link{ScaledBernsteinFunction-constructor}
+\linkS4class{BernsteinFunction},
 \code{\link[=valueOf]{valueOf()}}
 }

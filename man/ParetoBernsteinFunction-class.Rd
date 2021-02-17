@@ -109,12 +109,11 @@ Lévy representation.
 \examples{
 ParetoBernsteinFunction()
 ParetoBernsteinFunction(alpha = 0.2, x0 = 1)
-
 }
 \references{
 \insertAllCited{}
 }
 \seealso{
 \linkS4class{BernsteinFunction}, \linkS4class{LevyBernsteinFunction},
-\link{ParetoBernsteinFunction-constructor}, \code{\link[=valueOf]{valueOf()}}
+\code{\link[=valueOf]{valueOf()}}
 }

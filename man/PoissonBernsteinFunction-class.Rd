@@ -87,9 +87,8 @@ Lévy representation.
 \examples{
 PoissonBernsteinFunction()
 PoissonBernsteinFunction(lambda = 0.2, eta = 2)
-
 }
 \seealso{
 \linkS4class{BernsteinFunction}, \linkS4class{LevyBernsteinFunction}
-\link{PoissonBernsteinFunction-constructor}, \code{\link[=valueOf]{valueOf()}}
+\code{\link[=valueOf]{valueOf()}}
 }

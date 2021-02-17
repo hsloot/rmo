@@ -114,15 +114,13 @@ Lévy representation.
 \examples{
 GammaBernsteinFunction()
 GammaBernsteinFunction(a = 2)
-
 }
 \references{
 \insertAllCited{}
 }
 \seealso{
 \linkS4class{BernsteinFunction}, \linkS4class{LevyBernsteinFunction},
-\linkS4class{CompleteBernsteinFunction}, \link{GammaBernsteinFunction-constructor},
-\code{\link[=valueOf]{valueOf()}}
+\linkS4class{CompleteBernsteinFunction}, \code{\link[=valueOf]{valueOf()}}
 
 \linkS4class{GammaBernsteinFunction}
 }

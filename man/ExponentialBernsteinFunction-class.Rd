@@ -109,13 +109,11 @@ Stieltjes representation.
 \examples{
 ExponentialBernsteinFunction()
 ExponentialBernsteinFunction(lambda = 0.5)
-
 }
 \references{
 \insertAllCited{}
 }
 \seealso{
 \linkS4class{BernsteinFunction}, \linkS4class{LevyBernsteinFunction},
-\linkS4class{CompleteBernsteinFunction}, \link{ExponentialBernsteinFunction-constructor},
-\code{\link[=valueOf]{valueOf()}}
+\linkS4class{CompleteBernsteinFunction}, \code{\link[=valueOf]{valueOf()}}
 }

@@ -58,10 +58,8 @@ i.e. \eqn{a = 0} and \eqn{\nu = 0}. In particular,
 \examples{
 LinearBernsteinFunction()
 LinearBernsteinFunction(scale = 2)
-
 }
 \seealso{
 \linkS4class{BernsteinFunction},
-\link{LinearBernsteinFunction-constructor},
 \code{\link[=valueOf]{valueOf()}}
 }
