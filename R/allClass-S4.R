@@ -266,6 +266,8 @@ AlphaStableBernsteinFunction <- setClass("AlphaStableBernsteinFunction", # nolin
 #' }
 #'
 #' This Bernstein function can be found on p. 309 in \insertCite{Mai2017a}{rmo}.
+#' Furthermore it is  a transformation of no. 2 in the list of complete Bernstein
+#' functions in Chp. 16 of \insertCite{Schilling2012a}{rmo}.
 #'
 #' @references
 #'  \insertAllCited{}
@@ -275,7 +277,7 @@ AlphaStableBernsteinFunction <- setClass("AlphaStableBernsteinFunction", # nolin
 #'
 #' @export InverseGaussianBernsteinFunction
 InverseGaussianBernsteinFunction <- setClass("InverseGaussianBernsteinFunction", # nolint
-  contains = "LevyBernsteinFunction",
+  contains = "CompleteBernsteinFunction",
   slots = c(eta = "numeric"))
 
 

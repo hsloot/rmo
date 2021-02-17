@@ -347,7 +347,7 @@ setMethod("valueOf", "AlphaStableBernsteinFunction",
 #' @export
 setMethod("valueOf", "InverseGaussianBernsteinFunction",
   function(object, x, difference_order = 0L, ...,
-      method = c("default", "levy"),
+      method = c("default", "levy", "stieltjes"),
       tolerance = .Machine$double.eps^0.5) {
     method <- match.arg(method)
     if (!"default" == method) {

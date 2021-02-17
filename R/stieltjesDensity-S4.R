@@ -59,6 +59,28 @@ setMethod("stieltjesDensity", "ExponentialBernsteinFunction",
     )
   })
 
+#' @describeIn InverseGaussianBernsteinFunction-class
+#'   see [CompleteBernsteinFunction-class]
+#' @aliases stieltjesDensity,InverseGaussianBernsteinFunction-method
+#'
+#' @inheritParams levyDensity
+#'
+#' @section Stieltjes density:
+#' \deqn{
+#'   \sigma(du)
+#'     = \frac{\sin(\pi / 2)}{\pi} \cdot \frac{\sqrt{2 x - \eta^2}}{x} , \quad u > \eta^2 / 2 .
+#' }
+#'
+setMethod("stieltjesDensity", "InverseGaussianBernsteinFunction",
+  function(object) {
+    structure(
+      function(x) {
+        sin(pi / 2) / pi * sqrt(2 * x - object@eta^2) / x
+      },
+      lower = object@eta^2 / 2, upper = Inf, type = "continuous"
+    )
+  })
+
 #' @describeIn GammaBernsteinFunction-class
 #'   see [CompleteBernsteinFunction-class]
 #' @aliases stieltjesDensity,GammaBernsteinFunction-method
@@ -68,7 +90,7 @@ setMethod("stieltjesDensity", "ExponentialBernsteinFunction",
 #' @section Stieltjes density:
 #' \deqn{
 #'   \sigma(du)
-#'     = 1 / x, x > a .
+#'     = 1 / u du, u > a .
 #' }
 #'
 setMethod("stieltjesDensity", "GammaBernsteinFunction",

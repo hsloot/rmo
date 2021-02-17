@@ -210,6 +210,8 @@ test_that("`valueOf` for `InverseGaussianBernsteinFunction`", {
     (sqrt(2*x + eta^2) - eta))
   expect_equal(valueOf(bf, x, difference_order=0L, method = "levy"),
     (sqrt(2*x + eta^2) - eta))
+  expect_equal(valueOf(bf, x, difference_order=0L, method = "stieltjes"),
+    (sqrt(2*x + eta^2) - eta))
 
   k <- 1L
   y <- sort(unique(union(x, x+k)))
@@ -240,6 +242,12 @@ test_that("`valueOf` for `InverseGaussianBernsteinFunction`", {
 
   expect_equal(
     valueOf(bf, x, difference_order=k, method = "levy"),
+    (-1) ^ (k-1) * diff(
+      valueOf(bf, y, difference_order=0L),
+      differences=k)[seq_along(x)])
+
+  expect_equal(
+    valueOf(bf, x, difference_order=k, method = "stieltjes"),
     (-1) ^ (k-1) * diff(
       valueOf(bf, y, difference_order=0L),
       differences=k)[seq_along(x)])

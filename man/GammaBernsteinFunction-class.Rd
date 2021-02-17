@@ -107,7 +107,7 @@ Lévy representation.
 
 \deqn{
   \sigma(du)
-    = 1 / x, x > a .
+    = 1 / u du, u > a .
 }
 }
 
