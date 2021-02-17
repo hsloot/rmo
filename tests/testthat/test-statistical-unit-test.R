@@ -28,7 +28,7 @@ ks_test <- function(n, d, FUN, intensities) { # nolint
 #' @noRd
 #' @keywords internal test
 ex_ks_test <- function(n, d, FUN, ex_intensities) { # nolint
-  min_rate <- sum(ex_intensities * sapply(1:d, function(x) choose(d, x)))
+  min_rate <- sum(ex_intensities)
   x <- min_rate * apply(FUN(n, d, ex_intensities), 1, min)
   ks.test(x, stats::pexp)
 }
@@ -107,28 +107,28 @@ test_that("ESM passes statistical unit test", {
     first = ConstantBernsteinFunction(),
     second = LinearBernsteinFunction()
   ))
-  intensities <- ex_intensities2intensities(bf2ex_intensities(d, bf))
+  intensities <- bf2intensities(d, bf)
   expect_not_rejected(
     ks_test(n, d, rmo_esm, intensities),
     unit_threshold
   )
 
   bf <- testutils.rmo::fuzzy_bf(AlphaStableBernsteinFunction())
-  intensities <- ex_intensities2intensities(bf2ex_intensities(d, bf))
+  intensities <- bf2intensities(d, bf)
   expect_not_rejected(
     ks_test(n, d, rmo_esm, intensities),
     unit_threshold
   )
 
   bf <- testutils.rmo::fuzzy_bf(InverseGaussianBernsteinFunction())
-  intensities <- ex_intensities2intensities(bf2ex_intensities(d, bf))
+  intensities <- bf2intensities(d, bf)
   expect_not_rejected(
     ks_test(n, d, rmo_esm, intensities),
     unit_threshold
   )
 
   bf <- testutils.rmo::fuzzy_bf(ExponentialBernsteinFunction())
-  intensities <- ex_intensities2intensities(bf2ex_intensities(d, bf))
+  intensities <- bf2intensities(d, bf)
   expect_not_rejected(
     ks_test(n, d, rmo_esm, intensities),
     unit_threshold
@@ -147,28 +147,28 @@ test_that("Arnold model passes statistical unit test", {
     first = ConstantBernsteinFunction(),
     second = LinearBernsteinFunction()
   ))
-  intensities <- ex_intensities2intensities(bf2ex_intensities(d, bf))
+  intensities <- bf2intensities(d, bf)
   expect_not_rejected(
     ks_test(n, d, rmo_arnold, intensities),
     unit_threshold
   )
 
   bf <- testutils.rmo::fuzzy_bf(AlphaStableBernsteinFunction())
-  intensities <- ex_intensities2intensities(bf2ex_intensities(d, bf))
+  intensities <- bf2intensities(d, bf)
   expect_not_rejected(
     ks_test(n, d, rmo_arnold, intensities),
     unit_threshold
   )
 
   bf <- testutils.rmo::fuzzy_bf(InverseGaussianBernsteinFunction())
-  intensities <- ex_intensities2intensities(bf2ex_intensities(d, bf))
+  intensities <- bf2intensities(d, bf)
   expect_not_rejected(
     ks_test(n, d, rmo_arnold, intensities),
     unit_threshold
   )
 
   bf <- testutils.rmo::fuzzy_bf(ExponentialBernsteinFunction())
-  intensities <- ex_intensities2intensities(bf2ex_intensities(d, bf))
+  intensities <- bf2intensities(d, bf)
   expect_not_rejected(
     ks_test(n, d, rmo_arnold, intensities),
     unit_threshold

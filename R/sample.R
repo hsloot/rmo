@@ -87,12 +87,13 @@ rmo_arnold <- function(n, d, intensities) {
 #' Sample from an exchangeable MO distribution
 #'
 #' Draws `n` independent samples from a `d` variate exchangeable Marshall-Olkin
-#' distribution with shock rates `ex_intensities`.
+#' distribution with (scaled) shock rates `ex_intensities`.
 #'
 #' - The *exchangeable* shock intensities must be stored in a vector of length
 #' \eqn{d}.
 #' - The entry \eqn{{exintensities}_{i}}{ex_intensities[i]} is the
-#' intensity of a shock corresponding to a set with \eqn{i} elements.
+#' intensity of a shock corresponding to a set with \eqn{i} elements multiplied
+#' by the number of shocks of cardinality \eqn{i}, i.e. \eqn{\binom{d}{i}}.
 #'
 #' @section References:
 #' For more information on this algorithm, see J.-F. Mai, M. Scherer,
@@ -100,7 +101,7 @@ rmo_arnold <- function(n, d, intensities) {
 #'
 #' @param n number of samples
 #' @param d dimension
-#' @param ex_intensities exchangeable Marshall-Olkin intensity rates
+#' @param ex_intensities (Scaled) exchangeable Marshall-Olkin intensity rates
 #'
 #' @return `rexmo_markovian` implements the Markovian model for the
 #' exchangeable subclass and returns an \eqn{n \times d}{n x d} numeric matrix
@@ -111,8 +112,8 @@ rmo_arnold <- function(n, d, intensities) {
 #' @family samplers
 #'
 #' @examples
-#' rexmo_markovian(10, 2, c(0.4, 0.2))
-#' rexmo_markovian(10, 2, c(1, 0))      ## independence
+#' rexmo_markovian(10, 2, c(2 * 0.4, 0.2))
+#' rexmo_markovian(10, 2, c(2, 0))      ## independence
 #' rexmo_markovian(10, 2, c(0, 1))      ## comonotone
 #'
 #' @export

@@ -84,6 +84,9 @@ rexmo_markovian_bivariate <- function( # nolint
     is.numeric(ex_intensities) && 2 == length(ex_intensities) &&
       all(ex_intensities >= 0) && any(ex_intensities > 0))
 
+  ## convert to unscaled exchangeable intensities
+  ex_intensities <- sapply(1:d, function(i) ex_intensities[i] / choose(d, i))
+
   ## calculate the transition intensities for all states
   first_transition_intensity <- 2 * ex_intensities[[1]] + ex_intensities[[2]]
   second_transition_intensity <- ex_intensities[[1]] + ex_intensities[[2]]

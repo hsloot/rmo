@@ -1,8 +1,8 @@
 Integration tests
 ================
 
-![packageversion](https://img.shields.io/badge/Package%20version-0.2.6-orange.svg?style=flat-square)
-[![Last-changedate](https://img.shields.io/badge/last%20change-2020--12--11-yellowgreen.svg)](/commits/master)
+![packageversion](https://img.shields.io/badge/Package%20version-0.4.0-orange.svg?style=flat-square)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2021--02--17-yellowgreen.svg)](/commits/master)
 
 ## The overall minimum
 
@@ -131,7 +131,7 @@ ks_test(n, d, rmo_esm, intensities_gamma(d, a = 0.6), normalize = TRUE)
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, intensities), 1, min)
-#> D = 0.033871, p-value = 0.2014
+#> D = 0.033873, p-value = 0.2014
 #> alternative hypothesis: two-sided
 ks_test(n, d, rmo_esm, intensities_pareto(d, alpha = 0.4, x0 = 1e-4), normalize = TRUE)
 #> 
@@ -159,63 +159,63 @@ ks_test(n, d, rmo_arnold, intensities_constant(d, constant = 0.3))
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, intensities), 1, min)
-#> D = 0.031997, p-value = 0.2575
+#> D = 0.026023, p-value = 0.5073
 #> alternative hypothesis: two-sided
 ks_test(n, d, rmo_arnold, intensities_linear(d, scale = 0.2))
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, intensities), 1, min)
-#> D = 0.020938, p-value = 0.773
+#> D = 0.024935, p-value = 0.563
 #> alternative hypothesis: two-sided
 ks_test(n, d, rmo_arnold, intensities_cuadras_auge(d, alpha = 0.6, beta = 0.2))
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, intensities), 1, min)
-#> D = 0.021681, p-value = 0.735
+#> D = 0.019065, p-value = 0.8604
 #> alternative hypothesis: two-sided
 ks_test(n, d, rmo_arnold, intensities_poisson(d, lambda = 0.3, eta = 0.4))
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, intensities), 1, min)
-#> D = 0.025579, p-value = 0.5298
+#> D = 0.024261, p-value = 0.5983
 #> alternative hypothesis: two-sided
 ks_test(n, d, rmo_arnold, intensities_alpha_stable(d, alpha = 0.4))
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, intensities), 1, min)
-#> D = 0.021559, p-value = 0.7414
+#> D = 0.029265, p-value = 0.3586
 #> alternative hypothesis: two-sided
 ks_test(n, d, rmo_arnold, intensities_exponential(d, lambda = 0.5))
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, intensities), 1, min)
-#> D = 0.014325, p-value = 0.9865
+#> D = 0.027324, p-value = 0.4442
 #> alternative hypothesis: two-sided
 ks_test(n, d, rmo_arnold, intensities_gamma(d, a = 0.6))
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, intensities), 1, min)
-#> D = 0.021625, p-value = 0.7379
+#> D = 0.037951, p-value = 0.1122
 #> alternative hypothesis: two-sided
 ks_test(n, d, rmo_arnold, intensities_pareto(d, alpha = 0.4, x0 = 1e-4))
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, intensities), 1, min)
-#> D = 0.01982, p-value = 0.827
+#> D = 0.025464, p-value = 0.5356
 #> alternative hypothesis: two-sided
 ks_test(n, d, rmo_arnold, intensities_inverse_gaussian(d, eta = 0.1))
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, intensities), 1, min)
-#> D = 0.024684, p-value = 0.576
+#> D = 0.026383, p-value = 0.4895
 #> alternative hypothesis: two-sided
 
 ks_test(n, d, rmo_arnold, intensities_constant(d, constant = 0.3), normalize = TRUE)
@@ -223,331 +223,331 @@ ks_test(n, d, rmo_arnold, intensities_constant(d, constant = 0.3), normalize = T
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, intensities), 1, min)
-#> D = 0.027411, p-value = 0.4402
+#> D = 0.031305, p-value = 0.281
 #> alternative hypothesis: two-sided
 ks_test(n, d, rmo_arnold, intensities_linear(d, scale = 0.2), normalize = TRUE)
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, intensities), 1, min)
-#> D = 0.017813, p-value = 0.9088
+#> D = 0.051486, p-value = 0.009967
 #> alternative hypothesis: two-sided
 ks_test(n, d, rmo_arnold, intensities_cuadras_auge(d, alpha = 0.6, beta = 0.2), normalize = TRUE)
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, intensities), 1, min)
-#> D = 0.031268, p-value = 0.2822
+#> D = 0.018432, p-value = 0.8861
 #> alternative hypothesis: two-sided
 ks_test(n, d, rmo_arnold, intensities_poisson(d, lambda = 0.3, eta = 0.4), normalize = TRUE)
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, intensities), 1, min)
-#> D = 0.03063, p-value = 0.3052
+#> D = 0.023479, p-value = 0.6399
 #> alternative hypothesis: two-sided
 ks_test(n, d, rmo_arnold, intensities_alpha_stable(d, alpha = 0.4), normalize = TRUE)
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, intensities), 1, min)
-#> D = 0.03275, p-value = 0.2337
+#> D = 0.013021, p-value = 0.9958
 #> alternative hypothesis: two-sided
 ks_test(n, d, rmo_arnold, intensities_exponential(d, lambda = 0.5), normalize = TRUE)
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, intensities), 1, min)
-#> D = 0.026292, p-value = 0.4939
+#> D = 0.026641, p-value = 0.4769
 #> alternative hypothesis: two-sided
 ks_test(n, d, rmo_arnold, intensities_gamma(d, a = 0.6), normalize = TRUE)
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, intensities), 1, min)
-#> D = 0.025818, p-value = 0.5176
+#> D = 0.032075, p-value = 0.255
 #> alternative hypothesis: two-sided
 ks_test(n, d, rmo_arnold, intensities_pareto(d, alpha = 0.4, x0 = 1e-4), normalize = TRUE)
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, intensities), 1, min)
-#> D = 0.031074, p-value = 0.2891
+#> D = 0.042573, p-value = 0.0533
 #> alternative hypothesis: two-sided
 ks_test(n, d, rmo_arnold, intensities_inverse_gaussian(d, eta = 0.1), normalize = TRUE)
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, intensities), 1, min)
-#> D = 0.026316, p-value = 0.4928
+#> D = 0.03007, p-value = 0.3264
 #> alternative hypothesis: two-sided
 ```
 
-### Test for `rmo_ex_arnold` with `d = 10`
+### Test for `rexmo_markovian` with `d = 10`
 
 ``` r
 d <- 10L
 
-ex_ks_test(n, d, rmo_ex_arnold, ex_intensities_constant(d, constant = 0.3))
+ex_ks_test(n, d, rexmo_markovian, ex_intensities_constant(d, constant = 0.3))
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, ex_intensities), 1, min)
-#> D = 0.024714, p-value = 0.5745
+#> D = 0.035942, p-value = 0.1509
 #> alternative hypothesis: two-sided
-ex_ks_test(n, d, rmo_ex_arnold, ex_intensities_linear(d, scale = 0.2))
+ex_ks_test(n, d, rexmo_markovian, ex_intensities_linear(d, scale = 0.2))
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, ex_intensities), 1, min)
-#> D = 0.022538, p-value = 0.69
+#> D = 0.026694, p-value = 0.4743
 #> alternative hypothesis: two-sided
-ex_ks_test(n, d, rmo_ex_arnold, ex_intensities_cuadras_auge(d, alpha = 0.6, beta = 0.2))
+ex_ks_test(n, d, rexmo_markovian, ex_intensities_cuadras_auge(d, alpha = 0.6, beta = 0.2))
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, ex_intensities), 1, min)
-#> D = 0.023793, p-value = 0.6231
+#> D = 0.032068, p-value = 0.2552
 #> alternative hypothesis: two-sided
-ex_ks_test(n, d, rmo_ex_arnold, ex_intensities_poisson(d, lambda = 0.3, eta = 0.4))
+ex_ks_test(n, d, rexmo_markovian, ex_intensities_poisson(d, lambda = 0.3, eta = 0.4))
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, ex_intensities), 1, min)
-#> D = 0.028248, p-value = 0.4021
+#> D = 0.026338, p-value = 0.4917
 #> alternative hypothesis: two-sided
-ex_ks_test(n, d, rmo_ex_arnold, ex_intensities_alpha_stable(d, alpha = 0.4))
+ex_ks_test(n, d, rexmo_markovian, ex_intensities_alpha_stable(d, alpha = 0.4))
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, ex_intensities), 1, min)
-#> D = 0.022885, p-value = 0.6715
+#> D = 0.026433, p-value = 0.487
 #> alternative hypothesis: two-sided
-ex_ks_test(n, d, rmo_ex_arnold, ex_intensities_exponential(d, lambda = 0.5))
+ex_ks_test(n, d, rexmo_markovian, ex_intensities_exponential(d, lambda = 0.5))
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, ex_intensities), 1, min)
-#> D = 0.036459, p-value = 0.1401
+#> D = 0.019662, p-value = 0.8342
 #> alternative hypothesis: two-sided
-ex_ks_test(n, d, rmo_ex_arnold, ex_intensities_gamma(d, a = 0.6))
+ex_ks_test(n, d, rexmo_markovian, ex_intensities_gamma(d, a = 0.6))
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, ex_intensities), 1, min)
-#> D = 0.02014, p-value = 0.812
+#> D = 0.028713, p-value = 0.3818
 #> alternative hypothesis: two-sided
-ex_ks_test(n, d, rmo_ex_arnold, ex_intensities_pareto(d, alpha = 0.4, x0 = 1e-4))
+ex_ks_test(n, d, rexmo_markovian, ex_intensities_pareto(d, alpha = 0.4, x0 = 1e-4))
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, ex_intensities), 1, min)
-#> D = 0.044431, p-value = 0.03858
+#> D = 0.019993, p-value = 0.8189
 #> alternative hypothesis: two-sided
-ex_ks_test(n, d, rmo_ex_arnold, ex_intensities_inverse_gaussian(d, eta = 0.1))
+ex_ks_test(n, d, rexmo_markovian, ex_intensities_inverse_gaussian(d, eta = 0.1))
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, ex_intensities), 1, min)
-#> D = 0.033847, p-value = 0.2021
+#> D = 0.022671, p-value = 0.6829
 #> alternative hypothesis: two-sided
 
-ex_ks_test(n, d, rmo_ex_arnold, ex_intensities_constant(d, constant = 0.3), normalize = TRUE)
+ex_ks_test(n, d, rexmo_markovian, ex_intensities_constant(d, constant = 0.3), normalize = TRUE)
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, ex_intensities), 1, min)
-#> D = 0.02485, p-value = 0.5674
+#> D = 0.014153, p-value = 0.9882
 #> alternative hypothesis: two-sided
-ex_ks_test(n, d, rmo_ex_arnold, ex_intensities_linear(d, scale = 0.2), normalize = TRUE)
+ex_ks_test(n, d, rexmo_markovian, ex_intensities_linear(d, scale = 0.2), normalize = TRUE)
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, ex_intensities), 1, min)
-#> D = 0.03423, p-value = 0.1918
+#> D = 0.016268, p-value = 0.954
 #> alternative hypothesis: two-sided
-ex_ks_test(n, d, rmo_ex_arnold, ex_intensities_cuadras_auge(d, alpha = 0.6, beta = 0.2), normalize = TRUE)
+ex_ks_test(n, d, rexmo_markovian, ex_intensities_cuadras_auge(d, alpha = 0.6, beta = 0.2), normalize = TRUE)
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, ex_intensities), 1, min)
-#> D = 0.017181, p-value = 0.9294
+#> D = 0.025005, p-value = 0.5593
 #> alternative hypothesis: two-sided
-ex_ks_test(n, d, rmo_ex_arnold, ex_intensities_poisson(d, lambda = 0.3, eta = 0.4), normalize = TRUE)
+ex_ks_test(n, d, rexmo_markovian, ex_intensities_poisson(d, lambda = 0.3, eta = 0.4), normalize = TRUE)
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, ex_intensities), 1, min)
-#> D = 0.031727, p-value = 0.2665
+#> D = 0.032837, p-value = 0.2311
 #> alternative hypothesis: two-sided
-ex_ks_test(n, d, rmo_ex_arnold, ex_intensities_alpha_stable(d, alpha = 0.4), normalize = TRUE)
+ex_ks_test(n, d, rexmo_markovian, ex_intensities_alpha_stable(d, alpha = 0.4), normalize = TRUE)
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, ex_intensities), 1, min)
-#> D = 0.036162, p-value = 0.1462
+#> D = 0.032911, p-value = 0.2289
 #> alternative hypothesis: two-sided
-ex_ks_test(n, d, rmo_ex_arnold, ex_intensities_exponential(d, lambda = 0.5), normalize = TRUE)
+ex_ks_test(n, d, rexmo_markovian, ex_intensities_exponential(d, lambda = 0.5), normalize = TRUE)
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, ex_intensities), 1, min)
-#> D = 0.021222, p-value = 0.7587
+#> D = 0.025134, p-value = 0.5526
 #> alternative hypothesis: two-sided
-ex_ks_test(n, d, rmo_ex_arnold, ex_intensities_gamma(d, a = 0.6), normalize = TRUE)
+ex_ks_test(n, d, rexmo_markovian, ex_intensities_gamma(d, a = 0.6), normalize = TRUE)
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, ex_intensities), 1, min)
-#> D = 0.018069, p-value = 0.8998
+#> D = 0.039712, p-value = 0.08534
 #> alternative hypothesis: two-sided
-ex_ks_test(n, d, rmo_ex_arnold, ex_intensities_pareto(d, alpha = 0.4, x0 = 1e-4), normalize = TRUE)
+ex_ks_test(n, d, rexmo_markovian, ex_intensities_pareto(d, alpha = 0.4, x0 = 1e-4), normalize = TRUE)
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, ex_intensities), 1, min)
-#> D = 0.025567, p-value = 0.5304
+#> D = 0.013555, p-value = 0.9929
 #> alternative hypothesis: two-sided
-ex_ks_test(n, d, rmo_ex_arnold, ex_intensities_inverse_gaussian(d, eta = 0.1), normalize = TRUE)
+ex_ks_test(n, d, rexmo_markovian, ex_intensities_inverse_gaussian(d, eta = 0.1), normalize = TRUE)
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, ex_intensities), 1, min)
-#> D = 0.02865, p-value = 0.3845
+#> D = 0.020199, p-value = 0.8092
 #> alternative hypothesis: two-sided
 ```
 
-### Test for `rmo_ex_arnold` with `d = 125`
+### Test for `rexmo_markovian` with `d = 125`
 
 ``` r
 d <- 125L
 
-ex_ks_test(n, d, rmo_ex_arnold, ex_intensities_constant(d, constant = 0.3))
+ex_ks_test(n, d, rexmo_markovian, ex_intensities_constant(d, constant = 0.3))
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, ex_intensities), 1, min)
-#> D = 0.023354, p-value = 0.6465
+#> D = 0.019775, p-value = 0.829
 #> alternative hypothesis: two-sided
-ex_ks_test(n, d, rmo_ex_arnold, ex_intensities_linear(d, scale = 0.2))
+ex_ks_test(n, d, rexmo_markovian, ex_intensities_linear(d, scale = 0.2))
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, ex_intensities), 1, min)
-#> D = 0.029479, p-value = 0.3498
+#> D = 0.033294, p-value = 0.2176
 #> alternative hypothesis: two-sided
-ex_ks_test(n, d, rmo_ex_arnold, ex_intensities_cuadras_auge(d, alpha = 0.6, beta = 0.2))
+ex_ks_test(n, d, rexmo_markovian, ex_intensities_cuadras_auge(d, alpha = 0.6, beta = 0.2))
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, ex_intensities), 1, min)
-#> D = 0.024526, p-value = 0.5843
+#> D = 0.049606, p-value = 0.01458
 #> alternative hypothesis: two-sided
-ex_ks_test(n, d, rmo_ex_arnold, ex_intensities_poisson(d, lambda = 0.3, eta = 0.4))
+ex_ks_test(n, d, rexmo_markovian, ex_intensities_poisson(d, lambda = 0.3, eta = 0.4))
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, ex_intensities), 1, min)
-#> D = 0.017669, p-value = 0.9138
+#> D = 0.034026, p-value = 0.1972
 #> alternative hypothesis: two-sided
-ex_ks_test(n, d, rmo_ex_arnold, ex_intensities_alpha_stable(d, alpha = 0.4))
+ex_ks_test(n, d, rexmo_markovian, ex_intensities_alpha_stable(d, alpha = 0.4))
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, ex_intensities), 1, min)
-#> D = 0.026218, p-value = 0.4976
+#> D = 0.032751, p-value = 0.2337
 #> alternative hypothesis: two-sided
-ex_ks_test(n, d, rmo_ex_arnold, ex_intensities_exponential(d, lambda = 0.5))
+ex_ks_test(n, d, rexmo_markovian, ex_intensities_exponential(d, lambda = 0.5))
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, ex_intensities), 1, min)
-#> D = 0.015571, p-value = 0.9686
+#> D = 0.018992, p-value = 0.8635
 #> alternative hypothesis: two-sided
-ex_ks_test(n, d, rmo_ex_arnold, ex_intensities_gamma(d, a = 0.6))
+ex_ks_test(n, d, rexmo_markovian, ex_intensities_gamma(d, a = 0.6))
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, ex_intensities), 1, min)
-#> D = 0.018642, p-value = 0.8778
+#> D = 0.029997, p-value = 0.3292
 #> alternative hypothesis: two-sided
-ex_ks_test(n, d, rmo_ex_arnold, ex_intensities_pareto(d, alpha = 0.4, x0 = 1e-4))
+ex_ks_test(n, d, rexmo_markovian, ex_intensities_pareto(d, alpha = 0.4, x0 = 1e-4))
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, ex_intensities), 1, min)
-#> D = 0.020826, p-value = 0.7786
+#> D = 0.02915, p-value = 0.3633
 #> alternative hypothesis: two-sided
-ex_ks_test(n, d, rmo_ex_arnold, ex_intensities_inverse_gaussian(d, eta = 0.1))
+ex_ks_test(n, d, rexmo_markovian, ex_intensities_inverse_gaussian(d, eta = 0.1))
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, ex_intensities), 1, min)
-#> D = 0.020288, p-value = 0.805
+#> D = 0.030367, p-value = 0.315
 #> alternative hypothesis: two-sided
 
-ex_ks_test(n, d, rmo_ex_arnold, ex_intensities_constant(d, constant = 0.3), normalize = TRUE)
+ex_ks_test(n, d, rexmo_markovian, ex_intensities_constant(d, constant = 0.3), normalize = TRUE)
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, ex_intensities), 1, min)
-#> D = 0.022065, p-value = 0.715
+#> D = 0.030146, p-value = 0.3235
 #> alternative hypothesis: two-sided
-ex_ks_test(n, d, rmo_ex_arnold, ex_intensities_linear(d, scale = 0.2), normalize = TRUE)
+ex_ks_test(n, d, rexmo_markovian, ex_intensities_linear(d, scale = 0.2), normalize = TRUE)
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, ex_intensities), 1, min)
-#> D = 0.019575, p-value = 0.8382
+#> D = 0.018388, p-value = 0.8878
 #> alternative hypothesis: two-sided
-ex_ks_test(n, d, rmo_ex_arnold, ex_intensities_cuadras_auge(d, alpha = 0.6, beta = 0.2), normalize = TRUE)
+ex_ks_test(n, d, rexmo_markovian, ex_intensities_cuadras_auge(d, alpha = 0.6, beta = 0.2), normalize = TRUE)
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, ex_intensities), 1, min)
-#> D = 0.042986, p-value = 0.04967
+#> D = 0.029783, p-value = 0.3377
 #> alternative hypothesis: two-sided
-ex_ks_test(n, d, rmo_ex_arnold, ex_intensities_poisson(d, lambda = 0.3, eta = 0.4), normalize = TRUE)
+ex_ks_test(n, d, rexmo_markovian, ex_intensities_poisson(d, lambda = 0.3, eta = 0.4), normalize = TRUE)
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, ex_intensities), 1, min)
-#> D = 0.057279, p-value = 0.002827
+#> D = 0.0401, p-value = 0.08023
 #> alternative hypothesis: two-sided
-ex_ks_test(n, d, rmo_ex_arnold, ex_intensities_alpha_stable(d, alpha = 0.4), normalize = TRUE)
+ex_ks_test(n, d, rexmo_markovian, ex_intensities_alpha_stable(d, alpha = 0.4), normalize = TRUE)
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, ex_intensities), 1, min)
-#> D = 0.026052, p-value = 0.5059
+#> D = 0.031409, p-value = 0.2774
 #> alternative hypothesis: two-sided
-ex_ks_test(n, d, rmo_ex_arnold, ex_intensities_exponential(d, lambda = 0.5), normalize = TRUE)
+ex_ks_test(n, d, rexmo_markovian, ex_intensities_exponential(d, lambda = 0.5), normalize = TRUE)
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, ex_intensities), 1, min)
-#> D = 0.023103, p-value = 0.6599
+#> D = 0.044296, p-value = 0.03951
 #> alternative hypothesis: two-sided
-ex_ks_test(n, d, rmo_ex_arnold, ex_intensities_gamma(d, a = 0.6), normalize = TRUE)
+ex_ks_test(n, d, rexmo_markovian, ex_intensities_gamma(d, a = 0.6), normalize = TRUE)
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, ex_intensities), 1, min)
-#> D = 0.018769, p-value = 0.8727
+#> D = 0.029509, p-value = 0.3486
 #> alternative hypothesis: two-sided
-ex_ks_test(n, d, rmo_ex_arnold, ex_intensities_pareto(d, alpha = 0.4, x0 = 1e-4), normalize = TRUE)
+ex_ks_test(n, d, rexmo_markovian, ex_intensities_pareto(d, alpha = 0.4, x0 = 1e-4), normalize = TRUE)
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, ex_intensities), 1, min)
-#> D = 0.025224, p-value = 0.548
+#> D = 0.018764, p-value = 0.8729
 #> alternative hypothesis: two-sided
-ex_ks_test(n, d, rmo_ex_arnold, ex_intensities_inverse_gaussian(d, eta = 0.1), normalize = TRUE)
+ex_ks_test(n, d, rexmo_markovian, ex_intensities_inverse_gaussian(d, eta = 0.1), normalize = TRUE)
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, ex_intensities), 1, min)
-#> D = 0.03578, p-value = 0.1545
+#> D = 0.036052, p-value = 0.1486
 #> alternative hypothesis: two-sided
 ```
 
@@ -561,21 +561,21 @@ cuadras_auge_ks_test(n, d, rmo_esm_cuadras_auge, 0.3, 0)
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, alpha, beta), 1, min)
-#> D = 0.041218, p-value = 0.06689
+#> D = 0.034483, p-value = 0.1853
 #> alternative hypothesis: two-sided
 cuadras_auge_ks_test(n, d, rmo_esm_cuadras_auge, 0, 0.3)
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, alpha, beta), 1, min)
-#> D = 0.024012, p-value = 0.6115
+#> D = 0.018891, p-value = 0.8677
 #> alternative hypothesis: two-sided
 cuadras_auge_ks_test(n, d, rmo_esm_cuadras_auge, 0.6, 0.3)
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, alpha, beta), 1, min)
-#> D = 0.019822, p-value = 0.8269
+#> D = 0.021093, p-value = 0.7652
 #> alternative hypothesis: two-sided
 
 cuadras_auge_ks_test(n, d, rmo_esm_cuadras_auge, 0.3, 0, normalize = TRUE)
@@ -583,21 +583,21 @@ cuadras_auge_ks_test(n, d, rmo_esm_cuadras_auge, 0.3, 0, normalize = TRUE)
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, alpha, beta), 1, min)
-#> D = 0.021487, p-value = 0.7451
+#> D = 0.027677, p-value = 0.4279
 #> alternative hypothesis: two-sided
 cuadras_auge_ks_test(n, d, rmo_esm_cuadras_auge, 0, 0.3, normalize = TRUE)
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, alpha, beta), 1, min)
-#> D = 0.021357, p-value = 0.7518
+#> D = 0.022126, p-value = 0.7118
 #> alternative hypothesis: two-sided
 cuadras_auge_ks_test(n, d, rmo_esm_cuadras_auge, 0.6, 0.3, normalize = TRUE)
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, alpha, beta), 1, min)
-#> D = 0.03602, p-value = 0.1492
+#> D = 0.046118, p-value = 0.02842
 #> alternative hypothesis: two-sided
 ```
 
@@ -611,21 +611,21 @@ cuadras_auge_ks_test(n, d, rmo_esm_cuadras_auge, 0.3, 0)
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, alpha, beta), 1, min)
-#> D = 0.023826, p-value = 0.6214
+#> D = 0.024057, p-value = 0.6091
 #> alternative hypothesis: two-sided
 cuadras_auge_ks_test(n, d, rmo_esm_cuadras_auge, 0, 0.3)
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, alpha, beta), 1, min)
-#> D = 0.031212, p-value = 0.2842
+#> D = 0.027069, p-value = 0.4562
 #> alternative hypothesis: two-sided
 cuadras_auge_ks_test(n, d, rmo_esm_cuadras_auge, 0.6, 0.3)
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, alpha, beta), 1, min)
-#> D = 0.024466, p-value = 0.5875
+#> D = 0.023546, p-value = 0.6363
 #> alternative hypothesis: two-sided
 
 cuadras_auge_ks_test(n, d, rmo_esm_cuadras_auge, 0.3, 0, normalize = TRUE)
@@ -633,21 +633,21 @@ cuadras_auge_ks_test(n, d, rmo_esm_cuadras_auge, 0.3, 0, normalize = TRUE)
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, alpha, beta), 1, min)
-#> D = 0.0217, p-value = 0.7341
+#> D = 0.01749, p-value = 0.9197
 #> alternative hypothesis: two-sided
 cuadras_auge_ks_test(n, d, rmo_esm_cuadras_auge, 0, 0.3, normalize = TRUE)
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, alpha, beta), 1, min)
-#> D = 0.024245, p-value = 0.5991
+#> D = 0.020532, p-value = 0.7931
 #> alternative hypothesis: two-sided
 cuadras_auge_ks_test(n, d, rmo_esm_cuadras_auge, 0.6, 0.3, normalize = TRUE)
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  scale * apply(FUN(n, d, alpha, beta), 1, min)
-#> D = 0.022881, p-value = 0.6717
+#> D = 0.028568, p-value = 0.3881
 #> alternative hypothesis: two-sided
 ```
 
@@ -661,56 +661,56 @@ lfm_ks_test(n, d, rmo_lfm_cpp, 0, 0.3, 0, "rposval", list("value" = 1))
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  apply(FUN(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list), 1, min) * scale
-#> D = 0.018143, p-value = 0.897
+#> D = 0.028047, p-value = 0.4111
 #> alternative hypothesis: two-sided
 lfm_ks_test(n, d, rmo_lfm_cpp, 0, 0, 0.4, "rposval", list("value" = 1))
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  apply(FUN(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list), 1, min) * scale
-#> D = 0.017968, p-value = 0.9034
+#> D = 0.027797, p-value = 0.4223
 #> alternative hypothesis: two-sided
 lfm_ks_test(n, d, rmo_lfm_cpp, 0.1, 0, 0, "rposval", list("value" = 2))
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  apply(FUN(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list), 1, min) * scale
-#> D = 0.018995, p-value = 0.8634
+#> D = 0.012979, p-value = 0.996
 #> alternative hypothesis: two-sided
 lfm_ks_test(n, d, rmo_lfm_cpp, 0.1, 0.2, 0.4, "rposval", list("value" = 2))
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  apply(FUN(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list), 1, min) * scale
-#> D = 0.013042, p-value = 0.9957
+#> D = 0.02466, p-value = 0.5773
 #> alternative hypothesis: two-sided
 lfm_ks_test(n, d, rmo_lfm_cpp, 0.1, 0, 0, "rexp", list("rate" = 0.6))
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  apply(FUN(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list), 1, min) * scale
-#> D = 0.017214, p-value = 0.9284
+#> D = 0.028842, p-value = 0.3763
 #> alternative hypothesis: two-sided
 lfm_ks_test(n, d, rmo_lfm_cpp, 0.1, 0.2, 0.4, "rexp", list("rate" = 0.6))
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  apply(FUN(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list), 1, min) * scale
-#> D = 0.023014, p-value = 0.6647
+#> D = 0.024097, p-value = 0.607
 #> alternative hypothesis: two-sided
 lfm_ks_test(n, d, rmo_lfm_cpp, 0.1, 0, 0, "rpareto", list("alpha" = 0.4, "x0" = 1e-4))
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  apply(FUN(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list), 1, min) * scale
-#> D = 0.029963, p-value = 0.3306
+#> D = 0.026141, p-value = 0.5014
 #> alternative hypothesis: two-sided
 lfm_ks_test(n, d, rmo_lfm_cpp, 0.1, 0.2, 0.4, "rpareto", list("alpha" = 0.4, "x0" = 1e-4))
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  apply(FUN(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list), 1, min) * scale
-#> D = 0.02219, p-value = 0.7084
+#> D = 0.01741, p-value = 0.9223
 #> alternative hypothesis: two-sided
 
 lfm_ks_test(n, d, rmo_lfm_cpp, 0, 0.3, 0, "rposval", list("value" = 1), normalize = TRUE)
@@ -718,56 +718,56 @@ lfm_ks_test(n, d, rmo_lfm_cpp, 0, 0.3, 0, "rposval", list("value" = 1), normaliz
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  apply(FUN(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list), 1, min) * scale
-#> D = 0.02669, p-value = 0.4744
+#> D = 0.036631, p-value = 0.1366
 #> alternative hypothesis: two-sided
 lfm_ks_test(n, d, rmo_lfm_cpp, 0, 0, 0.4, "rposval", list("value" = 1), normalize = TRUE)
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  apply(FUN(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list), 1, min) * scale
-#> D = 0.019581, p-value = 0.8379
+#> D = 0.028933, p-value = 0.3724
 #> alternative hypothesis: two-sided
 lfm_ks_test(n, d, rmo_lfm_cpp, 0.1, 0, 0, "rposval", list("value" = 2), normalize = TRUE)
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  apply(FUN(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list), 1, min) * scale
-#> D = 0.020816, p-value = 0.7791
+#> D = 0.040782, p-value = 0.07185
 #> alternative hypothesis: two-sided
 lfm_ks_test(n, d, rmo_lfm_cpp, 0.1, 0.2, 0.4, "rposval", list("value" = 2), normalize = TRUE)
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  apply(FUN(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list), 1, min) * scale
-#> D = 0.034773, p-value = 0.178
+#> D = 0.044265, p-value = 0.03973
 #> alternative hypothesis: two-sided
 lfm_ks_test(n, d, rmo_lfm_cpp, 0.1, 0, 0, "rexp", list("rate" = 0.6), normalize = TRUE)
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  apply(FUN(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list), 1, min) * scale
-#> D = 0.018515, p-value = 0.8829
+#> D = 0.020566, p-value = 0.7915
 #> alternative hypothesis: two-sided
 lfm_ks_test(n, d, rmo_lfm_cpp, 0.1, 0.2, 0.4, "rexp", list("rate" = 0.6), normalize = TRUE)
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  apply(FUN(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list), 1, min) * scale
-#> D = 0.026455, p-value = 0.4859
+#> D = 0.021723, p-value = 0.7328
 #> alternative hypothesis: two-sided
 lfm_ks_test(n, d, rmo_lfm_cpp, 0.1, 0, 0, "rpareto", list("alpha" = 0.4, "x0" = 1e-4), normalize = TRUE)
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  apply(FUN(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list), 1, min) * scale
-#> D = 0.025778, p-value = 0.5197
+#> D = 0.038015, p-value = 0.1111
 #> alternative hypothesis: two-sided
 lfm_ks_test(n, d, rmo_lfm_cpp, 0.1, 0.2, 0.4, "rpareto", list("alpha" = 0.4, "x0" = 1e-4), normalize = TRUE)
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  apply(FUN(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list), 1, min) * scale
-#> D = 0.022643, p-value = 0.6844
+#> D = 0.033596, p-value = 0.209
 #> alternative hypothesis: two-sided
 ```
 
@@ -781,56 +781,56 @@ lfm_ks_test(n, d, rmo_lfm_cpp, 0, 0.3, 0, "rposval", list("value" = 1))
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  apply(FUN(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list), 1, min) * scale
-#> D = 0.031764, p-value = 0.2652
+#> D = 0.03032, p-value = 0.3168
 #> alternative hypothesis: two-sided
 lfm_ks_test(n, d, rmo_lfm_cpp, 0, 0, 0.4, "rposval", list("value" = 1))
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  apply(FUN(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list), 1, min) * scale
-#> D = 0.016526, p-value = 0.9476
+#> D = 0.017788, p-value = 0.9097
 #> alternative hypothesis: two-sided
 lfm_ks_test(n, d, rmo_lfm_cpp, 0.1, 0, 0, "rposval", list("value" = 2))
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  apply(FUN(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list), 1, min) * scale
-#> D = 0.028202, p-value = 0.4041
+#> D = 0.034297, p-value = 0.1901
 #> alternative hypothesis: two-sided
 lfm_ks_test(n, d, rmo_lfm_cpp, 0.1, 0.2, 0.4, "rposval", list("value" = 2))
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  apply(FUN(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list), 1, min) * scale
-#> D = 0.025181, p-value = 0.5502
+#> D = 0.019484, p-value = 0.8422
 #> alternative hypothesis: two-sided
 lfm_ks_test(n, d, rmo_lfm_cpp, 0.1, 0, 0, "rexp", list("rate" = 0.6))
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  apply(FUN(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list), 1, min) * scale
-#> D = 0.028229, p-value = 0.4029
+#> D = 0.025405, p-value = 0.5387
 #> alternative hypothesis: two-sided
 lfm_ks_test(n, d, rmo_lfm_cpp, 0.1, 0.2, 0.4, "rexp", list("rate" = 0.6))
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  apply(FUN(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list), 1, min) * scale
-#> D = 0.018768, p-value = 0.8728
+#> D = 0.031115, p-value = 0.2876
 #> alternative hypothesis: two-sided
 lfm_ks_test(n, d, rmo_lfm_cpp, 0.1, 0, 0, "rpareto", list("alpha" = 0.4, "x0" = 1e-4))
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  apply(FUN(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list), 1, min) * scale
-#> D = 0.020832, p-value = 0.7783
+#> D = 0.022078, p-value = 0.7143
 #> alternative hypothesis: two-sided
 lfm_ks_test(n, d, rmo_lfm_cpp, 0.1, 0.2, 0.4, "rpareto", list("alpha" = 0.4, "x0" = 1e-4))
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  apply(FUN(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list), 1, min) * scale
-#> D = 0.022231, p-value = 0.7062
+#> D = 0.022406, p-value = 0.697
 #> alternative hypothesis: two-sided
 
 lfm_ks_test(n, d, rmo_lfm_cpp, 0, 0.3, 0, "rposval", list("value" = 1), normalize = TRUE)
@@ -838,57 +838,55 @@ lfm_ks_test(n, d, rmo_lfm_cpp, 0, 0.3, 0, "rposval", list("value" = 1), normaliz
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  apply(FUN(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list), 1, min) * scale
-#> D = 0.02443, p-value = 0.5894
+#> D = 0.03464, p-value = 0.1813
 #> alternative hypothesis: two-sided
 lfm_ks_test(n, d, rmo_lfm_cpp, 0, 0, 0.4, "rposval", list("value" = 1), normalize = TRUE)
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  apply(FUN(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list), 1, min) * scale
-#> D = 0.029012, p-value = 0.3691
+#> D = 0.022447, p-value = 0.6948
 #> alternative hypothesis: two-sided
 lfm_ks_test(n, d, rmo_lfm_cpp, 0.1, 0, 0, "rposval", list("value" = 2), normalize = TRUE)
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  apply(FUN(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list), 1, min) * scale
-#> D = 0.030023, p-value = 0.3282
+#> D = 0.041612, p-value = 0.06267
 #> alternative hypothesis: two-sided
 lfm_ks_test(n, d, rmo_lfm_cpp, 0.1, 0.2, 0.4, "rposval", list("value" = 2), normalize = TRUE)
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  apply(FUN(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list), 1, min) * scale
-#> D = 0.021311, p-value = 0.7541
+#> D = 0.019981, p-value = 0.8195
 #> alternative hypothesis: two-sided
 lfm_ks_test(n, d, rmo_lfm_cpp, 0.1, 0, 0, "rexp", list("rate" = 0.6), normalize = TRUE)
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  apply(FUN(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list), 1, min) * scale
-#> D = 0.021804, p-value = 0.7286
+#> D = 0.023402, p-value = 0.644
 #> alternative hypothesis: two-sided
 lfm_ks_test(n, d, rmo_lfm_cpp, 0.1, 0.2, 0.4, "rexp", list("rate" = 0.6), normalize = TRUE)
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  apply(FUN(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list), 1, min) * scale
-#> D = 0.026692, p-value = 0.4744
+#> D = 0.04129, p-value = 0.0661
 #> alternative hypothesis: two-sided
 lfm_ks_test(n, d, rmo_lfm_cpp, 0.1, 0, 0, "rpareto", list("alpha" = 0.4, "x0" = 1e-4), normalize = TRUE)
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  apply(FUN(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list), 1, min) * scale
-#> D = 0.017314, p-value = 0.9253
+#> D = 0.057301, p-value = 0.002812
 #> alternative hypothesis: two-sided
 lfm_ks_test(n, d, rmo_lfm_cpp, 0.1, 0.2, 0.4, "rpareto", list("alpha" = 0.4, "x0" = 1e-4), normalize = TRUE)
-#> Warning in ks.test(apply(FUN(n, d, rate, rate_killing, rate_drift, rjump_name, :
-#> ties should not be present for the Kolmogorov-Smirnov test
 #> 
 #>  One-sample Kolmogorov-Smirnov test
 #> 
 #> data:  apply(FUN(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list), 1, min) * scale
-#> D = 0.023037, p-value = 0.6634
+#> D = 0.029986, p-value = 0.3297
 #> alternative hypothesis: two-sided
 ```
