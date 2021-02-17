@@ -73,7 +73,7 @@ distribution with shock rates ex_intensities." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rmo</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
       </span>
     </div>
 
@@ -201,38 +201,38 @@ intensity of a shock corresponding to a set with \(i\) elements.</p></li>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>rexmo_markovian</span><span class='op'>(</span><span class='fl'>10</span>, <span class='fl'>2</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.4</span>, <span class='fl'>0.2</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;            [,1]      [,2]
-#&gt;  [1,] 2.7073134 2.3714437
-#&gt;  [2,] 1.8024036 0.8939985
-#&gt;  [3,] 5.0390783 2.8683114
-#&gt;  [4,] 2.0980249 3.5192188
-#&gt;  [5,] 2.7590200 1.9539482
-#&gt;  [6,] 0.3916478 0.3916478
-#&gt;  [7,] 2.8678201 0.8964704
-#&gt;  [8,] 0.3603258 0.8325903
-#&gt;  [9,] 0.5312003 0.8953819
-#&gt; [10,] 2.6846301 0.8346728</div><div class='input'><span class='fu'>rexmo_markovian</span><span class='op'>(</span><span class='fl'>10</span>, <span class='fl'>2</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>0</span><span class='op'>)</span><span class='op'>)</span>      <span class='co'>## independence</span>
+#&gt;  [1,] 4.4562107 3.9524062
+#&gt;  [2,] 2.8526051 1.4899975
+#&gt;  [3,] 8.0366693 4.7805189
+#&gt;  [4,] 3.4967081 5.6284990
+#&gt;  [5,] 4.4641880 3.2565804
+#&gt;  [6,] 0.6527463 0.6527463
+#&gt;  [7,] 1.4941173 1.4941173
+#&gt;  [8,] 0.6881128 0.6881128
+#&gt;  [9,] 0.6005431 1.3089398
+#&gt; [10,] 0.8853339 1.4316062</div><div class='input'><span class='fu'>rexmo_markovian</span><span class='op'>(</span><span class='fl'>10</span>, <span class='fl'>2</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>0</span><span class='op'>)</span><span class='op'>)</span>      <span class='co'>## independence</span>
 </div><div class='output co'>#&gt;             [,1]       [,2]
-#&gt;  [1,] 0.07004495 1.98848356
-#&gt;  [2,] 0.04460339 0.75720096
-#&gt;  [3,] 1.87495492 2.14168469
-#&gt;  [4,] 0.42667391 0.57443398
-#&gt;  [5,] 0.14573849 0.05165176
-#&gt;  [6,] 0.62580101 2.30208140
-#&gt;  [7,] 0.42935364 0.01179131
-#&gt;  [8,] 0.17335316 0.34230367
-#&gt;  [9,] 0.23916824 0.06689434
-#&gt; [10,] 1.09675613 1.47963510</div><div class='input'><span class='fu'>rexmo_markovian</span><span class='op'>(</span><span class='fl'>10</span>, <span class='fl'>2</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>      <span class='co'>## comonotone</span>
+#&gt;  [1,] 3.05462157 0.83467282
+#&gt;  [2,] 0.14008990 3.97696713
+#&gt;  [3,] 0.08920679 1.51440192
+#&gt;  [4,] 3.74990984 4.28336937
+#&gt;  [5,] 0.85334783 1.14886795
+#&gt;  [6,] 0.29147699 0.10330351
+#&gt;  [7,] 1.25160202 4.60416280
+#&gt;  [8,] 0.85870727 0.02358263
+#&gt;  [9,] 0.34670633 0.68460733
+#&gt; [10,] 0.47833647 0.13378868</div><div class='input'><span class='fu'>rexmo_markovian</span><span class='op'>(</span><span class='fl'>10</span>, <span class='fl'>2</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>      <span class='co'>## comonotone</span>
 </div><div class='output co'>#&gt;              [,1]        [,2]
-#&gt;  [1,] 3.200337790 3.200337790
-#&gt;  [2,] 0.223704835 0.223704835
-#&gt;  [3,] 0.187107581 0.187107581
-#&gt;  [4,] 0.399658714 0.399658714
-#&gt;  [5,] 1.616973575 1.616973575
-#&gt;  [6,] 1.329220974 1.329220974
-#&gt;  [7,] 0.162732088 0.162732088
-#&gt;  [8,] 0.421942499 0.421942499
-#&gt;  [9,] 0.003116603 0.003116603
-#&gt; [10,] 0.335631529 0.335631529</div><div class='input'>
+#&gt;  [1,] 2.193512252 2.193512252
+#&gt;  [2,] 0.382878972 0.382878972
+#&gt;  [3,] 0.048992488 0.048992488
+#&gt;  [4,] 2.971026063 2.971026063
+#&gt;  [5,] 0.485084746 0.485084746
+#&gt;  [6,] 1.616973575 1.616973575
+#&gt;  [7,] 1.329220974 1.329220974
+#&gt;  [8,] 0.162732088 0.162732088
+#&gt;  [9,] 0.421942499 0.421942499
+#&gt; [10,] 0.003116603 0.003116603</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

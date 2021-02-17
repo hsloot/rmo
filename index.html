@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">rmo</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
       </span>
     </div>
 
@@ -121,23 +121,23 @@
 <h2 class="hasAnchor">
 <a href="#example" class="anchor"></a>Example</h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/rmo_esm.html">rmo_esm</a></span><span class="op">(</span>n<span class="op">=</span><span class="fl">10L</span>, d<span class="op">=</span><span class="fl">2L</span>, intensities<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt;              [,1]        [,2]</span>
-<span class="co">#&gt;  [1,] 0.220396393 0.220396393</span>
-<span class="co">#&gt;  [2,] 0.268882997 0.702705410</span>
-<span class="co">#&gt;  [3,] 0.071347906 0.071347906</span>
-<span class="co">#&gt;  [4,] 0.185663070 0.185663070</span>
-<span class="co">#&gt;  [5,] 0.007869681 0.007869681</span>
-<span class="co">#&gt;  [6,] 0.441468786 0.441468786</span>
-<span class="co">#&gt;  [7,] 0.936079929 0.493162846</span>
-<span class="co">#&gt;  [8,] 2.060125742 0.691868769</span>
-<span class="co">#&gt;  [9,] 0.220026223 1.290835243</span>
-<span class="co">#&gt; [10,] 0.035544062 1.518556226</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="reference/rmo_esm.html">rmo_esm</a></span><span class="op">(</span>n<span class="op">=</span><span class="fl">10L</span>, d<span class="op">=</span><span class="fl">2L</span>, <span class="fu"><a href="reference/parameter.html">intensities_alpha_stable</a></span><span class="op">(</span>d<span class="op">=</span><span class="fl">2L</span>, alpha <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log2</a></span><span class="op">(</span><span class="fl">2</span> <span class="op">-</span> <span class="fl">0.5</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt;             [,1]       [,2]</span>
+<span class="co">#&gt;  [1,] 0.44079279 0.44079279</span>
+<span class="co">#&gt;  [2,] 0.53776599 1.40541082</span>
+<span class="co">#&gt;  [3,] 0.14269581 0.14269581</span>
+<span class="co">#&gt;  [4,] 0.37132614 0.37132614</span>
+<span class="co">#&gt;  [5,] 0.01573936 0.01573936</span>
+<span class="co">#&gt;  [6,] 0.88293757 0.88293757</span>
+<span class="co">#&gt;  [7,] 1.87215986 0.98632569</span>
+<span class="co">#&gt;  [8,] 4.12025148 1.38373754</span>
+<span class="co">#&gt;  [9,] 0.44005245 2.58167049</span>
+<span class="co">#&gt; [10,] 0.07108812 3.03711245</span></code></pre></div>
 <div id="approximate-an-alpha-stable-bf" class="section level3">
 <h3 class="hasAnchor">
 <a href="#approximate-an-alpha-stable-bf" class="anchor"></a>Approximate an Alpha-Stable BF</h3>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">alpha</span> <span class="op">&lt;-</span> <span class="fl">0.5</span>
+<code class="sourceCode R"><span class="va">alpha</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log2</a></span><span class="op">(</span><span class="fl">2</span> <span class="op">-</span> <span class="fl">0.5</span><span class="op">)</span>
 <span class="va">bf</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/AlphaStableBernsteinFunction-class.html">AlphaStableBernsteinFunction</a></span><span class="op">(</span>alpha<span class="op">=</span><span class="va">alpha</span><span class="op">)</span>
 
 <span class="va">x0</span> <span class="op">&lt;-</span> <span class="fl">5e-4</span>
@@ -161,11 +161,10 @@
 <div id="roadmap-for-future-development" class="section level2">
 <h2 class="hasAnchor">
 <a href="#roadmap-for-future-development" class="anchor"></a>Roadmap for future development</h2>
-<p>We are planning to develop the package incrementally. The packages API might change frequently without deprecation. The goal is to implement prototypes of the algorithms in <code>R</code> and refactor them in compiled code afterwards. The original <code>R</code> implementations are supposed to serve as test functions in the unit-test harness.</p>
-<p>As of now, we have completed the reimplementation of all sampling algorithms in <code>Rcpp</code>. Our next steps are:</p>
+<p>We are planning to develop the package incrementally. The packages API might change frequently without deprecation. As of now, we have completed the reimplementation of all sampling algorithms in <code>Rcpp</code>. Our next steps are:</p>
 <ul>
 <li>
-<strong>Version 0.3</strong>: Refactor and document test and write new test cases to increase the coverage. Provide non trivial exchangeable and non-exchangeable parametrisations for testing.</li>
+<strong>Version 0.5</strong>: Refactor the <code>arnold_distribution</code> and the <code>markovian_exmo_distribution</code> to be based on a <code>random_walk_distribution</code> and <code>markov_process</code>. Add a distribution to sample from the Arnold model with <code>ex_intensities</code> which does not require to store all shock intensities.</li>
 </ul>
 <p>Other ideas for the future:</p>
 <ul>
@@ -222,7 +221,7 @@
 <ul class="list-unstyled">
 <li><a href="https://www.repostatus.org/#wip"><img src="https://www.repostatus.org/badges/latest/wip.svg" alt="Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public."></a></li>
 <li><a href="https://www.tidyverse.org/lifecycle/#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
-<li><a href="/commits/master"><img src="https://img.shields.io/badge/last%20change-2021--01--23-yellowgreen.svg" alt="Last-changedate"></a></li>
+<li><a href="/commits/master"><img src="https://img.shields.io/badge/last%20change-2021--02--17-yellowgreen.svg" alt="Last-changedate"></a></li>
 <li><a href="https://github.com/hsloot/rmo/actions"><img src="https://github.com/hsloot/rmo/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
 <li><a href="https://codecov.io/gh/hsloot/rmo?branch=master"><img src="https://codecov.io/gh/hsloot/rmo/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
 </ul>
