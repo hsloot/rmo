@@ -77,7 +77,7 @@ $$" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rmo</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1</span>
       </span>
     </div>
 
@@ -164,9 +164,9 @@ $$</p>
   <span class='va'>object</span>,
   <span class='va'>x</span>,
   <span class='va'>difference_order</span>,
-  cscale <span class='op'>=</span> <span class='fl'>1</span>,
   n <span class='op'>=</span> <span class='fl'>1L</span>,
   k <span class='op'>=</span> <span class='fl'>0L</span>,
+  cscale <span class='op'>=</span> <span class='fl'>1</span>,
   <span class='va'>...</span>,
   method <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"default"</span>, <span class='st'>"stieltjes"</span>, <span class='st'>"levy"</span><span class='op'>)</span>,
   tolerance <span class='op'>=</span> <span class='va'>.Machine</span><span class='op'>$</span><span class='va'>double.eps</span><span class='op'>^</span><span class='fl'>0.5</span>
@@ -193,16 +193,16 @@ differences taken on the Bernstein function (\(j\) in
 the representation).</p></td>
     </tr>
     <tr>
-      <th>cscale</th>
-      <td><p>Positive number, the composit scaling factor.</p></td>
-    </tr>
-    <tr>
       <th>n</th>
       <td><p>Non-negative numbers for the binomial factors.</p></td>
     </tr>
     <tr>
       <th>k</th>
       <td><p>Non-negative numbers for the binomial factors.</p></td>
+    </tr>
+    <tr>
+      <th>cscale</th>
+      <td><p>Positive number, the composit scaling factor.</p></td>
     </tr>
     <tr>
       <th>...</th>
