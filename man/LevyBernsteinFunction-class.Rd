@@ -15,9 +15,9 @@ levyDensity(object)
   object,
   x,
   difference_order,
-  cscale = 1,
   n = 1L,
   k = 0L,
+  cscale = 1,
   ...,
   method = c("default", "levy"),
   tolerance = .Machine$double.eps^0.5
@@ -35,11 +35,11 @@ the Bernstein function is evaluated.}
 differences taken on the Bernstein function (\eqn{j} in
 the representation).}
 
-\item{cscale}{Positive number, the composit scaling factor.}
-
 \item{n}{Non-negative numbers for the binomial factors.}
 
 \item{k}{Non-negative numbers for the binomial factors.}
+
+\item{cscale}{Positive number, the composit scaling factor.}
 
 \item{...}{Further parameter (passed to \code{\link[stats:integrate]{stats::integrate()}})}
 

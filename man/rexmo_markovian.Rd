@@ -11,7 +11,7 @@ rexmo_markovian(n, d, ex_intensities)
 
 \item{d}{dimension}
 
-\item{ex_intensities}{exchangeable Marshall-Olkin intensity rates}
+\item{ex_intensities}{(Scaled) exchangeable Marshall-Olkin intensity rates}
 }
 \value{
 \code{rexmo_markovian} implements the Markovian model for the
@@ -22,14 +22,15 @@ exchangeable parameters \code{ex_intensities}.
 }
 \description{
 Draws \code{n} independent samples from a \code{d} variate exchangeable Marshall-Olkin
-distribution with shock rates \code{ex_intensities}.
+distribution with (scaled) shock rates \code{ex_intensities}.
 }
 \details{
 \itemize{
 \item The \emph{exchangeable} shock intensities must be stored in a vector of length
 \eqn{d}.
 \item The entry \eqn{{exintensities}_{i}}{ex_intensities[i]} is the
-intensity of a shock corresponding to a set with \eqn{i} elements.
+intensity of a shock corresponding to a set with \eqn{i} elements multiplied
+by the number of shocks of cardinality \eqn{i}, i.e. \eqn{\binom{d}{i}}.
 }
 }
 \section{References}{
@@ -39,8 +40,8 @@ For more information on this algorithm, see J.-F. Mai, M. Scherer,
 }
 
 \examples{
-rexmo_markovian(10, 2, c(0.4, 0.2))
-rexmo_markovian(10, 2, c(1, 0))      ## independence
+rexmo_markovian(10, 2, c(2 * 0.4, 0.2))
+rexmo_markovian(10, 2, c(2, 0))      ## independence
 rexmo_markovian(10, 2, c(0, 1))      ## comonotone
 
 }

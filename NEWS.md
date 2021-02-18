@@ -1,3 +1,8 @@
+# rmo 0.4.1
+
+- Rearrange order in arguments of `valueOf`: instead of `cscale, n, k` we 
+  have `n, k, cscale`. 
+
 # rmo 0.4.0
 
 - Change input parameter for `rexmo_markovian` (which is now is scaled

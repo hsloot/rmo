@@ -6,7 +6,7 @@
 \alias{valueOf}
 \title{Virtual Class \code{BernsteinFunction} for Bernstein Functions}
 \usage{
-valueOf(object, x, difference_order = 0L, cscale = 1, n = 1L, k = 0L, ...)
+valueOf(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...)
 }
 \arguments{
 \item{object}{An object deriving from \linkS4class{LevyBernsteinFunction}
@@ -20,9 +20,9 @@ the Bernstein function is evaluated.}
 differences taken on the Bernstein function (\eqn{j} in
 the representation).}
 
-\item{cscale}{Positive number, the composit scaling factor.}
-
 \item{n, k}{Non-negative numbers for the binomial factors.}
+
+\item{cscale}{Positive number, the composit scaling factor.}
 
 \item{...}{Further parameter (passed to \code{\link[stats:integrate]{stats::integrate()}})}
 }

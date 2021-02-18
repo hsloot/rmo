@@ -37,7 +37,7 @@ NULL
 #'
 #' @export
 setGeneric("valueOf",
-  function(object, x, difference_order = 0L, cscale = 1, n = 1L, k = 0L, ...) {
+  function(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...) {
     standardGeneric("valueOf")
   })
 
@@ -60,7 +60,7 @@ setMethod("defaultMethod", "LevyBernsteinFunction",
 
 setMethod("valueOf0", "BernsteinFunction",
   function(object, x, ...) {
-    valueOf(object, x, difference_order = 0L, cscale = 1, n = 1L, k = 0L, ...)
+    valueOf(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...)
   })
 
 #' @describeIn LinearBernsteinFunction-class
@@ -72,7 +72,7 @@ setMethod("valueOf0", "BernsteinFunction",
 #' @importFrom checkmate qassert assert check_numeric check_complex
 #' @export
 setMethod("valueOf", "LinearBernsteinFunction",
-  function(object, x, difference_order = 0L, cscale = 1, n = 1L, k = 0L, ...) {
+  function(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...) {
     assert(combine = "or",
       check_numeric(x, lower = 0, min.len = 1L, any.missing = FALSE),
       check_complex(x, min.len = 1L, any.missing = FALSE))
@@ -102,7 +102,7 @@ setMethod("valueOf", "LinearBernsteinFunction",
 #' @importFrom checkmate qassert assert check_numeric check_complex
 #' @export
 setMethod("valueOf", "ConstantBernsteinFunction",
-  function(object, x, difference_order = 0L, cscale = 1, n = 1L, k = 0L, ...) {
+  function(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...) {
     assert(combine = "or",
       check_numeric(x, lower = 0, min.len = 1L, any.missing = FALSE),
       check_complex(x, min.len = 1L, any.missing = FALSE))
@@ -129,8 +129,8 @@ setMethod("valueOf", "ConstantBernsteinFunction",
 #'
 #' @export
 setMethod("valueOf", "ScaledBernsteinFunction",
-  function(object, x, difference_order = 0L, cscale = 1, n = 1L, k = 0L, ...) {
-    object@scale * valueOf(object@original, x, difference_order, cscale, n, k, ...)
+  function(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...) {
+    object@scale * valueOf(object@original, x, difference_order, n, k, cscale, ...)
   })
 
 
@@ -142,9 +142,9 @@ setMethod("valueOf", "ScaledBernsteinFunction",
 #'
 #' @export
 setMethod("valueOf", "SumOfBernsteinFunctions",
-  function(object, x, difference_order = 0L, cscale = 1, n = 1L, k = 0L, ...) {
-    valueOf(object@first, x, difference_order, cscale, n, k, ...) +
-      valueOf(object@second, x, difference_order, cscale, n, k, ...)
+  function(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...) {
+    valueOf(object@first, x, difference_order, n, k, cscale, ...) +
+      valueOf(object@second, x, difference_order, n, k, cscale, ...)
   })
 
 
@@ -191,7 +191,7 @@ setMethod("valueOf", "SumOfBernsteinFunctions",
 #' @importFrom stats integrate
 #' @export
 setMethod("valueOf", "LevyBernsteinFunction",
-  function(object, x, difference_order, cscale = 1, n = 1L, k = 0L, ...,
+  function(object, x, difference_order, n = 1L, k = 0L, cscale = 1, ...,
       method = c("default", "levy"),
       tolerance = .Machine$double.eps^0.5) {
     method <- match.arg(method)
@@ -203,7 +203,7 @@ setMethod("valueOf", "LevyBernsteinFunction",
         qassert(k, "N1[0,)")
         out <- multiply_binomial_coefficient(valueOf0(object, x * cscale), n, k)
       } else {
-        out <- valueOf(object, x, difference_order, cscale, n, k, ...,
+        out <- valueOf(object, x, difference_order, n, k, cscale, ...,
           method = defaultMethod(object), tolerance = tolerance)
       }
     } else {
@@ -281,7 +281,7 @@ setMethod("valueOf", "LevyBernsteinFunction",
 #' @importFrom stats integrate
 #' @export
 setMethod("valueOf", "CompleteBernsteinFunction",
-  function(object, x, difference_order, cscale = 1, n = 1L, k = 0L, ...,
+  function(object, x, difference_order, n = 1L, k = 0L, cscale = 1, ...,
       method = c("default", "stieltjes", "levy"),
       tolerance = .Machine$double.eps^0.5) {
     method <- match.arg(method)
@@ -293,7 +293,7 @@ setMethod("valueOf", "CompleteBernsteinFunction",
         qassert(k, "N1[0,)")
         out <- multiply_binomial_coefficient(valueOf0(object, x * cscale), n, k)
       } else {
-        out <- valueOf(object, x, difference_order, cscale, n, k, ...,
+        out <- valueOf(object, x, difference_order, n, k, cscale, ...,
           method = defaultMethod(object), tolerance = tolerance)
       }
     } else if (isTRUE("stieltjes" == method)) {
