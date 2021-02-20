@@ -231,8 +231,29 @@ setMethod(
     validObject(bf)
 
     bf
-  }
-)
+  })
+
+#' @rdname fuzzy_bf-methods
+#' @aliases fuzzy_bf,CompositeScaledBernsteinFunction,ANY-method
+#'
+#' @seealso [rmo::CompositeScaledBernsteinFunction-class]
+#' @examples
+#' bf <- fuzzy_bf(rmo::CompositeScaledBernsteinFunction(
+#'  cscale = 1, original = rmo::LinearBernsteinFunction()
+#' ))
+#' @importFrom methods setMethod validObject
+#' @importFrom rmo CompositeScaledBernsteinFunction
+#' @importFrom stats rexp
+#' @export
+setMethod(
+  "fuzzy_bf", "CompositeScaledBernsteinFunction",
+  function(bf) {
+    bf@cscale <- stats::rexp(1)
+    bf@original <- fuzzy_bf(bf@original)
+    validObject(bf)
+
+    bf
+  })
 
 #' @rdname fuzzy_bf-methods
 #' @aliases fuzzy_bf,SumOfBernsteinFunctions,ANY-method

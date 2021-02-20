@@ -46,6 +46,12 @@ test_that("Test initialisation of BernsteinFunction classes", {
     ScaledBernsteinFunction(scale = -1, original=GammaBernsteinFunction()))
 
   expect_s4_class(
+    testutils.rmo::fuzzy_bf(CompositeScaledBernsteinFunction(original=GammaBernsteinFunction())),
+    class = "CompositeScaledBernsteinFunction")
+  expect_error(
+    CompositeScaledBernsteinFunction(cscale = -1, original=GammaBernsteinFunction()))
+
+  expect_s4_class(
     testutils.rmo::fuzzy_bf(
       SumOfBernsteinFunctions(
         first = LinearBernsteinFunction(),
@@ -179,6 +185,37 @@ test_that("`valueOf` for `ScaledBernsteinFunction`", {
     value_of_naive(actual_fn, x, difference_order = difference_order,
                    n = n, k = k, cscale = cscale,
                    scale = scale, alpha = alpha))
+})
+
+test_that("`valueOf` for `CompositeScaledBernsteinFunction`", {
+  bf <- testutils.rmo::fuzzy_bf(
+    CompositeScaledBernsteinFunction(
+      original=AlphaStableBernsteinFunction()))
+  cscale <- bf@cscale
+  alpha <- bf@original@alpha
+  actual_fn <- function(x, comp_scale, alpha) {
+    (comp_scale * x) ^ alpha
+  }
+
+  expect_equal(valueOf(bf, x), actual_fn(x, cscale, alpha))
+  expect_equal(
+    valueOf(bf, x, method = "stieltjes", tolerance = testthat_tolerance()),
+    actual_fn(x, cscale, alpha))
+  expect_equal(
+    valueOf(bf, x, method = "levy", tolerance = testthat_tolerance()),
+    actual_fn(x, cscale, alpha))
+
+  expect_equal(
+    valueOf(bf, x, difference_order = difference_order, tolerance = testthat_tolerance()),
+    value_of_naive(actual_fn, x, difference_order, comp_scale = cscale, alpha = alpha))
+  expect_equal(
+    valueOf(bf, x, difference_order = difference_order,
+            method = "stieltjes", tolerance = testthat_tolerance()),
+    value_of_naive(actual_fn, x, difference_order, comp_scale = cscale, alpha = alpha))
+  expect_equal(
+    valueOf(bf, x, difference_order = difference_order,
+            method = "levy", tolerance = testthat_tolerance()),
+    value_of_naive(actual_fn, x, difference_order, comp_scale = cscale, alpha = alpha))
 })
 
 test_that("`valueOf` for `SumOfBernsteinFunctions`", {

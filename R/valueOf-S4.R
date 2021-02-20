@@ -237,6 +237,18 @@ setMethod("valueOf", "SumOfBernsteinFunctions",
       valueOf(object@second, x, difference_order, n, k, cscale, ...)
   })
 
+#' @describeIn CompositeScaledBernsteinFunction-class
+#'   Calculates the iterated differences of the Bernstein function, see [valueOf()]
+#' @aliases valueOf,CompositeScaledBernsteinFunction,ANY-method
+#'
+#' @inheritParams valueOf
+#'
+#' @export
+setMethod("valueOf", "CompositeScaledBernsteinFunction",
+  function(object, x, difference_order = 0L, n = 1, k = 0, cscale = 1, ...) {
+    valueOf(object@original, x, difference_order, n, k, cscale*object@cscale, ...)
+  })
+
 
 #' @describeIn LevyBernsteinFunction-class
 #'   Calculates the iterated differences of the Bernstein function, see [valueOf()]
