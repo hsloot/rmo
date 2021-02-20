@@ -44,18 +44,18 @@ devtools::install_github("hsloot/rmo")
 ## Example
 
 ``` r
-rmo_esm(n=10L, d=2L, intensities_alpha_stable(d=2L, alpha = log2(2 - 0.5)))
+rexmo_markovian(n=10L, d=2L, ex_intensities_alpha_stable(d=2L, alpha=log2(2 - 0.5)))
 #>             [,1]       [,2]
-#>  [1,] 0.44079279 0.44079279
-#>  [2,] 0.53776599 1.40541082
-#>  [3,] 0.14269581 0.14269581
-#>  [4,] 0.37132614 0.37132614
-#>  [5,] 0.01573936 0.01573936
-#>  [6,] 0.88293757 0.88293757
-#>  [7,] 1.87215986 0.98632569
-#>  [8,] 4.12025148 1.38373754
-#>  [9,] 0.44005245 2.58167049
-#> [10,] 0.07108812 3.03711245
+#>  [1,] 1.82255349 2.04294988
+#>  [2,] 0.82987456 1.53257997
+#>  [3,] 1.09917209 1.02782419
+#>  [4,] 0.86267662 1.04833969
+#>  [5,] 0.63310836 0.33621260
+#>  [6,] 3.07610878 1.63578070
+#>  [7,] 1.45136942 1.45136942
+#>  [8,] 0.02648939 0.02648939
+#>  [9,] 0.02369604 0.02369604
+#> [10,] 1.11184824 1.91441857
 ```
 
 ### Approximate an Alpha-Stable BF
@@ -80,15 +80,15 @@ bf_approx <- SumOfBernsteinFunctions(
 
 ## Word of caution for high dimensions
 
-While the package, including the simulation algorithms, is extensively
-tested with unit tests, it can happen to run into unexpected results for
-certain parametrisations in high dimensions. The reason for this are
-numerical issues with very small and very large numbers. We tried to
-program defensively to avoid these problems, but if the dimension is
-high enough and the parametrisation leads to values below the double
-precision, at some point numerical issues are inevitable. For this
-reason, we encourage users to produce statistical tests suitable for
-their use-case. An example can be found in
+The package, including the simulation algorithms, is extensively tested
+with unit tests. Nevertheless, it can happen to run into unexpected
+results for certain parameterisations in high dimensions. The reason for
+this are numerical issues with very small and very large numbers. We
+tried to program defensively to avoid these problems, but if the
+dimension is high enough and the parameterisation leads to values below
+the double precision, at some point numerical issues are inevitable. For
+this reason, we encourage users to produce statistical tests suitable
+for their use-case. An example can be found in
 <https://github.com/hsloot/rmo/blob/master/other/integration-test.Rmd>.
 If you are encountering statistical problems, please submit an [issue
 report](https://github.com/hsloot/rmo/issues/new?assignees=&labels=bug&template=statistical_problem.md&title=%5BSTAT%5D)
@@ -101,7 +101,7 @@ might change frequently without deprecation. As of now, we have
 completed the reimplementation of all sampling algorithms in `Rcpp`. Our
 next steps are:
 
--   **Version 0.5**: Refactor the `arnold_distribution` and the
+-   **Version 0.6**: Refactor the `arnold_distribution` and the
     `markovian_exmo_distribution` to be based on a
     `random_walk_distribution` and `markov_process`. Add a distribution
     to sample from the Arnold model with `ex_intensities` which does not

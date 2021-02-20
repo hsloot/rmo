@@ -8,17 +8,17 @@
 rcamo_esm(n, d, alpha, beta)
 }
 \arguments{
-\item{n}{number of samples}
+\item{n}{Number of samples}
 
-\item{d}{dimension}
+\item{d}{Dimension}
 
-\item{alpha}{rate of individual shocks}
+\item{alpha}{Shock intensity of individual shocks}
 
-\item{beta}{rate of global shock}
+\item{beta}{Shock intensity of global shock}
 }
 \value{
 \code{rmo_esm_cuadras_auge} implements an optimized version of the
-\emph{exogenous shock model} representation for the Cuadras-Augé family and
+\emph{exogenous shock model} algorithm for the Cuadras-Augé family and
 returns an \eqn{n \times d}{n x d} array matrix with rows corresponding to
 the independent samples of size \eqn{d}.
 }
@@ -27,12 +27,11 @@ Draws \code{n} independent samples from a \code{d} variate Cuadras-Augé distrib
 with parameters \code{alpha} and \code{beta}.
 }
 \details{
-\itemize{
-\item \code{alpha} is the shock intensity of shocks that affect only single
-components.
-\item \code{beta} is the shock intensity of the global shock that affects all
-components.
-}
+\strong{Parameterisation}:
+The Cuadras-Augé distribution is a special case of the exchangeable Marshall-Olkin
+distribution where \eqn{\lambda_i = 0 \forall 1 < i < d}.
+The individual shock rate is \eqn{\alpha = \lambda_1} and the global shock
+rate is \eqn{\beta = \lambda_d}.
 }
 \examples{
 rcamo_esm(10L, 2L, 0.5, 0.2)
@@ -41,11 +40,11 @@ rcamo_esm(10L, 2L, 1, 0)      ## independence
 
 }
 \seealso{
-\code{\link{rmo_esm}}
+\code{\link[=rmo_esm]{rmo_esm()}}
 
-Other samplers: 
+Other sampling-algorithms: 
 \code{\link{rexmo_markovian}()},
 \code{\link{rextmo_lfm}()},
 \code{\link{rmo_esm}()}
 }
-\concept{samplers}
+\concept{sampling-algorithms}

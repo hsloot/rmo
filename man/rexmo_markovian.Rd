@@ -2,35 +2,44 @@
 % Please edit documentation in R/sample.R
 \name{rexmo_markovian}
 \alias{rexmo_markovian}
-\title{Sample from an exchangeable MO distribution}
+\title{Sample from an exchangeable Marshall-Olkin distribution}
 \usage{
 rexmo_markovian(n, d, ex_intensities)
 }
 \arguments{
-\item{n}{number of samples}
+\item{n}{Number of samples}
 
 \item{d}{dimension}
 
-\item{ex_intensities}{(Scaled) exchangeable Marshall-Olkin intensity rates}
+\item{ex_intensities}{(Scaled) exchangeable Marshall-Olkin intensities}
 }
 \value{
-\code{rexmo_markovian} implements the Markovian model for the
-exchangeable subclass and returns an \eqn{n \times d}{n x d} numeric matrix
-with the rows corresponding to independent and identically disctributed
-samples of a \eqn{d} variate exchangeable Marshall-Olkin distribution with
-exchangeable parameters \code{ex_intensities}.
+\code{rexmo_markovian} implements the Markovian model for the default  counting
+process of the exchangeable subclass and returns an  \eqn{n \times d}{n x d}
+numeric matrix with the rows corresponding to independent and identically
+disctributed samples of a \eqn{d} variate exchangeable Marshall-Olkin
+distribution with exchangeable parameters \code{ex_intensities}.
 }
 \description{
 Draws \code{n} independent samples from a \code{d} variate exchangeable Marshall-Olkin
 distribution with (scaled) shock rates \code{ex_intensities}.
 }
 \details{
+\strong{Parameterisation}:
+The exchangeable Marshall--Olkin distribution has the property that
+\eqn{\lambda_I} only depends on the cardinality of \eqn{I}.
+The \emph{unscaled exchangeable shock intensities} are defined for \eqn{I} with
+\eqn{i = \lvert I\rvert} by \eqn{\lambda_i = \lambda_I}.
+The \emph{scaled exchangeable shock intensities} are defined by \eqn{\eta_i =
+\binom{d}{i} \lambda_i}.
+
+\strong{The scaled exchangeable shock intensities}:
 \itemize{
-\item The \emph{exchangeable} shock intensities must be stored in a vector of length
-\eqn{d}.
-\item The entry \eqn{{exintensities}_{i}}{ex_intensities[i]} is the
-intensity of a shock corresponding to a set with \eqn{i} elements multiplied
-by the number of shocks of cardinality \eqn{i}, i.e. \eqn{\binom{d}{i}}.
+\item The \emph{scaled exchangeable} shock intensities* \eqn{\eta_i} must be stored in
+a vector of length \eqn{d}.
+\item The entry \eqn{\eta_i} is the intensity of a shock corresponding to a set
+with \eqn{i} elements multiplied by the number of shocks of cardinality
+\eqn{i}, i.e. \eqn{\binom{d}{i}}.
 }
 }
 \section{References}{
@@ -46,9 +55,9 @@ rexmo_markovian(10, 2, c(0, 1))      ## comonotone
 
 }
 \seealso{
-Other samplers: 
+Other sampling-algorithms: 
 \code{\link{rextmo_lfm}()},
 \code{\link{rmo_esm_cuadras_auge}},
 \code{\link{rmo_esm}()}
 }
-\concept{samplers}
+\concept{sampling-algorithms}

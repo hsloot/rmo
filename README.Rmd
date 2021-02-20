@@ -50,7 +50,7 @@ devtools::install_github("hsloot/rmo")
 ## Example
 
 ```{r, include=TRUE}
-rmo_esm(n=10L, d=2L, intensities_alpha_stable(d=2L, alpha = log2(2 - 0.5)))
+rexmo_markovian(n=10L, d=2L, ex_intensities_alpha_stable(d=2L, alpha=log2(2 - 0.5)))
 ```
 
 ### Approximate an Alpha-Stable BF
@@ -87,11 +87,12 @@ tibble(
 
 ## Word of caution for high dimensions
 
-While the package, including the simulation algorithms, is extensively tested
-with unit tests, it can happen to run into unexpected results for certain
-parametrisations in high dimensions. The reason for this  are numerical  issues
+The package, including the simulation algorithms, is extensively tested with
+unit tests. Nevertheless, it can happen to run into unexpected results for
+certain parameterisations in high dimensions.
+The reason for this  are numerical  issues
 with very small and very large numbers. We tried to program defensively to avoid
-these problems, but if the dimension is high enough and the parametrisation
+these problems, but if the dimension is high enough and the parameterisation
 leads to values below the double precision, at some point numerical issues are
 inevitable.  For this reason, we encourage users to produce statistical tests
 suitable for their use-case. An example can be found in
@@ -103,12 +104,12 @@ including a [reprex](https://github.com/tidyverse/reprex).
 ## Roadmap for future development
 
 We are planning to develop the package incrementally. The packages API might
-change frequently without deprecation. 
+change frequently without deprecation.
 As of now, we have completed the reimplementation of all sampling algorithms in `Rcpp`. Our next steps are:
 
-- __Version 0.5__: Refactor the `arnold_distribution` and the 
+- __Version 0.6__: Refactor the `arnold_distribution` and the
   `markovian_exmo_distribution` to be based on a `random_walk_distribution`
-  and `markov_process`. Add a distribution to sample from the Arnold model 
+  and `markov_process`. Add a distribution to sample from the Arnold model
   with `ex_intensities` which does not require to store all shock intensities.
 
 Other ideas for the future:

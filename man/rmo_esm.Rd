@@ -14,15 +14,15 @@ rmo_arnold(n, d, intensities)
 
 \item{d}{Dimension}
 
-\item{intensities}{Marshall-Olkin intensity rates}
+\item{intensities}{Marshall-Olkin shock intensities}
 }
 \value{
-\code{rmo_esm} implements the \emph{exogenous shock model} representation and
+\code{rmo_esm} implements the \emph{exogenous shock model} algorithm and
 returns an \eqn{n \times d}{n x d} numeric matrix with the rows
 corresponding to independent and identically distributed samples of a
 \eqn{d} variate Marshall-Olkin distribution with parameters \code{intensities}.
 
-\code{rmo_arnold} implements the \emph{Arnold model} representation and returns
+\code{rmo_arnold} implements the \emph{Arnold model} algorithm and returns
 an \eqn{n \times d}{n x d} numeric matrix with the rows corresponding to
 independent and identically distributed samples of a \eqn{d} variate
 Marshall-Olkin distribution with parameters \code{intensities}.
@@ -32,6 +32,16 @@ Draws \code{n} independent samples from a \code{d}-variate Marshall-Olkin distri
 with shock rates \code{intensities}.
 }
 \details{
+\strong{Parameterisation}:
+The Marshall--Olkin distribution has the survival function
+\deqn{
+  \bar{F}(t)
+  \bar{F}(t)
+     = \exp{\left\{ - \sum_{I} \lambda_I \max_{i \in I} t_i \right\}} , \quad t > 0 ,
+}
+for \emph{shock intensities} \eqn{\lambda_I \geq 0},
+\eqn{\emptyset \neq I \subseteq {\{ 1 , \ldots, d \}}}.
+
 \strong{The shock intensities}:
 \itemize{
 \item The shock \code{intensities} must be stored in a vector of length
@@ -72,14 +82,14 @@ rmo_arnold(10L, 2L, c(0, 0, 1))         ## comonotone
 \insertAllCited{}
 }
 \seealso{
-Other samplers: 
+Other sampling-algorithms: 
 \code{\link{rexmo_markovian}()},
 \code{\link{rextmo_lfm}()},
 \code{\link{rmo_esm_cuadras_auge}}
 
-Other samplers: 
+Other sampling-algorithms: 
 \code{\link{rexmo_markovian}()},
 \code{\link{rextmo_lfm}()},
 \code{\link{rmo_esm_cuadras_auge}}
 }
-\concept{samplers}
+\concept{sampling-algorithms}
