@@ -1,6 +1,6 @@
 # # MIT License
 #
-# Copyright (c) 2020 Henrik Sloot
+# Copyright (c) 2021 Henrik Sloot
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -35,10 +35,10 @@
 #'   the jumps of the compound Poisson subordinator
 #'
 #' @examples
-#' rmo_lfm_cpp_independence(10, 3, 0, 0, 1, "rposval", list("value"=1))
+#' rextmo_lfm_independence(10, 3, 0, 0, 1, "rposval", list("value"=1))
 #' @include sample-helper.R
 #' @export
-rmo_lfm_cpp_independence <- function( # nolint
+rextmo_lfm_independence <- function( # nolint
     n, d = 2,
     rate = 0, rate_killing = 0, rate_drift = 1,
     rjump_name = "rposval", rjump_arg_list = list("value" = 0)) {

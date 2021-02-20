@@ -3,7 +3,7 @@ n <- 1e2
 
 
 test_that("LFM-CPP implementation works as indended for independence case", {
-  mockery::stub(rmo_lfm_cpp, "Rcpp__rmo_lfm_cpp", rtest__rmo_lfm_cpp)
+  mockery::stub(rextmo_lfm, "Rcpp__rextmo_lfm", rtest__rextmo_lfm)
 
   d <- 7
   args <- list(
@@ -13,13 +13,13 @@ test_that("LFM-CPP implementation works as indended for independence case", {
     "rjump_arg_list" = list("value" = 0)
   )
   expect_equal_rn_generation(
-    rmo_lfm_cpp, testutils.rmo::rmo_lfm_cpp_independence,
+    rextmo_lfm, testutils.rmo::rextmo_lfm_independence,
     args, n, use_seed)
 })
 
 
 test_that("LFM-CPP implementation works as indended for comonotone case", {
-  mockery::stub(rmo_lfm_cpp, "Rcpp__rmo_lfm_cpp", rtest__rmo_lfm_cpp)
+  mockery::stub(rextmo_lfm, "Rcpp__rextmo_lfm", rtest__rextmo_lfm)
 
   d <- 7
   args <- list(
@@ -29,13 +29,13 @@ test_that("LFM-CPP implementation works as indended for comonotone case", {
     "rjump_arg_list" = list("value" = 0)
   )
   expect_equal_rn_generation(
-    rmo_lfm_cpp, testutils.rmo::rmo_lfm_cpp_comonotone,
+    rextmo_lfm, testutils.rmo::rextmo_lfm_comonotone,
     args, n, use_seed)
 })
 
 
 test_that("LFM-CPP implementation works as intended for exp. jumps", {
-  mockery::stub(rmo_lfm_cpp, "Rcpp__rmo_lfm_cpp", rtest__rmo_lfm_cpp)
+  mockery::stub(rextmo_lfm, "Rcpp__rextmo_lfm", rtest__rextmo_lfm)
 
   d <- 7
 
@@ -47,7 +47,7 @@ test_that("LFM-CPP implementation works as intended for exp. jumps", {
     "rjump_arg_list" = list("rate" = 2)
   )
   expect_equal_rn_generation(
-    rmo_lfm_cpp, testutils.rmo::rmo_lfm_cpp_naive,
+    rextmo_lfm, testutils.rmo::rextmo_lfm_naive,
     args, n, use_seed)
 
   ## with killing, no drift
@@ -58,7 +58,7 @@ test_that("LFM-CPP implementation works as intended for exp. jumps", {
     "rjump_arg_list" = list("rate" = 2)
   )
   expect_equal_rn_generation(
-    rmo_lfm_cpp, testutils.rmo::rmo_lfm_cpp_naive,
+    rextmo_lfm, testutils.rmo::rextmo_lfm_naive,
     args, n, use_seed)
 
   ## no killing, with drift
@@ -69,7 +69,7 @@ test_that("LFM-CPP implementation works as intended for exp. jumps", {
     "rjump_arg_list" = list("rate" = 2)
   )
   expect_equal_rn_generation(
-    rmo_lfm_cpp, testutils.rmo::rmo_lfm_cpp_naive,
+    rextmo_lfm, testutils.rmo::rextmo_lfm_naive,
     args, n, use_seed)
 
   ## with killing, with drift
@@ -80,13 +80,13 @@ test_that("LFM-CPP implementation works as intended for exp. jumps", {
     "rjump_arg_list" = list("rate" = 2)
   )
   expect_equal_rn_generation(
-    rmo_lfm_cpp, testutils.rmo::rmo_lfm_cpp_naive,
+    rextmo_lfm, testutils.rmo::rextmo_lfm_naive,
     args, n, use_seed)
 })
 
 
 test_that("LFM-CPP implementation works as intended for det. jumps", {
-  mockery::stub(rmo_lfm_cpp, "Rcpp__rmo_lfm_cpp", rtest__rmo_lfm_cpp)
+  mockery::stub(rextmo_lfm, "Rcpp__rextmo_lfm", rtest__rextmo_lfm)
 
   d <- 7L
 
@@ -98,7 +98,7 @@ test_that("LFM-CPP implementation works as intended for det. jumps", {
     "rjump_arg_list" = list("value" = 1)
   )
   expect_equal_rn_generation(
-    rmo_lfm_cpp, testutils.rmo::rmo_lfm_cpp_naive,
+    rextmo_lfm, testutils.rmo::rextmo_lfm_naive,
     args, n, use_seed)
 
   ## with killing, no drift
@@ -109,7 +109,7 @@ test_that("LFM-CPP implementation works as intended for det. jumps", {
     "rjump_arg_list" = list("value" = 1)
   )
   expect_equal_rn_generation(
-    rmo_lfm_cpp, testutils.rmo::rmo_lfm_cpp_naive,
+    rextmo_lfm, testutils.rmo::rextmo_lfm_naive,
     args, n, use_seed)
 
   ## no killing, with drift
@@ -120,7 +120,7 @@ test_that("LFM-CPP implementation works as intended for det. jumps", {
     "rjump_arg_list" = list("value" = 1)
   )
   expect_equal_rn_generation(
-    rmo_lfm_cpp, testutils.rmo::rmo_lfm_cpp_naive,
+    rextmo_lfm, testutils.rmo::rextmo_lfm_naive,
     args, n, use_seed)
 
   ## with killing, with drift
@@ -131,13 +131,13 @@ test_that("LFM-CPP implementation works as intended for det. jumps", {
     "rjump_arg_list" = list("value" = 1)
   )
   expect_equal_rn_generation(
-    rmo_lfm_cpp, testutils.rmo::rmo_lfm_cpp_naive,
+    rextmo_lfm, testutils.rmo::rextmo_lfm_naive,
     args, n, use_seed)
 })
 
 
 test_that("LFM-CPP implementation works as intended for pareto jumps", {
-  mockery::stub(rmo_lfm_cpp, "Rcpp__rmo_lfm_cpp", rtest__rmo_lfm_cpp)
+  mockery::stub(rextmo_lfm, "Rcpp__rextmo_lfm", rtest__rextmo_lfm)
 
   d <- 7L
 
@@ -149,7 +149,7 @@ test_that("LFM-CPP implementation works as intended for pareto jumps", {
     "rjump_arg_list" = list("alpha" = 0.4, "x0" = 1e-4)
   )
   expect_equal_rn_generation(
-    rmo_lfm_cpp, testutils.rmo::rmo_lfm_cpp_naive,
+    rextmo_lfm, testutils.rmo::rextmo_lfm_naive,
     args, n, use_seed)
 
   ## with killing, no drift
@@ -160,7 +160,7 @@ test_that("LFM-CPP implementation works as intended for pareto jumps", {
     "rjump_arg_list" = list("alpha" = 0.4, "x0" = 1e-4)
   )
   expect_equal_rn_generation(
-    rmo_lfm_cpp, testutils.rmo::rmo_lfm_cpp_naive,
+    rextmo_lfm, testutils.rmo::rextmo_lfm_naive,
     args, n, use_seed)
 
   ## no killing, with drift
@@ -171,7 +171,7 @@ test_that("LFM-CPP implementation works as intended for pareto jumps", {
     "rjump_arg_list" = list("alpha" = 0.4, "x0" = 1e-4)
   )
   expect_equal_rn_generation(
-    rmo_lfm_cpp, testutils.rmo::rmo_lfm_cpp_naive,
+    rextmo_lfm, testutils.rmo::rextmo_lfm_naive,
     args, n, use_seed)
 
   ## with killing, with drift
@@ -182,6 +182,6 @@ test_that("LFM-CPP implementation works as intended for pareto jumps", {
     "rjump_arg_list" = list("alpha" = 0.4, "x0" = 1e-4)
   )
   expect_equal_rn_generation(
-    rmo_lfm_cpp, testutils.rmo::rmo_lfm_cpp_naive,
+    rextmo_lfm, testutils.rmo::rextmo_lfm_naive,
     args, n, use_seed)
 })

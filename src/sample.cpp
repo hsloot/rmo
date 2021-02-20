@@ -102,11 +102,11 @@ NumericMatrix Rcpp__rcamo_esm(const std::size_t n, const std::size_t d,
 }
 
 // [[Rcpp::export]]
-NumericMatrix Rcpp__rmo_lfm_cpp(const std::size_t n, const std::size_t d,
-                                const double rate, const double rate_killing,
-                                const double rate_drift,
-                                const std::string rjump_name,
-                                const List& rjump_arg_list) {
+NumericMatrix Rcpp__rextmo_lfm(const std::size_t n, const std::size_t d,
+                               const double rate, const double rate_killing,
+                               const double rate_drift,
+                               const std::string rjump_name,
+                               const List& rjump_arg_list) {
   using deterministic_distribution =
       rmolib::random::deterministic_distribution<double>;
   using exponential_distribution =
@@ -211,13 +211,13 @@ NumericMatrix rtest__rcamo_esm(const std::size_t n, const std::size_t d,
 
 //' @keywords internal test
 // [[Rcpp::export]]
-NumericMatrix rtest__rmo_lfm_cpp(const std::size_t n, const std::size_t d,
-                                 const double rate, const double rate_killing,
-                                 const double rate_drift,
-                                 const std::string rjump_name,
-                                 const List& rjump_arg_list) {
-  return Rcpp__rmo_lfm_cpp(n, d, rate, rate_killing, rate_drift, rjump_name,
-                           rjump_arg_list);
+NumericMatrix rtest__rextmo_lfm(const std::size_t n, const std::size_t d,
+                                const double rate, const double rate_killing,
+                                const double rate_drift,
+                                const std::string rjump_name,
+                                const List& rjump_arg_list) {
+  return Rcpp__rextmo_lfm(n, d, rate, rate_killing, rate_drift, rjump_name,
+                          rjump_arg_list);
 }
 
 // ----------------------------------------------------------------------------

@@ -45,7 +45,7 @@ rcamo_esm(10L, 2L, 1, 0)      ## independence
 
 Other samplers: 
 \code{\link{rexmo_markovian}()},
-\code{\link{rmo_esm}()},
-\code{\link{rmo_lfm_cpp}()}
+\code{\link{rextmo_lfm}()},
+\code{\link{rmo_esm}()}
 }
 \concept{samplers}

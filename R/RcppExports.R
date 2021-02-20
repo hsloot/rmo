@@ -37,8 +37,8 @@ Rcpp__rcamo_esm <- function(n, d, alpha, beta) {
     .Call(`_rmo_Rcpp__rcamo_esm`, n, d, alpha, beta)
 }
 
-Rcpp__rmo_lfm_cpp <- function(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list) {
-    .Call(`_rmo_Rcpp__rmo_lfm_cpp`, n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list)
+Rcpp__rextmo_lfm <- function(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list) {
+    .Call(`_rmo_Rcpp__rextmo_lfm`, n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list)
 }
 
 #' @keywords internal test
@@ -62,8 +62,8 @@ rtest__rcamo_esm <- function(n, d, alpha, beta) {
 }
 
 #' @keywords internal test
-rtest__rmo_lfm_cpp <- function(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list) {
-    .Call(`_rmo_rtest__rmo_lfm_cpp`, n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list)
+rtest__rextmo_lfm <- function(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list) {
+    .Call(`_rmo_rtest__rextmo_lfm`, n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list)
 }
 
 #' @keywords internal test
