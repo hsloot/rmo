@@ -4,23 +4,13 @@ NULL
 #' @keywords internal
 #' @noRd
 bf2intensities <- function(d, bf) { # nocov start
-  tmp <- sapply(1:d, function(i) valueOf(bf, d-i, i))
-  out <- numeric(2^d-1)
-  for (j in seq_along(out)) {
-    count <- 0
-    for (i in 1:d) {
-      count <- count + Rcpp__is_within(i, j)
-    }
-    out[j] <- tmp[count]
-  }
-
-  out
+  intensities(bf, d)
 } # nocov end
 
 #' @keywords internal
 #' @noRd
 bf2ex_intensities <- function(d, bf) { # nocov start
-  sapply(1:d, function(i) valueOf(bf, d-i, i, n = d, k = i))
+  exIntensities(bf, d)
 } # nocov end
 
 

@@ -41,7 +41,7 @@ the representation).}
 
 \item{cscale}{Positive number, the composit scaling factor.}
 
-\item{...}{Further parameter (passed to \code{\link[stats:integrate]{stats::integrate()}})}
+\item{...}{Pass-through parameter}
 
 \item{method}{Method to calculate the result; use \code{method = "levy"} for
 using the Lévy representation and \code{method = "stieltjes"} for using the

@@ -31,6 +31,26 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// uexi2i
+NumericVector uexi2i(const NumericVector& uexi);
+RcppExport SEXP _rmo_uexi2i(SEXP uexiSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const NumericVector& >::type uexi(uexiSEXP);
+    rcpp_result_gen = Rcpp::wrap(uexi2i(uexi));
+    return rcpp_result_gen;
+END_RCPP
+}
+// exi2exqm
+NumericMatrix exi2exqm(const NumericVector& exi);
+RcppExport SEXP _rmo_exi2exqm(SEXP exiSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const NumericVector& >::type exi(exiSEXP);
+    rcpp_result_gen = Rcpp::wrap(exi2exqm(exi));
+    return rcpp_result_gen;
+END_RCPP
+}
 // Rcpp__is_within
 bool Rcpp__is_within(const std::size_t i, const std::size_t j);
 RcppExport SEXP _rmo_Rcpp__is_within(SEXP iSEXP, SEXP jSEXP) {
@@ -239,6 +259,8 @@ RcppExport SEXP run_testthat_tests(SEXP);
 static const R_CallMethodDef CallEntries[] = {
     {"_rmo_multiply_binomial_coefficient", (DL_FUNC) &_rmo_multiply_binomial_coefficient, 3},
     {"_rmo_divide_binomial_coefficient", (DL_FUNC) &_rmo_divide_binomial_coefficient, 3},
+    {"_rmo_uexi2i", (DL_FUNC) &_rmo_uexi2i, 1},
+    {"_rmo_exi2exqm", (DL_FUNC) &_rmo_exi2exqm, 1},
     {"_rmo_Rcpp__is_within", (DL_FUNC) &_rmo_Rcpp__is_within, 2},
     {"_rmo_Rcpp__rmo_esm", (DL_FUNC) &_rmo_Rcpp__rmo_esm, 3},
     {"_rmo_Rcpp__rmo_arnold", (DL_FUNC) &_rmo_Rcpp__rmo_arnold, 3},

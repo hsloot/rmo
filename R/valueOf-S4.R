@@ -17,7 +17,7 @@ NULL
 #'   the representation).
 #' @param cscale Positive number, the composit scaling factor.
 #' @param n,k Non-negative numbers for the binomial factors.
-#' @param ... Further parameter (passed to [stats::integrate()])
+#' @param ... Pass-through parameter
 #'
 #' @details
 #' The method `valueOf` is implemented different, depending on the specific
@@ -42,25 +42,110 @@ setGeneric("valueOf",
   })
 
 #' @keywords internal
-setGeneric("defaultMethod",
-  function(object) {
-    standardGeneric("defaultMethod")
-  })
-
-#' @keywords internal
 setGeneric("valueOf0",
   function(object, x, ...) {
     standardGeneric("valueOf0")
   })
 
-setMethod("defaultMethod", "LevyBernsteinFunction",
+#' @keywords internal
+setGeneric("defaultMethod",
   function(object) {
-    "levy"
+    standardGeneric("defaultMethod")
+  })
+
+#' @describeIn BernsteinFunction-class
+#'   Calculates unscaled `ex_intensities` parameter for [rexmo_markovian()].
+#'
+#' @inheritParams levyDensity
+#' @param d Dimension
+#' @param ... Pass-through parameter
+#'
+#' @export
+setGeneric("uexIntensities",
+  function(object, d, ...) {
+    standardGeneric("uexIntensities")
+  })
+
+#' @describeIn BernsteinFunction-class
+#'   Calculates `intensities` parameter for [rmo_esm()] and [rmo_arnold()].
+#'
+#' @inheritParams uexIntensities
+#'
+#' @export
+setGeneric("intensities",
+  function(object, d, ...) {
+    standardGeneric("intensities")
+  })
+
+#' @describeIn BernsteinFunction-class
+#'   Calculates `ex_intensities` parameter for [rexmo_markovian()].
+#'
+#' @inheritParams uexIntensities
+#'
+#' @export
+setGeneric("exIntensities",
+  function(object, d, ...) {
+    standardGeneric("exIntensities")
+  })
+
+#' @describeIn BernsteinFunction-class
+#'   Calculates the exchangeable Q-matrix implies by [rexmo_markovian()].
+#'
+#' @inheritParams uexIntensities
+#'
+#' @export
+setGeneric("exQMatrix",
+  function(object, d, ...) {
+    standardGeneric("exQMatrix")
   })
 
 setMethod("valueOf0", "BernsteinFunction",
   function(object, x, ...) {
     valueOf(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...)
+  })
+
+#' @keywords internal
+setMethod("uexIntensities", "BernsteinFunction",
+  function(object, d, ...) {
+    sapply(1:d, function(i) valueOf(object, d-i, i))
+  })
+
+#' @rdname BernsteinFunction-class
+#'
+#' @examples
+#' exIntensities(AlphaStableBernsteinFunction(), 3L)
+#'
+#' @export
+setMethod("exIntensities", "BernsteinFunction",
+  function(object, d, ...) {
+    sapply(1:d, function(i) valueOf(object, d-i, i, n = d, k = i))
+  })
+
+#' @rdname BernsteinFunction-class
+#'
+#' @examples
+#' intensities(AlphaStableBernsteinFunction(), 3L)
+#'
+#' @export
+setMethod("intensities", "BernsteinFunction",
+  function(object, d, ...) {
+    uexi2i(uexIntensities(object, d, ...))
+  })
+
+#' @rdname BernsteinFunction-class
+#'
+#' @examples
+#' exQMatrix(AlphaStableBernsteinFunction(), 3L)
+#'
+#' @export
+setMethod("exQMatrix", "BernsteinFunction",
+  function(object, d, ...) {
+    exi2exqm(exIntensities(object, d, ...))
+  })
+
+setMethod("defaultMethod", "LevyBernsteinFunction",
+  function(object) {
+    "levy"
   })
 
 #' @describeIn LinearBernsteinFunction-class

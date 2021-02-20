@@ -4,9 +4,30 @@
 \name{BernsteinFunction-class}
 \alias{BernsteinFunction-class}
 \alias{valueOf}
+\alias{uexIntensities}
+\alias{intensities}
+\alias{exIntensities}
+\alias{exQMatrix}
+\alias{exIntensities,BernsteinFunction-method}
+\alias{intensities,BernsteinFunction-method}
+\alias{exQMatrix,BernsteinFunction-method}
 \title{Virtual Class \code{BernsteinFunction} for Bernstein Functions}
 \usage{
 valueOf(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...)
+
+uexIntensities(object, d, ...)
+
+intensities(object, d, ...)
+
+exIntensities(object, d, ...)
+
+exQMatrix(object, d, ...)
+
+\S4method{exIntensities}{BernsteinFunction}(object, d, ...)
+
+\S4method{intensities}{BernsteinFunction}(object, d, ...)
+
+\S4method{exQMatrix}{BernsteinFunction}(object, d, ...)
 }
 \arguments{
 \item{object}{An object deriving from \linkS4class{LevyBernsteinFunction}
@@ -24,7 +45,9 @@ the representation).}
 
 \item{cscale}{Positive number, the composit scaling factor.}
 
-\item{...}{Further parameter (passed to \code{\link[stats:integrate]{stats::integrate()}})}
+\item{...}{Pass-through parameter}
+
+\item{d}{Dimension}
 }
 \description{
 A virtual superclass for all implementations of the various classes of
@@ -77,8 +100,24 @@ alternating iterated forward differences, possibly scaled by a binomial
 \deqn{
     {(-1)}^{j-1} \Delta^j \psi(c x), x > 0.
   }
+
+\item \code{uexIntensities}: Calculates unscaled \code{ex_intensities} parameter for \code{\link[=rexmo_markovian]{rexmo_markovian()}}.
+
+\item \code{intensities}: Calculates \code{intensities} parameter for \code{\link[=rmo_esm]{rmo_esm()}} and \code{\link[=rmo_arnold]{rmo_arnold()}}.
+
+\item \code{exIntensities}: Calculates \code{ex_intensities} parameter for \code{\link[=rexmo_markovian]{rexmo_markovian()}}.
+
+\item \code{exQMatrix}: Calculates the exchangeable Q-matrix implies by \code{\link[=rexmo_markovian]{rexmo_markovian()}}.
 }}
 
+\examples{
+exIntensities(AlphaStableBernsteinFunction(), 3L)
+
+intensities(AlphaStableBernsteinFunction(), 3L)
+
+exQMatrix(AlphaStableBernsteinFunction(), 3L)
+
+}
 \references{
 \insertAllCited{}
 }

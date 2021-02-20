@@ -9,6 +9,14 @@ divide_binomial_coefficient <- function(x, n, k) {
     .Call(`_rmo_divide_binomial_coefficient`, x, n, k)
 }
 
+uexi2i <- function(uexi) {
+    .Call(`_rmo_uexi2i`, uexi)
+}
+
+exi2exqm <- function(exi) {
+    .Call(`_rmo_exi2exqm`, exi)
+}
+
 Rcpp__is_within <- function(i, j) {
     .Call(`_rmo_Rcpp__is_within`, i, j)
 }
