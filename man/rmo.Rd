@@ -5,24 +5,47 @@
 \alias{rmo}
 \title{rmo: A package for the Marshall-Olkin distribution.}
 \description{
-The package contains an implementation of the sampling algorithms related to
-the Marshall-Olkin distribution.
+The package contains fast implementations of sampling algorithms related to
+the Marshall-Olkin distribution. It also contains an S4-class system for
+Bernstein functions which can be used to create a large variety of
+Marshall-Olkin parameterisations.
 }
+\section{Bernstein functions}{
+
+A \emph{Bernstein function} is a non-negative function with non-negative
+alternating iterative differences. These functions can be used to
+generated parameterisations for the exchangeable Marshall-Olkin
+distribution.
+\itemize{
+\item An object that derives from \linkS4class{BernsteinFunction} can be used to
+generate the Marshall-Olkin intensities with \code{\link[=intensities]{intensities()}}.
+It can be used to generate (unscaled) exchangeable intensities with
+\code{\link[=exIntensities]{exIntensities()}}.
+\item Many families of Bernstein functions are available, e.g.
+\linkS4class{ParetoBernsteinFunction}, \linkS4class{ExponentialBernsteinFunction}, and
+\linkS4class{AlphaStableBernsteinFunction}.
+\item Bernstein functions can be recombined by scaling, by summation or by
+composition, which can be used to create new Bernstein functions with
+\linkS4class{ScaledBernsteinFunction} and \linkS4class{SumOfBernsteinFunctions}.
+}
+}
+
 \section{Sampling}{
 
+Multiple sampling algorithms are provided. The semantic naming scheme \verb{r*mo_*}
+is used, e.g. \code{\link[=rexmo_markovian]{rexmo_markovian()}} has \emph{(scaled) exchangeable intensities}
+\code{ex_intensities} as input and uses the Markovian model for the default
+counting process.
+The following algorithms are implemented:
 \itemize{
-\item Sample with the \emph{exogenous shock model} from arbitrary Marshall-Olkin
-distributions with \code{\link{rmo_esm}}. Not adviced for \code{d} much larger
-than 2.
-\item Sample with the \emph{Arnold model} from arbitrary Marshall-Olkin distributions
-with \code{\link{rmo_arnold}}.
-\item Sample with the \emph{exchangeable Markovian model} from exchangeable
-Marshall-Olki distributions with \code{\link{rexmo_markovian}}.
-\item Sample with the \emph{Lévy-frailty model for compound Poisson subordinators}
-from the corresponding subclass of extendible Marshall-Olkin distributions
-with \code{\link{rextmo_lfm}}.
-\item Sample with the optimised version of the \emph{exogenous shock model} for the
-Cuadras-Augé subclass with \code{\link{rcamo_esm}}.
+\item \emph{Exogenous shock model} for arbitrary Marshall-Olkin distributions with
+\code{\link[=rmo_esm]{rmo_esm()}}. Not adviced for \code{d} much larger than 2.
+\item \emph{Arnold model} for arbitrary Marshall-Olkin distributions with \code{\link[=rmo_arnold]{rmo_arnold()}}.
+\item \emph{Exchangeable Markovian model} for exchangeable Marshall-Olkin distributions
+with \code{\link[=rexmo_markovian]{rexmo_markovian()}}.
+\item \emph{Lévy-frailty model for compound Poisson subordinators} for the corresponding
+subclass of extendible Marshall-Olkin distributions with \code{\link[=rextmo_lfm]{rextmo_lfm()}}.
+\item \emph{Exogenous shock model} for the Cuadras-Augé subclass with \code{\link[=rcamo_esm]{rcamo_esm()}}.
 }
 }
 
