@@ -50,7 +50,9 @@ devtools::install_github("hsloot/rmo")
 ## Example
 
 ```{r, include=TRUE}
-rexmo_markovian(n=10L, d=2L, ex_intensities_alpha_stable(d=2L, alpha=log2(2 - 0.5)))
+rexmo_markovian(
+  n=10L, d=2L, 
+  ex_intensities_alpha_stable(d=2L, alpha=log2(2 - 0.5)))
 ```
 
 ### Approximate an Alpha-Stable BF

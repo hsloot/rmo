@@ -1,3 +1,7 @@
+# rmo 0.5.1
+
+- Add composite-scaled Bernstein function class.
+
 # rmo 0.5.0
 
 - Rename Cuadras-Augé and Lévy-frailty model algorithms. Now a sampling algorithm

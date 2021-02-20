@@ -156,7 +156,7 @@ SumOfBernsteinFunctions <- setClass("SumOfBernsteinFunctions", # nolint
 #'   [valueOf()]
 #'
 #' @export CompositeScaledBernsteinFunction
-CompositeScaledBernsteinFunction <- setClass("CompositeScaledBernsteinFunction",
+CompositeScaledBernsteinFunction <- setClass("CompositeScaledBernsteinFunction", # nolint
   contains  = "BernsteinFunction",
   slots = c(cscale = "numeric", original = "BernsteinFunction"))
 
