@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Sample with LFM and CPP subordinator — rextmo_lfm • rmo</title>
+<title>Sample with Lévy-frailty model with compound Poisson subordinator — rextmo_lfm • rmo</title>
 
 
 <!-- jquery -->
@@ -39,11 +39,9 @@
 
 
 
-<meta property="og:title" content="Sample with LFM and CPP subordinator — rextmo_lfm" />
+<meta property="og:title" content="Sample with Lévy-frailty model with compound Poisson subordinator — rextmo_lfm" />
 <meta property="og:description" content="Draws n independent samples from a d-variate extendible Marshall-Olkin
-distribution corresponding to a LFM with a compound Poisson subordinator with
-parameters rate, rate_killing, rate_drift, rjump_name, and
-rjump_arg_list." />
+distribution corresponding to a LFM with a compound Poisson subordinator." />
 
 
 
@@ -141,16 +139,14 @@ rjump_arg_list." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Sample with LFM and CPP subordinator</h1>
+    <h1>Sample with Lévy-frailty model with compound Poisson subordinator</h1>
     <small class="dont-index">Source: <a href='https://github.com/hsloot/rmo/blob/master/R/sample.R'><code>R/sample.R</code></a></small>
     <div class="hidden name"><code>rextmo_lfm.Rd</code></div>
     </div>
 
     <div class="ref-description">
     <p>Draws <code>n</code> independent samples from a <code>d</code>-variate extendible Marshall-Olkin
-distribution corresponding to a LFM with a compound Poisson subordinator with
-parameters <code>rate</code>, <code>rate_killing</code>, <code>rate_drift</code>, <code>rjump_name</code>, and
-<code>rjump_arg_list</code>.</p>
+distribution corresponding to a LFM with a compound Poisson subordinator.</p>
     </div>
 
     <pre class="usage"><span class='fu'>rextmo_lfm</span><span class='op'>(</span>
@@ -168,54 +164,57 @@ parameters <code>rate</code>, <code>rate_killing</code>, <code>rate_drift</code>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>n</th>
-      <td><p>number of samples</p></td>
+      <td><p>Number of samples</p></td>
     </tr>
     <tr>
       <th>d</th>
-      <td><p>dimension</p></td>
+      <td><p>Dimension</p></td>
     </tr>
     <tr>
       <th>rate</th>
-      <td><p>rate of CPP subordinator</p></td>
+      <td><p>Jump intensity of CPP subordinator</p></td>
     </tr>
     <tr>
       <th>rate_killing</th>
-      <td><p>killing rate of CPP subordinator</p></td>
+      <td><p>Killing intensity of CPP subordinator</p></td>
     </tr>
     <tr>
       <th>rate_drift</th>
-      <td><p>drift rate of CPP subordinator</p></td>
+      <td><p>Drift of CPP subordinator</p></td>
     </tr>
     <tr>
       <th>rjump_name</th>
-      <td><p>name of jump sampling function for jumps of CPP
+      <td><p>Name of jump sampling function for jumps of CPP
 subordinator</p></td>
     </tr>
     <tr>
       <th>rjump_arg_list</th>
-      <td><p>list with named arguments for jump sampling function
+      <td><p>A list with named arguments for jump sampling function
 for jumps of CPP subordinator</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>rextmo_lfm</code> implements the Lévy-frailty model representation with a
+    <p><code>rextmo_lfm</code> implements the Lévy-frailty model algorithm with a
 compound Poisson subordinator and returns an \(n \times d\) numeric
 matrix with the rows corresponding to independent and identically
 distributed samples of the corresponding <code>d</code>-variate extendible
 Marshall-Olkin distribution.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    
-<ul>
-<li><p><code>rate</code> is the <em>jump intensity</em> of the compound Poisson subordinator:
-at each given point-in-time, the waiting time to the next jump is
-exponentially distributed with rate <code>rate</code>.</p></li>
+    <p><strong>Model</strong>:
+The default times are defined as first exit times of a (killed) compound Poisson
+subordinator \(\Lambda\) with <em>killing intensity</em> \(a\), <em>drift</em> \(b\),
+<em>jump intensity</em> \(\xi\), and <em>jump distribution</em> \(X\).</p>
+<p><strong>Model parameters</strong>:</p><ul>
+<li><p><code>rate</code> is the <em>jump intensity</em> of the compound Poisson subordinator.</p></li>
 <li><p><code>rate_killing</code> is the <em>killing intensity</em> of the compound Poisson
-subordinator: the probability that the compound Poisson subordinator jumps to
-its graveyard-state \(\infty\) between \(t\) and \(s\) is \(1 -
-\exp{\{-{ratekilling} (s-t)\}}\).</p></li>
+subordinator.</p></li>
+<li><p><code>rate_drift</code> is the <em>drift</em> of the compound Poisson subordinator.</p></li>
+<li><p><code>rjump_name</code> and <code>rjump_arg_list</code> are the jump distribution name and
+list with jump distribution parameters. Currently, <code>"rexp"</code>, <code>"rposval"</code>,
+and <code>"rpareto"</code> are possible.</p></li>
 </ul>
 
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
@@ -224,7 +223,7 @@ its graveyard-state \(\infty\) between \(t\) and \(s\) is \(1 -
 M. Scherer, "Simulating Copulas", World Scientific (2017), pp. 140 psqq.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other samplers: 
+    <div class='dont-index'><p>Other sampling-algorithms: 
 <code><a href='rexmo_markovian.html'>rexmo_markovian</a>()</code>,
 <code><a href='rmo_esm_cuadras_auge.html'>rmo_esm_cuadras_auge</a></code>,
 <code><a href='rmo_esm.html'>rmo_esm</a>()</code></p></div>
@@ -252,30 +251,41 @@ M. Scherer, "Simulating Copulas", World Scientific (2017), pp. 140 psqq.</p>
 #&gt;  [7,]  2.7492549  4.2155902
 #&gt;  [8,]  0.3736335  7.2411320
 #&gt;  [9,]  7.2778702  6.0495844
-#&gt; [10,]  0.2116008  0.2116008</div><div class='input'>
+#&gt; [10,]  0.2116008  0.2116008</div><div class='input'><span class='fu'>rextmo_lfm</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fl'>0.5</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='st'>"rpareto"</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='st'>"alpha"</span><span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log2</a></span><span class='op'>(</span><span class='fl'>2</span> <span class='op'>-</span> <span class='fl'>0.5</span><span class='op'>)</span>, x0 <span class='op'>=</span> <span class='fl'>1e-4</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;            [,1]      [,2]
+#&gt;  [1,]  53.98252 207.73648
+#&gt;  [2,] 311.05216 193.51886
+#&gt;  [3,]  67.77939 135.28008
+#&gt;  [4,]  14.45430  82.35803
+#&gt;  [5,] 115.11769 322.60920
+#&gt;  [6,] 240.75283 240.75283
+#&gt;  [7,] 163.88851 163.88851
+#&gt;  [8,] 134.22049 364.71768
+#&gt;  [9,] 420.42407 771.21685
+#&gt; [10,] 213.45584  35.33269</div><div class='input'>
 <span class='fu'>rextmo_lfm</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>1</span>, <span class='st'>"rposval"</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='st'>"value"</span><span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>  <span class='co'>## independence</span>
-</div><div class='output co'>#&gt;              [,1]       [,2]
-#&gt;  [1,] 0.264769432 0.68774057
-#&gt;  [2,] 0.459522417 3.00186797
-#&gt;  [3,] 1.028440450 0.49854530
-#&gt;  [4,] 0.141630114 1.23387958
-#&gt;  [5,] 1.264154896 1.39129122
-#&gt;  [6,] 0.052213460 0.68832679
-#&gt;  [7,] 1.474223727 1.19901650
-#&gt;  [8,] 0.746381775 0.70668105
-#&gt;  [9,] 2.159284682 0.76381420
-#&gt; [10,] 0.004528473 0.05986955</div><div class='input'><span class='fu'>rextmo_lfm</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>0</span>, <span class='st'>"rposval"</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='st'>"value"</span><span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>  <span class='co'>## comonotone</span>
+</div><div class='output co'>#&gt;             [,1]        [,2]
+#&gt;  [1,] 0.45099181 0.259793823
+#&gt;  [2,] 0.48141067 0.931376344
+#&gt;  [3,] 0.65076527 1.766176285
+#&gt;  [4,] 0.08050842 0.186904407
+#&gt;  [5,] 0.66815137 0.703072602
+#&gt;  [6,] 0.40455994 2.648782296
+#&gt;  [7,] 0.22342756 0.589334122
+#&gt;  [8,] 0.86847268 0.001655062
+#&gt;  [9,] 0.65647407 0.392622327
+#&gt; [10,] 0.16017312 0.108483846</div><div class='input'><span class='fu'>rextmo_lfm</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>0</span>, <span class='st'>"rposval"</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='st'>"value"</span><span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>  <span class='co'>## comonotone</span>
 </div><div class='output co'>#&gt;             [,1]       [,2]
-#&gt;  [1,] 0.05074470 0.05074470
-#&gt;  [2,] 0.04685683 0.04685683
-#&gt;  [3,] 1.65857297 1.65857297
-#&gt;  [4,] 0.73118509 0.73118509
-#&gt;  [5,] 0.52152228 0.52152228
-#&gt;  [6,] 0.74851435 0.74851435
-#&gt;  [7,] 2.59340590 2.59340590
-#&gt;  [8,] 1.30110875 1.30110875
-#&gt;  [9,] 0.73809738 0.73809738
-#&gt; [10,] 0.29010954 0.29010954</div><div class='input'>
+#&gt;  [1,] 0.52666119 0.52666119
+#&gt;  [2,] 0.07336072 0.07336072
+#&gt;  [3,] 2.19648856 2.19648856
+#&gt;  [4,] 0.69430780 0.69430780
+#&gt;  [5,] 0.50395103 0.50395103
+#&gt;  [6,] 1.01516116 1.01516116
+#&gt;  [7,] 0.50437277 0.50437277
+#&gt;  [8,] 0.68533094 0.68533094
+#&gt;  [9,] 2.74712209 2.74712209
+#&gt; [10,] 2.50375163 2.50375163</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

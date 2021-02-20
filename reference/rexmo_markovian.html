@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Sample from an exchangeable MO distribution — rexmo_markovian • rmo</title>
+<title>Sample from an exchangeable Marshall-Olkin distribution — rexmo_markovian • rmo</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,7 @@
 
 
 
-<meta property="og:title" content="Sample from an exchangeable MO distribution — rexmo_markovian" />
+<meta property="og:title" content="Sample from an exchangeable Marshall-Olkin distribution — rexmo_markovian" />
 <meta property="og:description" content="Draws n independent samples from a d variate exchangeable Marshall-Olkin
 distribution with (scaled) shock rates ex_intensities." />
 
@@ -139,7 +139,7 @@ distribution with (scaled) shock rates ex_intensities." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Sample from an exchangeable MO distribution</h1>
+    <h1>Sample from an exchangeable Marshall-Olkin distribution</h1>
     <small class="dont-index">Source: <a href='https://github.com/hsloot/rmo/blob/master/R/sample.R'><code>R/sample.R</code></a></small>
     <div class="hidden name"><code>rexmo_markovian.Rd</code></div>
     </div>
@@ -156,7 +156,7 @@ distribution with (scaled) shock rates <code>ex_intensities</code>.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>n</th>
-      <td><p>number of samples</p></td>
+      <td><p>Number of samples</p></td>
     </tr>
     <tr>
       <th>d</th>
@@ -164,26 +164,32 @@ distribution with (scaled) shock rates <code>ex_intensities</code>.</p>
     </tr>
     <tr>
       <th>ex_intensities</th>
-      <td><p>(Scaled) exchangeable Marshall-Olkin intensity rates</p></td>
+      <td><p>(Scaled) exchangeable Marshall-Olkin intensities</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>rexmo_markovian</code> implements the Markovian model for the
-exchangeable subclass and returns an \(n \times d\) numeric matrix
-with the rows corresponding to independent and identically disctributed
-samples of a \(d\) variate exchangeable Marshall-Olkin distribution with
-exchangeable parameters <code>ex_intensities</code>.</p>
+    <p><code>rexmo_markovian</code> implements the Markovian model for the default  counting
+process of the exchangeable subclass and returns an  \(n \times d\)
+numeric matrix with the rows corresponding to independent and identically
+disctributed samples of a \(d\) variate exchangeable Marshall-Olkin
+distribution with exchangeable parameters <code>ex_intensities</code>.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    
-<ul>
-<li><p>The <em>exchangeable</em> shock intensities must be stored in a vector of length
-\(d\).</p></li>
-<li><p>The entry \({exintensities}_{i}\) is the
-intensity of a shock corresponding to a set with \(i\) elements multiplied
-by the number of shocks of cardinality \(i\), i.e. \(\binom{d}{i}\).</p></li>
+    <p><strong>Parameterisation</strong>:
+The exchangeable Marshall--Olkin distribution has the property that
+\(\lambda_I\) only depends on the cardinality of \(I\).
+The <em>unscaled exchangeable shock intensities</em> are defined for \(I\) with
+\(i = \lvert I\rvert\) by \(\lambda_i = \lambda_I\).
+The <em>scaled exchangeable shock intensities</em> are defined by \(\eta_i =
+\binom{d}{i} \lambda_i\).</p>
+<p><strong>The scaled exchangeable shock intensities</strong>:</p><ul>
+<li><p>The <em>scaled exchangeable</em> shock intensities* \(\eta_i\) must be stored in
+a vector of length \(d\).</p></li>
+<li><p>The entry \(\eta_i\) is the intensity of a shock corresponding to a set
+with \(i\) elements multiplied by the number of shocks of cardinality
+\(i\), i.e. \(\binom{d}{i}\).</p></li>
 </ul>
 
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
@@ -194,7 +200,7 @@ by the number of shocks of cardinality \(i\), i.e. \(\binom{d}{i}\).</p></li>
 "Simulating Copulas", World Scientific (2017), pp. 122 psqq.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other samplers: 
+    <div class='dont-index'><p>Other sampling-algorithms: 
 <code><a href='rextmo_lfm.html'>rextmo_lfm</a>()</code>,
 <code><a href='rmo_esm_cuadras_auge.html'>rmo_esm_cuadras_auge</a></code>,
 <code><a href='rmo_esm.html'>rmo_esm</a>()</code></p></div>

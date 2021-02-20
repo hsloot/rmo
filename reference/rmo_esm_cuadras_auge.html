@@ -156,81 +156,78 @@ with parameters <code>alpha</code> and <code>beta</code>.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>n</th>
-      <td><p>number of samples</p></td>
+      <td><p>Number of samples</p></td>
     </tr>
     <tr>
       <th>d</th>
-      <td><p>dimension</p></td>
+      <td><p>Dimension</p></td>
     </tr>
     <tr>
       <th>alpha</th>
-      <td><p>rate of individual shocks</p></td>
+      <td><p>Shock intensity of individual shocks</p></td>
     </tr>
     <tr>
       <th>beta</th>
-      <td><p>rate of global shock</p></td>
+      <td><p>Shock intensity of global shock</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p><code>rmo_esm_cuadras_auge</code> implements an optimized version of the
-<em>exogenous shock model</em> representation for the Cuadras-Augé family and
+<em>exogenous shock model</em> algorithm for the Cuadras-Augé family and
 returns an \(n \times d\) array matrix with rows corresponding to
 the independent samples of size \(d\).</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    
-<ul>
-<li><p><code>alpha</code> is the shock intensity of shocks that affect only single
-components.</p></li>
-<li><p><code>beta</code> is the shock intensity of the global shock that affects all
-components.</p></li>
-</ul>
-
+    <p><strong>Parameterisation</strong>:
+The Cuadras-Augé distribution is a special case of the exchangeable Marshall-Olkin
+distribution where \(\lambda_i = 0 \forall 1 &lt; i &lt; d\).
+The individual shock rate is \(\alpha = \lambda_1\) and the global shock
+rate is \(\beta = \lambda_d\).</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='rmo_esm.html'>rmo_esm</a></code></p>
-<p>Other samplers: 
+    <div class='dont-index'><p><code><a href='rmo_esm.html'>rmo_esm()</a></code></p>
+<p>Other sampling-algorithms: 
 <code><a href='rexmo_markovian.html'>rexmo_markovian</a>()</code>,
 <code><a href='rextmo_lfm.html'>rextmo_lfm</a>()</code>,
 <code><a href='rmo_esm.html'>rmo_esm</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>rcamo_esm</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fl'>0.5</span>, <span class='fl'>0.2</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;             [,1]       [,2]
-#&gt;  [1,] 1.90007235 1.26475073
-#&gt;  [2,] 0.05340894 0.45915438
-#&gt;  [3,] 4.26007487 0.28624337
-#&gt;  [4,] 0.76287641 1.77988059
-#&gt;  [5,] 5.32719374 1.09920633
-#&gt;  [6,] 2.54314700 0.88122313
-#&gt;  [7,] 0.15497372 0.07840685
-#&gt;  [8,] 0.46367619 0.23034913
-#&gt;  [9,] 0.60800074 0.57180879
-#&gt; [10,] 1.38281422 0.05287436</div><div class='input'><span class='fu'>rcamo_esm</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span>      <span class='co'>## comonotone</span>
-</div><div class='output co'>#&gt;             [,1]       [,2]
-#&gt;  [1,] 0.15210404 0.15210404
-#&gt;  [2,] 1.01687513 1.01687513
-#&gt;  [3,] 1.80836899 1.80836899
-#&gt;  [4,] 1.14321240 1.14321240
-#&gt;  [5,] 1.25896015 1.25896015
-#&gt;  [6,] 0.09659652 0.09659652
-#&gt;  [7,] 0.76962200 0.76962200
-#&gt;  [8,] 0.06768541 0.06768541
-#&gt;  [9,] 0.47850159 0.47850159
-#&gt; [10,] 0.43904557 0.43904557</div><div class='input'><span class='fu'>rcamo_esm</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fl'>1</span>, <span class='fl'>0</span><span class='op'>)</span>      <span class='co'>## independence</span>
 </div><div class='output co'>#&gt;            [,1]      [,2]
-#&gt;  [1,] 0.7510749 0.3477127
-#&gt;  [2,] 2.0632670 0.3808103
-#&gt;  [3,] 1.9443705 0.5643083
-#&gt;  [4,] 4.2174098 2.8622615
-#&gt;  [5,] 0.9369852 0.5694194
-#&gt;  [6,] 0.8147494 1.7085647
-#&gt;  [7,] 1.1690024 0.5546123
-#&gt;  [8,] 2.5386571 0.4852478
-#&gt;  [9,] 1.2798431 0.8772601
-#&gt; [10,] 0.4858480 0.7084776</div><div class='input'>
+#&gt;  [1,] 1.1591114 0.5491868
+#&gt;  [2,] 4.3117345 2.5761153
+#&gt;  [3,] 1.4992099 0.7403792
+#&gt;  [4,] 2.2715207 0.9507816
+#&gt;  [5,] 0.1075008 0.1075008
+#&gt;  [6,] 0.3422821 1.1239411
+#&gt;  [7,] 1.2966656 3.7413400
+#&gt;  [8,] 0.2143431 0.2143431
+#&gt;  [9,] 5.6632929 1.6167282
+#&gt; [10,] 0.7738252 1.2734566</div><div class='input'><span class='fu'>rcamo_esm</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span>      <span class='co'>## comonotone</span>
+</div><div class='output co'>#&gt;             [,1]       [,2]
+#&gt;  [1,] 0.01923201 0.01923201
+#&gt;  [2,] 0.30315226 0.30315226
+#&gt;  [3,] 0.23228084 0.23228084
+#&gt;  [4,] 0.19145614 0.19145614
+#&gt;  [5,] 0.40272523 0.40272523
+#&gt;  [6,] 0.97748519 0.97748519
+#&gt;  [7,] 0.14814172 0.14814172
+#&gt;  [8,] 4.35295840 4.35295840
+#&gt;  [9,] 0.52214073 0.52214073
+#&gt; [10,] 0.37999728 0.37999728</div><div class='input'><span class='fu'>rcamo_esm</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fl'>1</span>, <span class='fl'>0</span><span class='op'>)</span>      <span class='co'>## independence</span>
+</div><div class='output co'>#&gt;            [,1]        [,2]
+#&gt;  [1,] 0.2929692 1.602440214
+#&gt;  [2,] 0.3148262 0.599230511
+#&gt;  [3,] 0.2593448 0.479714277
+#&gt;  [4,] 0.2089334 0.864223083
+#&gt;  [5,] 2.3641674 1.118781199
+#&gt;  [6,] 1.1572743 0.350783662
+#&gt;  [7,] 3.0920279 1.256454813
+#&gt;  [8,] 0.1299232 0.313174729
+#&gt;  [9,] 0.2345208 0.006493014
+#&gt; [10,] 0.1396040 1.135673976</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

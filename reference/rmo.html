@@ -40,8 +40,10 @@
 
 
 <meta property="og:title" content="rmo: A package for the Marshall-Olkin distribution. — rmo" />
-<meta property="og:description" content="The package contains an implementation of the sampling algorithms related to
-the Marshall-Olkin distribution." />
+<meta property="og:description" content="The package contains fast implementations of sampling algorithms related to
+the Marshall-Olkin distribution. It also contains an S4-class system for
+Bernstein functions which can be used to create a large variety of
+Marshall-Olkin parameterisations." />
 
 
 
@@ -145,29 +147,51 @@ the Marshall-Olkin distribution." />
     </div>
 
     <div class="ref-description">
-    <p>The package contains an implementation of the sampling algorithms related to
-the Marshall-Olkin distribution.</p>
+    <p>The package contains fast implementations of sampling algorithms related to
+the Marshall-Olkin distribution. It also contains an S4-class system for
+Bernstein functions which can be used to create a large variety of
+Marshall-Olkin parameterisations.</p>
     </div>
 
 
+
+    <h2 class="hasAnchor" id="bernstein-functions"><a class="anchor" href="#bernstein-functions"></a>Bernstein functions</h2>
+
+    
+
+<p>A <em>Bernstein function</em> is a non-negative function with non-negative
+alternating iterative differences. These functions can be used to
+generated parameterisations for the exchangeable Marshall-Olkin
+distribution.</p><ul>
+<li><p>An object that derives from <a href='BernsteinFunction-class.html'>BernsteinFunction</a> can be used to
+generate the Marshall-Olkin intensities with <code><a href='BernsteinFunction-class.html'>intensities()</a></code>.
+It can be used to generate (unscaled) exchangeable intensities with
+<code><a href='BernsteinFunction-class.html'>exIntensities()</a></code>.</p></li>
+<li><p>Many families of Bernstein functions are available, e.g.
+<a href='ParetoBernsteinFunction-class.html'>ParetoBernsteinFunction</a>, <a href='ExponentialBernsteinFunction-class.html'>ExponentialBernsteinFunction</a>, and
+<a href='AlphaStableBernsteinFunction-class.html'>AlphaStableBernsteinFunction</a>.</p></li>
+<li><p>Bernstein functions can be recombined by scaling, by summation or by
+composition, which can be used to create new Bernstein functions with
+<a href='ScaledBernsteinFunction-class.html'>ScaledBernsteinFunction</a> and <a href='SumOfBernsteinFunctions-class.html'>SumOfBernsteinFunctions</a>.</p></li>
+</ul>
 
     <h2 class="hasAnchor" id="sampling"><a class="anchor" href="#sampling"></a>Sampling</h2>
 
     
 
-<ul>
-<li><p>Sample with the <em>exogenous shock model</em> from arbitrary Marshall-Olkin
-distributions with <code><a href='rmo_esm.html'>rmo_esm</a></code>. Not adviced for <code>d</code> much larger
-than 2.</p></li>
-<li><p>Sample with the <em>Arnold model</em> from arbitrary Marshall-Olkin distributions
-with <code><a href='rmo_esm.html'>rmo_arnold</a></code>.</p></li>
-<li><p>Sample with the <em>exchangeable Markovian model</em> from exchangeable
-Marshall-Olki distributions with <code><a href='rexmo_markovian.html'>rexmo_markovian</a></code>.</p></li>
-<li><p>Sample with the <em>Lévy-frailty model for compound Poisson subordinators</em>
-from the corresponding subclass of extendible Marshall-Olkin distributions
-with <code><a href='rextmo_lfm.html'>rextmo_lfm</a></code>.</p></li>
-<li><p>Sample with the optimised version of the <em>exogenous shock model</em> for the
-Cuadras-Augé subclass with <code><a href='rmo_esm_cuadras_auge.html'>rcamo_esm</a></code>.</p></li>
+<p>Multiple sampling algorithms are provided. The semantic naming scheme <code>r*mo_*</code>
+is used, e.g. <code><a href='rexmo_markovian.html'>rexmo_markovian()</a></code> has <em>(scaled) exchangeable intensities</em>
+<code>ex_intensities</code> as input and uses the Markovian model for the default
+counting process.
+The following algorithms are implemented:</p><ul>
+<li><p><em>Exogenous shock model</em> for arbitrary Marshall-Olkin distributions with
+<code><a href='rmo_esm.html'>rmo_esm()</a></code>. Not adviced for <code>d</code> much larger than 2.</p></li>
+<li><p><em>Arnold model</em> for arbitrary Marshall-Olkin distributions with <code><a href='rmo_esm.html'>rmo_arnold()</a></code>.</p></li>
+<li><p><em>Exchangeable Markovian model</em> for exchangeable Marshall-Olkin distributions
+with <code><a href='rexmo_markovian.html'>rexmo_markovian()</a></code>.</p></li>
+<li><p><em>Lévy-frailty model for compound Poisson subordinators</em> for the corresponding
+subclass of extendible Marshall-Olkin distributions with <code><a href='rextmo_lfm.html'>rextmo_lfm()</a></code>.</p></li>
+<li><p><em>Exogenous shock model</em> for the Cuadras-Augé subclass with <code><a href='rmo_esm_cuadras_auge.html'>rcamo_esm()</a></code>.</p></li>
 </ul>
 
 
