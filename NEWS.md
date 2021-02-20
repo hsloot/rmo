@@ -1,3 +1,10 @@
+# rmo 0.5.0
+
+- Rename Cuadras-Augé and Lévy-frailty model algorithms. Now a sampling algorithm
+  follows the format `r*mo_*` where the first `*` indicates the input-parameter 
+  and the second on the algorithm, e.g. `rexmo_markovian` has `ex_intensities` as
+  input parameters and uses the Markovian model for the default counting process.
+
 # rmo 0.4.1
 
 - Rearrange order in arguments of `valueOf`: instead of `cscale, n, k` we

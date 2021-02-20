@@ -261,7 +261,7 @@ test_that("Cuadras-Augé model passes statistical unit test", {
   alpha <- bf@second@scale
   beta <- bf@first@constant
   expect_not_rejected(
-    cuadras_auge_ks_test(n, d, rmo_esm_cuadras_auge, alpha, beta),
+    cuadras_auge_ks_test(n, d, rcamo_esm, alpha, beta),
     unit_threshold
   )
 
@@ -274,7 +274,7 @@ test_that("Cuadras-Augé model passes statistical unit test", {
   alpha <- bf@second@scale
   beta <- bf@first@constant
   expect_not_rejected(
-    cuadras_auge_ks_test(n, d, rmo_esm_cuadras_auge, alpha, beta),
+    cuadras_auge_ks_test(n, d, rcamo_esm, alpha, beta),
     unit_threshold
   )
 })
@@ -297,7 +297,7 @@ test_that("Lévy frailty CPP model passes statistical unit test", {
   rjump_arg_list <- list("value" = bf@second@second@eta)
   expect_not_rejected(
     lfm_ks_test(
-      n, d, rmo_lfm_cpp,
+      n, d, rextmo_lfm,
       rate, rate_killing, rate_drift,
       rjump_name, rjump_arg_list
     ),
@@ -319,7 +319,7 @@ test_that("Lévy frailty CPP model passes statistical unit test", {
   )
   expect_not_rejected(
     lfm_ks_test(
-      n, d, rmo_lfm_cpp,
+      n, d, rextmo_lfm,
       rate, rate_killing, rate_drift,
       rjump_name, rjump_arg_list
     ),
@@ -338,7 +338,7 @@ test_that("Lévy frailty CPP model passes statistical unit test", {
   rjump_arg_list <- list("rate" = bf@second@second@original@lambda)
   expect_not_rejected(
     lfm_ks_test(
-      n, d, rmo_lfm_cpp,
+      n, d, rextmo_lfm,
       rate, rate_killing, rate_drift,
       rjump_name, rjump_arg_list
     ),
@@ -358,7 +358,7 @@ test_that("Lévy frailty CPP model passes statistical unit test", {
   rjump_arg_list <- list("value" = bf@second@second@eta)
   expect_not_rejected(
     lfm_ks_test(
-      n, d, rmo_lfm_cpp,
+      n, d, rextmo_lfm,
       rate, rate_killing, rate_drift,
       rjump_name, rjump_arg_list
     ),
@@ -380,7 +380,7 @@ test_that("Lévy frailty CPP model passes statistical unit test", {
   )
   expect_not_rejected(
     lfm_ks_test(
-      n, d, rmo_lfm_cpp,
+      n, d, rextmo_lfm,
       rate, rate_killing, rate_drift,
       rjump_name, rjump_arg_list
     ),
@@ -399,7 +399,7 @@ test_that("Lévy frailty CPP model passes statistical unit test", {
   rjump_arg_list <- list("rate" = bf@second@second@original@lambda)
   expect_not_rejected(
     lfm_ks_test(
-      n, d, rmo_lfm_cpp,
+      n, d, rextmo_lfm,
       rate, rate_killing, rate_drift,
       rjump_name, rjump_arg_list
     ),

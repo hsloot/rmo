@@ -69,7 +69,7 @@ NumericMatrix Rcpp__rmo_arnold(const std::size_t n, const std::size_t d,
 
 // [[Rcpp::export]]
 NumericMatrix Rcpp__rexmo_markovian(const std::size_t n, const std::size_t d,
-                                  const NumericVector& ex_intensities) {
+                                    const NumericVector& ex_intensities) {
   using exponential_distribution =
       rmolib::random::exponential_distribution<double>;
   using uniform_real_distribution =
@@ -89,10 +89,8 @@ NumericMatrix Rcpp__rexmo_markovian(const std::size_t n, const std::size_t d,
 }
 
 // [[Rcpp::export]]
-NumericMatrix Rcpp__rmo_esm_cuadras_auge(const std::size_t n,
-                                         const std::size_t d,
-                                         const double alpha,
-                                         const double beta) {
+NumericMatrix Rcpp__rcamo_esm(const std::size_t n, const std::size_t d,
+                              const double alpha, const double beta) {
   using exponential_distribution =
       rmolib::random::exponential_distribution<double>;
   using cuadras_auge_distribution =
@@ -104,11 +102,11 @@ NumericMatrix Rcpp__rmo_esm_cuadras_auge(const std::size_t n,
 }
 
 // [[Rcpp::export]]
-NumericMatrix Rcpp__rmo_lfm_cpp(const std::size_t n, const std::size_t d,
-                                const double rate, const double rate_killing,
-                                const double rate_drift,
-                                const std::string rjump_name,
-                                const List& rjump_arg_list) {
+NumericMatrix Rcpp__rextmo_lfm(const std::size_t n, const std::size_t d,
+                               const double rate, const double rate_killing,
+                               const double rate_drift,
+                               const std::string rjump_name,
+                               const List& rjump_arg_list) {
   using deterministic_distribution =
       rmolib::random::deterministic_distribution<double>;
   using exponential_distribution =
@@ -181,7 +179,7 @@ NumericMatrix rtest__rmo_arnold(const std::size_t n, const std::size_t d,
 //' @keywords internal test
 // [[Rcpp::export]]
 NumericMatrix rtest__rexmo_markovian(const std::size_t n, const std::size_t d,
-                                   const NumericVector& ex_intensities) {
+                                     const NumericVector& ex_intensities) {
   // R's sample.int produces a final (redundant) selection of the
   // last remaining value see
   // https://github.com/wch/r-source/blob/613bdfd0e1d3fc9984142d5da3da448adf2438c7/src/main/random.c#L461
@@ -206,22 +204,20 @@ NumericMatrix rtest__rexmo_markovian(const std::size_t n, const std::size_t d,
 
 //' @keywords internal test
 // [[Rcpp::export]]
-NumericMatrix rtest__rmo_esm_cuadras_auge(const std::size_t n,
-                                          const std::size_t d,
-                                          const double alpha,
-                                          const double beta) {
-  return Rcpp__rmo_esm_cuadras_auge(n, d, alpha, beta);
+NumericMatrix rtest__rcamo_esm(const std::size_t n, const std::size_t d,
+                               const double alpha, const double beta) {
+  return Rcpp__rcamo_esm(n, d, alpha, beta);
 }
 
 //' @keywords internal test
 // [[Rcpp::export]]
-NumericMatrix rtest__rmo_lfm_cpp(const std::size_t n, const std::size_t d,
-                                 const double rate, const double rate_killing,
-                                 const double rate_drift,
-                                 const std::string rjump_name,
-                                 const List& rjump_arg_list) {
-  return Rcpp__rmo_lfm_cpp(n, d, rate, rate_killing, rate_drift, rjump_name,
-                           rjump_arg_list);
+NumericMatrix rtest__rextmo_lfm(const std::size_t n, const std::size_t d,
+                                const double rate, const double rate_killing,
+                                const double rate_drift,
+                                const std::string rjump_name,
+                                const List& rjump_arg_list) {
+  return Rcpp__rextmo_lfm(n, d, rate, rate_killing, rate_drift, rjump_name,
+                          rjump_arg_list);
 }
 
 // ----------------------------------------------------------------------------

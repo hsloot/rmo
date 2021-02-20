@@ -150,14 +150,14 @@ rexmo_markovian <- function(n, d, ex_intensities) {
 #' @family samplers
 #'
 #' @examples
-#' rmo_esm_cuadras_auge(10L, 2L, 0.5, 0.2)
-#' rmo_esm_cuadras_auge(10L, 2L, 0, 1)      ## comonotone
-#' rmo_esm_cuadras_auge(10L, 2L, 1, 0)      ## independence
+#' rcamo_esm(10L, 2L, 0.5, 0.2)
+#' rcamo_esm(10L, 2L, 0, 1)      ## comonotone
+#' rcamo_esm(10L, 2L, 1, 0)      ## independence
 #'
 #' @export
 #' @name rmo_esm_cuadras_auge
-rmo_esm_cuadras_auge <- function(n, d, alpha, beta) {
-  Rcpp__rmo_esm_cuadras_auge(n, d, alpha, beta)
+rcamo_esm <- function(n, d, alpha, beta) {
+  Rcpp__rcamo_esm(n, d, alpha, beta)
 }
 
 
@@ -187,7 +187,7 @@ rmo_esm_cuadras_auge <- function(n, d, alpha, beta) {
 #' @param rjump_arg_list list with named arguments for jump sampling function
 #' for jumps of CPP subordinator
 #'
-#' @return `rmo_lfm_cpp` implements the Lévy-frailty model representation with a
+#' @return `rextmo_lfm` implements the Lévy-frailty model representation with a
 #' compound Poisson subordinator and returns an \eqn{n \times d}{n x d} numeric
 #' matrix with the rows corresponding to independent and identically
 #' distributed samples of the corresponding `d`-variate extendible
@@ -197,19 +197,19 @@ rmo_esm_cuadras_auge <- function(n, d, alpha, beta) {
 #' M. Scherer, "Simulating Copulas", World Scientific (2017), pp. 140 psqq.
 #'
 #' @examples
-#' rmo_lfm_cpp(10L, 2L, 0.5, 0.1, 0.2, "rposval", list("value"=1))
-#' rmo_lfm_cpp(10L, 2L, 0.5, 0, 0, "rexp", list("rate"=2))
+#' rextmo_lfm(10L, 2L, 0.5, 0.1, 0.2, "rposval", list("value"=1))
+#' rextmo_lfm(10L, 2L, 0.5, 0, 0, "rexp", list("rate"=2))
 #'
-#' rmo_lfm_cpp(10L, 2L, 0, 0, 1, "rposval", list("value"=1))  ## independence
-#' rmo_lfm_cpp(10L, 2L, 0, 1, 0, "rposval", list("value"=1))  ## comonotone
+#' rextmo_lfm(10L, 2L, 0, 0, 1, "rposval", list("value"=1))  ## independence
+#' rextmo_lfm(10L, 2L, 0, 1, 0, "rposval", list("value"=1))  ## comonotone
 #'
 #' @family samplers
 #'
 #' @export
-#' @name rmo_lfm_cpp
-rmo_lfm_cpp <- function(n, d,
+#' @name rextmo_lfm
+rextmo_lfm <- function(n, d,
                         rate, rate_killing, rate_drift,
                         rjump_name, rjump_arg_list = list()) {
-  Rcpp__rmo_lfm_cpp(n, d,
+  Rcpp__rextmo_lfm(n, d,
                     rate, rate_killing, rate_drift, rjump_name, rjump_arg_list)
 }

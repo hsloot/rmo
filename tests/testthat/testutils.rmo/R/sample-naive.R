@@ -1,6 +1,6 @@
 # # MIT License
 #
-# Copyright (c) 2020 Henrik Sloot
+# Copyright (c) 2021 Henrik Sloot
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -319,12 +319,12 @@ rexmo_markovian_naive_recursive <- function( # nolint
 #' @param beta Global shock rate (>= 0; alpha + beta > 0)
 #'
 #' @examples
-#' rmo_esm_cuadras_auge_naive(10, 3, 0.5, 0.2)
-#' rmo_esm_cuadras_auge_naive(10, 3, 0, 1)      ## comonotone
-#' rmo_esm_cuadras_auge_naive(10, 3, 1, 0)      ## independence
+#' rcamo_esm_naive(10, 3, 0.5, 0.2)
+#' rcamo_esm_naive(10, 3, 0, 1)      ## comonotone
+#' rcamo_esm_naive(10, 3, 1, 0)      ## independence
 #' @include sample-helper.R
 #' @export
-rmo_esm_cuadras_auge_naive <- function(n, d, alpha, beta) { # nolint
+rcamo_esm_naive <- function(n, d, alpha, beta) { # nolint
   stopifnot(
     is.numeric(n) && 1L == length(n) && 0 == n %% 1 && n > 0 &&
     is.numeric(d) && 1L == length(d) && 0 == d %% 1 && d > 0 &&
@@ -464,16 +464,16 @@ sample_cpp_naive <- function( # nolint
 #'   the jumps of the compound Poisson subordinator
 #'
 #' @examples
-#' rmo_lfm_cpp_naive(10, 3, 0.5, 0.1, 0.2, "rposval", list("value"=1))
-#' rmo_lfm_cpp_naive(10, 3, 0.5, 0, 0, "rexp", list("rate"=2))
+#' rextmo_lfm_naive(10, 3, 0.5, 0.1, 0.2, "rposval", list("value"=1))
+#' rextmo_lfm_naive(10, 3, 0.5, 0, 0, "rexp", list("rate"=2))
 #'
 #' ## independence
-#' rmo_lfm_cpp_naive(10, 3, 0, 0, 1, "rposval", list("value"=1))
+#' rextmo_lfm_naive(10, 3, 0, 0, 1, "rposval", list("value"=1))
 #' ## comonotone
-#' rmo_lfm_cpp_naive(10, 3, 0, 1, 0, "rposval", list("value"=1))
+#' rextmo_lfm_naive(10, 3, 0, 1, 0, "rposval", list("value"=1))
 #' @include sample-helper.R
 #' @export
-rmo_lfm_cpp_naive <- function( # nolint
+rextmo_lfm_naive <- function( # nolint
     n, d = 2,
     rate = 0, rate_killing = 0, rate_drift = 1,
     rjump_name = "rposval", rjump_arg_list = list("value" = 0)) {

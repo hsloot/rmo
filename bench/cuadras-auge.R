@@ -17,9 +17,9 @@ ex_intensities <- ex_intensities_cuadras_auge(d, alpha, beta)
 
 #+ r bench
 bench::mark(
-  CuadrasAuge = rmo:::Rcpp__rmo_esm_cuadras_auge(n, d, alpha, beta),
+  CuadrasAuge = rmo:::Rcpp__rcamo_esm(n, d, alpha, beta),
   ExMarkovian = rmo:::Rcpp__rexmo_markovian(n, d, ex_intensities),
-  LFM = rmo:::Rcpp__rmo_lfm_cpp(
+  LFM = rmo:::Rcpp__rextmo_lfm(
     n, d, 0, beta, alpha, "rposval", list("value" = 1)),
   Arnold = rmo:::Rcpp__rmo_arnold(n, d, intensities),
   ESM = rmo:::Rcpp__rmo_esm( n, d, intensities),

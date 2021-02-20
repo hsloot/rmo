@@ -20,9 +20,9 @@ NULL
 #'   Marshall-Olki distributions with \code{\link{rexmo_markovian}}.
 #' - Sample with the *Lévy-frailty model for compound Poisson subordinators*
 #'   from the corresponding subclass of extendible Marshall-Olkin distributions
-#'   with \code{\link{rmo_lfm_cpp}}.
+#'   with \code{\link{rextmo_lfm}}.
 #' - Sample with the optimised version of the *exogenous shock model* for the
-#'   Cuadras-Augé subclass with \code{\link{rmo_esm_cuadras_auge}}.
+#'   Cuadras-Augé subclass with \code{\link{rcamo_esm}}.
 #'
 #' @docType package
 #' @name rmo

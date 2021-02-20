@@ -102,9 +102,9 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// Rcpp__rmo_esm_cuadras_auge
-NumericMatrix Rcpp__rmo_esm_cuadras_auge(const std::size_t n, const std::size_t d, const double alpha, const double beta);
-RcppExport SEXP _rmo_Rcpp__rmo_esm_cuadras_auge(SEXP nSEXP, SEXP dSEXP, SEXP alphaSEXP, SEXP betaSEXP) {
+// Rcpp__rcamo_esm
+NumericMatrix Rcpp__rcamo_esm(const std::size_t n, const std::size_t d, const double alpha, const double beta);
+RcppExport SEXP _rmo_Rcpp__rcamo_esm(SEXP nSEXP, SEXP dSEXP, SEXP alphaSEXP, SEXP betaSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -112,13 +112,13 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< const std::size_t >::type d(dSEXP);
     Rcpp::traits::input_parameter< const double >::type alpha(alphaSEXP);
     Rcpp::traits::input_parameter< const double >::type beta(betaSEXP);
-    rcpp_result_gen = Rcpp::wrap(Rcpp__rmo_esm_cuadras_auge(n, d, alpha, beta));
+    rcpp_result_gen = Rcpp::wrap(Rcpp__rcamo_esm(n, d, alpha, beta));
     return rcpp_result_gen;
 END_RCPP
 }
-// Rcpp__rmo_lfm_cpp
-NumericMatrix Rcpp__rmo_lfm_cpp(const std::size_t n, const std::size_t d, const double rate, const double rate_killing, const double rate_drift, const std::string rjump_name, const List& rjump_arg_list);
-RcppExport SEXP _rmo_Rcpp__rmo_lfm_cpp(SEXP nSEXP, SEXP dSEXP, SEXP rateSEXP, SEXP rate_killingSEXP, SEXP rate_driftSEXP, SEXP rjump_nameSEXP, SEXP rjump_arg_listSEXP) {
+// Rcpp__rextmo_lfm
+NumericMatrix Rcpp__rextmo_lfm(const std::size_t n, const std::size_t d, const double rate, const double rate_killing, const double rate_drift, const std::string rjump_name, const List& rjump_arg_list);
+RcppExport SEXP _rmo_Rcpp__rextmo_lfm(SEXP nSEXP, SEXP dSEXP, SEXP rateSEXP, SEXP rate_killingSEXP, SEXP rate_driftSEXP, SEXP rjump_nameSEXP, SEXP rjump_arg_listSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -129,7 +129,7 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< const double >::type rate_drift(rate_driftSEXP);
     Rcpp::traits::input_parameter< const std::string >::type rjump_name(rjump_nameSEXP);
     Rcpp::traits::input_parameter< const List& >::type rjump_arg_list(rjump_arg_listSEXP);
-    rcpp_result_gen = Rcpp::wrap(Rcpp__rmo_lfm_cpp(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list));
+    rcpp_result_gen = Rcpp::wrap(Rcpp__rextmo_lfm(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -172,9 +172,9 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// rtest__rmo_esm_cuadras_auge
-NumericMatrix rtest__rmo_esm_cuadras_auge(const std::size_t n, const std::size_t d, const double alpha, const double beta);
-RcppExport SEXP _rmo_rtest__rmo_esm_cuadras_auge(SEXP nSEXP, SEXP dSEXP, SEXP alphaSEXP, SEXP betaSEXP) {
+// rtest__rcamo_esm
+NumericMatrix rtest__rcamo_esm(const std::size_t n, const std::size_t d, const double alpha, const double beta);
+RcppExport SEXP _rmo_rtest__rcamo_esm(SEXP nSEXP, SEXP dSEXP, SEXP alphaSEXP, SEXP betaSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -182,13 +182,13 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< const std::size_t >::type d(dSEXP);
     Rcpp::traits::input_parameter< const double >::type alpha(alphaSEXP);
     Rcpp::traits::input_parameter< const double >::type beta(betaSEXP);
-    rcpp_result_gen = Rcpp::wrap(rtest__rmo_esm_cuadras_auge(n, d, alpha, beta));
+    rcpp_result_gen = Rcpp::wrap(rtest__rcamo_esm(n, d, alpha, beta));
     return rcpp_result_gen;
 END_RCPP
 }
-// rtest__rmo_lfm_cpp
-NumericMatrix rtest__rmo_lfm_cpp(const std::size_t n, const std::size_t d, const double rate, const double rate_killing, const double rate_drift, const std::string rjump_name, const List& rjump_arg_list);
-RcppExport SEXP _rmo_rtest__rmo_lfm_cpp(SEXP nSEXP, SEXP dSEXP, SEXP rateSEXP, SEXP rate_killingSEXP, SEXP rate_driftSEXP, SEXP rjump_nameSEXP, SEXP rjump_arg_listSEXP) {
+// rtest__rextmo_lfm
+NumericMatrix rtest__rextmo_lfm(const std::size_t n, const std::size_t d, const double rate, const double rate_killing, const double rate_drift, const std::string rjump_name, const List& rjump_arg_list);
+RcppExport SEXP _rmo_rtest__rextmo_lfm(SEXP nSEXP, SEXP dSEXP, SEXP rateSEXP, SEXP rate_killingSEXP, SEXP rate_driftSEXP, SEXP rjump_nameSEXP, SEXP rjump_arg_listSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -199,7 +199,7 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< const double >::type rate_drift(rate_driftSEXP);
     Rcpp::traits::input_parameter< const std::string >::type rjump_name(rjump_nameSEXP);
     Rcpp::traits::input_parameter< const List& >::type rjump_arg_list(rjump_arg_listSEXP);
-    rcpp_result_gen = Rcpp::wrap(rtest__rmo_lfm_cpp(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list));
+    rcpp_result_gen = Rcpp::wrap(rtest__rextmo_lfm(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -265,13 +265,13 @@ static const R_CallMethodDef CallEntries[] = {
     {"_rmo_Rcpp__rmo_esm", (DL_FUNC) &_rmo_Rcpp__rmo_esm, 3},
     {"_rmo_Rcpp__rmo_arnold", (DL_FUNC) &_rmo_Rcpp__rmo_arnold, 3},
     {"_rmo_Rcpp__rexmo_markovian", (DL_FUNC) &_rmo_Rcpp__rexmo_markovian, 3},
-    {"_rmo_Rcpp__rmo_esm_cuadras_auge", (DL_FUNC) &_rmo_Rcpp__rmo_esm_cuadras_auge, 4},
-    {"_rmo_Rcpp__rmo_lfm_cpp", (DL_FUNC) &_rmo_Rcpp__rmo_lfm_cpp, 7},
+    {"_rmo_Rcpp__rcamo_esm", (DL_FUNC) &_rmo_Rcpp__rcamo_esm, 4},
+    {"_rmo_Rcpp__rextmo_lfm", (DL_FUNC) &_rmo_Rcpp__rextmo_lfm, 7},
     {"_rmo_rtest__rmo_esm", (DL_FUNC) &_rmo_rtest__rmo_esm, 3},
     {"_rmo_rtest__rmo_arnold", (DL_FUNC) &_rmo_rtest__rmo_arnold, 3},
     {"_rmo_rtest__rexmo_markovian", (DL_FUNC) &_rmo_rtest__rexmo_markovian, 3},
-    {"_rmo_rtest__rmo_esm_cuadras_auge", (DL_FUNC) &_rmo_rtest__rmo_esm_cuadras_auge, 4},
-    {"_rmo_rtest__rmo_lfm_cpp", (DL_FUNC) &_rmo_rtest__rmo_lfm_cpp, 7},
+    {"_rmo_rtest__rcamo_esm", (DL_FUNC) &_rmo_rtest__rcamo_esm, 4},
+    {"_rmo_rtest__rextmo_lfm", (DL_FUNC) &_rmo_rtest__rextmo_lfm, 7},
     {"_rmo_rtest__deterministic", (DL_FUNC) &_rmo_rtest__deterministic, 2},
     {"_rmo_rtest__exponential", (DL_FUNC) &_rmo_rtest__exponential, 2},
     {"_rmo_rtest__pareto", (DL_FUNC) &_rmo_rtest__pareto, 3},
