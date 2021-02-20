@@ -47,15 +47,15 @@ the representation).}
       be passed to \code{initialize()}.}
 }
 \description{
+Class for the \emph{sum of two Bernstein functions}
+}
+\details{
 Bernstein functions are stable under addition, i.e. if \eqn{\psi_1} and
 \eqn{\psi_2} are two Bernstein functions, then
 \deqn{
   x \mapsto \psi_1(x) + \psi_2(x) , x>0,
 }
 is also a Bernstein function.
-}
-\details{
-Class for the \emph{sum of two Bernstein functions}
 }
 \section{Functions}{
 \itemize{

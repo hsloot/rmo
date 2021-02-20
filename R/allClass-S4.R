@@ -121,16 +121,15 @@ ScaledBernsteinFunction <- setClass("ScaledBernsteinFunction", # nolint
 
 #' Class for the *sum of two Bernstein functions*
 #'
-#' @slot first The first summand (derived from [BernsteinFunction-class]).
-#' @slot second The second summand (derived from [BernsteinFunction-class]).
-#'
-#' @description
 #' Bernstein functions are stable under addition, i.e. if \eqn{\psi_1} and
 #' \eqn{\psi_2} are two Bernstein functions, then
 #' \deqn{
 #'   x \mapsto \psi_1(x) + \psi_2(x) , x>0,
 #' }
 #' is also a Bernstein function.
+#'
+#' @slot first The first summand (derived from [BernsteinFunction-class]).
+#' @slot second The second summand (derived from [BernsteinFunction-class]).
 #'
 #' @seealso [BernsteinFunction-class],
 #'   [valueOf()]
@@ -139,6 +138,27 @@ ScaledBernsteinFunction <- setClass("ScaledBernsteinFunction", # nolint
 SumOfBernsteinFunctions <- setClass("SumOfBernsteinFunctions", # nolint
   contains = "BernsteinFunction",
   slots = c(first = "BernsteinFunction", second = "BernsteinFunction"))
+
+#' Class for the *composite scaled Bernstein function*
+#'
+#' Bernstein functions are stable under composition, i.e. if \eqn{\psi} is
+#' a Bernstein function and `c > 0`, then
+#' \deqn{
+#'   x \mapsto \psi(c x)
+#' }
+#' is also a Bernstein function.
+#'
+#' @slot cscale The scale of the inner linear Bernstein function of the
+#'   composition.
+#' @slot original The original Bernstein function.
+#'
+#' @seealso [BernsteinFunction-class],
+#'   [valueOf()]
+#'
+#' @export CompositeScaledBernsteinFunction
+CompositeScaledBernsteinFunction <- setClass("CompositeScaledBernsteinFunction",
+  contains  = "BernsteinFunction",
+  slots = c(cscale = "numeric", original = "BernsteinFunction"))
 
 
 #' Virtual Class \code{LevyBernsteinFunction} for Levy Bernstein Functions

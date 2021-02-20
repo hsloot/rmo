@@ -33,6 +33,7 @@ reference:
   contents:
   - matches("ScaledBernsteinFunction-")
   - matches("SumOfBernsteinFunctions-")
+  - matches("CompositeScaledBernsteinFunction-")
 
 - subtitle: Boundary cases
   desc: ~

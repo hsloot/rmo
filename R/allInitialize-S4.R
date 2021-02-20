@@ -81,6 +81,28 @@ setMethod("initialize", "SumOfBernsteinFunctions",
     invisible(.Object)
   })
 
+#' @describeIn CompositeScaledBernsteinFunction-class Constructor
+#' @aliases initialize,CompositeScaledBernsteinFunction-method
+#' @aliases initialize,CompositeScaledBernsteinFunction,ANY-method
+#'
+#' @inheritParams methods::initialize
+#' @param cscale Positive number.
+#' @param original Derives from [BernsteinFunction-class].
+#'
+#' @examples
+#' CompositeScaledBernsteinFunction()
+#' cscale <- 0.5
+#' bf_original <- AlphaStableBernsteinFunction()
+#' CompositeScaledBernsteinFunction(cscale = cscale, original = bf_original)
+setMethod("initialize", "CompositeScaledBernsteinFunction",
+  function(.Object, cscale = 1, original = LinearBernsteinFunction()) { # nolint
+    .Object@cscale <- cscale
+    .Object@original <- original
+    validObject(.Object)
+
+    invisible(.Object)
+  })
+
 #' @describeIn PoissonBernsteinFunction-class Constructor
 #' @aliases initialize,PoissonBernsteinFunction-method
 #' @aliases initialize,PoissonBernsteinFunction,ANY-method
