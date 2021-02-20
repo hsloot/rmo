@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Virtual Class CompleteBernsteinFunction for Complete Bernstein Functions — CompleteBernsteinFunction-class • rmo</title>
+<title>Class for the composite scaled Bernstein function — CompositeScaledBernsteinFunction-class • rmo</title>
 
 
 <!-- jquery -->
@@ -39,13 +39,13 @@
 
 
 
-<meta property="og:title" content="Virtual Class CompleteBernsteinFunction for Complete Bernstein Functions — CompleteBernsteinFunction-class" />
-<meta property="og:description" content="A virtual superclass for all Bernstein functions which can representated
-by a Stieltjes density (no drift or killing rate). That means that there exists
-a Stieltjes measure \(\sigma\) such that
+<meta property="og:title" content="Class for the composite scaled Bernstein function — CompositeScaledBernsteinFunction-class" />
+<meta property="og:description" content="Bernstein functions are stable under composition, i.e. if \(\psi\) is
+a Bernstein function and c &amp;gt; 0, then
 $$
-  \psi(x) = \int_0^\infty \frac{x}{x + u} \sigma(du) , x &amp;gt; 0 .
-$$" />
+  x \mapsto \psi(c x)
+$$
+is also a Bernstein function." />
 
 
 
@@ -143,42 +143,45 @@ $$" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Virtual Class <code>CompleteBernsteinFunction</code> for Complete Bernstein Functions</h1>
-    <small class="dont-index">Source: <a href='https://github.com/hsloot/rmo/blob/master/R/allClass-S4.R'><code>R/allClass-S4.R</code></a>, <a href='https://github.com/hsloot/rmo/blob/master/R/stieltjesDensity-S4.R'><code>R/stieltjesDensity-S4.R</code></a>, <a href='https://github.com/hsloot/rmo/blob/master/R/valueOf-S4.R'><code>R/valueOf-S4.R</code></a></small>
-    <div class="hidden name"><code>CompleteBernsteinFunction-class.Rd</code></div>
+    <h1>Class for the <em>composite scaled Bernstein function</em></h1>
+    <small class="dont-index">Source: <a href='https://github.com/hsloot/rmo/blob/master/R/allClass-S4.R'><code>R/allClass-S4.R</code></a>, <a href='https://github.com/hsloot/rmo/blob/master/R/allInitialize-S4.R'><code>R/allInitialize-S4.R</code></a>, <a href='https://github.com/hsloot/rmo/blob/master/R/valueOf-S4.R'><code>R/valueOf-S4.R</code></a></small>
+    <div class="hidden name"><code>CompositeScaledBernsteinFunction-class.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>A virtual superclass for all Bernstein functions which can representated
-by a Stieltjes density (no drift or killing rate). That means that there exists
-a Stieltjes measure \(\sigma\) such that
+    <p>Bernstein functions are stable under composition, i.e. if \(\psi\) is
+a Bernstein function and <code>c &gt; 0</code>, then
 $$
-  \psi(x) = \int_0^\infty \frac{x}{x + u} \sigma(du) , x &gt; 0 .
-$$</p>
+  x \mapsto \psi(c x)
+$$
+is also a Bernstein function.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>stieltjesDensity</span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span>
+    <pre class="usage"><span class='co'># S4 method for CompositeScaledBernsteinFunction</span>
+<span class='fu'>initialize</span><span class='op'>(</span><span class='va'>.Object</span>, cscale <span class='op'>=</span> <span class='fl'>1</span>, original <span class='op'>=</span> <span class='fu'><a href='LinearBernsteinFunction-class.html'>LinearBernsteinFunction</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
 
-<span class='co'># S4 method for CompleteBernsteinFunction</span>
-<span class='fu'><a href='BernsteinFunction-class.html'>valueOf</a></span><span class='op'>(</span>
-  <span class='va'>object</span>,
-  <span class='va'>x</span>,
-  <span class='va'>difference_order</span>,
-  n <span class='op'>=</span> <span class='fl'>1L</span>,
-  k <span class='op'>=</span> <span class='fl'>0L</span>,
-  cscale <span class='op'>=</span> <span class='fl'>1</span>,
-  <span class='va'>...</span>,
-  method <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"default"</span>, <span class='st'>"stieltjes"</span>, <span class='st'>"levy"</span><span class='op'>)</span>,
-  tolerance <span class='op'>=</span> <span class='va'>.Machine</span><span class='op'>$</span><span class='va'>double.eps</span><span class='op'>^</span><span class='fl'>0.5</span>
-<span class='op'>)</span></pre>
+<span class='co'># S4 method for CompositeScaledBernsteinFunction</span>
+<span class='fu'><a href='BernsteinFunction-class.html'>valueOf</a></span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>x</span>, difference_order <span class='op'>=</span> <span class='fl'>0L</span>, n <span class='op'>=</span> <span class='fl'>1</span>, k <span class='op'>=</span> <span class='fl'>0</span>, cscale <span class='op'>=</span> <span class='fl'>1</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
+      <th>.Object</th>
+      <td><p>An object:  see the &#8220;Initialize Methods&#8221; section.</p></td>
+    </tr>
+    <tr>
+      <th>cscale</th>
+      <td><p>Positive number.</p></td>
+    </tr>
+    <tr>
+      <th>original</th>
+      <td><p>Derives from <a href='BernsteinFunction-class.html'>BernsteinFunction</a>.</p></td>
+    </tr>
+    <tr>
       <th>object</th>
       <td><p>An object deriving from <a href='LevyBernsteinFunction-class.html'>LevyBernsteinFunction</a>
-(for <code>levyDensity</code>) or CompleteBernsteinFunction
+(for <code>levyDensity</code>) or <a href='CompleteBernsteinFunction-class.html'>CompleteBernsteinFunction</a>
 (for <code>stieltjesDensity</code>).</p></td>
     </tr>
     <tr>
@@ -201,69 +204,59 @@ the representation).</p></td>
       <td><p>Non-negative numbers for the binomial factors.</p></td>
     </tr>
     <tr>
-      <th>cscale</th>
-      <td><p>Positive number, the composit scaling factor.</p></td>
-    </tr>
-    <tr>
       <th>...</th>
-      <td><p>Pass-through parameter</p></td>
-    </tr>
-    <tr>
-      <th>method</th>
-      <td><p>Method to calculate the result; use <code>method = "levy"</code> for
-using the Lévy representation and <code>method = "stieltjes"</code> for using the
-Stieltjes representation.</p></td>
-    </tr>
-    <tr>
-      <th>tolerance</th>
-      <td><p>(Relative) tolerance, passed down to <code><a href='https://rdrr.io/r/stats/integrate.html'>stats::integrate()</a></code></p></td>
+      <td><p>arguments to specify properties of the new object, to
+      be passed to <code>initialize()</code>.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>For <em>continuous Stieltjes densities</em>, the values of the Bernstein function are
-calculated with <code><a href='https://rdrr.io/r/stats/integrate.html'>stats::integrate()</a></code> by using the representation
-$$
-  \psi(x)
-    = \int_{0}^{\infty} x \mathrm{Beta}(1, x + u) \sigma(du), \quad x &gt; 0 ,
-$$
-and the values of the iterated differences are calculated by using the
-representation
-$$
-  (-1)^{j-1} \Delta^{j} \psi(x)
-    = \int_{0}^{\infty} u \mathrm{Beta}(j+1, x + u) \sigma(du) ,
-    \quad x &gt; 0 .
-$$</p>
-<p>For <em>discrete Lévy densities</em> \(\sigma(du) = \sum_{i} y_i \delta_{u_i}(du)\), the
-values of the Bernstein function are calculated by using the representation
-$$
-  \psi(x)
-    = \sum_{i} x \mathrm{Beta}(1, x + u_i) y_i, \quad x &gt; 0 ,
-$$
-and the values of the iterated differences are calculated by using the
-representation
-$$
-  (-1)^{j-1} \Delta^{j} \psi(x)
-    = \sum_{i} u_i \mathrm{Beta}(j+1, x + u_i) y_i ,
-    \quad x &gt; 0 .
-$$</p>
     <h2 class="hasAnchor" id="functions"><a class="anchor" href="#functions"></a>Functions</h2>
 
     
 <ul>
-<li><p><code>stieltjesDensity</code>: returns the <em>Stieltjes density</em> with <code>lower</code>, <code>upper</code>, and <code>type</code>
-attributes if continuous and returns a <code>data.frame</code> with named columns
-<code>x</code> (atoms) and <code>y</code> (weights) as well as a type attribute if discrete.
-The <code>type</code> attribute is either <code>"continuous"</code> or <code>"discrete"</code>.</p></li>
-<li><p><code>valueOf,CompleteBernsteinFunction-method</code>: Calculates the iterated differences of the Bernstein function, see <code><a href='BernsteinFunction-class.html'>valueOf()</a></code></p></li>
+<li><p><code>initialize,CompositeScaledBernsteinFunction-method</code>: Constructor</p></li>
+<li><p><code>valueOf,CompositeScaledBernsteinFunction-method</code>: Calculates the iterated differences of the Bernstein function, see <code><a href='BernsteinFunction-class.html'>valueOf()</a></code></p></li>
 </ul>
+    <h2 class="hasAnchor" id="slots"><a class="anchor" href="#slots"></a>Slots</h2>
+
+    
+
+<dl>
+<dt><code>cscale</code></dt><dd><p>The scale of the inner linear Bernstein function of the
+composition.</p></dd>
+
+<dt><code>original</code></dt><dd><p>The original Bernstein function.</p></dd>
+
+</dl>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><a href='LevyBernsteinFunction-class.html'>LevyBernsteinFunction</a>,
-<a href='BernsteinFunction-class.html'>BernsteinFunction</a>
+    <div class='dont-index'><p><a href='BernsteinFunction-class.html'>BernsteinFunction</a>,
 <code><a href='BernsteinFunction-class.html'>valueOf()</a></code></p></div>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>CompositeScaledBernsteinFunction</span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; An object of class "CompositeScaledBernsteinFunction"
+#&gt; Slot "cscale":
+#&gt; [1] 1
+#&gt; 
+#&gt; Slot "original":
+#&gt; An object of class "LinearBernsteinFunction"
+#&gt; Slot "scale":
+#&gt; [1] 1
+#&gt; 
+#&gt; </div><div class='input'><span class='va'>cscale</span> <span class='op'>&lt;-</span> <span class='fl'>0.5</span>
+<span class='va'>bf_original</span> <span class='op'>&lt;-</span> <span class='fu'><a href='AlphaStableBernsteinFunction-class.html'>AlphaStableBernsteinFunction</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='fu'>CompositeScaledBernsteinFunction</span><span class='op'>(</span>cscale <span class='op'>=</span> <span class='va'>cscale</span>, original <span class='op'>=</span> <span class='va'>bf_original</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; An object of class "CompositeScaledBernsteinFunction"
+#&gt; Slot "cscale":
+#&gt; [1] 0.5
+#&gt; 
+#&gt; Slot "original":
+#&gt; An object of class "AlphaStableBernsteinFunction"
+#&gt; Slot "alpha":
+#&gt; [1] 0.5849625
+#&gt; 
+#&gt; </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
