@@ -1,7 +1,8 @@
 # rmo 0.4.1
 
-- Rearrange order in arguments of `valueOf`: instead of `cscale, n, k` we 
-  have `n, k, cscale`. 
+- Rearrange order in arguments of `valueOf`: instead of `cscale, n, k` we
+  have `n, k, cscale`.
+- Add methods to generate parameter from `BernsteinFunction` classes
 
 # rmo 0.4.0
 
@@ -10,7 +11,7 @@
   such that there should be no change necessary if these functions were used
   to create the input parameter for `rexmo_markovian`.
 - The Bernstein function classes have been refactored and some new features have
-  been added. 
+  been added.
 
 # rmo 0.3.0
 
