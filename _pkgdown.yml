@@ -11,8 +11,8 @@ reference:
   contents:
   - matches("rmo_[a-z]+")
   - starts_with("rexmo")
-  - "`rmo_esm_cuadras_auge`"
-  - ends_with("lfm_cpp")
+  - starts_with("rcamo")
+  - starts_with("rextmo")
 
 - title: Drop-in parameter factories
   desc: ~
