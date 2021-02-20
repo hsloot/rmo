@@ -150,14 +150,14 @@ rexmo_markovian <- function(n, d, ex_intensities) {
 #' @family samplers
 #'
 #' @examples
-#' rmo_esm_cuadras_auge(10L, 2L, 0.5, 0.2)
-#' rmo_esm_cuadras_auge(10L, 2L, 0, 1)      ## comonotone
-#' rmo_esm_cuadras_auge(10L, 2L, 1, 0)      ## independence
+#' rcamo_esm(10L, 2L, 0.5, 0.2)
+#' rcamo_esm(10L, 2L, 0, 1)      ## comonotone
+#' rcamo_esm(10L, 2L, 1, 0)      ## independence
 #'
 #' @export
 #' @name rmo_esm_cuadras_auge
-rmo_esm_cuadras_auge <- function(n, d, alpha, beta) {
-  Rcpp__rmo_esm_cuadras_auge(n, d, alpha, beta)
+rcamo_esm <- function(n, d, alpha, beta) {
+  Rcpp__rcamo_esm(n, d, alpha, beta)
 }
 
 

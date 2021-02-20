@@ -129,12 +129,12 @@ rexmo_markovian_bivariate <- function( # nolint
 #' @param beta Global shock rate (>= 0; alpha + beta > 0)
 #'
 #' @examples
-#' rmo_esm_cuadras_auge_bivariate(10, 2, 0.5, 0.2)
-#' rmo_esm_cuadras_auge_bivariate(10, 2, 0, 1)      ## comonotone
-#' rmo_esm_cuadras_auge_bivariate(10, 2, 1, 0)      ## independence
+#' rcamo_esm_bivariate(10, 2, 0.5, 0.2)
+#' rcamo_esm_bivariate(10, 2, 0, 1)      ## comonotone
+#' rcamo_esm_bivariate(10, 2, 1, 0)      ## independence
 #' @include sample-helper.R
 #' @export
-rmo_esm_cuadras_auge_bivariate <- function( # nolint
+rcamo_esm_bivariate <- function( # nolint
   n, d = 2, alpha = 1, beta = 0) {
   stopifnot(
     is.numeric(n) && 1L == length(n) && 0 == n %% 1 && n > 0 &&

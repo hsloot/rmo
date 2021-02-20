@@ -2,9 +2,10 @@
 % Please edit documentation in R/sample.R
 \name{rmo_esm_cuadras_auge}
 \alias{rmo_esm_cuadras_auge}
+\alias{rcamo_esm}
 \title{Sample from Cuadras-Auge distribution}
 \usage{
-rmo_esm_cuadras_auge(n, d, alpha, beta)
+rcamo_esm(n, d, alpha, beta)
 }
 \arguments{
 \item{n}{number of samples}
@@ -34,9 +35,9 @@ components.
 }
 }
 \examples{
-rmo_esm_cuadras_auge(10L, 2L, 0.5, 0.2)
-rmo_esm_cuadras_auge(10L, 2L, 0, 1)      ## comonotone
-rmo_esm_cuadras_auge(10L, 2L, 1, 0)      ## independence
+rcamo_esm(10L, 2L, 0.5, 0.2)
+rcamo_esm(10L, 2L, 0, 1)      ## comonotone
+rcamo_esm(10L, 2L, 1, 0)      ## independence
 
 }
 \seealso{

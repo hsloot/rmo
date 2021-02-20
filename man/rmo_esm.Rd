@@ -74,12 +74,12 @@ rmo_arnold(10L, 2L, c(0, 0, 1))         ## comonotone
 \seealso{
 Other samplers: 
 \code{\link{rexmo_markovian}()},
-\code{\link{rmo_esm_cuadras_auge}()},
+\code{\link{rmo_esm_cuadras_auge}},
 \code{\link{rmo_lfm_cpp}()}
 
 Other samplers: 
 \code{\link{rexmo_markovian}()},
-\code{\link{rmo_esm_cuadras_auge}()},
+\code{\link{rmo_esm_cuadras_auge}},
 \code{\link{rmo_lfm_cpp}()}
 }
 \concept{samplers}

@@ -261,7 +261,7 @@ test_that("Cuadras-Augé model passes statistical unit test", {
   alpha <- bf@second@scale
   beta <- bf@first@constant
   expect_not_rejected(
-    cuadras_auge_ks_test(n, d, rmo_esm_cuadras_auge, alpha, beta),
+    cuadras_auge_ks_test(n, d, rcamo_esm, alpha, beta),
     unit_threshold
   )
 
@@ -274,7 +274,7 @@ test_that("Cuadras-Augé model passes statistical unit test", {
   alpha <- bf@second@scale
   beta <- bf@first@constant
   expect_not_rejected(
-    cuadras_auge_ks_test(n, d, rmo_esm_cuadras_auge, alpha, beta),
+    cuadras_auge_ks_test(n, d, rcamo_esm, alpha, beta),
     unit_threshold
   )
 })

@@ -47,7 +47,7 @@ rexmo_markovian(10, 2, c(0, 1))      ## comonotone
 }
 \seealso{
 Other samplers: 
-\code{\link{rmo_esm_cuadras_auge}()},
+\code{\link{rmo_esm_cuadras_auge}},
 \code{\link{rmo_esm}()},
 \code{\link{rmo_lfm_cpp}()}
 }

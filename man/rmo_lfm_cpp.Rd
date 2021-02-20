@@ -71,7 +71,7 @@ rmo_lfm_cpp(10L, 2L, 0, 1, 0, "rposval", list("value"=1))  ## comonotone
 \seealso{
 Other samplers: 
 \code{\link{rexmo_markovian}()},
-\code{\link{rmo_esm_cuadras_auge}()},
+\code{\link{rmo_esm_cuadras_auge}},
 \code{\link{rmo_esm}()}
 }
 \concept{samplers}
