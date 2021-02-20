@@ -8,6 +8,7 @@
 \alias{intensities}
 \alias{exIntensities}
 \alias{exQMatrix}
+\alias{uexIntensities,BernsteinFunction-method}
 \alias{exIntensities,BernsteinFunction-method}
 \alias{intensities,BernsteinFunction-method}
 \alias{exQMatrix,BernsteinFunction-method}
@@ -22,6 +23,8 @@ intensities(object, d, ...)
 exIntensities(object, d, ...)
 
 exQMatrix(object, d, ...)
+
+\S4method{uexIntensities}{BernsteinFunction}(object, d, ...)
 
 \S4method{exIntensities}{BernsteinFunction}(object, d, ...)
 
@@ -111,6 +114,8 @@ alternating iterated forward differences, possibly scaled by a binomial
 }}
 
 \examples{
+exIntensities(AlphaStableBernsteinFunction(), 3L)
+
 exIntensities(AlphaStableBernsteinFunction(), 3L)
 
 intensities(AlphaStableBernsteinFunction(), 3L)

@@ -104,7 +104,12 @@ setMethod("valueOf0", "BernsteinFunction",
     valueOf(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...)
   })
 
-#' @keywords internal
+#' @rdname BernsteinFunction-class
+#'
+#' @examples
+#' exIntensities(AlphaStableBernsteinFunction(), 3L)
+#'
+#' @export
 setMethod("uexIntensities", "BernsteinFunction",
   function(object, d, ...) {
     sapply(1:d, function(i) valueOf(object, d-i, i))
