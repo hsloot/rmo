@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Sample from an exchangeable MO distribution — rexmo_markovian • rmo</title>
+<title>Sample with LFM and CPP subordinator — rextmo_lfm • rmo</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,11 @@
 
 
 
-<meta property="og:title" content="Sample from an exchangeable MO distribution — rexmo_markovian" />
-<meta property="og:description" content="Draws n independent samples from a d variate exchangeable Marshall-Olkin
-distribution with (scaled) shock rates ex_intensities." />
+<meta property="og:title" content="Sample with LFM and CPP subordinator — rextmo_lfm" />
+<meta property="og:description" content="Draws n independent samples from a d-variate extendible Marshall-Olkin
+distribution corresponding to a LFM with a compound Poisson subordinator with
+parameters rate, rate_killing, rate_drift, rjump_name, and
+rjump_arg_list." />
 
 
 
@@ -139,17 +141,27 @@ distribution with (scaled) shock rates ex_intensities." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Sample from an exchangeable MO distribution</h1>
+    <h1>Sample with LFM and CPP subordinator</h1>
     <small class="dont-index">Source: <a href='https://github.com/hsloot/rmo/blob/master/R/sample.R'><code>R/sample.R</code></a></small>
-    <div class="hidden name"><code>rexmo_markovian.Rd</code></div>
+    <div class="hidden name"><code>rextmo_lfm.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Draws <code>n</code> independent samples from a <code>d</code> variate exchangeable Marshall-Olkin
-distribution with (scaled) shock rates <code>ex_intensities</code>.</p>
+    <p>Draws <code>n</code> independent samples from a <code>d</code>-variate extendible Marshall-Olkin
+distribution corresponding to a LFM with a compound Poisson subordinator with
+parameters <code>rate</code>, <code>rate_killing</code>, <code>rate_drift</code>, <code>rjump_name</code>, and
+<code>rjump_arg_list</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>rexmo_markovian</span><span class='op'>(</span><span class='va'>n</span>, <span class='va'>d</span>, <span class='va'>ex_intensities</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>rextmo_lfm</span><span class='op'>(</span>
+  <span class='va'>n</span>,
+  <span class='va'>d</span>,
+  <span class='va'>rate</span>,
+  <span class='va'>rate_killing</span>,
+  <span class='va'>rate_drift</span>,
+  <span class='va'>rjump_name</span>,
+  rjump_arg_list <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -163,77 +175,107 @@ distribution with (scaled) shock rates <code>ex_intensities</code>.</p>
       <td><p>dimension</p></td>
     </tr>
     <tr>
-      <th>ex_intensities</th>
-      <td><p>(Scaled) exchangeable Marshall-Olkin intensity rates</p></td>
+      <th>rate</th>
+      <td><p>rate of CPP subordinator</p></td>
+    </tr>
+    <tr>
+      <th>rate_killing</th>
+      <td><p>killing rate of CPP subordinator</p></td>
+    </tr>
+    <tr>
+      <th>rate_drift</th>
+      <td><p>drift rate of CPP subordinator</p></td>
+    </tr>
+    <tr>
+      <th>rjump_name</th>
+      <td><p>name of jump sampling function for jumps of CPP
+subordinator</p></td>
+    </tr>
+    <tr>
+      <th>rjump_arg_list</th>
+      <td><p>list with named arguments for jump sampling function
+for jumps of CPP subordinator</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>rexmo_markovian</code> implements the Markovian model for the
-exchangeable subclass and returns an \(n \times d\) numeric matrix
-with the rows corresponding to independent and identically disctributed
-samples of a \(d\) variate exchangeable Marshall-Olkin distribution with
-exchangeable parameters <code>ex_intensities</code>.</p>
+    <p><code>rextmo_lfm</code> implements the Lévy-frailty model representation with a
+compound Poisson subordinator and returns an \(n \times d\) numeric
+matrix with the rows corresponding to independent and identically
+distributed samples of the corresponding <code>d</code>-variate extendible
+Marshall-Olkin distribution.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     
 <ul>
-<li><p>The <em>exchangeable</em> shock intensities must be stored in a vector of length
-\(d\).</p></li>
-<li><p>The entry \({exintensities}_{i}\) is the
-intensity of a shock corresponding to a set with \(i\) elements multiplied
-by the number of shocks of cardinality \(i\), i.e. \(\binom{d}{i}\).</p></li>
+<li><p><code>rate</code> is the <em>jump intensity</em> of the compound Poisson subordinator:
+at each given point-in-time, the waiting time to the next jump is
+exponentially distributed with rate <code>rate</code>.</p></li>
+<li><p><code>rate_killing</code> is the <em>killing intensity</em> of the compound Poisson
+subordinator: the probability that the compound Poisson subordinator jumps to
+its graveyard-state \(\infty\) between \(t\) and \(s\) is \(1 -
+\exp{\{-{ratekilling} (s-t)\}}\).</p></li>
 </ul>
 
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    
-
-<p>For more information on this algorithm, see J.-F. Mai, M. Scherer,
-"Simulating Copulas", World Scientific (2017), pp. 122 psqq.</p>
+    <p>For more information on this algorithm, see J.-F. Mai,
+M. Scherer, "Simulating Copulas", World Scientific (2017), pp. 140 psqq.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other samplers: 
-<code><a href='rextmo_lfm.html'>rextmo_lfm</a>()</code>,
+<code><a href='rexmo_markovian.html'>rexmo_markovian</a>()</code>,
 <code><a href='rmo_esm_cuadras_auge.html'>rmo_esm_cuadras_auge</a></code>,
 <code><a href='rmo_esm.html'>rmo_esm</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>rexmo_markovian</span><span class='op'>(</span><span class='fl'>10</span>, <span class='fl'>2</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span> <span class='op'>*</span> <span class='fl'>0.4</span>, <span class='fl'>0.2</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;            [,1]      [,2]
-#&gt;  [1,] 2.7073134 2.3714437
-#&gt;  [2,] 1.8024036 0.8939985
-#&gt;  [3,] 5.0390783 2.8683114
-#&gt;  [4,] 2.0980249 3.5192188
-#&gt;  [5,] 2.7590200 1.9539482
-#&gt;  [6,] 0.3916478 0.3916478
-#&gt;  [7,] 2.8678201 0.8964704
-#&gt;  [8,] 0.3603258 0.8325903
-#&gt;  [9,] 0.5312003 0.8953819
-#&gt; [10,] 2.6846301 0.8346728</div><div class='input'><span class='fu'>rexmo_markovian</span><span class='op'>(</span><span class='fl'>10</span>, <span class='fl'>2</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>0</span><span class='op'>)</span><span class='op'>)</span>      <span class='co'>## independence</span>
+    <pre class="examples"><div class='input'><span class='fu'>rextmo_lfm</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fl'>0.5</span>, <span class='fl'>0.1</span>, <span class='fl'>0.2</span>, <span class='st'>"rposval"</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='st'>"value"</span><span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;             [,1]       [,2]
-#&gt;  [1,] 0.07004495 1.98848356
-#&gt;  [2,] 0.04460339 0.75720096
-#&gt;  [3,] 1.87495492 2.14168469
-#&gt;  [4,] 0.42667391 0.57443398
-#&gt;  [5,] 0.14573849 0.05165176
-#&gt;  [6,] 0.62580101 2.30208140
-#&gt;  [7,] 0.42935364 0.01179131
-#&gt;  [8,] 0.17335316 0.34230367
-#&gt;  [9,] 0.23916824 0.06689434
-#&gt; [10,] 1.09675613 1.47963510</div><div class='input'><span class='fu'>rexmo_markovian</span><span class='op'>(</span><span class='fl'>10</span>, <span class='fl'>2</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>      <span class='co'>## comonotone</span>
-</div><div class='output co'>#&gt;              [,1]        [,2]
-#&gt;  [1,] 3.200337790 3.200337790
-#&gt;  [2,] 0.223704835 0.223704835
-#&gt;  [3,] 0.187107581 0.187107581
-#&gt;  [4,] 0.399658714 0.399658714
-#&gt;  [5,] 1.616973575 1.616973575
-#&gt;  [6,] 1.329220974 1.329220974
-#&gt;  [7,] 0.162732088 0.162732088
-#&gt;  [8,] 0.421942499 0.421942499
-#&gt;  [9,] 0.003116603 0.003116603
-#&gt; [10,] 0.335631529 0.335631529</div><div class='input'>
+#&gt;  [1,] 0.53360772 0.53360772
+#&gt;  [2,] 0.13953948 0.67100408
+#&gt;  [3,] 0.11122485 0.33954229
+#&gt;  [4,] 1.03663352 1.02499172
+#&gt;  [5,] 2.98178618 2.62819470
+#&gt;  [6,] 2.04007718 0.62798332
+#&gt;  [7,] 0.46765823 0.86155821
+#&gt;  [8,] 1.60280850 0.69379130
+#&gt;  [9,] 0.85674310 0.85674310
+#&gt; [10,] 0.06959359 0.06959359</div><div class='input'><span class='fu'>rextmo_lfm</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fl'>0.5</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='st'>"rexp"</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='st'>"rate"</span><span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;             [,1]       [,2]
+#&gt;  [1,]  1.2051005 14.5363947
+#&gt;  [2,]  1.6691409  1.6691409
+#&gt;  [3,]  7.7999790  5.1678548
+#&gt;  [4,] 15.7125469  5.3450053
+#&gt;  [5,]  0.2362183  0.2362183
+#&gt;  [6,]  1.4636057  1.4636057
+#&gt;  [7,]  2.7492549  4.2155902
+#&gt;  [8,]  0.3736335  7.2411320
+#&gt;  [9,]  7.2778702  6.0495844
+#&gt; [10,]  0.2116008  0.2116008</div><div class='input'>
+<span class='fu'>rextmo_lfm</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>1</span>, <span class='st'>"rposval"</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='st'>"value"</span><span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>  <span class='co'>## independence</span>
+</div><div class='output co'>#&gt;              [,1]       [,2]
+#&gt;  [1,] 0.264769432 0.68774057
+#&gt;  [2,] 0.459522417 3.00186797
+#&gt;  [3,] 1.028440450 0.49854530
+#&gt;  [4,] 0.141630114 1.23387958
+#&gt;  [5,] 1.264154896 1.39129122
+#&gt;  [6,] 0.052213460 0.68832679
+#&gt;  [7,] 1.474223727 1.19901650
+#&gt;  [8,] 0.746381775 0.70668105
+#&gt;  [9,] 2.159284682 0.76381420
+#&gt; [10,] 0.004528473 0.05986955</div><div class='input'><span class='fu'>rextmo_lfm</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>0</span>, <span class='st'>"rposval"</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='st'>"value"</span><span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>  <span class='co'>## comonotone</span>
+</div><div class='output co'>#&gt;             [,1]       [,2]
+#&gt;  [1,] 0.05074470 0.05074470
+#&gt;  [2,] 0.04685683 0.04685683
+#&gt;  [3,] 1.65857297 1.65857297
+#&gt;  [4,] 0.73118509 0.73118509
+#&gt;  [5,] 0.52152228 0.52152228
+#&gt;  [6,] 0.74851435 0.74851435
+#&gt;  [7,] 2.59340590 2.59340590
+#&gt;  [8,] 1.30110875 1.30110875
+#&gt;  [9,] 0.73809738 0.73809738
+#&gt; [10,] 0.29010954 0.29010954</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

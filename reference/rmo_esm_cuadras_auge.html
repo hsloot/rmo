@@ -73,7 +73,7 @@ with parameters alpha and beta." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rmo</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
       </span>
     </div>
 
@@ -149,7 +149,7 @@ with parameters alpha and beta." />
 with parameters <code>alpha</code> and <code>beta</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>rmo_esm_cuadras_auge</span><span class='op'>(</span><span class='va'>n</span>, <span class='va'>d</span>, <span class='va'>alpha</span>, <span class='va'>beta</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>rcamo_esm</span><span class='op'>(</span><span class='va'>n</span>, <span class='va'>d</span>, <span class='va'>alpha</span>, <span class='va'>beta</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -193,44 +193,44 @@ components.</p></li>
     <div class='dont-index'><p><code><a href='rmo_esm.html'>rmo_esm</a></code></p>
 <p>Other samplers: 
 <code><a href='rexmo_markovian.html'>rexmo_markovian</a>()</code>,
-<code><a href='rmo_esm.html'>rmo_esm</a>()</code>,
-<code><a href='rmo_lfm_cpp.html'>rmo_lfm_cpp</a>()</code></p></div>
+<code><a href='rextmo_lfm.html'>rextmo_lfm</a>()</code>,
+<code><a href='rmo_esm.html'>rmo_esm</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>rmo_esm_cuadras_auge</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fl'>0.5</span>, <span class='fl'>0.2</span><span class='op'>)</span>
+    <pre class="examples"><div class='input'><span class='fu'>rcamo_esm</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fl'>0.5</span>, <span class='fl'>0.2</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;             [,1]       [,2]
-#&gt;  [1,] 1.84448426 0.16123876
-#&gt;  [2,] 0.28233880 1.44215771
-#&gt;  [3,] 1.14005604 1.14005604
-#&gt;  [4,] 0.03690963 0.10519624
-#&gt;  [5,] 3.69063543 4.37326292
-#&gt;  [6,] 0.91271989 0.08064858
-#&gt;  [7,] 0.97207295 0.09712054
-#&gt;  [8,] 0.49912475 3.51674739
-#&gt;  [9,] 1.04423762 0.25754291
-#&gt; [10,] 0.55624395 2.41798025</div><div class='input'><span class='fu'>rmo_esm_cuadras_auge</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span>      <span class='co'>## comonotone</span>
+#&gt;  [1,] 1.90007235 1.26475073
+#&gt;  [2,] 0.05340894 0.45915438
+#&gt;  [3,] 4.26007487 0.28624337
+#&gt;  [4,] 0.76287641 1.77988059
+#&gt;  [5,] 5.32719374 1.09920633
+#&gt;  [6,] 2.54314700 0.88122313
+#&gt;  [7,] 0.15497372 0.07840685
+#&gt;  [8,] 0.46367619 0.23034913
+#&gt;  [9,] 0.60800074 0.57180879
+#&gt; [10,] 1.38281422 0.05287436</div><div class='input'><span class='fu'>rcamo_esm</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span>      <span class='co'>## comonotone</span>
+</div><div class='output co'>#&gt;             [,1]       [,2]
+#&gt;  [1,] 0.15210404 0.15210404
+#&gt;  [2,] 1.01687513 1.01687513
+#&gt;  [3,] 1.80836899 1.80836899
+#&gt;  [4,] 1.14321240 1.14321240
+#&gt;  [5,] 1.25896015 1.25896015
+#&gt;  [6,] 0.09659652 0.09659652
+#&gt;  [7,] 0.76962200 0.76962200
+#&gt;  [8,] 0.06768541 0.06768541
+#&gt;  [9,] 0.47850159 0.47850159
+#&gt; [10,] 0.43904557 0.43904557</div><div class='input'><span class='fu'>rcamo_esm</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fl'>1</span>, <span class='fl'>0</span><span class='op'>)</span>      <span class='co'>## independence</span>
 </div><div class='output co'>#&gt;            [,1]      [,2]
-#&gt;  [1,] 1.1312699 1.1312699
-#&gt;  [2,] 0.6884628 0.6884628
-#&gt;  [3,] 0.8172443 0.8172443
-#&gt;  [4,] 0.4268239 0.4268239
-#&gt;  [5,] 4.0584419 4.0584419
-#&gt;  [6,] 0.2529130 0.2529130
-#&gt;  [7,] 0.6558426 0.6558426
-#&gt;  [8,] 0.2861381 0.2861381
-#&gt;  [9,] 0.4169685 0.4169685
-#&gt; [10,] 0.1200703 0.1200703</div><div class='input'><span class='fu'>rmo_esm_cuadras_auge</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fl'>1</span>, <span class='fl'>0</span><span class='op'>)</span>      <span class='co'>## independence</span>
-</div><div class='output co'>#&gt;             [,1]       [,2]
-#&gt;  [1,] 2.48577980 0.24300920
-#&gt;  [2,] 4.26711665 0.97890153
-#&gt;  [3,] 0.10172479 1.63717892
-#&gt;  [4,] 3.14863010 0.36928823
-#&gt;  [5,] 0.02880499 0.04497353
-#&gt;  [6,] 0.52422183 2.33358958
-#&gt;  [7,] 1.45435566 0.61939240
-#&gt;  [8,] 0.11876648 0.46745937
-#&gt;  [9,] 1.09192908 0.25013858
-#&gt; [10,] 1.53476817 0.36159723</div><div class='input'>
+#&gt;  [1,] 0.7510749 0.3477127
+#&gt;  [2,] 2.0632670 0.3808103
+#&gt;  [3,] 1.9443705 0.5643083
+#&gt;  [4,] 4.2174098 2.8622615
+#&gt;  [5,] 0.9369852 0.5694194
+#&gt;  [6,] 0.8147494 1.7085647
+#&gt;  [7,] 1.1690024 0.5546123
+#&gt;  [8,] 2.5386571 0.4852478
+#&gt;  [9,] 1.2798431 0.8772601
+#&gt; [10,] 0.4858480 0.7084776</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

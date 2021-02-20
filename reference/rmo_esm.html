@@ -73,7 +73,7 @@ with shock rates intensities." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rmo</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
       </span>
     </div>
 
@@ -226,82 +226,82 @@ doi: <a href='https://doi.org/10.2307/2282907'>10.2307/2282907</a>
 
     <div class='dont-index'><p>Other samplers: 
 <code><a href='rexmo_markovian.html'>rexmo_markovian</a>()</code>,
-<code><a href='rmo_esm_cuadras_auge.html'>rmo_esm_cuadras_auge</a>()</code>,
-<code><a href='rmo_lfm_cpp.html'>rmo_lfm_cpp</a>()</code></p>
+<code><a href='rextmo_lfm.html'>rextmo_lfm</a>()</code>,
+<code><a href='rmo_esm_cuadras_auge.html'>rmo_esm_cuadras_auge</a></code></p>
 <p>Other samplers: 
 <code><a href='rexmo_markovian.html'>rexmo_markovian</a>()</code>,
-<code><a href='rmo_esm_cuadras_auge.html'>rmo_esm_cuadras_auge</a>()</code>,
-<code><a href='rmo_lfm_cpp.html'>rmo_lfm_cpp</a>()</code></p></div>
+<code><a href='rextmo_lfm.html'>rextmo_lfm</a>()</code>,
+<code><a href='rmo_esm_cuadras_auge.html'>rmo_esm_cuadras_auge</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>rmo_esm</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.4</span>, <span class='fl'>0.3</span>, <span class='fl'>0.2</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;             [,1]      [,2]
-#&gt;  [1,] 0.26680386 0.2668039
-#&gt;  [2,] 5.62700193 1.2437947
-#&gt;  [3,] 0.55773144 0.2325658
-#&gt;  [4,] 0.05561243 0.4859210
-#&gt;  [5,] 0.42442786 1.0249917
-#&gt;  [6,] 0.44918778 1.7277225
-#&gt;  [7,] 1.31409735 4.5407563
-#&gt;  [8,] 1.02003859 1.0200386
-#&gt;  [9,] 0.78497915 2.4786463
-#&gt; [10,] 1.16914558 1.1691456</div><div class='input'><span class='fu'>rmo_esm</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>0</span><span class='op'>)</span><span class='op'>)</span>         <span class='co'>## independence</span>
+#&gt;  [1,] 0.15890160 0.1589016
+#&gt;  [2,] 0.66869058 0.6686906
+#&gt;  [3,] 0.02299967 4.1977187
+#&gt;  [4,] 0.73390652 1.0214477
+#&gt;  [5,] 0.51290672 0.5129067
+#&gt;  [6,] 3.58416305 0.2687313
+#&gt;  [7,] 0.35292350 1.1400560
+#&gt;  [8,] 1.53699397 1.5369940
+#&gt;  [9,] 0.04613704 0.1753271
+#&gt; [10,] 4.61329429 7.7756460</div><div class='input'><span class='fu'>rmo_esm</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>0</span><span class='op'>)</span><span class='op'>)</span>         <span class='co'>## independence</span>
 </div><div class='output co'>#&gt;             [,1]       [,2]
-#&gt;  [1,] 0.19694999 1.32056170
-#&gt;  [2,] 0.35882925 3.55473991
-#&gt;  [3,] 0.34689565 1.17822671
-#&gt;  [4,] 0.46104855 0.51208218
-#&gt;  [5,] 0.08567431 1.67551998
-#&gt;  [6,] 0.45389771 0.27537110
-#&gt;  [7,] 1.27878700 0.03479680
-#&gt;  [8,] 0.15237484 1.47353128
-#&gt;  [9,] 0.60255025 0.51610724
-#&gt; [10,] 0.06513033 0.09360955</div><div class='input'><span class='fu'>rmo_esm</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>         <span class='co'>## comonotone</span>
+#&gt;  [1,] 0.45635995 0.04032429
+#&gt;  [2,] 1.10544443 0.48603647
+#&gt;  [3,] 0.04856027 0.70334948
+#&gt;  [4,] 0.24956238 2.27357966
+#&gt;  [5,] 0.37161926 0.52211881
+#&gt;  [6,] 0.12877145 0.55690861
+#&gt;  [7,] 0.27812198 1.20899012
+#&gt;  [8,] 1.13126986 0.68846283
+#&gt;  [9,] 0.81724429 0.42682390
+#&gt; [10,] 4.05844190 0.25291299</div><div class='input'><span class='fu'>rmo_esm</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>         <span class='co'>## comonotone</span>
 </div><div class='output co'>#&gt;            [,1]      [,2]
-#&gt;  [1,] 2.6142656 2.6142656
-#&gt;  [2,] 1.2465462 1.2465462
-#&gt;  [3,] 1.7651095 1.7651095
-#&gt;  [4,] 0.3814517 0.3814517
-#&gt;  [5,] 0.3504170 0.3504170
-#&gt;  [6,] 0.1360090 0.1360090
-#&gt;  [7,] 1.2415323 1.2415323
-#&gt;  [8,] 0.3006878 0.3006878
-#&gt;  [9,] 0.6291924 0.6291924
-#&gt; [10,] 2.2148779 2.2148779</div><div class='input'>
+#&gt;  [1,] 0.6558426 0.6558426
+#&gt;  [2,] 0.2861381 0.2861381
+#&gt;  [3,] 0.4169685 0.4169685
+#&gt;  [4,] 0.1200703 0.1200703
+#&gt;  [5,] 2.4857798 2.4857798
+#&gt;  [6,] 0.2430092 0.2430092
+#&gt;  [7,] 4.2671167 4.2671167
+#&gt;  [8,] 0.9789015 0.9789015
+#&gt;  [9,] 0.1017248 0.1017248
+#&gt; [10,] 1.6371789 1.6371789</div><div class='input'>
 <span class='fu'>rmo_arnold</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.4</span>, <span class='fl'>0.3</span>, <span class='fl'>0.2</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;             [,1]       [,2]
-#&gt;  [1,] 3.79427775 0.05962294
-#&gt;  [2,] 5.40393171 2.87103046
-#&gt;  [3,] 3.16795179 0.72778092
-#&gt;  [4,] 0.03412289 0.03412289
-#&gt;  [5,] 1.94384269 3.85398022
-#&gt;  [6,] 1.97734914 0.63544703
-#&gt;  [7,] 0.23055645 0.23055645
-#&gt;  [8,] 0.51757926 4.80876075
-#&gt;  [9,] 1.38119456 1.73471327
-#&gt; [10,] 1.07777561 0.45784087</div><div class='input'><span class='fu'>rmo_arnold</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>0</span><span class='op'>)</span><span class='op'>)</span>         <span class='co'>## independence</span>
-</div><div class='output co'>#&gt;            [,1]         [,2]
-#&gt;  [1,] 0.1101377 8.207787e-01
-#&gt;  [2,] 1.0515201 6.963041e-01
-#&gt;  [3,] 0.4092766 3.593669e-05
-#&gt;  [4,] 1.0909632 1.392690e-03
-#&gt;  [5,] 1.0104634 1.627403e+00
-#&gt;  [6,] 1.3111097 5.739979e-01
-#&gt;  [7,] 0.3731909 4.131125e-01
-#&gt;  [8,] 0.3819071 1.776787e+00
-#&gt;  [9,] 0.4645737 2.038125e-01
-#&gt; [10,] 2.3415224 1.044819e+00</div><div class='input'><span class='fu'>rmo_arnold</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>         <span class='co'>## comonotone</span>
-</div><div class='output co'>#&gt;             [,1]       [,2]
-#&gt;  [1,] 1.30110875 1.30110875
-#&gt;  [2,] 0.05664471 0.05664471
-#&gt;  [3,] 1.97830060 1.97830060
-#&gt;  [4,] 0.50047969 0.50047969
-#&gt;  [5,] 0.03178032 0.03178032
-#&gt;  [6,] 0.13373812 0.13373812
-#&gt;  [7,] 1.25931561 1.25931561
-#&gt;  [8,] 0.34743799 0.34743799
-#&gt;  [9,] 1.15793598 1.15793598
-#&gt; [10,] 0.10258134 0.10258134</div><div class='input'>
+</div><div class='output co'>#&gt;             [,1]      [,2]
+#&gt;  [1,] 3.49847789 6.6233033
+#&gt;  [2,] 1.21325454 2.6894353
+#&gt;  [3,] 1.70529796 2.3511802
+#&gt;  [4,] 0.17473521 1.3645833
+#&gt;  [5,] 0.08706506 8.2271991
+#&gt;  [6,] 4.20178030 0.8243962
+#&gt;  [7,] 1.75108571 3.8454167
+#&gt;  [8,] 0.59780783 0.6836592
+#&gt;  [9,] 1.85406192 3.0872776
+#&gt; [10,] 2.13640189 1.6033519</div><div class='input'><span class='fu'>rmo_arnold</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>0</span><span class='op'>)</span><span class='op'>)</span>         <span class='co'>## independence</span>
+</div><div class='output co'>#&gt;             [,1]        [,2]
+#&gt;  [1,] 0.03819245 2.817854341
+#&gt;  [2,] 0.75867044 0.449562066
+#&gt;  [3,] 0.35197290 1.065217555
+#&gt;  [4,] 0.04113247 3.710015428
+#&gt;  [5,] 0.07095734 1.989546802
+#&gt;  [6,] 0.31650935 0.157298437
+#&gt;  [7,] 0.57509845 1.341311387
+#&gt;  [8,] 0.97490352 0.008309862
+#&gt;  [9,] 2.92105275 0.117876347
+#&gt; [10,] 2.65596120 0.140455950</div><div class='input'><span class='fu'>rmo_arnold</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>         <span class='co'>## comonotone</span>
+</div><div class='output co'>#&gt;            [,1]      [,2]
+#&gt;  [1,] 0.1394811 0.1394811
+#&gt;  [2,] 3.0506897 3.0506897
+#&gt;  [3,] 0.1331726 0.1331726
+#&gt;  [4,] 0.8915171 0.8915171
+#&gt;  [5,] 1.6604923 1.6604923
+#&gt;  [6,] 1.4064678 1.4064678
+#&gt;  [7,] 0.6185939 0.6185939
+#&gt;  [8,] 2.5829326 2.5829326
+#&gt;  [9,] 0.4287433 0.4287433
+#&gt; [10,] 1.6027846 1.6027846</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
