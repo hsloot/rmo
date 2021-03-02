@@ -1,3 +1,8 @@
+# rmo 0.5.2
+
+- Allow pass-though of arguments to `integrate` in functions `valueOf`, 
+  `uexIntensities`, `exIntensities`, and `exQMatrix`.
+
 # rmo 0.5.1
 
 - Add composite-scaled Bernstein function class.
