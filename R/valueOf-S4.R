@@ -112,7 +112,7 @@ setMethod("valueOf0", "BernsteinFunction",
 #' @export
 setMethod("uexIntensities", "BernsteinFunction",
   function(object, d, ...) {
-    sapply(1:d, function(i) valueOf(object, d-i, i))
+    sapply(1:d, function(i) valueOf(object, d-i, i, ...))
   })
 
 #' @rdname BernsteinFunction-class
@@ -123,7 +123,7 @@ setMethod("uexIntensities", "BernsteinFunction",
 #' @export
 setMethod("exIntensities", "BernsteinFunction",
   function(object, d, ...) {
-    sapply(1:d, function(i) valueOf(object, d-i, i, n = d, k = i))
+    sapply(1:d, function(i) valueOf(object, d-i, i, n = d, k = i, ...))
   })
 
 #' @rdname BernsteinFunction-class
@@ -332,8 +332,10 @@ setMethod("valueOf", "LevyBernsteinFunction",
         out <- sapply(x,
           function(.x) {
             integrate(integrand_fn, .x = .x,
-              lower = attr(levy_density, "lower"), upper = attr(levy_density, "upper"),
-              rel.tol = tolerance)$value
+              lower = attr(levy_density, "lower"),
+              upper = attr(levy_density, "upper"),
+              rel.tol = tolerance,
+              ...)$value
           })
       } else {
         out <- multiply_binomial_coefficient(
@@ -423,7 +425,8 @@ setMethod("valueOf", "CompleteBernsteinFunction",
             integrate(integrand_fn, .x = .x,
               lower = attr(stieltjes_density, "lower"),
               upper = attr(stieltjes_density, "upper"),
-              rel.tol = tolerance)$value
+              rel.tol = tolerance,
+              ...)$value
           })
       } else {
         out <- multiply_binomial_coefficient(
