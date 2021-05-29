@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rmo</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.3</span>
       </span>
     </div>
 
@@ -148,11 +148,7 @@
     </div>
 
     <pre class="usage"><span class='co'># S4 method for SumOfBernsteinFunctions</span>
-<span class='fu'>initialize</span><span class='op'>(</span>
-  <span class='va'>.Object</span>,
-  first <span class='op'>=</span> <span class='fu'><a href='ConstantBernsteinFunction-class.html'>ConstantBernsteinFunction</a></span><span class='op'>(</span><span class='fl'>0.5</span><span class='op'>)</span>,
-  second <span class='op'>=</span> <span class='fu'><a href='LinearBernsteinFunction-class.html'>LinearBernsteinFunction</a></span><span class='op'>(</span><span class='fl'>0.5</span><span class='op'>)</span>
-<span class='op'>)</span>
+<span class='fu'>initialize</span><span class='op'>(</span><span class='va'>.Object</span>, <span class='va'>first</span>, <span class='va'>second</span><span class='op'>)</span>
 
 <span class='co'># S4 method for SumOfBernsteinFunctions</span>
 <span class='fu'><a href='BernsteinFunction-class.html'>valueOf</a></span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>x</span>, difference_order <span class='op'>=</span> <span class='fl'>0L</span>, n <span class='op'>=</span> <span class='fl'>1L</span>, k <span class='op'>=</span> <span class='fl'>0L</span>, cscale <span class='op'>=</span> <span class='fl'>1</span>, <span class='va'>...</span><span class='op'>)</span></pre>
@@ -242,16 +238,10 @@ is also a Bernstein function.</p>
     <pre class="examples"><div class='input'><span class='fu'>SumOfBernsteinFunctions</span><span class='op'>(</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; An object of class "SumOfBernsteinFunctions"
 #&gt; Slot "first":
-#&gt; An object of class "ConstantBernsteinFunction"
-#&gt; Slot "constant":
-#&gt; [1] 0.5
-#&gt; 
+#&gt; &lt;S4 Type Object&gt;
 #&gt; 
 #&gt; Slot "second":
-#&gt; An object of class "LinearBernsteinFunction"
-#&gt; Slot "scale":
-#&gt; [1] 0.5
-#&gt; 
+#&gt; &lt;S4 Type Object&gt;
 #&gt; </div><div class='input'><span class='va'>first_bf</span> <span class='op'>&lt;-</span> <span class='fu'><a href='LinearBernsteinFunction-class.html'>LinearBernsteinFunction</a></span><span class='op'>(</span>scale <span class='op'>=</span> <span class='fl'>0.2</span><span class='op'>)</span>
 <span class='va'>second_bf</span> <span class='op'>&lt;-</span> <span class='fu'><a href='AlphaStableBernsteinFunction-class.html'>AlphaStableBernsteinFunction</a></span><span class='op'>(</span>alpha <span class='op'>=</span> <span class='fl'>0.5</span><span class='op'>)</span>
 <span class='fu'>SumOfBernsteinFunctions</span><span class='op'>(</span>first <span class='op'>=</span> <span class='va'>first_bf</span>, second <span class='op'>=</span> <span class='va'>second_bf</span><span class='op'>)</span>

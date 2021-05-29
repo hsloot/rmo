@@ -78,7 +78,7 @@ $$" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rmo</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.3</span>
       </span>
     </div>
 
@@ -160,7 +160,7 @@ $$</p>
     </div>
 
     <pre class="usage"><span class='co'># S4 method for ParetoBernsteinFunction</span>
-<span class='fu'>initialize</span><span class='op'>(</span><span class='va'>.Object</span>, alpha <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log2</a></span><span class='op'>(</span><span class='fl'>2</span> <span class='op'>-</span> <span class='fl'>0.5</span><span class='op'>)</span>, x0 <span class='op'>=</span> <span class='fl'>1e-04</span><span class='op'>)</span>
+<span class='fu'>initialize</span><span class='op'>(</span><span class='va'>.Object</span>, <span class='va'>alpha</span>, <span class='va'>x0</span><span class='op'>)</span>
 
 <span class='co'># S4 method for ParetoBernsteinFunction</span>
 <span class='fu'><a href='LevyBernsteinFunction-class.html'>levyDensity</a></span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span></pre>
@@ -245,10 +245,10 @@ Ph.D. thesis, University of the Basque Country.</p>
     <pre class="examples"><div class='input'><span class='fu'>ParetoBernsteinFunction</span><span class='op'>(</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; An object of class "ParetoBernsteinFunction"
 #&gt; Slot "alpha":
-#&gt; [1] 0.5849625
+#&gt; numeric(0)
 #&gt; 
 #&gt; Slot "x0":
-#&gt; [1] 1e-04
+#&gt; numeric(0)
 #&gt; </div><div class='input'><span class='fu'>ParetoBernsteinFunction</span><span class='op'>(</span>alpha <span class='op'>=</span> <span class='fl'>0.2</span>, x0 <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; An object of class "ParetoBernsteinFunction"
 #&gt; Slot "alpha":
