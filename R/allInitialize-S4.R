@@ -12,9 +12,11 @@ NULL
 #' LinearBernsteinFunction()
 #' LinearBernsteinFunction(scale = 2)
 setMethod("initialize", "LinearBernsteinFunction",
-  function(.Object, scale = 1) { # nolint
-    .Object@scale <- scale
-    validObject(.Object)
+  function(.Object, scale) { # nolint
+    if (!missing(scale)) {
+      .Object@scale <- scale
+      validObject(.Object)
+    }
 
     invisible(.Object)
   })
@@ -30,9 +32,11 @@ setMethod("initialize", "LinearBernsteinFunction",
 #' ConstantBernsteinFunction()
 #' ConstantBernsteinFunction(constant = 0.2)
 setMethod("initialize", "ConstantBernsteinFunction",
-  function(.Object, constant = 1) { # nolint
-    .Object@constant <- constant
-    validObject(.Object)
+  function(.Object, constant) { # nolint
+    if (!missing(constant)) {
+      .Object@constant <- constant
+      validObject(.Object)
+    }
 
     invisible(.Object)
   })
@@ -50,10 +54,12 @@ setMethod("initialize", "ConstantBernsteinFunction",
 #' original_bf <- AlphaStableBernsteinFunction(alpha = 0.5)
 #' ScaledBernsteinFunction(scale = 2, original = original_bf)
 setMethod("initialize", "ScaledBernsteinFunction",
-  function(.Object, scale = 1, original = LinearBernsteinFunction()) { # nolint
-    .Object@scale <- scale
-    .Object@original <- original
-    validObject(.Object)
+  function(.Object, scale, original) { # nolint
+    if (!(missing(scale) || missing(original))) {
+      .Object@scale <- scale
+      .Object@original <- original
+      validObject(.Object)
+    }
 
     invisible(.Object)
   })
@@ -72,11 +78,12 @@ setMethod("initialize", "ScaledBernsteinFunction",
 #' second_bf <- AlphaStableBernsteinFunction(alpha = 0.5)
 #' SumOfBernsteinFunctions(first = first_bf, second = second_bf)
 setMethod("initialize", "SumOfBernsteinFunctions",
-  function(.Object, first = ConstantBernsteinFunction(0.5), # nolint
-      second = LinearBernsteinFunction(0.5)) {
-    .Object@first <- first
-    .Object@second <- second
-    validObject(.Object)
+  function(.Object, first, second) { # nolint
+    if (!(missing(first) || missing(second))) {
+      .Object@first <- first
+      .Object@second <- second
+      validObject(.Object)
+    }
 
     invisible(.Object)
   })
@@ -95,10 +102,12 @@ setMethod("initialize", "SumOfBernsteinFunctions",
 #' bf_original <- AlphaStableBernsteinFunction()
 #' CompositeScaledBernsteinFunction(cscale = cscale, original = bf_original)
 setMethod("initialize", "CompositeScaledBernsteinFunction",
-  function(.Object, cscale = 1, original = LinearBernsteinFunction()) { # nolint
-    .Object@cscale <- cscale
-    .Object@original <- original
-    validObject(.Object)
+  function(.Object, cscale, original) { # nolint
+    if (!(missing(cscale) || missing(original))) {
+      .Object@cscale <- cscale
+      .Object@original <- original
+      validObject(.Object)
+    }
 
     invisible(.Object)
   })
@@ -115,10 +124,12 @@ setMethod("initialize", "CompositeScaledBernsteinFunction",
 #' PoissonBernsteinFunction()
 #' PoissonBernsteinFunction(lambda = 0.2, eta = 2)
 setMethod("initialize", "PoissonBernsteinFunction",
-  function(.Object, eta = 1, lambda = 1) { # nolint
-    .Object@eta <- eta
-    .Object@lambda <- lambda
-    validObject(.Object)
+  function(.Object, eta, lambda) { # nolint
+    if (!(missing(eta) || missing(lambda))) {
+      .Object@eta <- eta
+      .Object@lambda <- lambda
+      validObject(.Object)
+    }
 
     invisible(.Object)
   })
@@ -134,9 +145,11 @@ setMethod("initialize", "PoissonBernsteinFunction",
 #' AlphaStableBernsteinFunction()
 #' AlphaStableBernsteinFunction(alpha = 0.5)
 setMethod("initialize", "AlphaStableBernsteinFunction",
-  function(.Object, alpha = log2(2 - 0.5)) { # nolint
-    .Object@alpha <- alpha
-    validObject(.Object)
+  function(.Object, alpha) { # nolint
+    if (!missing(alpha)) {
+      .Object@alpha <- alpha
+      validObject(.Object)
+    }
 
     invisible(.Object)
   })
@@ -152,9 +165,11 @@ setMethod("initialize", "AlphaStableBernsteinFunction",
 #' InverseGaussianBernsteinFunction()
 #' InverseGaussianBernsteinFunction(eta = 0.3)
 setMethod("initialize", "InverseGaussianBernsteinFunction",
-  function(.Object, eta = 0.5) { # nolint
-    .Object@eta <- eta
-    validObject(.Object)
+  function(.Object, eta) { # nolint
+    if (!missing(eta)) {
+      .Object@eta <- eta
+      validObject(.Object)
+    }
 
     invisible(.Object)
   })
@@ -170,9 +185,11 @@ setMethod("initialize", "InverseGaussianBernsteinFunction",
 #' ExponentialBernsteinFunction()
 #' ExponentialBernsteinFunction(lambda = 0.5)
 setMethod("initialize", "ExponentialBernsteinFunction",
-  function(.Object, lambda = 1) { # nolint
-    .Object@lambda <- lambda
-    validObject(.Object)
+  function(.Object, lambda) { # nolint
+    if (!missing(lambda)) {
+      .Object@lambda <- lambda
+      validObject(.Object)
+    }
 
     invisible(.Object)
   })
@@ -188,9 +205,11 @@ setMethod("initialize", "ExponentialBernsteinFunction",
 #' GammaBernsteinFunction()
 #' GammaBernsteinFunction(a = 2)
 setMethod("initialize", "GammaBernsteinFunction",
-  function(.Object, a = 1) { # nolint
-    .Object@a <- a
-    validObject(.Object)
+  function(.Object, a) { # nolint
+    if (!missing(a)) {
+      .Object@a <- a
+      validObject(.Object)
+    }
 
     invisible(.Object)
   })
@@ -207,10 +226,12 @@ setMethod("initialize", "GammaBernsteinFunction",
 #' ParetoBernsteinFunction()
 #' ParetoBernsteinFunction(alpha = 0.2, x0 = 1)
 setMethod("initialize", "ParetoBernsteinFunction",
-  function(.Object, alpha = log2(2 - 0.5), x0 = 1e-4) { # nolint
-    .Object@alpha <- alpha
-    .Object@x0 <- x0
-    validObject(.Object)
+  function(.Object, alpha, x0) { # nolint
+    if (!(missing(alpha) || missing(x0))) {
+      .Object@alpha <- alpha
+      .Object@x0 <- x0
+      validObject(.Object)
+    }
 
     invisible(.Object)
   })

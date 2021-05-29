@@ -11,7 +11,7 @@
 \alias{valueOf,ScaledBernsteinFunction,ANY-method}
 \title{Class for \emph{scaled Bernstein functions}}
 \usage{
-\S4method{initialize}{ScaledBernsteinFunction}(.Object, scale = 1, original = LinearBernsteinFunction())
+\S4method{initialize}{ScaledBernsteinFunction}(.Object, scale, original)
 
 \S4method{valueOf}{ScaledBernsteinFunction}(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...)
 }

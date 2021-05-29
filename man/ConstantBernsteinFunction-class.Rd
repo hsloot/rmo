@@ -11,7 +11,7 @@
 \alias{valueOf,ConstantBernsteinFunction,ANY-method}
 \title{Class for the \emph{constant Bernstein function}}
 \usage{
-\S4method{initialize}{ConstantBernsteinFunction}(.Object, constant = 1)
+\S4method{initialize}{ConstantBernsteinFunction}(.Object, constant)
 
 \S4method{valueOf}{ConstantBernsteinFunction}(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...)
 }

@@ -10,7 +10,7 @@
 \alias{levyDensity,ParetoBernsteinFunction-method}
 \title{Class for the \emph{Pareto Bernstein function}}
 \usage{
-\S4method{initialize}{ParetoBernsteinFunction}(.Object, alpha = log2(2 - 0.5), x0 = 1e-04)
+\S4method{initialize}{ParetoBernsteinFunction}(.Object, alpha, x0)
 
 \S4method{levyDensity}{ParetoBernsteinFunction}(object)
 }
