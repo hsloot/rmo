@@ -107,7 +107,7 @@ setMethod("valueOf0", "BernsteinFunction",
 #' @rdname BernsteinFunction-class
 #'
 #' @examples
-#' exIntensities(AlphaStableBernsteinFunction(), 3L)
+#' exIntensities(AlphaStableBernsteinFunction(4e-1), 3L)
 #'
 #' @export
 setMethod("uexIntensities", "BernsteinFunction",
@@ -118,7 +118,7 @@ setMethod("uexIntensities", "BernsteinFunction",
 #' @rdname BernsteinFunction-class
 #'
 #' @examples
-#' exIntensities(AlphaStableBernsteinFunction(), 3L)
+#' exIntensities(AlphaStableBernsteinFunction(4e-1), 3L)
 #'
 #' @export
 setMethod("exIntensities", "BernsteinFunction",
@@ -129,7 +129,7 @@ setMethod("exIntensities", "BernsteinFunction",
 #' @rdname BernsteinFunction-class
 #'
 #' @examples
-#' intensities(AlphaStableBernsteinFunction(), 3L)
+#' intensities(AlphaStableBernsteinFunction(4e-1), 3L)
 #'
 #' @export
 setMethod("intensities", "BernsteinFunction",
@@ -140,7 +140,7 @@ setMethod("intensities", "BernsteinFunction",
 #' @rdname BernsteinFunction-class
 #'
 #' @examples
-#' exQMatrix(AlphaStableBernsteinFunction(), 3L)
+#' exQMatrix(AlphaStableBernsteinFunction(4e-1), 3L)
 #'
 #' @export
 setMethod("exQMatrix", "BernsteinFunction",

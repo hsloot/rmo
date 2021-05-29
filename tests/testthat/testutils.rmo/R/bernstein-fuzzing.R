@@ -50,7 +50,8 @@ setGeneric(
 #'
 #' @seealso [rmo::AlphaStableBernsteinFunction-class]
 #' @examples
-#' bf <- fuzzy_bf(rmo::AlphaStableBernsteinFunction())
+#' fuzzy_bf(rmo::AlphaStableBernsteinFunction())
+#'
 #' @importFrom methods setMethod validObject
 #' @importFrom rmo AlphaStableBernsteinFunction
 #' @importFrom stats runif
@@ -70,7 +71,8 @@ setMethod(
 #'
 #' @seealso [rmo::ConstantBernsteinFunction-class]
 #' @examples
-#' bf <- fuzzy_bf(rmo::ConstantBernsteinFunction())
+#' fuzzy_bf(rmo::ConstantBernsteinFunction())
+#'
 #' @importFrom methods setMethod validObject
 #' @importFrom rmo ConstantBernsteinFunction
 #' @importFrom stats rexp
@@ -90,7 +92,8 @@ setMethod(
 #'
 #' @seealso [rmo::ExponentialBernsteinFunction-class]
 #' @examples
-#' bf <- fuzzy_bf(rmo::ExponentialBernsteinFunction())
+#' fuzzy_bf(rmo::ExponentialBernsteinFunction())
+#'
 #' @importFrom methods setMethod validObject
 #' @importFrom rmo ExponentialBernsteinFunction
 #' @importFrom stats rexp
@@ -110,7 +113,8 @@ setMethod(
 #'
 #' @seealso [rmo::GammaBernsteinFunction-class]
 #' @examples
-#' bf <- fuzzy_bf(rmo::GammaBernsteinFunction())
+#' fuzzy_bf(rmo::GammaBernsteinFunction())
+#'
 #' @importFrom methods setMethod validObject
 #' @importFrom rmo GammaBernsteinFunction
 #' @importFrom stats rexp
@@ -130,7 +134,8 @@ setMethod(
 #'
 #' @seealso [rmo::InverseGaussianBernsteinFunction-class]
 #' @examples
-#' bf <- fuzzy_bf(rmo::InverseGaussianBernsteinFunction())
+#' fuzzy_bf(rmo::InverseGaussianBernsteinFunction())
+#'
 #' @importFrom methods setMethod validObject
 #' @importFrom rmo InverseGaussianBernsteinFunction
 #' @importFrom stats rexp
@@ -150,7 +155,8 @@ setMethod(
 #'
 #' @seealso [rmo::LinearBernsteinFunction-class]
 #' @examples
-#' bf <- fuzzy_bf(rmo::LinearBernsteinFunction())
+#' fuzzy_bf(rmo::LinearBernsteinFunction())
+#'
 #' @importFrom methods setMethod validObject
 #' @importFrom rmo LinearBernsteinFunction
 #' @importFrom stats rexp
@@ -174,7 +180,8 @@ setMethod(
 #'
 #' @seealso [rmo::ParetoBernsteinFunction-class]
 #' @examples
-#' bf <- fuzzy_bf(rmo::ParetoBernsteinFunction())
+#' fuzzy_bf(rmo::ParetoBernsteinFunction())
+#'
 #' @importFrom methods setMethod validObject
 #' @importFrom rmo ParetoBernsteinFunction
 #' @importFrom stats runif
@@ -195,7 +202,8 @@ setMethod(
 #'
 #' @seealso [rmo::PoissonBernsteinFunction-class]
 #' @examples
-#' bf <- fuzzy_bf(rmo::PoissonBernsteinFunction())
+#' fuzzy_bf(rmo::PoissonBernsteinFunction())
+#'
 #' @importFrom methods setMethod validObject
 #' @importFrom rmo PoissonBernsteinFunction
 #' @importFrom stats rexp
@@ -212,14 +220,37 @@ setMethod(
 )
 
 #' @rdname fuzzy_bf-methods
+#' @aliases fuzzy_bf,missing,ANY-method
+#'
+#' @examples
+#' fuzzy_bf()
+#'
+#' @importFrom methods setMethod validObject new
+#' @importFrom rmo LinearBernsteinFunction ConstantBernsteinFunction PoissonBernsteinFunction
+#'   AlphaStableBernsteinFunction InverseGaussianBernsteinFunction ExponentialBernsteinFunction
+#    GammaBernsteinFunction ParetoBernsteinFunction
+#' @export
+setMethod("fuzzy_bf", "missing",
+  function(bf) {
+    bf_names <- paste0(
+      c("Linear", "Constant", "Poisson", "AlphaStable", "InverseGaussian", "Exponential",
+      "Gamma", "Pareto"), "BernsteinFunction")
+    bf_name <- bf_names[sample.int(length(bf_names), 1L)]
+    bf <- fuzzy_bf(new(bf_name))
+    validObject(bf)
+
+    bf
+  })
+
+#' @rdname fuzzy_bf-methods
 #' @aliases fuzzy_bf,ScaledBernsteinFunction,ANY-method
 #'
 #' @seealso [rmo::ScaledBernsteinFunction-class]
 #' @examples
-#' bf <- fuzzy_bf(rmo::ScaledBernsteinFunction(
-#'  scale = 1, original = rmo::LinearBernsteinFunction()
-#' ))
-#' @importFrom methods setMethod validObject
+#' fuzzy_bf(rmo::ScaledBernsteinFunction(
+#'  scale = 1, original = rmo::LinearBernsteinFunction()))
+#'
+#' @importFrom methods setMethod validObject is
 #' @importFrom rmo ScaledBernsteinFunction
 #' @importFrom stats rexp
 #' @export
@@ -227,7 +258,12 @@ setMethod(
   "fuzzy_bf", "ScaledBernsteinFunction",
   function(bf) {
     bf@scale <- stats::rexp(1)
-    bf@original <- fuzzy_bf(bf@original)
+    if (is(bf@original, "BernsteinFunction")) {
+      bf@original <- fuzzy_bf(bf@original)
+    } else {
+      bf@original <- fuzzy_bf()
+    }
+
     validObject(bf)
 
     bf
@@ -238,10 +274,10 @@ setMethod(
 #'
 #' @seealso [rmo::CompositeScaledBernsteinFunction-class]
 #' @examples
-#' bf <- fuzzy_bf(rmo::CompositeScaledBernsteinFunction(
-#'  cscale = 1, original = rmo::LinearBernsteinFunction()
-#' ))
-#' @importFrom methods setMethod validObject
+#' fuzzy_bf(rmo::CompositeScaledBernsteinFunction(
+#'  cscale = 1, original = rmo::LinearBernsteinFunction()))
+#'
+#' @importFrom methods setMethod validObject is
 #' @importFrom rmo CompositeScaledBernsteinFunction
 #' @importFrom stats rexp
 #' @export
@@ -249,7 +285,11 @@ setMethod(
   "fuzzy_bf", "CompositeScaledBernsteinFunction",
   function(bf) {
     bf@cscale <- stats::rexp(1)
-    bf@original <- fuzzy_bf(bf@original)
+    if (is(bf@original, "BernsteinFunction")) {
+      bf@original <- fuzzy_bf(bf@original)
+    } else {
+      bf@original <- fuzzy_bf()
+    }
     validObject(bf)
 
     bf
@@ -262,16 +302,24 @@ setMethod(
 #' @examples
 #' bf <- fuzzy_bf(rmo::SumOfBernsteinFunctions(
 #'  first = rmo::ConstantBernsteinFunction(),
-#'  second = rmo::LinearBernsteinFunction()
-#' ))
-#' @importFrom methods setMethod validObject
+#'  second = rmo::LinearBernsteinFunction()))
+#'
+#' @importFrom methods setMethod validObject is
 #' @importFrom rmo SumOfBernsteinFunctions
 #' @export
 setMethod(
   "fuzzy_bf", "SumOfBernsteinFunctions",
   function(bf) {
-    bf@first <- fuzzy_bf(bf@first)
-    bf@second <- fuzzy_bf(bf@second)
+    if (is(bf@first, "BernsteinFunction")) {
+      bf@first <- fuzzy_bf(bf@first)
+    } else {
+      bf@first <- fuzzy_bf()
+    }
+    if (is(bf@second, "BernsteinFunction")) {
+      bf@second <- fuzzy_bf(bf@second)
+    } else {
+      bf@second <- fuzzy_bf()
+    }
     validObject(bf)
 
     bf

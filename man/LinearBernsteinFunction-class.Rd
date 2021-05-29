@@ -11,7 +11,7 @@
 \alias{valueOf,LinearBernsteinFunction,ANY-method}
 \title{Class for the \emph{linear Bernstein function}}
 \usage{
-\S4method{initialize}{LinearBernsteinFunction}(.Object, scale = 1)
+\S4method{initialize}{LinearBernsteinFunction}(.Object, scale)
 
 \S4method{valueOf}{LinearBernsteinFunction}(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...)
 }

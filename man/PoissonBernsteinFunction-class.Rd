@@ -10,7 +10,7 @@
 \alias{levyDensity,PoissonBernsteinFunction-method}
 \title{Class for the \emph{Poisson Bernstein function}}
 \usage{
-\S4method{initialize}{PoissonBernsteinFunction}(.Object, eta = 1, lambda = 1)
+\S4method{initialize}{PoissonBernsteinFunction}(.Object, eta, lambda)
 
 \S4method{levyDensity}{PoissonBernsteinFunction}(object)
 }

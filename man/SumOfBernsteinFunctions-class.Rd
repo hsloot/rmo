@@ -11,11 +11,7 @@
 \alias{valueOf,SumOfBernsteinFunctions,ANY-method}
 \title{Class for \emph{input scaled Bernstein functions}}
 \usage{
-\S4method{initialize}{SumOfBernsteinFunctions}(
-  .Object,
-  first = ConstantBernsteinFunction(0.5),
-  second = LinearBernsteinFunction(0.5)
-)
+\S4method{initialize}{SumOfBernsteinFunctions}(.Object, first, second)
 
 \S4method{valueOf}{SumOfBernsteinFunctions}(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...)
 }

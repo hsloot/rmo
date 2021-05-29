@@ -11,7 +11,7 @@
 \alias{stieltjesDensity,GammaBernsteinFunction-method}
 \title{Class for the \emph{Gamma Bernstein function}}
 \usage{
-\S4method{initialize}{GammaBernsteinFunction}(.Object, a = 1)
+\S4method{initialize}{GammaBernsteinFunction}(.Object, a)
 
 \S4method{levyDensity}{GammaBernsteinFunction}(object)
 
