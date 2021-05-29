@@ -2,6 +2,7 @@
 
 - Fix implementation of initializers and validity methods. In particular, `validObject` can now
   be called with the argument `test = TRUE` without causing an error. 
+- Add show method for  `BernsteinFunction`-classes.
 
 # rmo 0.5.2
 

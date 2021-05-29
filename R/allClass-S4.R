@@ -1,5 +1,5 @@
 #' @importFrom methods new setClass setValidity setGeneric setMethod validObject
-#'    callNextMethod
+#'    callNextMethod show classLabel
 NULL
 
 #' Virtual Class \code{BernsteinFunction} for Bernstein Functions

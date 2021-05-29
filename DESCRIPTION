@@ -37,6 +37,7 @@ Collate:
     'RcppExports.R'
     'allClass-S4.R'
     'allInitialize-S4.R'
+    'allShow-S4.R'
     'allValidity-S4.R'
     'catch-routine-registration.R'
     'levyDensity-S4.R'
