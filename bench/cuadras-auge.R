@@ -1,6 +1,3 @@
-#+ r load-all
-pkgload::load_all()
-
 #' ## Only killing and drift ##
 #'
 #' For the CPP LFM parameterisation with *no* jump, but drift and killing, we
@@ -12,8 +9,8 @@ d <- 15
 alpha <- 0.6
 beta <- 0.2
 
-intensities <- intensities_cuadras_auge(d, alpha, beta)
-ex_intensities <- ex_intensities_cuadras_auge(d, alpha, beta)
+intensities <- rmo::intensities_cuadras_auge(d, alpha, beta)
+ex_intensities <- rmo::ex_intensities_cuadras_auge(d, alpha, beta)
 
 #+ r bench
 bench::mark(

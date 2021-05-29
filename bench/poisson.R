@@ -1,6 +1,3 @@
-#+ r load-all
-pkgload::load_all()
-
 #' ## Poisson jump CPP ##
 #'
 #' For the CPP LFM parameterisation with *fixed size* jumps, we chose the
@@ -13,8 +10,8 @@ d <- 15
 lambda <- 1
 eta <- 0.5
 
-intensities <- intensities_poisson(d, lambda, eta)
-ex_intensities <- ex_intensities_poisson(d, lambda, eta)
+intensities <- rmo::intensities_poisson(d, lambda, eta)
+ex_intensities <- rmo::ex_intensities_poisson(d, lambda, eta)
 
 #+ r bench
 bench::mark(

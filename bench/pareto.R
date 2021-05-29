@@ -1,6 +1,3 @@
-#+ r load-all
-pkgload::load_all()
-
 #' ## Pareto jump CPP ##
 #'
 #' For the CPP LFM parameterisation with *Pareto* jumps, we chose the parameters \( \lambda = 1 \),
@@ -14,8 +11,8 @@ lambda <- 1
 alpha <- 0.5
 x0 <- 5e-4
 
-intensities <- lambda * intensities_pareto(d, alpha, x0)
-ex_intensities <- lambda * ex_intensities_pareto(d, alpha, x0)
+intensities <- lambda * rmo::intensities_pareto(d, alpha, x0)
+ex_intensities <- lambda * rmo::ex_intensities_pareto(d, alpha, x0)
 
 #+ r bench
 bench::mark(
