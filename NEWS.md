@@ -1,3 +1,8 @@
+# rmo 0.5.3
+
+- Fix implementation of initializers and validity methods. In particular, `validObject` can now
+  be called with the argument `test = TRUE` without causing an error. 
+
 # rmo 0.5.2
 
 - Allow pass-though of arguments to `integrate` in functions `valueOf`, 
