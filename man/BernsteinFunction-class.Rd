@@ -114,13 +114,13 @@ alternating iterated forward differences, possibly scaled by a binomial
 }}
 
 \examples{
-exIntensities(AlphaStableBernsteinFunction(), 3L)
+exIntensities(AlphaStableBernsteinFunction(4e-1), 3L)
 
-exIntensities(AlphaStableBernsteinFunction(), 3L)
+exIntensities(AlphaStableBernsteinFunction(4e-1), 3L)
 
-intensities(AlphaStableBernsteinFunction(), 3L)
+intensities(AlphaStableBernsteinFunction(4e-1), 3L)
 
-exQMatrix(AlphaStableBernsteinFunction(), 3L)
+exQMatrix(AlphaStableBernsteinFunction(4e-1), 3L)
 
 }
 \references{

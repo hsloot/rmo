@@ -11,7 +11,7 @@
 \alias{stieltjesDensity,InverseGaussianBernsteinFunction-method}
 \title{Class for the \emph{Inverse Gaussian Bernstein function}}
 \usage{
-\S4method{initialize}{InverseGaussianBernsteinFunction}(.Object, eta = 0.5)
+\S4method{initialize}{InverseGaussianBernsteinFunction}(.Object, eta)
 
 \S4method{levyDensity}{InverseGaussianBernsteinFunction}(object)
 

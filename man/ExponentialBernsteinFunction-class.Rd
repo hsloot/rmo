@@ -11,7 +11,7 @@
 \alias{stieltjesDensity,ExponentialBernsteinFunction-method}
 \title{Class for the Exponential jump CPP Bernstein function}
 \usage{
-\S4method{initialize}{ExponentialBernsteinFunction}(.Object, lambda = 1)
+\S4method{initialize}{ExponentialBernsteinFunction}(.Object, lambda)
 
 \S4method{levyDensity}{ExponentialBernsteinFunction}(object)
 

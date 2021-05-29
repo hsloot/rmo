@@ -11,7 +11,7 @@
 \alias{stieltjesDensity,AlphaStableBernsteinFunction-method}
 \title{Class for the \emph{\eqn{\alpha}-stable Bernstein function}}
 \usage{
-\S4method{initialize}{AlphaStableBernsteinFunction}(.Object, alpha = log2(2 - 0.5))
+\S4method{initialize}{AlphaStableBernsteinFunction}(.Object, alpha)
 
 \S4method{levyDensity}{AlphaStableBernsteinFunction}(object)
 

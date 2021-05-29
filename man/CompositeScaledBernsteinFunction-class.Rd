@@ -11,7 +11,7 @@
 \alias{valueOf,CompositeScaledBernsteinFunction,ANY-method}
 \title{Class for the \emph{composite scaled Bernstein function}}
 \usage{
-\S4method{initialize}{CompositeScaledBernsteinFunction}(.Object, cscale = 1, original = LinearBernsteinFunction())
+\S4method{initialize}{CompositeScaledBernsteinFunction}(.Object, cscale, original)
 
 \S4method{valueOf}{CompositeScaledBernsteinFunction}(object, x, difference_order = 0L, n = 1, k = 0, cscale = 1, ...)
 }

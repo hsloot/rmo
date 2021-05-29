@@ -6,7 +6,7 @@ test_that("Test initialisation of BernsteinFunction classes", {
   expect_s4_class(
     testutils.rmo::fuzzy_bf(ConstantBernsteinFunction()),
     class = "ConstantBernsteinFunction")
-  expect_error
+  expect_error(ConstantBernsteinFunction(constant = -1))
 
   expect_s4_class(
     testutils.rmo::fuzzy_bf(LinearBernsteinFunction()),
@@ -37,10 +37,10 @@ test_that("Test initialisation of BernsteinFunction classes", {
   expect_s4_class(
     testutils.rmo::fuzzy_bf(ParetoBernsteinFunction()),
     class = "ParetoBernsteinFunction")
-  expect_error(ParetoBernsteinFunction(alpha = -1))
+  expect_error(ParetoBernsteinFunction(alpha = -1, x0 = 1e-4))
 
   expect_s4_class(
-    testutils.rmo::fuzzy_bf(ScaledBernsteinFunction(original=GammaBernsteinFunction())),
+    testutils.rmo::fuzzy_bf(ScaledBernsteinFunction()),
     class = "ScaledBernsteinFunction")
   expect_error(
     ScaledBernsteinFunction(scale = -1, original=GammaBernsteinFunction()))
@@ -136,7 +136,7 @@ test_that("`valueOf` for `LinearBernsteinFunction`", {
 
 test_that("`valueOf` for `ScaledBernsteinFunction`", {
   bf <- testutils.rmo::fuzzy_bf(
-    ScaledBernsteinFunction(
+    ScaledBernsteinFunction(scale = 1,
       original=AlphaStableBernsteinFunction()))
   scale <- bf@scale
   alpha <- bf@original@alpha
@@ -189,7 +189,7 @@ test_that("`valueOf` for `ScaledBernsteinFunction`", {
 
 test_that("`valueOf` for `CompositeScaledBernsteinFunction`", {
   bf <- testutils.rmo::fuzzy_bf(
-    CompositeScaledBernsteinFunction(
+    CompositeScaledBernsteinFunction(cscale = 1,
       original=AlphaStableBernsteinFunction()))
   cscale <- bf@cscale
   alpha <- bf@original@alpha
