@@ -144,7 +144,7 @@ is also a Bernstein function." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Class for <em>scaled Bernstein functions</em></h1>
-    <small class="dont-index">Source: <a href='https://github.com/hsloot/rmo/blob/master/R/allClass-S4.R'><code>R/allClass-S4.R</code></a>, <a href='https://github.com/hsloot/rmo/blob/master/R/allInitialize-S4.R'><code>R/allInitialize-S4.R</code></a>, <a href='https://github.com/hsloot/rmo/blob/master/R/valueOf-S4.R'><code>R/valueOf-S4.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/hsloot/rmo/blob/master/R/allClass-S4.R'><code>R/allClass-S4.R</code></a>, <a href='https://github.com/hsloot/rmo/blob/master/R/allInitialize-S4.R'><code>R/allInitialize-S4.R</code></a>, <a href='https://github.com/hsloot/rmo/blob/master/R/allShow-S4.R'><code>R/allShow-S4.R</code></a>, and 1 more</small>
     <div class="hidden name"><code>ScaledBernsteinFunction-class.Rd</code></div>
     </div>
 
@@ -159,6 +159,9 @@ is also a Bernstein function.</p>
 
     <pre class="usage"><span class='co'># S4 method for ScaledBernsteinFunction</span>
 <span class='fu'>initialize</span><span class='op'>(</span><span class='va'>.Object</span>, <span class='va'>scale</span>, <span class='va'>original</span><span class='op'>)</span>
+
+<span class='co'># S4 method for ScaledBernsteinFunction</span>
+<span class='fu'>show</span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span>
 
 <span class='co'># S4 method for ScaledBernsteinFunction</span>
 <span class='fu'><a href='BernsteinFunction-class.html'>valueOf</a></span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>x</span>, difference_order <span class='op'>=</span> <span class='fl'>0L</span>, n <span class='op'>=</span> <span class='fl'>1L</span>, k <span class='op'>=</span> <span class='fl'>0L</span>, cscale <span class='op'>=</span> <span class='fl'>1</span>, <span class='va'>...</span><span class='op'>)</span></pre>
@@ -219,6 +222,7 @@ the representation).</p></td>
     
 <ul>
 <li><p><code>initialize,ScaledBernsteinFunction-method</code>: Constructor</p></li>
+<li><p><code>show,ScaledBernsteinFunction-method</code>: Display the object.</p></li>
 <li><p><code>valueOf,ScaledBernsteinFunction-method</code>: Calculates the iterated differences of the Bernstein function, see <code><a href='BernsteinFunction-class.html'>valueOf()</a></code></p></li>
 </ul>
     <h2 class="hasAnchor" id="slots"><a class="anchor" href="#slots"></a>Slots</h2>
@@ -240,23 +244,13 @@ is to be multiplied.</p></dd>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>ScaledBernsteinFunction</span><span class='op'>(</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; An object of class "ScaledBernsteinFunction"
-#&gt; Slot "scale":
-#&gt; numeric(0)
-#&gt; 
-#&gt; Slot "original":
-#&gt; &lt;S4 Type Object&gt;
-#&gt; </div><div class='input'><span class='va'>original_bf</span> <span class='op'>&lt;-</span> <span class='fu'><a href='AlphaStableBernsteinFunction-class.html'>AlphaStableBernsteinFunction</a></span><span class='op'>(</span>alpha <span class='op'>=</span> <span class='fl'>0.5</span><span class='op'>)</span>
+#&gt; 	 (invalid or not initialized)</div><div class='input'><span class='va'>original_bf</span> <span class='op'>&lt;-</span> <span class='fu'><a href='AlphaStableBernsteinFunction-class.html'>AlphaStableBernsteinFunction</a></span><span class='op'>(</span>alpha <span class='op'>=</span> <span class='fl'>0.5</span><span class='op'>)</span>
 <span class='fu'>ScaledBernsteinFunction</span><span class='op'>(</span>scale <span class='op'>=</span> <span class='fl'>2</span>, original <span class='op'>=</span> <span class='va'>original_bf</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; An object of class "ScaledBernsteinFunction"
-#&gt; Slot "scale":
-#&gt; [1] 2
-#&gt; 
-#&gt; Slot "original":
-#&gt; An object of class "AlphaStableBernsteinFunction"
-#&gt; Slot "alpha":
-#&gt; [1] 0.5
-#&gt; 
-#&gt; </div></pre>
+#&gt; - scale: 2
+#&gt; - original:
+#&gt; 	An object of class "AlphaStableBernsteinFunction"
+#&gt; 	- alpha: 0.5</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

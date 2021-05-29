@@ -143,7 +143,7 @@ $$" />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Class for the Exponential jump CPP Bernstein function</h1>
-    <small class="dont-index">Source: <a href='https://github.com/hsloot/rmo/blob/master/R/allClass-S4.R'><code>R/allClass-S4.R</code></a>, <a href='https://github.com/hsloot/rmo/blob/master/R/allInitialize-S4.R'><code>R/allInitialize-S4.R</code></a>, <a href='https://github.com/hsloot/rmo/blob/master/R/levyDensity-S4.R'><code>R/levyDensity-S4.R</code></a>, and 1 more</small>
+    <small class="dont-index">Source: <a href='https://github.com/hsloot/rmo/blob/master/R/allClass-S4.R'><code>R/allClass-S4.R</code></a>, <a href='https://github.com/hsloot/rmo/blob/master/R/allInitialize-S4.R'><code>R/allInitialize-S4.R</code></a>, <a href='https://github.com/hsloot/rmo/blob/master/R/allShow-S4.R'><code>R/allShow-S4.R</code></a>, and 2 more</small>
     <div class="hidden name"><code>ExponentialBernsteinFunction-class.Rd</code></div>
     </div>
 
@@ -157,6 +157,9 @@ $$</p>
 
     <pre class="usage"><span class='co'># S4 method for ExponentialBernsteinFunction</span>
 <span class='fu'>initialize</span><span class='op'>(</span><span class='va'>.Object</span>, <span class='va'>lambda</span><span class='op'>)</span>
+
+<span class='co'># S4 method for ExponentialBernsteinFunction</span>
+<span class='fu'>show</span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span>
 
 <span class='co'># S4 method for ExponentialBernsteinFunction</span>
 <span class='fu'><a href='LevyBernsteinFunction-class.html'>levyDensity</a></span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span>
@@ -199,6 +202,7 @@ in Chp. 16 of (Schilling et al. 2012)
     
 <ul>
 <li><p><code>initialize,ExponentialBernsteinFunction-method</code>: Constructor</p></li>
+<li><p><code>show,ExponentialBernsteinFunction-method</code>: Display the object.</p></li>
 <li><p><code>levyDensity,ExponentialBernsteinFunction-method</code>: see <a href='LevyBernsteinFunction-class.html'>LevyBernsteinFunction</a></p></li>
 <li><p><code>stieltjesDensity,ExponentialBernsteinFunction-method</code>: see <a href='CompleteBernsteinFunction-class.html'>CompleteBernsteinFunction</a></p></li>
 </ul>
@@ -241,13 +245,9 @@ doi: <a href='https://doi.org/10.1515/9783110269338'>10.1515/9783110269338</a>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>ExponentialBernsteinFunction</span><span class='op'>(</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; An object of class "ExponentialBernsteinFunction"
-#&gt; Slot "lambda":
-#&gt; numeric(0)
-#&gt; </div><div class='input'><span class='fu'>ExponentialBernsteinFunction</span><span class='op'>(</span>lambda <span class='op'>=</span> <span class='fl'>0.5</span><span class='op'>)</span>
+#&gt; 	 (invalid or not initialized)</div><div class='input'><span class='fu'>ExponentialBernsteinFunction</span><span class='op'>(</span>lambda <span class='op'>=</span> <span class='fl'>0.5</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; An object of class "ExponentialBernsteinFunction"
-#&gt; Slot "lambda":
-#&gt; [1] 0.5
-#&gt; </div></pre>
+#&gt; - lambda: 0.5</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
