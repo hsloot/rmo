@@ -317,6 +317,11 @@ test_that("`valueOf` for `AlphaStableBernsteinFunction`", {
     value_of_naive(actual_fn, x, difference_order = difference_order,
                    n = n, k = k, cscale = cscale,
                    alpha = alpha))
+
+  expect_error(
+    valueOf(AlphaStableBernsteinFunction(log2(2 - 1e-4)), x, difference_order = 1L), NA)
+  expect_error(
+    valueOf(AlphaStableBernsteinFunction(log2(2 - (1 - 1e-4))), x, difference_order = 1L), NA)
 })
 
 

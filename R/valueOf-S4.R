@@ -304,6 +304,9 @@ setMethod("valueOf", "LevyBernsteinFunction",
         qassert(n, "X1(0,)")
         qassert(k, "N1[0,)")
         out <- multiply_binomial_coefficient(valueOf0(object, x * cscale), n, k)
+      } else if (isTRUE(1L == difference_order)) {
+        out <- multiply_binomial_coefficient(valueOf0(object, (x + 1) * cscale), n, k) -
+          multiply_binomial_coefficient(valueOf0(object, x * cscale), n, k)
       } else {
         out <- valueOf(object, x, difference_order, n, k, cscale, ...,
           method = defaultMethod(object), tolerance = tolerance)
@@ -396,6 +399,9 @@ setMethod("valueOf", "CompleteBernsteinFunction",
         qassert(n, "X1(0,)")
         qassert(k, "N1[0,)")
         out <- multiply_binomial_coefficient(valueOf0(object, x * cscale), n, k)
+      } else if (isTRUE(1L == difference_order)) {
+        out <- multiply_binomial_coefficient(valueOf0(object, (x + 1) * cscale), n, k) -
+          multiply_binomial_coefficient(valueOf0(object, x * cscale), n, k)
       } else {
         out <- valueOf(object, x, difference_order, n, k, cscale, ...,
           method = defaultMethod(object), tolerance = tolerance)

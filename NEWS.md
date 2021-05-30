@@ -1,12 +1,17 @@
+# rmo 0.5.4
+
+- Use explicit first-order iterated difference for `difference_order == 1L` in `valueOf` to
+  avoid endpoint-singularity problems in numerical integration. 
+
 # rmo 0.5.3
 
 - Fix implementation of initializers and validity methods. In particular, `validObject` can now
-  be called with the argument `test = TRUE` without causing an error. 
+  be called with the argument `test = TRUE` without causing an error.
 - Add show method for  `BernsteinFunction`-classes.
 
 # rmo 0.5.2
 
-- Allow pass-though of arguments to `integrate` in functions `valueOf`, 
+- Allow pass-though of arguments to `integrate` in functions `valueOf`,
   `uexIntensities`, `exIntensities`, and `exQMatrix`.
 
 # rmo 0.5.1
@@ -16,7 +21,7 @@
 # rmo 0.5.0
 
 - Rename Cuadras-Augé and Lévy-frailty model algorithms. Now a sampling algorithm
-  follows the format `r*mo_*` where the first `*` indicates the input-parameter 
+  follows the format `r*mo_*` where the first `*` indicates the input-parameter
   and the second on the algorithm, e.g. `rexmo_markovian` has `ex_intensities` as
   input parameters and uses the Markovian model for the default counting process.
 
