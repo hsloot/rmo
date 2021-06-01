@@ -1,3 +1,7 @@
+# rmo 0.5.5
+
+- Explicitly handle integration error with possible adjustment for very small values.
+
 # rmo 0.5.4
 
 - Use explicit first-order iterated difference for `difference_order == 1L` in `valueOf` to

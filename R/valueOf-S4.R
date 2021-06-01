@@ -334,11 +334,23 @@ setMethod("valueOf", "LevyBernsteinFunction",
         }
         out <- sapply(x,
           function(.x) {
-            integrate(integrand_fn, .x = .x,
+            res <- integrate(integrand_fn, .x = .x,
               lower = attr(levy_density, "lower"),
               upper = attr(levy_density, "upper"),
-              rel.tol = tolerance,
-              ...)$value
+              rel.tol = tolerance, stop.on.error = FALSE,
+              ...)
+            if (!isTRUE("OK" == res$message) && abs(.x) < 50 * .Machine$double.eps) {
+              res <- integrate(integrand_fn, .x = 50 * .Machine$double.eps,
+                lower = attr(levy_density, "lower"),
+                upper = attr(levy_density, "upper"),
+                rel.tol = tolerance, stop.on.error = FALSE,
+                ...)
+            }
+            if (!isTRUE("OK" == res$message)) {
+              stop(sprintf("Numerical integration failed with error: %s", res$message))
+            }
+
+            res$value
           })
       } else {
         out <- multiply_binomial_coefficient(
@@ -428,11 +440,23 @@ setMethod("valueOf", "CompleteBernsteinFunction",
         }
         out <- sapply(x,
           function(.x) {
-            integrate(integrand_fn, .x = .x,
+            res <- integrate(integrand_fn, .x = .x,
               lower = attr(stieltjes_density, "lower"),
               upper = attr(stieltjes_density, "upper"),
-              rel.tol = tolerance,
-              ...)$value
+              rel.tol = tolerance, stop.on.error = FALSE,
+              ...)
+            if (!isTRUE("OK" == res$message) && abs(.x) < 50 * .Machine$double.eps) {
+              res <- integrate(integrand_fn, .x = 50 * .Machine$double.eps,
+                lower = attr(stieltjes_density, "lower"),
+                upper = attr(stieltjes_density, "upper"),
+                rel.tol = tolerance, stop.on.error = FALSE,
+                ...)
+            }
+            if (!isTRUE("OK" == res$message)) {
+              stop(sprintf("Numerical integration failed with error: %s", res$message))
+            }
+
+            res$value
           })
       } else {
         out <- multiply_binomial_coefficient(
