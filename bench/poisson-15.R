@@ -1,6 +1,6 @@
 #' ## Poisson jump CPP ##
 #'
-#' For the CPP LFM parameterisation with *fixed size* jumps, we chose the
+#' For the CPP LFM parametrisation with *fixed size* jumps, we chose the
 #' parameters \( \lambda = 1 \) and \( \eta = 0.5 \).  This corresponds to a
 #' mean-jump-size of \( 0.5 \).
 #+ r parameters

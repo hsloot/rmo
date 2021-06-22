@@ -6,8 +6,8 @@
 \alias{intensities_constant}
 \alias{ex_intensities_linear}
 \alias{intensities_linear}
-\alias{ex_intensities_cuadras_auge}
-\alias{intensities_cuadras_auge}
+\alias{ex_intensities_armageddon}
+\alias{intensities_armageddon}
 \alias{ex_intensities_poisson}
 \alias{intensities_poisson}
 \alias{ex_intensities_alpha_stable}
@@ -30,9 +30,9 @@ ex_intensities_linear(d, scale)
 
 intensities_linear(d, scale)
 
-ex_intensities_cuadras_auge(d, alpha, beta)
+ex_intensities_armageddon(d, alpha, beta)
 
-intensities_cuadras_auge(d, alpha, beta)
+intensities_armageddon(d, alpha, beta)
 
 ex_intensities_poisson(d, lambda, eta)
 
@@ -103,9 +103,9 @@ ex_intensities_linear(10L, scale=1)
 
 intensities_linear(10L, scale=1)
 
-ex_intensities_cuadras_auge(10L, alpha=1, beta=0.5)
+ex_intensities_armageddon(10L, alpha=1, beta=0.5)
 
-intensities_cuadras_auge(10L, alpha=1, beta=0.5)
+intensities_armageddon(10L, alpha=1, beta=0.5)
 
 ex_intensities_poisson(10L, lambda = 0.5, eta = 0.2)
 

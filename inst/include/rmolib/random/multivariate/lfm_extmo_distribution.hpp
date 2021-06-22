@@ -11,10 +11,10 @@ namespace random {
 namespace internal {
 
 template <typename _T, class = void>
-struct __is_lfm_param_type : public std::false_type {};
+struct __is_lfm_extmo_param_type : public std::false_type {};
 
 template <typename _T>
-struct __is_lfm_param_type<
+struct __is_lfm_extmo_param_type<
     _T,
     std::enable_if_t<
         decltype(std::declval<_T>().dim(), std::true_type())::value&& decltype(
@@ -29,16 +29,16 @@ struct __is_lfm_param_type<
 }  // namespace internal
 
 template <typename _T>
-struct is_lfm_param_type
-    : public internal::__is_lfm_param_type<std::remove_cv_t<_T>> {};
+struct is_lfm_extmo_param_type
+    : public internal::__is_lfm_extmo_param_type<std::remove_cv_t<_T>> {};
 
-//! true, if _T can be used to construct lfm_distribution<>::param_type
+//! true, if _T can be used to construct lfm_extmo_distribution<>::param_type
 template <typename _T>
-constexpr bool is_lfm_param_type_v = is_lfm_param_type<_T>::value;
+constexpr bool is_lfm_extmo_param_type_v = is_lfm_extmo_param_type<_T>::value;
 
 template <typename _RealType, typename _JumpDistribution,
           typename _ExponentialDistribution>
-class lfm_distribution {
+class lfm_extmo_distribution {
  private:
   using exponential_parm_t = typename _ExponentialDistribution::param_type;
   using jump_parm_t = typename _JumpDistribution::param_type;
@@ -49,7 +49,7 @@ class lfm_distribution {
 
   class param_type {
    public:
-    using distribution_type = lfm_distribution;
+    using distribution_type = lfm_extmo_distribution;
 
     param_type() { __validate_input(); };
 
@@ -86,11 +86,11 @@ class lfm_distribution {
 
     // Used for construction from a different specialization
     template <
-        typename _LFMParamType,
-        std::enable_if_t<!std::is_convertible_v<_LFMParamType, param_type> &&
-                             is_lfm_param_type_v<_LFMParamType>,
+        typename _LFMExtMOParamType,
+        std::enable_if_t<!std::is_convertible_v<_LFMExtMOParamType, param_type> &&
+                             is_lfm_extmo_param_type_v<_LFMExtMOParamType>,
                          int> = 0>
-    explicit param_type(_LFMParamType&& parm)
+    explicit param_type(_LFMExtMOParamType&& parm)
         : param_type{parm.dim(), parm.killing(), parm.drift(), parm.intensity(),
                      parm.jump_param()} {}
 
@@ -107,7 +107,7 @@ class lfm_distribution {
 
     auto jump_param() const { return std::get<1>(compound_poisson_parm_); }
 
-    friend class lfm_distribution;
+    friend class lfm_extmo_distribution;
 
     friend bool operator==(const param_type& lhs, const param_type& rhs) {
       return lhs.dim_ == rhs.dim_ && lhs.killing_parm_ == rhs.killing_parm_ &&
@@ -147,20 +147,20 @@ class lfm_distribution {
     }
 
     static_assert(std::is_floating_point_v<_RealType>,
-                  "Class template rmolib::random::lfm_distribution<> must be "
+                  "Class template rmolib::random::lfm_extmo_distribution<> must be "
                   "parametrized with floating point type");
   };
 
-  lfm_distribution() = default;
+  lfm_extmo_distribution() = default;
 
-  explicit lfm_distribution(const std::size_t dim,
+  explicit lfm_extmo_distribution(const std::size_t dim,
                             const exponential_parm_t& killing_parm,
                             const _RealType drift,
                             const exponential_parm_t& intensity_parm,
                             const jump_parm_t& jump_parm)
       : param_type{dim, killing_parm, drift, intensity_parm, jump_parm} {}
 
-  explicit lfm_distribution(const std::size_t dim, const _RealType killing,
+  explicit lfm_extmo_distribution(const std::size_t dim, const _RealType killing,
                             const _RealType drift, const _RealType intensity,
                             const jump_parm_t& jump_parm)
       : param_type{dim, killing, drift, intensity, jump_parm} {}
@@ -171,23 +171,23 @@ class lfm_distribution {
                     std::decay_t<std::tuple_element_t<0, std::tuple<_Args...>>>,
                     jump_parm_t>,
                 int> = 0>
-  explicit lfm_distribution(const std::size_t dim, const _RealType killing,
+  explicit lfm_extmo_distribution(const std::size_t dim, const _RealType killing,
                             const _RealType drift, const _RealType intensity,
                             _Args&&... jump_args)
       : param_type{dim, killing, drift, intensity,
                    std::forward<_Args>(jump_args)...} {}
 
-  explicit lfm_distribution(const param_type& parm) : parm_{parm} {}
+  explicit lfm_extmo_distribution(const param_type& parm) : parm_{parm} {}
 
   // Used for construction from a different specialization
-  template <typename _LFMParamType,
+  template <typename _LFMExtMOParamType,
             std::enable_if_t<
-                !std::is_convertible_v<_LFMParamType, lfm_distribution> &&
-                    !std::is_convertible_v<_LFMParamType, param_type> &&
-                    is_lfm_param_type_v<_LFMParamType>,
+                !std::is_convertible_v<_LFMExtMOParamType, lfm_extmo_distribution> &&
+                    !std::is_convertible_v<_LFMExtMOParamType, param_type> &&
+                    is_lfm_extmo_param_type_v<_LFMExtMOParamType>,
                 int> = 0>
-  explicit lfm_distribution(_LFMParamType&& parm)
-      : parm_{std::forward<_LFMParamType>(parm)} {}
+  explicit lfm_extmo_distribution(_LFMExtMOParamType&& parm)
+      : parm_{std::forward<_LFMExtMOParamType>(parm)} {}
 
   // compiler generated ctor and assignment op is sufficient
 
@@ -252,13 +252,13 @@ class lfm_distribution {
     }
   }
 
-  friend bool operator==(const lfm_distribution& lhs,
-                         const lfm_distribution& rhs) {
+  friend bool operator==(const lfm_extmo_distribution& lhs,
+                         const lfm_extmo_distribution& rhs) {
     return lhs.parm_ == rhs.parm_;
   }
 
-  friend bool operator!=(const lfm_distribution& lhs,
-                         const lfm_distribution& rhs) {
+  friend bool operator!=(const lfm_extmo_distribution& lhs,
+                         const lfm_extmo_distribution& rhs) {
     return !(lhs == rhs);
   }
 
@@ -297,13 +297,13 @@ class lfm_distribution {
 
   static_assert(type_traits::is_safe_numeric_cast_v<
                     _RealType, typename _ExponentialDistribution::result_type>,
-                "Class template rmolib::random::lfm_distribution<> must be "
+                "Class template rmolib::random::lfm_extmo_distribution<> must be "
                 "parametrized with exponential_distribution-type with suitable "
                 "result_type");
   static_assert(
       type_traits::is_safe_numeric_cast_v<
           _RealType, typename _JumpDistribution::result_type>,
-      "Class template rmolib::random::lfm_distribution<> must be "
+      "Class template rmolib::random::lfm_extmo_distribution<> must be "
       "parametrized with jump distribution-type with suitable result_type");
 };
 
@@ -313,13 +313,13 @@ class lfm_distribution {
   template <class _CharType, class _Traits, typename _RealType, typename
   _ExponentialDistribution> std::basic_ostream<_CharType, _Traits>&
   operator<<(std::basic_ostream<_CharType, _Traits>& os,
-            lfm_distribution<_RealType, _ExponentialDistribution,
+            lfm_extmo_distribution<_RealType, _ExponentialDistribution,
   _JumpDistribution>& dist);
 
   template <class _CharType, class _Traits, typename _RealType, typename
   _ExponentialDistribution> std::basic_istream<_CharType, _Traits>&
   operator>>(std::basic_istream<_CharType, _Traits>& is,
-             lfm_distribution<_RealType, _ExponentialDistribution,
+             lfm_extmo_distribution<_RealType, _ExponentialDistribution,
   _JumpDistribution>& dist);
 */
 

@@ -42,7 +42,7 @@ NULL
 #'   with [rexmo_markovian()].
 #' - *Lévy-frailty model for compound Poisson subordinators* for the corresponding
 #'   subclass of extendible Marshall-Olkin distributions with [rextmo_lfm()].
-#' - *Exogenous shock model* for the Cuadras-Augé subclass with [rcamo_esm()].
+#' - *Exogenous shock model* for the armageddon ESM subclass with [rarmextmo_esm()].
 #'
 #' @docType package
 #' @name rmo

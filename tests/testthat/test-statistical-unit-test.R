@@ -9,7 +9,7 @@ total_threshold <- 1e-2
 esm_threshold <- total_threshold / 25
 arnold_threshold <- total_threshold / 25 * 3
 ex_arnold_threshold <- total_threshold / 25 * 10
-cuadras_auge_threshold <- total_threshold / 25
+armageddon_extmo_threshold <- total_threshold / 25
 lfm_cpp_threshold <- total_threshold / 25 * 10
 
 
@@ -36,7 +36,7 @@ ex_ks_test <- function(n, d, FUN, ex_intensities) { # nolint
 #' @importFrom stats ks.test
 #' @noRd
 #' @keywords internal test
-cuadras_auge_ks_test <- function(n, d, FUN, alpha, beta) { # nolint
+armageddon_extmo_ks_test <- function(n, d, FUN, alpha, beta) { # nolint
   min_rate <- (alpha * d + beta)
   x <- min_rate * apply(FUN(n, d, alpha, beta), 1, min)
   ks.test(x, stats::pexp)
@@ -248,10 +248,10 @@ test_that("Exchangeable Arnold model passes statistical unit test", {
 })
 
 
-## #### Cuadras-Augé model ####
+## #### Armageddon ESM ####
 
-test_that("Cuadras-Augé model passes statistical unit test", {
-  unit_threshold <- cuadras_auge_threshold / 2
+test_that("Armageddon ESM passes statistical unit test", {
+  unit_threshold <- armageddon_extmo_threshold / 2
   d <- 15
 
   bf <- testutils.rmo::fuzzy_bf(SumOfBernsteinFunctions(
@@ -261,7 +261,7 @@ test_that("Cuadras-Augé model passes statistical unit test", {
   alpha <- bf@second@scale
   beta <- bf@first@constant
   expect_not_rejected(
-    cuadras_auge_ks_test(n, d, rcamo_esm, alpha, beta),
+    armageddon_extmo_ks_test(n, d, rarmextmo_esm, alpha, beta),
     unit_threshold
   )
 
@@ -274,7 +274,7 @@ test_that("Cuadras-Augé model passes statistical unit test", {
   alpha <- bf@second@scale
   beta <- bf@first@constant
   expect_not_rejected(
-    cuadras_auge_ks_test(n, d, rcamo_esm, alpha, beta),
+    armageddon_extmo_ks_test(n, d, rarmextmo_esm, alpha, beta),
     unit_threshold
   )
 })

@@ -1,8 +1,8 @@
 ---
-title: "Cuadras-Augé distributions"
+title: "Armageddon shock model distributions"
 references:
 - id: Mai2009a
-  title: Efficiently sampling exchangeable Cuadras–Augé copulas in high dimensions
+  title: Efficiently sampling exchangeable armageddon ESM copulas in high dimensions
   author:
   - family: Mai
     given: Jan-Frederik
@@ -29,13 +29,13 @@ knitr::opts_chunk$set(
 )
 ```
 
-The multivariate *Cuadras-Augé* family is a very simple example of a [mixture of Marshall--Olkin distributions](Mixing-Marshall-Olkin-distributions.html).
+The multivariate *armageddon shock model* family is a very simple example of a [mixture of Marshall--Olkin distributions](Mixing-Marshall-Olkin-distributions.html).
 
 For a detailed mathematical treatment of this class, we refer to the references at the end of this document.
 
 ## Definition and survival function
 
-We say that a random vector has  multivariate Cuadras-Augé distribution if there exist \( \lambda, \lambda^G \geq 0 \) with \( \lambda + \lambda^G > 0 \) such that for \( t_{[1]} \geq \cdots \geq t_{[d]} \)
+We say that a random vector has  multivariate armageddon shock model distribution if there exist \( \lambda, \lambda^G \geq 0 \) with \( \lambda + \lambda^G > 0 \) such that for \( t_{[1]} \geq \cdots \geq t_{[d]} \)
 \[
   \bar{F} (\boldsymbol{t})
     = \exp{\left \{ - (\lambda + \lambda^G) t_{[1]} - \lambda \sum_{i = 2}^{d} t_{[i]}  \right \}}, \quad \boldsymbol{t} \geq 0 .

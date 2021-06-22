@@ -5,7 +5,7 @@
 // clang-format off
 #include <rmolib/random/r_engine.hpp> // must be included before <rmolib/*>
 // clang-format on
-#include <rmolib/random/multivariate/cuadras_auge_distribution.hpp>
+#include <rmolib/random/multivariate/armageddon_extmo_distribution.hpp>
 #include <rmolib/random/univariate/exponential_distribution.hpp>
 #include <testthat.h>
 
@@ -13,11 +13,11 @@
 #include "testutils-tester_distribution.h"
 
 using exponential_dist_t = rmolib::random::exponential_distribution<double>;
-using cuadras_auge_dist_t =
-    rmolib::random::cuadras_auge_distribution<double, exponential_dist_t>;
-using parm_t = cuadras_auge_dist_t::param_type;
+using armageddon_extmo_dist_t =
+    rmolib::random::armageddon_extmo_distribution<double, exponential_dist_t>;
+using parm_t = armageddon_extmo_dist_t::param_type;
 
-namespace test_cuadras_auge_distribution {
+namespace test_armageddon_extmo_distribution {
 
 class generic_param_type {
  public:
@@ -28,13 +28,13 @@ class generic_param_type {
       : dim_{dim}, alpha_{alpha}, beta_{beta} {}
 
   template <
-      typename _CuadrasAugeParamType,
+      typename _ArmageddonExtMOParamType,
       typename std::enable_if<
-          !std::is_convertible_v<_CuadrasAugeParamType, generic_param_type> &&
-              rmolib::random::is_cuadras_auge_param_type_v<
-                  _CuadrasAugeParamType>,
+          !std::is_convertible_v<_ArmageddonExtMOParamType, generic_param_type> &&
+              rmolib::random::is_armageddon_extmo_param_type_v<
+                  _ArmageddonExtMOParamType>,
           int>::type = 0>
-  explicit generic_param_type(_CuadrasAugeParamType&& parm)
+  explicit generic_param_type(_ArmageddonExtMOParamType&& parm)
       : dim_{parm.dim()}, alpha_{parm.alpha()}, beta_{parm.beta()} {}
 
   // compiler generated ctor and assignment op is sufficient
@@ -49,12 +49,12 @@ class generic_param_type {
   double beta_{0};
 };
 
-}  // namespace test_cuadras_auge_distribution
+}  // namespace test_armageddon_extmo_distribution
 
-using generic_parm_t = test_cuadras_auge_distribution::generic_param_type;
+using generic_parm_t = test_armageddon_extmo_distribution::generic_param_type;
 
-template <typename cuadras_auge_dist_t, typename generic_parm_t>
-void tester_distribution<cuadras_auge_dist_t, generic_parm_t>::__param_test(
+template <typename armageddon_extmo_dist_t, typename generic_parm_t>
+void tester_distribution<armageddon_extmo_dist_t, generic_parm_t>::__param_test(
     const generic_param_type& test_parm) const {
   const auto dist = distribution_type{test_parm};
   expect_true(dist.dim() == test_parm.dim());
@@ -62,14 +62,14 @@ void tester_distribution<cuadras_auge_dist_t, generic_parm_t>::__param_test(
   expect_true(dist.beta() == test_parm.beta());
 }
 
-using dist_tester_t = tester_distribution<cuadras_auge_dist_t, generic_parm_t>;
+using dist_tester_t = tester_distribution<armageddon_extmo_dist_t, generic_parm_t>;
 
-context("cuadras_auge_distribution") {
+context("armageddon_extmo_distribution") {
   const std::vector<generic_parm_t> test_cases = {
       generic_parm_t{}, generic_parm_t{std::size_t{2}, 1., 0.},
       generic_parm_t{std::size_t{2}, 0., 1.},
       generic_parm_t{std::size_t{3}, 0.4, 0.2},
       generic_parm_t{std::size_t{3}, 0.7, 0.1}};
-  auto dist_tester = dist_tester_t{"cuadras_auge_distribution", test_cases};
+  auto dist_tester = dist_tester_t{"armageddon_extmo_distribution", test_cases};
   dist_tester.run_tests(r_engine{});
 }

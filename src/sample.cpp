@@ -6,9 +6,9 @@
 #include "rcpp_distribution_caller.h"
 #include "rmolib/algorithm/r_shuffle.hpp"
 #include "rmolib/random/multivariate/arnold_mo_distribution.hpp"
-#include "rmolib/random/multivariate/cuadras_auge_distribution.hpp"
+#include "rmolib/random/multivariate/armageddon_extmo_distribution.hpp"
 #include "rmolib/random/multivariate/esm_mo_distribution.hpp"
-#include "rmolib/random/multivariate/lfm_distribution.hpp"
+#include "rmolib/random/multivariate/lfm_extmo_distribution.hpp"
 #include "rmolib/random/multivariate/markovian_exmo_distribution.hpp"
 #include "rmolib/random/univariate/deterministic_distribution.hpp"
 #include "rmolib/random/univariate/exponential_distribution.hpp"
@@ -89,14 +89,14 @@ NumericMatrix Rcpp__rexmo_markovian(const std::size_t n, const std::size_t d,
 }
 
 // [[Rcpp::export]]
-NumericMatrix Rcpp__rcamo_esm(const std::size_t n, const std::size_t d,
+NumericMatrix Rcpp__rarmextmo_esm(const std::size_t n, const std::size_t d,
                               const double alpha, const double beta) {
   using exponential_distribution =
       rmolib::random::exponential_distribution<double>;
-  using cuadras_auge_distribution =
-      rmolib::random::cuadras_auge_distribution<double,
+  using armageddon_extmo_distribution =
+      rmolib::random::armageddon_extmo_distribution<double,
                                                 exponential_distribution>;
-  using caller_t = rcpp_distribution_caller<cuadras_auge_distribution>;
+  using caller_t = rcpp_distribution_caller<armageddon_extmo_distribution>;
 
   return caller_t::call(r_engine{}, n, d, alpha, beta);
 }
@@ -117,21 +117,21 @@ NumericMatrix Rcpp__rextmo_lfm(const std::size_t n, const std::size_t d,
       rmolib::random::pareto_distribution<double, uniform_real_distribution>;
 
   if ("rposval" == rjump_name) {
-    using caller_t = rcpp_distribution_caller<rmolib::random::lfm_distribution<
+    using caller_t = rcpp_distribution_caller<rmolib::random::lfm_extmo_distribution<
         double, deterministic_distribution, exponential_distribution>>;
 
     const auto value = get_param<double>(rjump_arg_list, "value");
     return caller_t::call(r_engine{}, n, d, rate_killing, rate_drift, rate,
                           value);
   } else if ("rexp" == rjump_name) {
-    using caller_t = rcpp_distribution_caller<rmolib::random::lfm_distribution<
+    using caller_t = rcpp_distribution_caller<rmolib::random::lfm_extmo_distribution<
         double, exponential_distribution, exponential_distribution>>;
 
     const auto lambda = get_param<double>(rjump_arg_list, "rate");
     return caller_t::call(r_engine{}, n, d, rate_killing, rate_drift, rate,
                           lambda);
   } else if ("rpareto" == rjump_name) {
-    using caller_t = rcpp_distribution_caller<rmolib::random::lfm_distribution<
+    using caller_t = rcpp_distribution_caller<rmolib::random::lfm_extmo_distribution<
         double, pareto_distribution, exponential_distribution>>;
 
     const auto alpha = get_param<double>(rjump_arg_list, "alpha");
@@ -204,9 +204,9 @@ NumericMatrix rtest__rexmo_markovian(const std::size_t n, const std::size_t d,
 
 //' @keywords internal test
 // [[Rcpp::export]]
-NumericMatrix rtest__rcamo_esm(const std::size_t n, const std::size_t d,
+NumericMatrix rtest__rarmextmo_esm(const std::size_t n, const std::size_t d,
                                const double alpha, const double beta) {
-  return Rcpp__rcamo_esm(n, d, alpha, beta);
+  return Rcpp__rarmextmo_esm(n, d, alpha, beta);
 }
 
 //' @keywords internal test

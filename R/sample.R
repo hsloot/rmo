@@ -56,7 +56,6 @@
 #'  \insertAllCited{}
 #'
 #' @export
-#' @name rmo_esm
 rmo_esm <- function(n, d, intensities) {
   Rcpp__rmo_esm(n, d, intensities)
 }
@@ -137,7 +136,6 @@ rmo_arnold <- function(n, d, intensities) {
 #' rexmo_markovian(10, 2, c(0, 1))      ## comonotone
 #'
 #' @export
-#' @name rexmo_markovian
 rexmo_markovian <- function(n, d, ex_intensities) {
   Rcpp__rexmo_markovian(n, d, ex_intensities)
 }
@@ -146,9 +144,9 @@ rexmo_markovian <- function(n, d, ex_intensities) {
 ##
 
 
-#' Sample from Cuadras-Auge distribution
+#' Sample from the armageddon ESM distribution
 #'
-#' Draws `n` independent samples from a `d` variate Cuadras-Augé distribution
+#' Draws `n` independent samples from a `d` variate armageddon ESM distribution
 #' with parameters `alpha` and `beta`.
 #'
 #' @param n Number of samples
@@ -156,14 +154,14 @@ rexmo_markovian <- function(n, d, ex_intensities) {
 #' @param alpha Shock intensity of individual shocks
 #' @param beta Shock intensity of global shock
 #'
-#' @return `rmo_esm_cuadras_auge` implements an optimized version of the
-#' *exogenous shock model* algorithm for the Cuadras-Augé family and
+#' @return `rarmextmo_esm` implements an optimized version of the
+#' *exogenous shock model* algorithm for the armageddon shock family and
 #' returns an \eqn{n \times d}{n x d} array matrix with rows corresponding to
 #' the independent samples of size \eqn{d}.
 #'
 #' @details
 #' __Parameterisation__:
-#' The Cuadras-Augé distribution is a special case of the exchangeable Marshall-Olkin
+#' The armageddon ESM distribution is a special case of the exchangeable Marshall-Olkin
 #' distribution where \eqn{\lambda_i = 0 \forall 1 < i < d}.
 #' The individual shock rate is \eqn{\alpha = \lambda_1} and the global shock
 #' rate is \eqn{\beta = \lambda_d}.
@@ -172,14 +170,13 @@ rexmo_markovian <- function(n, d, ex_intensities) {
 #' @family sampling-algorithms
 #'
 #' @examples
-#' rcamo_esm(10L, 2L, 0.5, 0.2)
-#' rcamo_esm(10L, 2L, 0, 1)      ## comonotone
-#' rcamo_esm(10L, 2L, 1, 0)      ## independence
+#' rarmextmo_esm(10L, 2L, 0.5, 0.2)
+#' rarmextmo_esm(10L, 2L, 0, 1)      ## comonotone
+#' rarmextmo_esm(10L, 2L, 1, 0)      ## independence
 #'
 #' @export
-#' @name rmo_esm_cuadras_auge
-rcamo_esm <- function(n, d, alpha, beta) {
-  Rcpp__rcamo_esm(n, d, alpha, beta)
+rarmextmo_esm <- function(n, d, alpha, beta) {
+  Rcpp__rarmextmo_esm(n, d, alpha, beta)
 }
 
 
@@ -234,7 +231,6 @@ rcamo_esm <- function(n, d, alpha, beta) {
 #' @family sampling-algorithms
 #'
 #' @export
-#' @name rextmo_lfm
 rextmo_lfm <- function(n, d,
                         rate, rate_killing, rate_drift,
                         rjump_name, rjump_arg_list = list()) {

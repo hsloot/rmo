@@ -119,9 +119,9 @@ rexmo_markovian_bivariate <- function( # nolint
 }
 
 
-## #### Cuadras-Augé model ####
+## #### Armageddon shock model ####
 
-#' Bivariate implementatino of the Cuadras-Augé ESM
+#' Bivariate implementatino of the Armageddon ESM
 #'
 #' @param n Number of samples (> 0)
 #' @param d Dimension (== 2)
@@ -129,12 +129,12 @@ rexmo_markovian_bivariate <- function( # nolint
 #' @param beta Global shock rate (>= 0; alpha + beta > 0)
 #'
 #' @examples
-#' rcamo_esm_bivariate(10, 2, 0.5, 0.2)
-#' rcamo_esm_bivariate(10, 2, 0, 1)      ## comonotone
-#' rcamo_esm_bivariate(10, 2, 1, 0)      ## independence
+#' rarmextmo_esm_bivariate(10, 2, 0.5, 0.2)
+#' rarmextmo_esm_bivariate(10, 2, 0, 1)      ## comonotone
+#' rarmextmo_esm_bivariate(10, 2, 1, 0)      ## independence
 #' @include sample-helper.R
 #' @export
-rcamo_esm_bivariate <- function( # nolint
+rarmextmo_esm_bivariate <- function( # nolint
   n, d = 2, alpha = 1, beta = 0) {
   stopifnot(
     is.numeric(n) && 1L == length(n) && 0 == n %% 1 && n > 0 &&

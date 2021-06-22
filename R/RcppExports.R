@@ -33,8 +33,8 @@ Rcpp__rexmo_markovian <- function(n, d, ex_intensities) {
     .Call(`_rmo_Rcpp__rexmo_markovian`, n, d, ex_intensities)
 }
 
-Rcpp__rcamo_esm <- function(n, d, alpha, beta) {
-    .Call(`_rmo_Rcpp__rcamo_esm`, n, d, alpha, beta)
+Rcpp__rarmextmo_esm <- function(n, d, alpha, beta) {
+    .Call(`_rmo_Rcpp__rarmextmo_esm`, n, d, alpha, beta)
 }
 
 Rcpp__rextmo_lfm <- function(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list) {
@@ -57,8 +57,8 @@ rtest__rexmo_markovian <- function(n, d, ex_intensities) {
 }
 
 #' @keywords internal test
-rtest__rcamo_esm <- function(n, d, alpha, beta) {
-    .Call(`_rmo_rtest__rcamo_esm`, n, d, alpha, beta)
+rtest__rarmextmo_esm <- function(n, d, alpha, beta) {
+    .Call(`_rmo_rtest__rarmextmo_esm`, n, d, alpha, beta)
 }
 
 #' @keywords internal test

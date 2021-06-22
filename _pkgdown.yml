@@ -11,8 +11,9 @@ reference:
   contents:
   - matches("rmo_[a-z]+")
   - starts_with("rexmo")
-  - starts_with("rcamo")
   - starts_with("rextmo")
+  - starts_with("rarmextmo")
+
 
 - title: Drop-in parameter factories
   desc: ~

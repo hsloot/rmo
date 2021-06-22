@@ -82,7 +82,7 @@ We have
       + b x , \quad x \geq 0 .
 \]
 
-This model produces a [multivariate Cuadras-Augé distribution](Cuadras-Auge-distribution.html).
+This model produces a [multivariate armageddon shock model distribution](Armageddon-ESM-distribution.html).
 
 
 ## Compound Poisson process

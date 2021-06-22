@@ -1,3 +1,7 @@
+# rmo 0.6
+
+- Rename *Cuadras-Augé* to *armageddon ESM* to better reflect the nature of the distribution.
+
 # rmo 0.5.5
 
 - Explicitly handle integration error with possible adjustment for very small values.
@@ -5,7 +9,7 @@
 # rmo 0.5.4
 
 - Use explicit first-order iterated difference for `difference_order == 1L` in `valueOf` to
-  avoid endpoint-singularity problems in numerical integration. 
+  avoid endpoint-singularity problems in numerical integration.
 
 # rmo 0.5.3
 

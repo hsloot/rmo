@@ -45,7 +45,7 @@ The following algorithms are implemented:
 with \code{\link[=rexmo_markovian]{rexmo_markovian()}}.
 \item \emph{Lévy-frailty model for compound Poisson subordinators} for the corresponding
 subclass of extendible Marshall-Olkin distributions with \code{\link[=rextmo_lfm]{rextmo_lfm()}}.
-\item \emph{Exogenous shock model} for the Cuadras-Augé subclass with \code{\link[=rcamo_esm]{rcamo_esm()}}.
+\item \emph{Exogenous shock model} for the armageddon ESM subclass with \code{\link[=rarmextmo_esm]{rarmextmo_esm()}}.
 }
 }
 

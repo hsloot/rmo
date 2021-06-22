@@ -1,0 +1,75 @@
+---
+title: "Benchmark Overview"
+author: "Henrik Sloot <henrik.sloot@tum.de>"
+date: "6/22/2021"
+output: pdf_document
+params:
+  n: 5
+  n_max: 10
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r, include=FALSE}
+bench::cb_fetch()
+```
+
+```{r}
+viapply <- function(x, f, ...) vapply(x, f, integer(1), ...)
+vcapply <- function(x, f, ...) vapply(x, f, character(1), ...)
+first <- function(x) if (length(x)) head(x, 1L) else character(1)
+df <- bench::cb_read() %>%
+  filter(viapply(benchmarks, NROW) > 0L) %>%
+  filter(row_number() <= !!params$n | str_detect(vcapply(ref_names, first), "tag: v[[:digit:]\\.]+")) %>%
+  filter(row_number() <= !!params$n_max) %>%
+  unnest(benchmarks) %>%
+  mutate(
+    pretty_name = ifelse(viapply(ref_names, length) > 0L, vcapply(ref_names, first),
+                              abbrev_commit_hash),
+    pretty_name = factor(pretty_name, levels = rev(unique(pretty_name))), 
+    file = str_replace(file, "cuadras\\-auge\\.R", "armageddon-15.R"),
+    file = str_replace(file, "pareto\\.R", "pareto-15.R"),
+    file = str_replace(file, "poisson\\.R", "poisson-15.R"),
+    name = str_replace(name, "Ex[_ ]Arnold", "ExMarkovian"),
+    name = str_replace(name, "CuadrasAuge", "Armageddon"),
+    name = factor(name, levels = c("Armageddon", "ExMarkovian", "LFM", "Arnold", "ESM")),
+    parameter = str_to_title(str_extract(file, "^[[:alpha:]]+")),
+    parameter = factor(parameter, levels = sort(unique(parameter))),
+    dimension = as.integer(str_extract(file, "[[:digit:]]+")),
+    dimension = factor(dimension, sort(unique(dimension))))
+```
+
+## Comparison for \( d = 15 \)
+
+```{r}
+df %>%
+  filter(dimension == 15L) %>%
+  ggplot(aes(x = pretty_name, y = p50, group = name)) +
+    geom_ribbon(aes(ymin = p25, ymax = p75), alpha = 1/2) +
+    geom_line() +
+    coord_flip() +
+    scale_x_discrete(name = NULL) +
+    bench:::scale_y_bench_time(name = NULL, base = 10) +
+    facet_grid(name ~ parameter, scales = "free_x") + 
+    theme_minimal() + 
+    theme(panel.spacing.x = unit(1, "lines"))
+```
+
+## Comparison for Pareto parameter
+
+```{r}
+df %>%
+  filter(parameter == "Pareto") %>%
+  ggplot(aes(x = pretty_name, y = p50, group = name)) +
+    geom_ribbon(aes(ymin = p25, ymax = p75), alpha = 1/2) +
+    geom_line() +
+    coord_flip() +
+    scale_x_discrete(name = NULL) +
+    bench:::scale_y_bench_time(name = NULL, base = 10) +
+    facet_grid(name ~ dimension, scales = "free_x") + 
+    theme_minimal() + 
+    theme(panel.spacing.x = unit(1, "lines"))
+```

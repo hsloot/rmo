@@ -89,21 +89,21 @@ intensities_linear <- function(d, scale) { # nocov start
 #'   [ConstantBernsteinFunction-class]
 #'
 #' @examples
-#' ex_intensities_cuadras_auge(10L, alpha=1, beta=0.5)
+#' ex_intensities_armageddon(10L, alpha=1, beta=0.5)
 #'
 #' @export
 #' @rdname parameter
-ex_intensities_cuadras_auge <- function(d, alpha, beta) { # nocov start
+ex_intensities_armageddon <- function(d, alpha, beta) { # nocov start
   ex_intensities_linear(d, scale = alpha) +
     ex_intensities_constant(d, constant = beta)
 } # nocov end
 
 #' @examples
-#' intensities_cuadras_auge(10L, alpha=1, beta=0.5)
+#' intensities_armageddon(10L, alpha=1, beta=0.5)
 #'
 #' @export
 #' @rdname parameter
-intensities_cuadras_auge <- function(d, alpha, beta) { # nocov start
+intensities_armageddon <- function(d, alpha, beta) { # nocov start
   intensities_linear(d, scale = alpha) +
     intensities_constant(d, constant = beta)
 } # nocov end

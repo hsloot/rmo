@@ -1,6 +1,6 @@
 #' ## Pareto jump CPP ##
 #'
-#' For the CPP LFM parameterisation with *Pareto* jumps, we chose the parameters \( \lambda = 1 \),
+#' For the CPP LFM parametrisation with *Pareto* jumps, we chose the parameters \( \lambda = 1 \),
 #' \( \alpha = 0.5 \), and \( x_0 = 5e-4 \). This corresponds to a
 #' mean-jump-value of approximately \( 0.07 \).
 #+ r parameters

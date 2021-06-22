@@ -83,13 +83,13 @@ rmo_arnold(10L, 2L, c(0, 0, 1))         ## comonotone
 }
 \seealso{
 Other sampling-algorithms: 
+\code{\link{rarmextmo_esm}()},
 \code{\link{rexmo_markovian}()},
-\code{\link{rextmo_lfm}()},
-\code{\link{rmo_esm_cuadras_auge}}
+\code{\link{rextmo_lfm}()}
 
 Other sampling-algorithms: 
+\code{\link{rarmextmo_esm}()},
 \code{\link{rexmo_markovian}()},
-\code{\link{rextmo_lfm}()},
-\code{\link{rmo_esm_cuadras_auge}}
+\code{\link{rextmo_lfm}()}
 }
 \concept{sampling-algorithms}

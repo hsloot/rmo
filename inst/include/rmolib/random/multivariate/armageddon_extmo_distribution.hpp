@@ -13,10 +13,10 @@ namespace random {
 namespace internal {
 
 template <typename _T, class = void>
-struct __is_cuadras_auge_param_type : public std::false_type {};
+struct __is_armageddon_extmo_param_type : public std::false_type {};
 
 template <typename _T>
-struct __is_cuadras_auge_param_type<
+struct __is_armageddon_extmo_param_type<
     _T,
     std::enable_if_t<
         decltype(std::declval<_T>().dim(), std::true_type())::value&& decltype(
@@ -28,22 +28,22 @@ struct __is_cuadras_auge_param_type<
 }  // namespace internal
 
 template <typename _T>
-struct is_cuadras_auge_param_type
-    : public internal::__is_cuadras_auge_param_type<std::remove_cv_t<_T>> {};
+struct is_armageddon_extmo_param_type
+    : public internal::__is_armageddon_extmo_param_type<std::remove_cv_t<_T>> {};
 
-//! true, if _T can be used to construct cuadras_auge_distribution<>::param_type
+//! true, if _T can be used to construct armageddon_extmo_distribution<>::param_type
 template <typename _T>
-constexpr bool is_cuadras_auge_param_type_v =
-    is_cuadras_auge_param_type<_T>::value;
+constexpr bool is_armageddon_extmo_param_type_v =
+    is_armageddon_extmo_param_type<_T>::value;
 
 template <typename _RealType, typename _ExponentialDistribution>
-class cuadras_auge_distribution {
+class armageddon_extmo_distribution {
  public:
   using result_type = std::vector<_RealType>;
 
   class param_type {
    public:
-    using distribution_type = cuadras_auge_distribution;
+    using distribution_type = armageddon_extmo_distribution;
 
     param_type() = default;
 
@@ -52,12 +52,12 @@ class cuadras_auge_distribution {
         : dim_{dim}, alpha_parm_{alpha}, beta_parm_{beta} {}
 
     // Used for construction from a different specialization
-    template <typename _CuadrasAugeParamType,
+    template <typename _ArmageddonExtMOParamType,
               std::enable_if_t<
-                  !std::is_convertible_v<_CuadrasAugeParamType, param_type> &&
-                      is_cuadras_auge_param_type_v<_CuadrasAugeParamType>,
+                  !std::is_convertible_v<_ArmageddonExtMOParamType, param_type> &&
+                      is_armageddon_extmo_param_type_v<_ArmageddonExtMOParamType>,
                   int> = 0>
-    explicit param_type(_CuadrasAugeParamType&& parm)
+    explicit param_type(_ArmageddonExtMOParamType&& parm)
         : param_type{parm.dim(), parm.alpha(), parm.beta()} {}
 
     // compiler generated ctor and assignment op is sufficient
@@ -66,7 +66,7 @@ class cuadras_auge_distribution {
     auto alpha() const { return alpha_parm_.lambda(); }
     auto beta() const { return beta_parm_.lambda(); }
 
-    friend class cuadras_auge_distribution;
+    friend class armageddon_extmo_distribution;
 
     friend bool operator==(const param_type& lhs, const param_type& rhs) {
       return lhs.dim_ == rhs.dim_ && lhs.alpha_parm_ == rhs.alpha_parm_ &&
@@ -85,25 +85,25 @@ class cuadras_auge_distribution {
     exponential_parm_t beta_parm_{_RealType{0}};
   };
 
-  cuadras_auge_distribution() = default;
+  armageddon_extmo_distribution() = default;
 
-  explicit cuadras_auge_distribution(const std::size_t dim,
+  explicit armageddon_extmo_distribution(const std::size_t dim,
                                      const _RealType alpha,
                                      const _RealType beta)
       : parm_{dim, alpha, beta} {}
 
-  explicit cuadras_auge_distribution(const param_type& parm) : parm_{parm} {}
+  explicit armageddon_extmo_distribution(const param_type& parm) : parm_{parm} {}
 
   // Used for construction from a different specialization
-  template <typename _CuadrasAugeParamType,
+  template <typename _ArmageddonExtMOParamType,
             std::enable_if_t<
-                !std::is_convertible_v<_CuadrasAugeParamType,
-                                       cuadras_auge_distribution> &&
-                    !std::is_convertible_v<_CuadrasAugeParamType, param_type> &&
-                    is_cuadras_auge_param_type_v<_CuadrasAugeParamType>,
+                !std::is_convertible_v<_ArmageddonExtMOParamType,
+                                       armageddon_extmo_distribution> &&
+                    !std::is_convertible_v<_ArmageddonExtMOParamType, param_type> &&
+                    is_armageddon_extmo_param_type_v<_ArmageddonExtMOParamType>,
                 int> = 0>
-  explicit cuadras_auge_distribution(_CuadrasAugeParamType&& parm)
-      : parm_{std::forward<_CuadrasAugeParamType>(parm)} {}
+  explicit armageddon_extmo_distribution(_ArmageddonExtMOParamType&& parm)
+      : parm_{std::forward<_ArmageddonExtMOParamType>(parm)} {}
 
   // compiler generated ctor and assignment op is sufficient
 
@@ -141,13 +141,13 @@ class cuadras_auge_distribution {
     }
   }
 
-  friend bool operator==(const cuadras_auge_distribution& lhs,
-                         const cuadras_auge_distribution& rhs) {
+  friend bool operator==(const armageddon_extmo_distribution& lhs,
+                         const armageddon_extmo_distribution& rhs) {
     return lhs.parm_ == rhs.parm_;
   }
 
-  friend bool operator!=(const cuadras_auge_distribution& lhs,
-                         const cuadras_auge_distribution& rhs) {
+  friend bool operator!=(const armageddon_extmo_distribution& lhs,
+                         const armageddon_extmo_distribution& rhs) {
     return !(lhs == rhs);
   }
 
@@ -158,7 +158,7 @@ class cuadras_auge_distribution {
   static_assert(
       type_traits::is_safe_numeric_cast_v<
           _RealType, typename _ExponentialDistribution::result_type>,
-      "Class template rmolib::random::cuadras_auge_distribution<> must be "
+      "Class template rmolib::random::armageddon_extmo_distribution<> must be "
       "parametrized with unit_exponential_distribution-type with suitable "
       "result_type");
 };
@@ -169,13 +169,13 @@ class cuadras_auge_distribution {
   template <class _CharType, class _Traits, typename _RealType, typename
   _ExponentialDistribution> std::basic_ostream<_CharType, _Traits>&
   operator<<(std::basic_ostream<_CharType, _Traits>& os,
-            cuadras_auge_distribution<_RealType, _ExponentialDistribution>&
+            armageddon_extmo_distribution<_RealType, _ExponentialDistribution>&
   dist);
 
   template <class _CharType, class _Traits, typename _RealType, typename
   _ExponentialDistribution> std::basic_istream<_CharType, _Traits>&
   operator>>(std::basic_istream<_CharType, _Traits>& is,
-             cuadras_auge_distribution<_RealType,
+             armageddon_extmo_distribution<_RealType,
   _ExponentialDistribution>& dist);
 */
 

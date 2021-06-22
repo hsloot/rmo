@@ -75,8 +75,8 @@ rextmo_lfm(10L, 2L, 0, 1, 0, "rposval", list("value"=1))  ## comonotone
 }
 \seealso{
 Other sampling-algorithms: 
+\code{\link{rarmextmo_esm}()},
 \code{\link{rexmo_markovian}()},
-\code{\link{rmo_esm_cuadras_auge}},
 \code{\link{rmo_esm}()}
 }
 \concept{sampling-algorithms}
