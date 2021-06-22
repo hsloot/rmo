@@ -73,7 +73,7 @@ distribution corresponding to a LFM with a compound Poisson subordinator." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rmo</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6</span>
       </span>
     </div>
 
@@ -96,7 +96,7 @@ distribution corresponding to a LFM with a compound Poisson subordinator." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/Cuadras-Auge-distributions.html">Cuadras-Augé distributions</a>
+      <a href="../articles/Armageddon-ESM-distribution.html">Armageddon shock model distributions</a>
     </li>
     <li>
       <a href="../articles/Exchangeable-Marshall-Olkin-distributions.html">Exchangeable Marshall--Olkin distributions</a>
@@ -224,37 +224,37 @@ M. Scherer, "Simulating Copulas", World Scientific (2017), pp. 140 psqq.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other sampling-algorithms: 
+<code><a href='rarmextmo_esm.html'>rarmextmo_esm</a>()</code>,
 <code><a href='rexmo_markovian.html'>rexmo_markovian</a>()</code>,
-<code><a href='rmo_esm_cuadras_auge.html'>rmo_esm_cuadras_auge</a></code>,
 <code><a href='rmo_esm.html'>rmo_esm</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>rextmo_lfm</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fl'>0.5</span>, <span class='fl'>0.1</span>, <span class='fl'>0.2</span>, <span class='st'>"rposval"</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='st'>"value"</span><span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;             [,1]      [,2]
+#&gt;  [1,] 0.04978157 4.1960943
+#&gt;  [2,] 1.96583658 2.7964707
+#&gt;  [3,] 0.74991673 0.9718288
+#&gt;  [4,] 7.03377784 3.6894583
+#&gt;  [5,] 0.23621833 0.2362183
+#&gt;  [6,] 2.42818968 0.2417508
+#&gt;  [7,] 0.56776506 1.9869345
+#&gt;  [8,] 1.21537553 0.6363337
+#&gt;  [9,] 0.66909784 1.1158825
+#&gt; [10,] 2.42586830 1.1013770</div><div class='input'><span class='fu'>rextmo_lfm</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fl'>0.5</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='st'>"rexp"</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='st'>"rate"</span><span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;             [,1]       [,2]
-#&gt;  [1,] 0.53360772 0.53360772
-#&gt;  [2,] 0.13953948 0.67100408
-#&gt;  [3,] 0.11122485 0.33954229
-#&gt;  [4,] 1.03663352 1.02499172
-#&gt;  [5,] 2.98178618 2.62819470
-#&gt;  [6,] 2.04007718 0.62798332
-#&gt;  [7,] 0.46765823 0.86155821
-#&gt;  [8,] 1.60280850 0.69379130
-#&gt;  [9,] 0.85674310 0.85674310
-#&gt; [10,] 0.06959359 0.06959359</div><div class='input'><span class='fu'>rextmo_lfm</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fl'>0.5</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='st'>"rexp"</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='st'>"rate"</span><span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;             [,1]       [,2]
-#&gt;  [1,]  1.2051005 14.5363947
-#&gt;  [2,]  1.6691409  1.6691409
-#&gt;  [3,]  7.7999790  5.1678548
-#&gt;  [4,] 15.7125469  5.3450053
-#&gt;  [5,]  0.2362183  0.2362183
-#&gt;  [6,]  1.4636057  1.4636057
-#&gt;  [7,]  2.7492549  4.2155902
-#&gt;  [8,]  0.3736335  7.2411320
-#&gt;  [9,]  7.2778702  6.0495844
-#&gt; [10,]  0.2116008  0.2116008</div><div class='input'><span class='fu'>rextmo_lfm</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fl'>0.5</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='st'>"rpareto"</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='st'>"alpha"</span><span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log2</a></span><span class='op'>(</span><span class='fl'>2</span> <span class='op'>-</span> <span class='fl'>0.5</span><span class='op'>)</span>, x0 <span class='op'>=</span> <span class='fl'>1e-4</span><span class='op'>)</span><span class='op'>)</span>
+#&gt;  [1,]  7.2778702  6.0495844
+#&gt;  [2,]  0.2116008  0.2116008
+#&gt;  [3,]  0.9190448  0.9190448
+#&gt;  [4,]  2.8115700  0.2832602
+#&gt;  [5,]  2.9484475  4.4412110
+#&gt;  [6,] 11.4765066  5.4121144
+#&gt;  [7,]  4.5546243 34.9375015
+#&gt;  [8,]  0.1612388  0.8996000
+#&gt;  [9,]  1.7862148  1.7862148
+#&gt; [10,]  5.2768794 18.6024768</div><div class='input'><span class='fu'>rextmo_lfm</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fl'>0.5</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='st'>"rpareto"</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='st'>"alpha"</span><span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log2</a></span><span class='op'>(</span><span class='fl'>2</span> <span class='op'>-</span> <span class='fl'>0.5</span><span class='op'>)</span>, x0 <span class='op'>=</span> <span class='fl'>1e-4</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;            [,1]      [,2]
-#&gt;  [1,]  53.98252 207.73648
-#&gt;  [2,] 311.05216 193.51886
+#&gt;  [1,] 265.19450  70.09397
+#&gt;  [2,]  19.77236 117.48609
 #&gt;  [3,]  67.77939 135.28008
 #&gt;  [4,]  14.45430  82.35803
 #&gt;  [5,] 115.11769 322.60920

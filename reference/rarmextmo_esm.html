@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Class for the linear Bernstein function — LinearBernsteinFunction-class • rmo</title>
+<title>Sample from the armageddon ESM distribution — rarmextmo_esm • rmo</title>
 
 
 <!-- jquery -->
@@ -39,12 +39,9 @@
 
 
 
-<meta property="og:title" content="Class for the linear Bernstein function — LinearBernsteinFunction-class" />
-<meta property="og:description" content="A linear Bernstein function is a Bernstein function with only a drift,
-i.e. \(a = 0\) and \(\nu = 0\). In particular,
-$$
- \psi(x) = b x, x &amp;gt; 0.
-$$" />
+<meta property="og:title" content="Sample from the armageddon ESM distribution — rarmextmo_esm" />
+<meta property="og:description" content="Draws n independent samples from a d variate armageddon ESM distribution
+with parameters alpha and beta." />
 
 
 
@@ -142,103 +139,96 @@ $$" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Class for the <em>linear Bernstein function</em></h1>
-    <small class="dont-index">Source: <a href='https://github.com/hsloot/rmo/blob/master/R/allClass-S4.R'><code>R/allClass-S4.R</code></a>, <a href='https://github.com/hsloot/rmo/blob/master/R/allInitialize-S4.R'><code>R/allInitialize-S4.R</code></a>, <a href='https://github.com/hsloot/rmo/blob/master/R/allShow-S4.R'><code>R/allShow-S4.R</code></a>, and 1 more</small>
-    <div class="hidden name"><code>LinearBernsteinFunction-class.Rd</code></div>
+    <h1>Sample from the armageddon ESM distribution</h1>
+    <small class="dont-index">Source: <a href='https://github.com/hsloot/rmo/blob/master/R/sample.R'><code>R/sample.R</code></a></small>
+    <div class="hidden name"><code>rarmextmo_esm.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><em>A linear Bernstein function</em> is a Bernstein function with only a drift,
-i.e. \(a = 0\) and \(\nu = 0\). In particular,
-$$
- \psi(x) = b x, x &gt; 0.
-$$</p>
+    <p>Draws <code>n</code> independent samples from a <code>d</code> variate armageddon ESM distribution
+with parameters <code>alpha</code> and <code>beta</code>.</p>
     </div>
 
-    <pre class="usage"><span class='co'># S4 method for LinearBernsteinFunction</span>
-<span class='fu'>initialize</span><span class='op'>(</span><span class='va'>.Object</span>, <span class='va'>scale</span><span class='op'>)</span>
-
-<span class='co'># S4 method for LinearBernsteinFunction</span>
-<span class='fu'>show</span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span>
-
-<span class='co'># S4 method for LinearBernsteinFunction</span>
-<span class='fu'><a href='BernsteinFunction-class.html'>valueOf</a></span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>x</span>, difference_order <span class='op'>=</span> <span class='fl'>0L</span>, n <span class='op'>=</span> <span class='fl'>1L</span>, k <span class='op'>=</span> <span class='fl'>0L</span>, cscale <span class='op'>=</span> <span class='fl'>1</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>rarmextmo_esm</span><span class='op'>(</span><span class='va'>n</span>, <span class='va'>d</span>, <span class='va'>alpha</span>, <span class='va'>beta</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>.Object</th>
-      <td><p>An object:  see the &#8220;Initialize Methods&#8221; section.</p></td>
-    </tr>
-    <tr>
-      <th>scale</th>
-      <td><p>Non-negative number.</p></td>
-    </tr>
-    <tr>
-      <th>object</th>
-      <td><p>An object deriving from <a href='LevyBernsteinFunction-class.html'>LevyBernsteinFunction</a>
-(for <code>levyDensity</code>) or <a href='CompleteBernsteinFunction-class.html'>CompleteBernsteinFunction</a>
-(for <code>stieltjesDensity</code>).</p></td>
-    </tr>
-    <tr>
-      <th>x</th>
-      <td><p>Non-negativ numeric vector at which the iterated difference of
-the Bernstein function is evaluated.</p></td>
-    </tr>
-    <tr>
-      <th>difference_order</th>
-      <td><p>The order of the alternating iterated forward
-differences taken on the Bernstein function (\(j\) in
-the representation).</p></td>
-    </tr>
-    <tr>
       <th>n</th>
-      <td><p>Non-negative numbers for the binomial factors.</p></td>
+      <td><p>Number of samples</p></td>
     </tr>
     <tr>
-      <th>k</th>
-      <td><p>Non-negative numbers for the binomial factors.</p></td>
+      <th>d</th>
+      <td><p>Dimension</p></td>
     </tr>
     <tr>
-      <th>cscale</th>
-      <td><p>Positive number, the composit scaling factor.</p></td>
+      <th>alpha</th>
+      <td><p>Shock intensity of individual shocks</p></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>arguments to specify properties of the new object, to
-      be passed to <code>initialize()</code>.</p></td>
+      <th>beta</th>
+      <td><p>Shock intensity of global shock</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="functions"><a class="anchor" href="#functions"></a>Functions</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    
-<ul>
-<li><p><code>initialize,LinearBernsteinFunction-method</code>: Constructor</p></li>
-<li><p><code>show,LinearBernsteinFunction-method</code>: Display the object.</p></li>
-<li><p><code>valueOf,LinearBernsteinFunction-method</code>: Calculates the iterated differences of the Bernstein function, see <code><a href='BernsteinFunction-class.html'>valueOf()</a></code></p></li>
-</ul>
-    <h2 class="hasAnchor" id="slots"><a class="anchor" href="#slots"></a>Slots</h2>
+    <p><code>rarmextmo_esm</code> implements an optimized version of the
+<em>exogenous shock model</em> algorithm for the armageddon shock family and
+returns an \(n \times d\) array matrix with rows corresponding to
+the independent samples of size \(d\).</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    
-
-<dl>
-<dt><code>scale</code></dt><dd><p>The non-negative <em>drift</em> parameter
-(i.e. \(b\) in the representation)</p></dd>
-
-</dl>
+    <p><strong>Parameterisation</strong>:
+The armageddon ESM distribution is a special case of the exchangeable Marshall-Olkin
+distribution where \(\lambda_i = 0 \forall 1 &lt; i &lt; d\).
+The individual shock rate is \(\alpha = \lambda_1\) and the global shock
+rate is \(\beta = \lambda_d\).</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><a href='BernsteinFunction-class.html'>BernsteinFunction</a>,
-<code><a href='BernsteinFunction-class.html'>valueOf()</a></code></p></div>
+    <div class='dont-index'><p><code><a href='rmo_esm.html'>rmo_esm()</a></code></p>
+<p>Other sampling-algorithms: 
+<code><a href='rexmo_markovian.html'>rexmo_markovian</a>()</code>,
+<code><a href='rextmo_lfm.html'>rextmo_lfm</a>()</code>,
+<code><a href='rmo_esm.html'>rmo_esm</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>LinearBernsteinFunction</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; An object of class "LinearBernsteinFunction"
-#&gt; 	 (invalid or not initialized)</div><div class='input'><span class='fu'>LinearBernsteinFunction</span><span class='op'>(</span>scale <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; An object of class "LinearBernsteinFunction"
-#&gt; - scale: 2</div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>rarmextmo_esm</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fl'>0.5</span>, <span class='fl'>0.2</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;            [,1]       [,2]
+#&gt;  [1,] 1.3373321 0.40304354
+#&gt;  [2,] 8.2198095 1.70443232
+#&gt;  [3,] 1.0900860 0.04746857
+#&gt;  [4,] 2.6049203 3.90330608
+#&gt;  [5,] 4.1960497 2.49590487
+#&gt;  [6,] 1.0046901 0.07131968
+#&gt;  [7,] 0.7542240 1.95823879
+#&gt;  [8,] 0.2500026 0.72065167
+#&gt;  [9,] 1.0786992 0.53952187
+#&gt; [10,] 3.5674030 0.12629416</div><div class='input'><span class='fu'>rarmextmo_esm</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span>      <span class='co'>## comonotone</span>
+</div><div class='output co'>#&gt;            [,1]      [,2]
+#&gt;  [1,] 0.8346728 0.8346728
+#&gt;  [2,] 2.1228993 2.1228993
+#&gt;  [3,] 1.1099744 1.1099744
+#&gt;  [4,] 0.6503988 0.6503988
+#&gt;  [5,] 0.7884202 0.7884202
+#&gt;  [6,] 0.1400899 0.1400899
+#&gt;  [7,] 1.0360235 1.0360235
+#&gt;  [8,] 0.1925256 0.1925256
+#&gt;  [9,] 1.9184386 1.9184386
+#&gt; [10,] 0.3760188 0.3760188</div><div class='input'><span class='fu'>rarmextmo_esm</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fl'>1</span>, <span class='fl'>0</span><span class='op'>)</span>      <span class='co'>## independence</span>
+</div><div class='output co'>#&gt;            [,1]       [,2]
+#&gt;  [1,] 0.8075358 0.71259757
+#&gt;  [2,] 0.7070553 1.20103089
+#&gt;  [3,] 0.1198257 0.26672977
+#&gt;  [4,] 0.2012750 0.73863261
+#&gt;  [5,] 0.8533478 0.97090525
+#&gt;  [6,] 1.4269226 0.10330351
+#&gt;  [7,] 1.7654759 3.79108831
+#&gt;  [8,] 0.6281026 1.30879119
+#&gt;  [9,] 1.6762804 0.01530056
+#&gt; [10,] 0.3207186 0.02358263</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -74,7 +74,7 @@ exMO distribution." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rmo</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6</span>
       </span>
     </div>
 
@@ -97,7 +97,7 @@ exMO distribution." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/Cuadras-Auge-distributions.html">Cuadras-Augé distributions</a>
+      <a href="../articles/Armageddon-ESM-distribution.html">Armageddon shock model distributions</a>
     </li>
     <li>
       <a href="../articles/Exchangeable-Marshall-Olkin-distributions.html">Exchangeable Marshall--Olkin distributions</a>
@@ -159,9 +159,9 @@ exMO distribution.</p>
 
 <span class='fu'>intensities_linear</span><span class='op'>(</span><span class='va'>d</span>, <span class='va'>scale</span><span class='op'>)</span>
 
-<span class='fu'>ex_intensities_cuadras_auge</span><span class='op'>(</span><span class='va'>d</span>, <span class='va'>alpha</span>, <span class='va'>beta</span><span class='op'>)</span>
+<span class='fu'>ex_intensities_armageddon</span><span class='op'>(</span><span class='va'>d</span>, <span class='va'>alpha</span>, <span class='va'>beta</span><span class='op'>)</span>
 
-<span class='fu'>intensities_cuadras_auge</span><span class='op'>(</span><span class='va'>d</span>, <span class='va'>alpha</span>, <span class='va'>beta</span><span class='op'>)</span>
+<span class='fu'>intensities_armageddon</span><span class='op'>(</span><span class='va'>d</span>, <span class='va'>alpha</span>, <span class='va'>beta</span><span class='op'>)</span>
 
 <span class='fu'>ex_intensities_poisson</span><span class='op'>(</span><span class='va'>d</span>, <span class='va'>lambda</span>, <span class='va'>eta</span><span class='op'>)</span>
 
@@ -315,9 +315,9 @@ for the respective Bernstein function.</p>
 #&gt;  [926] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 #&gt;  [963] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 #&gt; [1000] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0</div><div class='input'>
-<span class='fu'>ex_intensities_cuadras_auge</span><span class='op'>(</span><span class='fl'>10L</span>, alpha<span class='op'>=</span><span class='fl'>1</span>, beta<span class='op'>=</span><span class='fl'>0.5</span><span class='op'>)</span>
+<span class='fu'>ex_intensities_armageddon</span><span class='op'>(</span><span class='fl'>10L</span>, alpha<span class='op'>=</span><span class='fl'>1</span>, beta<span class='op'>=</span><span class='fl'>0.5</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;  [1] 10.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.5</div><div class='input'>
-<span class='fu'>intensities_cuadras_auge</span><span class='op'>(</span><span class='fl'>10L</span>, alpha<span class='op'>=</span><span class='fl'>1</span>, beta<span class='op'>=</span><span class='fl'>0.5</span><span class='op'>)</span>
+<span class='fu'>intensities_armageddon</span><span class='op'>(</span><span class='fl'>10L</span>, alpha<span class='op'>=</span><span class='fl'>1</span>, beta<span class='op'>=</span><span class='fl'>0.5</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;    [1] 1.0 1.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0
 #&gt;   [19] 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0
 #&gt;   [37] 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0

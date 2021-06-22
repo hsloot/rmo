@@ -73,7 +73,7 @@ distribution with (scaled) shock rates ex_intensities." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rmo</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6</span>
       </span>
     </div>
 
@@ -96,7 +96,7 @@ distribution with (scaled) shock rates ex_intensities." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/Cuadras-Auge-distributions.html">Cuadras-Augé distributions</a>
+      <a href="../articles/Armageddon-ESM-distribution.html">Armageddon shock model distributions</a>
     </li>
     <li>
       <a href="../articles/Exchangeable-Marshall-Olkin-distributions.html">Exchangeable Marshall--Olkin distributions</a>
@@ -201,45 +201,45 @@ with \(i\) elements multiplied by the number of shocks of cardinality
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other sampling-algorithms: 
+<code><a href='rarmextmo_esm.html'>rarmextmo_esm</a>()</code>,
 <code><a href='rextmo_lfm.html'>rextmo_lfm</a>()</code>,
-<code><a href='rmo_esm_cuadras_auge.html'>rmo_esm_cuadras_auge</a></code>,
 <code><a href='rmo_esm.html'>rmo_esm</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>rexmo_markovian</span><span class='op'>(</span><span class='fl'>10</span>, <span class='fl'>2</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span> <span class='op'>*</span> <span class='fl'>0.4</span>, <span class='fl'>0.2</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;            [,1]      [,2]
-#&gt;  [1,] 2.7073134 2.3714437
-#&gt;  [2,] 1.8024036 0.8939985
-#&gt;  [3,] 5.0390783 2.8683114
-#&gt;  [4,] 2.0980249 3.5192188
-#&gt;  [5,] 2.7590200 1.9539482
-#&gt;  [6,] 0.3916478 0.3916478
-#&gt;  [7,] 2.8678201 0.8964704
-#&gt;  [8,] 0.3603258 0.8325903
-#&gt;  [9,] 0.5312003 0.8953819
-#&gt; [10,] 2.6846301 0.8346728</div><div class='input'><span class='fu'>rexmo_markovian</span><span class='op'>(</span><span class='fl'>10</span>, <span class='fl'>2</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>0</span><span class='op'>)</span><span class='op'>)</span>      <span class='co'>## independence</span>
+#&gt;  [1,] 0.6843666 0.6711049
+#&gt;  [2,] 1.1290153 1.4105994
+#&gt;  [3,] 0.4209118 0.1337887
+#&gt;  [4,] 2.1935123 2.8316439
+#&gt;  [5,] 6.8842395 3.2003378
+#&gt;  [6,] 1.7667651 1.7667651
+#&gt;  [7,] 4.5151703 1.9538939
+#&gt;  [8,] 2.3520736 0.1367053
+#&gt;  [9,] 0.8659696 0.1627321
+#&gt; [10,] 0.4435195 2.7592044</div><div class='input'><span class='fu'>rexmo_markovian</span><span class='op'>(</span><span class='fl'>10</span>, <span class='fl'>2</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>0</span><span class='op'>)</span><span class='op'>)</span>      <span class='co'>## independence</span>
+</div><div class='output co'>#&gt;             [,1]      [,2]
+#&gt;  [1,] 1.26595820 0.1678158
+#&gt;  [2,] 1.29523247 1.2215184
+#&gt;  [3,] 0.84763997 1.8282054
+#&gt;  [4,] 0.32801442 0.5937467
+#&gt;  [5,] 0.01112249 1.4248105
+#&gt;  [6,] 0.28112257 1.1572701
+#&gt;  [7,] 1.62138527 0.2591584
+#&gt;  [8,] 0.46997429 0.1559826
+#&gt;  [9,] 0.36668246 0.2151861
+#&gt; [10,] 0.09847499 0.1338374</div><div class='input'><span class='fu'>rexmo_markovian</span><span class='op'>(</span><span class='fl'>10</span>, <span class='fl'>2</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>      <span class='co'>## comonotone</span>
 </div><div class='output co'>#&gt;             [,1]       [,2]
-#&gt;  [1,] 0.07004495 1.98848356
-#&gt;  [2,] 0.04460339 0.75720096
-#&gt;  [3,] 1.87495492 2.14168469
-#&gt;  [4,] 0.42667391 0.57443398
-#&gt;  [5,] 0.14573849 0.05165176
-#&gt;  [6,] 0.62580101 2.30208140
-#&gt;  [7,] 0.42935364 0.01179131
-#&gt;  [8,] 0.17335316 0.34230367
-#&gt;  [9,] 0.23916824 0.06689434
-#&gt; [10,] 1.09675613 1.47963510</div><div class='input'><span class='fu'>rexmo_markovian</span><span class='op'>(</span><span class='fl'>10</span>, <span class='fl'>2</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>      <span class='co'>## comonotone</span>
-</div><div class='output co'>#&gt;              [,1]        [,2]
-#&gt;  [1,] 3.200337790 3.200337790
-#&gt;  [2,] 0.223704835 0.223704835
-#&gt;  [3,] 0.187107581 0.187107581
-#&gt;  [4,] 0.399658714 0.399658714
-#&gt;  [5,] 1.616973575 1.616973575
-#&gt;  [6,] 1.329220974 1.329220974
-#&gt;  [7,] 0.162732088 0.162732088
-#&gt;  [8,] 0.421942499 0.421942499
-#&gt;  [9,] 0.003116603 0.003116603
-#&gt; [10,] 0.335631529 0.335631529</div><div class='input'>
+#&gt;  [1,] 0.34689565 0.34689565
+#&gt;  [2,] 0.35595619 0.35595619
+#&gt;  [3,] 0.08567431 0.08567431
+#&gt;  [4,] 1.36220467 1.36220467
+#&gt;  [5,] 1.27878700 1.27878700
+#&gt;  [6,] 0.15237484 0.15237484
+#&gt;  [7,] 0.60255025 0.60255025
+#&gt;  [8,] 0.09360955 0.09360955
+#&gt;  [9,] 0.38145170 0.38145170
+#&gt; [10,] 0.26831469 0.26831469</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
