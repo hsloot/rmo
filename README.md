@@ -45,7 +45,7 @@ devtools::install_github("hsloot/rmo")
 
 ``` r
 rexmo_markovian(
-  n=10L, d=2L, 
+  n=10L, d=2L,
   ex_intensities_alpha_stable(d=2L, alpha=log2(2 - 0.5)))
 #>             [,1]       [,2]
 #>  [1,] 1.82255349 2.04294988
@@ -103,7 +103,7 @@ might change frequently without deprecation. As of now, we have
 completed the reimplementation of all sampling algorithms in `Rcpp`. Our
 next steps are:
 
--   **Version 0.6**: Refactor the `arnold_distribution` and the
+-   **Version 0.7**: Refactor the `arnold_distribution` and the
     `markovian_exmo_distribution` to be based on a
     `random_walk_distribution` and `markov_process`. Add a distribution
     to sample from the Arnold model with `ex_intensities` which does not
