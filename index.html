@@ -122,7 +122,7 @@
 <a href="#example" class="anchor"></a>Example</h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/rexmo_markovian.html">rexmo_markovian</a></span><span class="op">(</span>
-  n<span class="op">=</span><span class="fl">10L</span>, d<span class="op">=</span><span class="fl">2L</span>, 
+  n<span class="op">=</span><span class="fl">10L</span>, d<span class="op">=</span><span class="fl">2L</span>,
   <span class="fu"><a href="reference/parameter.html">ex_intensities_alpha_stable</a></span><span class="op">(</span>d<span class="op">=</span><span class="fl">2L</span>, alpha<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log2</a></span><span class="op">(</span><span class="fl">2</span> <span class="op">-</span> <span class="fl">0.5</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt;             [,1]       [,2]</span>
 <span class="co">#&gt;  [1,] 1.82255349 2.04294988</span>
@@ -166,7 +166,7 @@
 <p>We are planning to develop the package incrementally. The packages API might change frequently without deprecation. As of now, we have completed the reimplementation of all sampling algorithms in <code>Rcpp</code>. Our next steps are:</p>
 <ul>
 <li>
-<strong>Version 0.6</strong>: Refactor the <code>arnold_distribution</code> and the <code>markovian_exmo_distribution</code> to be based on a <code>random_walk_distribution</code> and <code>markov_process</code>. Add a distribution to sample from the Arnold model with <code>ex_intensities</code> which does not require to store all shock intensities.</li>
+<strong>Version 0.7</strong>: Refactor the <code>arnold_distribution</code> and the <code>markovian_exmo_distribution</code> to be based on a <code>random_walk_distribution</code> and <code>markov_process</code>. Add a distribution to sample from the Arnold model with <code>ex_intensities</code> which does not require to store all shock intensities.</li>
 </ul>
 <p>Other ideas for the future:</p>
 <ul>
