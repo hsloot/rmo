@@ -5,6 +5,11 @@
 
 using namespace Rcpp;
 
+#ifdef RCPP_USE_GLOBAL_ROSTREAM
+Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
+Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
+#endif
+
 // multiply_binomial_coefficient
 NumericVector multiply_binomial_coefficient(const NumericVector& x, const std::size_t n, const std::size_t k);
 RcppExport SEXP _rmo_multiply_binomial_coefficient(SEXP xSEXP, SEXP nSEXP, SEXP kSEXP) {
