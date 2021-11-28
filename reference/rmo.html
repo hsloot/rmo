@@ -75,7 +75,7 @@ Marshall-Olkin parameterisations." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rmo</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.1</span>
       </span>
     </div>
 
@@ -180,15 +180,15 @@ composition, which can be used to create new Bernstein functions with
     
 
 <p>Multiple sampling algorithms are provided. The semantic naming scheme <code>r*mo_*</code>
-is used, e.g. <code><a href='rexmo_markovian.html'>rexmo_markovian()</a></code> has <em>(scaled) exchangeable intensities</em>
+is used, e.g. <code><a href='rexmo_mdcm.html'>rexmo_mdcm()</a></code> has <em>(scaled) exchangeable intensities</em>
 <code>ex_intensities</code> as input and uses the Markovian model for the default
 counting process.
 The following algorithms are implemented:</p><ul>
 <li><p><em>Exogenous shock model</em> for arbitrary Marshall-Olkin distributions with
 <code><a href='rmo_esm.html'>rmo_esm()</a></code>. Not adviced for <code>d</code> much larger than 2.</p></li>
-<li><p><em>Arnold model</em> for arbitrary Marshall-Olkin distributions with <code><a href='rmo_esm.html'>rmo_arnold()</a></code>.</p></li>
+<li><p><em>Arnold model</em> for arbitrary Marshall-Olkin distributions with <code><a href='rmo_esm.html'>rmo_am()</a></code>.</p></li>
 <li><p><em>Exchangeable Markovian model</em> for exchangeable Marshall-Olkin distributions
-with <code><a href='rexmo_markovian.html'>rexmo_markovian()</a></code>.</p></li>
+with <code><a href='rexmo_mdcm.html'>rexmo_mdcm()</a></code>.</p></li>
 <li><p><em>Lévy-frailty model for compound Poisson subordinators</em> for the corresponding
 subclass of extendible Marshall-Olkin distributions with <code><a href='rextmo_lfm.html'>rextmo_lfm()</a></code>.</p></li>
 <li><p><em>Exogenous shock model</em> for the armageddon ESM subclass with <code><a href='rarmextmo_esm.html'>rarmextmo_esm()</a></code>.</p></li>

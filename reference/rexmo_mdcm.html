@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Sample from the armageddon ESM distribution — rarmextmo_esm • rmo</title>
+<title>Sample from an exchangeable Marshall-Olkin distribution — rexmo_mdcm • rmo</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,9 @@
 
 
 
-<meta property="og:title" content="Sample from the armageddon ESM distribution — rarmextmo_esm" />
-<meta property="og:description" content="Draws n independent samples from a d variate armageddon ESM distribution
-with parameters alpha and beta." />
+<meta property="og:title" content="Sample from an exchangeable Marshall-Olkin distribution — rexmo_mdcm" />
+<meta property="og:description" content="Draws n independent samples from a d variate exchangeable Marshall-Olkin
+distribution with (scaled) shock rates ex_intensities." />
 
 
 
@@ -139,17 +139,17 @@ with parameters alpha and beta." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Sample from the armageddon ESM distribution</h1>
+    <h1>Sample from an exchangeable Marshall-Olkin distribution</h1>
     <small class="dont-index">Source: <a href='https://github.com/hsloot/rmo/blob/master/R/sample.R'><code>R/sample.R</code></a></small>
-    <div class="hidden name"><code>rarmextmo_esm.Rd</code></div>
+    <div class="hidden name"><code>rexmo_mdcm.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Draws <code>n</code> independent samples from a <code>d</code> variate armageddon ESM distribution
-with parameters <code>alpha</code> and <code>beta</code>.</p>
+    <p>Draws <code>n</code> independent samples from a <code>d</code> variate exchangeable Marshall-Olkin
+distribution with (scaled) shock rates <code>ex_intensities</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>rarmextmo_esm</span><span class='op'>(</span><span class='va'>n</span>, <span class='va'>d</span>, <span class='va'>alpha</span>, <span class='va'>beta</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>rexmo_mdcm</span><span class='op'>(</span><span class='va'>n</span>, <span class='va'>d</span>, <span class='va'>ex_intensities</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -160,76 +160,88 @@ with parameters <code>alpha</code> and <code>beta</code>.</p>
     </tr>
     <tr>
       <th>d</th>
-      <td><p>Dimension</p></td>
+      <td><p>dimension</p></td>
     </tr>
     <tr>
-      <th>alpha</th>
-      <td><p>Shock intensity of individual shocks</p></td>
-    </tr>
-    <tr>
-      <th>beta</th>
-      <td><p>Shock intensity of global shock</p></td>
+      <th>ex_intensities</th>
+      <td><p>(Scaled) exchangeable Marshall-Olkin intensities</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>rarmextmo_esm</code> implements an optimized version of the
-<em>exogenous shock model</em> algorithm for the armageddon shock family and
-returns an \(n \times d\) array matrix with rows corresponding to
-the independent samples of size \(d\).</p>
+    <p><code>rexmo_mdcm</code> implements the Markovian model for the default counting
+process of the exchangeable subclass and returns an  \(n \times d\)
+numeric matrix with the rows corresponding to independent and identically
+disctributed samples of a \(d\) variate exchangeable Marshall-Olkin
+distribution with exchangeable parameters <code>ex_intensities</code>.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p><strong>Parameterisation</strong>:
-The armageddon ESM distribution is a special case of the exchangeable Marshall-Olkin
-distribution where \(\lambda_i = 0 \forall 1 &lt; i &lt; d\).
-The individual shock rate is \(\alpha = \lambda_1\) and the global shock
-rate is \(\beta = \lambda_d\).</p>
+The exchangeable Marshall--Olkin distribution has the property that
+\(\lambda_I\) only depends on the cardinality of \(I\).
+The <em>unscaled exchangeable shock intensities</em> are defined for \(I\) with
+\(i = \lvert I\rvert\) by \(\lambda_i = \lambda_I\).
+The <em>scaled exchangeable shock intensities</em> are defined by \(\eta_i =
+\binom{d}{i} \lambda_i\).</p>
+<p><strong>The scaled exchangeable shock intensities</strong>:</p><ul>
+<li><p>The <em>scaled exchangeable</em> shock intensities* \(\eta_i\) must be stored in
+a vector of length \(d\).</p></li>
+<li><p>The entry \(\eta_i\) is the intensity of a shock corresponding to a set
+with \(i\) elements multiplied by the number of shocks of cardinality
+\(i\), i.e. \(\binom{d}{i}\).</p></li>
+</ul>
+
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+
+    
+
+<p>For more information on this algorithm, see J.-F. Mai, M. Scherer,
+"Simulating Copulas", World Scientific (2017), pp. 122 psqq.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='rmo_esm.html'>rmo_esm()</a></code></p>
-<p>Other sampling-algorithms: 
-<code><a href='rexmo_mdcm.html'>rexmo_mdcm</a>()</code>,
+    <div class='dont-index'><p>Other sampling-algorithms: 
+<code><a href='rarmextmo_esm.html'>rarmextmo_esm</a>()</code>,
 <code><a href='rextmo_lfm.html'>rextmo_lfm</a>()</code>,
 <code><a href='rmo_esm.html'>rmo_esm</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='r-in'><span class='fu'>rarmextmo_esm</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fl'>0.5</span>, <span class='fl'>0.2</span><span class='op'>)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>            [,1]       [,2]</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1,] 1.3373321 0.40304354</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  [2,] 8.2198095 1.70443232</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  [3,] 1.0900860 0.04746857</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  [4,] 2.6049203 3.90330608</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  [5,] 4.1960497 2.49590487</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  [6,] 1.0046901 0.07131968</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  [7,] 0.7542240 1.95823879</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  [8,] 0.2500026 0.72065167</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  [9,] 1.0786992 0.53952187</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> [10,] 3.5674030 0.12629416</span>
-<span class='r-in'><span class='fu'>rarmextmo_esm</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span>      <span class='co'>## comonotone</span></span>
+    <pre class="examples"><span class='r-in'><span class='fu'>rexmo_mdcm</span><span class='op'>(</span><span class='fl'>10</span>, <span class='fl'>2</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span> <span class='op'>*</span> <span class='fl'>0.4</span>, <span class='fl'>0.2</span><span class='op'>)</span><span class='op'>)</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>            [,1]      [,2]</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1,] 0.8346728 0.8346728</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  [2,] 2.1228993 2.1228993</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  [3,] 1.1099744 1.1099744</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  [4,] 0.6503988 0.6503988</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  [5,] 0.7884202 0.7884202</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  [6,] 0.1400899 0.1400899</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  [7,] 1.0360235 1.0360235</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  [8,] 0.1925256 0.1925256</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  [9,] 1.9184386 1.9184386</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> [10,] 0.3760188 0.3760188</span>
-<span class='r-in'><span class='fu'>rarmextmo_esm</span><span class='op'>(</span><span class='fl'>10L</span>, <span class='fl'>2L</span>, <span class='fl'>1</span>, <span class='fl'>0</span><span class='op'>)</span>      <span class='co'>## independence</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>            [,1]       [,2]</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1,] 0.8075358 0.71259757</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  [2,] 0.7070553 1.20103089</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  [3,] 0.1198257 0.26672977</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  [4,] 0.2012750 0.73863261</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  [5,] 0.8533478 0.97090525</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  [6,] 1.4269226 0.10330351</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  [7,] 1.7654759 3.79108831</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  [8,] 0.6281026 1.30879119</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  [9,] 1.6762804 0.01530056</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> [10,] 0.3207186 0.02358263</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1,] 0.6843666 0.6711049</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [2,] 1.1290153 1.4105994</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [3,] 0.4209118 0.1337887</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [4,] 2.1935123 2.8316439</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [5,] 6.8842395 3.2003378</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [6,] 1.7667651 1.7667651</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [7,] 4.5151703 1.9538939</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [8,] 2.3520736 0.1367053</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [9,] 0.8659696 0.1627321</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [10,] 0.4435195 2.7592044</span>
+<span class='r-in'><span class='fu'>rexmo_mdcm</span><span class='op'>(</span><span class='fl'>10</span>, <span class='fl'>2</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>0</span><span class='op'>)</span><span class='op'>)</span>      <span class='co'>## independence</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>             [,1]      [,2]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1,] 1.26595820 0.1678158</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [2,] 1.29523247 1.2215184</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [3,] 0.84763997 1.8282054</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [4,] 0.32801442 0.5937467</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [5,] 0.01112249 1.4248105</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [6,] 0.28112257 1.1572701</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [7,] 1.62138527 0.2591584</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [8,] 0.46997429 0.1559826</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [9,] 0.36668246 0.2151861</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [10,] 0.09847499 0.1338374</span>
+<span class='r-in'><span class='fu'>rexmo_mdcm</span><span class='op'>(</span><span class='fl'>10</span>, <span class='fl'>2</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>      <span class='co'>## comonotone</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>             [,1]       [,2]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1,] 0.34689565 0.34689565</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [2,] 0.35595619 0.35595619</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [3,] 0.08567431 0.08567431</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [4,] 1.36220467 1.36220467</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [5,] 1.27878700 1.27878700</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [6,] 0.15237484 0.15237484</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [7,] 0.60255025 0.60255025</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [8,] 0.09360955 0.09360955</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [9,] 0.38145170 0.38145170</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [10,] 0.26831469 0.26831469</span>
 <span class='r-in'></span>
 </pre>
   </div>
