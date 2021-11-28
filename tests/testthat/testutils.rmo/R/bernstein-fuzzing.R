@@ -211,7 +211,6 @@ setMethod(
 setMethod(
   "fuzzy_bf", "PoissonBernsteinFunction",
   function(bf) {
-    bf@lambda <- stats::rexp(1)
     bf@eta <- stats::rexp(1)
     validObject(bf)
 

@@ -17,8 +17,8 @@ test_that("Test initialisation of BernsteinFunction classes", {
   expect_s4_class(
     testutils.rmo::fuzzy_bf(PoissonBernsteinFunction()),
     class = "PoissonBernsteinFunction")
-  expect_error(PoissonBernsteinFunction(lambda = -1, eta = 0.2))
-  expect_error(PoissonBernsteinFunction(lambda = c(1, 2), eta = 0.2))
+  expect_error(PoissonBernsteinFunction(eta = -0.2))
+  expect_error(PoissonBernsteinFunction(eta = c(0.1, 0.2)))
 
   expect_s4_class(
     testutils.rmo::fuzzy_bf(AlphaStableBernsteinFunction()),
@@ -228,42 +228,41 @@ test_that("`valueOf` for `SumOfBernsteinFunctions`", {
       second = PoissonBernsteinFunction()))
   constant <- bf@first@first@constant
   scale <- bf@first@second@scale
-  lambda <- bf@second@lambda
   eta <- bf@second@eta
-  actual_fn <- function(x, constant, scale, lambda, eta) {
-    ifelse(0 < x, constant, 0) + scale * x + lambda * (1 - exp(-x * eta))
+  actual_fn <- function(x, constant, scale, eta) {
+    ifelse(0 < x, constant, 0) + scale * x + 1 - exp(-x * eta)
   }
 
   expect_equal(
     valueOf(bf, x),
-    actual_fn(x, constant, scale, lambda, eta))
+    actual_fn(x, constant, scale, eta))
   expect_equal(
     valueOf(bf, x, method = "levy", tolerance = testthat_tolerance()),
-    actual_fn(x, constant, scale, lambda, eta))
+    actual_fn(x, constant, scale, eta))
 
   expect_equal(
     valueOf(bf, x, difference_order = difference_order, tolerance = testthat_tolerance()),
     value_of_naive(actual_fn, x, difference_order,
-                   constant = constant, scale = scale, lambda = lambda, eta = eta))
+                   constant = constant, scale = scale, eta = eta))
   expect_equal(
     valueOf(bf, x, difference_order = difference_order,
             method = "levy", tolerance = testthat_tolerance()),
     value_of_naive(actual_fn, x, difference_order,
-                   constant = constant, scale = scale, lambda = lambda, eta = eta))
+                   constant = constant, scale = scale, eta = eta))
 
   expect_equal(
     valueOf(bf, x, difference_order = difference_order, tolerance = testthat_tolerance(),
             n = n, k = k, cscale = cscale),
     value_of_naive(actual_fn, x, difference_order = difference_order,
                    n = n, k = k, cscale = cscale,
-                   constant = constant, scale = scale, lambda = lambda, eta = eta))
+                   constant = constant, scale = scale, eta = eta))
   expect_equal(
     valueOf(bf, x, difference_order = difference_order,
             method = "levy", tolerance = testthat_tolerance(),
             n = n, k = k, cscale = cscale),
     value_of_naive(actual_fn, x, difference_order = difference_order,
                    n = n, k = k, cscale = cscale,
-                   constant = constant, scale = scale, lambda = lambda, eta = eta))
+                   constant = constant, scale = scale, eta = eta))
 })
 
 
@@ -526,36 +525,35 @@ test_that("`valueOf` for `ParetoBernsteinFunction`", {
 
 test_that("`valueOf` for `PoissonBernsteinFunction`", {
   bf <- testutils.rmo::fuzzy_bf(PoissonBernsteinFunction())
-  lambda <- bf@lambda
   eta <- bf@eta
-  actual_fn <- function(x, lambda, eta) {
-    lambda * (1 - exp(-eta*x))
+  actual_fn <- function(x, eta) {
+    1 - exp(-eta*x)
   }
 
-  expect_equal(valueOf(bf, x), actual_fn(x, lambda, eta))
+  expect_equal(valueOf(bf, x), actual_fn(x, eta))
   expect_equal(
     valueOf(bf, x, method = "levy", tolerance = testthat_tolerance()),
-    actual_fn(x, lambda, eta))
+    actual_fn(x, eta))
 
   expect_equal(
     valueOf(bf, x, difference_order = difference_order,
             tolerance = testthat_tolerance()),
-    lambda * exp(-eta * x) * (1 - exp(-eta))^difference_order)
+    exp(-eta * x) * (1 - exp(-eta))^difference_order)
   expect_equal(
     valueOf(bf, x, difference_order = difference_order,
             method = "levy", tolerance = testthat_tolerance()),
-    lambda * exp(-eta*x) * (1 - exp(-eta)) ^ difference_order)
+    exp(-eta*x) * (1 - exp(-eta)) ^ difference_order)
 
   expect_equal(
     valueOf(bf, x, difference_order = difference_order,
             tolerance = testthat_tolerance(),
             n = n, k = k, cscale = cscale),
     choose(n, k) *
-      lambda * exp(-eta * cscale*x) * (1 - exp(-eta * cscale)) ^ difference_order)
+      exp(-eta * cscale*x) * (1 - exp(-eta * cscale)) ^ difference_order)
   expect_equal(
     valueOf(bf, x, difference_order = difference_order,
             method = "levy", tolerance = testthat_tolerance(),
             n = n, k = k, cscale = cscale),
     choose(n, k) *
-      lambda * exp(-eta * cscale*x) * (1 - exp(-eta * cscale)) ^ difference_order)
+      exp(-eta * cscale*x) * (1 - exp(-eta * cscale)) ^ difference_order)
 })

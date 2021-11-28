@@ -201,10 +201,10 @@ dparams <- tibble(expand.grid(
 ))
 
 ex_intensity_list <- force(pmap(dparams, ~{
-  ex_intensities_poisson(..1, lambda=..2, eta=..2)
+  ..2 * ex_intensities_poisson(..1, eta=..2)
 }))
 intensity_list <- force(pmap(dparams, ~{
-  intensities_poisson(..1, lambda=..2, eta=..2)
+  ..2 * intensities_poisson(..1, eta=..2)
 }))
 ```
 
@@ -296,9 +296,9 @@ detach("package:rmo", unload = TRUE)
 ## Pareto LFM parametrisation
 
 We use this parametrisation to compare the LFM and the exchangeable Arnold model
-in higher dimensions. This parametrisation is more unfavorable for the LFM, 
-since Pareto jumps are computationally more expensive than fixed size jumps or 
-exponential jumps. 
+in higher dimensions. This parametrisation is more unfavorable for the LFM,
+since Pareto jumps are computationally more expensive than fixed size jumps or
+exponential jumps.
 
 ```{r Pareto-parameter, message=FALSE}
 library(rmo)
@@ -332,7 +332,7 @@ bp3 <- bench::press(
     idx <- which(
       dparams$d == d &
         dparams$alpha == alpha &
-        dparams$x0 == x0 & 
+        dparams$x0 == x0 &
         dparams$rate == rate)
     ex_intensities <- ex_intensity_list[[idx]]
 
@@ -386,7 +386,7 @@ bp3_prev <- bench::press(
     idx <- which(
       dparams$d == d &
         dparams$alpha == alpha &
-        dparams$x0 == x0 & 
+        dparams$x0 == x0 &
         dparams$rate == rate)
     ex_intensities <- ex_intensity_list[[idx]]
 

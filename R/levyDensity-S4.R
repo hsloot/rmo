@@ -33,7 +33,7 @@ setGeneric("levyDensity",
 setMethod("levyDensity", "PoissonBernsteinFunction",
   function(object) {
     structure(
-      data.frame(x = object@eta, y = object@lambda),
+      data.frame(x = object@eta, y = 1),
       type = "discrete"
     )
   })

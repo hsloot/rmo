@@ -203,7 +203,7 @@ setClass("CompleteBernsteinFunction",
 #' The Poisson process with arrival-rate \eqn{\lambda} and fixed jump size
 #' \eqn{\eta} is a Lévy subordinator corresponding to the Bernstein function
 #' \deqn{
-#'   \psi(x) = \lambda (1 - e^{-x\eta}) , x>0.
+#'   \psi(x) = 1 - e^{-x\eta}, x>0.
 #' }
 #'
 #' @details
@@ -219,7 +219,7 @@ setClass("CompleteBernsteinFunction",
 #' @export PoissonBernsteinFunction
 PoissonBernsteinFunction <- setClass("PoissonBernsteinFunction", # nolint
   contains = "LevyBernsteinFunction",
-  slots = c(lambda = "numeric", eta = "numeric"))
+  slots = c(eta = "numeric"))
 
 
 #' Class for the *\eqn{\alpha}-stable Bernstein function*

@@ -6,7 +6,7 @@ intensities_hierarchical <- function(d1, d2, lambda, eta, a, alpha) { # nolint
   ex_intensities_1 <- rmo::ex_intensities_gamma(d1, a)
   ex_intensities_2 <- rmo::ex_intensities_alpha_stable(d2, alpha)
 
-  intensities <- rmo::intensities_poisson(d1+d2, lambda, eta)
+  intensities <- lambda * rmo::intensities_poisson(d1+d2, eta)
   for (j in seq_along(intensities)) {
     count_1 <- 0
     count_2 <- 0

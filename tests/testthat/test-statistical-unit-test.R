@@ -46,7 +46,7 @@ armageddon_extmo_ks_test <- function(n, d, FUN, alpha, beta) { # nolint
 #' @keywords internal test
 lfm_bf <- function(rate, rate_killing, rate_drift, rjump_name, rjump_arg_list) {
   if ("rposval" == rjump_name) {
-    bf <- PoissonBernsteinFunction(lambda = 1, eta = rjump_arg_list$value)
+    bf <- PoissonBernsteinFunction(eta = rjump_arg_list$value)
   } else if ("rexp" == rjump_name) {
     bf <- ExponentialBernsteinFunction(lambda = rjump_arg_list$rate)
   } else if ("rpareto" == rjump_name) {
@@ -292,7 +292,7 @@ test_that("Lévy frailty CPP model passes statistical unit test", {
   bf <- testutils.rmo::fuzzy_bf(bf)
   rate_drift <- bf@second@first@scale
   rate_killing <- bf@first@constant
-  rate <- bf@second@second@lambda
+  rate <- 1
   rjump_name <- "rposval"
   rjump_arg_list <- list("value" = bf@second@second@eta)
   expect_not_rejected(
@@ -353,7 +353,7 @@ test_that("Lévy frailty CPP model passes statistical unit test", {
   bf <- testutils.rmo::fuzzy_bf(bf)
   rate_drift <- bf@second@first@scale
   rate_killing <- bf@first@constant
-  rate <- bf@second@second@lambda
+  rate <- 1
   rjump_name <- "rposval"
   rjump_arg_list <- list("value" = bf@second@second@eta)
   expect_not_rejected(

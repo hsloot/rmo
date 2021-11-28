@@ -118,16 +118,14 @@ setMethod("initialize", "CompositeScaledBernsteinFunction",
 #'
 #' @inheritParams methods::initialize
 #' @param eta Positive number.
-#' @param lambda Positive number
 #'
 #' @examples
 #' PoissonBernsteinFunction()
-#' PoissonBernsteinFunction(lambda = 0.2, eta = 2)
+#' PoissonBernsteinFunction(eta = 2)
 setMethod("initialize", "PoissonBernsteinFunction",
-  function(.Object, eta, lambda) { # nolint
-    if (!(missing(eta) || missing(lambda))) {
+  function(.Object, eta) { # nolint
+    if (!missing(eta)) {
       .Object@eta <- eta
-      .Object@lambda <- lambda
       validObject(.Object)
     }
 

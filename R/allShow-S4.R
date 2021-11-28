@@ -101,7 +101,6 @@ setMethod("show", "PoissonBernsteinFunction",
   function(object) {
     cat(sprintf("An object of class %s\n", classLabel(class(object))))
     if (isTRUE(validObject(object, test = TRUE))) {
-      cat(sprintf("- lambda: %s\n", format(object@lambda)))
       cat(sprintf("- eta: %s\n", format(object@eta)))
     } else {
       cat("\t (invalid or not initialized)\n")

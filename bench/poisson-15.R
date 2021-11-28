@@ -7,11 +7,10 @@
 n <- 1e3
 d <- 15
 
-lambda <- 1
 eta <- 0.5
 
-intensities <- rmo::intensities_poisson(d, lambda, eta)
-ex_intensities <- rmo::ex_intensities_poisson(d, lambda, eta)
+intensities <- rmo::intensities_poisson(d, eta)
+ex_intensities <- rmo::ex_intensities_poisson(d, eta)
 
 #+ r bench
 bench::mark(
@@ -20,6 +19,6 @@ bench::mark(
   ExMarkovian = rmo:::Rcpp__rexmo_markovian(
     n, d, ex_intensities=ex_intensities),
   LFM = rmo:::Rcpp__rextmo_lfm(
-    n, d, lambda, 0, 0, "rposval", list("value"=eta)),
+    n, d, 1, 0, 0, "rposval", list("value"=eta)),
   min_iterations = 100L,
   check=FALSE)

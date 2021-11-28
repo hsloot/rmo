@@ -109,30 +109,28 @@ intensities_armageddon <- function(d, alpha, beta) { # nocov start
 } # nocov end
 
 
-#' @param lambda Rate for Poisson process, passed to `lambda` parameter
-#'   [PoissonBernsteinFunction-class]
 #' @param eta Jump size for Poisson process, passed to `eta` parameter of
 #'   [PoissonBernsteinFunction-class]
 #'
 #' @seealso [PoissonBernsteinFunction-class]
 #'
 #' @examples
-#' ex_intensities_poisson(10L, lambda = 0.5, eta = 0.2)
+#' ex_intensities_poisson(10L, eta = 0.2)
 #'
 #' @export
 #' @rdname parameter
-ex_intensities_poisson <- function(d, lambda, eta) { # nocov start
-  bf <- PoissonBernsteinFunction(lambda = lambda, eta = eta)
+ex_intensities_poisson <- function(d, eta) { # nocov start
+  bf <- PoissonBernsteinFunction(eta = eta)
   bf2ex_intensities(d, bf)
 } # nocov end
 
 #' @examples
-#' intensities_poisson(10L, lambda = 0.5, eta = 0.2)
+#' intensities_poisson(10L, eta = 0.2)
 #'
 #' @export
 #' @rdname parameter
-intensities_poisson <- function(d, lambda, eta) { # nocov start
-  bf <- PoissonBernsteinFunction(lambda = lambda, eta = eta)
+intensities_poisson <- function(d, eta) { # nocov start
+  bf <- PoissonBernsteinFunction(eta = eta)
   bf2intensities(d, bf)
 } # nocov end
 
