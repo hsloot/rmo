@@ -81,16 +81,16 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// Rcpp__rmo_arnold
-NumericMatrix Rcpp__rmo_arnold(const std::size_t n, const std::size_t d, const NumericVector& intensities);
-RcppExport SEXP _rmo_Rcpp__rmo_arnold(SEXP nSEXP, SEXP dSEXP, SEXP intensitiesSEXP) {
+// Rcpp__rmo_am
+NumericMatrix Rcpp__rmo_am(const std::size_t n, const std::size_t d, const NumericVector& intensities);
+RcppExport SEXP _rmo_Rcpp__rmo_am(SEXP nSEXP, SEXP dSEXP, SEXP intensitiesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const std::size_t >::type n(nSEXP);
     Rcpp::traits::input_parameter< const std::size_t >::type d(dSEXP);
     Rcpp::traits::input_parameter< const NumericVector& >::type intensities(intensitiesSEXP);
-    rcpp_result_gen = Rcpp::wrap(Rcpp__rmo_arnold(n, d, intensities));
+    rcpp_result_gen = Rcpp::wrap(Rcpp__rmo_am(n, d, intensities));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -151,16 +151,16 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// rtest__rmo_arnold
-NumericMatrix rtest__rmo_arnold(const std::size_t n, const std::size_t d, const NumericVector& intensities);
-RcppExport SEXP _rmo_rtest__rmo_arnold(SEXP nSEXP, SEXP dSEXP, SEXP intensitiesSEXP) {
+// rtest__rmo_am
+NumericMatrix rtest__rmo_am(const std::size_t n, const std::size_t d, const NumericVector& intensities);
+RcppExport SEXP _rmo_rtest__rmo_am(SEXP nSEXP, SEXP dSEXP, SEXP intensitiesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const std::size_t >::type n(nSEXP);
     Rcpp::traits::input_parameter< const std::size_t >::type d(dSEXP);
     Rcpp::traits::input_parameter< const NumericVector& >::type intensities(intensitiesSEXP);
-    rcpp_result_gen = Rcpp::wrap(rtest__rmo_arnold(n, d, intensities));
+    rcpp_result_gen = Rcpp::wrap(rtest__rmo_am(n, d, intensities));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -268,12 +268,12 @@ static const R_CallMethodDef CallEntries[] = {
     {"_rmo_exi2exqm", (DL_FUNC) &_rmo_exi2exqm, 1},
     {"_rmo_Rcpp__is_within", (DL_FUNC) &_rmo_Rcpp__is_within, 2},
     {"_rmo_Rcpp__rmo_esm", (DL_FUNC) &_rmo_Rcpp__rmo_esm, 3},
-    {"_rmo_Rcpp__rmo_arnold", (DL_FUNC) &_rmo_Rcpp__rmo_arnold, 3},
+    {"_rmo_Rcpp__rmo_am", (DL_FUNC) &_rmo_Rcpp__rmo_am, 3},
     {"_rmo_Rcpp__rexmo_mdcm", (DL_FUNC) &_rmo_Rcpp__rexmo_mdcm, 3},
     {"_rmo_Rcpp__rarmextmo_esm", (DL_FUNC) &_rmo_Rcpp__rarmextmo_esm, 4},
     {"_rmo_Rcpp__rextmo_lfm", (DL_FUNC) &_rmo_Rcpp__rextmo_lfm, 7},
     {"_rmo_rtest__rmo_esm", (DL_FUNC) &_rmo_rtest__rmo_esm, 3},
-    {"_rmo_rtest__rmo_arnold", (DL_FUNC) &_rmo_rtest__rmo_arnold, 3},
+    {"_rmo_rtest__rmo_am", (DL_FUNC) &_rmo_rtest__rmo_am, 3},
     {"_rmo_rtest__rexmo_mdcm", (DL_FUNC) &_rmo_rtest__rexmo_mdcm, 3},
     {"_rmo_rtest__rarmextmo_esm", (DL_FUNC) &_rmo_rtest__rarmextmo_esm, 4},
     {"_rmo_rtest__rextmo_lfm", (DL_FUNC) &_rmo_rtest__rextmo_lfm, 7},

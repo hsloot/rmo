@@ -67,7 +67,7 @@ setGeneric("uexIntensities",
   })
 
 #' @describeIn BernsteinFunction-class
-#'   Calculates `intensities` parameter for [rmo_esm()] and [rmo_arnold()].
+#'   Calculates `intensities` parameter for [rmo_esm()] and [rmo_am()].
 #'
 #' @inheritParams uexIntensities
 #'

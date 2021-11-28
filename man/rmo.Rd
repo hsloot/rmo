@@ -40,7 +40,7 @@ The following algorithms are implemented:
 \itemize{
 \item \emph{Exogenous shock model} for arbitrary Marshall-Olkin distributions with
 \code{\link[=rmo_esm]{rmo_esm()}}. Not adviced for \code{d} much larger than 2.
-\item \emph{Arnold model} for arbitrary Marshall-Olkin distributions with \code{\link[=rmo_arnold]{rmo_arnold()}}.
+\item \emph{Arnold model} for arbitrary Marshall-Olkin distributions with \code{\link[=rmo_am]{rmo_am()}}.
 \item \emph{Exchangeable Markovian model} for exchangeable Marshall-Olkin distributions
 with \code{\link[=rexmo_mdcm]{rexmo_mdcm()}}.
 \item \emph{Lévy-frailty model for compound Poisson subordinators} for the corresponding

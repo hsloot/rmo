@@ -149,28 +149,28 @@ test_that("Arnold model passes statistical unit test", {
   ))
   intensities <- bf2intensities(d, bf)
   expect_not_rejected(
-    ks_test(n, d, rmo_arnold, intensities),
+    ks_test(n, d, rmo_am, intensities),
     unit_threshold
   )
 
   bf <- testutils.rmo::fuzzy_bf(AlphaStableBernsteinFunction())
   intensities <- bf2intensities(d, bf)
   expect_not_rejected(
-    ks_test(n, d, rmo_arnold, intensities),
+    ks_test(n, d, rmo_am, intensities),
     unit_threshold
   )
 
   bf <- testutils.rmo::fuzzy_bf(InverseGaussianBernsteinFunction())
   intensities <- bf2intensities(d, bf)
   expect_not_rejected(
-    ks_test(n, d, rmo_arnold, intensities),
+    ks_test(n, d, rmo_am, intensities),
     unit_threshold
   )
 
   bf <- testutils.rmo::fuzzy_bf(ExponentialBernsteinFunction())
   intensities <- bf2intensities(d, bf)
   expect_not_rejected(
-    ks_test(n, d, rmo_arnold, intensities),
+    ks_test(n, d, rmo_am, intensities),
     unit_threshold
   )
 })

@@ -16,7 +16,7 @@ ex_intensities <- lambda * rmo::ex_intensities_pareto(d, alpha, x0)
 
 #+ r bench
 bench::mark(
-  Arnold = rmo:::Rcpp__rmo_arnold(
+  Arnold = rmo:::Rcpp__rmo_am(
     n, d, intensities=intensities),
   ExMarkovian = rmo:::Rcpp__rexmo_mdcm(
     n, d, ex_intensities=ex_intensities),

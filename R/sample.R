@@ -70,21 +70,21 @@ rmo_esm <- function(n, d, intensities) {
 #' the specific shocks, see \insertCite{@see Sec. 3.1.2 @Mai2017a}{rmo} and
 #' \insertCite{Arnold1975a}{rmo}.
 #'
-#' @return `rmo_arnold` implements the *Arnold model* algorithm and returns
+#' @return `rmo_am` implements the *Arnold model* algorithm and returns
 #'  an \eqn{n \times d}{n x d} numeric matrix with the rows corresponding to
 #'  independent and identically distributed samples of a \eqn{d} variate
 #'  Marshall-Olkin distribution with parameters `intensities`.
 #'
 #' @examples
-#' rmo_arnold(10L, 2L, c(0.4, 0.3, 0.2))
-#' rmo_arnold(10L, 2L, c(1, 1, 0))         ## independence
-#' rmo_arnold(10L, 2L, c(0, 0, 1))         ## comonotone
+#' rmo_am(10L, 2L, c(0.4, 0.3, 0.2))
+#' rmo_am(10L, 2L, c(1, 1, 0))         ## independence
+#' rmo_am(10L, 2L, c(0, 0, 1))         ## comonotone
 #'
 #' @family sampling-algorithms
 #'
 #' @export
-rmo_arnold <- function(n, d, intensities) {
-  Rcpp__rmo_arnold(n, d, intensities)
+rmo_am <- function(n, d, intensities) {
+  Rcpp__rmo_am(n, d, intensities)
 }
 
 

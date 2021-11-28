@@ -37,7 +37,7 @@ NULL
 #' The following algorithms are implemented:
 #' - *Exogenous shock model* for arbitrary Marshall-Olkin distributions with
 #'   [rmo_esm()]. Not adviced for `d` much larger than 2.
-#' - *Arnold model* for arbitrary Marshall-Olkin distributions with [rmo_arnold()].
+#' - *Arnold model* for arbitrary Marshall-Olkin distributions with [rmo_am()].
 #' - *Exchangeable Markovian model* for exchangeable Marshall-Olkin distributions
 #'   with [rexmo_mdcm()].
 #' - *Lévy-frailty model for compound Poisson subordinators* for the corresponding

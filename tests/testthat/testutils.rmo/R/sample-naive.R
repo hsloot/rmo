@@ -72,12 +72,12 @@ rmo_esm_naive <- function(n, d, intensities) { # nolint
 #' @param intensities Shock intensities (length == 2^d-1; all >= 0, any > 0)
 #'
 #' @examples
-#' rmo_arnold_naive(10, 3, c(0.4, 0.3, 0.2, 0.5, 0.2, 0.1, 0.05))
-#' rmo_arnold_naive(10, 3, c(1, 1, 0, 1, 0, 0, 0)) ## independence
-#' rmo_arnold_naive(10, 3, c(0, 0, 0, 0, 0, 0, 1)) ## comonotone
+#' rmo_am_naive(10, 3, c(0.4, 0.3, 0.2, 0.5, 0.2, 0.1, 0.05))
+#' rmo_am_naive(10, 3, c(1, 1, 0, 1, 0, 0, 0)) ## independence
+#' rmo_am_naive(10, 3, c(0, 0, 0, 0, 0, 0, 1)) ## comonotone
 #' @include sample-helper.R
 #' @export
-rmo_arnold_naive <- function(n, d, intensities) { # nolint
+rmo_am_naive <- function(n, d, intensities) { # nolint
   stopifnot(
     is.numeric(n) && 1L == length(n) && 0 == n %% 1 && n > 0 &&
     is.numeric(d) && 1L == length(d) && 0 == d %% 1 && d > 0 &&

@@ -1,6 +1,7 @@
 # rmo 0.7.1
 
-- Rename sampling methods `*_markovian` to `*_mdcm`
+- Rename sampling method `*_markovian` to `*_mdcm`
+- Rename sampling method `*_arnold` to `*_am`
 
 # rmo 0.7
 
