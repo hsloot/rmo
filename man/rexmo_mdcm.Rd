@@ -58,6 +58,6 @@ rexmo_mdcm(10, 2, c(0, 1))      ## comonotone
 Other sampling-algorithms: 
 \code{\link{rarmextmo_esm}()},
 \code{\link{rextmo_lfm}()},
-\code{\link{rmo_esm}()}
+\code{\link{rmo}()}
 }
 \concept{sampling-algorithms}

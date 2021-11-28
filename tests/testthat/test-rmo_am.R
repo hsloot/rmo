@@ -1,11 +1,14 @@
 use_seed <- 1632
 n <- 1e2
 
+rmo_am <- function(...) {
+  mockery::stub(rmo, "Rcpp__rmo_am", rtest__rmo_am)
+  rmo(..., method = "AM")
+}
+
 ## #### Test implementation for the bivariate case ####
 
 test_that("Arnold model implementation for d = 2", {
-  mockery::stub(rmo_am, "Rcpp__rmo_am", rtest__rmo_am)
-
   ## all equal
   args <- list(
     "d" = 2L,
@@ -94,8 +97,6 @@ test_that("Arnold model implementation for d = 2", {
 ## ## test implementation against original `R` version ####
 
 test_that("Arnold model implementation for d>2", {
-  mockery::stub(rmo_am, "Rcpp__rmo_am", rtest__rmo_am)
-
   ## dimension parameters
   d1 <- 3
   d2 <- 4

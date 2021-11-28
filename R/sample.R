@@ -5,28 +5,30 @@
 #' Sample from a Marshall--Olkin distribution
 #'
 #' Draws `n` independent samples from a `d`-variate Marshall-Olkin distribution
-#' with shock rates `intensities`.
+#' with shock arrival `intensities`.
 #'
-#' @param n Number of samples
-#' @param d Dimension
-#' @param intensities Marshall-Olkin shock intensities
+#' @param n an integer for the number of samples.
+#' @param d an integer for the dimension of the sample.
+#' @param intensities a numeric vector with the Marshall-Olkin shock shock arrival
+#'   intensities intensities.
+#' @param method a character vector indicating which sampling algorithm should be used.
+#'   Use "AM" for the *Arnold model* and "ESM" for the *exogenous shock model*.
 #'
 #' @details
-#' __Parameterisation__:
+#' __Parametrisation__:
 #' The Marshall--Olkin distribution has the survival function
 #' \deqn{
 #'   \bar{F}(t)
-#'   \bar{F}(t)
 #'      = \exp{\left\{ - \sum_{I} \lambda_I \max_{i \in I} t_i \right\}} , \quad t > 0 ,
 #' }
-#' for *shock intensities* \eqn{\lambda_I \geq 0},
+#' for *shock arrival intensities* \eqn{\lambda_I \geq 0},
 #' \eqn{\emptyset \neq I \subseteq {\{ 1 , \ldots, d \}}}.
 #'
-#' __The shock intensities__:
-#' - The shock `intensities` must be stored in a vector of length
+#' __The shock arrival intensities__:
+#' - The shock arrival `intensities` must be stored in a vector of length
 #'    \eqn{2^d-1}.
-#' - A shock intensity of zero corresponds to an almost surely infinite
-#'    shock.
+#' - A shock arrival intensity of zero corresponds to an almost surely infinite
+#'    shock arrival time.
 #' - We use a binary representation to map a non-empty subset \eqn{J}
 #'    of \eqn{\{ 1, \ldots, d\}}{{1, \ldots, d}} to integers \eqn{j} of
 #'    \eqn{1, \ldots, 2^d-1}.
@@ -35,58 +37,49 @@
 #'    \eqn{j = \sum_{k=0}^\infty a_k 2^k}{\sum a[k] * 2^k}
 #'    and \eqn{a_{i-1} = 1}{a[i-1] = 1}.
 #'
-#' __The exogenous shock model__ simulates a Marshall--Olkin distributed random
+#' The __exogenous shock model__ simulates a Marshall--Olkin distributed random
 #' vector via exponentially distributed shock times for all non-empty subsets,
 #' see \insertCite{@see pp. 104 psqq. @Mai2017a}{rmo} and
 #' \insertCite{Marshall1967a}{rmo}.
 #'
-#' @return `rmo_esm` implements the *exogenous shock model* algorithm and
-#'   returns an \eqn{n \times d}{n x d} numeric matrix with the rows
+#' The __Arnold model__ simulates a Marshall--Olkin distributed random variable
+#' by simulating a marked homogeneous Poisson process and where the
+#' inter-arrival times correspond to shock shock-arrival times and the marks to
+#' the specific shocks, see \insertCite{@see Sec. 3.1.2 @Mai2017a}{rmo} and
+#' \insertCite{Arnold1975a}{rmo}.
+#'
+#' @return `rmo` returns an \eqn{n \times d}{n x d} numeric matrix with the rows
 #'   corresponding to independent and identically distributed samples of a
 #'   \eqn{d} variate Marshall-Olkin distribution with parameters `intensities`.
 #'
 #' @family sampling-algorithms
 #'
 #' @examples
-#' rmo_esm(10L, 2L, c(0.4, 0.3, 0.2))
-#' rmo_esm(10L, 2L, c(1, 1, 0))         ## independence
-#' rmo_esm(10L, 2L, c(0, 0, 1))         ## comonotone
+#' rmo(10L, 2L, c(0.4, 0.3, 0.2))
+#' rmo(10L, 2L, c(1, 1, 0))         ## independence
+#' rmo(10L, 2L, c(0, 0, 1))         ## comonotone
+#'
+#' rmo(10L, 2L, c(0.4, 0.3, 0.2), method = "ESM")
+#' rmo(10L, 2L, c(1, 1, 0), method = "ESM")         ## independence
+#' rmo(10L, 2L, c(0, 0, 1), method = "ESM")         ## comonotone
+#'
+#' rmo(10L, 2L, c(0.4, 0.3, 0.2), method = "AM")
+#' rmo(10L, 2L, c(1, 1, 0), method = "AM")         ## independence
+#' rmo(10L, 2L, c(0, 0, 1), method = "AM")         ## comonotone
 #'
 #' @references
 #'  \insertAllCited{}
 #'
 #' @export
-rmo_esm <- function(n, d, intensities) {
-  Rcpp__rmo_esm(n, d, intensities)
+rmo <- function(n, d, intensities, method = c("AM", "ESM")) {
+  method <- match.arg(method)
+  if ("ESM" == method) {
+    Rcpp__rmo_esm(n, d, intensities)
+  } else if ("AM" == method) {
+    Rcpp__rmo_am(n, d, intensities)
+  }
+
 }
-
-
-#' @rdname rmo_esm
-#'
-#' @details
-#' __The Arnold model__ simulates a Marshall--Olkin distributed random variable
-#' by simulating a marked homogeneous Poisson process and where the
-#' inter-arrival times correspond to shock shock-arrival times and the marks to
-#' the specific shocks, see \insertCite{@see Sec. 3.1.2 @Mai2017a}{rmo} and
-#' \insertCite{Arnold1975a}{rmo}.
-#'
-#' @return `rmo_am` implements the *Arnold model* algorithm and returns
-#'  an \eqn{n \times d}{n x d} numeric matrix with the rows corresponding to
-#'  independent and identically distributed samples of a \eqn{d} variate
-#'  Marshall-Olkin distribution with parameters `intensities`.
-#'
-#' @examples
-#' rmo_am(10L, 2L, c(0.4, 0.3, 0.2))
-#' rmo_am(10L, 2L, c(1, 1, 0))         ## independence
-#' rmo_am(10L, 2L, c(0, 0, 1))         ## comonotone
-#'
-#' @family sampling-algorithms
-#'
-#' @export
-rmo_am <- function(n, d, intensities) {
-  Rcpp__rmo_am(n, d, intensities)
-}
-
 
 
 ## #### Sample from an exchangeable Marshall--Olkin distribution ####
@@ -166,7 +159,7 @@ rexmo_mdcm <- function(n, d, ex_intensities) {
 #' The individual shock rate is \eqn{\alpha = \lambda_1} and the global shock
 #' rate is \eqn{\beta = \lambda_d}.
 #'
-#' @seealso [rmo_esm()]
+#' @seealso [rmo()]
 #' @family sampling-algorithms
 #'
 #' @examples

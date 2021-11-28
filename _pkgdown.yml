@@ -4,12 +4,12 @@ reference:
 - title: Package
   desc: ~
   contents:
-  - "`rmo`"
+  - "`rmo-package`"
 
 - title: Sampling functions
   desc: ~
   contents:
-  - matches("rmo_[a-z]+")
+  - matches("^rmo$")
   - starts_with("rexmo")
   - starts_with("rextmo")
   - starts_with("rarmextmo")

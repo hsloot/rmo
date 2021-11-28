@@ -106,7 +106,7 @@ alternating iterated forward differences, possibly scaled by a binomial
 
 \item \code{uexIntensities}: Calculates unscaled \code{ex_intensities} parameter for \code{\link[=rexmo_mdcm]{rexmo_mdcm()}}.
 
-\item \code{intensities}: Calculates \code{intensities} parameter for \code{\link[=rmo_esm]{rmo_esm()}} and \code{\link[=rmo_am]{rmo_am()}}.
+\item \code{intensities}: Calculates \code{intensities} parameter for \code{\link[=rmo]{rmo()}}.
 
 \item \code{exIntensities}: Calculates \code{ex_intensities} parameter for \code{\link[=rexmo_mdcm]{rexmo_mdcm()}}.
 

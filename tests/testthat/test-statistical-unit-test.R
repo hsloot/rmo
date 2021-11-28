@@ -2,6 +2,14 @@
 n <- 1e3
 set.seed(1623)
 
+rmo_esm <- function(...) {
+  rmo(..., method = "ESM")
+}
+
+rmo_am <- function(...) {
+  rmo(..., method = "AM")
+}
+
 ## All threshold should be chosen such that, in total, they sum up to this
 ## number. If this is, e.g., 1%, then the probability of a false positive,
 ## assuming the null hypothesis is fulfilled, is 1%.
