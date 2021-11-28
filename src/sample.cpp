@@ -9,7 +9,7 @@
 #include "rmolib/random/multivariate/armageddon_extmo_distribution.hpp"
 #include "rmolib/random/multivariate/esm_mo_distribution.hpp"
 #include "rmolib/random/multivariate/lfm_extmo_distribution.hpp"
-#include "rmolib/random/multivariate/markovian_exmo_distribution.hpp"
+#include "rmolib/random/multivariate/mdcm_exmo_distribution.hpp"
 #include "rmolib/random/univariate/deterministic_distribution.hpp"
 #include "rmolib/random/univariate/exponential_distribution.hpp"
 #include "rmolib/random/univariate/pareto_distribution.hpp"
@@ -78,11 +78,11 @@ NumericMatrix Rcpp__rexmo_mdcm(const std::size_t n, const std::size_t d,
       rmolib::random::uniform_int_distribution<std::size_t>;
   using discrete_distribution = rmolib::random::discrete_distribution<
       std::size_t, double, uniform_real_distribution, uniform_int_distribution>;
-  using markovian_exmo_distribution =
-      rmolib::random::markovian_exmo_distribution<
+  using mdcm_exmo_distribution =
+      rmolib::random::mdcm_exmo_distribution<
           double, exponential_distribution, uniform_int_distribution,
           discrete_distribution, rmolib::algorithm::shuffler>;
-  using caller_t = rcpp_distribution_caller<markovian_exmo_distribution, false>;
+  using caller_t = rcpp_distribution_caller<mdcm_exmo_distribution, false>;
 
   return caller_t::call(r_engine{}, n, d, ex_intensities.begin(),
                         ex_intensities.end());
@@ -192,11 +192,11 @@ NumericMatrix rtest__rexmo_mdcm(const std::size_t n, const std::size_t d,
   using discrete_distribution =
       rmolib::random::r_discrete_distribution<std::size_t, double,
                                               uniform_real_distribution>;
-  using markovian_exmo_distribution =
-      rmolib::random::markovian_exmo_distribution<
+  using mdcm_exmo_distribution =
+      rmolib::random::mdcm_exmo_distribution<
           double, exponential_distribution, uniform_int_distribution,
           discrete_distribution, rmolib::algorithm::r_shuffler>;
-  using caller_t = rcpp_distribution_caller<markovian_exmo_distribution, true>;
+  using caller_t = rcpp_distribution_caller<mdcm_exmo_distribution, true>;
 
   return caller_t::call(r_engine{}, n, d, ex_intensities.begin(),
                         ex_intensities.end());
