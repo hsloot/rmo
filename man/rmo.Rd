@@ -33,7 +33,7 @@ composition, which can be used to create new Bernstein functions with
 \section{Sampling}{
 
 Multiple sampling algorithms are provided. The semantic naming scheme \verb{r*mo_*}
-is used, e.g. \code{\link[=rexmo_markovian]{rexmo_markovian()}} has \emph{(scaled) exchangeable intensities}
+is used, e.g. \code{\link[=rexmo_mdcm]{rexmo_mdcm()}} has \emph{(scaled) exchangeable intensities}
 \code{ex_intensities} as input and uses the Markovian model for the default
 counting process.
 The following algorithms are implemented:
@@ -42,7 +42,7 @@ The following algorithms are implemented:
 \code{\link[=rmo_esm]{rmo_esm()}}. Not adviced for \code{d} much larger than 2.
 \item \emph{Arnold model} for arbitrary Marshall-Olkin distributions with \code{\link[=rmo_arnold]{rmo_arnold()}}.
 \item \emph{Exchangeable Markovian model} for exchangeable Marshall-Olkin distributions
-with \code{\link[=rexmo_markovian]{rexmo_markovian()}}.
+with \code{\link[=rexmo_mdcm]{rexmo_mdcm()}}.
 \item \emph{Lévy-frailty model for compound Poisson subordinators} for the corresponding
 subclass of extendible Marshall-Olkin distributions with \code{\link[=rextmo_lfm]{rextmo_lfm()}}.
 \item \emph{Exogenous shock model} for the armageddon ESM subclass with \code{\link[=rarmextmo_esm]{rarmextmo_esm()}}.

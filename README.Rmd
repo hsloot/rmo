@@ -50,7 +50,7 @@ devtools::install_github("hsloot/rmo")
 ## Example
 
 ```{r, include=TRUE}
-rexmo_markovian(
+rexmo_mdcm(
   n=10L, d=2L,
   ex_intensities_alpha_stable(d=2L, alpha=log2(2 - 0.5)))
 ```

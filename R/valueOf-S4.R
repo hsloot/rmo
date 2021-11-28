@@ -54,7 +54,7 @@ setGeneric("defaultMethod",
   })
 
 #' @describeIn BernsteinFunction-class
-#'   Calculates unscaled `ex_intensities` parameter for [rexmo_markovian()].
+#'   Calculates unscaled `ex_intensities` parameter for [rexmo_mdcm()].
 #'
 #' @inheritParams levyDensity
 #' @param d Dimension
@@ -78,7 +78,7 @@ setGeneric("intensities",
   })
 
 #' @describeIn BernsteinFunction-class
-#'   Calculates `ex_intensities` parameter for [rexmo_markovian()].
+#'   Calculates `ex_intensities` parameter for [rexmo_mdcm()].
 #'
 #' @inheritParams uexIntensities
 #'
@@ -89,7 +89,7 @@ setGeneric("exIntensities",
   })
 
 #' @describeIn BernsteinFunction-class
-#'   Calculates the exchangeable Q-matrix implies by [rexmo_markovian()].
+#'   Calculates the exchangeable Q-matrix implies by [rexmo_mdcm()].
 #'
 #' @inheritParams uexIntensities
 #'

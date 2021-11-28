@@ -15,7 +15,7 @@ ex_intensities <- rmo::ex_intensities_armageddon(d, alpha, beta)
 #+ r bench
 bench::mark(
   Armageddon = rmo:::Rcpp__rarmextmo_esm(n, d, alpha, beta),
-  ExMarkovian = rmo:::Rcpp__rexmo_markovian(n, d, ex_intensities),
+  ExMarkovian = rmo:::Rcpp__rexmo_mdcm(n, d, ex_intensities),
   LFM = rmo:::Rcpp__rextmo_lfm(
     n, d, 0, beta, alpha, "rposval", list("value" = 1)),
   Arnold = rmo:::Rcpp__rmo_arnold(n, d, intensities),

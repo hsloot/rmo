@@ -31,7 +31,7 @@ NULL
 #'
 #' @section Sampling:
 #' Multiple sampling algorithms are provided. The semantic naming scheme `r*mo_*`
-#' is used, e.g. [rexmo_markovian()] has *(scaled) exchangeable intensities*
+#' is used, e.g. [rexmo_mdcm()] has *(scaled) exchangeable intensities*
 #' `ex_intensities` as input and uses the Markovian model for the default
 #' counting process.
 #' The following algorithms are implemented:
@@ -39,7 +39,7 @@ NULL
 #'   [rmo_esm()]. Not adviced for `d` much larger than 2.
 #' - *Arnold model* for arbitrary Marshall-Olkin distributions with [rmo_arnold()].
 #' - *Exchangeable Markovian model* for exchangeable Marshall-Olkin distributions
-#'   with [rexmo_markovian()].
+#'   with [rexmo_mdcm()].
 #' - *Lévy-frailty model for compound Poisson subordinators* for the corresponding
 #'   subclass of extendible Marshall-Olkin distributions with [rextmo_lfm()].
 #' - *Exogenous shock model* for the armageddon ESM subclass with [rarmextmo_esm()].

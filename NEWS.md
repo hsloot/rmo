@@ -1,3 +1,7 @@
+# rmo 0.7.1
+
+- Rename sampling methods `*_markovian` to `*_mdcm`
+
 # rmo 0.7
 
 - Breaking change: remove `lambda` parameter for `PoissonBernsteinFunction`.

@@ -106,7 +106,7 @@ rmo_arnold <- function(n, d, intensities) {
 #' @param ex_intensities (Scaled) exchangeable Marshall-Olkin intensities
 #'
 #' @return
-#' `rexmo_markovian` implements the Markovian model for the default  counting
+#' `rexmo_mdcm` implements the Markovian model for the default counting
 #' process of the exchangeable subclass and returns an  \eqn{n \times d}{n x d}
 #' numeric matrix with the rows corresponding to independent and identically
 #' disctributed samples of a \eqn{d} variate exchangeable Marshall-Olkin
@@ -131,13 +131,13 @@ rmo_arnold <- function(n, d, intensities) {
 #' @family sampling-algorithms
 #'
 #' @examples
-#' rexmo_markovian(10, 2, c(2 * 0.4, 0.2))
-#' rexmo_markovian(10, 2, c(2, 0))      ## independence
-#' rexmo_markovian(10, 2, c(0, 1))      ## comonotone
+#' rexmo_mdcm(10, 2, c(2 * 0.4, 0.2))
+#' rexmo_mdcm(10, 2, c(2, 0))      ## independence
+#' rexmo_mdcm(10, 2, c(0, 1))      ## comonotone
 #'
 #' @export
-rexmo_markovian <- function(n, d, ex_intensities) {
-  Rcpp__rexmo_markovian(n, d, ex_intensities)
+rexmo_mdcm <- function(n, d, ex_intensities) {
+  Rcpp__rexmo_mdcm(n, d, ex_intensities)
 }
 
 ## #### Sample from extendible Marshall-Olkin distributions ####

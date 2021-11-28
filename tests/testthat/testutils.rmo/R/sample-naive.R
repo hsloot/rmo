@@ -127,12 +127,12 @@ rmo_arnold_naive <- function(n, d, intensities) { # nolint
 #'   (length == 2; all >= 0, any > 0)
 #'
 #' @examples
-#' rexmo_markovian_naive(10, 3, c(3*0.4, 2*0.3, 0.2))
-#' rexmo_markovian_naive(10, 3, c(3, 0, 0)) ## independence
-#' rexmo_markovian_naive(10, 3, c(0, 0, 1)) ## comonotone
+#' rexmo_mdcm_naive(10, 3, c(3*0.4, 2*0.3, 0.2))
+#' rexmo_mdcm_naive(10, 3, c(3, 0, 0)) ## independence
+#' rexmo_mdcm_naive(10, 3, c(0, 0, 1)) ## comonotone
 #' @include sample-helper.R
 #' @export
-rexmo_markovian_naive <- function(n, d, ex_intensities) { # nolint
+rexmo_mdcm_naive <- function(n, d, ex_intensities) { # nolint
   stopifnot(
     is.numeric(n) && 1L == length(n) && 0 == n %% 1 && n > 0 &&
     is.numeric(d) && 1L == length(d) && 0 == d %% 1 && d > 0 &&
@@ -220,12 +220,12 @@ rexmo_markovian_naive <- function(n, d, ex_intensities) { # nolint
 #' should only be used for low dimensions to test.
 #'
 #' @examples
-#' rexmo_markovian_naive_recursive(10, 3, c(3*0.4, 2*0.3, 0.2))
-#' rexmo_markovian_naive_recursive(10, 3, c(3*1, 0, 0)) ## independence
-#' rexmo_markovian_naive_recursive(10, 3, c(0, 0, 1)) ## comonotone
+#' rexmo_mdcm_naive_recursive(10, 3, c(3*0.4, 2*0.3, 0.2))
+#' rexmo_mdcm_naive_recursive(10, 3, c(3*1, 0, 0)) ## independence
+#' rexmo_mdcm_naive_recursive(10, 3, c(0, 0, 1)) ## comonotone
 #' @include sample-helper.R
 #' @export
-rexmo_markovian_naive_recursive <- function( # nolint
+rexmo_mdcm_naive_recursive <- function( # nolint
   n, d = 2, ex_intensities = c(1, 0)) {
   stopifnot(
     is.numeric(n) && 1L == length(n) && 0 == n %% 1 && n > 0 &&

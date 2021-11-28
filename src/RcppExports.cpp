@@ -94,16 +94,16 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// Rcpp__rexmo_markovian
-NumericMatrix Rcpp__rexmo_markovian(const std::size_t n, const std::size_t d, const NumericVector& ex_intensities);
-RcppExport SEXP _rmo_Rcpp__rexmo_markovian(SEXP nSEXP, SEXP dSEXP, SEXP ex_intensitiesSEXP) {
+// Rcpp__rexmo_mdcm
+NumericMatrix Rcpp__rexmo_mdcm(const std::size_t n, const std::size_t d, const NumericVector& ex_intensities);
+RcppExport SEXP _rmo_Rcpp__rexmo_mdcm(SEXP nSEXP, SEXP dSEXP, SEXP ex_intensitiesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const std::size_t >::type n(nSEXP);
     Rcpp::traits::input_parameter< const std::size_t >::type d(dSEXP);
     Rcpp::traits::input_parameter< const NumericVector& >::type ex_intensities(ex_intensitiesSEXP);
-    rcpp_result_gen = Rcpp::wrap(Rcpp__rexmo_markovian(n, d, ex_intensities));
+    rcpp_result_gen = Rcpp::wrap(Rcpp__rexmo_mdcm(n, d, ex_intensities));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -164,16 +164,16 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// rtest__rexmo_markovian
-NumericMatrix rtest__rexmo_markovian(const std::size_t n, const std::size_t d, const NumericVector& ex_intensities);
-RcppExport SEXP _rmo_rtest__rexmo_markovian(SEXP nSEXP, SEXP dSEXP, SEXP ex_intensitiesSEXP) {
+// rtest__rexmo_mdcm
+NumericMatrix rtest__rexmo_mdcm(const std::size_t n, const std::size_t d, const NumericVector& ex_intensities);
+RcppExport SEXP _rmo_rtest__rexmo_mdcm(SEXP nSEXP, SEXP dSEXP, SEXP ex_intensitiesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const std::size_t >::type n(nSEXP);
     Rcpp::traits::input_parameter< const std::size_t >::type d(dSEXP);
     Rcpp::traits::input_parameter< const NumericVector& >::type ex_intensities(ex_intensitiesSEXP);
-    rcpp_result_gen = Rcpp::wrap(rtest__rexmo_markovian(n, d, ex_intensities));
+    rcpp_result_gen = Rcpp::wrap(rtest__rexmo_mdcm(n, d, ex_intensities));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -269,12 +269,12 @@ static const R_CallMethodDef CallEntries[] = {
     {"_rmo_Rcpp__is_within", (DL_FUNC) &_rmo_Rcpp__is_within, 2},
     {"_rmo_Rcpp__rmo_esm", (DL_FUNC) &_rmo_Rcpp__rmo_esm, 3},
     {"_rmo_Rcpp__rmo_arnold", (DL_FUNC) &_rmo_Rcpp__rmo_arnold, 3},
-    {"_rmo_Rcpp__rexmo_markovian", (DL_FUNC) &_rmo_Rcpp__rexmo_markovian, 3},
+    {"_rmo_Rcpp__rexmo_mdcm", (DL_FUNC) &_rmo_Rcpp__rexmo_mdcm, 3},
     {"_rmo_Rcpp__rarmextmo_esm", (DL_FUNC) &_rmo_Rcpp__rarmextmo_esm, 4},
     {"_rmo_Rcpp__rextmo_lfm", (DL_FUNC) &_rmo_Rcpp__rextmo_lfm, 7},
     {"_rmo_rtest__rmo_esm", (DL_FUNC) &_rmo_rtest__rmo_esm, 3},
     {"_rmo_rtest__rmo_arnold", (DL_FUNC) &_rmo_rtest__rmo_arnold, 3},
-    {"_rmo_rtest__rexmo_markovian", (DL_FUNC) &_rmo_rtest__rexmo_markovian, 3},
+    {"_rmo_rtest__rexmo_mdcm", (DL_FUNC) &_rmo_rtest__rexmo_mdcm, 3},
     {"_rmo_rtest__rarmextmo_esm", (DL_FUNC) &_rmo_rtest__rarmextmo_esm, 4},
     {"_rmo_rtest__rextmo_lfm", (DL_FUNC) &_rmo_rtest__rextmo_lfm, 7},
     {"_rmo_rtest__deterministic", (DL_FUNC) &_rmo_rtest__deterministic, 2},
