@@ -11,7 +11,7 @@
 \alias{levyDensity,PoissonBernsteinFunction-method}
 \title{Class for the \emph{Poisson Bernstein function}}
 \usage{
-\S4method{initialize}{PoissonBernsteinFunction}(.Object, eta, lambda)
+\S4method{initialize}{PoissonBernsteinFunction}(.Object, eta)
 
 \S4method{show}{PoissonBernsteinFunction}(object)
 
@@ -22,8 +22,6 @@
 
 \item{eta}{Positive number.}
 
-\item{lambda}{Positive number}
-
 \item{object}{An object deriving from \linkS4class{LevyBernsteinFunction}
 (for \code{levyDensity}) or \linkS4class{CompleteBernsteinFunction}
 (for \code{stieltjesDensity}).}
@@ -32,7 +30,7 @@
 The Poisson process with arrival-rate \eqn{\lambda} and fixed jump size
 \eqn{\eta} is a Lévy subordinator corresponding to the Bernstein function
 \deqn{
-  \psi(x) = \lambda (1 - e^{-x\eta}) , x>0.
+  \psi(x) = 1 - e^{-x\eta}, x>0.
 }
 }
 \details{
@@ -69,7 +67,7 @@ foward differences can be calculated in closed form:
 
 \examples{
 PoissonBernsteinFunction()
-PoissonBernsteinFunction(lambda = 0.2, eta = 2)
+PoissonBernsteinFunction(eta = 2)
 }
 \seealso{
 \linkS4class{BernsteinFunction}, \linkS4class{LevyBernsteinFunction}

@@ -477,7 +477,7 @@ setMethod("valueOf0", "PoissonBernsteinFunction",
       check_numeric(x, min.len = 1L, any.missing = FALSE),
       check_complex(x, min.len = 1L, any.missing = FALSE))
     qassert(Re(x), "N+[0,)")
-    object@lambda * (1 - exp(-x * object@eta))
+    1 - exp(-x * object@eta)
   })
 
 #' @keywords internal

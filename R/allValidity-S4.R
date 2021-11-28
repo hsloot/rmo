@@ -48,9 +48,6 @@ setValidity("CompositeScaledBernsteinFunction",
 #' @importFrom checkmate qtest
 setValidity("PoissonBernsteinFunction",
   function(object) {
-    if (!qtest(object@lambda, "N1[0,)")) {
-      return(sprintf(ERR_MSG_DOMAIN, "lambda", "N1[0,)"))
-    }
     if (!qtest(object@eta, "N1[0,)")) {
       return(sprintf(ERR_MSG_DOMAIN, "eta", "N1[0,)"))
     }

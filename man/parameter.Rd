@@ -34,9 +34,9 @@ ex_intensities_armageddon(d, alpha, beta)
 
 intensities_armageddon(d, alpha, beta)
 
-ex_intensities_poisson(d, lambda, eta)
+ex_intensities_poisson(d, eta)
 
-intensities_poisson(d, lambda, eta)
+intensities_poisson(d, eta)
 
 ex_intensities_alpha_stable(d, alpha)
 
@@ -73,11 +73,11 @@ parameter of \linkS4class{ParetoBernsteinFunction}}
 \item{beta}{Rate for global shock, passed to \code{constant} parameter for
 \linkS4class{ConstantBernsteinFunction}}
 
-\item{lambda}{lambda parameter for Exponential-jump CPP subordinator, passed to \code{lambda}
-parameter of \linkS4class{ExponentialBernsteinFunction}}
-
 \item{eta}{\code{eta} parameter for the inverse Gaussian BF, passed to \code{eta}
 parameter of \linkS4class{InverseGaussianBernsteinFunction}}
+
+\item{lambda}{lambda parameter for Exponential-jump CPP subordinator, passed to \code{lambda}
+parameter of \linkS4class{ExponentialBernsteinFunction}}
 
 \item{a}{Shape parameter for Gamma subordinator, passed to \code{a} parameter of
 \linkS4class{GammaBernsteinFunction}}
@@ -107,9 +107,9 @@ ex_intensities_armageddon(10L, alpha=1, beta=0.5)
 
 intensities_armageddon(10L, alpha=1, beta=0.5)
 
-ex_intensities_poisson(10L, lambda = 0.5, eta = 0.2)
+ex_intensities_poisson(10L, eta = 0.2)
 
-intensities_poisson(10L, lambda = 0.5, eta = 0.2)
+intensities_poisson(10L, eta = 0.2)
 
 ex_intensities_alpha_stable(10L, alpha=0.4)
 

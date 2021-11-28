@@ -37,7 +37,7 @@ test_that("Arnold model implementation for d = 2", {
   args <- list(
     "d" = 2,
     "intensities" = intensities_poisson(
-      2, lambda = 0.2, eta = 0.3
+      2, eta = 0.3
     )
   )
   expect_equal_rn_generation(
@@ -132,7 +132,7 @@ test_that("Arnold model implementation for d>2", {
   args <- list(
     "d" = d,
     "intensities" = intensities_poisson(
-      d, lambda = 0.2, eta = 0.3
+      d, eta = 0.3
     )
   )
   expect_equal_rn_generation(
