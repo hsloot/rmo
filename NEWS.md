@@ -1,3 +1,7 @@
+# rmo 0.7
+
+- Breaking change: remove `lambda` parameter for `PoissonBernsteinFunction`.
+
 # rmo 0.6
 
 - Rename *Cuadras-Augé* to *armageddon ESM* to better reflect the nature of the distribution.
