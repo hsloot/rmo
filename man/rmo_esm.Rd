@@ -2,12 +2,12 @@
 % Please edit documentation in R/sample.R
 \name{rmo_esm}
 \alias{rmo_esm}
-\alias{rmo_arnold}
+\alias{rmo_am}
 \title{Sample from a Marshall--Olkin distribution}
 \usage{
 rmo_esm(n, d, intensities)
 
-rmo_arnold(n, d, intensities)
+rmo_am(n, d, intensities)
 }
 \arguments{
 \item{n}{Number of samples}
@@ -22,7 +22,7 @@ returns an \eqn{n \times d}{n x d} numeric matrix with the rows
 corresponding to independent and identically distributed samples of a
 \eqn{d} variate Marshall-Olkin distribution with parameters \code{intensities}.
 
-\code{rmo_arnold} implements the \emph{Arnold model} algorithm and returns
+\code{rmo_am} implements the \emph{Arnold model} algorithm and returns
 an \eqn{n \times d}{n x d} numeric matrix with the rows corresponding to
 independent and identically distributed samples of a \eqn{d} variate
 Marshall-Olkin distribution with parameters \code{intensities}.
@@ -73,9 +73,9 @@ rmo_esm(10L, 2L, c(0.4, 0.3, 0.2))
 rmo_esm(10L, 2L, c(1, 1, 0))         ## independence
 rmo_esm(10L, 2L, c(0, 0, 1))         ## comonotone
 
-rmo_arnold(10L, 2L, c(0.4, 0.3, 0.2))
-rmo_arnold(10L, 2L, c(1, 1, 0))         ## independence
-rmo_arnold(10L, 2L, c(0, 0, 1))         ## comonotone
+rmo_am(10L, 2L, c(0.4, 0.3, 0.2))
+rmo_am(10L, 2L, c(1, 1, 0))         ## independence
+rmo_am(10L, 2L, c(0, 0, 1))         ## comonotone
 
 }
 \references{
@@ -84,12 +84,12 @@ rmo_arnold(10L, 2L, c(0, 0, 1))         ## comonotone
 \seealso{
 Other sampling-algorithms: 
 \code{\link{rarmextmo_esm}()},
-\code{\link{rexmo_markovian}()},
+\code{\link{rexmo_mdcm}()},
 \code{\link{rextmo_lfm}()}
 
 Other sampling-algorithms: 
 \code{\link{rarmextmo_esm}()},
-\code{\link{rexmo_markovian}()},
+\code{\link{rexmo_mdcm}()},
 \code{\link{rextmo_lfm}()}
 }
 \concept{sampling-algorithms}

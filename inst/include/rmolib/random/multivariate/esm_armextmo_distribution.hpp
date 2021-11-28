@@ -31,19 +31,19 @@ template <typename _T>
 struct is_armageddon_extmo_param_type
     : public internal::__is_armageddon_extmo_param_type<std::remove_cv_t<_T>> {};
 
-//! true, if _T can be used to construct armageddon_extmo_distribution<>::param_type
+//! true, if _T can be used to construct esm_armextmo_distribution<>::param_type
 template <typename _T>
 constexpr bool is_armageddon_extmo_param_type_v =
     is_armageddon_extmo_param_type<_T>::value;
 
 template <typename _RealType, typename _ExponentialDistribution>
-class armageddon_extmo_distribution {
+class esm_armextmo_distribution {
  public:
   using result_type = std::vector<_RealType>;
 
   class param_type {
    public:
-    using distribution_type = armageddon_extmo_distribution;
+    using distribution_type = esm_armextmo_distribution;
 
     param_type() = default;
 
@@ -66,7 +66,7 @@ class armageddon_extmo_distribution {
     auto alpha() const { return alpha_parm_.lambda(); }
     auto beta() const { return beta_parm_.lambda(); }
 
-    friend class armageddon_extmo_distribution;
+    friend class esm_armextmo_distribution;
 
     friend bool operator==(const param_type& lhs, const param_type& rhs) {
       return lhs.dim_ == rhs.dim_ && lhs.alpha_parm_ == rhs.alpha_parm_ &&
@@ -85,24 +85,24 @@ class armageddon_extmo_distribution {
     exponential_parm_t beta_parm_{_RealType{0}};
   };
 
-  armageddon_extmo_distribution() = default;
+  esm_armextmo_distribution() = default;
 
-  explicit armageddon_extmo_distribution(const std::size_t dim,
+  explicit esm_armextmo_distribution(const std::size_t dim,
                                      const _RealType alpha,
                                      const _RealType beta)
       : parm_{dim, alpha, beta} {}
 
-  explicit armageddon_extmo_distribution(const param_type& parm) : parm_{parm} {}
+  explicit esm_armextmo_distribution(const param_type& parm) : parm_{parm} {}
 
   // Used for construction from a different specialization
   template <typename _ArmageddonExtMOParamType,
             std::enable_if_t<
                 !std::is_convertible_v<_ArmageddonExtMOParamType,
-                                       armageddon_extmo_distribution> &&
+                                       esm_armextmo_distribution> &&
                     !std::is_convertible_v<_ArmageddonExtMOParamType, param_type> &&
                     is_armageddon_extmo_param_type_v<_ArmageddonExtMOParamType>,
                 int> = 0>
-  explicit armageddon_extmo_distribution(_ArmageddonExtMOParamType&& parm)
+  explicit esm_armextmo_distribution(_ArmageddonExtMOParamType&& parm)
       : parm_{std::forward<_ArmageddonExtMOParamType>(parm)} {}
 
   // compiler generated ctor and assignment op is sufficient
@@ -141,13 +141,13 @@ class armageddon_extmo_distribution {
     }
   }
 
-  friend bool operator==(const armageddon_extmo_distribution& lhs,
-                         const armageddon_extmo_distribution& rhs) {
+  friend bool operator==(const esm_armextmo_distribution& lhs,
+                         const esm_armextmo_distribution& rhs) {
     return lhs.parm_ == rhs.parm_;
   }
 
-  friend bool operator!=(const armageddon_extmo_distribution& lhs,
-                         const armageddon_extmo_distribution& rhs) {
+  friend bool operator!=(const esm_armextmo_distribution& lhs,
+                         const esm_armextmo_distribution& rhs) {
     return !(lhs == rhs);
   }
 
@@ -158,7 +158,7 @@ class armageddon_extmo_distribution {
   static_assert(
       type_traits::is_safe_numeric_cast_v<
           _RealType, typename _ExponentialDistribution::result_type>,
-      "Class template rmolib::random::armageddon_extmo_distribution<> must be "
+      "Class template rmolib::random::esm_armextmo_distribution<> must be "
       "parametrized with unit_exponential_distribution-type with suitable "
       "result_type");
 };
@@ -169,13 +169,13 @@ class armageddon_extmo_distribution {
   template <class _CharType, class _Traits, typename _RealType, typename
   _ExponentialDistribution> std::basic_ostream<_CharType, _Traits>&
   operator<<(std::basic_ostream<_CharType, _Traits>& os,
-            armageddon_extmo_distribution<_RealType, _ExponentialDistribution>&
+            esm_armextmo_distribution<_RealType, _ExponentialDistribution>&
   dist);
 
   template <class _CharType, class _Traits, typename _RealType, typename
   _ExponentialDistribution> std::basic_istream<_CharType, _Traits>&
   operator>>(std::basic_istream<_CharType, _Traits>& is,
-             armageddon_extmo_distribution<_RealType,
+             esm_armextmo_distribution<_RealType,
   _ExponentialDistribution>& dist);
 */
 

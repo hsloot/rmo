@@ -149,28 +149,28 @@ test_that("Arnold model passes statistical unit test", {
   ))
   intensities <- bf2intensities(d, bf)
   expect_not_rejected(
-    ks_test(n, d, rmo_arnold, intensities),
+    ks_test(n, d, rmo_am, intensities),
     unit_threshold
   )
 
   bf <- testutils.rmo::fuzzy_bf(AlphaStableBernsteinFunction())
   intensities <- bf2intensities(d, bf)
   expect_not_rejected(
-    ks_test(n, d, rmo_arnold, intensities),
+    ks_test(n, d, rmo_am, intensities),
     unit_threshold
   )
 
   bf <- testutils.rmo::fuzzy_bf(InverseGaussianBernsteinFunction())
   intensities <- bf2intensities(d, bf)
   expect_not_rejected(
-    ks_test(n, d, rmo_arnold, intensities),
+    ks_test(n, d, rmo_am, intensities),
     unit_threshold
   )
 
   bf <- testutils.rmo::fuzzy_bf(ExponentialBernsteinFunction())
   intensities <- bf2intensities(d, bf)
   expect_not_rejected(
-    ks_test(n, d, rmo_arnold, intensities),
+    ks_test(n, d, rmo_am, intensities),
     unit_threshold
   )
 })
@@ -188,28 +188,28 @@ test_that("Exchangeable Arnold model passes statistical unit test", {
   ))
   ex_intensities <- bf2ex_intensities(d, bf)
   expect_not_rejected(
-    ex_ks_test(n, d, rexmo_markovian, ex_intensities),
+    ex_ks_test(n, d, rexmo_mdcm, ex_intensities),
     unit_threshold
   )
 
   bf <- testutils.rmo::fuzzy_bf(AlphaStableBernsteinFunction())
   ex_intensities <- bf2ex_intensities(d, bf)
   expect_not_rejected(
-    ex_ks_test(n, d, rexmo_markovian, ex_intensities),
+    ex_ks_test(n, d, rexmo_mdcm, ex_intensities),
     unit_threshold
   )
 
   bf <- testutils.rmo::fuzzy_bf(InverseGaussianBernsteinFunction())
   ex_intensities <- bf2ex_intensities(d, bf)
   expect_not_rejected(
-    ex_ks_test(n, d, rexmo_markovian, ex_intensities),
+    ex_ks_test(n, d, rexmo_mdcm, ex_intensities),
     unit_threshold
   )
 
   bf <- testutils.rmo::fuzzy_bf(ExponentialBernsteinFunction())
   ex_intensities <- bf2ex_intensities(d, bf)
   expect_not_rejected(
-    ex_ks_test(n, d, rexmo_markovian, ex_intensities),
+    ex_ks_test(n, d, rexmo_mdcm, ex_intensities),
     unit_threshold
   )
 
@@ -221,28 +221,28 @@ test_that("Exchangeable Arnold model passes statistical unit test", {
   ))
   ex_intensities <- bf2ex_intensities(d, bf)
   expect_not_rejected(
-    ex_ks_test(n, d, rexmo_markovian, ex_intensities),
+    ex_ks_test(n, d, rexmo_mdcm, ex_intensities),
     unit_threshold
   )
 
   bf <- testutils.rmo::fuzzy_bf(AlphaStableBernsteinFunction())
   ex_intensities <- bf2ex_intensities(d, bf)
   expect_not_rejected(
-    ex_ks_test(n, d, rexmo_markovian, ex_intensities),
+    ex_ks_test(n, d, rexmo_mdcm, ex_intensities),
     unit_threshold
   )
 
   bf <- testutils.rmo::fuzzy_bf(InverseGaussianBernsteinFunction())
   ex_intensities <- bf2ex_intensities(d, bf)
   expect_not_rejected(
-    ex_ks_test(n, d, rexmo_markovian, ex_intensities),
+    ex_ks_test(n, d, rexmo_mdcm, ex_intensities),
     unit_threshold
   )
 
   bf <- testutils.rmo::fuzzy_bf(ExponentialBernsteinFunction())
   ex_intensities <- bf2ex_intensities(d, bf)
   expect_not_rejected(
-    ex_ks_test(n, d, rexmo_markovian, ex_intensities),
+    ex_ks_test(n, d, rexmo_mdcm, ex_intensities),
     unit_threshold
   )
 })

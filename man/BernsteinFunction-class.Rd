@@ -104,13 +104,13 @@ alternating iterated forward differences, possibly scaled by a binomial
     {(-1)}^{j-1} \Delta^j \psi(c x), x > 0.
   }
 
-\item \code{uexIntensities}: Calculates unscaled \code{ex_intensities} parameter for \code{\link[=rexmo_markovian]{rexmo_markovian()}}.
+\item \code{uexIntensities}: Calculates unscaled \code{ex_intensities} parameter for \code{\link[=rexmo_mdcm]{rexmo_mdcm()}}.
 
-\item \code{intensities}: Calculates \code{intensities} parameter for \code{\link[=rmo_esm]{rmo_esm()}} and \code{\link[=rmo_arnold]{rmo_arnold()}}.
+\item \code{intensities}: Calculates \code{intensities} parameter for \code{\link[=rmo_esm]{rmo_esm()}} and \code{\link[=rmo_am]{rmo_am()}}.
 
-\item \code{exIntensities}: Calculates \code{ex_intensities} parameter for \code{\link[=rexmo_markovian]{rexmo_markovian()}}.
+\item \code{exIntensities}: Calculates \code{ex_intensities} parameter for \code{\link[=rexmo_mdcm]{rexmo_mdcm()}}.
 
-\item \code{exQMatrix}: Calculates the exchangeable Q-matrix implies by \code{\link[=rexmo_markovian]{rexmo_markovian()}}.
+\item \code{exQMatrix}: Calculates the exchangeable Q-matrix implies by \code{\link[=rexmo_mdcm]{rexmo_mdcm()}}.
 }}
 
 \examples{

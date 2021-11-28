@@ -14,9 +14,9 @@ ex_intensities <- rmo::ex_intensities_poisson(d, eta)
 
 #+ r bench
 bench::mark(
-  Arnold = rmo:::Rcpp__rmo_arnold(
+  Arnold = rmo:::Rcpp__rmo_am(
     n, d, intensities=intensities),
-  ExMarkovian = rmo:::Rcpp__rexmo_markovian(
+  ExMarkovian = rmo:::Rcpp__rexmo_mdcm(
     n, d, ex_intensities=ex_intensities),
   LFM = rmo:::Rcpp__rextmo_lfm(
     n, d, 1, 0, 0, "rposval", list("value"=eta)),

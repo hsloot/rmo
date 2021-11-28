@@ -26,7 +26,7 @@ struct is_exmo_param_type
     : public internal::__is_exmo_param_type<std::remove_cv_t<_T>> {};
 
 //! true, if _T can be used to construct
-//! markovian_exmo_distribution<>::param_type
+//! mdcm_exmo_distribution<>::param_type
 template <typename _T>
 constexpr bool is_exmo_param_type_v = is_exmo_param_type<_T>::value;
 

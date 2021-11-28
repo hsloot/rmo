@@ -138,57 +138,57 @@ ks_test(n, d, rmo_arnold, intensities_inverse_gaussian(d, eta = 0.1), normalize 
 ```
 
 
-### Test for `rexmo_markovian` with `d = 10`
+### Test for `rexmo_mdcm` with `d = 10`
 
 ```{r overall-minimum-ex_arnold-10}
 d <- 10L
 
-ex_ks_test(n, d, rexmo_markovian, ex_intensities_constant(d, constant = 0.3))
-ex_ks_test(n, d, rexmo_markovian, ex_intensities_linear(d, scale = 0.2))
-ex_ks_test(n, d, rexmo_markovian, ex_intensities_armageddon(d, alpha = 0.6, beta = 0.2))
-ex_ks_test(n, d, rexmo_markovian, ex_intensities_poisson(d, lambda = 0.3, eta = 0.4))
-ex_ks_test(n, d, rexmo_markovian, ex_intensities_alpha_stable(d, alpha = 0.4))
-ex_ks_test(n, d, rexmo_markovian, ex_intensities_exponential(d, lambda = 0.5))
-ex_ks_test(n, d, rexmo_markovian, ex_intensities_gamma(d, a = 0.6))
-ex_ks_test(n, d, rexmo_markovian, ex_intensities_pareto(d, alpha = 0.4, x0 = 1e-4))
-ex_ks_test(n, d, rexmo_markovian, ex_intensities_inverse_gaussian(d, eta = 0.1))
+ex_ks_test(n, d, rexmo_mdcm, ex_intensities_constant(d, constant = 0.3))
+ex_ks_test(n, d, rexmo_mdcm, ex_intensities_linear(d, scale = 0.2))
+ex_ks_test(n, d, rexmo_mdcm, ex_intensities_armageddon(d, alpha = 0.6, beta = 0.2))
+ex_ks_test(n, d, rexmo_mdcm, ex_intensities_poisson(d, lambda = 0.3, eta = 0.4))
+ex_ks_test(n, d, rexmo_mdcm, ex_intensities_alpha_stable(d, alpha = 0.4))
+ex_ks_test(n, d, rexmo_mdcm, ex_intensities_exponential(d, lambda = 0.5))
+ex_ks_test(n, d, rexmo_mdcm, ex_intensities_gamma(d, a = 0.6))
+ex_ks_test(n, d, rexmo_mdcm, ex_intensities_pareto(d, alpha = 0.4, x0 = 1e-4))
+ex_ks_test(n, d, rexmo_mdcm, ex_intensities_inverse_gaussian(d, eta = 0.1))
 
-ex_ks_test(n, d, rexmo_markovian, ex_intensities_constant(d, constant = 0.3), normalize = TRUE)
-ex_ks_test(n, d, rexmo_markovian, ex_intensities_linear(d, scale = 0.2), normalize = TRUE)
-ex_ks_test(n, d, rexmo_markovian, ex_intensities_armageddon(d, alpha = 0.6, beta = 0.2), normalize = TRUE)
-ex_ks_test(n, d, rexmo_markovian, ex_intensities_poisson(d, lambda = 0.3, eta = 0.4), normalize = TRUE)
-ex_ks_test(n, d, rexmo_markovian, ex_intensities_alpha_stable(d, alpha = 0.4), normalize = TRUE)
-ex_ks_test(n, d, rexmo_markovian, ex_intensities_exponential(d, lambda = 0.5), normalize = TRUE)
-ex_ks_test(n, d, rexmo_markovian, ex_intensities_gamma(d, a = 0.6), normalize = TRUE)
-ex_ks_test(n, d, rexmo_markovian, ex_intensities_pareto(d, alpha = 0.4, x0 = 1e-4), normalize = TRUE)
-ex_ks_test(n, d, rexmo_markovian, ex_intensities_inverse_gaussian(d, eta = 0.1), normalize = TRUE)
+ex_ks_test(n, d, rexmo_mdcm, ex_intensities_constant(d, constant = 0.3), normalize = TRUE)
+ex_ks_test(n, d, rexmo_mdcm, ex_intensities_linear(d, scale = 0.2), normalize = TRUE)
+ex_ks_test(n, d, rexmo_mdcm, ex_intensities_armageddon(d, alpha = 0.6, beta = 0.2), normalize = TRUE)
+ex_ks_test(n, d, rexmo_mdcm, ex_intensities_poisson(d, lambda = 0.3, eta = 0.4), normalize = TRUE)
+ex_ks_test(n, d, rexmo_mdcm, ex_intensities_alpha_stable(d, alpha = 0.4), normalize = TRUE)
+ex_ks_test(n, d, rexmo_mdcm, ex_intensities_exponential(d, lambda = 0.5), normalize = TRUE)
+ex_ks_test(n, d, rexmo_mdcm, ex_intensities_gamma(d, a = 0.6), normalize = TRUE)
+ex_ks_test(n, d, rexmo_mdcm, ex_intensities_pareto(d, alpha = 0.4, x0 = 1e-4), normalize = TRUE)
+ex_ks_test(n, d, rexmo_mdcm, ex_intensities_inverse_gaussian(d, eta = 0.1), normalize = TRUE)
 ```
 
 
-### Test for `rexmo_markovian` with `d = 125`
+### Test for `rexmo_mdcm` with `d = 125`
 
 ```{r overall-minimum-ex_arnold-125}
 d <- 125L
 
-ex_ks_test(n, d, rexmo_markovian, ex_intensities_constant(d, constant = 0.3))
-ex_ks_test(n, d, rexmo_markovian, ex_intensities_linear(d, scale = 0.2))
-ex_ks_test(n, d, rexmo_markovian, ex_intensities_cuadras_auge(d, alpha = 0.6, beta = 0.2))
-ex_ks_test(n, d, rexmo_markovian, ex_intensities_poisson(d, lambda = 0.3, eta = 0.4))
-ex_ks_test(n, d, rexmo_markovian, ex_intensities_alpha_stable(d, alpha = 0.4))
-ex_ks_test(n, d, rexmo_markovian, ex_intensities_exponential(d, lambda = 0.5))
-ex_ks_test(n, d, rexmo_markovian, ex_intensities_gamma(d, a = 0.6))
-ex_ks_test(n, d, rexmo_markovian, ex_intensities_pareto(d, alpha = 0.4, x0 = 1e-4))
-ex_ks_test(n, d, rexmo_markovian, ex_intensities_inverse_gaussian(d, eta = 0.1))
+ex_ks_test(n, d, rexmo_mdcm, ex_intensities_constant(d, constant = 0.3))
+ex_ks_test(n, d, rexmo_mdcm, ex_intensities_linear(d, scale = 0.2))
+ex_ks_test(n, d, rexmo_mdcm, ex_intensities_cuadras_auge(d, alpha = 0.6, beta = 0.2))
+ex_ks_test(n, d, rexmo_mdcm, ex_intensities_poisson(d, lambda = 0.3, eta = 0.4))
+ex_ks_test(n, d, rexmo_mdcm, ex_intensities_alpha_stable(d, alpha = 0.4))
+ex_ks_test(n, d, rexmo_mdcm, ex_intensities_exponential(d, lambda = 0.5))
+ex_ks_test(n, d, rexmo_mdcm, ex_intensities_gamma(d, a = 0.6))
+ex_ks_test(n, d, rexmo_mdcm, ex_intensities_pareto(d, alpha = 0.4, x0 = 1e-4))
+ex_ks_test(n, d, rexmo_mdcm, ex_intensities_inverse_gaussian(d, eta = 0.1))
 
-ex_ks_test(n, d, rexmo_markovian, ex_intensities_constant(d, constant = 0.3), normalize = TRUE)
-ex_ks_test(n, d, rexmo_markovian, ex_intensities_linear(d, scale = 0.2), normalize = TRUE)
-ex_ks_test(n, d, rexmo_markovian, ex_intensities_cuadras_auge(d, alpha = 0.6, beta = 0.2), normalize = TRUE)
-ex_ks_test(n, d, rexmo_markovian, ex_intensities_poisson(d, lambda = 0.3, eta = 0.4), normalize = TRUE)
-ex_ks_test(n, d, rexmo_markovian, ex_intensities_alpha_stable(d, alpha = 0.4), normalize = TRUE)
-ex_ks_test(n, d, rexmo_markovian, ex_intensities_exponential(d, lambda = 0.5), normalize = TRUE)
-ex_ks_test(n, d, rexmo_markovian, ex_intensities_gamma(d, a = 0.6), normalize = TRUE)
-ex_ks_test(n, d, rexmo_markovian, ex_intensities_pareto(d, alpha = 0.4, x0 = 1e-4), normalize = TRUE)
-ex_ks_test(n, d, rexmo_markovian, ex_intensities_inverse_gaussian(d, eta = 0.1), normalize = TRUE)
+ex_ks_test(n, d, rexmo_mdcm, ex_intensities_constant(d, constant = 0.3), normalize = TRUE)
+ex_ks_test(n, d, rexmo_mdcm, ex_intensities_linear(d, scale = 0.2), normalize = TRUE)
+ex_ks_test(n, d, rexmo_mdcm, ex_intensities_cuadras_auge(d, alpha = 0.6, beta = 0.2), normalize = TRUE)
+ex_ks_test(n, d, rexmo_mdcm, ex_intensities_poisson(d, lambda = 0.3, eta = 0.4), normalize = TRUE)
+ex_ks_test(n, d, rexmo_mdcm, ex_intensities_alpha_stable(d, alpha = 0.4), normalize = TRUE)
+ex_ks_test(n, d, rexmo_mdcm, ex_intensities_exponential(d, lambda = 0.5), normalize = TRUE)
+ex_ks_test(n, d, rexmo_mdcm, ex_intensities_gamma(d, a = 0.6), normalize = TRUE)
+ex_ks_test(n, d, rexmo_mdcm, ex_intensities_pareto(d, alpha = 0.4, x0 = 1e-4), normalize = TRUE)
+ex_ks_test(n, d, rexmo_mdcm, ex_intensities_inverse_gaussian(d, eta = 0.1), normalize = TRUE)
 ```
 
 

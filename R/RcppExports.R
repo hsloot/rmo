@@ -25,12 +25,12 @@ Rcpp__rmo_esm <- function(n, d, intensities) {
     .Call(`_rmo_Rcpp__rmo_esm`, n, d, intensities)
 }
 
-Rcpp__rmo_arnold <- function(n, d, intensities) {
-    .Call(`_rmo_Rcpp__rmo_arnold`, n, d, intensities)
+Rcpp__rmo_am <- function(n, d, intensities) {
+    .Call(`_rmo_Rcpp__rmo_am`, n, d, intensities)
 }
 
-Rcpp__rexmo_markovian <- function(n, d, ex_intensities) {
-    .Call(`_rmo_Rcpp__rexmo_markovian`, n, d, ex_intensities)
+Rcpp__rexmo_mdcm <- function(n, d, ex_intensities) {
+    .Call(`_rmo_Rcpp__rexmo_mdcm`, n, d, ex_intensities)
 }
 
 Rcpp__rarmextmo_esm <- function(n, d, alpha, beta) {
@@ -47,13 +47,13 @@ rtest__rmo_esm <- function(n, d, intensities) {
 }
 
 #' @keywords internal test
-rtest__rmo_arnold <- function(n, d, intensities) {
-    .Call(`_rmo_rtest__rmo_arnold`, n, d, intensities)
+rtest__rmo_am <- function(n, d, intensities) {
+    .Call(`_rmo_rtest__rmo_am`, n, d, intensities)
 }
 
 #' @keywords internal test
-rtest__rexmo_markovian <- function(n, d, ex_intensities) {
-    .Call(`_rmo_rtest__rexmo_markovian`, n, d, ex_intensities)
+rtest__rexmo_mdcm <- function(n, d, ex_intensities) {
+    .Call(`_rmo_rtest__rexmo_mdcm`, n, d, ex_intensities)
 }
 
 #' @keywords internal test

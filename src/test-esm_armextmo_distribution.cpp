@@ -5,7 +5,7 @@
 // clang-format off
 #include <rmolib/random/r_engine.hpp> // must be included before <rmolib/*>
 // clang-format on
-#include <rmolib/random/multivariate/armageddon_extmo_distribution.hpp>
+#include <rmolib/random/multivariate/esm_armextmo_distribution.hpp>
 #include <rmolib/random/univariate/exponential_distribution.hpp>
 #include <testthat.h>
 
@@ -14,10 +14,10 @@
 
 using exponential_dist_t = rmolib::random::exponential_distribution<double>;
 using armageddon_extmo_dist_t =
-    rmolib::random::armageddon_extmo_distribution<double, exponential_dist_t>;
+    rmolib::random::esm_armextmo_distribution<double, exponential_dist_t>;
 using parm_t = armageddon_extmo_dist_t::param_type;
 
-namespace test_armageddon_extmo_distribution {
+namespace test_esm_armextmo_distribution {
 
 class generic_param_type {
  public:
@@ -49,9 +49,9 @@ class generic_param_type {
   double beta_{0};
 };
 
-}  // namespace test_armageddon_extmo_distribution
+}  // namespace test_esm_armextmo_distribution
 
-using generic_parm_t = test_armageddon_extmo_distribution::generic_param_type;
+using generic_parm_t = test_esm_armextmo_distribution::generic_param_type;
 
 template <typename armageddon_extmo_dist_t, typename generic_parm_t>
 void tester_distribution<armageddon_extmo_dist_t, generic_parm_t>::__param_test(
@@ -64,12 +64,12 @@ void tester_distribution<armageddon_extmo_dist_t, generic_parm_t>::__param_test(
 
 using dist_tester_t = tester_distribution<armageddon_extmo_dist_t, generic_parm_t>;
 
-context("armageddon_extmo_distribution") {
+context("esm_armextmo_distribution") {
   const std::vector<generic_parm_t> test_cases = {
       generic_parm_t{}, generic_parm_t{std::size_t{2}, 1., 0.},
       generic_parm_t{std::size_t{2}, 0., 1.},
       generic_parm_t{std::size_t{3}, 0.4, 0.2},
       generic_parm_t{std::size_t{3}, 0.7, 0.1}};
-  auto dist_tester = dist_tester_t{"armageddon_extmo_distribution", test_cases};
+  auto dist_tester = dist_tester_t{"esm_armextmo_distribution", test_cases};
   dist_tester.run_tests(r_engine{});
 }

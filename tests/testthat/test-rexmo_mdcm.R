@@ -5,7 +5,7 @@ n <- 100
 ## #### Test implementation for the bivariate case ####
 
 test_that("Exchangeable Arnold model for d = 2", {
-  mockery::stub(rexmo_markovian, "Rcpp__rexmo_markovian", rtest__rexmo_markovian)
+  mockery::stub(rexmo_mdcm, "Rcpp__rexmo_mdcm", rtest__rexmo_mdcm)
 
   ## all equal
   args <- list(
@@ -13,7 +13,7 @@ test_that("Exchangeable Arnold model for d = 2", {
     ex_intensities = sapply(1:2, function(i) choose(2, i))
   )
   expect_equal_rn_generation(
-    rexmo_markovian, testutils.rmo::rexmo_markovian_bivariate,
+    rexmo_mdcm, testutils.rmo::rexmo_mdcm_bivariate,
     args, n, use_seed)
 
   ## independence
@@ -22,7 +22,7 @@ test_that("Exchangeable Arnold model for d = 2", {
     ex_intensities = ex_intensities_linear(2, scale = 0.7)
   )
   expect_equal_rn_generation(
-    rexmo_markovian, testutils.rmo::rexmo_markovian_bivariate,
+    rexmo_mdcm, testutils.rmo::rexmo_mdcm_bivariate,
     args, n, use_seed)
 
   ## comonotone
@@ -31,7 +31,7 @@ test_that("Exchangeable Arnold model for d = 2", {
     ex_intensities = ex_intensities_constant(2, constant = 0.7)
   )
   expect_equal_rn_generation(
-    rexmo_markovian, testutils.rmo::rexmo_markovian_bivariate,
+    rexmo_mdcm, testutils.rmo::rexmo_mdcm_bivariate,
     args, n, use_seed)
 
   ## Poisson
@@ -42,7 +42,7 @@ test_that("Exchangeable Arnold model for d = 2", {
     )
   )
   expect_equal_rn_generation(
-    rexmo_markovian, testutils.rmo::rexmo_markovian_bivariate,
+    rexmo_mdcm, testutils.rmo::rexmo_mdcm_bivariate,
     args, n, use_seed)
 
   ## Alpha-Stable
@@ -51,7 +51,7 @@ test_that("Exchangeable Arnold model for d = 2", {
     ex_intensities = ex_intensities_alpha_stable(2, alpha = 0.25)
   )
   expect_equal_rn_generation(
-    rexmo_markovian, testutils.rmo::rexmo_markovian_bivariate,
+    rexmo_mdcm, testutils.rmo::rexmo_mdcm_bivariate,
     args, n, use_seed)
 
   ## Gamma
@@ -60,7 +60,7 @@ test_that("Exchangeable Arnold model for d = 2", {
     ex_intensities = ex_intensities_gamma(2, a = 0.4)
   )
   expect_equal_rn_generation(
-    rexmo_markovian, testutils.rmo::rexmo_markovian_bivariate,
+    rexmo_mdcm, testutils.rmo::rexmo_mdcm_bivariate,
     args, n, use_seed)
 
   ## Pareto
@@ -69,7 +69,7 @@ test_that("Exchangeable Arnold model for d = 2", {
     "ex_intensities" = ex_intensities_pareto(2, alpha = 0.4, x0 = 1e-4)
   )
   expect_equal_rn_generation(
-    rexmo_markovian, testutils.rmo::rexmo_markovian_bivariate,
+    rexmo_mdcm, testutils.rmo::rexmo_mdcm_bivariate,
     args, n, use_seed)
 
   ## Inverse-Gaussian
@@ -78,7 +78,7 @@ test_that("Exchangeable Arnold model for d = 2", {
     "ex_intensities" = ex_intensities_inverse_gaussian(2, eta = 0.5)
   )
   expect_equal_rn_generation(
-    rexmo_markovian, testutils.rmo::rexmo_markovian_bivariate,
+    rexmo_mdcm, testutils.rmo::rexmo_mdcm_bivariate,
     args, n, use_seed)
 })
 
@@ -87,7 +87,7 @@ test_that("Exchangeable Arnold model for d = 2", {
 ## #### Test alternative implementation in `R` ####
 
 test_that("Alternative implementation in R for d>2", {
-  mockery::stub(rexmo_markovian, "Rcpp__rexmo_markovian", rtest__rexmo_markovian)
+  mockery::stub(rexmo_mdcm, "Rcpp__rexmo_mdcm", rtest__rexmo_mdcm)
 
   d <- 5
 
@@ -97,7 +97,7 @@ test_that("Alternative implementation in R for d>2", {
     "ex_intensities" = sapply(1:d, function(i) choose(d, i))
   )
   expect_equal_rn_generation(
-    rexmo_markovian, testutils.rmo::rexmo_markovian_naive_recursive,
+    rexmo_mdcm, testutils.rmo::rexmo_mdcm_naive_recursive,
     args, n, use_seed)
 
   ## independence
@@ -106,7 +106,7 @@ test_that("Alternative implementation in R for d>2", {
     "ex_intensities" = ex_intensities_linear(d, scale = 0.7)
   )
   expect_equal_rn_generation(
-    rexmo_markovian, testutils.rmo::rexmo_markovian_naive_recursive,
+    rexmo_mdcm, testutils.rmo::rexmo_mdcm_naive_recursive,
     args, n, use_seed)
 
   ## comonotone
@@ -115,7 +115,7 @@ test_that("Alternative implementation in R for d>2", {
     "ex_intensities" = ex_intensities_constant(d, constant = 0.7)
   )
   expect_equal_rn_generation(
-    rexmo_markovian, testutils.rmo::rexmo_markovian_naive_recursive,
+    rexmo_mdcm, testutils.rmo::rexmo_mdcm_naive_recursive,
     args, n, use_seed)
 
   ## Poisson
@@ -126,7 +126,7 @@ test_that("Alternative implementation in R for d>2", {
     )
   )
   expect_equal_rn_generation(
-    rexmo_markovian, testutils.rmo::rexmo_markovian_naive_recursive,
+    rexmo_mdcm, testutils.rmo::rexmo_mdcm_naive_recursive,
     args, n, use_seed)
 
   ## Alpha-stable
@@ -135,7 +135,7 @@ test_that("Alternative implementation in R for d>2", {
     "ex_intensities" = ex_intensities_alpha_stable(d, alpha = 0.25)
   )
   expect_equal_rn_generation(
-    rexmo_markovian, testutils.rmo::rexmo_markovian_naive_recursive,
+    rexmo_mdcm, testutils.rmo::rexmo_mdcm_naive_recursive,
     args, n, use_seed)
 
   ## Gamma
@@ -144,7 +144,7 @@ test_that("Alternative implementation in R for d>2", {
     "ex_intensities" = ex_intensities_gamma(d, a = 0.4)
   )
   expect_equal_rn_generation(
-    rexmo_markovian, testutils.rmo::rexmo_markovian_naive_recursive,
+    rexmo_mdcm, testutils.rmo::rexmo_mdcm_naive_recursive,
     args, n, use_seed)
 
   ## Pareto
@@ -153,7 +153,7 @@ test_that("Alternative implementation in R for d>2", {
     "ex_intensities" = ex_intensities_pareto(d, alpha = 0.4, x0 = 1e-4)
   )
   expect_equal_rn_generation(
-    rexmo_markovian, testutils.rmo::rexmo_markovian_naive_recursive,
+    rexmo_mdcm, testutils.rmo::rexmo_mdcm_naive_recursive,
     args, n, use_seed)
 
   ## Inverse-Gaussian
@@ -162,7 +162,7 @@ test_that("Alternative implementation in R for d>2", {
     "ex_intensities" = ex_intensities_inverse_gaussian(d, eta = 0.5)
   )
   expect_equal_rn_generation(
-    rexmo_markovian, testutils.rmo::rexmo_markovian_naive_recursive,
+    rexmo_mdcm, testutils.rmo::rexmo_mdcm_naive_recursive,
     args, n, use_seed)
 })
 
@@ -173,7 +173,7 @@ test_that("Alternative implementation in R for d>2", {
 # as the original `R` implementation for various dimensions and choices of
 # parameters.
 test_that("Exchangeable Arnold model implementation in C++", {
-  mockery::stub(rexmo_markovian, "Rcpp__rexmo_markovian", rtest__rexmo_markovian)
+  mockery::stub(rexmo_mdcm, "Rcpp__rexmo_mdcm", rtest__rexmo_mdcm)
 
   d <- 7
 
@@ -183,7 +183,7 @@ test_that("Exchangeable Arnold model implementation in C++", {
     "ex_intensities" = sapply(1:d, function(i) choose(d, i))
   )
   expect_equal_rn_generation(
-    rexmo_markovian, testutils.rmo::rexmo_markovian_naive,
+    rexmo_mdcm, testutils.rmo::rexmo_mdcm_naive,
     args, n, use_seed)
 
   ## independence
@@ -192,7 +192,7 @@ test_that("Exchangeable Arnold model implementation in C++", {
     "ex_intensities" = ex_intensities_linear(d, scale = 0.7)
   )
   expect_equal_rn_generation(
-    rexmo_markovian, testutils.rmo::rexmo_markovian_naive,
+    rexmo_mdcm, testutils.rmo::rexmo_mdcm_naive,
     args, n, use_seed)
 
   ## comonotone
@@ -201,7 +201,7 @@ test_that("Exchangeable Arnold model implementation in C++", {
     "ex_intensities" = ex_intensities_constant(d, constant = 0.7)
   )
   expect_equal_rn_generation(
-    rexmo_markovian, testutils.rmo::rexmo_markovian_naive,
+    rexmo_mdcm, testutils.rmo::rexmo_mdcm_naive,
     args, n, use_seed)
 
   ## Poisson
@@ -212,7 +212,7 @@ test_that("Exchangeable Arnold model implementation in C++", {
     )
   )
   expect_equal_rn_generation(
-    rexmo_markovian, testutils.rmo::rexmo_markovian_naive,
+    rexmo_mdcm, testutils.rmo::rexmo_mdcm_naive,
     args, n, use_seed)
 
   ## Alpha-stable
@@ -221,7 +221,7 @@ test_that("Exchangeable Arnold model implementation in C++", {
     "ex_intensities" = ex_intensities_alpha_stable(d, alpha = 0.25)
   )
   expect_equal_rn_generation(
-    rexmo_markovian, testutils.rmo::rexmo_markovian_naive,
+    rexmo_mdcm, testutils.rmo::rexmo_mdcm_naive,
     args, n, use_seed)
 
   ## Gamma
@@ -230,7 +230,7 @@ test_that("Exchangeable Arnold model implementation in C++", {
     "ex_intensities" = ex_intensities_gamma(d, a = 0.4)
   )
   expect_equal_rn_generation(
-    rexmo_markovian, testutils.rmo::rexmo_markovian_naive,
+    rexmo_mdcm, testutils.rmo::rexmo_mdcm_naive,
     args, n, use_seed)
 
   ## Pareto
@@ -239,7 +239,7 @@ test_that("Exchangeable Arnold model implementation in C++", {
     "ex_intensities" = ex_intensities_pareto(d, alpha = 0.4, x0 = 1e-4)
   )
   expect_equal_rn_generation(
-    rexmo_markovian, testutils.rmo::rexmo_markovian_naive,
+    rexmo_mdcm, testutils.rmo::rexmo_mdcm_naive,
     args, n, use_seed)
 
   ## Inverse-Gaussian
@@ -248,6 +248,6 @@ test_that("Exchangeable Arnold model implementation in C++", {
     "ex_intensities" = ex_intensities_inverse_gaussian(d, eta = 0.5)
   )
   expect_equal_rn_generation(
-    rexmo_markovian, testutils.rmo::rexmo_markovian_naive,
+    rexmo_mdcm, testutils.rmo::rexmo_mdcm_naive,
     args, n, use_seed)
 })
