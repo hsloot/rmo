@@ -43,7 +43,7 @@
 <meta property="og:description" content="The Poisson process with arrival-rate \(\lambda\) and fixed jump size
 \(\eta\) is a Lévy subordinator corresponding to the Bernstein function
 $$
-  \psi(x) = \lambda (1 - e^{-x\eta}) , x&amp;gt;0.
+  \psi(x) = 1 - e^{-x\eta}, x&amp;gt;0.
 $$" />
 
 
@@ -151,12 +151,12 @@ $$" />
     <p>The Poisson process with arrival-rate \(\lambda\) and fixed jump size
 \(\eta\) is a Lévy subordinator corresponding to the Bernstein function
 $$
-  \psi(x) = \lambda (1 - e^{-x\eta}) , x&gt;0.
+  \psi(x) = 1 - e^{-x\eta}, x&gt;0.
 $$</p>
     </div>
 
     <pre class="usage"><span class='co'># S4 method for PoissonBernsteinFunction</span>
-<span class='fu'>initialize</span><span class='op'>(</span><span class='va'>.Object</span>, <span class='va'>eta</span>, <span class='va'>lambda</span><span class='op'>)</span>
+<span class='fu'>initialize</span><span class='op'>(</span><span class='va'>.Object</span>, <span class='va'>eta</span><span class='op'>)</span>
 
 <span class='co'># S4 method for PoissonBernsteinFunction</span>
 <span class='fu'>show</span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span>
@@ -174,10 +174,6 @@ $$</p>
     <tr>
       <th>eta</th>
       <td><p>Positive number.</p></td>
-    </tr>
-    <tr>
-      <th>lambda</th>
-      <td><p>Positive number</p></td>
     </tr>
     <tr>
       <th>object</th>
@@ -226,12 +222,13 @@ $$</p>
 <code><a href='BernsteinFunction-class.html'>valueOf()</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>PoissonBernsteinFunction</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; An object of class "PoissonBernsteinFunction"
-#&gt; 	 (invalid or not initialized)</div><div class='input'><span class='fu'>PoissonBernsteinFunction</span><span class='op'>(</span>lambda <span class='op'>=</span> <span class='fl'>0.2</span>, eta <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; An object of class "PoissonBernsteinFunction"
-#&gt; - lambda: 0.2
-#&gt; - eta: 2</div></pre>
+    <pre class="examples"><span class='r-in'><span class='fu'>PoissonBernsteinFunction</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> An object of class "PoissonBernsteinFunction"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 	 (invalid or not initialized)</span>
+<span class='r-in'><span class='fu'>PoissonBernsteinFunction</span><span class='op'>(</span>eta <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> An object of class "PoissonBernsteinFunction"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> - eta: 2</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
