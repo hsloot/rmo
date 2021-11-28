@@ -109,7 +109,7 @@ We are planning to develop the package incrementally. The packages API might
 change frequently without deprecation.
 As of now, we have completed the reimplementation of all sampling algorithms in `Rcpp`. Our next steps are:
 
-- __Version 0.7__: Refactor the `arnold_distribution` and the
+- __Version 0.x__: Refactor the `arnold_distribution` and the
   `markovian_exmo_distribution` to be based on a `random_walk_distribution`
   and `markov_process`. Add a distribution to sample from the Arnold model
   with `ex_intensities` which does not require to store all shock intensities.
