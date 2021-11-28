@@ -1,7 +1,7 @@
 # rmo 0.7.1
 
-- Rename sampling method `*_markovian` to `*_mdcm`
-- Rename sampling method `*_arnold` to `*_am`
+- Rename sampling method `*_markovian` and `*_arnold` to `*_mdcm` and `*_am`, respectively.
+- Rename internal CPP classes `arnold_mo_distribution`, `markovian_exmo_distribution`, and `armageddon_extmo_distribution` to `am_mo_distribution`, `mdcm_exmo_distribution`, and `esm_armextmo_distribution`, respectively. 
 
 # rmo 0.7
 

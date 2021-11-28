@@ -6,7 +6,7 @@
 #include "rcpp_distribution_caller.h"
 #include "rmolib/algorithm/r_shuffle.hpp"
 #include "rmolib/random/multivariate/am_mo_distribution.hpp"
-#include "rmolib/random/multivariate/armageddon_extmo_distribution.hpp"
+#include "rmolib/random/multivariate/esm_armextmo_distribution.hpp"
 #include "rmolib/random/multivariate/esm_mo_distribution.hpp"
 #include "rmolib/random/multivariate/lfm_extmo_distribution.hpp"
 #include "rmolib/random/multivariate/mdcm_exmo_distribution.hpp"
@@ -93,10 +93,10 @@ NumericMatrix Rcpp__rarmextmo_esm(const std::size_t n, const std::size_t d,
                               const double alpha, const double beta) {
   using exponential_distribution =
       rmolib::random::exponential_distribution<double>;
-  using armageddon_extmo_distribution =
-      rmolib::random::armageddon_extmo_distribution<double,
+  using esm_armextmo_distribution =
+      rmolib::random::esm_armextmo_distribution<double,
                                                 exponential_distribution>;
-  using caller_t = rcpp_distribution_caller<armageddon_extmo_distribution>;
+  using caller_t = rcpp_distribution_caller<esm_armextmo_distribution>;
 
   return caller_t::call(r_engine{}, n, d, alpha, beta);
 }
