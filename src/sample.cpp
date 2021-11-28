@@ -5,7 +5,7 @@
 
 #include "rcpp_distribution_caller.h"
 #include "rmolib/algorithm/r_shuffle.hpp"
-#include "rmolib/random/multivariate/arnold_mo_distribution.hpp"
+#include "rmolib/random/multivariate/am_mo_distribution.hpp"
 #include "rmolib/random/multivariate/armageddon_extmo_distribution.hpp"
 #include "rmolib/random/multivariate/esm_mo_distribution.hpp"
 #include "rmolib/random/multivariate/lfm_extmo_distribution.hpp"
@@ -58,10 +58,10 @@ NumericMatrix Rcpp__rmo_am(const std::size_t n, const std::size_t d,
       rmolib::random::uniform_int_distribution<std::size_t>;
   using discrete_distribution = rmolib::random::discrete_distribution<
       std::size_t, double, uniform_real_distribution, uniform_int_distribution>;
-  using arnold_mo_distribution =
-      rmolib::random::arnold_mo_distribution<double, exponential_distribution,
+  using am_mo_distribution =
+      rmolib::random::am_mo_distribution<double, exponential_distribution,
                                              discrete_distribution>;
-  using caller_t = rcpp_distribution_caller<arnold_mo_distribution>;
+  using caller_t = rcpp_distribution_caller<am_mo_distribution>;
 
   return caller_t::call(r_engine{}, n, d, intensities.begin(),
                         intensities.end());
@@ -167,10 +167,10 @@ NumericMatrix rtest__rmo_am(const std::size_t n, const std::size_t d,
   using discrete_distribution =
       rmolib::random::r_discrete_distribution<std::size_t, double,
                                               uniform_real_distribution>;
-  using arnold_mo_distribution =
-      rmolib::random::arnold_mo_distribution<double, exponential_distribution,
+  using am_mo_distribution =
+      rmolib::random::am_mo_distribution<double, exponential_distribution,
                                              discrete_distribution>;
-  using caller_t = rcpp_distribution_caller<arnold_mo_distribution>;
+  using caller_t = rcpp_distribution_caller<am_mo_distribution>;
 
   return caller_t::call(r_engine{}, n, d, intensities.begin(),
                         intensities.end());

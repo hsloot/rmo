@@ -5,7 +5,7 @@
 // clang-format off
 #include <rmolib/random/r_engine.hpp> // must be included before <rmolib/*>
 // clang-format on
-#include <rmolib/random/multivariate/arnold_mo_distribution.hpp>
+#include <rmolib/random/multivariate/am_mo_distribution.hpp>
 #include <rmolib/random/univariate/exponential_distribution.hpp>
 #include <rmolib/random/univariate/r_discrete_distribution.hpp>
 #include <rmolib/random/univariate/uniform_real_distribution.hpp>
@@ -20,11 +20,11 @@ using r_discrete_dist_t =
     rmolib::random::r_discrete_distribution<std::size_t, double,
                                             uniform_real_dist_t>;
 using arnold_mo_dist_t =
-    rmolib::random::arnold_mo_distribution<double, exponential_dist_t,
+    rmolib::random::am_mo_distribution<double, exponential_dist_t,
                                            r_discrete_dist_t>;
 using parm_t = arnold_mo_dist_t::param_type;
 
-namespace test_arnold_mo_distribution {
+namespace test_am_mo_distribution {
 
 class generic_param_type {
  public:
@@ -56,9 +56,9 @@ class generic_param_type {
   std::vector<double> intensities_ = {1.};
 };
 
-}  // namespace test_arnold_mo_distribution
+}  // namespace test_am_mo_distribution
 
-using generic_parm_t = test_arnold_mo_distribution::generic_param_type;
+using generic_parm_t = test_am_mo_distribution::generic_param_type;
 
 template <typename arnold_mo_dist_t, typename generic_parm_t>
 void tester_distribution<arnold_mo_dist_t, generic_parm_t>::__param_test(
@@ -70,11 +70,11 @@ void tester_distribution<arnold_mo_dist_t, generic_parm_t>::__param_test(
 
 using dist_tester_t = tester_distribution<arnold_mo_dist_t, generic_parm_t>;
 
-context("arnold_mo_distribution") {
+context("am_mo_distribution") {
   const std::vector<generic_parm_t> test_cases = {
       generic_parm_t{}, generic_parm_t{std::size_t{2}, {1., 1., 1.}},
       generic_parm_t{std::size_t{3}, {0., 1., 2., 3., 4., 5., 6.}},
       generic_parm_t{std::size_t{3}, {2., 1., 0.5, 0.2, 0.3, 4., .7}}};
-  auto dist_tester = dist_tester_t{"arnold_mo_distribution", test_cases};
+  auto dist_tester = dist_tester_t{"am_mo_distribution", test_cases};
   dist_tester.run_tests(r_engine{});
 }

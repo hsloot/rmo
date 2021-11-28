@@ -20,13 +20,13 @@ namespace random {
 
 template <typename _RealType, typename _ExponentialDistribution,
           typename _DiscreteDistribution>
-class arnold_mo_distribution {
+class am_mo_distribution {
  public:
   using result_type = std::vector<_RealType>;
 
   class param_type {
    public:
-    using distribution_type = arnold_mo_distribution;
+    using distribution_type = am_mo_distribution;
 
     param_type() { __init_empty(); }
 
@@ -63,7 +63,7 @@ class arnold_mo_distribution {
       return out;
     }
 
-    friend class arnold_mo_distribution;
+    friend class am_mo_distribution;
 
     friend bool operator==(const param_type& lhs, const param_type& rhs) {
       return lhs.dim_ == rhs.dim_ &&
@@ -138,32 +138,32 @@ class arnold_mo_distribution {
 
     static_assert(
         std::is_floating_point_v<_RealType>,
-        "Class template rmolib::random::arnold_mo_distribution<> must be "
+        "Class template rmolib::random::am_mo_distribution<> must be "
         "parametrized with floating point type");
   };
 
-  arnold_mo_distribution() = default;
+  am_mo_distribution() = default;
 
   template <typename _ForwardIterator>
-  explicit arnold_mo_distribution(const std::size_t dim, _ForwardIterator first,
+  explicit am_mo_distribution(const std::size_t dim, _ForwardIterator first,
                                   _ForwardIterator last)
       : parm_{dim, first, last} {}
 
   template <typename _Container>
-  explicit arnold_mo_distribution(const std::size_t dim,
+  explicit am_mo_distribution(const std::size_t dim,
                                   const _Container& intensities)
       : parm_{dim, intensities} {}
 
-  explicit arnold_mo_distribution(const param_type& parm) : parm_{parm} {}
+  explicit am_mo_distribution(const param_type& parm) : parm_{parm} {}
 
   // Used for construction from a different specialization
   template <typename _MOParamType,
             std::enable_if_t<
-                !std::is_convertible_v<_MOParamType, arnold_mo_distribution> &&
+                !std::is_convertible_v<_MOParamType, am_mo_distribution> &&
                     !std::is_convertible_v<_MOParamType, param_type> &&
                     is_mo_param_type_v<_MOParamType>,
                 int> = 0>
-  explicit arnold_mo_distribution(_MOParamType&& parm)
+  explicit am_mo_distribution(_MOParamType&& parm)
       : parm_{std::forward<_MOParamType>(parm)} {}
 
   // compiler generated ctor and assignment op is sufficient
@@ -211,13 +211,13 @@ class arnold_mo_distribution {
     }
   }
 
-  friend bool operator==(const arnold_mo_distribution& lhs,
-                         const arnold_mo_distribution& rhs) {
+  friend bool operator==(const am_mo_distribution& lhs,
+                         const am_mo_distribution& rhs) {
     return lhs.parm_ == rhs.parm_;
   }
 
-  friend bool operator!=(const arnold_mo_distribution& lhs,
-                         const arnold_mo_distribution& rhs) {
+  friend bool operator!=(const am_mo_distribution& lhs,
+                         const am_mo_distribution& rhs) {
     return !(lhs == rhs);
   }
 
@@ -243,14 +243,14 @@ class arnold_mo_distribution {
   static_assert(
       type_traits::is_safe_numeric_cast_v<
           _RealType, typename _ExponentialDistribution::result_type>,
-      "Class template rmolib::random::arnold_mo_distribution<> must be "
+      "Class template rmolib::random::am_mo_distribution<> must be "
       "parametrized with unit_exponential_distribution-type with suitable "
       "result_type");
 
   static_assert(
       type_traits::is_safe_numeric_cast_v<
           std::size_t, typename _DiscreteDistribution::result_type>,
-      "Class template rmolib::random::arnold_mo_distribution<> must be "
+      "Class template rmolib::random::am_mo_distribution<> must be "
       "parametrized with discrete_distribution-type with suitable "
       "result_type");
 };
@@ -261,13 +261,13 @@ class arnold_mo_distribution {
   template <class _CharType, class _Traits, typename _RealType, typename
   _UnitExponentialDistribution> std::basic_ostream<_CharType, _Traits>&
   operator<<(std::basic_ostream<_CharType, _Traits>& os,
-            arnold_mo_distribution<_RealType, _UnitExponentialDistribution>&
+            am_mo_distribution<_RealType, _UnitExponentialDistribution>&
   dist);
 
   template <class _CharType, class _Traits, typename _RealType, typename
   _UnitExponentialDistribution> std::basic_istream<_CharType, _Traits>&
   operator>>(std::basic_istream<_CharType, _Traits>& is,
-             arnold_mo_distribution<_RealType, _UnitExponentialDistribution>&
+             am_mo_distribution<_RealType, _UnitExponentialDistribution>&
   dist);
 */
 
