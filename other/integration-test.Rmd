@@ -26,6 +26,10 @@ rmo_am <- function(...) {
   rmo(..., method = "AM")
 }
 
+rexmo_mdcm <- function(...) {
+  rexmo(..., method = "MDCM")
+}
+
 ks_test <- function(n, d, FUN, intensities, normalize=FALSE) {
   scale <- sum(intensities)
   if (normalize) {

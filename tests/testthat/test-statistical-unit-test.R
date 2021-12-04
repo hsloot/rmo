@@ -10,6 +10,10 @@ rmo_am <- function(...) {
   rmo(..., method = "AM")
 }
 
+rexmo_mdcm <- function(...) {
+  rexmo(..., method = "MDCM")
+}
+
 ## All threshold should be chosen such that, in total, they sum up to this
 ## number. If this is, e.g., 1%, then the probability of a false positive,
 ## assuming the null hypothesis is fulfilled, is 1%.

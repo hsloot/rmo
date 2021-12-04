@@ -1,7 +1,12 @@
+# rmo 0.7.2
+
+- Create single entry point for general MO sampling routines.
+- Create single entry point for exchangeable MO sampling routines.
+
 # rmo 0.7.1
 
 - Rename sampling method `*_markovian` and `*_arnold` to `*_mdcm` and `*_am`, respectively.
-- Rename internal CPP classes `arnold_mo_distribution`, `markovian_exmo_distribution`, and `armageddon_extmo_distribution` to `am_mo_distribution`, `mdcm_exmo_distribution`, and `esm_armextmo_distribution`, respectively. 
+- Rename internal CPP classes `arnold_mo_distribution`, `markovian_exmo_distribution`, and `armageddon_extmo_distribution` to `am_mo_distribution`, `mdcm_exmo_distribution`, and `esm_armextmo_distribution`, respectively.
 
 # rmo 0.7
 

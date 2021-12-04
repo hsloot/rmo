@@ -42,7 +42,7 @@ rarmextmo_esm(10L, 2L, 1, 0)      ## independence
 \code{\link[=rmo]{rmo()}}
 
 Other sampling-algorithms: 
-\code{\link{rexmo_mdcm}()},
+\code{\link{rexmo}()},
 \code{\link{rextmo_lfm}()},
 \code{\link{rmo}()}
 }

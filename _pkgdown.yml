@@ -10,7 +10,7 @@ reference:
   desc: ~
   contents:
   - matches("^rmo$")
-  - starts_with("rexmo")
+  - matches("^rexmo$")
   - starts_with("rextmo")
   - starts_with("rarmextmo")
 

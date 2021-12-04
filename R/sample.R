@@ -9,8 +9,7 @@
 #'
 #' @param n an integer for the number of samples.
 #' @param d an integer for the dimension of the sample.
-#' @param intensities a numeric vector with the Marshall-Olkin shock shock arrival
-#'   intensities intensities.
+#' @param intensities a numeric vector with the Marshall-Olkin shock arrival intensities.
 #' @param method a character vector indicating which sampling algorithm should be used.
 #'   Use "AM" for the *Arnold model* and "ESM" for the *exogenous shock model*.
 #'
@@ -78,7 +77,6 @@ rmo <- function(n, d, intensities, method = c("AM", "ESM")) {
   } else if ("AM" == method) {
     Rcpp__rmo_am(n, d, intensities)
   }
-
 }
 
 
@@ -88,49 +86,61 @@ rmo <- function(n, d, intensities, method = c("AM", "ESM")) {
 #' Sample from an exchangeable Marshall-Olkin distribution
 #'
 #' Draws `n` independent samples from a `d` variate exchangeable Marshall-Olkin
-#' distribution with (scaled) shock rates `ex_intensities`.
+#' distribution with shock-size arrival rates `ex_intensities`.
 #'
 #' @section References:
-#' For more information on this algorithm, see J.-F. Mai, M. Scherer,
+#' For more information on a similar algorithm, see J.-F. Mai, M. Scherer,
 #' "Simulating Copulas", World Scientific (2017), pp. 122 psqq.
 #'
-#' @param n Number of samples
-#' @param d dimension
-#' @param ex_intensities (Scaled) exchangeable Marshall-Olkin intensities
+#' @param n an integer for the number of samples.
+#' @param d an integer for the dimension of the sample.
+#' @param ex_intensities a numeric vector with the exchangeable Marshall-Olkin exchangeable
+#'   shock-size arrival intensities.
+#' @param method a character vector indicating which sampling algorithm should be used.
+#'   Use "MDCM" for the *Markovian death-counting model*, "AM" for the *Arnold model*,
+#'   and "ESM" for the *exogenous shock model*.
 #'
 #' @return
-#' `rexmo_mdcm` implements the Markovian model for the default counting
-#' process of the exchangeable subclass and returns an  \eqn{n \times d}{n x d}
-#' numeric matrix with the rows corresponding to independent and identically
-#' disctributed samples of a \eqn{d} variate exchangeable Marshall-Olkin
-#' distribution with exchangeable parameters `ex_intensities`.
+#' `rexmo` implements the Markovian model for the death-counting process of the exchangeable
+#' subclass and returns an  \eqn{n \times d}{n x d} numeric matrix with the rows corresponding to
+#' independent and identically disctributed samples of a \eqn{d} variate exchangeable Marshall-Olkin
+#' distribution with exchangeable shock-size arrival intensities `ex_intensities`.
 #'
 #' @details
 #' __Parameterisation__:
-#' The exchangeable Marshall--Olkin distribution has the property that
-#' \eqn{\lambda_I} only depends on the cardinality of \eqn{I}.
-#' The *unscaled exchangeable shock intensities* are defined for \eqn{I} with
-#' \eqn{i = \lvert I\rvert} by \eqn{\lambda_i = \lambda_I}.
-#' The *scaled exchangeable shock intensities* are defined by \eqn{\eta_i =
-#' \binom{d}{i} \lambda_i}.
-#'
-#' __The scaled exchangeable shock intensities__:
-#' - The *scaled exchangeable* shock intensities* \eqn{\eta_i} must be stored in
-#'   a vector of length \eqn{d}.
-#' - The entry \eqn{\eta_i} is the intensity of a shock corresponding to a set
-#'   with \eqn{i} elements multiplied by the number of shocks of cardinality
-#'   \eqn{i}, i.e. \eqn{\binom{d}{i}}.
+#' The exchangeable Marshall--Olkin distribution has the property that \eqn{\lambda_I} only depends
+#' on the cardinality of \eqn{I}, i.e., the *(unscaled) exchangeable shock arrival  intensities* are
+#' defined for \eqn{I} with \eqn{i = \lvert I\rvert} by \eqn{\lambda_i = \lambda_I}, see [rmo()].
+#' The *(scaled) exchangeable shock-size arrival intensities* are defined by
+#' \eqn{\eta_i = \binom{d}{i} \lambda_i}.
 #'
 #' @family sampling-algorithms
 #'
 #' @examples
-#' rexmo_mdcm(10, 2, c(2 * 0.4, 0.2))
-#' rexmo_mdcm(10, 2, c(2, 0))      ## independence
-#' rexmo_mdcm(10, 2, c(0, 1))      ## comonotone
+#' rexmo(10, 2, c(2 * 0.4, 0.2))
+#' rexmo(10, 2, c(2, 0))          ## independence
+#' rexmo(10, 2, c(0, 1))          ## comonotone
+#'
+#' rexmo(10, 2, c(2 * 0.4, 0.2), method = "AM")
+#' rexmo(10, 2, c(2, 0), method = "AM")          ## independence
+#' rexmo(10, 2, c(0, 1), method = "AM")          ## comonotone
+#'
+#' rexmo(10, 2, c(2 * 0.4, 0.2), method = "ESM")
+#' rexmo(10, 2, c(2, 0), method = "ESM")          ## independence
+#' rexmo(10, 2, c(0, 1), method = "ESM")          ## comonotone
 #'
 #' @export
-rexmo_mdcm <- function(n, d, ex_intensities) {
-  Rcpp__rexmo_mdcm(n, d, ex_intensities)
+rexmo <- function(n, d, ex_intensities, method = c("MDCM", "AM", "ESM")) {
+  method <- match.arg(method)
+  if ("MDCM" == method) {
+    Rcpp__rexmo_mdcm(n, d, ex_intensities)
+  } else if (method %in% c("AM", "ESM")) {
+    intensities <- uexi2i(
+      sapply(seq_along(ex_intensities), function(i) {
+        divide_binomial_coefficient(ex_intensities[[i]], d, i)
+      }))
+    rmo(n, d, intensities, method = method)
+  }
 }
 
 ## #### Sample from extendible Marshall-Olkin distributions ####

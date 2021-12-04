@@ -19,7 +19,7 @@ distribution.
 \itemize{
 \item An object that derives from \linkS4class{BernsteinFunction} can be used to
 generate the Marshall-Olkin intensities with \code{\link[=intensities]{intensities()}}.
-It can be used to generate (unscaled) exchangeable intensities with
+It can be used to generate (scaled) exchangeable intensities with
 \code{\link[=exIntensities]{exIntensities()}}.
 \item Many families of Bernstein functions are available, e.g.
 \linkS4class{ParetoBernsteinFunction}, \linkS4class{ExponentialBernsteinFunction}, and
@@ -32,17 +32,15 @@ composition, which can be used to create new Bernstein functions with
 
 \section{Sampling}{
 
-Multiple sampling algorithms are provided. The semantic naming scheme \code{r*mo}
-is used, e.g. \code{\link[=rexmo_mdcm]{rexmo_mdcm()}} has \emph{(scaled) exchangeable intensities}
-\code{ex_intensities} as input and uses the Markovian model for the default
-counting process.
+Multiple sampling algorithms are provided. The semantic naming scheme \code{r*mo} is used, e.g.,
+\code{\link[=rexmo]{rexmo()}} has \emph{(scaled) exchangeable shock-size arrival intensities} \code{ex_intensities} as input
+and uses, as the default, the Markovian model for the death-counting process for sampling.
 The following algorithms are implemented:
 \itemize{
 \item The \emph{exogenous shock model} and the \emph{Arnold model} for the general Marshall-Olkin distribution
 are implemented in \code{\link[=rmo]{rmo()}}. The former should only be used in very small dimensions and the
 latter can be used up until \eqn{d \leq 30}.
-\item \emph{Exchangeable Markovian model} for exchangeable Marshall-Olkin distributions
-with \code{\link[=rexmo_mdcm]{rexmo_mdcm()}}.
+\item \emph{Markovian death-counting model} for exchangeable Marshall-Olkin distributions with \code{\link[=rexmo]{rexmo()}}.
 \item \emph{Lévy-frailty model for compound Poisson subordinators} for the corresponding
 subclass of extendible Marshall-Olkin distributions with \code{\link[=rextmo_lfm]{rextmo_lfm()}}.
 \item \emph{Exogenous shock model} for the armageddon ESM subclass with \code{\link[=rarmextmo_esm]{rarmextmo_esm()}}.

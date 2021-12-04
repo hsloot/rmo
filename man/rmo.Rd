@@ -11,8 +11,7 @@ rmo(n, d, intensities, method = c("AM", "ESM"))
 
 \item{d}{an integer for the dimension of the sample.}
 
-\item{intensities}{a numeric vector with the Marshall-Olkin shock shock arrival
-intensities intensities.}
+\item{intensities}{a numeric vector with the Marshall-Olkin shock arrival intensities.}
 
 \item{method}{a character vector indicating which sampling algorithm should be used.
 Use "AM" for the \emph{Arnold model} and "ESM" for the \emph{exogenous shock model}.}
@@ -82,7 +81,7 @@ rmo(10L, 2L, c(0, 0, 1), method = "AM")         ## comonotone
 \seealso{
 Other sampling-algorithms: 
 \code{\link{rarmextmo_esm}()},
-\code{\link{rexmo_mdcm}()},
+\code{\link{rexmo}()},
 \code{\link{rextmo_lfm}()}
 }
 \concept{sampling-algorithms}

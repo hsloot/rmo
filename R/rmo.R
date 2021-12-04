@@ -19,7 +19,7 @@ NULL
 #' distribution.
 #' - An object that derives from [BernsteinFunction-class] can be used to
 #'   generate the Marshall-Olkin intensities with [intensities()].
-#'   It can be used to generate (unscaled) exchangeable intensities with
+#'   It can be used to generate (scaled) exchangeable intensities with
 #'   [exIntensities()].
 #' - Many families of Bernstein functions are available, e.g.
 #'   [ParetoBernsteinFunction-class], [ExponentialBernsteinFunction-class], and
@@ -30,16 +30,14 @@ NULL
 #'
 #'
 #' @section Sampling:
-#' Multiple sampling algorithms are provided. The semantic naming scheme `r*mo`
-#' is used, e.g. [rexmo_mdcm()] has *(scaled) exchangeable intensities*
-#' `ex_intensities` as input and uses the Markovian model for the default
-#' counting process.
+#' Multiple sampling algorithms are provided. The semantic naming scheme `r*mo` is used, e.g.,
+#' [rexmo()] has *(scaled) exchangeable shock-size arrival intensities* `ex_intensities` as input
+#' and uses, as the default, the Markovian model for the death-counting process for sampling.
 #' The following algorithms are implemented:
 #' - The *exogenous shock model* and the *Arnold model* for the general Marshall-Olkin distribution
 #'   are implemented in [rmo()]. The former should only be used in very small dimensions and the
 #'   latter can be used up until \eqn{d \leq 30}.
-#' - *Exchangeable Markovian model* for exchangeable Marshall-Olkin distributions
-#'   with [rexmo_mdcm()].
+#' - *Markovian death-counting model* for exchangeable Marshall-Olkin distributions with [rexmo()].
 #' - *Lévy-frailty model for compound Poisson subordinators* for the corresponding
 #'   subclass of extendible Marshall-Olkin distributions with [rextmo_lfm()].
 #' - *Exogenous shock model* for the armageddon ESM subclass with [rarmextmo_esm()].
