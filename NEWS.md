@@ -2,6 +2,7 @@
 
 - Create single entry point for general MO sampling routines.
 - Create single entry point for exchangeable MO sampling routines.
+- Create single entry point for extendible MO sampling routines.
 
 # rmo 0.7.1
 

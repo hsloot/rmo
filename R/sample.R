@@ -103,7 +103,7 @@ rmo <- function(n, d, intensities, method = c("AM", "ESM")) {
 #' @return
 #' `rexmo` implements the Markovian model for the death-counting process of the exchangeable
 #' subclass and returns an  \eqn{n \times d}{n x d} numeric matrix with the rows corresponding to
-#' independent and identically disctributed samples of a \eqn{d} variate exchangeable Marshall-Olkin
+#' independent and identically distributed samples of a \eqn{d} variate exchangeable Marshall-Olkin
 #' distribution with exchangeable shock-size arrival intensities `ex_intensities`.
 #'
 #' @details
@@ -145,6 +145,54 @@ rexmo <- function(n, d, ex_intensities, method = c("MDCM", "AM", "ESM")) {
 
 ## #### Sample from extendible Marshall-Olkin distributions ####
 ##
+
+#' Sample from an extendible Marshall--Olkin distribution
+#'
+#' Draws `n` independent samples from a `d`-variate extendible Marshall--Olkin distribution with
+#' Bernstein function `bf` using a wrapper of [rexmo()].
+#'
+#' @param n an integer for the number of samples.
+#' @param d an integer for the dimension of the sample.
+#' @param bf a [BernsteinFunction-class]  with the Bernstein function of the extendible
+#'   Marshall--Olkin distribution.
+#' @param method a character vector indicating which sampling algorithm should be used.
+#'   Use "MDCM" for the *Markovian death-counting model*, "AM" for the *Arnold model*,
+#'   and "ESM" for the *exogenous shock model*.
+#'
+#' @return
+#' `rextmo` is a wrapper arround [rexmo()] for extendible Marshall--Olkin distributions and returns
+#' an  \eqn{n \times d}{n x d} numeric matrix with the rows corresponding to independent and
+#' identically distributed samples of a \eqn{d} variate extendible Marshall-Olkin distribution
+#' with Bernstein function `bf`.
+#'
+#' @details
+#' __Parametrization__:
+#' Extendible Marshall--Olkin distributions are parametrized by Bernstein functions \eqn{\psi} such that the
+#' exchangeable shock-size arrival intensities are
+#' \deqn{
+#'   \eta_{i}
+#'      = \binom{d}{i} {(-1)}^{i-1} \Delta{ \psi{(d-i)} } , \quad i \in {[d]} .
+#' }
+#'
+#' @family smapling-algorithms
+#'
+#' @examples
+#' rextmo(10, 2, AlphaStableBernsteinFunction(alpha = log2(2  - 0.5)))
+#' rextmo(10, 2, LinearBernsteinFunction(scale = 1))                    # independence
+#' rextmo(10, 2, ConstantBernsteinFunction(constant = 1))               # comonotone
+#'
+#' rextmo(10, 2, AlphaStableBernsteinFunction(alpha = log2(2  - 0.5)), method = "AM")
+#' rextmo(10, 2, LinearBernsteinFunction(scale = 1), method = "AM")                    # independence
+#' rextmo(10, 2, ConstantBernsteinFunction(constant = 1), method = "AM")               # comonotone
+#'
+#' rextmo(10, 2, AlphaStableBernsteinFunction(alpha = log2(2  - 0.5)), method = "ESM")
+#' rextmo(10, 2, LinearBernsteinFunction(scale = 1), method = "ESM")                    # independence
+#' rextmo(10, 2, ConstantBernsteinFunction(constant = 1), method = "ESM")               # comonotone
+#'
+#' @export
+rextmo <- function(n, d, bf, method = c("MDCM", "AM", "ESM")) {
+  rexmo(n, d, exIntensities(bf, d), method = method)
+}
 
 
 #' Sample from the armageddon ESM distribution

@@ -11,7 +11,8 @@ reference:
   contents:
   - matches("^rmo$")
   - matches("^rexmo$")
-  - starts_with("rextmo")
+  - matches("^rextmo$")
+  - starts_with("rextmo_")
   - starts_with("rarmextmo")
 
 

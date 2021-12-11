@@ -21,7 +21,7 @@ and "ESM" for the \emph{exogenous shock model}.}
 \value{
 \code{rexmo} implements the Markovian model for the death-counting process of the exchangeable
 subclass and returns an  \eqn{n \times d}{n x d} numeric matrix with the rows corresponding to
-independent and identically disctributed samples of a \eqn{d} variate exchangeable Marshall-Olkin
+independent and identically distributed samples of a \eqn{d} variate exchangeable Marshall-Olkin
 distribution with exchangeable shock-size arrival intensities \code{ex_intensities}.
 }
 \description{
