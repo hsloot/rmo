@@ -41,7 +41,7 @@
 #' see \insertCite{@see pp. 104 psqq. @Mai2017a}{rmo} and
 #' \insertCite{Marshall1967a}{rmo}.
 #'
-#' The __Arnold model__ simulates a Marshall--Olkin distributed random variable
+#' The __Arnold model__ simulates a Marshall--Olkin distributed random vector
 #' by simulating a marked homogeneous Poisson process and where the
 #' inter-arrival times correspond to shock shock-arrival times and the marks to
 #' the specific shocks, see \insertCite{@see Sec. 3.1.2 @Mai2017a}{rmo} and
@@ -155,7 +155,7 @@ rexmo <- function(n, d, ex_intensities, method = c("MDCM", "AM", "ESM")) {
 #' @param d an integer for the dimension of the sample.
 #' @param bf a [BernsteinFunction-class]  with the Bernstein function of the extendible
 #'   Marshall--Olkin distribution.
-#' @param method a character vector indicating which sampling algorithm should be used.
+#' @param method a character indicating which sampling algorithm should be used.
 #'   Use "MDCM" for the *Markovian death-counting model*, "AM" for the *Arnold model*,
 #'   and "ESM" for the *exogenous shock model*.
 #'
@@ -174,7 +174,7 @@ rexmo <- function(n, d, ex_intensities, method = c("MDCM", "AM", "ESM")) {
 #'      = \binom{d}{i} {(-1)}^{i-1} \Delta{ \psi{(d-i)} } , \quad i \in {[d]} .
 #' }
 #'
-#' @family smapling-algorithms
+#' @family sampling-algorithms
 #'
 #' @examples
 #' rextmo(10, 2, AlphaStableBernsteinFunction(alpha = log2(2  - 0.5)))
@@ -195,96 +195,357 @@ rextmo <- function(n, d, bf, method = c("MDCM", "AM", "ESM")) {
 }
 
 
-#' Sample from the armageddon ESM distribution
+#' Sample from an parametrized ext. MO distribution
 #'
-#' Draws `n` independent samples from a `d` variate armageddon ESM distribution
-#' with parameters `alpha` and `beta`.
+#' Draws `n` independent samples from a `d` variate paramatrized ext. MO distribution
+#' with parameter vector `eta`.
 #'
-#' @param n Number of samples
-#' @param d Dimension
-#' @param alpha Shock intensity of individual shocks
-#' @param beta Shock intensity of global shock
+#' @param n an integer for the number of samples.
+#' @param d an integer for the dimension of the sample.
+#' @param a a non-negative double for the killing-rate parameter \eqn{a} of the Bernstein function
+#'   (default `a = 0`).
+#' @param b a non-negative double for the drift parameter \eqn{b} of the Bernstein function (default
+#'   `b = 0`).
+#' @param gamma a position double for the scaling of the integral part of the Bernstein function
+#'   (default `gamma = 1`).
+#' @param eta a numeric vector for the family's parameters.
+#' @param family a string indicating the parametrized family.
+#'    Use "Armageddon" for the *Armageddon* family, "Poisson" for the *Poisson family*, "Pareto" for
+#'    the *Pareto family*, "Exponential" for the *Exponential family*, "AlphaStable" for the
+#'    *\eqn{\alpha}-stable fmaily*, "InverseGaussian" for the *Inverse-Gaussian family*, "Gamma" for
+#'    the *Gamma family*.
+#' @param method a string indicating which sampling algorithm should be used.
+#'   Use "ESM" for the *exogenous shock model*, considering only finite shocks,
+#'   "MDCM" for the *Markovian death-set model*, "LFM" for the *Lévy-frailty model*,
+#'   and "AM" for the *Arnold model*.
 #'
-#' @return `rarmextmo_esm` implements an optimized version of the
-#' *exogenous shock model* algorithm for the armageddon shock family and
-#' returns an \eqn{n \times d}{n x d} array matrix with rows corresponding to
-#' the independent samples of size \eqn{d}.
+#' @return `rpextmo` implements, or wraps around, various sampling algorithms for parametrized ext.
+#' MO families and returns an \eqn{n \times d}{n x d} array matrix with rows corresponding to the
+#' iid samples of a \eqn{d} variate parametrized ext. MO distribution with parameters \eqn{a},
+#' \eqn{b}, and \eqn{\eta}.
 #'
 #' @details
 #' __Parameterisation__:
-#' The armageddon ESM distribution is a special case of the exchangeable Marshall-Olkin
-#' distribution where \eqn{\lambda_i = 0 \forall 1 < i < d}.
-#' The individual shock rate is \eqn{\alpha = \lambda_1} and the global shock
-#' rate is \eqn{\beta = \lambda_d}.
+#' A parametrized ext. MO distribution is a family of ext. MO distribution corresponding to
+#' Bernstein functions of the form
+#' \deqn{
+#'   \psi{(x)}
+#'      = 1_{\{ x > 0 \}} a + b x + \gamma \cdot \int_{0}^{\infty}{ {[1 - e^{-ux}]} \nu{(\mathrm{d}u)} },
+#'      \quad x \geq 0 ,
+#' }
+#' or
+#' \deqn{
+#'  \psi{(x)}
+#'    = 1_{\{ x > 0 \}} a + b x + \gamma \cdot \int_{0}^{\infty}{ \frac{x}{x + u} \sigma{(\mathrm{d}u)} },
+#'      \quad x \geq 0 ,
+#' }
+#' where \eqn{a, a \geq 0} and \eqn{\nu}, resp. \eqn{\sigma}, are the Lévy measure, resp. Stieltjes
+#' measure, and \eqn{\alpha > 0}, \eqn{\beta > 0}, or \eqn{nu \not\equiv 0}, resp.
+#' \eqn{\sigma \not\equiv 0}.
 #'
-#' @seealso [rmo()]
-#' @family sampling-algorithms
+#' The Lévy measure, resp. Stieltjes measure, take the following forms:
+#' - *Armageddon family*: \eqn{nu = \sigma \equiv 0} and Bernstein function
+#'   \deqn{
+#'    \psi{(x)}
+#'      = 1_{\{ x > 0\}} a + b x ,
+#'      \quad x \geq 0 ,
+#'   }
+#'   see [ConstantBernsteinFunction-class] and
+#'   [LinearBernsteinFunction-class].
+#' - *Poisson family*: We have \eqn{\eta > 0}, Bernstein function
+#'   \deqn{
+#'    \psi{(x)}
+#'      = 1_{\{ x > 0\}} a + b x + \gamma \cdot {[1 - e^{-\eta x}]},
+#'      \quad x \geq 0 ,
+#'   }
+#'   and Lévy measure
+#'   \deqn{
+#'     \nu{(\mathrm{d}u)}
+#'      = \delta_{\{ \eta \}}{(\mathrm{d}u)} ,
+#'   }
+#'   see [PoissonBernsteinFunction-class].
+#' - *Pareto family*: We have \eqn{\eta \in \mathbb{R}^2} with \eqn{\eta_1, \eta_2 > 0} and
+#'   Lévy measure
+#'   \deqn{
+#'     \nu{(\mathrm{d}u)}
+#'      = \eta_{1} \eta_{2}^{\eta_{1}} \cdot u^{-\eta_{1}-1}  1_{\{ u > \eta_{2}\}} \mathrm{d}u ,
+#'   }
+#'   see [ParetoBernsteinFunction-class].
+#' - *Exponential family*: We have \eqn{\eta > 0}, Bernstein function
+#'   \deqn{
+#'    \psi{(x)}
+#'      = 1_{\{ x > 0\}} a + b x + \gamma \cdot \frac{x}{x + \eta} ,
+#'      \quad x \geq 0 ,
+#'   }
+#'   and Lévy measure
+#'   \deqn{
+#'    \nu{(\mathrm{d}u)}
+#'      = \eta e^{-\eta u} \mathrm{d}u ,
+#'   }
+#'   and Stieltjes measure
+#'   \deqn{
+#'    \sigma{(\mathrm{d}u)}
+#'      = \delta_{\{ \eta \}}{(\mathrm{d}u)} ,
+#'   }
+#'  see [ExponentialBernsteinFunction-class].
+#' - *\eqn{\alpha}-stable family*: We have \eqn{\eta \in {(0, 1)}}, Bernstein function
+#'   \deqn{
+#'    \psi{(x)}
+#'      = 1_{\{ x > 0\}} a + b x + \gamma \cdot x^{\eta} ,
+#'      \quad x \geq 0 ,
+#'   }
+#'   Lévy measure,
+#'   \deqn{
+#'    \nu{(\mathrm{d}u)}
+#'      = \frac{\eta}{\Gamma{(1 - \eta)}} \cdot u^{-\eta-1} \mathrm{d}u ,
+#'   }
+#'   and Stieljtes measure
+#'   \deqn{
+#'    \sigma{(\mathrm{d}u)}
+#'      = \frac{\sin{(\eta \pi)}}{\pi} \cdot u^{\eta - 1} \mathrm{d}u ,
+#'   }
+#'   see [AlphaStableBernsteinFunction-class].
+#' - *Inverse-Gaussian family*: We have \eqn{\eta > 0}, Bernstein function
+#'   \deqn{
+#'    \psi{(x)}
+#'      = 1_{\{ x > 0\}} a + b x + \gamma \cdot {\left[ \sqrt{2 x + \eta^2} - \eta \right]},
+#'      \quad x \geq 0 ,
+#'   }
+#'   Lévy measure
+#'   \deqn{
+#'    \nu{(\mathrm{d}u)}
+#'      = \frac{1}{ \sqrt{2 \pi} } \cdot \frac{ e^{-\frac{1}{2} \eta^2 u} }{ \sqrt{u^3} } \mathrm{d}u ,
+#'   }
+#'   and Stieltjes measure
+#'   \deqn{
+#'    \sigma{(\mathrm{d}u)}
+#'      = \frac{\sin{(\pi / 2)}}{\pi} \cdot \frac{\sqrt{2 u - \eta^2}}{u} 1_{\{ u > \eta^2 / 2 \}} \mathrm{d}u ,
+#'   }
+#'   see [InverseGaussianBernsteinFunction-class].
+#' - *Gamma family*: We have \eqn{\eta > 0}, Bernstein function
+#'   \deqn{
+#'    \psi{(x)}
+#'      = 1_{\{ x > 0\}} a + b x + \gamma \cdot \log{\left( 1 +  \frac{x}{\eta} \right)} ,
+#'      \quad x \geq 0 ,
+#'   }
+#'   Lévy measure
+#'   \deqn{
+#'    \nu{(\mathrm{d}u)}
+#'      = e^{-\eta u} u^{-1} \mathrm{d}u ,
+#'   }
+#'   and Stieljtes measure
+#'   \deqn{
+#'    \sigma{(\mathrm{d}u)}
+#'      = u^{-1} 1_{\{ u > \eta \}} \mathrm{d}u ,
+#'   }
+#'   see [GammaBernsteinFunction-class].
 #'
-#' @examples
-#' rarmextmo_esm(10L, 2L, 0.5, 0.2)
-#' rarmextmo_esm(10L, 2L, 0, 1)      ## comonotone
-#' rarmextmo_esm(10L, 2L, 1, 0)      ## independence
 #'
-#' @export
-rarmextmo_esm <- function(n, d, alpha, beta) {
-  Rcpp__rarmextmo_esm(n, d, alpha, beta)
-}
-
-
-
-#' Sample with Lévy-frailty model with compound Poisson subordinator
+#' For the *Armageddon family*, an optimized version of the __exogenous shock model__ is used,
+#' ignoring all infinite shocks which will not influence the final result.
 #'
-#' Draws `n` independent samples from a `d`-variate extendible Marshall-Olkin
-#' distribution corresponding to a LFM with a compound Poisson subordinator.
+#' The __Lévy-frailty model__ simulates the elements of the random vector as first-hitting times
+#' of a compound Poisson subordinator \eqn{\Lambda} into sets \eqn{(E_i, \infty)} for iid unit
+#' exponential random variables.
+#' Here, the subordinator is a linear combination of a pure-drift subordinator, a pure-killing subordinator,
+#' and a pure-jump compound Poisson subordinator, i.e.
+#' \deqn{
+#'    \Lambda_{t}
+#'      = \infty \cdot 1_{\{ \epsilon > \beta t \}} + \alpha t + \sum_{j=1}^{N_{\gamma t}} X_{j} ,
+#'      \quad t \geq 0,
+#' }
+#' where \eqn{\epsilon} is a unit exponential rv, \eqn{N} is a Poisson process, and \eqn{X_{1},
+#' X_{2}, \ldots} are iid jumps from the corresponding jump distribution.
 #'
-#' @param n Number of samples
-#' @param d Dimension
-#' @param rate Jump intensity of CPP subordinator
-#' @param rate_killing Killing intensity of CPP subordinator
-#' @param rate_drift Drift of CPP subordinator
-#' @param rjump_name Name of jump sampling function for jumps of CPP
-#'   subordinator
-#' @param rjump_arg_list A list with named arguments for jump sampling function
-#'   for jumps of CPP subordinator
+#' For the *Markovian death-set model*, the *Arnold model*, or the *exogenous shock model* a
+#' suitable [BernsteinFunction-class] is created and [rextmo()] is called.
 #'
-#' @return `rextmo_lfm` implements the Lévy-frailty model algorithm with a
-#' compound Poisson subordinator and returns an \eqn{n \times d}{n x d} numeric
-#' matrix with the rows corresponding to independent and identically
-#' distributed samples of the corresponding `d`-variate extendible
-#' Marshall-Olkin distribution.
-#'
-#' @details
-#' __Model__:
-#' The default times are defined as first exit times of a (killed) compound Poisson
-#' subordinator \eqn{\Lambda} with *killing intensity* \eqn{a}, *drift* \eqn{b},
-#' *jump intensity* \eqn{\xi}, and *jump distribution* \eqn{X}.
-#'
-#' __Model parameters__:
-#' - `rate` is the *jump intensity* of the compound Poisson subordinator.
-#' - `rate_killing` is the *killing intensity* of the compound Poisson
-#'   subordinator.
-#' - `rate_drift` is the *drift* of the compound Poisson subordinator.
-#' - `rjump_name` and `rjump_arg_list` are the jump distribution name and
-#'   list with jump distribution parameters. Currently, `"rexp"`, `"rposval"`,
-#'   and `"rpareto"` are possible.
-#'
-#' @section References: For more information on this algorithm, see J.-F. Mai,
+#' @section References: For more information on the LFM algorithm, see J.-F. Mai,
 #' M. Scherer, "Simulating Copulas", World Scientific (2017), pp. 140 psqq.
 #'
-#' @examples
-#' rextmo_lfm(10L, 2L, 0.5, 0.1, 0.2, "rposval", list("value"=1))
-#' rextmo_lfm(10L, 2L, 0.5, 0, 0, "rexp", list("rate"=2))
-#' rextmo_lfm(10L, 2L, 0.5, 0, 0, "rpareto", list("alpha"=log2(2 - 0.5), x0 = 1e-4))
-#'
-#' rextmo_lfm(10L, 2L, 0, 0, 1, "rposval", list("value"=1))  ## independence
-#' rextmo_lfm(10L, 2L, 0, 1, 0, "rposval", list("value"=1))  ## comonotone
-#'
 #' @family sampling-algorithms
 #'
+#' @examples
+#' ## Armageddon
+#'
+#' rpextmo(10, 2L, a = 0.2, b = 0.5)
+#' rpextmo(10, 2, a = 1)      ## comonotone
+#' rpextmo(10, 2, b = 1)      ## independence
+#'
+#' rpextmo(10, 2, a = 0.2, b = 0.5, method = "ESM")
+#' rpextmo(10, 2, a = 1, method = "ESM")      ## comonotone
+#' rpextmo(10, 2, b = 1, method = "ESM")      ## independence
+#'
+#' rpextmo(10, 2, a = 0.2, b = 0.5, method = "LFM")
+#' rpextmo(10L, 2, a = 1, method = "LFM")      ## comonotone
+#' rpextmo(10L, 2, b = 1, method = "LFM")      ## independence
+#'
+#' rpextmo(10, 2, a = 0.2, b = 0.5, method = "MDCM")
+#' rpextmo(10, 2, a = 1, method = "MDCM")      ## comonotone
+#' rpextmo(10, 2, b = 1, method = "MDCM")      ## independence
+#'
+#' rpextmo(10, 2, a = 0.2, b = 0.5, method = "AM")
+#' rpextmo(10, 2, a = 1, method = "AM")      ## comonotone
+#' rpextmo(10, 2, b = 1, method = "AM")      ## independence
+#'
+#' rpextmo(10, 2, a = 0.2, b = 0.5, family = "Armageddon")
+#' rpextmo(10, 2, a = 1, family = "Armageddon")      ## comonotone
+#' rpextmo(10, 2, b = 1, family = "Armageddon")      ## independence
+#'
+#' rpextmo(10, 2, a = 0.2, b = 0.5, family = "Armageddon", method = "ESM")
+#' rpextmo(10, 2, a = 1, family = "Armageddon", method = "ESM")      ## comonotone
+#' rpextmo(10, 2, b = 1, family = "Armageddon", method = "ESM")      ## independence
+#'
+#' rpextmo(10, 2, a = 0.2, b = 0.5, family = "Armageddon", method = "LFM")
+#' rpextmo(10, 2, a = 1, family = "Armageddon", method = "LFM")      ## comonotone
+#' rpextmo(10, 2, b = 1, family = "Armageddon", method = "LFM")      ## independence
+#'
+#' rpextmo(10, 2, a = 0.2, b = 0.5, family = "Armageddon", method = "MDCM")
+#' rpextmo(10, 2, a = 1, family = "Armageddon", method = "MDCM")      ## comonotone
+#' rpextmo(10, 2, b = 1, family = "Armageddon", method = "MDCM")      ## independence
+#'
+#' rpextmo(10, 2, a = 0.2, b = 0.5, family = "Armageddon", method = "AM")
+#' rpextmo(10, 2, a = 1, family = "Armageddon", method = "AM")      ## comonotone
+#' rpextmo(10, 2, b = 1, family = "Armageddon", method = "AM")      ## independence
+#'
+#' ## Poisson
+#'
+#' rpextmo(10, 2, a = 0.2, b = 0.5, gamma = 2, eta = 0.5, family = "Poisson")
+#' rpextmo(10, 2, a = 0.2, b = 0.5, gamma = 2, eta = 0.5, family = "Poisson", method = "ESM")
+#' rpextmo(10, 2, a = 0.2, b = 0.5, gamma = 2, eta = 0.5, family = "Poisson", method = "LFM")
+#' rpextmo(10, 2, a = 0.2, b = 0.5, gamma = 2, eta = 0.5, family = "Poisson", method = "MDCM")
+#' rpextmo(10, 2, a = 0.2, b = 0.5, gamma = 2, eta = 0.5, family = "Poisson", method = "AM")
+#'
+#' ## Pareto
+#'
+#' rpextmo(10, 2, a = 0.2, b = 0.5, gamma = 2, eta = c(0.5, 1e-4), family = "Pareto")
+#' rpextmo(10, 2, a = 0.2, b = 0.5, gamma = 2, eta = c(0.5, 1e-4), family = "Pareto", method = "ESM")
+#' rpextmo(10, 2, a = 0.2, b = 0.5, gamma = 2, eta = c(0.5, 1e-4), family = "Pareto", method = "LFM")
+#' rpextmo(10, 2, a = 0.2, b = 0.5, gamma = 2, eta = c(0.5, 1e-4), family = "Pareto", method = "MDCM")
+#' rpextmo(10, 2, a = 0.2, b = 0.5, gamma = 2, eta = c(0.5, 1e-4), family = "Pareto", method = "AM")
+#'
+#' ## Exponential
+#'
+#' rpextmo(10, 2, a = 0.2, b = 0.5, gamma = 2, eta = 0.5, family = "Exponential")
+#' rpextmo(10, 2, a = 0.2, b = 0.5, gamma = 2, eta = 0.5, family = "Exponential", method = "ESM")
+#' rpextmo(10, 2, a = 0.2, b = 0.5, gamma = 2, eta = 0.5, family = "Exponential", method = "LFM")
+#' rpextmo(10, 2, a = 0.2, b = 0.5, gamma = 2, eta = 0.5, family = "Exponential", method = "MDCM")
+#' rpextmo(10, 2, a = 0.2, b = 0.5, gamma = 2, eta = 0.5, family = "Exponential", method = "AM")
+#'
+#' ## Alpha-Stable
+#'
+#' rpextmo(10, 2, a = 0.2, b = 0.5, gamma = 2, eta = 0.5, family = "AlphaStable")
+#' rpextmo(10, 2, a = 0.2, b = 0.5, gamma = 2, eta = 0.5, family = "AlphaStable", method = "ESM")
+#' rpextmo(10, 2, a = 0.2, b = 0.5, gamma = 2, eta = 0.5, family = "AlphaStable", method = "MDCM")
+#' rpextmo(10, 2, a = 0.2, b = 0.5, gamma = 2, eta = 0.5, family = "AlphaStable", method = "AM")
+#'
+#' ## Inverse Gaussian
+#'
+#' rpextmo(10, 2, a = 0.2, b = 0.5, gamma = 2, eta = 0.5, family = "InverseGaussian")
+#' rpextmo(10, 2, a = 0.2, b = 0.5, gamma = 2, eta = 0.5, family = "InverseGaussian", method = "ESM")
+#' rpextmo(10, 2, a = 0.2, b = 0.5, gamma = 2, eta = 0.5, family = "InverseGaussian", method = "MDCM")
+#' rpextmo(10, 2, a = 0.2, b = 0.5, gamma = 2, eta = 0.5, family = "InverseGaussian", method = "AM")
+#'
+#' ## Gamma
+#'
+#' rpextmo(10, 2, a = 0.2, b = 0.5, gamma = 2, eta = 0.5, family = "Gamma")
+#' rpextmo(10, 2, a = 0.2, b = 0.5, gamma = 2, eta = 0.5, family = "Gamma", method = "ESM")
+#' rpextmo(10, 2, a = 0.2, b = 0.5, gamma = 2, eta = 0.5, family = "Gamma", method = "MDCM")
+#' rpextmo(10, 2, a = 0.2, b = 0.5, gamma = 2, eta = 0.5, family = "Gamma", method = "AM")
+#'
+#'
+#' @importFrom checkmate qassert assert_choice
+#'
 #' @export
-rextmo_lfm <- function(n, d,
-                        rate, rate_killing, rate_drift,
-                        rjump_name, rjump_arg_list = list()) {
-  Rcpp__rextmo_lfm(n, d,
-                    rate, rate_killing, rate_drift, rjump_name, rjump_arg_list)
+rpextmo <- function(n, d, a = 0, b = 0, gamma = 1, eta = NULL,
+    family = c("Armageddon", "Poisson", "Pareto",
+      "Exponential", "AlphaStable", "InverseGaussian", "Gamma"),
+    method = c("MDCM", "LFM", "AM", "ESM")) {
+  family <- match.arg(family)
+  if (missing(method) && isTRUE("Armageddon" == family)) {
+    method <- "ESM"
+  } else {
+    method <- match.arg(method)
+  }
+  qassert(a, "N1[0,)")
+  qassert(b, "N1[0,)")
+  qassert(gamma, "N1(0,)")
+  qassert(eta, c("N+(0,)", "0"))
+
+  if (isTRUE("Armageddon" == family) && isTRUE("ESM" == method)) {
+    Rcpp__rarmextmo_esm(n, d, alpha = b, beta = a)
+  } else if (isTRUE("LFM" == method)) {
+    assert_choice(family, c("Armageddon", "Poisson", "Pareto", "Exponential"))
+    if (isTRUE("Armageddon" == family)) {
+      qassert(eta, "0")
+      gamma <- 0
+      rjump_name <- "rposval"
+      rjump_arg_list <- list("value" = 0)
+    } else if (isTRUE("Poisson" == family)) {
+      qassert(eta, "N1(0,)")
+      rjump_name <- "rposval"
+      rjump_arg_list <- list("value" = eta)
+    } else if (isTRUE("Pareto" == family)) {
+      qassert(eta, "N2(0,)")
+      rjump_name <- "rpareto"
+      rjump_arg_list <- list("alpha" = eta[[1]], x0 = eta[[2]])
+    } else if (isTRUE("Exponential" == family)) {
+      qassert(eta, "N1(0,)")
+      rjump_name <- "rexp"
+      rjump_arg_list <- list("rate" = eta)
+    } else {
+      stop(sprintf("Family %s not implemented for LFM", family))
+    }
+    Rcpp__rextmo_lfm(
+      n, d,
+      rate = gamma, rate_killing = a, rate_drift = b,
+      rjump_name = rjump_name, rjump_arg_list = rjump_arg_list)
+  } else if (method %in% c("MDCM", "AM", "ESM")) {
+    psi <- NULL
+    if (isTRUE("Poisson" == family)) {
+      qassert(eta, "N1(0,)")
+      psi <- PoissonBernsteinFunction(eta = eta)
+    } else if (isTRUE("Pareto" == family)) {
+      qassert(eta, "N2")
+      qassert(eta[[1]], "N1(0,1)")
+      qassert(eta[[2]], "N1(0,)")
+      psi <- ParetoBernsteinFunction(alpha = eta[[1]], x0 = eta[[2]])
+    } else if (isTRUE("Exponential" == family)) {
+      qassert(eta, "N1(0,)")
+      psi <- ExponentialBernsteinFunction(lambda = eta)
+    } else if (isTRUE("AlphaStable" == family)) {
+      qassert(eta, "N1(0,)")
+      psi <- AlphaStableBernsteinFunction(alpha = eta)
+    } else if (isTRUE("InverseGaussian" == family)) {
+      qassert(eta, "N1(0,)")
+      psi <- InverseGaussianBernsteinFunction(eta = eta)
+    } else if (isTRUE("Gamma" == family)) {
+      qassert(eta, "N1(0,)")
+      psi <- GammaBernsteinFunction(a = eta)
+    }
+    if (isFALSE(gamma == 1) && !is.null(psi)) {
+      psi <- ScaledBernsteinFunction(scale = gamma, original = psi)
+    }
+    if (isFALSE(b == 0)) {
+      if (!is.null(psi)) {
+        psi <- SumOfBernsteinFunctions(
+          first = LinearBernsteinFunction(scale = b),
+          second = psi)
+      } else {
+        psi <- LinearBernsteinFunction(scale = b)
+      }
+    }
+    if (isFALSE(a == 0)) {
+      if (!is.null(psi)) {
+        psi <- SumOfBernsteinFunctions(
+          first = ConstantBernsteinFunction(constant = a),
+          second = psi)
+      } else {
+        psi <- ConstantBernsteinFunction(constant = a)
+      }
+    }
+    rextmo(n, d, bf = psi, method = method)
+  } else {
+    stop(sprintf("Method %s not implemented", method))
+  }
 }

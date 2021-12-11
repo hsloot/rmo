@@ -1,11 +1,14 @@
 use_seed <- 1623
 n <- 1e2
 
+rarmextmo_esm <- function(n, d, alpha, beta) {
+  mockery::stub(rpextmo, "Rcpp__rarmextmo_esm", rtest__rarmextmo_esm)
+  rpextmo(n, d, a = beta, b = alpha, family = "Armageddon", method = "ESM")
+}
+
 ## #### Test implementation for the bivariate case ####
 
 test_that("Armageddon shock Ext.-MO implementation works as intended for d=2", {
-  mockery::stub(rarmextmo_esm, "Rcpp__rarmextmo_esm", rtest__rarmextmo_esm)
-
   ## both equal
   args <- list("d" = 2, "alpha" = 1, "beta" = 1)
   expect_equal_rn_generation(rarmextmo_esm, testutils.rmo::rarmextmo_esm_bivariate,
@@ -32,8 +35,6 @@ test_that("Armageddon shock Ext.-MO implementation works as intended for d=2", {
 ## #### Test implementation against original `R` version ####
 
 test_that("Armageddon shock Ext.-MO ESM implementation in Rcpp", {
-  mockery::stub(rarmextmo_esm, "Rcpp__rarmextmo_esm", rtest__rarmextmo_esm)
-
   d <- 7
 
   args <- list("d" = d, "alpha" = 1, "beta" = 1)

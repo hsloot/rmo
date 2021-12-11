@@ -55,7 +55,7 @@ vector via exponentially distributed shock times for all non-empty subsets,
 see \insertCite{@see pp. 104 psqq. @Mai2017a}{rmo} and
 \insertCite{Marshall1967a}{rmo}.
 
-The \strong{Arnold model} simulates a Marshall--Olkin distributed random variable
+The \strong{Arnold model} simulates a Marshall--Olkin distributed random vector
 by simulating a marked homogeneous Poisson process and where the
 inter-arrival times correspond to shock shock-arrival times and the marks to
 the specific shocks, see \insertCite{@see Sec. 3.1.2 @Mai2017a}{rmo} and
@@ -80,8 +80,8 @@ rmo(10L, 2L, c(0, 0, 1), method = "AM")         ## comonotone
 }
 \seealso{
 Other sampling-algorithms: 
-\code{\link{rarmextmo_esm}()},
 \code{\link{rexmo}()},
-\code{\link{rextmo_lfm}()}
+\code{\link{rextmo}()},
+\code{\link{rpextmo}()}
 }
 \concept{sampling-algorithms}

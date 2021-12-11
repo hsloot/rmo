@@ -1,10 +1,29 @@
 use_seed <- 1632
 n <- 1e2
 
+rextmo_lfm <- function(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list) {
+  mockery::stub(rextmo_lfm, "Rcpp__rextmo_lfm", rtest__rextmo_lfm)
+  if (isTRUE(rate == 0) || (isTRUE(rjump_name == "rposval") && isTRUE(rjump_arg_list$value == 0))) {
+    rpextmo(n, d, a = rate_killing, b = rate_drift, family = "Armageddon", method = "LFM")
+  } else if (isTRUE("rposval" == rjump_name)) {
+    rpextmo(
+      n, d, a = rate_killing, b = rate_drift, gamma = rate, eta = rjump_arg_list$value,
+      family = "Poisson", method = "LFM")
+  } else if (isTRUE("rpareto" == rjump_name)) {
+    rpextmo(
+      n, d, a = rate_killing, b = rate_drift, gamma = rate,
+      eta = c(rjump_arg_list$alpha, rjump_arg_list$x0),
+      family = "Pareto", method = "LFM")
+  } else if (isTRUE("rexp" == rjump_name)) {
+    rpextmo(
+      n, d, a = rate_killing, b = rate_drift, gamma = rate, eta = rjump_arg_list$rate,
+      family = "Exponential", method = "LFM")
+  } else {
+    stop(sprintf("Jump distribution %s not implemented", rjump_name))
+  }
+}
 
 test_that("LFM-CPP implementation works as indended for independence case", {
-  mockery::stub(rextmo_lfm, "Rcpp__rextmo_lfm", rtest__rextmo_lfm)
-
   d <- 7
   args <- list(
     "d" = d,
@@ -19,8 +38,6 @@ test_that("LFM-CPP implementation works as indended for independence case", {
 
 
 test_that("LFM-CPP implementation works as indended for comonotone case", {
-  mockery::stub(rextmo_lfm, "Rcpp__rextmo_lfm", rtest__rextmo_lfm)
-
   d <- 7
   args <- list(
     "d" = d,
@@ -35,8 +52,6 @@ test_that("LFM-CPP implementation works as indended for comonotone case", {
 
 
 test_that("LFM-CPP implementation works as intended for exp. jumps", {
-  mockery::stub(rextmo_lfm, "Rcpp__rextmo_lfm", rtest__rextmo_lfm)
-
   d <- 7
 
   ## no killing, no drift
@@ -86,8 +101,6 @@ test_that("LFM-CPP implementation works as intended for exp. jumps", {
 
 
 test_that("LFM-CPP implementation works as intended for det. jumps", {
-  mockery::stub(rextmo_lfm, "Rcpp__rextmo_lfm", rtest__rextmo_lfm)
-
   d <- 7L
 
   ## no killing, no drift
@@ -137,8 +150,6 @@ test_that("LFM-CPP implementation works as intended for det. jumps", {
 
 
 test_that("LFM-CPP implementation works as intended for pareto jumps", {
-  mockery::stub(rextmo_lfm, "Rcpp__rextmo_lfm", rtest__rextmo_lfm)
-
   d <- 7L
 
   ## no killing, no drift

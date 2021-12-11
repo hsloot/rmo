@@ -12,8 +12,7 @@ reference:
   - matches("^rmo$")
   - matches("^rexmo$")
   - matches("^rextmo$")
-  - starts_with("rextmo_")
-  - starts_with("rarmextmo")
+  - matches("^rpextmo$")
 
 
 - title: Drop-in parameter factories

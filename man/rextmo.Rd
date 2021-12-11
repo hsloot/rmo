@@ -14,7 +14,7 @@ rextmo(n, d, bf, method = c("MDCM", "AM", "ESM"))
 \item{bf}{a \linkS4class{BernsteinFunction}  with the Bernstein function of the extendible
 Marshall--Olkin distribution.}
 
-\item{method}{a character vector indicating which sampling algorithm should be used.
+\item{method}{a character indicating which sampling algorithm should be used.
 Use "MDCM" for the \emph{Markovian death-counting model}, "AM" for the \emph{Arnold model},
 and "ESM" for the \emph{exogenous shock model}.}
 }
@@ -51,4 +51,10 @@ rextmo(10, 2, LinearBernsteinFunction(scale = 1), method = "ESM")               
 rextmo(10, 2, ConstantBernsteinFunction(constant = 1), method = "ESM")               # comonotone
 
 }
-\concept{smapling-algorithms}
+\seealso{
+Other sampling-algorithms: 
+\code{\link{rexmo}()},
+\code{\link{rmo}()},
+\code{\link{rpextmo}()}
+}
+\concept{sampling-algorithms}
