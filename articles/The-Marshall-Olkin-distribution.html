@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,18 +33,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rmo</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -79,7 +75,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/hsloot/rmo/">
+  <a href="https://github.com/hsloot/rmo/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -100,7 +96,7 @@
       <h1 data-toc-skip>The Marshall-Olkin distribution</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/hsloot/rmo/blob/master/vignettes/The-Marshall-Olkin-distribution.Rmd"><code>vignettes/The-Marshall-Olkin-distribution.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/hsloot/rmo/blob/HEAD/vignettes/The-Marshall-Olkin-distribution.Rmd" class="external-link"><code>vignettes/The-Marshall-Olkin-distribution.Rmd</code></a></small>
       <div class="hidden name"><code>The-Marshall-Olkin-distribution.Rmd</code></div>
 
     </div>
@@ -109,9 +105,9 @@
     
 <p>The following document is a compendium for the <em>Marshall–Olkin distribution</em>.</p>
 <p>For a detailed mathematical treatment of this class, we refer to the references at the end of this document.</p>
-<div id="definition-and-survival-copula" class="section level2">
-<h2 class="hasAnchor">
-<a href="#definition-and-survival-copula" class="anchor"></a>Definition and survival copula</h2>
+<div class="section level2">
+<h2 id="definition-and-survival-copula">Definition and survival copula<a class="anchor" aria-label="anchor" href="#definition-and-survival-copula"></a>
+</h2>
 <p>A d-variate random vector <span class="math inline">\(\boldsymbol{\tau} = (\tau_1, \ldots, \tau_d)\)</span> has a <em>Marshall–Olkin distribution</em> with parameters <span class="math inline">\(\lambda_I, \ \emptyset \neq I \subseteq \{1, \ldots, d\}\)</span> if and only if it has the multivariate survival function <span class="math display">\[
   \bar{F} (\boldsymbol{t})
     = \exp \left\{ - \sum_{\emptyset \neq I \subseteq \{1, \ldots, d\}} \lambda_I \max_{i\in I} t_i \right\}, \ \boldsymbol{t} = (t_1, \ldots, t_d) \geq 0 ,
@@ -121,26 +117,26 @@
     \forall i \in \{1, \ldots, d\} .
 \]</span></p>
 </div>
-<div id="marginal-survival-functions" class="section level2">
-<h2 class="hasAnchor">
-<a href="#marginal-survival-functions" class="anchor"></a>Marginal survival functions</h2>
+<div class="section level2">
+<h2 id="marginal-survival-functions">Marginal survival functions<a class="anchor" aria-label="anchor" href="#marginal-survival-functions"></a>
+</h2>
 <p>The marginal random variables <span class="math inline">\(\tau_i\)</span> of a d-variate Marshall-Olkin distributed random vector are exponentially distributed with rates <span class="math inline">\(\eta_i, \ i \in \{1, \ldots, d\}\)</span>. In particular, this implies that <span class="math inline">\(\tau_i\)</span> has the survival function <span class="math display">\[
   \bar{F}_i (t)
     = \exp \left\{ - t \eta_i \right\}
     = \exp \left\{ - t \sum_{I \ni i} \lambda_I \right\} , \ i \in \{1, \ldots, d\}, \ t \geq 0 .
 \]</span></p>
 </div>
-<div id="survival-copula" class="section level2">
-<h2 class="hasAnchor">
-<a href="#survival-copula" class="anchor"></a>Survival copula</h2>
+<div class="section level2">
+<h2 id="survival-copula">Survival copula<a class="anchor" aria-label="anchor" href="#survival-copula"></a>
+</h2>
 <p>The survival copula <span class="math inline">\(\hat{C}\)</span> of a d-variate Marshall–Olkin distributed random vector is <span class="math display">\[
   \hat{C} (\boldsymbol{u})
     = \prod_{\emptyset\neq I \subseteq [d]} \min_{i \in I} u_i^{\frac{\lambda_I}{\eta_i}}, \quad \boldsymbol{u} \in [0, 1]^d .
 \]</span></p>
 </div>
-<div id="pickands-measure-and-function" class="section level2">
-<h2 class="hasAnchor">
-<a href="#pickands-measure-and-function" class="anchor"></a>Pickands measure and function</h2>
+<div class="section level2">
+<h2 id="pickands-measure-and-function">Pickands measure and function<a class="anchor" aria-label="anchor" href="#pickands-measure-and-function"></a>
+</h2>
 <p>The Marshall–Olkin distribution is <em>Min-stable multivariate exponential (MSMVE)</em> and has a survival copula of <em>extreme-value</em> kind. The <em>Pickands measure</em> <span class="math inline">\(\delta\)</span> of a d-variate Marshall–Olkin distributed random vector is <span class="math display">\[
   \delta \left( \frac{ \sum_{i\in I} \vec{e}_i \prod_{i \neq j \in I} \eta_j }{ \sum_{i\in I} \prod_{i \neq j \in I} \eta_j } \right)
     = \lambda_I \sum_{i\in I} \frac{1}{\eta_i}  ,
@@ -151,17 +147,17 @@
     = \sum_{\emptyset\neq I \subseteq [d]} \lambda_I \max_{i \in I} \frac{w_i}{\eta_i} .
 \]</span></p>
 </div>
-<div id="the-exogenous-shock-model" class="section level2">
-<h2 class="hasAnchor">
-<a href="#the-exogenous-shock-model" class="anchor"></a>The exogenous shock model</h2>
+<div class="section level2">
+<h2 id="the-exogenous-shock-model">The exogenous shock model<a class="anchor" aria-label="anchor" href="#the-exogenous-shock-model"></a>
+</h2>
 <p>A d-variate Marshall–Olkin distribution has a natural stochastic model: consider independent random variables <span class="math inline">\(E_I \sim \mathrm{Exp} (\lambda_I), \ \emptyset \neq I \subseteq \{1, \ldots, d\}\)</span> and define <span class="math display">\[
   \tau_i
     := \min \Big\{ E_I \ : \ I \ni i \Big\} , \ i \in \{ 1 , \ldots , d \} .
 \]</span></p>
 </div>
-<div id="the-arnold-model" class="section level2">
-<h2 class="hasAnchor">
-<a href="#the-arnold-model" class="anchor"></a>The Arnold model</h2>
+<div class="section level2">
+<h2 id="the-arnold-model">The Arnold model<a class="anchor" aria-label="anchor" href="#the-arnold-model"></a>
+</h2>
 <p>A d-variate Marshall–Olkin distribution has another stochastic model which is strongly linked to continuous time, homogeneous Markovian processes. For this, consider the transformed parameters <span class="math display">\[
   \lambda
     := \sum_{\emptyset \neq I \subseteq \{1, \ldots, d\}} \lambda_I
@@ -181,15 +177,15 @@
     := \sum_{j=1}^{\min \{ k \in \mathbb{N} : i \in Y_k\}} \epsilon_j , \quad i \in \{ 1, \ldots, d\} .
 \]</span></p>
 </div>
-<div id="references" class="section level2 unnumbered">
-<h2 class="hasAnchor">
-<a href="#references" class="anchor"></a>References</h2>
+<div class="section level2 unnumbered">
+<h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h2>
 <div id="refs" class="references">
 <div id="ref-Mai2010a">
-<p>Mai, Jan-Frederik, and Matthias Scherer. 2010. “The Pickands Representation of Survival Marshall–Olkin Copulas.” <em>Statistics &amp; Probability Letters</em> 80 (5): 357–60. <a href="https://doi.org/10.1016/j.spl.2009.11.010">https://doi.org/10.1016/j.spl.2009.11.010</a>.</p>
+<p>Mai, Jan-Frederik, and Matthias Scherer. 2010. “The Pickands Representation of Survival Marshall–Olkin Copulas.” <em>Statistics &amp; Probability Letters</em> 80 (5): 357–60. <a href="https://doi.org/10.1016/j.spl.2009.11.010" class="external-link">https://doi.org/10.1016/j.spl.2009.11.010</a>.</p>
 </div>
 <div id="ref-Mai2017a">
-<p>———. 2017. <em>Simulating Copulas</em>. 2nd ed. World Scientific. <a href="https://doi.org/10.1142/10265">https://doi.org/10.1142/10265</a>.</p>
+<p>———. 2017. <em>Simulating Copulas</em>. 2nd ed. World Scientific. <a href="https://doi.org/10.1142/10265" class="external-link">https://doi.org/10.1142/10265</a>.</p>
 </div>
 </div>
 </div>
@@ -206,11 +202,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Henrik Sloot.</p>
+  <p></p>
+<p>Developed by Henrik Sloot.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer>
@@ -218,6 +216,8 @@
 
   
 
+
+  
 
   </body>
 </html>

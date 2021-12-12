@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,18 +33,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rmo</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -79,7 +75,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/hsloot/rmo/">
+  <a href="https://github.com/hsloot/rmo/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -100,7 +96,7 @@
       <h1 data-toc-skip>The Lévy frailty model</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/hsloot/rmo/blob/master/vignettes/The-Levy-frailty-model.Rmd"><code>vignettes/The-Levy-frailty-model.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/hsloot/rmo/blob/HEAD/vignettes/The-Levy-frailty-model.Rmd" class="external-link"><code>vignettes/The-Levy-frailty-model.Rmd</code></a></small>
       <div class="hidden name"><code>The-Levy-frailty-model.Rmd</code></div>
 
     </div>
@@ -109,17 +105,17 @@
     
 <p>A subclass of exchangeable Marshall–Olkin distributions can be sampled with a so-called <em>Lévy frailty model</em>. This alternative stochastic model is very efficient in high dimensions.</p>
 <p>For a detailed mathematical treatment of this class, we refer to the references at the end of this document.</p>
-<div id="the-extendible-subclass" class="section level2">
-<h2 class="hasAnchor">
-<a href="#the-extendible-subclass" class="anchor"></a>The extendible subclass</h2>
+<div class="section level2">
+<h2 id="the-extendible-subclass">The extendible subclass<a class="anchor" aria-label="anchor" href="#the-extendible-subclass"></a>
+</h2>
 <p>An exchangeable Marshall–Olkin distribution with parameters <span class="math inline">\(a_0, \ldots, a_{d-1}\)</span> is called extendible if there exists a sequence <span class="math inline">\(\tau_1, \tau_2, \ldots\)</span> such that each finite margin has a Marshall–Olkin distribution and <span class="math display">\[
   \mathbb{P}{\left( \tau_1 &gt; t_1 , \ldots \tau_d &gt; t_d \right)}
     = \exp{\left \{ - \sum_{i = 0}^{d-1} a_i t_{[i+1]} \right \}}, \quad \boldsymbol{t} \geq 0 .
 \]</span></p>
 </div>
-<div id="the-lévy-frailty-representation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#the-l%C3%A9vy-frailty-representation" class="anchor"></a>The Lévy frailty representation</h2>
+<div class="section level2">
+<h2 id="the-lévy-frailty-representation">The Lévy frailty representation<a class="anchor" aria-label="anchor" href="#the-l%C3%A9vy-frailty-representation"></a>
+</h2>
 <p>Each extendible Marshall–Olkin distribution can be uniquely linked (in law) to a Lévy subordinator <span class="math inline">\(\Lambda\)</span> and a iid unit exponential random variables <span class="math inline">\(E_1, \ldots , E_d\)</span> such that <span class="math inline">\(\boldsymbol{\tau}\)</span> has this distribution with <span class="math display">\[
   \tau_i
     = \inf{\left \{ t &gt; 0 \ : \ \Lambda_t \geq E_i \right \}}, \quad i \in \{ 1, \ldots, d\} .
@@ -129,17 +125,17 @@
     = \psi (i+1) - \psi(i) , \quad i \in \{ 1, \ldots, d\} .
 \]</span></p>
 </div>
-<div id="homogeneous-poisson-process" class="section level2">
-<h2 class="hasAnchor">
-<a href="#homogeneous-poisson-process" class="anchor"></a>Homogeneous Poisson process</h2>
+<div class="section level2">
+<h2 id="homogeneous-poisson-process">Homogeneous Poisson process<a class="anchor" aria-label="anchor" href="#homogeneous-poisson-process"></a>
+</h2>
 <p>A simple example is the case, when <span class="math inline">\(\Lambda\)</span> is a homogenous Poisson process with rate <span class="math inline">\(\lambda &gt; 0\)</span>. In this case <span class="math display">\[
   \psi (x)
     = \lambda {\left( 1 - \exp{\{ -x\}} \right)} , \quad x \geq 0 .
 \]</span></p>
 </div>
-<div id="exponential-killing-and-drift" class="section level2">
-<h2 class="hasAnchor">
-<a href="#exponential-killing-and-drift" class="anchor"></a>Exponential killing and drift</h2>
+<div class="section level2">
+<h2 id="exponential-killing-and-drift">Exponential killing and drift<a class="anchor" aria-label="anchor" href="#exponential-killing-and-drift"></a>
+</h2>
 <p>Another simple example is the case, when the subordinator has a deterministic drift <span class="math inline">\(b \geq 0\)</span> and is killed (send to infinity) at a certain rate <span class="math inline">\(a \geq 0\)</span>. That means <span class="math display">\[
   \Lambda_t
     = N_t^G \cdot \infty + b t , \quad t \geq 0 ,
@@ -151,9 +147,9 @@
 \]</span></p>
 <p>This model produces a <a href="Armageddon-ESM-distribution.html">multivariate armageddon shock model distribution</a>.</p>
 </div>
-<div id="compound-poisson-process" class="section level2">
-<h2 class="hasAnchor">
-<a href="#compound-poisson-process" class="anchor"></a>Compound Poisson process</h2>
+<div class="section level2">
+<h2 id="compound-poisson-process">Compound Poisson process<a class="anchor" aria-label="anchor" href="#compound-poisson-process"></a>
+</h2>
 <p>The class of compound Poisson subordinators is the largest class of Lévy subordinators which can be used to sample <em>exactly</em> from a Marshall–Olkin distribution. Here, the Lévy subordinator has the form <span class="math display">\[
   \Lambda_t
     = N_t^G \cdot \infty
@@ -167,12 +163,12 @@
       + \lambda \left( 1 - \mathcal{L} (X_1; x) \right), \quad x \geq 0 ,
 \]</span> where <span class="math inline">\(x \mapsto \mathcal{L} (X_1, x)\)</span> is the Laplace transform of <span class="math inline">\(X_1\)</span>.</p>
 </div>
-<div id="references" class="section level2 unnumbered">
-<h2 class="hasAnchor">
-<a href="#references" class="anchor"></a>References</h2>
+<div class="section level2 unnumbered">
+<h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h2>
 <div id="refs" class="references">
 <div id="ref-Mai2017a">
-<p>Mai, Jan-Frederik, and Matthias Scherer. 2017. <em>Simulating Copulas</em>. 2nd ed. World Scientific. <a href="https://doi.org/10.1142/10265">https://doi.org/10.1142/10265</a>.</p>
+<p>Mai, Jan-Frederik, and Matthias Scherer. 2017. <em>Simulating Copulas</em>. 2nd ed. World Scientific. <a href="https://doi.org/10.1142/10265" class="external-link">https://doi.org/10.1142/10265</a>.</p>
 </div>
 </div>
 </div>
@@ -189,11 +185,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Henrik Sloot.</p>
+  <p></p>
+<p>Developed by Henrik Sloot.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer>
@@ -201,6 +199,8 @@
 
   
 
+
+  
 
   </body>
 </html>

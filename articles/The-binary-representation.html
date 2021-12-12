@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,18 +33,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rmo</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -79,7 +75,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/hsloot/rmo/">
+  <a href="https://github.com/hsloot/rmo/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -100,7 +96,7 @@
       <h1 data-toc-skip>The binary representation of the MO parameter</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/hsloot/rmo/blob/master/vignettes/The-binary-representation.Rmd"><code>vignettes/The-binary-representation.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/hsloot/rmo/blob/HEAD/vignettes/The-binary-representation.Rmd" class="external-link"><code>vignettes/The-binary-representation.Rmd</code></a></small>
       <div class="hidden name"><code>The-binary-representation.Rmd</code></div>
 
     </div>
@@ -108,9 +104,9 @@
     
     
 <p>The <a href="The-Marshall-Olkin-distribution.html">Marshall–Olkin distribution</a> is a multivariate distribution which is for dimension <span class="math inline">\(d\)</span> parametrised by <span class="math inline">\(2^d-1\)</span> non-negative parameters for each non-empty subset <span class="math inline">\(\emptyset \neq I \subseteq {\{ 1 , \ldots, d\}}\)</span>. To represent such a distribution in a computer program, we need an efficient way to represent all <span class="math inline">\(2^d-1\)</span> parameters. The current best-practice, see <span class="citation">(Mai and Scherer 2017, 109)</span>, is to identify all <span class="math inline">\(2^d-1\)</span> non-empty subsets with a natural number in <span class="math inline">\(1, \ldots , 2^d-1\)</span> via a binary representation.</p>
-<div id="the-binary-representation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#the-binary-representation" class="anchor"></a>The binary representation</h2>
+<div class="section level2">
+<h2 id="the-binary-representation">The binary representation<a class="anchor" aria-label="anchor" href="#the-binary-representation"></a>
+</h2>
 <p>Each natural (non-zero) number <span class="math inline">\(j\)</span> can be represented by a 0-1-sequence <span class="math inline">\(c = {\{ c_k \}}_{k \in \mathbb{N}} \in {\{ 0, 1 \}}^\mathbb{N}\)</span> with <span class="math display">\[
   j
     = \sum_{k=0}^\infty c_k 2^k ,
@@ -129,9 +125,9 @@
     = 1 + \sum_{k=1}^\infty \tilde{c}_{k-1} 2^{k}
 \]</span> and we can choose <span class="math inline">\(c_0 = 1\)</span> and <span class="math inline">\(c_k = \tilde{c}_{k-1},\ k &gt; 0\)</span>. Since each summand with a positive <span class="math inline">\(c_k\)</span> contributes an amount bigger or equal to <span class="math inline">\(1\)</span> to the sum, it is clear that all but finitely many <span class="math inline">\(c_k\)</span> must be equal to zero.</p>
 </div>
-<div id="uniqueness-of-the-binary-representation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#uniqueness-of-the-binary-representation" class="anchor"></a>Uniqueness of the binary representation</h2>
+<div class="section level2">
+<h2 id="uniqueness-of-the-binary-representation">Uniqueness of the binary representation<a class="anchor" aria-label="anchor" href="#uniqueness-of-the-binary-representation"></a>
+</h2>
 <p>It can be proven by induction that the binary representation is unique. To see this, consider two sequences <span class="math inline">\(\hat{c} = {\{ \hat{c}_k \}}_{k\in\mathbb{N}} , c = {\{ c_k \}}_{k \in \mathbb{N}} \in {\{ 0 , 1 \}}^\mathbb{N}\)</span> with <span class="math display">\[
   \sum_{k=0}^\infty c_k 2^k
     = \sum_{k=0}^\infty \hat{c}_k 2^k .
@@ -140,9 +136,9 @@
     = \sum_{k=0}^\infty \hat{c}_{k+1} 2^k .
 \]</span> With the induction assumption, we get the claim.</p>
 </div>
-<div id="integer-division" class="section level2">
-<h2 class="hasAnchor">
-<a href="#integer-division" class="anchor"></a>Integer division</h2>
+<div class="section level2">
+<h2 id="integer-division">Integer division<a class="anchor" aria-label="anchor" href="#integer-division"></a>
+</h2>
 <p>Integer division is defined as follows <span class="math display">\[
   / : \mathbb{N}_0^2 \to \mathbb{N}_0, {(k, n)} \mapsto \sup{\{ j \in \mathbb{N}_0 \ :\ j\cdot k \leq n  \}} .
 \]</span> For <span class="math inline">\(n = 2\)</span> an equivalent definition is <span class="math display">\[
@@ -167,9 +163,9 @@
   c_n = (j / 2^n)\ \mathrm{mod}\ 2 .
 \]</span></p>
 </div>
-<div id="iterating-through-binary-representations" class="section level2">
-<h2 class="hasAnchor">
-<a href="#iterating-through-binary-representations" class="anchor"></a>Iterating through binary representations</h2>
+<div class="section level2">
+<h2 id="iterating-through-binary-representations">Iterating through binary representations<a class="anchor" aria-label="anchor" href="#iterating-through-binary-representations"></a>
+</h2>
 <p>A natural question is, if we can easily determine the binary representation of <span class="math inline">\(j+1\)</span> directly from the binary representation of <span class="math inline">\(j\)</span>.</p>
 <p>Consider a natural number with its binary representation <span class="math display">\[
   j = \sum_{k=0}^\infty c_k 2^k
@@ -192,21 +188,21 @@
     = \sum_{k=0}^\infty \tilde{c}_k 2^k .
 \]</span></p>
 </div>
-<div id="the-mo-parameter-mapping" class="section level2">
-<h2 class="hasAnchor">
-<a href="#the-mo-parameter-mapping" class="anchor"></a>The MO parameter mapping</h2>
+<div class="section level2">
+<h2 id="the-mo-parameter-mapping">The MO parameter mapping<a class="anchor" aria-label="anchor" href="#the-mo-parameter-mapping"></a>
+</h2>
 <p>We choose the following bijections to store all Marshall-Olkin parameters in a vector of length <span class="math inline">\(2^d-1\)</span>: <span class="math display">\[
   T : \mathcal{P}{(\{ 1 , \ldots, d\} \backslash {\{ 0 \}})} \to \{ 1 , \ldots, 2^d-1 \},\ I \mapsto \sum_{i=1}^{d} 1_{\{ i \in I \}} 2^{(i-1)} .
 \]</span> <span class="math display">\[
   T^{-1} : \{ 1 , \ldots, 2^d-1 \} \to \mathcal{P}{(\{ 1 , \ldots, d\} \backslash {\{ 0 \}})},\ j \mapsto {\{ i \ :\ (j / 2^{(i-1)}) \ \mathrm{mod}\ 2 = 1 \}} .
 \]</span></p>
 </div>
-<div id="references" class="section level2 unnumbered">
-<h2 class="hasAnchor">
-<a href="#references" class="anchor"></a>References</h2>
+<div class="section level2 unnumbered">
+<h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h2>
 <div id="refs" class="references">
 <div id="ref-Mai2017a">
-<p>Mai, Jan-Frederik, and Matthias Scherer. 2017. <em>Simulating Copulas</em>. 2nd ed. World Scientific. <a href="https://doi.org/10.1142/10265">https://doi.org/10.1142/10265</a>.</p>
+<p>Mai, Jan-Frederik, and Matthias Scherer. 2017. <em>Simulating Copulas</em>. 2nd ed. World Scientific. <a href="https://doi.org/10.1142/10265" class="external-link">https://doi.org/10.1142/10265</a>.</p>
 </div>
 </div>
 </div>
@@ -223,11 +219,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Henrik Sloot.</p>
+  <p></p>
+<p>Developed by Henrik Sloot.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer>
@@ -235,6 +233,8 @@
 
   
 
+
+  
 
   </body>
 </html>

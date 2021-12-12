@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,18 +33,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rmo</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -79,7 +75,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/hsloot/rmo/">
+  <a href="https://github.com/hsloot/rmo/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -100,7 +96,7 @@
       <h1 data-toc-skip>Exchangeable Marshall–Olkin distributions</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/hsloot/rmo/blob/master/vignettes/Exchangeable-Marshall-Olkin-distributions.Rmd"><code>vignettes/Exchangeable-Marshall-Olkin-distributions.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/hsloot/rmo/blob/HEAD/vignettes/Exchangeable-Marshall-Olkin-distributions.Rmd" class="external-link"><code>vignettes/Exchangeable-Marshall-Olkin-distributions.Rmd</code></a></small>
       <div class="hidden name"><code>Exchangeable-Marshall-Olkin-distributions.Rmd</code></div>
 
     </div>
@@ -109,14 +105,14 @@
     
 <p>The exchangeable subclass of Marshall–Olkin distribution deserves special consideration. Almost all specific examples of Marshall–Olkin distributions are exchangeable – or are based on <a href="Mixing-Marshall-Olkin-distributions.html">mixtures of exchangeable Marshall–Olkin distributions</a>.</p>
 <p>For a detailed mathematical treatment of this class, we refer to the references at the end of this document.</p>
-<div id="exchangeability" class="section level2">
-<h2 class="hasAnchor">
-<a href="#exchangeability" class="anchor"></a>Exchangeability</h2>
+<div class="section level2">
+<h2 id="exchangeability">Exchangeability<a class="anchor" aria-label="anchor" href="#exchangeability"></a>
+</h2>
 <p>A random vector is called <em>exchangeable</em> if a reordering of the components does not change its law. An equivalent definition is that the survival function, distribution function, or density (if it exists) does not change if the arguments are permutated.</p>
 </div>
-<div id="condition" class="section level2">
-<h2 class="hasAnchor">
-<a href="#condition" class="anchor"></a>Condition</h2>
+<div class="section level2">
+<h2 id="condition">Condition<a class="anchor" aria-label="anchor" href="#condition"></a>
+</h2>
 <p>A Marshall–Olkin distribution is exchangeable if and only if <span class="math display">\[
   \lvert I\rvert = \lvert J\rvert
   \quad\Rightarrow\quad
@@ -125,9 +121,9 @@
 \]</span></p>
 <p>For this reason, we use the notation <span class="math inline">\(\lambda_i := \lambda_{I}\)</span>, if <span class="math inline">\(i = \lvert I \rvert\)</span>.</p>
 </div>
-<div id="reparametrisation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#reparametrisation" class="anchor"></a>Reparametrisation</h2>
+<div class="section level2">
+<h2 id="reparametrisation">Reparametrisation<a class="anchor" aria-label="anchor" href="#reparametrisation"></a>
+</h2>
 <p>For <span class="math inline">\(\boldsymbol{t} \geq 0\)</span> with descendingly ordered version <span class="math inline">\(t_{[1]} \geq \cdots \geq t_{[d]}\)</span> the <a href="The-Marshall-Olkin-distribution.html#definition-and-survival-copula">survival function</a> can be rewritten as <span class="math display">\[
   \bar{F} (\boldsymbol{t})
     = \exp{\left \{ - \sum_{i=0}^{d-1} a_i \cdot t_{[i+1]} \right \}} , \quad \boldsymbol{t} \geq 0 .
@@ -142,17 +138,17 @@
 \]</span></p>
 <p>A sequences of non-negative parameters <span class="math inline">\(a_0 , a_1, \ldots, a_{d-1}\)</span> defines a proper Marshall–Olkin distribution if and only if the formula above yields a non-negative sequence <span class="math inline">\(\lambda_1, \ldots, \lambda_d\)</span>.</p>
 </div>
-<div id="survival-copula" class="section level2">
-<h2 class="hasAnchor">
-<a href="#survival-copula" class="anchor"></a>Survival copula</h2>
+<div class="section level2">
+<h2 id="survival-copula">Survival copula<a class="anchor" aria-label="anchor" href="#survival-copula"></a>
+</h2>
 <p>For the exchangeable Marshall–Olkin distribution, the survival copula takes the form <span class="math display">\[
   \hat{C} (\boldsymbol{u})
     = u_{(1)} \cdot u_{(2)}^{a_1/a_0} \cdot \ldots \cdot u_{(d)}^{a_{d-1}/a_0} , \quad \boldsymbol{u} \in {[0, 1]}^d
 \]</span> where <span class="math inline">\(u_{(1)} \leq \cdots \leq u_{(d)}\)</span> is the ascendingly ordered version of <span class="math inline">\(\boldsymbol{u}\)</span>.</p>
 </div>
-<div id="fast-simulation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#fast-simulation" class="anchor"></a>Fast simulation</h2>
+<div class="section level2">
+<h2 id="fast-simulation">Fast simulation<a class="anchor" aria-label="anchor" href="#fast-simulation"></a>
+</h2>
 <p>The large number of parameters and the inefficiency of the <a href="The-Marshall-Olkin-distribution.html#the-exogenous-shock-model">exogenous shock model</a> become a problem in higher dimensions.</p>
 <p>For the exchangeable subclass, the <a href="The-Marshall-Olkin-distribution.html#the-arnold-model">Arnold model</a> can be modified by sampling the ordered version <span class="math inline">\(\tau_{(1)} \leq \cdots \leq \tau_{(d)}\)</span> and apply a random shuffling.</p>
 <p>The first shock has an exponential distribution with rate <span class="math display">\[
@@ -174,15 +170,15 @@
     = \tau_{\Pi (i)} , \quad i = 1, \ldots, d .
 \]</span></p>
 </div>
-<div id="references" class="section level2 unnumbered">
-<h2 class="hasAnchor">
-<a href="#references" class="anchor"></a>References</h2>
+<div class="section level2 unnumbered">
+<h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h2>
 <div id="refs" class="references">
 <div id="ref-Mai2011a">
-<p>Mai, Jan-Frederik, and Matthias Scherer. 2011. “Reparameterizing Marshall–Olkin Copulas with Applications to Sampling.” <em>Journal of Statistical Computation and Simulation</em> 81 (1): 59–78. <a href="https://doi.org/10.1080/00949650903185961">https://doi.org/10.1080/00949650903185961</a>.</p>
+<p>Mai, Jan-Frederik, and Matthias Scherer. 2011. “Reparameterizing Marshall–Olkin Copulas with Applications to Sampling.” <em>Journal of Statistical Computation and Simulation</em> 81 (1): 59–78. <a href="https://doi.org/10.1080/00949650903185961" class="external-link">https://doi.org/10.1080/00949650903185961</a>.</p>
 </div>
 <div id="ref-Mai2017a">
-<p>———. 2017. <em>Simulating Copulas</em>. 2nd ed. World Scientific. <a href="https://doi.org/10.1142/10265">https://doi.org/10.1142/10265</a>.</p>
+<p>———. 2017. <em>Simulating Copulas</em>. 2nd ed. World Scientific. <a href="https://doi.org/10.1142/10265" class="external-link">https://doi.org/10.1142/10265</a>.</p>
 </div>
 </div>
 </div>
@@ -199,11 +195,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Henrik Sloot.</p>
+  <p></p>
+<p>Developed by Henrik Sloot.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer>
@@ -211,6 +209,8 @@
 
   
 
+
+  
 
   </body>
 </html>
