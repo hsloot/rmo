@@ -7,7 +7,8 @@
 #' @param d an integer for the *dimension*.
 #' @param intensities a numeric vector for the *shock arrival intensities*.
 #' @param method a string indicating which sampling algorithm should be used.
-#'   Use "AM" for the *Arnold model* and "ESM" for the *exogenous shock model*.
+#'   Use "AM" for the *Arnold model* and "ESM" for the *exogenous shock model*. We recommend using
+#'   the *ESM* only for small dimensions; the *AM* can be used up until dimension \eqn{30}.
 #'
 #' @return `rmo` returns a numeric matrix with \eqn{n} rows and \eqn{d} columns with the rows
 #'   corresponding to iid distributed samples of a \eqn{d}-variate *Marshall–Olkin distribution*
@@ -92,8 +93,9 @@ rmo <- function(n, d, intensities, method = c("AM", "ESM")) {
 #' @inheritParams rmo
 #' @param ex_intensities a numeric vector with the exchangeable *shock-size arrival intensities*.
 #' @param method a string indicating which sampling algorithm should be used.
-#'   Use "MDCM" for the *Markovian death-counting model*, "AM" for the *Arnold model*,
-#'   and "ESM" for the *exogenous shock model*.
+#'   Use "MDCM" for the *Markovian death-counting model*, "AM" for the *Arnold model*, and "ESM" for
+#'   the *exogenous shock model*. We recommend using the *ESM* only for small dimensions; the *AM*
+#'   can be used up until dimension \eqn{30}.
 #'
 #' @return `rexmo` returns a numeric matrix with \eqn{n} rows and \eqn{d} columns with the rows
 #' corresponding to iid distributed samples of a \eqn{d}-variate *exchangeable Marshall–Olkin
@@ -235,6 +237,8 @@ rextmo <- function(n, d, bf, method = c("MDCM", "AM", "ESM")) {
 #'   Use "MDCM" for the *Markovian death-set model*, "LFM" for the *Lévy-frailty model*,  "AM" for
 #'   the *Arnold model*, and "ESM" for the *exogenous shock model* (in case of the *Armageddon
 #'   family*, the algorithm is optimized to consider only finite shocks).
+#'   We recommend using the *ESM* only for small dimensions; the *AM* can be used up until dimension
+#'   \eqn{30}.
 #'
 #' @return `rpextmo` returns a numeric matrix with \eqn{n} rows and \eqn{d} columns with the rows
 #' corresponding to iid distributed samples of a \eqn{d}-variate *parametrized extendible

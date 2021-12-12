@@ -15,8 +15,9 @@ rextmo(n, d, bf, method = c("MDCM", "AM", "ESM"))
 Marshall–Olkin distribution}.}
 
 \item{method}{a string indicating which sampling algorithm should be used.
-Use "MDCM" for the \emph{Markovian death-counting model}, "AM" for the \emph{Arnold model},
-and "ESM" for the \emph{exogenous shock model}.}
+Use "MDCM" for the \emph{Markovian death-counting model}, "AM" for the \emph{Arnold model}, and "ESM" for
+the \emph{exogenous shock model}. We recommend using the \emph{ESM} only for small dimensions; the \emph{AM}
+can be used up until dimension \eqn{30}.}
 }
 \value{
 \code{rextmo} returns a numeric matrix with \eqn{n} rows and \eqn{d} columns with the rows

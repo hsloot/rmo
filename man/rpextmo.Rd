@@ -38,7 +38,9 @@ the \emph{Gamma family}.}
 \item{method}{a string indicating which sampling algorithm should be used.
 Use "MDCM" for the \emph{Markovian death-set model}, "LFM" for the \emph{Lévy-frailty model},  "AM" for
 the \emph{Arnold model}, and "ESM" for the \emph{exogenous shock model} (in case of the \emph{Armageddon
-family}, the algorithm is optimized to consider only finite shocks).}
+family}, the algorithm is optimized to consider only finite shocks).
+We recommend using the \emph{ESM} only for small dimensions; the \emph{AM} can be used up until dimension
+\eqn{30}.}
 }
 \value{
 \code{rpextmo} returns a numeric matrix with \eqn{n} rows and \eqn{d} columns with the rows
