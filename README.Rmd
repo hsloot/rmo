@@ -50,9 +50,9 @@ devtools::install_github("hsloot/rmo")
 ## Example
 
 ```{r, include=TRUE}
-rexmo_mdcm(
-  n=10L, d=2L,
-  ex_intensities_alpha_stable(d=2L, alpha=log2(2 - 0.5)))
+rexmo(
+  n = 10, d = 2,
+  ex_intensities_alpha_stable(d = 2, alpha = log2(2 - 0.5)))
 ```
 
 ### Approximate an Alpha-Stable BF
@@ -117,8 +117,8 @@ As of now, we have completed the reimplementation of all sampling algorithms in 
 Other ideas for the future:
 
 - Implementation of estimation routines (__help wanted__).
-- An *OOP* implementation of the Marshall--Olkin distribution with the ultimate
-  goal to facilitate a hierarchical construction of Marshall--Olkin
+- An *OOP* implementation of the Marshall–Olkin distribution with the ultimate
+  goal to facilitate a hierarchical construction of Marshall–Olkin
   distributions.
 
 ## Contributing

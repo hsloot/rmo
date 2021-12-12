@@ -7,13 +7,13 @@
 
 ![minimal R
 version](https://img.shields.io/badge/R%3E%3D-3.3.0-6666ff.svg)
-![packageversion](https://img.shields.io/badge/Package%20version-0.7-orange.svg?style=flat-square)
+![packageversion](https://img.shields.io/badge/Package%20version-0.7.2-orange.svg?style=flat-square)
 [![Project Status: WIP – Initial development is in progress, but there
 has not yet been a stable, usable release suitable for the
 public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
-[![Last-changedate](https://img.shields.io/badge/last%20change-2021--11--28-yellowgreen.svg)](/commits/master)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2021--12--12-yellowgreen.svg)](/commits/master)
 [![R build
 status](https://github.com/hsloot/rmo/workflows/R-CMD-check/badge.svg)](https://github.com/hsloot/rmo/actions)
 [![Codecov test
@@ -44,9 +44,9 @@ devtools::install_github("hsloot/rmo")
 ## Example
 
 ``` r
-rexmo_markovian(
-  n=10L, d=2L,
-  ex_intensities_alpha_stable(d=2L, alpha=log2(2 - 0.5)))
+rexmo(
+  n = 10, d = 2,
+  ex_intensities_alpha_stable(d = 2, alpha = log2(2 - 0.5)))
 #>             [,1]       [,2]
 #>  [1,] 1.82255349 2.04294988
 #>  [2,] 0.82987456 1.53257997

@@ -2,54 +2,57 @@
 % Please edit documentation in R/sample.R
 \name{rextmo}
 \alias{rextmo}
-\title{Sample from an extendible Marshall--Olkin distribution}
+\title{Sample from an extendible Marshall–Olkin distribution}
 \usage{
 rextmo(n, d, bf, method = c("MDCM", "AM", "ESM"))
 }
 \arguments{
-\item{n}{an integer for the number of samples.}
+\item{n}{an integer for the \emph{number of samples}.}
 
-\item{d}{an integer for the dimension of the sample.}
+\item{d}{an integer for the \emph{dimension}.}
 
-\item{bf}{a \linkS4class{BernsteinFunction}  with the Bernstein function of the extendible
-Marshall--Olkin distribution.}
+\item{bf}{a \linkS4class{BernsteinFunction}  with the \emph{Bernstein function} of the \emph{extendible
+Marshall–Olkin distribution}.}
 
-\item{method}{a character indicating which sampling algorithm should be used.
+\item{method}{a string indicating which sampling algorithm should be used.
 Use "MDCM" for the \emph{Markovian death-counting model}, "AM" for the \emph{Arnold model},
 and "ESM" for the \emph{exogenous shock model}.}
 }
 \value{
-\code{rextmo} is a wrapper arround \code{\link[=rexmo]{rexmo()}} for extendible Marshall--Olkin distributions and returns
-an  \eqn{n \times d}{n x d} numeric matrix with the rows corresponding to independent and
-identically distributed samples of a \eqn{d} variate extendible Marshall-Olkin distribution
-with Bernstein function \code{bf}.
+\code{rextmo} returns a numeric matrix with \eqn{n} rows and \eqn{d} columns with the rows
+corresponding to iid distributed samples of a \eqn{d}-variate \emph{extendible Marshall–Olkin
+distribution} with \emph{Bernstein function} \code{bf}.
 }
 \description{
-Draws \code{n} independent samples from a \code{d}-variate extendible Marshall--Olkin distribution with
-Bernstein function \code{bf} using a wrapper of \code{\link[=rexmo]{rexmo()}}.
+Draws \eqn{n} iid samples from a \eqn{d}-variate \emph{extendible Marshall–Olkin distribution} with
+Bernstein function \code{bf} by wrapping of \code{\link[=rexmo]{rexmo()}}.
 }
-\details{
-\strong{Parametrization}:
-Extendible Marshall--Olkin distributions are parametrized by Bernstein functions \eqn{\psi} such that the
-exchangeable shock-size arrival intensities are
+\section{Parametrization}{
+\emph{Extendible Marshall–Olkin distributions} are parametrized by \emph{Bernstein functions} \eqn{\psi},
+see \insertCite{@see Sec. 3.3 @Mai2017a}{rmo}.
+The \emph{exchangeable shock-size arrival intensities} are defined by
 \deqn{
   \eta_{i}
      = \binom{d}{i} {(-1)}^{i-1} \Delta{ \psi{(d-i)} } , \quad i \in {[d]} .
 }
 }
+
 \examples{
-rextmo(10, 2, AlphaStableBernsteinFunction(alpha = log2(2  - 0.5)))
-rextmo(10, 2, LinearBernsteinFunction(scale = 1))                    # independence
-rextmo(10, 2, ConstantBernsteinFunction(constant = 1))               # comonotone
+rextmo(10, 3, AlphaStableBernsteinFunction(alpha = log2(2  - 0.5)))
+rextmo(10, 3, LinearBernsteinFunction(scale = 1))                    # independence
+rextmo(10, 3, ConstantBernsteinFunction(constant = 1))               # comonotone
 
-rextmo(10, 2, AlphaStableBernsteinFunction(alpha = log2(2  - 0.5)), method = "AM")
-rextmo(10, 2, LinearBernsteinFunction(scale = 1), method = "AM")                    # independence
-rextmo(10, 2, ConstantBernsteinFunction(constant = 1), method = "AM")               # comonotone
+rextmo(10, 3, AlphaStableBernsteinFunction(alpha = log2(2  - 0.5)), method = "AM")
+rextmo(10, 3, LinearBernsteinFunction(scale = 1), method = "AM")                   # independence
+rextmo(10, 3, ConstantBernsteinFunction(constant = 1), method = "AM")              # comonotone
 
-rextmo(10, 2, AlphaStableBernsteinFunction(alpha = log2(2  - 0.5)), method = "ESM")
-rextmo(10, 2, LinearBernsteinFunction(scale = 1), method = "ESM")                    # independence
-rextmo(10, 2, ConstantBernsteinFunction(constant = 1), method = "ESM")               # comonotone
+rextmo(10, 3, AlphaStableBernsteinFunction(alpha = log2(2  - 0.5)), method = "ESM")
+rextmo(10, 3, LinearBernsteinFunction(scale = 1), method = "ESM")                  # independence
+rextmo(10, 3, ConstantBernsteinFunction(constant = 1), method = "ESM")             # comonotone
 
+}
+\references{
+\insertAllCited{}
 }
 \seealso{
 Other sampling-algorithms: 

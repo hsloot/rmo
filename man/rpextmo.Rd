@@ -2,7 +2,7 @@
 % Please edit documentation in R/sample.R
 \name{rpextmo}
 \alias{rpextmo}
-\title{Sample from an parametrized ext. MO distribution}
+\title{Sample from parametrized ext. MO distributions}
 \usage{
 rpextmo(
   n,
@@ -17,64 +17,61 @@ rpextmo(
 )
 }
 \arguments{
-\item{n}{an integer for the number of samples.}
+\item{n}{an integer for the \emph{number of samples}.}
 
-\item{d}{an integer for the dimension of the sample.}
+\item{d}{an integer for the \emph{dimension}.}
 
-\item{a}{a non-negative double for the killing-rate parameter \eqn{a} of the Bernstein function
-(default \code{a = 0}).}
+\item{a}{a non-negative double for the \emph{killing-rate} \eqn{a} of the \emph{Bernstein function}.}
 
-\item{b}{a non-negative double for the drift parameter \eqn{b} of the Bernstein function (default
-\code{b = 0}).}
+\item{b}{a non-negative double for the \emph{drift} \eqn{b} of the \emph{Bernstein function}.}
 
-\item{gamma}{a position double for the scaling of the integral part of the Bernstein function
-(default \code{gamma = 1}).}
+\item{gamma}{a position double for the scaling of the integral part of the \emph{Bernstein function}.}
 
-\item{eta}{a numeric vector for the family's parameters.}
+\item{eta}{a numeric vector for the family's parameter.}
 
 \item{family}{a string indicating the parametrized family.
 Use "Armageddon" for the \emph{Armageddon} family, "Poisson" for the \emph{Poisson family}, "Pareto" for
 the \emph{Pareto family}, "Exponential" for the \emph{Exponential family}, "AlphaStable" for the
-\emph{\eqn{\alpha}-stable fmaily}, "InverseGaussian" for the \emph{Inverse-Gaussian family}, "Gamma" for
+\emph{\eqn{\alpha}-stable family}, "InverseGaussian" for the \emph{Inverse-Gaussian family}, "Gamma" for
 the \emph{Gamma family}.}
 
 \item{method}{a string indicating which sampling algorithm should be used.
-Use "ESM" for the \emph{exogenous shock model}, considering only finite shocks,
-"MDCM" for the \emph{Markovian death-set model}, "LFM" for the \emph{Lévy-frailty model},
-and "AM" for the \emph{Arnold model}.}
+Use "MDCM" for the \emph{Markovian death-set model}, "LFM" for the \emph{Lévy-frailty model},  "AM" for
+the \emph{Arnold model}, and "ESM" for the \emph{exogenous shock model} (in case of the \emph{Armageddon
+family}, the algorithm is optimized to consider only finite shocks).}
 }
 \value{
-\code{rpextmo} implements, or wraps around, various sampling algorithms for parametrized ext.
-MO families and returns an \eqn{n \times d}{n x d} array matrix with rows corresponding to the
-iid samples of a \eqn{d} variate parametrized ext. MO distribution with parameters \eqn{a},
-\eqn{b}, and \eqn{\eta}.
+\code{rpextmo} returns a numeric matrix with \eqn{n} rows and \eqn{d} columns with the rows
+corresponding to iid distributed samples of a \eqn{d}-variate \emph{parametrized extendible
+Marshall–Olkin distribution} with corresponding parameters.
 }
 \description{
-Draws \code{n} independent samples from a \code{d} variate paramatrized ext. MO distribution
-with parameter vector \code{eta}.
+Draws \eqn{n} iid samples from a \eqn{d}-variate \emph{paramatrized ext. MO distribution}.
 }
-\details{
-\strong{Parameterisation}:
-A parametrized ext. MO distribution is a family of ext. MO distribution corresponding to
-Bernstein functions of the form
+\section{Parametrization}{
+A \emph{parametrized ext. MO distribution} is a family of \emph{ext. MO distributions} corresponding to
+\emph{Bernstein functions} of the form
 \deqn{
   \psi{(x)}
-     = 1_{\{ x > 0 \}} a + b x + \gamma \cdot \int_{0}^{\infty}{ {[1 - e^{-ux}]} \nu{(\mathrm{d}u)} },
+     = 1_{\{ x > 0 \}} a + b x + \gamma \cdot
+     \int_{0}^{\infty}{ {[1 - e^{-ux}]} \nu{(\mathrm{d}u)} },
      \quad x \geq 0 ,
 }
 or
 \deqn{
  \psi{(x)}
-   = 1_{\{ x > 0 \}} a + b x + \gamma \cdot \int_{0}^{\infty}{ \frac{x}{x + u} \sigma{(\mathrm{d}u)} },
+   = 1_{\{ x > 0 \}} a + b x + \gamma \cdot
+     \int_{0}^{\infty}{ \frac{x}{x + u} \sigma{(\mathrm{d}u)} },
      \quad x \geq 0 ,
 }
-where \eqn{a, a \geq 0} and \eqn{\nu}, resp. \eqn{\sigma}, are the Lévy measure, resp. Stieltjes
-measure, and \eqn{\alpha > 0}, \eqn{\beta > 0}, or \eqn{nu \not\equiv 0}, resp.
+where \eqn{a, a \geq 0} and \eqn{\nu}, resp. \eqn{\sigma}, are the \emph{Lévy measure}, resp.
+\emph{Stieltjes measure}, and \eqn{\alpha > 0}, \eqn{\beta > 0}, or \eqn{nu \not\equiv 0}, resp.
 \eqn{\sigma \not\equiv 0}.
 
-The Lévy measure, resp. Stieltjes measure, take the following forms:
-\itemize{
-\item \emph{Armageddon family}: \eqn{nu = \sigma \equiv 0} and Bernstein function
+The Lévy measure, resp. Stieltjes measure, take the forms listed in the following.
+\subsection{Armageddon family}{
+
+We have \eqn{nu = \sigma \equiv 0} and Bernstein function
 \deqn{
    \psi{(x)}
      = 1_{\{ x > 0\}} a + b x ,
@@ -82,7 +79,11 @@ The Lévy measure, resp. Stieltjes measure, take the following forms:
   }
 see \linkS4class{ConstantBernsteinFunction} and
 \linkS4class{LinearBernsteinFunction}.
-\item \emph{Poisson family}: We have \eqn{\eta > 0}, Bernstein function
+}
+
+\subsection{Poisson family}{
+
+We have \eqn{\eta > 0}, Bernstein function
 \deqn{
    \psi{(x)}
      = 1_{\{ x > 0\}} a + b x + \gamma \cdot {[1 - e^{-\eta x}]},
@@ -94,14 +95,22 @@ and Lévy measure
      = \delta_{\{ \eta \}}{(\mathrm{d}u)} ,
   }
 see \linkS4class{PoissonBernsteinFunction}.
-\item \emph{Pareto family}: We have \eqn{\eta \in \mathbb{R}^2} with \eqn{\eta_1, \eta_2 > 0} and
+}
+
+\subsection{Pareto family}{
+
+We have \eqn{\eta \in \mathbb{R}^2} with \eqn{\eta_1, \eta_2 > 0} and
 Lévy measure
 \deqn{
     \nu{(\mathrm{d}u)}
      = \eta_{1} \eta_{2}^{\eta_{1}} \cdot u^{-\eta_{1}-1}  1_{\{ u > \eta_{2}\}} \mathrm{d}u ,
   }
 see \linkS4class{ParetoBernsteinFunction}.
-\item \emph{Exponential family}: We have \eqn{\eta > 0}, Bernstein function
+}
+
+\subsection{Exponential family}{
+
+We have \eqn{\eta > 0}, Bernstein function
 \deqn{
    \psi{(x)}
      = 1_{\{ x > 0\}} a + b x + \gamma \cdot \frac{x}{x + \eta} ,
@@ -118,7 +127,11 @@ and Stieltjes measure
      = \delta_{\{ \eta \}}{(\mathrm{d}u)} ,
   }
 see \linkS4class{ExponentialBernsteinFunction}.
-\item \emph{\eqn{\alpha}-stable family}: We have \eqn{\eta \in {(0, 1)}}, Bernstein function
+}
+
+\subsection{\eqn{\alpha}-stable family}{
+
+We have \eqn{\eta \in {(0, 1)}}, Bernstein function
 \deqn{
    \psi{(x)}
      = 1_{\{ x > 0\}} a + b x + \gamma \cdot x^{\eta} ,
@@ -135,7 +148,11 @@ and Stieljtes measure
      = \frac{\sin{(\eta \pi)}}{\pi} \cdot u^{\eta - 1} \mathrm{d}u ,
   }
 see \linkS4class{AlphaStableBernsteinFunction}.
-\item \emph{Inverse-Gaussian family}: We have \eqn{\eta > 0}, Bernstein function
+}
+
+\subsection{Inverse-Gaussian family}{
+
+We have \eqn{\eta > 0}, Bernstein function
 \deqn{
    \psi{(x)}
      = 1_{\{ x > 0\}} a + b x + \gamma \cdot {\left[ \sqrt{2 x + \eta^2} - \eta \right]},
@@ -144,15 +161,21 @@ see \linkS4class{AlphaStableBernsteinFunction}.
 Lévy measure
 \deqn{
    \nu{(\mathrm{d}u)}
-     = \frac{1}{ \sqrt{2 \pi} } \cdot \frac{ e^{-\frac{1}{2} \eta^2 u} }{ \sqrt{u^3} } \mathrm{d}u ,
+     = \frac{1}{ \sqrt{2 \pi} } \cdot
+       \frac{ e^{-\frac{1}{2} \eta^2 u} }{ \sqrt{u^3} } \mathrm{d}u ,
   }
 and Stieltjes measure
 \deqn{
    \sigma{(\mathrm{d}u)}
-     = \frac{\sin{(\pi / 2)}}{\pi} \cdot \frac{\sqrt{2 u - \eta^2}}{u} 1_{\{ u > \eta^2 / 2 \}} \mathrm{d}u ,
+     = \frac{\sin{(\pi / 2)}}{\pi} \cdot
+       \frac{\sqrt{2 u - \eta^2}}{u} 1_{\{ u > \eta^2 / 2 \}} \mathrm{d}u ,
   }
 see \linkS4class{InverseGaussianBernsteinFunction}.
-\item \emph{Gamma family}: We have \eqn{\eta > 0}, Bernstein function
+}
+
+\subsection{Gamma family}{
+
+We have \eqn{\eta > 0}, Bernstein function
 \deqn{
    \psi{(x)}
      = 1_{\{ x > 0\}} a + b x + \gamma \cdot \log{\left( 1 +  \frac{x}{\eta} \right)} ,
@@ -170,120 +193,125 @@ and Stieljtes measure
   }
 see \linkS4class{GammaBernsteinFunction}.
 }
+}
 
-For the \emph{Armageddon family}, an optimized version of the \strong{exogenous shock model} is used,
-ignoring all infinite shocks which will not influence the final result.
+\section{Simulation algorithms}{
+\subsection{(General) exchangeable Marshall–Olkin sampling algorithms}{
 
-The \strong{Lévy-frailty model} simulates the elements of the random vector as first-hitting times
-of a compound Poisson subordinator \eqn{\Lambda} into sets \eqn{(E_i, \infty)} for iid unit
+The \emph{MDCM}, \emph{AM}, and \emph{ESM} simulation algorithms for the \emph{exchangeable Marshall–Olkin
+distribution} can be used; for this, the corresponding Bernstein function is passed to
+\code{\link[=rextmo]{rextmo()}}.
+An exception is the \emph{ESM} for the \emph{Armageddon family} which uses an optimized version considering
+only finite shock times.
+}
+
+\subsection{Lévy-frailty model}{
+
+The \emph{Lévy-frailty model} simulates the elements of the random vector as first-hitting times of a
+compound Poisson subordinator \eqn{\Lambda} into sets \eqn{(E_i, \infty)} for iid unit
 exponential random variables.
-Here, the subordinator is a linear combination of a pure-drift subordinator, a pure-killing subordinator,
-and a pure-jump compound Poisson subordinator, i.e.
+Here, the subordinator is a linear combination of a pure-drift subordinator, a pure-killing
+subordinator, and a pure-jump compound Poisson subordinator, i.e.
 \deqn{
    \Lambda_{t}
      = \infty \cdot 1_{\{ \epsilon > \beta t \}} + \alpha t + \sum_{j=1}^{N_{\gamma t}} X_{j} ,
      \quad t \geq 0,
 }
 where \eqn{\epsilon} is a unit exponential rv, \eqn{N} is a Poisson process, and \eqn{X_{1},
-X_{2}, \ldots} are iid jumps from the corresponding jump distribution.
-
-For the \emph{Markovian death-set model}, the \emph{Arnold model}, or the \emph{exogenous shock model} a
-suitable \linkS4class{BernsteinFunction} is created and \code{\link[=rextmo]{rextmo()}} is called.
+X_{2}, \ldots} are iid jumps from the corresponding jump distribution,
+see \insertCite{@see pp. 140 psqq. @Mai2017a}{rmo}.
 }
-\section{References}{
- For more information on the LFM algorithm, see J.-F. Mai,
-M. Scherer, "Simulating Copulas", World Scientific (2017), pp. 140 psqq.
 }
 
 \examples{
 ## Armageddon
+rpextmo(10, 3, a = 0.2, b = 0.5)
+rpextmo(10, 3, a = 1)      ## comonotone
+rpextmo(10, 3, b = 1)      ## independence
 
-rpextmo(10, 2L, a = 0.2, b = 0.5)
-rpextmo(10, 2, a = 1)      ## comonotone
-rpextmo(10, 2, b = 1)      ## independence
+rpextmo(10, 3, a = 0.2, b = 0.5, method = "ESM")
+rpextmo(10, 3, a = 1, method = "ESM")      ## comonotone
+rpextmo(10, 3, b = 1, method = "ESM")      ## independence
 
-rpextmo(10, 2, a = 0.2, b = 0.5, method = "ESM")
-rpextmo(10, 2, a = 1, method = "ESM")      ## comonotone
-rpextmo(10, 2, b = 1, method = "ESM")      ## independence
+rpextmo(10, 3, a = 0.2, b = 0.5, method = "LFM")
+rpextmo(10, 3, a = 1, method = "LFM")      ## comonotone
+rpextmo(10, 3, b = 1, method = "LFM")      ## independence
 
-rpextmo(10, 2, a = 0.2, b = 0.5, method = "LFM")
-rpextmo(10L, 2, a = 1, method = "LFM")      ## comonotone
-rpextmo(10L, 2, b = 1, method = "LFM")      ## independence
+rpextmo(10, 3, a = 0.2, b = 0.5, method = "MDCM")
+rpextmo(10, 3, a = 1, method = "MDCM")      ## comonotone
+rpextmo(10, 3, b = 1, method = "MDCM")      ## independence
 
-rpextmo(10, 2, a = 0.2, b = 0.5, method = "MDCM")
-rpextmo(10, 2, a = 1, method = "MDCM")      ## comonotone
-rpextmo(10, 2, b = 1, method = "MDCM")      ## independence
+rpextmo(10, 3, a = 0.2, b = 0.5, method = "AM")
+rpextmo(10, 3, a = 1, method = "AM")      ## comonotone
+rpextmo(10, 3, b = 1, method = "AM")      ## independence
 
-rpextmo(10, 2, a = 0.2, b = 0.5, method = "AM")
-rpextmo(10, 2, a = 1, method = "AM")      ## comonotone
-rpextmo(10, 2, b = 1, method = "AM")      ## independence
+rpextmo(10, 3, a = 0.2, b = 0.5, family = "Armageddon")
+rpextmo(10, 3, a = 1, family = "Armageddon")      ## comonotone
+rpextmo(10, 3, b = 1, family = "Armageddon")      ## independence
 
-rpextmo(10, 2, a = 0.2, b = 0.5, family = "Armageddon")
-rpextmo(10, 2, a = 1, family = "Armageddon")      ## comonotone
-rpextmo(10, 2, b = 1, family = "Armageddon")      ## independence
+rpextmo(10, 3, a = 0.2, b = 0.5, family = "Armageddon", method = "ESM")
+rpextmo(10, 3, a = 1, family = "Armageddon", method = "ESM")      ## comonotone
+rpextmo(10, 3, b = 1, family = "Armageddon", method = "ESM")      ## independence
 
-rpextmo(10, 2, a = 0.2, b = 0.5, family = "Armageddon", method = "ESM")
-rpextmo(10, 2, a = 1, family = "Armageddon", method = "ESM")      ## comonotone
-rpextmo(10, 2, b = 1, family = "Armageddon", method = "ESM")      ## independence
+rpextmo(10, 3, a = 0.2, b = 0.5, family = "Armageddon", method = "LFM")
+rpextmo(10, 3, a = 1, family = "Armageddon", method = "LFM")      ## comonotone
+rpextmo(10, 3, b = 1, family = "Armageddon", method = "LFM")      ## independence
 
-rpextmo(10, 2, a = 0.2, b = 0.5, family = "Armageddon", method = "LFM")
-rpextmo(10, 2, a = 1, family = "Armageddon", method = "LFM")      ## comonotone
-rpextmo(10, 2, b = 1, family = "Armageddon", method = "LFM")      ## independence
+rpextmo(10, 3, a = 0.2, b = 0.5, family = "Armageddon", method = "MDCM")
+rpextmo(10, 3, a = 1, family = "Armageddon", method = "MDCM")      ## comonotone
+rpextmo(10, 3, b = 1, family = "Armageddon", method = "MDCM")      ## independence
 
-rpextmo(10, 2, a = 0.2, b = 0.5, family = "Armageddon", method = "MDCM")
-rpextmo(10, 2, a = 1, family = "Armageddon", method = "MDCM")      ## comonotone
-rpextmo(10, 2, b = 1, family = "Armageddon", method = "MDCM")      ## independence
-
-rpextmo(10, 2, a = 0.2, b = 0.5, family = "Armageddon", method = "AM")
-rpextmo(10, 2, a = 1, family = "Armageddon", method = "AM")      ## comonotone
-rpextmo(10, 2, b = 1, family = "Armageddon", method = "AM")      ## independence
+rpextmo(10, 3, a = 0.2, b = 0.5, family = "Armageddon", method = "AM")
+rpextmo(10, 3, a = 1, family = "Armageddon", method = "AM")      ## comonotone
+rpextmo(10, 3, b = 1, family = "Armageddon", method = "AM")      ## independence
 
 ## Poisson
-
-rpextmo(10, 2, a = 0.2, b = 0.5, gamma = 2, eta = 0.5, family = "Poisson")
-rpextmo(10, 2, a = 0.2, b = 0.5, gamma = 2, eta = 0.5, family = "Poisson", method = "ESM")
-rpextmo(10, 2, a = 0.2, b = 0.5, gamma = 2, eta = 0.5, family = "Poisson", method = "LFM")
-rpextmo(10, 2, a = 0.2, b = 0.5, gamma = 2, eta = 0.5, family = "Poisson", method = "MDCM")
-rpextmo(10, 2, a = 0.2, b = 0.5, gamma = 2, eta = 0.5, family = "Poisson", method = "AM")
+rpextmo(10, 3, a = 0.2, b = 0.5, gamma = 2, eta = 0.5, family = "Poisson")
+rpextmo(10, 3, a = 0.2, b = 0.5, gamma = 2, eta = 0.5, family = "Poisson", method = "ESM")
+rpextmo(10, 3, a = 0.2, b = 0.5, gamma = 2, eta = 0.5, family = "Poisson", method = "LFM")
+rpextmo(10, 3, a = 0.2, b = 0.5, gamma = 2, eta = 0.5, family = "Poisson", method = "MDCM")
+rpextmo(10, 3, a = 0.2, b = 0.5, gamma = 2, eta = 0.5, family = "Poisson", method = "AM")
 
 ## Pareto
-
-rpextmo(10, 2, a = 0.2, b = 0.5, gamma = 2, eta = c(0.5, 1e-4), family = "Pareto")
-rpextmo(10, 2, a = 0.2, b = 0.5, gamma = 2, eta = c(0.5, 1e-4), family = "Pareto", method = "ESM")
-rpextmo(10, 2, a = 0.2, b = 0.5, gamma = 2, eta = c(0.5, 1e-4), family = "Pareto", method = "LFM")
-rpextmo(10, 2, a = 0.2, b = 0.5, gamma = 2, eta = c(0.5, 1e-4), family = "Pareto", method = "MDCM")
-rpextmo(10, 2, a = 0.2, b = 0.5, gamma = 2, eta = c(0.5, 1e-4), family = "Pareto", method = "AM")
+rpextmo(10, 3, a = 0.2, b = 0.5, gamma = 2, eta = c(0.5, 1e-4), family = "Pareto")
+rpextmo(
+ 10, 3, a = 0.2, b = 0.5, gamma = 2, eta = c(0.5, 1e-4), family = "Pareto", method = "ESM")
+rpextmo(
+ 10, 3, a = 0.2, b = 0.5, gamma = 2, eta = c(0.5, 1e-4), family = "Pareto", method = "LFM")
+rpextmo(
+ 10, 3, a = 0.2, b = 0.5, gamma = 2, eta = c(0.5, 1e-4), family = "Pareto", method = "MDCM")
+rpextmo(10, 3, a = 0.2, b = 0.5, gamma = 2, eta = c(0.5, 1e-4), family = "Pareto", method = "AM")
 
 ## Exponential
-
-rpextmo(10, 2, a = 0.2, b = 0.5, gamma = 2, eta = 0.5, family = "Exponential")
-rpextmo(10, 2, a = 0.2, b = 0.5, gamma = 2, eta = 0.5, family = "Exponential", method = "ESM")
-rpextmo(10, 2, a = 0.2, b = 0.5, gamma = 2, eta = 0.5, family = "Exponential", method = "LFM")
-rpextmo(10, 2, a = 0.2, b = 0.5, gamma = 2, eta = 0.5, family = "Exponential", method = "MDCM")
-rpextmo(10, 2, a = 0.2, b = 0.5, gamma = 2, eta = 0.5, family = "Exponential", method = "AM")
+rpextmo(10, 3, a = 0.2, b = 0.5, gamma = 2, eta = 0.5, family = "Exponential")
+rpextmo(10, 3, a = 0.2, b = 0.5, gamma = 2, eta = 0.5, family = "Exponential", method = "ESM")
+rpextmo(10, 3, a = 0.2, b = 0.5, gamma = 2, eta = 0.5, family = "Exponential", method = "LFM")
+rpextmo(10, 3, a = 0.2, b = 0.5, gamma = 2, eta = 0.5, family = "Exponential", method = "MDCM")
+rpextmo(10, 3, a = 0.2, b = 0.5, gamma = 2, eta = 0.5, family = "Exponential", method = "AM")
 
 ## Alpha-Stable
-
-rpextmo(10, 2, a = 0.2, b = 0.5, gamma = 2, eta = 0.5, family = "AlphaStable")
-rpextmo(10, 2, a = 0.2, b = 0.5, gamma = 2, eta = 0.5, family = "AlphaStable", method = "ESM")
-rpextmo(10, 2, a = 0.2, b = 0.5, gamma = 2, eta = 0.5, family = "AlphaStable", method = "MDCM")
-rpextmo(10, 2, a = 0.2, b = 0.5, gamma = 2, eta = 0.5, family = "AlphaStable", method = "AM")
+rpextmo(10, 3, a = 0.2, b = 0.5, gamma = 2, eta = 0.5, family = "AlphaStable")
+rpextmo(10, 3, a = 0.2, b = 0.5, gamma = 2, eta = 0.5, family = "AlphaStable", method = "ESM")
+rpextmo(10, 3, a = 0.2, b = 0.5, gamma = 2, eta = 0.5, family = "AlphaStable", method = "MDCM")
+rpextmo(10, 3, a = 0.2, b = 0.5, gamma = 2, eta = 0.5, family = "AlphaStable", method = "AM")
 
 ## Inverse Gaussian
-
-rpextmo(10, 2, a = 0.2, b = 0.5, gamma = 2, eta = 0.5, family = "InverseGaussian")
-rpextmo(10, 2, a = 0.2, b = 0.5, gamma = 2, eta = 0.5, family = "InverseGaussian", method = "ESM")
-rpextmo(10, 2, a = 0.2, b = 0.5, gamma = 2, eta = 0.5, family = "InverseGaussian", method = "MDCM")
-rpextmo(10, 2, a = 0.2, b = 0.5, gamma = 2, eta = 0.5, family = "InverseGaussian", method = "AM")
+rpextmo(10, 3, a = 0.2, b = 0.5, gamma = 2, eta = 0.5, family = "InverseGaussian")
+rpextmo(
+ 10, 3, a = 0.2, b = 0.5, gamma = 2, eta = 0.5, family = "InverseGaussian", method = "ESM")
+rpextmo(
+ 10, 3, a = 0.2, b = 0.5, gamma = 2, eta = 0.5, family = "InverseGaussian", method = "MDCM")
+rpextmo(10, 3, a = 0.2, b = 0.5, gamma = 2, eta = 0.5, family = "InverseGaussian", method = "AM")
 
 ## Gamma
+rpextmo(10, 3, a = 0.2, b = 0.5, gamma = 2, eta = 0.5, family = "Gamma")
+rpextmo(10, 3, a = 0.2, b = 0.5, gamma = 2, eta = 0.5, family = "Gamma", method = "ESM")
+rpextmo(10, 3, a = 0.2, b = 0.5, gamma = 2, eta = 0.5, family = "Gamma", method = "MDCM")
+rpextmo(10, 3, a = 0.2, b = 0.5, gamma = 2, eta = 0.5, family = "Gamma", method = "AM")
 
-rpextmo(10, 2, a = 0.2, b = 0.5, gamma = 2, eta = 0.5, family = "Gamma")
-rpextmo(10, 2, a = 0.2, b = 0.5, gamma = 2, eta = 0.5, family = "Gamma", method = "ESM")
-rpextmo(10, 2, a = 0.2, b = 0.5, gamma = 2, eta = 0.5, family = "Gamma", method = "MDCM")
-rpextmo(10, 2, a = 0.2, b = 0.5, gamma = 2, eta = 0.5, family = "Gamma", method = "AM")
-
-
+}
+\references{
+\insertAllCited{}
 }
 \seealso{
 Other sampling-algorithms: 
