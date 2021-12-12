@@ -1,3 +1,7 @@
+# rmo 0.8.x
+
+- Small changes in the documentation
+
 # rmo 0.8
 
 - Create single entry point method for general MO sampling distributions, exchangeable MO sampling

@@ -216,7 +216,7 @@ Here, the subordinator is a linear combination of a pure-drift subordinator, a p
 subordinator, and a pure-jump compound Poisson subordinator, i.e.
 \deqn{
    \Lambda_{t}
-     = \infty \cdot 1_{\{ \epsilon > \beta t \}} + \alpha t + \sum_{j=1}^{N_{\gamma t}} X_{j} ,
+     = \infty \cdot 1_{\{ \epsilon > a t \}} + b t + \sum_{j=1}^{N_{\gamma t}} X_{j} ,
      \quad t \geq 0,
 }
 where \eqn{\epsilon} is a unit exponential rv, \eqn{N} is a Poisson process, and \eqn{X_{1},
