@@ -1,8 +1,8 @@
-# rmo 0.7.2
+# rmo 0.8
 
-- Create single entry point for general MO sampling routines.
-- Create single entry point for exchangeable MO sampling routines.
-- Create single entry point for extendible MO sampling routines.
+- Create single entry point method for general MO sampling distributions, exchangeable MO sampling
+  routines, extendible MO sampling routines, and parametrized extendible MO sampling routines.
+- Improve documentation and add snaphot test for sampling routines.
 
 # rmo 0.7.1
 
