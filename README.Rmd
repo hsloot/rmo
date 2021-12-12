@@ -50,9 +50,7 @@ devtools::install_github("hsloot/rmo")
 ## Example
 
 ```{r, include=TRUE}
-rexmo(
-  n = 10, d = 2,
-  ex_intensities_alpha_stable(d = 2, alpha = log2(2 - 0.5)))
+rpextmo(n = 10, d = 3, eta = log2(2 - 0.5), family = "AlphaStable")
 ```
 
 ### Approximate an Alpha-Stable BF

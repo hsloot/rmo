@@ -131,6 +131,10 @@ rmo <- function(n, d, intensities, method = c("AM", "ESM")) {
 #' rexmo(10, 3, c(3, 0, 0))          ## independence
 #' rexmo(10, 3, c(0, 0, 1))          ## comonotone
 #'
+#' rexmo(10, 3, c(1.2, 0.3, 0.4), method = "MDCM")
+#' rexmo(10, 3, c(3, 0, 0), method = "MDCM")          ## independence
+#' rexmo(10, 3, c(0, 0, 1), method = "MDCM")          ## comonotone
+#'
 #' rexmo(10, 3, c(1.2, 0.3, 0.4), method = "AM")
 #' rexmo(10, 3, c(3, 0, 0), method = "AM")          ## independence
 #' rexmo(10, 3, c(0, 0, 1), method = "AM")          ## comonotone
@@ -505,24 +509,24 @@ rpextmo <- function( # nolint
   qassert(gamma, "N1(0,)")
   qassert(eta, c("N+(0,)", "0"))
 
-  if (isTRUE("Armageddon" == family) && isTRUE("ESM" == method)) {
+  if ((family == "Armageddon") && (method == "ESM")) {
     Rcpp__rarmextmo_esm(n, d, alpha = b, beta = a)
-  } else if (isTRUE("LFM" == method)) {
+  } else if (method == "LFM") {
     assert_choice(family, c("Armageddon", "Poisson", "Pareto", "Exponential"))
-    if (isTRUE("Armageddon" == family)) {
+    if (family == "Armageddon") {
       qassert(eta, "0")
       gamma <- 0
       rjump_name <- "rposval"
       rjump_arg_list <- list("value" = 0)
-    } else if (isTRUE("Poisson" == family)) {
+    } else if (family == "Poisson") {
       qassert(eta, "N1(0,)")
       rjump_name <- "rposval"
       rjump_arg_list <- list("value" = eta)
-    } else if (isTRUE("Pareto" == family)) {
+    } else if (family == "Pareto") {
       qassert(eta, "N2(0,)")
       rjump_name <- "rpareto"
       rjump_arg_list <- list("alpha" = eta[[1]], x0 = eta[[2]])
-    } else if (isTRUE("Exponential" == family)) {
+    } else if (family == "Exponential") {
       qassert(eta, "N1(0,)")
       rjump_name <- "rexp"
       rjump_arg_list <- list("rate" = eta)
@@ -535,31 +539,31 @@ rpextmo <- function( # nolint
       rjump_name = rjump_name, rjump_arg_list = rjump_arg_list)
   } else if (method %in% c("MDCM", "AM", "ESM")) {
     psi <- NULL
-    if (isTRUE("Poisson" == family)) {
+    if (family == "Poisson") {
       qassert(eta, "N1(0,)")
       psi <- PoissonBernsteinFunction(eta = eta)
-    } else if (isTRUE("Pareto" == family)) {
+    } else if (family == "Pareto") {
       qassert(eta, "N2")
       qassert(eta[[1]], "N1(0,1)")
       qassert(eta[[2]], "N1(0,)")
       psi <- ParetoBernsteinFunction(alpha = eta[[1]], x0 = eta[[2]])
-    } else if (isTRUE("Exponential" == family)) {
+    } else if (family == "Exponential") {
       qassert(eta, "N1(0,)")
       psi <- ExponentialBernsteinFunction(lambda = eta)
-    } else if (isTRUE("AlphaStable" == family)) {
+    } else if (family == "AlphaStable") {
       qassert(eta, "N1(0,)")
       psi <- AlphaStableBernsteinFunction(alpha = eta)
-    } else if (isTRUE("InverseGaussian" == family)) {
+    } else if (family == "InverseGaussian") {
       qassert(eta, "N1(0,)")
       psi <- InverseGaussianBernsteinFunction(eta = eta)
-    } else if (isTRUE("Gamma" == family)) {
+    } else if (family == "Gamma") {
       qassert(eta, "N1(0,)")
       psi <- GammaBernsteinFunction(a = eta)
     }
-    if (isFALSE(gamma == 1) && !is.null(psi)) {
+    if (!(gamma == 1) && !is.null(psi)) {
       psi <- ScaledBernsteinFunction(scale = gamma, original = psi)
     }
-    if (isFALSE(b == 0)) {
+    if (!(b == 0)) {
       if (!is.null(psi)) {
         psi <- SumOfBernsteinFunctions(
           first = LinearBernsteinFunction(scale = b),
@@ -568,7 +572,7 @@ rpextmo <- function( # nolint
         psi <- LinearBernsteinFunction(scale = b)
       }
     }
-    if (isFALSE(a == 0)) {
+    if (!(a == 0)) {
       if (!is.null(psi)) {
         psi <- SumOfBernsteinFunctions(
           first = ConstantBernsteinFunction(constant = a),

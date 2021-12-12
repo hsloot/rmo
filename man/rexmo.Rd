@@ -59,6 +59,10 @@ rexmo(10, 3, c(1.2, 0.3, 0.4))
 rexmo(10, 3, c(3, 0, 0))          ## independence
 rexmo(10, 3, c(0, 0, 1))          ## comonotone
 
+rexmo(10, 3, c(1.2, 0.3, 0.4), method = "MDCM")
+rexmo(10, 3, c(3, 0, 0), method = "MDCM")          ## independence
+rexmo(10, 3, c(0, 0, 1), method = "MDCM")          ## comonotone
+
 rexmo(10, 3, c(1.2, 0.3, 0.4), method = "AM")
 rexmo(10, 3, c(3, 0, 0), method = "AM")          ## independence
 rexmo(10, 3, c(0, 0, 1), method = "AM")          ## comonotone
