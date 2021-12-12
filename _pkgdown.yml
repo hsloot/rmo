@@ -4,15 +4,15 @@ reference:
 - title: Package
   desc: ~
   contents:
-  - "`rmo`"
+  - "`rmo-package`"
 
 - title: Sampling functions
   desc: ~
   contents:
-  - matches("rmo_[a-z]+")
-  - starts_with("rexmo")
-  - starts_with("rextmo")
-  - starts_with("rarmextmo")
+  - matches("^rmo$")
+  - matches("^rexmo$")
+  - matches("^rextmo$")
+  - matches("^rpextmo$")
 
 
 - title: Drop-in parameter factories

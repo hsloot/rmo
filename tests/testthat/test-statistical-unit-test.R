@@ -2,6 +2,43 @@
 n <- 1e3
 set.seed(1623)
 
+rmo_esm <- function(...) {
+  rmo(..., method = "ESM")
+}
+
+rmo_am <- function(...) {
+  rmo(..., method = "AM")
+}
+
+rexmo_mdcm <- function(...) {
+  rexmo(..., method = "MDCM")
+}
+
+rarmextmo_esm <- function(n, d, alpha, beta) {
+  rpextmo(n, d, a = beta, b = alpha, family = "Armageddon", method = "ESM")
+}
+
+rextmo_lfm <- function(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list) {
+  if (isTRUE(rate == 0) || (isTRUE(rjump_name == "rposval") && isTRUE(rjump_arg_list$value == 0))) {
+    rpextmo(n, d, a = rate_killing, b = rate_drift, family = "Armageddon", method = "LFM")
+  } else if (isTRUE("rposval" == rjump_name)) {
+    rpextmo(
+      n, d, a = rate_killing, b = rate_drift, gamma = rate, eta = rjump_arg_list$value,
+      family = "Poisson", method = "LFM")
+  } else if (isTRUE("rpareto" == rjump_name)) {
+    rpextmo(
+      n, d, a = rate_killing, b = rate_drift, gamma = rate,
+      eta = c(rjump_arg_list$alpha, rjump_arg_list$x0),
+      family = "Pareto", method = "LFM")
+  } else if (isTRUE("rexp" == rjump_name)) {
+    rpextmo(
+      n, d, a = rate_killing, b = rate_drift, gamma = rate, eta = rjump_arg_list$rate,
+      family = "Exponential", method = "LFM")
+  } else {
+    stop(sprintf("Jump distribution %s not implemented", rjump_name))
+  }
+}
+
 ## All threshold should be chosen such that, in total, they sum up to this
 ## number. If this is, e.g., 1%, then the probability of a false positive,
 ## assuming the null hypothesis is fulfilled, is 1%.

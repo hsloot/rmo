@@ -54,7 +54,7 @@ setGeneric("defaultMethod",
   })
 
 #' @describeIn BernsteinFunction-class
-#'   Calculates unscaled `ex_intensities` parameter for [rexmo_mdcm()].
+#'   Calculates (unscaled) exchangeable shock arrival intensities, see [rmo()] and [rexmo()].
 #'
 #' @inheritParams levyDensity
 #' @param d Dimension
@@ -67,7 +67,7 @@ setGeneric("uexIntensities",
   })
 
 #' @describeIn BernsteinFunction-class
-#'   Calculates `intensities` parameter for [rmo_esm()] and [rmo_am()].
+#'   Calculates `intensities` parameter for [rmo()].
 #'
 #' @inheritParams uexIntensities
 #'
@@ -78,7 +78,7 @@ setGeneric("intensities",
   })
 
 #' @describeIn BernsteinFunction-class
-#'   Calculates `ex_intensities` parameter for [rexmo_mdcm()].
+#'   Calculates (scaled) exchangeable shock-size arrival intensities for [rexmo()].
 #'
 #' @inheritParams uexIntensities
 #'
@@ -89,7 +89,8 @@ setGeneric("exIntensities",
   })
 
 #' @describeIn BernsteinFunction-class
-#'   Calculates the exchangeable Q-matrix implies by [rexmo_mdcm()].
+#'   Calculates the infinitesimal generator matrix of the corresponding Markovian default-counting
+#'   process used internally by [rexmo()].
 #'
 #' @inheritParams uexIntensities
 #'

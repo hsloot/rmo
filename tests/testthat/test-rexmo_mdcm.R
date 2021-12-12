@@ -1,12 +1,14 @@
 use_seed <- 1632
 n <- 100
 
+rexmo_mdcm <- function(...) {
+  mockery::stub(rexmo, "Rcpp__rexmo_mdcm", rtest__rexmo_mdcm)
+  rexmo(..., method = "MDCM")
+}
 
 ## #### Test implementation for the bivariate case ####
 
 test_that("Exchangeable Arnold model for d = 2", {
-  mockery::stub(rexmo_mdcm, "Rcpp__rexmo_mdcm", rtest__rexmo_mdcm)
-
   ## all equal
   args <- list(
     "d" = 2,
@@ -87,8 +89,6 @@ test_that("Exchangeable Arnold model for d = 2", {
 ## #### Test alternative implementation in `R` ####
 
 test_that("Alternative implementation in R for d>2", {
-  mockery::stub(rexmo_mdcm, "Rcpp__rexmo_mdcm", rtest__rexmo_mdcm)
-
   d <- 5
 
   ## all equal
@@ -173,8 +173,6 @@ test_that("Alternative implementation in R for d>2", {
 # as the original `R` implementation for various dimensions and choices of
 # parameters.
 test_that("Exchangeable Arnold model implementation in C++", {
-  mockery::stub(rexmo_mdcm, "Rcpp__rexmo_mdcm", rtest__rexmo_mdcm)
-
   d <- 7
 
   ## all equal

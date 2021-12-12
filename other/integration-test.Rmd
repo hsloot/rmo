@@ -18,6 +18,18 @@ library(rmo)
 set.seed(1623L)
 n <- 1e3L
 
+rmo_esm <- function(...) {
+  rmo(..., method = "ESM")
+}
+
+rmo_am <- function(...) {
+  rmo(..., method = "AM")
+}
+
+rexmo_mdcm <- function(...) {
+  rexmo(..., method = "MDCM")
+}
+
 ks_test <- function(n, d, FUN, intensities, normalize=FALSE) {
   scale <- sum(intensities)
   if (normalize) {

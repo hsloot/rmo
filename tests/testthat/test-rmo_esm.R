@@ -1,11 +1,14 @@
 use_seed <- 1632
 n <- 1e2
 
+rmo_esm <- function(...) {
+  mockery::stub(rmo, "Rcpp__rmo_esm", rtest__rmo_esm)
+  rmo(..., method = "ESM")
+}
+
 # #### Test implementation for the bivariate case ####
 
 test_that("ESM implementation for d = 2", {
-  mockery::stub(rmo_esm, "Rcpp__rmo_esm", rtest__rmo_esm)
-
   ## all equal
   args <- list("d" = 2, "intensities" = rep(1, 3))
   expect_equal_rn_generation(
@@ -91,8 +94,6 @@ test_that("ESM implementation for d = 2", {
 # #### Test implementation against original `R` version ####
 
 test_that("ESM implementation for d > 2", {
-  mockery::stub(rmo_esm, "Rcpp__rmo_esm", rtest__rmo_esm)
-
   ## dimension parameters
   d1 <- 3
   d2 <- 4
