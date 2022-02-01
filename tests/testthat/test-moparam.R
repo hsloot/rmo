@@ -49,3 +49,22 @@ test_that("ex_qmatrix parameter is calculated correctly", {
 
   expect_equal(exQMatrix(bf, d), exQMatrix(bf, d+1)[-1, -1])
 })
+
+test_that("sum(ex_intensities) is calculated correctly (base case)", {
+  bf <- testutils.rmo::fuzzy_bf(AlphaStableBernsteinFunction())
+
+  expect_equal(
+    sum(exIntensities(bf, d)),
+    valueOf0(bf, d)
+  )
+})
+
+test_that("sum(ex_intensities) is calculated correctly (corner case)", {
+  bf <- AlphaStableBernsteinFunction(log2(2 - 99.999e-2))
+  d <- 125
+
+  expect_equal(
+    sum(exIntensities(bf, d)),
+    valueOf0(bf, d)
+  )
+})

@@ -1,6 +1,7 @@
 # rmo 0.8.x
 
 - Small changes in the documentation
+- Improvement of `exIntensities`
 
 # rmo 0.8
 
