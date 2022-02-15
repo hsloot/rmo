@@ -124,7 +124,15 @@ setMethod("uexIntensities", "BernsteinFunction",
 #' @export
 setMethod("exIntensities", "BernsteinFunction",
   function(object, d, ...) {
-    sapply(1:d, function(i) valueOf(object, d-i, i, n = d, k = i, ...))
+    if (d == 2) {
+      out <- d * (valueOf0(object, d) - valueOf0(object, d-1))
+    } else {
+      out <- c(
+        d * (valueOf0(object, d) - valueOf0(object, d-1)),
+        sapply(2:(d-1), function(i) valueOf(object, d-i, i, n = d, k = i, ...)))
+    }
+
+    c(out, pmax(valueOf0(object, d) - sum(out), 0))
   })
 
 #' @rdname BernsteinFunction-class
