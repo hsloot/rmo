@@ -2,6 +2,7 @@
 
 - Small changes in the documentation
 - Improvement of `exIntensities`
+- Allow `n = 0` in sampling algorithms (e.g. for measure setup time)
 
 # rmo 0.8
 

@@ -73,7 +73,7 @@
 #' @export
 rmo <- function(n, d, intensities, method = c("AM", "ESM")) {
   method <- match.arg(method)
-  qassert(n, "X1[1,)")
+  qassert(n, "X1[0,)")
   qassert(d, "X1[2,)")
   if (method == "ESM") {
     Rcpp__rmo_esm(n, d, intensities)
@@ -153,7 +153,7 @@ rmo <- function(n, d, intensities, method = c("AM", "ESM")) {
 #' @export
 rexmo <- function(n, d, ex_intensities, method = c("MDCM", "AM", "ESM")) {
   method <- match.arg(method)
-  qassert(n, "X1[1,)")
+  qassert(n, "X1[0,)")
   qassert(d, "X1[2,)")
   if (method == "MDCM") {
     Rcpp__rexmo_mdcm(n, d, ex_intensities)
@@ -213,7 +213,7 @@ rexmo <- function(n, d, ex_intensities, method = c("MDCM", "AM", "ESM")) {
 #' @export
 rextmo <- function(n, d, bf, method = c("MDCM", "AM", "ESM")) {
   method <- match.arg(method)
-  qassert(n, "X1[1,)")
+  qassert(n, "X1[0,)")
   qassert(d, "X1[2,)")
   rexmo(n, d, exIntensities(bf, d), method = method)
 }
@@ -508,6 +508,8 @@ rpextmo <- function( # nolint
   } else {
     method <- match.arg(method)
   }
+  qassert(n, "X1[0,)")
+  qassert(d, "X1[2,)")
   qassert(a, "N1[0,)")
   qassert(b, "N1[0,)")
   qassert(gamma, "N1(0,)")

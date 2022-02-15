@@ -188,3 +188,12 @@ test_that("Arnold model implementation for d>2", {
     rmo_am, testutils.rmo::rmo_am_naive,
     args, n, use_seed)
 })
+
+# #### Test no-sample ####
+
+test_that("AM implementation for n = 0", {
+  n <- 0
+  d <- 5
+  x <- rmo_am(n, d, intensities_exponential(d, 1))
+  checkmate::expect_matrix(x, mode = "numeric", nrows = n, ncols = d)
+})

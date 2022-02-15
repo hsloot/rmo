@@ -196,3 +196,14 @@ test_that("LFM-CPP implementation works as intended for pareto jumps", {
     rextmo_lfm, testutils.rmo::rextmo_lfm_naive,
     args, n, use_seed)
 })
+
+# #### Test no-sample ####
+
+test_that("LFM implementation for n = 0", {
+  n <- 0
+  d <- 5
+  x <- rextmo_lfm(
+    n, d, rate = 1, rate_killing = 0, rate_drift = 0,
+    rjump_name = "rexp", rjump_arg_list = list(rate = 1))
+  checkmate::expect_matrix(x, mode = "numeric", nrows = n, ncols = d)
+})

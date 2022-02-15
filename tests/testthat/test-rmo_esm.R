@@ -185,3 +185,12 @@ test_that("ESM implementation for d > 2", {
     rmo_esm, testutils.rmo::rmo_esm_naive,
     args, n, use_seed)
 })
+
+# #### Test no-sample ####
+
+test_that("ESM implementation for n = 0", {
+  n <- 0
+  d <- 5
+  x <- rmo_esm(n, d, intensities_exponential(d, 1))
+  checkmate::expect_matrix(x, mode = "numeric", nrows = n, ncols = d)
+})
