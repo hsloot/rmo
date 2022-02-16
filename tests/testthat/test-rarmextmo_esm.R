@@ -56,3 +56,12 @@ test_that("Armageddon shock Ext.-MO ESM implementation in Rcpp", {
   expect_equal_rn_generation(rarmextmo_esm, testutils.rmo::rarmextmo_esm_naive,
     args, n, use_seed)
 })
+
+# #### Test no-sample ####
+
+test_that("Arm. ESM implementation for n = 0", {
+  n <- 0
+  d <- 5
+  x <- rarmextmo_esm(n, d, alpha = 1, beta = 1 / d)
+  checkmate::expect_matrix(x, mode = "numeric", nrows = n, ncols = d)
+})

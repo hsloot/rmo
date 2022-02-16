@@ -249,3 +249,12 @@ test_that("Exchangeable Arnold model implementation in C++", {
     rexmo_mdcm, testutils.rmo::rexmo_mdcm_naive,
     args, n, use_seed)
 })
+
+# #### Test no-sample ####
+
+test_that("MDCM implementation for n = 0", {
+  n <- 0
+  d <- 5
+  x <- rexmo_mdcm(n, d, ex_intensities_exponential(d, 1))
+  checkmate::expect_matrix(x, mode = "numeric", nrows = n, ncols = d)
+})
