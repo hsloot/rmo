@@ -56,11 +56,12 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.8" id="rmo-08x">rmo 0.8.x<a class="anchor" aria-label="anchor" href="#rmo-08x"></a></h2>
+<h2 class="pkg-version" data-toc-text="0.8.1" id="rmo-081">rmo 0.8.1<a class="anchor" aria-label="anchor" href="#rmo-081"></a></h2>
 <ul><li>Small changes in the documentation</li>
 <li>Improvement of <code>exIntensities</code>
 </li>
 <li>Allow <code>n = 0</code> in sampling algorithms (e.g. for measure setup time)</li>
+<li>Consistent use of STL headers and attribute [[maybe_unused]] in C++ code</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.8" id="rmo-08">rmo 0.8<a class="anchor" aria-label="anchor" href="#rmo-08"></a></h2>
@@ -74,20 +75,16 @@
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.7" id="rmo-07">rmo 0.7<a class="anchor" aria-label="anchor" href="#rmo-07"></a></h2>
-<ul><li>Breaking change: remove <code>lambda</code> parameter for <code>PoissonBernsteinFunction</code>.</li>
-</ul></div>
+<ul><li>Breaking change: remove <code>lambda</code> parameter for <code>PoissonBernsteinFunction</code>.</li></ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.6" id="rmo-06">rmo 0.6<a class="anchor" aria-label="anchor" href="#rmo-06"></a></h2>
-<ul><li>Rename <em>Cuadras-Augé</em> to <em>armageddon ESM</em> to better reflect the nature of the distribution.</li>
-</ul></div>
+<ul><li>Rename <em>Cuadras-Augé</em> to <em>armageddon ESM</em> to better reflect the nature of the distribution.</li></ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.5.5" id="rmo-055">rmo 0.5.5<a class="anchor" aria-label="anchor" href="#rmo-055"></a></h2>
-<ul><li>Explicitly handle integration error with possible adjustment for very small values.</li>
-</ul></div>
+<ul><li>Explicitly handle integration error with possible adjustment for very small values.</li></ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.5.4" id="rmo-054">rmo 0.5.4<a class="anchor" aria-label="anchor" href="#rmo-054"></a></h2>
-<ul><li>Use explicit first-order iterated difference for <code>difference_order == 1L</code> in <code>valueOf</code> to avoid endpoint-singularity problems in numerical integration.</li>
-</ul></div>
+<ul><li>Use explicit first-order iterated difference for <code>difference_order == 1L</code> in <code>valueOf</code> to avoid endpoint-singularity problems in numerical integration.</li></ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.5.3" id="rmo-053">rmo 0.5.3<a class="anchor" aria-label="anchor" href="#rmo-053"></a></h2>
 <ul><li>Fix implementation of initializers and validity methods. In particular, <code>validObject</code> can now be called with the argument <code>test = TRUE</code> without causing an error.</li>
@@ -95,16 +92,13 @@
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.5.2" id="rmo-052">rmo 0.5.2<a class="anchor" aria-label="anchor" href="#rmo-052"></a></h2>
-<ul><li>Allow pass-though of arguments to <code>integrate</code> in functions <code>valueOf</code>, <code>uexIntensities</code>, <code>exIntensities</code>, and <code>exQMatrix</code>.</li>
-</ul></div>
+<ul><li>Allow pass-though of arguments to <code>integrate</code> in functions <code>valueOf</code>, <code>uexIntensities</code>, <code>exIntensities</code>, and <code>exQMatrix</code>.</li></ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.5.1" id="rmo-051">rmo 0.5.1<a class="anchor" aria-label="anchor" href="#rmo-051"></a></h2>
-<ul><li>Add composite-scaled Bernstein function class.</li>
-</ul></div>
+<ul><li>Add composite-scaled Bernstein function class.</li></ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.5.0" id="rmo-050">rmo 0.5.0<a class="anchor" aria-label="anchor" href="#rmo-050"></a></h2>
-<ul><li>Rename Cuadras-Augé and Lévy-frailty model algorithms. Now a sampling algorithm follows the format <code>r*mo_*</code> where the first <code>*</code> indicates the input-parameter and the second on the algorithm, e.g. <code>rexmo_markovian</code> has <code>ex_intensities</code> as input parameters and uses the Markovian model for the default counting process.</li>
-</ul></div>
+<ul><li>Rename Cuadras-Augé and Lévy-frailty model algorithms. Now a sampling algorithm follows the format <code>r*mo_*</code> where the first <code>*</code> indicates the input-parameter and the second on the algorithm, e.g. <code>rexmo_markovian</code> has <code>ex_intensities</code> as input parameters and uses the Markovian model for the default counting process.</li></ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.4.1" id="rmo-041">rmo 0.4.1<a class="anchor" aria-label="anchor" href="#rmo-041"></a></h2>
 <ul><li>Rearrange order in arguments of <code>valueOf</code>: instead of <code>cscale, n, k</code> we have <code>n, k, cscale</code>.</li>
@@ -117,13 +111,11 @@
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.3.0" id="rmo-030">rmo 0.3.0<a class="anchor" aria-label="anchor" href="#rmo-030"></a></h2>
-<ul><li>Rename <code>rmo_ex_arnold</code> to <code>rexmo_markovian</code>.</li>
-</ul></div>
+<ul><li>Rename <code>rmo_ex_arnold</code> to <code>rexmo_markovian</code>.</li></ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.2.6" id="rmo-026">rmo 0.2.6<a class="anchor" aria-label="anchor" href="#rmo-026"></a></h2>
 <ul><li>Complete refactored C++ backend: Distribution classes satisfy a multivariate version of the named requirement <em>RandomNumberDistribution</em>
-</li>
-</ul></div>
+</li></ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.2.5" id="rmo-025">rmo 0.2.5<a class="anchor" aria-label="anchor" href="#rmo-025"></a></h2>
 <ul><li>Include more tests</li>
@@ -132,8 +124,7 @@
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.2.4" id="rmo-024">rmo 0.2.4<a class="anchor" aria-label="anchor" href="#rmo-024"></a></h2>
-<ul><li>Implementation of the Inverse Gaussian Bernstein function</li>
-</ul></div>
+<ul><li>Implementation of the Inverse Gaussian Bernstein function</li></ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.2.3" id="rmo-023">rmo 0.2.3<a class="anchor" aria-label="anchor" href="#rmo-023"></a></h2>
 <ul><li>Implement Pareto jumps and Pareto CPP Bernstein function</li>
@@ -164,8 +155,7 @@
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.1.2" id="rmo-012">rmo 0.1.2<a class="anchor" aria-label="anchor" href="#rmo-012"></a></h2>
-<ul><li>Bugfix for <code>rmo:::sample_cpp</code> which is used in <code>rmo_lfm_cpp</code>. The former implementation did not properly account for the case, when the CPP drifts over several barriers during a waiting period.</li>
-</ul></div>
+<ul><li>Bugfix for <code>rmo:::sample_cpp</code> which is used in <code>rmo_lfm_cpp</code>. The former implementation did not properly account for the case, when the CPP drifts over several barriers during a waiting period.</li></ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.1.1" id="rmo-011">rmo 0.1.1<a class="anchor" aria-label="anchor" href="#rmo-011"></a></h2>
 <ul><li>Bugfix for <code>rmo:::sample_cpp</code> which is used in <code>rmo_lfm_cpp</code> (case <code>rate == 0</code> was not properly handled).</li>
@@ -173,8 +163,7 @@
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.1.0" id="rmo-010">rmo 0.1.0<a class="anchor" aria-label="anchor" href="#rmo-010"></a></h2>
-<ul><li>Added pure <code>R</code> implementations of various sampling algorithms: <code>rmo_esm</code>, <code>rmo_arnold</code>, <code>rmo_ex_arnold</code>, <code>rmo_lfm_cpp</code>, and <code>rmo_esm_cuadras_auge</code>.</li>
-</ul></div>
+<ul><li>Added pure <code>R</code> implementations of various sampling algorithms: <code>rmo_esm</code>, <code>rmo_arnold</code>, <code>rmo_ex_arnold</code>, <code>rmo_lfm_cpp</code>, and <code>rmo_esm_cuadras_auge</code>.</li></ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.0.9000" id="rmo-0009000">rmo 0.0.0.9000<a class="anchor" aria-label="anchor" href="#rmo-0009000"></a></h2>
 <ul><li>Added a <code>NEWS.md</code> file to track changes to the package.</li>
@@ -189,7 +178,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
     </footer></div>
