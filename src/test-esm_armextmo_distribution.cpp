@@ -1,13 +1,14 @@
-#include <algorithm>
-#include <cmath>
-#include <functional>
+#include <cstddef>
+#include <type_traits>
+#include <vector>
+
+#include <testthat.h>
 
 // clang-format off
-#include <rmolib/random/r_engine.hpp> // must be included before <rmolib/*>
+#include "rmolib/random/r_engine.hpp" // must be included before <rmolib/*>
 // clang-format on
-#include <rmolib/random/multivariate/esm_armextmo_distribution.hpp>
-#include <rmolib/random/univariate/exponential_distribution.hpp>
-#include <testthat.h>
+#include "rmolib/random/multivariate/esm_armextmo_distribution.hpp"
+#include "rmolib/random/univariate/exponential_distribution.hpp"
 
 #include "testutils-approxequals.h"
 #include "testutils-tester_distribution.h"
@@ -27,13 +28,13 @@ class generic_param_type {
                               const double beta)
       : dim_{dim}, alpha_{alpha}, beta_{beta} {}
 
-  template <
-      typename _ArmageddonExtMOParamType,
-      typename std::enable_if<
-          !std::is_convertible_v<_ArmageddonExtMOParamType, generic_param_type> &&
-              rmolib::random::is_armageddon_extmo_param_type_v<
-                  _ArmageddonExtMOParamType>,
-          int>::type = 0>
+  template <typename _ArmageddonExtMOParamType,
+            typename std::enable_if<
+                !std::is_convertible_v<_ArmageddonExtMOParamType,
+                                       generic_param_type> &&
+                    rmolib::random::is_armageddon_extmo_param_type_v<
+                        _ArmageddonExtMOParamType>,
+                int>::type = 0>
   explicit generic_param_type(_ArmageddonExtMOParamType&& parm)
       : dim_{parm.dim()}, alpha_{parm.alpha()}, beta_{parm.beta()} {}
 
@@ -62,7 +63,8 @@ void tester_distribution<armageddon_extmo_dist_t, generic_parm_t>::__param_test(
   expect_true(dist.beta() == test_parm.beta());
 }
 
-using dist_tester_t = tester_distribution<armageddon_extmo_dist_t, generic_parm_t>;
+using dist_tester_t =
+    tester_distribution<armageddon_extmo_dist_t, generic_parm_t>;
 
 context("esm_armextmo_distribution") {
   const std::vector<generic_parm_t> test_cases = {

@@ -1,7 +1,6 @@
 #include <algorithm>
 
 #include <R_ext/Utils.h>
-
 #include <rmolib/algorithm/r_sort.hpp>
 #include <testthat.h>
 /*
@@ -18,22 +17,25 @@ context("r_sort") {
       {{1, 0}, {2, 1}, {3, 2}, {4, 3}, {5, 4}, {6, 5}},
       {{1, 0}, {1, 1}, {1, 2}, {1, 3}, {1, 4}}};
   // case 1: create max heap
-  std::vector<std::vector<std::tuple<int, std::size_t>>> after_make_heap_vectors = {
-      {{5, 4}, {4, 3}, {2, 5}, {3, 0}, {2, 1}, {1, 2}},
-      {{6, 5}, {5, 4}, {3, 2}, {4, 3}, {2, 1}, {1, 0}},
-      {{1, 0}, {1, 1}, {1, 2}, {1, 3}, {1, 4}}};
+  std::vector<std::vector<std::tuple<int, std::size_t>>>
+      after_make_heap_vectors = {
+          {{5, 4}, {4, 3}, {2, 5}, {3, 0}, {2, 1}, {1, 2}},
+          {{6, 5}, {5, 4}, {3, 2}, {4, 3}, {2, 1}, {1, 0}},
+          {{1, 0}, {1, 1}, {1, 2}, {1, 3}, {1, 4}}};
   // case 2: create max heap and pop
-  std::vector<std::vector<std::tuple<int, std::size_t>>> after_pop_heap_vectors = {
-      {{4, 3}, {3, 0}, {2, 5}, {1, 2}, {2, 1}, {5, 4}},
-      {{5, 4}, {4, 3}, {3, 2}, {1, 0}, {2, 1}, {6, 5}},
-      {{1, 4}, {1, 1}, {1, 2}, {1, 3}, {1, 0}}};
+  std::vector<std::vector<std::tuple<int, std::size_t>>>
+      after_pop_heap_vectors = {
+          {{4, 3}, {3, 0}, {2, 5}, {1, 2}, {2, 1}, {5, 4}},
+          {{5, 4}, {4, 3}, {3, 2}, {1, 0}, {2, 1}, {6, 5}},
+          {{1, 4}, {1, 1}, {1, 2}, {1, 3}, {1, 0}}};
   // case 3: create max heap and push
   std::vector<std::tuple<int, std::size_t>> new_values_vectors = {
       {3, 6}, {7, 6}, {1, 5}};
-  std::vector<std::vector<std::tuple<int, std::size_t>>> after_push_heap_vectors = {
-      {{5, 4}, {4, 3}, {3, 6}, {3, 0}, {2, 1}, {1, 2}, {2, 5}},
-      {{7, 6}, {5, 4}, {6, 5}, {4, 3}, {2, 1}, {1, 0}, {3, 2}},
-      {{1, 0}, {1, 1}, {1, 2}, {1, 3}, {1, 4}, {1, 5}}};
+  std::vector<std::vector<std::tuple<int, std::size_t>>>
+      after_push_heap_vectors = {
+          {{5, 4}, {4, 3}, {3, 6}, {3, 0}, {2, 1}, {1, 2}, {2, 5}},
+          {{7, 6}, {5, 4}, {6, 5}, {4, 3}, {2, 1}, {1, 0}, {3, 2}},
+          {{1, 0}, {1, 1}, {1, 2}, {1, 3}, {1, 4}, {1, 5}}};
   // case 4: create max heap and sortsort heap with `sort_heap`
   std::vector<std::vector<std::tuple<int, std::size_t>>> after_sort_heap = {
       {{1, 2}, {2, 5}, {2, 1}, {3, 0}, {4, 3}, {5, 4}},

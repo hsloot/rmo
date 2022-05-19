@@ -1,7 +1,5 @@
 #pragma once
 
-#include<type_traits>
-
 namespace rmolib {
 
 namespace math {

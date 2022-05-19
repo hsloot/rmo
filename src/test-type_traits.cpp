@@ -1,8 +1,12 @@
+#include <cstddef>
 #include <iterator>
+#include <utility>
+#include <vector>
 
-#include <rmolib/type_traits/is_safe_numeric_cast.hpp>
-#include <rmolib/type_traits/iterator.hpp>
 #include <testthat.h>
+
+#include "rmolib/type_traits/is_safe_numeric_cast.hpp"
+#include "rmolib/type_traits/iterator.hpp"
 
 context("rmolib/type_traits/**") {
   using namespace rmolib::type_traits;

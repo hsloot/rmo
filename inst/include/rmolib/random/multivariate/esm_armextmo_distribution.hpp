@@ -1,8 +1,11 @@
 #pragma once
 
 #include <algorithm>
+#include <cstddef>
 #include <limits>
 #include <type_traits>
+#include <utility>
+#include <vector>
 
 #include "rmolib/type_traits/is_safe_numeric_cast.hpp"
 
@@ -29,7 +32,8 @@ struct __is_armageddon_extmo_param_type<
 
 template <typename _T>
 struct is_armageddon_extmo_param_type
-    : public internal::__is_armageddon_extmo_param_type<std::remove_cv_t<_T>> {};
+    : public internal::__is_armageddon_extmo_param_type<std::remove_cv_t<_T>> {
+};
 
 //! true, if _T can be used to construct esm_armextmo_distribution<>::param_type
 template <typename _T>
@@ -52,11 +56,12 @@ class esm_armextmo_distribution {
         : dim_{dim}, alpha_parm_{alpha}, beta_parm_{beta} {}
 
     // Used for construction from a different specialization
-    template <typename _ArmageddonExtMOParamType,
-              std::enable_if_t<
-                  !std::is_convertible_v<_ArmageddonExtMOParamType, param_type> &&
-                      is_armageddon_extmo_param_type_v<_ArmageddonExtMOParamType>,
-                  int> = 0>
+    template <
+        typename _ArmageddonExtMOParamType,
+        std::enable_if_t<
+            !std::is_convertible_v<_ArmageddonExtMOParamType, param_type> &&
+                is_armageddon_extmo_param_type_v<_ArmageddonExtMOParamType>,
+            int> = 0>
     explicit param_type(_ArmageddonExtMOParamType&& parm)
         : param_type{parm.dim(), parm.alpha(), parm.beta()} {}
 
@@ -95,13 +100,14 @@ class esm_armextmo_distribution {
   explicit esm_armextmo_distribution(const param_type& parm) : parm_{parm} {}
 
   // Used for construction from a different specialization
-  template <typename _ArmageddonExtMOParamType,
-            std::enable_if_t<
-                !std::is_convertible_v<_ArmageddonExtMOParamType,
-                                       esm_armextmo_distribution> &&
-                    !std::is_convertible_v<_ArmageddonExtMOParamType, param_type> &&
-                    is_armageddon_extmo_param_type_v<_ArmageddonExtMOParamType>,
-                int> = 0>
+  template <
+      typename _ArmageddonExtMOParamType,
+      std::enable_if_t<
+          !std::is_convertible_v<_ArmageddonExtMOParamType,
+                                 esm_armextmo_distribution> &&
+              !std::is_convertible_v<_ArmageddonExtMOParamType, param_type> &&
+              is_armageddon_extmo_param_type_v<_ArmageddonExtMOParamType>,
+          int> = 0>
   explicit esm_armextmo_distribution(_ArmageddonExtMOParamType&& parm)
       : parm_{std::forward<_ArmageddonExtMOParamType>(parm)} {}
 

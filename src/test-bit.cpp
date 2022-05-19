@@ -1,6 +1,7 @@
 #include <testthat.h>
-#include <rmolib/bit/bit_fill.hpp>
-#include <rmolib/bit/bit_test.hpp>
+
+#include "rmolib/bit/bit_fill.hpp"
+#include "rmolib/bit/bit_test.hpp"
 
 context("rmolib/bit/**") {
   using namespace rmolib::bit;

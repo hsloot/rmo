@@ -1,8 +1,9 @@
-# rmo 0.8.x
+# rmo 0.8.1
 
 - Small changes in the documentation
 - Improvement of `exIntensities`
 - Allow `n = 0` in sampling algorithms (e.g. for measure setup time)
+- Consistent use of STL headers and attribute [[maybe_unused]] in C++ code
 
 # rmo 0.8
 

@@ -1,29 +1,33 @@
 #pragma once
 
+#include <cstddef>
 #include <iterator>
 #include <type_traits>
+#include <utility>
 #include <vector>
 
 #include <Rcpp.h>
 
 static const R_xlen_t C_CHECK_USR_INTERRUP = 100000;
 
-template<typename T, class=void>
+template <typename T, class = void>
 struct has_value_type : public std::false_type {};
 
-template<typename T>
-struct has_value_type<T, std::void_t<typename T::value_type>> : public std::true_type {};
+template <typename T>
+struct has_value_type<T, std::void_t<typename T::value_type>>
+    : public std::true_type {};
 
-template<typename T>
+template <typename T>
 constexpr bool has_value_type_v = has_value_type<T>::value;
 
-template<typename T, class=void>
+template <typename T, class = void>
 struct has_allocator_type : public std::false_type {};
 
-template<typename T>
-struct has_allocator_type<T, std::void_t<typename T::allocator_type>> : public std::true_type {};
+template <typename T>
+struct has_allocator_type<T, std::void_t<typename T::allocator_type>>
+    : public std::true_type {};
 
-template<typename T>
+template <typename T>
 constexpr bool has_allocator_type_v = has_allocator_type<T>::value;
 
 template <typename T, class = void>
@@ -68,12 +72,12 @@ class rcpp_distribution_caller {
   template <typename _T>
   static constexpr int rtype_v = rtype<_T>::value;
 
-  template<typename _T, class=void>
+  template <typename _T, class = void>
   struct __value_type {
     using type = _T;
   };
 
-  template<typename _T>
+  template <typename _T>
   struct __value_type<_T, std::enable_if_t<has_value_type_v<_T>>> {
     using type = typename _T::value_type;
   };
@@ -95,11 +99,9 @@ class rcpp_distribution_caller {
   static constexpr result_type __init(const std::size_t n,
                                       const std::size_t d) {
     if constexpr (is_multivariate_v) {
-      return result_type(
-          Rcpp::no_init(n, d));  // result_type == NumericMatrix
+      return result_type(Rcpp::no_init(n, d));  // result_type == NumericMatrix
     } else {
-      return result_type(
-          Rcpp::no_init(n));  // result_type == NumericVector
+      return result_type(Rcpp::no_init(n));  // result_type == NumericVector
     }
   }
 

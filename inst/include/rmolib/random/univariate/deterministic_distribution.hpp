@@ -71,7 +71,7 @@ class deterministic_distribution {
    private:
     _RealType value_{1.};
 
-    void __validate_input(const _RealType value) const {}
+    void __validate_input([[maybe_unused]] const _RealType value) const {}
 
     static_assert(
         std::is_floating_point_v<_RealType> &&
@@ -116,7 +116,8 @@ class deterministic_distribution {
   }
 
   template <typename _Engine>
-  result_type operator()(_Engine&& engine, const param_type& parm) {
+  result_type operator()([[maybe_unused]] _Engine&& engine,
+                         const param_type& parm) {
     return parm.value_;
   }
 

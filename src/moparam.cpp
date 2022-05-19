@@ -1,5 +1,12 @@
+#include <algorithm>
+#include <cstddef>
+#include <iterator>
+#include <numeric>
+
 #include <Rcpp.h>
-#include <rmolib/random/multivariate/internal/is_within.hpp>
+
+#include "rmolib/random/multivariate/internal/is_within.hpp"
+
 using namespace Rcpp;
 
 //! unscaled `uex_intensities` to `intensities`

@@ -2,9 +2,13 @@
 
 #include <algorithm>
 #include <cmath>
+#include <cstddef>
+#include <iterator>
 #include <limits>
 #include <numeric>
+#include <stdexcept>
 #include <type_traits>
+#include <utility>
 #include <vector>
 
 #include "rmolib/math/binomial_coefficient.hpp"
@@ -142,10 +146,9 @@ class mdcm_exmo_distribution {
 
     template <typename _InputIterator>
     void __init(_InputIterator first, _InputIterator last) {
-      static_assert(
-          type_traits::is_input_iterator_v<_InputIterator>,
-          "Class template rmolib::random::mdcm_exmo_distribution<>: "
-          "_InputIterator only be initialized with input iterator");
+      static_assert(type_traits::is_input_iterator_v<_InputIterator>,
+                    "Class template rmolib::random::mdcm_exmo_distribution<>: "
+                    "_InputIterator only be initialized with input iterator");
       if (first == last) {
         __init_empty(first, last);
       } else {
@@ -165,14 +168,13 @@ class mdcm_exmo_distribution {
   mdcm_exmo_distribution() = default;
 
   template <typename _ForwardIterator>
-  explicit mdcm_exmo_distribution(const std::size_t dim,
-                                       _ForwardIterator first,
-                                       _ForwardIterator last)
+  explicit mdcm_exmo_distribution(const std::size_t dim, _ForwardIterator first,
+                                  _ForwardIterator last)
       : parm_{dim, first, last} {}
 
   template <typename _Container>
   explicit mdcm_exmo_distribution(const std::size_t dim,
-                                       const _Container& ex_intensities)
+                                  const _Container& ex_intensities)
       : parm_{dim, ex_intensities} {}
 
   explicit mdcm_exmo_distribution(const param_type& parm) : parm_{parm} {}

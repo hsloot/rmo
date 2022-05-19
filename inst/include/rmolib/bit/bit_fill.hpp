@@ -18,12 +18,14 @@ constexpr _UnsignedType bit_fill_ones(const _UnsignedType position_begin,
     return 0;
   else
     return internal::make_bitmask(position_begin) +
-           bit_fill_ones(math::next_integral_value(position_begin), position_end);
+           bit_fill_ones(math::next_integral_value(position_begin),
+                         position_end);
 }
 
 template <typename _UnsignedType>
-constexpr _UnsignedType bit_fill_zeros(const _UnsignedType position_begin,
-                                       const _UnsignedType position_end) {
+constexpr _UnsignedType bit_fill_zeros(
+    [[maybe_unused]] const _UnsignedType position_begin,
+    [[maybe_unused]] const _UnsignedType position_end) {
   return 0;
 }
 

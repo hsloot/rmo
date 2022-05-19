@@ -1,5 +1,11 @@
 #pragma once
 
+#include <algorithm>
+#include <cstddef>
+#include <limits>
+#include <stdexcept>
+#include <type_traits>
+#include <utility>
 #include <vector>
 
 #include "rmolib/type_traits/is_safe_numeric_cast.hpp"
@@ -85,11 +91,11 @@ class lfm_extmo_distribution {
                      jump_parm_t{std::forward<_Args>(jump_args)...}} {}
 
     // Used for construction from a different specialization
-    template <
-        typename _LFMExtMOParamType,
-        std::enable_if_t<!std::is_convertible_v<_LFMExtMOParamType, param_type> &&
-                             is_lfm_extmo_param_type_v<_LFMExtMOParamType>,
-                         int> = 0>
+    template <typename _LFMExtMOParamType,
+              std::enable_if_t<
+                  !std::is_convertible_v<_LFMExtMOParamType, param_type> &&
+                      is_lfm_extmo_param_type_v<_LFMExtMOParamType>,
+                  int> = 0>
     explicit param_type(_LFMExtMOParamType&& parm)
         : param_type{parm.dim(), parm.killing(), parm.drift(), parm.intensity(),
                      parm.jump_param()} {}
@@ -146,23 +152,26 @@ class lfm_extmo_distribution {
         throw std::domain_error("jump values must not be negative");
     }
 
-    static_assert(std::is_floating_point_v<_RealType>,
-                  "Class template rmolib::random::lfm_extmo_distribution<> must be "
-                  "parametrized with floating point type");
+    static_assert(
+        std::is_floating_point_v<_RealType>,
+        "Class template rmolib::random::lfm_extmo_distribution<> must be "
+        "parametrized with floating point type");
   };
 
   lfm_extmo_distribution() = default;
 
   explicit lfm_extmo_distribution(const std::size_t dim,
-                            const exponential_parm_t& killing_parm,
-                            const _RealType drift,
-                            const exponential_parm_t& intensity_parm,
-                            const jump_parm_t& jump_parm)
+                                  const exponential_parm_t& killing_parm,
+                                  const _RealType drift,
+                                  const exponential_parm_t& intensity_parm,
+                                  const jump_parm_t& jump_parm)
       : param_type{dim, killing_parm, drift, intensity_parm, jump_parm} {}
 
-  explicit lfm_extmo_distribution(const std::size_t dim, const _RealType killing,
-                            const _RealType drift, const _RealType intensity,
-                            const jump_parm_t& jump_parm)
+  explicit lfm_extmo_distribution(const std::size_t dim,
+                                  const _RealType killing,
+                                  const _RealType drift,
+                                  const _RealType intensity,
+                                  const jump_parm_t& jump_parm)
       : param_type{dim, killing, drift, intensity, jump_parm} {}
 
   template <typename... _Args,
@@ -171,21 +180,24 @@ class lfm_extmo_distribution {
                     std::decay_t<std::tuple_element_t<0, std::tuple<_Args...>>>,
                     jump_parm_t>,
                 int> = 0>
-  explicit lfm_extmo_distribution(const std::size_t dim, const _RealType killing,
-                            const _RealType drift, const _RealType intensity,
-                            _Args&&... jump_args)
+  explicit lfm_extmo_distribution(const std::size_t dim,
+                                  const _RealType killing,
+                                  const _RealType drift,
+                                  const _RealType intensity,
+                                  _Args&&... jump_args)
       : param_type{dim, killing, drift, intensity,
                    std::forward<_Args>(jump_args)...} {}
 
   explicit lfm_extmo_distribution(const param_type& parm) : parm_{parm} {}
 
   // Used for construction from a different specialization
-  template <typename _LFMExtMOParamType,
-            std::enable_if_t<
-                !std::is_convertible_v<_LFMExtMOParamType, lfm_extmo_distribution> &&
-                    !std::is_convertible_v<_LFMExtMOParamType, param_type> &&
-                    is_lfm_extmo_param_type_v<_LFMExtMOParamType>,
-                int> = 0>
+  template <
+      typename _LFMExtMOParamType,
+      std::enable_if_t<
+          !std::is_convertible_v<_LFMExtMOParamType, lfm_extmo_distribution> &&
+              !std::is_convertible_v<_LFMExtMOParamType, param_type> &&
+              is_lfm_extmo_param_type_v<_LFMExtMOParamType>,
+          int> = 0>
   explicit lfm_extmo_distribution(_LFMExtMOParamType&& parm)
       : parm_{std::forward<_LFMExtMOParamType>(parm)} {}
 
@@ -295,11 +307,12 @@ class lfm_extmo_distribution {
     return state;
   }
 
-  static_assert(type_traits::is_safe_numeric_cast_v<
-                    _RealType, typename _ExponentialDistribution::result_type>,
-                "Class template rmolib::random::lfm_extmo_distribution<> must be "
-                "parametrized with exponential_distribution-type with suitable "
-                "result_type");
+  static_assert(
+      type_traits::is_safe_numeric_cast_v<
+          _RealType, typename _ExponentialDistribution::result_type>,
+      "Class template rmolib::random::lfm_extmo_distribution<> must be "
+      "parametrized with exponential_distribution-type with suitable "
+      "result_type");
   static_assert(
       type_traits::is_safe_numeric_cast_v<
           _RealType, typename _JumpDistribution::result_type>,

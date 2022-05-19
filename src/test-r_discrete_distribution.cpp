@@ -1,15 +1,18 @@
 #include <algorithm>
-#include <cmath>
-#include <functional>
+#include <cstddef>
 #include <iterator>
 #include <numeric>
+#include <type_traits>
+#include <utility>
+#include <vector>
+
+#include <testthat.h>
 
 // clang-format off
-#include <rmolib/random/r_engine.hpp> // must be included before <rmolib/*>
+#include "rmolib/random/r_engine.hpp" // must be included before <rmolib/*>
 // clang-format on
-#include <rmolib/random/univariate/r_discrete_distribution.hpp>
-#include <rmolib/random/univariate/uniform_real_distribution.hpp>
-#include <testthat.h>
+#include "rmolib/random/univariate/r_discrete_distribution.hpp"
+#include "rmolib/random/univariate/uniform_real_distribution.hpp"
 
 #include "testutils-approxequals.h"
 #include "testutils-tester_distribution.h"
@@ -23,9 +26,7 @@ namespace test_r_discrete_distribution {
 
 class generic_param_type {
  public:
-  generic_param_type() {
-    __init_empty();
-  }
+  generic_param_type() { __init_empty(); }
 
   template <typename _InputIterator>
   explicit generic_param_type(_InputIterator first, _InputIterator last) {

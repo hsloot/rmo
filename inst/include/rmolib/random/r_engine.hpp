@@ -19,17 +19,19 @@ namespace random {
 namespace internal {
 
 template <typename _RealType, typename _Engine>
-inline _RealType unit_uniform_real_distribution(_Engine&& engine, r_engine) {
+inline _RealType unit_uniform_real_distribution(
+    [[maybe_unused]] _Engine&& engine, r_engine) {
   return ::unif_rand();
 }
 
 template <typename _RealType, typename _Engine>
-inline _RealType unit_exponential_distribution(_Engine&& engine, r_engine) {
+inline _RealType unit_exponential_distribution(
+    [[maybe_unused]] _Engine&& engine, r_engine) {
   return ::exp_rand();
 }
 
 template <typename _IntType, typename _Engine>
-inline _IntType unit_uniform_int_distribution(_Engine&& engine,
+inline _IntType unit_uniform_int_distribution([[maybe_unused]] _Engine&& engine,
                                               const _IntType n, r_engine) {
 #if defined(R_VERSION) && R_VERSION >= R_Version(3, 4, 0)
   return ::R_unif_index(static_cast<double>(n));

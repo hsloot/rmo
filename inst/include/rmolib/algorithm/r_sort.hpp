@@ -1,6 +1,8 @@
 #pragma once
 
 #include <functional>
+#include <iterator>
+#include <utility>
 
 namespace rmolib {
 
@@ -11,14 +13,14 @@ namespace internal {
 // heap parent
 template <typename _RandomAccessIterator>
 inline auto r_heap_parent(_RandomAccessIterator first,
-                           _RandomAccessIterator child) {
+                          _RandomAccessIterator child) {
   // first == node --> -1 / 2 = 0 --> return first;
   return std::next(first, (std::distance(first, child) - 1) / 2);
 }
 
 template <typename _RandomAccessIterator>
 inline auto r_last_parent(_RandomAccessIterator first,
-                           _RandomAccessIterator last) {
+                          _RandomAccessIterator last) {
   auto last_child = next(last, -1);
   return r_heap_parent(first, last_child);
 };
@@ -26,8 +28,8 @@ inline auto r_last_parent(_RandomAccessIterator first,
 // heap child
 template <typename _RandomAccessIterator, bool left = false>
 inline auto r_heap_child(_RandomAccessIterator first,
-                          _RandomAccessIterator last,
-                          _RandomAccessIterator parent) {
+                         _RandomAccessIterator last,
+                         _RandomAccessIterator parent) {
   const auto n = std::distance(first, last);
   const auto k = std::distance(first, parent);
   const auto shift = static_cast<decltype(n)>(left);
@@ -38,24 +40,24 @@ inline auto r_heap_child(_RandomAccessIterator first,
 
 template <typename _RandomAccessIterator>
 inline auto r_heap_left_child(_RandomAccessIterator first,
-                               _RandomAccessIterator last,
-                               _RandomAccessIterator parent) {
+                              _RandomAccessIterator last,
+                              _RandomAccessIterator parent) {
   return r_heap_child<_RandomAccessIterator, false>(first, last, parent);
 }
 
 template <typename _RandomAccessIterator>
 inline auto r_heap_right_child(_RandomAccessIterator first,
-                                _RandomAccessIterator last,
-                                _RandomAccessIterator parent) {
+                               _RandomAccessIterator last,
+                               _RandomAccessIterator parent) {
   return r_heap_child<_RandomAccessIterator, true>(first, last, parent);
 }
 
 // heap sift down
 template <typename _RandomAccessIterator, typename _CompareOperator>
 inline void r_heap_sift_down(_RandomAccessIterator first,
-                              _RandomAccessIterator last,
-                              _RandomAccessIterator node,
-                              _CompareOperator comp) {
+                             _RandomAccessIterator last,
+                             _RandomAccessIterator node,
+                             _CompareOperator comp) {
   auto largest = node;
   auto left = r_heap_left_child(first, last, node);
   auto right = r_heap_right_child(first, last, node);
@@ -70,8 +72,8 @@ inline void r_heap_sift_down(_RandomAccessIterator first,
 // heap sift up
 template <typename _RandomAccessIterator, typename _CompareOperator>
 inline void r_heap_sift_up(_RandomAccessIterator first,
-                            _RandomAccessIterator last,
-                            _RandomAccessIterator node, _CompareOperator comp) {
+                           _RandomAccessIterator last,
+                           _RandomAccessIterator node, _CompareOperator comp) {
   auto parent = r_heap_parent(first, node);
   if (comp(*parent, *node)) {
     std::swap(*node, *parent);

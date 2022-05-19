@@ -1,17 +1,18 @@
-#include <algorithm>
-#include <cmath>
-#include <functional>
+#include <cstddef>
+#include <utility>
+#include <vector>
+
+#include <testthat.h>
 
 // clang-format off
-#include <rmolib/random/r_engine.hpp> // must be included before <rmolib/*>
+#include "rmolib/random/r_engine.hpp" // must be included before <rmolib/*>
 // clang-format on
-#include <rmolib/random/multivariate/mdcm_exmo_distribution.hpp>
-#include <rmolib/random/univariate/exponential_distribution.hpp>
-#include <rmolib/random/univariate/r_discrete_distribution.hpp>
-#include <rmolib/random/univariate/uniform_int_distribution.hpp>
-#include <rmolib/random/univariate/uniform_real_distribution.hpp>
-#include <rmolib/algorithm/r_shuffle.hpp>
-#include <testthat.h>
+#include "rmolib/random/multivariate/mdcm_exmo_distribution.hpp"
+#include "rmolib/random/univariate/exponential_distribution.hpp"
+#include "rmolib/random/univariate/r_discrete_distribution.hpp"
+#include "rmolib/random/univariate/uniform_int_distribution.hpp"
+#include "rmolib/random/univariate/uniform_real_distribution.hpp"
+#include "rmolib/algorithm/r_shuffle.hpp"
 
 #include "testutils-approxequals.h"
 #include "testutils-tester_distribution.h"
@@ -24,8 +25,10 @@ using r_discrete_dist_t =
     rmolib::random::r_discrete_distribution<std::size_t, double,
                                             uniform_real_dist_t>;
 using shuffler_t = rmolib::algorithm::r_shuffler;
-using markovian_exmo_dist_t = rmolib::random::mdcm_exmo_distribution<
-    double, exponential_dist_t, uniform_int_dist_t, r_discrete_dist_t, shuffler_t>;
+using markovian_exmo_dist_t =
+    rmolib::random::mdcm_exmo_distribution<double, exponential_dist_t,
+                                           uniform_int_dist_t,
+                                           r_discrete_dist_t, shuffler_t>;
 using parm_t = markovian_exmo_dist_t::param_type;
 
 namespace test_mdcm_exmo_distribution {

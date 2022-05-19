@@ -36,9 +36,7 @@ the Bernstein function is evaluated.}
 differences taken on the Bernstein function (\eqn{j} in
 the representation).}
 
-\item{n}{Non-negative numbers for the binomial factors.}
-
-\item{k}{Non-negative numbers for the binomial factors.}
+\item{n, k}{Non-negative numbers for the binomial factors.}
 
 \item{cscale}{Positive number, the composit scaling factor.}
 

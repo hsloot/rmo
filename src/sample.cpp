@@ -1,6 +1,10 @@
+#include <algorithm>
+#include <cstddef>
+#include <string>
+
 // clang-format off
 #include <Rcpp.h>
-#include <rmolib/random/r_engine.hpp> // must be included before <rmolib/*>
+#include "rmolib/random/r_engine.hpp" // must be included before <rmolib/*>
 // clang-format on
 
 #include "rcpp_distribution_caller.h"
@@ -49,7 +53,7 @@ NumericMatrix Rcpp__rmo_esm(const std::size_t n, const std::size_t d,
 
 // [[Rcpp::export]]
 NumericMatrix Rcpp__rmo_am(const std::size_t n, const std::size_t d,
-                               const NumericVector& intensities) {
+                           const NumericVector& intensities) {
   using exponential_distribution =
       rmolib::random::exponential_distribution<double>;
   using uniform_real_distribution =
@@ -60,7 +64,7 @@ NumericMatrix Rcpp__rmo_am(const std::size_t n, const std::size_t d,
       std::size_t, double, uniform_real_distribution, uniform_int_distribution>;
   using am_mo_distribution =
       rmolib::random::am_mo_distribution<double, exponential_distribution,
-                                             discrete_distribution>;
+                                         discrete_distribution>;
   using caller_t = rcpp_distribution_caller<am_mo_distribution>;
 
   return caller_t::call(r_engine{}, n, d, intensities.begin(),
@@ -69,7 +73,7 @@ NumericMatrix Rcpp__rmo_am(const std::size_t n, const std::size_t d,
 
 // [[Rcpp::export]]
 NumericMatrix Rcpp__rexmo_mdcm(const std::size_t n, const std::size_t d,
-                                    const NumericVector& ex_intensities) {
+                               const NumericVector& ex_intensities) {
   using exponential_distribution =
       rmolib::random::exponential_distribution<double>;
   using uniform_real_distribution =
@@ -78,10 +82,9 @@ NumericMatrix Rcpp__rexmo_mdcm(const std::size_t n, const std::size_t d,
       rmolib::random::uniform_int_distribution<std::size_t>;
   using discrete_distribution = rmolib::random::discrete_distribution<
       std::size_t, double, uniform_real_distribution, uniform_int_distribution>;
-  using mdcm_exmo_distribution =
-      rmolib::random::mdcm_exmo_distribution<
-          double, exponential_distribution, uniform_int_distribution,
-          discrete_distribution, rmolib::algorithm::shuffler>;
+  using mdcm_exmo_distribution = rmolib::random::mdcm_exmo_distribution<
+      double, exponential_distribution, uniform_int_distribution,
+      discrete_distribution, rmolib::algorithm::shuffler>;
   using caller_t = rcpp_distribution_caller<mdcm_exmo_distribution, false>;
 
   return caller_t::call(r_engine{}, n, d, ex_intensities.begin(),
@@ -90,7 +93,7 @@ NumericMatrix Rcpp__rexmo_mdcm(const std::size_t n, const std::size_t d,
 
 // [[Rcpp::export]]
 NumericMatrix Rcpp__rarmextmo_esm(const std::size_t n, const std::size_t d,
-                              const double alpha, const double beta) {
+                                  const double alpha, const double beta) {
   using exponential_distribution =
       rmolib::random::exponential_distribution<double>;
   using esm_armextmo_distribution =
@@ -117,22 +120,25 @@ NumericMatrix Rcpp__rextmo_lfm(const std::size_t n, const std::size_t d,
       rmolib::random::pareto_distribution<double, uniform_real_distribution>;
 
   if ("rposval" == rjump_name) {
-    using caller_t = rcpp_distribution_caller<rmolib::random::lfm_extmo_distribution<
-        double, deterministic_distribution, exponential_distribution>>;
+    using caller_t =
+        rcpp_distribution_caller<rmolib::random::lfm_extmo_distribution<
+            double, deterministic_distribution, exponential_distribution>>;
 
     const auto value = get_param<double>(rjump_arg_list, "value");
     return caller_t::call(r_engine{}, n, d, rate_killing, rate_drift, rate,
                           value);
   } else if ("rexp" == rjump_name) {
-    using caller_t = rcpp_distribution_caller<rmolib::random::lfm_extmo_distribution<
-        double, exponential_distribution, exponential_distribution>>;
+    using caller_t =
+        rcpp_distribution_caller<rmolib::random::lfm_extmo_distribution<
+            double, exponential_distribution, exponential_distribution>>;
 
     const auto lambda = get_param<double>(rjump_arg_list, "rate");
     return caller_t::call(r_engine{}, n, d, rate_killing, rate_drift, rate,
                           lambda);
   } else if ("rpareto" == rjump_name) {
-    using caller_t = rcpp_distribution_caller<rmolib::random::lfm_extmo_distribution<
-        double, pareto_distribution, exponential_distribution>>;
+    using caller_t =
+        rcpp_distribution_caller<rmolib::random::lfm_extmo_distribution<
+            double, pareto_distribution, exponential_distribution>>;
 
     const auto alpha = get_param<double>(rjump_arg_list, "alpha");
     const auto lower_bound = get_param<double>(rjump_arg_list, "x0");
@@ -159,7 +165,7 @@ NumericMatrix rtest__rmo_esm(const std::size_t n, const std::size_t d,
 //' @keywords internal test
 // [[Rcpp::export]]
 NumericMatrix rtest__rmo_am(const std::size_t n, const std::size_t d,
-                                const NumericVector& intensities) {
+                            const NumericVector& intensities) {
   using exponential_distribution =
       rmolib::random::exponential_distribution<double>;
   using uniform_real_distribution =
@@ -169,7 +175,7 @@ NumericMatrix rtest__rmo_am(const std::size_t n, const std::size_t d,
                                               uniform_real_distribution>;
   using am_mo_distribution =
       rmolib::random::am_mo_distribution<double, exponential_distribution,
-                                             discrete_distribution>;
+                                         discrete_distribution>;
   using caller_t = rcpp_distribution_caller<am_mo_distribution>;
 
   return caller_t::call(r_engine{}, n, d, intensities.begin(),
@@ -179,7 +185,7 @@ NumericMatrix rtest__rmo_am(const std::size_t n, const std::size_t d,
 //' @keywords internal test
 // [[Rcpp::export]]
 NumericMatrix rtest__rexmo_mdcm(const std::size_t n, const std::size_t d,
-                                     const NumericVector& ex_intensities) {
+                                const NumericVector& ex_intensities) {
   // R's sample.int produces a final (redundant) selection of the
   // last remaining value see
   // https://github.com/wch/r-source/blob/613bdfd0e1d3fc9984142d5da3da448adf2438c7/src/main/random.c#L461
@@ -192,10 +198,9 @@ NumericMatrix rtest__rexmo_mdcm(const std::size_t n, const std::size_t d,
   using discrete_distribution =
       rmolib::random::r_discrete_distribution<std::size_t, double,
                                               uniform_real_distribution>;
-  using mdcm_exmo_distribution =
-      rmolib::random::mdcm_exmo_distribution<
-          double, exponential_distribution, uniform_int_distribution,
-          discrete_distribution, rmolib::algorithm::r_shuffler>;
+  using mdcm_exmo_distribution = rmolib::random::mdcm_exmo_distribution<
+      double, exponential_distribution, uniform_int_distribution,
+      discrete_distribution, rmolib::algorithm::r_shuffler>;
   using caller_t = rcpp_distribution_caller<mdcm_exmo_distribution, true>;
 
   return caller_t::call(r_engine{}, n, d, ex_intensities.begin(),
@@ -205,7 +210,7 @@ NumericMatrix rtest__rexmo_mdcm(const std::size_t n, const std::size_t d,
 //' @keywords internal test
 // [[Rcpp::export]]
 NumericMatrix rtest__rarmextmo_esm(const std::size_t n, const std::size_t d,
-                               const double alpha, const double beta) {
+                                   const double alpha, const double beta) {
   return Rcpp__rarmextmo_esm(n, d, alpha, beta);
 }
 

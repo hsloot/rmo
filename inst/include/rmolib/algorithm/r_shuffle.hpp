@@ -5,6 +5,7 @@
 #include <iterator>
 #include <numeric>
 #include <type_traits>
+#include <utility>
 #include <vector>
 
 #include "rmolib/algorithm/shuffle.hpp"

@@ -22,12 +22,11 @@ struct __is_uniform_int_param_type<
                                                 std::true_type())::value>>
     : public std::true_type {};
 
-
-template<typename _IntType, typename _Engine>
+template <typename _IntType, typename _Engine>
 _IntType unit_uniform_int_distribution(_Engine&& engine, const _IntType& n) {
-    typename std::remove_reference_t<_Engine> engine_t;
-    return unit_uniform_int_distribution<_IntType>(
-        std::forward<_Engine>(engine), n, engine_t);
+  typename std::remove_reference_t<_Engine> engine_t;
+  return unit_uniform_int_distribution<_IntType>(std::forward<_Engine>(engine),
+                                                 n, engine_t);
 }
 
 }  // namespace internal
@@ -132,7 +131,8 @@ class uniform_int_distribution {
 
   template <typename _Engine>
   result_type operator()(_Engine&& engine, const param_type& parm) {
-    return parm.lower_ + internal::unit_uniform_int_distribution<_IntType>(std::forward<_Engine>(engine), parm.length_);
+    return parm.lower_ + internal::unit_uniform_int_distribution<_IntType>(
+                             std::forward<_Engine>(engine), parm.length_);
   }
 
   friend bool operator==(const uniform_int_distribution& lhs,

@@ -1,15 +1,17 @@
 #include <algorithm>
-#include <cmath>
-#include <functional>
+#include <cstddef>
+#include <type_traits>
+#include <vector>
+
+#include <testthat.h>
 
 // clang-format off
-#include <rmolib/random/r_engine.hpp> // must be included before <rmolib/*>
+#include "rmolib/random/r_engine.hpp" // must be included before <rmolib/*>
 // clang-format on
-#include <rmolib/random/multivariate/lfm_extmo_distribution.hpp>
-#include <rmolib/random/univariate/exponential_distribution.hpp>
-#include <rmolib/random/univariate/pareto_distribution.hpp>  // (use pareto here)
-#include <rmolib/random/univariate/uniform_real_distribution.hpp>
-#include <testthat.h>
+#include "rmolib/random/multivariate/lfm_extmo_distribution.hpp"
+#include "rmolib/random/univariate/exponential_distribution.hpp"
+#include "rmolib/random/univariate/pareto_distribution.hpp"  // (use pareto here)
+#include "rmolib/random/univariate/uniform_real_distribution.hpp"
 
 #include "testutils-approxequals.h"
 #include "testutils-tester_distribution.h"
@@ -19,7 +21,8 @@ using uniform_real_dist_t = rmolib::random::uniform_real_distribution<double>;
 using pareto_dist_t =
     rmolib::random::pareto_distribution<double, uniform_real_dist_t>;
 using lfm_extmo_dist_t =
-    rmolib::random::lfm_extmo_distribution<double, pareto_dist_t, exponential_dist_t>;
+    rmolib::random::lfm_extmo_distribution<double, pareto_dist_t,
+                                           exponential_dist_t>;
 using jump_parm_t = pareto_dist_t::param_type;
 using parm_t = lfm_extmo_dist_t::param_type;
 
@@ -38,11 +41,12 @@ class generic_param_type {
         intensity_{intensity},
         jump_parm_{jump_parm} {}
 
-  template <typename _LFMExtMOParamType,
-            typename std::enable_if<
-                !std::is_convertible_v<_LFMExtMOParamType, generic_param_type> &&
-                    rmolib::random::is_lfm_extmo_param_type_v<_LFMExtMOParamType>,
-                int>::type = 0>
+  template <
+      typename _LFMExtMOParamType,
+      typename std::enable_if<
+          !std::is_convertible_v<_LFMExtMOParamType, generic_param_type> &&
+              rmolib::random::is_lfm_extmo_param_type_v<_LFMExtMOParamType>,
+          int>::type = 0>
   explicit generic_param_type(_LFMExtMOParamType&& parm)
       : generic_param_type{parm.dim(), parm.killling(), parm.drift(),
                            parm.intensity(), parm.jump_parm()} {}

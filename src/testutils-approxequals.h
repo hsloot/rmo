@@ -1,7 +1,8 @@
 #pragma once
 
-#include <functional>
+#include <cmath>
 #include <limits>
+#include <string>
 #include <vector>
 
 #include <testthat.h>

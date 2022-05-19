@@ -192,9 +192,7 @@ class discrete_distribution {
         "parametrized with integral type");
   };
 
-  discrete_distribution() {
-    init_unit_uniform_real_distribution();
-  }
+  discrete_distribution() { init_unit_uniform_real_distribution(); }
 
   template <typename _InputIterator>
   explicit discrete_distribution(_InputIterator first, _InputIterator last)

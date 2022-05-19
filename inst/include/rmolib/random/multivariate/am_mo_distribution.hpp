@@ -2,10 +2,13 @@
 
 #include <algorithm>
 #include <cmath>
+#include <cstddef>
+#include <iterator>
 #include <limits>
 #include <numeric>
 #include <stdexcept>
 #include <type_traits>
+#include <utility>
 #include <vector>
 
 #include "rmolib/bit/bit_fill.hpp"
@@ -136,22 +139,21 @@ class am_mo_distribution {
       }
     }
 
-    static_assert(
-        std::is_floating_point_v<_RealType>,
-        "Class template rmolib::random::am_mo_distribution<> must be "
-        "parametrized with floating point type");
+    static_assert(std::is_floating_point_v<_RealType>,
+                  "Class template rmolib::random::am_mo_distribution<> must be "
+                  "parametrized with floating point type");
   };
 
   am_mo_distribution() = default;
 
   template <typename _ForwardIterator>
   explicit am_mo_distribution(const std::size_t dim, _ForwardIterator first,
-                                  _ForwardIterator last)
+                              _ForwardIterator last)
       : parm_{dim, first, last} {}
 
   template <typename _Container>
   explicit am_mo_distribution(const std::size_t dim,
-                                  const _Container& intensities)
+                              const _Container& intensities)
       : parm_{dim, intensities} {}
 
   explicit am_mo_distribution(const param_type& parm) : parm_{parm} {}
@@ -247,12 +249,11 @@ class am_mo_distribution {
       "parametrized with unit_exponential_distribution-type with suitable "
       "result_type");
 
-  static_assert(
-      type_traits::is_safe_numeric_cast_v<
-          std::size_t, typename _DiscreteDistribution::result_type>,
-      "Class template rmolib::random::am_mo_distribution<> must be "
-      "parametrized with discrete_distribution-type with suitable "
-      "result_type");
+  static_assert(type_traits::is_safe_numeric_cast_v<
+                    std::size_t, typename _DiscreteDistribution::result_type>,
+                "Class template rmolib::random::am_mo_distribution<> must be "
+                "parametrized with discrete_distribution-type with suitable "
+                "result_type");
 };
 
 /*

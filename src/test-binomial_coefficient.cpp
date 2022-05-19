@@ -1,8 +1,8 @@
-#include <functional>
-#include <limits>
+#include <utility>
 
-#include <rmolib/math/binomial_coefficient.hpp>
 #include <testthat.h>
+
+#include "rmolib/math/binomial_coefficient.hpp"
 
 context("rmolib/math/**") {
   using namespace rmolib::math;

@@ -1,16 +1,18 @@
 #include <algorithm>
 #include <cmath>
+#include <cstddef>
 #include <functional>
 #include <iterator>
 #include <numeric>
 
-// clang-format off
-#include <rmolib/random/r_engine.hpp> // must be included before <rmolib/*>
-// clang-format on
-#include <rmolib/random/univariate/bernoulli_distribution.hpp>
-#include <rmolib/random/univariate/uniform_real_distribution.hpp>
-#include <rmolib/random/univariate/uniform_int_distribution.hpp>
 #include <testthat.h>
+
+// clang-format off
+#include "rmolib/random/r_engine.hpp" // must be included before <rmolib/*>
+// clang-format on
+#include "rmolib/random/univariate/bernoulli_distribution.hpp"
+#include "rmolib/random/univariate/uniform_real_distribution.hpp"
+#include "rmolib/random/univariate/uniform_int_distribution.hpp"
 
 #include "testutils-approxequals.h"
 #include "testutils-tester_distribution.h"

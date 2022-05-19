@@ -3,6 +3,7 @@
 #include <iterator>
 #include <limits>
 #include <type_traits>
+#include <utility>
 
 #include "rmolib/math/next_integral_value.hpp"
 #include "rmolib/type_traits/is_safe_numeric_cast.hpp"

@@ -3,12 +3,14 @@
 #include <iterator>
 #include <string>
 #include <type_traits>
+#include <utility>
 #include <vector>
 
-// clang-format off
-#include <rmolib/random/r_engine.hpp> // must be included before <rmolib/*>
-// clang-format on
 #include <testthat.h>
+
+// clang-format off
+#include "rmolib/random/r_engine.hpp" // must be included before <rmolib/*>
+// clang-format on
 
 template <typename _Distribution, typename _GenericParamType>
 class tester_distribution {
@@ -78,7 +80,7 @@ class tester_distribution {
   template <typename _Engine>
   void __sample_test(_Engine&& engine, const generic_param_type& test_parm) {
     if constexpr (std::is_same_v<std::decay_t<_Engine>, r_engine>)
-      local_rngscope{}; // required to avoid UB
+      local_rngscope{};  // required to avoid UB
 
     const auto parm = param_type{test_parm};
     auto default_dist = distribution_type{};

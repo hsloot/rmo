@@ -70,7 +70,7 @@ class bernoulli_distribution {
     _WeightType p_{0.5};
 
     void __validate_input(const _WeightType p) const {
-      if (!(p_ >= _WeightType{0} && p_ <= _WeightType{1}))
+      if (!(p >= _WeightType{0} && p <= _WeightType{1}))
         throw std::domain_error("p must be in [0, 1]");
     }
 
