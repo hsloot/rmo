@@ -10,7 +10,7 @@ on:
   pull_request:
     branches: [main, master]
 
-name: R-CMD-check
+name: check-full
 
 jobs:
   R-CMD-check:
@@ -25,7 +25,7 @@ jobs:
           - {os: macOS-latest,   r: 'release'}
 
           - {os: windows-latest, r: 'release'}
-          # Use 3.6 to trigger usage of RTools35
+          # Use 3.6 to trigger usage of Rtools35
           - {os: windows-latest, r: '3.6'}
 
           # Use older ubuntu to maximise backward compatibility
