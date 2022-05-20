@@ -6,18 +6,18 @@
 <!-- badges: start -->
 
 ![minimal R
-version](https://img.shields.io/badge/R%3E%3D-3.3.0-6666ff.svg)
-![packageversion](https://img.shields.io/badge/Package%20version-0.8.0.9995-orange.svg?style=flat-square)
+version](https://img.shields.io/badge/R%3E%3D-3.4.0-6666ff.svg)
+![packageversion](https://img.shields.io/badge/Package%20version-0.8.1-orange.svg?style=flat-square)
 [![Project Status: WIP – Initial development is in progress, but there
 has not yet been a stable, usable release suitable for the
 public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
-[![Last-changedate](https://img.shields.io/badge/last%20change-2021--12--12-yellowgreen.svg)](/commits/master)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2022--05--20-yellowgreen.svg)](/commits/master)
 [![R build
 status](https://github.com/hsloot/rmo/workflows/R-CMD-check/badge.svg)](https://github.com/hsloot/rmo/actions)
 [![Codecov test
-coverage](https://codecov.io/gh/hsloot/rmo/branch/master/graph/badge.svg)](https://codecov.io/gh/hsloot/rmo?branch=master)
+coverage](https://codecov.io/gh/hsloot/rmo/branch/master/graph/badge.svg)](https://codecov.io/gh/hsloot/rmo?branch=main)
 <!-- badges: end -->
 
 An R package for the *Marshall-Olkin distribution*: algorithms for the
