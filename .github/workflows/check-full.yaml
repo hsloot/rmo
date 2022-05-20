@@ -25,8 +25,9 @@ jobs:
           - {os: macOS-latest,   r: 'release'}
 
           - {os: windows-latest, r: 'release'}
-          # Use 3.6 to trigger usage of Rtools35
-          - {os: windows-latest, r: '3.6'}
+          # Don't test on Windows + R<4.0 due to missing C++17 support of Rtools35
+          # Use 4.0 to trigger usage of Rtools40
+          - {os: windows-latest, r: '4.0'}
 
           # Use older ubuntu to maximise backward compatibility
           - {os: ubuntu-18.04,   r: 'devel', http-user-agent: 'release'}
