@@ -119,115 +119,115 @@ World Scientific.
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">rextmo</span><span class="op">(</span><span class="fl">10</span>, <span class="fl">3</span>, <span class="fu"><a href="AlphaStableBernsteinFunction-class.html">AlphaStableBernsteinFunction</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log2</a></span><span class="op">(</span><span class="fl">2</span>  <span class="op">-</span> <span class="fl">0.5</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]      [,2]      [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 1.0532201 0.1342543 1.0532201</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 2.0148398 0.2441802 2.6586850</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.4266984 1.7191085 2.9390995</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.9426690 0.9426690 0.4438175</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.1646115 0.1646115 0.1646115</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 1.4782288 1.4782288 1.0846330</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 2.2980015 1.1619226 0.2655781</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 3.5831492 2.7489738 2.1674063</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 1.5494220 0.1251068 0.1251068</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 2.0019940 2.0019940 1.6700679</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]      [,2]       [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 2.2006843 2.2006843 0.09265645</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.3687940 0.4937123 0.36879401</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 1.7986336 1.2349211 0.05256958</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.7901493 2.1810884 1.39259700</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 3.0233746 1.7990468 1.62453014</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 4.2597790 0.5285621 0.52856207</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 2.8202982 0.3608124 1.01166750</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.5873549 0.5873549 0.46129619</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 2.2559338 2.3222195 2.25593383</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 1.4160652 0.7470752 0.06993407</span>
 <span class="r-in"><span class="fu">rextmo</span><span class="op">(</span><span class="fl">10</span>, <span class="fl">3</span>, <span class="fu"><a href="LinearBernsteinFunction-class.html">LinearBernsteinFunction</a></span><span class="op">(</span>scale <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span>                    <span class="co"># independence</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]      [,2]      [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 4.1423828 2.6064893 2.9542080</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 1.0824650 1.1978926 2.0236242</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 2.4289980 2.3791811 1.7018386</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 8.1490808 1.7003975 0.8637372</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 3.8086826 0.5785201 1.3774649</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 1.2515101 1.2236609 0.1229193</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.4794320 0.2375766 0.1223151</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 2.9343691 2.8031971 0.1417498</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 1.1016193 0.8391915 0.9554908</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.1449477 0.8859820 0.1852423</span>
-<span class="r-in"><span class="fu">rextmo</span><span class="op">(</span><span class="fl">10</span>, <span class="fl">3</span>, <span class="fu"><a href="ConstantBernsteinFunction-class.html">ConstantBernsteinFunction</a></span><span class="op">(</span>constant <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span>               <span class="co"># comonotone</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]       [,2]       [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 2.07191409 2.07191409 2.07191409</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 2.85272972 2.85272972 2.85272972</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.07983915 0.07983915 0.07983915</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.95048948 0.95048948 0.95048948</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.68816721 0.68816721 0.68816721</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.58859513 0.58859513 0.58859513</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 1.37274292 1.37274292 1.37274292</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.12326953 0.12326953 0.12326953</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 1.15212072 1.15212072 1.15212072</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.43963184 0.43963184 0.43963184</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.96238633 1.16402974 0.44008405</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 1.69963857 1.68838697 3.51431156</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 1.40391659 0.03138997 0.09824662</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.32148477 0.74004709 0.45378044</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 4.04812238 0.94747948 1.11758450</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.14600473 0.03775907 0.44832101</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 2.01627300 0.08363434 0.11164819</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 1.67636304 0.26044703 2.67903049</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.01819022 0.51201805 0.19530723</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.18986250 1.33700805 0.06522249</span>
+<span class="r-in"><span class="fu">rextmo</span><span class="op">(</span><span class="fl">10</span>, <span class="fl">3</span>, <span class="fu"><a href="ConstantBernsteinFunction-class.html">ConstantBernsteinFunction</a></span><span class="op">(</span>constant <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span>               <span class="co"># comonotone</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]      [,2]      [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.2906026 0.2906026 0.2906026</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 1.0703266 1.0703266 1.0703266</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.1052173 0.1052173 0.1052173</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 1.2021540 1.2021540 1.2021540</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 1.0461150 1.0461150 1.0461150</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 1.8697112 1.8697112 1.8697112</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.2077975 0.2077975 0.2077975</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 2.7424956 2.7424956 2.7424956</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.7179833 0.7179833 0.7179833</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 1.5611554 1.5611554 1.5611554</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu">rextmo</span><span class="op">(</span><span class="fl">10</span>, <span class="fl">3</span>, <span class="fu"><a href="AlphaStableBernsteinFunction-class.html">AlphaStableBernsteinFunction</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log2</a></span><span class="op">(</span><span class="fl">2</span>  <span class="op">-</span> <span class="fl">0.5</span><span class="op">)</span><span class="op">)</span>, method <span class="op">=</span> <span class="st">"AM"</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]       [,2]       [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 2.0489122 0.67767212 1.14013427</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.2092223 0.74640140 0.74640140</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.8186717 0.40799454 0.40799454</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.1919315 0.31871903 0.31871903</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.1319511 0.13195112 0.59483982</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.1214770 0.03988852 0.03988852</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 4.0091848 0.34358021 0.64328908</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 1.0907235 1.45214794 1.09346964</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 1.0134407 0.08761990 1.01344070</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 1.7885214 1.65231790 1.85166308</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]       [,2]       [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 1.01672897 0.18664079 0.38690048</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.68494241 2.11468803 0.78479118</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 1.06069116 0.34594908 1.06069116</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.69285973 1.43562791 1.37032663</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.50408426 0.50408426 0.50408426</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.24908498 0.24908498 0.79872861</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 1.27096872 0.07356381 2.91932836</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.03275745 1.53687759 1.53687759</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 1.10797424 2.67617764 0.08224562</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.29518870 1.54986832 0.99509255</span>
 <span class="r-in"><span class="fu">rextmo</span><span class="op">(</span><span class="fl">10</span>, <span class="fl">3</span>, <span class="fu"><a href="LinearBernsteinFunction-class.html">LinearBernsteinFunction</a></span><span class="op">(</span>scale <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>, method <span class="op">=</span> <span class="st">"AM"</span><span class="op">)</span>                   <span class="co"># independence</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]      [,2]        [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.81104924 0.7189879 0.008971597</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.79788364 1.6425030 0.848945795</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 1.97440602 3.2176839 0.108775048</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.03987006 0.4211554 0.563556523</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.98847036 0.3417460 0.387054825</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 1.41946302 1.5226897 0.092915183</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.06235749 4.2789361 1.475609705</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 1.12257831 7.0530673 1.090066627</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 2.43882335 0.5031131 0.949605016</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 2.45962132 0.1526625 0.210978462</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]      [,2]       [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.03508441 0.6006718 0.01508779</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.13299160 1.5692094 0.05478579</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 4.26653377 1.3390775 0.86391158</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.22258681 0.0524059 2.47900736</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.11185473 1.8473211 0.38333527</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 1.57934810 3.0342820 1.06716840</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 9.18700010 1.8479789 0.15489221</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 1.21395672 1.3538347 1.28306912</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.52977560 0.6209332 1.44138565</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.87207956 1.3975999 0.12659489</span>
 <span class="r-in"><span class="fu">rextmo</span><span class="op">(</span><span class="fl">10</span>, <span class="fl">3</span>, <span class="fu"><a href="ConstantBernsteinFunction-class.html">ConstantBernsteinFunction</a></span><span class="op">(</span>constant <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>, method <span class="op">=</span> <span class="st">"AM"</span><span class="op">)</span>              <span class="co"># comonotone</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]       [,2]       [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.38142943 0.38142943 0.38142943</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.40470628 0.40470628 0.40470628</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.24455729 0.24455729 0.24455729</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 2.22033352 2.22033352 2.22033352</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.11111658 0.11111658 0.11111658</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 1.13606898 1.13606898 1.13606898</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.11233162 0.11233162 0.11233162</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.78542817 0.78542817 0.78542817</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.01786081 0.01786081 0.01786081</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 4.42683958 4.42683958 4.42683958</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 2.18861230 2.18861230 2.18861230</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 1.14616015 1.14616015 1.14616015</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 2.14999835 2.14999835 2.14999835</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.25641479 0.25641479 0.25641479</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.15489578 0.15489578 0.15489578</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.13069032 0.13069032 0.13069032</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 4.99550860 4.99550860 4.99550860</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.06787707 0.06787707 0.06787707</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.36663991 0.36663991 0.36663991</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.34796856 0.34796856 0.34796856</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu">rextmo</span><span class="op">(</span><span class="fl">10</span>, <span class="fl">3</span>, <span class="fu"><a href="AlphaStableBernsteinFunction-class.html">AlphaStableBernsteinFunction</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log2</a></span><span class="op">(</span><span class="fl">2</span>  <span class="op">-</span> <span class="fl">0.5</span><span class="op">)</span><span class="op">)</span>, method <span class="op">=</span> <span class="st">"ESM"</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]      [,2]      [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.1888568 0.1888568 0.1245797</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 1.2796723 0.2243419 1.2796723</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 2.8092597 0.5120205 3.8613233</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 1.2372924 1.2372924 1.2372924</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 3.0041521 2.4297317 2.1171727</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 2.4905037 2.4905037 0.1184049</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.5882531 2.9025789 1.6201255</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 3.9786846 3.9786846 3.9786846</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.1097987 3.4800915 0.9268327</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.7104200 0.2065119 1.0749078</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]       [,2]       [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 1.0830426 0.84490506 3.02700608</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.3615337 0.02279786 0.36153366</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.8097678 2.81977081 0.53870823</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 3.0864168 0.27202242 0.22383941</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 1.0128429 1.01284286 1.01284286</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 3.0117448 0.00293198 1.69469716</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 3.0489987 2.02117621 2.02117621</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.8254594 0.82545940 0.82545940</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.8904027 1.14350001 0.25608185</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.5040296 0.50402964 0.09552935</span>
 <span class="r-in"><span class="fu">rextmo</span><span class="op">(</span><span class="fl">10</span>, <span class="fl">3</span>, <span class="fu"><a href="LinearBernsteinFunction-class.html">LinearBernsteinFunction</a></span><span class="op">(</span>scale <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>, method <span class="op">=</span> <span class="st">"ESM"</span><span class="op">)</span>                  <span class="co"># independence</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]      [,2]       [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.7400299 0.1654017 1.86780887</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.4273744 0.4861880 1.55490141</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.5071992 0.7118483 0.31812631</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.6920826 0.5293146 1.23300840</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.1080440 0.2308830 0.03705070</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 1.3803700 0.2972303 0.12220717</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.1847702 1.3211719 2.04375101</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.8060620 0.5261800 0.31237274</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.5853186 1.1934296 0.09936731</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 1.7044325 0.8321938 3.64467120</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]       [,2]       [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 3.27753281 0.91372883 1.57313474</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 1.15443867 0.38669035 0.12961404</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.52276346 0.88722585 0.57105660</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.95803206 0.70147737 0.51102535</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 3.91970042 0.95676281 1.23552220</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 2.13047773 0.35961842 0.03291188</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.11126261 0.95257179 0.11010922</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 1.36130421 0.01278399 1.86935726</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.08909466 0.41418395 0.44309541</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.03484187 1.47347899 0.63785243</span>
 <span class="r-in"><span class="fu">rextmo</span><span class="op">(</span><span class="fl">10</span>, <span class="fl">3</span>, <span class="fu"><a href="ConstantBernsteinFunction-class.html">ConstantBernsteinFunction</a></span><span class="op">(</span>constant <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>, method <span class="op">=</span> <span class="st">"ESM"</span><span class="op">)</span>             <span class="co"># comonotone</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>              [,1]        [,2]        [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.424203436 0.424203436 0.424203436</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.002185913 0.002185913 0.002185913</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 1.012895951 1.012895951 1.012895951</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.882049224 0.882049224 0.882049224</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.976210563 0.976210563 0.976210563</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.285615328 0.285615328 0.285615328</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.936944500 0.936944500 0.936944500</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 1.604669660 1.604669660 1.604669660</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 1.502499863 1.502499863 1.502499863</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 1.156613692 1.156613692 1.156613692</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]       [,2]       [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 2.94955782 2.94955782 2.94955782</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 2.21453176 2.21453176 2.21453176</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.40774810 0.40774810 0.40774810</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.40925453 0.40925453 0.40925453</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.23055791 0.23055791 0.23055791</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.98917721 0.98917721 0.98917721</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.03100206 0.03100206 0.03100206</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.88050654 0.88050654 0.88050654</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 2.80468930 2.80468930 2.80468930</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 3.78233649 3.78233649 3.78233649</span>
 <span class="r-in"></span>
 </code></pre></div>
     </div>
