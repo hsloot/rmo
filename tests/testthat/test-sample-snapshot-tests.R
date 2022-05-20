@@ -1,4 +1,5 @@
 skip_on_cran()
+skip_if(!require_R_version("3.6.0")) # RNG changes, see https://bugs.r-project.org/bugzilla3/show_bug.cgi?id=17494
 
 set.seed(1632)
 
