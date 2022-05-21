@@ -2,7 +2,7 @@
 % Please edit documentation in R/sample.R
 \name{rexmo}
 \alias{rexmo}
-\title{Sample from an exchangeable Marshall–Olkin distribution}
+\title{Sample from exchangeable Marshall–Olkin distributions}
 \usage{
 rexmo(n, d, ex_intensities, method = c("MDCM", "AM", "ESM"))
 }
@@ -11,7 +11,7 @@ rexmo(n, d, ex_intensities, method = c("MDCM", "AM", "ESM"))
 
 \item{d}{an integer for the \emph{dimension}.}
 
-\item{ex_intensities}{a numeric vector with the exchangeable \emph{shock-size arrival intensities}.}
+\item{ex_intensities}{a numeric vector with the exchangeable \emph{shock-size-arrival intensities}.}
 
 \item{method}{a string indicating which sampling algorithm should be used.
 Use "MDCM" for the \emph{Markovian death-counting model}, "AM" for the \emph{Arnold model}, and "ESM" for
@@ -19,58 +19,106 @@ the \emph{exogenous shock model}. We recommend using the \emph{ESM} only for sma
 can be used up until dimension \eqn{30}.}
 }
 \value{
-\code{rexmo} returns a numeric matrix with \eqn{n} rows and \eqn{d} columns with the rows
-corresponding to iid distributed samples of a \eqn{d}-variate \emph{exchangeable Marshall–Olkin
-distribution} with exchangeable \emph{shock-size arrival intensities} \code{ex_intensities}.
+\code{rexmo} returns a numeric matrix with \code{n} rows and \code{d} columns with the rows
+corresponding to iid distributed samples of a \code{d}-variate \emph{exchangeable Marshall–Olkin
+distribution} with exchangeable \emph{shock-size-arrival intensities} \code{ex_intensities}.
 }
 \description{
-Draws \eqn{n} iid samples from a \eqn{d}-variate \emph{exchangeable Marshall–Olkin
-distribution} parametrized by exchangeable \emph{shock-size arrival rates}.
+Draws \code{n} iid samples from a \code{d}-variate \emph{exchangeable Marshall–Olkin distribution} parametrized
+by exchangeable \emph{shock-size-arrival intensities}.
 }
-\section{Parametrization}{
-The exchangeable Marshall–Olkin distribution has the following property:
-a \emph{shock arrival intensity} \eqn{\lambda_I} for a set \eqn{I} only depends on the cardinality of
-\eqn{I}, i.e., the \emph{exchangeable shock arrival intensities} are defined for \eqn{I} with \eqn{i =
-\lvert I\rvert} by \eqn{\lambda_i = \lambda_I}, see \insertCite{@see Sec. 3.2 @Mai2017a}{rmo}.
-The \emph{exchangeable Marshall–Olkin distribution} is parametrized by the exchangeable \emph{shock-size
-arrival intensities} defined by
+\details{
+The \emph{exchangeable Marshall–Olkin distribution} has the survival function
 \deqn{
- \eta_i
-   = \binom{d}{i} \lambda_i ,
-   \quad i \in {\{ 1, \ldots, d \}} .
+    \bar{F}{(t)}
+        = \exp{\left\{ -\sum_{i=1}^{d}{ \eta_{i} \tau_{[i]} } \right\}} ,
+            \quad t = {(t_{1}, \ldots, t_{d})} > 0 ,
 }
+for \emph{exchangeable shock-size-arrival intensities} \eqn{\eta_{i} \geq 0}, \eqn{1 \leq i \leq d}
+and \eqn{t_{[1]} \geq \cdots \geq t_{[d]}}, see \insertCite{Mai2017a}{rmo}.
+They are called \emph{shock-size-arrival intensities} as they correspond to the rates of the minimums
+of all independent exponential random variables corresponding to \eqn{I}-sized shocks from the
+\emph{exogenous shock model (ESM)}, and a shock-size-arrival intensity \eqn{\eta_{i}} of shock-size
+\eqn{i} equal to zero implies that no shock with size \eqn{i} occurs.
+The relationsip of \emph{exchangeable shock-size-arrival intensities} to the \emph{shock-arrival
+intensities} of the \emph{Marshall–Olkin distribution}, see \code{\link[=rmo]{rmo()}}, is as follows:
+\deqn{
+    \eta_{i}
+        = \binom{d}{i} \lambda_{i} .
 }
-
-\section{Simulation algorithms}{
+\subsection{Simulation algorithms}{
 \subsection{General Marshall–Olkin sampling algorithms}{
 
-The \emph{ESM} and \emph{AM} simulation algorithms for the general \emph{Marshall–Olkin distribution} can be
-used; for this, the exchangeable \emph{shock-size arrival intensities} are converted to the
-corresponding \emph{shock arrival intensities} and passed to \code{\link[=rmo]{rmo()}}.
+The \emph{exogenous shock model (ESM)} and \emph{Arnold model (AM)} simulation algorithms for the general
+\emph{Marshall–Olkin distribution} can be used.
+For this, the exchangeable \emph{shock-size-arrival intensities} are converted to the
+corresponding \emph{shock-arrival intensities} and passed to \code{\link[=rmo]{rmo()}}.
 }
 
 \subsection{Markovian death-set model}{
 
 TBD; see \insertCite{@see pp. 122 psqq. @Mai2017a}{rmo} for a similar algorithm.
 }
+
 }
-
+}
 \examples{
-rexmo(10, 3, c(1.2, 0.3, 0.4))
-rexmo(10, 3, c(3, 0, 0))          ## independence
-rexmo(10, 3, c(0, 0, 1))          ## comonotone
+rexmo(
+    10, 3,
+    c(1.2, 0.3, 0.4))
+## independence
+rexmo(
+    10, 3,
+    c(3, 0, 0))
+## comonotone
+rexmo(
+    10, 3,
+    c(0, 0, 1))
 
-rexmo(10, 3, c(1.2, 0.3, 0.4), method = "MDCM")
-rexmo(10, 3, c(3, 0, 0), method = "MDCM")          ## independence
-rexmo(10, 3, c(0, 0, 1), method = "MDCM")          ## comonotone
+rexmo(
+    10, 3,
+    c(1.2, 0.3, 0.4),
+    method = "MDCM")
+## independence
+rexmo(
+    10, 3,
+    c(3, 0, 0),
+    method = "MDCM")
+## comonotone
+rexmo(
+    10, 3,
+    c(0, 0, 1),
+    method = "MDCM")
 
-rexmo(10, 3, c(1.2, 0.3, 0.4), method = "AM")
-rexmo(10, 3, c(3, 0, 0), method = "AM")          ## independence
-rexmo(10, 3, c(0, 0, 1), method = "AM")          ## comonotone
+rexmo(
+    10, 3,
+    c(1.2, 0.3, 0.4),
+    method = "AM")
+## independence
+rexmo(
+    10, 3,
+    c(3, 0, 0),
+    method = "AM")
+## comonotone
+rexmo(
+    10, 3,
+    c(0, 0, 1),
+    method = "AM")
 
-rexmo(10, 3, c(1.2, 0.3, 0.4), method = "ESM")
-rexmo(10, 3, c(3, 0, 0), method = "ESM")          ## independence
-rexmo(10, 3, c(0, 0, 1), method = "ESM")          ## comonotone
+rexmo(
+    10, 3,
+    c(1.2, 0.3, 0.4),
+    method = "ESM")
+## independence
+rexmo(
+    10, 3,
+    c(3, 0, 0),
+    method = "ESM")
+## comonotone
+rexmo(
+    10, 3,
+    c(0, 0, 1),
+    method = "ESM")
 
 }
 \references{

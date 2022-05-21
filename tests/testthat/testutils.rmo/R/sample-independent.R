@@ -35,31 +35,31 @@
 #'   the jumps of the compound Poisson subordinator
 #'
 #' @examples
-#' rextmo_lfm_independence(10, 3, 0, 0, 1, "rposval", list("value"=1))
+#' rextmo_lfm_independence(10, 3, 0, 0, 1, "rposval", list("value" = 1))
 #' @include sample-helper.R
 #' @export
 rextmo_lfm_independence <- function( # nolint
-    n, d = 2,
-    rate = 0, rate_killing = 0, rate_drift = 1,
-    rjump_name = "rposval", rjump_arg_list = list("value" = 0)) {
-  stopifnot(
-    is.numeric(n) && 1L == length(n) && 0 == n %% 1 && n > 0 &&
-    is.numeric(d) && 1L == length(d) && 0 == d %% 1 && d > 0 &&
-    is.numeric(rate) && 1L == length(rate) && rate == 0 &&
-    is.numeric(rate_killing) && 1L == length(rate_killing) &&
-      rate_killing == 0 &&
-    is.numeric(rate_drift) && 1L == length(rate_drift) && rate_drift > 0 &&
-    is.character(rjump_name) && 1L == length(rjump_name) &&
-      rjump_name %in% c("rexp", "rposval", "rpareto"))
+                                    n, d = 2,
+                                    rate = 0, rate_killing = 0, rate_drift = 1,
+                                    rjump_name = "rposval", rjump_arg_list = list("value" = 0)) {
+    stopifnot(
+        is.numeric(n) && 1L == length(n) && 0 == n %% 1 && n > 0 &&
+            is.numeric(d) && 1L == length(d) && 0 == d %% 1 && d > 0 &&
+            is.numeric(rate) && 1L == length(rate) && rate == 0 &&
+            is.numeric(rate_killing) && 1L == length(rate_killing) &&
+            rate_killing == 0 &&
+            is.numeric(rate_drift) && 1L == length(rate_drift) && rate_drift > 0 &&
+            is.character(rjump_name) && 1L == length(rjump_name) &&
+            rjump_name %in% c("rexp", "rposval", "rpareto"))
 
-  out <- matrix(NA, nrow=n, ncol=d)
-  for (k in 1:n) {
-    ## sample unit exponential barrier values
-    barrier_values <- rexp(d, rate = 1)
-    ## the return values are the times a pure-drift subordinator surpasses
-    ## these barrier values
-    out[k, ] <- barrier_values / rate_drift
-  }
+    out <- matrix(NA, nrow = n, ncol = d)
+    for (k in 1:n) {
+        ## sample unit exponential barrier values
+        barrier_values <- rexp(d, rate = 1)
+        ## the return values are the times a pure-drift subordinator surpasses
+        ## these barrier values
+        out[k, ] <- barrier_values / rate_drift
+    }
 
-  out
+    out
 }

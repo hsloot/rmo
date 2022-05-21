@@ -13,4 +13,5 @@ IncludeCategories:
   - Regex:           '".*"'
     Priority:        4
     SortPriority:    0
+IndentWidth: 4
 ...

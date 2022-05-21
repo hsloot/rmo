@@ -12,7 +12,7 @@
 \alias{exIntensities,BernsteinFunction-method}
 \alias{intensities,BernsteinFunction-method}
 \alias{exQMatrix,BernsteinFunction-method}
-\title{Virtual Class \code{BernsteinFunction} for Bernstein Functions}
+\title{Bernstein functions}
 \usage{
 valueOf(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...)
 
@@ -37,81 +37,56 @@ exQMatrix(object, d, ...)
 (for \code{levyDensity}) or \linkS4class{CompleteBernsteinFunction}
 (for \code{stieltjesDensity}).}
 
-\item{x}{Non-negativ numeric vector at which the iterated difference of
+\item{x}{a non-negativ numeric vector at which the iterated difference of
 the Bernstein function is evaluated.}
 
-\item{difference_order}{The order of the alternating iterated forward
-differences taken on the Bernstein function (\eqn{j} in
-the representation).}
+\item{difference_order}{a non-negative integer with the order of the alternating iterated
+forward differences taken on the Bernstein function.}
 
-\item{n, k}{Non-negative numbers for the binomial factors.}
+\item{n, k}{non-negative numbers for the binomial factor.}
 
-\item{cscale}{Positive number, the composit scaling factor.}
+\item{cscale}{a positive numeric scalar with the composite scaling factor.}
 
-\item{...}{Pass-through parameter}
+\item{...}{pass-through parameter}
 
-\item{d}{Dimension}
+\item{d}{a positive integer, larger than two, for the \emph{dimension}.}
 }
 \description{
-A virtual superclass for all implementations of the various classes of
-Bernstein functions which have a representaion
-\deqn{
- \psi(x) = a + b x + \int_0^\infty (1 - e^{-ux}) \nu(du) , x > 0
-}
-for non-negative constants \eqn{a, b \geq 0}, called \emph{killing rate} and
-\emph{drift}, and a \emph{Lévy measure} \eqn{\nu} on \eqn{(0, \infty)}.
+A virtual superclass for all implementations of the various classes of \emph{Bernstein functions}.
 }
 \details{
-Bernstein functions have a 1-1 relationship to Lévy subordinators s.t. for
-every Bernstein function \eqn{\psi}, there exists a Lévy subordinator
-\eqn{\Lambda} with
+A \emph{Bernstein function} is a non-negative, non-decreasing, infinitely often differentiable
+function with whose recursive finite forward differences have alternating signs:
 \deqn{
-  E[e^{-x \Lambda_t}]
-    = e^{-t \psi(x)} , t, x > 0 .
+    {(-1)}^{i-1} \Delta^{i}{ \psi{(x)} }
+        \geq 0 ,
+            \quad \forall  i \in \mathbb{N}, x \geq 0 .
 }
-\itemize{
-\item \eqn{a} Describes the (exponential) \emph{killing rate}, which
-determines the rate of an exponentially distributed event that sends
-the subordinator to infinity.
-\item \eqn{b} Describes the linear \emph{drift} of the Lévy subordinator.
-\item \eqn{\nu} determines the arrival-rate and shock-size distribution
-for the jumps of the Lévy subordinator.
-}
-
-For a theoretic treatment of Bernstein function, we refer to
-\insertCite{Schilling2012a}{rmo}.
-
-The method \code{valueOf} is implemented different, depending on the specific
-Bernstein function to get the best possible accuracy:
-\itemize{
-\item For \code{difference_order == 0L}, the values are calculated with closed
-form formulas if possible.
-\item For \emph{linear Bernstein functions} and \emph{constant Bernstein functions}
-the iterated differences are calculated automatically.
-\item For \emph{scaled Bernstein functions} and \emph{sums of Bernstein functions}
-the result is calculted recursively.
-\item For all other cases, the values are calculated using either the
-Lévy-Khintchine or the Stieltjes representation. Which one is chosen,
-depends on the case and can be manually overwritten with
-\code{method = "levy"} or \code{method = "stieltjes"}.
+In particular, the following sequence defines an \emph{extendible Marshall–Olkin distribution}:
+\deqn{
+    {(-1)}^{i-1} \Delta^{i}{ \psi{(d-i)} } ,
+        \quad 1 \leq i \leq d .
 }
 }
 \section{Functions}{
 \itemize{
-\item \code{valueOf}: Calculate the values for a compound scaled Bernstein function and its higher-order,
-alternating iterated forward differences, possibly scaled by a binomial
+\item \code{valueOf}: Calculate the values for a Bernstein function and its higher-order, alternating iterated
+forward differences, possibly scaled by a binomial coefficient, i.e.
 \deqn{
-    {(-1)}^{j-1} \Delta^j \psi(c x), x > 0.
+      {(-1)}^{j-1} \Delta^{j}{ \psi(c x) } ,
+          \quad x > 0 .
   }
 
-\item \code{uexIntensities}: Calculates (unscaled) exchangeable shock arrival intensities, see \code{\link[=rmo]{rmo()}} and \code{\link[=rexmo]{rexmo()}}.
+\item \code{uexIntensities}: Calculates (unscaled) \emph{exchangeable shock-arrival intensities}, see \code{\link[=rmo]{rmo()}} and \code{\link[=rexmo]{rexmo()}}.
 
-\item \code{intensities}: Calculates \code{intensities} parameter for \code{\link[=rmo]{rmo()}}.
+\item \code{intensities}: Calculates the \emph{shock-arrival intensities}, the \code{intensities} parameter for
+\code{\link[=rmo]{rmo()}}.
 
-\item \code{exIntensities}: Calculates (scaled) exchangeable shock-size arrival intensities for \code{\link[=rexmo]{rexmo()}}.
+\item \code{exIntensities}: Calculates \emph{exchangeable shock-size-arrival intensities}, the \code{ex_intensities} parameter for
+\code{\link[=rexmo]{rexmo()}}.
 
-\item \code{exQMatrix}: Calculates the infinitesimal generator matrix of the corresponding Markovian default-counting
-process used internally by \code{\link[=rexmo]{rexmo()}}.
+\item \code{exQMatrix}: Calculates the \emph{infinitesimal Markov generator matrix} of the corresponding (Markovian)
+default-counting process, used internally by \code{\link[=rexmo]{rexmo()}}.
 }}
 
 \examples{
@@ -125,18 +100,14 @@ exQMatrix(AlphaStableBernsteinFunction(4e-1), 3L)
 
 }
 \references{
-\insertAllCited{}
+\insertRef{Schilling2012a}{rmo}
 }
 \seealso{
-\linkS4class{LevyBernsteinFunction}, \linkS4class{CompleteBernsteinFunction},
-\linkS4class{ConstantBernsteinFunction},
-\linkS4class{ScaledBernsteinFunction},
-\linkS4class{SumOfBernsteinFunctions},
-\linkS4class{LinearBernsteinFunction},
-\linkS4class{PoissonBernsteinFunction},
-\linkS4class{AlphaStableBernsteinFunction},
-\linkS4class{ExponentialBernsteinFunction},
-\linkS4class{InverseGaussianBernsteinFunction},
-\linkS4class{GammaBernsteinFunction},
+\linkS4class{LevyBernsteinFunction}, \linkS4class{ScaledBernsteinFunction},
+\linkS4class{SumOfBernsteinFunctions}, \linkS4class{CompositeScaledBernsteinFunction},
+\linkS4class{CompleteBernsteinFunction}, \linkS4class{ConstantBernsteinFunction},
+\linkS4class{LinearBernsteinFunction}, \linkS4class{PoissonBernsteinFunction},
+\linkS4class{AlphaStableBernsteinFunction}, \linkS4class{ExponentialBernsteinFunction},
+\linkS4class{InverseGaussianBernsteinFunction}, \linkS4class{GammaBernsteinFunction},
 \linkS4class{ParetoBernsteinFunction}
 }

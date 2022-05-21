@@ -2,53 +2,39 @@
 #'    callNextMethod show classLabel
 NULL
 
-#' Virtual Class \code{BernsteinFunction} for Bernstein Functions
+#' Bernstein functions
 #'
-#' A virtual superclass for all implementations of the various classes of
-#' Bernstein functions which have a representaion
+#' A virtual superclass for all implementations of the various classes of *Bernstein functions*.
+#'
+#' @details
+#'
+#' A *Bernstein function* is a non-negative, non-decreasing, infinitely often differentiable
+#' function with whose recursive finite forward differences have alternating signs:
 #' \deqn{
-#'  \psi(x) = a + b x + \int_0^\infty (1 - e^{-ux}) \nu(du) , x > 0
+#'     {(-1)}^{i-1} \Delta^{i}{ \psi{(x)} }
+#'         \geq 0 ,
+#'             \quad \forall  i \in \mathbb{N}, x \geq 0 .
 #' }
-#' for non-negative constants \eqn{a, b \geq 0}, called \emph{killing rate} and
-#' \emph{drift}, and a \emph{Lévy measure} \eqn{\nu} on \eqn{(0, \infty)}.
-#'
-#' Bernstein functions have a 1-1 relationship to Lévy subordinators s.t. for
-#' every Bernstein function \eqn{\psi}, there exists a Lévy subordinator
-#' \eqn{\Lambda} with
+#' In particular, the following sequence defines an *extendible Marshall–Olkin distribution*:
 #' \deqn{
-#'   E[e^{-x \Lambda_t}]
-#'     = e^{-t \psi(x)} , t, x > 0 .
+#'     {(-1)}^{i-1} \Delta^{i}{ \psi{(d-i)} } ,
+#'         \quad 1 \leq i \leq d .
 #' }
-#' \itemize{
-#'   \item \eqn{a} Describes the (exponential) \emph{killing rate}, which
-#'     determines the rate of an exponentially distributed event that sends
-#'     the subordinator to infinity.
-#'   \item \eqn{b} Describes the linear \emph{drift} of the Lévy subordinator.
-#'   \item \eqn{\nu} determines the arrival-rate and shock-size distribution
-#'     for the jumps of the Lévy subordinator.
-#' }
-#'
-#' For a theoretic treatment of Bernstein function, we refer to
-#' \insertCite{Schilling2012a}{rmo}.
 #'
 #' @references
-#'   \insertAllCited{}
+#'   \insertRef{Schilling2012a}{rmo}
 #'
-#' @seealso [LevyBernsteinFunction-class], [CompleteBernsteinFunction-class],
-#'   [ConstantBernsteinFunction-class],
-#'   [ScaledBernsteinFunction-class],
-#'   [SumOfBernsteinFunctions-class],
-#'   [LinearBernsteinFunction-class],
-#'   [PoissonBernsteinFunction-class],
-#'   [AlphaStableBernsteinFunction-class],
-#'   [ExponentialBernsteinFunction-class],
-#'   [InverseGaussianBernsteinFunction-class],
-#'   [GammaBernsteinFunction-class],
-#'   [ParetoBernsteinFunction-class]
+#' @seealso [LevyBernsteinFunction-class], [ScaledBernsteinFunction-class],
+#' [SumOfBernsteinFunctions-class], [CompositeScaledBernsteinFunction-class],
+#' [CompleteBernsteinFunction-class], [ConstantBernsteinFunction-class],
+#' [LinearBernsteinFunction-class], [PoissonBernsteinFunction-class],
+#' [AlphaStableBernsteinFunction-class], [ExponentialBernsteinFunction-class],
+#' [InverseGaussianBernsteinFunction-class], [GammaBernsteinFunction-class],
+#' [ParetoBernsteinFunction-class]
 #'
 #' @export
 setClass("BernsteinFunction", # nolint
-  contains = "VIRTUAL")
+    contains = "VIRTUAL")
 
 
 #' Class for the \emph{linear Bernstein function}
@@ -68,8 +54,8 @@ setClass("BernsteinFunction", # nolint
 #'
 #' @export LinearBernsteinFunction
 LinearBernsteinFunction <- setClass("LinearBernsteinFunction", # nolint
-  contains = "BernsteinFunction",
-  slots = c(scale = "numeric"))
+    contains = "BernsteinFunction",
+    slots = c(scale = "numeric"))
 
 #' Class for the \emph{constant Bernstein function}
 #'
@@ -89,8 +75,8 @@ LinearBernsteinFunction <- setClass("LinearBernsteinFunction", # nolint
 #'
 #' @export ConstantBernsteinFunction
 ConstantBernsteinFunction <- setClass("ConstantBernsteinFunction", # nolint
-  contains = "BernsteinFunction",
-  slots = c(constant = "numeric"))
+    contains = "BernsteinFunction",
+    slots = c(constant = "numeric"))
 
 
 #' Class for \emph{scaled Bernstein functions}
@@ -111,8 +97,8 @@ ConstantBernsteinFunction <- setClass("ConstantBernsteinFunction", # nolint
 #'
 #' @export ScaledBernsteinFunction
 ScaledBernsteinFunction <- setClass("ScaledBernsteinFunction", # nolint
-  contains = "BernsteinFunction",
-  slots = c(scale = "numeric", original = "BernsteinFunction"))
+    contains = "BernsteinFunction",
+    slots = c(scale = "numeric", original = "BernsteinFunction"))
 
 
 #' Class for *input scaled Bernstein functions*
@@ -136,8 +122,8 @@ ScaledBernsteinFunction <- setClass("ScaledBernsteinFunction", # nolint
 #'
 #' @export SumOfBernsteinFunctions
 SumOfBernsteinFunctions <- setClass("SumOfBernsteinFunctions", # nolint
-  contains = "BernsteinFunction",
-  slots = c(first = "BernsteinFunction", second = "BernsteinFunction"))
+    contains = "BernsteinFunction",
+    slots = c(first = "BernsteinFunction", second = "BernsteinFunction"))
 
 #' Class for the *composite scaled Bernstein function*
 #'
@@ -157,11 +143,11 @@ SumOfBernsteinFunctions <- setClass("SumOfBernsteinFunctions", # nolint
 #'
 #' @export CompositeScaledBernsteinFunction
 CompositeScaledBernsteinFunction <- setClass("CompositeScaledBernsteinFunction", # nolint
-  contains  = "BernsteinFunction",
-  slots = c(cscale = "numeric", original = "BernsteinFunction"))
+    contains = "BernsteinFunction",
+    slots = c(cscale = "numeric", original = "BernsteinFunction"))
 
 
-#' Virtual Class \code{LevyBernsteinFunction} for Levy Bernstein Functions
+#' Virtual Class `LevyBernsteinFunction` for Levy Bernstein Functions
 #'
 #' A virtual superclass for all Bernstein functions which can representated
 #' by a Lévy density (no drift or killing rate). That means that there exists
@@ -174,9 +160,9 @@ CompositeScaledBernsteinFunction <- setClass("CompositeScaledBernsteinFunction",
 #'
 #' @export
 setClass("LevyBernsteinFunction",
-  contains = c("BernsteinFunction", "VIRTUAL"))
+    contains = c("BernsteinFunction", "VIRTUAL"))
 
-#' Virtual Class \code{CompleteBernsteinFunction} for Complete Bernstein Functions
+#' Virtual Class `CompleteBernsteinFunction` for Complete Bernstein Functions
 #'
 #' A virtual superclass for all Bernstein functions which can representated
 #' by a Stieltjes density (no drift or killing rate). That means that there exists
@@ -191,7 +177,7 @@ setClass("LevyBernsteinFunction",
 #'
 #' @export
 setClass("CompleteBernsteinFunction",
-  contains = c("LevyBernsteinFunction", "VIRTUAL"))
+    contains = c("LevyBernsteinFunction", "VIRTUAL"))
 
 
 #' Class for the \emph{Poisson Bernstein function}
@@ -218,8 +204,8 @@ setClass("CompleteBernsteinFunction",
 #'
 #' @export PoissonBernsteinFunction
 PoissonBernsteinFunction <- setClass("PoissonBernsteinFunction", # nolint
-  contains = "LevyBernsteinFunction",
-  slots = c(eta = "numeric"))
+    contains = "LevyBernsteinFunction",
+    slots = c(eta = "numeric"))
 
 
 #' Class for the *\eqn{\alpha}-stable Bernstein function*
@@ -258,8 +244,8 @@ PoissonBernsteinFunction <- setClass("PoissonBernsteinFunction", # nolint
 #'
 #' @export AlphaStableBernsteinFunction
 AlphaStableBernsteinFunction <- setClass("AlphaStableBernsteinFunction", # nolint
-  contains = "CompleteBernsteinFunction",
-  slots = c(alpha = "numeric"))
+    contains = "CompleteBernsteinFunction",
+    slots = c(alpha = "numeric"))
 
 
 #' Class for the \emph{Inverse Gaussian Bernstein function}
@@ -297,8 +283,8 @@ AlphaStableBernsteinFunction <- setClass("AlphaStableBernsteinFunction", # nolin
 #'
 #' @export InverseGaussianBernsteinFunction
 InverseGaussianBernsteinFunction <- setClass("InverseGaussianBernsteinFunction", # nolint
-  contains = "CompleteBernsteinFunction",
-  slots = c(eta = "numeric"))
+    contains = "CompleteBernsteinFunction",
+    slots = c(eta = "numeric"))
 
 
 #' Class for the Exponential jump CPP Bernstein function
@@ -331,8 +317,8 @@ InverseGaussianBernsteinFunction <- setClass("InverseGaussianBernsteinFunction",
 #'
 #' @export ExponentialBernsteinFunction
 ExponentialBernsteinFunction <- setClass("ExponentialBernsteinFunction", # nolint
-  contains = "CompleteBernsteinFunction",
-  slots = c("lambda" = "numeric"))
+    contains = "CompleteBernsteinFunction",
+    slots = c("lambda" = "numeric"))
 
 
 #' Class for the \emph{Gamma Bernstein function}
@@ -370,8 +356,8 @@ ExponentialBernsteinFunction <- setClass("ExponentialBernsteinFunction", # nolin
 #'
 #' @export GammaBernsteinFunction
 GammaBernsteinFunction <- setClass("GammaBernsteinFunction", # nolint
-  contains = "CompleteBernsteinFunction",
-  slots = c(a = "numeric"))
+    contains = "CompleteBernsteinFunction",
+    slots = c(a = "numeric"))
 
 
 #' Class for the \emph{Pareto Bernstein function}
@@ -414,5 +400,5 @@ GammaBernsteinFunction <- setClass("GammaBernsteinFunction", # nolint
 #'
 #' @export ParetoBernsteinFunction
 ParetoBernsteinFunction <- setClass("ParetoBernsteinFunction", # nolint
-  contains = "LevyBernsteinFunction",
-  slots = c(alpha = "numeric", x0 = "numeric"))
+    contains = "LevyBernsteinFunction",
+    slots = c(alpha = "numeric", x0 = "numeric"))

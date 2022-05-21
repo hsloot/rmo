@@ -95,41 +95,41 @@ For more information, please read the corresponding  documentation
 for the respective Bernstein function.
 }
 \examples{
-ex_intensities_constant(10L, constant=1)
+ex_intensities_constant(10L, constant = 1)
 
-intensities_constant(10L, constant=1)
+intensities_constant(10L, constant = 1)
 
-ex_intensities_linear(10L, scale=1)
+ex_intensities_linear(10L, scale = 1)
 
-intensities_linear(10L, scale=1)
+intensities_linear(10L, scale = 1)
 
-ex_intensities_armageddon(10L, alpha=1, beta=0.5)
+ex_intensities_armageddon(10L, alpha = 1, beta = 0.5)
 
-intensities_armageddon(10L, alpha=1, beta=0.5)
+intensities_armageddon(10L, alpha = 1, beta = 0.5)
 
 ex_intensities_poisson(10L, eta = 0.2)
 
 intensities_poisson(10L, eta = 0.2)
 
-ex_intensities_alpha_stable(10L, alpha=0.4)
+ex_intensities_alpha_stable(10L, alpha = 0.4)
 
-intensities_alpha_stable(10L, alpha=0.4)
+intensities_alpha_stable(10L, alpha = 0.4)
 
-ex_intensities_exponential(10L, lambda=0.4)
+ex_intensities_exponential(10L, lambda = 0.4)
 
-intensities_exponential(10L, lambda=0.4)
+intensities_exponential(10L, lambda = 0.4)
 
-ex_intensities_gamma(10L, a=0.3)
+ex_intensities_gamma(10L, a = 0.3)
 
-intensities_gamma(10L, a=0.3)
+intensities_gamma(10L, a = 0.3)
 
-ex_intensities_pareto(10L, alpha=0.4, x0=5e-4)
+ex_intensities_pareto(10L, alpha = 0.4, x0 = 5e-4)
 
-intensities_pareto(10L, alpha=0.4, x0=5e-4)
+intensities_pareto(10L, alpha = 0.4, x0 = 5e-4)
 
-ex_intensities_inverse_gaussian(10L, eta=0.4)
+ex_intensities_inverse_gaussian(10L, eta = 0.4)
 
-intensities_inverse_gaussian(10L, eta=0.4)
+intensities_inverse_gaussian(10L, eta = 0.4)
 
 }
 \seealso{

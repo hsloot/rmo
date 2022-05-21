@@ -6,7 +6,7 @@ namespace math {
 
 template <typename _IntVal>
 constexpr _IntVal next_integral_value(_IntVal i) {
-  return ++i;
+    return ++i;
 }
 
 }  // namespace math
