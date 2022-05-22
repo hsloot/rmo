@@ -154,10 +154,10 @@ for the respective Bernstein function.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">ex_intensities_constant</span><span class="op">(</span><span class="fl">10L</span>, constant<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">ex_intensities_constant</span><span class="op">(</span><span class="fl">10L</span>, constant <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 0 0 0 0 0 0 0 0 0 1</span>
 <span class="r-in"></span>
-<span class="r-in"><span class="fu">intensities_constant</span><span class="op">(</span><span class="fl">10L</span>, constant<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu">intensities_constant</span><span class="op">(</span><span class="fl">10L</span>, constant <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    [1] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   [38] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   [75] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0</span>
@@ -187,10 +187,10 @@ for the respective Bernstein function.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [963] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1000] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1</span>
 <span class="r-in"></span>
-<span class="r-in"><span class="fu">ex_intensities_linear</span><span class="op">(</span><span class="fl">10L</span>, scale<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu">ex_intensities_linear</span><span class="op">(</span><span class="fl">10L</span>, scale <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 10  0  0  0  0  0  0  0  0  0</span>
 <span class="r-in"></span>
-<span class="r-in"><span class="fu">intensities_linear</span><span class="op">(</span><span class="fl">10L</span>, scale<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu">intensities_linear</span><span class="op">(</span><span class="fl">10L</span>, scale <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    [1] 1 1 0 1 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   [38] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   [75] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0</span>
@@ -220,10 +220,10 @@ for the respective Bernstein function.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [963] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1000] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0</span>
 <span class="r-in"></span>
-<span class="r-in"><span class="fu">ex_intensities_armageddon</span><span class="op">(</span><span class="fl">10L</span>, alpha<span class="op">=</span><span class="fl">1</span>, beta<span class="op">=</span><span class="fl">0.5</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu">ex_intensities_armageddon</span><span class="op">(</span><span class="fl">10L</span>, alpha <span class="op">=</span> <span class="fl">1</span>, beta <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 10.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.5</span>
 <span class="r-in"></span>
-<span class="r-in"><span class="fu">intensities_armageddon</span><span class="op">(</span><span class="fl">10L</span>, alpha<span class="op">=</span><span class="fl">1</span>, beta<span class="op">=</span><span class="fl">0.5</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu">intensities_armageddon</span><span class="op">(</span><span class="fl">10L</span>, alpha <span class="op">=</span> <span class="fl">1</span>, beta <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    [1] 1.0 1.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   [19] 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   [37] 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0</span>
@@ -493,11 +493,11 @@ for the respective Bernstein function.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1016] 3.529330e-06 7.814033e-07 7.814033e-07 1.730048e-07 7.814033e-07</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1021] 1.730048e-07 1.730048e-07 3.830375e-08</span>
 <span class="r-in"></span>
-<span class="r-in"><span class="fu">ex_intensities_alpha_stable</span><span class="op">(</span><span class="fl">10L</span>, alpha<span class="op">=</span><span class="fl">0.4</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu">ex_intensities_alpha_stable</span><span class="op">(</span><span class="fl">10L</span>, alpha <span class="op">=</span> <span class="fl">0.4</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1.03661746 0.32248031 0.17952974 0.12289967 0.09436818 0.07861548</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [7] 0.07046094 0.06897917 0.07971455 0.45822094</span>
 <span class="r-in"></span>
-<span class="r-in"><span class="fu">intensities_alpha_stable</span><span class="op">(</span><span class="fl">10L</span>, alpha<span class="op">=</span><span class="fl">0.4</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu">intensities_alpha_stable</span><span class="op">(</span><span class="fl">10L</span>, alpha <span class="op">=</span> <span class="fl">0.4</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    [1] 0.1036617462 0.1036617462 0.0071662291 0.1036617462 0.0071662291</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    [6] 0.0071662291 0.0014960812 0.1036617462 0.0071662291 0.0071662291</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   [11] 0.0014960812 0.0071662291 0.0014960812 0.0014960812 0.0005852365</span>
@@ -704,11 +704,11 @@ for the respective Bernstein function.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1016] 0.0005871745 0.0015328704 0.0015328704 0.0079714547 0.0015328704</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1021] 0.0079714547 0.0079714547 0.4582209400</span>
 <span class="r-in"></span>
-<span class="r-in"><span class="fu">ex_intensities_exponential</span><span class="op">(</span><span class="fl">10L</span>, lambda<span class="op">=</span><span class="fl">0.4</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu">ex_intensities_exponential</span><span class="op">(</span><span class="fl">10L</span>, lambda <span class="op">=</span> <span class="fl">0.4</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 0.04091653 0.04383914 0.04739366 0.05183682 0.05759647 0.06545053</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [7] 0.07700062 0.09625078 0.13750112 0.34375279</span>
 <span class="r-in"></span>
-<span class="r-in"><span class="fu">intensities_exponential</span><span class="op">(</span><span class="fl">10L</span>, lambda<span class="op">=</span><span class="fl">0.4</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu">intensities_exponential</span><span class="op">(</span><span class="fl">10L</span>, lambda <span class="op">=</span> <span class="fl">0.4</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    [1] 0.0040916530 0.0040916530 0.0009742031 0.0040916530 0.0009742031</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    [6] 0.0009742031 0.0003949472 0.0040916530 0.0009742031 0.0009742031</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   [11] 0.0003949472 0.0009742031 0.0003949472 0.0003949472 0.0002468420</span>
@@ -915,11 +915,11 @@ for the respective Bernstein function.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1016] 0.0006416719 0.0021389062 0.0021389062 0.0137501115 0.0021389062</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1021] 0.0137501115 0.0137501115 0.3437527882</span>
 <span class="r-in"></span>
-<span class="r-in"><span class="fu">ex_intensities_gamma</span><span class="op">(</span><span class="fl">10L</span>, a<span class="op">=</span><span class="fl">0.3</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu">ex_intensities_gamma</span><span class="op">(</span><span class="fl">10L</span>, a <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1.0212950 0.5233226 0.3591469 0.2789589 0.2330767 0.2054108 0.1900017</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [8] 0.1862096 0.2023288 0.3363659</span>
 <span class="r-in"></span>
-<span class="r-in"><span class="fu">intensities_gamma</span><span class="op">(</span><span class="fl">10L</span>, a<span class="op">=</span><span class="fl">0.3</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu">intensities_gamma</span><span class="op">(</span><span class="fl">10L</span>, a <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    [1] 0.1021294951 0.1021294951 0.0116293903 0.1021294951 0.0116293903</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    [6] 0.0116293903 0.0029928910 0.1021294951 0.0116293903 0.0116293903</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   [11] 0.0029928910 0.0116293903 0.0029928910 0.0029928910 0.0013283758</span>
@@ -1126,11 +1126,11 @@ for the respective Bernstein function.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1016] 0.0015833472 0.0041379909 0.0041379909 0.0202328832 0.0041379909</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1021] 0.0202328832 0.0202328832 0.3363658526</span>
 <span class="r-in"></span>
-<span class="r-in"><span class="fu">ex_intensities_pareto</span><span class="op">(</span><span class="fl">10L</span>, alpha<span class="op">=</span><span class="fl">0.4</span>, x0<span class="op">=</span><span class="fl">5e-4</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu">ex_intensities_pareto</span><span class="op">(</span><span class="fl">10L</span>, alpha <span class="op">=</span> <span class="fl">0.4</span>, x0 <span class="op">=</span> <span class="fl">5e-4</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 0.070489748 0.022960901 0.012784245 0.008751640 0.006719924 0.005598180</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [7] 0.005017498 0.004911982 0.005676444 0.032629747</span>
 <span class="r-in"></span>
-<span class="r-in"><span class="fu">intensities_pareto</span><span class="op">(</span><span class="fl">10L</span>, alpha<span class="op">=</span><span class="fl">0.4</span>, x0<span class="op">=</span><span class="fl">5e-4</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu">intensities_pareto</span><span class="op">(</span><span class="fl">10L</span>, alpha <span class="op">=</span> <span class="fl">0.4</span>, x0 <span class="op">=</span> <span class="fl">5e-4</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    [1] 7.048975e-03 7.048975e-03 5.102422e-04 7.048975e-03 5.102422e-04</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    [6] 5.102422e-04 1.065354e-04 7.048975e-03 5.102422e-04 5.102422e-04</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   [11] 1.065354e-04 5.102422e-04 1.065354e-04 1.065354e-04 4.167448e-05</span>
@@ -1337,11 +1337,11 @@ for the respective Bernstein function.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1016] 4.181248e-05 1.091551e-04 1.091551e-04 5.676444e-04 1.091551e-04</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1021] 5.676444e-04 5.676444e-04 3.262975e-02</span>
 <span class="r-in"></span>
-<span class="r-in"><span class="fu">ex_intensities_inverse_gaussian</span><span class="op">(</span><span class="fl">10L</span>, eta<span class="op">=</span><span class="fl">0.4</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu">ex_intensities_inverse_gaussian</span><span class="op">(</span><span class="fl">10L</span>, eta <span class="op">=</span> <span class="fl">0.4</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 2.28533714 0.58370348 0.29959361 0.19346675 0.14122976 0.11202407</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [7] 0.09527639 0.08757488 0.09210827 0.19967450</span>
 <span class="r-in"></span>
-<span class="r-in"><span class="fu">intensities_inverse_gaussian</span><span class="op">(</span><span class="fl">10L</span>, eta<span class="op">=</span><span class="fl">0.4</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu">intensities_inverse_gaussian</span><span class="op">(</span><span class="fl">10L</span>, eta <span class="op">=</span> <span class="fl">0.4</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    [1] 0.2285337136 0.2285337136 0.0129711885 0.2285337136 0.0129711885</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    [6] 0.0129711885 0.0024966134 0.2285337136 0.0129711885 0.0129711885</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   [11] 0.0024966134 0.0129711885 0.0024966134 0.0024966134 0.0009212703</span>

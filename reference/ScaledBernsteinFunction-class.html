@@ -61,8 +61,8 @@ is also a Bernstein function."><!-- mathjax --><script src="https://cdnjs.cloudf
 </nav><div class="container template-reference-topic">
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="" class="logo" alt=""><h1>Class for <em>scaled Bernstein functions</em></h1>
-      <small class="dont-index">Source: <a href="https://github.com/hsloot/rmo/blob/HEAD/R/allClass-S4.R" class="external-link"><code>R/allClass-S4.R</code></a>, <a href="https://github.com/hsloot/rmo/blob/HEAD/R/allInitialize-S4.R" class="external-link"><code>R/allInitialize-S4.R</code></a>, <a href="https://github.com/hsloot/rmo/blob/HEAD/R/allShow-S4.R" class="external-link"><code>R/allShow-S4.R</code></a>, and 1 more</small>
+      <img src="" class="logo" alt=""><h1>Class for scaled Bernstein functions</h1>
+      <small class="dont-index">Source: <a href="https://github.com/hsloot/rmo/blob/HEAD/R/s4-ScaledBernsteinFunction.R" class="external-link"><code>R/s4-ScaledBernsteinFunction.R</code></a></small>
       <div class="d-none name"><code>ScaledBernsteinFunction-class.Rd</code></div>
     </div>
 
@@ -100,16 +100,15 @@ is also a Bernstein function.</p>
 (for <code>levyDensity</code>) or <a href="CompleteBernsteinFunction-class.html">CompleteBernsteinFunction</a>
 (for <code>stieltjesDensity</code>).</p></dd>
 <dt>x</dt>
-<dd><p>Non-negativ numeric vector at which the iterated difference of
+<dd><p>a non-negativ numeric vector at which the iterated difference of
 the Bernstein function is evaluated.</p></dd>
 <dt>difference_order</dt>
-<dd><p>The order of the alternating iterated forward
-differences taken on the Bernstein function (\(j\) in
-the representation).</p></dd>
+<dd><p>a non-negative integer with the order of the alternating iterated
+forward differences taken on the Bernstein function.</p></dd>
 <dt>n, k</dt>
-<dd><p>Non-negative numbers for the binomial factors.</p></dd>
+<dd><p>non-negative numbers for the binomial factor.</p></dd>
 <dt>cscale</dt>
-<dd><p>Positive number, the composit scaling factor.</p></dd>
+<dd><p>a positive numeric scalar with the composite scaling factor.</p></dd>
 <dt>...</dt>
 <dd><p>arguments to specify properties of the new object, to
       be passed to <code>initialize()</code>.</p></dd>
