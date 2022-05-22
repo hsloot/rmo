@@ -1,7 +1,7 @@
 #' @include s4-BernsteinFunction.R
 NULL
 
-#' Class for \emph{scaled Bernstein functions}
+#' Class for scaled Bernstein functions
 #'
 #' Berstein functions are stable under (non-negative) scalar multiplication,
 #' i.e. if \eqn{\psi} is a Bernstein function and \eqn{\lambda \geq 0} , then

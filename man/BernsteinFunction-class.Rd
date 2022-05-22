@@ -12,7 +12,7 @@
 \alias{exIntensities,BernsteinFunction-method}
 \alias{intensities,BernsteinFunction-method}
 \alias{exQMatrix,BernsteinFunction-method}
-\title{Bernstein functions}
+\title{Virtual superclass for Bernstein functions}
 \usage{
 valueOf(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...)
 

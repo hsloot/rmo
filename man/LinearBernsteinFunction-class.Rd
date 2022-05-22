@@ -9,7 +9,7 @@
 \alias{show,LinearBernsteinFunction-method}
 \alias{valueOf,LinearBernsteinFunction-method}
 \alias{valueOf,LinearBernsteinFunction,ANY-method}
-\title{Class for the \emph{linear Bernstein function}}
+\title{Class for linear Bernstein functions}
 \usage{
 \S4method{initialize}{LinearBernsteinFunction}(.Object, scale)
 

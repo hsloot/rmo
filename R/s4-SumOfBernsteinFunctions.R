@@ -1,7 +1,7 @@
 #' @include s4-BernsteinFunction.R
 NULL
 
-#' Class for the *sum of two Bernstein functions*
+#' Class for sums of two Bernstein functions
 #'
 #' Bernstein functions are stable under addition, i.e. if \eqn{\psi_1} and
 #' \eqn{\psi_2} are two Bernstein functions, then

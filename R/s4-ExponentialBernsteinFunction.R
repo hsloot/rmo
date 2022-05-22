@@ -1,7 +1,7 @@
 #' @include s4-BernsteinFunction.R s4-LevyBernsteinFunction.R
 NULL
 
-#' Class for the Exponential jump CPP Bernstein function
+#' Class for Exponential Bernstein functions
 #'
 #' @slot lambda The index \eqn{\lambda}.
 #'

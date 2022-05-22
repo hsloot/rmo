@@ -1,7 +1,7 @@
 #' @include s4-BernsteinFunction.R
 NULL
 
-#' Virtual Class `LevyBernsteinFunction` for Levy Bernstein Functions
+#' Virtual superclass for Bernstein functions with non-zero Lévy density
 #'
 #' A virtual superclass for all Bernstein functions which can representated
 #' by a Lévy density (no drift or killing rate). That means that there exists

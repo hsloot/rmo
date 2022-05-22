@@ -1,7 +1,7 @@
 #' @include s4-BernsteinFunction.R s4-LevyBernsteinFunction.R s4-CompleteBernsteinFunction.R
 NULL
 
-#' Class for the \emph{Inverse Gaussian Bernstein function}
+#' Class for Inverse Gaussian Bernstein function
 #'
 #' @slot eta The distribution parameter (drift of the
 #'   underlying Gaussian process)

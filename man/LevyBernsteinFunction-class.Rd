@@ -6,7 +6,7 @@
 \alias{levyDensity}
 \alias{valueOf,LevyBernsteinFunction-method}
 \alias{valueOf,LevyBernsteinFunction,ANY-method}
-\title{Virtual Class \code{LevyBernsteinFunction} for Levy Bernstein Functions}
+\title{Virtual superclass for Bernstein functions with non-zero Lévy density}
 \usage{
 levyDensity(object)
 

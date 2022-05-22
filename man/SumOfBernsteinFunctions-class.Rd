@@ -9,7 +9,7 @@
 \alias{show,SumOfBernsteinFunctions-method}
 \alias{valueOf,SumOfBernsteinFunctions-method}
 \alias{valueOf,SumOfBernsteinFunctions,ANY-method}
-\title{Class for the \emph{sum of two Bernstein functions}}
+\title{Class for sums of two Bernstein functions}
 \usage{
 \S4method{initialize}{SumOfBernsteinFunctions}(.Object, first, second)
 

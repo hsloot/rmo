@@ -1,7 +1,7 @@
 #' @include s4-BernsteinFunction.R
 NULL
 
-#' Class for the *composite scaled Bernstein function*
+#' Class for composite scaled Bernstein functions
 #'
 #' Bernstein functions are stable under composition, i.e. if \eqn{\psi} is
 #' a Bernstein function and `c > 0`, then

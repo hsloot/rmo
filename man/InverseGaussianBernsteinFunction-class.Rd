@@ -9,7 +9,7 @@
 \alias{show,InverseGaussianBernsteinFunction-method}
 \alias{levyDensity,InverseGaussianBernsteinFunction-method}
 \alias{stieltjesDensity,InverseGaussianBernsteinFunction-method}
-\title{Class for the \emph{Inverse Gaussian Bernstein function}}
+\title{Class for Inverse Gaussian Bernstein function}
 \usage{
 \S4method{initialize}{InverseGaussianBernsteinFunction}(.Object, eta)
 

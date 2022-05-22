@@ -1,7 +1,7 @@
 #' @include s4-BernsteinFunction.R s4-LevyBernsteinFunction.R
 NULL
 
-#' Virtual Class `CompleteBernsteinFunction` for Complete Bernstein Functions
+#' Virtual superclass for complete Bernstein functions
 #'
 #' A virtual superclass for all Bernstein functions which can representated
 #' by a Stieltjes density (no drift or killing rate). That means that there exists

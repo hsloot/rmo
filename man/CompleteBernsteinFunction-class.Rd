@@ -6,7 +6,7 @@
 \alias{stieltjesDensity}
 \alias{valueOf,CompleteBernsteinFunction-method}
 \alias{valueOf,CompleteBernsteinFunction,ANY-method}
-\title{Virtual Class \code{CompleteBernsteinFunction} for Complete Bernstein Functions}
+\title{Virtual superclass for complete Bernstein functions}
 \usage{
 stieltjesDensity(object)
 

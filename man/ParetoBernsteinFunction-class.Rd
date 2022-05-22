@@ -8,7 +8,7 @@
 \alias{initialize,ParetoBernsteinFunction,ANY-method}
 \alias{show,ParetoBernsteinFunction-method}
 \alias{levyDensity,ParetoBernsteinFunction-method}
-\title{Class for the \emph{Pareto Bernstein function}}
+\title{Class for Pareto Bernstein functions}
 \usage{
 \S4method{initialize}{ParetoBernsteinFunction}(.Object, alpha, x0)
 

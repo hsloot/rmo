@@ -8,7 +8,7 @@
 \alias{initialize,PoissonBernsteinFunction,ANY-method}
 \alias{show,PoissonBernsteinFunction-method}
 \alias{levyDensity,PoissonBernsteinFunction-method}
-\title{Class for the \emph{Poisson Bernstein function}}
+\title{Class for Poisson Bernstein functions}
 \usage{
 \S4method{initialize}{PoissonBernsteinFunction}(.Object, eta)
 

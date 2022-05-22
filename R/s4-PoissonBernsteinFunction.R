@@ -1,7 +1,7 @@
 #' @include s4-BernsteinFunction.R s4-LevyBernsteinFunction.R
 NULL
 
-#' Class for the \emph{Poisson Bernstein function}
+#' Class for Poisson Bernstein functions
 #'
 #' @slot lambda The (positive) arrival rate of the underlying Poisson process.
 #' @slot eta The fixed (positive) jump size of the Poisson process.

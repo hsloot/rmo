@@ -9,7 +9,7 @@
 \alias{show,GammaBernsteinFunction-method}
 \alias{levyDensity,GammaBernsteinFunction-method}
 \alias{stieltjesDensity,GammaBernsteinFunction-method}
-\title{Class for the \emph{Gamma Bernstein function}}
+\title{Class for Gamma Bernstein functions}
 \usage{
 \S4method{initialize}{GammaBernsteinFunction}(.Object, a)
 

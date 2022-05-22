@@ -1,7 +1,7 @@
 #' @include s4-BernsteinFunction.R s4-LevyBernsteinFunction.R s4-CompleteBernsteinFunction.R
 NULL
 
-#' Class for the \emph{Gamma Bernstein function}
+#' Class for Gamma Bernstein functions
 #'
 #' @slot a Scale parameter for the Lévy measure.
 #'

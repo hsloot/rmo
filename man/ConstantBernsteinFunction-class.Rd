@@ -9,7 +9,7 @@
 \alias{show,ConstantBernsteinFunction-method}
 \alias{valueOf,ConstantBernsteinFunction-method}
 \alias{valueOf,ConstantBernsteinFunction,ANY-method}
-\title{Class for the \emph{constant Bernstein function}}
+\title{Class for (almost) constant Bernstein functions}
 \usage{
 \S4method{initialize}{ConstantBernsteinFunction}(.Object, constant)
 

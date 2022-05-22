@@ -1,7 +1,7 @@
 #' @include s4-BernsteinFunction.R
 NULL
 
-#' Class for the \emph{linear Bernstein function}
+#' Class for linear Bernstein functions
 #'
 #' @slot scale The non-negative \emph{drift} parameter
 #'   (i.e. \eqn{b} in the representation)

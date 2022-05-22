@@ -9,7 +9,7 @@
 \alias{show,AlphaStableBernsteinFunction-method}
 \alias{levyDensity,AlphaStableBernsteinFunction-method}
 \alias{stieltjesDensity,AlphaStableBernsteinFunction-method}
-\title{Class for the \emph{\eqn{\alpha}-stable Bernstein function}}
+\title{Class for the \eqn{\alpha}-stable Bernstein function}
 \usage{
 \S4method{initialize}{AlphaStableBernsteinFunction}(.Object, alpha)
 

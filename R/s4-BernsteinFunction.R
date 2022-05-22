@@ -2,7 +2,7 @@
 #'    callNextMethod show classLabel
 NULL
 
-#' Bernstein functions
+#' Virtual superclass for Bernstein functions
 #'
 #' A virtual superclass for all implementations of the various classes of *Bernstein functions*.
 #'

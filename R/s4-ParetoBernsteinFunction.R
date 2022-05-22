@@ -1,7 +1,7 @@
 #' @include s4-BernsteinFunction.R s4-LevyBernsteinFunction.R
 NULL
 
-#' Class for the \emph{Pareto Bernstein function}
+#' Class for Pareto Bernstein functions
 #'
 #' @slot alpha The index \eqn{\alpha}
 #' @slot x0 The cutoff point \eqn{x_0}

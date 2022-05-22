@@ -1,7 +1,7 @@
 #' @include s4-BernsteinFunction.R
 NULL
 
-#' Class for the \emph{constant Bernstein function}
+#' Class for (almost) constant Bernstein functions
 #'
 #' @slot constant The non-negative \emph{killing} parameter (i.e. \eqn{a}
 #'   in the representation)

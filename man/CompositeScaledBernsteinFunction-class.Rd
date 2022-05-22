@@ -9,7 +9,7 @@
 \alias{show,CompositeScaledBernsteinFunction-method}
 \alias{valueOf,CompositeScaledBernsteinFunction-method}
 \alias{valueOf,CompositeScaledBernsteinFunction,ANY-method}
-\title{Class for the \emph{composite scaled Bernstein function}}
+\title{Class for composite scaled Bernstein functions}
 \usage{
 \S4method{initialize}{CompositeScaledBernsteinFunction}(.Object, cscale, original)
 

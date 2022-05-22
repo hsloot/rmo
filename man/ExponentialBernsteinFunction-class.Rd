@@ -9,7 +9,7 @@
 \alias{show,ExponentialBernsteinFunction-method}
 \alias{levyDensity,ExponentialBernsteinFunction-method}
 \alias{stieltjesDensity,ExponentialBernsteinFunction-method}
-\title{Class for the Exponential jump CPP Bernstein function}
+\title{Class for Exponential Bernstein functions}
 \usage{
 \S4method{initialize}{ExponentialBernsteinFunction}(.Object, lambda)
 
