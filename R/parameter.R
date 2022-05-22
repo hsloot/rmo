@@ -1,6 +1,3 @@
-#' @include allClass-S4.R valueOf-S4.R
-NULL
-
 #' @keywords internal
 #' @noRd
 bf2intensities <- function(d, bf) { # nocov start
