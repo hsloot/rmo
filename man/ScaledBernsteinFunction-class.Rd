@@ -51,13 +51,13 @@ is also a Bernstein function.
 }
 \section{Functions}{
 \itemize{
-\item \code{initialize,ScaledBernsteinFunction-method}: Constructor
+\item \code{initialize(ScaledBernsteinFunction)}: Constructor
 
-\item \code{show,ScaledBernsteinFunction-method}: Display the object.
+\item \code{show(ScaledBernsteinFunction)}: Display the object.
 
-\item \code{valueOf,ScaledBernsteinFunction-method}: Calculates the iterated differences of the Bernstein function, see \code{\link[=valueOf]{valueOf()}}
+\item \code{valueOf(ScaledBernsteinFunction)}: Calculates the iterated differences of the Bernstein function, see \code{\link[=valueOf]{valueOf()}}
+
 }}
-
 \section{Slots}{
 
 \describe{

@@ -53,15 +53,15 @@ in Chp. 16 of \insertCite{Schilling2012a}{rmo}.
 }
 \section{Functions}{
 \itemize{
-\item \code{initialize,GammaBernsteinFunction-method}: Constructor
+\item \code{initialize(GammaBernsteinFunction)}: Constructor
 
-\item \code{show,GammaBernsteinFunction-method}: Display the object.
+\item \code{show(GammaBernsteinFunction)}: Display the object.
 
-\item \code{levyDensity,GammaBernsteinFunction-method}: see \linkS4class{LevyBernsteinFunction}
+\item \code{levyDensity(GammaBernsteinFunction)}: see \linkS4class{LevyBernsteinFunction}
 
-\item \code{stieltjesDensity,GammaBernsteinFunction-method}: see \linkS4class{CompleteBernsteinFunction}
+\item \code{stieltjesDensity(GammaBernsteinFunction)}: see \linkS4class{CompleteBernsteinFunction}
+
 }}
-
 \section{Slots}{
 
 \describe{

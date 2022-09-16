@@ -41,13 +41,13 @@ foward differences can be calculated in closed form:
 }
 \section{Functions}{
 \itemize{
-\item \code{initialize,PoissonBernsteinFunction-method}: Constructor
+\item \code{initialize(PoissonBernsteinFunction)}: Constructor
 
-\item \code{show,PoissonBernsteinFunction-method}: Display the object.
+\item \code{show(PoissonBernsteinFunction)}: Display the object.
 
-\item \code{levyDensity,PoissonBernsteinFunction-method}: see \linkS4class{LevyBernsteinFunction}
+\item \code{levyDensity(PoissonBernsteinFunction)}: see \linkS4class{LevyBernsteinFunction}
+
 }}
-
 \section{Slots}{
 
 \describe{

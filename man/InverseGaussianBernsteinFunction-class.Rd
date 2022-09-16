@@ -52,15 +52,15 @@ functions in Chp. 16 of \insertCite{Schilling2012a}{rmo}.
 }
 \section{Functions}{
 \itemize{
-\item \code{initialize,InverseGaussianBernsteinFunction-method}: Constructor
+\item \code{initialize(InverseGaussianBernsteinFunction)}: Constructor
 
-\item \code{show,InverseGaussianBernsteinFunction-method}: Display the object.
+\item \code{show(InverseGaussianBernsteinFunction)}: Display the object.
 
-\item \code{levyDensity,InverseGaussianBernsteinFunction-method}: see \linkS4class{LevyBernsteinFunction}
+\item \code{levyDensity(InverseGaussianBernsteinFunction)}: see \linkS4class{LevyBernsteinFunction}
 
-\item \code{stieltjesDensity,InverseGaussianBernsteinFunction-method}: see \linkS4class{CompleteBernsteinFunction}
+\item \code{stieltjesDensity(InverseGaussianBernsteinFunction)}: see \linkS4class{CompleteBernsteinFunction}
+
 }}
-
 \section{Slots}{
 
 \describe{

@@ -56,13 +56,13 @@ function can be used to approximate the Bernstein function of an
 }
 \section{Functions}{
 \itemize{
-\item \code{initialize,ParetoBernsteinFunction-method}: Constructor
+\item \code{initialize(ParetoBernsteinFunction)}: Constructor
 
-\item \code{show,ParetoBernsteinFunction-method}: Display the object.
+\item \code{show(ParetoBernsteinFunction)}: Display the object.
 
-\item \code{levyDensity,ParetoBernsteinFunction-method}: see \linkS4class{LevyBernsteinFunction}
+\item \code{levyDensity(ParetoBernsteinFunction)}: see \linkS4class{LevyBernsteinFunction}
+
 }}
-
 \section{Slots}{
 
 \describe{

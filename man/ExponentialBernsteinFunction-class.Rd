@@ -48,15 +48,15 @@ in Chp. 16 of \insertCite{Schilling2012a}{rmo}.
 }
 \section{Functions}{
 \itemize{
-\item \code{initialize,ExponentialBernsteinFunction-method}: Constructor
+\item \code{initialize(ExponentialBernsteinFunction)}: Constructor
 
-\item \code{show,ExponentialBernsteinFunction-method}: Display the object.
+\item \code{show(ExponentialBernsteinFunction)}: Display the object.
 
-\item \code{levyDensity,ExponentialBernsteinFunction-method}: see \linkS4class{LevyBernsteinFunction}
+\item \code{levyDensity(ExponentialBernsteinFunction)}: see \linkS4class{LevyBernsteinFunction}
 
-\item \code{stieltjesDensity,ExponentialBernsteinFunction-method}: see \linkS4class{CompleteBernsteinFunction}
+\item \code{stieltjesDensity(ExponentialBernsteinFunction)}: see \linkS4class{CompleteBernsteinFunction}
+
 }}
-
 \section{Slots}{
 
 \describe{

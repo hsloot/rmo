@@ -84,14 +84,14 @@ representation
 }
 \section{Functions}{
 \itemize{
-\item \code{stieltjesDensity}: returns the \emph{Stieltjes density} with \code{lower}, \code{upper}, and \code{type}
+\item \code{stieltjesDensity()}: returns the \emph{Stieltjes density} with \code{lower}, \code{upper}, and \code{type}
 attributes if continuous and returns a \code{data.frame} with named columns
 \code{x} (atoms) and \code{y} (weights) as well as a type attribute if discrete.
 The \code{type} attribute is either \code{"continuous"} or \code{"discrete"}.
 
-\item \code{valueOf,CompleteBernsteinFunction-method}: Calculates the iterated differences of the Bernstein function, see \code{\link[=valueOf]{valueOf()}}
-}}
+\item \code{valueOf(CompleteBernsteinFunction)}: Calculates the iterated differences of the Bernstein function, see \code{\link[=valueOf]{valueOf()}}
 
+}}
 \seealso{
 \linkS4class{LevyBernsteinFunction},
 \linkS4class{BernsteinFunction}

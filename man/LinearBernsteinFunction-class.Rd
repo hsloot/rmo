@@ -48,13 +48,13 @@ i.e. \eqn{a = 0} and \eqn{\nu = 0}. In particular,
 }
 \section{Functions}{
 \itemize{
-\item \code{initialize,LinearBernsteinFunction-method}: Constructor
+\item \code{initialize(LinearBernsteinFunction)}: Constructor
 
-\item \code{show,LinearBernsteinFunction-method}: Display the object.
+\item \code{show(LinearBernsteinFunction)}: Display the object.
 
-\item \code{valueOf,LinearBernsteinFunction-method}: Calculates the iterated differences of the Bernstein function, see \code{\link[=valueOf]{valueOf()}}
+\item \code{valueOf(LinearBernsteinFunction)}: Calculates the iterated differences of the Bernstein function, see \code{\link[=valueOf]{valueOf()}}
+
 }}
-
 \section{Slots}{
 
 \describe{

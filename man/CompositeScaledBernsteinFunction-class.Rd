@@ -49,13 +49,13 @@ is also a Bernstein function.
 }
 \section{Functions}{
 \itemize{
-\item \code{initialize,CompositeScaledBernsteinFunction-method}: Constructor
+\item \code{initialize(CompositeScaledBernsteinFunction)}: Constructor
 
-\item \code{show,CompositeScaledBernsteinFunction-method}: Display the object.
+\item \code{show(CompositeScaledBernsteinFunction)}: Display the object.
 
-\item \code{valueOf,CompositeScaledBernsteinFunction-method}: Calculates the iterated differences of the Bernstein function, see \code{\link[=valueOf]{valueOf()}}
+\item \code{valueOf(CompositeScaledBernsteinFunction)}: Calculates the iterated differences of the Bernstein function, see \code{\link[=valueOf]{valueOf()}}
+
 }}
-
 \section{Slots}{
 
 \describe{

@@ -51,13 +51,13 @@ is also a Bernstein function.
 }
 \section{Functions}{
 \itemize{
-\item \code{initialize,SumOfBernsteinFunctions-method}: Constructor
+\item \code{initialize(SumOfBernsteinFunctions)}: Constructor
 
-\item \code{show,SumOfBernsteinFunctions-method}: Display the object.
+\item \code{show(SumOfBernsteinFunctions)}: Display the object.
 
-\item \code{valueOf,SumOfBernsteinFunctions-method}: Calculates the iterated differences of the Bernstein function, see \code{\link[=valueOf]{valueOf()}}
+\item \code{valueOf(SumOfBernsteinFunctions)}: Calculates the iterated differences of the Bernstein function, see \code{\link[=valueOf]{valueOf()}}
+
 }}
-
 \section{Slots}{
 
 \describe{

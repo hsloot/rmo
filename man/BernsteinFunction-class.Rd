@@ -70,25 +70,25 @@ In particular, the following sequence defines an \emph{extendible Marshall–Olk
 }
 \section{Functions}{
 \itemize{
-\item \code{valueOf}: Calculate the values for a Bernstein function and its higher-order, alternating iterated
+\item \code{valueOf()}: Calculate the values for a Bernstein function and its higher-order, alternating iterated
 forward differences, possibly scaled by a binomial coefficient, i.e.
 \deqn{
       {(-1)}^{j-1} \Delta^{j}{ \psi(c x) } ,
           \quad x > 0 .
   }
 
-\item \code{uexIntensities}: Calculates (unscaled) \emph{exchangeable shock-arrival intensities}, see \code{\link[=rmo]{rmo()}} and \code{\link[=rexmo]{rexmo()}}.
+\item \code{uexIntensities()}: Calculates (unscaled) \emph{exchangeable shock-arrival intensities}, see \code{\link[=rmo]{rmo()}} and \code{\link[=rexmo]{rexmo()}}.
 
-\item \code{intensities}: Calculates the \emph{shock-arrival intensities}, the \code{intensities} parameter for
+\item \code{intensities()}: Calculates the \emph{shock-arrival intensities}, the \code{intensities} parameter for
 \code{\link[=rmo]{rmo()}}.
 
-\item \code{exIntensities}: Calculates \emph{exchangeable shock-size-arrival intensities}, the \code{ex_intensities} parameter for
+\item \code{exIntensities()}: Calculates \emph{exchangeable shock-size-arrival intensities}, the \code{ex_intensities} parameter for
 \code{\link[=rexmo]{rexmo()}}.
 
-\item \code{exQMatrix}: Calculates the \emph{infinitesimal Markov generator matrix} of the corresponding (Markovian)
+\item \code{exQMatrix()}: Calculates the \emph{infinitesimal Markov generator matrix} of the corresponding (Markovian)
 default-counting process, used internally by \code{\link[=rexmo]{rexmo()}}.
-}}
 
+}}
 \examples{
 exIntensities(AlphaStableBernsteinFunction(4e-1), 3L)
 

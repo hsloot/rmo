@@ -53,15 +53,15 @@ in Chp. 16 of \insertCite{Schilling2012a}{rmo}.
 }
 \section{Functions}{
 \itemize{
-\item \code{initialize,AlphaStableBernsteinFunction-method}: Constructor
+\item \code{initialize(AlphaStableBernsteinFunction)}: Constructor
 
-\item \code{show,AlphaStableBernsteinFunction-method}: Display the object.
+\item \code{show(AlphaStableBernsteinFunction)}: Display the object.
 
-\item \code{levyDensity,AlphaStableBernsteinFunction-method}: see \linkS4class{LevyBernsteinFunction}
+\item \code{levyDensity(AlphaStableBernsteinFunction)}: see \linkS4class{LevyBernsteinFunction}
 
-\item \code{stieltjesDensity,AlphaStableBernsteinFunction-method}: see \linkS4class{CompleteBernsteinFunction}.
+\item \code{stieltjesDensity(AlphaStableBernsteinFunction)}: see \linkS4class{CompleteBernsteinFunction}.
+
 }}
-
 \section{Slots}{
 
 \describe{

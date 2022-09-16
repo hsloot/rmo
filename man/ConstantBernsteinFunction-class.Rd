@@ -49,13 +49,13 @@ particular,
 }
 \section{Functions}{
 \itemize{
-\item \code{initialize,ConstantBernsteinFunction-method}: Constructor
+\item \code{initialize(ConstantBernsteinFunction)}: Constructor
 
-\item \code{show,ConstantBernsteinFunction-method}: Display the object.
+\item \code{show(ConstantBernsteinFunction)}: Display the object.
 
-\item \code{valueOf,ConstantBernsteinFunction-method}: Calculates the iterated differences of the Bernstein function, see \code{\link[=valueOf]{valueOf()}}
+\item \code{valueOf(ConstantBernsteinFunction)}: Calculates the iterated differences of the Bernstein function, see \code{\link[=valueOf]{valueOf()}}
+
 }}
-
 \section{Slots}{
 
 \describe{
