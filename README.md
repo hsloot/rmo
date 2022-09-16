@@ -7,13 +7,13 @@
 
 ![minimal R
 version](https://img.shields.io/badge/R%3E%3D-3.4.0-6666ff.svg)
-![packageversion](https://img.shields.io/badge/Package%20version-0.8.1-orange.svg?style=flat-square)
+![packageversion](https://img.shields.io/badge/Package%20version-0.8.2-orange.svg?style=flat-square)
 [![Project Status: WIP – Initial development is in progress, but there
 has not yet been a stable, usable release suitable for the
 public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
-[![Last-changedate](https://img.shields.io/badge/last%20change-2022--05--20-yellowgreen.svg)](/commits/master)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2022--09--16-yellowgreen.svg)](/commits/master)
 [![R build
 status](https://github.com/hsloot/rmo/workflows/check-full/badge.svg)](https://github.com/hsloot/rmo/actions)
 [![Codecov test
@@ -101,18 +101,18 @@ might change frequently without deprecation. As of now, we have
 completed the reimplementation of all sampling algorithms in `Rcpp`. Our
 next steps are:
 
--   **Version 0.x**: Refactor the `arnold_distribution` and the
-    `markovian_exmo_distribution` to be based on a
-    `random_walk_distribution` and `markov_process`. Add a distribution
-    to sample from the Arnold model with `ex_intensities` which does not
-    require to store all shock intensities.
+- **Version 0.x**: Refactor the `arnold_distribution` and the
+  `markovian_exmo_distribution` to be based on a
+  `random_walk_distribution` and `markov_process`. Add a distribution to
+  sample from the Arnold model with `ex_intensities` which does not
+  require to store all shock intensities.
 
 Other ideas for the future:
 
--   Implementation of estimation routines (**help wanted**).
--   An *OOP* implementation of the Marshall–Olkin distribution with the
-    ultimate goal to facilitate a hierarchical construction of
-    Marshall–Olkin distributions.
+- Implementation of estimation routines (**help wanted**).
+- An *OOP* implementation of the Marshall–Olkin distribution with the
+  ultimate goal to facilitate a hierarchical construction of
+  Marshall–Olkin distributions.
 
 ## Contributing
 

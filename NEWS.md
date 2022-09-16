@@ -1,3 +1,7 @@
+# rmo 0.8.2
+
+- bump version
+
 # rmo 0.8.1
 
 - Small changes in the documentation
