@@ -7,13 +7,13 @@
 
 ![minimal R
 version](https://img.shields.io/badge/R%3E%3D-3.4.0-6666ff.svg)
-![packageversion](https://img.shields.io/badge/Package%20version-0.8.2-orange.svg?style=flat-square)
+![packageversion](https://img.shields.io/badge/Package%20version-0.8.3-orange.svg?style=flat-square)
 [![Project Status: WIP – Initial development is in progress, but there
 has not yet been a stable, usable release suitable for the
 public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
-[![Last-changedate](https://img.shields.io/badge/last%20change-2022--09--16-yellowgreen.svg)](/commits/master)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2022--11--30-yellowgreen.svg)](/commits/master)
 [![R build
 status](https://github.com/hsloot/rmo/workflows/check-full/badge.svg)](https://github.com/hsloot/rmo/actions)
 [![Codecov test
