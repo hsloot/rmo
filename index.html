@@ -30,7 +30,7 @@
     
     <a class="navbar-brand me-2" href="index.html">rmo</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.3</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -79,6 +79,7 @@
 <div class="page-header"><h1 id="rmo">rmo<a class="anchor" aria-label="anchor" href="#rmo"></a>
 </h1></div>
 <!-- badges: start -->
+
 <p>An R package for the <em>Marshall-Olkin distribution</em>: algorithms for the construction, simulation and estimation.</p>
 <div class="section level2">
 <h2 id="motivation">Motivation<a class="anchor" aria-label="anchor" href="#motivation"></a>
@@ -138,8 +139,10 @@
 <h2 id="roadmap-for-future-development">Roadmap for future development<a class="anchor" aria-label="anchor" href="#roadmap-for-future-development"></a>
 </h2>
 <p>We are planning to develop the package incrementally. The packages API might change frequently without deprecation. As of now, we have completed the reimplementation of all sampling algorithms in <code>Rcpp</code>. Our next steps are:</p>
-<ul><li>
-<strong>Version 0.x</strong>: Refactor the <code>arnold_distribution</code> and the <code>markovian_exmo_distribution</code> to be based on a <code>random_walk_distribution</code> and <code>markov_process</code>. Add a distribution to sample from the Arnold model with <code>ex_intensities</code> which does not require to store all shock intensities.</li></ul>
+<ul>
+<li>
+<strong>Version 0.x</strong>: Refactor the <code>arnold_distribution</code> and the <code>markovian_exmo_distribution</code> to be based on a <code>random_walk_distribution</code> and <code>markov_process</code>. Add a distribution to sample from the Arnold model with <code>ex_intensities</code> which does not require to store all shock intensities.</li>
+</ul>
 <p>Other ideas for the future:</p>
 <ul>
 <li>Implementation of estimation routines (<strong>help wanted</strong>).</li>
@@ -201,7 +204,7 @@
 <ul class="list-unstyled">
 <li><a href="https://www.repostatus.org/#wip" class="external-link"><img src="https://www.repostatus.org/badges/latest/wip.svg" alt="Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public."></a></li>
 <li><a href="https://www.tidyverse.org/lifecycle/#experimental" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
-<li><a href="/commits/master"><img src="https://img.shields.io/badge/last%20change-2022--09--16-yellowgreen.svg" alt="Last-changedate"></a></li>
+<li><a href="/commits/master"><img src="https://img.shields.io/badge/last%20change-2022--11--30-yellowgreen.svg" alt="Last-changedate"></a></li>
 <li><a href="https://github.com/hsloot/rmo/actions" class="external-link"><img src="https://github.com/hsloot/rmo/workflows/check-full/badge.svg" alt="R build status"></a></li>
 <li><a href="https://codecov.io/gh/hsloot/rmo?branch=main" class="external-link"><img src="https://codecov.io/gh/hsloot/rmo/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
 </ul>

@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">rmo</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.3</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -85,75 +85,128 @@
 
     
     
-<p>The Marshall–Olkin distribution has the <a href="The-Marshall-Olkin-distribution.html#the-exogenous-shock-model">exogenous shock model</a> as a natural stochastic representation. In this model, independent exponential random times can cause the failure of multiple components at once.</p>
-<p>This article describe multiple alternative ways to combine multiple Marshall–Olkin distributed random vectors to create another Marshall–Olkin distributed random vector. The techniques described are very useful to build complex, hierarchical distributions from simpler Marshall–Olkin distributions.</p>
-<p>All results presented in this article can be verified with simple calculations.</p>
+<p>The Marshall–Olkin distribution has the <a href="The-Marshall-Olkin-distribution.html#the-exogenous-shock-model">exogenous
+shock model</a> as a natural stochastic representation. In this model,
+independent exponential random times can cause the failure of multiple
+components at once.</p>
+<p>This article describe multiple alternative ways to combine multiple
+Marshall–Olkin distributed random vectors to create another
+Marshall–Olkin distributed random vector. The techniques described are
+very useful to build complex, hierarchical distributions from simpler
+Marshall–Olkin distributions.</p>
+<p>All results presented in this article can be verified with simple
+calculations.</p>
 <div class="section level2">
 <h2 id="independent-exponentials">Independent exponentials<a class="anchor" aria-label="anchor" href="#independent-exponentials"></a>
 </h2>
-<p>The easiest example of a mixing of Marshall–Olkin distribution is a vector of univariate <em>independent</em> exponential distributed random variables. This corresponds to setting all shocks in the <a href="The-Marshall-Olkin-distribution.html#the-exogenous-shock-model">exogenous shock model</a> which correspond to a set with cardinality larger than 1 to infinity.</p>
+<p>The easiest example of a mixing of Marshall–Olkin distribution is a
+vector of univariate <em>independent</em> exponential distributed random
+variables. This corresponds to setting all shocks in the <a href="The-Marshall-Olkin-distribution.html#the-exogenous-shock-model">exogenous
+shock model</a> which correspond to a set with cardinality larger than 1
+to infinity.</p>
 </div>
 <div class="section level2">
 <h2 id="independent-concatenations">Independent concatenations<a class="anchor" aria-label="anchor" href="#independent-concatenations"></a>
 </h2>
-<p>Another very simple example is the <em>concatenation</em> of an arbitrary number of independent Marshall–Olkin distributed random vectors. For example, let <span class="math inline">\(\boldsymbol{\tau}^{(1)}, \ldots, \boldsymbol{\tau}^{(k)}\)</span> be independent Marshall–Olkin distributed random vectors of dimensions <span class="math inline">\(d_1, \ldots, d_k\)</span> and parameters <span class="math inline">\(\lambda_I\)</span>, <span class="math inline">\(\emptyset \neq I \subseteq {\{1, \ldots, d_j\}}\)</span>, <span class="math inline">\(1 \leq \cdots \leq k\)</span>, and define <span class="math display">\[
+<p>Another very simple example is the <em>concatenation</em> of an
+arbitrary number of independent Marshall–Olkin distributed random
+vectors. For example, let <span class="math inline">\(\boldsymbol{\tau}^{(1)}, \ldots,
+\boldsymbol{\tau}^{(k)}\)</span> be independent Marshall–Olkin
+distributed random vectors of dimensions <span class="math inline">\(d_1, \ldots, d_k\)</span> and parameters <span class="math inline">\(\lambda_I\)</span>, <span class="math inline">\(\emptyset \neq I \subseteq {\{1, \ldots,
+d_j\}}\)</span>, <span class="math inline">\(1 \leq \cdots \leq
+k\)</span>, and define <span class="math display">\[
   \boldsymbol{\tau}
     = \begin{pmatrix}
-        \tau_{1}^{(1)} &amp; \cdots &amp; \tau_{d_1}^{(1)} &amp; \cdots &amp; \tau_{1}^{(k)} &amp; \cdots &amp; \tau_{d_k}^{(k)}
+        \tau_{1}^{(1)} &amp; \cdots &amp; \tau_{d_1}^{(1)} &amp; \cdots
+&amp; \tau_{1}^{(k)} &amp; \cdots &amp; \tau_{d_k}^{(k)}
       \end{pmatrix} .
-\]</span> Then <span class="math inline">\(\boldsymbol{\tau}\)</span> is a <span class="math inline">\((d_1 + \cdots + d_k)\)</span>-variate Marshall–Olkin distribution with parameters <span class="math display">\[
+\]</span> Then <span class="math inline">\(\boldsymbol{\tau}\)</span> is
+a <span class="math inline">\((d_1 + \cdots + d_k)\)</span>-variate
+Marshall–Olkin distribution with parameters <span class="math display">\[
   \lambda_I
     = \begin{cases}
-        \lambda_{I - \sum_{l=1}^{j-1} d_l }^{(l)} &amp; \emptyset\neq I \subseteq {\{ d_{l-1} + 1, \ldots, d_l \}} , \\
+        \lambda_{I - \sum_{l=1}^{j-1} d_l }^{(l)} &amp; \emptyset\neq I
+\subseteq {\{ d_{l-1} + 1, \ldots, d_l \}} , \\
         0 &amp; \text{else} ,
       \end{cases}
-\]</span> where <span class="math inline">\(d_0 = 0\)</span> and <span class="math inline">\(I - k = \{ i_1 - k , \ldots , i_{\lvert I \rvert} - k \}\)</span>.</p>
-<p>Note that a <a href="#Independent-exponentials">vector of independent exponential variables</a> can be represented like this, if <span class="math inline">\(\tau^{(1)}, \ldots, \tau^{(d)}\)</span> are all univariate Marshall–Olkin distributed, i.e. univariate exponential, random variables.</p>
+\]</span> where <span class="math inline">\(d_0 = 0\)</span> and <span class="math inline">\(I - k = \{ i_1 - k , \ldots , i_{\lvert I \rvert}
+- k \}\)</span>.</p>
+<p>Note that a <a href="#Independent-exponentials">vector of independent
+exponential variables</a> can be represented like this, if <span class="math inline">\(\tau^{(1)}, \ldots, \tau^{(d)}\)</span> are all
+univariate Marshall–Olkin distributed, i.e. univariate exponential,
+random variables.</p>
 </div>
 <div class="section level2">
 <h2 id="comonotone-concatenations">Comonotone concatenations<a class="anchor" aria-label="anchor" href="#comonotone-concatenations"></a>
 </h2>
-<p>A very similar example is the concatenation of perfectly dependent, identical Marshall–Olkin distributed random vectors. For this, consider a <span class="math inline">\(d\)</span>-variate Marshall–Olkin distributed random vector <span class="math inline">\(\tilde{\boldsymbol{\tau}}\)</span> with parameters <span class="math inline">\(\tilde{\lambda}_I\)</span>, <span class="math inline">\(\emptyset \neq I \subseteq {\{1, \ldots, d\}}\)</span>, and define the <span class="math inline">\(d k\)</span>-variate random vector <span class="math inline">\(\boldsymbol{\tau}\)</span> by <span class="math display">\[
+<p>A very similar example is the concatenation of perfectly dependent,
+identical Marshall–Olkin distributed random vectors. For this, consider
+a <span class="math inline">\(d\)</span>-variate Marshall–Olkin
+distributed random vector <span class="math inline">\(\tilde{\boldsymbol{\tau}}\)</span> with parameters
+<span class="math inline">\(\tilde{\lambda}_I\)</span>, <span class="math inline">\(\emptyset \neq I \subseteq {\{1, \ldots,
+d\}}\)</span>, and define the <span class="math inline">\(d
+k\)</span>-variate random vector <span class="math inline">\(\boldsymbol{\tau}\)</span> by <span class="math display">\[
   \boldsymbol{\tau}
     := \begin{pmatrix}
-      \tilde{\tau}_1 &amp; \cdots &amp; \tilde{\tau}_d &amp; \cdots &amp; \tilde{\tau_1} &amp; \cdots &amp; \tilde{\tau}_d
+      \tilde{\tau}_1 &amp; \cdots &amp; \tilde{\tau}_d &amp; \cdots
+&amp; \tilde{\tau_1} &amp; \cdots &amp; \tilde{\tau}_d
     \end{pmatrix} .
 \]</span> The corresponding parameters are defined by <span class="math display">\[
   \lambda_I
-    = \tilde{\lambda}_J \ \text{for} \ I \cap {\{ 1 , \ldots, d \}} = J , \quad \emptyset \neq I \subseteq {\{ 1, \ldots, dk \}} .
+    = \tilde{\lambda}_J \ \text{for} \ I \cap {\{ 1 , \ldots, d \}} = J
+, \quad \emptyset \neq I \subseteq {\{ 1, \ldots, dk \}} .
 \]</span></p>
 </div>
 <div class="section level2">
 <h2 id="scalar-multiplication">Scalar multiplication<a class="anchor" aria-label="anchor" href="#scalar-multiplication"></a>
 </h2>
-<p>Similarly to the univariate exponential distribution, a Marshall–Olkin distributed random vector which is scaled by a positive number has a Marshall–Olkin distribution, too. For this, let <span class="math inline">\(\tilde{\boldsymbol{\tau}}\)</span> be a <span class="math inline">\(d\)</span>-variate Marshall–Olkin distributed random vector with parameters <span class="math inline">\(\tilde{\lambda}_I\)</span>, <span class="math inline">\(\emptyset \neq I \subseteq {\{1, \ldots, d\}}\)</span>, and <span class="math inline">\(a &gt; 0\)</span> and define <span class="math inline">\(\boldsymbol{\tau}\)</span> by <span class="math display">\[
+<p>Similarly to the univariate exponential distribution, a
+Marshall–Olkin distributed random vector which is scaled by a positive
+number has a Marshall–Olkin distribution, too. For this, let <span class="math inline">\(\tilde{\boldsymbol{\tau}}\)</span> be a <span class="math inline">\(d\)</span>-variate Marshall–Olkin distributed
+random vector with parameters <span class="math inline">\(\tilde{\lambda}_I\)</span>, <span class="math inline">\(\emptyset \neq I \subseteq {\{1, \ldots,
+d\}}\)</span>, and <span class="math inline">\(a &gt; 0\)</span> and
+define <span class="math inline">\(\boldsymbol{\tau}\)</span> by <span class="math display">\[
   \boldsymbol{\tau}
     = a \cdot \tilde{\boldsymbol{\tau}} .
 \]</span> The corresponding parameters are defined by <span class="math display">\[
   \lambda_I
-    = \frac{\tilde{\lambda}_I}{a} , \quad \emptyset \neq I \subseteq {\{ 1 , \ldots , d \}} .
+    = \frac{\tilde{\lambda}_I}{a} , \quad \emptyset \neq I \subseteq {\{
+1 , \ldots , d \}} .
 \]</span></p>
 </div>
 <div class="section level2">
 <h2 id="component-wise-minima">Component-wise minima<a class="anchor" aria-label="anchor" href="#component-wise-minima"></a>
 </h2>
-<p>The component-wise minimum of two independent Marshall–Olkin distributed random vectors of the same length is again Marshall–Olkin distributed with added rates: let <span class="math inline">\(\tilde{\boldsymbol{\tau}}^{(1)}\)</span> and <span class="math inline">\(\tilde{\boldsymbol{\tau}}^{(2)}\)</span> be Marshall–Olkin distributed with parameters <span class="math inline">\(\tilde{\lambda}_I^{(j)}\)</span>, <span class="math inline">\(\emptyset \neq I \subseteq {\{ 1, \ldots, d\}}\)</span>, <span class="math inline">\(j \in {\{ 1 , 2 \}}\)</span>, and define <span class="math inline">\(\boldsymbol{\tau}\)</span> by <span class="math display">\[
+<p>The component-wise minimum of two independent Marshall–Olkin
+distributed random vectors of the same length is again Marshall–Olkin
+distributed with added rates: let <span class="math inline">\(\tilde{\boldsymbol{\tau}}^{(1)}\)</span> and <span class="math inline">\(\tilde{\boldsymbol{\tau}}^{(2)}\)</span> be
+Marshall–Olkin distributed with parameters <span class="math inline">\(\tilde{\lambda}_I^{(j)}\)</span>, <span class="math inline">\(\emptyset \neq I \subseteq {\{ 1, \ldots,
+d\}}\)</span>, <span class="math inline">\(j \in {\{ 1 , 2 \}}\)</span>,
+and define <span class="math inline">\(\boldsymbol{\tau}\)</span> by
+<span class="math display">\[
   \boldsymbol{\tau}
     = \begin{pmatrix}
-      \min{\{ \tilde{\tau}_1^{(1)} , \tilde{\tau}_1^{(2)} \}} &amp; \cdots &amp; \min{\{ \tilde{\tau}_d^{(1)} , \tilde{\tau}_d^{(2)} \}}
+      \min{\{ \tilde{\tau}_1^{(1)} , \tilde{\tau}_1^{(2)} \}} &amp;
+\cdots &amp; \min{\{ \tilde{\tau}_d^{(1)} , \tilde{\tau}_d^{(2)} \}}
     \end{pmatrix} .
 \]</span> The corresponding parameters are defined by <span class="math display">\[
   \lambda_I
-    = \tilde{\lambda}_I^{(1)} + \tilde{\lambda}_I^{(2)} , \quad \emptyset \neq I \subseteq {\{ 1, \ldots, d\}} .
+    = \tilde{\lambda}_I^{(1)} + \tilde{\lambda}_I^{(2)} , \quad
+\emptyset \neq I \subseteq {\{ 1, \ldots, d\}} .
 \]</span></p>
-<p>This can be generalised by allowing components of <span class="math inline">\(\tilde{\boldsymbol{\tau}}^{(1)}\)</span> and <span class="math inline">\(\tilde{\boldsymbol{\tau}}^{(2)}\)</span> to be infinite as long as <span class="math inline">\(\boldsymbol{\tau}\)</span> has finite margins. Specifically, <span class="math inline">\(\tilde{\lambda}_I^{(j)} = 0\)</span> is allowed as long as <span class="math inline">\(\tilde{\lambda}_I^{(1)} + \tilde{\lambda}_I^{(2)} &gt; 0\)</span>.</p>
+<p>This can be generalised by allowing components of <span class="math inline">\(\tilde{\boldsymbol{\tau}}^{(1)}\)</span> and <span class="math inline">\(\tilde{\boldsymbol{\tau}}^{(2)}\)</span> to be
+infinite as long as <span class="math inline">\(\boldsymbol{\tau}\)</span> has finite margins.
+Specifically, <span class="math inline">\(\tilde{\lambda}_I^{(j)} =
+0\)</span> is allowed as long as <span class="math inline">\(\tilde{\lambda}_I^{(1)} + \tilde{\lambda}_I^{(2)}
+&gt; 0\)</span>.</p>
 </div>
 <div class="section level2 unnumbered">
 <h2 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-Mai2017a" class="csl-entry">
-Mai, Jan-Frederik, and Matthias Scherer. 2017. <em>Simulating Copulas</em>. 2nd ed. World Scientific. <a href="https://doi.org/10.1142/10265" class="external-link">https://doi.org/10.1142/10265</a>.
+Mai, Jan-Frederik, and Matthias Scherer. 2017. <em>Simulating
+Copulas</em>. 2nd ed. World Scientific. <a href="https://doi.org/10.1142/10265" class="external-link">https://doi.org/10.1142/10265</a>.
 </div>
 </div>
 </div>

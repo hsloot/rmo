@@ -1,4 +1,4 @@
-pandoc: 2.14.2
+pandoc: 2.19.2
 pkgdown: 2.0.6
 pkgdown_sha: ~
 articles:
@@ -8,5 +8,5 @@ articles:
   The-Levy-frailty-model: The-Levy-frailty-model.html
   The-Marshall-Olkin-distribution: The-Marshall-Olkin-distribution.html
   The-binary-representation: The-binary-representation.html
-last_built: 2022-09-16T21:01Z
+last_built: 2022-11-30T13:06Z
 

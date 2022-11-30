@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">rmo</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.3</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -85,24 +85,38 @@
 
     
     
-<p>A subclass of exchangeable Marshall–Olkin distributions can be sampled with a so-called <em>Lévy frailty model</em>. This alternative stochastic model is very efficient in high dimensions.</p>
-<p>For a detailed mathematical treatment of this class, we refer to the references at the end of this document.</p>
+<p>A subclass of exchangeable Marshall–Olkin distributions can be
+sampled with a so-called <em>Lévy frailty model</em>. This alternative
+stochastic model is very efficient in high dimensions.</p>
+<p>For a detailed mathematical treatment of this class, we refer to the
+references at the end of this document.</p>
 <div class="section level2">
 <h2 id="the-extendible-subclass">The extendible subclass<a class="anchor" aria-label="anchor" href="#the-extendible-subclass"></a>
 </h2>
-<p>An exchangeable Marshall–Olkin distribution with parameters <span class="math inline">\(a_0, \ldots, a_{d-1}\)</span> is called extendible if there exists a sequence <span class="math inline">\(\tau_1, \tau_2, \ldots\)</span> such that each finite margin has a Marshall–Olkin distribution and <span class="math display">\[
+<p>An exchangeable Marshall–Olkin distribution with parameters <span class="math inline">\(a_0, \ldots, a_{d-1}\)</span> is called extendible
+if there exists a sequence <span class="math inline">\(\tau_1, \tau_2,
+\ldots\)</span> such that each finite margin has a Marshall–Olkin
+distribution and <span class="math display">\[
   \mathbb{P}{\left( \tau_1 &gt; t_1 , \ldots \tau_d &gt; t_d \right)}
-    = \exp{\left \{ - \sum_{i = 0}^{d-1} a_i t_{[i+1]} \right \}}, \quad \boldsymbol{t} \geq 0 .
+    = \exp{\left \{ - \sum_{i = 0}^{d-1} a_i t_{[i+1]} \right \}}, \quad
+\boldsymbol{t} \geq 0 .
 \]</span></p>
 </div>
 <div class="section level2">
 <h2 id="the-lévy-frailty-representation">The Lévy frailty representation<a class="anchor" aria-label="anchor" href="#the-l%C3%A9vy-frailty-representation"></a>
 </h2>
-<p>Each extendible Marshall–Olkin distribution can be uniquely linked (in law) to a Lévy subordinator <span class="math inline">\(\Lambda\)</span> and a iid unit exponential random variables <span class="math inline">\(E_1, \ldots , E_d\)</span> such that <span class="math inline">\(\boldsymbol{\tau}\)</span> has this distribution with <span class="math display">\[
+<p>Each extendible Marshall–Olkin distribution can be uniquely linked
+(in law) to a Lévy subordinator <span class="math inline">\(\Lambda\)</span> and a iid unit exponential random
+variables <span class="math inline">\(E_1, \ldots , E_d\)</span> such
+that <span class="math inline">\(\boldsymbol{\tau}\)</span> has this
+distribution with <span class="math display">\[
   \tau_i
-    = \inf{\left \{ t &gt; 0 \ : \ \Lambda_t \geq E_i \right \}}, \quad i \in \{ 1, \ldots, d\} .
+    = \inf{\left \{ t &gt; 0 \ : \ \Lambda_t \geq E_i \right \}}, \quad
+i \in \{ 1, \ldots, d\} .
 \]</span></p>
-<p>If <span class="math inline">\(\psi\)</span> is the Laplace exponent of the Lévy subordinator, i.e. <span class="math inline">\(\psi (x) = -\log\mathbb{E}{[\exp{\{ - x \Lambda_1\}}]}\)</span>, then <span class="math display">\[
+<p>If <span class="math inline">\(\psi\)</span> is the Laplace exponent
+of the Lévy subordinator, i.e. <span class="math inline">\(\psi (x) =
+-\log\mathbb{E}{[\exp{\{ - x \Lambda_1\}}]}\)</span>, then <span class="math display">\[
   a_i
     = \psi (i+1) - \psi(i) , \quad i \in \{ 1, \ldots, d\} .
 \]</span></p>
@@ -110,7 +124,9 @@
 <div class="section level2">
 <h2 id="homogeneous-poisson-process">Homogeneous Poisson process<a class="anchor" aria-label="anchor" href="#homogeneous-poisson-process"></a>
 </h2>
-<p>A simple example is the case, when <span class="math inline">\(\Lambda\)</span> is a homogenous Poisson process with rate <span class="math inline">\(\lambda &gt; 0\)</span>. In this case <span class="math display">\[
+<p>A simple example is the case, when <span class="math inline">\(\Lambda\)</span> is a homogenous Poisson process
+with rate <span class="math inline">\(\lambda &gt; 0\)</span>. In this
+case <span class="math display">\[
   \psi (x)
     = \lambda {\left( 1 - \exp{\{ -x\}} \right)} , \quad x \geq 0 .
 \]</span></p>
@@ -118,39 +134,55 @@
 <div class="section level2">
 <h2 id="exponential-killing-and-drift">Exponential killing and drift<a class="anchor" aria-label="anchor" href="#exponential-killing-and-drift"></a>
 </h2>
-<p>Another simple example is the case, when the subordinator has a deterministic drift <span class="math inline">\(b \geq 0\)</span> and is killed (send to infinity) at a certain rate <span class="math inline">\(a \geq 0\)</span>. That means <span class="math display">\[
+<p>Another simple example is the case, when the subordinator has a
+deterministic drift <span class="math inline">\(b \geq 0\)</span> and is
+killed (send to infinity) at a certain rate <span class="math inline">\(a \geq 0\)</span>. That means <span class="math display">\[
   \Lambda_t
     = N_t^G \cdot \infty + b t , \quad t \geq 0 ,
-\]</span> where <span class="math inline">\(N^G\)</span> is a homogenous Poisson process with rate <span class="math inline">\(a\)</span>.</p>
+\]</span> where <span class="math inline">\(N^G\)</span> is a homogenous
+Poisson process with rate <span class="math inline">\(a\)</span>.</p>
 <p>We have <span class="math display">\[
   \psi (x)
     = a 1_{(0, \infty)} (x)
       + b x , \quad x \geq 0 .
 \]</span></p>
-<p>This model produces a <a href="Armageddon-ESM-distribution.html">multivariate armageddon shock model distribution</a>.</p>
+<p>This model produces a <a href="Armageddon-ESM-distribution.html">multivariate armageddon shock
+model distribution</a>.</p>
 </div>
 <div class="section level2">
 <h2 id="compound-poisson-process">Compound Poisson process<a class="anchor" aria-label="anchor" href="#compound-poisson-process"></a>
 </h2>
-<p>The class of compound Poisson subordinators is the largest class of Lévy subordinators which can be used to sample <em>exactly</em> from a Marshall–Olkin distribution. Here, the Lévy subordinator has the form <span class="math display">\[
+<p>The class of compound Poisson subordinators is the largest class of
+Lévy subordinators which can be used to sample <em>exactly</em> from a
+Marshall–Olkin distribution. Here, the Lévy subordinator has the form
+<span class="math display">\[
   \Lambda_t
     = N_t^G \cdot \infty
       + b t
       + \sum_{i = 1}^{N_t} X_i , \quad t \geq 0 ,
-\]</span> where <span class="math inline">\(N^G\)</span> is a homogenous Poisson process with rate <span class="math inline">\(a \geq 0\)</span>, <span class="math inline">\(b \geq 0\)</span> is a deterministic drift, <span class="math inline">\(N\)</span> is a homogenous Poisson process with rate <span class="math inline">\(\lambda \geq 0\)</span>, and <span class="math inline">\({\{ X_i \}}_{i \in \mathbb{N}}\)</span> is an iid sequence of non-negative random variables (all objects are independent).</p>
+\]</span> where <span class="math inline">\(N^G\)</span> is a homogenous
+Poisson process with rate <span class="math inline">\(a \geq 0\)</span>,
+<span class="math inline">\(b \geq 0\)</span> is a deterministic drift,
+<span class="math inline">\(N\)</span> is a homogenous Poisson process
+with rate <span class="math inline">\(\lambda \geq 0\)</span>, and <span class="math inline">\({\{ X_i \}}_{i \in \mathbb{N}}\)</span> is an iid
+sequence of non-negative random variables (all objects are
+independent).</p>
 <p>We have <span class="math display">\[
   \psi (x)
     = a 1_{(0, \infty)} (x)
       + b x
-      + \lambda \left( 1 - \mathcal{L} (X_1; x) \right), \quad x \geq 0 ,
-\]</span> where <span class="math inline">\(x \mapsto \mathcal{L} (X_1, x)\)</span> is the Laplace transform of <span class="math inline">\(X_1\)</span>.</p>
+      + \lambda \left( 1 - \mathcal{L} (X_1; x) \right), \quad x \geq 0
+,
+\]</span> where <span class="math inline">\(x \mapsto \mathcal{L} (X_1,
+x)\)</span> is the Laplace transform of <span class="math inline">\(X_1\)</span>.</p>
 </div>
 <div class="section level2 unnumbered">
 <h2 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-Mai2017a" class="csl-entry">
-Mai, Jan-Frederik, and Matthias Scherer. 2017. <em>Simulating Copulas</em>. 2nd ed. World Scientific. <a href="https://doi.org/10.1142/10265" class="external-link">https://doi.org/10.1142/10265</a>.
+Mai, Jan-Frederik, and Matthias Scherer. 2017. <em>Simulating
+Copulas</em>. 2nd ed. World Scientific. <a href="https://doi.org/10.1142/10265" class="external-link">https://doi.org/10.1142/10265</a>.
 </div>
 </div>
 </div>

@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">rmo</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.3</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -85,35 +85,67 @@
 
     
     
-<p>The <a href="The-Marshall-Olkin-distribution.html">Marshall–Olkin distribution</a> is a multivariate distribution which is for dimension <span class="math inline">\(d\)</span> parametrised by <span class="math inline">\(2^d-1\)</span> non-negative parameters for each non-empty subset <span class="math inline">\(\emptyset \neq I \subseteq {\{ 1 , \ldots, d\}}\)</span>. To represent such a distribution in a computer program, we need an efficient way to represent all <span class="math inline">\(2^d-1\)</span> parameters. The current best-practice, see <span class="citation">(Mai and Scherer 2017, 109)</span>, is to identify all <span class="math inline">\(2^d-1\)</span> non-empty subsets with a natural number in <span class="math inline">\(1, \ldots , 2^d-1\)</span> via a binary representation.</p>
+<p>The <a href="The-Marshall-Olkin-distribution.html">Marshall–Olkin
+distribution</a> is a multivariate distribution which is for dimension
+<span class="math inline">\(d\)</span> parametrised by <span class="math inline">\(2^d-1\)</span> non-negative parameters for each
+non-empty subset <span class="math inline">\(\emptyset \neq I \subseteq
+{\{ 1 , \ldots, d\}}\)</span>. To represent such a distribution in a
+computer program, we need an efficient way to represent all <span class="math inline">\(2^d-1\)</span> parameters. The current
+best-practice, see <span class="citation">(Mai and Scherer 2017,
+109)</span>, is to identify all <span class="math inline">\(2^d-1\)</span> non-empty subsets with a natural
+number in <span class="math inline">\(1, \ldots , 2^d-1\)</span> via a
+binary representation.</p>
 <div class="section level2">
 <h2 id="the-binary-representation">The binary representation<a class="anchor" aria-label="anchor" href="#the-binary-representation"></a>
 </h2>
-<p>Each natural (non-zero) number <span class="math inline">\(j\)</span> can be represented by a 0-1-sequence <span class="math inline">\(c = {\{ c_k \}}_{k \in \mathbb{N}} \in {\{ 0, 1 \}}^\mathbb{N}\)</span> with <span class="math display">\[
+<p>Each natural (non-zero) number <span class="math inline">\(j\)</span>
+can be represented by a 0-1-sequence <span class="math inline">\(c = {\{
+c_k \}}_{k \in \mathbb{N}} \in {\{ 0, 1 \}}^\mathbb{N}\)</span> with
+<span class="math display">\[
   j
     = \sum_{k=0}^\infty c_k 2^k ,
-\]</span> where <span class="math inline">\(2^0 = 1\)</span> and all but finitely many <span class="math inline">\(c_k\)</span> are zero.</p>
-<p><strong>Proof:</strong> The statement is true for <span class="math inline">\(j = 1\)</span> with <span class="math inline">\(c_0 = 1\)</span> and <span class="math inline">\(c_k = 0,\ k &gt; 0\)</span>. This representation is also unique. Assume now that the statement is true for all natural numbers smaller than <span class="math inline">\(j\)</span>. If <span class="math inline">\(j\)</span> is divisible by <span class="math inline">\(2\)</span>, then there exists by induction assumption a sequence <span class="math inline">\(\tilde{c} = {\{ \tilde{c}_k \}}_{k \in \mathbb{N}}\)</span> for <span class="math inline">\(j/2\)</span> with <span class="math display">\[
+\]</span> where <span class="math inline">\(2^0 = 1\)</span> and all but
+finitely many <span class="math inline">\(c_k\)</span> are zero.</p>
+<p><strong>Proof:</strong> The statement is true for <span class="math inline">\(j = 1\)</span> with <span class="math inline">\(c_0 = 1\)</span> and <span class="math inline">\(c_k = 0,\ k &gt; 0\)</span>. This representation
+is also unique. Assume now that the statement is true for all natural
+numbers smaller than <span class="math inline">\(j\)</span>. If <span class="math inline">\(j\)</span> is divisible by <span class="math inline">\(2\)</span>, then there exists by induction
+assumption a sequence <span class="math inline">\(\tilde{c} = {\{
+\tilde{c}_k \}}_{k \in \mathbb{N}}\)</span> for <span class="math inline">\(j/2\)</span> with <span class="math display">\[
   j/2
     = \sum_{k=0}^\infty \tilde{c}_k 2^k .
 \]</span> Consequently, <span class="math display">\[
   j
     = \sum_{k=1}^\infty \tilde{c}_{k-1} 2^{k}
-\]</span> and we can choose <span class="math inline">\(c_0 = 0\)</span> and <span class="math inline">\(c_k = \tilde{c}_{k-1},\ k &gt; 0\)</span>. If <span class="math inline">\(j\)</span> is not divisible by <span class="math inline">\(2\)</span>, then <span class="math inline">\(j-1\)</span> is and there exists by induction assumption a sequence <span class="math inline">\(\tilde{c} = {\{ \tilde{c}_k \}}_{k \in \mathbb{N}}\)</span> for <span class="math inline">\((j-1)/2\)</span> with <span class="math display">\[
+\]</span> and we can choose <span class="math inline">\(c_0 = 0\)</span>
+and <span class="math inline">\(c_k = \tilde{c}_{k-1},\ k &gt;
+0\)</span>. If <span class="math inline">\(j\)</span> is not divisible
+by <span class="math inline">\(2\)</span>, then <span class="math inline">\(j-1\)</span> is and there exists by induction
+assumption a sequence <span class="math inline">\(\tilde{c} = {\{
+\tilde{c}_k \}}_{k \in \mathbb{N}}\)</span> for <span class="math inline">\((j-1)/2\)</span> with <span class="math display">\[
   (j-1)/2
     = \sum_{k=0}^\infty \tilde{c}_k 2^k .
 \]</span> Consequently, <span class="math display">\[
   j
     = 1 + \sum_{k=1}^\infty \tilde{c}_{k-1} 2^{k}
-\]</span> and we can choose <span class="math inline">\(c_0 = 1\)</span> and <span class="math inline">\(c_k = \tilde{c}_{k-1},\ k &gt; 0\)</span>. Since each summand with a positive <span class="math inline">\(c_k\)</span> contributes an amount bigger or equal to <span class="math inline">\(1\)</span> to the sum, it is clear that all but finitely many <span class="math inline">\(c_k\)</span> must be equal to zero.</p>
+\]</span> and we can choose <span class="math inline">\(c_0 = 1\)</span>
+and <span class="math inline">\(c_k = \tilde{c}_{k-1},\ k &gt;
+0\)</span>. Since each summand with a positive <span class="math inline">\(c_k\)</span> contributes an amount bigger or equal
+to <span class="math inline">\(1\)</span> to the sum, it is clear that
+all but finitely many <span class="math inline">\(c_k\)</span> must be
+equal to zero.</p>
 </div>
 <div class="section level2">
 <h2 id="uniqueness-of-the-binary-representation">Uniqueness of the binary representation<a class="anchor" aria-label="anchor" href="#uniqueness-of-the-binary-representation"></a>
 </h2>
-<p>It can be proven by induction that the binary representation is unique. To see this, consider two sequences <span class="math inline">\(\hat{c} = {\{ \hat{c}_k \}}_{k\in\mathbb{N}} , c = {\{ c_k \}}_{k \in \mathbb{N}} \in {\{ 0 , 1 \}}^\mathbb{N}\)</span> with <span class="math display">\[
+<p>It can be proven by induction that the binary representation is
+unique. To see this, consider two sequences <span class="math inline">\(\hat{c} = {\{ \hat{c}_k \}}_{k\in\mathbb{N}} , c =
+{\{ c_k \}}_{k \in \mathbb{N}} \in {\{ 0 , 1 \}}^\mathbb{N}\)</span>
+with <span class="math display">\[
   \sum_{k=0}^\infty c_k 2^k
     = \sum_{k=0}^\infty \hat{c}_k 2^k .
-\]</span> It is easy to see, that this number is even iff <span class="math inline">\(c_0 = 0\)</span> and odd iff <span class="math inline">\(c_0 = 1\)</span>. Hence, we can w.l.o.g. assume that <span class="math inline">\(c_0 = \hat{c}_0 = 0\)</span>, i.e. the number is even. By dividing both sides by two, we obtain <span class="math display">\[
+\]</span> It is easy to see, that this number is even iff <span class="math inline">\(c_0 = 0\)</span> and odd iff <span class="math inline">\(c_0 = 1\)</span>. Hence, we can w.l.o.g. assume
+that <span class="math inline">\(c_0 = \hat{c}_0 = 0\)</span>, i.e. the
+number is even. By dividing both sides by two, we obtain <span class="math display">\[
   \sum_{k=0}^\infty c_{k+1} 2^k
     = \sum_{k=0}^\infty \hat{c}_{k+1} 2^k .
 \]</span> With the induction assumption, we get the claim.</p>
@@ -122,8 +154,10 @@
 <h2 id="integer-division">Integer division<a class="anchor" aria-label="anchor" href="#integer-division"></a>
 </h2>
 <p>Integer division is defined as follows <span class="math display">\[
-  / : \mathbb{N}_0^2 \to \mathbb{N}_0, {(k, n)} \mapsto \sup{\{ j \in \mathbb{N}_0 \ :\ j\cdot k \leq n  \}} .
-\]</span> For <span class="math inline">\(n = 2\)</span> an equivalent definition is <span class="math display">\[
+  / : \mathbb{N}_0^2 \to \mathbb{N}_0, {(k, n)} \mapsto \sup{\{ j \in
+\mathbb{N}_0 \ :\ j\cdot k \leq n  \}} .
+\]</span> For <span class="math inline">\(n = 2\)</span> an equivalent
+definition is <span class="math display">\[
   k / 2
     = \begin{cases}
       i &amp; k = i \cdot 2,\ k\ \text{even or}\ k=0 , \\
@@ -148,7 +182,9 @@
 <div class="section level2">
 <h2 id="iterating-through-binary-representations">Iterating through binary representations<a class="anchor" aria-label="anchor" href="#iterating-through-binary-representations"></a>
 </h2>
-<p>A natural question is, if we can easily determine the binary representation of <span class="math inline">\(j+1\)</span> directly from the binary representation of <span class="math inline">\(j\)</span>.</p>
+<p>A natural question is, if we can easily determine the binary
+representation of <span class="math inline">\(j+1\)</span> directly from
+the binary representation of <span class="math inline">\(j\)</span>.</p>
 <p>Consider a natural number with its binary representation <span class="math display">\[
   j = \sum_{k=0}^\infty c_k 2^k
 \]</span> and let <span class="math display">\[
@@ -173,10 +209,15 @@
 <div class="section level2">
 <h2 id="the-mo-parameter-mapping">The MO parameter mapping<a class="anchor" aria-label="anchor" href="#the-mo-parameter-mapping"></a>
 </h2>
-<p>We choose the following bijections to store all Marshall-Olkin parameters in a vector of length <span class="math inline">\(2^d-1\)</span>: <span class="math display">\[
-  T : \mathcal{P}{(\{ 1 , \ldots, d\} \backslash {\{ 0 \}})} \to \{ 1 , \ldots, 2^d-1 \},\ I \mapsto \sum_{i=1}^{d} 1_{\{ i \in I \}} 2^{(i-1)} .
+<p>We choose the following bijections to store all Marshall-Olkin
+parameters in a vector of length <span class="math inline">\(2^d-1\)</span>: <span class="math display">\[
+  T : \mathcal{P}{(\{ 1 , \ldots, d\} \backslash {\{ 0 \}})} \to \{ 1 ,
+\ldots, 2^d-1 \},\ I \mapsto \sum_{i=1}^{d} 1_{\{ i \in I \}} 2^{(i-1)}
+.
 \]</span> <span class="math display">\[
-  T^{-1} : \{ 1 , \ldots, 2^d-1 \} \to \mathcal{P}{(\{ 1 , \ldots, d\} \backslash {\{ 0 \}})},\ j \mapsto {\{ i \ :\ (j / 2^{(i-1)}) \ \mathrm{mod}\ 2 = 1 \}} .
+  T^{-1} : \{ 1 , \ldots, 2^d-1 \} \to \mathcal{P}{(\{ 1 , \ldots, d\}
+\backslash {\{ 0 \}})},\ j \mapsto {\{ i \ :\ (j / 2^{(i-1)}) \
+\mathrm{mod}\ 2 = 1 \}} .
 \]</span></p>
 </div>
 <div class="section level2 unnumbered">
@@ -184,7 +225,8 @@
 </h2>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-Mai2017a" class="csl-entry">
-Mai, Jan-Frederik, and Matthias Scherer. 2017. <em>Simulating Copulas</em>. 2nd ed. World Scientific. <a href="https://doi.org/10.1142/10265" class="external-link">https://doi.org/10.1142/10265</a>.
+Mai, Jan-Frederik, and Matthias Scherer. 2017. <em>Simulating
+Copulas</em>. 2nd ed. World Scientific. <a href="https://doi.org/10.1142/10265" class="external-link">https://doi.org/10.1142/10265</a>.
 </div>
 </div>
 </div>
