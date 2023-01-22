@@ -46,3 +46,6 @@ docs
 # temporary files create by gcov
 *.gcno
 *.gcda
+
+# jabref backup files
+*.bib.sav
