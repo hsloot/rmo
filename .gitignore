@@ -1,9 +1,51 @@
+# Created by https://www.toptal.com/developers/gitignore/api/r,c++
+# Edit at https://www.toptal.com/developers/gitignore?templates=r,c++
+
+### C++ ###
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+### R ###
 # History files
 .Rhistory
 .Rapp.history
 
 # Session Data files
 .RData
+.RDataTmp
+
+# User-specific files
+.Ruserdata
 
 # Example code in package build process
 *-Ex.R
@@ -25,23 +67,38 @@ vignettes/*.pdf
 .httr-oauth
 
 # knitr and R markdown default cache directories
-/*_cache/
+*_cache/
 /cache/
 
 # Temporary files created by R markdown
 *.utf8.md
 *.knit.md
 
-# Shiny token, see https://shiny.rstudio.com/articles/shinyapps.html
-rsconnect/
+# R Environment Variables
+.Renviron
+
+# pkgdown site
 docs/
 
-.clang_complete
-rmo.code-workspace
-.vscode
-docs
+# translation temp files
+po/*~
 
-*.tmp
+# RStudio Connect folder
+rsconnect/
+
+### R.Bookdown Stack ###
+# R package: bookdown caching files
+/*_files/
+
+# End of https://www.toptal.com/developers/gitignore/api/r,c++
+
+# pkgdown build directory
+docs/
+
+# local configuration files
+.clang_complete
+rmo.code-workspace/
+.vscode/
 
 # temporary files create by gcov
 *.gcno
@@ -49,3 +106,6 @@ docs
 
 # jabref backup files
 *.bib.sav
+
+*.tmp
+.DS_Store
