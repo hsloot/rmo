@@ -1,19 +1,6 @@
 ---
 title: "The Lévy frailty model"
-references:
-- id: Mai2017a
-  title: Simulating copulas
-  author:
-  - family: Mai
-    given: Jan-Frederik
-  - family: Scherer
-    given: Matthias
-  publisher: World Scientific
-  edition: 2nd
-  DOI: 10.1142/10265
-  type: book
-  issued:
-    year: 2017
+bibliography: ../inst/REFERENCES.bib
 nocite: |
   @Mai2017a
 ---

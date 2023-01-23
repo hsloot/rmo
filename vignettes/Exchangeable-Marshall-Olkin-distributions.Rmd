@@ -1,35 +1,6 @@
 ---
 title: "Exchangeable Marshall--Olkin distributions"
-references:
-- id: Mai2017a
-  title: Simulating copulas
-  author:
-  - family: Mai
-    given: Jan-Frederik
-  - family: Scherer
-    given: Matthias
-  publisher: World Scientific
-  edition: 2nd
-  DOI: 10.1142/10265
-  type: book
-  issued:
-    year: 2017
-- id: Mai2011a
-  title: Reparameterizing Marshall--Olkin copulas with applications to sampling
-  author:
-  - family: Mai
-    given: Jan-Frederik
-  - family: Scherer
-    given: Matthias
-  container-title: Journal of Statistical Computation and Simulation
-  volume: 81
-  issue: 1
-  page: 59 -- 78
-  DOI: 10.1080/00949650903185961
-  publisher: Taylor & Francis
-  type: article-journal
-  issued:
-    year: 2011
+bibliography: ../inst/REFERENCES.bib
 nocite: |
   @Mai2017a, @Mai2011a
 ---

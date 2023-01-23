@@ -1,35 +1,6 @@
 ---
 title: "The Marshall-Olkin distribution"
-references:
-- id: Mai2017a
-  title: Simulating copulas
-  author:
-  - family: Mai
-    given: Jan-Frederik
-  - family: Scherer
-    given: Matthias
-  publisher: World Scientific
-  edition: 2nd
-  DOI: 10.1142/10265
-  type: book
-  issued:
-    year: 2017
-- id: Mai2010a
-  title: The Pickands representation of survival Marshall–Olkin copulas
-  author:
-  - family: Mai
-    given: Jan-Frederik
-  - family: Scherer
-    given: Matthias
-  container-title: Statistics & Probability Letters
-  volume: 80
-  issue: 5
-  page: 357 -- 360
-  DOI: 10.1016/j.spl.2009.11.010
-  publisher: Elsevier
-  type: article-journal
-  issued:
-    year: 2010
+bibliography: ../inst/REFERENCES.bib
 nocite: |
   @Mai2017a, @Mai2010a
 ---

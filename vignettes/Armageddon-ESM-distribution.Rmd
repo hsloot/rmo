@@ -1,22 +1,6 @@
 ---
 title: "Armageddon shock model distributions"
-references:
-- id: Mai2009a
-  title: Efficiently sampling exchangeable armageddon ESM copulas in high dimensions
-  author:
-  - family: Mai
-    given: Jan-Frederik
-  - family: Scherer
-    given: Matthias
-  container-title: Information Sciences
-  volume: 179
-  issue: 17
-  page: 2872 -- 2877
-  DOI: 10.1016/j.ins.2008.09.004
-  publisher: Elsevier
-  type: article-journal
-  issued:
-    year: 2009
+bibliography: ../inst/REFERENCES.bib
 nocite: |
   @Mai2009a
 ---
