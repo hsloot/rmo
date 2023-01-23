@@ -13,89 +13,147 @@ knitr::opts_chunk$set(
 )
 ```
 
-The following document is a compendium for the *Marshall--Olkin distribution*. 
+The following document is a compendium for the *Marshall–Olkin distribution*. 
 
 For a detailed mathematical treatment of this class, we refer to the references at the end of this document.
 
 ## Definition and survival copula
 
-A d-variate random vector \(\boldsymbol{\tau} = (\tau_1, \ldots, \tau_d)\) has a *Marshall--Olkin distribution* with parameters \(\lambda_I, \ \emptyset \neq I \subseteq \{1, \ldots, d\}\) if and only if it has the multivariate survival function
+A d-variate random vector \( \boldsymbol{\tau} = {( \tau_{1}, \ldots, \tau_{d} )} \) has a *Marshall–Olkin distribution* with parameters \( \lambda_{I} \geq {0} \), \( \emptyset \neq I \subseteq {\{ 1, \ldots, d \}} \) if and only if it has the multivariate survival function
 \[
-  \bar{F} (\boldsymbol{t})
-    = \exp \left\{ - \sum_{\emptyset \neq I \subseteq \{1, \ldots, d\}} \lambda_I \max_{i\in I} t_i \right\}, \ \boldsymbol{t} = (t_1, \ldots, t_d) \geq 0 ,
+    \bar{F} (\boldsymbol{t})
+        = \exp{\left \{ 
+            -\sum_{\emptyset \neq I \subseteq {\{ 1, \ldots, d \}}}{
+                \lambda_I
+                \max_{i \in I}{
+                    t_{i}
+                }
+            }
+        \right \}}, 
+        \quad \boldsymbol{t} = {( t_{1}, \ldots, t_{d} )} \geq 0 ,
 \]
-and the parameters fulfil
+and the parameters fulfill
 \[
-  \eta_i
-    := \sum_{I \ni i} \lambda_I > 0 \
-    \forall i \in \{1, \ldots, d\} .
+  \eta_{i}
+    := \sum_{I \ni i} \lambda_I > 0
+        \ \forall i \in {\{ 1, \ldots, d \}} .
 \]
 
 ## Marginal survival functions
 
-The marginal random variables \(\tau_i\) of a d-variate Marshall-Olkin distributed random vector are exponentially distributed with rates \(\eta_i, \ i \in \{1, \ldots, d\}\). In particular, this implies that \(\tau_i\) has the survival function
+The marginal random variables \( \tau_{i} \) of a d-variate Marshall-Olkin distributed random vector are exponentially distributed with rates \( \eta_i, \ i \in {\{ 1, \ldots, d \}} \).
+In particular, this implies that \( \tau_{i} \) has the survival function
 \[
-  \bar{F}_i (t)
-    = \exp \left\{ - t \eta_i \right\}
-    = \exp \left\{ - t \sum_{I \ni i} \lambda_I \right\} , \ i \in \{1, \ldots, d\}, \ t \geq 0 .
+    \bar{F}_{i}{(t)}
+        = \exp{\left \{
+                -t \eta_{i}
+            \right \}}
+        = \exp{\left \{
+                -t \sum_{I \ni i}{
+                    \lambda_{I}
+                }
+            \right \}} , 
+            \quad i \in {\{ 1, \ldots, d \}},
+            \ t \geq 0 .
 \]
 
 ## Survival copula
 
-The survival copula \(\hat{C}\) of a d-variate Marshall--Olkin distributed random vector is
+The survival copula \( \hat{C} \) of a d-variate Marshall–Olkin distributed random vector is
 \[
-  \hat{C} (\boldsymbol{u})
-    = \prod_{\emptyset\neq I \subseteq [d]} \min_{i \in I} u_i^{\frac{\lambda_I}{\eta_i}}, \quad \boldsymbol{u} \in [0, 1]^d .
+    \hat{C}{( \boldsymbol{u} )}
+        = \prod_{\emptyset \neq I \subseteq {[d]}}{
+                \min_{i \in I} u_{i}^{\frac{\lambda_I}{\eta_i}}
+            } ,
+            \quad \boldsymbol{u} \in {[0, 1]}^d .
 \]
 
 ## Pickands measure and function
 
-The Marshall--Olkin distribution is *Min-stable multivariate exponential (MSMVE)* and has a survival copula of *extreme-value* kind.
-The *Pickands measure* \(\delta\) of a d-variate Marshall--Olkin distributed random vector is
+The Marshall–Olkin distribution is *Min-stable multivariate exponential (MSMVE)* and has a survival copula of *extreme-value* kind.
+The *Pickands measure* \( \delta \) of a d-variate Marshall–Olkin distributed random vector is
 \[
-  \delta \left( \frac{ \sum_{i\in I} \vec{e}_i \prod_{i \neq j \in I} \eta_j }{ \sum_{i\in I} \prod_{i \neq j \in I} \eta_j } \right)
-    = \lambda_I \sum_{i\in I} \frac{1}{\eta_i}  ,
-    \quad \emptyset \neq I \subseteq [d] .
+    \delta{\left( 
+        \frac{
+            \sum_{i \in I}{
+                \vec{e}_{i}
+                \prod_{i \neq j \in I}{ 
+                    \eta_{j}
+                }
+            }
+        }{
+            \sum_{i \in I}{
+                \prod_{i \neq j \in I}{
+                    \eta_{j}
+                }
+            }
+        } 
+    \right)}
+    = \lambda_{I}
+        \sum_{i \in I}{
+            \frac{1}{\eta_{i}}
+        } ,
+        \quad \emptyset \neq I \subseteq {[d]} .
 \]
-The *Pickands function* \(P\) of a d-variate Marshall--Olkin distributed random vector is
+The *Pickands function* \( P \) of a d-variate Marshall–Olkin distributed random vector is
 \[
-  P (\boldsymbol{w})
-    := \int_{S_d} \max_{i \in [d]} \{ w_i u_i \} \mathrm{d} \,\delta(\boldsymbol{u})
-    = \sum_{\emptyset\neq I \subseteq [d]} \lambda_I \max_{i \in I} \frac{w_i}{\eta_i} .
+    P{(\boldsymbol{w})}
+        := \int_{S_{d}}{
+                \max_{i \in {[d]}}{\{ w_{i} u_{i} \}} \delta{( \mathrm{d}\boldsymbol{u} )}
+            }
+        = \sum_{\emptyset\neq I \subseteq {[d]}}{ 
+            \lambda_{I}
+            \max_{i \in I}{
+                \frac{
+                    w_{i}
+                }{
+                    \eta_{i}
+                }
+            }
+        } .
 \]
 
 ## The exogenous shock model
 
-A d-variate Marshall--Olkin distribution has a natural stochastic model: consider independent random variables \(E_I \sim \mathrm{Exp} (\lambda_I), \ \emptyset \neq I \subseteq \{1, \ldots, d\}\) and define
+A d-variate Marshall–Olkin distribution has a natural stochastic model:
+consider independent random variables \( E_{I} \sim \mathrm{Exp}{(\lambda_{I})}, \ \emptyset \neq I \subseteq {\{ 1, \ldots, d \}} \) and define
 \[
-  \tau_i
-    := \min \Big\{ E_I \ : \ I \ni i \Big\} , \ i \in \{ 1 , \ldots , d \} .
+    \tau_{i}
+        := \min{\Big\{ E_{I} \ : \ I \ni i \Big\}} ,
+            \quad i \in {\{ 1 , \ldots , d \}} .
 \]
 
 ## The Arnold model
 
-A d-variate Marshall--Olkin distribution has another stochastic model which is strongly linked to continuous time, homogeneous Markovian processes.
+A d-variate Marshall–Olkin distribution has another stochastic model which is strongly linked to continuous time, homogeneous Markovian processes.
 For this, consider the transformed parameters
 \[
-  \lambda
-    := \sum_{\emptyset \neq I \subseteq \{1, \ldots, d\}} \lambda_I
+    \lambda
+        := \sum_{\emptyset \neq I \subseteq {\{ 1, \ldots, d \}}}{
+            \lambda_{I}
+        }
 \]
 and
 \[
-  p_I
-    := \frac{\lambda_I}{\lambda}, \
-    \emptyset \neq I \subseteq \{ 1, \ldots, d \} .
+    p_{I}
+        := \frac{
+            \lambda_{I}
+        }{
+            \lambda
+        },
+        \quad \emptyset \neq I \subseteq {\{ 1, \ldots, d \}} .
 \]
-Then, it can be shown that the vector \(\boldsymbol{\tau}\), defined below, has the desired Marshall--Olkin distribution.
+Then, it can be shown that the vector \( \boldsymbol{\tau} \), defined below, has the desired Marshall–Olkin distribution.
 Let the following two sequences be independent:
 
-- \(\epsilon_1, \epsilon_2, \ldots \sim \mathrm{Exp} (\lambda)\) iid.
-- \(Y_1, Y_2, \ldots\) iid in \(\mathcal{P} (\{1, \ldots, d\}) \backslash \{ 0\}\) with \(\mathbb{P} (Y_1 = I) = p_I, \ \emptyset \neq I \subseteq \{ 1, \ldots , d\}\).
+- \( \epsilon_{1}, \epsilon_{2}, \ldots \sim \mathrm{Exp}{(\lambda)} \) iid.
+- \( Y_{1}, Y_{2}, \ldots \) iid in \( \mathcal{P}{(\{1, \ldots, d\})} \setminus \emptyset \) with \( \mathbb{P}{( Y_{1} = I )} = p_{I}, \ \emptyset \neq I \subseteq {\{ 1, \ldots , d\}} \).
 
-Now, we define \(\boldsymbol{\tau}\) by
+Now, we define \( \boldsymbol{\tau} \) by
 \[
-  \tau_i
-    := \sum_{j=1}^{\min \{ k \in \mathbb{N} : i \in Y_k\}} \epsilon_j , \quad i \in \{ 1, \ldots, d\} .
+    \tau_{i}
+        := \sum_{j=1}^{\min{\{ k \in \mathbb{N} : i \in Y_{k} \}}}{ \epsilon_{j} } ,
+            \quad i \in {\{ 1, \ldots, d \}} .
 \]
 
 

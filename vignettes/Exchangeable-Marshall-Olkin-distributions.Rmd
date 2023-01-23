@@ -13,8 +13,8 @@ knitr::opts_chunk$set(
 )
 ```
 
-The exchangeable subclass of Marshall--Olkin distribution deserves special consideration.
-Almost all specific examples of Marshall--Olkin distributions are exchangeable -- or are based on [mixtures of exchangeable Marshall--Olkin distributions](Mixing-Marshall-Olkin-distributions.html).
+The exchangeable subclass of Marshall–Olkin distribution deserves special consideration.
+Almost all specific examples of Marshall–Olkin distributions are exchangeable — or are based on [mixtures of exchangeable Marshall--Olkin distributions](Mixing-Marshall-Olkin-distributions.html).
 
 For a detailed mathematical treatment of this class, we refer to the references at the end of this document.
 
@@ -27,46 +27,59 @@ An equivalent definition is that the survival function, distribution function, o
 
 ## Condition
 
-A Marshall--Olkin distribution is exchangeable if and only if
+A Marshall–Olkin distribution is exchangeable if and only if
 \[
-  \lvert I\rvert = \lvert J\rvert
-  \quad\Rightarrow\quad
-  \lambda_I
-    = \lambda_J  .
+    {\lvert I \rvert}
+        = {\lvert J \rvert}
+    \quad \Rightarrow \quad
+    \lambda_{I}
+        = \lambda_{J} .
 \]
 
-For this reason, we use the notation \( \lambda_i := \lambda_{I} \), if \( i = \lvert I \rvert \).
+For this reason, we use the notation \( \lambda_i := \lambda_{I} \), if \( i = {\lvert I \rvert} \).
 
 
 ## Reparametrisation
 
 For \( \boldsymbol{t} \geq 0 \) with descendingly ordered version \( t_{[1]} \geq \cdots \geq t_{[d]} \) the [survival function](The-Marshall-Olkin-distribution.html#definition-and-survival-copula) can be rewritten as
 \[
-  \bar{F} (\boldsymbol{t})
-    = \exp{\left \{ - \sum_{i=0}^{d-1} a_i \cdot t_{[i+1]} \right \}} , \quad \boldsymbol{t} \geq 0 .
+    \bar{F}{(\boldsymbol{t})}
+        = \exp{\left \{
+                - \sum_{i=0}^{d-1}{
+                    a_{i} \cdot t_{[i+1]}
+                }
+            \right \}} ,
+            \quad \boldsymbol{t} \geq 0 .
 \]
 
-The parameters \( a_0, a_1, \ldots, a_{d-1} \) are defined by
+The parameters \( a_{0}, a_{1}, \ldots, a_{d-1} \) are defined by
 \[
-  a_i
-    = \sum_{j=0}^{d-i-1} \binom{d-i-1}{j} \lambda_{j+1} , \quad i = 0, 1, \ldots, d-1 ,
+    a_{i}
+        = \sum_{j=0}^{d-i-1}{
+                \binom{d-i-1}{j} \lambda_{j+1}
+            } ,
+            \quad i \in {\{ 0, 1, \ldots, d-1 \}} ,
 \]
-and the parameters \( \lambda_1, \ldots, \lambda_d \) can be retrieved by the formula
+and the parameters \( \lambda_{1}, \ldots, \lambda_{d} \) can be retrieved by the formula
 \[
-  \lambda_i
-    = (-1)^{i-1} \Delta^{i-1} a_{d-i}
-    = \sum_{j=0}^{i-1} {(-1)}^{j} \binom{i-1}{j} a_{d-i+j} , \quad i = 1, \ldots, d .
+    \lambda_{i}
+        = (-1)^{i-1} \Delta^{i-1} a_{d-i}
+        = \sum_{j=0}^{i-1}{
+                {(-1)}^{j} \binom{i-1}{j} a_{d-i+j}
+            },
+            \quad i \in {\{ 1, \ldots, d \}} .
 \]
 
-A sequences of non-negative parameters \( a_0 , a_1, \ldots, a_{d-1} \) defines a proper Marshall--Olkin distribution if and only if the formula above yields a non-negative sequence \( \lambda_1, \ldots, \lambda_d \).
+A sequences of non-negative parameters \( a_{0} , a_{1}, \ldots, a_{d-1} \) defines a proper Marshall–Olkin distribution if and only if the formula above yields a non-negative sequence \( \lambda_{1}, \ldots, \lambda_{d} \).
 
 
 ## Survival copula
 
-For the exchangeable Marshall--Olkin distribution, the survival copula takes the form
+For the exchangeable Marshall–Olkin distribution, the survival copula takes the form
 \[
-  \hat{C} (\boldsymbol{u})
-    = u_{(1)} \cdot u_{(2)}^{a_1/a_0} \cdot \ldots \cdot u_{(d)}^{a_{d-1}/a_0} , \quad \boldsymbol{u} \in {[0, 1]}^d
+    \hat{C}{( \boldsymbol{u} )}
+        = u_{(1)} \cdot u_{(2)}^{a_1/a_0} \cdot \ldots \cdot u_{(d)}^{a_{d-1}/a_0} ,
+            \quad \boldsymbol{u} \in {[0, 1]}^d
 \]
 where \( u_{(1)} \leq \cdots \leq u_{(d)} \) is the ascendingly ordered version of \( \boldsymbol{u} \).
 
@@ -79,33 +92,41 @@ For the exchangeable subclass, the [Arnold model](The-Marshall-Olkin-distributio
 
 The first shock has an exponential distribution with rate
 \[
-  \lambda
-    = \sum_{i=1}^{d} \binom{d}{i} \lambda_i .
+    \lambda
+        = \sum_{i=1}^{d}{
+            \binom{d}{i} \lambda_{i}
+        } .
 \]
 
 The probability that this shock destroys \( i \) components is
 \[
-  \frac{ \binom{d}{i} \lambda_i }{ \lambda } , \quad i = 1, \ldots, d .
+    \frac{
+        \binom{d}{i} \lambda_i
+    }{
+        \lambda
+    } ,
+        \quad i \in {\{ 1, \ldots, d \}} .
 \]
 
-Assume that the first shock arrives at time \( W_1 \). Then it is possible to show that the random vector
+Assume that the first shock arrives at time \( W_{1} \).
+Then it is possible to show that the random vector
 \[
-  \begin{pmatrix}
-    \tau_{(d - i + 1)} - W_1 & \cdots & \tau_{(d)} - W_1
-  \end{pmatrix}
+    \begin{pmatrix}
+        \tau_{(d - i + 1)} - W_{1} & \cdots & \tau_{(d)} - W_{1}
+    \end{pmatrix}
 \]
-is the ordered version of a \( (d-i) \)-variate Marshall--Olkin distributed random vector with parameters \( a_0, a_1, \ldots a_{d-i-1} \).
+is the ordered version of a \( {(d-i)} \)-variate Marshall–Olkin distributed random vector with parameters \( a_{0}, a_{1}, \ldots a_{d-i-1} \).
 Hence, we can repeat this step recursively until we sampled
 \[
-  \tau_{(1)} \leq \cdots \leq \tau_{(d)} .
+    \tau_{(1)} \leq \cdots \leq \tau_{(d)} .
 \]
 
 Finally we can apply a random shuffling \( \Pi \) and get
 \[
-  \tau_ i
-    = \tau_{\Pi (i)} , \quad i = 1, \ldots, d .
+    \tau_ i
+        = \tau_{\Pi{(i)}} ,
+            \quad i \in {\{ 1, \ldots, d \}} .
 \]
-
 
 
 ## References
