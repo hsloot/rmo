@@ -42,7 +42,7 @@ forward differences taken on the Bernstein function.}
       be passed to \code{initialize()}.}
 }
 \description{
-Berstein functions are stable under (non-negative) scalar multiplication,
+Bernstein functions are stable under (non-negative) scalar multiplication,
 i.e. if \eqn{\psi} is a Bernstein function and \eqn{\lambda \geq 0} , then
 \deqn{
   x \mapsto \lambda \psi(x), x > 0,
