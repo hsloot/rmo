@@ -37,7 +37,7 @@ Collate:
     'catch-routine-registration.R'
     'error.R'
     'parameter.R'
-    'rmo.R'
+    'rmo-package.R'
     's4-BernsteinFunction.R'
     's4-LevyBernsteinFunction.R'
     's4-CompleteBernsteinFunction.R'

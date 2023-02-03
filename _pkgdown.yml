@@ -35,30 +35,30 @@ reference:
 - subtitle: Bernstein function arithmetics
   desc: ~
   contents:
-  - matches("ScaledBernsteinFunction-")
-  - matches("SumOfBernsteinFunctions-")
-  - matches("CompositeScaledBernsteinFunction-")
+  - "`ScaledBernsteinFunction-class`"
+  - "`SumOfBernsteinFunctions-class`"
+  - "`CompositeScaledBernsteinFunction-class`"
 
 - subtitle: Boundary cases
   desc: ~
   contents:
-  - matches("LinearBernsteinFunction-")
-  - matches("ConstantBernsteinFunction-")
+  - "`LinearBernsteinFunction-class`"
+  - "`ConstantBernsteinFunction-class`"
 
 - subtitle: Algebraic Bernstein functions
   desc: ~
   contents:
-  - matches("ParetoBernsteinFunction-")
-  - matches("AlphaStableBernsteinFunction-")
-  - matches("InverseGaussianBernsteinFunction-")
-  - matches("ExponentialBernsteinFunction-")
+  - "`ParetoBernsteinFunction-class`"
+  - "`AlphaStableBernsteinFunction-class`"
+  - "`InverseGaussianBernsteinFunction-class`"
+  - "`ExponentialBernsteinFunction-class`"
 
 - subtitle: Logarithmic Bernstein functions
   desc: ~
   contents:
-  - matches("GammaBernsteinFunction-")
+  - "`GammaBernsteinFunction-class`"
 
 - subtitle: Other Bernstein Functions
   desc: ~
   contents:
-  - matches("PoissonBernsteinFunction-")
+  - "`PoissonBernsteinFunction-class`"

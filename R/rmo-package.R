@@ -48,4 +48,7 @@ NULL
 #'
 #' @docType package
 #' @name rmo-package
-NULL
+#' @aliases rmo-package NULL
+#'
+#' @keywords internal
+"_PACKAGE"
