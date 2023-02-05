@@ -349,841 +349,919 @@ World Scientific.
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## Armageddon</span></span></span>
 <span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span><span class="fl">10</span>, <span class="fl">3</span>, a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]       [,2]      [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.38471197 0.20731834 2.9602781</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 1.67353413 0.74851294 1.9844646</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.69963092 0.31400621 0.2887767</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 1.05041472 0.52848169 1.1056045</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.42742110 0.46145842 0.3780742</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.80495712 0.07111229 1.7097449</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.40407743 0.40407743 0.4040774</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.43703500 4.54929801 0.6853945</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.05736984 0.33865201 1.7524649</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 5.88828941 0.47482872 0.3125398</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]       [,2]       [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.01866099 0.08478868 0.34505462</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 1.61186020 0.88806733 3.37801468</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 2.81358939 0.10840299 1.35098872</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 1.96726926 1.96726926 1.12595941</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.01395206 0.01395206 0.01395206</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.73571497 0.43852538 0.94766076</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 1.76370897 1.33973927 0.03962021</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.08483517 0.08483517 0.08483517</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.08121376 0.87922570 0.87922570</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 4.50166265 3.44072715 1.82569715</span>
 <span class="r-in"><span><span class="co">## comonotone</span></span></span>
 <span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span><span class="fl">10</span>, <span class="fl">3</span>, a <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]      [,2]      [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.7440582 0.7440582 0.7440582</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.6000785 0.6000785 0.6000785</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.7660618 0.7660618 0.7660618</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 1.3351624 1.3351624 1.3351624</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.5348441 0.5348441 0.5348441</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.3075862 0.3075862 0.3075862</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.3325900 0.3325900 0.3325900</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.9953178 0.9953178 0.9953178</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.8523534 0.8523534 0.8523534</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.2409691 0.2409691 0.2409691</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]       [,2]       [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 1.39158717 1.39158717 1.39158717</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.92678622 0.92678622 0.92678622</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 1.70094825 1.70094825 1.70094825</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.03890648 0.03890648 0.03890648</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.75880693 0.75880693 0.75880693</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 1.80079711 1.80079711 1.80079711</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 1.42359630 1.42359630 1.42359630</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.15008629 0.15008629 0.15008629</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.29919340 0.29919340 0.29919340</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 3.53039875 3.53039875 3.53039875</span>
 <span class="r-in"><span><span class="co">## independence</span></span></span>
 <span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span><span class="fl">10</span>, <span class="fl">3</span>, b <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]       [,2]      [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 2.22952091 0.62293594 0.5666936</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.39689975 1.68804320 1.4201404</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.01957947 0.07091638 0.7394691</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.39679123 0.41680343 0.5872069</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.07305307 0.45687146 0.2157368</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.84192264 0.05475117 0.1594599</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.37397843 0.07973184 0.9618996</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.80990773 1.34804995 3.7896139</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.53529786 0.75465080 0.1674957</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.74658698 1.46148864 1.8241370</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]      [,2]      [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 1.95224351 2.8295053 1.0356981</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 2.85225894 1.1268573 0.5837284</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.18333445 0.1122367 0.1794377</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 1.04110780 0.8519810 1.1957578</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.83927309 0.4200341 0.1974925</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 1.50393316 1.1838515 0.3056272</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.08094599 0.4940007 1.7313263</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.62851970 1.5228925 0.3770616</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.23711422 0.3942152 0.7833212</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 1.01722982 0.1703046 0.2963610</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span><span class="fl">10</span>, <span class="fl">3</span>, a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>, method <span class="op">=</span> <span class="st">"ESM"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]      [,2]      [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.12967719 0.9136108 3.6899728</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.19667624 1.8933146 0.4997865</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.48842146 1.2317957 0.4221915</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.31226863 0.3122686 0.3122686</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 1.09060468 1.0906047 1.0906047</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.01959357 4.2545130 9.1017504</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.33795951 6.9331961 0.7630142</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.75724063 0.2365362 0.2231161</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.09514877 2.7447088 2.1297206</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.15758499 0.1575850 0.1575850</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.05693545 1.0576268 1.0576268</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 1.57949147 1.5794915 1.5794915</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 2.05218004 2.8025352 1.5967363</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 2.69931570 1.2254488 0.2556626</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 2.43776032 4.2083030 2.0570257</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.68642051 2.5277651 3.0982834</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 1.04808638 0.2654900 1.0480864</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.52040421 0.5099089 3.8626555</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.01001797 2.0350258 0.1494021</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.58587376 1.1521253 0.1355240</span>
 <span class="r-in"><span><span class="co">## comonotone</span></span></span>
 <span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span><span class="fl">10</span>, <span class="fl">3</span>, a <span class="op">=</span> <span class="fl">1</span>, method <span class="op">=</span> <span class="st">"ESM"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]       [,2]       [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 1.50443018 1.50443018 1.50443018</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.37022875 0.37022875 0.37022875</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.00550371 0.00550371 0.00550371</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.21291412 0.21291412 0.21291412</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.05302529 0.05302529 0.05302529</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 1.21599380 1.21599380 1.21599380</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.18490333 0.18490333 0.18490333</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 1.28994512 1.28994512 1.28994512</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 1.41940260 1.41940260 1.41940260</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.06308340 0.06308340 0.06308340</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.28697187 0.28697187 0.28697187</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 4.72419170 4.72419170 4.72419170</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.91647743 0.91647743 0.91647743</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.14824431 0.14824431 0.14824431</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.06310064 0.06310064 0.06310064</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 1.43940680 1.43940680 1.43940680</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.05235014 0.05235014 0.05235014</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.91763496 0.91763496 0.91763496</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.58123669 0.58123669 0.58123669</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.22728921 0.22728921 0.22728921</span>
 <span class="r-in"><span><span class="co">## independence</span></span></span>
 <span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span><span class="fl">10</span>, <span class="fl">3</span>, b <span class="op">=</span> <span class="fl">1</span>, method <span class="op">=</span> <span class="st">"ESM"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]       [,2]       [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.3334477 0.20396960 0.82968189</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.6040270 0.63544106 0.98403135</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.6847461 0.68824534 0.76364963</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.4897941 0.75430847 4.94541121</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.2684092 0.45170277 0.11942586</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 1.0722526 0.88415652 0.62669852</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 3.4892261 0.05394067 3.17129192</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 1.2590574 0.38286813 0.55513766</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.3590597 0.08064619 0.09747055</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.5413360 1.35205028 1.04728624</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]      [,2]       [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 2.22672522 1.4569209 1.24662960</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 2.30904311 1.7160727 0.10710161</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 1.44679900 1.8996976 0.22110251</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.09288283 2.8134513 2.28681532</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.59363086 0.7910714 0.42670048</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 2.38381246 3.1735527 0.37328251</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 1.43523184 0.6000176 1.00085592</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.61929106 1.1025049 0.44672152</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 1.35230383 1.3039275 0.06349159</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.67075187 0.3497718 0.05236714</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span><span class="fl">10</span>, <span class="fl">3</span>, a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>, method <span class="op">=</span> <span class="st">"LFM"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]      [,2]      [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 1.40073260 0.8394852 3.4960273</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 1.50258274 1.1243828 1.5025827</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.12317176 0.3109686 0.2616707</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.02323719 0.6902630 5.1878879</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 3.86808898 1.2383904 6.0715860</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 1.47506659 1.6068274 1.5302060</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.40352425 0.4035242 0.4035242</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 1.49227410 0.7186343 1.8602204</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 3.37919270 5.1676252 0.5879220</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 2.84378461 2.9785374 1.3707562</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 1.54866330 2.8638879 1.0976932</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 3.12960709 0.8658253 0.4537780</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.09699357 1.2503389 1.9498519</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.06583782 1.4932460 2.1361299</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.15294340 3.1592542 1.3032429</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.06458751 6.5453245 0.4845501</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.15320347 0.3897055 0.5095786</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.06178320 1.0973936 2.4471616</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 1.01039786 2.1095059 2.1095059</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.54607576 2.5796991 0.8585280</span>
 <span class="r-in"><span><span class="co">## comonotone</span></span></span>
 <span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span><span class="fl">10</span>, <span class="fl">3</span>, a <span class="op">=</span> <span class="fl">1</span>, method <span class="op">=</span> <span class="st">"LFM"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]      [,2]      [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 3.1900679 3.1900679 3.1900679</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.5493546 0.5493546 0.5493546</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.5419027 0.5419027 0.5419027</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 1.2203506 1.2203506 1.2203506</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 1.0736953 1.0736953 1.0736953</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 1.1288912 1.1288912 1.1288912</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.3286512 0.3286512 0.3286512</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.2262894 0.2262894 0.2262894</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 2.0906233 2.0906233 2.0906233</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 1.6766829 1.6766829 1.6766829</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]       [,2]       [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.29058375 0.29058375 0.29058375</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.04300285 0.04300285 0.04300285</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.10254529 0.10254529 0.10254529</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 3.22402242 3.22402242 3.22402242</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.10018944 0.10018944 0.10018944</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.42695333 0.42695333 0.42695333</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 2.60336204 2.60336204 2.60336204</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 3.61582457 3.61582457 3.61582457</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.09853321 0.09853321 0.09853321</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.23912588 0.23912588 0.23912588</span>
 <span class="r-in"><span><span class="co">## independence</span></span></span>
 <span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span><span class="fl">10</span>, <span class="fl">3</span>, b <span class="op">=</span> <span class="fl">1</span>, method <span class="op">=</span> <span class="st">"LFM"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>              [,1]      [,2]       [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 2.453890623 0.1909259 1.15969605</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.301680794 1.0913022 1.40913584</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 2.597364502 0.2947611 0.91085329</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 1.172863951 0.1569631 1.31818445</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 1.668380365 0.3601119 0.56759589</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 1.177127064 3.3326799 0.09515901</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.008021454 2.2744881 1.83868175</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.140315005 0.8112638 0.45710222</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 1.860641558 0.5340296 1.05314488</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.666254909 1.2429205 0.66984586</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]      [,2]       [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 2.4587094 2.3095700 0.41206294</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 1.0791256 0.2000956 1.15176229</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.3376648 1.0056648 1.09151351</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 1.8173200 0.7675359 0.08803752</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.3638919 0.7096876 0.91160743</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.1288619 0.8671994 2.25124276</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 1.0342836 0.0412185 0.70975016</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.2616270 1.6205345 2.98077623</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 1.2512128 0.1620208 2.21118571</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.1180182 0.1179381 0.78330044</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span><span class="fl">10</span>, <span class="fl">3</span>, a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>, method <span class="op">=</span> <span class="st">"MDCM"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]      [,2]       [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 1.0033744 0.3290450 1.18590950</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 1.6670095 0.4923779 1.31402315</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 3.5068882 0.9659918 1.14706072</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.6385405 4.0958668 0.64230797</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.5652147 1.1205105 1.18592234</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.3257829 0.5570626 1.35209713</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 1.3569552 1.0158805 2.54938416</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.3762098 0.6226921 2.29164153</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.3365336 0.7892566 0.02516818</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.3289969 2.1078979 2.04257481</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]      [,2]      [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 2.41883904 1.4232652 0.3702613</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.98921064 0.9892106 0.1817613</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.07048086 0.7472906 0.2572940</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 1.61632868 1.6163287 0.5071925</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.75891169 0.7589117 0.7589117</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.33859381 0.6059750 0.0138113</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 2.62920225 1.3789405 0.7181889</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 4.57413654 0.1956564 2.5092878</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.05348257 0.2303249 0.2303249</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.46246028 1.2130863 5.0142131</span>
 <span class="r-in"><span><span class="co">## comonotone</span></span></span>
 <span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span><span class="fl">10</span>, <span class="fl">3</span>, a <span class="op">=</span> <span class="fl">1</span>, method <span class="op">=</span> <span class="st">"MDCM"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]       [,2]       [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 2.01267864 2.01267864 2.01267864</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.49944199 0.49944199 0.49944199</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 1.52455806 1.52455806 1.52455806</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.98576954 0.98576954 0.98576954</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.02487981 0.02487981 0.02487981</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 1.87540697 1.87540697 1.87540697</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.14250697 0.14250697 0.14250697</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 2.08257092 2.08257092 2.08257092</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 1.78726457 1.78726457 1.78726457</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 1.39869636 1.39869636 1.39869636</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]      [,2]      [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.2417537 0.2417537 0.2417537</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.4741595 0.4741595 0.4741595</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 2.5046904 2.5046904 2.5046904</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.1377471 0.1377471 0.1377471</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.1547744 0.1547744 0.1547744</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.5417775 0.5417775 0.5417775</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 1.2898959 1.2898959 1.2898959</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 1.4143850 1.4143850 1.4143850</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 2.8202682 2.8202682 2.8202682</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 1.1633982 1.1633982 1.1633982</span>
 <span class="r-in"><span><span class="co">## independence</span></span></span>
 <span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span><span class="fl">10</span>, <span class="fl">3</span>, b <span class="op">=</span> <span class="fl">1</span>, method <span class="op">=</span> <span class="st">"MDCM"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]       [,2]        [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 1.1596149 2.14558050 2.149955385</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.6693484 2.21734387 0.001558413</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.3299316 4.52110744 0.863144698</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.7606489 0.50313347 1.086675234</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.8941757 5.30383198 1.278870221</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 1.0082215 0.32543690 0.616818236</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.6213128 0.53664950 3.705817925</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.4172451 3.54443384 0.218520753</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.6575757 0.06891373 0.611040098</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 1.8742000 0.29442278 0.003890466</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]       [,2]      [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.2052643 0.59022771 0.6857535</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.6691379 0.80508799 0.6949107</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 3.3505076 1.17869251 0.2940379</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.5875417 1.87300622 0.6081790</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 4.9481925 0.50606098 0.9291516</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 1.5293096 0.02573068 0.9439439</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 1.1363342 0.06533791 0.9935377</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 1.6805931 0.21602641 0.6248575</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.3207993 0.51269938 0.8181797</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.4424754 0.72776463 1.4317600</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span><span class="fl">10</span>, <span class="fl">3</span>, a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>, method <span class="op">=</span> <span class="st">"AM"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]      [,2]      [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.01562861 1.2131822 0.2682724</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.24467040 0.2446704 0.2446704</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 4.92790782 1.5932149 2.0986489</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 1.23696686 5.7808650 1.1561981</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 1.50726366 0.4033717 0.1003695</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 1.29582440 1.9860577 2.3948853</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.04053248 2.3971474 0.2020230</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 1.41338252 1.5449278 1.5963903</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 5.06283127 0.8252524 0.4694468</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.15230582 0.1523058 0.1523058</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]      [,2]      [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.7375209 0.7102808 1.3796462</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 1.8492925 1.3776431 1.6194308</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 2.4689849 2.4689849 1.0972625</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.4183385 0.4443444 0.4443444</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 3.8143080 0.9456117 1.3807480</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 3.3008480 1.9516993 0.5933764</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 2.0825471 2.2698361 0.3464191</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.5692153 0.2587152 0.5692153</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 1.6770885 0.4986522 0.5117712</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 2.2718182 1.4775867 0.2304022</span>
 <span class="r-in"><span><span class="co">## comonotone</span></span></span>
 <span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span><span class="fl">10</span>, <span class="fl">3</span>, a <span class="op">=</span> <span class="fl">1</span>, method <span class="op">=</span> <span class="st">"AM"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>              [,1]        [,2]        [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.238147218 0.238147218 0.238147218</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.471528715 0.471528715 0.471528715</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.244056945 0.244056945 0.244056945</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 1.054763588 1.054763588 1.054763588</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 2.481132286 2.481132286 2.481132286</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 2.136479935 2.136479935 2.136479935</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.006801576 0.006801576 0.006801576</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.498688027 0.498688027 0.498688027</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 1.719398549 1.719398549 1.719398549</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 1.695359627 1.695359627 1.695359627</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]       [,2]       [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.08696942 0.08696942 0.08696942</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 1.60035903 1.60035903 1.60035903</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.25045600 0.25045600 0.25045600</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.50002416 0.50002416 0.50002416</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.70955422 0.70955422 0.70955422</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 3.01481810 3.01481810 3.01481810</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 1.40994049 1.40994049 1.40994049</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 3.53459911 3.53459911 3.53459911</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 1.21488690 1.21488690 1.21488690</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.63344589 0.63344589 0.63344589</span>
 <span class="r-in"><span><span class="co">## independence</span></span></span>
 <span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span><span class="fl">10</span>, <span class="fl">3</span>, b <span class="op">=</span> <span class="fl">1</span>, method <span class="op">=</span> <span class="st">"AM"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>              [,1]        [,2]      [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.146504722 0.298277867 0.7546487</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.642978721 0.191796622 0.8971850</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.867651423 0.029251238 3.8233143</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 2.210574043 0.003849827 1.0232574</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.830648352 0.481304632 0.7473174</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.036847226 3.403523872 1.7518384</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 2.462644953 0.731033066 0.4714331</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.004253095 1.500977672 2.2016988</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 3.661173236 3.014858740 0.1620643</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.224584997 1.334680726 0.0585472</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]       [,2]       [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.1270747 0.03679806 0.51483055</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.3482853 2.21647413 0.04629703</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 1.2626412 0.01018199 1.58929358</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.1450210 3.30138783 7.92094555</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.8410477 1.25246031 3.58885050</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.5547510 0.08981342 1.72385555</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.9905810 0.34919045 1.09897649</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.9766904 0.79754265 0.51066900</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.4031559 1.78991722 1.03455487</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.2466400 0.53096256 0.69163542</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span><span class="fl">10</span>, <span class="fl">3</span>, a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>, family <span class="op">=</span> <span class="st">"Armageddon"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]       [,2]       [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 2.45017583 5.08543779 1.82493737</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.02950188 0.02950188 0.02950188</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 1.34054819 2.58714678 2.02237162</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 1.18202632 3.67379427 2.14307531</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 1.50810295 0.78652670 1.78155132</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 1.41545935 0.50504565 1.41545935</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.29618885 0.59367475 0.44836406</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 4.95182874 1.92963006 0.13799028</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 7.52646784 0.12655587 0.42890686</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.76854449 0.06840268 0.76854449</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]      [,2]      [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.1577008 0.7536813 0.7536813</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 1.1446787 1.1213732 1.1306646</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 2.6500472 1.0813083 1.5399735</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 1.6070937 0.2587031 0.7984633</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.9656308 1.0571686 1.0571686</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 3.2194148 1.1809042 0.4940547</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.1102865 0.5971713 0.1923165</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.5475875 1.1280574 1.1280574</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 1.1206437 1.4461306 0.2150660</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 1.4135631 0.2174868 1.9608470</span>
 <span class="r-in"><span><span class="co">## comonotone</span></span></span>
 <span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span><span class="fl">10</span>, <span class="fl">3</span>, a <span class="op">=</span> <span class="fl">1</span>, family <span class="op">=</span> <span class="st">"Armageddon"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]       [,2]       [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.69877661 0.69877661 0.69877661</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.01608014 0.01608014 0.01608014</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.18514814 0.18514814 0.18514814</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 2.23324086 2.23324086 2.23324086</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.28686215 0.28686215 0.28686215</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.01529286 0.01529286 0.01529286</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.30706731 0.30706731 0.30706731</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.93784697 0.93784697 0.93784697</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.92029016 0.92029016 0.92029016</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.32084866 0.32084866 0.32084866</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.26027423 0.26027423 0.26027423</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.35784394 0.35784394 0.35784394</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.14722124 0.14722124 0.14722124</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.06321138 0.06321138 0.06321138</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 1.03919144 1.03919144 1.03919144</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.35333352 0.35333352 0.35333352</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.83027861 0.83027861 0.83027861</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 2.79822023 2.79822023 2.79822023</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.88552504 0.88552504 0.88552504</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.99510218 0.99510218 0.99510218</span>
 <span class="r-in"><span><span class="co">## independence</span></span></span>
 <span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span><span class="fl">10</span>, <span class="fl">3</span>, b <span class="op">=</span> <span class="fl">1</span>, family <span class="op">=</span> <span class="st">"Armageddon"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]       [,2]        [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 1.98486804 1.43657072 0.266916749</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.06598884 0.26584417 0.046679191</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.21903809 0.39309641 0.784887882</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.02691825 3.50922132 0.036747293</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 1.53714891 0.09702195 1.297046320</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.95924369 0.16317648 0.587788372</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 2.96610600 1.13193486 0.144215715</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 1.47133537 0.55043022 0.006233884</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.27345913 1.24743288 0.151089952</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.18280553 3.76289949 0.911834173</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]       [,2]       [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 1.4365331 0.37592656 2.20975649</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.3224523 1.05382179 0.54727074</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.3981187 0.02825116 0.73166046</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.3809327 0.17217913 1.88823107</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.2949028 0.72182881 4.45358628</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.2704240 3.36552956 0.06945234</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.1283106 0.01404160 0.66356251</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.5179236 1.40021512 0.18867295</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 2.2037704 0.55773691 1.49687258</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.9433991 0.94540127 0.41278307</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span></span></span>
-<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>, a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>,</span></span>
+<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>,</span></span>
+<span class="r-in"><span>    a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>,</span></span>
 <span class="r-in"><span>    family <span class="op">=</span> <span class="st">"Armageddon"</span>,</span></span>
-<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"ESM"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]       [,2]      [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,]  2.2154980 0.68760420 0.8814356</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,]  6.0174465 2.54796775 2.1120142</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 11.1184402 1.60672941 1.3260531</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,]  0.7559565 1.60662305 0.8587198</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,]  4.0006957 1.08378013 0.7079286</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,]  1.4941736 0.22499923 0.1021902</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,]  0.7363976 0.08070248 0.3341892</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,]  0.5350414 0.29640372 3.2398481</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,]  0.5625859 1.89471391 6.6094324</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,]  0.4964589 0.08919104 0.4964589</span>
+<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"ESM"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]      [,2]       [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 1.0785306 1.0802278 0.09007144</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 4.6365005 0.2339384 1.07492882</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 2.5232488 0.2691460 0.61727417</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 3.8385788 0.4081725 1.29105708</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 2.1810587 0.2182089 0.52658041</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 3.7214687 3.2350271 3.72146869</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 6.6297859 0.7980867 0.51641354</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 1.6035703 6.0555582 3.20780823</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 1.1582824 0.4995307 0.61547612</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.1773864 0.2815015 1.51294261</span>
 <span class="r-in"><span><span class="co">## comonotone</span></span></span>
 <span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span></span></span>
-<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>, a <span class="op">=</span> <span class="fl">1</span>,</span></span>
+<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>,</span></span>
+<span class="r-in"><span>    a <span class="op">=</span> <span class="fl">1</span>,</span></span>
 <span class="r-in"><span>    family <span class="op">=</span> <span class="st">"Armageddon"</span>,</span></span>
-<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"ESM"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]      [,2]      [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 1.0544952 1.0544952 1.0544952</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.3658314 0.3658314 0.3658314</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 1.1791666 1.1791666 1.1791666</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 1.0239948 1.0239948 1.0239948</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.5092481 0.5092481 0.5092481</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 1.3768438 1.3768438 1.3768438</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 1.1146624 1.1146624 1.1146624</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.7899009 0.7899009 0.7899009</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.2374284 0.2374284 0.2374284</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.9012778 0.9012778 0.9012778</span>
+<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"ESM"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]       [,2]       [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.76586073 0.76586073 0.76586073</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.98995422 0.98995422 0.98995422</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.92936019 0.92936019 0.92936019</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.14172703 0.14172703 0.14172703</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.15058737 0.15058737 0.15058737</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 1.38343486 1.38343486 1.38343486</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.62246368 0.62246368 0.62246368</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.30421990 0.30421990 0.30421990</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.04536151 0.04536151 0.04536151</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 1.25034224 1.25034224 1.25034224</span>
 <span class="r-in"><span><span class="co">## independence</span></span></span>
 <span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span></span></span>
-<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>, b <span class="op">=</span> <span class="fl">1</span>,</span></span>
+<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>,</span></span>
+<span class="r-in"><span>    b <span class="op">=</span> <span class="fl">1</span>,</span></span>
 <span class="r-in"><span>    family <span class="op">=</span> <span class="st">"Armageddon"</span>,</span></span>
-<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"ESM"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               [,1]       [,2]       [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 1.9063343181 0.52270417 2.01167578</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.5418303045 0.36779300 0.20412827</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.0007608463 0.14582519 1.35161705</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.0170852495 0.08269218 0.29780517</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 1.9014385472 0.13680691 1.34514240</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 2.4243259447 1.37979478 0.06221833</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 2.4733133967 3.53585455 0.23345730</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 2.7540246266 2.11446525 1.84729690</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.0059734417 0.09345217 2.46071264</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.5833893972 1.27827076 1.06394232</span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span></span></span>
-<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>, a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>,</span></span>
-<span class="r-in"><span>    family <span class="op">=</span> <span class="st">"Armageddon"</span>,</span></span>
-<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"LFM"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"ESM"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]      [,2]       [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 3.22362459 5.7807463 0.28482019</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 3.41805355 0.1370594 0.06708591</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 3.23522779 0.5135232 4.06706824</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 4.86604458 4.1665613 2.11886935</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 1.86051733 2.0697019 5.89990098</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 1.40100240 1.4010024 1.40100240</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.05229757 1.5577200 1.38306573</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 1.73618639 1.0001317 1.73618639</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.41875845 0.4187584 0.41875845</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.16263124 0.1626312 0.16263124</span>
-<span class="r-in"><span><span class="co">## comonotone</span></span></span>
-<span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span></span></span>
-<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>, a <span class="op">=</span> <span class="fl">1</span>,</span></span>
-<span class="r-in"><span>    family <span class="op">=</span> <span class="st">"Armageddon"</span>,</span></span>
-<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"LFM"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]       [,2]       [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.60006163 0.60006163 0.60006163</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 1.62490128 1.62490128 1.62490128</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.02776522 0.02776522 0.02776522</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.33925547 0.33925547 0.33925547</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.39512812 0.39512812 0.39512812</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 1.13014006 1.13014006 1.13014006</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 2.82331875 2.82331875 2.82331875</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.65618879 0.65618879 0.65618879</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 1.02255482 1.02255482 1.02255482</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.35474805 0.35474805 0.35474805</span>
-<span class="r-in"><span><span class="co">## independence</span></span></span>
-<span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span></span></span>
-<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>, b <span class="op">=</span> <span class="fl">1</span>,</span></span>
-<span class="r-in"><span>    family <span class="op">=</span> <span class="st">"Armageddon"</span>,</span></span>
-<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"LFM"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]       [,2]       [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.03403085 0.74316051 0.08258863</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 1.86733858 0.51086725 0.84494400</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.94013026 0.45646801 0.70964841</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.62891785 0.05610156 0.12429769</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.36599925 1.23558079 0.72310346</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.21694355 1.09906701 0.08753187</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.33053075 1.51474978 0.05633423</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.43903697 0.65953736 1.30631574</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 1.62619426 0.87870250 0.87602182</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.15830442 0.33432316 0.57964234</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 1.57757622 2.4822176 0.15040679</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 1.39006908 0.1076211 0.48030329</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.23647768 0.3367305 0.90461169</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.71333261 5.0422600 0.99165106</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.08721471 0.1140090 1.18026909</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 1.42152816 0.6090064 3.97509070</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.78440889 0.7561192 0.49290663</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.24693333 3.8355977 0.07779858</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 2.81498345 2.7966723 0.06432344</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 1.68399199 1.2455944 0.21769601</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span></span></span>
-<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>, a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>,</span></span>
+<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>,</span></span>
+<span class="r-in"><span>    a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>,</span></span>
 <span class="r-in"><span>    family <span class="op">=</span> <span class="st">"Armageddon"</span>,</span></span>
-<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"MDCM"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]       [,2]       [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 2.81191420 0.61150506 0.69392611</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 1.64970514 2.00613793 2.20493262</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 1.26703766 1.26703766 1.03167908</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 1.95302680 1.84897050 1.95302680</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 3.07168345 1.08202087 3.96750054</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 1.22296639 0.19547602 2.18623042</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.06181781 0.06181781 0.06181781</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.18489818 0.21736523 0.32677327</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.86788615 0.54882824 0.87849690</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.32155929 5.62292196 0.78032080</span>
-<span class="r-in"><span><span class="co">## comonotone</span></span></span>
-<span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span></span></span>
-<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>, a <span class="op">=</span> <span class="fl">1</span>,</span></span>
-<span class="r-in"><span>    family <span class="op">=</span> <span class="st">"Armageddon"</span>,</span></span>
-<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"MDCM"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]       [,2]       [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 1.05392597 1.05392597 1.05392597</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.08979148 0.08979148 0.08979148</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 2.37053844 2.37053844 2.37053844</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.11787737 0.11787737 0.11787737</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.23842831 0.23842831 0.23842831</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.95993059 0.95993059 0.95993059</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.52727718 0.52727718 0.52727718</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.67915695 0.67915695 0.67915695</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 2.71745054 2.71745054 2.71745054</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.03722171 0.03722171 0.03722171</span>
-<span class="r-in"><span><span class="co">## independence</span></span></span>
-<span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span></span></span>
-<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>, b <span class="op">=</span> <span class="fl">1</span>,</span></span>
-<span class="r-in"><span>    family <span class="op">=</span> <span class="st">"Armageddon"</span>,</span></span>
-<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"MDCM"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]       [,2]        [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.9020570 0.64655138 1.676155474</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.4237699 0.63633593 2.599481119</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.3215959 0.27077771 0.945493059</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.1025318 0.03754799 0.006463063</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.3553571 0.51060029 0.044640027</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 1.4155333 0.51969844 0.838474471</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 2.2304988 0.29236050 0.078986240</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 2.2512597 0.24117172 1.515080627</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.5107427 0.93454489 1.320330489</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 1.5423036 0.95666101 1.438769352</span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span></span></span>
-<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>, a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>,</span></span>
-<span class="r-in"><span>    family <span class="op">=</span> <span class="st">"Armageddon"</span>,</span></span>
-<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"AM"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"LFM"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]       [,2]      [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 1.4000689 0.87423431 0.4380265</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.6438385 3.58932307 2.0885857</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 1.4508271 4.04801461 3.5576239</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 1.3998989 1.52517100 1.5251710</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 1.9940607 4.70430370 4.7043037</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 4.2797315 1.40391078 0.8266957</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.6760121 0.67601208 0.6760121</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 4.2125523 0.01285755 1.7593842</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 3.2997435 3.62894958 8.1320322</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 1.1846579 1.72522076 3.4884723</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.2497395 0.07900555 0.5900570</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 1.8382013 1.83820135 1.0014904</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 2.8910718 0.23856081 2.2547544</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 1.4105950 1.21449166 2.8318239</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.0370677 2.12075867 8.0613708</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.7994576 2.53971941 4.9829787</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 4.2488280 3.59537927 0.5916014</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.5047536 0.37388033 4.8747841</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 5.5933580 0.38213263 0.3502669</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 2.3435169 2.34351687 0.4431827</span>
 <span class="r-in"><span><span class="co">## comonotone</span></span></span>
 <span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span></span></span>
-<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>, a <span class="op">=</span> <span class="fl">1</span>,</span></span>
+<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>,</span></span>
+<span class="r-in"><span>    a <span class="op">=</span> <span class="fl">1</span>,</span></span>
 <span class="r-in"><span>    family <span class="op">=</span> <span class="st">"Armageddon"</span>,</span></span>
-<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"AM"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"LFM"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]       [,2]       [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.79424803 0.79424803 0.79424803</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 1.60904976 1.60904976 1.60904976</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.27902351 0.27902351 0.27902351</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.16089903 0.16089903 0.16089903</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.27649828 0.27649828 0.27649828</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 1.01302509 1.01302509 1.01302509</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.41123187 0.41123187 0.41123187</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 1.54679751 1.54679751 1.54679751</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 1.69329378 1.69329378 1.69329378</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.02104718 0.02104718 0.02104718</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.49615208 0.49615208 0.49615208</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 2.77213940 2.77213940 2.77213940</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.04653134 0.04653134 0.04653134</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 3.21065186 3.21065186 3.21065186</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 2.31955287 2.31955287 2.31955287</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.63793751 0.63793751 0.63793751</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.11009436 0.11009436 0.11009436</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.36946528 0.36946528 0.36946528</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.02877847 0.02877847 0.02877847</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.59526946 0.59526946 0.59526946</span>
 <span class="r-in"><span><span class="co">## independence</span></span></span>
 <span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span></span></span>
-<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>, b <span class="op">=</span> <span class="fl">1</span>,</span></span>
+<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>,</span></span>
+<span class="r-in"><span>    b <span class="op">=</span> <span class="fl">1</span>,</span></span>
 <span class="r-in"><span>    family <span class="op">=</span> <span class="st">"Armageddon"</span>,</span></span>
-<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"AM"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]        [,2]      [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.26229678 1.394108825 1.2387640</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.33405344 0.893898221 0.0699110</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.01452577 1.588819477 1.1805432</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.66801175 0.303057169 0.2784330</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.34409818 0.110067321 0.3729206</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.67285230 0.536867921 0.8278428</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 1.16568868 0.067512717 0.2158858</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 1.00541830 0.666026983 1.0532493</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.03292002 0.061975273 1.1475601</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.44220526 0.008760339 0.3125543</span>
+<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"LFM"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]      [,2]       [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.5346178 0.6067912 3.07590064</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.1144926 3.3824465 0.15503660</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 1.3388578 3.7214425 0.81436192</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 2.9574439 1.2227238 0.83133831</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.5144285 1.0735962 1.09720024</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.6002250 0.5275170 2.76346185</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.4574835 1.1001802 1.59288290</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 2.0681695 0.5555884 0.43661945</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.3935588 0.5075208 0.24196165</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.1516011 3.8406722 0.02340085</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>,</span></span>
+<span class="r-in"><span>    a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>,</span></span>
+<span class="r-in"><span>    family <span class="op">=</span> <span class="st">"Armageddon"</span>,</span></span>
+<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"MDCM"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]      [,2]      [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 1.37369271 1.6788727 0.3838238</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 3.85950666 3.8595067 0.9097222</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 1.59867871 1.0277390 3.7299326</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.11363401 1.5174920 0.2345461</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.03087081 0.3587474 2.5238665</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 2.60761360 0.6006125 1.6121269</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.03974517 1.0440956 4.8900317</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 5.75228508 0.8694362 1.7711668</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.20823473 0.2082347 0.2082347</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 1.92999288 0.7383158 1.2293564</span>
+<span class="r-in"><span><span class="co">## comonotone</span></span></span>
+<span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>,</span></span>
+<span class="r-in"><span>    a <span class="op">=</span> <span class="fl">1</span>,</span></span>
+<span class="r-in"><span>    family <span class="op">=</span> <span class="st">"Armageddon"</span>,</span></span>
+<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"MDCM"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]       [,2]       [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.07592387 0.07592387 0.07592387</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 1.48530488 1.48530488 1.48530488</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.99385671 0.99385671 0.99385671</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.07689907 0.07689907 0.07689907</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.03451048 0.03451048 0.03451048</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.57287437 0.57287437 0.57287437</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.45116121 0.45116121 0.45116121</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.05404566 0.05404566 0.05404566</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.58568231 0.58568231 0.58568231</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 2.54479818 2.54479818 2.54479818</span>
+<span class="r-in"><span><span class="co">## independence</span></span></span>
+<span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>,</span></span>
+<span class="r-in"><span>    b <span class="op">=</span> <span class="fl">1</span>,</span></span>
+<span class="r-in"><span>    family <span class="op">=</span> <span class="st">"Armageddon"</span>,</span></span>
+<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"MDCM"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]      [,2]      [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 1.17734483 0.6050522 1.5852841</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.18687109 0.1096635 0.1422823</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 2.87999653 1.8614107 0.1832798</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.18649178 0.3283049 0.5629172</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 2.52954935 0.5397557 0.9862765</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.15916663 0.1437100 0.4570709</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.45159751 1.7228172 3.2252958</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.25097878 0.1498642 0.9102246</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.20603374 1.6355472 1.2721597</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.04824073 0.8461999 0.2734531</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>,</span></span>
+<span class="r-in"><span>    a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>,</span></span>
+<span class="r-in"><span>    family <span class="op">=</span> <span class="st">"Armageddon"</span>,</span></span>
+<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"AM"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>              [,1]       [,2]       [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 1.802026323 0.57100292 0.56206116</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.537351427 3.67523293 1.18743794</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 3.333415473 0.74080017 2.43323802</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 2.002141027 0.05221737 1.55764510</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.234015260 2.90066764 1.00945573</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 1.591825331 2.00560740 2.00560740</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.138535463 1.23560048 1.48540834</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 2.794736097 2.73684221 1.43268802</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 2.160952534 5.67329344 0.07869714</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.008095532 1.37765851 3.65955752</span>
+<span class="r-in"><span><span class="co">## comonotone</span></span></span>
+<span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>,</span></span>
+<span class="r-in"><span>    a <span class="op">=</span> <span class="fl">1</span>,</span></span>
+<span class="r-in"><span>    family <span class="op">=</span> <span class="st">"Armageddon"</span>,</span></span>
+<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"AM"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]       [,2]       [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.11114716 0.11114716 0.11114716</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.22923699 0.22923699 0.22923699</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.06448208 0.06448208 0.06448208</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.17626825 0.17626825 0.17626825</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.13522672 0.13522672 0.13522672</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.56260649 0.56260649 0.56260649</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 1.12501327 1.12501327 1.12501327</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 1.14022111 1.14022111 1.14022111</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.55681844 0.55681844 0.55681844</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 1.27742562 1.27742562 1.27742562</span>
+<span class="r-in"><span><span class="co">## independence</span></span></span>
+<span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>,</span></span>
+<span class="r-in"><span>    b <span class="op">=</span> <span class="fl">1</span>,</span></span>
+<span class="r-in"><span>    family <span class="op">=</span> <span class="st">"Armageddon"</span>,</span></span>
+<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"AM"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]       [,2]      [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.83208416 0.33351987 2.5050979</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.07017313 0.67994846 0.7686589</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.48358132 1.90267470 2.4955684</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 1.99016345 0.07291105 3.0954853</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 2.87034115 1.44961563 0.2392701</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.52199774 0.02522864 1.8904974</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 2.89677655 1.30060159 0.2821898</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.96317725 0.16983091 1.3745131</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 3.15553810 0.08848311 0.3288236</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 1.99774553 0.38404063 0.2470503</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Poisson</span></span></span>
 <span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span></span></span>
-<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>, a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>, gamma <span class="op">=</span> <span class="fl">2</span>,</span></span>
-<span class="r-in"><span>    eta <span class="op">=</span> <span class="fl">0.5</span>, family <span class="op">=</span> <span class="st">"Poisson"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]      [,2]      [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.03677504 0.2071274 0.2071274</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.72801857 0.5929393 0.7280186</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.87297828 0.2462049 1.8575600</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.06600693 0.1627355 0.4645862</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.68914809 1.0461098 0.6891481</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.49400311 0.6694169 2.3735586</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 1.17495601 0.0804637 1.3199833</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 1.84281858 1.2263073 0.4053579</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.49780987 2.4270070 0.3793778</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 1.12932834 1.9287857 1.1293283</span>
-<span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span></span></span>
-<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>, a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>, gamma <span class="op">=</span> <span class="fl">2</span>,</span></span>
-<span class="r-in"><span>    eta <span class="op">=</span> <span class="fl">0.5</span>, family <span class="op">=</span> <span class="st">"Poisson"</span>,</span></span>
-<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"ESM"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]      [,2]       [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.03861906 1.5521151 2.12404359</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.58268369 0.3928541 0.39285407</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.88975687 0.9373386 0.27657578</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 1.32447781 1.7789027 0.37354803</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.35805023 0.3580502 0.18755395</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 1.50185688 0.6952363 0.69523631</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.77513296 1.0086130 0.27569162</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.49956753 0.5398419 0.04717786</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.45796383 0.3293780 0.61051450</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.03834530 0.7829338 0.78293380</span>
-<span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span></span></span>
-<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>, a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>, gamma <span class="op">=</span> <span class="fl">2</span>,</span></span>
-<span class="r-in"><span>    eta <span class="op">=</span> <span class="fl">0.5</span>, family <span class="op">=</span> <span class="st">"Poisson"</span>,</span></span>
-<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"LFM"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>,</span></span>
+<span class="r-in"><span>    a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>, gamma <span class="op">=</span> <span class="fl">2</span>,</span></span>
+<span class="r-in"><span>    eta <span class="op">=</span> <span class="fl">0.5</span>, family <span class="op">=</span> <span class="st">"Poisson"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]      [,2]      [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.4750116 0.1820215 0.4871160</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 1.9941447 0.2016480 0.4404778</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.6748159 0.6748159 3.3671806</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 1.0813147 0.4347707 0.3432397</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 2.3321349 0.2317952 0.5650854</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.7004021 0.1898738 0.7004021</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 1.0538283 0.3286439 1.4703057</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 2.2215978 2.6448750 1.6480544</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 1.0862659 1.0924898 1.0924898</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.9447962 1.6431981 1.3177961</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.7642968 0.2043312 1.3275241</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 1.1497783 0.7099280 0.6698433</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.1490711 0.7330948 0.1490711</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 2.3327571 0.2335464 0.2335464</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.5516042 0.5518001 0.2932410</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 1.8782572 0.6109744 0.6109744</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.3178930 0.5923287 0.5630438</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.6120559 0.6120559 0.6120559</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.1876266 0.2785963 0.1660095</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.4319697 0.8953299 0.8953299</span>
 <span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span></span></span>
-<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>, a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>, gamma <span class="op">=</span> <span class="fl">2</span>,</span></span>
+<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>,</span></span>
+<span class="r-in"><span>    a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>, gamma <span class="op">=</span> <span class="fl">2</span>,</span></span>
 <span class="r-in"><span>    eta <span class="op">=</span> <span class="fl">0.5</span>, family <span class="op">=</span> <span class="st">"Poisson"</span>,</span></span>
-<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"MDCM"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"ESM"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]       [,2]       [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.12198108 1.68352357 0.96402632</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.36736257 2.57764953 0.75322877</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.22350088 0.11725434 0.11725434</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.86896301 1.35555569 1.23397941</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.50946318 0.50946318 0.50946318</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.41946169 0.43286646 1.83232273</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 1.69105586 2.70135810 0.20701186</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.01165992 0.01165992 0.01165992</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 1.04493575 0.09909770 1.05528676</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.61356899 0.61356899 0.25029599</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.35955408 0.75182674 0.35955408</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 1.08482638 1.01062795 0.19472224</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.12533857 0.17782561 0.17782561</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 1.16965165 1.99767318 2.30096549</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.28628776 0.28628776 0.27494605</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.32520740 0.08946967 0.38848046</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 1.15719148 0.06828646 0.06828646</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 1.91529662 0.62129504 0.58068696</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.63764961 0.81323484 0.11441874</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.08513147 0.08513147 0.66787102</span>
 <span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span></span></span>
-<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>, a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>, gamma <span class="op">=</span> <span class="fl">2</span>,</span></span>
+<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>,</span></span>
+<span class="r-in"><span>    a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>, gamma <span class="op">=</span> <span class="fl">2</span>,</span></span>
 <span class="r-in"><span>    eta <span class="op">=</span> <span class="fl">0.5</span>, family <span class="op">=</span> <span class="st">"Poisson"</span>,</span></span>
-<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"AM"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]        [,2]       [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.35357997 0.353579974 0.35357997</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.16262289 1.262071653 0.16262289</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.06935676 0.069356760 0.23613053</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.13391843 0.133918427 0.13391843</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.55666889 0.556668888 0.55666889</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.54806676 0.570195247 1.65377424</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.30862377 0.343212062 0.85192079</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.57013353 0.009471879 0.22070399</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.48537384 0.485373843 0.01690307</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.03373814 1.259426591 1.37020335</span>
+<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"LFM"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>              [,1]       [,2]      [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 1.488220412 1.06040570 0.4746150</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.790740825 0.51621515 0.8791285</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 1.022397854 0.04309391 0.2465573</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.009132628 0.14794588 0.1478315</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.454072655 0.45407266 0.4540727</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.366973347 0.36697335 0.3669733</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.464402414 0.46440241 0.4644024</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.506166882 0.03140135 0.5061669</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.903540918 1.08253611 1.0825361</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.242243508 1.30113266 0.8340281</span>
+<span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>,</span></span>
+<span class="r-in"><span>    a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>, gamma <span class="op">=</span> <span class="fl">2</span>,</span></span>
+<span class="r-in"><span>    eta <span class="op">=</span> <span class="fl">0.5</span>, family <span class="op">=</span> <span class="st">"Poisson"</span>,</span></span>
+<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"MDCM"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]       [,2]      [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 1.4467471 0.98630716 0.9863072</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.5458486 0.54584857 0.5458486</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.1954165 0.04649094 1.0930038</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.4909998 0.60388757 0.5333058</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.5300995 3.04654719 0.2139092</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.1063073 0.10630725 0.1063073</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 1.3745279 1.25332772 0.2675832</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 1.4449892 0.49376697 0.8667088</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.8765086 0.54132221 0.8765086</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.4688008 2.74192061 1.2836497</span>
+<span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>,</span></span>
+<span class="r-in"><span>    a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>, gamma <span class="op">=</span> <span class="fl">2</span>,</span></span>
+<span class="r-in"><span>    eta <span class="op">=</span> <span class="fl">0.5</span>, family <span class="op">=</span> <span class="st">"Poisson"</span>,</span></span>
+<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"AM"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]       [,2]      [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.21592314 0.21592314 0.2159231</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.56154553 0.77761356 0.2601151</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.02814336 0.02814336 0.0124498</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.49449369 1.26312818 0.4944937</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.33905813 1.65854617 2.1416741</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 1.25353666 1.20358719 0.5152518</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.40794856 0.40794856 0.7320617</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.04637121 0.04637121 1.5951529</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.19726530 1.68028385 2.5211370</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.65918005 0.11476806 1.3065701</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Pareto</span></span></span>
 <span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span></span></span>
-<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>, a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>, gamma <span class="op">=</span> <span class="fl">2</span>,</span></span>
-<span class="r-in"><span>    eta <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">1e-4</span><span class="op">)</span>, family <span class="op">=</span> <span class="st">"Pareto"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>,</span></span>
+<span class="r-in"><span>    a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>, gamma <span class="op">=</span> <span class="fl">2</span>,</span></span>
+<span class="r-in"><span>    eta <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">1e-4</span><span class="op">)</span>, family <span class="op">=</span> <span class="st">"Pareto"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]       [,2]       [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.4479192 0.44791923 0.44791923</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.7823503 0.71071887 2.24481657</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.2935615 1.05209031 0.36294406</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 2.6598966 0.04969001 1.25923748</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 4.3093314 0.52791199 1.57146437</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 1.8242905 0.67826354 0.04519338</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.4222395 0.42223954 0.42223954</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 6.1731180 1.83268738 6.76622082</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.1247472 0.12474721 0.12474721</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 2.5533571 1.78748300 3.41035376</span>
+<span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>,</span></span>
+<span class="r-in"><span>    a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>, gamma <span class="op">=</span> <span class="fl">2</span>,</span></span>
+<span class="r-in"><span>    eta <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">1e-4</span><span class="op">)</span>, family <span class="op">=</span> <span class="st">"Pareto"</span>,</span></span>
+<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"ESM"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]      [,2]      [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 2.35571481 2.3557148 2.3557148</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.52799747 2.0395058 5.5241986</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.02715018 1.1583055 0.1750333</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 5.54670223 0.4274940 5.4079969</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 2.22164261 2.0670158 2.2216426</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.18983054 0.1375339 3.2829982</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 2.03998175 0.6725197 0.1234812</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.82465997 1.2854386 2.7290474</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 4.45748428 1.8445516 0.1422299</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.68033200 0.3714602 1.4018786</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 2.47338967 3.8637414 2.2544048</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 5.91851455 1.1825116 0.2868595</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.70874974 4.1171946 4.1171946</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.58330787 1.2605265 1.2605265</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.78799238 1.7428580 0.2058708</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.15122694 0.2245426 0.2245426</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.09343131 1.5469108 0.1513394</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.13223213 0.1043824 0.0936859</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.35952998 0.7561350 2.2384876</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 2.70491177 0.4732213 1.1443128</span>
 <span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span></span></span>
-<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>, a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>, gamma <span class="op">=</span> <span class="fl">2</span>,</span></span>
+<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>,</span></span>
+<span class="r-in"><span>    a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>, gamma <span class="op">=</span> <span class="fl">2</span>,</span></span>
 <span class="r-in"><span>    eta <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">1e-4</span><span class="op">)</span>, family <span class="op">=</span> <span class="st">"Pareto"</span>,</span></span>
-<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"ESM"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]        [,2]      [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.10946297 0.667348201 2.2628970</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.87985409 1.176782657 1.3985587</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 5.89200687 3.457839015 0.4709756</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.12208534 0.122085344 0.1220853</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.06006096 1.708127414 2.5919024</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 1.20794203 7.125320622 0.2331707</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.14170063 0.141700634 0.1417006</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 1.15305942 0.008123914 2.2107019</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.11852357 1.065042148 0.3978543</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 2.50341993 0.471619951 1.0080663</span>
-<span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span></span></span>
-<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>, a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>, gamma <span class="op">=</span> <span class="fl">2</span>,</span></span>
-<span class="r-in"><span>    eta <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">1e-4</span><span class="op">)</span>, family <span class="op">=</span> <span class="st">"Pareto"</span>,</span></span>
-<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"LFM"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"LFM"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]      [,2]       [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 5.04054274 3.6220996 1.19315798</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 3.36725799 2.5215795 1.05916238</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 2.82135519 3.9955687 1.08134581</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 2.08899307 0.6779082 0.62827913</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 5.19370430 1.4075417 2.73838929</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.06225482 0.6193466 0.01190762</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 1.52033762 1.8030072 3.66868894</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 2.82650110 0.3554843 4.06882397</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.71728775 1.5226255 4.40523410</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 5.35334881 0.9420711 0.87473370</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.01421198 0.9534520 1.51323715</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.81405967 0.1980552 0.27140405</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.97782720 1.3718938 0.18210587</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.06725918 0.5224277 0.52242769</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 1.70995824 1.7099582 0.04693734</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 5.09746254 0.4966000 0.91027252</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.44904487 0.4490449 0.44904487</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 1.38440860 1.3844086 1.38440860</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.76288506 0.7705634 0.77056345</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.47732983 2.8110384 2.81103845</span>
 <span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span></span></span>
-<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>, a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>, gamma <span class="op">=</span> <span class="fl">2</span>,</span></span>
+<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>,</span></span>
+<span class="r-in"><span>    a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>, gamma <span class="op">=</span> <span class="fl">2</span>,</span></span>
 <span class="r-in"><span>    eta <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">1e-4</span><span class="op">)</span>, family <span class="op">=</span> <span class="st">"Pareto"</span>,</span></span>
-<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"MDCM"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]       [,2]       [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 1.30564169 1.29502147 0.77804456</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.04788458 0.04788458 0.04788458</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 1.71164477 0.51924050 0.38583430</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.13970901 0.33741944 0.07371916</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 6.76216309 0.38163460 1.95458630</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.58399147 0.58399147 0.21841958</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.12844929 1.12992449 1.09823452</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 2.20404944 2.49683555 0.67473663</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.27577606 0.35876938 1.83797218</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.72905201 0.03523142 2.22404744</span>
+<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"MDCM"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]       [,2]      [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.39122159 3.07577830 2.1575185</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.52901536 4.48259970 0.5328492</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.67328766 2.61495156 2.8746616</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 1.49492676 2.85079123 1.4385760</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 2.04530047 0.49457579 0.3236008</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 1.05184667 2.81826119 0.3709435</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.37090263 0.05547879 0.3709026</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 1.72028614 0.80485618 1.4140491</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.07315986 0.91917267 0.1206429</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.51480115 1.08890116 0.4325392</span>
 <span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span></span></span>
-<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>, a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>, gamma <span class="op">=</span> <span class="fl">2</span>,</span></span>
+<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>,</span></span>
+<span class="r-in"><span>    a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>, gamma <span class="op">=</span> <span class="fl">2</span>,</span></span>
 <span class="r-in"><span>    eta <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">1e-4</span><span class="op">)</span>, family <span class="op">=</span> <span class="st">"Pareto"</span>,</span></span>
-<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"AM"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]       [,2]      [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.7076887 1.53486264 1.2572367</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.8929210 2.94277558 2.3696069</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 3.7653247 0.43574607 2.6017405</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 4.4462112 1.12262512 0.6639328</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 1.5493819 0.01943693 1.1839329</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 2.4598810 1.61484318 1.5287209</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.1629147 1.84104941 1.0530486</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 2.3731334 1.15007444 4.7758274</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 1.2340321 1.45578125 1.6955041</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.8664929 0.47707516 0.8664929</span>
+<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"AM"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>              [,1]      [,2]       [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 3.051703287 2.3209304 1.37282787</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 1.185639645 1.1856396 0.99461736</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.471260232 0.3520256 0.36982222</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.098415383 1.1813146 1.05095525</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 1.192098484 1.9102364 1.24947201</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 3.408156839 1.6122001 1.70066992</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.569666845 0.5696668 0.56966684</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 2.110923166 0.4847567 0.24586437</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.336273807 0.5309027 2.89036207</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.001820072 1.6415866 0.09418252</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Exponential</span></span></span>
 <span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span></span></span>
-<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>, a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>, gamma <span class="op">=</span> <span class="fl">2</span>,</span></span>
-<span class="r-in"><span>    eta <span class="op">=</span> <span class="fl">0.5</span>, family <span class="op">=</span> <span class="st">"Exponential"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]       [,2]      [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.10929875 0.10929875 0.1092987</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 1.08547130 1.78994604 1.0854713</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.07769039 1.48202895 0.8837241</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.42632391 0.09774453 1.4083727</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.06128176 0.43196708 0.4319671</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.11700263 0.11700263 0.1170026</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.98351476 1.29075264 0.9835148</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.28156854 0.28156854 0.2815685</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.49615208 0.18656446 0.8562074</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.10086132 0.39801244 0.2551755</span>
+<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>,</span></span>
+<span class="r-in"><span>    a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>, gamma <span class="op">=</span> <span class="fl">2</span>,</span></span>
+<span class="r-in"><span>    eta <span class="op">=</span> <span class="fl">0.5</span>, family <span class="op">=</span> <span class="st">"Exponential"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]       [,2]       [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.44519274 0.44519274 0.44519274</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.53011852 0.53011852 0.27308299</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.62824681 0.62824681 0.60728232</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.75536323 0.75536323 0.66093579</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.19507802 0.19507802 0.19507802</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.06964464 0.06964464 0.06964464</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.68166365 0.68166365 0.68166365</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.60864857 0.13345576 0.60864857</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.79872331 0.40889597 0.27969691</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.04066980 0.04066980 0.04066980</span>
 <span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span></span></span>
-<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>, a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>, gamma <span class="op">=</span> <span class="fl">2</span>,</span></span>
+<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>,</span></span>
+<span class="r-in"><span>    a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>, gamma <span class="op">=</span> <span class="fl">2</span>,</span></span>
 <span class="r-in"><span>    eta <span class="op">=</span> <span class="fl">0.5</span>, family <span class="op">=</span> <span class="st">"Exponential"</span>,</span></span>
-<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"ESM"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]      [,2]       [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.3143823 0.6890157 0.08051804</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.1148554 0.3017754 0.30177541</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.4172451 0.4172451 0.11730706</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.7347128 0.7347128 0.73471277</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.4503940 0.1653738 0.46008503</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.2733353 0.2733353 0.27333527</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.3101127 0.3145853 0.15811496</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.3026004 0.3026004 0.30260039</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.6964499 0.4248364 0.69644986</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 1.2087718 0.4638149 1.79166435</span>
+<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"ESM"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]       [,2]       [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.05137511 0.05137511 0.05137511</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.48866186 0.48866186 0.48866186</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.24070555 0.93907413 0.93907413</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.07637066 0.24911664 0.75596144</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.03639657 0.03639657 0.03639657</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.14567030 0.14567030 0.14567030</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 1.26342282 1.26342282 1.24199296</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 1.38345369 1.72606836 1.81155161</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.31270109 0.72079626 1.29869856</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.71810502 0.57165803 0.71810502</span>
 <span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span></span></span>
-<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>, a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>, gamma <span class="op">=</span> <span class="fl">2</span>,</span></span>
+<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>,</span></span>
+<span class="r-in"><span>    a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>, gamma <span class="op">=</span> <span class="fl">2</span>,</span></span>
 <span class="r-in"><span>    eta <span class="op">=</span> <span class="fl">0.5</span>, family <span class="op">=</span> <span class="st">"Exponential"</span>,</span></span>
-<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"LFM"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"LFM"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]       [,2]      [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.9678168 0.02094485 0.9678168</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.8250629 1.23213418 0.1933162</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.1676144 0.16761438 0.1676144</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.5728697 0.57286968 0.5728697</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.7398840 0.73988398 0.3988762</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.4760008 0.47600081 0.1129219</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.1258459 0.12584591 0.1258459</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.1007326 1.67848321 0.1007326</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.4907638 0.79412804 0.4907638</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.2199387 0.21993868 0.2199387</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.1310409 0.89999461 1.1450379</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.3541694 0.23172624 0.2317262</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.5051984 0.32153005 0.3333979</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 1.6796191 1.02993383 1.7513977</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.3153576 0.03363303 0.3153576</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.6511093 0.19880623 0.6605316</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.1931369 0.19313690 0.1931369</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 1.0868418 1.08684176 0.8448659</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 3.6020920 0.51849914 3.4720367</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.3263196 0.32631957 0.3263196</span>
 <span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span></span></span>
-<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>, a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>, gamma <span class="op">=</span> <span class="fl">2</span>,</span></span>
+<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>,</span></span>
+<span class="r-in"><span>    a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>, gamma <span class="op">=</span> <span class="fl">2</span>,</span></span>
 <span class="r-in"><span>    eta <span class="op">=</span> <span class="fl">0.5</span>, family <span class="op">=</span> <span class="st">"Exponential"</span>,</span></span>
-<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"MDCM"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]        [,2]       [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 1.19053996 0.003048023 1.19053996</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.04048565 0.040485646 0.04048565</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.17914915 0.179149147 0.14487823</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.24945958 0.249459583 0.24945958</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.83013807 1.007621445 0.83013807</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.08093811 0.068194600 0.08093811</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.26832701 0.150686181 1.02089715</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.28171144 0.281711438 0.28171144</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.39279481 0.600274363 0.20753476</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.37374399 0.373743992 0.37374399</span>
+<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"MDCM"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]       [,2]       [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.29612908 1.24841071 0.29612908</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.01723684 0.01723684 0.01723684</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.03779016 0.03779016 0.03779016</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.54953207 1.57093164 0.51888589</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.36906565 0.43670822 0.43670822</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.20801114 0.20801114 0.20801114</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.72773317 0.72773317 0.72773317</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.28837824 1.05762496 0.68359181</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.65515692 1.08297411 1.94605275</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.89681116 0.37157307 0.89681116</span>
 <span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span></span></span>
-<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>, a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>, gamma <span class="op">=</span> <span class="fl">2</span>,</span></span>
+<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>,</span></span>
+<span class="r-in"><span>    a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>, gamma <span class="op">=</span> <span class="fl">2</span>,</span></span>
 <span class="r-in"><span>    eta <span class="op">=</span> <span class="fl">0.5</span>, family <span class="op">=</span> <span class="st">"Exponential"</span>,</span></span>
-<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"AM"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>              [,1]      [,2]      [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.008333051 0.1915545 0.3662792</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.978409613 0.8025397 0.3392906</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.642689698 0.7122916 0.6426897</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.082478072 0.2456947 0.2456947</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.555499036 0.5554990 0.5344852</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.181196265 0.1811963 0.1811963</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.315439982 0.3154400 0.3154400</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.951894515 1.0256394 1.0256394</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.905479492 0.1777552 0.9054795</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.478201901 1.1507733 1.1507733</span>
+<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"AM"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]       [,2]       [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.42028053 0.41131369 0.39407562</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.17756058 0.17756058 0.17756058</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.04113788 0.04113788 0.24770892</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.33897364 0.33897364 0.31149895</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.04043911 0.04043911 0.04043911</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 1.49551959 1.04107925 0.41129490</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 1.27836765 1.27836765 1.27836765</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.82562771 0.82562771 0.40271847</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.34238471 0.34238471 0.34238471</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.06418026 0.06418026 0.06418026</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Alpha-Stable</span></span></span>
 <span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span></span></span>
-<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>, a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>, gamma <span class="op">=</span> <span class="fl">2</span>,</span></span>
-<span class="r-in"><span>    eta <span class="op">=</span> <span class="fl">0.5</span>, family <span class="op">=</span> <span class="st">"AlphaStable"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]       [,2]       [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.4515894 0.45158938 0.26410947</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.9892620 0.35680697 0.52195685</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.1761819 0.71643408 0.38683716</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.6534684 0.24526299 0.05584853</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 1.2770412 0.38057851 0.07795208</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.2276945 0.22769450 0.22769450</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.3872656 0.38726556 0.38003825</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.6816465 0.15917593 0.37387957</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.2368176 0.02136835 0.54390914</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.1043171 0.67854450 0.51299985</span>
+<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>,</span></span>
+<span class="r-in"><span>    a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>, gamma <span class="op">=</span> <span class="fl">2</span>,</span></span>
+<span class="r-in"><span>    eta <span class="op">=</span> <span class="fl">0.5</span>, family <span class="op">=</span> <span class="st">"AlphaStable"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>              [,1]        [,2]        [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.923594802 1.235151959 1.206615575</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.332726313 0.332726313 0.533839612</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.004151706 0.004151706 0.004151706</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.233001404 0.034510468 0.302632077</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.042886634 0.042886634 0.042886634</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.114530038 0.114530038 0.114530038</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.245538740 0.090046089 0.244455648</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.136399350 0.136399350 0.313968710</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.026333909 0.862174678 0.129419684</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 1.116891628 0.066325352 1.116891628</span>
 <span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span></span></span>
-<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>, a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>, gamma <span class="op">=</span> <span class="fl">2</span>,</span></span>
+<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>,</span></span>
+<span class="r-in"><span>    a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>, gamma <span class="op">=</span> <span class="fl">2</span>,</span></span>
 <span class="r-in"><span>    eta <span class="op">=</span> <span class="fl">0.5</span>, family <span class="op">=</span> <span class="st">"AlphaStable"</span>,</span></span>
-<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"ESM"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"ESM"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]       [,2]       [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.69385057 0.17094468 0.33549161</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.01032634 0.39810092 0.39810092</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.05538987 0.03359319 0.17459193</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.08333055 0.08333055 0.08333055</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.43947515 0.13033872 0.25894492</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.05000509 0.51258948 0.25682134</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.40742061 0.08005438 0.93000371</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.31165988 0.92856049 0.92856049</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.49090901 0.49090901 0.49090901</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.44506212 0.38593064 0.70854535</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.34099081 0.45174849 0.45174849</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.06809761 0.06809761 0.06809761</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.44774438 0.31270891 0.44774438</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.11083386 0.30649481 0.32448148</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.30997032 0.56265428 1.60853287</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.22130525 0.18593035 0.22130525</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.73223616 0.20317187 0.73223616</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.46459514 0.54473685 0.29371680</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.23208993 0.03089564 0.03089564</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.38697887 0.65349885 1.06888279</span>
 <span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span></span></span>
-<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>, a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>, gamma <span class="op">=</span> <span class="fl">2</span>,</span></span>
+<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>,</span></span>
+<span class="r-in"><span>    a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>, gamma <span class="op">=</span> <span class="fl">2</span>,</span></span>
 <span class="r-in"><span>    eta <span class="op">=</span> <span class="fl">0.5</span>, family <span class="op">=</span> <span class="st">"AlphaStable"</span>,</span></span>
-<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"MDCM"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>              [,1]       [,2]       [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.255303230 0.25530323 1.22488834</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.442095590 0.91190833 1.90627127</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.449115350 0.44911535 0.44911535</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.064818628 0.08077094 0.06481863</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.997594764 0.30833091 0.55351681</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.003095544 0.33010367 0.33010367</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.750145948 0.75014595 0.75014595</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.114191867 0.11419187 0.11419187</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.246158747 0.24615875 0.32891728</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.011789577 0.01178958 0.01178958</span>
-<span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span></span></span>
-<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>, a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>, gamma <span class="op">=</span> <span class="fl">2</span>,</span></span>
-<span class="r-in"><span>    eta <span class="op">=</span> <span class="fl">0.5</span>, family <span class="op">=</span> <span class="st">"AlphaStable"</span>,</span></span>
-<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"AM"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"MDCM"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]       [,2]       [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.32871712 0.03516347 0.32871712</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.04662698 0.04662698 0.04662698</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.34764718 0.34764718 0.65808277</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.69836217 0.16158517 0.71207255</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.27533238 0.15767728 0.27533238</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 1.32942109 0.46715403 0.70303174</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.03686898 0.03686898 0.03686898</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.08326702 0.67064612 0.08326702</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.03813711 0.03813711 0.03813711</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.81990222 0.23936401 0.06874254</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.00311837 0.50824267 0.00311837</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.01883306 0.34250236 0.34250236</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.01540736 0.01540736 0.01540736</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.24156460 0.10470126 0.20576709</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.02810374 0.02810374 0.02810374</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.09761896 0.03319042 0.03319042</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.14288557 0.14288557 0.14288557</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.57322432 0.57322432 0.57322432</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.39872268 0.05551663 0.72869079</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.07856814 0.07856814 1.37068497</span>
+<span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>,</span></span>
+<span class="r-in"><span>    a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>, gamma <span class="op">=</span> <span class="fl">2</span>,</span></span>
+<span class="r-in"><span>    eta <span class="op">=</span> <span class="fl">0.5</span>, family <span class="op">=</span> <span class="st">"AlphaStable"</span>,</span></span>
+<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"AM"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]       [,2]       [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.72785632 0.06422626 0.10435022</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.53453184 0.33170562 0.60211354</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.36075805 0.47601703 0.36631708</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.21289365 0.63399200 1.29480605</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.34133554 0.51139029 1.51484503</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.17255903 0.29607933 0.19865977</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.18456213 0.47359464 0.47359464</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.03969592 0.01049661 0.08056514</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.44347850 0.44347850 0.16095149</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.19158894 0.19158894 0.17239148</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Inverse Gaussian</span></span></span>
 <span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span></span></span>
-<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>, a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>, gamma <span class="op">=</span> <span class="fl">2</span>,</span></span>
-<span class="r-in"><span>    eta <span class="op">=</span> <span class="fl">0.5</span>, family <span class="op">=</span> <span class="st">"InverseGaussian"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>,</span></span>
+<span class="r-in"><span>    a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>, gamma <span class="op">=</span> <span class="fl">2</span>,</span></span>
+<span class="r-in"><span>    eta <span class="op">=</span> <span class="fl">0.5</span>, family <span class="op">=</span> <span class="st">"InverseGaussian"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]       [,2]       [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.25510568 1.89303709 1.24873331</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 1.50476330 0.01389896 1.17606920</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.01451169 0.98825996 0.26712443</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.02976312 0.25954903 0.40113454</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 1.07875784 0.02951054 0.05306956</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.27760546 0.38402306 0.27760546</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.17949871 0.17949871 0.17949871</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.47345137 1.14336562 0.47345137</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 1.27241414 1.32479931 1.05078244</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.06274734 0.06274734 0.06274734</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.23902713 1.06672634 0.14753966</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 1.32122318 0.24961481 0.46413907</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.01594760 0.09652670 0.09652670</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.00988970 0.14375033 0.21492086</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.09284229 0.08746430 0.09284229</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.57167996 0.08169270 0.46296439</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.18269134 0.30939213 0.04187959</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.16060206 0.16060206 0.16060206</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.15778993 0.04933439 0.04986581</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.36594475 0.09664458 0.21432603</span>
 <span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span></span></span>
-<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>, a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>, gamma <span class="op">=</span> <span class="fl">2</span>,</span></span>
+<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>,</span></span>
+<span class="r-in"><span>    a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>, gamma <span class="op">=</span> <span class="fl">2</span>,</span></span>
 <span class="r-in"><span>    eta <span class="op">=</span> <span class="fl">0.5</span>, family <span class="op">=</span> <span class="st">"InverseGaussian"</span>,</span></span>
-<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"ESM"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"ESM"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]      [,2]      [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.54318337 0.9306348 0.3248251</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.08566093 0.1522536 0.1522536</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.20467034 0.2046703 0.2046703</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.93528617 1.7802947 0.2397904</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.31846238 0.3875708 0.9321616</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.49419418 0.4941942 0.4192292</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.21697076 0.2169708 0.2169708</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.01354949 0.2787941 0.8441901</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.15846083 0.2495337 0.1745919</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.54293038 0.1265393 0.6700708</span>
+<span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>,</span></span>
+<span class="r-in"><span>    a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>, gamma <span class="op">=</span> <span class="fl">2</span>,</span></span>
+<span class="r-in"><span>    eta <span class="op">=</span> <span class="fl">0.5</span>, family <span class="op">=</span> <span class="st">"InverseGaussian"</span>,</span></span>
+<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"MDCM"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]       [,2]       [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.12939795 0.12939795 0.12939795</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.56781014 0.29587712 0.01491664</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 1.89391797 0.96228876 0.96228876</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.54408345 0.08374799 0.54408345</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.09390462 0.09390462 0.20263223</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.39580981 0.06251219 0.39580981</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.10322420 0.38841662 0.16015334</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.15742842 0.10315966 0.03826262</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.13868190 0.13868190 0.13868190</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.38745606 0.75235002 0.75235002</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.11267235 0.11267235 0.11267235</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.08105141 0.08105141 0.08105141</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.03180370 0.03180370 0.03180370</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.50658453 0.06762796 0.05939682</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.75167229 0.58897372 0.05092953</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.02649339 0.34440698 0.22351938</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.14854082 1.17740835 0.14854082</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.06079646 0.04909624 0.60730874</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.25894987 1.10268922 0.93244620</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.12473864 0.12473864 0.12473864</span>
 <span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span></span></span>
-<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>, a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>, gamma <span class="op">=</span> <span class="fl">2</span>,</span></span>
+<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>,</span></span>
+<span class="r-in"><span>    a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>, gamma <span class="op">=</span> <span class="fl">2</span>,</span></span>
 <span class="r-in"><span>    eta <span class="op">=</span> <span class="fl">0.5</span>, family <span class="op">=</span> <span class="st">"InverseGaussian"</span>,</span></span>
-<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"MDCM"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>              [,1]       [,2]       [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.324848790 0.09212486 0.11145343</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.047546540 0.47173502 0.34650895</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.016367379 0.14556883 0.01636738</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.331239192 1.58840155 0.56676265</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.141099605 0.44027479 0.70669353</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.258505614 0.19729379 0.57552283</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.011161501 0.01116150 0.01116150</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 2.833698745 0.04422954 0.06245329</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.792109871 0.42270659 0.19202973</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.006339606 0.31653945 0.31653945</span>
-<span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span></span></span>
-<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>, a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>, gamma <span class="op">=</span> <span class="fl">2</span>,</span></span>
-<span class="r-in"><span>    eta <span class="op">=</span> <span class="fl">0.5</span>, family <span class="op">=</span> <span class="st">"InverseGaussian"</span>,</span></span>
-<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"AM"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]       [,2]       [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.10552958 0.10552958 0.03764788</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.03134312 0.03134312 0.03134312</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.39041168 0.06291383 0.12448769</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.31165976 0.05998157 0.59037886</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.09289036 0.80226952 0.09289036</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.13358920 0.69694101 0.14158294</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.05338839 0.05338839 0.05338839</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.56520959 0.11859900 0.03656910</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 1.01116410 0.31824616 0.33692257</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.67471358 0.35358227 0.30159577</span>
+<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"AM"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]       [,2]        [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.15747709 0.05471632 0.005645238</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.35053766 0.15091097 0.725961173</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.13265770 0.13265770 0.132657703</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.39724282 0.42383021 0.523545626</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.20963551 0.20963551 0.704880013</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.01486156 0.28261388 0.315662627</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.44780928 0.45721033 0.457210330</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 3.05324580 0.57446820 0.402010416</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 1.21040762 0.16105898 0.020690324</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.12764799 0.08414772 1.533500268</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Gamma</span></span></span>
 <span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span></span></span>
-<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>, a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>, gamma <span class="op">=</span> <span class="fl">2</span>,</span></span>
-<span class="r-in"><span>    eta <span class="op">=</span> <span class="fl">0.5</span>, family <span class="op">=</span> <span class="st">"Gamma"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]       [,2]       [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.58771535 0.17701124 0.17701124</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.08080998 0.08080998 0.08080998</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.45931111 0.40258300 0.40258300</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.06355540 0.06355540 0.06355540</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.95121280 1.11441149 0.33778517</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 1.20264593 0.05660056 0.10795602</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.61551675 0.43788702 0.17511737</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.39781891 0.39781891 0.65317295</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.51119218 0.30201169 0.10395392</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 1.58913189 0.17852590 0.89137460</span>
+<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>,</span></span>
+<span class="r-in"><span>    a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>, gamma <span class="op">=</span> <span class="fl">2</span>,</span></span>
+<span class="r-in"><span>    eta <span class="op">=</span> <span class="fl">0.5</span>, family <span class="op">=</span> <span class="st">"Gamma"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]       [,2]      [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.62115248 0.62115248 0.6211525</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.09405069 0.42029887 0.1606409</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.24821448 0.24821448 0.2832937</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.01282918 0.12723611 0.1901370</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 1.56842167 0.39769003 0.9515295</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.16417607 0.16747898 0.1674790</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.23425820 0.15490606 0.5252805</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.41146268 0.01288499 0.4114627</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.29131066 0.20689678 0.1669231</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.78357995 0.52724811 0.7835800</span>
 <span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span></span></span>
-<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>, a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>, gamma <span class="op">=</span> <span class="fl">2</span>,</span></span>
+<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>,</span></span>
+<span class="r-in"><span>    a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>, gamma <span class="op">=</span> <span class="fl">2</span>,</span></span>
 <span class="r-in"><span>    eta <span class="op">=</span> <span class="fl">0.5</span>, family <span class="op">=</span> <span class="st">"Gamma"</span>,</span></span>
-<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"ESM"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"ESM"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]       [,2]       [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.36339825 0.18059798 0.36339825</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.06158708 0.35613812 0.06158708</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.02153235 0.23899977 0.23899977</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.65956865 0.65956865 0.65956865</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.09608233 0.09608233 0.09608233</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.33159063 0.71111117 0.48966383</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.58629036 0.07001716 0.58629036</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.33731273 0.65165768 0.33731273</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.04268445 0.04268445 0.04268445</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.07147596 0.90225192 2.29878209</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.70538117 0.70538117 0.47268877</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.81997605 0.70523455 0.78903183</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 1.09144391 1.09144391 0.63699644</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.13888095 0.13888095 0.10120671</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.02346738 0.08071952 0.08071952</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.08244273 0.34055661 0.29796795</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.35344548 0.55986151 0.09711282</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.22677517 0.79875186 0.58424188</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.01687890 0.01687890 0.01687890</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.05446056 0.05446056 0.05446056</span>
 <span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span></span></span>
-<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>, a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>, gamma <span class="op">=</span> <span class="fl">2</span>,</span></span>
+<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>,</span></span>
+<span class="r-in"><span>    a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>, gamma <span class="op">=</span> <span class="fl">2</span>,</span></span>
 <span class="r-in"><span>    eta <span class="op">=</span> <span class="fl">0.5</span>, family <span class="op">=</span> <span class="st">"Gamma"</span>,</span></span>
-<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"MDCM"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"MDCM"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]       [,2]       [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.61362639 0.64504216 0.29481286</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.10145696 0.09546035 0.10145696</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.11636121 0.24883307 0.11636121</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.07906811 0.58545437 0.23772949</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.21678946 0.06028082 0.21678946</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 1.27352559 0.74371239 0.81112341</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.03916826 0.24058096 0.03916826</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.26857973 0.02099993 0.42511580</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.81596008 0.81596008 0.22553593</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.06363016 0.06363016 0.06363016</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.05586241 0.05586241 0.05586241</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.13269422 0.13269422 0.13269422</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.38666988 0.19678726 0.15434774</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.10913697 0.10237914 0.10913697</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.30440133 0.30440133 0.09077274</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.09062379 0.63425236 0.09062379</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.09355337 0.13989063 0.39344423</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.33589328 0.20494290 0.71376942</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.11652091 0.48136159 0.48136159</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.15234220 0.15234220 0.15234220</span>
 <span class="r-in"><span><span class="fu">rpextmo</span><span class="op">(</span></span></span>
-<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>, a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>, gamma <span class="op">=</span> <span class="fl">2</span>,</span></span>
+<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>,</span></span>
+<span class="r-in"><span>    a <span class="op">=</span> <span class="fl">0.2</span>, b <span class="op">=</span> <span class="fl">0.5</span>, gamma <span class="op">=</span> <span class="fl">2</span>,</span></span>
 <span class="r-in"><span>    eta <span class="op">=</span> <span class="fl">0.5</span>, family <span class="op">=</span> <span class="st">"Gamma"</span>,</span></span>
-<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"AM"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"AM"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]       [,2]       [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.71221239 0.71221239 0.56535740</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.05079635 0.05079635 0.05079635</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.25257254 1.39778484 0.62726456</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.84910340 0.61090287 0.43153043</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.25920988 0.32376974 0.26364078</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.71578556 0.15768740 0.71866665</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.23691494 0.23691494 0.23691494</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.19905891 0.10407547 0.10407547</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.10507731 0.19248575 0.19248575</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.15924692 1.58543000 0.08176109</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.06052307 0.06052307 0.06052307</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.08808214 0.95240650 0.12768136</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.55487976 0.10086925 0.55487976</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.07306938 1.65189639 0.47920843</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 1.40338109 0.36237035 0.36237035</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.32916081 0.01257557 0.80665426</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.10623191 0.10623191 0.10623191</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.13509589 0.13509589 0.09940821</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.10198758 0.31890305 0.20082337</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.07734355 0.02348442 0.19432556</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
