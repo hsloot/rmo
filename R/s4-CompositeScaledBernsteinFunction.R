@@ -1,4 +1,4 @@
-#' @include s4-BernsteinFunction.R
+#' @include error.R s4-BernsteinFunction.R
 NULL
 
 #' Class for composite scaled Bernstein functions

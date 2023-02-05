@@ -1,4 +1,4 @@
-#' @include s4-BernsteinFunction.R s4-LevyBernsteinFunction.R
+#' @include error.R s4-BernsteinFunction.R s4-LevyBernsteinFunction.R
 NULL
 
 #' Class for Poisson Bernstein functions

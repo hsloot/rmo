@@ -1,4 +1,4 @@
-#' @include s4-BernsteinFunction.R s4-LevyBernsteinFunction.R s4-CompleteBernsteinFunction.R
+#' @include error.R s4-BernsteinFunction.R s4-LevyBernsteinFunction.R s4-CompleteBernsteinFunction.R
 NULL
 
 #' Class for the \eqn{\alpha}-stable Bernstein function
