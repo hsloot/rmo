@@ -9,11 +9,11 @@ NULL
 #'
 #' The package contains fast implementations of sampling algorithms related to the Marshall–Olkin
 #' distribution. It also contains an S4-class system for Bernstein functions which can be used to
-#' create a large variety of Marshall–Olkin parameterisations.
+#' create a large variety of Marshall–Olkin parametrizations.
 #'
 #' @section Bernstein functions:
 #' A *Bernstein function* is a non-negative function with non-negative alternating iterative
-#' differences. These functions can be used to generated parameterisations the extendible
+#' differences. These functions can be used to generated parametrizations the extendible
 #' Marshall–Olkin distributions.
 #' - An object that derives from [BernsteinFunction-class] can be used to generate the
 #'   Marshall–Olkin shock arrival intensities with [intensities()]. It can be used to generate

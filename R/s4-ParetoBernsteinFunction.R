@@ -30,7 +30,7 @@ NULL
 #'
 #' The Pareto Bernstein function, in combination with a linear Bernstein
 #' function can be used to approximate the Bernstein function of an
-#' \eqn{\alpha}-stable Subordinator, see Sec. 5.3 of
+#' \eqn{\alpha}-stable subordinator, see Sec. 5.3 of
 #' \insertCite{Fernandez2015a}{rmo}.
 #'
 #' @references

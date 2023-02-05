@@ -14,8 +14,8 @@ NULL
 #' }
 #'
 #' @details
-#' For the Poisson Bernstein function, the higher-order alternatig iterated
-#' foward differences can be calculated in closed form:
+#' For the Poisson Bernstein function, the higher-order alternating iterated
+#' forward differences can be calculated in closed form:
 #' \deqn{
 #'   {(-1)}^{k-1} \Delta^k \psi(x) = e^{-u\eta} (1-e^{-\eta})^k, x>0, k>0.
 #' }
