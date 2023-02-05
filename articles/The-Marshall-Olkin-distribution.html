@@ -92,31 +92,44 @@ references at the end of this document.</p>
 <div class="section level2">
 <h2 id="definition-and-survival-copula">Definition and survival copula<a class="anchor" aria-label="anchor" href="#definition-and-survival-copula"></a>
 </h2>
-<p>A d-variate random vector <span class="math inline">\(\boldsymbol{\tau} = (\tau_1, \ldots,
-\tau_d)\)</span> has a <em>Marshall–Olkin distribution</em> with
-parameters <span class="math inline">\(\lambda_I, \ \emptyset \neq I
-\subseteq \{1, \ldots, d\}\)</span> if and only if it has the
-multivariate survival function <span class="math display">\[
-  \bar{F} (\boldsymbol{t})
-    = \exp \left\{ - \sum_{\emptyset \neq I \subseteq \{1, \ldots, d\}}
-\lambda_I \max_{i\in I} t_i \right\}, \ \boldsymbol{t} = (t_1, \ldots,
-t_d) \geq 0 ,
-\]</span> and the parameters fulfil <span class="math display">\[
-  \eta_i
-    := \sum_{I \ni i} \lambda_I &gt; 0 \
-    \forall i \in \{1, \ldots, d\} .
+<p>A d-variate random vector <span class="math inline">\(\boldsymbol{\tau} = {( \tau_{1}, \ldots, \tau_{d}
+)}\)</span> has a <em>Marshall–Olkin distribution</em> with parameters
+<span class="math inline">\(\lambda_{I} \geq {0}\)</span>, <span class="math inline">\(\emptyset \neq I \subseteq {\{ 1, \ldots, d
+\}}\)</span> if and only if it has the multivariate survival function
+<span class="math display">\[
+    \bar{F} (\boldsymbol{t})
+        = \exp{\left \{
+            -\sum_{\emptyset \neq I \subseteq {\{ 1, \ldots, d \}}}{
+                \lambda_I
+                \max_{i \in I}{
+                    t_{i}
+                }
+            }
+        \right \}},
+        \quad \boldsymbol{t} = {( t_{1}, \ldots, t_{d} )} \geq 0 ,
+\]</span> and the parameters fulfill <span class="math display">\[
+  \eta_{i}
+    := \sum_{I \ni i} \lambda_I &gt; 0
+        \ \forall i \in {\{ 1, \ldots, d \}} .
 \]</span></p>
 </div>
 <div class="section level2">
 <h2 id="marginal-survival-functions">Marginal survival functions<a class="anchor" aria-label="anchor" href="#marginal-survival-functions"></a>
 </h2>
-<p>The marginal random variables <span class="math inline">\(\tau_i\)</span> of a d-variate Marshall-Olkin
-distributed random vector are exponentially distributed with rates <span class="math inline">\(\eta_i, \ i \in \{1, \ldots, d\}\)</span>. In
-particular, this implies that <span class="math inline">\(\tau_i\)</span> has the survival function <span class="math display">\[
-  \bar{F}_i (t)
-    = \exp \left\{ - t \eta_i \right\}
-    = \exp \left\{ - t \sum_{I \ni i} \lambda_I \right\} , \ i \in \{1,
-\ldots, d\}, \ t \geq 0 .
+<p>The marginal random variables <span class="math inline">\(\tau_{i}\)</span> of a d-variate Marshall-Olkin
+distributed random vector are exponentially distributed with rates <span class="math inline">\(\eta_i, \ i \in {\{ 1, \ldots, d \}}\)</span>. In
+particular, this implies that <span class="math inline">\(\tau_{i}\)</span> has the survival function <span class="math display">\[
+    \bar{F}_{i}{(t)}
+        = \exp{\left \{
+                -t \eta_{i}
+            \right \}}
+        = \exp{\left \{
+                -t \sum_{I \ni i}{
+                    \lambda_{I}
+                }
+            \right \}} ,
+            \quad i \in {\{ 1, \ldots, d \}},
+            \ t \geq 0 .
 \]</span></p>
 </div>
 <div class="section level2">
@@ -124,9 +137,11 @@ particular, this implies that <span class="math inline">\(\tau_i\)</span> has th
 </h2>
 <p>The survival copula <span class="math inline">\(\hat{C}\)</span> of a
 d-variate Marshall–Olkin distributed random vector is <span class="math display">\[
-  \hat{C} (\boldsymbol{u})
-    = \prod_{\emptyset\neq I \subseteq [d]} \min_{i \in I}
-u_i^{\frac{\lambda_I}{\eta_i}}, \quad \boldsymbol{u} \in [0, 1]^d .
+    \hat{C}{( \boldsymbol{u} )}
+        = \prod_{\emptyset \neq I \subseteq {[d]}}{
+                \min_{i \in I} u_{i}^{\frac{\lambda_I}{\eta_i}}
+            } ,
+            \quad \boldsymbol{u} \in {[0, 1]}^d .
 \]</span></p>
 </div>
 <div class="section level2">
@@ -136,28 +151,56 @@ u_i^{\frac{\lambda_I}{\eta_i}}, \quad \boldsymbol{u} \in [0, 1]^d .
 exponential (MSMVE)</em> and has a survival copula of
 <em>extreme-value</em> kind. The <em>Pickands measure</em> <span class="math inline">\(\delta\)</span> of a d-variate Marshall–Olkin
 distributed random vector is <span class="math display">\[
-  \delta \left( \frac{ \sum_{i\in I} \vec{e}_i \prod_{i \neq j \in I}
-\eta_j }{ \sum_{i\in I} \prod_{i \neq j \in I} \eta_j } \right)
-    = \lambda_I \sum_{i\in I} \frac{1}{\eta_i}  ,
-    \quad \emptyset \neq I \subseteq [d] .
+    \delta{\left(
+        \frac{
+            \sum_{i \in I}{
+                \vec{e}_{i}
+                \prod_{i \neq j \in I}{
+                    \eta_{j}
+                }
+            }
+        }{
+            \sum_{i \in I}{
+                \prod_{i \neq j \in I}{
+                    \eta_{j}
+                }
+            }
+        }
+    \right)}
+    = \lambda_{I}
+        \sum_{i \in I}{
+            \frac{1}{\eta_{i}}
+        } ,
+        \quad \emptyset \neq I \subseteq {[d]} .
 \]</span> The <em>Pickands function</em> <span class="math inline">\(P\)</span> of a d-variate Marshall–Olkin
 distributed random vector is <span class="math display">\[
-  P (\boldsymbol{w})
-    := \int_{S_d} \max_{i \in [d]} \{ w_i u_i \} \mathrm{d}
-\,\delta(\boldsymbol{u})
-    = \sum_{\emptyset\neq I \subseteq [d]} \lambda_I \max_{i \in I}
-\frac{w_i}{\eta_i} .
+    P{(\boldsymbol{w})}
+        := \int_{S_{d}}{
+                \max_{i \in {[d]}}{\{ w_{i} u_{i} \}} \delta{(
+\mathrm{d}\boldsymbol{u} )}
+            }
+        = \sum_{\emptyset\neq I \subseteq {[d]}}{
+            \lambda_{I}
+            \max_{i \in I}{
+                \frac{
+                    w_{i}
+                }{
+                    \eta_{i}
+                }
+            }
+        } .
 \]</span></p>
 </div>
 <div class="section level2">
 <h2 id="the-exogenous-shock-model">The exogenous shock model<a class="anchor" aria-label="anchor" href="#the-exogenous-shock-model"></a>
 </h2>
 <p>A d-variate Marshall–Olkin distribution has a natural stochastic
-model: consider independent random variables <span class="math inline">\(E_I \sim \mathrm{Exp} (\lambda_I), \ \emptyset
-\neq I \subseteq \{1, \ldots, d\}\)</span> and define <span class="math display">\[
-  \tau_i
-    := \min \Big\{ E_I \ : \ I \ni i \Big\} , \ i \in \{ 1 , \ldots , d
-\} .
+model: consider independent random variables <span class="math inline">\(E_{I} \sim \mathrm{Exp}{(\lambda_{I})}, \
+\emptyset \neq I \subseteq {\{ 1, \ldots, d \}}\)</span> and define
+<span class="math display">\[
+    \tau_{i}
+        := \min{\Big\{ E_{I} \ : \ I \ni i \Big\}} ,
+            \quad i \in {\{ 1 , \ldots , d \}} .
 \]</span></p>
 </div>
 <div class="section level2">
@@ -166,29 +209,38 @@ model: consider independent random variables <span class="math inline">\(E_I \si
 <p>A d-variate Marshall–Olkin distribution has another stochastic model
 which is strongly linked to continuous time, homogeneous Markovian
 processes. For this, consider the transformed parameters <span class="math display">\[
-  \lambda
-    := \sum_{\emptyset \neq I \subseteq \{1, \ldots, d\}} \lambda_I
+    \lambda
+        := \sum_{\emptyset \neq I \subseteq {\{ 1, \ldots, d \}}}{
+            \lambda_{I}
+        }
 \]</span> and <span class="math display">\[
-  p_I
-    := \frac{\lambda_I}{\lambda}, \
-    \emptyset \neq I \subseteq \{ 1, \ldots, d \} .
+    p_{I}
+        := \frac{
+            \lambda_{I}
+        }{
+            \lambda
+        },
+        \quad \emptyset \neq I \subseteq {\{ 1, \ldots, d \}} .
 \]</span> Then, it can be shown that the vector <span class="math inline">\(\boldsymbol{\tau}\)</span>, defined below, has the
 desired Marshall–Olkin distribution. Let the following two sequences be
 independent:</p>
 <ul>
 <li>
-<span class="math inline">\(\epsilon_1, \epsilon_2, \ldots \sim
-\mathrm{Exp} (\lambda)\)</span> iid.</li>
+<span class="math inline">\(\epsilon_{1}, \epsilon_{2}, \ldots \sim
+\mathrm{Exp}{(\lambda)}\)</span> iid.</li>
 <li>
-<span class="math inline">\(Y_1, Y_2, \ldots\)</span> iid in <span class="math inline">\(\mathcal{P} (\{1, \ldots, d\}) \backslash \{
-0\}\)</span> with <span class="math inline">\(\mathbb{P} (Y_1 = I) =
-p_I, \ \emptyset \neq I \subseteq \{ 1, \ldots , d\}\)</span>.</li>
+<span class="math inline">\(Y_{1}, Y_{2}, \ldots\)</span> iid in
+<span class="math inline">\(\mathcal{P}{(\{1, \ldots, d\})} \setminus
+\emptyset\)</span> with <span class="math inline">\(\mathbb{P}{( Y_{1} =
+I )} = p_{I}, \ \emptyset \neq I \subseteq {\{ 1, \ldots ,
+d\}}\)</span>.</li>
 </ul>
 <p>Now, we define <span class="math inline">\(\boldsymbol{\tau}\)</span>
 by <span class="math display">\[
-  \tau_i
-    := \sum_{j=1}^{\min \{ k \in \mathbb{N} : i \in Y_k\}} \epsilon_j ,
-\quad i \in \{ 1, \ldots, d\} .
+    \tau_{i}
+        := \sum_{j=1}^{\min{\{ k \in \mathbb{N} : i \in Y_{k} \}}}{
+\epsilon_{j} } ,
+            \quad i \in {\{ 1, \ldots, d \}} .
 \]</span></p>
 </div>
 <div class="section level2 unnumbered">
@@ -196,12 +248,15 @@ by <span class="math display">\[
 </h2>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-Mai2010a" class="csl-entry">
-Mai, Jan-Frederik, and Matthias Scherer. 2010. <span>“The Pickands
-Representation of Survival Marshall–Olkin Copulas.”</span>
-<em>Statistics &amp; Probability Letters</em> 80 (5): 357–60. <a href="https://doi.org/10.1016/j.spl.2009.11.010" class="external-link">https://doi.org/10.1016/j.spl.2009.11.010</a>.
+Mai, Jan-Frederik, and Matthias Scherer. 2010. <span>“The
+<span>P</span>ickands Representation of Survival
+<span>M</span>arshall–<span>O</span>lkin Copulas.”</span> <em>Statistics
+&amp; Probability Letters</em> 80 (5): 357–60. <a href="https://doi.org/10.1016/j.spl.2009.11.010" class="external-link">https://doi.org/10.1016/j.spl.2009.11.010</a>.
 </div>
 <div id="ref-Mai2017a" class="csl-entry">
-———. 2017. <em>Simulating Copulas</em>. 2nd ed. World Scientific. <a href="https://doi.org/10.1142/10265" class="external-link">https://doi.org/10.1142/10265</a>.
+———. 2017. <em>Simulating Copulas: Stochastic Models, Sampling
+Algorithms and Applications</em>. 2nd ed. Series in Quantitative
+Finance. World Scientific. <a href="https://doi.org/10.1142/10265" class="external-link">https://doi.org/10.1142/10265</a>.
 </div>
 </div>
 </div>
