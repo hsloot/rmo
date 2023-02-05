@@ -50,7 +50,8 @@ rextmo_lfm_comonotone <- function( # nolint
             rate_killing > 0 &&
             is.numeric(rate_drift) && 1L == length(rate_drift) && rate_drift == 0 &&
             is.character(rjump_name) && 1L == length(rjump_name) &&
-            rjump_name %in% c("rexp", "rposval", "rpareto"))
+            rjump_name %in% c("rexp", "rposval", "rpareto")
+    )
 
     out <- matrix(nrow = n, ncol = d)
     for (k in 1:n) {

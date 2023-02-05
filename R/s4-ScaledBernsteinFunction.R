@@ -20,7 +20,8 @@ NULL
 #' @export ScaledBernsteinFunction
 ScaledBernsteinFunction <- setClass("ScaledBernsteinFunction", # nolint
     contains = "BernsteinFunction",
-    slots = c(scale = "numeric", original = "BernsteinFunction"))
+    slots = c(scale = "numeric", original = "BernsteinFunction")
+)
 
 #' @describeIn ScaledBernsteinFunction-class Constructor
 #' @aliases initialize,ScaledBernsteinFunction-method
@@ -34,7 +35,8 @@ ScaledBernsteinFunction <- setClass("ScaledBernsteinFunction", # nolint
 #' ScaledBernsteinFunction()
 #' original_bf <- AlphaStableBernsteinFunction(alpha = 0.5)
 #' ScaledBernsteinFunction(scale = 2, original = original_bf)
-setMethod("initialize", "ScaledBernsteinFunction",
+setMethod(
+    "initialize", "ScaledBernsteinFunction",
     function(.Object, scale, original) { # nolint
         if (!(missing(scale) || missing(original))) {
             .Object@scale <- scale
@@ -43,17 +45,20 @@ setMethod("initialize", "ScaledBernsteinFunction",
         }
 
         invisible(.Object)
-    })
+    }
+)
 
 #' @importFrom checkmate qtest
-setValidity("ScaledBernsteinFunction",
+setValidity(
+    "ScaledBernsteinFunction",
     function(object) {
         if (!qtest(object@scale, "N1[0,)")) {
             return(error_msg_domain("scale", "N1[0,)"))
         }
 
         invisible(TRUE)
-    })
+    }
+)
 
 #' @describeIn ScaledBernsteinFunction-class Display the object.
 #' @aliases show,ScaledBernsteinFunction-method
@@ -61,20 +66,23 @@ setValidity("ScaledBernsteinFunction",
 #' @importFrom utils capture.output
 #'
 #' @export
-setMethod("show", "ScaledBernsteinFunction",
+setMethod(
+    "show", "ScaledBernsteinFunction",
     function(object) {
         cat(sprintf("An object of class %s\n", classLabel(class(object))))
         if (isTRUE(validObject(object, test = TRUE))) {
             cat(sprintf("- scale: %s\n", format(object@scale)))
             cat("- original:\n")
             writeLines(
-                paste0("\t", capture.output(show(object@original))))
+                paste0("\t", capture.output(show(object@original)))
+            )
         } else {
             cat("\t (invalid or not initialized)\n")
         }
 
         invisible(NULL)
-    })
+    }
+)
 
 #' @describeIn ScaledBernsteinFunction-class
 #'   Calculates the iterated differences of the Bernstein function, see [valueOf()]
@@ -83,7 +91,9 @@ setMethod("show", "ScaledBernsteinFunction",
 #' @inheritParams valueOf
 #'
 #' @export
-setMethod("valueOf", "ScaledBernsteinFunction",
+setMethod(
+    "valueOf", "ScaledBernsteinFunction",
     function(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...) {
         object@scale * valueOf(object@original, x, difference_order, n, k, cscale, ...)
-    })
+    }
+)

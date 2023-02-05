@@ -24,17 +24,23 @@ rextmo_lfm <- function(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_a
         rpextmo(n, d, a = rate_killing, b = rate_drift, family = "Armageddon", method = "LFM")
     } else if (isTRUE("rposval" == rjump_name)) {
         rpextmo(
-            n, d, a = rate_killing, b = rate_drift, gamma = rate, eta = rjump_arg_list$value,
-            family = "Poisson", method = "LFM")
+            n, d,
+            a = rate_killing, b = rate_drift, gamma = rate, eta = rjump_arg_list$value,
+            family = "Poisson", method = "LFM"
+        )
     } else if (isTRUE("rpareto" == rjump_name)) {
         rpextmo(
-            n, d, a = rate_killing, b = rate_drift, gamma = rate,
+            n, d,
+            a = rate_killing, b = rate_drift, gamma = rate,
             eta = c(rjump_arg_list$alpha, rjump_arg_list$x0),
-            family = "Pareto", method = "LFM")
+            family = "Pareto", method = "LFM"
+        )
     } else if (isTRUE("rexp" == rjump_name)) {
         rpextmo(
-            n, d, a = rate_killing, b = rate_drift, gamma = rate, eta = rjump_arg_list$rate,
-            family = "Exponential", method = "LFM")
+            n, d,
+            a = rate_killing, b = rate_drift, gamma = rate, eta = rjump_arg_list$rate,
+            family = "Exponential", method = "LFM"
+        )
     } else {
         stop(sprintf("Jump distribution %s not implemented", rjump_name))
     }
@@ -107,15 +113,15 @@ lfm_bf <- function(rate, rate_killing, rate_drift, rjump_name, rjump_arg_list) {
 #' @importFrom stats ks.test
 #' @noRd
 #' @keywords internal test
-lfm_ks_test <- function(
-                        n, d, FUN, # nolint
+lfm_ks_test <- function(n, d, FUN, # nolint
                         rate, rate_killing, rate_drift,
                         rjump_name, rjump_arg_list) {
     bf <- lfm_bf(rate, rate_killing, rate_drift, rjump_name, rjump_arg_list)
     min_rate <- valueOf(bf, d, 0L)
     x <- min_rate * apply(
         FUN(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list),
-        1, min)
+        1, min
+    )
     ks.test(x, stats::pexp)
 }
 

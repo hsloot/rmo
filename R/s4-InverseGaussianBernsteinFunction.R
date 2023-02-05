@@ -37,7 +37,8 @@ NULL
 #' @export InverseGaussianBernsteinFunction
 InverseGaussianBernsteinFunction <- setClass("InverseGaussianBernsteinFunction", # nolint
     contains = "CompleteBernsteinFunction",
-    slots = c(eta = "numeric"))
+    slots = c(eta = "numeric")
+)
 
 #' @describeIn InverseGaussianBernsteinFunction-class Constructor
 #' @aliases initialize,InverseGaussianBernsteinFunction-method
@@ -49,7 +50,8 @@ InverseGaussianBernsteinFunction <- setClass("InverseGaussianBernsteinFunction",
 #' @examples
 #' InverseGaussianBernsteinFunction()
 #' InverseGaussianBernsteinFunction(eta = 0.3)
-setMethod("initialize", "InverseGaussianBernsteinFunction",
+setMethod(
+    "initialize", "InverseGaussianBernsteinFunction",
     function(.Object, eta) { # nolint
         if (!missing(eta)) {
             .Object@eta <- eta
@@ -57,23 +59,27 @@ setMethod("initialize", "InverseGaussianBernsteinFunction",
         }
 
         invisible(.Object)
-    })
+    }
+)
 
 #' @importFrom checkmate qtest
-setValidity("InverseGaussianBernsteinFunction",
+setValidity(
+    "InverseGaussianBernsteinFunction",
     function(object) {
         if (!qtest(object@eta, "N1(0,)")) {
             return(error_msg_domain("eta", "N1(0,)"))
         }
 
         invisible(TRUE)
-    })
+    }
+)
 
 #' @describeIn InverseGaussianBernsteinFunction-class Display the object.
 #' @aliases show,InverseGaussianBernsteinFunction-method
 #'
 #' @export
-setMethod("show", "InverseGaussianBernsteinFunction",
+setMethod(
+    "show", "InverseGaussianBernsteinFunction",
     function(object) {
         cat(sprintf("An object of class %s\n", classLabel(class(object))))
         if (isTRUE(validObject(object, test = TRUE))) {
@@ -83,7 +89,8 @@ setMethod("show", "InverseGaussianBernsteinFunction",
         }
 
         invisible(NULL)
-    })
+    }
+)
 
 #' @describeIn InverseGaussianBernsteinFunction-class
 #'   see [LevyBernsteinFunction-class]
@@ -99,7 +106,8 @@ setMethod("show", "InverseGaussianBernsteinFunction",
 #' }
 #'
 #' @export
-setMethod("levyDensity", "InverseGaussianBernsteinFunction",
+setMethod(
+    "levyDensity", "InverseGaussianBernsteinFunction",
     function(object) {
         structure(
             function(x) {
@@ -107,7 +115,8 @@ setMethod("levyDensity", "InverseGaussianBernsteinFunction",
             },
             lower = 0, upper = Inf, type = "continuous"
         )
-    })
+    }
+)
 
 #' @describeIn InverseGaussianBernsteinFunction-class
 #'   see [CompleteBernsteinFunction-class]
@@ -121,7 +130,8 @@ setMethod("levyDensity", "InverseGaussianBernsteinFunction",
 #'     = \frac{\sin(\pi / 2)}{\pi} \cdot \frac{\sqrt{2 x - \eta^2}}{x} , \quad u > \eta^2 / 2 .
 #' }
 #'
-setMethod("stieltjesDensity", "InverseGaussianBernsteinFunction",
+setMethod(
+    "stieltjesDensity", "InverseGaussianBernsteinFunction",
     function(object) {
         structure(
             function(x) {
@@ -129,14 +139,19 @@ setMethod("stieltjesDensity", "InverseGaussianBernsteinFunction",
             },
             lower = object@eta^2 / 2, upper = Inf, type = "continuous"
         )
-    })
+    }
+)
 
 #' @keywords internal
-setMethod("valueOf0", "InverseGaussianBernsteinFunction",
+setMethod(
+    "valueOf0", "InverseGaussianBernsteinFunction",
     function(object, x, ...) {
-        assert(combine = "or",
+        assert(
+            combine = "or",
             check_numeric(x, min.len = 1L, any.missing = FALSE),
-            check_complex(x, min.len = 1L, any.missing = FALSE))
+            check_complex(x, min.len = 1L, any.missing = FALSE)
+        )
         qassert(Re(x), "N+[0,)")
         sqrt(2 * x + object@eta^2) - object@eta
-    })
+    }
+)

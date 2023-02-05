@@ -34,7 +34,8 @@ NULL
 #'
 #' @export
 setClass("BernsteinFunction", # nolint
-    contains = "VIRTUAL")
+    contains = "VIRTUAL"
+)
 
 #' @describeIn BernsteinFunction-class
 #'   Calculate the values for a Bernstein function and its higher-order, alternating iterated
@@ -54,22 +55,28 @@ setClass("BernsteinFunction", # nolint
 #' @param ... pass-through parameter.
 #'
 #' @export
-setGeneric("valueOf",
+setGeneric(
+    "valueOf",
     function(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...) {
         standardGeneric("valueOf")
-    })
+    }
+)
 
 #' @keywords internal
-setGeneric("valueOf0",
+setGeneric(
+    "valueOf0",
     function(object, x, ...) {
         standardGeneric("valueOf0")
-    })
+    }
+)
 
 #' @keywords internal
-setGeneric("defaultMethod",
+setGeneric(
+    "defaultMethod",
     function(object) {
         standardGeneric("defaultMethod")
-    })
+    }
+)
 
 #' @describeIn BernsteinFunction-class
 #'   Calculates (unscaled) *exchangeable shock-arrival intensities*, see [rmo()] and [rexmo()].
@@ -79,10 +86,12 @@ setGeneric("defaultMethod",
 #' @param ... pass-through parameter
 #'
 #' @export
-setGeneric("uexIntensities",
+setGeneric(
+    "uexIntensities",
     function(object, d, ...) {
         standardGeneric("uexIntensities")
-    })
+    }
+)
 
 #' @describeIn BernsteinFunction-class
 #'   Calculates the *shock-arrival intensities*, the `intensities` parameter for
@@ -91,10 +100,12 @@ setGeneric("uexIntensities",
 #' @inheritParams uexIntensities
 #'
 #' @export
-setGeneric("intensities",
+setGeneric(
+    "intensities",
     function(object, d, ...) {
         standardGeneric("intensities")
-    })
+    }
+)
 
 #' @describeIn BernsteinFunction-class
 #'   Calculates *exchangeable shock-size-arrival intensities*, the `ex_intensities` parameter for
@@ -103,10 +114,12 @@ setGeneric("intensities",
 #' @inheritParams uexIntensities
 #'
 #' @export
-setGeneric("exIntensities",
+setGeneric(
+    "exIntensities",
     function(object, d, ...) {
         standardGeneric("exIntensities")
-    })
+    }
+)
 
 #' @describeIn BernsteinFunction-class
 #'   Calculates the *infinitesimal Markov generator matrix* of the corresponding (Markovian)
@@ -115,15 +128,19 @@ setGeneric("exIntensities",
 #' @inheritParams uexIntensities
 #'
 #' @export
-setGeneric("exQMatrix",
+setGeneric(
+    "exQMatrix",
     function(object, d, ...) {
         standardGeneric("exQMatrix")
-    })
+    }
+)
 
-setMethod("valueOf0", "BernsteinFunction",
+setMethod(
+    "valueOf0", "BernsteinFunction",
     function(object, x, ...) {
         valueOf(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...)
-    })
+    }
+)
 
 #' @rdname BernsteinFunction-class
 #'
@@ -131,10 +148,12 @@ setMethod("valueOf0", "BernsteinFunction",
 #' exIntensities(AlphaStableBernsteinFunction(4e-1), 3L)
 #'
 #' @export
-setMethod("uexIntensities", "BernsteinFunction",
+setMethod(
+    "uexIntensities", "BernsteinFunction",
     function(object, d, ...) {
         sapply(1:d, function(i) valueOf(object, d - i, i, ...))
-    })
+    }
+)
 
 #' @rdname BernsteinFunction-class
 #'
@@ -142,18 +161,21 @@ setMethod("uexIntensities", "BernsteinFunction",
 #' exIntensities(AlphaStableBernsteinFunction(4e-1), 3L)
 #'
 #' @export
-setMethod("exIntensities", "BernsteinFunction",
+setMethod(
+    "exIntensities", "BernsteinFunction",
     function(object, d, ...) {
         if (d == 2) {
             out <- d * (valueOf0(object, d) - valueOf0(object, d - 1))
         } else {
             out <- c(
                 d * (valueOf0(object, d) - valueOf0(object, d - 1)),
-                sapply(2:(d - 1), function(i) valueOf(object, d - i, i, n = d, k = i, ...)))
+                sapply(2:(d - 1), function(i) valueOf(object, d - i, i, n = d, k = i, ...))
+            )
         }
 
         c(out, pmax(valueOf0(object, d) - sum(out), 0))
-    })
+    }
+)
 
 #' @rdname BernsteinFunction-class
 #'
@@ -161,10 +183,12 @@ setMethod("exIntensities", "BernsteinFunction",
 #' intensities(AlphaStableBernsteinFunction(4e-1), 3L)
 #'
 #' @export
-setMethod("intensities", "BernsteinFunction",
+setMethod(
+    "intensities", "BernsteinFunction",
     function(object, d, ...) {
         uexi2i(uexIntensities(object, d, ...))
-    })
+    }
+)
 
 #' @rdname BernsteinFunction-class
 #'
@@ -172,7 +196,9 @@ setMethod("intensities", "BernsteinFunction",
 #' exQMatrix(AlphaStableBernsteinFunction(4e-1), 3L)
 #'
 #' @export
-setMethod("exQMatrix", "BernsteinFunction",
+setMethod(
+    "exQMatrix", "BernsteinFunction",
     function(object, d, ...) {
         exi2exqm(exIntensities(object, d, ...))
-    })
+    }
+)

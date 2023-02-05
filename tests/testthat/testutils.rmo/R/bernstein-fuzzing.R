@@ -229,17 +229,22 @@ setMethod(
 #'   AlphaStableBernsteinFunction InverseGaussianBernsteinFunction ExponentialBernsteinFunction
 #    GammaBernsteinFunction ParetoBernsteinFunction
 #' @export
-setMethod("fuzzy_bf", "missing",
+setMethod(
+    "fuzzy_bf", "missing",
     function(bf) {
         bf_names <- paste0(
-            c("Linear", "Constant", "Poisson", "AlphaStable", "InverseGaussian", "Exponential",
-                "Gamma", "Pareto"), "BernsteinFunction")
+            c(
+                "Linear", "Constant", "Poisson", "AlphaStable", "InverseGaussian", "Exponential",
+                "Gamma", "Pareto"
+            ), "BernsteinFunction"
+        )
         bf_name <- bf_names[sample.int(length(bf_names), 1L)]
         bf <- fuzzy_bf(new(bf_name))
         validObject(bf)
 
         bf
-    })
+    }
+)
 
 #' @rdname fuzzy_bf-methods
 #' @aliases fuzzy_bf,ScaledBernsteinFunction,ANY-method
@@ -247,7 +252,8 @@ setMethod("fuzzy_bf", "missing",
 #' @seealso [rmo::ScaledBernsteinFunction-class]
 #' @examples
 #' fuzzy_bf(rmo::ScaledBernsteinFunction(
-#'     scale = 1, original = rmo::LinearBernsteinFunction()))
+#'     scale = 1, original = rmo::LinearBernsteinFunction()
+#' ))
 #'
 #' @importFrom methods setMethod validObject is
 #' @importFrom rmo ScaledBernsteinFunction
@@ -266,7 +272,8 @@ setMethod(
         validObject(bf)
 
         bf
-    })
+    }
+)
 
 #' @rdname fuzzy_bf-methods
 #' @aliases fuzzy_bf,CompositeScaledBernsteinFunction,ANY-method
@@ -274,7 +281,8 @@ setMethod(
 #' @seealso [rmo::CompositeScaledBernsteinFunction-class]
 #' @examples
 #' fuzzy_bf(rmo::CompositeScaledBernsteinFunction(
-#'     cscale = 1, original = rmo::LinearBernsteinFunction()))
+#'     cscale = 1, original = rmo::LinearBernsteinFunction()
+#' ))
 #'
 #' @importFrom methods setMethod validObject is
 #' @importFrom rmo CompositeScaledBernsteinFunction
@@ -292,7 +300,8 @@ setMethod(
         validObject(bf)
 
         bf
-    })
+    }
+)
 
 #' @rdname fuzzy_bf-methods
 #' @aliases fuzzy_bf,SumOfBernsteinFunctions,ANY-method
@@ -301,7 +310,8 @@ setMethod(
 #' @examples
 #' bf <- fuzzy_bf(rmo::SumOfBernsteinFunctions(
 #'     first = rmo::ConstantBernsteinFunction(),
-#'     second = rmo::LinearBernsteinFunction()))
+#'     second = rmo::LinearBernsteinFunction()
+#' ))
 #'
 #' @importFrom methods setMethod validObject is
 #' @importFrom rmo SumOfBernsteinFunctions

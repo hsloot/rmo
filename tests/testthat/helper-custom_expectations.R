@@ -31,12 +31,13 @@
 #' testthat::test_that("rexp equal to rexp_test?", {
 #'     expect_equal_rn_generation(
 #'         stats::rexp, rexp_test,
-#'         list("rate" = 2), 10L, use_seed = 1623L)
+#'         list("rate" = 2), 10L,
+#'         use_seed = 1623L
+#'     )
 #' })
 #' @noRd
 #' @keywords internal test
-expect_equal_rn_generation <- function(
-                                       rn_generator,
+expect_equal_rn_generation <- function(rn_generator,
                                        rn_generator_test,
                                        arg_list,
                                        n,
@@ -47,19 +48,29 @@ expect_equal_rn_generation <- function(
                                        env = parent.frame(), ...) {
     ## Capture rn_generator, rn_generator_test, and arguments with labels
     rn_generator <- testthat::quasi_label(
-        rlang::enquo(rn_generator), NULL, arg = "rn_generator")
+        rlang::enquo(rn_generator), NULL,
+        arg = "rn_generator"
+    )
     rn_generator_test <- testthat::quasi_label(
-        rlang::enquo(rn_generator_test), NULL, arg = "rn_generator_test")
+        rlang::enquo(rn_generator_test), NULL,
+        arg = "rn_generator_test"
+    )
     arg_list <- testthat::quasi_label(
-        rlang::enquo(arg_list), "Arguments", arg = "arg_list")
+        rlang::enquo(arg_list), "Arguments",
+        arg = "arg_list"
+    )
 
     ## Conventional checks to catch user errors early on
-    checkmate::assert(combine = "or",
+    checkmate::assert(
+        combine = "or",
         checkmate::check_string(rn_generator$val),
-        checkmate::check_function(rn_generator$val))
-    checkmate::assert(combine = "or",
+        checkmate::check_function(rn_generator$val)
+    )
+    checkmate::assert(
+        combine = "or",
         checkmate::check_string(rn_generator_test$val),
-        checkmate::check_function(rn_generator_test$val))
+        checkmate::check_function(rn_generator_test$val)
+    )
     checkmate::qassert(n, "X1(0,)")
     checkmate::qassert(n, "X1(0,)")
 
@@ -69,8 +80,9 @@ expect_equal_rn_generation <- function(
     }
 
     ## Set up RNG
-    if (!is.null(RNG_kind_arg_list))
+    if (!is.null(RNG_kind_arg_list)) {
         rlang::exec(RNG_kind, !!!RNG_kind_arg_list, .env = env)
+    }
 
     ## Evaluate expressions and compare results
     set_seed(use_seed)
@@ -94,7 +106,8 @@ expect_equal_rn_generation <- function(
             rn_generator$lab, rn_generator_test$lab, use_seed,
             arg_list$lab,
             format_args(arg_list$val, justify = "right", digits = 2L),
-            comp$message)
+            comp$message
+        )
     )
 
     invisible(rn_generator$val)
@@ -102,8 +115,9 @@ expect_equal_rn_generation <- function(
 
 RNG_kind_arg_list_default <- function() { # nolint
     out <- list("kind" = "default", "normal.kind" = "default")
-    if (require_R_version("3.6.0"))
+    if (require_R_version("3.6.0")) {
         out["sample.kind"] <- "default"
+    }
     out
 }
 

@@ -37,8 +37,9 @@
 is_within <- function(i, j) { # nolint
     count <- 1
     while (j > 0) {
-        if (1 == (j %% 2) && count == i) ## <=> c_{i-1} = 1
+        if (1 == (j %% 2) && count == i) { ## <=> c_{i-1} = 1
             return(TRUE)
+        }
         j <- j %/% 2
         count <- count + 1
     }
@@ -106,5 +107,5 @@ rposval <- function(n, value = 1) {
 #' @importFrom stats runif
 #' @export
 rpareto <- function(n, alpha = 1, x0 = 1e-4) {
-    x0 / (stats::runif(n)) ^ (1 / alpha)
+    x0 / (stats::runif(n))^(1 / alpha)
 }

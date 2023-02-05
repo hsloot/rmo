@@ -38,7 +38,8 @@ NULL
 #' @export AlphaStableBernsteinFunction
 AlphaStableBernsteinFunction <- setClass("AlphaStableBernsteinFunction", # nolint
     contains = "CompleteBernsteinFunction",
-    slots = c(alpha = "numeric"))
+    slots = c(alpha = "numeric")
+)
 
 #' @describeIn AlphaStableBernsteinFunction-class Constructor
 #' @aliases initialize,AlphaStableBernsteinFunction-method
@@ -50,7 +51,8 @@ AlphaStableBernsteinFunction <- setClass("AlphaStableBernsteinFunction", # nolin
 #' @examples
 #' AlphaStableBernsteinFunction()
 #' AlphaStableBernsteinFunction(alpha = 0.5)
-setMethod("initialize", "AlphaStableBernsteinFunction",
+setMethod(
+    "initialize", "AlphaStableBernsteinFunction",
     function(.Object, alpha) { # nolint
         if (!missing(alpha)) {
             .Object@alpha <- alpha
@@ -58,23 +60,27 @@ setMethod("initialize", "AlphaStableBernsteinFunction",
         }
 
         invisible(.Object)
-    })
+    }
+)
 
 #' @importFrom checkmate qtest
-setValidity("AlphaStableBernsteinFunction",
+setValidity(
+    "AlphaStableBernsteinFunction",
     function(object) {
         if (!qtest(object@alpha, "N1(0,1)")) {
             return(error_msg_domain("alpha", "N1(0,1)"))
         }
 
         invisible(TRUE)
-    })
+    }
+)
 
 #' @describeIn AlphaStableBernsteinFunction-class Display the object.
 #' @aliases show,AlphaStableBernsteinFunction-method
 #'
 #' @export
-setMethod("show", "AlphaStableBernsteinFunction",
+setMethod(
+    "show", "AlphaStableBernsteinFunction",
     function(object) {
         cat(sprintf("An object of class %s\n", classLabel(class(object))))
         if (isTRUE(validObject(object, test = TRUE))) {
@@ -84,7 +90,8 @@ setMethod("show", "AlphaStableBernsteinFunction",
         }
 
         invisible(NULL)
-    })
+    }
+)
 
 #' @describeIn AlphaStableBernsteinFunction-class
 #'   see [LevyBernsteinFunction-class]
@@ -99,15 +106,17 @@ setMethod("show", "AlphaStableBernsteinFunction",
 #' }
 #'
 #' @export
-setMethod("levyDensity", "AlphaStableBernsteinFunction",
+setMethod(
+    "levyDensity", "AlphaStableBernsteinFunction",
     function(object) {
         structure(
             function(x) {
-                object@alpha / gamma(1 - object@alpha) * x ^ (-1 - object@alpha)
+                object@alpha / gamma(1 - object@alpha) * x^(-1 - object@alpha)
             },
             lower = 0, upper = Inf, type = "continuous"
         )
-    })
+    }
+)
 
 #' @describeIn AlphaStableBernsteinFunction-class
 #'   see [CompleteBernsteinFunction-class].
@@ -122,22 +131,28 @@ setMethod("levyDensity", "AlphaStableBernsteinFunction",
 #' }
 #'
 #' @export
-setMethod("stieltjesDensity", "AlphaStableBernsteinFunction",
+setMethod(
+    "stieltjesDensity", "AlphaStableBernsteinFunction",
     function(object) {
         structure(
             function(x) {
-                sin(object@alpha * pi) / pi * x ^ (object@alpha - 1)
+                sin(object@alpha * pi) / pi * x^(object@alpha - 1)
             },
             lower = 0, upper = Inf, type = "continuous"
         )
-    })
+    }
+)
 
 #' @keywords internal
-setMethod("valueOf0", "AlphaStableBernsteinFunction",
+setMethod(
+    "valueOf0", "AlphaStableBernsteinFunction",
     function(object, x, ...) {
-        assert(combine = "or",
+        assert(
+            combine = "or",
             check_numeric(x, min.len = 1L, any.missing = FALSE),
-            check_complex(x, min.len = 1L, any.missing = FALSE))
+            check_complex(x, min.len = 1L, any.missing = FALSE)
+        )
         qassert(Re(x), "N+[0,)")
         x^object@alpha
-    })
+    }
+)

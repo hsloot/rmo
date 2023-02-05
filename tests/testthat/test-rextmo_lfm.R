@@ -8,17 +8,23 @@ rextmo_lfm <- function(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_a
         rpextmo(n, d, a = rate_killing, b = rate_drift, family = "Armageddon", method = "LFM")
     } else if (isTRUE("rposval" == rjump_name)) {
         rpextmo(
-            n, d, a = rate_killing, b = rate_drift, gamma = rate, eta = rjump_arg_list$value,
-            family = "Poisson", method = "LFM")
+            n, d,
+            a = rate_killing, b = rate_drift, gamma = rate, eta = rjump_arg_list$value,
+            family = "Poisson", method = "LFM"
+        )
     } else if (isTRUE("rpareto" == rjump_name)) {
         rpextmo(
-            n, d, a = rate_killing, b = rate_drift, gamma = rate,
+            n, d,
+            a = rate_killing, b = rate_drift, gamma = rate,
             eta = c(rjump_arg_list$alpha, rjump_arg_list$x0),
-            family = "Pareto", method = "LFM")
+            family = "Pareto", method = "LFM"
+        )
     } else if (isTRUE("rexp" == rjump_name)) {
         rpextmo(
-            n, d, a = rate_killing, b = rate_drift, gamma = rate, eta = rjump_arg_list$rate,
-            family = "Exponential", method = "LFM")
+            n, d,
+            a = rate_killing, b = rate_drift, gamma = rate, eta = rjump_arg_list$rate,
+            family = "Exponential", method = "LFM"
+        )
     } else {
         stop(sprintf("Jump distribution %s not implemented", rjump_name))
     }
@@ -34,7 +40,8 @@ test_that("LFM-CPP implementation works as indended for independence case", {
     )
     expect_equal_rn_generation(
         rextmo_lfm, testutils.rmo::rextmo_lfm_independence,
-        args, n, use_seed)
+        args, n, use_seed
+    )
 })
 
 
@@ -48,7 +55,8 @@ test_that("LFM-CPP implementation works as indended for comonotone case", {
     )
     expect_equal_rn_generation(
         rextmo_lfm, testutils.rmo::rextmo_lfm_comonotone,
-        args, n, use_seed)
+        args, n, use_seed
+    )
 })
 
 
@@ -64,7 +72,8 @@ test_that("LFM-CPP implementation works as intended for exp. jumps", {
     )
     expect_equal_rn_generation(
         rextmo_lfm, testutils.rmo::rextmo_lfm_naive,
-        args, n, use_seed)
+        args, n, use_seed
+    )
 
     ## with killing, no drift
     args <- list(
@@ -75,7 +84,8 @@ test_that("LFM-CPP implementation works as intended for exp. jumps", {
     )
     expect_equal_rn_generation(
         rextmo_lfm, testutils.rmo::rextmo_lfm_naive,
-        args, n, use_seed)
+        args, n, use_seed
+    )
 
     ## no killing, with drift
     args <- list(
@@ -86,7 +96,8 @@ test_that("LFM-CPP implementation works as intended for exp. jumps", {
     )
     expect_equal_rn_generation(
         rextmo_lfm, testutils.rmo::rextmo_lfm_naive,
-        args, n, use_seed)
+        args, n, use_seed
+    )
 
     ## with killing, with drift
     args <- list(
@@ -97,7 +108,8 @@ test_that("LFM-CPP implementation works as intended for exp. jumps", {
     )
     expect_equal_rn_generation(
         rextmo_lfm, testutils.rmo::rextmo_lfm_naive,
-        args, n, use_seed)
+        args, n, use_seed
+    )
 })
 
 
@@ -113,7 +125,8 @@ test_that("LFM-CPP implementation works as intended for det. jumps", {
     )
     expect_equal_rn_generation(
         rextmo_lfm, testutils.rmo::rextmo_lfm_naive,
-        args, n, use_seed)
+        args, n, use_seed
+    )
 
     ## with killing, no drift
     args <- list(
@@ -124,7 +137,8 @@ test_that("LFM-CPP implementation works as intended for det. jumps", {
     )
     expect_equal_rn_generation(
         rextmo_lfm, testutils.rmo::rextmo_lfm_naive,
-        args, n, use_seed)
+        args, n, use_seed
+    )
 
     ## no killing, with drift
     args <- list(
@@ -135,7 +149,8 @@ test_that("LFM-CPP implementation works as intended for det. jumps", {
     )
     expect_equal_rn_generation(
         rextmo_lfm, testutils.rmo::rextmo_lfm_naive,
-        args, n, use_seed)
+        args, n, use_seed
+    )
 
     ## with killing, with drift
     args <- list(
@@ -146,7 +161,8 @@ test_that("LFM-CPP implementation works as intended for det. jumps", {
     )
     expect_equal_rn_generation(
         rextmo_lfm, testutils.rmo::rextmo_lfm_naive,
-        args, n, use_seed)
+        args, n, use_seed
+    )
 })
 
 
@@ -162,7 +178,8 @@ test_that("LFM-CPP implementation works as intended for pareto jumps", {
     )
     expect_equal_rn_generation(
         rextmo_lfm, testutils.rmo::rextmo_lfm_naive,
-        args, n, use_seed)
+        args, n, use_seed
+    )
 
     ## with killing, no drift
     args <- list(
@@ -173,7 +190,8 @@ test_that("LFM-CPP implementation works as intended for pareto jumps", {
     )
     expect_equal_rn_generation(
         rextmo_lfm, testutils.rmo::rextmo_lfm_naive,
-        args, n, use_seed)
+        args, n, use_seed
+    )
 
     ## no killing, with drift
     args <- list(
@@ -184,7 +202,8 @@ test_that("LFM-CPP implementation works as intended for pareto jumps", {
     )
     expect_equal_rn_generation(
         rextmo_lfm, testutils.rmo::rextmo_lfm_naive,
-        args, n, use_seed)
+        args, n, use_seed
+    )
 
     ## with killing, with drift
     args <- list(
@@ -195,7 +214,8 @@ test_that("LFM-CPP implementation works as intended for pareto jumps", {
     )
     expect_equal_rn_generation(
         rextmo_lfm, testutils.rmo::rextmo_lfm_naive,
-        args, n, use_seed)
+        args, n, use_seed
+    )
 })
 
 # #### Test no-sample ####
@@ -204,7 +224,9 @@ test_that("LFM implementation for n = 0", {
     n <- 0
     d <- 5
     x <- rextmo_lfm(
-        n, d, rate = 1, rate_killing = 0, rate_drift = 0,
-        rjump_name = "rexp", rjump_arg_list = list(rate = 1))
+        n, d,
+        rate = 1, rate_killing = 0, rate_drift = 0,
+        rjump_name = "rexp", rjump_arg_list = list(rate = 1)
+    )
     checkmate::expect_matrix(x, mode = "numeric", nrows = n, ncols = d)
 })

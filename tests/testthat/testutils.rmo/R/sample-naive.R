@@ -39,7 +39,8 @@ rmo_esm_naive <- function(n, d, intensities) { # nolint
         is.numeric(n) && 1L == length(n) && 0 == n %% 1 && n > 0 &&
             is.numeric(d) && 1L == length(d) && 0 == d %% 1 && d > 0 &&
             is.numeric(intensities) && 2^d - 1 == length(intensities) &&
-            all(intensities >= 0) && any(intensities > 0))
+            all(intensities >= 0) && any(intensities > 0)
+    )
 
     out <- matrix(nrow = n, ncol = d)
     for (k in 1:n) {
@@ -52,8 +53,9 @@ rmo_esm_naive <- function(n, d, intensities) { # nolint
             ## iterate over all components, check if current shock concerns it,
             ## and update value if that is the case
             for (i in 1:d) {
-                if (is_within(i, j))
+                if (is_within(i, j)) {
                     value[i] <- min(c(value[[i]], shock_time))
+                }
             }
         }
         out[k, ] <- value
@@ -82,7 +84,8 @@ rmo_am_naive <- function(n, d, intensities) { # nolint
         is.numeric(n) && 1L == length(n) && 0 == n %% 1 && n > 0 &&
             is.numeric(d) && 1L == length(d) && 0 == d %% 1 && d > 0 &&
             is.numeric(intensities) && 2^d - 1 == length(intensities) &&
-            all(intensities >= 0) && any(intensities > 0))
+            all(intensities >= 0) && any(intensities > 0)
+    )
 
     ## calculate arrival intensity and all arrival probabilities
     arrival_intensity <- sum(intensities)
@@ -97,8 +100,10 @@ rmo_am_naive <- function(n, d, intensities) { # nolint
             ## while not all are destroyed, sample the waiting time and the
             ## arriving shock
             waiting_time <- rexp(1, rate = arrival_intensity)
-            affected <- sample.int(n = length(arrival_probs), size = 1,
-                replace = FALSE, prob = arrival_probs)
+            affected <- sample.int(
+                n = length(arrival_probs), size = 1,
+                replace = FALSE, prob = arrival_probs
+            )
             ## check which components will be destroyed by the shock and increment
             ## time for all components which were alive before the shock arrival
             for (i in 1:d) {
@@ -137,7 +142,8 @@ rexmo_mdcm_naive <- function(n, d, ex_intensities) { # nolint
         is.numeric(n) && 1L == length(n) && 0 == n %% 1 && n > 0 &&
             is.numeric(d) && 1L == length(d) && 0 == d %% 1 && d > 0 &&
             is.numeric(ex_intensities) && d == length(ex_intensities) &&
-            all(ex_intensities >= 0) && any(ex_intensities > 0))
+            all(ex_intensities >= 0) && any(ex_intensities > 0)
+    )
 
     ## convert to unscaled exchangeable intensities
     ex_intensities <- sapply(1:d, function(i) ex_intensities[i] / choose(d, i))
@@ -158,7 +164,9 @@ rexmo_mdcm_naive <- function(n, d, ex_intensities) { # nolint
                         FUN.VALUE = 0.5
                     )
                 )
-            }, FUN.VALUE = 0.5) *
+            },
+            FUN.VALUE = 0.5
+        ) *
             vapply(
                 1:i,
                 function(k) {
@@ -186,8 +194,10 @@ rexmo_mdcm_naive <- function(n, d, ex_intensities) { # nolint
 
             ## sample waiting time and number of affected components
             waiting_time <- rexp(1, rate = transition_intensity)
-            num_affected <- sample.int(n = d_alive, size = 1, replace = FALSE,
-                prob = transition_probs)
+            num_affected <- sample.int(
+                n = d_alive, size = 1, replace = FALSE,
+                prob = transition_probs
+            )
 
             ## update all components which were alive before the current
             ## shock arrived and reduce the number of alive components
@@ -231,7 +241,8 @@ rexmo_mdcm_naive_recursive <- function( # nolint
         is.numeric(n) && 1L == length(n) && 0 == n %% 1 && n > 0 &&
             is.numeric(d) && 1L == length(d) && 0 == d %% 1 && d > 0 &&
             is.numeric(ex_intensities) && d == length(ex_intensities) &&
-            all(ex_intensities >= 0) && any(ex_intensities > 0))
+            all(ex_intensities >= 0) && any(ex_intensities > 0)
+    )
 
     ## convert to unscaled exchangeable intensities
     ex_intensities <- sapply(1:d, function(i) ex_intensities[i] / choose(d, i))
@@ -247,7 +258,9 @@ rexmo_mdcm_naive_recursive <- function( # nolint
                     function(k) {
                         choose(d - i - 1, k) * ex_intensities[[k + 1]]
                     },
-                    FUN.VALUE = 0.5))
+                    FUN.VALUE = 0.5
+                )
+            )
         },
         FUN.VALUE = 0.5
     )
@@ -270,7 +283,9 @@ rexmo_mdcm_naive_recursive <- function( # nolint
                                 (-1)^k * choose(i - 1, k) *
                                     ex_a_alive[[d_alive - i + k + 1]]
                             },
-                            FUN.VALUE = 0.5))
+                            FUN.VALUE = 0.5
+                        )
+                    )
                 },
                 FUN.VALUE = 0.5
             )
@@ -291,8 +306,10 @@ rexmo_mdcm_naive_recursive <- function( # nolint
 
             ## sample waiting time and transition state
             waiting_time <- rexp(1, rate = transition_intensity)
-            num_affected <- sample.int(n = d_alive, size = 1, replace = FALSE,
-                prob = transition_probs)
+            num_affected <- sample.int(
+                n = d_alive, size = 1, replace = FALSE,
+                prob = transition_probs
+            )
 
             ## update all components which were alive before the current shock
             ## arrived and reduce the number of alive components
@@ -330,7 +347,8 @@ rarmextmo_esm_naive <- function(n, d, alpha, beta) { # nolint
             is.numeric(d) && 1L == length(d) && 0 == d %% 1 && d > 0 &&
             is.numeric(alpha) && 1L == length(alpha) && alpha >= 0 &&
             is.numeric(beta) && 1L == length(beta) && beta >= 0 &&
-            any(c(alpha, beta) > 0))
+            any(c(alpha, beta) > 0)
+    )
 
     out <- matrix(nrow = n, ncol = d)
     for (k in 1:n) {
@@ -375,7 +393,8 @@ sample_cpp_naive <- function( # nolint
             is.numeric(barrier_values) && length(barrier_values) > 0 &&
             all(barrier_values > 0) &&
             is.character(rjump_name) && 1L == length(rjump_name) &&
-            rjump_name %in% c("rexp", "rposval", "rpareto"))
+            rjump_name %in% c("rexp", "rposval", "rpareto")
+    )
 
     ## get jump distribution
     rjump <- match.fun(rjump_name)
@@ -383,8 +402,9 @@ sample_cpp_naive <- function( # nolint
     barrier_values <- sort(barrier_values, decreasing = FALSE)
     ## if barriers cannot be surpassed by drift, only the largest barrier
     ## is relevant
-    if (0 == rate_drift)
+    if (0 == rate_drift) {
         barrier_values <- max(barrier_values)
+    }
     ## sample killing time
     killing_time <- rexp(1, rate = rate_killing)
 
@@ -486,7 +506,8 @@ rextmo_lfm_naive <- function( # nolint
             is.numeric(rate_drift) && 1L == length(rate_drift) && rate_drift >= 0 &&
             any(c(rate, rate_killing, rate_drift) > 0) &&
             is.character(rjump_name) && 1L == length(rjump_name) &&
-            rjump_name %in% c("rexp", "rposval", "rpareto"))
+            rjump_name %in% c("rexp", "rposval", "rpareto")
+    )
 
     out <- matrix(nrow = n, ncol = d)
     for (k in 1:n) {
@@ -497,7 +518,8 @@ rextmo_lfm_naive <- function( # nolint
         cpp_subordinator <- sample_cpp_naive(
             rate = rate, rate_killing = rate_killing, rate_drift = rate_drift,
             rjump_name = rjump_name, rjump_arg_list = rjump_arg_list,
-            barrier_values = barrier_values)
+            barrier_values = barrier_values
+        )
         ## find the smallest time-index value for which the
         ## subordinator surpasses the respective barriers
         times <- cpp_subordinator[, "t"]

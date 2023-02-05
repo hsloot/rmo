@@ -16,7 +16,8 @@ test_that("Exchangeable Arnold model for d = 2", {
     )
     expect_equal_rn_generation(
         rexmo_mdcm, testutils.rmo::rexmo_mdcm_bivariate,
-        args, n, use_seed)
+        args, n, use_seed
+    )
 
     ## independence
     args <- list(
@@ -25,7 +26,8 @@ test_that("Exchangeable Arnold model for d = 2", {
     )
     expect_equal_rn_generation(
         rexmo_mdcm, testutils.rmo::rexmo_mdcm_bivariate,
-        args, n, use_seed)
+        args, n, use_seed
+    )
 
     ## comonotone
     args <- list(
@@ -34,18 +36,21 @@ test_that("Exchangeable Arnold model for d = 2", {
     )
     expect_equal_rn_generation(
         rexmo_mdcm, testutils.rmo::rexmo_mdcm_bivariate,
-        args, n, use_seed)
+        args, n, use_seed
+    )
 
     ## Poisson
     args <- list(
         "d" = 2,
         ex_intensities = ex_intensities_poisson(
-            2, eta = 0.3
+            2,
+            eta = 0.3
         )
     )
     expect_equal_rn_generation(
         rexmo_mdcm, testutils.rmo::rexmo_mdcm_bivariate,
-        args, n, use_seed)
+        args, n, use_seed
+    )
 
     ## Alpha-Stable
     args <- list(
@@ -54,7 +59,8 @@ test_that("Exchangeable Arnold model for d = 2", {
     )
     expect_equal_rn_generation(
         rexmo_mdcm, testutils.rmo::rexmo_mdcm_bivariate,
-        args, n, use_seed)
+        args, n, use_seed
+    )
 
     ## Gamma
     args <- list(
@@ -63,7 +69,8 @@ test_that("Exchangeable Arnold model for d = 2", {
     )
     expect_equal_rn_generation(
         rexmo_mdcm, testutils.rmo::rexmo_mdcm_bivariate,
-        args, n, use_seed)
+        args, n, use_seed
+    )
 
     ## Pareto
     args <- list(
@@ -72,7 +79,8 @@ test_that("Exchangeable Arnold model for d = 2", {
     )
     expect_equal_rn_generation(
         rexmo_mdcm, testutils.rmo::rexmo_mdcm_bivariate,
-        args, n, use_seed)
+        args, n, use_seed
+    )
 
     ## Inverse-Gaussian
     args <- list(
@@ -81,7 +89,8 @@ test_that("Exchangeable Arnold model for d = 2", {
     )
     expect_equal_rn_generation(
         rexmo_mdcm, testutils.rmo::rexmo_mdcm_bivariate,
-        args, n, use_seed)
+        args, n, use_seed
+    )
 })
 
 
@@ -98,7 +107,8 @@ test_that("Alternative implementation in R for d>2", {
     )
     expect_equal_rn_generation(
         rexmo_mdcm, testutils.rmo::rexmo_mdcm_naive_recursive,
-        args, n, use_seed)
+        args, n, use_seed
+    )
 
     ## independence
     args <- list(
@@ -107,7 +117,8 @@ test_that("Alternative implementation in R for d>2", {
     )
     expect_equal_rn_generation(
         rexmo_mdcm, testutils.rmo::rexmo_mdcm_naive_recursive,
-        args, n, use_seed)
+        args, n, use_seed
+    )
 
     ## comonotone
     args <- list(
@@ -116,18 +127,21 @@ test_that("Alternative implementation in R for d>2", {
     )
     expect_equal_rn_generation(
         rexmo_mdcm, testutils.rmo::rexmo_mdcm_naive_recursive,
-        args, n, use_seed)
+        args, n, use_seed
+    )
 
     ## Poisson
     args <- list(
         "d" = d,
         "ex_intensities" = ex_intensities_poisson(
-            d, eta = 0.3
+            d,
+            eta = 0.3
         )
     )
     expect_equal_rn_generation(
         rexmo_mdcm, testutils.rmo::rexmo_mdcm_naive_recursive,
-        args, n, use_seed)
+        args, n, use_seed
+    )
 
     ## Alpha-stable
     args <- list(
@@ -136,7 +150,8 @@ test_that("Alternative implementation in R for d>2", {
     )
     expect_equal_rn_generation(
         rexmo_mdcm, testutils.rmo::rexmo_mdcm_naive_recursive,
-        args, n, use_seed)
+        args, n, use_seed
+    )
 
     ## Gamma
     args <- list(
@@ -145,7 +160,8 @@ test_that("Alternative implementation in R for d>2", {
     )
     expect_equal_rn_generation(
         rexmo_mdcm, testutils.rmo::rexmo_mdcm_naive_recursive,
-        args, n, use_seed)
+        args, n, use_seed
+    )
 
     ## Pareto
     args <- list(
@@ -154,7 +170,8 @@ test_that("Alternative implementation in R for d>2", {
     )
     expect_equal_rn_generation(
         rexmo_mdcm, testutils.rmo::rexmo_mdcm_naive_recursive,
-        args, n, use_seed)
+        args, n, use_seed
+    )
 
     ## Inverse-Gaussian
     args <- list(
@@ -163,7 +180,8 @@ test_that("Alternative implementation in R for d>2", {
     )
     expect_equal_rn_generation(
         rexmo_mdcm, testutils.rmo::rexmo_mdcm_naive_recursive,
-        args, n, use_seed)
+        args, n, use_seed
+    )
 })
 
 
@@ -182,7 +200,8 @@ test_that("Exchangeable Arnold model implementation in C++", {
     )
     expect_equal_rn_generation(
         rexmo_mdcm, testutils.rmo::rexmo_mdcm_naive,
-        args, n, use_seed)
+        args, n, use_seed
+    )
 
     ## independence
     args <- list(
@@ -191,7 +210,8 @@ test_that("Exchangeable Arnold model implementation in C++", {
     )
     expect_equal_rn_generation(
         rexmo_mdcm, testutils.rmo::rexmo_mdcm_naive,
-        args, n, use_seed)
+        args, n, use_seed
+    )
 
     ## comonotone
     args <- list(
@@ -200,18 +220,21 @@ test_that("Exchangeable Arnold model implementation in C++", {
     )
     expect_equal_rn_generation(
         rexmo_mdcm, testutils.rmo::rexmo_mdcm_naive,
-        args, n, use_seed)
+        args, n, use_seed
+    )
 
     ## Poisson
     args <- list(
         "d" = d,
         "ex_intensities" = ex_intensities_poisson(
-            d, eta = 0.3
+            d,
+            eta = 0.3
         )
     )
     expect_equal_rn_generation(
         rexmo_mdcm, testutils.rmo::rexmo_mdcm_naive,
-        args, n, use_seed)
+        args, n, use_seed
+    )
 
     ## Alpha-stable
     args <- list(
@@ -220,7 +243,8 @@ test_that("Exchangeable Arnold model implementation in C++", {
     )
     expect_equal_rn_generation(
         rexmo_mdcm, testutils.rmo::rexmo_mdcm_naive,
-        args, n, use_seed)
+        args, n, use_seed
+    )
 
     ## Gamma
     args <- list(
@@ -229,7 +253,8 @@ test_that("Exchangeable Arnold model implementation in C++", {
     )
     expect_equal_rn_generation(
         rexmo_mdcm, testutils.rmo::rexmo_mdcm_naive,
-        args, n, use_seed)
+        args, n, use_seed
+    )
 
     ## Pareto
     args <- list(
@@ -238,7 +263,8 @@ test_that("Exchangeable Arnold model implementation in C++", {
     )
     expect_equal_rn_generation(
         rexmo_mdcm, testutils.rmo::rexmo_mdcm_naive,
-        args, n, use_seed)
+        args, n, use_seed
+    )
 
     ## Inverse-Gaussian
     args <- list(
@@ -247,7 +273,8 @@ test_that("Exchangeable Arnold model implementation in C++", {
     )
     expect_equal_rn_generation(
         rexmo_mdcm, testutils.rmo::rexmo_mdcm_naive,
-        args, n, use_seed)
+        args, n, use_seed
+    )
 })
 
 # #### Test no-sample ####

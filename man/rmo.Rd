@@ -68,45 +68,54 @@ components are \emph{hit} by a shock, see \insertCite{@see Sec. 3.1.2 @Mai2017a}
 \examples{
 rmo(
     10, 3,
-    c(0.4, 0.4, 0.1, 0.4, 0.1, 0.1, 0.4))
+    c(0.4, 0.4, 0.1, 0.4, 0.1, 0.1, 0.4)
+)
 ## independence
 rmo(
     10, 3,
-    c(1, 1, 0, 1, 0, 0, 0))
+    c(1, 1, 0, 1, 0, 0, 0)
+)
 ## comonotone
 rmo(
     10, 3,
-    c(0, 0, 0, 0, 0, 0, 1))
+    c(0, 0, 0, 0, 0, 0, 1)
+)
 
 rmo(
     10, 3,
     c(0.4, 0.4, 0.1, 0.4, 0.1, 0.1, 0.4),
-    method = "ESM")
+    method = "ESM"
+)
 ## independence
 rmo(
     10, 3,
     c(1, 1, 0, 1, 0, 0, 0),
-    method = "ESM")
+    method = "ESM"
+)
 ## comonotone
 rmo(
     10, 3,
     c(0, 0, 0, 0, 0, 0, 1),
-    method = "ESM")
+    method = "ESM"
+)
 
 rmo(
     10, 3,
     c(0.4, 0.4, 0.1, 0.4, 0.1, 0.1, 0.4),
-    method = "AM")
+    method = "AM"
+)
 ## independence
 rmo(
     10, 3,
     c(1, 1, 0, 1, 0, 0, 0),
-    method = "AM")
+    method = "AM"
+)
 ## comonotone
 rmo(
     10, 3,
     c(0, 0, 0, 0, 0, 0, 1),
-    method = "AM")
+    method = "AM"
+)
 
 }
 \references{

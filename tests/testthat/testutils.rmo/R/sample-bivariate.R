@@ -40,7 +40,8 @@ rmo_esm_bivariate <- function( # nolint
         is.numeric(n) && 1L == length(n) && 0 == n %% 1 && n > 0 &&
             is.numeric(d) && 1L == length(d) && 0 == d %% 1 && d == 2 &&
             is.numeric(intensities) && 3 == length(intensities) &&
-            all(intensities >= 0) && any(intensities > 0))
+            all(intensities >= 0) && any(intensities > 0)
+    )
 
     first_intensity <- intensities[[1]]
     second_intensity <- intensities[[2]]
@@ -82,7 +83,8 @@ rexmo_mdcm_bivariate <- function( # nolint
         is.numeric(n) && 1L == length(n) && 0 == n %% 1 && n > 0 &&
             is.numeric(d) && 1L == length(d) && 0 == d %% 1 && d == 2 &&
             is.numeric(ex_intensities) && 2 == length(ex_intensities) &&
-            all(ex_intensities >= 0) && any(ex_intensities > 0))
+            all(ex_intensities >= 0) && any(ex_intensities > 0)
+    )
 
     ## convert to unscaled exchangeable intensities
     ex_intensities <- sapply(1:d, function(i) ex_intensities[i] / choose(d, i))
@@ -98,8 +100,10 @@ rexmo_mdcm_bivariate <- function( # nolint
     for (k in 1:n) {
         ## sample waiting time and cardinality of next arriving shock
         waiting_time <- rexp(1, rate = first_transition_intensity)
-        num_affected <- sample.int(2, 1, replace = FALSE,
-            prob = first_transition_prob)
+        num_affected <- sample.int(2, 1,
+            replace = FALSE,
+            prob = first_transition_prob
+        )
         out[k, ] <- waiting_time
 
         if (num_affected < 2) {
@@ -141,7 +145,8 @@ rarmextmo_esm_bivariate <- function( # nolint
             is.numeric(d) && 1L == length(d) && 0 == d %% 1 && d == 2 &&
             is.numeric(alpha) && 1L == length(alpha) && alpha >= 0 &&
             is.numeric(beta) && 1L == length(beta) && beta >= 0 &&
-            any(c(alpha, beta) > 0))
+            any(c(alpha, beta) > 0)
+    )
 
     out <- matrix(nrow = n, ncol = 2)
     for (k in 1:n) {

@@ -13,7 +13,8 @@ test_that("ESM implementation for d = 2", {
     args <- list("d" = 2, "intensities" = rep(1, 3))
     expect_equal_rn_generation(
         rmo_esm, testutils.rmo::rmo_esm_bivariate,
-        args, n, use_seed)
+        args, n, use_seed
+    )
 
     ## independence
     args <- list(
@@ -22,7 +23,8 @@ test_that("ESM implementation for d = 2", {
     )
     expect_equal_rn_generation(
         rmo_esm, testutils.rmo::rmo_esm_bivariate,
-        args, n, use_seed)
+        args, n, use_seed
+    )
 
     ## comonotone
     args <- list(
@@ -31,18 +33,21 @@ test_that("ESM implementation for d = 2", {
     )
     expect_equal_rn_generation(
         rmo_esm, testutils.rmo::rmo_esm_bivariate,
-        args, n, use_seed)
+        args, n, use_seed
+    )
 
     ## Poisson
     args <- list(
         "d" = 2,
         "intensities" = intensities_poisson(
-            2, eta = 0.3
+            2,
+            eta = 0.3
         )
     )
     expect_equal_rn_generation(
         rmo_esm, testutils.rmo::rmo_esm_bivariate,
-        args, n, use_seed)
+        args, n, use_seed
+    )
 
     ## Alpha-Stable
     args <- list(
@@ -51,7 +56,8 @@ test_that("ESM implementation for d = 2", {
     )
     expect_equal_rn_generation(
         rmo_esm, testutils.rmo::rmo_esm_bivariate,
-        args, n, use_seed)
+        args, n, use_seed
+    )
 
     ## Gamma
     args <- list(
@@ -60,7 +66,8 @@ test_that("ESM implementation for d = 2", {
     )
     expect_equal_rn_generation(
         rmo_esm, testutils.rmo::rmo_esm_bivariate,
-        args, n, use_seed)
+        args, n, use_seed
+    )
 
     ## Pareto
     args <- list(
@@ -69,7 +76,8 @@ test_that("ESM implementation for d = 2", {
     )
     expect_equal_rn_generation(
         rmo_esm, testutils.rmo::rmo_esm_bivariate,
-        args, n, use_seed)
+        args, n, use_seed
+    )
 
     ## Inverse-Gaussian
     args <- list(
@@ -78,7 +86,8 @@ test_that("ESM implementation for d = 2", {
     )
     expect_equal_rn_generation(
         rmo_esm, testutils.rmo::rmo_esm_bivariate,
-        args, n, use_seed)
+        args, n, use_seed
+    )
 
     ## Mixed
     args <- list(
@@ -87,7 +96,8 @@ test_that("ESM implementation for d = 2", {
     )
     expect_equal_rn_generation(
         rmo_esm, testutils.rmo::rmo_esm_bivariate,
-        args, n, use_seed)
+        args, n, use_seed
+    )
 })
 
 
@@ -106,7 +116,8 @@ test_that("ESM implementation for d > 2", {
     )
     expect_equal_rn_generation(
         rmo_esm, testutils.rmo::rmo_esm_naive,
-        args, n, use_seed)
+        args, n, use_seed
+    )
 
     ## independence
     args <- list(
@@ -115,7 +126,8 @@ test_that("ESM implementation for d > 2", {
     )
     expect_equal_rn_generation(
         rmo_esm, testutils.rmo::rmo_esm_naive,
-        args, n, use_seed)
+        args, n, use_seed
+    )
 
     ## comonotone
     args <- list(
@@ -124,18 +136,21 @@ test_that("ESM implementation for d > 2", {
     )
     expect_equal_rn_generation(
         rmo_esm, testutils.rmo::rmo_esm_naive,
-        args, n, use_seed)
+        args, n, use_seed
+    )
 
     ## Poisson
     args <- list(
         "d" = d,
         "intensities" = intensities_poisson(
-            d, eta = 0.3
+            d,
+            eta = 0.3
         )
     )
     expect_equal_rn_generation(
         rmo_esm, testutils.rmo::rmo_esm_naive,
-        args, n, use_seed)
+        args, n, use_seed
+    )
 
     ## Alpha-Stable
     args <- list(
@@ -144,7 +159,8 @@ test_that("ESM implementation for d > 2", {
     )
     expect_equal_rn_generation(
         rmo_esm, testutils.rmo::rmo_esm_naive,
-        args, n, use_seed)
+        args, n, use_seed
+    )
 
     ## Gamma
     args <- list(
@@ -153,7 +169,8 @@ test_that("ESM implementation for d > 2", {
     )
     expect_equal_rn_generation(
         rmo_esm, testutils.rmo::rmo_esm_naive,
-        args, n, use_seed)
+        args, n, use_seed
+    )
 
     ## Pareto
     args <- list(
@@ -162,7 +179,8 @@ test_that("ESM implementation for d > 2", {
     )
     expect_equal_rn_generation(
         rmo_esm, testutils.rmo::rmo_esm_naive,
-        args, n, use_seed)
+        args, n, use_seed
+    )
 
     ## Inverse-Gaussian
     args <- list(
@@ -171,7 +189,8 @@ test_that("ESM implementation for d > 2", {
     )
     expect_equal_rn_generation(
         rmo_esm, testutils.rmo::rmo_esm_naive,
-        args, n, use_seed)
+        args, n, use_seed
+    )
 
     ## Hierarchical
     args <- list(
@@ -183,7 +202,8 @@ test_that("ESM implementation for d > 2", {
     )
     expect_equal_rn_generation(
         rmo_esm, testutils.rmo::rmo_esm_naive,
-        args, n, use_seed)
+        args, n, use_seed
+    )
 })
 
 # #### Test no-sample ####

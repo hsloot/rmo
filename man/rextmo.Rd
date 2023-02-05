@@ -49,45 +49,54 @@ of the \emph{exchangeable Marshall–Olkin distribution}, see \code{\link[=rexmo
 \examples{
 rextmo(
     10, 3,
-    AlphaStableBernsteinFunction(alpha = log2(2 - 0.5)))
+    AlphaStableBernsteinFunction(alpha = log2(2 - 0.5))
+)
 # independence
 rextmo(
     10, 3,
-    LinearBernsteinFunction(scale = 1))
+    LinearBernsteinFunction(scale = 1)
+)
 # comonotone
 rextmo(
     10, 3,
-    ConstantBernsteinFunction(constant = 1))
+    ConstantBernsteinFunction(constant = 1)
+)
 
 rextmo(
     10, 3,
     AlphaStableBernsteinFunction(alpha = log2(2 - 0.5)),
-    method = "AM")
+    method = "AM"
+)
 # independence
 rextmo(
     10, 3,
     LinearBernsteinFunction(scale = 1),
-    method = "AM")
+    method = "AM"
+)
 # comonotone
 rextmo(
     10, 3,
     ConstantBernsteinFunction(constant = 1),
-    method = "AM")
+    method = "AM"
+)
 
 rextmo(
     10, 3,
     AlphaStableBernsteinFunction(alpha = log2(2 - 0.5)),
-    method = "ESM")
+    method = "ESM"
+)
 # independence
 rextmo(
     10, 3,
     LinearBernsteinFunction(scale = 1),
-    method = "ESM")
+    method = "ESM"
+)
 # comonotone
 rextmo(
     10, 3,
     ConstantBernsteinFunction(constant = 1),
-    method = "ESM")
+    method = "ESM"
+)
 
 }
 \references{

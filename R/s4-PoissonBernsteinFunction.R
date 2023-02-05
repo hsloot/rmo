@@ -26,7 +26,8 @@ NULL
 #' @export PoissonBernsteinFunction
 PoissonBernsteinFunction <- setClass("PoissonBernsteinFunction", # nolint
     contains = "LevyBernsteinFunction",
-    slots = c(eta = "numeric"))
+    slots = c(eta = "numeric")
+)
 
 #' @describeIn PoissonBernsteinFunction-class Constructor
 #' @aliases initialize,PoissonBernsteinFunction-method
@@ -38,7 +39,8 @@ PoissonBernsteinFunction <- setClass("PoissonBernsteinFunction", # nolint
 #' @examples
 #' PoissonBernsteinFunction()
 #' PoissonBernsteinFunction(eta = 2)
-setMethod("initialize", "PoissonBernsteinFunction",
+setMethod(
+    "initialize", "PoissonBernsteinFunction",
     function(.Object, eta) { # nolint
         if (!missing(eta)) {
             .Object@eta <- eta
@@ -46,23 +48,27 @@ setMethod("initialize", "PoissonBernsteinFunction",
         }
 
         invisible(.Object)
-    })
+    }
+)
 
 #' @importFrom checkmate qtest
-setValidity("PoissonBernsteinFunction",
+setValidity(
+    "PoissonBernsteinFunction",
     function(object) {
         if (!qtest(object@eta, "N1[0,)")) {
             return(error_msg_domain("eta", "N1[0,)"))
         }
 
         invisible(TRUE)
-    })
+    }
+)
 
 #' @describeIn PoissonBernsteinFunction-class Display the object.
 #' @aliases show,PoissonBernsteinFunction-method
 #'
 #' @export
-setMethod("show", "PoissonBernsteinFunction",
+setMethod(
+    "show", "PoissonBernsteinFunction",
     function(object) {
         cat(sprintf("An object of class %s\n", classLabel(class(object))))
         if (isTRUE(validObject(object, test = TRUE))) {
@@ -72,7 +78,8 @@ setMethod("show", "PoissonBernsteinFunction",
         }
 
         invisible(NULL)
-    })
+    }
+)
 
 #' @describeIn PoissonBernsteinFunction-class
 #'   see [LevyBernsteinFunction-class]
@@ -87,21 +94,27 @@ setMethod("show", "PoissonBernsteinFunction",
 #' }
 #'
 #' @export
-setMethod("levyDensity", "PoissonBernsteinFunction",
+setMethod(
+    "levyDensity", "PoissonBernsteinFunction",
     function(object) {
         structure(
             data.frame(x = object@eta, y = 1),
             type = "discrete"
         )
-    })
+    }
+)
 
 #' @importFrom checkmate qassert
 #' @keywords internal
-setMethod("valueOf0", "PoissonBernsteinFunction",
+setMethod(
+    "valueOf0", "PoissonBernsteinFunction",
     function(object, x, ...) {
-        assert(combine = "or",
+        assert(
+            combine = "or",
             check_numeric(x, min.len = 1L, any.missing = FALSE),
-            check_complex(x, min.len = 1L, any.missing = FALSE))
+            check_complex(x, min.len = 1L, any.missing = FALSE)
+        )
         qassert(Re(x), "N+[0,)")
         1 - exp(-x * object@eta)
-    })
+    }
+)

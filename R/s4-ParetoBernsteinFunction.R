@@ -42,7 +42,8 @@ NULL
 #' @export ParetoBernsteinFunction
 ParetoBernsteinFunction <- setClass("ParetoBernsteinFunction", # nolint
     contains = "LevyBernsteinFunction",
-    slots = c(alpha = "numeric", x0 = "numeric"))
+    slots = c(alpha = "numeric", x0 = "numeric")
+)
 
 #' @describeIn ParetoBernsteinFunction-class Constructor
 #' @aliases initialize,ParetoBernsteinFunction-method
@@ -55,7 +56,8 @@ ParetoBernsteinFunction <- setClass("ParetoBernsteinFunction", # nolint
 #' @examples
 #' ParetoBernsteinFunction()
 #' ParetoBernsteinFunction(alpha = 0.2, x0 = 1)
-setMethod("initialize", "ParetoBernsteinFunction",
+setMethod(
+    "initialize", "ParetoBernsteinFunction",
     function(.Object, alpha, x0) { # nolint
         if (!(missing(alpha) || missing(x0))) {
             .Object@alpha <- alpha
@@ -64,10 +66,12 @@ setMethod("initialize", "ParetoBernsteinFunction",
         }
 
         invisible(.Object)
-    })
+    }
+)
 
 #' @importFrom checkmate qtest
-setValidity("ParetoBernsteinFunction",
+setValidity(
+    "ParetoBernsteinFunction",
     function(object) {
         if (!qtest(object@alpha, "N1(0,1)")) {
             return(error_msg_domain("alpha", "N1(0,1)"))
@@ -77,13 +81,15 @@ setValidity("ParetoBernsteinFunction",
         }
 
         invisible(TRUE)
-    })
+    }
+)
 
 #' @describeIn ParetoBernsteinFunction-class Display the object.
 #' @aliases show,ParetoBernsteinFunction-method
 #'
 #' @export
-setMethod("show", "ParetoBernsteinFunction",
+setMethod(
+    "show", "ParetoBernsteinFunction",
     function(object) {
         cat(sprintf("An object of class %s\n", classLabel(class(object))))
         if (isTRUE(validObject(object, test = TRUE))) {
@@ -94,7 +100,8 @@ setMethod("show", "ParetoBernsteinFunction",
         }
 
         invisible(NULL)
-    })
+    }
+)
 
 #' @describeIn ParetoBernsteinFunction-class
 #'   see [LevyBernsteinFunction-class]
@@ -109,25 +116,31 @@ setMethod("show", "ParetoBernsteinFunction",
 #' }
 #'
 #' @export
-setMethod("levyDensity", "ParetoBernsteinFunction",
+setMethod(
+    "levyDensity", "ParetoBernsteinFunction",
     function(object) {
         structure(
             function(x) {
-                object@alpha * (object@x0 / x) ^ (object@alpha) / x
+                object@alpha * (object@x0 / x)^(object@alpha) / x
             },
             lower = object@x0, upper = Inf, type = "continuous"
         )
-    })
+    }
+)
 
 #' @importFrom stats pgamma
 #' @keywords internal
-setMethod("valueOf0", "ParetoBernsteinFunction",
+setMethod(
+    "valueOf0", "ParetoBernsteinFunction",
     function(object, x, ...) {
-        assert(combine = "or",
+        assert(
+            combine = "or",
             check_numeric(x, min.len = 1L, any.missing = FALSE),
-            check_complex(x, min.len = 1L, any.missing = FALSE))
+            check_complex(x, min.len = 1L, any.missing = FALSE)
+        )
         qassert(Re(x), "N+[0,)")
-        1 - exp(-object@x0 * x) + (object@x0 * x) ^ (object@alpha) *
+        1 - exp(-object@x0 * x) + (object@x0 * x)^(object@alpha) *
             pgamma(object@x0 * x, 1 - object@alpha, lower.tail = FALSE) *
             gamma(1 - object@alpha)
-    })
+    }
+)

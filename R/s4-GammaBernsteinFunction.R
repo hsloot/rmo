@@ -37,7 +37,8 @@ NULL
 #' @export GammaBernsteinFunction
 GammaBernsteinFunction <- setClass("GammaBernsteinFunction", # nolint
     contains = "CompleteBernsteinFunction",
-    slots = c(a = "numeric"))
+    slots = c(a = "numeric")
+)
 
 #' @describeIn GammaBernsteinFunction-class Constructor
 #' @aliases initialize,GammaBernsteinFunction-method
@@ -49,7 +50,8 @@ GammaBernsteinFunction <- setClass("GammaBernsteinFunction", # nolint
 #' @examples
 #' GammaBernsteinFunction()
 #' GammaBernsteinFunction(a = 2)
-setMethod("initialize", "GammaBernsteinFunction",
+setMethod(
+    "initialize", "GammaBernsteinFunction",
     function(.Object, a) { # nolint
         if (!missing(a)) {
             .Object@a <- a
@@ -57,23 +59,27 @@ setMethod("initialize", "GammaBernsteinFunction",
         }
 
         invisible(.Object)
-    })
+    }
+)
 
 #' @importFrom checkmate qtest
-setValidity("GammaBernsteinFunction",
+setValidity(
+    "GammaBernsteinFunction",
     function(object) {
         if (!qtest(object@a, "N1(0,)")) {
             return(error_msg_domain("a", "N1(0,)"))
         }
 
         invisible(TRUE)
-    })
+    }
+)
 
 #' @describeIn GammaBernsteinFunction-class Display the object.
 #' @aliases show,GammaBernsteinFunction-method
 #'
 #' @export
-setMethod("show", "GammaBernsteinFunction",
+setMethod(
+    "show", "GammaBernsteinFunction",
     function(object) {
         cat(sprintf("An object of class %s\n", classLabel(class(object))))
         if (isTRUE(validObject(object, test = TRUE))) {
@@ -83,7 +89,8 @@ setMethod("show", "GammaBernsteinFunction",
         }
 
         invisible(NULL)
-    })
+    }
+)
 
 #' @describeIn GammaBernsteinFunction-class
 #'   see [LevyBernsteinFunction-class]
@@ -98,7 +105,8 @@ setMethod("show", "GammaBernsteinFunction",
 #' }
 #'
 #' @export
-setMethod("levyDensity", "GammaBernsteinFunction",
+setMethod(
+    "levyDensity", "GammaBernsteinFunction",
     function(object) {
         structure(
             function(x) {
@@ -106,7 +114,8 @@ setMethod("levyDensity", "GammaBernsteinFunction",
             },
             lower = 0, upper = Inf, type = "continuous"
         )
-    })
+    }
+)
 
 #' @describeIn GammaBernsteinFunction-class
 #'   see [CompleteBernsteinFunction-class]
@@ -120,7 +129,8 @@ setMethod("levyDensity", "GammaBernsteinFunction",
 #'     = 1 / u du, u > a .
 #' }
 #'
-setMethod("stieltjesDensity", "GammaBernsteinFunction",
+setMethod(
+    "stieltjesDensity", "GammaBernsteinFunction",
     function(object) {
         structure(
             function(x) {
@@ -128,14 +138,19 @@ setMethod("stieltjesDensity", "GammaBernsteinFunction",
             },
             lower = object@a, upper = Inf, type = "continuous"
         )
-    })
+    }
+)
 
 #' @keywords internal
-setMethod("valueOf0", "GammaBernsteinFunction",
+setMethod(
+    "valueOf0", "GammaBernsteinFunction",
     function(object, x, ...) {
-        assert(combine = "or",
+        assert(
+            combine = "or",
             check_numeric(x, min.len = 1L, any.missing = FALSE),
-            check_complex(x, min.len = 1L, any.missing = FALSE))
+            check_complex(x, min.len = 1L, any.missing = FALSE)
+        )
         qassert(Re(x), "N+[0,)")
         log(1 + x / object@a)
-    })
+    }
+)

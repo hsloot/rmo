@@ -32,7 +32,8 @@ NULL
 #' @export ExponentialBernsteinFunction
 ExponentialBernsteinFunction <- setClass("ExponentialBernsteinFunction", # nolint
     contains = "CompleteBernsteinFunction",
-    slots = c("lambda" = "numeric"))
+    slots = c("lambda" = "numeric")
+)
 
 #' @describeIn ExponentialBernsteinFunction-class Constructor
 #' @aliases initialize,ExponentialBernsteinFunction-method
@@ -44,7 +45,8 @@ ExponentialBernsteinFunction <- setClass("ExponentialBernsteinFunction", # nolin
 #' @examples
 #' ExponentialBernsteinFunction()
 #' ExponentialBernsteinFunction(lambda = 0.5)
-setMethod("initialize", "ExponentialBernsteinFunction",
+setMethod(
+    "initialize", "ExponentialBernsteinFunction",
     function(.Object, lambda) { # nolint
         if (!missing(lambda)) {
             .Object@lambda <- lambda
@@ -52,23 +54,27 @@ setMethod("initialize", "ExponentialBernsteinFunction",
         }
 
         invisible(.Object)
-    })
+    }
+)
 
 #' @importFrom checkmate qtest
-setValidity("ExponentialBernsteinFunction",
+setValidity(
+    "ExponentialBernsteinFunction",
     function(object) {
         if (!qtest(object@lambda, "N1(0,)")) {
             return(error_msg_domain("lambda", "N1(0,)"))
         }
 
         invisible(TRUE)
-    })
+    }
+)
 
 #' @describeIn ExponentialBernsteinFunction-class Display the object.
 #' @aliases show,ExponentialBernsteinFunction-method
 #'
 #' @export
-setMethod("show", "ExponentialBernsteinFunction",
+setMethod(
+    "show", "ExponentialBernsteinFunction",
     function(object) {
         cat(sprintf("An object of class %s\n", classLabel(class(object))))
         if (isTRUE(validObject(object, test = TRUE))) {
@@ -78,7 +84,8 @@ setMethod("show", "ExponentialBernsteinFunction",
         }
 
         invisible(NULL)
-    })
+    }
+)
 
 #' @describeIn ExponentialBernsteinFunction-class
 #'   see [LevyBernsteinFunction-class]
@@ -93,7 +100,8 @@ setMethod("show", "ExponentialBernsteinFunction",
 #' }
 #'
 #' @export
-setMethod("levyDensity", "ExponentialBernsteinFunction",
+setMethod(
+    "levyDensity", "ExponentialBernsteinFunction",
     function(object) {
         structure(
             function(x) {
@@ -101,7 +109,8 @@ setMethod("levyDensity", "ExponentialBernsteinFunction",
             },
             lower = 0, upper = Inf, type = "continuous"
         )
-    })
+    }
+)
 
 #' @describeIn ExponentialBernsteinFunction-class
 #'   see [CompleteBernsteinFunction-class]
@@ -116,26 +125,34 @@ setMethod("levyDensity", "ExponentialBernsteinFunction",
 #' }
 #'
 #' @export
-setMethod("stieltjesDensity", "ExponentialBernsteinFunction",
+setMethod(
+    "stieltjesDensity", "ExponentialBernsteinFunction",
     function(object) {
         structure(
             data.frame(x = object@lambda, y = 1),
             type = "discrete"
         )
-    })
+    }
+)
 
 #' @keywords internal
-setMethod("defaultMethod", "ExponentialBernsteinFunction",
+setMethod(
+    "defaultMethod", "ExponentialBernsteinFunction",
     function(object) {
         "stieltjes"
-    })
+    }
+)
 
 #' @keywords internal
-setMethod("valueOf0", "ExponentialBernsteinFunction",
+setMethod(
+    "valueOf0", "ExponentialBernsteinFunction",
     function(object, x, ...) {
-        assert(combine = "or",
+        assert(
+            combine = "or",
             check_numeric(x, min.len = 1L, any.missing = FALSE),
-            check_complex(x, min.len = 1L, any.missing = FALSE))
+            check_complex(x, min.len = 1L, any.missing = FALSE)
+        )
         qassert(Re(x), "N+[0,)")
         x / (x + object@lambda)
-    })
+    }
+)

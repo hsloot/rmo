@@ -19,7 +19,8 @@ NULL
 #' @export SumOfBernsteinFunctions
 SumOfBernsteinFunctions <- setClass("SumOfBernsteinFunctions", # nolint
     contains = "BernsteinFunction",
-    slots = c(first = "BernsteinFunction", second = "BernsteinFunction"))
+    slots = c(first = "BernsteinFunction", second = "BernsteinFunction")
+)
 
 #' @describeIn SumOfBernsteinFunctions-class Constructor
 #' @aliases initialize,SumOfBernsteinFunctions-method
@@ -34,7 +35,8 @@ SumOfBernsteinFunctions <- setClass("SumOfBernsteinFunctions", # nolint
 #' first_bf <- LinearBernsteinFunction(scale = 0.2)
 #' second_bf <- AlphaStableBernsteinFunction(alpha = 0.5)
 #' SumOfBernsteinFunctions(first = first_bf, second = second_bf)
-setMethod("initialize", "SumOfBernsteinFunctions",
+setMethod(
+    "initialize", "SumOfBernsteinFunctions",
     function(.Object, first, second) { # nolint
         if (!(missing(first) || missing(second))) {
             .Object@first <- first
@@ -43,7 +45,8 @@ setMethod("initialize", "SumOfBernsteinFunctions",
         }
 
         invisible(.Object)
-    })
+    }
+)
 
 #' @describeIn SumOfBernsteinFunctions-class Display the object.
 #' @aliases show,SumOfBernsteinFunctions-method
@@ -51,22 +54,26 @@ setMethod("initialize", "SumOfBernsteinFunctions",
 #' @importFrom utils capture.output
 #'
 #' @export
-setMethod("show", "SumOfBernsteinFunctions",
+setMethod(
+    "show", "SumOfBernsteinFunctions",
     function(object) {
         cat(sprintf("An object of class %s\n", classLabel(class(object))))
         if (isTRUE(validObject(object, test = TRUE))) {
             cat("- first:\n")
             writeLines(
-                paste0("\t", capture.output(show(object@first))))
+                paste0("\t", capture.output(show(object@first)))
+            )
             cat("- second:\n")
             writeLines(
-                paste0("\t", capture.output(show(object@second))))
+                paste0("\t", capture.output(show(object@second)))
+            )
         } else {
             cat("\t (invalid or not initialized)\n")
         }
 
         invisible(NULL)
-    })
+    }
+)
 
 #' @describeIn SumOfBernsteinFunctions-class
 #'   Calculates the iterated differences of the Bernstein function, see [valueOf()]
@@ -75,8 +82,10 @@ setMethod("show", "SumOfBernsteinFunctions",
 #' @inheritParams valueOf
 #'
 #' @export
-setMethod("valueOf", "SumOfBernsteinFunctions",
+setMethod(
+    "valueOf", "SumOfBernsteinFunctions",
     function(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...) {
         valueOf(object@first, x, difference_order, n, k, cscale, ...) +
             valueOf(object@second, x, difference_order, n, k, cscale, ...)
-    })
+    }
+)

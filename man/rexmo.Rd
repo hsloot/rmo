@@ -65,60 +65,72 @@ TBD; see \insertCite{@see pp. 122 psqq. @Mai2017a}{rmo} for a similar algorithm.
 \examples{
 rexmo(
     10, 3,
-    c(1.2, 0.3, 0.4))
+    c(1.2, 0.3, 0.4)
+)
 ## independence
 rexmo(
     10, 3,
-    c(3, 0, 0))
+    c(3, 0, 0)
+)
 ## comonotone
 rexmo(
     10, 3,
-    c(0, 0, 1))
+    c(0, 0, 1)
+)
 
 rexmo(
     10, 3,
     c(1.2, 0.3, 0.4),
-    method = "MDCM")
+    method = "MDCM"
+)
 ## independence
 rexmo(
     10, 3,
     c(3, 0, 0),
-    method = "MDCM")
+    method = "MDCM"
+)
 ## comonotone
 rexmo(
     10, 3,
     c(0, 0, 1),
-    method = "MDCM")
+    method = "MDCM"
+)
 
 rexmo(
     10, 3,
     c(1.2, 0.3, 0.4),
-    method = "AM")
+    method = "AM"
+)
 ## independence
 rexmo(
     10, 3,
     c(3, 0, 0),
-    method = "AM")
+    method = "AM"
+)
 ## comonotone
 rexmo(
     10, 3,
     c(0, 0, 1),
-    method = "AM")
+    method = "AM"
+)
 
 rexmo(
     10, 3,
     c(1.2, 0.3, 0.4),
-    method = "ESM")
+    method = "ESM"
+)
 ## independence
 rexmo(
     10, 3,
     c(3, 0, 0),
-    method = "ESM")
+    method = "ESM"
+)
 ## comonotone
 rexmo(
     10, 3,
     c(0, 0, 1),
-    method = "ESM")
+    method = "ESM"
+)
 
 }
 \references{

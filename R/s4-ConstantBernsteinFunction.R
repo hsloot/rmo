@@ -20,7 +20,8 @@ NULL
 #' @export ConstantBernsteinFunction
 ConstantBernsteinFunction <- setClass("ConstantBernsteinFunction", # nolint
     contains = "BernsteinFunction",
-    slots = c(constant = "numeric"))
+    slots = c(constant = "numeric")
+)
 
 #' @describeIn ConstantBernsteinFunction-class Constructor
 #' @aliases initialize,ConstantBernsteinFunction-method
@@ -32,7 +33,8 @@ ConstantBernsteinFunction <- setClass("ConstantBernsteinFunction", # nolint
 #' @examples
 #' ConstantBernsteinFunction()
 #' ConstantBernsteinFunction(constant = 0.2)
-setMethod("initialize", "ConstantBernsteinFunction",
+setMethod(
+    "initialize", "ConstantBernsteinFunction",
     function(.Object, constant) { # nolint
         if (!missing(constant)) {
             .Object@constant <- constant
@@ -40,23 +42,27 @@ setMethod("initialize", "ConstantBernsteinFunction",
         }
 
         invisible(.Object)
-    })
+    }
+)
 
 #' @importFrom checkmate qtest
-setValidity("ConstantBernsteinFunction",
+setValidity(
+    "ConstantBernsteinFunction",
     function(object) {
         if (!qtest(object@constant, "N1[0,)")) {
             return(error_msg_domain("constant", "N1[0,)"))
         }
 
         invisible(TRUE)
-    })
+    }
+)
 
 #' @describeIn ConstantBernsteinFunction-class Display the object.
 #' @aliases show,ConstantBernsteinFunction-method
 #'
 #' @export
-setMethod("show", "ConstantBernsteinFunction",
+setMethod(
+    "show", "ConstantBernsteinFunction",
     function(object) {
         cat(sprintf("An object of class %s\n", classLabel(class(object))))
         if (isTRUE(validObject(object, test = TRUE))) {
@@ -66,7 +72,8 @@ setMethod("show", "ConstantBernsteinFunction",
         }
 
         invisible(NULL)
-    })
+    }
+)
 
 #' @describeIn ConstantBernsteinFunction-class
 #'   Calculates the iterated differences of the Bernstein function, see [valueOf()]
@@ -76,11 +83,14 @@ setMethod("show", "ConstantBernsteinFunction",
 #'
 #' @importFrom checkmate qassert assert check_numeric check_complex
 #' @export
-setMethod("valueOf", "ConstantBernsteinFunction",
+setMethod(
+    "valueOf", "ConstantBernsteinFunction",
     function(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...) {
-        assert(combine = "or",
+        assert(
+            combine = "or",
             check_numeric(x, lower = 0, min.len = 1L, any.missing = FALSE),
-            check_complex(x, min.len = 1L, any.missing = FALSE))
+            check_complex(x, min.len = 1L, any.missing = FALSE)
+        )
         qassert(difference_order, "X1[0,)")
         qassert(cscale, "N1(0,)")
         qassert(n, "X1(0,)")
@@ -93,4 +103,5 @@ setMethod("valueOf", "ConstantBernsteinFunction",
         }
 
         out
-    })
+    }
+)
