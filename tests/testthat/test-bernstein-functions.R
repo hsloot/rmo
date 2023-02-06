@@ -74,6 +74,13 @@ test_that("Test initialisation of BernsteinFunction classes", {
         ),
         class = "SumOfBernsteinFunctions"
     )
+
+    expect_s4_class(
+        testutils.rmo::fuzzy_bf(
+            ConvexCombinationOfBernsteinFunctions()
+        ),
+        class = "ConvexCombinationOfBernsteinFunctions"
+    )
 })
 
 

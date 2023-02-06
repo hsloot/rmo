@@ -44,6 +44,7 @@ Collate:
     's4-AlphaStableBernsteinFunction.R'
     's4-CompositeScaledBernsteinFunction.R'
     's4-ConstantBernsteinFunction.R'
+    's4-ConvexCombinationOfBernsteinFunctions.R'
     's4-ExponentialBernsteinFunction.R'
     's4-GammaBernsteinFunction.R'
     's4-InverseGaussianBernsteinFunction.R'

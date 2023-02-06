@@ -36,8 +36,9 @@ reference:
   desc: ~
   contents:
   - "`ScaledBernsteinFunction-class`"
-  - "`SumOfBernsteinFunctions-class`"
   - "`CompositeScaledBernsteinFunction-class`"
+  - "`SumOfBernsteinFunctions-class`"
+  - "`ConvexCombinationOfBernsteinFunctions-class`"
 
 - subtitle: Boundary cases
   desc: ~

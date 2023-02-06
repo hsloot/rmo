@@ -184,4 +184,8 @@ test_that("Snapshot tests for `rpextmo`", {
     expect_snapshot(
         rpextmo(10, 3, a = a, b = b, gamma = gamma, eta = eta, family = "Gamma", method = "ESM")
     )
+
+    expect_snapshot(
+        rextmo(10, 3, testutils.rmo::fuzzy_bf(ConvexCombinationOfBernsteinFunctions()), method = "MDCM")
+    )
 })

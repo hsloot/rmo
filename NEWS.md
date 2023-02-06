@@ -1,3 +1,8 @@
+# rmo 0.8.3
+
+- Add `ConvexCombinationOfBernsteinFunctions` to represent convex combinations
+  of Bernstein functions compactly.
+
 # rmo 0.8.2
 
 - bump version
