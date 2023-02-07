@@ -128,16 +128,16 @@
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x0</span> <span class="op">&lt;-</span> <span class="fl">5e-4</span></span>
 <span><span class="va">bf_approximated</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/SumOfBernsteinFunctions-class.html">SumOfBernsteinFunctions</a></span><span class="op">(</span></span>
-<span>  first <span class="op">=</span> <span class="fu"><a href="reference/LinearBernsteinFunction-class.html">LinearBernsteinFunction</a></span><span class="op">(</span></span>
-<span>    scale <span class="op">=</span> <span class="va">alpha</span><span class="op">*</span><span class="va">x0</span><span class="op">^</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">alpha</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">alpha</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/Special.html" class="external-link">gamma</a></span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">alpha</span><span class="op">)</span></span>
-<span>  <span class="op">)</span>,</span>
-<span>  second <span class="op">=</span> <span class="fu"><a href="reference/ScaledBernsteinFunction-class.html">ScaledBernsteinFunction</a></span><span class="op">(</span></span>
-<span>    scale <span class="op">=</span> <span class="va">x0</span><span class="op">^</span><span class="op">(</span><span class="op">-</span><span class="va">alpha</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/Special.html" class="external-link">gamma</a></span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">alpha</span><span class="op">)</span>,</span>
-<span>    original <span class="op">=</span> <span class="fu"><a href="reference/ParetoBernsteinFunction-class.html">ParetoBernsteinFunction</a></span><span class="op">(</span></span>
-<span>        alpha <span class="op">=</span> <span class="va">alpha</span>,</span>
-<span>        x0 <span class="op">=</span> <span class="va">x0</span></span>
+<span>    first <span class="op">=</span> <span class="fu"><a href="reference/LinearBernsteinFunction-class.html">LinearBernsteinFunction</a></span><span class="op">(</span></span>
+<span>        scale <span class="op">=</span> <span class="va">alpha</span> <span class="op">*</span> <span class="va">x0</span><span class="op">^</span><span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">alpha</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">alpha</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/Special.html" class="external-link">gamma</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">alpha</span><span class="op">)</span></span>
+<span>    <span class="op">)</span>,</span>
+<span>    second <span class="op">=</span> <span class="fu"><a href="reference/ScaledBernsteinFunction-class.html">ScaledBernsteinFunction</a></span><span class="op">(</span></span>
+<span>        scale <span class="op">=</span> <span class="va">x0</span><span class="op">^</span><span class="op">(</span><span class="op">-</span><span class="va">alpha</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/Special.html" class="external-link">gamma</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">alpha</span><span class="op">)</span>,</span>
+<span>        original <span class="op">=</span> <span class="fu"><a href="reference/ParetoBernsteinFunction-class.html">ParetoBernsteinFunction</a></span><span class="op">(</span></span>
+<span>            alpha <span class="op">=</span> <span class="va">alpha</span>,</span>
+<span>            x0 <span class="op">=</span> <span class="va">x0</span></span>
+<span>        <span class="op">)</span></span>
 <span>    <span class="op">)</span></span>
-<span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Bernstein functions are closed under addition, scaling, and composite scaling, which can be used to create new Bernstein functions:</p>
 <p><img src="reference/figures/README-unnamed-chunk-6-1.png" width="100%"></p>
@@ -222,7 +222,7 @@
 <ul class="list-unstyled">
 <li><a href="https://www.repostatus.org/#wip" class="external-link"><img src="https://www.repostatus.org/badges/latest/wip.svg" alt="Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public."></a></li>
 <li><a href="https://www.tidyverse.org/lifecycle/#experimental" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
-<li><a href="/commits/master"><img src="https://img.shields.io/badge/last%20change-2023--02--02-yellowgreen.svg" alt="Last-changedate"></a></li>
+<li><a href="/commits/master"><img src="https://img.shields.io/badge/last%20change-2023--02--07-yellowgreen.svg" alt="Last-changedate"></a></li>
 <li><a href="https://github.com/hsloot/rmo/actions" class="external-link"><img src="https://github.com/hsloot/rmo/workflows/check-full/badge.svg" alt="R build status"></a></li>
 <li><a href="https://codecov.io/gh/hsloot/rmo?branch=main" class="external-link"><img src="https://codecov.io/gh/hsloot/rmo/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
 </ul>
