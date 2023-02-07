@@ -65,7 +65,7 @@ setGeneric(
 #' @keywords internal
 setGeneric(
     "valueOf0",
-    function(object, x, ...) {
+    function(object, x, cscale = 1, ...) {
         standardGeneric("valueOf0")
     }
 )
@@ -88,7 +88,7 @@ setGeneric(
 #' @export
 setGeneric(
     "uexIntensities",
-    function(object, d, ...) {
+    function(object, d, cscale = 1, ...) {
         standardGeneric("uexIntensities")
     }
 )
@@ -102,7 +102,7 @@ setGeneric(
 #' @export
 setGeneric(
     "intensities",
-    function(object, d, ...) {
+    function(object, d, cscale = 1, ...) {
         standardGeneric("intensities")
     }
 )
@@ -116,7 +116,7 @@ setGeneric(
 #' @export
 setGeneric(
     "exIntensities",
-    function(object, d, ...) {
+    function(object, d, cscale = 1, ...) {
         standardGeneric("exIntensities")
     }
 )
@@ -130,15 +130,15 @@ setGeneric(
 #' @export
 setGeneric(
     "exQMatrix",
-    function(object, d, ...) {
+    function(object, d, cscale = 1, ...) {
         standardGeneric("exQMatrix")
     }
 )
 
 setMethod(
     "valueOf0", "BernsteinFunction",
-    function(object, x, ...) {
-        valueOf(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...)
+    function(object, x, cscale = 1, ...) {
+        valueOf(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = cscale, ...)
     }
 )
 
@@ -150,8 +150,8 @@ setMethod(
 #' @export
 setMethod(
     "uexIntensities", "BernsteinFunction",
-    function(object, d, ...) {
-        sapply(1:d, function(i) valueOf(object, d - i, i, ...))
+    function(object, d, cscale = 1, ...) {
+        sapply(1:d, function(i) valueOf(object, d - i, i, cscale = cscale, ...))
     }
 )
 
@@ -163,17 +163,17 @@ setMethod(
 #' @export
 setMethod(
     "exIntensities", "BernsteinFunction",
-    function(object, d, ...) {
+    function(object, d, cscale = 1, ...) {
         if (d == 2) {
-            out <- d * (valueOf0(object, d) - valueOf0(object, d - 1))
+            out <- d * (valueOf0(object, d, cscale = cscale) - valueOf0(object, d - 1, cscale = cscale))
         } else {
             out <- c(
-                d * (valueOf0(object, d) - valueOf0(object, d - 1)),
-                sapply(2:(d - 1), function(i) valueOf(object, d - i, i, n = d, k = i, ...))
+                d * (valueOf0(object, d, cscale = cscale) - valueOf0(object, d - 1, cscale = cscale)),
+                sapply(2:(d - 1), function(i) valueOf(object, d - i, i, n = d, k = i, cscale = cscale, ...))
             )
         }
 
-        c(out, pmax(valueOf0(object, d) - sum(out), 0))
+        c(out, pmax(valueOf0(object, d, cscale = cscale) - sum(out), 0))
     }
 )
 
@@ -185,8 +185,8 @@ setMethod(
 #' @export
 setMethod(
     "intensities", "BernsteinFunction",
-    function(object, d, ...) {
-        uexi2i(uexIntensities(object, d, ...))
+    function(object, d, cscale = 1, ...) {
+        uexi2i(uexIntensities(object, d, cscale = cscale, ...))
     }
 )
 
@@ -198,7 +198,7 @@ setMethod(
 #' @export
 setMethod(
     "exQMatrix", "BernsteinFunction",
-    function(object, d, ...) {
-        exi2exqm(exIntensities(object, d, ...))
+    function(object, d, cscale = 1, ...) {
+        exi2exqm(exIntensities(object, d, cscale = cscale, ...))
     }
 )

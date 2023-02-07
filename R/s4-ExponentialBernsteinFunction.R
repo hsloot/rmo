@@ -146,13 +146,15 @@ setMethod(
 #' @keywords internal
 setMethod(
     "valueOf0", "ExponentialBernsteinFunction",
-    function(object, x, ...) {
+    function(object, x, cscale = 1, ...) {
         assert(
             combine = "or",
             check_numeric(x, min.len = 1L, any.missing = FALSE),
             check_complex(x, min.len = 1L, any.missing = FALSE)
         )
         qassert(Re(x), "N+[0,)")
+        qassert(cscale, "N1(0,)")
+        x <- x * cscale
         x / (x + object@lambda)
     }
 )
