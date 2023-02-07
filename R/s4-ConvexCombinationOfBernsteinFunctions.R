@@ -138,7 +138,7 @@ setMethod(
     function(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...) {
         drop(
             t(object@coefficients) %*%
-                sapply(
+                drop(t(sapply(
                     object@points,
                     valueOf,
                     x = x,
@@ -147,7 +147,7 @@ setMethod(
                     k = k,
                     cscale = cscale,
                     ...
-                )
+                )))
         )
     }
 )

@@ -1,4 +1,4 @@
-set.seed(1623)
+set.seed(1624)
 
 # #### Test initialization of `BernsteinFunction`-classes ####
 
@@ -356,6 +356,37 @@ test_that("`valueOf` for `SumOfBernsteinFunctions`", {
             difference_order = difference_order,
             n = n, k = k, cscale = cscale,
             constant = constant, scale = scale, eta = eta
+        )
+    )
+})
+
+test_that("`valueOf` for `ConvexCombinationOfBernsteinFunctions`", {
+    bf <- testutils.rmo::fuzzy_bf(ConvexCombinationOfBernsteinFunctions())
+    n <- length(bf@coefficients)
+
+    actual_fn <- function(x) {
+        coefficients <- bf@coefficients
+        points <- bf@points
+        value_matrix <- drop(t(sapply(points, valueOf, x = x)))
+
+        drop(t(coefficients) %*% value_matrix)
+    }
+
+    expect_equal(valueOf(bf, x), actual_fn(x))
+
+    expect_equal(
+        valueOf(bf, x, difference_order = difference_order, tolerance = testthat_tolerance()),
+        value_of_naive(actual_fn, x, difference_order)
+    )
+
+    expect_equal(
+        valueOf(bf, x,
+                difference_order = difference_order, tolerance = testthat_tolerance(),
+                n = n, k = k, cscale = cscale
+        ),
+        value_of_naive(actual_fn, x,
+                       difference_order = difference_order,
+                       n = n, k = k, cscale = cscale
         )
     )
 })
