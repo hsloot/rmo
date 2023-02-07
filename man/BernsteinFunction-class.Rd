@@ -16,21 +16,21 @@
 \usage{
 valueOf(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...)
 
-uexIntensities(object, d, ...)
+uexIntensities(object, d, cscale = 1, ...)
 
-intensities(object, d, ...)
+intensities(object, d, cscale = 1, ...)
 
-exIntensities(object, d, ...)
+exIntensities(object, d, cscale = 1, ...)
 
-exQMatrix(object, d, ...)
+exQMatrix(object, d, cscale = 1, ...)
 
-\S4method{uexIntensities}{BernsteinFunction}(object, d, ...)
+\S4method{uexIntensities}{BernsteinFunction}(object, d, cscale = 1, ...)
 
-\S4method{exIntensities}{BernsteinFunction}(object, d, ...)
+\S4method{exIntensities}{BernsteinFunction}(object, d, cscale = 1, ...)
 
-\S4method{intensities}{BernsteinFunction}(object, d, ...)
+\S4method{intensities}{BernsteinFunction}(object, d, cscale = 1, ...)
 
-\S4method{exQMatrix}{BernsteinFunction}(object, d, ...)
+\S4method{exQMatrix}{BernsteinFunction}(object, d, cscale = 1, ...)
 }
 \arguments{
 \item{object}{An object deriving from \linkS4class{LevyBernsteinFunction}
