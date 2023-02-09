@@ -341,15 +341,6 @@ setMethod(
 #' @seealso [rmo::ConvexCombinationOfBernsteinFunctions-class]
 #' @examples
 #' bf <- fuzzy_bf(rmo::ConvexCombinationOfBernsteinFunctions())
-#' bf <- fuzzy_bf(rmo::ConvexCombinationOfBernsteinFunctions(
-#'     coefficients = rep(1, 4L),
-#'     points = list(
-#'         rmo::LinearBernsteinFunction(),
-#'         rmo::ConstantBernsteinFunction(),
-#'         rmo::AlphaStableBernsteinFunction(),
-#'         rmo::GammaBernsteinFunction()
-#'     )
-#' ))
 #'
 #' @importFrom stats rpois
 #' @importFrom methods setMethod validObject is
@@ -360,14 +351,16 @@ setMethod(
     function(bf) {
         if (isFALSE(length(bf@points) > 1L)) {
             n <- rpois(n = 1, lambda = 10)
-            bf@points <- sapply(seq_len(n), function(x) fuzzy_bf())
+            points <- sapply(seq_len(n), function(x) fuzzy_bf())
         } else {
-            bf@points <- sapply(bf@points, fuzzy_bf)
-            n <- length(bf@points)
+            points <- sapply(bf@points, fuzzy_bf)
+            n <- length(points)
         }
-        bf@coefficients <- rexp(n)
-        validObject(bf)
+        coefficients <- rexp(n)
 
-        bf
+        ConvexCombinationOfBernsteinFunctions(
+            coefficients = coefficients,
+            points = points
+        )
     }
 )
