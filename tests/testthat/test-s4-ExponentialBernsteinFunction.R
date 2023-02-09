@@ -38,6 +38,26 @@ test_that("`valueOf` calculates expected values", {
         valueOf(bf_exponential, x, cscale = cscale),
         actual_fn(cscale * x, bf_exponential@lambda)
     )
+
+    expect_equal(
+        valueOf(bf_exponential, x, cscale = cscale),
+        valueOf(
+            bf_exponential, x,
+            cscale = cscale,
+            method = "levy",
+            tolerance = testthat_tolerance()
+        )
+    )
+
+    expect_equal(
+        valueOf(bf_exponential, x, cscale = cscale),
+        valueOf(
+            bf_exponential, x,
+            cscale = cscale,
+            method = "stieltjes",
+            tolerance = testthat_tolerance()
+        )
+    )
 })
 
 d <- 7

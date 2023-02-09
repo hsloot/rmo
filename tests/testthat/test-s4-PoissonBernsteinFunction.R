@@ -33,6 +33,16 @@ test_that("`valueOf` calculates expected values", {
         valueOf(bf_poisson, x, cscale = cscale),
         actual_fn(cscale * x, bf_poisson@eta)
     )
+
+    expect_equal(
+        valueOf(bf_poisson, x, cscale = cscale),
+        valueOf(
+            bf_poisson, x,
+            cscale = cscale,
+            method = "levy",
+            tolerance = testthat_tolerance()
+        )
+    )
 })
 
 d <- 7
