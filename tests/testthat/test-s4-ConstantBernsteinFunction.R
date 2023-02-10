@@ -1,6 +1,4 @@
-set.seed(1607)
-
-bf_constant <- testutils.rmo::fuzzy_bf(ConstantBernsteinFunction())
+bf_constant <- ConstantBernsteinFunction(constant = 1.416005)
 
 test_that("Initialize `ConstantBernsteinFunction`", {
     expect_s4_class(bf_constant, "ConstantBernsteinFunction")

@@ -1,8 +1,7 @@
-set.seed(1623)
 d <- 10L
 
 test_that("ex_intensities parameter is calculated correctly", {
-    bf <- testutils.rmo::fuzzy_bf(AlphaStableBernsteinFunction())
+    bf <- AlphaStableBernsteinFunction(alpha = 0.1033993)
 
     expect_equal(
         exIntensities(bf, d),
@@ -17,7 +16,7 @@ test_that("ex_intensities parameter is calculated correctly", {
 })
 
 test_that("intensities parameter is calculated correctly", {
-    bf <- testutils.rmo::fuzzy_bf(AlphaStableBernsteinFunction())
+    bf <- AlphaStableBernsteinFunction(alpha = 0.07608632)
 
     tmp <- sapply(1:d, function(i) valueOf(bf, d - i, i))
     intensities <- numeric(2^d - 1)
@@ -32,7 +31,7 @@ test_that("intensities parameter is calculated correctly", {
 })
 
 test_that("ex_qmatrix parameter is calculated correctly", {
-    bf <- testutils.rmo::fuzzy_bf(AlphaStableBernsteinFunction())
+    bf <- AlphaStableBernsteinFunction(alpha = 0.6101982)
 
     ex_qmatrix <- matrix(0, nrow = d + 1, ncol = d + 1)
     ex_qmatrix[1, -1] <- exIntensities(bf, d)
@@ -51,7 +50,7 @@ test_that("ex_qmatrix parameter is calculated correctly", {
 })
 
 test_that("sum(ex_intensities) is calculated correctly (base case)", {
-    bf <- testutils.rmo::fuzzy_bf(AlphaStableBernsteinFunction())
+    bf <- AlphaStableBernsteinFunction(alpha = 0.8598596)
 
     expect_equal(
         sum(exIntensities(bf, d)),

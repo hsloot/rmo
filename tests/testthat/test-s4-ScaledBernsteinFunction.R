@@ -1,10 +1,6 @@
-set.seed(1601)
-
-bf_scaled_bf <- testutils.rmo::fuzzy_bf(
-    ScaledBernsteinFunction(
-        scale = 1,
-        original = AlphaStableBernsteinFunction()
-    )
+bf_scaled_bf <- ScaledBernsteinFunction(
+    scale = 4.638729,
+    original = AlphaStableBernsteinFunction(alpha = 0.2188059)
 )
 
 test_that("Initialize `ScaledBernsteinFunction`", {

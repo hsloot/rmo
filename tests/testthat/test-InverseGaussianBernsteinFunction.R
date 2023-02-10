@@ -1,6 +1,4 @@
-set.seed(1583)
-
-bf_inverse_gaussian <- testutils.rmo::fuzzy_bf(InverseGaussianBernsteinFunction())
+bf_inverse_gaussian <- InverseGaussianBernsteinFunction(eta = 1.133682)
 
 test_that("Initialize `InverseGaussianBernsteinFunction`", {
     expect_s4_class(

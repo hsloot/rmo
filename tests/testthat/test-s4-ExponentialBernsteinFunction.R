@@ -1,6 +1,4 @@
-set.seed(1583)
-
-bf_exponential <- testutils.rmo::fuzzy_bf(ExponentialBernsteinFunction())
+bf_exponential <- ExponentialBernsteinFunction(lambda = 1.133682)
 
 test_that("Initialize `ExponentialBernsteinFunction`", {
     expect_s4_class(

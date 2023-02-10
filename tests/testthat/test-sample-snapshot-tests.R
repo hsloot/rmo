@@ -186,6 +186,31 @@ test_that("Snapshot tests for `rpextmo`", {
     )
 
     expect_snapshot(
-        rextmo(10, 3, testutils.rmo::fuzzy_bf(ConvexCombinationOfBernsteinFunctions()), method = "MDCM")
+        rextmo(
+            10,
+            3,
+            ConvexCombinationOfBernsteinFunctions(
+                coefficients = c(
+                    2.144887,
+                    0.1491956,
+                    0.8279853,
+                    0.5382334,
+                    2.687858,
+                    1.164148,
+                    1.369062,
+                    0.02881049
+                ),
+                points = list(
+                    InverseGaussianBernsteinFunction(eta = 1.643128),
+                    LinearBernsteinFunction(scale = 1.452913),
+                    ParetoBernsteinFunction(alpha = 0.1474029, x0 = 1e-2),
+                    GammaBernsteinFunction(a = 2.518894),
+                    ConstantBernsteinFunction(constant = 0.6853059),
+                    ExponentialBernsteinFunction(lambda = 1.541644),
+                    InverseGaussianBernsteinFunction(eta = 0.5562086),
+                    LinearBernsteinFunction(scale = 0.002915767)
+                )
+            ),
+            method = "MDCM")
     )
 })

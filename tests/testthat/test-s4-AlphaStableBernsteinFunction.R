@@ -1,6 +1,4 @@
-set.seed(1655)
-
-bf_alpha_stable <- testutils.rmo::fuzzy_bf(AlphaStableBernsteinFunction())
+bf_alpha_stable <- AlphaStableBernsteinFunction(alpha = 0.6132243)
 
 test_that("Initialize `AlphaStableBernsteinFunction`", {
     expect_s4_class(bf_alpha_stable, class = "AlphaStableBernsteinFunction")

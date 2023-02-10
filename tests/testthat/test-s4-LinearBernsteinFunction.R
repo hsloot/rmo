@@ -1,6 +1,4 @@
-set.seed(1622)
-
-bf_linear <- testutils.rmo::fuzzy_bf(LinearBernsteinFunction())
+bf_linear <- LinearBernsteinFunction(scale = 1.027499)
 
 test_that("Initialize `LinearBernsteinFunction`", {
     expect_s4_class(bf_linear, "LinearBernsteinFunction")
