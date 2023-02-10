@@ -1,7 +1,18 @@
-set.seed(1643)
-
-bf_convex_combinations_of_bfs <- testutils.rmo::fuzzy_bf(
-    ConvexCombinationOfBernsteinFunctions()
+bf_convex_combinations_of_bfs <- ConvexCombinationOfBernsteinFunctions(
+    coefficients = c(
+        1.582807,
+        0.3411499,
+        1.118504,
+        0.3013299,
+        0.3344583
+    ),
+    points = list(
+        AlphaStableBernsteinFunction(alpha = 0.9714516),
+        InverseGaussianBernsteinFunction(eta = 0.001121208),
+        ConstantBernsteinFunction(constant = 0.08010536),
+        ParetoBernsteinFunction(alpha = 0.8690643, x0 = 1e-2),
+        GammaBernsteinFunction(a = 2.500349)
+    )
 )
 
 test_that("Initialize `ConvexCombinationsOfBernsteinFunctions`", {

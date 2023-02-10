@@ -1,6 +1,4 @@
-set.seed(1582)
-
-bf_gamma <- testutils.rmo::fuzzy_bf(GammaBernsteinFunction())
+bf_gamma <- GammaBernsteinFunction(a = 0.1253985)
 
 test_that("Initialize `GammaBernsteinFunction`", {
     expect_s4_class(bf_gamma, class = "GammaBernsteinFunction")

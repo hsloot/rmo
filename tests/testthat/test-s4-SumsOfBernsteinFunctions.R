@@ -1,10 +1,6 @@
-set.seed(1628)
-
-bf_sum_of_bfs <- testutils.rmo::fuzzy_bf(
-    SumOfBernsteinFunctions(
-        first = AlphaStableBernsteinFunction(),
-        second = ExponentialBernsteinFunction()
-    )
+bf_sum_of_bfs <- SumOfBernsteinFunctions(
+    first = AlphaStableBernsteinFunction(alpha = 0.2497179),
+    second = ExponentialBernsteinFunction(lambda = 0.6492033)
 )
 
 test_that("Initialize `SumOfBernsteinFunctions`", {

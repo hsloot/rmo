@@ -1,6 +1,4 @@
-set.seed(1682)
-
-bf_pareto <- testutils.rmo::fuzzy_bf(ParetoBernsteinFunction())
+bf_pareto <- ParetoBernsteinFunction(alpha = 0.5365548, x0 = 1e-2)
 
 test_that("Initialize `ParetoBernsteinFunction`", {
     expect_s4_class(bf_pareto, class = "ParetoBernsteinFunction")

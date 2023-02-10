@@ -1,6 +1,4 @@
-set.seed(1664)
-
-bf_poisson <- testutils.rmo::fuzzy_bf(PoissonBernsteinFunction())
+bf_poisson <- PoissonBernsteinFunction(eta = 0.1336104)
 
 test_that("Initialize `PoissonBernsteinFunction`", {
     expect_s4_class(bf_poisson, "PoissonBernsteinFunction")

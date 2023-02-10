@@ -1,10 +1,6 @@
-set.seed(1681)
-
-bf_composite_scaled_bf <- testutils.rmo::fuzzy_bf(
-    CompositeScaledBernsteinFunction(
-        cscale = 1,
-        original = AlphaStableBernsteinFunction()
-    )
+bf_composite_scaled_bf <- CompositeScaledBernsteinFunction(
+    cscale = 0.887174,
+    original = AlphaStableBernsteinFunction(alpha = 0.7281229)
 )
 
 test_that("Initialize `CompositeScaledBernsteinFunction`", {

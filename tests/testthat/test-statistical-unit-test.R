@@ -147,31 +147,31 @@ test_that("ESM passes statistical unit test", {
     unit_threshold <- esm_threshold / 4
     d <- 7
 
-    bf <- testutils.rmo::fuzzy_bf(SumOfBernsteinFunctions(
-        first = ConstantBernsteinFunction(),
-        second = LinearBernsteinFunction()
-    ))
+    bf <- SumOfBernsteinFunctions(
+        first = ConstantBernsteinFunction(constant = 2.73383),
+        second = LinearBernsteinFunction(scale = 2.296823)
+    )
     intensities <- bf2intensities(d, bf)
     expect_not_rejected(
         ks_test(n, d, rmo_esm, intensities),
         unit_threshold
     )
 
-    bf <- testutils.rmo::fuzzy_bf(AlphaStableBernsteinFunction())
+    bf <- AlphaStableBernsteinFunction(alpha = 0.595094)
     intensities <- bf2intensities(d, bf)
     expect_not_rejected(
         ks_test(n, d, rmo_esm, intensities),
         unit_threshold
     )
 
-    bf <- testutils.rmo::fuzzy_bf(InverseGaussianBernsteinFunction())
+    bf <- InverseGaussianBernsteinFunction(eta = 0.5186811)
     intensities <- bf2intensities(d, bf)
     expect_not_rejected(
         ks_test(n, d, rmo_esm, intensities),
         unit_threshold
     )
 
-    bf <- testutils.rmo::fuzzy_bf(ExponentialBernsteinFunction())
+    bf <- ExponentialBernsteinFunction(lambda = 0.3410571)
     intensities <- bf2intensities(d, bf)
     expect_not_rejected(
         ks_test(n, d, rmo_esm, intensities),
@@ -187,31 +187,31 @@ test_that("Arnold model passes statistical unit test", {
     unit_threshold <- arnold_threshold / 4
     d <- 15
 
-    bf <- testutils.rmo::fuzzy_bf(SumOfBernsteinFunctions(
-        first = ConstantBernsteinFunction(),
-        second = LinearBernsteinFunction()
-    ))
+    bf <- SumOfBernsteinFunctions(
+        first = ConstantBernsteinFunction(constant = 0.1819954),
+        second = LinearBernsteinFunction(scale = 1.152357)
+    )
     intensities <- bf2intensities(d, bf)
     expect_not_rejected(
         ks_test(n, d, rmo_am, intensities),
         unit_threshold
     )
 
-    bf <- testutils.rmo::fuzzy_bf(AlphaStableBernsteinFunction())
+    bf <- AlphaStableBernsteinFunction(alpha = 0.6546152)
     intensities <- bf2intensities(d, bf)
     expect_not_rejected(
         ks_test(n, d, rmo_am, intensities),
         unit_threshold
     )
 
-    bf <- testutils.rmo::fuzzy_bf(InverseGaussianBernsteinFunction())
+    bf <- InverseGaussianBernsteinFunction(eta = 0.09929306)
     intensities <- bf2intensities(d, bf)
     expect_not_rejected(
         ks_test(n, d, rmo_am, intensities),
         unit_threshold
     )
 
-    bf <- testutils.rmo::fuzzy_bf(ExponentialBernsteinFunction())
+    bf <- ExponentialBernsteinFunction(lambda = 0.6385946)
     intensities <- bf2intensities(d, bf)
     expect_not_rejected(
         ks_test(n, d, rmo_am, intensities),
@@ -226,31 +226,31 @@ test_that("Exchangeable Arnold model passes statistical unit test", {
     unit_threshold <- ex_arnold_threshold / 8
     d <- 15
 
-    bf <- testutils.rmo::fuzzy_bf(SumOfBernsteinFunctions(
-        first = ConstantBernsteinFunction(),
-        second = LinearBernsteinFunction()
-    ))
+    bf <- SumOfBernsteinFunctions(
+        first = ConstantBernsteinFunction(constant = 2.112945),
+        second = LinearBernsteinFunction(scale = 0.5088719)
+    )
     ex_intensities <- bf2ex_intensities(d, bf)
     expect_not_rejected(
         ex_ks_test(n, d, rexmo_mdcm, ex_intensities),
         unit_threshold
     )
 
-    bf <- testutils.rmo::fuzzy_bf(AlphaStableBernsteinFunction())
+    bf <- AlphaStableBernsteinFunction(alpha = 0.09870832)
     ex_intensities <- bf2ex_intensities(d, bf)
     expect_not_rejected(
         ex_ks_test(n, d, rexmo_mdcm, ex_intensities),
         unit_threshold
     )
 
-    bf <- testutils.rmo::fuzzy_bf(InverseGaussianBernsteinFunction())
+    bf <- InverseGaussianBernsteinFunction(eta = 4.687992)
     ex_intensities <- bf2ex_intensities(d, bf)
     expect_not_rejected(
         ex_ks_test(n, d, rexmo_mdcm, ex_intensities),
         unit_threshold
     )
 
-    bf <- testutils.rmo::fuzzy_bf(ExponentialBernsteinFunction())
+    bf <- ExponentialBernsteinFunction(lambda = 0.2047898)
     ex_intensities <- bf2ex_intensities(d, bf)
     expect_not_rejected(
         ex_ks_test(n, d, rexmo_mdcm, ex_intensities),
@@ -259,31 +259,31 @@ test_that("Exchangeable Arnold model passes statistical unit test", {
 
     d <- 125
 
-    bf <- testutils.rmo::fuzzy_bf(SumOfBernsteinFunctions(
-        first = ConstantBernsteinFunction(),
-        second = LinearBernsteinFunction()
-    ))
+    bf <- SumOfBernsteinFunctions(
+        first = ConstantBernsteinFunction(constant = 1.796975),
+        second = LinearBernsteinFunction(scale = 0.3058118)
+    )
     ex_intensities <- bf2ex_intensities(d, bf)
     expect_not_rejected(
         ex_ks_test(n, d, rexmo_mdcm, ex_intensities),
         unit_threshold
     )
 
-    bf <- testutils.rmo::fuzzy_bf(AlphaStableBernsteinFunction())
+    bf <- AlphaStableBernsteinFunction(alpha = 0.9034687)
     ex_intensities <- bf2ex_intensities(d, bf)
     expect_not_rejected(
         ex_ks_test(n, d, rexmo_mdcm, ex_intensities),
         unit_threshold
     )
 
-    bf <- testutils.rmo::fuzzy_bf(InverseGaussianBernsteinFunction())
+    bf <- InverseGaussianBernsteinFunction(eta = 5.023343)
     ex_intensities <- bf2ex_intensities(d, bf)
     expect_not_rejected(
         ex_ks_test(n, d, rexmo_mdcm, ex_intensities),
         unit_threshold
     )
 
-    bf <- testutils.rmo::fuzzy_bf(ExponentialBernsteinFunction())
+    bf <- ExponentialBernsteinFunction(lambda = 0.6293527)
     ex_intensities <- bf2ex_intensities(d, bf)
     expect_not_rejected(
         ex_ks_test(n, d, rexmo_mdcm, ex_intensities),
@@ -298,10 +298,10 @@ test_that("Armageddon ESM passes statistical unit test", {
     unit_threshold <- armageddon_extmo_threshold / 2
     d <- 15
 
-    bf <- testutils.rmo::fuzzy_bf(SumOfBernsteinFunctions(
-        first = ConstantBernsteinFunction(),
-        second = LinearBernsteinFunction()
-    ))
+    bf <- SumOfBernsteinFunctions(
+        first = ConstantBernsteinFunction(constant = 0.1712597),
+        second = LinearBernsteinFunction(scale = 1.012998)
+    )
     alpha <- bf@second@scale
     beta <- bf@first@constant
     expect_not_rejected(
@@ -311,10 +311,10 @@ test_that("Armageddon ESM passes statistical unit test", {
 
     d <- 125
 
-    bf <- testutils.rmo::fuzzy_bf(SumOfBernsteinFunctions(
-        first = ConstantBernsteinFunction(),
-        second = LinearBernsteinFunction()
-    ))
+    bf <- SumOfBernsteinFunctions(
+        first = ConstantBernsteinFunction(constant = 0.5255554),
+        second = LinearBernsteinFunction(scale = 1.696983)
+    )
     alpha <- bf@second@scale
     beta <- bf@first@constant
     expect_not_rejected(
@@ -330,10 +330,13 @@ test_that("Lévy frailty CPP model passes statistical unit test", {
     unit_threshold <- lfm_cpp_threshold / 6
     d <- 15
 
-    bf <- PoissonBernsteinFunction()
-    bf <- SumOfBernsteinFunctions(first = LinearBernsteinFunction(), second = bf)
-    bf <- SumOfBernsteinFunctions(first = ConstantBernsteinFunction(), second = bf)
-    bf <- testutils.rmo::fuzzy_bf(bf)
+    bf <- SumOfBernsteinFunctions(
+        first = ConstantBernsteinFunction(constant = 2.026176),
+        second = SumOfBernsteinFunctions(
+            first = LinearBernsteinFunction(scale = 2.528583),
+            second = PoissonBernsteinFunction(eta = 1.523929)
+        )
+    )
     rate_drift <- bf@second@first@scale
     rate_killing <- bf@first@constant
     rate <- 1
@@ -347,12 +350,19 @@ test_that("Lévy frailty CPP model passes statistical unit test", {
         ),
         unit_threshold
     )
-
-    bf <- ParetoBernsteinFunction()
-    bf <- ScaledBernsteinFunction(scale = 1, original = bf)
-    bf <- SumOfBernsteinFunctions(first = LinearBernsteinFunction(), second = bf)
-    bf <- SumOfBernsteinFunctions(first = ConstantBernsteinFunction(), second = bf)
-    bf <- testutils.rmo::fuzzy_bf(bf)
+    bf <- SumOfBernsteinFunctions(
+        first = ConstantBernsteinFunction(constant = 3.658762),
+        second = SumOfBernsteinFunctions(
+            first = LinearBernsteinFunction(scale = 1.143383),
+            second = ScaledBernsteinFunction(
+                scale = 0.3249725,
+                original = ParetoBernsteinFunction(
+                    alpha = 0.5480305,
+                    x0 = 2
+                )
+            )
+        )
+    )
     rate_drift <- bf@second@first@scale
     rate_killing <- bf@first@constant
     rate <- bf@second@second@scale
@@ -370,11 +380,16 @@ test_that("Lévy frailty CPP model passes statistical unit test", {
         unit_threshold
     )
 
-    bf <- ExponentialBernsteinFunction()
-    bf <- ScaledBernsteinFunction(scale = 1, original = bf)
-    bf <- SumOfBernsteinFunctions(first = LinearBernsteinFunction(), second = bf)
-    bf <- SumOfBernsteinFunctions(first = ConstantBernsteinFunction(), second = bf)
-    bf <- testutils.rmo::fuzzy_bf(bf)
+    bf <- SumOfBernsteinFunctions(
+        first = ConstantBernsteinFunction(constant = 1.786405),
+        second = SumOfBernsteinFunctions(
+            first = LinearBernsteinFunction(scale = 2.162608),
+            second = ScaledBernsteinFunction(
+                scale = 0.08321866,
+                original = ExponentialBernsteinFunction(lambda = 1.17918)
+            )
+        )
+    )
     rate_drift <- bf@second@first@scale
     rate_killing <- bf@first@constant
     rate <- bf@second@second@scale
@@ -391,10 +406,13 @@ test_that("Lévy frailty CPP model passes statistical unit test", {
 
     d <- 125
 
-    bf <- PoissonBernsteinFunction()
-    bf <- SumOfBernsteinFunctions(first = LinearBernsteinFunction(), second = bf)
-    bf <- SumOfBernsteinFunctions(first = ConstantBernsteinFunction(), second = bf)
-    bf <- testutils.rmo::fuzzy_bf(bf)
+    bf <- SumOfBernsteinFunctions(
+        first = ConstantBernsteinFunction(constant = 0.2450249),
+        second = SumOfBernsteinFunctions(
+            first = LinearBernsteinFunction(scale = 1.041612),
+            second = PoissonBernsteinFunction(eta = 1.790146)
+        )
+    )
     rate_drift <- bf@second@first@scale
     rate_killing <- bf@first@constant
     rate <- 1
@@ -409,11 +427,19 @@ test_that("Lévy frailty CPP model passes statistical unit test", {
         unit_threshold
     )
 
-    bf <- ParetoBernsteinFunction()
-    bf <- ScaledBernsteinFunction(scale = 1, original = bf)
-    bf <- SumOfBernsteinFunctions(first = LinearBernsteinFunction(), second = bf)
-    bf <- SumOfBernsteinFunctions(first = ConstantBernsteinFunction(), second = bf)
-    bf <- testutils.rmo::fuzzy_bf(bf)
+    bf <- SumOfBernsteinFunctions(
+        first = ConstantBernsteinFunction(constant = 0.3258317),
+        second = SumOfBernsteinFunctions(
+            first = LinearBernsteinFunction(scale = 0.01834995),
+            second = ScaledBernsteinFunction(
+                scale = 0.1350263,
+                original = ParetoBernsteinFunction(
+                    alpha = 0.2507382,
+                    x0 = 1e-04
+                )
+            )
+        )
+    )
     rate_drift <- bf@second@first@scale
     rate_killing <- bf@first@constant
     rate <- bf@second@second@scale
@@ -431,11 +457,16 @@ test_that("Lévy frailty CPP model passes statistical unit test", {
         unit_threshold
     )
 
-    bf <- ExponentialBernsteinFunction()
-    bf <- ScaledBernsteinFunction(scale = 1, original = bf)
-    bf <- SumOfBernsteinFunctions(first = LinearBernsteinFunction(), second = bf)
-    bf <- SumOfBernsteinFunctions(first = ConstantBernsteinFunction(), second = bf)
-    bf <- testutils.rmo::fuzzy_bf(bf)
+    bf <- SumOfBernsteinFunctions(
+        first = ConstantBernsteinFunction(constant = 0.2251528),
+        second = SumOfBernsteinFunctions(
+            first = LinearBernsteinFunction(scale = 0.9185561),
+            second = ScaledBernsteinFunction(
+                scale = 0.07279246,
+                original = ExponentialBernsteinFunction(lambda = 0.7327681)
+            )
+        )
+    )
     rate_drift <- bf@second@first@scale
     rate_killing <- bf@first@constant
     rate <- bf@second@second@scale
