@@ -82,7 +82,7 @@ setValidity(
 #' @aliases show,AlphaStableBernsteinFunction-method
 #'
 #' @export
-setMethod(
+setMethod( # nocov start
     "show", "AlphaStableBernsteinFunction",
     function(object) {
         cat(sprintf("An object of class %s\n", classLabel(class(object))))
@@ -94,7 +94,7 @@ setMethod(
 
         invisible(NULL)
     }
-)
+) # nocov end
 
 #' @describeIn AlphaStableBernsteinFunction-class
 #'   see [LevyBernsteinFunction-class]

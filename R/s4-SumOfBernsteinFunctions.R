@@ -54,7 +54,7 @@ setMethod(
 #' @importFrom utils capture.output
 #'
 #' @export
-setMethod(
+setMethod( # nocov start
     "show", "SumOfBernsteinFunctions",
     function(object) {
         cat(sprintf("An object of class %s\n", classLabel(class(object))))
@@ -73,7 +73,7 @@ setMethod(
 
         invisible(NULL)
     }
-)
+) # nocov end
 
 #' @describeIn SumOfBernsteinFunctions-class
 #'   Calculates the iterated differences of the Bernstein function,

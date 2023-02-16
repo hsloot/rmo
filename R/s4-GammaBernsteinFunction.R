@@ -81,7 +81,7 @@ setValidity(
 #' @aliases show,GammaBernsteinFunction-method
 #'
 #' @export
-setMethod(
+setMethod( # nocov start
     "show", "GammaBernsteinFunction",
     function(object) {
         cat(sprintf("An object of class %s\n", classLabel(class(object))))
@@ -93,7 +93,7 @@ setMethod(
 
         invisible(NULL)
     }
-)
+) # nocov end
 
 #' @describeIn GammaBernsteinFunction-class
 #'   see [LevyBernsteinFunction-class]

@@ -90,7 +90,7 @@ setValidity(
 #' @aliases show,ParetoBernsteinFunction-method
 #'
 #' @export
-setMethod(
+setMethod( # nocov start
     "show", "ParetoBernsteinFunction",
     function(object) {
         cat(sprintf("An object of class %s\n", classLabel(class(object))))
@@ -103,7 +103,7 @@ setMethod(
 
         invisible(NULL)
     }
-)
+) # nocov end
 
 #' @describeIn ParetoBernsteinFunction-class
 #'   see [LevyBernsteinFunction-class]

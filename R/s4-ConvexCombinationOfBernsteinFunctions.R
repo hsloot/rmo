@@ -105,7 +105,7 @@ setValidity(
 #' @importFrom utils capture.output
 #'
 #' @export
-setMethod(
+setMethod( # nocov start
     "show",
     "ConvexCombinationOfBernsteinFunctions",
     function(object) {
@@ -128,7 +128,7 @@ setMethod(
 
         invisible(NULL)
     }
-)
+) # nocov end
 
 #' @describeIn ConvexCombinationOfBernsteinFunctions-class
 #'   Calculates the iterated differences of the Bernstein function,

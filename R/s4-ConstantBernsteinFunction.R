@@ -62,7 +62,7 @@ setValidity(
 #' @aliases show,ConstantBernsteinFunction-method
 #'
 #' @export
-setMethod(
+setMethod( # nocov start
     "show", "ConstantBernsteinFunction",
     function(object) {
         cat(sprintf("An object of class %s\n", classLabel(class(object))))
@@ -74,7 +74,7 @@ setMethod(
 
         invisible(NULL)
     }
-)
+) # nocov end
 
 #' @describeIn ConstantBernsteinFunction-class
 #'   Calculates the iterated differences of the Bernstein function,

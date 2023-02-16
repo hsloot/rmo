@@ -81,7 +81,7 @@ setValidity(
 #' @aliases show,InverseGaussianBernsteinFunction-method
 #'
 #' @export
-setMethod(
+setMethod( # nocov start
     "show", "InverseGaussianBernsteinFunction",
     function(object) {
         cat(sprintf("An object of class %s\n", classLabel(class(object))))
@@ -93,7 +93,7 @@ setMethod(
 
         invisible(NULL)
     }
-)
+) # nocov end
 
 #' @describeIn InverseGaussianBernsteinFunction-class
 #'   see [LevyBernsteinFunction-class]

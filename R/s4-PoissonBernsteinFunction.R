@@ -69,7 +69,7 @@ setValidity(
 #' @aliases show,PoissonBernsteinFunction-method
 #'
 #' @export
-setMethod(
+setMethod( # nocov start
     "show", "PoissonBernsteinFunction",
     function(object) {
         cat(sprintf("An object of class %s\n", classLabel(class(object))))
@@ -81,7 +81,7 @@ setMethod(
 
         invisible(NULL)
     }
-)
+) # nocov end
 
 #' @describeIn PoissonBernsteinFunction-class
 #'   see [LevyBernsteinFunction-class]

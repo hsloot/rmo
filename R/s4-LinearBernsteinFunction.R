@@ -61,7 +61,7 @@ setValidity(
 #' @aliases show,LinearBernsteinFunction-method
 #'
 #' @export
-setMethod(
+setMethod( # nocov start
     "show", "LinearBernsteinFunction",
     function(object) {
         cat(sprintf("An object of class %s\n", classLabel(class(object))))
@@ -73,7 +73,7 @@ setMethod(
 
         invisible(NULL)
     }
-)
+) # nocov end
 
 #' @describeIn LinearBernsteinFunction-class
 #'   Calculates the iterated differences of the Bernstein function,

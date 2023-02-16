@@ -67,7 +67,7 @@ setValidity(
 #' @importFrom utils capture.output
 #'
 #' @export
-setMethod(
+setMethod( # nocov start
     "show", "ScaledBernsteinFunction",
     function(object) {
         cat(sprintf("An object of class %s\n", classLabel(class(object))))
@@ -83,7 +83,7 @@ setMethod(
 
         invisible(NULL)
     }
-)
+) # nocov end
 
 #' @describeIn ScaledBernsteinFunction-class
 #'   Calculates the iterated differences of the Bernstein function,

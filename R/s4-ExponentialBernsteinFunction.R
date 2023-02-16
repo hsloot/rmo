@@ -75,7 +75,7 @@ setValidity(
 #' @aliases show,ExponentialBernsteinFunction-method
 #'
 #' @export
-setMethod(
+setMethod( # nocov start
     "show", "ExponentialBernsteinFunction",
     function(object) {
         cat(sprintf("An object of class %s\n", classLabel(class(object))))
@@ -87,7 +87,7 @@ setMethod(
 
         invisible(NULL)
     }
-)
+) # nocov end
 
 #' @describeIn ExponentialBernsteinFunction-class
 #'   see [LevyBernsteinFunction-class]
