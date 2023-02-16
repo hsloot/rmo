@@ -37,7 +37,11 @@ ex_qmatrix_naive <- function(f, d, cscale = 1, ...) {
                 if (j > i) {
                     value_of_naive(
                         f,
-                        x = d - j, difference_order = j - i, n = d - i, k = j - i, cscale = cscale, ...
+                        x = d - j,
+                        difference_order = j - i,
+                        n = d - i, k = j - i,
+                        cscale = cscale,
+                        ...
                     )
                 } else if (j == i) {
                     -f(cscale * (d - i), ...)

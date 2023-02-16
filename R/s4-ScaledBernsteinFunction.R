@@ -39,8 +39,8 @@ setMethod(
     "initialize", "ScaledBernsteinFunction",
     function(.Object, scale, original) { # nolint
         if (!(missing(scale) || missing(original))) {
-            .Object@scale <- scale
-            .Object@original <- original
+            .Object@scale <- scale # nolint
+            .Object@original <- original # nolint
             validObject(.Object)
         }
 

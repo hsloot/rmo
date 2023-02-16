@@ -60,8 +60,8 @@ setMethod(
     "initialize", "ParetoBernsteinFunction",
     function(.Object, alpha, x0) { # nolint
         if (!(missing(alpha) || missing(x0))) {
-            .Object@alpha <- alpha
-            .Object@x0 <- x0
+            .Object@alpha <- alpha # nolint
+            .Object@x0 <- x0 # nolint
             validObject(.Object)
         }
 

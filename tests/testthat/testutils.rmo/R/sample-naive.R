@@ -53,7 +53,7 @@ rmo_esm_naive <- function(n, d, intensities) { # nolint
             ## iterate over all components, check if current shock concerns it,
             ## and update value if that is the case
             for (i in 1:d) {
-                if (is_within(i, j)) {
+                if (is_within(i, j)) { # nolint
                     value[i] <- min(c(value[[i]], shock_time))
                 }
             }
@@ -108,7 +108,7 @@ rmo_am_naive <- function(n, d, intensities) { # nolint
             ## time for all components which were alive before the shock arrival
             for (i in 1:d) {
                 if (!destroyed[[i]]) {
-                    if (is_within(i, affected)) {
+                    if (is_within(i, affected)) { # nolint
                         destroyed[[i]] <- TRUE
                     }
                     time[[i]] <- time[[i]] + waiting_time
@@ -423,8 +423,8 @@ sample_cpp_naive <- function( # nolint
                 ## where individual barriers are surpassed
                 for (j in i:length(barrier_values)) {
                     if (rate_drift > 0 &&
-                        (barrier_values[[j]] - last(values)) / rate_drift <=
-                            killing_waiting_time) {
+                        (barrier_values[[j]] - last(values)) / # nolint
+                            rate_drift <= killing_waiting_time) {
                         ## if barrier is surpassed by drift before killing set the
                         ## value accordingly
                         intermediate_waiting_time <- (barrier_values[[j]] - last(values)) / rate_drift # nolint
@@ -442,12 +442,14 @@ sample_cpp_naive <- function( # nolint
                 ## where individual barriers are surpassed
                 for (j in i:length(barrier_values)) {
                     if (rate_drift > 0 &&
-                        (barrier_values[[j]] - last(values)) / rate_drift <=
-                            waiting_time) {
+                        (barrier_values[[j]] - last(values)) / # nolint
+                            rate_drift <= waiting_time
+                    ) {
                         ## if killing does not happen before the next shock, but barrier is
                         ## surpassed by drift, set the value accordingly
-                        intermediate_waiting_time <- (barrier_values[[j]] - last(values)) /
-                            rate_drift
+                        intermediate_waiting_time <- (
+                            barrier_values[[j]] - last(values) # nolint
+                        ) / rate_drift
                         times <- c(times, last(times) + intermediate_waiting_time) # nolint
                         values <- c(values, barrier_values[[j]])
                         waiting_time <- waiting_time - intermediate_waiting_time
@@ -460,7 +462,7 @@ sample_cpp_naive <- function( # nolint
                     times <- c(times, last(times) + waiting_time) # nolint
                     values <- c(
                         values,
-                        last(values) + waiting_time * rate_drift + jump_value
+                        last(values) + waiting_time * rate_drift + jump_value # nolint
                     )
                 }
             }

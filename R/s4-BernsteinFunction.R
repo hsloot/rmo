@@ -165,11 +165,24 @@ setMethod(
     "exIntensities", "BernsteinFunction",
     function(object, d, cscale = 1, ...) {
         if (d == 2) {
-            out <- d * (valueOf0(object, d, cscale = cscale) - valueOf0(object, d - 1, cscale = cscale))
+            out <- d * (
+                valueOf0(object, d, cscale = cscale) -
+                    valueOf0(object, d - 1, cscale = cscale)
+            )
         } else {
             out <- c(
-                d * (valueOf0(object, d, cscale = cscale) - valueOf0(object, d - 1, cscale = cscale)),
-                sapply(2:(d - 1), function(i) valueOf(object, d - i, i, n = d, k = i, cscale = cscale, ...))
+                d * (
+                    valueOf0(object, d, cscale = cscale) -
+                        valueOf0(object, d - 1, cscale = cscale)),
+                sapply(
+                    2:(d - 1),
+                    function(i) {
+                        valueOf(
+                            object, d - i, i,
+                            n = d, k = i, cscale = cscale, ...
+                        )
+                    }
+                )
             )
         }
 
