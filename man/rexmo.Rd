@@ -64,8 +64,9 @@ the corresponding \emph{shock-arrival intensities} and passed to \code{\link[=rm
 
 \subsection{Markovian death-set model}{
 
-TBD; see \insertCite{@see pp. 122 psqq. @Mai2017a}{rmo} for a similar
-algorithm.
+TBD; see \insertCite{Sloot2022a}{rmo} and
+\insertCite{@see pp. 122 psqq. @Mai2017a}{rmo}
+for a similar algorithm.
 }
 
 }

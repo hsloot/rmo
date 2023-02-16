@@ -183,8 +183,9 @@ rmo <- function(n, d, intensities, method = c("AM", "ESM")) {
 #' the corresponding *shock-arrival intensities* and passed to [rmo()].
 #'
 #' ### Markovian death-set model
-#' TBD; see \insertCite{@see pp. 122 psqq. @Mai2017a}{rmo} for a similar
-#' algorithm.
+#' TBD; see \insertCite{Sloot2022a}{rmo} and
+#' \insertCite{@see pp. 122 psqq. @Mai2017a}{rmo}
+#' for a similar algorithm.
 #'
 #' @family sampling-algorithms
 #'
