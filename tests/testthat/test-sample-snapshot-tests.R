@@ -211,6 +211,7 @@ test_that("Snapshot tests for `rpextmo`", {
                     LinearBernsteinFunction(scale = 0.002915767)
                 )
             ),
-            method = "MDCM")
+            method = "MDCM"
+        )
     )
 })

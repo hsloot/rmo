@@ -54,7 +54,7 @@ setMethod(
     "initialize", "GammaBernsteinFunction",
     function(.Object, a) { # nolint
         if (!missing(a)) {
-            .Object@a <- a
+            .Object@a <- a # nolint
             validObject(.Object)
         }
 

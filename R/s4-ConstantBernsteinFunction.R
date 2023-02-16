@@ -37,7 +37,7 @@ setMethod(
     "initialize", "ConstantBernsteinFunction",
     function(.Object, constant) { # nolint
         if (!missing(constant)) {
-            .Object@constant <- constant
+            .Object@constant <- constant # nolint
             validObject(.Object)
         }
 

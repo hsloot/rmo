@@ -16,7 +16,7 @@ NULL
 #' @slot points List of Bernstein functions.
 #'
 #' @export ConvexCombinationOfBernsteinFunctions
-ConvexCombinationOfBernsteinFunctions <- setClass(
+ConvexCombinationOfBernsteinFunctions <- setClass( # nolint
     "ConvexCombinationOfBernsteinFunctions",
     contains = "BernsteinFunction",
     slots = c(
@@ -45,10 +45,10 @@ ConvexCombinationOfBernsteinFunctions <- setClass(
 setMethod(
     "initialize",
     "ConvexCombinationOfBernsteinFunctions",
-    function(.Object, coefficients, points) {
+    function(.Object, coefficients, points) { # nolint
         if (!(missing(coefficients) || missing(points))) {
-            .Object@coefficients <- coefficients
-            .Object@points <- points
+            .Object@coefficients <- coefficients # nolint
+            .Object@points <- points # nolint
             validObject(.Object)
         }
 

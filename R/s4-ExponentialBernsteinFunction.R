@@ -49,7 +49,7 @@ setMethod(
     "initialize", "ExponentialBernsteinFunction",
     function(.Object, lambda) { # nolint
         if (!missing(lambda)) {
-            .Object@lambda <- lambda
+            .Object@lambda <- lambda # nolint
             validObject(.Object)
         }
 

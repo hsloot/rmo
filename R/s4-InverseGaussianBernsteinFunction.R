@@ -54,7 +54,7 @@ setMethod(
     "initialize", "InverseGaussianBernsteinFunction",
     function(.Object, eta) { # nolint
         if (!missing(eta)) {
-            .Object@eta <- eta
+            .Object@eta <- eta # nolint
             validObject(.Object)
         }
 

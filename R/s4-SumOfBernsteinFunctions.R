@@ -39,8 +39,8 @@ setMethod(
     "initialize", "SumOfBernsteinFunctions",
     function(.Object, first, second) { # nolint
         if (!(missing(first) || missing(second))) {
-            .Object@first <- first
-            .Object@second <- second
+            .Object@first <- first # nolint
+            .Object@second <- second # nolint
             validObject(.Object)
         }
 

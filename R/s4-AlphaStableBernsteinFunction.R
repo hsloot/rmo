@@ -55,7 +55,7 @@ setMethod(
     "initialize", "AlphaStableBernsteinFunction",
     function(.Object, alpha) { # nolint
         if (!missing(alpha)) {
-            .Object@alpha <- alpha
+            .Object@alpha <- alpha # nolint
             validObject(.Object)
         }
 

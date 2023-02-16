@@ -40,8 +40,8 @@ setMethod(
     "initialize", "CompositeScaledBernsteinFunction",
     function(.Object, cscale, original) { # nolint
         if (!(missing(cscale) || missing(original))) {
-            .Object@cscale <- cscale
-            .Object@original <- original
+            .Object@cscale <- cscale # nolint
+            .Object@original <- original # nolint
             validObject(.Object)
         }
 
