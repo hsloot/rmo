@@ -1,4 +1,5 @@
-#' @include error.R s4-BernsteinFunction.R
+#' @include error.R
+#' @include s4-BernsteinFunction.R
 NULL
 
 #' Class for composite scaled Bernstein functions
@@ -86,7 +87,8 @@ setMethod(
 )
 
 #' @describeIn CompositeScaledBernsteinFunction-class
-#'   Calculates the iterated differences of the Bernstein function, see [valueOf()]
+#'   Calculates the iterated differences of the Bernstein function,
+#'   see [valueOf()]
 #' @aliases valueOf,CompositeScaledBernsteinFunction,ANY-method
 #'
 #' @inheritParams valueOf
@@ -95,6 +97,12 @@ setMethod(
 setMethod(
     "valueOf", "CompositeScaledBernsteinFunction",
     function(object, x, difference_order = 0L, n = 1, k = 0, cscale = 1, ...) {
-        valueOf(object@original, x, difference_order, n, k, cscale * object@cscale, ...)
+        valueOf(
+            object@original, x,
+            difference_order = difference_order,
+            n = n, k = k,
+            cscale = cscale * object@cscale,
+            ...
+        )
     }
 )

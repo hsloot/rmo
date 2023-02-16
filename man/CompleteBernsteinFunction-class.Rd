@@ -27,13 +27,13 @@ stieltjesDensity(object)
 (for \code{levyDensity}) or \linkS4class{CompleteBernsteinFunction}
 (for \code{stieltjesDensity}).}
 
-\item{x}{a non-negativ numeric vector at which the iterated difference of
+\item{x}{a nonnegativ numeric vector at which the iterated difference of
 the Bernstein function is evaluated.}
 
-\item{difference_order}{a non-negative integer with the order of the alternating iterated
-forward differences taken on the Bernstein function.}
+\item{difference_order}{a nonnegative integer with the order of the
+alternating iterated forward differences taken on the Bernstein function.}
 
-\item{n, k}{non-negative numbers for the binomial factor.}
+\item{n, k}{nonnegative numbers for the binomial factor.}
 
 \item{cscale}{a positive numeric scalar with the composite scaling factor.}
 
@@ -46,16 +46,16 @@ Stieltjes representation.}
 \item{tolerance}{(Relative) tolerance, passed down to \code{\link[stats:integrate]{stats::integrate()}}}
 }
 \description{
-A virtual superclass for all Bernstein functions which can representated
-by a Stieltjes density (no drift or killing rate). That means that there exists
-a Stieltjes measure \eqn{\sigma} such that
+A virtual superclass for all Bernstein functions which can represented
+by a Stieltjes density (no drift or killing rate). That means that there
+exists a Stieltjes measure \eqn{\sigma} such that
 \deqn{
   \psi(x) = \int_0^\infty \frac{x}{x + u} \sigma(du) , x > 0 .
 }
 }
 \details{
-For \emph{continuous Stieltjes densities}, the values of the Bernstein function are
-calculated with \code{\link[stats:integrate]{stats::integrate()}} by using the representation
+For \emph{continuous Stieltjes densities}, the values of the Bernstein function
+are calculated with \code{\link[stats:integrate]{stats::integrate()}} by using the representation
 \deqn{
   \psi(x)
     = \int_{0}^{\infty} x \mathrm{Beta}(1, x + u) \sigma(du), \quad x > 0 ,
@@ -68,8 +68,10 @@ representation
     \quad x > 0 .
 }
 
-For \emph{discrete Lévy densities} \eqn{\sigma(du) = \sum_{i} y_i \delta_{u_i}(du)}, the
-values of the Bernstein function are calculated by using the representation
+For \emph{discrete Lévy densities}
+\eqn{\sigma(du) = \sum_{i} y_i \delta_{u_i}(du)},
+the values of the Bernstein function are calculated by using the
+representation
 \deqn{
   \psi(x)
     = \sum_{i} x \mathrm{Beta}(1, x + u_i) y_i, \quad x > 0 ,
@@ -89,7 +91,8 @@ attributes if continuous and returns a \code{data.frame} with named columns
 \code{x} (atoms) and \code{y} (weights) as well as a type attribute if discrete.
 The \code{type} attribute is either \code{"continuous"} or \code{"discrete"}.
 
-\item \code{valueOf(CompleteBernsteinFunction)}: Calculates the iterated differences of the Bernstein function, see \code{\link[=valueOf]{valueOf()}}
+\item \code{valueOf(CompleteBernsteinFunction)}: Calculates the iterated differences of the Bernstein function,
+see \code{\link[=valueOf]{valueOf()}}
 
 }}
 \seealso{

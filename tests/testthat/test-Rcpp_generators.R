@@ -50,7 +50,9 @@ test_that("FixedDblGenerator works as expected", {
 })
 
 test_that("CountReplaceGenerator works as expected", {
-    sample_count_replace_base_0 <- function(n, d = length(probabilities), probabilities = NULL) {
+    sample_count_replace_base_0 <- function(n,
+                                            d = length(probabilities),
+                                            probabilities = NULL) {
         sapply(
             1:n,
             function(x) {

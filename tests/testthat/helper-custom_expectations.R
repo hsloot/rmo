@@ -9,7 +9,7 @@
 #'   implementation
 #' @param arg_list Argument list for both methods
 #' @param n Number of samples
-#' @param use_seed The seed (which is reset before each callto an RNG method)
+#' @param use_seed The seed (which is reset before each call to an RNG method)
 #' @param RNG_kind_arg_list A list with arguments for `RNGkind`
 #' @param set_seed A function to reset the seed
 #' @param RNG_kind A function to choose the underlying RNG
@@ -20,7 +20,7 @@
 #' (this can be avoided by setting `RNG_kind_arg_list = NULL`), and
 #' calls `rn_generator` and `rn_generator_test` with provided arguments via
 #' `[rlang::exec()]`.
-#' Each call is preceeded by a call to `set_seed(use_seed)` to ensure
+#' Each call is proceeded by a call to `set_seed(use_seed)` to ensure
 #' reproducibility.
 #' @seealso \code{\link[testthat]{expect_equal}}
 #' @seealso \url{https://testthat.r-lib.org/articles/custom-expectation.html}
@@ -97,7 +97,7 @@ expect_equal_rn_generation <- function(rn_generator,
         ok = comp$equal,
         failure_message = sprintf(
             paste0(
-                "Random number generation results of %s not equal to those of %s.",
+                "Random number generation results of %s not equal to those of %s.", # nolint
                 "\nSeed: %s",
                 "\n%s:",
                 "\n%s",

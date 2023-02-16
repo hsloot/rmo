@@ -21,38 +21,45 @@ rpextmo(
 
 \item{d}{an integer for the \emph{dimension}.}
 
-\item{a}{a non-negative double for the \emph{killing-rate} \eqn{a} of the \emph{Bernstein function}.}
+\item{a}{a non-negative double for the \emph{killing-rate} \eqn{a} of the
+\emph{Bernstein function}.}
 
-\item{b}{a non-negative double for the \emph{drift} \eqn{b} of the \emph{Bernstein function}.}
+\item{b}{a non-negative double for the \emph{drift} \eqn{b} of the
+\emph{Bernstein function}.}
 
-\item{gamma}{a position double for the scaling of the integral part of the \emph{Bernstein function}.}
+\item{gamma}{a position double for the scaling of the integral part of the
+\emph{Bernstein function}.}
 
 \item{eta}{a numeric vector for the family's parameters, see Details.}
 
 \item{family}{a string indicating the parametrized family.
-Use "Armageddon" for the \emph{Armageddon} family, "Poisson" for the \emph{Poisson family}, "Pareto" for
-the \emph{Pareto family}, "Exponential" for the \emph{Exponential family}, "AlphaStable" for the
-\emph{\eqn{\alpha}-stable family}, "InverseGaussian" for the \emph{Inverse-Gaussian family}, "Gamma" for
+Use "Armageddon" for the \emph{Armageddon} family, "Poisson" for the
+\emph{Poisson family}, "Pareto" for the \emph{Pareto family}, "Exponential" for the
+\emph{Exponential family}, "AlphaStable" for the \emph{\eqn{\alpha}-stable family},
+"InverseGaussian" for the \emph{Inverse-Gaussian family}, "Gamma" for
 the \emph{Gamma family}.}
 
 \item{method}{a string indicating which sampling algorithm should be used.
-Use "MDCM" for the \emph{Markovian death-set model}, "LFM" for the \emph{Lévy–frailty model},  "AM" for
-the \emph{Arnold model}, and "ESM" for the \emph{exogenous shock model} (in case of the \emph{Armageddon
-family}, the algorithm is optimized to consider only finite shocks).
-We recommend using the \emph{ESM} only for small dimensions; the \emph{AM} can be used up until dimension
+Use "MDCM" for the \emph{Markovian death-set model}, "LFM" for the
+\emph{Lévy–frailty model}, "AM" for the \emph{Arnold model}, and "ESM" for the
+\emph{exogenous shock model} (in case of the \emph{Armageddon family}, the algorithm
+is optimized to consider only finite shocks). We recommend using the \emph{ESM}
+only for small dimensions; the \emph{AM} can be used up until dimension
 \eqn{30}.}
 }
 \value{
-\code{rpextmo} returns a numeric matrix with \code{n} rows and \code{d} columns with the rows
-corresponding to iid distributed samples of a \code{d}-variate \emph{parametrized extendible
-Marshall–Olkin distribution} with corresponding parameters.
+\code{rpextmo} returns a numeric matrix with \code{n} rows and \code{d} columns with
+the rows corresponding to iid distributed samples of a \code{d}-variate
+\emph{parametrized extendible Marshall–Olkin distribution} with corresponding
+parameters.
 }
 \description{
-Draws \code{n} iid samples from a \code{d}-variate \emph{paramatrized extendible MO distribution}.
+Draws \code{n} iid samples from a \code{d}-variate
+\emph{paramatrized extendible MO distribution}.
 }
 \details{
-A \emph{parametrized ext. MO distribution} is a family of \emph{ext. MO distributions}, see \code{\link[=rextmo]{rextmo()}},
-corresponding to \emph{Bernstein functions} of the form
+A \emph{parametrized ext. MO distribution} is a family of \emph{ext. MO distributions},
+see \code{\link[=rextmo]{rextmo()}}, corresponding to \emph{Bernstein functions} of the form
 \deqn{
     \psi{(x)}
         = 1_{\{ x > 0 \}} a + b x + \gamma \cdot
@@ -66,13 +73,14 @@ or
            \int_{0}^{\infty}{ \frac{x}{x + u} \sigma{(\mathrm{d}u)} },
                \quad x \geq 0 ,
 }
-where \eqn{a, b \geq 0} and \eqn{\nu}, resp. \eqn{\sigma}, are the \emph{Lévy measure}, resp.
-\emph{Stieltjes measure}, and \eqn{a > 0}, \eqn{b > 0}, or \eqn{\nu \not\equiv 0}, resp.
-\eqn{\sigma \not\equiv 0}.
+where \eqn{a, b \geq 0} and \eqn{\nu}, resp. \eqn{\sigma}, are the
+\emph{Lévy measure}, resp. \emph{Stieltjes measure}, and \eqn{a > 0}, \eqn{b > 0}, or
+\eqn{\nu \not\equiv 0}, resp. \eqn{\sigma \not\equiv 0}.
 \subsection{Families}{
 
-All implemented families are listed in the following; some re-combinations are possible, see
-\linkS4class{ScaledBernsteinFunction}, \linkS4class{SumOfBernsteinFunctions}, and
+All implemented families are listed in the following; some re-combinations
+are possible, see \linkS4class{ScaledBernsteinFunction},
+\linkS4class{SumOfBernsteinFunctions}, and
 \linkS4class{CompositeScaledBernsteinFunction}.
 \subsection{Armageddon family}{
 
@@ -103,10 +111,12 @@ see \linkS4class{PoissonBernsteinFunction}.
 
 \subsection{Pareto family}{
 
-We have \eqn{\eta \in \mathbb{R}^2} with \eqn{\eta_1 \in {(0, 1)}, \eta_2 > 0} and Lévy measure
+We have \eqn{\eta \in \mathbb{R}^2} with
+\eqn{\eta_1 \in {(0, 1)}, \eta_2 > 0} and Lévy measure
 \deqn{
     \nu{(\mathrm{d}u)}
-        = \eta_{1} \eta_{2}^{\eta_{1}} \cdot u^{-\eta_{1}-1}  1_{\{ u > \eta_{2}\}} \mathrm{d}u ,
+        = \eta_{1} \eta_{2}^{\eta_{1}} \cdot
+         u^{-\eta_{1}-1}  1_{\{ u > \eta_{2}\}} \mathrm{d}u ,
 }
 see \linkS4class{ParetoBernsteinFunction}.
 }
@@ -158,7 +168,8 @@ see \linkS4class{AlphaStableBernsteinFunction}.
 We have \eqn{\eta > 0}, Bernstein function
 \deqn{
     \psi{(x)}
-        = 1_{\{ x > 0\}} a + b x + \gamma \cdot {\left[ \sqrt{2 x + \eta^2} - \eta \right]},
+        = 1_{\{ x > 0\}} a + b x + \gamma \cdot
+             {\left[ \sqrt{2 x + \eta^2} - \eta \right]},
             \quad x \geq 0 ,
 }
 Lévy measure
@@ -171,7 +182,8 @@ and Stieltjes measure
 \deqn{
     \sigma{(\mathrm{d}u)}
         = \frac{\sin{(\pi / 2)}}{\pi} \cdot
-            \frac{\sqrt{2 u - \eta^2}}{u} 1_{\{ u > \eta^2 / 2 \}} \mathrm{d}u ,
+            \frac{\sqrt{2 u - \eta^2}} {u}
+             1_{\{ u > \eta^2 / 2 \}} \mathrm{d}u ,
 }
 see \linkS4class{InverseGaussianBernsteinFunction}.
 }
@@ -181,7 +193,8 @@ see \linkS4class{InverseGaussianBernsteinFunction}.
 We have \eqn{\eta > 0}, Bernstein function
 \deqn{
     \psi{(x)}
-        = 1_{\{ x > 0\}} a + b x + \gamma \cdot \log{\left( 1 +  \frac{x}{\eta} \right)} ,
+        = 1_{\{ x > 0\}} a + b x + \gamma \cdot
+             \log{\left( 1 +  \frac{x}{\eta} \right)} ,
             \quad x \geq 0 ,
 }
 Lévy measure
@@ -202,28 +215,30 @@ see \linkS4class{GammaBernsteinFunction}.
 \subsection{Simulation algorithms}{
 \subsection{Exchangeable Marshall–Olkin simulation algorithms}{
 
-The \emph{MDCM}, \emph{AM}, and \emph{ESM} simulation algorithms for the \emph{exchangeable Marshall–Olkin
-distribution} can be used.
+The \emph{MDCM}, \emph{AM}, and \emph{ESM} simulation algorithms for the
+\emph{exchangeable Marshall–Olkin distribution} can be used.
 For this, the corresponding Bernstein function is passed to \code{\link[=rextmo]{rextmo()}}.
-An exception is the \emph{ESM} for the \emph{Armageddon family} which uses an optimized version considering
-only finite shock-times.
+An exception is the \emph{ESM} for the \emph{Armageddon family} which uses an optimized
+version considering only finite shock-times.
 }
 
 \subsection{Lévy-frailty simulation algorithms}{
 
-The \emph{Lévy-frailty model} simulates the elements of the random vector as first-hitting times of a
-compound Poisson subordinator \eqn{\Lambda} into sets \eqn{(E_i, \infty)} for iid unit
-exponential random variables.
-Here, the subordinator is a linear combination of a pure-drift subordinator, a pure-killing
-subordinator, and a pure-jump compound Poisson subordinator, i.e.
+The \emph{Lévy-frailty model} simulates the elements of the random vector as
+first-hitting times of a compound Poisson subordinator \eqn{\Lambda} into
+sets \eqn{(E_i, \infty)} for iid unit exponential random variables.
+Here, the subordinator is a linear combination of a pure-drift subordinator,
+a pure-killing subordinator, and a pure-jump compound Poisson subordinator,
+i.e.
 \deqn{
    \Lambda_{t}
-       = \infty \cdot 1_{\{ \epsilon > a t \}} + b t + \sum_{j=1}^{N_{\gamma t}} X_{j} ,
+       = \infty \cdot 1_{\{ \epsilon > a t \}} + b t +
+         \sum_{j=1}^{N_{\gamma t}} X_{j} ,
            \quad t \geq 0,
 }
-where \eqn{\epsilon} is a unit exponential rv, \code{n} is a Poisson process, and \eqn{X_{1},
-X_{2}, \ldots} are iid jumps from the corresponding jump distribution,
-see \insertCite{@see pp. 140 psqq. @Mai2017a}{rmo}.
+where \eqn{\epsilon} is a unit exponential rv, \code{n} is a Poisson process, and
+\eqn{X_{1}, X_{2}, \ldots} are iid jumps from the corresponding jump
+distribution, see \insertCite{@see pp. 140 psqq. @Mai2017a}{rmo}.
 }
 
 }

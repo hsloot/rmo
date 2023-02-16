@@ -1,4 +1,7 @@
-#' @include error.R s4-BernsteinFunction.R s4-LevyBernsteinFunction.R s4-CompleteBernsteinFunction.R
+#' @include error.R
+#' @include s4-BernsteinFunction.R
+#' @include s4-LevyBernsteinFunction.R
+#' @include s4-CompleteBernsteinFunction.R
 NULL
 
 #' Class for Inverse Gaussian Bernstein function
@@ -25,8 +28,8 @@ NULL
 #' }
 #'
 #' This Bernstein function can be found on p. 309 in \insertCite{Mai2017a}{rmo}.
-#' Furthermore it is  a transformation of no. 2 in the list of complete Bernstein
-#' functions in Chp. 16 of \insertCite{Schilling2012a}{rmo}.
+#' Furthermore it is  a transformation of no. 2 in the list of complete
+#' Bernstein functions in Chp. 16 of \insertCite{Schilling2012a}{rmo}.
 #'
 #' @references
 #'  \insertAllCited{}
@@ -127,7 +130,16 @@ setMethod(
 #' @section Stieltjes density:
 #' \deqn{
 #'   \sigma(du)
-#'     = \frac{\sin(\pi / 2)}{\pi} \cdot \frac{\sqrt{2 x - \eta^2}}{x} , \quad u > \eta^2 / 2 .
+#'     = \frac{
+#'         \sin(\pi / 2)
+#'       }{
+#'         \pi
+#'       } \cdot \frac{
+#'         \sqrt{2 x - \eta^2}
+#'       }{
+#'         x
+#'       } ,
+#'       \quad u > \eta^2 / 2 .
 #' }
 #'
 setMethod(

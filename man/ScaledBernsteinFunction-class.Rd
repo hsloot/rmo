@@ -28,13 +28,13 @@
 (for \code{levyDensity}) or \linkS4class{CompleteBernsteinFunction}
 (for \code{stieltjesDensity}).}
 
-\item{x}{a non-negativ numeric vector at which the iterated difference of
+\item{x}{a nonnegativ numeric vector at which the iterated difference of
 the Bernstein function is evaluated.}
 
-\item{difference_order}{a non-negative integer with the order of the alternating iterated
-forward differences taken on the Bernstein function.}
+\item{difference_order}{a nonnegative integer with the order of the
+alternating iterated forward differences taken on the Bernstein function.}
 
-\item{n, k}{non-negative numbers for the binomial factor.}
+\item{n, k}{nonnegative numbers for the binomial factor.}
 
 \item{cscale}{a positive numeric scalar with the composite scaling factor.}
 
@@ -42,7 +42,7 @@ forward differences taken on the Bernstein function.}
       be passed to \code{initialize()}.}
 }
 \description{
-Bernstein functions are stable under (non-negative) scalar multiplication,
+Bernstein functions are stable under (nonegative) scalar multiplication,
 i.e. if \eqn{\psi} is a Bernstein function and \eqn{\lambda \geq 0} , then
 \deqn{
   x \mapsto \lambda \psi(x), x > 0,
@@ -55,7 +55,8 @@ is also a Bernstein function.
 
 \item \code{show(ScaledBernsteinFunction)}: Display the object.
 
-\item \code{valueOf(ScaledBernsteinFunction)}: Calculates the iterated differences of the Bernstein function, see \code{\link[=valueOf]{valueOf()}}
+\item \code{valueOf(ScaledBernsteinFunction)}: Calculates the iterated differences of the Bernstein function,
+see \code{\link[=valueOf]{valueOf()}}
 
 }}
 \section{Slots}{

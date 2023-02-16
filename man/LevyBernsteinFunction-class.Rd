@@ -6,7 +6,7 @@
 \alias{levyDensity}
 \alias{valueOf,LevyBernsteinFunction-method}
 \alias{valueOf,LevyBernsteinFunction,ANY-method}
-\title{Virtual superclass for Bernstein functions with non-zero Lévy density}
+\title{Virtual superclass for Bernstein functions with nonzero Lévy density}
 \usage{
 levyDensity(object)
 
@@ -27,13 +27,13 @@ levyDensity(object)
 (for \code{levyDensity}) or \linkS4class{CompleteBernsteinFunction}
 (for \code{stieltjesDensity}).}
 
-\item{x}{a non-negativ numeric vector at which the iterated difference of
+\item{x}{a nonnegativ numeric vector at which the iterated difference of
 the Bernstein function is evaluated.}
 
-\item{difference_order}{a non-negative integer with the order of the alternating iterated
-forward differences taken on the Bernstein function.}
+\item{difference_order}{a nonnegative integer with the order of the
+alternating iterated forward differences taken on the Bernstein function.}
 
-\item{n, k}{non-negative numbers for the binomial factor.}
+\item{n, k}{nonnegative numbers for the binomial factor.}
 
 \item{cscale}{a positive numeric scalar with the composite scaling factor.}
 
@@ -46,7 +46,7 @@ Stieltjes representation.}
 \item{tolerance}{(Relative) tolerance, passed down to \code{\link[stats:integrate]{stats::integrate()}}}
 }
 \description{
-A virtual superclass for all Bernstein functions which can representated
+A virtual superclass for all Bernstein functions which can represented
 by a Lévy density (no drift or killing rate). That means that there exists
 a Lévy measure \eqn{\nu} such that
 \deqn{
@@ -64,12 +64,14 @@ and the values of the iterated differences are calculated by using the
 representation
 \deqn{
   (-1)^{j-1} \Delta^{j} \psi(x)
-    = \int_{0}^{\infty} \operatorname{e}^{-ux} (1 - \operatorname{e}^{-u})^j \nu(du) ,
+    = \int_{0}^{\infty}
+      \operatorname{e}^{-ux} (1 - \operatorname{e}^{-u})^j \nu(du) ,
     \quad x > 0 .
 }
 
-For \emph{discrete Lévy densities} \eqn{\nu(du) = \sum_{i} y_i \delta_{u_i}(du)}, the
-values of the Bernstein function are calculated by using the representation
+For \emph{discrete Lévy densities} \eqn{\nu(du) = \sum_{i} y_i \delta_{u_i}(du)},
+the values of the Bernstein function are calculated by using the
+representation
 \deqn{
   \psi(x)
     = \sum_{i} (1 - \operatorname{e}^{-u_i x}) y_i, \quad x > 0 ,
@@ -78,7 +80,7 @@ and the values of the iterated differences are calculated by using the
 representation
 \deqn{
   (-1)^{j-1} \Delta^{j} \psi(x)
-    = \sum_{i} \operatorname{e}^{-u_i x} (1 - \operatorname{e}^{-u_i})^j y_i ,
+    = \sum_{i} \operatorname{e}^{-u_i x} (1 - \operatorname{e}^{-u_i})^j y_i,
     \quad x > 0 .
 }
 }
@@ -89,7 +91,8 @@ attributes if continuous and returns a \code{data.frame} with named columns
 \code{x} (atoms) and \code{y} (weights) as well as a type attribute if discrete.
 The \code{type} attribute is either \code{"continuous"} or \code{"discrete"}.
 
-\item \code{valueOf(LevyBernsteinFunction)}: Calculates the iterated differences of the Bernstein function, see \code{\link[=valueOf]{valueOf()}}
+\item \code{valueOf(LevyBernsteinFunction)}: Calculates the iterated differences of the Bernstein function,
+see \code{\link[=valueOf]{valueOf()}}
 
 }}
 \seealso{

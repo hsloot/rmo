@@ -104,8 +104,9 @@ rmo_am_naive <- function(n, d, intensities) { # nolint
                 n = length(arrival_probs), size = 1,
                 replace = FALSE, prob = arrival_probs
             )
-            ## check which components will be destroyed by the shock and increment
-            ## time for all components which were alive before the shock arrival
+            ## check which components will be destroyed by the shock and
+            ## increment time for all components which were alive before the
+            ## shock arrival
             for (i in 1:d) {
                 if (!destroyed[[i]]) {
                     if (is_within(i, affected)) { # nolint
@@ -148,8 +149,8 @@ rexmo_mdcm_naive <- function(n, d, ex_intensities) { # nolint
     ## convert to unscaled exchangeable intensities
     ex_intensities <- sapply(1:d, function(i) ex_intensities[i] / choose(d, i))
 
-    ## store transition intensities and transition probabilities for all possible
-    ## states (number of destroyed components) in a list
+    ## store transition intensities and transition probabilities for all
+    ## possible states (number of destroyed components) in a list
     generator_list <- list()
     for (i in 1:d) {
         transition_probs <- vapply(
@@ -189,7 +190,8 @@ rexmo_mdcm_naive <- function(n, d, ex_intensities) { # nolint
         while (d_alive > 0) {
             ## while not all are dead, retrieve transition intensity and the
             ## transition probabilities for current state
-            transition_intensity <- generator_list[[d_alive]]$transition_intensity
+            transition_intensity <-
+                generator_list[[d_alive]]$transition_intensity
             transition_probs <- generator_list[[d_alive]]$transition_probs
 
             ## sample waiting time and number of affected components
@@ -202,7 +204,8 @@ rexmo_mdcm_naive <- function(n, d, ex_intensities) { # nolint
             ## update all components which were alive before the current
             ## shock arrived and reduce the number of alive components
             ## according to the shock size
-            out[k, (d - d_alive + 1):d] <- out[k, (d - d_alive + 1):d] + waiting_time
+            out[k, (d - d_alive + 1):d] <- out[k, (d - d_alive + 1):d] +
+                waiting_time
             d_alive <- d_alive - num_affected
         }
         ## use a random permutation to reorder the components
@@ -300,7 +303,8 @@ rexmo_mdcm_naive_recursive <- function( # nolint
             ## account for possible negative values in zero tolerance
             stopifnot(all(transition_probs >= -sqrt(.Machine$double.eps)))
             transition_probs <- pmax(transition_probs, 0)
-            ##  calculate transition intensity and normalize transition probabilities
+            ## calculate transition intensity and normalize transition
+            ## probabilities
             transition_intensity <- sum(transition_probs)
             transition_probs <- transition_probs / transition_intensity
 
@@ -313,7 +317,8 @@ rexmo_mdcm_naive_recursive <- function( # nolint
 
             ## update all components which were alive before the current shock
             ## arrived and reduce the number of alive components
-            out[i, (d - d_alive + 1):d] <- out[i, (d - d_alive + 1):d] + waiting_time
+            out[i, (d - d_alive + 1):d] <- out[i, (d - d_alive + 1):d] +
+                waiting_time
             d_alive <- d_alive - num_affected
         }
 
@@ -382,13 +387,15 @@ rarmextmo_esm_naive <- function(n, d, alpha, beta) { # nolint
 #' @keywords internal
 sample_cpp_naive <- function( # nolint
                              rate = 0, rate_killing = 0, rate_drift = 1,
-                             rjump_name = "rposval", rjump_arg_list = list("values" = 0),
+                             rjump_name = "rposval",
+                             rjump_arg_list = list("values" = 0),
                              barrier_values = rexp(2, rate = 1)) {
     stopifnot(
         is.numeric(rate) && 1L == length(rate) && rate >= 0 &&
             is.numeric(rate_killing) && 1L == length(rate_killing) &&
             rate_killing >= 0 &&
-            is.numeric(rate_drift) && 1L == length(rate_drift) && rate_drift >= 0 &&
+            is.numeric(rate_drift) &&
+            1L == length(rate_drift) && rate_drift >= 0 &&
             any(c(rate, rate_killing, rate_drift) > 0) &&
             is.numeric(barrier_values) && length(barrier_values) > 0 &&
             all(barrier_values > 0) &&
@@ -418,19 +425,26 @@ sample_cpp_naive <- function( # nolint
             ## sample jump value
             jump_value <- do.call(rjump, args = c("n" = 1, rjump_arg_list))
 
-            if (killing_waiting_time < Inf && killing_waiting_time <= waiting_time) {
+            if (killing_waiting_time < Inf &&
+                killing_waiting_time <= waiting_time
+            ) {
                 ## if killing happens before the next shock, calculate the time
                 ## where individual barriers are surpassed
                 for (j in i:length(barrier_values)) {
                     if (rate_drift > 0 &&
                         (barrier_values[[j]] - last(values)) / # nolint
                             rate_drift <= killing_waiting_time) {
-                        ## if barrier is surpassed by drift before killing set the
-                        ## value accordingly
-                        intermediate_waiting_time <- (barrier_values[[j]] - last(values)) / rate_drift # nolint
-                        times <- c(times, last(times) + intermediate_waiting_time) # nolint
+                        ## if barrier is surpassed by drift before killing set
+                        ## to value accordingly
+                        intermediate_waiting_time <-
+                            (barrier_values[[j]] - last(values)) / rate_drift # nolint
+                        times <- c(
+                            times,
+                            last(times) + intermediate_waiting_time # nolint
+                        )
                         values <- c(values, barrier_values[[j]])
-                        killing_waiting_time <- killing_waiting_time - intermediate_waiting_time
+                        killing_waiting_time <- killing_waiting_time -
+                            intermediate_waiting_time
                     }
                 }
 
@@ -438,19 +452,23 @@ sample_cpp_naive <- function( # nolint
                 times <- c(times, last(times) + killing_waiting_time) # nolint
                 values <- c(values, Inf)
             } else {
-                ## if killing does not happen before the next shock, calculate the time
-                ## where individual barriers are surpassed
+                ## if killing does not happen before the next shock, calculate
+                ## the time where individual barriers are surpassed
                 for (j in i:length(barrier_values)) {
                     if (rate_drift > 0 &&
                         (barrier_values[[j]] - last(values)) / # nolint
                             rate_drift <= waiting_time
                     ) {
-                        ## if killing does not happen before the next shock, but barrier is
-                        ## surpassed by drift, set the value accordingly
+                        ## if killing does not happen before the next shock, but
+                        ## barrier is surpassed by drift, set the value
+                        ##  accordingly
                         intermediate_waiting_time <- (
                             barrier_values[[j]] - last(values) # nolint
                         ) / rate_drift
-                        times <- c(times, last(times) + intermediate_waiting_time) # nolint
+                        times <- c(
+                            times,
+                            last(times) + intermediate_waiting_time # nolint
+                        )
                         values <- c(values, barrier_values[[j]])
                         waiting_time <- waiting_time - intermediate_waiting_time
                     }
@@ -498,14 +516,16 @@ sample_cpp_naive <- function( # nolint
 rextmo_lfm_naive <- function( # nolint
                              n, d = 2,
                              rate = 0, rate_killing = 0, rate_drift = 1,
-                             rjump_name = "rposval", rjump_arg_list = list("value" = 0)) {
+                             rjump_name = "rposval",
+                             rjump_arg_list = list("value" = 0)) {
     stopifnot(
         is.numeric(n) && 1L == length(n) && 0 == n %% 1 && n > 0 &&
             is.numeric(d) && 1L == length(d) && 0 == d %% 1 && d > 0 &&
             is.numeric(rate) && 1L == length(rate) && rate >= 0 &&
             is.numeric(rate_killing) && 1L == length(rate_killing) &&
             rate_killing >= 0 &&
-            is.numeric(rate_drift) && 1L == length(rate_drift) && rate_drift >= 0 &&
+            is.numeric(rate_drift) &&
+            1L == length(rate_drift) && rate_drift >= 0 &&
             any(c(rate, rate_killing, rate_drift) > 0) &&
             is.character(rjump_name) && 1L == length(rjump_name) &&
             rjump_name %in% c("rexp", "rposval", "rpareto")

@@ -40,33 +40,84 @@ test_that("Snapshot tests for `rpextmo`", {
     expect_snapshot(rpextmo(10, 3, a = a, b = b, method = "AM"))
 
     eta <- 0.5
-    expect_snapshot(rpextmo(10, 3, a = a, b = b, gamma = gamma, eta = eta, family = "Poisson"))
     expect_snapshot(
-        rpextmo(10, 3, a = a, b = b, gamma = gamma, eta = eta, family = "Poisson", method = "MDCM")
+        rpextmo(
+            10, 3,
+            a = a, b = b, gamma = gamma, eta = eta,
+            family = "Poisson"
+        )
     )
     expect_snapshot(
-        rpextmo(10, 3, a = a, b = b, gamma = gamma, eta = eta, family = "Poisson", method = "LFM")
+        rpextmo(
+            10, 3,
+            a = a, b = b, gamma = gamma, eta = eta,
+            family = "Poisson",
+            method = "MDCM"
+        )
     )
     expect_snapshot(
-        rpextmo(10, 3, a = a, b = b, gamma = gamma, eta = eta, family = "Poisson", method = "AM")
+        rpextmo(
+            10, 3,
+            a = a, b = b, gamma = gamma, eta = eta,
+            family = "Poisson",
+            method = "LFM"
+        )
     )
     expect_snapshot(
-        rpextmo(10, 3, a = a, b = b, gamma = gamma, eta = eta, family = "Poisson", method = "ESM")
+        rpextmo(
+            10, 3,
+            a = a, b = b, gamma = gamma, eta = eta,
+            family = "Poisson",
+            method = "AM"
+        )
+    )
+    expect_snapshot(
+        rpextmo(
+            10, 3,
+            a = a, b = b, gamma = gamma, eta = eta,
+            family = "Poisson", method = "ESM"
+        )
     )
 
     eta <- c(0.5, 1e-4)
-    expect_snapshot(rpextmo(10, 3, a = a, b = b, gamma = gamma, eta = eta, family = "Pareto"))
     expect_snapshot(
-        rpextmo(10, 3, a = a, b = b, gamma = gamma, eta = eta, family = "Pareto", method = "MDCM")
+        rpextmo(
+            10, 3,
+            a = a, b = b, gamma = gamma, eta = eta,
+            family = "Pareto"
+        )
     )
     expect_snapshot(
-        rpextmo(10, 3, a = a, b = b, gamma = gamma, eta = eta, family = "Pareto", method = "LFM")
+        rpextmo(
+            10, 3,
+            a = a, b = b, gamma = gamma, eta = eta,
+            family = "Pareto",
+            method = "MDCM"
+        )
     )
     expect_snapshot(
-        rpextmo(10, 3, a = a, b = b, gamma = gamma, eta = eta, family = "Pareto", method = "AM")
+        rpextmo(
+            10, 3,
+            a = a, b = b, gamma = gamma, eta = eta,
+            family = "Pareto",
+            method = "LFM"
+        )
     )
     expect_snapshot(
-        rpextmo(10, 3, a = a, b = b, gamma = gamma, eta = eta, family = "Pareto", method = "ESM")
+        rpextmo(
+            10, 3,
+            a = a, b = b, gamma = gamma, eta = eta,
+            family = "Pareto",
+            method = "AM"
+        )
+    )
+    expect_snapshot(
+        rpextmo(
+            10, 3,
+            a = a, b = b, gamma = gamma, eta = eta,
+            family = "Pareto",
+            method = "ESM"
+        )
     )
 
     eta <- 0.5
@@ -174,15 +225,36 @@ test_that("Snapshot tests for `rpextmo`", {
     )
 
     eta <- 0.5
-    expect_snapshot(rpextmo(10, 3, a = a, b = b, gamma = gamma, eta = eta, family = "Gamma"))
     expect_snapshot(
-        rpextmo(10, 3, a = a, b = b, gamma = gamma, eta = eta, family = "Gamma", method = "MDCM")
+        rpextmo(
+            10, 3,
+            a = a, b = b, gamma = gamma, eta = eta,
+            family = "Gamma"
+        )
     )
     expect_snapshot(
-        rpextmo(10, 3, a = a, b = b, gamma = gamma, eta = eta, family = "Gamma", method = "AM")
+        rpextmo(
+            10, 3,
+            a = a, b = b, gamma = gamma, eta = eta,
+            family = "Gamma",
+            method = "MDCM"
+        )
     )
     expect_snapshot(
-        rpextmo(10, 3, a = a, b = b, gamma = gamma, eta = eta, family = "Gamma", method = "ESM")
+        rpextmo(
+            10, 3,
+            a = a, b = b, gamma = gamma, eta = eta,
+            family = "Gamma",
+            method = "AM"
+        )
+    )
+    expect_snapshot(
+        rpextmo(
+            10, 3,
+            a = a, b = b, gamma = gamma, eta = eta,
+            family = "Gamma",
+            method = "ESM"
+        )
     )
 
     expect_snapshot(

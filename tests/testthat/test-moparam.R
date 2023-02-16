@@ -11,7 +11,12 @@ test_that("ex_intensities parameter is calculated correctly", {
     uex_intensities <- uexIntensities(bf, d)
     expect_equal(
         exIntensities(bf, d),
-        sapply(1:d, function(i) multiply_binomial_coefficient(uex_intensities[[i]], d, i))
+        sapply(
+            1:d,
+            function(i) {
+                multiply_binomial_coefficient(uex_intensities[[i]], d, i)
+            }
+        )
     )
 })
 
@@ -38,7 +43,8 @@ test_that("ex_qmatrix parameter is calculated correctly", {
     for (i in 1:d) {
         if (i < d) {
             for (j in (i + 1):d) {
-                ex_qmatrix[1 + i, 1 + j] <- (d - j + 1) / (d - i + 1) * ex_qmatrix[i, j] +
+                ex_qmatrix[1 + i, 1 + j] <-
+                    (d - j + 1) / (d - i + 1) * ex_qmatrix[i, j] +
                     (j + 1 - i) / (d - i + 1) * ex_qmatrix[i, j + 1]
             }
         }

@@ -18,14 +18,20 @@ rarmextmo_esm <- function(n, d, alpha, beta) {
     rpextmo(n, d, a = beta, b = alpha, family = "Armageddon", method = "ESM")
 }
 
-rextmo_lfm <- function(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list) {
+rextmo_lfm <- function(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list) { # nolint
     if (isTRUE(rate == 0) ||
-        (isTRUE(rjump_name == "rposval") && isTRUE(rjump_arg_list$value == 0))) {
-        rpextmo(n, d, a = rate_killing, b = rate_drift, family = "Armageddon", method = "LFM")
+        (isTRUE(rjump_name == "rposval") &&
+            isTRUE(rjump_arg_list$value == 0))) {
+        rpextmo(
+            n, d,
+            a = rate_killing, b = rate_drift,
+            family = "Armageddon", method = "LFM"
+        )
     } else if (isTRUE("rposval" == rjump_name)) {
         rpextmo(
             n, d,
-            a = rate_killing, b = rate_drift, gamma = rate, eta = rjump_arg_list$value,
+            a = rate_killing, b = rate_drift, gamma = rate,
+            eta = rjump_arg_list$value,
             family = "Poisson", method = "LFM"
         )
     } else if (isTRUE("rpareto" == rjump_name)) {
@@ -38,7 +44,8 @@ rextmo_lfm <- function(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_a
     } else if (isTRUE("rexp" == rjump_name)) {
         rpextmo(
             n, d,
-            a = rate_killing, b = rate_drift, gamma = rate, eta = rjump_arg_list$rate,
+            a = rate_killing, b = rate_drift, gamma = rate,
+            eta = rjump_arg_list$rate,
             family = "Exponential", method = "LFM"
         )
     } else {

@@ -76,8 +76,8 @@ parameter of \linkS4class{ParetoBernsteinFunction}}
 \item{eta}{\code{eta} parameter for the inverse Gaussian BF, passed to \code{eta}
 parameter of \linkS4class{InverseGaussianBernsteinFunction}}
 
-\item{lambda}{lambda parameter for Exponential-jump CPP subordinator, passed to \code{lambda}
-parameter of \linkS4class{ExponentialBernsteinFunction}}
+\item{lambda}{lambda parameter for Exponential-jump CPP subordinator, passed
+to \code{lambda} parameter of \linkS4class{ExponentialBernsteinFunction}}
 
 \item{a}{Shape parameter for Gamma subordinator, passed to \code{a} parameter of
 \linkS4class{GammaBernsteinFunction}}

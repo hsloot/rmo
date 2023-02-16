@@ -4,18 +4,21 @@ NULL
 
 #' Virtual superclass for Bernstein functions
 #'
-#' A virtual superclass for all implementations of the various classes of *Bernstein functions*.
+#' A virtual superclass for all implementations of the various classes of
+#' *Bernstein functions*.
 #'
 #' @details
 #'
-#' A *Bernstein function* is a non-negative, non-decreasing, infinitely often differentiable
-#' function with whose recursive finite forward differences have alternating signs:
+#' A *Bernstein function* is a nonnegative, nondecreasing, infinitely often
+#' differentiable function with whose recursive finite forward differences have
+#' alternating signs:
 #' \deqn{
 #'     {(-1)}^{i-1} \Delta^{i}{ \psi{(x)} }
 #'         \geq 0 ,
 #'             \quad \forall  i \in \mathbb{N}, x \geq 0 .
 #' }
-#' In particular, the following sequence defines an *extendible Marshall–Olkin distribution*:
+#' In particular, the following sequence defines an *extendible Marshall–Olkin
+#' distribution*:
 #' \deqn{
 #'     {(-1)}^{i-1} \Delta^{i}{ \psi{(d-i)} } ,
 #'         \quad 1 \leq i \leq d .
@@ -38,26 +41,27 @@ setClass("BernsteinFunction", # nolint
 )
 
 #' @describeIn BernsteinFunction-class
-#'   Calculate the values for a Bernstein function and its higher-order, alternating iterated
-#'   forward differences, possibly scaled by a binomial coefficient, i.e.
+#'   Calculate the values for a Bernstein function and its higher-order,
+#'   alternating iterated forward differences, possibly scaled by a binomial
+#'   coefficient, i.e.,
 #'   \deqn{
 #'       {(-1)}^{j-1} \Delta^{j}{ \psi(c x) } ,
 #'           \quad x > 0 .
 #'   }
 #'
 #' @inheritParams levyDensity
-#' @param x a non-negativ numeric vector at which the iterated difference of
+#' @param x a nonnegativ numeric vector at which the iterated difference of
 #'   the Bernstein function is evaluated.
-#' @param difference_order a non-negative integer with the order of the alternating iterated
-#'   forward differences taken on the Bernstein function.
+#' @param difference_order a nonnegative integer with the order of the
+#'   alternating iterated forward differences taken on the Bernstein function.
 #' @param cscale a positive numeric scalar with the composite scaling factor.
-#' @param n,k non-negative numbers for the binomial factor.
+#' @param n,k nonnegative numbers for the binomial factor.
 #' @param ... pass-through parameter.
 #'
 #' @export
 setGeneric(
     "valueOf",
-    function(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...) {
+    function(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...) { # nolint
         standardGeneric("valueOf")
     }
 )
@@ -79,7 +83,8 @@ setGeneric(
 )
 
 #' @describeIn BernsteinFunction-class
-#'   Calculates (unscaled) *exchangeable shock-arrival intensities*, see [rmo()] and [rexmo()].
+#'   Calculates (unscaled) *exchangeable shock-arrival intensities*,
+#'   see [rmo()] and [rexmo()].
 #'
 #' @inheritParams levyDensity
 #' @param d a positive integer, larger than two, for the *dimension*.
@@ -108,8 +113,8 @@ setGeneric(
 )
 
 #' @describeIn BernsteinFunction-class
-#'   Calculates *exchangeable shock-size-arrival intensities*, the `ex_intensities` parameter for
-#'   [rexmo()].
+#'   Calculates *exchangeable shock-size-arrival intensities*, the
+#'   `ex_intensities` parameter for [rexmo()].
 #'
 #' @inheritParams uexIntensities
 #'
@@ -122,8 +127,8 @@ setGeneric(
 )
 
 #' @describeIn BernsteinFunction-class
-#'   Calculates the *infinitesimal Markov generator matrix* of the corresponding (Markovian)
-#'   default-counting process, used internally by [rexmo()].
+#'   Calculates the *infinitesimal Markov generator matrix* of the corresponding
+#'   (Markovian) default-counting process, used internally by [rexmo()].
 #'
 #' @inheritParams uexIntensities
 #'
@@ -138,7 +143,10 @@ setGeneric(
 setMethod(
     "valueOf0", "BernsteinFunction",
     function(object, x, cscale = 1, ...) {
-        valueOf(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = cscale, ...)
+        valueOf(
+            object, x,
+            difference_order = 0L, n = 1L, k = 0L, cscale = cscale, ...
+        )
     }
 )
 

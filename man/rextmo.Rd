@@ -11,35 +11,40 @@ rextmo(n, d, bf, method = c("MDCM", "AM", "ESM"))
 
 \item{d}{an integer for the \emph{dimension}.}
 
-\item{bf}{a \linkS4class{BernsteinFunction} with the \emph{Bernstein function} of a \emph{extendible
-Marshall–Olkin distribution}.}
+\item{bf}{a \linkS4class{BernsteinFunction} with the \emph{Bernstein function} of a
+\emph{extendible Marshall–Olkin distribution}.}
 
 \item{method}{a string indicating which sampling algorithm should be used.
-Use "MDCM" for the \emph{Markovian death-counting model}, "AM" for the \emph{Arnold model}, and "ESM" for
-the \emph{exogenous shock model}. We recommend using the \emph{ESM} only for small dimensions; the \emph{AM}
-can be used up until dimension \eqn{30}.}
+Use "MDCM" for the \emph{Markovian death-counting model}, "AM" for the
+\emph{Arnold model}, and "ESM" for the \emph{exogenous shock model}. We recommend
+using the \emph{ESM} only for small dimensions; the \emph{AM} can be used up until
+dimension \eqn{30}.}
 }
 \value{
-\code{rextmo} returns a numeric matrix with \code{n} rows and \code{d} columns with the rows
-corresponding to iid distributed samples of a \code{d}-variate \emph{extendible Marshall–Olkin
-distribution} with \emph{Bernstein function} \code{bf}.
+\code{rextmo} returns a numeric matrix with \code{n} rows and \code{d} columns with
+the rows corresponding to iid distributed samples of a \code{d}-variate
+\emph{extendible Marshall–Olkin distribution} with \emph{Bernstein function} \code{bf}.
 }
 \description{
-Draws \code{n} iid samples from a \code{d}-variate \emph{extendible Marshall–Olkin distribution} parametrized by
-Bernstein functions \code{bf}, essentially wrapping \code{\link[=rexmo]{rexmo()}} by generating suitable \emph{exchangeable
-shock-size-arrival intensities}.
+Draws \code{n} iid samples from a \code{d}-variate
+\emph{extendible Marshall–Olkin distribution} parametrized by Bernstein functions
+\code{bf}, essentially wrapping \code{\link[=rexmo]{rexmo()}} by generating suitable
+\emph{exchangeable shock-size-arrival intensities}.
 }
 \details{
 The \emph{extendible Marshall–Olkin distribution} has the survival function
 \deqn{
     \bar{F}{(t)}
-        = \exp{\left\{ - \sum_{i=1}^{d}{ {[ \psi{(i)} - \psi{(i-1)} ]} t_{[i]} } \right\}} ,
+        = \exp{\left\{
+            - \sum_{i=1}^{d}{ {[ \psi{(i)} - \psi{(i-1)} ]} t_{[i]} }
+          \right\}} ,
             \quad t = {(t_{1}, \ldots, t_{d})} > 0 ,
 }
-for \emph{Bernstein functions} \eqn{\psi}, see \linkS4class{BernsteinFunction}, and \eqn{t_{[1]} \geq \cdots
-\geq t_{[d]}}, see \insertCite{Mai2017a}{rmo}.
-The relationship between \emph{Bernstein functions} and \emph{exchangeable shock-size-arrival intensities}
-of the \emph{exchangeable Marshall–Olkin distribution}, see \code{\link[=rexmo]{rexmo()}}, is as follows:
+for \emph{Bernstein functions} \eqn{\psi}, see \linkS4class{BernsteinFunction}, and
+\eqn{t_{[1]} \geq \cdots \geq t_{[d]}}, see \insertCite{Mai2017a}{rmo}.
+The relationship between \emph{Bernstein functions} and
+\emph{exchangeable shock-size-arrival intensities} of the
+\emph{exchangeable Marshall–Olkin distribution}, see \code{\link[=rexmo]{rexmo()}}, is as follows:
 \deqn{
     \eta_{i}
         = \binom{d}{i} {(-1)}^{i-1} \Delta{ \psi{(d-i)} } ,

@@ -30,7 +30,8 @@ ConvexCombinationOfBernsteinFunctions <- setClass( # nolint
 #' @aliases initialize,ConvexCombinationOfBernsteinFunctions,ANY-method
 #'
 #' @inheritParams methods::initialize
-#' @param coefficients Derives from [ConvexCombinationOfBernsteinFunctions-class].
+#' @param coefficients Derives from
+#'   [ConvexCombinationOfBernsteinFunctions-class].
 #' @param points Derives from [ConvexCombinationOfBernsteinFunctions-class].
 #'
 #' @examples
@@ -111,7 +112,11 @@ setMethod(
         cat(sprintf("An object of class %s\n", classLabel(class(object))))
         if (isTRUE(validObject(object, test = TRUE))) {
             for (i in seq_along(object@coefficients)) {
-                cat(sprintf("- coefficient: %s\n", format(object@coefficients[[i]])))
+                cat(
+                    sprintf(
+                        "- coefficient: %s\n", format(object@coefficients[[i]])
+                    )
+                )
                 cat("- point:\n")
                 writeLines(
                     paste0("\t", capture.output(show(object@points[[i]])))
@@ -126,7 +131,8 @@ setMethod(
 )
 
 #' @describeIn ConvexCombinationOfBernsteinFunctions-class
-#'   Calculates the iterated differences of the Bernstein function, see [valueOf()]
+#'   Calculates the iterated differences of the Bernstein function,
+#'   see [valueOf()]
 #' @aliases valueOf,ConvexCombinationOfBernsteinFunctions,ANY-method
 #'
 #' @inheritParams valueOf
@@ -135,7 +141,7 @@ setMethod(
 setMethod(
     "valueOf",
     "ConvexCombinationOfBernsteinFunctions",
-    function(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...) {
+    function(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...) { # nolint
         drop(
             t(object@coefficients) %*%
                 drop(t(sapply(

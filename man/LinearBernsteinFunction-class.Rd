@@ -20,19 +20,19 @@
 \arguments{
 \item{.Object}{ An object:  see the \dQuote{Initialize Methods} section.}
 
-\item{scale}{Non-negative number.}
+\item{scale}{Nonnegative number.}
 
 \item{object}{An object deriving from \linkS4class{LevyBernsteinFunction}
 (for \code{levyDensity}) or \linkS4class{CompleteBernsteinFunction}
 (for \code{stieltjesDensity}).}
 
-\item{x}{a non-negativ numeric vector at which the iterated difference of
+\item{x}{a nonnegativ numeric vector at which the iterated difference of
 the Bernstein function is evaluated.}
 
-\item{difference_order}{a non-negative integer with the order of the alternating iterated
-forward differences taken on the Bernstein function.}
+\item{difference_order}{a nonnegative integer with the order of the
+alternating iterated forward differences taken on the Bernstein function.}
 
-\item{n, k}{non-negative numbers for the binomial factor.}
+\item{n, k}{nonnegative numbers for the binomial factor.}
 
 \item{cscale}{a positive numeric scalar with the composite scaling factor.}
 
@@ -52,13 +52,14 @@ i.e. \eqn{a = 0} and \eqn{\nu = 0}. In particular,
 
 \item \code{show(LinearBernsteinFunction)}: Display the object.
 
-\item \code{valueOf(LinearBernsteinFunction)}: Calculates the iterated differences of the Bernstein function, see \code{\link[=valueOf]{valueOf()}}
+\item \code{valueOf(LinearBernsteinFunction)}: Calculates the iterated differences of the Bernstein function,
+see \code{\link[=valueOf]{valueOf()}}
 
 }}
 \section{Slots}{
 
 \describe{
-\item{\code{scale}}{The non-negative \emph{drift} parameter
+\item{\code{scale}}{The nonnegative \emph{drift} parameter
 (i.e. \eqn{b} in the representation)}
 }}
 

@@ -76,7 +76,8 @@ setMethod(
 )
 
 #' @describeIn SumOfBernsteinFunctions-class
-#'   Calculates the iterated differences of the Bernstein function, see [valueOf()]
+#'   Calculates the iterated differences of the Bernstein function,
+#'   see [valueOf()]
 #' @aliases valueOf,SumOfBernsteinFunctions,ANY-method
 #'
 #' @inheritParams valueOf
@@ -84,7 +85,7 @@ setMethod(
 #' @export
 setMethod(
     "valueOf", "SumOfBernsteinFunctions",
-    function(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...) {
+    function(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...) { # nolint
         valueOf(object@first, x, difference_order, n, k, cscale, ...) +
             valueOf(object@second, x, difference_order, n, k, cscale, ...)
     }

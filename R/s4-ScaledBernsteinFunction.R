@@ -1,9 +1,10 @@
-#' @include error.R s4-BernsteinFunction.R
+#' @include error.R
+#' @include s4-BernsteinFunction.R
 NULL
 
 #' Class for scaled Bernstein functions
 #'
-#' Bernstein functions are stable under (non-negative) scalar multiplication,
+#' Bernstein functions are stable under (nonegative) scalar multiplication,
 #' i.e. if \eqn{\psi} is a Bernstein function and \eqn{\lambda \geq 0} , then
 #' \deqn{
 #'   x \mapsto \lambda \psi(x), x > 0,
@@ -85,7 +86,8 @@ setMethod(
 )
 
 #' @describeIn ScaledBernsteinFunction-class
-#'   Calculates the iterated differences of the Bernstein function, see [valueOf()]
+#'   Calculates the iterated differences of the Bernstein function,
+#'   see [valueOf()]
 #' @aliases valueOf,ScaledBernsteinFunction,ANY-method
 #'
 #' @inheritParams valueOf
@@ -93,7 +95,8 @@ setMethod(
 #' @export
 setMethod(
     "valueOf", "ScaledBernsteinFunction",
-    function(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...) {
-        object@scale * valueOf(object@original, x, difference_order, n, k, cscale, ...)
+    function(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...) { # nolint
+        object@scale *
+            valueOf(object@original, x, difference_order, n, k, cscale, ...)
     }
 )

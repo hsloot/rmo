@@ -1,9 +1,10 @@
-#' @include error.R s4-BernsteinFunction.R
+#' @include error.R
+#' @include s4-BernsteinFunction.R
 NULL
 
 #' Class for linear Bernstein functions
 #'
-#' @slot scale The non-negative \emph{drift} parameter
+#' @slot scale The nonnegative \emph{drift} parameter
 #'   (i.e. \eqn{b} in the representation)
 #'
 #' @description
@@ -27,7 +28,7 @@ LinearBernsteinFunction <- setClass("LinearBernsteinFunction", # nolint
 #' @aliases initialize,LinearBernsteinFunction,ANY-method
 #'
 #' @inheritParams methods::initialize
-#' @param scale Non-negative number.
+#' @param scale Nonnegative number.
 #'
 #' @examples
 #' LinearBernsteinFunction()
@@ -75,7 +76,8 @@ setMethod(
 )
 
 #' @describeIn LinearBernsteinFunction-class
-#'   Calculates the iterated differences of the Bernstein function, see [valueOf()]
+#'   Calculates the iterated differences of the Bernstein function,
+#'    see [valueOf()]
 #' @aliases valueOf,LinearBernsteinFunction,ANY-method
 #'
 #' @inheritParams valueOf
@@ -84,7 +86,7 @@ setMethod(
 #' @export
 setMethod(
     "valueOf", "LinearBernsteinFunction",
-    function(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...) {
+    function(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...) { # nolint
         assert(
             combine = "or",
             check_numeric(x, lower = 0, min.len = 1L, any.missing = FALSE),
@@ -96,9 +98,14 @@ setMethod(
         qassert(k, "N1[0,)")
 
         if (0L == difference_order) {
-            out <- multiply_binomial_coefficient((object@scale * cscale) * x, n, k)
+            out <- multiply_binomial_coefficient(
+                (object@scale * cscale) * x, n, k
+            )
         } else if (1L == difference_order) {
-            out <- rep(multiply_binomial_coefficient((object@scale * cscale), n, k), length(x))
+            out <- rep(
+                multiply_binomial_coefficient((object@scale * cscale), n, k),
+                length(x)
+            )
         } else {
             out <- rep(0, length(x))
         }

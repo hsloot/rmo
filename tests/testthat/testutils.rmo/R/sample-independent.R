@@ -41,14 +41,16 @@
 rextmo_lfm_independence <- function( # nolint
                                     n, d = 2,
                                     rate = 0, rate_killing = 0, rate_drift = 1,
-                                    rjump_name = "rposval", rjump_arg_list = list("value" = 0)) {
+                                    rjump_name = "rposval",
+                                    rjump_arg_list = list("value" = 0)) {
     stopifnot(
         is.numeric(n) && 1L == length(n) && 0 == n %% 1 && n > 0 &&
             is.numeric(d) && 1L == length(d) && 0 == d %% 1 && d > 0 &&
             is.numeric(rate) && 1L == length(rate) && rate == 0 &&
             is.numeric(rate_killing) && 1L == length(rate_killing) &&
             rate_killing == 0 &&
-            is.numeric(rate_drift) && 1L == length(rate_drift) && rate_drift > 0 &&
+            is.numeric(rate_drift) &&
+            1L == length(rate_drift) && rate_drift > 0 &&
             is.character(rjump_name) && 1L == length(rjump_name) &&
             rjump_name %in% c("rexp", "rposval", "rpareto")
     )

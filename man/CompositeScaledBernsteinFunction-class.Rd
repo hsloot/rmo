@@ -28,13 +28,13 @@
 (for \code{levyDensity}) or \linkS4class{CompleteBernsteinFunction}
 (for \code{stieltjesDensity}).}
 
-\item{x}{a non-negativ numeric vector at which the iterated difference of
+\item{x}{a nonnegativ numeric vector at which the iterated difference of
 the Bernstein function is evaluated.}
 
-\item{difference_order}{a non-negative integer with the order of the alternating iterated
-forward differences taken on the Bernstein function.}
+\item{difference_order}{a nonnegative integer with the order of the
+alternating iterated forward differences taken on the Bernstein function.}
 
-\item{n, k}{non-negative numbers for the binomial factor.}
+\item{n, k}{nonnegative numbers for the binomial factor.}
 
 \item{...}{arguments to specify properties of the new object, to
       be passed to \code{initialize()}.}
@@ -53,7 +53,8 @@ is also a Bernstein function.
 
 \item \code{show(CompositeScaledBernsteinFunction)}: Display the object.
 
-\item \code{valueOf(CompositeScaledBernsteinFunction)}: Calculates the iterated differences of the Bernstein function, see \code{\link[=valueOf]{valueOf()}}
+\item \code{valueOf(CompositeScaledBernsteinFunction)}: Calculates the iterated differences of the Bernstein function,
+see \code{\link[=valueOf]{valueOf()}}
 
 }}
 \section{Slots}{

@@ -47,8 +47,8 @@ to approximate it with the following representation:
 }
 
 This Bernstein function can be found on p. 309 in \insertCite{Mai2017a}{rmo}.
-Furthermore it is  a transformation of no. 2 in the list of complete Bernstein
-functions in Chp. 16 of \insertCite{Schilling2012a}{rmo}.
+Furthermore it is  a transformation of no. 2 in the list of complete
+Bernstein functions in Chp. 16 of \insertCite{Schilling2012a}{rmo}.
 }
 \section{Functions}{
 \itemize{
@@ -81,7 +81,16 @@ underlying Gaussian process)}
 
 \deqn{
   \sigma(du)
-    = \frac{\sin(\pi / 2)}{\pi} \cdot \frac{\sqrt{2 x - \eta^2}}{x} , \quad u > \eta^2 / 2 .
+    = \frac{
+        \sin(\pi / 2)
+      }{
+        \pi
+      } \cdot \frac{
+        \sqrt{2 x - \eta^2}
+      }{
+        x
+      } ,
+      \quad u > \eta^2 / 2 .
 }
 }
 

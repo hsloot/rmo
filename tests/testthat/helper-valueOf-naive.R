@@ -1,4 +1,4 @@
-value_of_naive <- function(f, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...) {
+value_of_naive <- function(f, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...) { # nolint
     if (isTRUE(0L == difference_order)) {
         out <- f(cscale * x, ...)
     } else {
@@ -23,7 +23,11 @@ ex_intensities_naive <- function(f, d, cscale = 1, ...) {
         function(i) {
             value_of_naive(
                 f,
-                x = d - i, difference_order = i, n = d, k = i, cscale = cscale, ...
+                x = d - i,
+                difference_order = i,
+                n = d, k = i,
+                cscale = cscale,
+                ...
             )
         }
     )

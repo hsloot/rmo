@@ -107,12 +107,12 @@ rexmo_mdcm_bivariate <- function( # nolint
         out[k, ] <- waiting_time
 
         if (num_affected < 2) {
-            ## if less than two components are affected sample another waiting time
-            ## and set the value of the second component accordingly
+            ## if less than two components are affected sample another waiting
+            ## time and set the value of the second component accordingly
             waiting_time <- rexp(1, rate = second_transition_intensity)
             out[k, 2] <- out[k, 2] + waiting_time
-            # we do not need it here, but we have to sample another random integer
-            # to keep the random number generators in sync
+            ## we do not need it here, but we have to sample another random
+            ## integer to keep the random number generators in sync
             num_affected <- sample.int(1, 1, replace = FALSE) ## dummy
         }
         ## use a random permutation to reorder the components
@@ -155,7 +155,13 @@ rarmextmo_esm_bivariate <- function( # nolint
         ## sample the individual shocks
         individual_shock_1 <- rexp(1, rate = alpha)
         individual_shock_2 <- rexp(1, rate = alpha)
-        out[k, ] <- pmin(c(individual_shock_1, individual_shock_2), global_shock)
+        out[k, ] <- pmin(
+            c(
+                individual_shock_1,
+                individual_shock_2
+            ),
+            global_shock
+        )
     }
 
     out

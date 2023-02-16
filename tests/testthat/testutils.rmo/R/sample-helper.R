@@ -27,7 +27,8 @@
 #'
 #' @details
 #' The function returns `TRUE`, if the i's bit of j is set (with base 1)
-#' @seealso \url{https://hsloot.github.io/rmo/articles/The-binary-representation.html}
+#' @seealso
+#'   \url{https://hsloot.github.io/rmo/articles/The-binary-representation.html}
 #' @examples
 #' is_within(1, 1)
 #' is_within(1, 2)

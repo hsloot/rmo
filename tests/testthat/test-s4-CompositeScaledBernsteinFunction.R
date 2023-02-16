@@ -4,7 +4,10 @@ bf_composite_scaled_bf <- CompositeScaledBernsteinFunction(
 )
 
 test_that("Initialize `CompositeScaledBernsteinFunction`", {
-    expect_s4_class(bf_composite_scaled_bf, class = "CompositeScaledBernsteinFunction")
+    expect_s4_class(
+        bf_composite_scaled_bf,
+        class = "CompositeScaledBernsteinFunction"
+    )
 
     expect_error(
         ScaledBernsteinFunction(

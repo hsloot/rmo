@@ -11,21 +11,25 @@ rexmo(n, d, ex_intensities, method = c("MDCM", "AM", "ESM"))
 
 \item{d}{an integer for the \emph{dimension}.}
 
-\item{ex_intensities}{a numeric vector with the exchangeable \emph{shock-size-arrival intensities}.}
+\item{ex_intensities}{a numeric vector with the exchangeable
+\emph{shock-size-arrival intensities}.}
 
 \item{method}{a string indicating which sampling algorithm should be used.
-Use "MDCM" for the \emph{Markovian death-counting model}, "AM" for the \emph{Arnold model}, and "ESM" for
-the \emph{exogenous shock model}. We recommend using the \emph{ESM} only for small dimensions; the \emph{AM}
-can be used up until dimension \eqn{30}.}
+Use "MDCM" for the \emph{Markovian death-counting model}, "AM" for the
+\emph{Arnold model}, and "ESM" for the \emph{exogenous shock model}. We recommend
+using the \emph{ESM} only for small dimensions; the \emph{AM} can be used up until
+dimension \eqn{30}.}
 }
 \value{
-\code{rexmo} returns a numeric matrix with \code{n} rows and \code{d} columns with the rows
-corresponding to iid distributed samples of a \code{d}-variate \emph{exchangeable Marshall–Olkin
-distribution} with exchangeable \emph{shock-size-arrival intensities} \code{ex_intensities}.
+\code{rexmo} returns a numeric matrix with \code{n} rows and \code{d} columns with
+the rows corresponding to iid distributed samples of a \code{d}-variate
+\emph{exchangeable Marshall–Olkin distribution} with exchangeable
+\emph{shock-size-arrival intensities} \code{ex_intensities}.
 }
 \description{
-Draws \code{n} iid samples from a \code{d}-variate \emph{exchangeable Marshall–Olkin distribution} parametrized
-by exchangeable \emph{shock-size-arrival intensities}.
+Draws \code{n} iid samples from a \code{d}-variate
+\emph{exchangeable Marshall–Olkin distribution} parametrized by exchangeable
+\emph{shock-size-arrival intensities}.
 }
 \details{
 The \emph{exchangeable Marshall–Olkin distribution} has the survival function
@@ -34,14 +38,17 @@ The \emph{exchangeable Marshall–Olkin distribution} has the survival function
         = \exp{\left\{ -\sum_{i=1}^{d}{ \eta_{i} \tau_{[i]} } \right\}} ,
             \quad t = {(t_{1}, \ldots, t_{d})} > 0 ,
 }
-for \emph{exchangeable shock-size-arrival intensities} \eqn{\eta_{i} \geq 0}, \eqn{1 \leq i \leq d}
+for \emph{exchangeable shock-size-arrival intensities}
+\eqn{\eta_{i} \geq 0}, \eqn{1 \leq i \leq d}
 and \eqn{t_{[1]} \geq \cdots \geq t_{[d]}}, see \insertCite{Mai2017a}{rmo}.
-They are called \emph{shock-size-arrival intensities} as they correspond to the rates of the minimums
-of all independent exponential random variables corresponding to \eqn{I}-sized shocks from the
-\emph{exogenous shock model (ESM)}, and a shock-size-arrival intensity \eqn{\eta_{i}} of shock-size
+They are called \emph{shock-size-arrival intensities} as they correspond to the
+rates of the minimums of all independent exponential random variables
+corresponding to \eqn{I}-sized shocks from the \emph{exogenous shock model (ESM)},
+and a shock-size-arrival intensity \eqn{\eta_{i}} of shock-size
 \eqn{i} equal to zero implies that no shock with size \eqn{i} occurs.
-The relationsip of \emph{exchangeable shock-size-arrival intensities} to the \emph{shock-arrival
-intensities} of the \emph{Marshall–Olkin distribution}, see \code{\link[=rmo]{rmo()}}, is as follows:
+The relationship of \emph{exchangeable shock-size-arrival intensities} to the
+\emph{shock-arrival intensities} of the \emph{Marshall–Olkin distribution},
+see \code{\link[=rmo]{rmo()}}, is as follows:
 \deqn{
     \eta_{i}
         = \binom{d}{i} \lambda_{i} .
@@ -49,15 +56,16 @@ intensities} of the \emph{Marshall–Olkin distribution}, see \code{\link[=rmo]{
 \subsection{Simulation algorithms}{
 \subsection{General Marshall–Olkin sampling algorithms}{
 
-The \emph{exogenous shock model (ESM)} and \emph{Arnold model (AM)} simulation algorithms for the general
-\emph{Marshall–Olkin distribution} can be used.
-For this, the exchangeable \emph{shock-size-arrival intensities} are converted to the
-corresponding \emph{shock-arrival intensities} and passed to \code{\link[=rmo]{rmo()}}.
+The \emph{exogenous shock model (ESM)} and \emph{Arnold model (AM)} simulation
+algorithms for the general \emph{Marshall–Olkin distribution} can be used.
+For this, the exchangeable \emph{shock-size-arrival intensities} are converted to
+the corresponding \emph{shock-arrival intensities} and passed to \code{\link[=rmo]{rmo()}}.
 }
 
 \subsection{Markovian death-set model}{
 
-TBD; see \insertCite{@see pp. 122 psqq. @Mai2017a}{rmo} for a similar algorithm.
+TBD; see \insertCite{@see pp. 122 psqq. @Mai2017a}{rmo} for a similar
+algorithm.
 }
 
 }

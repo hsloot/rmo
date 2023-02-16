@@ -158,8 +158,8 @@ intensities_alpha_stable <- function(d, alpha) { # nocov start
 } # nocov end
 
 
-#' @param lambda lambda parameter for Exponential-jump CPP subordinator, passed to `lambda`
-#'   parameter of [ExponentialBernsteinFunction-class]
+#' @param lambda lambda parameter for Exponential-jump CPP subordinator, passed
+#'   to `lambda` parameter of [ExponentialBernsteinFunction-class]
 #'
 #' @seealso [ExponentialBernsteinFunction-class]
 #'
