@@ -64,11 +64,29 @@ alternating signs:
         \geq 0 ,
             \quad \forall  i \in \mathbb{N}, x \geq 0 .
 }
-In particular, the following sequence defines an \emph{extendible Marshall–Olkin
-distribution}:
+\subsection{Extendible Marshall--Olkin distributions}{
+
+A Bernstein function an \emph{extendible Marshall–Olkin distribution} with
+\emph{exchangeable shock-size arrival intensities}
 \deqn{
-    {(-1)}^{i-1} \Delta^{i}{ \psi{(d-i)} } ,
-        \quad 1 \leq i \leq d .
+  \eta_{i}
+    = \binom{d}{i} {(-1)}^{i-1} \Delta^{i}{ \psi{(d-i)} } ,
+         \quad 1 \leq i \leq d .
+}
+
+The (upper triagonal) infinitesimal Markov generator of the associated
+death-counting process is calculated recursively:
+\deqn{
+  q_{0, i}^\ast
+    = \eta_{i} ,
+      \quad i \in {\{ 1 , \ldots , d \}} ,
+}
+and
+\deqn{
+  q_{i+1, j+1}^\ast
+    = \frac{d-j}{d-i} q_{i,j}^\ast + \frac{j+1-i}{d-i} q_{i, j+1}^\ast ,
+     \quad 0 \leq i < j \leq d .
+}
 }
 }
 \section{Functions}{
