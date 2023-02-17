@@ -13,15 +13,21 @@ knitr::opts_chunk$set(
 )
 ```
 
-A subclass of exchangeable Marshall–Olkin distributions can be sampled with a so-called *Lévy frailty model*.
+A subclass of exchangeable Marshall–Olkin distributions can be sampled with a
+so-called *Lévy frailty model*.
 This alternative stochastic model is very efficient in high dimensions.
 
-For a detailed mathematical treatment of this class, we refer to the references at the end of this document.
+For a detailed mathematical treatment of this class, we refer to the references
+at the end of this document.
 
 
 ## The extendible subclass
 
-An exchangeable Marshall–Olkin distribution with parameters \( a_{0}, \ldots, a_{d-1} \) is called extendible if there exists a sequence \( \tau_{1}, \tau_{2}, \ldots \) such that each finite margin has a Marshall–Olkin distribution and
+An exchangeable Marshall–Olkin distribution with parameters
+\( a_{0}, \ldots, a_{d-1} \) is called extendible if there exists a sequence
+\( \tau_{1}, \tau_{2}, \ldots \) such that each finite margin has a
+Marshall–Olkin distribution and
+
 \[
     \mathbb{P}{\left( \tau_{1} > t_{1} , \ldots \tau_{d} > t_{d} \right)}
         = \exp{\left \{
@@ -35,7 +41,11 @@ An exchangeable Marshall–Olkin distribution with parameters \( a_{0}, \ldots, 
 
 ## The Lévy frailty representation
 
-Each extendible Marshall–Olkin distribution can be uniquely linked (in law) to a Lévy subordinator \( \Lambda \) and a iid unit exponential random variables \( E_{1}, \ldots , E_{d} \) such that \( \boldsymbol{\tau} \) has this distribution with
+Each extendible Marshall–Olkin distribution can be uniquely linked (in law) to a
+Lévy subordinator \( \Lambda \) and a iid unit exponential random variables
+\( E_{1}, \ldots , E_{d} \) such that \( \boldsymbol{\tau} \) has this
+distribution with
+
 \[
     \tau_{i}
         = \inf{\left \{
@@ -46,7 +56,9 @@ Each extendible Marshall–Olkin distribution can be uniquely linked (in law) to
             \quad i \in {\{ 1, \ldots, d \}} .
 \]
 
-If \( \psi \) is the Laplace exponent of the Lévy subordinator, i.e. \( \psi{(x)} = -\log\mathbb{E}{[\exp{\{ - x \Lambda_1\}}]} \), then
+If \( \psi \) is the Laplace exponent of the Lévy subordinator, i.e.,
+\( \psi{(x)} = -\log\mathbb{E}{[\exp{\{ - x \Lambda_1\}}]} \), then
+
 \[
     a_{i}
         = \psi{(i+1)} - \psi{(i)} ,
@@ -56,8 +68,10 @@ If \( \psi \) is the Laplace exponent of the Lévy subordinator, i.e. \( \psi{(x
 
 ## Homogeneous Poisson process
 
-A simple example is the case, when \( \Lambda \) is a homogenous Poisson process with rate \( \lambda > 0 \).
+A simple example is the case, when \( \Lambda \) is a homogenous Poisson process
+with rate \( \lambda > 0 \).
 In this case
+
 \[
     \psi{(x)}
         = \lambda {\left( 1 - \exp{\{ -x \}} \right)} ,
@@ -67,16 +81,21 @@ In this case
 
 ## Exponential killing and drift
 
-Another simple example is the case, when the subordinator has a deterministic drift \( b \geq 0 \) and is killed (send to infinity) at a certain rate \( a \geq 0 \).
+Another simple example is the case, when the subordinator has a deterministic
+drift \( b \geq 0 \) and is killed (send to infinity) at a certain rate
+\( a \geq 0 \).
 That means
+
 \[
     \Lambda_{t}
         = N_{t}^{G} \cdot \infty + b t ,
             \quad t \geq 0 ,
 \]
+
 where \( N^{G} \) is a homogeneous Poisson process with rate \( a \).
 
 We have
+
 \[
     \psi{(x)}
         = a 1_{(0, \infty)}{(x)}
@@ -84,13 +103,17 @@ We have
             \quad x \geq 0 .
 \]
 
-This model produces a [multivariate armageddon shock model distribution](Armageddon-ESM-distribution.html).
+This model produces a
+[multivariate armageddon shock model distribution](Armageddon-ESM-distribution.html).
 
 
 ## Compound Poisson process
 
-The class of compound Poisson subordinators is the largest class of Lévy subordinators which can be used to sample *exactly* from a Marshall–Olkin distribution.
+The class of compound Poisson subordinators is the largest class of
+Lévy subordinators which can be used to sample *exactly* from a
+Marshall–Olkin distribution.
 Here, the Lévy subordinator has the form
+
 \[
     \Lambda_{t}
         = N_{t}^{G} \cdot \infty
@@ -98,9 +121,15 @@ Here, the Lévy subordinator has the form
             + \sum_{i = 1}^{N_{t}} X_{i} ,
             \quad t \geq 0 ,
 \]
-where \( N^{G} \) is a homogeneous Poisson process with rate \( a \geq 0 \), \( b \geq 0 \) is a deterministic drift, \( N \) is a homogeneous Poisson process with rate \( \lambda \geq 0 \), and \( {\{ X_{i} \}}_{i \in \mathbb{N}} \) is an iid sequence of non-negative random variables (all objects are independent).
+
+where \( N^{G} \) is a homogeneous Poisson process with rate
+\( a \geq 0 \), \( b \geq 0 \) is a deterministic drift, \( N \) is a
+homogeneous Poisson process with rate \( \lambda \geq 0 \), and
+\( {\{ X_{i} \}}_{i \in \mathbb{N}} \) is an iid sequence of non-negative
+random variables (all objects are independent).
 
 We have
+
 \[
     \psi{(x)}
         = a 1_{(0, \infty)}{(x)}
@@ -108,6 +137,7 @@ We have
             + \lambda {\left( 1 - \mathcal{L}{(X_{1}; x)} \right)} ,
             \quad x \geq 0 ,
 \]
+
 where \( x \mapsto \mathcal{L}{(X_{1}, x)} \) is the Laplace transform of \( X_{1} \).
 
 
