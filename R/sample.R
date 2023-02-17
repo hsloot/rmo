@@ -8,11 +8,11 @@
 #' @param intensities a numeric vector for the *shock-arrival intensities*.
 #' @param method a string indicating which sampling algorithm should be used.
 #'   Use "AM" for the *Arnold model* and "ESM" for the *exogenous shock model*.
-#'   We recommend using the *ESM* only for small dimensions; the *AM* can be
+#'   We recommend using the *ESM* for small dimensions only; the *AM* can be
 #'   used up until dimension \eqn{30}.
 #'
-#' @return `rmo` returns a numeric matrix with `n` rows and `d` columns with the
-#'   rows corresponding to iid distributed samples of a `d`-variate
+#' @return `rmo` returns a numeric matrix with `n` rows and `d` columns, with
+#'   the rows corresponding to iid distributed samples of a `d`-variate
 #'   *Marshall–Olkin distribution* with *shock-arrival intensities*
 #'   `intensities`.
 #'
@@ -135,11 +135,11 @@ rmo <- function(n, d, intensities, method = c("AM", "ESM")) {
 #'
 #' Draws `n` iid samples from a `d`-variate
 #' *exchangeable Marshall–Olkin distribution* parametrized by exchangeable
-#' *shock-size-arrival intensities*.
+#' *shock-size arrival intensities*.
 #'
 #' @inheritParams rmo
 #' @param ex_intensities a numeric vector with the exchangeable
-#' *shock-size-arrival intensities*.
+#' *shock-size arrival intensities*.
 #' @param method a string indicating which sampling algorithm should be used.
 #'   Use "MDCM" for the *Markovian death-counting model*, "AM" for the
 #'   *Arnold model*, and "ESM" for the *exogenous shock model*. We recommend
@@ -149,7 +149,7 @@ rmo <- function(n, d, intensities, method = c("AM", "ESM")) {
 #' @return `rexmo` returns a numeric matrix with `n` rows and `d` columns with
 #' the rows corresponding to iid distributed samples of a `d`-variate
 #' *exchangeable Marshall–Olkin distribution* with exchangeable
-#' *shock-size-arrival intensities* `ex_intensities`.
+#' *shock-size arrival intensities* `ex_intensities`.
 #'
 #' @details
 #' The *exchangeable Marshall–Olkin distribution* has the survival function
@@ -158,15 +158,15 @@ rmo <- function(n, d, intensities, method = c("AM", "ESM")) {
 #'         = \exp{\left\{ -\sum_{i=1}^{d}{ \eta_{i} \tau_{[i]} } \right\}} ,
 #'             \quad t = {(t_{1}, \ldots, t_{d})} > 0 ,
 #' }
-#' for *exchangeable shock-size-arrival intensities*
+#' for *exchangeable shock-size arrival intensities*
 #' \eqn{\eta_{i} \geq 0}, \eqn{1 \leq i \leq d}
 #' and \eqn{t_{[1]} \geq \cdots \geq t_{[d]}}, see \insertCite{Mai2017a}{rmo}.
-#' They are called *shock-size-arrival intensities* as they correspond to the
+#' They are called *shock-size arrival intensities* as they correspond to the
 #' rates of the minimums of all independent exponential random variables
 #' corresponding to \eqn{I}-sized shocks from the *exogenous shock model (ESM)*,
-#' and a shock-size-arrival intensity \eqn{\eta_{i}} of shock-size
+#' and a shock-size arrival intensity \eqn{\eta_{i}} of shock-size
 #' \eqn{i} equal to zero implies that no shock with size \eqn{i} occurs.
-#' The relationship of *exchangeable shock-size-arrival intensities* to the
+#' The relationship of *exchangeable shock-size arrival intensities* to the
 #' *shock-arrival intensities* of the *Marshall–Olkin distribution*,
 #' see [rmo()], is as follows:
 #' \deqn{
@@ -177,13 +177,19 @@ rmo <- function(n, d, intensities, method = c("AM", "ESM")) {
 #' ## Simulation algorithms
 #'
 #' ### General Marshall–Olkin sampling algorithms
+#'
 #' The *exogenous shock model (ESM)* and *Arnold model (AM)* simulation
 #' algorithms for the general *Marshall–Olkin distribution* can be used.
-#' For this, the exchangeable *shock-size-arrival intensities* are converted to
+#' For this, the exchangeable *shock-size arrival intensities* are converted to
 #' the corresponding *shock-arrival intensities* and passed to [rmo()].
 #'
-#' ### Markovian death-set model
-#' TBD; see \insertCite{Sloot2022a}{rmo} and
+#' ### Markovian death-counting model
+#'
+#' The Markovian death-counting model simulates the random vector's
+#' death-counting process, which is a Markov process, until all
+#' components are dead. This defines an order statistic that is used
+#' to obtain a sample by a random permutation;
+#' see \insertCite{Sloot2022a}{rmo} and
 #' \insertCite{@see pp. 122 psqq. @Mai2017a}{rmo}
 #' for a similar algorithm.
 #'
@@ -290,7 +296,7 @@ rexmo <- function(n, d, ex_intensities, method = c("MDCM", "AM", "ESM")) {
 #' Draws `n` iid samples from a `d`-variate
 #' *extendible Marshall–Olkin distribution* parametrized by Bernstein functions
 #' `bf`, essentially wrapping [rexmo()] by generating suitable
-#' *exchangeable shock-size-arrival intensities*.
+#' *exchangeable shock-size arrival intensities*.
 #'
 #' @inheritParams rexmo
 #' @param bf a [BernsteinFunction-class] with the *Bernstein function* of a
@@ -312,13 +318,57 @@ rexmo <- function(n, d, ex_intensities, method = c("MDCM", "AM", "ESM")) {
 #' for *Bernstein functions* \eqn{\psi}, see [BernsteinFunction-class], and
 #' \eqn{t_{[1]} \geq \cdots \geq t_{[d]}}, see \insertCite{Mai2017a}{rmo}.
 #' The relationship between *Bernstein functions* and
-#' *exchangeable shock-size-arrival intensities* of the
+#' *exchangeable shock-size arrival intensities* of the
 #' *exchangeable Marshall–Olkin distribution*, see [rexmo()], is as follows:
 #' \deqn{
 #'     \eta_{i}
 #'         = \binom{d}{i} {(-1)}^{i-1} \Delta{ \psi{(d-i)} } ,
 #'             \quad i \in {\{ 1 , \ldots , d \}} .
 #' }
+#'
+#' ### Calculation of the shock-size arrival intensities
+#'
+#' The *exchangeable shock-size arrival intensities* of a constant Bernstein
+#' function with triplet \eqn{(a, 0, 0)} are
+#' \deqn{
+#'   \eta_{i}
+#'     = \binom{d}{i} a 1_{\{ i = d \}} ,
+#'       \quad i \in {\{ 1 , \ldots , d \}} .
+#' }
+#'
+#' The *exchangeable shock-size arrival intensities* of a linear Bernstein
+#' function with triplet \eqn{(0, b, 0)} are
+#' \deqn{
+#'   \eta_{i}
+#'     = \binom{d}{i} b 1_{\{ i = 1 \}} ,
+#'       \quad i \in {\{ 1 , \ldots , d \}} .
+#' }
+#'
+#' The *exchangeable shock-size arrival intensities* of a Bernstein function
+#' with *Lévy triple* \eqn{(0, 0, \nu)} are
+#' \deqn{
+#'   \eta_{i}
+#'     = \int_{0}^{\infty}
+#'       \binom{d}{i} {(1 - e^{-u})}^{i} e^{- u {(d-i)}} \nu{(du)} ,
+#'         \quad i \in {\{ 1, \ldots, d \}}
+#' }
+#'
+#' The *exchangeable shock-size arrival intensities* of a complete Bernstein
+#' function with *Stieltjes triple* \eqn{(0, 0, \sigma)} are
+#' \deqn{
+#'   \eta_{i}
+#'     = \int_{0}^{\infty}
+#'       \binom{d}{i} u B{(1 + i, d - i + u)} \sigma{(du)}  ,
+#'         \quad i \in {\{ 1, \ldots, d \}}
+#' }
+#'
+#' The *exchangeable shock-size arrival intensities* of convex combinations of
+#' Bernstein functions are the corresponding convex combinations of their
+#' individual *exchangeable shock-size arrival intensities* with the same
+#' coefficients.
+#'
+#' See \insertCite{Sloot2022a}{rmo} for the background, and detailed notes on
+#' numerical approximations of these integrals.
 #'
 #' @family sampling-algorithms
 #'
@@ -891,7 +941,8 @@ rpextmo <- function( # nolint
                     n, d, a = 0, b = 0, gamma = 1, eta = NULL,
                     family = c(
                         "Armageddon", "Poisson", "Pareto",
-                        "Exponential", "AlphaStable", "InverseGaussian", "Gamma"
+                        "Exponential", "AlphaStable", "InverseGaussian",
+                        "Gamma"
                     ),
                     method = c("MDCM", "LFM", "AM", "ESM")) {
     family <- match.arg(family)

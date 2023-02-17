@@ -15,12 +15,12 @@ rmo(n, d, intensities, method = c("AM", "ESM"))
 
 \item{method}{a string indicating which sampling algorithm should be used.
 Use "AM" for the \emph{Arnold model} and "ESM" for the \emph{exogenous shock model}.
-We recommend using the \emph{ESM} only for small dimensions; the \emph{AM} can be
+We recommend using the \emph{ESM} for small dimensions only; the \emph{AM} can be
 used up until dimension \eqn{30}.}
 }
 \value{
-\code{rmo} returns a numeric matrix with \code{n} rows and \code{d} columns with the
-rows corresponding to iid distributed samples of a \code{d}-variate
+\code{rmo} returns a numeric matrix with \code{n} rows and \code{d} columns, with
+the rows corresponding to iid distributed samples of a \code{d}-variate
 \emph{Marshall–Olkin distribution} with \emph{shock-arrival intensities}
 \code{intensities}.
 }

@@ -29,7 +29,7 @@ the rows corresponding to iid distributed samples of a \code{d}-variate
 Draws \code{n} iid samples from a \code{d}-variate
 \emph{extendible Marshall–Olkin distribution} parametrized by Bernstein functions
 \code{bf}, essentially wrapping \code{\link[=rexmo]{rexmo()}} by generating suitable
-\emph{exchangeable shock-size-arrival intensities}.
+\emph{exchangeable shock-size arrival intensities}.
 }
 \details{
 The \emph{extendible Marshall–Olkin distribution} has the survival function
@@ -43,12 +43,56 @@ The \emph{extendible Marshall–Olkin distribution} has the survival function
 for \emph{Bernstein functions} \eqn{\psi}, see \linkS4class{BernsteinFunction}, and
 \eqn{t_{[1]} \geq \cdots \geq t_{[d]}}, see \insertCite{Mai2017a}{rmo}.
 The relationship between \emph{Bernstein functions} and
-\emph{exchangeable shock-size-arrival intensities} of the
+\emph{exchangeable shock-size arrival intensities} of the
 \emph{exchangeable Marshall–Olkin distribution}, see \code{\link[=rexmo]{rexmo()}}, is as follows:
 \deqn{
     \eta_{i}
         = \binom{d}{i} {(-1)}^{i-1} \Delta{ \psi{(d-i)} } ,
             \quad i \in {\{ 1 , \ldots , d \}} .
+}
+\subsection{Calculation of the shock-size arrival intensities}{
+
+The \emph{exchangeable shock-size arrival intensities} of a constant Bernstein
+function with triplet \eqn{(a, 0, 0)} are
+\deqn{
+  \eta_{i}
+    = \binom{d}{i} a 1_{\{ i = d \}} ,
+      \quad i \in {\{ 1 , \ldots , d \}} .
+}
+
+The \emph{exchangeable shock-size arrival intensities} of a linear Bernstein
+function with triplet \eqn{(0, b, 0)} are
+\deqn{
+  \eta_{i}
+    = \binom{d}{i} b 1_{\{ i = 1 \}} ,
+      \quad i \in {\{ 1 , \ldots , d \}} .
+}
+
+The \emph{exchangeable shock-size arrival intensities} of a Bernstein function
+with \emph{Lévy triple} \eqn{(0, 0, \nu)} are
+\deqn{
+  \eta_{i}
+    = \int_{0}^{\infty}
+      \binom{d}{i} {(1 - e^{-u})}^{i} e^{- u {(d-i)}} \nu{(du)} ,
+        \quad i \in {\{ 1, \ldots, d \}}
+}
+
+The \emph{exchangeable shock-size arrival intensities} of a complete Bernstein
+function with \emph{Stieltjes triple} \eqn{(0, 0, \sigma)} are
+\deqn{
+  \eta_{i}
+    = \int_{0}^{\infty}
+      \binom{d}{i} u B{(1 + i, d - i + u)} \sigma{(du)}  ,
+        \quad i \in {\{ 1, \ldots, d \}}
+}
+
+The \emph{exchangeable shock-size arrival intensities} of convex combinations of
+Bernstein functions are the corresponding convex combinations of their
+individual \emph{exchangeable shock-size arrival intensities} with the same
+coefficients.
+
+See \insertCite{Sloot2022a}{rmo} for the background, and detailed notes on
+numerical approximations of these integrals.
 }
 }
 \examples{
