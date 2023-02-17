@@ -53,7 +53,10 @@ Collate:
     's4-PoissonBernsteinFunction.R'
     's4-ScaledBernsteinFunction.R'
     's4-SumOfBernsteinFunctions.R'
-    'sample.R'
+    'sample-rmo.R'
+    'sample-rexmo.R'
+    'sample-rextmo.R'
+    'sample-rpextmo.R'
     'zzz.R'
 URL: https://github.com/hsloot/rmo
 BugReports: https://github.com/hsloot/rmo/issues
