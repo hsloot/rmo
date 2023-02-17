@@ -54,7 +54,7 @@ parametrized by shock-arrival intensities."><!-- mathjax --><script src="https:/
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="" class="logo" alt=""><h1>Sample from Marshall–Olkin distributions</h1>
-      <small class="dont-index">Source: <a href="https://github.com/hsloot/rmo/blob/HEAD/R/sample.R" class="external-link"><code>R/sample.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/hsloot/rmo/blob/HEAD/R/sample-rmo.R" class="external-link"><code>R/sample-rmo.R</code></a></small>
       <div class="d-none name"><code>rmo.Rd</code></div>
     </div>
 
@@ -85,7 +85,7 @@ parametrized by <em>shock-arrival intensities</em>.</p>
 <dt>method</dt>
 <dd><p>a string indicating which sampling algorithm should be used.
 Use "AM" for the <em>Arnold model</em> and "ESM" for the <em>exogenous shock model</em>.
-We recommend using the <em>ESM</em> only for small dimensions; the <em>AM</em> can be
+We recommend using the <em>ESM</em> for small dimensions only; the <em>AM</em> can be
 used up until dimension \(30\).</p></dd>
 
 </dl></div>
@@ -93,8 +93,8 @@ used up until dimension \(30\).</p></dd>
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p><code>rmo</code> returns a numeric matrix with <code>n</code> rows and <code>d</code> columns with the
-rows corresponding to iid distributed samples of a <code>d</code>-variate
+<p><code>rmo</code> returns a numeric matrix with <code>n</code> rows and <code>d</code> columns, with
+the rows corresponding to iid distributed samples of a <code>d</code>-variate
 <em>Marshall–Olkin distribution</em> with <em>shock-arrival intensities</em></p>
 
 
@@ -183,83 +183,83 @@ World Scientific.
 <span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>,</span></span>
 <span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.4</span>, <span class="fl">0.4</span>, <span class="fl">0.1</span>, <span class="fl">0.4</span>, <span class="fl">0.1</span>, <span class="fl">0.1</span>, <span class="fl">0.4</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               [,1]         [,2]         [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.7462744055 0.6538876306 0.2487707241</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.0007202849 0.0007202849 0.0007202849</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 1.2390602993 1.2390602993 0.0483436174</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 2.1781874781 0.3077213287 1.3711815707</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.5560772680 0.5560772680 0.5560772680</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.6026560970 0.7313154071 0.7313154071</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.1926976945 0.0778471459 0.1926976945</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.0273967240 0.0273967240 0.0273967240</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.9769709261 0.7666100071 0.9769709261</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.7057678338 0.2642060593 0.6542030228</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]      [,2]       [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.4332742 0.4332742 0.43327422</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.8145682 0.8145682 0.03151031</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 1.3708320 0.9047787 0.09326529</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 1.5954745 2.0711889 1.27717877</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.5294766 1.1230009 2.10474860</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.9305823 0.9305823 0.93058229</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.8974076 0.8750919 0.28896881</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 1.5391260 0.5022717 0.61891647</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 2.8814951 3.0170528 2.30618906</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 3.6960035 1.4829399 1.48293988</span>
 <span class="r-in"><span><span class="co">## independence</span></span></span>
 <span class="r-in"><span><span class="fu">rmo</span><span class="op">(</span></span></span>
 <span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>,</span></span>
 <span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]       [,2]      [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 1.78949055 1.57543617 0.1855978</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.55190614 1.36144719 0.1735493</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.48792083 1.32278583 0.1214395</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 1.13009760 2.96573648 0.5046500</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.07564629 3.30365783 0.2725335</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 1.48745251 1.92261027 1.0084979</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.27060882 0.77156593 0.6396069</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 1.87211447 0.69087654 0.7921210</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 2.15145404 0.04407503 1.8123092</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.92167820 4.07121518 0.1160113</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               [,1]      [,2]        [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.3940955854 0.8706064 1.943909551</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.3551947841 0.7469686 0.569905644</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.0227393300 0.4465233 0.960865749</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.0002102099 1.4834823 0.175756043</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.4040795700 1.1655414 0.008227351</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.0348230400 0.5135286 2.281326488</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.8822388014 0.1833615 0.171067095</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 1.1716722869 1.3488559 0.242194423</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 1.8042933397 0.9954350 3.220663328</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 2.6693951032 0.1663279 0.353476864</span>
 <span class="r-in"><span><span class="co">## comonotone</span></span></span>
 <span class="r-in"><span><span class="fu">rmo</span><span class="op">(</span></span></span>
 <span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>,</span></span>
 <span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]       [,2]       [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.89593662 0.89593662 0.89593662</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 2.03138547 2.03138547 2.03138547</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.48374469 0.48374469 0.48374469</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.13119837 0.13119837 0.13119837</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 1.05384081 1.05384081 1.05384081</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 1.85044312 1.85044312 1.85044312</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.44875480 0.44875480 0.44875480</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.19273572 0.19273572 0.19273572</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.09486099 0.09486099 0.09486099</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 1.92253780 1.92253780 1.92253780</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 2.46651322 2.46651322 2.46651322</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.89715322 0.89715322 0.89715322</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 1.43826877 1.43826877 1.43826877</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 1.05912797 1.05912797 1.05912797</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 1.05011355 1.05011355 1.05011355</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.06073726 0.06073726 0.06073726</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.65751746 0.65751746 0.65751746</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.90476606 0.90476606 0.90476606</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.37999808 0.37999808 0.37999808</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.04271985 0.04271985 0.04271985</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">rmo</span><span class="op">(</span></span></span>
 <span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>,</span></span>
 <span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.4</span>, <span class="fl">0.4</span>, <span class="fl">0.1</span>, <span class="fl">0.4</span>, <span class="fl">0.1</span>, <span class="fl">0.1</span>, <span class="fl">0.4</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"ESM"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]      [,2]      [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.36403652 0.3640365 0.3640365</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 1.17153968 1.1715397 0.1079069</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.74312307 0.7431231 0.7431231</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 1.73975039 1.7397504 0.8253085</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.82973884 1.6395737 0.8297388</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.43591398 0.4359140 0.4393783</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.62484205 0.6248421 0.6248421</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.16194916 0.2326689 0.1910355</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.09924827 0.1691088 0.4886671</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.05703699 0.4611600 0.8080590</span>
+<span class="r-in"><span><span class="co">## independence</span></span></span>
+<span class="r-in"><span><span class="fu">rmo</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>,</span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>    method <span class="op">=</span> <span class="st">"ESM"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]       [,2]       [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.10413067 0.78515494 0.78515494</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 2.63683589 2.13022820 2.29491984</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.81566891 2.99784422 0.81566891</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 1.90121189 1.68446716 1.94125446</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 1.95436667 3.65847724 0.21656165</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.09077777 0.22792517 0.22792517</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 1.25307181 1.07875129 1.07875129</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 1.95197101 1.95197101 1.95197101</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 1.42092682 0.06199959 0.06199959</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 1.83070386 4.15977077 1.83070386</span>
-<span class="r-in"><span><span class="co">## independence</span></span></span>
-<span class="r-in"><span><span class="fu">rmo</span><span class="op">(</span></span></span>
-<span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>,</span></span>
-<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"ESM"</span></span></span>
-<span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]       [,2]       [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.0966244 0.04064243 0.16956114</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 1.4942131 1.44681993 1.61977886</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 2.1856552 0.27913852 1.43129840</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.1859048 0.31027294 0.19137462</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 1.5150700 1.21581574 0.06497078</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 2.7353460 1.29734907 0.32189607</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.3404355 0.30685181 0.72780732</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.4976680 0.47244066 3.33850113</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.4437573 2.70713473 0.06778842</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.6689885 0.02950921 0.33304404</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 1.49064733 2.09771913 1.04907789</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 1.81822691 0.23556594 0.22907413</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.09344653 1.50445518 0.23949865</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.14397670 2.11503888 1.78652354</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.88815571 0.05440357 1.50834466</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.43935061 0.31626810 1.23239670</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 1.69180945 0.71257071 0.35546023</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 1.95754400 1.44980712 0.92792036</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.59500888 1.63187312 0.04804564</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.06357031 4.74919524 0.96347019</span>
 <span class="r-in"><span><span class="co">## comonotone</span></span></span>
 <span class="r-in"><span><span class="fu">rmo</span><span class="op">(</span></span></span>
 <span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>,</span></span>
@@ -267,33 +267,33 @@ World Scientific.
 <span class="r-in"><span>    method <span class="op">=</span> <span class="st">"ESM"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]      [,2]      [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.6031620 0.6031620 0.6031620</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.2230730 0.2230730 0.2230730</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 1.1783406 1.1783406 1.1783406</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.7347799 0.7347799 0.7347799</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.4020061 0.4020061 0.4020061</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 3.2987486 3.2987486 3.2987486</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 1.1127582 1.1127582 1.1127582</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.4855560 0.4855560 0.4855560</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 2.0682982 2.0682982 2.0682982</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 1.4278880 1.4278880 1.4278880</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.9268026 0.9268026 0.9268026</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.3334049 0.3334049 0.3334049</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.4428489 0.4428489 0.4428489</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.9256085 0.9256085 0.9256085</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 3.3959962 3.3959962 3.3959962</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.4600348 0.4600348 0.4600348</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 1.2979586 1.2979586 1.2979586</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.2105053 0.2105053 0.2105053</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.9708400 0.9708400 0.9708400</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.1913857 0.1913857 0.1913857</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">rmo</span><span class="op">(</span></span></span>
 <span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>,</span></span>
 <span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.4</span>, <span class="fl">0.4</span>, <span class="fl">0.1</span>, <span class="fl">0.4</span>, <span class="fl">0.1</span>, <span class="fl">0.1</span>, <span class="fl">0.4</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>    method <span class="op">=</span> <span class="st">"AM"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]      [,2]      [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 1.2872935 1.2872935 1.5757186</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 1.1403573 1.0938056 1.1403573</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.3897622 1.3256157 3.1311697</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.4102103 0.4102103 0.4102103</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 1.3960113 0.8928070 1.3960113</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.8756623 0.4064613 0.8756623</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.9287905 0.8798958 4.9428172</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.9869404 0.1054547 1.6976739</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 1.4091771 0.9865158 1.4091771</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 2.4129862 2.4129862 1.9393504</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]      [,2]        [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 1.9436973 1.5482172 4.026515820</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.4050212 0.4734998 0.988773304</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.0198282 0.4793550 0.019828196</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 1.1095575 1.6624793 0.636615692</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.6582095 0.4138662 0.658209526</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.7988457 0.7988457 0.798845695</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.2429575 0.2429575 0.242957458</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.8883830 0.5831010 3.226168074</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.5390355 0.5390355 0.539035515</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 3.2653003 0.4069142 0.004700855</span>
 <span class="r-in"><span><span class="co">## independence</span></span></span>
 <span class="r-in"><span><span class="fu">rmo</span><span class="op">(</span></span></span>
 <span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>,</span></span>
@@ -301,16 +301,16 @@ World Scientific.
 <span class="r-in"><span>    method <span class="op">=</span> <span class="st">"AM"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]       [,2]       [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 1.4353275 0.02625074 4.01134256</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 1.3546008 0.94741398 0.15429333</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.6675316 1.53936930 0.42284538</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.1145819 0.31056091 1.71870542</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.6609434 1.80141256 1.28047689</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.5079368 0.81527928 0.34028310</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 1.1194546 0.76778479 0.09685601</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.9044043 1.47975588 0.40465751</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 1.0173708 0.95950018 0.31844368</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 2.2724675 0.36660605 1.32831282</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.1271035 0.29159540 0.68140616</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 2.3349345 1.02202658 0.71147489</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 1.7903798 0.22813933 0.01994426</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 1.5382849 0.49916848 0.72276661</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 1.4848845 0.12632143 0.13937087</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.6931330 0.41141111 1.71973152</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.5773699 1.68248076 0.35389091</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.7079033 0.07832118 1.89507670</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.4192670 0.45223916 0.76259686</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 1.3253207 1.43375033 0.08914120</span>
 <span class="r-in"><span><span class="co">## comonotone</span></span></span>
 <span class="r-in"><span><span class="fu">rmo</span><span class="op">(</span></span></span>
 <span class="r-in"><span>    <span class="fl">10</span>, <span class="fl">3</span>,</span></span>
@@ -318,16 +318,16 @@ World Scientific.
 <span class="r-in"><span>    method <span class="op">=</span> <span class="st">"AM"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]      [,2]      [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.8689825 0.8689825 0.8689825</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.3774774 0.3774774 0.3774774</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.8301367 0.8301367 0.8301367</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 2.7882905 2.7882905 2.7882905</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.1130081 0.1130081 0.1130081</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.2676675 0.2676675 0.2676675</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.1880310 0.1880310 0.1880310</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.6673620 0.6673620 0.6673620</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.1511120 0.1511120 0.1511120</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.7930649 0.7930649 0.7930649</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 1.3962076 1.3962076 1.3962076</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 1.2536454 1.2536454 1.2536454</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.4953417 0.4953417 0.4953417</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.8112017 0.8112017 0.8112017</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.4274337 0.4274337 0.4274337</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.3829850 0.3829850 0.3829850</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 5.4043767 5.4043767 5.4043767</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 1.0980798 1.0980798 1.0980798</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.1841928 0.1841928 0.1841928</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.2952143 0.2952143 0.2952143</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

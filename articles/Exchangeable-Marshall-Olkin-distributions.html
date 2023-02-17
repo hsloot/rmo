@@ -89,8 +89,8 @@
 special consideration. Almost all specific examples of Marshall–Olkin
 distributions are exchangeable — or are based on <a href="Mixing-Marshall-Olkin-distributions.html">mixtures of exchangeable
 Marshall–Olkin distributions</a>.</p>
-<p>For a detailed mathematical treatment of this class, we refer to the
-references at the end of this document.</p>
+<p>For a detailed mathematical treatment of this class, see the
+references below.</p>
 <div class="section level2">
 <h2 id="exchangeability">Exchangeability<a class="anchor" aria-label="anchor" href="#exchangeability"></a>
 </h2>
@@ -117,7 +117,8 @@ does not change if the arguments are permutated.</p>
 <p>For <span class="math inline">\(\boldsymbol{t} \geq 0\)</span> with
 descendingly ordered version <span class="math inline">\(t_{[1]} \geq
 \cdots \geq t_{[d]}\)</span> the <a href="The-Marshall-Olkin-distribution.html#definition-and-survival-copula">survival
-function</a> can be rewritten as <span class="math display">\[
+function</a> can be rewritten as</p>
+<p><span class="math display">\[
     \bar{F}{(\boldsymbol{t})}
         = \exp{\left \{
                 - \sum_{i=0}^{d-1}{
@@ -127,14 +128,17 @@ function</a> can be rewritten as <span class="math display">\[
             \quad \boldsymbol{t} \geq 0 .
 \]</span></p>
 <p>The parameters <span class="math inline">\(a_{0}, a_{1}, \ldots,
-a_{d-1}\)</span> are defined by <span class="math display">\[
+a_{d-1}\)</span> are defined by</p>
+<p><span class="math display">\[
     a_{i}
         = \sum_{j=0}^{d-i-1}{
                 \binom{d-i-1}{j} \lambda_{j+1}
             } ,
             \quad i \in {\{ 0, 1, \ldots, d-1 \}} ,
-\]</span> and the parameters <span class="math inline">\(\lambda_{1},
-\ldots, \lambda_{d}\)</span> can be retrieved by the formula <span class="math display">\[
+\]</span></p>
+<p>and the parameters <span class="math inline">\(\lambda_{1}, \ldots,
+\lambda_{d}\)</span> can be retrieved by the formula</p>
+<p><span class="math display">\[
     \lambda_{i}
         = (-1)^{i-1} \Delta^{i-1} a_{d-i}
         = \sum_{j=0}^{i-1}{
@@ -151,49 +155,38 @@ yields a non-negative sequence <span class="math inline">\(\lambda_{1},
 <h2 id="survival-copula">Survival copula<a class="anchor" aria-label="anchor" href="#survival-copula"></a>
 </h2>
 <p>For the exchangeable Marshall–Olkin distribution, the survival copula
-takes the form <span class="math display">\[
+takes the form</p>
+<p><span class="math display">\[
     \hat{C}{( \boldsymbol{u} )}
         = u_{(1)} \cdot u_{(2)}^{a_1/a_0} \cdot \ldots \cdot
 u_{(d)}^{a_{d-1}/a_0} ,
             \quad \boldsymbol{u} \in {[0, 1]}^d
-\]</span> where <span class="math inline">\(u_{(1)} \leq \cdots \leq
+\]</span></p>
+<p>where <span class="math inline">\(u_{(1)} \leq \cdots \leq
 u_{(d)}\)</span> is the ascendingly ordered version of <span class="math inline">\(\boldsymbol{u}\)</span>.</p>
 </div>
 <div class="section level2">
 <h2 id="fast-simulation">Fast simulation<a class="anchor" aria-label="anchor" href="#fast-simulation"></a>
 </h2>
-<p>The large number of parameters and the inefficiency of the <a href="The-Marshall-Olkin-distribution.html#the-exogenous-shock-model">exogenous
-shock model</a> become a problem in higher dimensions.</p>
-<p>For the exchangeable subclass, the <a href="The-Marshall-Olkin-distribution.html#the-arnold-model">Arnold
-model</a> can be modified by sampling the ordered version <span class="math inline">\(\tau_{(1)} \leq \cdots \leq \tau_{(d)}\)</span>
-and apply a random shuffling.</p>
-<p>The first shock has an exponential distribution with rate <span class="math display">\[
-    \lambda
-        = \sum_{i=1}^{d}{
-            \binom{d}{i} \lambda_{i}
-        } .
+<p>Given <em>exchangeable shock-size arrival intensities</em></p>
+<p><span class="math display">\[
+    \eta_{i}
+      = \binom{d}{i} \lambda_{i} ,
+       \quad i \in {\{ 1 , \ldots , d \}} ,
 \]</span></p>
-<p>The probability that this shock destroys <span class="math inline">\(i\)</span> components is <span class="math display">\[
-    \frac{
-        \binom{d}{i} \lambda_i
-    }{
-        \lambda
-    } ,
-        \quad i \in {\{ 1, \ldots, d \}} .
+<p>the corresponding <em>exchangeable Marshall-Olkin distribution</em>
+can be simulated via its default-counting process <span class="math inline">\(Z\)</span>, which is a Markov process. A
+sample-path from the default-counting process defines an defines a
+corresponding order statistic</p>
+<p><span class="math display">\[
+    \tau_{(1)} \leq \cdots \leq \tau_{(d)}
 \]</span></p>
-<p>Assume that the first shock arrives at time <span class="math inline">\(W_{1}\)</span>. Then it is possible to show that
-the random vector <span class="math display">\[
-    \begin{pmatrix}
-        \tau_{(d - i + 1)} - W_{1} &amp; \cdots &amp; \tau_{(d)} - W_{1}
-    \end{pmatrix}
-\]</span> is the ordered version of a <span class="math inline">\({(d-i)}\)</span>-variate Marshall–Olkin
-distributed random vector with parameters <span class="math inline">\(a_{0}, a_{1}, \ldots a_{d-i-1}\)</span>. Hence, we
-can repeat this step recursively until we sampled <span class="math display">\[
-    \tau_{(1)} \leq \cdots \leq \tau_{(d)} .
-\]</span></p>
-<p>Finally we can apply a random shuffling <span class="math inline">\(\Pi\)</span> and get <span class="math display">\[
+<p>We can obtain a random vector with the desired <em>exchangeable
+Marshall-Olkin distribution</em> by applying an independent random
+shuffling <span class="math inline">\(\Pi\)</span>:</p>
+<p><span class="math display">\[
     \tau_ i
-        = \tau_{\Pi{(i)}} ,
+        = \tau_{(\Pi{(i)})} ,
             \quad i \in {\{ 1, \ldots, d \}} .
 \]</span></p>
 </div>
@@ -211,6 +204,11 @@ Simulation</em> 81 (1): 59–78. <a href="https://doi.org/10.1080/00949650903185
 ———. 2017. <em>Simulating Copulas: Stochastic Models, Sampling
 Algorithms and Applications</em>. 2nd ed. Series in Quantitative
 Finance. World Scientific. <a href="https://doi.org/10.1142/10265" class="external-link">https://doi.org/10.1142/10265</a>.
+</div>
+<div id="ref-Sloot2022a" class="csl-entry">
+Sloot, Henrik. 2022. <span>“Implementing <span>M</span>arkovian Models
+for Extendible <span>M</span>arshall–<span>O</span>lkin
+Distributions.”</span> <em>Dependence Modeling</em> 10 (1): 308–43. <a href="https://doi.org/doi:10.1515/demo-2022-0151" class="external-link">https://doi.org/doi:10.1515/demo-2022-0151</a>.
 </div>
 </div>
 </div>
