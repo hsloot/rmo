@@ -131,13 +131,32 @@ $$
     {(-1)}^{i-1} \Delta^{i}{ \psi{(x)} }
         \geq 0 ,
             \quad \forall  i \in \mathbb{N}, x \geq 0 .
+$$</p><div class="section">
+<h3 id="extendible-marshall-olkin-distributions">Extendible Marshall--Olkin distributions<a class="anchor" aria-label="anchor" href="#extendible-marshall-olkin-distributions"></a></h3>
+
+
+<p>A Bernstein function an <em>extendible Marshall–Olkin distribution</em> with
+<em>exchangeable shock-size arrival intensities</em>
 $$
-In particular, the following sequence defines an <em>extendible Marshall–Olkin
-distribution</em>:
-$$
-    {(-1)}^{i-1} \Delta^{i}{ \psi{(d-i)} } ,
-        \quad 1 \leq i \leq d .
+  \eta_{i}
+    = \binom{d}{i} {(-1)}^{i-1} \Delta^{i}{ \psi{(d-i)} } ,
+         \quad 1 \leq i \leq d .
 $$</p>
+<p>The (upper triagonal) infinitesimal Markov generator of the associated
+death-counting process is calculated recursively:
+$$
+  q_{0, i}^\ast
+    = \eta_{i} ,
+      \quad i \in {\{ 1 , \ldots , d \}} ,
+$$
+and
+$$
+  q_{i+1, j+1}^\ast
+    = \frac{d-j}{d-i} q_{i,j}^\ast + \frac{j+1-i}{d-i} q_{i, j+1}^\ast ,
+     \quad 0 \leq i &lt; j \leq d .
+$$</p>
+</div>
+
     </div>
     <div class="section level2">
     <h2 id="functions">Functions<a class="anchor" aria-label="anchor" href="#functions"></a></h2>
