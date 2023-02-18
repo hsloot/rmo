@@ -36,49 +36,9 @@ NULL
 #'             \quad i \in {\{ 1 , \ldots , d \}} .
 #' }
 #'
-#' ### Calculation of the shock-size arrival intensities
-#'
-#' The *exchangeable shock-size arrival intensities* of a constant Bernstein
-#' function with triplet \eqn{(a, 0, 0)} are
-#' \deqn{
-#'   \eta_{i}
-#'     = \binom{d}{i} a 1_{\{ i = d \}} ,
-#'       \quad i \in {\{ 1 , \ldots , d \}} .
-#' }
-#'
-#' The *exchangeable shock-size arrival intensities* of a linear Bernstein
-#' function with triplet \eqn{(0, b, 0)} are
-#' \deqn{
-#'   \eta_{i}
-#'     = \binom{d}{i} b 1_{\{ i = 1 \}} ,
-#'       \quad i \in {\{ 1 , \ldots , d \}} .
-#' }
-#'
-#' The *exchangeable shock-size arrival intensities* of a Bernstein function
-#' with *Lévy triple* \eqn{(0, 0, \nu)} are
-#' \deqn{
-#'   \eta_{i}
-#'     = \int_{0}^{\infty}
-#'       \binom{d}{i} {(1 - e^{-u})}^{i} e^{- u {(d-i)}} \nu{(du)} ,
-#'         \quad i \in {\{ 1, \ldots, d \}}
-#' }
-#'
-#' The *exchangeable shock-size arrival intensities* of a complete Bernstein
-#' function with *Stieltjes triple* \eqn{(0, 0, \sigma)} are
-#' \deqn{
-#'   \eta_{i}
-#'     = \int_{0}^{\infty}
-#'       \binom{d}{i} u B{(1 + i, d - i + u)} \sigma{(du)}  ,
-#'         \quad i \in {\{ 1, \ldots, d \}}
-#' }
-#'
-#' The *exchangeable shock-size arrival intensities* of convex combinations of
-#' Bernstein functions are the corresponding convex combinations of their
-#' individual *exchangeable shock-size arrival intensities* with the same
-#' coefficients.
-#'
-#' See \insertCite{Sloot2022a}{rmo} for the background, and detailed notes on
-#' numerical approximations of these integrals.
+#' This formula for the *exchangeable shock-size arrival intensities* is not
+#' numerically stable in higher dimensions, and [rextmo()] uses
+#' approximation techniques from \insertCite{Sloot2022a}{rmo} to calculate them.
 #'
 #' @family sampling-algorithms
 #'
