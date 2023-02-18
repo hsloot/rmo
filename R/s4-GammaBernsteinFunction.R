@@ -9,7 +9,7 @@ NULL
 #' @slot a Scale parameter for the Lévy measure.
 #'
 #' @description
-#' The \emph{Gamma Bernstein function}, is the Bernstein function of a
+#' The *Gamma Bernstein function*, is the Bernstein function of a
 #' subordinator with a (scaled) Gamma distribution. The representation is for
 #' \eqn{a > 0}
 #' \deqn{

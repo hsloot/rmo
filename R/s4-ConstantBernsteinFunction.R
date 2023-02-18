@@ -4,11 +4,11 @@ NULL
 
 #' Class for (almost) constant Bernstein functions
 #'
-#' @slot constant The nonnegative \emph{killing} parameter (i.e. \eqn{a}
+#' @slot constant The nonnegative *killing* parameter (i.e. \eqn{a}
 #'   in the representation)
 #'
 #' @description
-#' A \emph{constant Bernstein function} is a Bernstein function with only a
+#' A *constant Bernstein function* is a Bernstein function with only a
 #' constant part (for \eqn{x > 0}), i.e. \eqn{b = 0} and \eqn{\nu = 0}. In
 #' particular,
 #' \deqn{
