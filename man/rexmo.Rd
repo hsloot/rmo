@@ -77,72 +77,72 @@ for a similar algorithm.
 }
 \examples{
 rexmo(
-    10, 3,
-    c(1.2, 0.3, 0.4)
+  10, 3,
+  c(1.2, 0.3, 0.4)
 )
 ## independence
 rexmo(
-    10, 3,
-    c(3, 0, 0)
+  10, 3,
+  c(3, 0, 0)
 )
 ## comonotone
 rexmo(
-    10, 3,
-    c(0, 0, 1)
+  10, 3,
+  c(0, 0, 1)
 )
 
 rexmo(
-    10, 3,
-    c(1.2, 0.3, 0.4),
-    method = "MDCM"
+  10, 3,
+  c(1.2, 0.3, 0.4),
+  method = "MDCM"
 )
 ## independence
 rexmo(
-    10, 3,
-    c(3, 0, 0),
-    method = "MDCM"
+  10, 3,
+  c(3, 0, 0),
+  method = "MDCM"
 )
 ## comonotone
 rexmo(
-    10, 3,
-    c(0, 0, 1),
-    method = "MDCM"
+  10, 3,
+  c(0, 0, 1),
+  method = "MDCM"
 )
 
 rexmo(
-    10, 3,
-    c(1.2, 0.3, 0.4),
-    method = "AM"
+  10, 3,
+  c(1.2, 0.3, 0.4),
+  method = "AM"
 )
 ## independence
 rexmo(
-    10, 3,
-    c(3, 0, 0),
-    method = "AM"
+  10, 3,
+  c(3, 0, 0),
+  method = "AM"
 )
 ## comonotone
 rexmo(
-    10, 3,
-    c(0, 0, 1),
-    method = "AM"
+  10, 3,
+  c(0, 0, 1),
+  method = "AM"
 )
 
 rexmo(
-    10, 3,
-    c(1.2, 0.3, 0.4),
-    method = "ESM"
+  10, 3,
+  c(1.2, 0.3, 0.4),
+  method = "ESM"
 )
 ## independence
 rexmo(
-    10, 3,
-    c(3, 0, 0),
-    method = "ESM"
+  10, 3,
+  c(3, 0, 0),
+  method = "ESM"
 )
 ## comonotone
 rexmo(
-    10, 3,
-    c(0, 0, 1),
-    method = "ESM"
+  10, 3,
+  c(0, 0, 1),
+  method = "ESM"
 )
 
 }

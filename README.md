@@ -50,9 +50,9 @@ distribution, use
 
 ``` r
 rpextmo(
-    n = 10, d = 3,
-    eta = log2(2 - 0.5),
-    family = "AlphaStable"
+  n = 10, d = 3,
+  eta = log2(2 - 0.5),
+  family = "AlphaStable"
 )
 #>             [,1]      [,2]       [,3]
 #>  [1,] 1.43771730 1.4377173 1.43771730
@@ -74,7 +74,7 @@ via:
 ``` r
 alpha <- log2(2 - 0.5)
 bf <- AlphaStableBernsteinFunction(
-    alpha = alpha
+  alpha = alpha
 )
 bf
 #> An object of class "AlphaStableBernsteinFunction"
@@ -90,16 +90,16 @@ example.
 ``` r
 x0 <- 5e-4
 bf_approximated <- SumOfBernsteinFunctions(
-    first = LinearBernsteinFunction(
-        scale = alpha * x0^(1 - alpha) / (1 - alpha) / gamma(1 - alpha)
-    ),
-    second = ScaledBernsteinFunction(
-        scale = x0^(-alpha) / gamma(1 - alpha),
-        original = ParetoBernsteinFunction(
-            alpha = alpha,
-            x0 = x0
-        )
+  first = LinearBernsteinFunction(
+    scale = alpha * x0^(1 - alpha) / (1 - alpha) / gamma(1 - alpha)
+  ),
+  second = ScaledBernsteinFunction(
+    scale = x0^(-alpha) / gamma(1 - alpha),
+    original = ParetoBernsteinFunction(
+      alpha = alpha,
+      x0 = x0
     )
+  )
 )
 ```
 

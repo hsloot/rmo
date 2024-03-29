@@ -26,14 +26,14 @@
 #' @seealso \url{https://testthat.r-lib.org/articles/custom-expectation.html}
 #' @examples
 #' rexp_test <- function(n, rate) {
-#'     sapply(1:n, function(x) stats::rexp(1L, rate))
+#'   sapply(1:n, function(x) stats::rexp(1L, rate))
 #' }
 #' testthat::test_that("rexp equal to rexp_test?", {
-#'     expect_equal_rn_generation(
-#'         stats::rexp, rexp_test,
-#'         list("rate" = 2), 10L,
-#'         use_seed = 1623L
-#'     )
+#'   expect_equal_rn_generation(
+#'     stats::rexp, rexp_test,
+#'     list("rate" = 2), 10L,
+#'     use_seed = 1623L
+#'   )
 #' })
 #' @noRd
 #' @keywords internal test
@@ -46,94 +46,94 @@ expect_equal_rn_generation <- function(rn_generator,
                                        set_seed = base::set.seed,
                                        RNG_kind = base::RNGkind, # nolint
                                        env = parent.frame(), ...) {
-    ## Capture rn_generator, rn_generator_test, and arguments with labels
-    rn_generator <- testthat::quasi_label(
-        rlang::enquo(rn_generator), NULL,
-        arg = "rn_generator"
+  ## Capture rn_generator, rn_generator_test, and arguments with labels
+  rn_generator <- testthat::quasi_label(
+    rlang::enquo(rn_generator), NULL,
+    arg = "rn_generator"
+  )
+  rn_generator_test <- testthat::quasi_label(
+    rlang::enquo(rn_generator_test), NULL,
+    arg = "rn_generator_test"
+  )
+  arg_list <- testthat::quasi_label(
+    rlang::enquo(arg_list), "Arguments",
+    arg = "arg_list"
+  )
+
+  ## Conventional checks to catch user errors early on
+  checkmate::assert(
+    combine = "or",
+    checkmate::check_string(rn_generator$val),
+    checkmate::check_function(rn_generator$val)
+  )
+  checkmate::assert(
+    combine = "or",
+    checkmate::check_string(rn_generator_test$val),
+    checkmate::check_function(rn_generator_test$val)
+  )
+  checkmate::qassert(n, "X1(0,)")
+  checkmate::qassert(n, "X1(0,)")
+
+  ## Set up call arguments
+  if (!missing(n)) {
+    arg_list$val <- c("n" = n, arg_list$val)
+  }
+
+  ## Set up RNG
+  if (!is.null(RNG_kind_arg_list)) {
+    rlang::exec(RNG_kind, !!!RNG_kind_arg_list, .env = env)
+  }
+
+  ## Evaluate expressions and compare results
+  set_seed(use_seed)
+  x <- rlang::exec(rn_generator$val, !!!arg_list$val, .env = env)
+  set_seed(use_seed)
+  y <- rlang::exec(rn_generator_test$val, !!!arg_list$val, .env = env)
+
+  comp <- testthat::compare(x, y, ...)
+
+  ## Create testthat output
+  testthat::expect(
+    ok = comp$equal,
+    failure_message = sprintf(
+      paste0(
+        "Random number generation results of %s not equal to those of %s.", # nolint
+        "\nSeed: %s",
+        "\n%s:",
+        "\n%s",
+        "\n\n%s"
+      ),
+      rn_generator$lab, rn_generator_test$lab, use_seed,
+      arg_list$lab,
+      format_args(arg_list$val, justify = "right", digits = 2L),
+      comp$message
     )
-    rn_generator_test <- testthat::quasi_label(
-        rlang::enquo(rn_generator_test), NULL,
-        arg = "rn_generator_test"
-    )
-    arg_list <- testthat::quasi_label(
-        rlang::enquo(arg_list), "Arguments",
-        arg = "arg_list"
-    )
+  )
 
-    ## Conventional checks to catch user errors early on
-    checkmate::assert(
-        combine = "or",
-        checkmate::check_string(rn_generator$val),
-        checkmate::check_function(rn_generator$val)
-    )
-    checkmate::assert(
-        combine = "or",
-        checkmate::check_string(rn_generator_test$val),
-        checkmate::check_function(rn_generator_test$val)
-    )
-    checkmate::qassert(n, "X1(0,)")
-    checkmate::qassert(n, "X1(0,)")
-
-    ## Set up call arguments
-    if (!missing(n)) {
-        arg_list$val <- c("n" = n, arg_list$val)
-    }
-
-    ## Set up RNG
-    if (!is.null(RNG_kind_arg_list)) {
-        rlang::exec(RNG_kind, !!!RNG_kind_arg_list, .env = env)
-    }
-
-    ## Evaluate expressions and compare results
-    set_seed(use_seed)
-    x <- rlang::exec(rn_generator$val, !!!arg_list$val, .env = env)
-    set_seed(use_seed)
-    y <- rlang::exec(rn_generator_test$val, !!!arg_list$val, .env = env)
-
-    comp <- testthat::compare(x, y, ...)
-
-    ## Create testthat output
-    testthat::expect(
-        ok = comp$equal,
-        failure_message = sprintf(
-            paste0(
-                "Random number generation results of %s not equal to those of %s.", # nolint
-                "\nSeed: %s",
-                "\n%s:",
-                "\n%s",
-                "\n\n%s"
-            ),
-            rn_generator$lab, rn_generator_test$lab, use_seed,
-            arg_list$lab,
-            format_args(arg_list$val, justify = "right", digits = 2L),
-            comp$message
-        )
-    )
-
-    invisible(rn_generator$val)
+  invisible(rn_generator$val)
 }
 
 RNG_kind_arg_list_default <- function() { # nolint
-    out <- list("kind" = "default", "normal.kind" = "default")
-    if (require_R_version("3.6.0")) {
-        out["sample.kind"] <- "default"
-    }
-    out
+  out <- list("kind" = "default", "normal.kind" = "default")
+  if (require_R_version("3.6.0")) {
+    out["sample.kind"] <- "default"
+  }
+  out
 }
 
 require_R_version <- function( # nolint
-        version_string = paste(major, minor, sep = "."),
-        major = R.version$major,
-        minor = R.version$minor) {
-    R_version_string <- paste(R.version$major, R.version$minor, sep = ".") # nolint
-    return(1 == compareVersion(R_version_string, version_string))
+    version_string = paste(major, minor, sep = "."),
+    major = R.version$major,
+    minor = R.version$minor) {
+  R_version_string <- paste(R.version$major, R.version$minor, sep = ".") # nolint
+  return(1 == compareVersion(R_version_string, version_string))
 }
 
 format_args <- function(args, ...) {
-    paste(
-        paste0(
-            " * ", names(args), " = \n\t", format(args, ...)
-        ),
-        collapse = "\n"
-    )
+  paste(
+    paste0(
+      " * ", names(args), " = \n\t", format(args, ...)
+    ),
+    collapse = "\n"
+  )
 }

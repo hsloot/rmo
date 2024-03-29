@@ -27,8 +27,8 @@ NULL
 #'
 #' @export PoissonBernsteinFunction
 PoissonBernsteinFunction <- setClass("PoissonBernsteinFunction", # nolint
-    contains = "LevyBernsteinFunction",
-    slots = c(eta = "numeric")
+  contains = "LevyBernsteinFunction",
+  slots = c(eta = "numeric")
 )
 
 #' @describeIn PoissonBernsteinFunction-class Constructor
@@ -42,27 +42,27 @@ PoissonBernsteinFunction <- setClass("PoissonBernsteinFunction", # nolint
 #' PoissonBernsteinFunction()
 #' PoissonBernsteinFunction(eta = 2)
 setMethod(
-    "initialize", "PoissonBernsteinFunction",
-    function(.Object, eta) { # nolint
-        if (!missing(eta)) {
-            .Object@eta <- eta # nolint
-            validObject(.Object)
-        }
-
-        invisible(.Object)
+  "initialize", "PoissonBernsteinFunction",
+  function(.Object, eta) { # nolint
+    if (!missing(eta)) {
+      .Object@eta <- eta # nolint
+      validObject(.Object)
     }
+
+    invisible(.Object)
+  }
 )
 
 #' @importFrom checkmate qtest
 setValidity(
-    "PoissonBernsteinFunction",
-    function(object) {
-        if (!qtest(object@eta, "N1[0,)")) {
-            return(error_msg_domain("eta", "N1[0,)"))
-        }
-
-        invisible(TRUE)
+  "PoissonBernsteinFunction",
+  function(object) {
+    if (!qtest(object@eta, "N1[0,)")) {
+      return(error_msg_domain("eta", "N1[0,)"))
     }
+
+    invisible(TRUE)
+  }
 )
 
 #' @describeIn PoissonBernsteinFunction-class Display the object.
@@ -70,17 +70,17 @@ setValidity(
 #'
 #' @export
 setMethod( # nocov start
-    "show", "PoissonBernsteinFunction",
-    function(object) {
-        cat(sprintf("An object of class %s\n", classLabel(class(object))))
-        if (isTRUE(validObject(object, test = TRUE))) {
-            cat(sprintf("- eta: %s\n", format(object@eta)))
-        } else {
-            cat("\t (invalid or not initialized)\n")
-        }
-
-        invisible(NULL)
+  "show", "PoissonBernsteinFunction",
+  function(object) {
+    cat(sprintf("An object of class %s\n", classLabel(class(object))))
+    if (isTRUE(validObject(object, test = TRUE))) {
+      cat(sprintf("- eta: %s\n", format(object@eta)))
+    } else {
+      cat("\t (invalid or not initialized)\n")
     }
+
+    invisible(NULL)
+  }
 ) # nocov end
 
 #' @describeIn PoissonBernsteinFunction-class
@@ -97,28 +97,28 @@ setMethod( # nocov start
 #'
 #' @export
 setMethod(
-    "levyDensity", "PoissonBernsteinFunction",
-    function(object) {
-        structure(
-            data.frame(x = object@eta, y = 1),
-            type = "discrete"
-        )
-    }
+  "levyDensity", "PoissonBernsteinFunction",
+  function(object) {
+    structure(
+      data.frame(x = object@eta, y = 1),
+      type = "discrete"
+    )
+  }
 )
 
 #' @importFrom checkmate qassert
 #' @keywords internal
 setMethod(
-    "valueOf0", "PoissonBernsteinFunction",
-    function(object, x, cscale = 1, ...) {
-        assert(
-            combine = "or",
-            check_numeric(x, min.len = 1L, any.missing = FALSE),
-            check_complex(x, min.len = 1L, any.missing = FALSE)
-        )
-        qassert(Re(x), "N+[0,)")
-        qassert(cscale, "N1(0,)")
-        x <- x * cscale
-        1 - exp(-x * object@eta)
-    }
+  "valueOf0", "PoissonBernsteinFunction",
+  function(object, x, cscale = 1, ...) {
+    assert(
+      combine = "or",
+      check_numeric(x, min.len = 1L, any.missing = FALSE),
+      check_complex(x, min.len = 1L, any.missing = FALSE)
+    )
+    qassert(Re(x), "N+[0,)")
+    qassert(cscale, "N1(0,)")
+    x <- x * cscale
+    1 - exp(-x * object@eta)
+  }
 )

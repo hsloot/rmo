@@ -40,8 +40,8 @@ NULL
 #'
 #' @export AlphaStableBernsteinFunction
 AlphaStableBernsteinFunction <- setClass("AlphaStableBernsteinFunction", # nolint
-    contains = "CompleteBernsteinFunction",
-    slots = c(alpha = "numeric")
+  contains = "CompleteBernsteinFunction",
+  slots = c(alpha = "numeric")
 )
 
 #' @describeIn AlphaStableBernsteinFunction-class Constructor
@@ -55,27 +55,27 @@ AlphaStableBernsteinFunction <- setClass("AlphaStableBernsteinFunction", # nolin
 #' AlphaStableBernsteinFunction()
 #' AlphaStableBernsteinFunction(alpha = 0.5)
 setMethod(
-    "initialize", "AlphaStableBernsteinFunction",
-    function(.Object, alpha) { # nolint
-        if (!missing(alpha)) {
-            .Object@alpha <- alpha # nolint
-            validObject(.Object)
-        }
-
-        invisible(.Object)
+  "initialize", "AlphaStableBernsteinFunction",
+  function(.Object, alpha) { # nolint
+    if (!missing(alpha)) {
+      .Object@alpha <- alpha # nolint
+      validObject(.Object)
     }
+
+    invisible(.Object)
+  }
 )
 
 #' @importFrom checkmate qtest
 setValidity(
-    "AlphaStableBernsteinFunction",
-    function(object) {
-        if (!qtest(object@alpha, "N1(0,1)")) {
-            return(error_msg_domain("alpha", "N1(0,1)"))
-        }
-
-        invisible(TRUE)
+  "AlphaStableBernsteinFunction",
+  function(object) {
+    if (!qtest(object@alpha, "N1(0,1)")) {
+      return(error_msg_domain("alpha", "N1(0,1)"))
     }
+
+    invisible(TRUE)
+  }
 )
 
 #' @describeIn AlphaStableBernsteinFunction-class Display the object.
@@ -83,17 +83,17 @@ setValidity(
 #'
 #' @export
 setMethod( # nocov start
-    "show", "AlphaStableBernsteinFunction",
-    function(object) {
-        cat(sprintf("An object of class %s\n", classLabel(class(object))))
-        if (isTRUE(validObject(object, test = TRUE))) {
-            cat(sprintf("- alpha: %s\n", format(object@alpha)))
-        } else {
-            cat("\t (invalid or not initialized)\n")
-        }
-
-        invisible(NULL)
+  "show", "AlphaStableBernsteinFunction",
+  function(object) {
+    cat(sprintf("An object of class %s\n", classLabel(class(object))))
+    if (isTRUE(validObject(object, test = TRUE))) {
+      cat(sprintf("- alpha: %s\n", format(object@alpha)))
+    } else {
+      cat("\t (invalid or not initialized)\n")
     }
+
+    invisible(NULL)
+  }
 ) # nocov end
 
 #' @describeIn AlphaStableBernsteinFunction-class
@@ -110,15 +110,15 @@ setMethod( # nocov start
 #'
 #' @export
 setMethod(
-    "levyDensity", "AlphaStableBernsteinFunction",
-    function(object) {
-        structure(
-            function(x) {
-                object@alpha / gamma(1 - object@alpha) * x^(-1 - object@alpha)
-            },
-            lower = 0, upper = Inf, type = "continuous"
-        )
-    }
+  "levyDensity", "AlphaStableBernsteinFunction",
+  function(object) {
+    structure(
+      function(x) {
+        object@alpha / gamma(1 - object@alpha) * x^(-1 - object@alpha)
+      },
+      lower = 0, upper = Inf, type = "continuous"
+    )
+  }
 )
 
 #' @describeIn AlphaStableBernsteinFunction-class
@@ -135,29 +135,29 @@ setMethod(
 #'
 #' @export
 setMethod(
-    "stieltjesDensity", "AlphaStableBernsteinFunction",
-    function(object) {
-        structure(
-            function(x) {
-                sin(object@alpha * pi) / pi * x^(object@alpha - 1)
-            },
-            lower = 0, upper = Inf, type = "continuous"
-        )
-    }
+  "stieltjesDensity", "AlphaStableBernsteinFunction",
+  function(object) {
+    structure(
+      function(x) {
+        sin(object@alpha * pi) / pi * x^(object@alpha - 1)
+      },
+      lower = 0, upper = Inf, type = "continuous"
+    )
+  }
 )
 
 #' @keywords internal
 setMethod(
-    "valueOf0", "AlphaStableBernsteinFunction",
-    function(object, x, cscale = 1, ...) {
-        assert(
-            combine = "or",
-            check_numeric(x, min.len = 1L, any.missing = FALSE),
-            check_complex(x, min.len = 1L, any.missing = FALSE)
-        )
-        qassert(Re(x), "N+[0,)")
-        qassert(cscale, "N1(0,)")
-        x <- x * cscale
-        x^object@alpha
-    }
+  "valueOf0", "AlphaStableBernsteinFunction",
+  function(object, x, cscale = 1, ...) {
+    assert(
+      combine = "or",
+      check_numeric(x, min.len = 1L, any.missing = FALSE),
+      check_complex(x, min.len = 1L, any.missing = FALSE)
+    )
+    qassert(Re(x), "N+[0,)")
+    qassert(cscale, "N1(0,)")
+    x <- x * cscale
+    x^object@alpha
+  }
 )

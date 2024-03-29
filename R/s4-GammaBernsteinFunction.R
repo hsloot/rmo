@@ -39,8 +39,8 @@ NULL
 #'
 #' @export GammaBernsteinFunction
 GammaBernsteinFunction <- setClass("GammaBernsteinFunction", # nolint
-    contains = "CompleteBernsteinFunction",
-    slots = c(a = "numeric")
+  contains = "CompleteBernsteinFunction",
+  slots = c(a = "numeric")
 )
 
 #' @describeIn GammaBernsteinFunction-class Constructor
@@ -54,27 +54,27 @@ GammaBernsteinFunction <- setClass("GammaBernsteinFunction", # nolint
 #' GammaBernsteinFunction()
 #' GammaBernsteinFunction(a = 2)
 setMethod(
-    "initialize", "GammaBernsteinFunction",
-    function(.Object, a) { # nolint
-        if (!missing(a)) {
-            .Object@a <- a # nolint
-            validObject(.Object)
-        }
-
-        invisible(.Object)
+  "initialize", "GammaBernsteinFunction",
+  function(.Object, a) { # nolint
+    if (!missing(a)) {
+      .Object@a <- a # nolint
+      validObject(.Object)
     }
+
+    invisible(.Object)
+  }
 )
 
 #' @importFrom checkmate qtest
 setValidity(
-    "GammaBernsteinFunction",
-    function(object) {
-        if (!qtest(object@a, "N1(0,)")) {
-            return(error_msg_domain("a", "N1(0,)"))
-        }
-
-        invisible(TRUE)
+  "GammaBernsteinFunction",
+  function(object) {
+    if (!qtest(object@a, "N1(0,)")) {
+      return(error_msg_domain("a", "N1(0,)"))
     }
+
+    invisible(TRUE)
+  }
 )
 
 #' @describeIn GammaBernsteinFunction-class Display the object.
@@ -82,17 +82,17 @@ setValidity(
 #'
 #' @export
 setMethod( # nocov start
-    "show", "GammaBernsteinFunction",
-    function(object) {
-        cat(sprintf("An object of class %s\n", classLabel(class(object))))
-        if (isTRUE(validObject(object, test = TRUE))) {
-            cat(sprintf("- a: %s\n", format(object@a)))
-        } else {
-            cat("\t (invalid or not initialized)\n")
-        }
-
-        invisible(NULL)
+  "show", "GammaBernsteinFunction",
+  function(object) {
+    cat(sprintf("An object of class %s\n", classLabel(class(object))))
+    if (isTRUE(validObject(object, test = TRUE))) {
+      cat(sprintf("- a: %s\n", format(object@a)))
+    } else {
+      cat("\t (invalid or not initialized)\n")
     }
+
+    invisible(NULL)
+  }
 ) # nocov end
 
 #' @describeIn GammaBernsteinFunction-class
@@ -109,15 +109,15 @@ setMethod( # nocov start
 #'
 #' @export
 setMethod(
-    "levyDensity", "GammaBernsteinFunction",
-    function(object) {
-        structure(
-            function(x) {
-                exp(-object@a * x) / x
-            },
-            lower = 0, upper = Inf, type = "continuous"
-        )
-    }
+  "levyDensity", "GammaBernsteinFunction",
+  function(object) {
+    structure(
+      function(x) {
+        exp(-object@a * x) / x
+      },
+      lower = 0, upper = Inf, type = "continuous"
+    )
+  }
 )
 
 #' @describeIn GammaBernsteinFunction-class
@@ -133,29 +133,29 @@ setMethod(
 #' }
 #'
 setMethod(
-    "stieltjesDensity", "GammaBernsteinFunction",
-    function(object) {
-        structure(
-            function(x) {
-                1 / x
-            },
-            lower = object@a, upper = Inf, type = "continuous"
-        )
-    }
+  "stieltjesDensity", "GammaBernsteinFunction",
+  function(object) {
+    structure(
+      function(x) {
+        1 / x
+      },
+      lower = object@a, upper = Inf, type = "continuous"
+    )
+  }
 )
 
 #' @keywords internal
 setMethod(
-    "valueOf0", "GammaBernsteinFunction",
-    function(object, x, cscale = 1, ...) {
-        assert(
-            combine = "or",
-            check_numeric(x, min.len = 1L, any.missing = FALSE),
-            check_complex(x, min.len = 1L, any.missing = FALSE)
-        )
-        qassert(Re(x), "N+[0,)")
-        qassert(cscale, "N1(0,)")
-        x <- x * cscale
-        log(1 + x / object@a)
-    }
+  "valueOf0", "GammaBernsteinFunction",
+  function(object, x, cscale = 1, ...) {
+    assert(
+      combine = "or",
+      check_numeric(x, min.len = 1L, any.missing = FALSE),
+      check_complex(x, min.len = 1L, any.missing = FALSE)
+    )
+    qassert(Re(x), "N+[0,)")
+    qassert(cscale, "N1(0,)")
+    x <- x * cscale
+    log(1 + x / object@a)
+  }
 )

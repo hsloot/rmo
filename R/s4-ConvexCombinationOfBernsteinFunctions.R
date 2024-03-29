@@ -17,12 +17,12 @@ NULL
 #'
 #' @export ConvexCombinationOfBernsteinFunctions
 ConvexCombinationOfBernsteinFunctions <- setClass( # nolint
-    "ConvexCombinationOfBernsteinFunctions",
-    contains = "BernsteinFunction",
-    slots = c(
-        coefficients = "numeric",
-        points = "list"
-    )
+  "ConvexCombinationOfBernsteinFunctions",
+  contains = "BernsteinFunction",
+  slots = c(
+    coefficients = "numeric",
+    points = "list"
+  )
 )
 
 #' @describeIn ConvexCombinationOfBernsteinFunctions-class Constructor
@@ -40,63 +40,63 @@ ConvexCombinationOfBernsteinFunctions <- setClass( # nolint
 #' bf2 <- ConstantBernsteinFunction(constant = 0.5)
 #' bf3 <- AlphaStableBernsteinFunction(alpha = 0.5)
 #' ConvexCombinationOfBernsteinFunctions(
-#'     coefficients = c(0.2, 0.5, 0.1),
-#'     points = list(bf1, bf2, bf3)
+#'   coefficients = c(0.2, 0.5, 0.1),
+#'   points = list(bf1, bf2, bf3)
 #' )
 setMethod(
-    "initialize",
-    "ConvexCombinationOfBernsteinFunctions",
-    function(.Object, coefficients, points) { # nolint
-        if (!(missing(coefficients) || missing(points))) {
-            .Object@coefficients <- coefficients # nolint
-            .Object@points <- points # nolint
-            validObject(.Object)
-        }
-
-        invisible(.Object)
+  "initialize",
+  "ConvexCombinationOfBernsteinFunctions",
+  function(.Object, coefficients, points) { # nolint
+    if (!(missing(coefficients) || missing(points))) {
+      .Object@coefficients <- coefficients # nolint
+      .Object@points <- points # nolint
+      validObject(.Object)
     }
+
+    invisible(.Object)
+  }
 )
 
 #' @importFrom checkmate qtest test_list
 setValidity(
-    "ConvexCombinationOfBernsteinFunctions",
-    function(object) {
-        if (!qtest(object@coefficients, "R+(0,)")) {
-            return(error_msg_domain("coefficients", "R+(0,)"))
-        }
-        if (!(
-              test_list(
-                  object@points,
-                  types = "BernsteinFunction",
-                  any.missing = FALSE,
-                  len = length(object@coefficients)
-              ) &&
-                  all(
-                      sapply(
-                          object@points,
-                          function(object) {
-                              isTRUE(
-                                  validObject(
-                                      object,
-                                      test = TRUE, complete = TRUE
-                                  )
-                              )
-                          }
-                      )
-                  ))) {
-            return(
-                error_msg_domain(
-                    "points",
-                    sprintf(
-                        "list of valid Bernstein functions of length %i",
-                        length(object@coefficients)
-                    )
-                )
-            )
-        }
-
-        invisible(TRUE)
+  "ConvexCombinationOfBernsteinFunctions",
+  function(object) {
+    if (!qtest(object@coefficients, "R+(0,)")) {
+      return(error_msg_domain("coefficients", "R+(0,)"))
     }
+    if (!(
+          test_list(
+            object@points,
+            types = "BernsteinFunction",
+            any.missing = FALSE,
+            len = length(object@coefficients)
+          ) &&
+            all(
+              sapply(
+                object@points,
+                function(object) {
+                  isTRUE(
+                    validObject(
+                      object,
+                      test = TRUE, complete = TRUE
+                    )
+                  )
+                }
+              )
+            ))) {
+      return(
+        error_msg_domain(
+          "points",
+          sprintf(
+            "list of valid Bernstein functions of length %i",
+            length(object@coefficients)
+          )
+        )
+      )
+    }
+
+    invisible(TRUE)
+  }
 )
 
 #' @describeIn ConvexCombinationOfBernsteinFunctions-class Display the object.
@@ -106,28 +106,28 @@ setValidity(
 #'
 #' @export
 setMethod( # nocov start
-    "show",
-    "ConvexCombinationOfBernsteinFunctions",
-    function(object) {
-        cat(sprintf("An object of class %s\n", classLabel(class(object))))
-        if (isTRUE(validObject(object, test = TRUE))) {
-            for (i in seq_along(object@coefficients)) {
-                cat(
-                    sprintf(
-                        "- coefficient: %s\n", format(object@coefficients[[i]])
-                    )
-                )
-                cat("- point:\n")
-                writeLines(
-                    paste0("\t", capture.output(show(object@points[[i]])))
-                )
-            }
-        } else {
-            cat("\t (invalid or not initialized)\n")
-        }
-
-        invisible(NULL)
+  "show",
+  "ConvexCombinationOfBernsteinFunctions",
+  function(object) {
+    cat(sprintf("An object of class %s\n", classLabel(class(object))))
+    if (isTRUE(validObject(object, test = TRUE))) {
+      for (i in seq_along(object@coefficients)) {
+        cat(
+          sprintf(
+            "- coefficient: %s\n", format(object@coefficients[[i]])
+          )
+        )
+        cat("- point:\n")
+        writeLines(
+          paste0("\t", capture.output(show(object@points[[i]])))
+        )
+      }
+    } else {
+      cat("\t (invalid or not initialized)\n")
     }
+
+    invisible(NULL)
+  }
 ) # nocov end
 
 #' @describeIn ConvexCombinationOfBernsteinFunctions-class
@@ -139,21 +139,21 @@ setMethod( # nocov start
 #'
 #' @export
 setMethod(
-    "valueOf",
-    "ConvexCombinationOfBernsteinFunctions",
-    function(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...) { # nolint
-        drop(
-            t(object@coefficients) %*%
-                drop(t(sapply(
-                    object@points,
-                    valueOf,
-                    x = x,
-                    difference_order = difference_order,
-                    n = n,
-                    k = k,
-                    cscale = cscale,
-                    ...
-                )))
-        )
-    }
+  "valueOf",
+  "ConvexCombinationOfBernsteinFunctions",
+  function(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...) { # nolint
+    drop(
+      t(object@coefficients) %*%
+        drop(t(sapply(
+          object@points,
+          valueOf,
+          x = x,
+          difference_order = difference_order,
+          n = n,
+          k = k,
+          cscale = cscale,
+          ...
+        )))
+    )
+  }
 )

@@ -36,16 +36,16 @@
 #' is_within(1, 3)
 #' @export
 is_within <- function(i, j) { # nolint
-    count <- 1
-    while (j > 0) {
-        if (1 == (j %% 2) && count == i) { ## <=> c_{i-1} = 1
-            return(TRUE)
-        }
-        j <- j %/% 2
-        count <- count + 1
+  count <- 1
+  while (j > 0) {
+    if (1 == (j %% 2) && count == i) { ## <=> c_{i-1} = 1
+      return(TRUE)
     }
+    j <- j %/% 2
+    count <- count + 1
+  }
 
-    return(FALSE)
+  return(FALSE)
 }
 
 #' Last value in a vector or list
@@ -56,7 +56,7 @@ is_within <- function(i, j) { # nolint
 #' last(rep(1, times = 5))
 #' @export
 last <- function(x) {
-    x[[length(x)]]
+  x[[length(x)]]
 }
 
 #' Sample from the Exponential distribution
@@ -76,13 +76,13 @@ last <- function(x) {
 #' @importFrom stats rexp
 #' @export
 rexp <- function(n, rate = 1) {
-    if (0 == rate) {
-        return(rep(Inf, n))
-    } else if (Inf == rate) {
-        return(rep(0, n))
-    }
+  if (0 == rate) {
+    return(rep(Inf, n))
+  } else if (Inf == rate) {
+    return(rep(0, n))
+  }
 
-    stats::rexp(n, rate)
+  stats::rexp(n, rate)
 }
 
 #' Sample a deterministic value
@@ -94,7 +94,7 @@ rexp <- function(n, rate = 1) {
 #' rposval(10, value = 0.5)
 #' @export
 rposval <- function(n, value = 1) {
-    rep(value, times = n)
+  rep(value, times = n)
 }
 
 #' Sample from the Pareto distribution
@@ -108,5 +108,5 @@ rposval <- function(n, value = 1) {
 #' @importFrom stats runif
 #' @export
 rpareto <- function(n, alpha = 1, x0 = 1e-4) {
-    x0 / (stats::runif(n))^(1 / alpha)
+  x0 / (stats::runif(n))^(1 / alpha)
 }

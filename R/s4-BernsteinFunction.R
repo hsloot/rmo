@@ -55,7 +55,7 @@ NULL
 #'
 #' @export
 setClass("BernsteinFunction", # nolint
-    contains = "VIRTUAL"
+  contains = "VIRTUAL"
 )
 
 #' @describeIn BernsteinFunction-class
@@ -78,26 +78,26 @@ setClass("BernsteinFunction", # nolint
 #'
 #' @export
 setGeneric(
-    "valueOf",
-    function(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...) { # nolint
-        standardGeneric("valueOf")
-    }
+  "valueOf",
+  function(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...) { # nolint
+    standardGeneric("valueOf")
+  }
 )
 
 #' @keywords internal
 setGeneric(
-    "valueOf0",
-    function(object, x, cscale = 1, ...) {
-        standardGeneric("valueOf0")
-    }
+  "valueOf0",
+  function(object, x, cscale = 1, ...) {
+    standardGeneric("valueOf0")
+  }
 )
 
 #' @keywords internal
 setGeneric(
-    "defaultMethod",
-    function(object) {
-        standardGeneric("defaultMethod")
-    }
+  "defaultMethod",
+  function(object) {
+    standardGeneric("defaultMethod")
+  }
 )
 
 #' @describeIn BernsteinFunction-class
@@ -110,10 +110,10 @@ setGeneric(
 #'
 #' @export
 setGeneric(
-    "uexIntensities",
-    function(object, d, cscale = 1, ...) {
-        standardGeneric("uexIntensities")
-    }
+  "uexIntensities",
+  function(object, d, cscale = 1, ...) {
+    standardGeneric("uexIntensities")
+  }
 )
 
 #' @describeIn BernsteinFunction-class
@@ -124,10 +124,10 @@ setGeneric(
 #'
 #' @export
 setGeneric(
-    "intensities",
-    function(object, d, cscale = 1, ...) {
-        standardGeneric("intensities")
-    }
+  "intensities",
+  function(object, d, cscale = 1, ...) {
+    standardGeneric("intensities")
+  }
 )
 
 #' @describeIn BernsteinFunction-class
@@ -138,10 +138,10 @@ setGeneric(
 #'
 #' @export
 setGeneric(
-    "exIntensities",
-    function(object, d, cscale = 1, ...) {
-        standardGeneric("exIntensities")
-    }
+  "exIntensities",
+  function(object, d, cscale = 1, ...) {
+    standardGeneric("exIntensities")
+  }
 )
 
 #' @describeIn BernsteinFunction-class
@@ -152,68 +152,68 @@ setGeneric(
 #'
 #' @export
 setGeneric(
-    "exQMatrix",
-    function(object, d, cscale = 1, ...) {
-        standardGeneric("exQMatrix")
-    }
+  "exQMatrix",
+  function(object, d, cscale = 1, ...) {
+    standardGeneric("exQMatrix")
+  }
 )
 
 setMethod(
-    "valueOf0", "BernsteinFunction",
-    function(object, x, cscale = 1, ...) {
-        valueOf(
-            object, x,
-            difference_order = 0L, n = 1L, k = 0L, cscale = cscale, ...
+  "valueOf0", "BernsteinFunction",
+  function(object, x, cscale = 1, ...) {
+    valueOf(
+      object, x,
+      difference_order = 0L, n = 1L, k = 0L, cscale = cscale, ...
+    )
+  }
+)
+
+#' @rdname BernsteinFunction-class
+#'
+#' @examples
+#' exIntensities(AlphaStableBernsteinFunction(4e-1), 3L)
+#'
+#' @export
+setMethod(
+  "uexIntensities", "BernsteinFunction",
+  function(object, d, cscale = 1, ...) {
+    sapply(1:d, function(i) valueOf(object, d - i, i, cscale = cscale, ...))
+  }
+)
+
+#' @rdname BernsteinFunction-class
+#'
+#' @examples
+#' exIntensities(AlphaStableBernsteinFunction(4e-1), 3L)
+#'
+#' @export
+setMethod(
+  "exIntensities", "BernsteinFunction",
+  function(object, d, cscale = 1, ...) {
+    if (d == 2) {
+      out <- d * (
+        valueOf0(object, d, cscale = cscale) -
+          valueOf0(object, d - 1, cscale = cscale)
+      )
+    } else {
+      out <- c(
+        d * (
+             valueOf0(object, d, cscale = cscale) -
+               valueOf0(object, d - 1, cscale = cscale)),
+        sapply(
+          2:(d - 1),
+          function(i) {
+            valueOf(
+              object, d - i, i,
+              n = d, k = i, cscale = cscale, ...
+            )
+          }
         )
+      )
     }
-)
 
-#' @rdname BernsteinFunction-class
-#'
-#' @examples
-#' exIntensities(AlphaStableBernsteinFunction(4e-1), 3L)
-#'
-#' @export
-setMethod(
-    "uexIntensities", "BernsteinFunction",
-    function(object, d, cscale = 1, ...) {
-        sapply(1:d, function(i) valueOf(object, d - i, i, cscale = cscale, ...))
-    }
-)
-
-#' @rdname BernsteinFunction-class
-#'
-#' @examples
-#' exIntensities(AlphaStableBernsteinFunction(4e-1), 3L)
-#'
-#' @export
-setMethod(
-    "exIntensities", "BernsteinFunction",
-    function(object, d, cscale = 1, ...) {
-        if (d == 2) {
-            out <- d * (
-                valueOf0(object, d, cscale = cscale) -
-                    valueOf0(object, d - 1, cscale = cscale)
-            )
-        } else {
-            out <- c(
-                d * (
-                     valueOf0(object, d, cscale = cscale) -
-                         valueOf0(object, d - 1, cscale = cscale)),
-                sapply(
-                    2:(d - 1),
-                    function(i) {
-                        valueOf(
-                            object, d - i, i,
-                            n = d, k = i, cscale = cscale, ...
-                        )
-                    }
-                )
-            )
-        }
-
-        c(out, pmax(valueOf0(object, d, cscale = cscale) - sum(out), 0))
-    }
+    c(out, pmax(valueOf0(object, d, cscale = cscale) - sum(out), 0))
+  }
 )
 
 #' @rdname BernsteinFunction-class
@@ -223,10 +223,10 @@ setMethod(
 #'
 #' @export
 setMethod(
-    "intensities", "BernsteinFunction",
-    function(object, d, cscale = 1, ...) {
-        uexi2i(uexIntensities(object, d, cscale = cscale, ...))
-    }
+  "intensities", "BernsteinFunction",
+  function(object, d, cscale = 1, ...) {
+    uexi2i(uexIntensities(object, d, cscale = cscale, ...))
+  }
 )
 
 #' @rdname BernsteinFunction-class
@@ -236,8 +236,8 @@ setMethod(
 #'
 #' @export
 setMethod(
-    "exQMatrix", "BernsteinFunction",
-    function(object, d, cscale = 1, ...) {
-        exi2exqm(exIntensities(object, d, cscale = cscale, ...))
-    }
+  "exQMatrix", "BernsteinFunction",
+  function(object, d, cscale = 1, ...) {
+    exi2exqm(exIntensities(object, d, cscale = cscale, ...))
+  }
 )

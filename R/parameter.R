@@ -1,13 +1,13 @@
 #' @keywords internal
 #' @noRd
 bf2intensities <- function(d, bf) { # nocov start
-    intensities(bf, d)
+  intensities(bf, d)
 } # nocov end
 
 #' @keywords internal
 #' @noRd
 bf2ex_intensities <- function(d, bf) { # nocov start
-    exIntensities(bf, d)
+  exIntensities(bf, d)
 } # nocov end
 
 
@@ -39,8 +39,8 @@ NULL
 #' @export
 #' @rdname parameter
 ex_intensities_constant <- function(d, constant) { # nocov start
-    bf <- ConstantBernsteinFunction(constant = constant)
-    bf2ex_intensities(d, bf)
+  bf <- ConstantBernsteinFunction(constant = constant)
+  bf2ex_intensities(d, bf)
 } # nocov end
 
 #' @examples
@@ -49,8 +49,8 @@ ex_intensities_constant <- function(d, constant) { # nocov start
 #' @export
 #' @rdname parameter
 intensities_constant <- function(d, constant) { # nocov start
-    bf <- ConstantBernsteinFunction(constant = constant)
-    bf2intensities(d, bf)
+  bf <- ConstantBernsteinFunction(constant = constant)
+  bf2intensities(d, bf)
 } # nocov end
 
 
@@ -65,8 +65,8 @@ intensities_constant <- function(d, constant) { # nocov start
 #' @export
 #' @rdname parameter
 ex_intensities_linear <- function(d, scale) { # nocov start
-    bf <- LinearBernsteinFunction(scale = scale)
-    bf2ex_intensities(d, bf)
+  bf <- LinearBernsteinFunction(scale = scale)
+  bf2ex_intensities(d, bf)
 } # nocov end
 
 #' @examples
@@ -75,8 +75,8 @@ ex_intensities_linear <- function(d, scale) { # nocov start
 #' @export
 #' @rdname parameter
 intensities_linear <- function(d, scale) { # nocov start
-    bf <- LinearBernsteinFunction(scale = scale)
-    bf2intensities(d, bf)
+  bf <- LinearBernsteinFunction(scale = scale)
+  bf2intensities(d, bf)
 } # nocov end
 
 
@@ -91,8 +91,8 @@ intensities_linear <- function(d, scale) { # nocov start
 #' @export
 #' @rdname parameter
 ex_intensities_armageddon <- function(d, alpha, beta) { # nocov start
-    ex_intensities_linear(d, scale = alpha) +
-        ex_intensities_constant(d, constant = beta)
+  ex_intensities_linear(d, scale = alpha) +
+    ex_intensities_constant(d, constant = beta)
 } # nocov end
 
 #' @examples
@@ -101,8 +101,8 @@ ex_intensities_armageddon <- function(d, alpha, beta) { # nocov start
 #' @export
 #' @rdname parameter
 intensities_armageddon <- function(d, alpha, beta) { # nocov start
-    intensities_linear(d, scale = alpha) +
-        intensities_constant(d, constant = beta)
+  intensities_linear(d, scale = alpha) +
+    intensities_constant(d, constant = beta)
 } # nocov end
 
 
@@ -117,8 +117,8 @@ intensities_armageddon <- function(d, alpha, beta) { # nocov start
 #' @export
 #' @rdname parameter
 ex_intensities_poisson <- function(d, eta) { # nocov start
-    bf <- PoissonBernsteinFunction(eta = eta)
-    bf2ex_intensities(d, bf)
+  bf <- PoissonBernsteinFunction(eta = eta)
+  bf2ex_intensities(d, bf)
 } # nocov end
 
 #' @examples
@@ -127,8 +127,8 @@ ex_intensities_poisson <- function(d, eta) { # nocov start
 #' @export
 #' @rdname parameter
 intensities_poisson <- function(d, eta) { # nocov start
-    bf <- PoissonBernsteinFunction(eta = eta)
-    bf2intensities(d, bf)
+  bf <- PoissonBernsteinFunction(eta = eta)
+  bf2intensities(d, bf)
 } # nocov end
 
 
@@ -143,8 +143,8 @@ intensities_poisson <- function(d, eta) { # nocov start
 #' @export
 #' @rdname parameter
 ex_intensities_alpha_stable <- function(d, alpha) { # nocov start
-    bf <- AlphaStableBernsteinFunction(alpha = alpha)
-    bf2ex_intensities(d, bf)
+  bf <- AlphaStableBernsteinFunction(alpha = alpha)
+  bf2ex_intensities(d, bf)
 } # nocov end
 
 #' @examples
@@ -153,8 +153,8 @@ ex_intensities_alpha_stable <- function(d, alpha) { # nocov start
 #' @export
 #' @rdname parameter
 intensities_alpha_stable <- function(d, alpha) { # nocov start
-    bf <- AlphaStableBernsteinFunction(alpha = alpha)
-    bf2intensities(d, bf)
+  bf <- AlphaStableBernsteinFunction(alpha = alpha)
+  bf2intensities(d, bf)
 } # nocov end
 
 
@@ -169,8 +169,8 @@ intensities_alpha_stable <- function(d, alpha) { # nocov start
 #' @export
 #' @rdname parameter
 ex_intensities_exponential <- function(d, lambda) { # nocov start
-    bf <- ExponentialBernsteinFunction(lambda = lambda)
-    bf2ex_intensities(d, bf)
+  bf <- ExponentialBernsteinFunction(lambda = lambda)
+  bf2ex_intensities(d, bf)
 } # nocov end
 
 #' @examples
@@ -179,8 +179,8 @@ ex_intensities_exponential <- function(d, lambda) { # nocov start
 #' @export
 #' @rdname parameter
 intensities_exponential <- function(d, lambda) { # nocov start
-    bf <- ExponentialBernsteinFunction(lambda = lambda)
-    bf2intensities(d, bf)
+  bf <- ExponentialBernsteinFunction(lambda = lambda)
+  bf2intensities(d, bf)
 } # nocov end
 
 
@@ -195,8 +195,8 @@ intensities_exponential <- function(d, lambda) { # nocov start
 #' @export
 #' @rdname parameter
 ex_intensities_gamma <- function(d, a) { # nocov start
-    bf <- GammaBernsteinFunction(a = a)
-    bf2ex_intensities(d, bf)
+  bf <- GammaBernsteinFunction(a = a)
+  bf2ex_intensities(d, bf)
 } # nocov end
 
 #' @examples
@@ -205,8 +205,8 @@ ex_intensities_gamma <- function(d, a) { # nocov start
 #' @export
 #' @rdname parameter
 intensities_gamma <- function(d, a) { # nocov start
-    bf <- GammaBernsteinFunction(a = a)
-    bf2intensities(d, bf)
+  bf <- GammaBernsteinFunction(a = a)
+  bf2intensities(d, bf)
 } # nocov end
 
 
@@ -223,8 +223,8 @@ intensities_gamma <- function(d, a) { # nocov start
 #' @export
 #' @rdname parameter
 ex_intensities_pareto <- function(d, alpha, x0) { # nocov start
-    bf <- ParetoBernsteinFunction(alpha = alpha, x0 = x0)
-    bf2ex_intensities(d, bf)
+  bf <- ParetoBernsteinFunction(alpha = alpha, x0 = x0)
+  bf2ex_intensities(d, bf)
 } # nocov end
 
 #' @examples
@@ -233,8 +233,8 @@ ex_intensities_pareto <- function(d, alpha, x0) { # nocov start
 #' @export
 #' @rdname parameter
 intensities_pareto <- function(d, alpha, x0) { # nocov start
-    bf <- ParetoBernsteinFunction(alpha = alpha, x0 = x0)
-    bf2intensities(d, bf)
+  bf <- ParetoBernsteinFunction(alpha = alpha, x0 = x0)
+  bf2intensities(d, bf)
 } # nocov end
 
 
@@ -249,8 +249,8 @@ intensities_pareto <- function(d, alpha, x0) { # nocov start
 #' @export
 #' @rdname parameter
 ex_intensities_inverse_gaussian <- function(d, eta) { # nolint # nocov start
-    bf <- InverseGaussianBernsteinFunction(eta = eta)
-    bf2ex_intensities(d, bf)
+  bf <- InverseGaussianBernsteinFunction(eta = eta)
+  bf2ex_intensities(d, bf)
 } # nocov end
 
 #' @examples
@@ -259,6 +259,6 @@ ex_intensities_inverse_gaussian <- function(d, eta) { # nolint # nocov start
 #' @export
 #' @rdname parameter
 intensities_inverse_gaussian <- function(d, eta) { # nocov start
-    bf <- InverseGaussianBernsteinFunction(eta = eta)
-    bf2intensities(d, bf)
+  bf <- InverseGaussianBernsteinFunction(eta = eta)
+  bf2intensities(d, bf)
 } # nocov end

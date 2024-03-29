@@ -20,8 +20,8 @@ NULL
 #'
 #' @export ScaledBernsteinFunction
 ScaledBernsteinFunction <- setClass("ScaledBernsteinFunction", # nolint
-    contains = "BernsteinFunction",
-    slots = c(scale = "numeric", original = "BernsteinFunction")
+  contains = "BernsteinFunction",
+  slots = c(scale = "numeric", original = "BernsteinFunction")
 )
 
 #' @describeIn ScaledBernsteinFunction-class Constructor
@@ -37,28 +37,28 @@ ScaledBernsteinFunction <- setClass("ScaledBernsteinFunction", # nolint
 #' original_bf <- AlphaStableBernsteinFunction(alpha = 0.5)
 #' ScaledBernsteinFunction(scale = 2, original = original_bf)
 setMethod(
-    "initialize", "ScaledBernsteinFunction",
-    function(.Object, scale, original) { # nolint
-        if (!(missing(scale) || missing(original))) {
-            .Object@scale <- scale # nolint
-            .Object@original <- original # nolint
-            validObject(.Object)
-        }
-
-        invisible(.Object)
+  "initialize", "ScaledBernsteinFunction",
+  function(.Object, scale, original) { # nolint
+    if (!(missing(scale) || missing(original))) {
+      .Object@scale <- scale # nolint
+      .Object@original <- original # nolint
+      validObject(.Object)
     }
+
+    invisible(.Object)
+  }
 )
 
 #' @importFrom checkmate qtest
 setValidity(
-    "ScaledBernsteinFunction",
-    function(object) {
-        if (!qtest(object@scale, "N1[0,)")) {
-            return(error_msg_domain("scale", "N1[0,)"))
-        }
-
-        invisible(TRUE)
+  "ScaledBernsteinFunction",
+  function(object) {
+    if (!qtest(object@scale, "N1[0,)")) {
+      return(error_msg_domain("scale", "N1[0,)"))
     }
+
+    invisible(TRUE)
+  }
 )
 
 #' @describeIn ScaledBernsteinFunction-class Display the object.
@@ -68,21 +68,21 @@ setValidity(
 #'
 #' @export
 setMethod( # nocov start
-    "show", "ScaledBernsteinFunction",
-    function(object) {
-        cat(sprintf("An object of class %s\n", classLabel(class(object))))
-        if (isTRUE(validObject(object, test = TRUE))) {
-            cat(sprintf("- scale: %s\n", format(object@scale)))
-            cat("- original:\n")
-            writeLines(
-                paste0("\t", capture.output(show(object@original)))
-            )
-        } else {
-            cat("\t (invalid or not initialized)\n")
-        }
-
-        invisible(NULL)
+  "show", "ScaledBernsteinFunction",
+  function(object) {
+    cat(sprintf("An object of class %s\n", classLabel(class(object))))
+    if (isTRUE(validObject(object, test = TRUE))) {
+      cat(sprintf("- scale: %s\n", format(object@scale)))
+      cat("- original:\n")
+      writeLines(
+        paste0("\t", capture.output(show(object@original)))
+      )
+    } else {
+      cat("\t (invalid or not initialized)\n")
     }
+
+    invisible(NULL)
+  }
 ) # nocov end
 
 #' @describeIn ScaledBernsteinFunction-class
@@ -94,9 +94,9 @@ setMethod( # nocov start
 #'
 #' @export
 setMethod(
-    "valueOf", "ScaledBernsteinFunction",
-    function(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...) { # nolint
-        object@scale *
-            valueOf(object@original, x, difference_order, n, k, cscale, ...)
-    }
+  "valueOf", "ScaledBernsteinFunction",
+  function(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...) { # nolint
+    object@scale *
+      valueOf(object@original, x, difference_order, n, k, cscale, ...)
+  }
 )

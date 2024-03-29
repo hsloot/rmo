@@ -20,8 +20,8 @@ NULL
 #'
 #' @export CompositeScaledBernsteinFunction
 CompositeScaledBernsteinFunction <- setClass("CompositeScaledBernsteinFunction", # nolint
-    contains = "BernsteinFunction",
-    slots = c(cscale = "numeric", original = "BernsteinFunction")
+  contains = "BernsteinFunction",
+  slots = c(cscale = "numeric", original = "BernsteinFunction")
 )
 
 #' @describeIn CompositeScaledBernsteinFunction-class Constructor
@@ -38,28 +38,28 @@ CompositeScaledBernsteinFunction <- setClass("CompositeScaledBernsteinFunction",
 #' bf_original <- AlphaStableBernsteinFunction()
 #' CompositeScaledBernsteinFunction(cscale = cscale, original = bf_original)
 setMethod(
-    "initialize", "CompositeScaledBernsteinFunction",
-    function(.Object, cscale, original) { # nolint
-        if (!(missing(cscale) || missing(original))) {
-            .Object@cscale <- cscale # nolint
-            .Object@original <- original # nolint
-            validObject(.Object)
-        }
-
-        invisible(.Object)
+  "initialize", "CompositeScaledBernsteinFunction",
+  function(.Object, cscale, original) { # nolint
+    if (!(missing(cscale) || missing(original))) {
+      .Object@cscale <- cscale # nolint
+      .Object@original <- original # nolint
+      validObject(.Object)
     }
+
+    invisible(.Object)
+  }
 )
 
 #' @importFrom checkmate qtest
 setValidity(
-    "CompositeScaledBernsteinFunction",
-    function(object) {
-        if (!qtest(object@cscale, "N1[0,)")) {
-            return(error_msg_domain("cscale", "N1[0,)"))
-        }
-
-        invisible(TRUE)
+  "CompositeScaledBernsteinFunction",
+  function(object) {
+    if (!qtest(object@cscale, "N1[0,)")) {
+      return(error_msg_domain("cscale", "N1[0,)"))
     }
+
+    invisible(TRUE)
+  }
 )
 
 #' @describeIn CompositeScaledBernsteinFunction-class Display the object.
@@ -69,21 +69,21 @@ setValidity(
 #'
 #' @export
 setMethod( # nocov start
-    "show", "CompositeScaledBernsteinFunction",
-    function(object) {
-        cat(sprintf("An object of class %s\n", classLabel(class(object))))
-        if (isTRUE(validObject(object, test = TRUE))) {
-            cat(sprintf("- cscale: %s\n", format(object@cscale)))
-            cat("- original:\n")
-            writeLines(
-                paste0("\t", capture.output(show(object@original)))
-            )
-        } else {
-            cat("\t (invalid or not initialized)\n")
-        }
-
-        invisible(NULL)
+  "show", "CompositeScaledBernsteinFunction",
+  function(object) {
+    cat(sprintf("An object of class %s\n", classLabel(class(object))))
+    if (isTRUE(validObject(object, test = TRUE))) {
+      cat(sprintf("- cscale: %s\n", format(object@cscale)))
+      cat("- original:\n")
+      writeLines(
+        paste0("\t", capture.output(show(object@original)))
+      )
+    } else {
+      cat("\t (invalid or not initialized)\n")
     }
+
+    invisible(NULL)
+  }
 ) # nocov end
 
 #' @describeIn CompositeScaledBernsteinFunction-class
@@ -95,14 +95,14 @@ setMethod( # nocov start
 #'
 #' @export
 setMethod(
-    "valueOf", "CompositeScaledBernsteinFunction",
-    function(object, x, difference_order = 0L, n = 1, k = 0, cscale = 1, ...) {
-        valueOf(
-            object@original, x,
-            difference_order = difference_order,
-            n = n, k = k,
-            cscale = cscale * object@cscale,
-            ...
-        )
-    }
+  "valueOf", "CompositeScaledBernsteinFunction",
+  function(object, x, difference_order = 0L, n = 1, k = 0, cscale = 1, ...) {
+    valueOf(
+      object@original, x,
+      difference_order = difference_order,
+      n = n, k = k,
+      cscale = cscale * object@cscale,
+      ...
+    )
+  }
 )

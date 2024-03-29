@@ -59,54 +59,54 @@
 #'
 #' @examples
 #' rmo(
-#'     10, 3,
-#'     c(0.4, 0.4, 0.1, 0.4, 0.1, 0.1, 0.4)
+#'   10, 3,
+#'   c(0.4, 0.4, 0.1, 0.4, 0.1, 0.1, 0.4)
 #' )
 #' ## independence
 #' rmo(
-#'     10, 3,
-#'     c(1, 1, 0, 1, 0, 0, 0)
+#'   10, 3,
+#'   c(1, 1, 0, 1, 0, 0, 0)
 #' )
 #' ## comonotone
 #' rmo(
-#'     10, 3,
-#'     c(0, 0, 0, 0, 0, 0, 1)
+#'   10, 3,
+#'   c(0, 0, 0, 0, 0, 0, 1)
 #' )
 #'
 #' rmo(
-#'     10, 3,
-#'     c(0.4, 0.4, 0.1, 0.4, 0.1, 0.1, 0.4),
-#'     method = "ESM"
+#'   10, 3,
+#'   c(0.4, 0.4, 0.1, 0.4, 0.1, 0.1, 0.4),
+#'   method = "ESM"
 #' )
 #' ## independence
 #' rmo(
-#'     10, 3,
-#'     c(1, 1, 0, 1, 0, 0, 0),
-#'     method = "ESM"
+#'   10, 3,
+#'   c(1, 1, 0, 1, 0, 0, 0),
+#'   method = "ESM"
 #' )
 #' ## comonotone
 #' rmo(
-#'     10, 3,
-#'     c(0, 0, 0, 0, 0, 0, 1),
-#'     method = "ESM"
+#'   10, 3,
+#'   c(0, 0, 0, 0, 0, 0, 1),
+#'   method = "ESM"
 #' )
 #'
 #' rmo(
-#'     10, 3,
-#'     c(0.4, 0.4, 0.1, 0.4, 0.1, 0.1, 0.4),
-#'     method = "AM"
+#'   10, 3,
+#'   c(0.4, 0.4, 0.1, 0.4, 0.1, 0.1, 0.4),
+#'   method = "AM"
 #' )
 #' ## independence
 #' rmo(
-#'     10, 3,
-#'     c(1, 1, 0, 1, 0, 0, 0),
-#'     method = "AM"
+#'   10, 3,
+#'   c(1, 1, 0, 1, 0, 0, 0),
+#'   method = "AM"
 #' )
 #' ## comonotone
 #' rmo(
-#'     10, 3,
-#'     c(0, 0, 0, 0, 0, 0, 1),
-#'     method = "AM"
+#'   10, 3,
+#'   c(0, 0, 0, 0, 0, 0, 1),
+#'   method = "AM"
 #' )
 #'
 #' @references
@@ -116,16 +116,16 @@
 #'
 #' @export
 rmo <- function(n, d, intensities, method = c("AM", "ESM")) {
-    method <- match.arg(method)
-    qassert(n, "X1[0,)")
-    qassert(d, "X1[2,)")
-    assert_choice(method, c("AM", "ESM"))
+  method <- match.arg(method)
+  qassert(n, "X1[0,)")
+  qassert(d, "X1[2,)")
+  assert_choice(method, c("AM", "ESM"))
 
-    if (method == "ESM") {
-        Rcpp__rmo_esm(n, d, intensities)
-    } else if (method == "AM") {
-        Rcpp__rmo_am(n, d, intensities)
-    } else {
-        stop(sprintf("Method %s not implemented", method)) # nocov
-    }
+  if (method == "ESM") {
+    Rcpp__rmo_esm(n, d, intensities)
+  } else if (method == "AM") {
+    Rcpp__rmo_am(n, d, intensities)
+  } else {
+    stop(sprintf("Method %s not implemented", method)) # nocov
+  }
 }

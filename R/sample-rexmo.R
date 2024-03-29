@@ -67,72 +67,72 @@ NULL
 #'
 #' @examples
 #' rexmo(
-#'     10, 3,
-#'     c(1.2, 0.3, 0.4)
+#'   10, 3,
+#'   c(1.2, 0.3, 0.4)
 #' )
 #' ## independence
 #' rexmo(
-#'     10, 3,
-#'     c(3, 0, 0)
+#'   10, 3,
+#'   c(3, 0, 0)
 #' )
 #' ## comonotone
 #' rexmo(
-#'     10, 3,
-#'     c(0, 0, 1)
+#'   10, 3,
+#'   c(0, 0, 1)
 #' )
 #'
 #' rexmo(
-#'     10, 3,
-#'     c(1.2, 0.3, 0.4),
-#'     method = "MDCM"
+#'   10, 3,
+#'   c(1.2, 0.3, 0.4),
+#'   method = "MDCM"
 #' )
 #' ## independence
 #' rexmo(
-#'     10, 3,
-#'     c(3, 0, 0),
-#'     method = "MDCM"
+#'   10, 3,
+#'   c(3, 0, 0),
+#'   method = "MDCM"
 #' )
 #' ## comonotone
 #' rexmo(
-#'     10, 3,
-#'     c(0, 0, 1),
-#'     method = "MDCM"
+#'   10, 3,
+#'   c(0, 0, 1),
+#'   method = "MDCM"
 #' )
 #'
 #' rexmo(
-#'     10, 3,
-#'     c(1.2, 0.3, 0.4),
-#'     method = "AM"
+#'   10, 3,
+#'   c(1.2, 0.3, 0.4),
+#'   method = "AM"
 #' )
 #' ## independence
 #' rexmo(
-#'     10, 3,
-#'     c(3, 0, 0),
-#'     method = "AM"
+#'   10, 3,
+#'   c(3, 0, 0),
+#'   method = "AM"
 #' )
 #' ## comonotone
 #' rexmo(
-#'     10, 3,
-#'     c(0, 0, 1),
-#'     method = "AM"
+#'   10, 3,
+#'   c(0, 0, 1),
+#'   method = "AM"
 #' )
 #'
 #' rexmo(
-#'     10, 3,
-#'     c(1.2, 0.3, 0.4),
-#'     method = "ESM"
+#'   10, 3,
+#'   c(1.2, 0.3, 0.4),
+#'   method = "ESM"
 #' )
 #' ## independence
 #' rexmo(
-#'     10, 3,
-#'     c(3, 0, 0),
-#'     method = "ESM"
+#'   10, 3,
+#'   c(3, 0, 0),
+#'   method = "ESM"
 #' )
 #' ## comonotone
 #' rexmo(
-#'     10, 3,
-#'     c(0, 0, 1),
-#'     method = "ESM"
+#'   10, 3,
+#'   c(0, 0, 1),
+#'   method = "ESM"
 #' )
 #'
 #' @references
@@ -142,21 +142,21 @@ NULL
 #'
 #' @export
 rexmo <- function(n, d, ex_intensities, method = c("MDCM", "AM", "ESM")) {
-    method <- match.arg(method)
-    qassert(n, "X1[0,)")
-    qassert(d, "X1[2,)")
-    assert_choice(method, c("MDCM", "AM", "ESM"))
+  method <- match.arg(method)
+  qassert(n, "X1[0,)")
+  qassert(d, "X1[2,)")
+  assert_choice(method, c("MDCM", "AM", "ESM"))
 
-    if (method == "MDCM") {
-        Rcpp__rexmo_mdcm(n, d, ex_intensities)
-    } else if (method %in% c("AM", "ESM")) {
-        intensities <- uexi2i(
-            sapply(seq_along(ex_intensities), function(i) {
-                divide_binomial_coefficient(ex_intensities[[i]], d, i)
-            })
-        )
-        rmo(n, d, intensities, method = method)
-    } else {
-        stop(sprintf("Method %s not implemented", method)) # nocov
-    }
+  if (method == "MDCM") {
+    Rcpp__rexmo_mdcm(n, d, ex_intensities)
+  } else if (method %in% c("AM", "ESM")) {
+    intensities <- uexi2i(
+      sapply(seq_along(ex_intensities), function(i) {
+        divide_binomial_coefficient(ex_intensities[[i]], d, i)
+      })
+    )
+    rmo(n, d, intensities, method = method)
+  } else {
+    stop(sprintf("Method %s not implemented", method)) # nocov
+  }
 }

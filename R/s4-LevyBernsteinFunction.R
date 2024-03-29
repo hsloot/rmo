@@ -14,14 +14,14 @@ NULL
 #'
 #' @export
 setClass("LevyBernsteinFunction",
-    contains = c("BernsteinFunction", "VIRTUAL")
+  contains = c("BernsteinFunction", "VIRTUAL")
 )
 
 setMethod(
-    "defaultMethod", "LevyBernsteinFunction",
-    function(object) {
-        "levy"
-    }
+  "defaultMethod", "LevyBernsteinFunction",
+  function(object) {
+    "levy"
+  }
 )
 
 #' @describeIn LevyBernsteinFunction-class
@@ -36,10 +36,10 @@ setMethod(
 #'
 #' @export
 setGeneric(
-    "levyDensity",
-    function(object) {
-        standardGeneric("levyDensity")
-    }
+  "levyDensity",
+  function(object) {
+    standardGeneric("levyDensity")
+  }
 )
 
 #' @describeIn LevyBernsteinFunction-class
@@ -88,98 +88,98 @@ setGeneric(
 #' @importFrom stats integrate
 #' @export
 setMethod(
-    "valueOf", "LevyBernsteinFunction",
-    function(object, x, difference_order, n = 1L, k = 0L, cscale = 1, ...,
-             method = c("default", "levy"),
-             tolerance = .Machine$double.eps^0.5) {
-        method <- match.arg(method)
+  "valueOf", "LevyBernsteinFunction",
+  function(object, x, difference_order, n = 1L, k = 0L, cscale = 1, ...,
+           method = c("default", "levy"),
+           tolerance = .Machine$double.eps^0.5) {
+    method <- match.arg(method)
 
-        if (isTRUE("default" == method)) {
-            if (isTRUE(0L == difference_order)) {
-                qassert(cscale, "N1(0,)")
-                qassert(n, "X1(0,)")
-                qassert(k, "N1[0,)")
-                out <- multiply_binomial_coefficient(
-                    valueOf0(object, x * cscale), n, k
-                )
-            } else if (isTRUE(1L == difference_order)) {
-                out <- multiply_binomial_coefficient(
-                    valueOf0(object, (x + 1) * cscale), n, k
-                ) -
-                    multiply_binomial_coefficient(
-                        valueOf0(object, x * cscale), n, k
-                    )
-            } else {
-                out <- valueOf(object, x, difference_order, n, k, cscale, ...,
-                    method = defaultMethod(object), tolerance = tolerance
-                )
-            }
-        } else {
-            qassert(x, "N+[0,)")
-            qassert(difference_order, "X1[0,)")
-            qassert(cscale, "N1(0,)")
-            qassert(n, "X1(0,)")
-            qassert(k, "N1[0,)")
-            levy_density <- levyDensity(object)
-            if (isTRUE(0L == difference_order)) {
-                fct <- function(u, .x) {
-                    (1 - exp(-u * cscale * .x))
-                }
-            } else {
-                fct <- function(u, .x) {
-                    exp(-u * cscale * .x) *
-                        (1 - exp(-u * cscale))^difference_order
-                }
-            }
-
-            if (isTRUE("continuous" == attr(levy_density, "type"))) {
-                integrand_fn <- function(u, .x) {
-                    multiply_binomial_coefficient(
-                        fct(u, .x) * levy_density(u), n, k
-                    )
-                }
-                out <- sapply(
-                    x,
-                    function(.x) {
-                        res <- integrate(integrand_fn,
-                            .x = .x,
-                            lower = attr(levy_density, "lower"),
-                            upper = attr(levy_density, "upper"),
-                            rel.tol = tolerance, stop.on.error = FALSE,
-                            ...
-                        )
-                        if (!isTRUE("OK" == res$message) &&
-                                abs(.x) < 50 * .Machine$double.eps) {
-                            res <- integrate(integrand_fn,
-                                .x = 50 * .Machine$double.eps,
-                                lower = attr(levy_density, "lower"),
-                                upper = attr(levy_density, "upper"),
-                                rel.tol = tolerance, stop.on.error = FALSE,
-                                ...
-                            )
-                        }
-                        if (!isTRUE("OK" == res$message)) {
-                            stop(
-                                sprintf(
-                                    "Numerical integration failed with error: %s", # nolint
-                                    res$message
-                                )
-                            )
-                        }
-
-                        res$value
-                    }
-                )
-            } else {
-                out <- multiply_binomial_coefficient(
-                    as.vector(
-                        levy_density$y %*% outer(levy_density$x, x, fct)
-                    ),
-                    n, k
-                )
-            }
+    if (isTRUE("default" == method)) {
+      if (isTRUE(0L == difference_order)) {
+        qassert(cscale, "N1(0,)")
+        qassert(n, "X1(0,)")
+        qassert(k, "N1[0,)")
+        out <- multiply_binomial_coefficient(
+          valueOf0(object, x * cscale), n, k
+        )
+      } else if (isTRUE(1L == difference_order)) {
+        out <- multiply_binomial_coefficient(
+          valueOf0(object, (x + 1) * cscale), n, k
+        ) -
+          multiply_binomial_coefficient(
+            valueOf0(object, x * cscale), n, k
+          )
+      } else {
+        out <- valueOf(object, x, difference_order, n, k, cscale, ...,
+          method = defaultMethod(object), tolerance = tolerance
+        )
+      }
+    } else {
+      qassert(x, "N+[0,)")
+      qassert(difference_order, "X1[0,)")
+      qassert(cscale, "N1(0,)")
+      qassert(n, "X1(0,)")
+      qassert(k, "N1[0,)")
+      levy_density <- levyDensity(object)
+      if (isTRUE(0L == difference_order)) {
+        fct <- function(u, .x) {
+          (1 - exp(-u * cscale * .x))
         }
+      } else {
+        fct <- function(u, .x) {
+          exp(-u * cscale * .x) *
+            (1 - exp(-u * cscale))^difference_order
+        }
+      }
 
-        out
+      if (isTRUE("continuous" == attr(levy_density, "type"))) {
+        integrand_fn <- function(u, .x) {
+          multiply_binomial_coefficient(
+            fct(u, .x) * levy_density(u), n, k
+          )
+        }
+        out <- sapply(
+          x,
+          function(.x) {
+            res <- integrate(integrand_fn,
+              .x = .x,
+              lower = attr(levy_density, "lower"),
+              upper = attr(levy_density, "upper"),
+              rel.tol = tolerance, stop.on.error = FALSE,
+              ...
+            )
+            if (!isTRUE("OK" == res$message) &&
+                  abs(.x) < 50 * .Machine$double.eps) {
+              res <- integrate(integrand_fn,
+                .x = 50 * .Machine$double.eps,
+                lower = attr(levy_density, "lower"),
+                upper = attr(levy_density, "upper"),
+                rel.tol = tolerance, stop.on.error = FALSE,
+                ...
+              )
+            }
+            if (!isTRUE("OK" == res$message)) {
+              stop(
+                sprintf(
+                  "Numerical integration failed with error: %s", # nolint
+                  res$message
+                )
+              )
+            }
+
+            res$value
+          }
+        )
+      } else {
+        out <- multiply_binomial_coefficient(
+          as.vector(
+            levy_density$y %*% outer(levy_density$x, x, fct)
+          ),
+          n, k
+        )
+      }
     }
+
+    out
+  }
 )

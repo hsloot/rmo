@@ -20,8 +20,8 @@ NULL
 #'
 #' @export ConstantBernsteinFunction
 ConstantBernsteinFunction <- setClass("ConstantBernsteinFunction", # nolint
-    contains = "BernsteinFunction",
-    slots = c(constant = "numeric")
+  contains = "BernsteinFunction",
+  slots = c(constant = "numeric")
 )
 
 #' @describeIn ConstantBernsteinFunction-class Constructor
@@ -35,27 +35,27 @@ ConstantBernsteinFunction <- setClass("ConstantBernsteinFunction", # nolint
 #' ConstantBernsteinFunction()
 #' ConstantBernsteinFunction(constant = 0.2)
 setMethod(
-    "initialize", "ConstantBernsteinFunction",
-    function(.Object, constant) { # nolint
-        if (!missing(constant)) {
-            .Object@constant <- constant # nolint
-            validObject(.Object)
-        }
-
-        invisible(.Object)
+  "initialize", "ConstantBernsteinFunction",
+  function(.Object, constant) { # nolint
+    if (!missing(constant)) {
+      .Object@constant <- constant # nolint
+      validObject(.Object)
     }
+
+    invisible(.Object)
+  }
 )
 
 #' @importFrom checkmate qtest
 setValidity(
-    "ConstantBernsteinFunction",
-    function(object) {
-        if (!qtest(object@constant, "N1[0,)")) {
-            return(error_msg_domain("constant", "N1[0,)"))
-        }
-
-        invisible(TRUE)
+  "ConstantBernsteinFunction",
+  function(object) {
+    if (!qtest(object@constant, "N1[0,)")) {
+      return(error_msg_domain("constant", "N1[0,)"))
     }
+
+    invisible(TRUE)
+  }
 )
 
 #' @describeIn ConstantBernsteinFunction-class Display the object.
@@ -63,17 +63,17 @@ setValidity(
 #'
 #' @export
 setMethod( # nocov start
-    "show", "ConstantBernsteinFunction",
-    function(object) {
-        cat(sprintf("An object of class %s\n", classLabel(class(object))))
-        if (isTRUE(validObject(object, test = TRUE))) {
-            cat(sprintf("- constant: %s\n", format(object@constant)))
-        } else {
-            cat("\t (invalid or not initialized)\n")
-        }
-
-        invisible(NULL)
+  "show", "ConstantBernsteinFunction",
+  function(object) {
+    cat(sprintf("An object of class %s\n", classLabel(class(object))))
+    if (isTRUE(validObject(object, test = TRUE))) {
+      cat(sprintf("- constant: %s\n", format(object@constant)))
+    } else {
+      cat("\t (invalid or not initialized)\n")
     }
+
+    invisible(NULL)
+  }
 ) # nocov end
 
 #' @describeIn ConstantBernsteinFunction-class
@@ -86,28 +86,28 @@ setMethod( # nocov start
 #' @importFrom checkmate qassert assert check_numeric check_complex
 #' @export
 setMethod(
-    "valueOf", "ConstantBernsteinFunction",
-    function(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...) { # nolint
-        assert(
-            combine = "or",
-            check_numeric(x, lower = 0, min.len = 1L, any.missing = FALSE),
-            check_complex(x, min.len = 1L, any.missing = FALSE)
-        )
-        qassert(difference_order, "X1[0,)")
-        qassert(cscale, "N1(0,)")
-        qassert(n, "X1(0,)")
-        qassert(k, "N1[0,)")
+  "valueOf", "ConstantBernsteinFunction",
+  function(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...) { # nolint
+    assert(
+      combine = "or",
+      check_numeric(x, lower = 0, min.len = 1L, any.missing = FALSE),
+      check_complex(x, min.len = 1L, any.missing = FALSE)
+    )
+    qassert(difference_order, "X1[0,)")
+    qassert(cscale, "N1(0,)")
+    qassert(n, "X1(0,)")
+    qassert(k, "N1[0,)")
 
-        if (0L == difference_order) {
-            out <- ifelse(
-                x == 0, 0, multiply_binomial_coefficient(object@constant, n, k)
-            )
-        } else {
-            out <- ifelse(
-                x == 0, multiply_binomial_coefficient(object@constant, n, k), 0
-            )
-        }
-
-        out
+    if (0L == difference_order) {
+      out <- ifelse(
+        x == 0, 0, multiply_binomial_coefficient(object@constant, n, k)
+      )
+    } else {
+      out <- ifelse(
+        x == 0, multiply_binomial_coefficient(object@constant, n, k), 0
+      )
     }
+
+    out
+  }
 )

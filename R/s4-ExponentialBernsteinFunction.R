@@ -33,8 +33,8 @@ NULL
 #'
 #' @export ExponentialBernsteinFunction
 ExponentialBernsteinFunction <- setClass("ExponentialBernsteinFunction", # nolint
-    contains = "CompleteBernsteinFunction",
-    slots = c("lambda" = "numeric")
+  contains = "CompleteBernsteinFunction",
+  slots = c("lambda" = "numeric")
 )
 
 #' @describeIn ExponentialBernsteinFunction-class Constructor
@@ -48,27 +48,27 @@ ExponentialBernsteinFunction <- setClass("ExponentialBernsteinFunction", # nolin
 #' ExponentialBernsteinFunction()
 #' ExponentialBernsteinFunction(lambda = 0.5)
 setMethod(
-    "initialize", "ExponentialBernsteinFunction",
-    function(.Object, lambda) { # nolint
-        if (!missing(lambda)) {
-            .Object@lambda <- lambda # nolint
-            validObject(.Object)
-        }
-
-        invisible(.Object)
+  "initialize", "ExponentialBernsteinFunction",
+  function(.Object, lambda) { # nolint
+    if (!missing(lambda)) {
+      .Object@lambda <- lambda # nolint
+      validObject(.Object)
     }
+
+    invisible(.Object)
+  }
 )
 
 #' @importFrom checkmate qtest
 setValidity(
-    "ExponentialBernsteinFunction",
-    function(object) {
-        if (!qtest(object@lambda, "N1(0,)")) {
-            return(error_msg_domain("lambda", "N1(0,)"))
-        }
-
-        invisible(TRUE)
+  "ExponentialBernsteinFunction",
+  function(object) {
+    if (!qtest(object@lambda, "N1(0,)")) {
+      return(error_msg_domain("lambda", "N1(0,)"))
     }
+
+    invisible(TRUE)
+  }
 )
 
 #' @describeIn ExponentialBernsteinFunction-class Display the object.
@@ -76,17 +76,17 @@ setValidity(
 #'
 #' @export
 setMethod( # nocov start
-    "show", "ExponentialBernsteinFunction",
-    function(object) {
-        cat(sprintf("An object of class %s\n", classLabel(class(object))))
-        if (isTRUE(validObject(object, test = TRUE))) {
-            cat(sprintf("- lambda: %s\n", format(object@lambda)))
-        } else {
-            cat("\t (invalid or not initialized)\n")
-        }
-
-        invisible(NULL)
+  "show", "ExponentialBernsteinFunction",
+  function(object) {
+    cat(sprintf("An object of class %s\n", classLabel(class(object))))
+    if (isTRUE(validObject(object, test = TRUE))) {
+      cat(sprintf("- lambda: %s\n", format(object@lambda)))
+    } else {
+      cat("\t (invalid or not initialized)\n")
     }
+
+    invisible(NULL)
+  }
 ) # nocov end
 
 #' @describeIn ExponentialBernsteinFunction-class
@@ -103,15 +103,15 @@ setMethod( # nocov start
 #'
 #' @export
 setMethod(
-    "levyDensity", "ExponentialBernsteinFunction",
-    function(object) {
-        structure(
-            function(x) {
-                object@lambda * exp(-object@lambda * x)
-            },
-            lower = 0, upper = Inf, type = "continuous"
-        )
-    }
+  "levyDensity", "ExponentialBernsteinFunction",
+  function(object) {
+    structure(
+      function(x) {
+        object@lambda * exp(-object@lambda * x)
+      },
+      lower = 0, upper = Inf, type = "continuous"
+    )
+  }
 )
 
 #' @describeIn ExponentialBernsteinFunction-class
@@ -128,35 +128,35 @@ setMethod(
 #'
 #' @export
 setMethod(
-    "stieltjesDensity", "ExponentialBernsteinFunction",
-    function(object) {
-        structure(
-            data.frame(x = object@lambda, y = 1),
-            type = "discrete"
-        )
-    }
+  "stieltjesDensity", "ExponentialBernsteinFunction",
+  function(object) {
+    structure(
+      data.frame(x = object@lambda, y = 1),
+      type = "discrete"
+    )
+  }
 )
 
 #' @keywords internal
 setMethod(
-    "defaultMethod", "ExponentialBernsteinFunction",
-    function(object) {
-        "stieltjes"
-    }
+  "defaultMethod", "ExponentialBernsteinFunction",
+  function(object) {
+    "stieltjes"
+  }
 )
 
 #' @keywords internal
 setMethod(
-    "valueOf0", "ExponentialBernsteinFunction",
-    function(object, x, cscale = 1, ...) {
-        assert(
-            combine = "or",
-            check_numeric(x, min.len = 1L, any.missing = FALSE),
-            check_complex(x, min.len = 1L, any.missing = FALSE)
-        )
-        qassert(Re(x), "N+[0,)")
-        qassert(cscale, "N1(0,)")
-        x <- x * cscale
-        x / (x + object@lambda)
-    }
+  "valueOf0", "ExponentialBernsteinFunction",
+  function(object, x, cscale = 1, ...) {
+    assert(
+      combine = "or",
+      check_numeric(x, min.len = 1L, any.missing = FALSE),
+      check_complex(x, min.len = 1L, any.missing = FALSE)
+    )
+    qassert(Re(x), "N+[0,)")
+    qassert(cscale, "N1(0,)")
+    x <- x * cscale
+    x / (x + object@lambda)
+  }
 )

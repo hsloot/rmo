@@ -13,8 +13,8 @@
 #' @keywords internal
 #' @noRd
 error_msg_domain <- function(variable, domain) {
-    assert_string(variable)
-    assert_string(domain)
+  assert_string(variable)
+  assert_string(domain)
 
-    sprintf("Parameter %s must be of type %s", variable, domain)
+  sprintf("Parameter %s must be of type %s", variable, domain)
 }

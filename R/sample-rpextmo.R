@@ -241,255 +241,255 @@ NULL
 #' rpextmo(10, 3, b = 1, family = "Armageddon")
 #'
 #' rpextmo(
-#'     10, 3,
-#'     a = 0.2, b = 0.5,
-#'     family = "Armageddon",
-#'     method = "ESM"
+#'   10, 3,
+#'   a = 0.2, b = 0.5,
+#'   family = "Armageddon",
+#'   method = "ESM"
 #' )
 #' ## comonotone
 #' rpextmo(
-#'     10, 3,
-#'     a = 1,
-#'     family = "Armageddon",
-#'     method = "ESM"
+#'   10, 3,
+#'   a = 1,
+#'   family = "Armageddon",
+#'   method = "ESM"
 #' )
 #' ## independence
 #' rpextmo(
-#'     10, 3,
-#'     b = 1,
-#'     family = "Armageddon",
-#'     method = "ESM"
+#'   10, 3,
+#'   b = 1,
+#'   family = "Armageddon",
+#'   method = "ESM"
 #' )
 #'
 #' rpextmo(
-#'     10, 3,
-#'     a = 0.2, b = 0.5,
-#'     family = "Armageddon",
-#'     method = "LFM"
+#'   10, 3,
+#'   a = 0.2, b = 0.5,
+#'   family = "Armageddon",
+#'   method = "LFM"
 #' )
 #' ## comonotone
 #' rpextmo(
-#'     10, 3,
-#'     a = 1,
-#'     family = "Armageddon",
-#'     method = "LFM"
+#'   10, 3,
+#'   a = 1,
+#'   family = "Armageddon",
+#'   method = "LFM"
 #' )
 #' ## independence
 #' rpextmo(
-#'     10, 3,
-#'     b = 1,
-#'     family = "Armageddon",
-#'     method = "LFM"
+#'   10, 3,
+#'   b = 1,
+#'   family = "Armageddon",
+#'   method = "LFM"
 #' )
 #'
 #' rpextmo(
-#'     10, 3,
-#'     a = 0.2, b = 0.5,
-#'     family = "Armageddon",
-#'     method = "MDCM"
+#'   10, 3,
+#'   a = 0.2, b = 0.5,
+#'   family = "Armageddon",
+#'   method = "MDCM"
 #' )
 #' ## comonotone
 #' rpextmo(
-#'     10, 3,
-#'     a = 1,
-#'     family = "Armageddon",
-#'     method = "MDCM"
+#'   10, 3,
+#'   a = 1,
+#'   family = "Armageddon",
+#'   method = "MDCM"
 #' )
 #' ## independence
 #' rpextmo(
-#'     10, 3,
-#'     b = 1,
-#'     family = "Armageddon",
-#'     method = "MDCM"
+#'   10, 3,
+#'   b = 1,
+#'   family = "Armageddon",
+#'   method = "MDCM"
 #' )
 #'
 #' rpextmo(
-#'     10, 3,
-#'     a = 0.2, b = 0.5,
-#'     family = "Armageddon",
-#'     method = "AM"
+#'   10, 3,
+#'   a = 0.2, b = 0.5,
+#'   family = "Armageddon",
+#'   method = "AM"
 #' )
 #' ## comonotone
 #' rpextmo(
-#'     10, 3,
-#'     a = 1,
-#'     family = "Armageddon",
-#'     method = "AM"
+#'   10, 3,
+#'   a = 1,
+#'   family = "Armageddon",
+#'   method = "AM"
 #' )
 #' ## independence
 #' rpextmo(
-#'     10, 3,
-#'     b = 1,
-#'     family = "Armageddon",
-#'     method = "AM"
+#'   10, 3,
+#'   b = 1,
+#'   family = "Armageddon",
+#'   method = "AM"
 #' )
 #'
 #' ## Poisson
 #' rpextmo(
-#'     10, 3,
-#'     a = 0.2, b = 0.5, gamma = 2,
-#'     eta = 0.5, family = "Poisson"
+#'   10, 3,
+#'   a = 0.2, b = 0.5, gamma = 2,
+#'   eta = 0.5, family = "Poisson"
 #' )
 #' rpextmo(
-#'     10, 3,
-#'     a = 0.2, b = 0.5, gamma = 2,
-#'     eta = 0.5, family = "Poisson",
-#'     method = "ESM"
+#'   10, 3,
+#'   a = 0.2, b = 0.5, gamma = 2,
+#'   eta = 0.5, family = "Poisson",
+#'   method = "ESM"
 #' )
 #' rpextmo(
-#'     10, 3,
-#'     a = 0.2, b = 0.5, gamma = 2,
-#'     eta = 0.5, family = "Poisson",
-#'     method = "LFM"
+#'   10, 3,
+#'   a = 0.2, b = 0.5, gamma = 2,
+#'   eta = 0.5, family = "Poisson",
+#'   method = "LFM"
 #' )
 #' rpextmo(
-#'     10, 3,
-#'     a = 0.2, b = 0.5, gamma = 2,
-#'     eta = 0.5, family = "Poisson",
-#'     method = "MDCM"
+#'   10, 3,
+#'   a = 0.2, b = 0.5, gamma = 2,
+#'   eta = 0.5, family = "Poisson",
+#'   method = "MDCM"
 #' )
 #' rpextmo(
-#'     10, 3,
-#'     a = 0.2, b = 0.5, gamma = 2,
-#'     eta = 0.5, family = "Poisson",
-#'     method = "AM"
+#'   10, 3,
+#'   a = 0.2, b = 0.5, gamma = 2,
+#'   eta = 0.5, family = "Poisson",
+#'   method = "AM"
 #' )
 #'
 #' ## Pareto
 #' rpextmo(
-#'     10, 3,
-#'     a = 0.2, b = 0.5, gamma = 2,
-#'     eta = c(0.5, 1e-4), family = "Pareto"
+#'   10, 3,
+#'   a = 0.2, b = 0.5, gamma = 2,
+#'   eta = c(0.5, 1e-4), family = "Pareto"
 #' )
 #' rpextmo(
-#'     10, 3,
-#'     a = 0.2, b = 0.5, gamma = 2,
-#'     eta = c(0.5, 1e-4), family = "Pareto",
-#'     method = "ESM"
+#'   10, 3,
+#'   a = 0.2, b = 0.5, gamma = 2,
+#'   eta = c(0.5, 1e-4), family = "Pareto",
+#'   method = "ESM"
 #' )
 #' rpextmo(
-#'     10, 3,
-#'     a = 0.2, b = 0.5, gamma = 2,
-#'     eta = c(0.5, 1e-4), family = "Pareto",
-#'     method = "LFM"
+#'   10, 3,
+#'   a = 0.2, b = 0.5, gamma = 2,
+#'   eta = c(0.5, 1e-4), family = "Pareto",
+#'   method = "LFM"
 #' )
 #' rpextmo(
-#'     10, 3,
-#'     a = 0.2, b = 0.5, gamma = 2,
-#'     eta = c(0.5, 1e-4), family = "Pareto",
-#'     method = "MDCM"
+#'   10, 3,
+#'   a = 0.2, b = 0.5, gamma = 2,
+#'   eta = c(0.5, 1e-4), family = "Pareto",
+#'   method = "MDCM"
 #' )
 #' rpextmo(
-#'     10, 3,
-#'     a = 0.2, b = 0.5, gamma = 2,
-#'     eta = c(0.5, 1e-4), family = "Pareto",
-#'     method = "AM"
+#'   10, 3,
+#'   a = 0.2, b = 0.5, gamma = 2,
+#'   eta = c(0.5, 1e-4), family = "Pareto",
+#'   method = "AM"
 #' )
 #'
 #' ## Exponential
 #' rpextmo(
-#'     10, 3,
-#'     a = 0.2, b = 0.5, gamma = 2,
-#'     eta = 0.5, family = "Exponential"
+#'   10, 3,
+#'   a = 0.2, b = 0.5, gamma = 2,
+#'   eta = 0.5, family = "Exponential"
 #' )
 #' rpextmo(
-#'     10, 3,
-#'     a = 0.2, b = 0.5, gamma = 2,
-#'     eta = 0.5, family = "Exponential",
-#'     method = "ESM"
+#'   10, 3,
+#'   a = 0.2, b = 0.5, gamma = 2,
+#'   eta = 0.5, family = "Exponential",
+#'   method = "ESM"
 #' )
 #' rpextmo(
-#'     10, 3,
-#'     a = 0.2, b = 0.5, gamma = 2,
-#'     eta = 0.5, family = "Exponential",
-#'     method = "LFM"
+#'   10, 3,
+#'   a = 0.2, b = 0.5, gamma = 2,
+#'   eta = 0.5, family = "Exponential",
+#'   method = "LFM"
 #' )
 #' rpextmo(
-#'     10, 3,
-#'     a = 0.2, b = 0.5, gamma = 2,
-#'     eta = 0.5, family = "Exponential",
-#'     method = "MDCM"
+#'   10, 3,
+#'   a = 0.2, b = 0.5, gamma = 2,
+#'   eta = 0.5, family = "Exponential",
+#'   method = "MDCM"
 #' )
 #' rpextmo(
-#'     10, 3,
-#'     a = 0.2, b = 0.5, gamma = 2,
-#'     eta = 0.5, family = "Exponential",
-#'     method = "AM"
+#'   10, 3,
+#'   a = 0.2, b = 0.5, gamma = 2,
+#'   eta = 0.5, family = "Exponential",
+#'   method = "AM"
 #' )
 #'
 #' ## Alpha-Stable
 #' rpextmo(
-#'     10, 3,
-#'     a = 0.2, b = 0.5, gamma = 2,
-#'     eta = 0.5, family = "AlphaStable"
+#'   10, 3,
+#'   a = 0.2, b = 0.5, gamma = 2,
+#'   eta = 0.5, family = "AlphaStable"
 #' )
 #' rpextmo(
-#'     10, 3,
-#'     a = 0.2, b = 0.5, gamma = 2,
-#'     eta = 0.5, family = "AlphaStable",
-#'     method = "ESM"
+#'   10, 3,
+#'   a = 0.2, b = 0.5, gamma = 2,
+#'   eta = 0.5, family = "AlphaStable",
+#'   method = "ESM"
 #' )
 #' rpextmo(
-#'     10, 3,
-#'     a = 0.2, b = 0.5, gamma = 2,
-#'     eta = 0.5, family = "AlphaStable",
-#'     method = "MDCM"
+#'   10, 3,
+#'   a = 0.2, b = 0.5, gamma = 2,
+#'   eta = 0.5, family = "AlphaStable",
+#'   method = "MDCM"
 #' )
 #' rpextmo(
-#'     10, 3,
-#'     a = 0.2, b = 0.5, gamma = 2,
-#'     eta = 0.5, family = "AlphaStable",
-#'     method = "AM"
+#'   10, 3,
+#'   a = 0.2, b = 0.5, gamma = 2,
+#'   eta = 0.5, family = "AlphaStable",
+#'   method = "AM"
 #' )
 #'
 #' ## Inverse Gaussian
 #' rpextmo(
-#'     10, 3,
-#'     a = 0.2, b = 0.5, gamma = 2,
-#'     eta = 0.5, family = "InverseGaussian"
+#'   10, 3,
+#'   a = 0.2, b = 0.5, gamma = 2,
+#'   eta = 0.5, family = "InverseGaussian"
 #' )
 #' rpextmo(
-#'     10, 3,
-#'     a = 0.2, b = 0.5, gamma = 2,
-#'     eta = 0.5, family = "InverseGaussian",
-#'     method = "ESM"
+#'   10, 3,
+#'   a = 0.2, b = 0.5, gamma = 2,
+#'   eta = 0.5, family = "InverseGaussian",
+#'   method = "ESM"
 #' )
 #' rpextmo(
-#'     10, 3,
-#'     a = 0.2, b = 0.5, gamma = 2,
-#'     eta = 0.5, family = "InverseGaussian",
-#'     method = "MDCM"
+#'   10, 3,
+#'   a = 0.2, b = 0.5, gamma = 2,
+#'   eta = 0.5, family = "InverseGaussian",
+#'   method = "MDCM"
 #' )
 #' rpextmo(
-#'     10, 3,
-#'     a = 0.2, b = 0.5, gamma = 2,
-#'     eta = 0.5, family = "InverseGaussian",
-#'     method = "AM"
+#'   10, 3,
+#'   a = 0.2, b = 0.5, gamma = 2,
+#'   eta = 0.5, family = "InverseGaussian",
+#'   method = "AM"
 #' )
 #'
 #' ## Gamma
 #' rpextmo(
-#'     10, 3,
-#'     a = 0.2, b = 0.5, gamma = 2,
-#'     eta = 0.5, family = "Gamma"
+#'   10, 3,
+#'   a = 0.2, b = 0.5, gamma = 2,
+#'   eta = 0.5, family = "Gamma"
 #' )
 #' rpextmo(
-#'     10, 3,
-#'     a = 0.2, b = 0.5, gamma = 2,
-#'     eta = 0.5, family = "Gamma",
-#'     method = "ESM"
+#'   10, 3,
+#'   a = 0.2, b = 0.5, gamma = 2,
+#'   eta = 0.5, family = "Gamma",
+#'   method = "ESM"
 #' )
 #' rpextmo(
-#'     10, 3,
-#'     a = 0.2, b = 0.5, gamma = 2,
-#'     eta = 0.5, family = "Gamma",
-#'     method = "MDCM"
+#'   10, 3,
+#'   a = 0.2, b = 0.5, gamma = 2,
+#'   eta = 0.5, family = "Gamma",
+#'   method = "MDCM"
 #' )
 #' rpextmo(
-#'     10, 3,
-#'     a = 0.2, b = 0.5, gamma = 2,
-#'     eta = 0.5, family = "Gamma",
-#'     method = "AM"
+#'   10, 3,
+#'   a = 0.2, b = 0.5, gamma = 2,
+#'   eta = 0.5, family = "Gamma",
+#'   method = "AM"
 #' )
 #'
 #' @references
@@ -499,113 +499,113 @@ NULL
 #'
 #' @export
 rpextmo <- function( # nolint
-        n, d, a = 0, b = 0, gamma = 1, eta = NULL,
-        family = c(
-            "Armageddon", "Poisson", "Pareto",
-            "Exponential", "AlphaStable", "InverseGaussian",
-            "Gamma"
-        ),
-        method = c("MDCM", "LFM", "AM", "ESM")) {
-    family <- match.arg(family)
-    assert_choice(
-        family,
-        c(
-            "Armageddon", "Poisson", "Pareto", "Exponential",
-            "AlphaStable", "InverseGaussian", "Gamma"
-        )
+    n, d, a = 0, b = 0, gamma = 1, eta = NULL,
+    family = c(
+      "Armageddon", "Poisson", "Pareto",
+      "Exponential", "AlphaStable", "InverseGaussian",
+      "Gamma"
+    ),
+    method = c("MDCM", "LFM", "AM", "ESM")) {
+  family <- match.arg(family)
+  assert_choice(
+    family,
+    c(
+      "Armageddon", "Poisson", "Pareto", "Exponential",
+      "AlphaStable", "InverseGaussian", "Gamma"
     )
-    if (missing(method) && isTRUE("Armageddon" == family)) {
-        method <- "ESM"
-    } else {
-        method <- match.arg(method)
-    }
-    assert_choice(method, c("MDCM", "LFM", "AM", "ESM"))
-    qassert(n, "X1[0,)")
-    qassert(d, "X1[2,)")
-    qassert(a, "N1[0,)")
-    qassert(b, "N1[0,)")
-    qassert(gamma, "N1(0,)")
-    qassert(eta, c("N+(0,)", "0"))
+  )
+  if (missing(method) && isTRUE("Armageddon" == family)) {
+    method <- "ESM"
+  } else {
+    method <- match.arg(method)
+  }
+  assert_choice(method, c("MDCM", "LFM", "AM", "ESM"))
+  qassert(n, "X1[0,)")
+  qassert(d, "X1[2,)")
+  qassert(a, "N1[0,)")
+  qassert(b, "N1[0,)")
+  qassert(gamma, "N1(0,)")
+  qassert(eta, c("N+(0,)", "0"))
 
-    if ((family == "Armageddon") && (method == "ESM")) {
-        Rcpp__rarmextmo_esm(n, d, alpha = b, beta = a)
-    } else if (method == "LFM") {
-        assert_choice(
-            family, c("Armageddon", "Poisson", "Pareto", "Exponential")
-        )
-        if (family == "Armageddon") {
-            qassert(eta, "0")
-            gamma <- 0
-            rjump_name <- "rposval"
-            rjump_arg_list <- list("value" = 0)
-        } else if (family == "Poisson") {
-            qassert(eta, "N1(0,)")
-            rjump_name <- "rposval"
-            rjump_arg_list <- list("value" = eta)
-        } else if (family == "Pareto") {
-            qassert(eta, "N2(0,)")
-            rjump_name <- "rpareto"
-            rjump_arg_list <- list("alpha" = eta[[1]], x0 = eta[[2]])
-        } else if (family == "Exponential") {
-            qassert(eta, "N1(0,)")
-            rjump_name <- "rexp"
-            rjump_arg_list <- list("rate" = eta)
-        } else {
-            stop(sprintf("Family %s not implemented for LFM", family)) # nocov
-        }
-        Rcpp__rextmo_lfm(
-            n, d,
-            rate = gamma, rate_killing = a, rate_drift = b,
-            rjump_name = rjump_name, rjump_arg_list = rjump_arg_list
-        )
-    } else if (method %in% c("MDCM", "AM", "ESM")) {
-        psi <- NULL
-        if (family == "Poisson") {
-            qassert(eta, "N1(0,)")
-            psi <- PoissonBernsteinFunction(eta = eta)
-        } else if (family == "Pareto") {
-            qassert(eta, "N2")
-            qassert(eta[[1]], "N1(0,1)")
-            qassert(eta[[2]], "N1(0,)")
-            psi <- ParetoBernsteinFunction(alpha = eta[[1]], x0 = eta[[2]])
-        } else if (family == "Exponential") {
-            qassert(eta, "N1(0,)")
-            psi <- ExponentialBernsteinFunction(lambda = eta)
-        } else if (family == "AlphaStable") {
-            qassert(eta, "N1(0,)")
-            psi <- AlphaStableBernsteinFunction(alpha = eta)
-        } else if (family == "InverseGaussian") {
-            qassert(eta, "N1(0,)")
-            psi <- InverseGaussianBernsteinFunction(eta = eta)
-        } else if (family == "Gamma") {
-            qassert(eta, "N1(0,)")
-            psi <- GammaBernsteinFunction(a = eta)
-        }
-        if (!(gamma == 1) && !is.null(psi)) {
-            psi <- ScaledBernsteinFunction(scale = gamma, original = psi)
-        }
-        if (!(b == 0)) {
-            if (!is.null(psi)) {
-                psi <- SumOfBernsteinFunctions(
-                    first = LinearBernsteinFunction(scale = b),
-                    second = psi
-                )
-            } else {
-                psi <- LinearBernsteinFunction(scale = b)
-            }
-        }
-        if (!(a == 0)) {
-            if (!is.null(psi)) {
-                psi <- SumOfBernsteinFunctions(
-                    first = ConstantBernsteinFunction(constant = a),
-                    second = psi
-                )
-            } else {
-                psi <- ConstantBernsteinFunction(constant = a)
-            }
-        }
-        rextmo(n, d, bf = psi, method = method)
+  if ((family == "Armageddon") && (method == "ESM")) {
+    Rcpp__rarmextmo_esm(n, d, alpha = b, beta = a)
+  } else if (method == "LFM") {
+    assert_choice(
+      family, c("Armageddon", "Poisson", "Pareto", "Exponential")
+    )
+    if (family == "Armageddon") {
+      qassert(eta, "0")
+      gamma <- 0
+      rjump_name <- "rposval"
+      rjump_arg_list <- list("value" = 0)
+    } else if (family == "Poisson") {
+      qassert(eta, "N1(0,)")
+      rjump_name <- "rposval"
+      rjump_arg_list <- list("value" = eta)
+    } else if (family == "Pareto") {
+      qassert(eta, "N2(0,)")
+      rjump_name <- "rpareto"
+      rjump_arg_list <- list("alpha" = eta[[1]], x0 = eta[[2]])
+    } else if (family == "Exponential") {
+      qassert(eta, "N1(0,)")
+      rjump_name <- "rexp"
+      rjump_arg_list <- list("rate" = eta)
     } else {
-        stop(sprintf("Method %s not implemented", method)) # nocov
+      stop(sprintf("Family %s not implemented for LFM", family)) # nocov
     }
+    Rcpp__rextmo_lfm(
+      n, d,
+      rate = gamma, rate_killing = a, rate_drift = b,
+      rjump_name = rjump_name, rjump_arg_list = rjump_arg_list
+    )
+  } else if (method %in% c("MDCM", "AM", "ESM")) {
+    psi <- NULL
+    if (family == "Poisson") {
+      qassert(eta, "N1(0,)")
+      psi <- PoissonBernsteinFunction(eta = eta)
+    } else if (family == "Pareto") {
+      qassert(eta, "N2")
+      qassert(eta[[1]], "N1(0,1)")
+      qassert(eta[[2]], "N1(0,)")
+      psi <- ParetoBernsteinFunction(alpha = eta[[1]], x0 = eta[[2]])
+    } else if (family == "Exponential") {
+      qassert(eta, "N1(0,)")
+      psi <- ExponentialBernsteinFunction(lambda = eta)
+    } else if (family == "AlphaStable") {
+      qassert(eta, "N1(0,)")
+      psi <- AlphaStableBernsteinFunction(alpha = eta)
+    } else if (family == "InverseGaussian") {
+      qassert(eta, "N1(0,)")
+      psi <- InverseGaussianBernsteinFunction(eta = eta)
+    } else if (family == "Gamma") {
+      qassert(eta, "N1(0,)")
+      psi <- GammaBernsteinFunction(a = eta)
+    }
+    if (!(gamma == 1) && !is.null(psi)) {
+      psi <- ScaledBernsteinFunction(scale = gamma, original = psi)
+    }
+    if (!(b == 0)) {
+      if (!is.null(psi)) {
+        psi <- SumOfBernsteinFunctions(
+          first = LinearBernsteinFunction(scale = b),
+          second = psi
+        )
+      } else {
+        psi <- LinearBernsteinFunction(scale = b)
+      }
+    }
+    if (!(a == 0)) {
+      if (!is.null(psi)) {
+        psi <- SumOfBernsteinFunctions(
+          first = ConstantBernsteinFunction(constant = a),
+          second = psi
+        )
+      } else {
+        psi <- ConstantBernsteinFunction(constant = a)
+      }
+    }
+    rextmo(n, d, bf = psi, method = method)
+  } else {
+    stop(sprintf("Method %s not implemented", method)) # nocov
+  }
 }

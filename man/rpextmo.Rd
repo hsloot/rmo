@@ -282,255 +282,255 @@ rpextmo(10, 3, a = 1, family = "Armageddon")
 rpextmo(10, 3, b = 1, family = "Armageddon")
 
 rpextmo(
-    10, 3,
-    a = 0.2, b = 0.5,
-    family = "Armageddon",
-    method = "ESM"
+  10, 3,
+  a = 0.2, b = 0.5,
+  family = "Armageddon",
+  method = "ESM"
 )
 ## comonotone
 rpextmo(
-    10, 3,
-    a = 1,
-    family = "Armageddon",
-    method = "ESM"
+  10, 3,
+  a = 1,
+  family = "Armageddon",
+  method = "ESM"
 )
 ## independence
 rpextmo(
-    10, 3,
-    b = 1,
-    family = "Armageddon",
-    method = "ESM"
+  10, 3,
+  b = 1,
+  family = "Armageddon",
+  method = "ESM"
 )
 
 rpextmo(
-    10, 3,
-    a = 0.2, b = 0.5,
-    family = "Armageddon",
-    method = "LFM"
+  10, 3,
+  a = 0.2, b = 0.5,
+  family = "Armageddon",
+  method = "LFM"
 )
 ## comonotone
 rpextmo(
-    10, 3,
-    a = 1,
-    family = "Armageddon",
-    method = "LFM"
+  10, 3,
+  a = 1,
+  family = "Armageddon",
+  method = "LFM"
 )
 ## independence
 rpextmo(
-    10, 3,
-    b = 1,
-    family = "Armageddon",
-    method = "LFM"
+  10, 3,
+  b = 1,
+  family = "Armageddon",
+  method = "LFM"
 )
 
 rpextmo(
-    10, 3,
-    a = 0.2, b = 0.5,
-    family = "Armageddon",
-    method = "MDCM"
+  10, 3,
+  a = 0.2, b = 0.5,
+  family = "Armageddon",
+  method = "MDCM"
 )
 ## comonotone
 rpextmo(
-    10, 3,
-    a = 1,
-    family = "Armageddon",
-    method = "MDCM"
+  10, 3,
+  a = 1,
+  family = "Armageddon",
+  method = "MDCM"
 )
 ## independence
 rpextmo(
-    10, 3,
-    b = 1,
-    family = "Armageddon",
-    method = "MDCM"
+  10, 3,
+  b = 1,
+  family = "Armageddon",
+  method = "MDCM"
 )
 
 rpextmo(
-    10, 3,
-    a = 0.2, b = 0.5,
-    family = "Armageddon",
-    method = "AM"
+  10, 3,
+  a = 0.2, b = 0.5,
+  family = "Armageddon",
+  method = "AM"
 )
 ## comonotone
 rpextmo(
-    10, 3,
-    a = 1,
-    family = "Armageddon",
-    method = "AM"
+  10, 3,
+  a = 1,
+  family = "Armageddon",
+  method = "AM"
 )
 ## independence
 rpextmo(
-    10, 3,
-    b = 1,
-    family = "Armageddon",
-    method = "AM"
+  10, 3,
+  b = 1,
+  family = "Armageddon",
+  method = "AM"
 )
 
 ## Poisson
 rpextmo(
-    10, 3,
-    a = 0.2, b = 0.5, gamma = 2,
-    eta = 0.5, family = "Poisson"
+  10, 3,
+  a = 0.2, b = 0.5, gamma = 2,
+  eta = 0.5, family = "Poisson"
 )
 rpextmo(
-    10, 3,
-    a = 0.2, b = 0.5, gamma = 2,
-    eta = 0.5, family = "Poisson",
-    method = "ESM"
+  10, 3,
+  a = 0.2, b = 0.5, gamma = 2,
+  eta = 0.5, family = "Poisson",
+  method = "ESM"
 )
 rpextmo(
-    10, 3,
-    a = 0.2, b = 0.5, gamma = 2,
-    eta = 0.5, family = "Poisson",
-    method = "LFM"
+  10, 3,
+  a = 0.2, b = 0.5, gamma = 2,
+  eta = 0.5, family = "Poisson",
+  method = "LFM"
 )
 rpextmo(
-    10, 3,
-    a = 0.2, b = 0.5, gamma = 2,
-    eta = 0.5, family = "Poisson",
-    method = "MDCM"
+  10, 3,
+  a = 0.2, b = 0.5, gamma = 2,
+  eta = 0.5, family = "Poisson",
+  method = "MDCM"
 )
 rpextmo(
-    10, 3,
-    a = 0.2, b = 0.5, gamma = 2,
-    eta = 0.5, family = "Poisson",
-    method = "AM"
+  10, 3,
+  a = 0.2, b = 0.5, gamma = 2,
+  eta = 0.5, family = "Poisson",
+  method = "AM"
 )
 
 ## Pareto
 rpextmo(
-    10, 3,
-    a = 0.2, b = 0.5, gamma = 2,
-    eta = c(0.5, 1e-4), family = "Pareto"
+  10, 3,
+  a = 0.2, b = 0.5, gamma = 2,
+  eta = c(0.5, 1e-4), family = "Pareto"
 )
 rpextmo(
-    10, 3,
-    a = 0.2, b = 0.5, gamma = 2,
-    eta = c(0.5, 1e-4), family = "Pareto",
-    method = "ESM"
+  10, 3,
+  a = 0.2, b = 0.5, gamma = 2,
+  eta = c(0.5, 1e-4), family = "Pareto",
+  method = "ESM"
 )
 rpextmo(
-    10, 3,
-    a = 0.2, b = 0.5, gamma = 2,
-    eta = c(0.5, 1e-4), family = "Pareto",
-    method = "LFM"
+  10, 3,
+  a = 0.2, b = 0.5, gamma = 2,
+  eta = c(0.5, 1e-4), family = "Pareto",
+  method = "LFM"
 )
 rpextmo(
-    10, 3,
-    a = 0.2, b = 0.5, gamma = 2,
-    eta = c(0.5, 1e-4), family = "Pareto",
-    method = "MDCM"
+  10, 3,
+  a = 0.2, b = 0.5, gamma = 2,
+  eta = c(0.5, 1e-4), family = "Pareto",
+  method = "MDCM"
 )
 rpextmo(
-    10, 3,
-    a = 0.2, b = 0.5, gamma = 2,
-    eta = c(0.5, 1e-4), family = "Pareto",
-    method = "AM"
+  10, 3,
+  a = 0.2, b = 0.5, gamma = 2,
+  eta = c(0.5, 1e-4), family = "Pareto",
+  method = "AM"
 )
 
 ## Exponential
 rpextmo(
-    10, 3,
-    a = 0.2, b = 0.5, gamma = 2,
-    eta = 0.5, family = "Exponential"
+  10, 3,
+  a = 0.2, b = 0.5, gamma = 2,
+  eta = 0.5, family = "Exponential"
 )
 rpextmo(
-    10, 3,
-    a = 0.2, b = 0.5, gamma = 2,
-    eta = 0.5, family = "Exponential",
-    method = "ESM"
+  10, 3,
+  a = 0.2, b = 0.5, gamma = 2,
+  eta = 0.5, family = "Exponential",
+  method = "ESM"
 )
 rpextmo(
-    10, 3,
-    a = 0.2, b = 0.5, gamma = 2,
-    eta = 0.5, family = "Exponential",
-    method = "LFM"
+  10, 3,
+  a = 0.2, b = 0.5, gamma = 2,
+  eta = 0.5, family = "Exponential",
+  method = "LFM"
 )
 rpextmo(
-    10, 3,
-    a = 0.2, b = 0.5, gamma = 2,
-    eta = 0.5, family = "Exponential",
-    method = "MDCM"
+  10, 3,
+  a = 0.2, b = 0.5, gamma = 2,
+  eta = 0.5, family = "Exponential",
+  method = "MDCM"
 )
 rpextmo(
-    10, 3,
-    a = 0.2, b = 0.5, gamma = 2,
-    eta = 0.5, family = "Exponential",
-    method = "AM"
+  10, 3,
+  a = 0.2, b = 0.5, gamma = 2,
+  eta = 0.5, family = "Exponential",
+  method = "AM"
 )
 
 ## Alpha-Stable
 rpextmo(
-    10, 3,
-    a = 0.2, b = 0.5, gamma = 2,
-    eta = 0.5, family = "AlphaStable"
+  10, 3,
+  a = 0.2, b = 0.5, gamma = 2,
+  eta = 0.5, family = "AlphaStable"
 )
 rpextmo(
-    10, 3,
-    a = 0.2, b = 0.5, gamma = 2,
-    eta = 0.5, family = "AlphaStable",
-    method = "ESM"
+  10, 3,
+  a = 0.2, b = 0.5, gamma = 2,
+  eta = 0.5, family = "AlphaStable",
+  method = "ESM"
 )
 rpextmo(
-    10, 3,
-    a = 0.2, b = 0.5, gamma = 2,
-    eta = 0.5, family = "AlphaStable",
-    method = "MDCM"
+  10, 3,
+  a = 0.2, b = 0.5, gamma = 2,
+  eta = 0.5, family = "AlphaStable",
+  method = "MDCM"
 )
 rpextmo(
-    10, 3,
-    a = 0.2, b = 0.5, gamma = 2,
-    eta = 0.5, family = "AlphaStable",
-    method = "AM"
+  10, 3,
+  a = 0.2, b = 0.5, gamma = 2,
+  eta = 0.5, family = "AlphaStable",
+  method = "AM"
 )
 
 ## Inverse Gaussian
 rpextmo(
-    10, 3,
-    a = 0.2, b = 0.5, gamma = 2,
-    eta = 0.5, family = "InverseGaussian"
+  10, 3,
+  a = 0.2, b = 0.5, gamma = 2,
+  eta = 0.5, family = "InverseGaussian"
 )
 rpextmo(
-    10, 3,
-    a = 0.2, b = 0.5, gamma = 2,
-    eta = 0.5, family = "InverseGaussian",
-    method = "ESM"
+  10, 3,
+  a = 0.2, b = 0.5, gamma = 2,
+  eta = 0.5, family = "InverseGaussian",
+  method = "ESM"
 )
 rpextmo(
-    10, 3,
-    a = 0.2, b = 0.5, gamma = 2,
-    eta = 0.5, family = "InverseGaussian",
-    method = "MDCM"
+  10, 3,
+  a = 0.2, b = 0.5, gamma = 2,
+  eta = 0.5, family = "InverseGaussian",
+  method = "MDCM"
 )
 rpextmo(
-    10, 3,
-    a = 0.2, b = 0.5, gamma = 2,
-    eta = 0.5, family = "InverseGaussian",
-    method = "AM"
+  10, 3,
+  a = 0.2, b = 0.5, gamma = 2,
+  eta = 0.5, family = "InverseGaussian",
+  method = "AM"
 )
 
 ## Gamma
 rpextmo(
-    10, 3,
-    a = 0.2, b = 0.5, gamma = 2,
-    eta = 0.5, family = "Gamma"
+  10, 3,
+  a = 0.2, b = 0.5, gamma = 2,
+  eta = 0.5, family = "Gamma"
 )
 rpextmo(
-    10, 3,
-    a = 0.2, b = 0.5, gamma = 2,
-    eta = 0.5, family = "Gamma",
-    method = "ESM"
+  10, 3,
+  a = 0.2, b = 0.5, gamma = 2,
+  eta = 0.5, family = "Gamma",
+  method = "ESM"
 )
 rpextmo(
-    10, 3,
-    a = 0.2, b = 0.5, gamma = 2,
-    eta = 0.5, family = "Gamma",
-    method = "MDCM"
+  10, 3,
+  a = 0.2, b = 0.5, gamma = 2,
+  eta = 0.5, family = "Gamma",
+  method = "MDCM"
 )
 rpextmo(
-    10, 3,
-    a = 0.2, b = 0.5, gamma = 2,
-    eta = 0.5, family = "Gamma",
-    method = "AM"
+  10, 3,
+  a = 0.2, b = 0.5, gamma = 2,
+  eta = 0.5, family = "Gamma",
+  method = "AM"
 )
 
 }

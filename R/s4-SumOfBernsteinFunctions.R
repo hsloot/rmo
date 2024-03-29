@@ -18,8 +18,8 @@ NULL
 #'
 #' @export SumOfBernsteinFunctions
 SumOfBernsteinFunctions <- setClass("SumOfBernsteinFunctions", # nolint
-    contains = "BernsteinFunction",
-    slots = c(first = "BernsteinFunction", second = "BernsteinFunction")
+  contains = "BernsteinFunction",
+  slots = c(first = "BernsteinFunction", second = "BernsteinFunction")
 )
 
 #' @describeIn SumOfBernsteinFunctions-class Constructor
@@ -36,16 +36,16 @@ SumOfBernsteinFunctions <- setClass("SumOfBernsteinFunctions", # nolint
 #' second_bf <- AlphaStableBernsteinFunction(alpha = 0.5)
 #' SumOfBernsteinFunctions(first = first_bf, second = second_bf)
 setMethod(
-    "initialize", "SumOfBernsteinFunctions",
-    function(.Object, first, second) { # nolint
-        if (!(missing(first) || missing(second))) {
-            .Object@first <- first # nolint
-            .Object@second <- second # nolint
-            validObject(.Object)
-        }
-
-        invisible(.Object)
+  "initialize", "SumOfBernsteinFunctions",
+  function(.Object, first, second) { # nolint
+    if (!(missing(first) || missing(second))) {
+      .Object@first <- first # nolint
+      .Object@second <- second # nolint
+      validObject(.Object)
     }
+
+    invisible(.Object)
+  }
 )
 
 #' @describeIn SumOfBernsteinFunctions-class Display the object.
@@ -55,24 +55,24 @@ setMethod(
 #'
 #' @export
 setMethod( # nocov start
-    "show", "SumOfBernsteinFunctions",
-    function(object) {
-        cat(sprintf("An object of class %s\n", classLabel(class(object))))
-        if (isTRUE(validObject(object, test = TRUE))) {
-            cat("- first:\n")
-            writeLines(
-                paste0("\t", capture.output(show(object@first)))
-            )
-            cat("- second:\n")
-            writeLines(
-                paste0("\t", capture.output(show(object@second)))
-            )
-        } else {
-            cat("\t (invalid or not initialized)\n")
-        }
-
-        invisible(NULL)
+  "show", "SumOfBernsteinFunctions",
+  function(object) {
+    cat(sprintf("An object of class %s\n", classLabel(class(object))))
+    if (isTRUE(validObject(object, test = TRUE))) {
+      cat("- first:\n")
+      writeLines(
+        paste0("\t", capture.output(show(object@first)))
+      )
+      cat("- second:\n")
+      writeLines(
+        paste0("\t", capture.output(show(object@second)))
+      )
+    } else {
+      cat("\t (invalid or not initialized)\n")
     }
+
+    invisible(NULL)
+  }
 ) # nocov end
 
 #' @describeIn SumOfBernsteinFunctions-class
@@ -84,9 +84,9 @@ setMethod( # nocov start
 #'
 #' @export
 setMethod(
-    "valueOf", "SumOfBernsteinFunctions",
-    function(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...) { # nolint
-        valueOf(object@first, x, difference_order, n, k, cscale, ...) +
-            valueOf(object@second, x, difference_order, n, k, cscale, ...)
-    }
+  "valueOf", "SumOfBernsteinFunctions",
+  function(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...) { # nolint
+    valueOf(object@first, x, difference_order, n, k, cscale, ...) +
+      valueOf(object@second, x, difference_order, n, k, cscale, ...)
+  }
 )

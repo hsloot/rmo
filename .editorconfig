@@ -13,7 +13,7 @@ insert_final_newline = true
 # R
 [*.{R,r}]
 indent_style = space
-indent_size = 4
+indent_size = 2
 
 # C, C++
 [*.{c,cpp,h,hpp,ipp,tpp}]
@@ -23,7 +23,7 @@ indent_size = 4
 # Markdown, Rmarkdown, quarto files
 [*.{R,r,q,}md]
 indent_style = space
-indent_size = 4
+indent_size = 2
 trim_trailing_whitespace = false
 
 # yaml config files

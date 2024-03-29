@@ -6,10 +6,10 @@ output: github_document
 
 ```{r, include = FALSE, message=FALSE}
 knitr::opts_chunk$set(
-    collapse = TRUE,
-    comment = "#>",
-    fig.path = "man/figures/README-",
-    out.width = "100%"
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
 )
 library(rmo)
 library(tidyverse)
@@ -59,9 +59,9 @@ For example to simulate from the family associated with the
 
 ```{r, include=TRUE}
 rpextmo(
-    n = 10, d = 3,
-    eta = log2(2 - 0.5),
-    family = "AlphaStable"
+  n = 10, d = 3,
+  eta = log2(2 - 0.5),
+  family = "AlphaStable"
 )
 ```
 
@@ -71,7 +71,7 @@ For the previous example, the associated Bernstein function can be defined via:
 ```{r}
 alpha <- log2(2 - 0.5)
 bf <- AlphaStableBernsteinFunction(
-    alpha = alpha
+  alpha = alpha
 )
 bf
 ```
@@ -85,16 +85,16 @@ with the \( \alpha \)-stable distribution from the previous example.
 ```{r, include=TRUE}
 x0 <- 5e-4
 bf_approximated <- SumOfBernsteinFunctions(
-    first = LinearBernsteinFunction(
-        scale = alpha * x0^(1 - alpha) / (1 - alpha) / gamma(1 - alpha)
-    ),
-    second = ScaledBernsteinFunction(
-        scale = x0^(-alpha) / gamma(1 - alpha),
-        original = ParetoBernsteinFunction(
-            alpha = alpha,
-            x0 = x0
-        )
+  first = LinearBernsteinFunction(
+    scale = alpha * x0^(1 - alpha) / (1 - alpha) / gamma(1 - alpha)
+  ),
+  second = ScaledBernsteinFunction(
+    scale = x0^(-alpha) / gamma(1 - alpha),
+    original = ParetoBernsteinFunction(
+      alpha = alpha,
+      x0 = x0
     )
+  )
 )
 ```
 
@@ -107,30 +107,30 @@ which can be used to create new Bernstein functions:
 ```{r,echo=FALSE, eval=TRUE}
 d <- 15
 tibble(
-    i = 1:d,
-    original = sapply(
-        1:d,
-        function(i) {
-            valueOf(bf, d - i, i)
-        }
-    ),
-    approximation = sapply(
-        1:d,
-        function(i) {
-            valueOf(bf_approximated, d - i, i)
-        }
-    )
+  i = 1:d,
+  original = sapply(
+    1:d,
+    function(i) {
+      valueOf(bf, d - i, i)
+    }
+  ),
+  approximation = sapply(
+    1:d,
+    function(i) {
+      valueOf(bf_approximated, d - i, i)
+    }
+  )
 ) %>%
-    gather("type", "exi", -i) %>%
-    ggplot(aes(x = i, y = exi, colour = type)) +
-    geom_point() +
-    theme_classic() +
-    theme(
-        legend.position = "bottom",
-        axis.title = element_blank(),
-        legend.title = element_blank()
-    ) +
-    ggtitle("Exchangeable MO shock-size arrival intensities")
+  gather("type", "exi", -i) %>%
+  ggplot(aes(x = i, y = exi, colour = type)) +
+  geom_point() +
+  theme_classic() +
+  theme(
+    legend.position = "bottom",
+    axis.title = element_blank(),
+    legend.title = element_blank()
+  ) +
+  ggtitle("Exchangeable MO shock-size arrival intensities")
 ```
 
 

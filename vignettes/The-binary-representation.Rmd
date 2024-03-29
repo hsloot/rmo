@@ -7,9 +7,9 @@ nocite: |
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
-    collapse = TRUE,
-    comment = "#>",
-    eval = FALSE
+  collapse = TRUE,
+  comment = "#>",
+  eval = FALSE
 )
 ```
 

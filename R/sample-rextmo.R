@@ -44,54 +44,54 @@ NULL
 #'
 #' @examples
 #' rextmo(
-#'     10, 3,
-#'     AlphaStableBernsteinFunction(alpha = log2(2 - 0.5))
+#'   10, 3,
+#'   AlphaStableBernsteinFunction(alpha = log2(2 - 0.5))
 #' )
 #' # independence
 #' rextmo(
-#'     10, 3,
-#'     LinearBernsteinFunction(scale = 1)
+#'   10, 3,
+#'   LinearBernsteinFunction(scale = 1)
 #' )
 #' # comonotone
 #' rextmo(
-#'     10, 3,
-#'     ConstantBernsteinFunction(constant = 1)
+#'   10, 3,
+#'   ConstantBernsteinFunction(constant = 1)
 #' )
 #'
 #' rextmo(
-#'     10, 3,
-#'     AlphaStableBernsteinFunction(alpha = log2(2 - 0.5)),
-#'     method = "AM"
+#'   10, 3,
+#'   AlphaStableBernsteinFunction(alpha = log2(2 - 0.5)),
+#'   method = "AM"
 #' )
 #' # independence
 #' rextmo(
-#'     10, 3,
-#'     LinearBernsteinFunction(scale = 1),
-#'     method = "AM"
+#'   10, 3,
+#'   LinearBernsteinFunction(scale = 1),
+#'   method = "AM"
 #' )
 #' # comonotone
 #' rextmo(
-#'     10, 3,
-#'     ConstantBernsteinFunction(constant = 1),
-#'     method = "AM"
+#'   10, 3,
+#'   ConstantBernsteinFunction(constant = 1),
+#'   method = "AM"
 #' )
 #'
 #' rextmo(
-#'     10, 3,
-#'     AlphaStableBernsteinFunction(alpha = log2(2 - 0.5)),
-#'     method = "ESM"
+#'   10, 3,
+#'   AlphaStableBernsteinFunction(alpha = log2(2 - 0.5)),
+#'   method = "ESM"
 #' )
 #' # independence
 #' rextmo(
-#'     10, 3,
-#'     LinearBernsteinFunction(scale = 1),
-#'     method = "ESM"
+#'   10, 3,
+#'   LinearBernsteinFunction(scale = 1),
+#'   method = "ESM"
 #' )
 #' # comonotone
 #' rextmo(
-#'     10, 3,
-#'     ConstantBernsteinFunction(constant = 1),
-#'     method = "ESM"
+#'   10, 3,
+#'   ConstantBernsteinFunction(constant = 1),
+#'   method = "ESM"
 #' )
 #'
 #' @references
@@ -101,10 +101,10 @@ NULL
 #'
 #' @export
 rextmo <- function(n, d, bf, method = c("MDCM", "AM", "ESM")) {
-    method <- match.arg(method)
-    qassert(n, "X1[0,)")
-    qassert(d, "X1[2,)")
-    assert_choice(method, c("MDCM", "AM", "ESM"))
+  method <- match.arg(method)
+  qassert(n, "X1[0,)")
+  qassert(d, "X1[2,)")
+  assert_choice(method, c("MDCM", "AM", "ESM"))
 
-    rexmo(n, d, exIntensities(bf, d), method = method)
+  rexmo(n, d, exIntensities(bf, d), method = method)
 }

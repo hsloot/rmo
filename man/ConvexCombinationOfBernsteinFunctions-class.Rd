@@ -75,7 +75,7 @@ bf1 <- LinearBernsteinFunction(scale = 0.2)
 bf2 <- ConstantBernsteinFunction(constant = 0.5)
 bf3 <- AlphaStableBernsteinFunction(alpha = 0.5)
 ConvexCombinationOfBernsteinFunctions(
-    coefficients = c(0.2, 0.5, 0.1),
-    points = list(bf1, bf2, bf3)
+  coefficients = c(0.2, 0.5, 0.1),
+  points = list(bf1, bf2, bf3)
 )
 }

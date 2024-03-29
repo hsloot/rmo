@@ -57,54 +57,54 @@ approximation techniques from \insertCite{Sloot2022a}{rmo} to calculate them.
 }
 \examples{
 rextmo(
-    10, 3,
-    AlphaStableBernsteinFunction(alpha = log2(2 - 0.5))
+  10, 3,
+  AlphaStableBernsteinFunction(alpha = log2(2 - 0.5))
 )
 # independence
 rextmo(
-    10, 3,
-    LinearBernsteinFunction(scale = 1)
+  10, 3,
+  LinearBernsteinFunction(scale = 1)
 )
 # comonotone
 rextmo(
-    10, 3,
-    ConstantBernsteinFunction(constant = 1)
+  10, 3,
+  ConstantBernsteinFunction(constant = 1)
 )
 
 rextmo(
-    10, 3,
-    AlphaStableBernsteinFunction(alpha = log2(2 - 0.5)),
-    method = "AM"
+  10, 3,
+  AlphaStableBernsteinFunction(alpha = log2(2 - 0.5)),
+  method = "AM"
 )
 # independence
 rextmo(
-    10, 3,
-    LinearBernsteinFunction(scale = 1),
-    method = "AM"
+  10, 3,
+  LinearBernsteinFunction(scale = 1),
+  method = "AM"
 )
 # comonotone
 rextmo(
-    10, 3,
-    ConstantBernsteinFunction(constant = 1),
-    method = "AM"
+  10, 3,
+  ConstantBernsteinFunction(constant = 1),
+  method = "AM"
 )
 
 rextmo(
-    10, 3,
-    AlphaStableBernsteinFunction(alpha = log2(2 - 0.5)),
-    method = "ESM"
+  10, 3,
+  AlphaStableBernsteinFunction(alpha = log2(2 - 0.5)),
+  method = "ESM"
 )
 # independence
 rextmo(
-    10, 3,
-    LinearBernsteinFunction(scale = 1),
-    method = "ESM"
+  10, 3,
+  LinearBernsteinFunction(scale = 1),
+  method = "ESM"
 )
 # comonotone
 rextmo(
-    10, 3,
-    ConstantBernsteinFunction(constant = 1),
-    method = "ESM"
+  10, 3,
+  ConstantBernsteinFunction(constant = 1),
+  method = "ESM"
 )
 
 }
