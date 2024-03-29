@@ -8,8 +8,8 @@
 <meta name="description" content="rmo">
 <title>The Marshall-Olkin distribution • rmo</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="The Marshall-Olkin distribution">
 <meta property="og:description" content="rmo">
@@ -41,10 +41,7 @@
 <li class="active nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/Armageddon-ESM-distribution.html">Armageddon shock model distributions</a>
-    <a class="dropdown-item" href="../articles/Exchangeable-Marshall-Olkin-distributions.html">Exchangeable Marshall--Olkin distributions</a>
     <a class="dropdown-item" href="../articles/Mixing-Marshall-Olkin-distributions.html">Mixing Marshall--Olkin distributions</a>
-    <a class="dropdown-item" href="../articles/The-Levy-frailty-model.html">The Lévy frailty model</a>
     <a class="dropdown-item" href="../articles/The-Marshall-Olkin-distribution.html">The Marshall-Olkin distribution</a>
     <a class="dropdown-item" href="../articles/The-binary-representation.html">The binary representation of the MO parameter</a>
   </div>
@@ -85,18 +82,25 @@
 
     
     
-<p>The following document is a compendium for the <em>Marshall–Olkin
-distribution</em>.</p>
-<p>For a detailed mathematical treatment of this class, we refer to the
-references at the end of this document.</p>
+<blockquote>
+<p>DISCLAIMER: This article is a brief work of reference about
+<em>Marshall–Olkin distributions</em>. For a detailed mathematical
+treatment of this class, we refer to the references at the end of this
+document.</p>
+</blockquote>
 <div class="section level2">
-<h2 id="definition-and-survival-copula">Definition and survival copula<a class="anchor" aria-label="anchor" href="#definition-and-survival-copula"></a>
+<h2 id="marshallolkin-distributions">Marshall–Olkin distributions<a class="anchor" aria-label="anchor" href="#marshallolkin-distributions"></a>
 </h2>
+<div class="section level3">
+<h3 id="definition">Definition<a class="anchor" aria-label="anchor" href="#definition"></a>
+</h3>
 <p>A d-variate random vector <span class="math inline">\(\boldsymbol{\tau} = {( \tau_{1}, \ldots, \tau_{d}
-)}\)</span> has a <em>Marshall–Olkin distribution</em> with parameters
-<span class="math inline">\(\lambda_{I} \geq {0}\)</span>, <span class="math inline">\(\emptyset \neq I \subseteq {\{ 1, \ldots, d
-\}}\)</span> if and only if it has the multivariate survival function
-<span class="math display">\[
+)}\)</span> has a <em>Marshall–Olkin (MO) distribution</em> with
+parameters <span class="math inline">\(\lambda_{I} \geq {0}\)</span>,
+<span class="math inline">\(\emptyset \neq I \subseteq {\{ 1, \ldots, d
+\}}\)</span>, called <em>shock arrival intensities</em>, if and only if
+it has the multivariate survival function</p>
+<p><span class="math display">\[
     \bar{F} (\boldsymbol{t})
         = \exp{\left \{
             -\sum_{\emptyset \neq I \subseteq {\{ 1, \ldots, d \}}}{
@@ -107,113 +111,44 @@ references at the end of this document.</p>
             }
         \right \}},
         \quad \boldsymbol{t} = {( t_{1}, \ldots, t_{d} )} \geq 0 ,
-\]</span> and the parameters fulfill <span class="math display">\[
-  \eta_{i}
-    := \sum_{I \ni i} \lambda_I &gt; 0
-        \ \forall i \in {\{ 1, \ldots, d \}} .
+\]</span></p>
+<p>and the rates for the marginal exponential distributions fulfill</p>
+<p><span class="math display">\[
+  c_{i}
+    := \sum_{I \ni i} \lambda_I &gt; 0 ,
+        \quad \forall i \in {\{ 1, \ldots, d \}} .
 \]</span></p>
 </div>
-<div class="section level2">
-<h2 id="marginal-survival-functions">Marginal survival functions<a class="anchor" aria-label="anchor" href="#marginal-survival-functions"></a>
-</h2>
-<p>The marginal random variables <span class="math inline">\(\tau_{i}\)</span> of a d-variate Marshall-Olkin
-distributed random vector are exponentially distributed with rates <span class="math inline">\(\eta_i, \ i \in {\{ 1, \ldots, d \}}\)</span>. In
-particular, this implies that <span class="math inline">\(\tau_{i}\)</span> has the survival function <span class="math display">\[
-    \bar{F}_{i}{(t)}
-        = \exp{\left \{
-                -t \eta_{i}
-            \right \}}
-        = \exp{\left \{
-                -t \sum_{I \ni i}{
-                    \lambda_{I}
-                }
-            \right \}} ,
-            \quad i \in {\{ 1, \ldots, d \}},
-            \ t \geq 0 .
-\]</span></p>
-</div>
-<div class="section level2">
-<h2 id="survival-copula">Survival copula<a class="anchor" aria-label="anchor" href="#survival-copula"></a>
-</h2>
-<p>The survival copula <span class="math inline">\(\hat{C}\)</span> of a
-d-variate Marshall–Olkin distributed random vector is <span class="math display">\[
-    \hat{C}{( \boldsymbol{u} )}
-        = \prod_{\emptyset \neq I \subseteq {[d]}}{
-                \min_{i \in I} u_{i}^{\frac{\lambda_I}{\eta_i}}
-            } ,
-            \quad \boldsymbol{u} \in {[0, 1]}^d .
-\]</span></p>
-</div>
-<div class="section level2">
-<h2 id="pickands-measure-and-function">Pickands measure and function<a class="anchor" aria-label="anchor" href="#pickands-measure-and-function"></a>
-</h2>
-<p>The Marshall–Olkin distribution is <em>Min-stable multivariate
-exponential (MSMVE)</em> and has a survival copula of
-<em>extreme-value</em> kind. The <em>Pickands measure</em> <span class="math inline">\(\delta\)</span> of a d-variate Marshall–Olkin
-distributed random vector is <span class="math display">\[
-    \delta{\left(
-        \frac{
-            \sum_{i \in I}{
-                \vec{e}_{i}
-                \prod_{i \neq j \in I}{
-                    \eta_{j}
-                }
-            }
-        }{
-            \sum_{i \in I}{
-                \prod_{i \neq j \in I}{
-                    \eta_{j}
-                }
-            }
-        }
-    \right)}
-    = \lambda_{I}
-        \sum_{i \in I}{
-            \frac{1}{\eta_{i}}
-        } ,
-        \quad \emptyset \neq I \subseteq {[d]} .
-\]</span> The <em>Pickands function</em> <span class="math inline">\(P\)</span> of a d-variate Marshall–Olkin
-distributed random vector is <span class="math display">\[
-    P{(\boldsymbol{w})}
-        := \int_{S_{d}}{
-                \max_{i \in {[d]}}{\{ w_{i} u_{i} \}} \delta{(
-\mathrm{d}\boldsymbol{u} )}
-            }
-        = \sum_{\emptyset\neq I \subseteq {[d]}}{
-            \lambda_{I}
-            \max_{i \in I}{
-                \frac{
-                    w_{i}
-                }{
-                    \eta_{i}
-                }
-            }
-        } .
-\]</span></p>
-</div>
-<div class="section level2">
-<h2 id="the-exogenous-shock-model">The exogenous shock model<a class="anchor" aria-label="anchor" href="#the-exogenous-shock-model"></a>
-</h2>
+<div class="section level3">
+<h3 id="the-exogenous-shock-model">The exogenous shock model<a class="anchor" aria-label="anchor" href="#the-exogenous-shock-model"></a>
+</h3>
 <p>A d-variate Marshall–Olkin distribution has a natural stochastic
-model: consider independent random variables <span class="math inline">\(E_{I} \sim \mathrm{Exp}{(\lambda_{I})}, \
-\emptyset \neq I \subseteq {\{ 1, \ldots, d \}}\)</span> and define
-<span class="math display">\[
+model: consider independent exponentially distributed random variables
+<span class="math inline">\(E_{I} \sim
+\mathrm{Exp}{(\lambda_{I})}\)</span>, <span class="math inline">\(\emptyset \neq I \subseteq {\{ 1, \ldots, d
+\}}\)</span>, whose rates are the <em>shock arrival intensities</em>,
+and define</p>
+<p><span class="math display">\[
     \tau_{i}
         := \min{\Big\{ E_{I} \ : \ I \ni i \Big\}} ,
             \quad i \in {\{ 1 , \ldots , d \}} .
 \]</span></p>
 </div>
-<div class="section level2">
-<h2 id="the-arnold-model">The Arnold model<a class="anchor" aria-label="anchor" href="#the-arnold-model"></a>
-</h2>
-<p>A d-variate Marshall–Olkin distribution has another stochastic model
+<div class="section level3">
+<h3 id="the-arnold-model">The Arnold model<a class="anchor" aria-label="anchor" href="#the-arnold-model"></a>
+</h3>
+<p>A d-variate Marshall–Olkin distribution has another stochastic model,
 which is strongly linked to continuous time, homogeneous Markovian
-processes. For this, consider the transformed parameters <span class="math display">\[
+processes. For this, consider the transformed parameters: the <em>total
+shock arrival intensity</em></p>
+<p><span class="math display">\[
     \lambda
         := \sum_{\emptyset \neq I \subseteq {\{ 1, \ldots, d \}}}{
             \lambda_{I}
         }
-\]</span> and <span class="math display">\[
+\]</span></p>
+<p>and the <em>shock arrival probabilies</em></p>
+<p><span class="math display">\[
     p_{I}
         := \frac{
             \lambda_{I}
@@ -221,9 +156,8 @@ processes. For this, consider the transformed parameters <span class="math displ
             \lambda
         },
         \quad \emptyset \neq I \subseteq {\{ 1, \ldots, d \}} .
-\]</span> Then, it can be shown that the vector <span class="math inline">\(\boldsymbol{\tau}\)</span>, defined below, has the
-desired Marshall–Olkin distribution. Let the following two sequences be
-independent:</p>
+\]</span></p>
+<p>Let the following two sequences be independent:</p>
 <ul>
 <li>
 <span class="math inline">\(\epsilon_{1}, \epsilon_{2}, \ldots \sim
@@ -232,31 +166,356 @@ independent:</p>
 <span class="math inline">\(Y_{1}, Y_{2}, \ldots\)</span> iid in
 <span class="math inline">\(\mathcal{P}{(\{1, \ldots, d\})} \setminus
 \emptyset\)</span> with <span class="math inline">\(\mathbb{P}{( Y_{1} =
-I )} = p_{I}, \ \emptyset \neq I \subseteq {\{ 1, \ldots ,
-d\}}\)</span>.</li>
+I )} = p_{I}\)</span>, <span class="math inline">\(\emptyset \neq I
+\subseteq {\{ 1, \ldots , d\}}\)</span>.</li>
 </ul>
-<p>Now, we define <span class="math inline">\(\boldsymbol{\tau}\)</span>
-by <span class="math display">\[
+<p>Now, define <span class="math inline">\(\boldsymbol{\tau}\)</span>
+by</p>
+<p><span class="math display">\[
     \tau_{i}
         := \sum_{j=1}^{\min{\{ k \in \mathbb{N} : i \in Y_{k} \}}}{
 \epsilon_{j} } ,
             \quad i \in {\{ 1, \ldots, d \}} .
 \]</span></p>
 </div>
+<div class="section level3">
+<h3 id="the-markovian-death-set-model">The Markovian death-set model<a class="anchor" aria-label="anchor" href="#the-markovian-death-set-model"></a>
+</h3>
+<p>A d-variate Marshall–Olkin distribution has yet another stochastic
+model through the associated <em>death-set process</em>, indicating
+which entities are dead, which is a Markov process with infinitesimal
+generator matrix <span class="math inline">\(Q = {( q_{I, J} : I, J
+\subseteq {\{ 1 , \ldots , d \}} )}\)</span> defined by</p>
+<p><span class="math display">\[
+    q_{I, J}
+        = \begin{cases}
+            -\sum_{I \subsetneq K \subseteq {\{ 1 , \ldots , d \}}} {
+q_{I, K} } , &amp; I = J , \\
+            \sum_{L \subseteq I}{ \lambda_{L \cup {(J \setminus I )}}
+}          , &amp; I \subsetneq J , \\
+            0                                                                    ,
+&amp; \text{else} .
+        \end{cases}
+\]</span></p>
+<p>Given a sample of <span class="math inline">\(Z\)</span>, simulated
+until reaching its absorbing state and associated waiting times <span class="math inline">\(W_{1}, W_{2}, \ldots\)</span> and corresponding
+states <span class="math inline">\(Z_{W_{1}}, Z_{W_{1} + W_{2}},
+\ldots\)</span>, define</p>
+<p><span class="math display">\[
+    \tau_{i}
+        := \sum_{j=1}^{ \min{\{ k : Z_{W_{1} + \cdots + W_{k}} \ni i \}}
+}{ W_{j} } ,
+        \quad i \in {\{ 1 , \ldots , d \}} .
+\]</span></p>
+</div>
+</div>
+<div class="section level2">
+<h2 id="exchangeable-marshallolkin-distributions">Exchangeable Marshall–Olkin distributions<a class="anchor" aria-label="anchor" href="#exchangeable-marshallolkin-distributions"></a>
+</h2>
+<div class="section level3">
+<h3 id="exchangeability">Exchangeability<a class="anchor" aria-label="anchor" href="#exchangeability"></a>
+</h3>
+<p>A random vector is called <em>exchangeable</em> if a reordering of
+the components does not change its law. An equivalent definition is that
+the survival function, distribution function, or density (if it exists)
+does not change if the arguments are permutated.</p>
+</div>
+<div class="section level3">
+<h3 id="exchangeable-shock-arrival-intensities">Exchangeable shock arrival intensities<a class="anchor" aria-label="anchor" href="#exchangeable-shock-arrival-intensities"></a>
+</h3>
+<p>A Marshall–Olkin distribution is exchangeable if and only if</p>
+<p><span class="math display">\[
+    {\lvert I \rvert}
+        = {\lvert J \rvert}
+    \quad \Rightarrow \quad
+    \lambda_{I}
+        = \lambda_{J} ,
+    \quad \forall \emptyset \neq I, J \subseteq {\{ 1 , \ldots , d \}} .
+\]</span></p>
+<p>For this reason, <span class="math inline">\(\lambda_i :=
+\lambda_{I}\)</span>, for <span class="math inline">\(\emptyset \neq I
+\subseteq {\{ 1, \ldots, d \}}\)</span> with <span class="math inline">\(i = {\lvert I \rvert}\)</span>, <span class="math inline">\(i \in {\{ 1 , \ldots , d \}}\)</span>, are called
+(unscaled) <em>exchangeable shock arrival intensities</em>.</p>
+</div>
+<div class="section level3">
+<h3 id="the-markovian-death-counting-model">The Markovian death-counting model<a class="anchor" aria-label="anchor" href="#the-markovian-death-counting-model"></a>
+</h3>
+<p>A d-variate exchangeable Marshall–Olkin distribution has a stochastic
+model through the associated death-counting process <span class="math inline">\(Z^\ast\)</span>, indicating how many entities are
+dead, which is a Markov process with infinitesimal generator matrix
+<span class="math inline">\(Q^\ast = {( q^\ast_{i, j} : 0 \leq i, j \leq
+d )}\)</span> defined by</p>
+<p><span class="math display">\[
+    q^\ast_{i, j}
+        = \begin{cases}
+            -\sum_{l=1}^{d-i}{ q^\ast_{i, l}
+}                                      , &amp; i = j , \\
+            \binom{d-i}{j-i} \sum_{k=0}^{i}{ \binom{i}{k} \lambda_{k +
+{(j-i)}} }   , &amp; i &lt; j , \\
+            0                                                                       ,
+&amp; \text{else} .
+        \end{cases}
+\]</span></p>
+<p>The first row of this infinitesimal generator matrix consists of the
+(scaled) <em>exchangeable shock-size arrival intensities</em> <span class="math inline">\(\eta_{i} = \binom{d}{i} \lambda_{i}\)</span>,
+<span class="math inline">\(0 &lt; i \leq d\)</span>, and the remaining
+rows can be calculated with the recursion</p>
+<p><span class="math display">\[
+    q^\ast_{i+1, j+1}
+        = \frac{d-j}{d-i} q^\ast_{i, j} + \frac{j+1-i}{d-i} q^\ast_{i,
+j+1} ,
+        \quad 0 \leq i &lt; j &lt; d .
+\]</span></p>
+<p>Given a sample of <span class="math inline">\(Z^\ast\)</span>,
+simulated until reaching its absorbing state and associated waiting
+times <span class="math inline">\(W_{1}, W_{2}, \ldots\)</span> and
+states <span class="math inline">\(Z^\ast_{W_{1}}, Z^\ast_{W_{1} +
+W_{2}}, \ldots\)</span>, and an independent uniform permutation <span class="math inline">\(\Pi\)</span> on <span class="math inline">\({\{ 1
+, \ldots, d \}}\)</span>, define</p>
+<p><span class="math display">\[
+    \tau_{i}
+        := \sum_{j = 1}^{\min{\{ k : Z^\ast_{W_{1} + \cdots + W_{k}}
+\geq \Pi{(i)} \}}}{ W_{j} } ,
+            \quad i \in {\{ 1 , \ldots , d \}} .
+\]</span></p>
+</div>
+</div>
+<div class="section level2">
+<h2 id="extendible-marshallolkin-distributions">Extendible Marshall–Olkin distributions<a class="anchor" aria-label="anchor" href="#extendible-marshallolkin-distributions"></a>
+</h2>
+<p>Exchangeable sequence <span class="math inline">\(\tau_{1}, \tau_{2},
+\ldots\)</span> with finite margins of Marshall–Olkin type are
+identified with a so-called <em>Bernstein function</em> <span class="math inline">\(\psi\)</span> and associated Lévy subordinator
+<span class="math inline">\(\Lambda\)</span> such that</p>
+<p><span class="math display">\[
+    \tau_{i}
+        := \inf{\{ t &gt; 0 : \Lambda_{t} \geq E_{i} \}} ,
+        \quad i \in {\{ 1 , \ldots , d \}} ,
+\]</span> for iid unit exponentially distributed random <em>barrier
+variables</em> <span class="math inline">\(E_{1}, \ldots,
+E_{d}\)</span>; the <em>Bernstein function</em> is the Lévy
+subordinator’s Laplace exponent, and it holds that</p>
+<p><span class="math display">\[
+    \eta_{i}
+        = \binom{d}{i}  {(-1)}^{i-1} \Delta^{i} \psi{(d-i)},
+        \quad i \in {\{ 1 , \ldots , d \}}.
+\]</span></p>
+<div class="section level3">
+<h3 id="bernstein-functions">Bernstein functions<a class="anchor" aria-label="anchor" href="#bernstein-functions"></a>
+</h3>
+<p><em>Bernstein functions</em> are the Laplace exponents of (killed)
+Lévy subordinators. They are associated with a <em>Lévy triplet</em>
+<span class="math inline">\({(a, b, \nu)}\)</span>, with a <em>killing
+rate</em> <span class="math inline">\(a \geq 0\)</span>, a
+<em>drift</em> <span class="math inline">\(b \geq 0\)</span>, and a
+<em>pure-jump Lévy measure</em> <span class="math inline">\(\nu\)</span>
+on <span class="math inline">\({(0, \infty)}\)</span> with <span class="math inline">\(\int_{0}^{\infty} {(1 \wedge u)} \nu{(du)} &lt;
+\infty\)</span>:</p>
+<p><span class="math display">\[
+    \psi{(x)}
+        = a 1_{\{ x &gt; 0 \}} + b x + \int_{0}^{\infty}{ {(1 - e^{u
+x})} \nu{(du)}} ,
+        \quad x \geq 0 .
+\]</span></p>
+<p><em>Complete Bernstein functions</em> are also associate with a
+<em>Stieltjes triples</em> <span class="math inline">\({( a , b , \sigma
+)}\)</span>, with <span class="math inline">\(a, b\)</span> from the
+Lévy triplet, and a <em>Stieljtes measure</em> <span class="math inline">\(\sigma\)</span> on <span class="math inline">\({(0, \infty)}\)</span> with <span class="math inline">\(\int_{0}^{\infty} {( 1 + u)}^{-1} \sigma{(du)}
+&lt; \infty\)</span>:</p>
+<p><span class="math display">\[
+    \psi{(x)}
+        = a 1_{\{ x &gt; 0 \}} + b x + \int_{0}^{\infty}{ \frac{x}{x +
+u} \sigma{(du)} } ,
+        \quad x \geq 0 .
+\]</span></p>
+</div>
+<div class="section level3">
+<h3 id="calculating-the-exchangeable-shock-size-arrival-intensities">Calculating the exchangeable shock-size arrival intensities<a class="anchor" aria-label="anchor" href="#calculating-the-exchangeable-shock-size-arrival-intensities"></a>
+</h3>
+<p>Numerically stable approximations of the <em>exchangeable shock-size
+arrival intensities</em> <span class="math inline">\(\eta_{i}\)</span>,
+<span class="math inline">\(i \in {\{ 1 , \ldots , d\}}\)</span>, can be
+derived from the Bernstein function’s integral representations.</p>
+<ul>
+<li>
+<p>For a Bernstein function with Lévy triplet <span class="math inline">\({(a, 0, 0 )}\)</span>, they can be calculated
+as</p>
+<p><span class="math display">\[
+      \eta_{i}
+          = \binom{d}{i} a 1_{\{ i = d \}} ,
+          \quad i \in {\{ 1 , \ldots , d \}} .
+\]</span></p>
+</li>
+<li>
+<p>For a Bernstein function with Lévy triplet <span class="math inline">\({(0, b, 0 )}\)</span>, they can be calculated
+as</p>
+<p><span class="math display">\[
+      \eta_{i}
+          = \binom{d}{i} b 1_{\{ i = 1 \}} ,
+          \quad i \in {\{ 1 , \ldots , d \}} .
+\]</span></p>
+</li>
+<li>
+<p>For a Bernstein function Lévy triplet <span class="math inline">\({(0, 0, \nu)}\)</span>, they can be calculated
+as</p>
+<p><span class="math display">\[
+      \eta_{i}
+          = \int_{0}^{\infty}{
+              \binom{d}{i}
+              {(1 - e^{-u})}^{i} e^{-u {(d - i)}} \nu{(du)}
+          } ,
+          \quad i \in {\{ 1 , \ldots , d \}} .
+\]</span></p>
+</li>
+<li>
+<p>For a complete Bernstein function with Stieltjes triples <span class="math inline">\({(0, 0, \sigma )}\)</span>, they can be calculated
+as</p>
+<p><span class="math display">\[
+      \eta_{i}
+          = \int_{0}^{\infty}{
+              \binom{d}{i}
+              u B{(1 + i, d-i + u)} \sigma{(du)}
+          } ,
+          \quad i \in {\{ 1 , \ldots , d \}} .
+\]</span></p>
+</li>
+<li><p>Finally, linear combinations are associated with linear
+combinations of their Lévy (or Stieltjes) triples with the same
+coefficients. Similarly, their <em>exchangeable shock-size arrival
+intensities</em> can be calculated as a linear combination of the
+individual <em>exchangeable shock-size arrival intensities</em> with
+these coefficients.</p></li>
+</ul>
+</div>
+<div class="section level3">
+<h3 id="the-lévy-frailty-model">The Lévy frailty model<a class="anchor" aria-label="anchor" href="#the-l%C3%A9vy-frailty-model"></a>
+</h3>
+<p>A d-variate extendible Marshall–Olkin distribution with associated
+(killed) compound Poisson subordinator with drift <span class="math display">\[
+    \Lambda_{t}
+        = \infty \cdot 1_{\{ \epsilon \leq a t \}}
+            + b t
+            + \sum_{j = 1}^{N_{t}}{ X_{j} } ,
+            \quad t \geq 0 ,
+\]</span></p>
+<p>with a unit exponenential random variable <span class="math inline">\(\epsilon\)</span> and compound Poisson process
+<span class="math inline">\(N_{t} = \max{\{ k : W_{1} + \cdots + W_{k}
+\leq t \}}\)</span>, define</p>
+<p><span class="math display">\[
+    \tau_{i}
+        := W_{1} + \cdots + W_{K_{i}}
+            + \min{\left \{
+                W_{K_{i} + 1} ,
+                \frac{E_{i} - \Lambda_{W_{1} + \cdots + W_{K_{i}}}}{b} ,
+                \frac{\epsilon}{a} - {( W_{1} + \cdots + W_{K_{i}} )}
+            \right \}} ,
+            \quad i \in {\{ 1 , \ldots , d \}} ,
+\]</span></p>
+<p>where</p>
+<p><span class="math display">\[
+    K_{i}
+        := \max{\left \{
+            k
+            :
+            \Lambda_{W_{1} + \cdots + W_{k}} &lt; E_{i}
+        \right \}} ,
+        \quad i \in {\{ 1 , \ldots , d \}} .
+\]</span></p>
+</div>
+</div>
+<div class="section level2">
+<h2 id="parametric-extendible-families">Parametric extendible families<a class="anchor" aria-label="anchor" href="#parametric-extendible-families"></a>
+</h2>
+<div class="section level3">
+<h3 id="constant-bernstein-function">Constant Bernstein function<a class="anchor" aria-label="anchor" href="#constant-bernstein-function"></a>
+</h3>
+<p>Suppose <span class="math inline">\(a \geq 0\)</span> and consider
+the <em>constant Bernstein function</em></p>
+<p><span class="math display">\[
+    \psi{(x)}
+        = a 1_{\{ x &gt; 0 \}} ,
+         \quad x \geq 0 .
+\]</span></p>
+</div>
+<div class="section level3">
+<h3 id="linear-bernstein-function">Linear Bernstein function<a class="anchor" aria-label="anchor" href="#linear-bernstein-function"></a>
+</h3>
+<p>Suppose <span class="math inline">\(b \geq 0\)</span> and consider
+the <em>linear Bernstein function</em></p>
+<p><span class="math display">\[
+    \psi{(x)}
+        = b x ,
+        \quad x \geq 0 .
+\]</span></p>
+</div>
+<div class="section level3">
+<h3 id="armageddon-family">Armageddon family<a class="anchor" aria-label="anchor" href="#armageddon-family"></a>
+</h3>
+<p>Suppose <span class="math inline">\(a, b \geq 0\)</span> and consider
+the <em>Armageddon Bernstein function</em></p>
+<p><span class="math display">\[
+    \psi{(x)}
+        = a 1_{\{ x &gt; 0 \}} + b x ,
+        \quad x \geq 0 ,
+\]</span></p>
+<p>which is the sum of a <a href="#constant-bernstein-function">constant
+Bernstein function</a> and a <a href="#linear-bernstein-function">linear
+Bernstein function</a>.</p>
+<ul>
+<li>
+<p>The corresponding Lévy subordinator has an exponential killing
+rate <span class="math inline">\(a\)</span>, a linear drift <span class="math inline">\(b\)</span>, and no compound Poisson component:</p>
+<p><span class="math display">\[
+      \Lambda_{t}
+          = \infty \cdot 1_{\{ \epsilon \leq a t \}} + b t ,
+          \quad t \geq 0 .
+\]</span></p>
+</li>
+<li>
+<p>The corresponding <em>shock arrival intensities</em> are</p>
+<p><span class="math display">\[
+      \lambda_{I}
+          = \begin{cases}
+              b ,     &amp; {\lvert I \rvert} = 1 , \\
+              a ,     &amp; I = {\{ 1 , \ldots, d \}} , \\
+              0 ,     &amp; \text{else} ,
+          \end{cases}
+\]</span></p>
+<p>such that a simplified <em>exogenous shock model</em> can be
+used.</p>
+</li>
+</ul>
+</div>
+</div>
 <div class="section level2 unnumbered">
 <h2 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
-<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
 <div id="ref-Mai2010a" class="csl-entry">
 Mai, Jan-Frederik, and Matthias Scherer. 2010. <span>“The
 <span>P</span>ickands Representation of Survival
 <span>M</span>arshall–<span>O</span>lkin Copulas.”</span> <em>Statistics
 &amp; Probability Letters</em> 80 (5): 357–60. <a href="https://doi.org/10.1016/j.spl.2009.11.010" class="external-link">https://doi.org/10.1016/j.spl.2009.11.010</a>.
 </div>
+<div id="ref-Mai2011a" class="csl-entry">
+———. 2011. <span>“Reparameterizing
+<span>M</span>arshall–<span>O</span>lkin Copulas with Applications to
+Sampling.”</span> <em>Journal of Statistical Computation and
+Simulation</em> 81 (1): 59–78. <a href="https://doi.org/10.1080/00949650903185961" class="external-link">https://doi.org/10.1080/00949650903185961</a>.
+</div>
 <div id="ref-Mai2017a" class="csl-entry">
 ———. 2017. <em>Simulating Copulas: Stochastic Models, Sampling
 Algorithms and Applications</em>. 2nd ed. Series in Quantitative
 Finance. World Scientific. <a href="https://doi.org/10.1142/10265" class="external-link">https://doi.org/10.1142/10265</a>.
+</div>
+<div id="ref-Schilling2012a" class="csl-entry">
+Schilling, René L., Renming Song, and Zoran Vondracek. 2012.
+<em><span>B</span>ernstein Functions</em>. 2nd ed. De Gruyter. <a href="https://doi.org/10.1515/9783110269338" class="external-link">https://doi.org/10.1515/9783110269338</a>.
+</div>
+<div id="ref-Sloot2022a" class="csl-entry">
+Sloot, Henrik. 2022. <span>“Implementing <span>M</span>arkovian Models
+for Extendible <span>M</span>arshall–<span>O</span>lkin
+Distributions.”</span> <em>Dependence Modeling</em> 10 (1): 308–43. <a href="https://doi.org/doi:10.1515/demo-2022-0151" class="external-link">https://doi.org/doi:10.1515/demo-2022-0151</a>.
 </div>
 </div>
 </div>
