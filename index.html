@@ -97,9 +97,9 @@
 <p>We provide drop-in wrapper <code>rpextmo</code>for simulating several parametric families of exchangeable Marshall-Olkin distributions: For example to simulate from the family associated with the <span class="math inline"><em>α</em></span>-stable distribution, use</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/rpextmo.html">rpextmo</a></span><span class="op">(</span></span>
-<span>    n <span class="op">=</span> <span class="fl">10</span>, d <span class="op">=</span> <span class="fl">3</span>,</span>
-<span>    eta <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log2</a></span><span class="op">(</span><span class="fl">2</span> <span class="op">-</span> <span class="fl">0.5</span><span class="op">)</span>,</span>
-<span>    family <span class="op">=</span> <span class="st">"AlphaStable"</span></span>
+<span>  n <span class="op">=</span> <span class="fl">10</span>, d <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>  eta <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log2</a></span><span class="op">(</span><span class="fl">2</span> <span class="op">-</span> <span class="fl">0.5</span><span class="op">)</span>,</span>
+<span>  family <span class="op">=</span> <span class="st">"AlphaStable"</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt;             [,1]      [,2]       [,3]</span></span>
 <span><span class="co">#&gt;  [1,] 1.43771730 1.4377173 1.43771730</span></span>
@@ -116,7 +116,7 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">alpha</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log2</a></span><span class="op">(</span><span class="fl">2</span> <span class="op">-</span> <span class="fl">0.5</span><span class="op">)</span></span>
 <span><span class="va">bf</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/AlphaStableBernsteinFunction-class.html">AlphaStableBernsteinFunction</a></span><span class="op">(</span></span>
-<span>    alpha <span class="op">=</span> <span class="va">alpha</span></span>
+<span>  alpha <span class="op">=</span> <span class="va">alpha</span></span>
 <span><span class="op">)</span></span>
 <span><span class="va">bf</span></span>
 <span><span class="co">#&gt; An object of class "AlphaStableBernsteinFunction"</span></span>
@@ -125,16 +125,16 @@
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x0</span> <span class="op">&lt;-</span> <span class="fl">5e-4</span></span>
 <span><span class="va">bf_approximated</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/SumOfBernsteinFunctions-class.html">SumOfBernsteinFunctions</a></span><span class="op">(</span></span>
-<span>    first <span class="op">=</span> <span class="fu"><a href="reference/LinearBernsteinFunction-class.html">LinearBernsteinFunction</a></span><span class="op">(</span></span>
-<span>        scale <span class="op">=</span> <span class="va">alpha</span> <span class="op">*</span> <span class="va">x0</span><span class="op">^</span><span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">alpha</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">alpha</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/Special.html" class="external-link">gamma</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">alpha</span><span class="op">)</span></span>
-<span>    <span class="op">)</span>,</span>
-<span>    second <span class="op">=</span> <span class="fu"><a href="reference/ScaledBernsteinFunction-class.html">ScaledBernsteinFunction</a></span><span class="op">(</span></span>
-<span>        scale <span class="op">=</span> <span class="va">x0</span><span class="op">^</span><span class="op">(</span><span class="op">-</span><span class="va">alpha</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/Special.html" class="external-link">gamma</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">alpha</span><span class="op">)</span>,</span>
-<span>        original <span class="op">=</span> <span class="fu"><a href="reference/ParetoBernsteinFunction-class.html">ParetoBernsteinFunction</a></span><span class="op">(</span></span>
-<span>            alpha <span class="op">=</span> <span class="va">alpha</span>,</span>
-<span>            x0 <span class="op">=</span> <span class="va">x0</span></span>
-<span>        <span class="op">)</span></span>
+<span>  first <span class="op">=</span> <span class="fu"><a href="reference/LinearBernsteinFunction-class.html">LinearBernsteinFunction</a></span><span class="op">(</span></span>
+<span>    scale <span class="op">=</span> <span class="va">alpha</span> <span class="op">*</span> <span class="va">x0</span><span class="op">^</span><span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">alpha</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">alpha</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/Special.html" class="external-link">gamma</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">alpha</span><span class="op">)</span></span>
+<span>  <span class="op">)</span>,</span>
+<span>  second <span class="op">=</span> <span class="fu"><a href="reference/ScaledBernsteinFunction-class.html">ScaledBernsteinFunction</a></span><span class="op">(</span></span>
+<span>    scale <span class="op">=</span> <span class="va">x0</span><span class="op">^</span><span class="op">(</span><span class="op">-</span><span class="va">alpha</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/Special.html" class="external-link">gamma</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">alpha</span><span class="op">)</span>,</span>
+<span>    original <span class="op">=</span> <span class="fu"><a href="reference/ParetoBernsteinFunction-class.html">ParetoBernsteinFunction</a></span><span class="op">(</span></span>
+<span>      alpha <span class="op">=</span> <span class="va">alpha</span>,</span>
+<span>      x0 <span class="op">=</span> <span class="va">x0</span></span>
 <span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Bernstein functions are closed under addition, scaling, and composite scaling, which can be used to create new Bernstein functions:</p>
 <p><img src="reference/figures/README-unnamed-chunk-6-1.png" width="100%"></p>
