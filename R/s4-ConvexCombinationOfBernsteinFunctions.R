@@ -65,25 +65,25 @@ setValidity(
             return(error_msg_domain("coefficients", "R+(0,)"))
         }
         if (!(
-            test_list(
-                object@points,
-                types = "BernsteinFunction",
-                any.missing = FALSE,
-                len = length(object@coefficients)
-            ) &&
-                all(
-                    sapply(
-                        object@points,
-                        function(object) {
-                            isTRUE(
-                                validObject(
-                                    object,
-                                    test = TRUE, complete = TRUE
-                                )
-                            )
-                        }
-                    )
-                ))) {
+              test_list(
+                  object@points,
+                  types = "BernsteinFunction",
+                  any.missing = FALSE,
+                  len = length(object@coefficients)
+              ) &&
+                  all(
+                      sapply(
+                          object@points,
+                          function(object) {
+                              isTRUE(
+                                  validObject(
+                                      object,
+                                      test = TRUE, complete = TRUE
+                                  )
+                              )
+                          }
+                      )
+                  ))) {
             return(
                 error_msg_domain(
                     "points",

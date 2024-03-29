@@ -137,7 +137,7 @@ setMethod(
                             ...
                         )
                         if (!isTRUE("OK" == res$message) &&
-                            abs(.x) < 50 * .Machine$double.eps) {
+                                abs(.x) < 50 * .Machine$double.eps) {
                             res <- integrate(integrand_fn,
                                 .x = 50 * .Machine$double.eps,
                                 lower = attr(stieltjes_density, "lower"),

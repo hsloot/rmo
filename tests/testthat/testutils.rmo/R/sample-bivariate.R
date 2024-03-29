@@ -35,7 +35,7 @@
 #' @include sample-helper.R
 #' @export
 rmo_esm_bivariate <- function( # nolint
-                              n, d = 2, intensities = c(1, 1, 0)) {
+        n, d = 2, intensities = c(1, 1, 0)) {
     stopifnot(
         is.numeric(n) && 1L == length(n) && 0 == n %% 1 && n > 0 &&
             is.numeric(d) && 1L == length(d) && 0 == d %% 1 && d == 2 &&
@@ -78,7 +78,7 @@ rmo_esm_bivariate <- function( # nolint
 #' @include sample-helper.R
 #' @export
 rexmo_mdcm_bivariate <- function( # nolint
-                                 n, d = 2, ex_intensities = c(1, 0)) {
+        n, d = 2, ex_intensities = c(1, 0)) {
     stopifnot(
         is.numeric(n) && 1L == length(n) && 0 == n %% 1 && n > 0 &&
             is.numeric(d) && 1L == length(d) && 0 == d %% 1 && d == 2 &&
@@ -139,7 +139,7 @@ rexmo_mdcm_bivariate <- function( # nolint
 #' @include sample-helper.R
 #' @export
 rarmextmo_esm_bivariate <- function( # nolint
-                                    n, d = 2, alpha = 1, beta = 0) {
+        n, d = 2, alpha = 1, beta = 0) {
     stopifnot(
         is.numeric(n) && 1L == length(n) && 0 == n %% 1 && n > 0 &&
             is.numeric(d) && 1L == length(d) && 0 == d %% 1 && d == 2 &&

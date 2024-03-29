@@ -499,13 +499,13 @@ NULL
 #'
 #' @export
 rpextmo <- function( # nolint
-    n, d, a = 0, b = 0, gamma = 1, eta = NULL,
-    family = c(
-        "Armageddon", "Poisson", "Pareto",
-        "Exponential", "AlphaStable", "InverseGaussian",
-        "Gamma"
-    ),
-    method = c("MDCM", "LFM", "AM", "ESM")) {
+        n, d, a = 0, b = 0, gamma = 1, eta = NULL,
+        family = c(
+            "Armageddon", "Poisson", "Pareto",
+            "Exponential", "AlphaStable", "InverseGaussian",
+            "Gamma"
+        ),
+        method = c("MDCM", "LFM", "AM", "ESM")) {
     family <- match.arg(family)
     assert_choice(
         family,

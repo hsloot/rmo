@@ -20,8 +20,8 @@ rarmextmo_esm <- function(n, d, alpha, beta) {
 
 rextmo_lfm <- function(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list) { # nolint
     if (isTRUE(rate == 0) ||
-        (isTRUE(rjump_name == "rposval") &&
-            isTRUE(rjump_arg_list$value == 0))) {
+            (isTRUE(rjump_name == "rposval") &&
+                 isTRUE(rjump_arg_list$value == 0))) {
         rpextmo(
             n, d,
             a = rate_killing, b = rate_drift,

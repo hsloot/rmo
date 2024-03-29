@@ -39,10 +39,10 @@
 #' @include sample-helper.R
 #' @export
 rextmo_lfm_comonotone <- function( # nolint
-                                  n, d = 2,
-                                  rate = 0, rate_killing = 1, rate_drift = 0,
-                                  rjump_name = "rposval",
-                                  rjump_arg_list = list("value" = 0)) {
+        n, d = 2,
+        rate = 0, rate_killing = 1, rate_drift = 0,
+        rjump_name = "rposval",
+        rjump_arg_list = list("value" = 0)) {
     stopifnot(
         is.numeric(n) && 1L == length(n) && 0 == n %% 1 && n > 0 &&
             is.numeric(d) && 1L == length(d) && 0 == d %% 1 && d > 0 &&

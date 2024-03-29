@@ -198,8 +198,8 @@ setMethod(
         } else {
             out <- c(
                 d * (
-                    valueOf0(object, d, cscale = cscale) -
-                        valueOf0(object, d - 1, cscale = cscale)),
+                     valueOf0(object, d, cscale = cscale) -
+                         valueOf0(object, d - 1, cscale = cscale)),
                 sapply(
                     2:(d - 1),
                     function(i) {

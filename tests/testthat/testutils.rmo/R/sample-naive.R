@@ -239,7 +239,7 @@ rexmo_mdcm_naive <- function(n, d, ex_intensities) { # nolint
 #' @include sample-helper.R
 #' @export
 rexmo_mdcm_naive_recursive <- function( # nolint
-                                       n, d = 2, ex_intensities = c(1, 0)) {
+        n, d = 2, ex_intensities = c(1, 0)) {
     stopifnot(
         is.numeric(n) && 1L == length(n) && 0 == n %% 1 && n > 0 &&
             is.numeric(d) && 1L == length(d) && 0 == d %% 1 && d > 0 &&
@@ -386,10 +386,10 @@ rarmextmo_esm_naive <- function(n, d, alpha, beta) { # nolint
 #' @include sample-helper.R
 #' @keywords internal
 sample_cpp_naive <- function( # nolint
-                             rate = 0, rate_killing = 0, rate_drift = 1,
-                             rjump_name = "rposval",
-                             rjump_arg_list = list("values" = 0),
-                             barrier_values = rexp(2, rate = 1)) {
+        rate = 0, rate_killing = 0, rate_drift = 1,
+        rjump_name = "rposval",
+        rjump_arg_list = list("values" = 0),
+        barrier_values = rexp(2, rate = 1)) {
     stopifnot(
         is.numeric(rate) && 1L == length(rate) && rate >= 0 &&
             is.numeric(rate_killing) && 1L == length(rate_killing) &&
@@ -426,7 +426,7 @@ sample_cpp_naive <- function( # nolint
             jump_value <- do.call(rjump, args = c("n" = 1, rjump_arg_list))
 
             if (killing_waiting_time < Inf &&
-                killing_waiting_time <= waiting_time
+                    killing_waiting_time <= waiting_time
             ) {
                 ## if killing happens before the next shock, calculate the time
                 ## where individual barriers are surpassed
@@ -514,10 +514,10 @@ sample_cpp_naive <- function( # nolint
 #' @include sample-helper.R
 #' @export
 rextmo_lfm_naive <- function( # nolint
-                             n, d = 2,
-                             rate = 0, rate_killing = 0, rate_drift = 1,
-                             rjump_name = "rposval",
-                             rjump_arg_list = list("value" = 0)) {
+        n, d = 2,
+        rate = 0, rate_killing = 0, rate_drift = 1,
+        rjump_name = "rposval",
+        rjump_arg_list = list("value" = 0)) {
     stopifnot(
         is.numeric(n) && 1L == length(n) && 0 == n %% 1 && n > 0 &&
             is.numeric(d) && 1L == length(d) && 0 == d %% 1 && d > 0 &&

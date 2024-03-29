@@ -2,17 +2,17 @@ use_seed <- 1632
 n <- 1e2
 
 rextmo_lfm <- function(
-    n,
-    d,
-    rate,
-    rate_killing,
-    rate_drift,
-    rjump_name,
-    rjump_arg_list) {
+        n,
+        d,
+        rate,
+        rate_killing,
+        rate_drift,
+        rjump_name,
+        rjump_arg_list) {
     mockery::stub(rextmo_lfm, "Rcpp__rextmo_lfm", rtest__rextmo_lfm)
     if (isTRUE(rate == 0) ||
-        (isTRUE(rjump_name == "rposval") &&
-            isTRUE(rjump_arg_list$value == 0))) {
+            (isTRUE(rjump_name == "rposval") &&
+                 isTRUE(rjump_arg_list$value == 0))) {
         rpextmo(
             n, d,
             a = rate_killing, b = rate_drift,
