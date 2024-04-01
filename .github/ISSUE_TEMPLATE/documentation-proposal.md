@@ -9,4 +9,10 @@ assignees: hsloot
 
 ## Proposal
 
-Write quickly which documentation should be improved or updated. Preferably with links. __Usually, this should not be a proposal for somebody else, but a proper way of documenting your reviewing activities and including it in projects__.
+Write a brief description of the documentation that needs improvement or
+updating. It is recommended to include links to the specific documentation.
+
+__Note__: This template is intended for documenting your reviewing activities
+and your intended contribution to the documentation. It should not be used to
+assign tasks to others. Please ensure that your proposed improvements are clear
+and actionable.
