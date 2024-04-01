@@ -107,9 +107,9 @@ rextmo(n = 10, d = 3, bf = bf)
 While the package is extensively tested, numerical issues may arise in
 high-dimensional simulations due to very small or large numbers. We recommend
 performing statistical tests suitable for your use-case to ensure validity. For
-more guidance, refer to our [integration
-test](https://github.com/hsloot/rmo/blob/master/other/integration-test.Rmd) and
-submit an [issue
+more guidance, refer to our [statistical unit
+tests](https://github.com/hsloot/rmo/blob/main/tests/testthat/test-statistical-unit-test.R)
+and submit an [issue
 report](https://github.com/hsloot/rmo/issues/new?assignees=&labels=bug&template=statistical_problem.md&title=%5BSTAT%5D)
 if you encounter statistical problems.
 
