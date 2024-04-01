@@ -50,7 +50,6 @@ An R package for constructing and simulating high-dimensional
 research and real-world applications. Read more about simulating
 high-dimensional MO distributions in [@Sloot2022a].
 
-
 ## Installation
 
 You can install the development version from GitHub using the `devtools` package
@@ -60,7 +59,6 @@ with:
 # install.packages("devtools")
 devtools::install_github("hsloot/rmo")
 ```
-
 
 ## Basic usage
 
@@ -104,7 +102,6 @@ bf <- SumOfBernsteinFunctions(
 rextmo(n = 10, d = 3, bf = bf)
 ```
 
-
 ## Word(s) of caution
 
 While the package is extensively tested, numerical issues may arise in
@@ -121,12 +118,10 @@ it is still under active development. We aim to keep the interface of the
 primary function `rpextmo()` backwards compatible, the implementation may
 undergo changes.
 
-
 ## API documentation
 
 The package is documented using `roxygen2` and `pkgdown`. You can find the
 documentation on the [project website](reference/index.html).
-
 
 ## Testing
 
@@ -137,11 +132,9 @@ following command after checking out the repository:
 devtools::test()
 ```
 
-
 ## Changelog
 
 The changelog is available in the [NEWS.md](NEWS.md) file.
-
 
 ## Contributing
 
@@ -150,11 +143,9 @@ documentation, writing tests, raising issues or feature requests, implementing
 feature requests, or fixing bugs. Check out our [contribution
 guide](.github/CONTRIBUTING.md) to get started.
 
-
 ## References
 
 <div id="refs"></div>
-
 
 ## License
 
