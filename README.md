@@ -13,7 +13,7 @@ has not yet been a stable, usable release suitable for the
 public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
-[![Last-changedate](https://img.shields.io/badge/last%20change-2024--04--01-yellowgreen.svg)](/commits/master)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2024--04--02-yellowgreen.svg)](/commits/master)
 [![R build
 status](https://github.com/hsloot/rmo/workflows/check-full/badge.svg)](https://github.com/hsloot/rmo/actions)
 [![Codecov test
@@ -104,8 +104,8 @@ rextmo(n = 10, d = 3, bf = bf)
 While the package is extensively tested, numerical issues may arise in
 high-dimensional simulations due to very small or large numbers. We
 recommend performing statistical tests suitable for your use-case to
-ensure validity. For more guidance, refer to our [integration
-test](https://github.com/hsloot/rmo/blob/master/other/integration-test.Rmd)
+ensure validity. For more guidance, refer to our [statistical unit
+tests](https://github.com/hsloot/rmo/blob/main/tests/testthat/test-statistical-unit-test.R)
 and submit an [issue
 report](https://github.com/hsloot/rmo/issues/new?assignees=&labels=bug&template=statistical_problem.md&title=%5BSTAT%5D)
 if you encounter statistical problems.
@@ -135,7 +135,7 @@ The changelog is available in the [NEWS.md](NEWS.md) file.
 
 ## Contributing
 
-Contribution to `rmo` are welcome! You contribution can be about
+Contributions to `rmo` are welcome! You contribution can be about
 improving the documentation, writing tests, raising issues or feature
 requests, implementing feature requests, or fixing bugs. Check out our
 [contribution guide](.github/CONTRIBUTING.md) to get started.

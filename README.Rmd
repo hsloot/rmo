@@ -138,7 +138,7 @@ The changelog is available in the [NEWS.md](NEWS.md) file.
 
 ## Contributing
 
-Contribution to `rmo` are welcome! You contribution can be about improving the
+Contributions to `rmo` are welcome! You contribution can be about improving the
 documentation, writing tests, raising issues or feature requests, implementing
 feature requests, or fixing bugs. Check out our [contribution
 guide](.github/CONTRIBUTING.md) to get started.
