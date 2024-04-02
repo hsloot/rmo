@@ -1,39 +1,38 @@
-#' Sample from Marshall–Olkin distributions
+#' Simulate from Marshall–Olkin distributions
 #'
 #' Draws `n` iid samples from a `d`-variate *Marshall–Olkin distribution*
 #' parametrized by *shock-arrival intensities*.
 #'
-#' @param n an integer for the *number of samples*.
-#' @param d an integer for the *dimension*.
-#' @param intensities a numeric vector for the *shock-arrival intensities*.
-#' @param method a string indicating which sampling algorithm should be used.
+#' @param n An integer for the *number of samples*.
+#' @param d An integer for the *dimension*.
+#' @param intensities A numeric vector for the *shock-arrival intensities*.
+#' @param method A string indicating which sampling algorithm should be used.
 #'   Use "AM" for the *Arnold model* and "ESM" for the *exogenous shock model*.
 #'   We recommend using the *ESM* for small dimensions only; the *AM* can be
 #'   used up until dimension \eqn{30}.
 #'
-#' @return `rmo` returns a numeric matrix with `n` rows and `d` columns, with
-#'   the rows corresponding to iid distributed samples of a `d`-variate
-#'   *Marshall–Olkin distribution* with *shock-arrival intensities*
-#'   `intensities`.
+#' @return
+#' `rmo` returns a numeric matrix of size `n` x `d`. Each row corresponds to an
+#' independently and identically (iid) distributed sample from a `d`-variate
+#' *Marshall–Olkin distribution* with specified parameters.
 #'
 #'
 #' @details
 #' The *Marshall–Olkin distribution* was introduced in
-#' \insertCite{Marshall1967a}{rmo} and has the survival function
+#' \insertCite{Marshall1967a}{rmo}. It is characterized by the survival
+#' function:
 #' \deqn{
 #'     \bar{F}{(t)}
-#'         = \exp{\left\{ - \sum_{I} \lambda_I \max_{i \in I} t_i \right\}} ,
-#'             \quad t = {(t_{1}, \ldots, t_{d})} > 0 ,
+#'         = \exp{\left\{ - \sum_{I} \lambda_I \max_{i \in I} t_i \right\}},
+#'             \quad t = {(t_{1}, \ldots, t_{d})} > 0,
 #' }
 #' for *shock-arrival intensities* \eqn{\lambda_I \geq 0},
 #' \eqn{\emptyset \neq I \subseteq {\{ 1 , \ldots, d \}}}.
-#' They are called *shock-arrival intensities* as they correspond to the rates
-#' of independent exponential random variables from the
-#' *exogenous shock model (ESM)*, and a shock-arrival intensity
-#' \eqn{\lambda_{I}} of shock \eqn{I} equal to zero implies that the the shock
-#' \eqn{I} never arrives. We use the following binary representation to map a
-#' subsets of \eqn{\{ 1, \ldots, d\}}{{1, \ldots, d}} to integers
-#' \eqn{0, \ldots, 2^d-1}:
+#' The shock-arrival intensities correspond to the rates of independent
+#' exponential random variables in the *exogenous shock model (ESM)*. If
+#' \eqn{\lambda_{I}} is zero, it means that the shock \eqn{I} never arrives. To
+#' map subsets of \eqn{{\{ 1, \ldots, d\}}} to integers \eqn{0, \ldots, 2^d-1},
+#' we use a binary representation:
 #' \deqn{
 #'   I \equiv \sum_{k \in I}{ 2^{k-1} }
 #' }
@@ -41,18 +40,21 @@
 #' ## Simulation algorithms
 #'
 #' ### Exogenous shock model
-#' The *exogenous shock model (ESM)* simulates a Marshall–Olkin distributed
-#' random vector via independent exponentially distributed shock times for all
-#' non-empty subsets of components and defines each component as the minimum of
-#' all shock times corresponding to a subset containing this component, see
-#' \insertCite{@see pp. 104 psqq. @Mai2017a}{rmo} and
-#' \insertCite{Marshall1967a}{rmo}.
+#' The *exogenous shock model (ESM)* is a simulation algorithm for generating
+#' samples from a Marshall–Olkin distributed random vector. It works by
+#' generating independent exponentially distributed shock arrival times for all
+#' non-empty subsets of components. Each component's death time is then defined
+#' as the minimum of all shock arrival times corresponding to a subset
+#' containing that component. See \insertCite{@see pp. 104 psqq. @Mai2017a}{rmo}
+#' and \insertCite{Marshall1967a}{rmo}.
 #'
 #' ### Arnold model
-#' The *Arnold model (AM)* simulates a Marshall–Olkin distributed random vector
-#' by simulating a marked homogeneous Poisson process with set-valued marks.
-#' The process is stopped when all components are *hit* by a shock,
-#' see \insertCite{@see Sec. 3.1.2 @Mai2017a}{rmo} and
+#'
+#' The *Arnold model (AM)* is a simulation algorithm used to generate samples
+#' from a Marshall–Olkin distributed random vector. It simulates a marked
+#' homogeneous Poisson process with set-valued marks, where the process is
+#' stopped when all components are hit by a shock. This algorithm is described
+#' in detail in \insertCite{@see Sec. 3.1.2 @Mai2017a}{rmo} and
 #' \insertCite{Arnold1975a}{rmo}.
 #'
 #' @family sampling-algorithms

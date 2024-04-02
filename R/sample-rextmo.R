@@ -1,20 +1,20 @@
 #' @include sample-rmo.R sample-rexmo.R
 NULL
 
-#' Sample from extendible Marshall–Olkin distributions
+#' Simulate from extendible Marshall–Olkin distributions
 #'
-#' Draws `n` iid samples from a `d`-variate
-#' *extendible Marshall–Olkin distribution* parametrized by Bernstein functions
-#' `bf`, essentially wrapping [rexmo()] by generating suitable
-#' *exchangeable shock-size arrival intensities*.
+#' Draws `n` iid samples from a `d`-variate *extendible Marshall–Olkin
+#' distribution* parametrized by Bernstein functions `bf`.
 #'
 #' @inheritParams rexmo
-#' @param bf a [BernsteinFunction-class] with the *Bernstein function* of a
-#'   *extendible Marshall–Olkin distribution*.
+#' @param bf A [BernsteinFunction-class] representing the *Bernstein function*
+#'   of a *extendible Marshall–Olkin distribution*.
 #'
-#' @return `rextmo` returns a numeric matrix with `n` rows and `d` columns with
-#' the rows corresponding to iid distributed samples of a `d`-variate
-#' *extendible Marshall–Olkin distribution* with *Bernstein function* `bf`.
+#' @return
+#' `rextmo` returns a numeric matrix of size `n` x `d` rows and `d`. Each row
+#' corresponds to an independently and identically (iid) distributed sample from
+#' a `d`-variate *extendible Marshall–Olkin distribution* with specified
+#' parameters.
 #'
 #' @details
 #' The *extendible Marshall–Olkin distribution* has the survival function

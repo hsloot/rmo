@@ -1,36 +1,38 @@
 #' @include sample-rmo.R sample-rexmo.R sample-rextmo.R
 NULL
 
-#' Sample from parametrized extendible MO distributions
+#' Simulate from parametrized families of extendible MO distributions
 #'
-#' Draws `n` iid samples from a `d`-variate
-#' *paramatrized extendible MO distribution*.
+#' Draws `n` iid `d`-variate samples from a *parametrized family of extendible
+#' MO distribution*.
 #'
 #' @inheritParams rextmo
-#' @param a a non-negative double for the *killing-rate* \eqn{a} of the
+#' @param a A non-negative double representing the *killing-rate* \eqn{a} of the
 #'   *Bernstein function*.
-#' @param b a non-negative double for the *drift* \eqn{b} of the
+#' @param b A non-negative double representing the *drift* \eqn{b} of the
 #'   *Bernstein function*.
-#' @param gamma a position double for the scaling of the integral part of the
-#'   *Bernstein function*.
-#' @param eta a numeric vector for the family's parameters, see Details.
-#' @param family a string indicating the parametrized family.
+#' @param gamma a positive double representing the scaling factor of the
+#'   integral part of the *Bernstein function*.
+#' @param eta A numeric vector representing the distribution family's
+#'   parameters, see the Details section.
+#' @param family A string representing the parametrized family.
 #'    Use "Armageddon" for the *Armageddon* family, "Poisson" for the
 #'    *Poisson family*, "Pareto" for the *Pareto family*, "Exponential" for the
 #'    *Exponential family*, "AlphaStable" for the *\eqn{\alpha}-stable family*,
 #'    "InverseGaussian" for the *Inverse-Gaussian family*, "Gamma" for
-#'    the *Gamma family*.
-#' @param method a string indicating which sampling algorithm should be used.
+#'    the *Gamma family*, see the Details section.
+#' @param method A string representing which sampling algorithm should be used.
 #'   Use "MDCM" for the *Markovian death-set model*, "LFM" for the
 #'   *Lévy–frailty model*, "AM" for the *Arnold model*, and "ESM" for the
 #'   *exogenous shock model* (in case of the *Armageddon family*, the algorithm
 #'   is optimized to consider only finite shocks). We recommend using the *ESM*
-#'   only for small dimensions; the *AM* can be used up until dimension
+#'   only for small dimensions; the *AM* can be used up to dimension
 #'   \eqn{30}.
 #'
-#' @return `rpextmo` returns a numeric matrix with `n` rows and `d` columns with
-#' the rows corresponding to iid distributed samples of a `d`-variate
-#' *parametrized extendible Marshall–Olkin distribution* with corresponding
+#' @return
+#' `rpextmo` returns a numeric matrix of size `n` x `d`. Each row corresponds to
+#' an independently and identically (iid) distributed sample from a `d`-variate
+#' *parametrized extendible Marshall–Olkin distribution* with the specified
 #' parameters.
 #'
 #' @details
@@ -49,9 +51,10 @@ NULL
 #'            \int_{0}^{\infty}{ \frac{x}{x + u} \sigma{(\mathrm{d}u)} },
 #'                \quad x \geq 0 ,
 #' }
-#' where \eqn{a, b \geq 0} and \eqn{\nu}, resp. \eqn{\sigma}, are the
-#' *Lévy measure*, resp. *Stieltjes measure*, and \eqn{a > 0}, \eqn{b > 0}, or
-#' \eqn{\nu \not\equiv 0}, resp. \eqn{\sigma \not\equiv 0}.
+#' where \eqn{a, b \geq 0}. The \eqn{\nu} and \eqn{\sigma} represent the
+#' *Lévy measure* and *Stieltjes measure*, respectively. At least one of the
+#' following conditions must hold: \eqn{a > 0}, \eqn{b > 0}, or
+#' \eqn{\nu \not\equiv 0} (resp. \eqn{\sigma \not\equiv 0}).
 #'
 #' ## Families
 #'

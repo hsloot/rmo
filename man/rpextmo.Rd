@@ -2,7 +2,7 @@
 % Please edit documentation in R/sample-rpextmo.R
 \name{rpextmo}
 \alias{rpextmo}
-\title{Sample from parametrized extendible MO distributions}
+\title{Simulate from parametrized families of extendible MO distributions}
 \usage{
 rpextmo(
   n,
@@ -17,45 +17,46 @@ rpextmo(
 )
 }
 \arguments{
-\item{n}{an integer for the \emph{number of samples}.}
+\item{n}{An integer for the \emph{number of samples}.}
 
-\item{d}{an integer for the \emph{dimension}.}
+\item{d}{An integer for the \emph{dimension}.}
 
-\item{a}{a non-negative double for the \emph{killing-rate} \eqn{a} of the
+\item{a}{A non-negative double representing the \emph{killing-rate} \eqn{a} of the
 \emph{Bernstein function}.}
 
-\item{b}{a non-negative double for the \emph{drift} \eqn{b} of the
+\item{b}{A non-negative double representing the \emph{drift} \eqn{b} of the
 \emph{Bernstein function}.}
 
-\item{gamma}{a position double for the scaling of the integral part of the
-\emph{Bernstein function}.}
+\item{gamma}{a positive double representing the scaling factor of the
+integral part of the \emph{Bernstein function}.}
 
-\item{eta}{a numeric vector for the family's parameters, see Details.}
+\item{eta}{A numeric vector representing the distribution family's
+parameters, see the Details section.}
 
-\item{family}{a string indicating the parametrized family.
+\item{family}{A string representing the parametrized family.
 Use "Armageddon" for the \emph{Armageddon} family, "Poisson" for the
 \emph{Poisson family}, "Pareto" for the \emph{Pareto family}, "Exponential" for the
 \emph{Exponential family}, "AlphaStable" for the \emph{\eqn{\alpha}-stable family},
 "InverseGaussian" for the \emph{Inverse-Gaussian family}, "Gamma" for
-the \emph{Gamma family}.}
+the \emph{Gamma family}, see the Details section.}
 
-\item{method}{a string indicating which sampling algorithm should be used.
+\item{method}{A string representing which sampling algorithm should be used.
 Use "MDCM" for the \emph{Markovian death-set model}, "LFM" for the
 \emph{Lévy–frailty model}, "AM" for the \emph{Arnold model}, and "ESM" for the
 \emph{exogenous shock model} (in case of the \emph{Armageddon family}, the algorithm
 is optimized to consider only finite shocks). We recommend using the \emph{ESM}
-only for small dimensions; the \emph{AM} can be used up until dimension
+only for small dimensions; the \emph{AM} can be used up to dimension
 \eqn{30}.}
 }
 \value{
-\code{rpextmo} returns a numeric matrix with \code{n} rows and \code{d} columns with
-the rows corresponding to iid distributed samples of a \code{d}-variate
-\emph{parametrized extendible Marshall–Olkin distribution} with corresponding
+\code{rpextmo} returns a numeric matrix of size \code{n} x \code{d}. Each row corresponds to
+an independently and identically (iid) distributed sample from a \code{d}-variate
+\emph{parametrized extendible Marshall–Olkin distribution} with the specified
 parameters.
 }
 \description{
-Draws \code{n} iid samples from a \code{d}-variate
-\emph{paramatrized extendible MO distribution}.
+Draws \code{n} iid \code{d}-variate samples from a \emph{parametrized family of extendible
+MO distribution}.
 }
 \details{
 A \emph{parametrized ext. MO distribution} is a family of \emph{ext. MO distributions},
@@ -73,9 +74,10 @@ or
            \int_{0}^{\infty}{ \frac{x}{x + u} \sigma{(\mathrm{d}u)} },
                \quad x \geq 0 ,
 }
-where \eqn{a, b \geq 0} and \eqn{\nu}, resp. \eqn{\sigma}, are the
-\emph{Lévy measure}, resp. \emph{Stieltjes measure}, and \eqn{a > 0}, \eqn{b > 0}, or
-\eqn{\nu \not\equiv 0}, resp. \eqn{\sigma \not\equiv 0}.
+where \eqn{a, b \geq 0}. The \eqn{\nu} and \eqn{\sigma} represent the
+\emph{Lévy measure} and \emph{Stieltjes measure}, respectively. At least one of the
+following conditions must hold: \eqn{a > 0}, \eqn{b > 0}, or
+\eqn{\nu \not\equiv 0} (resp. \eqn{\sigma \not\equiv 0}).
 \subsection{Families}{
 
 All implemented families are listed in the following; some re-combinations

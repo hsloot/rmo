@@ -2,34 +2,33 @@
 % Please edit documentation in R/sample-rextmo.R
 \name{rextmo}
 \alias{rextmo}
-\title{Sample from extendible Marshall–Olkin distributions}
+\title{Simulate from extendible Marshall–Olkin distributions}
 \usage{
 rextmo(n, d, bf, method = c("MDCM", "AM", "ESM"))
 }
 \arguments{
-\item{n}{an integer for the \emph{number of samples}.}
+\item{n}{An integer for the \emph{number of samples}.}
 
-\item{d}{an integer for the \emph{dimension}.}
+\item{d}{An integer for the \emph{dimension}.}
 
-\item{bf}{a \linkS4class{BernsteinFunction} with the \emph{Bernstein function} of a
-\emph{extendible Marshall–Olkin distribution}.}
+\item{bf}{A \linkS4class{BernsteinFunction} representing the \emph{Bernstein function}
+of a \emph{extendible Marshall–Olkin distribution}.}
 
-\item{method}{a string indicating which sampling algorithm should be used.
+\item{method}{A string indicating which sampling algorithm should be used.
 Use "MDCM" for the \emph{Markovian death-counting model}, "AM" for the
 \emph{Arnold model}, and "ESM" for the \emph{exogenous shock model}. We recommend
 using the \emph{ESM} only for small dimensions; the \emph{AM} can be used up until
 dimension \eqn{30}.}
 }
 \value{
-\code{rextmo} returns a numeric matrix with \code{n} rows and \code{d} columns with
-the rows corresponding to iid distributed samples of a \code{d}-variate
-\emph{extendible Marshall–Olkin distribution} with \emph{Bernstein function} \code{bf}.
+\code{rextmo} returns a numeric matrix of size \code{n} x \code{d} rows and \code{d}. Each row
+corresponds to an independently and identically (iid) distributed sample from
+a \code{d}-variate \emph{extendible Marshall–Olkin distribution} with specified
+parameters.
 }
 \description{
-Draws \code{n} iid samples from a \code{d}-variate
-\emph{extendible Marshall–Olkin distribution} parametrized by Bernstein functions
-\code{bf}, essentially wrapping \code{\link[=rexmo]{rexmo()}} by generating suitable
-\emph{exchangeable shock-size arrival intensities}.
+Draws \code{n} iid samples from a \code{d}-variate \emph{extendible Marshall–Olkin
+distribution} parametrized by Bernstein functions \code{bf}.
 }
 \details{
 The \emph{extendible Marshall–Olkin distribution} has the survival function
