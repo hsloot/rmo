@@ -10,7 +10,7 @@ alpha <- 0.6
 beta <- 0.2
 
 bf <- rmo::SumOfBernsteinFunctions(
-  first = rmo::ConstantBernsteinFunction(value = alpha),
+  first = rmo::ConstantBernsteinFunction(constant = alpha),
   second = rmo::LinearBernsteinFunction(scale = beta)
 )
 intensities <- intensities(bf, d)
