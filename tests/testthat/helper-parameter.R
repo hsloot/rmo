@@ -86,7 +86,7 @@ intensities_pareto <- function(d, alpha, x0) {
   bf2intensities(d, bf)
 }
 
-ex_intensities_inverse_gaussian <- function(d, eta) {
+ex_intensities_inverse_gaussian <- function(d, eta) { # nolint
   bf <- InverseGaussianBernsteinFunction(eta = eta)
   bf2ex_intensities(d, bf)
 }
@@ -96,7 +96,7 @@ intensities_inverse_gaussian <- function(d, eta) {
   bf2intensities(d, bf)
 }
 
-intensities_hierarchical <- function(d1, d2, lambda, eta, a, alpha) {
+intensities_hierarchical <- function(d1, d2, lambda, eta, a, alpha) { # nolint
   ex_intensities_1 <- ex_intensities_gamma(d1, a)
   ex_intensities_2 <- ex_intensities_alpha_stable(d2, alpha)
 
