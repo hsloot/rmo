@@ -1,29 +1,21 @@
-bf2intensities <- function(d, bf) {
-  intensities(bf, d)
-}
-
-bf2ex_intensities <- function(d, bf) {
-  exIntensities(bf, d)
-}
-
 ex_intensities_constant <- function(d, constant) {
   bf <- ConstantBernsteinFunction(constant = constant)
-  bf2ex_intensities(d, bf)
+  exIntensities(bf, d)
 }
 
 intensities_constant <- function(d, constant) {
   bf <- ConstantBernsteinFunction(constant = constant)
-  bf2intensities(d, bf)
+  intensities(bf, d)
 }
 
 ex_intensities_linear <- function(d, scale) {
   bf <- LinearBernsteinFunction(scale = scale)
-  bf2ex_intensities(d, bf)
+  exIntensities(bf, d)
 }
 
 intensities_linear <- function(d, scale) {
   bf <- LinearBernsteinFunction(scale = scale)
-  bf2intensities(d, bf)
+  intensities(bf, d)
 }
 
 ex_intensities_armageddon <- function(d, alpha, beta) {
@@ -38,62 +30,62 @@ intensities_armageddon <- function(d, alpha, beta) {
 
 ex_intensities_poisson <- function(d, eta) {
   bf <- PoissonBernsteinFunction(eta = eta)
-  bf2ex_intensities(d, bf)
+  exIntensities(bf, d)
 }
 
 intensities_poisson <- function(d, eta) {
   bf <- PoissonBernsteinFunction(eta = eta)
-  bf2intensities(d, bf)
+  intensities(bf, d)
 }
 
 ex_intensities_alpha_stable <- function(d, alpha) {
   bf <- AlphaStableBernsteinFunction(alpha = alpha)
-  bf2ex_intensities(d, bf)
+  exIntensities(bf, d)
 }
 
 intensities_alpha_stable <- function(d, alpha) {
   bf <- AlphaStableBernsteinFunction(alpha = alpha)
-  bf2intensities(d, bf)
+  intensities(bf, d)
 }
 
 ex_intensities_exponential <- function(d, lambda) {
   bf <- ExponentialBernsteinFunction(lambda = lambda)
-  bf2ex_intensities(d, bf)
+  exIntensities(bf, d)
 }
 
 intensities_exponential <- function(d, lambda) {
   bf <- ExponentialBernsteinFunction(lambda = lambda)
-  bf2intensities(d, bf)
+  intensities(bf, d)
 }
 
 ex_intensities_gamma <- function(d, a) {
   bf <- GammaBernsteinFunction(a = a)
-  bf2ex_intensities(d, bf)
+  exIntensities(bf, d)
 }
 
 intensities_gamma <- function(d, a) {
   bf <- GammaBernsteinFunction(a = a)
-  bf2intensities(d, bf)
+  intensities(bf, d)
 }
 
 ex_intensities_pareto <- function(d, alpha, x0) {
   bf <- ParetoBernsteinFunction(alpha = alpha, x0 = x0)
-  bf2ex_intensities(d, bf)
+  exIntensities(bf, d)
 }
 
 intensities_pareto <- function(d, alpha, x0) {
   bf <- ParetoBernsteinFunction(alpha = alpha, x0 = x0)
-  bf2intensities(d, bf)
+  intensities(bf, d)
 }
 
 ex_intensities_inverse_gaussian <- function(d, eta) { # nolint
   bf <- InverseGaussianBernsteinFunction(eta = eta)
-  bf2ex_intensities(d, bf)
+  exIntensities(bf, d)
 }
 
 intensities_inverse_gaussian <- function(d, eta) {
   bf <- InverseGaussianBernsteinFunction(eta = eta)
-  bf2intensities(d, bf)
+  intensities(bf, d)
 }
 
 intensities_hierarchical <- function(d1, d2, lambda, eta, a, alpha) { # nolint

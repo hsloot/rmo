@@ -158,28 +158,28 @@ test_that("ESM passes statistical unit test", {
     first = ConstantBernsteinFunction(constant = 2.73383),
     second = LinearBernsteinFunction(scale = 2.296823)
   )
-  intensities <- bf2intensities(d, bf)
+  intensities <- intensities(bf, d)
   expect_not_rejected(
     ks_test(n, d, rmo_esm, intensities),
     unit_threshold
   )
 
   bf <- AlphaStableBernsteinFunction(alpha = 0.595094)
-  intensities <- bf2intensities(d, bf)
+  intensities <- intensities(bf, d)
   expect_not_rejected(
     ks_test(n, d, rmo_esm, intensities),
     unit_threshold
   )
 
   bf <- InverseGaussianBernsteinFunction(eta = 0.5186811)
-  intensities <- bf2intensities(d, bf)
+  intensities <- intensities(bf, d)
   expect_not_rejected(
     ks_test(n, d, rmo_esm, intensities),
     unit_threshold
   )
 
   bf <- ExponentialBernsteinFunction(lambda = 0.3410571)
-  intensities <- bf2intensities(d, bf)
+  intensities <- intensities(bf, d)
   expect_not_rejected(
     ks_test(n, d, rmo_esm, intensities),
     unit_threshold
@@ -198,28 +198,28 @@ test_that("Arnold model passes statistical unit test", {
     first = ConstantBernsteinFunction(constant = 0.1819954),
     second = LinearBernsteinFunction(scale = 1.152357)
   )
-  intensities <- bf2intensities(d, bf)
+  intensities <- intensities(bf, d)
   expect_not_rejected(
     ks_test(n, d, rmo_am, intensities),
     unit_threshold
   )
 
   bf <- AlphaStableBernsteinFunction(alpha = 0.6546152)
-  intensities <- bf2intensities(d, bf)
+  intensities <- intensities(bf, d)
   expect_not_rejected(
     ks_test(n, d, rmo_am, intensities),
     unit_threshold
   )
 
   bf <- InverseGaussianBernsteinFunction(eta = 0.09929306)
-  intensities <- bf2intensities(d, bf)
+  intensities <- intensities(bf, d)
   expect_not_rejected(
     ks_test(n, d, rmo_am, intensities),
     unit_threshold
   )
 
   bf <- ExponentialBernsteinFunction(lambda = 0.6385946)
-  intensities <- bf2intensities(d, bf)
+  intensities <- intensities(bf, d)
   expect_not_rejected(
     ks_test(n, d, rmo_am, intensities),
     unit_threshold
@@ -237,28 +237,28 @@ test_that("Exchangeable Arnold model passes statistical unit test", {
     first = ConstantBernsteinFunction(constant = 2.112945),
     second = LinearBernsteinFunction(scale = 0.5088719)
   )
-  ex_intensities <- bf2ex_intensities(d, bf)
+  ex_intensities <- exIntensities(bf, d)
   expect_not_rejected(
     ex_ks_test(n, d, rexmo_mdcm, ex_intensities),
     unit_threshold
   )
 
   bf <- AlphaStableBernsteinFunction(alpha = 0.09870832)
-  ex_intensities <- bf2ex_intensities(d, bf)
+  ex_intensities <- exIntensities(bf, d)
   expect_not_rejected(
     ex_ks_test(n, d, rexmo_mdcm, ex_intensities),
     unit_threshold
   )
 
   bf <- InverseGaussianBernsteinFunction(eta = 4.687992)
-  ex_intensities <- bf2ex_intensities(d, bf)
+  ex_intensities <- exIntensities(bf, d)
   expect_not_rejected(
     ex_ks_test(n, d, rexmo_mdcm, ex_intensities),
     unit_threshold
   )
 
   bf <- ExponentialBernsteinFunction(lambda = 0.2047898)
-  ex_intensities <- bf2ex_intensities(d, bf)
+  ex_intensities <- exIntensities(bf, d)
   expect_not_rejected(
     ex_ks_test(n, d, rexmo_mdcm, ex_intensities),
     unit_threshold
@@ -270,28 +270,28 @@ test_that("Exchangeable Arnold model passes statistical unit test", {
     first = ConstantBernsteinFunction(constant = 1.796975),
     second = LinearBernsteinFunction(scale = 0.3058118)
   )
-  ex_intensities <- bf2ex_intensities(d, bf)
+  ex_intensities <- exIntensities(bf, d)
   expect_not_rejected(
     ex_ks_test(n, d, rexmo_mdcm, ex_intensities),
     unit_threshold
   )
 
   bf <- AlphaStableBernsteinFunction(alpha = 0.9034687)
-  ex_intensities <- bf2ex_intensities(d, bf)
+  ex_intensities <- exIntensities(bf, d)
   expect_not_rejected(
     ex_ks_test(n, d, rexmo_mdcm, ex_intensities),
     unit_threshold
   )
 
   bf <- InverseGaussianBernsteinFunction(eta = 5.023343)
-  ex_intensities <- bf2ex_intensities(d, bf)
+  ex_intensities <- exIntensities(bf, d)
   expect_not_rejected(
     ex_ks_test(n, d, rexmo_mdcm, ex_intensities),
     unit_threshold
   )
 
   bf <- ExponentialBernsteinFunction(lambda = 0.6293527)
-  ex_intensities <- bf2ex_intensities(d, bf)
+  ex_intensities <- exIntensities(bf, d)
   expect_not_rejected(
     ex_ks_test(n, d, rexmo_mdcm, ex_intensities),
     unit_threshold
