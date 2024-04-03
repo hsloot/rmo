@@ -36,7 +36,6 @@ Collate:
     'RcppExports.R'
     'catch-routine-registration.R'
     'error.R'
-    'parameter.R'
     'rmo-package.R'
     's4-BernsteinFunction.R'
     's4-LevyBernsteinFunction.R'
