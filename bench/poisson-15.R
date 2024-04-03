@@ -13,8 +13,8 @@ bf <- rmo::ScaledBernsteinFunction(
   scale = 1,
   original = rmo::PoissonBernsteinFunction(eta = eta)
 )
-intensities <- rmo::intensities(d, bf)
-ex_intensities <- rmo::ex_intensities(d, bf)
+intensities <- rmo::intensities(bf, d)
+ex_intensities <- rmo::exIntensities(bf, d)
 
 #+ r bench
 bench::mark(

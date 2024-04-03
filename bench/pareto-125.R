@@ -15,7 +15,7 @@ bf <- rmo::ScaledBernsteinFunction(
   scale = lambda,
   original = rmo::ParetoBernsteinFunction(alpha = alpha, x0 = x0)
 )
-ex_intensities <- rmo::exIntensities()
+ex_intensities <- rmo::exIntensities(bf, d)
 
 #+ r bench
 bench::mark(
