@@ -13,8 +13,8 @@ bf <- rmo::SumOfBernsteinFunctions(
   first = rmo::ConstantBernsteinFunction(constant = alpha),
   second = rmo::LinearBernsteinFunction(scale = beta)
 )
-intensities <- intensities(bf, d)
-ex_intensities <- exIntensities(bf, d)
+intensities <- rmo::intensities(bf, d)
+ex_intensities <- rmo::exIntensities(bf, d)
 
 #+ r bench
 bench::mark(
