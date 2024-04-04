@@ -7,7 +7,7 @@
   "codeRepository": "https://github.com/hsloot/rmo",
   "issueTracker": "https://github.com/hsloot/rmo/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "0.8.4",
+  "version": "0.8.5",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -180,9 +180,5 @@
     },
     "SystemRequirements": "C++17"
   },
-  "fileSize": "20720.416KB",
-  "releaseNotes": "https://github.com/hsloot/rmo/blob/master/NEWS.md",
-  "readme": "https://github.com/hsloot/rmo/blob/main/README.md",
-  "contIntegration": ["https://github.com/hsloot/rmo/actions", "https://codecov.io/gh/hsloot/rmo?branch=main"],
-  "keywords": ["r", "simulation", "modeling", "statistics", "mathematics", "mathematical-modelling", "r-package", "rstats"]
+  "fileSize": "20710.966KB"
 }
