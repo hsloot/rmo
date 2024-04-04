@@ -30,7 +30,7 @@
     
     <a class="navbar-brand me-2" href="index.html">rmo</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.4</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -142,7 +142,7 @@
 <div class="section level2">
 <h2 id="word-of-caution-for-high-dimensions">Word of caution for high dimensions<a class="anchor" aria-label="anchor" href="#word-of-caution-for-high-dimensions"></a>
 </h2>
-<p>The package, including the simulation algorithms, is extensively tested with unit tests. Nevertheless, it can happen to run into unexpected results for certain parametrizations in high dimensions. The reason for this are numerical issues with very small and very large numbers. We tried to program defensively to avoid these problems, but if the dimension is high enough and the parametrization leads to values below the double precision, at some point numerical issues are inevitable. For this reason, we encourage users to produce statistical tests suitable for their use-case; see our <a href="https://github.com/hsloot/rmo/blob/master/other/integration-test.Rmd" class="external-link">integration test</a> for an example. If you are encountering statistical problems, please submit an <a href="https://github.com/hsloot/rmo/issues/new?assignees=&amp;labels=bug&amp;template=statistical_problem.md&amp;title=%5BSTAT%5D" class="external-link">issue report</a> including a <a href="https://github.com/tidyverse/reprex" class="external-link">reprex</a>.</p>
+<p>The package, including the simulation algorithms, is extensively tested with unit tests. Nevertheless, it can happen to run into unexpected results for certain parametrizations in high dimensions. The reason for this are numerical issues with very small and very large numbers. We tried to program defensively to avoid these problems, but if the dimension is high enough and the parametrization leads to values below the double precision, at some point numerical issues are inevitable. For this reason, we encourage users to produce statistical tests suitable for their use-case; see our <a href="https://github.com/hsloot/rmo/blob/main/tests/testthat/test-statistical-unit-test.R" class="external-link">statistical unit tests</a> for an example. If you are encountering statistical problems, please submit an <a href="https://github.com/hsloot/rmo/issues/new?assignees=&amp;labels=bug&amp;template=statistical_problem.md&amp;title=%5BSTAT%5D" class="external-link">issue report</a> including a <a href="https://github.com/tidyverse/reprex" class="external-link">reprex</a>.</p>
 </div>
 <div class="section level2">
 <h2 id="roadmap-for-future-development">Roadmap for future development<a class="anchor" aria-label="anchor" href="#roadmap-for-future-development"></a>
@@ -219,7 +219,7 @@
 <ul class="list-unstyled">
 <li><a href="https://www.repostatus.org/#wip" class="external-link"><img src="https://www.repostatus.org/badges/latest/wip.svg" alt="Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public."></a></li>
 <li><a href="https://www.tidyverse.org/lifecycle/#experimental" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
-<li><a href="/commits/master"><img src="https://img.shields.io/badge/last%20change-2024--03--29-yellowgreen.svg" alt="Last-changedate"></a></li>
+<li><a href="/commits/master"><img src="https://img.shields.io/badge/last%20change-2024--04--03-yellowgreen.svg" alt="Last-changedate"></a></li>
 <li><a href="https://github.com/hsloot/rmo/actions" class="external-link"><img src="https://github.com/hsloot/rmo/workflows/check-full/badge.svg" alt="R build status"></a></li>
 <li><a href="https://codecov.io/gh/hsloot/rmo?branch=main" class="external-link"><img src="https://codecov.io/gh/hsloot/rmo/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
 </ul>
