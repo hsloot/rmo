@@ -148,7 +148,7 @@ at some point numerical issues are inevitable.
 For this reason, we encourage users to produce statistical tests suitable for
 their use-case;
 see our
-[integration test](https://github.com/hsloot/rmo/blob/master/other/integration-test.Rmd)
+[statistical unit tests](https://github.com/hsloot/rmo/blob/main/tests/testthat/test-statistical-unit-test.R)
 for an example.
 If you are encountering statistical problems, please submit an
 [issue report](https://github.com/hsloot/rmo/issues/new?assignees=&labels=bug&template=statistical_problem.md&title=%5BSTAT%5D)

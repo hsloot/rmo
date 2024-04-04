@@ -1,5 +1,7 @@
 # rmo 0.8.3
 
+- Remove outdated rmarkdown notebooks from development phase (#115)
+
 - Add `ConvexCombinationOfBernsteinFunctions` to represent convex combinations
   of Bernstein functions compactly.
 

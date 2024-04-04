@@ -1,20 +1,19 @@
 {
-  "@context": [
-    "https://doi.org/10.5063/schema/codemeta-2.0",
-    "http://schema.org"
-  ],
+  "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
   "@type": "SoftwareSourceCode",
   "identifier": "rmo",
-  "description": "\n  The package contains an implementation of the Marshall-Olkin distribution and\n  methods for estimation, simulation, and construction.",
+  "description": " The package contains an implementation of the Marshall-Olkin distribution and methods for estimation, simulation, and construction.",
   "name": "rmo: A package for the Marshall-Olkin distribution",
+  "codeRepository": "https://github.com/hsloot/rmo",
+  "issueTracker": "https://github.com/hsloot/rmo/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "0.6",
+  "version": "0.8.4",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.0.5 (2021-03-31)",
+  "runtimePlatform": "R version 4.3.3 (2024-02-29)",
   "author": [
     {
       "@type": "Person",
@@ -24,9 +23,6 @@
       "@id": "https://orcid.org/0000-0001-8582-7776"
     }
   ],
-  "contributor": {},
-  "copyrightHolder": {},
-  "funder": {},
   "maintainer": [
     {
       "@type": "Person",
@@ -134,14 +130,14 @@
       "sameAs": "https://CRAN.R-project.org/package=remotes"
     }
   ],
-  "softwareRequirements": [
-    {
+  "softwareRequirements": {
+    "1": {
       "@type": "SoftwareApplication",
       "identifier": "R",
       "name": "R",
-      "version": ">= 3.3.0"
+      "version": ">= 3.4.0"
     },
-    {
+    "2": {
       "@type": "SoftwareApplication",
       "identifier": "Rcpp",
       "name": "Rcpp",
@@ -153,12 +149,12 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=Rcpp"
     },
-    {
+    "3": {
       "@type": "SoftwareApplication",
       "identifier": "methods",
       "name": "methods"
     },
-    {
+    "4": {
       "@type": "SoftwareApplication",
       "identifier": "Rdpack",
       "name": "Rdpack",
@@ -170,7 +166,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=Rdpack"
     },
-    {
+    "5": {
       "@type": "SoftwareApplication",
       "identifier": "checkmate",
       "name": "checkmate",
@@ -181,20 +177,12 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=checkmate"
-    }
-  ],
-  "codeRepository": "https://github.com/hsloot/rmo",
+    },
+    "SystemRequirements": "C++17"
+  },
+  "fileSize": "20720.416KB",
   "releaseNotes": "https://github.com/hsloot/rmo/blob/master/NEWS.md",
-  "contIntegration": "https://codecov.io/gh/hsloot/rmo?branch=master",
-  "keywords": [
-    "r",
-    "simulation",
-    "estimation",
-    "modeling",
-    "statistics",
-    "mathematics",
-    "mathematical-modelling"
-  ],
-  "issueTracker": "https://github.com/hsloot/rmo/issues",
-  "fileSize": "0KB"
+  "readme": "https://github.com/hsloot/rmo/blob/main/README.md",
+  "contIntegration": ["https://github.com/hsloot/rmo/actions", "https://codecov.io/gh/hsloot/rmo?branch=main"],
+  "keywords": ["r", "simulation", "modeling", "statistics", "mathematics", "mathematical-modelling", "r-package", "rstats"]
 }

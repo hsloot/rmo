@@ -7,13 +7,13 @@
 
 ![minimal R
 version](https://img.shields.io/badge/R%3E%3D-3.4.0-6666ff.svg)
-![packageversion](https://img.shields.io/badge/Package%20version-0.8.3-orange.svg?style=flat-square)
+![packageversion](https://img.shields.io/badge/Package%20version-0.8.4-orange.svg?style=flat-square)
 [![Project Status: WIP – Initial development is in progress, but there
 has not yet been a stable, usable release suitable for the
 public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
-[![Last-changedate](https://img.shields.io/badge/last%20change-2024--03--29-yellowgreen.svg)](/commits/master)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2024--04--03-yellowgreen.svg)](/commits/master)
 [![R build
 status](https://github.com/hsloot/rmo/workflows/check-full/badge.svg)](https://github.com/hsloot/rmo/actions)
 [![Codecov test
@@ -118,8 +118,8 @@ tried to program defensively to avoid these problems, but if the
 dimension is high enough and the parametrization leads to values below
 the double precision, at some point numerical issues are inevitable. For
 this reason, we encourage users to produce statistical tests suitable
-for their use-case; see our [integration
-test](https://github.com/hsloot/rmo/blob/master/other/integration-test.Rmd)
+for their use-case; see our [statistical unit
+tests](https://github.com/hsloot/rmo/blob/main/tests/testthat/test-statistical-unit-test.R)
 for an example. If you are encountering statistical problems, please
 submit an [issue
 report](https://github.com/hsloot/rmo/issues/new?assignees=&labels=bug&template=statistical_problem.md&title=%5BSTAT%5D)
