@@ -19,7 +19,18 @@ reference:
 
 - title: Bernstein functions
 
-- subtitle: Virtual classes
+- subtitle: Generic methods for Bernstein functions
+  desc: ~
+  contents:
+  - valueOf
+  - intensities
+  - uexIntensities
+  - exIntensities
+  - exQMatrix
+  - levyDensity
+  - stieltjesDensity
+
+- subtitle: Virtual classes for Bernstein Functions
   desc: ~
   contents:
   - BernsteinFunction-class
