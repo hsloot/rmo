@@ -1,6 +1,6 @@
 #' ## Poisson jump CPP ##
 #'
-#' For the CPP LFM parametrisation with *fixed size* jumps, we chose the
+#' For the CPP LFM parametrization with *fixed size* jumps, we chose the
 #' parameters \( \lambda = 1 \) and \( \eta = 0.5 \).  This corresponds to a
 #' mean-jump-size of \( 0.5 \).
 #+ r parameters
@@ -9,8 +9,12 @@ d <- 15
 
 eta <- 0.5
 
-intensities <- rmo::intensities_poisson(d, eta)
-ex_intensities <- rmo::ex_intensities_poisson(d, eta)
+bf <- rmo::ScaledBernsteinFunction(
+  scale = 1,
+  original = rmo::PoissonBernsteinFunction(eta = eta)
+)
+intensities <- rmo::intensities(bf, d)
+ex_intensities <- rmo::exIntensities(bf, d)
 
 #+ r bench
 bench::mark(

@@ -21,14 +21,6 @@ if (!"testutils.rmo" %in% installed.packages()[, "Package"]) {
   )
 }
 
-# The auxiliary functions for parameter generation are relocated to
-# the Rsource directory such that they are available in interactive R
-# mode (e.g. for profiling).
-source(system.file("Rsource", "parameter_generator.R",
-  package = "rmo",
-  mustWork = TRUE
-))
-
 withr::defer(
   {
     .libPaths(lib_path_restore)

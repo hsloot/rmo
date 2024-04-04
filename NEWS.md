@@ -2,8 +2,11 @@
 
 - Remove outdated rmarkdown notebooks from development phase (#115)
 
+- Remove convenience wrapper functions for generating shock arrival intensity
+  and shock-size arrival intensity parameter (#114)
+
 - Add `ConvexCombinationOfBernsteinFunctions` to represent convex combinations
-  of Bernstein functions compactly.
+  of Bernstein functions compactly
 
 # rmo 0.8.2
 

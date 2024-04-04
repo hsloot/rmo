@@ -1,6 +1,6 @@
 #' ## Only killing and drift ##
 #'
-#' For the CPP LFM parametrisation with *no* jump, but drift and killing, we
+#' For the CPP LFM parametrization with *no* jump, but drift and killing, we
 #' chose the parameters \( \alpha = 0.6 \) (drift) and \( \beta = 0.2 \) (rate
 #' killing). #+ r parameters
 n <- 1e3
@@ -9,8 +9,12 @@ d <- 15
 alpha <- 0.6
 beta <- 0.2
 
-intensities <- rmo::intensities_armageddon(d, alpha, beta)
-ex_intensities <- rmo::ex_intensities_armageddon(d, alpha, beta)
+bf <- rmo::SumOfBernsteinFunctions(
+  first = rmo::ConstantBernsteinFunction(constant = alpha),
+  second = rmo::LinearBernsteinFunction(scale = beta)
+)
+intensities <- rmo::intensities(bf, d)
+ex_intensities <- rmo::exIntensities(bf, d)
 
 #+ r bench
 bench::mark(
