@@ -1,8 +1,3 @@
-#' @include error.R
-#' @include s4-BernsteinFunction.R
-#' @include s4-LevyBernsteinFunction.R
-NULL
-
 #' Class for Exponential Bernstein functions
 #'
 #' @slot lambda The index \eqn{\lambda}.
@@ -25,28 +20,41 @@ NULL
 #' This Bernstein function is no. 4 in the list of complete Bernstein functions
 #' in Chp. 16 of \insertCite{Schilling2012a}{rmo}.
 #'
+#' ### Lévy density
+#' \deqn{
+#'   \nu(du)
+#'     = \lambda \operatorname{e}^{-\lambda u}, \quad u > 0 .
+#' }
+#' ### Stieltjes density
+#' \deqn{
+#'   \sigma(du)
+#'     = \delta_{\lambda}(du), \quad u > 0 .
+#' }
+#'
 #' @references
 #'   \insertAllCited{}
 #'
 #' @seealso [BernsteinFunction-class], [LevyBernsteinFunction-class],
 #'   [CompleteBernsteinFunction-class], [valueOf()]
 #'
+#' @include s4-BernsteinFunction.R s4-CompleteBernsteinFunction.R
+#' @family Bernstein function classes
+#' @family Levy Bernstein function classes
+#' @family Complete Bernstein function classes
+#' @family Algebraic Bernstein function classes
 #' @export ExponentialBernsteinFunction
+#' @examples
+#' ExponentialBernsteinFunction()
+#' ExponentialBernsteinFunction(lambda = 0.5)
 ExponentialBernsteinFunction <- setClass("ExponentialBernsteinFunction", # nolint
   contains = "CompleteBernsteinFunction",
   slots = c("lambda" = "numeric")
 )
 
-#' @describeIn ExponentialBernsteinFunction-class Constructor
-#' @aliases initialize,ExponentialBernsteinFunction-method
-#' @aliases initialize,ExponentialBernsteinFunction,ANY-method
+#' @rdname hidden_aliases
 #'
 #' @inheritParams methods::initialize
 #' @param lambda Positive number.
-#'
-#' @examples
-#' ExponentialBernsteinFunction()
-#' ExponentialBernsteinFunction(lambda = 0.5)
 setMethod(
   "initialize", "ExponentialBernsteinFunction",
   function(.Object, lambda) { # nolint
@@ -59,6 +67,7 @@ setMethod(
   }
 )
 
+#' @include error.R
 #' @importFrom checkmate qtest
 setValidity(
   "ExponentialBernsteinFunction",
@@ -71,8 +80,9 @@ setValidity(
   }
 )
 
-#' @describeIn ExponentialBernsteinFunction-class Display the object.
-#' @aliases show,ExponentialBernsteinFunction-method
+#' @rdname hidden_aliases
+#'
+#' @inheritParams methods::show
 #'
 #' @export
 setMethod( # nocov start
@@ -89,18 +99,11 @@ setMethod( # nocov start
   }
 ) # nocov end
 
-#' @describeIn ExponentialBernsteinFunction-class
-#'   see [LevyBernsteinFunction-class]
-#' @aliases levyDensity,ExponentialBernsteinFunction-method
+#' @rdname hidden_aliases
 #'
 #' @inheritParams levyDensity
 #'
-#' @section Lévy density:
-#' \deqn{
-#'   \nu(du)
-#'     = \lambda \operatorname{e}^{-\lambda u}, \quad u > 0 .
-#' }
-#'
+#' @include s4-levyDensity.R
 #' @export
 setMethod(
   "levyDensity", "ExponentialBernsteinFunction",
@@ -114,18 +117,11 @@ setMethod(
   }
 )
 
-#' @describeIn ExponentialBernsteinFunction-class
-#'   see [CompleteBernsteinFunction-class]
-#' @aliases stieltjesDensity,ExponentialBernsteinFunction-method
+#' @rdname hidden_aliases
 #'
 #' @inheritParams levyDensity
 #'
-#' @section Stieltjes density:
-#' \deqn{
-#'   \sigma(du)
-#'     = \delta_{\lambda}(du), \quad u > 0 .
-#' }
-#'
+#' @include s4-stieltjesDensity.R
 #' @export
 setMethod(
   "stieltjesDensity", "ExponentialBernsteinFunction",

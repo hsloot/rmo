@@ -3,48 +3,7 @@
 \docType{class}
 \name{CompleteBernsteinFunction-class}
 \alias{CompleteBernsteinFunction-class}
-\alias{stieltjesDensity}
-\alias{valueOf,CompleteBernsteinFunction-method}
-\alias{valueOf,CompleteBernsteinFunction,ANY-method}
 \title{Virtual superclass for complete Bernstein functions}
-\usage{
-stieltjesDensity(object)
-
-\S4method{valueOf}{CompleteBernsteinFunction}(
-  object,
-  x,
-  difference_order,
-  n = 1L,
-  k = 0L,
-  cscale = 1,
-  ...,
-  method = c("default", "stieltjes", "levy"),
-  tolerance = .Machine$double.eps^0.5
-)
-}
-\arguments{
-\item{object}{An object deriving from \linkS4class{LevyBernsteinFunction}
-(for \code{levyDensity}) or \linkS4class{CompleteBernsteinFunction}
-(for \code{stieltjesDensity}).}
-
-\item{x}{a nonnegativ numeric vector at which the iterated difference of
-the Bernstein function is evaluated.}
-
-\item{difference_order}{a nonnegative integer with the order of the
-alternating iterated forward differences taken on the Bernstein function.}
-
-\item{n, k}{nonnegative numbers for the binomial factor.}
-
-\item{cscale}{a positive numeric scalar with the composite scaling factor.}
-
-\item{...}{pass-through parameter}
-
-\item{method}{Method to calculate the result; use \code{method = "levy"} for
-using the Lévy representation and \code{method = "stieltjes"} for using the
-Stieltjes representation.}
-
-\item{tolerance}{(Relative) tolerance, passed down to \code{\link[stats:integrate]{stats::integrate()}}}
-}
 \description{
 A virtual superclass for all Bernstein functions which can represented
 by a Stieltjes density (no drift or killing rate). That means that there
@@ -53,50 +12,41 @@ exists a Stieltjes measure \eqn{\sigma} such that
   \psi(x) = \int_0^\infty \frac{x}{x + u} \sigma(du) , x > 0 .
 }
 }
-\details{
-For \emph{continuous Stieltjes densities}, the values of the Bernstein function
-are calculated with \code{\link[stats:integrate]{stats::integrate()}} by using the representation
-\deqn{
-  \psi(x)
-    = \int_{0}^{\infty} x \mathrm{Beta}(1, x + u) \sigma(du), \quad x > 0 ,
-}
-and the values of the iterated differences are calculated by using the
-representation
-\deqn{
-  (-1)^{j-1} \Delta^{j} \psi(x)
-    = \int_{0}^{\infty} u \mathrm{Beta}(j+1, x + u) \sigma(du) ,
-    \quad x > 0 .
-}
-
-For \emph{discrete Lévy densities}
-\eqn{\sigma(du) = \sum_{i} y_i \delta_{u_i}(du)},
-the values of the Bernstein function are calculated by using the
-representation
-\deqn{
-  \psi(x)
-    = \sum_{i} x \mathrm{Beta}(1, x + u_i) y_i, \quad x > 0 ,
-}
-and the values of the iterated differences are calculated by using the
-representation
-\deqn{
-  (-1)^{j-1} \Delta^{j} \psi(x)
-    = \sum_{i} u_i \mathrm{Beta}(j+1, x + u_i) y_i ,
-    \quad x > 0 .
-}
-}
-\section{Functions}{
-\itemize{
-\item \code{stieltjesDensity()}: returns the \emph{Stieltjes density} with \code{lower}, \code{upper}, and \code{type}
-attributes if continuous and returns a \code{data.frame} with named columns
-\code{x} (atoms) and \code{y} (weights) as well as a type attribute if discrete.
-The \code{type} attribute is either \code{"continuous"} or \code{"discrete"}.
-
-\item \code{valueOf(CompleteBernsteinFunction)}: Calculates the iterated differences of the Bernstein function,
-see \code{\link[=valueOf]{valueOf()}}
-
-}}
 \seealso{
 \linkS4class{LevyBernsteinFunction},
 \linkS4class{BernsteinFunction}
 \code{\link[=valueOf]{valueOf()}}
+
+Other Bernstein function classes: 
+\code{\link{AlphaStableBernsteinFunction-class}},
+\code{\link{BernsteinFunction-class}},
+\code{\link{CompositeScaledBernsteinFunction-class}},
+\code{\link{ConstantBernsteinFunction-class}},
+\code{\link{ConvexCombinationOfBernsteinFunctions-class}},
+\code{\link{ExponentialBernsteinFunction-class}},
+\code{\link{GammaBernsteinFunction-class}},
+\code{\link{InverseGaussianBernsteinFunction-class}},
+\code{\link{LevyBernsteinFunction-class}},
+\code{\link{LinearBernsteinFunction-class}},
+\code{\link{ParetoBernsteinFunction-class}},
+\code{\link{PoissonBernsteinFunction-class}},
+\code{\link{ScaledBernsteinFunction-class}},
+\code{\link{SumOfBernsteinFunctions-class}}
+
+Other Virtual Bernstein function classes: 
+\code{\link{BernsteinFunction-class}},
+\code{\link{LevyBernsteinFunction-class}}
+
+Other Levy Bernstein function classes: 
+\code{\link{AlphaStableBernsteinFunction-class}},
+\code{\link{ExponentialBernsteinFunction-class}},
+\code{\link{GammaBernsteinFunction-class}},
+\code{\link{InverseGaussianBernsteinFunction-class}},
+\code{\link{LevyBernsteinFunction-class}},
+\code{\link{ParetoBernsteinFunction-class}},
+\code{\link{PoissonBernsteinFunction-class}}
 }
+\concept{Bernstein function classes}
+\concept{Levy Bernstein function classes}
+\concept{Stieltjes Bernstein function classes}
+\concept{Virtual Bernstein function classes}

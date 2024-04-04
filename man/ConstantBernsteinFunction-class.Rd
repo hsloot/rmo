@@ -4,41 +4,7 @@
 \name{ConstantBernsteinFunction-class}
 \alias{ConstantBernsteinFunction-class}
 \alias{ConstantBernsteinFunction}
-\alias{initialize,ConstantBernsteinFunction-method}
-\alias{initialize,ConstantBernsteinFunction,ANY-method}
-\alias{show,ConstantBernsteinFunction-method}
-\alias{valueOf,ConstantBernsteinFunction-method}
-\alias{valueOf,ConstantBernsteinFunction,ANY-method}
 \title{Class for (almost) constant Bernstein functions}
-\usage{
-\S4method{initialize}{ConstantBernsteinFunction}(.Object, constant)
-
-\S4method{show}{ConstantBernsteinFunction}(object)
-
-\S4method{valueOf}{ConstantBernsteinFunction}(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...)
-}
-\arguments{
-\item{.Object}{ An object:  see the \dQuote{Initialize Methods} section.}
-
-\item{constant}{Nonnegative number.}
-
-\item{object}{An object deriving from \linkS4class{LevyBernsteinFunction}
-(for \code{levyDensity}) or \linkS4class{CompleteBernsteinFunction}
-(for \code{stieltjesDensity}).}
-
-\item{x}{a nonnegativ numeric vector at which the iterated difference of
-the Bernstein function is evaluated.}
-
-\item{difference_order}{a nonnegative integer with the order of the
-alternating iterated forward differences taken on the Bernstein function.}
-
-\item{n, k}{nonnegative numbers for the binomial factor.}
-
-\item{cscale}{a positive numeric scalar with the composite scaling factor.}
-
-\item{...}{arguments to specify properties of the new object, to
-      be passed to \code{initialize()}.}
-}
 \description{
 A \emph{constant Bernstein function} is a Bernstein function with only a
 constant part (for \eqn{x > 0}), i.e. \eqn{b = 0} and \eqn{\nu = 0}. In
@@ -47,16 +13,6 @@ particular,
   \psi(x) = a , x > 0
 }
 }
-\section{Functions}{
-\itemize{
-\item \code{initialize(ConstantBernsteinFunction)}: Constructor
-
-\item \code{show(ConstantBernsteinFunction)}: Display the object.
-
-\item \code{valueOf(ConstantBernsteinFunction)}: Calculates the iterated differences of the Bernstein function,
-see \code{\link[=valueOf]{valueOf()}}
-
-}}
 \section{Slots}{
 
 \describe{
@@ -71,4 +27,26 @@ ConstantBernsteinFunction(constant = 0.2)
 \seealso{
 \linkS4class{BernsteinFunction},
 \code{\link[=valueOf]{valueOf()}}
+
+Other Bernstein function classes: 
+\code{\link{AlphaStableBernsteinFunction-class}},
+\code{\link{BernsteinFunction-class}},
+\code{\link{CompleteBernsteinFunction-class}},
+\code{\link{CompositeScaledBernsteinFunction-class}},
+\code{\link{ConvexCombinationOfBernsteinFunctions-class}},
+\code{\link{ExponentialBernsteinFunction-class}},
+\code{\link{GammaBernsteinFunction-class}},
+\code{\link{InverseGaussianBernsteinFunction-class}},
+\code{\link{LevyBernsteinFunction-class}},
+\code{\link{LinearBernsteinFunction-class}},
+\code{\link{ParetoBernsteinFunction-class}},
+\code{\link{PoissonBernsteinFunction-class}},
+\code{\link{ScaledBernsteinFunction-class}},
+\code{\link{SumOfBernsteinFunctions-class}}
+
+Other Bernstein function boundary classes: 
+\code{\link{LinearBernsteinFunction-class}},
+\code{\link{PoissonBernsteinFunction-class}}
 }
+\concept{Bernstein function boundary classes}
+\concept{Bernstein function classes}

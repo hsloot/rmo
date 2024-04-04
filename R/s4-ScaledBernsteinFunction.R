@@ -1,7 +1,3 @@
-#' @include error.R
-#' @include s4-BernsteinFunction.R
-NULL
-
 #' Class for scaled Bernstein functions
 #'
 #' Bernstein functions are stable under (nonegative) scalar multiplication,
@@ -18,24 +14,24 @@ NULL
 #' @seealso [BernsteinFunction-class],
 #'   [valueOf()]
 #'
+#' @include s4-BernsteinFunction.R
+#' @family Bernstein function classes
+#' @family Bernstein function transformer classes
 #' @export ScaledBernsteinFunction
+#' @examples
+#' ScaledBernsteinFunction()
+#' original_bf <- AlphaStableBernsteinFunction(alpha = 0.5)
+#' ScaledBernsteinFunction(scale = 2, original = original_bf)
 ScaledBernsteinFunction <- setClass("ScaledBernsteinFunction", # nolint
   contains = "BernsteinFunction",
   slots = c(scale = "numeric", original = "BernsteinFunction")
 )
 
-#' @describeIn ScaledBernsteinFunction-class Constructor
-#' @aliases initialize,ScaledBernsteinFunction-method
-#' @aliases initialize,ScaledBernsteinFunction,ANY-method
+#' @rdname hidden_aliases
 #'
 #' @inheritParams methods::initialize
 #' @param scale Positive number.
 #' @param original Derives from [BernsteinFunction-class].
-#'
-#' @examples
-#' ScaledBernsteinFunction()
-#' original_bf <- AlphaStableBernsteinFunction(alpha = 0.5)
-#' ScaledBernsteinFunction(scale = 2, original = original_bf)
 setMethod(
   "initialize", "ScaledBernsteinFunction",
   function(.Object, scale, original) { # nolint
@@ -49,6 +45,7 @@ setMethod(
   }
 )
 
+#' @include error.R
 #' @importFrom checkmate qtest
 setValidity(
   "ScaledBernsteinFunction",
@@ -61,11 +58,11 @@ setValidity(
   }
 )
 
-#' @describeIn ScaledBernsteinFunction-class Display the object.
-#' @aliases show,ScaledBernsteinFunction-method
+#' @rdname hidden_aliases
+#'
+#' @inheritParams methods::show
 #'
 #' @importFrom utils capture.output
-#'
 #' @export
 setMethod( # nocov start
   "show", "ScaledBernsteinFunction",
@@ -85,13 +82,11 @@ setMethod( # nocov start
   }
 ) # nocov end
 
-#' @describeIn ScaledBernsteinFunction-class
-#'   Calculates the iterated differences of the Bernstein function,
-#'   see [valueOf()]
-#' @aliases valueOf,ScaledBernsteinFunction,ANY-method
+#' @rdname hidden_aliases
 #'
 #' @inheritParams valueOf
 #'
+#' @include s4-valueOf.R
 #' @export
 setMethod(
   "valueOf", "ScaledBernsteinFunction",

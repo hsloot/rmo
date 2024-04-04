@@ -1,7 +1,3 @@
-#' @include s4-BernsteinFunction.R
-#' @include s4-LevyBernsteinFunction.R
-NULL
-
 #' Virtual superclass for complete Bernstein functions
 #'
 #' A virtual superclass for all Bernstein functions which can represented
@@ -15,35 +11,22 @@ NULL
 #'   [BernsteinFunction-class]
 #'   [valueOf()]
 #'
+#' @include s4-BernsteinFunction.R s4-LevyBernsteinFunction.R
+#' @family Bernstein function classes
+#' @family Virtual Bernstein function classes
+#' @family Levy Bernstein function classes
+#' @family Stieltjes Bernstein function classes
 #' @export
 setClass("CompleteBernsteinFunction",
   contains = c("LevyBernsteinFunction", "VIRTUAL")
 )
 
-#' @describeIn CompleteBernsteinFunction-class
-#'   returns the *Stieltjes density* with `lower`, `upper`, and `type`
-#'   attributes if continuous and returns a `data.frame` with named columns
-#'   `x` (atoms) and `y` (weights) as well as a type attribute if discrete.
-#'   The `type` attribute is either `"continuous"` or `"discrete"`.
-#'
-#' @inheritParams levyDensity
-#'
-#' @export
-setGeneric(
-  "stieltjesDensity",
-  function(object) {
-    standardGeneric("stieltjesDensity")
-  }
-)
-
-#' @describeIn CompleteBernsteinFunction-class
-#'   Calculates the iterated differences of the Bernstein function,
-#'   see [valueOf()]
-#' @aliases valueOf,CompleteBernsteinFunction,ANY-method
-#'
+#' @rdname hidden_aliases
 #' @inheritParams valueOf
 #'
 #' @details
+#' ### Evaluation of Complete Bernstein functions
+#'
 #' For *continuous Stieltjes densities*, the values of the Bernstein function
 #' are calculated with [stats::integrate()] by using the representation
 #' \deqn{
@@ -74,6 +57,7 @@ setGeneric(
 #'     \quad x > 0 .
 #' }
 #'
+#' @include s4-valueOf0.R s4-valueOf.R RcppExports.R
 #' @importFrom checkmate qassert
 #' @importFrom stats integrate
 #' @export

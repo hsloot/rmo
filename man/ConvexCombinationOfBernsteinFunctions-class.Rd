@@ -4,44 +4,7 @@
 \name{ConvexCombinationOfBernsteinFunctions-class}
 \alias{ConvexCombinationOfBernsteinFunctions-class}
 \alias{ConvexCombinationOfBernsteinFunctions}
-\alias{initialize,ConvexCombinationOfBernsteinFunctions-method}
-\alias{initialize,ConvexCombinationOfBernsteinFunctions,ANY-method}
-\alias{show,ConvexCombinationOfBernsteinFunctions-method}
-\alias{valueOf,ConvexCombinationOfBernsteinFunctions-method}
-\alias{valueOf,ConvexCombinationOfBernsteinFunctions,ANY-method}
 \title{Class for convex combinations of Bernstein functions}
-\usage{
-\S4method{initialize}{ConvexCombinationOfBernsteinFunctions}(.Object, coefficients, points)
-
-\S4method{show}{ConvexCombinationOfBernsteinFunctions}(object)
-
-\S4method{valueOf}{ConvexCombinationOfBernsteinFunctions}(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...)
-}
-\arguments{
-\item{.Object}{ An object:  see the \dQuote{Initialize Methods} section.}
-
-\item{coefficients}{Derives from
-\linkS4class{ConvexCombinationOfBernsteinFunctions}.}
-
-\item{points}{Derives from \linkS4class{ConvexCombinationOfBernsteinFunctions}.}
-
-\item{object}{An object deriving from \linkS4class{LevyBernsteinFunction}
-(for \code{levyDensity}) or \linkS4class{CompleteBernsteinFunction}
-(for \code{stieltjesDensity}).}
-
-\item{x}{a nonnegativ numeric vector at which the iterated difference of
-the Bernstein function is evaluated.}
-
-\item{difference_order}{a nonnegative integer with the order of the
-alternating iterated forward differences taken on the Bernstein function.}
-
-\item{n, k}{nonnegative numbers for the binomial factor.}
-
-\item{cscale}{a positive numeric scalar with the composite scaling factor.}
-
-\item{...}{arguments to specify properties of the new object, to
-      be passed to \code{initialize()}.}
-}
 \description{
 Bernstein functions are stable under convex combinations, i.e. if
 \eqn{\psi_1, \ldots, \psi_n} are Bernstein functions and
@@ -51,16 +14,6 @@ Bernstein functions are stable under convex combinations, i.e. if
 }
 is also a Bernstein function.
 }
-\section{Functions}{
-\itemize{
-\item \code{initialize(ConvexCombinationOfBernsteinFunctions)}: Constructor
-
-\item \code{show(ConvexCombinationOfBernsteinFunctions)}: Display the object.
-
-\item \code{valueOf(ConvexCombinationOfBernsteinFunctions)}: Calculates the iterated differences of the Bernstein function,
-see \code{\link[=valueOf]{valueOf()}}
-
-}}
 \section{Slots}{
 
 \describe{
@@ -79,3 +32,27 @@ ConvexCombinationOfBernsteinFunctions(
   points = list(bf1, bf2, bf3)
 )
 }
+\seealso{
+Other Bernstein function classes: 
+\code{\link{AlphaStableBernsteinFunction-class}},
+\code{\link{BernsteinFunction-class}},
+\code{\link{CompleteBernsteinFunction-class}},
+\code{\link{CompositeScaledBernsteinFunction-class}},
+\code{\link{ConstantBernsteinFunction-class}},
+\code{\link{ExponentialBernsteinFunction-class}},
+\code{\link{GammaBernsteinFunction-class}},
+\code{\link{InverseGaussianBernsteinFunction-class}},
+\code{\link{LevyBernsteinFunction-class}},
+\code{\link{LinearBernsteinFunction-class}},
+\code{\link{ParetoBernsteinFunction-class}},
+\code{\link{PoissonBernsteinFunction-class}},
+\code{\link{ScaledBernsteinFunction-class}},
+\code{\link{SumOfBernsteinFunctions-class}}
+
+Other Bernstein function transformer classes: 
+\code{\link{CompositeScaledBernsteinFunction-class}},
+\code{\link{ScaledBernsteinFunction-class}},
+\code{\link{SumOfBernsteinFunctions-class}}
+}
+\concept{Bernstein function classes}
+\concept{Bernstein function transformer classes}

@@ -4,30 +4,7 @@
 \name{InverseGaussianBernsteinFunction-class}
 \alias{InverseGaussianBernsteinFunction-class}
 \alias{InverseGaussianBernsteinFunction}
-\alias{initialize,InverseGaussianBernsteinFunction-method}
-\alias{initialize,InverseGaussianBernsteinFunction,ANY-method}
-\alias{show,InverseGaussianBernsteinFunction-method}
-\alias{levyDensity,InverseGaussianBernsteinFunction-method}
-\alias{stieltjesDensity,InverseGaussianBernsteinFunction-method}
 \title{Class for Inverse Gaussian Bernstein function}
-\usage{
-\S4method{initialize}{InverseGaussianBernsteinFunction}(.Object, eta)
-
-\S4method{show}{InverseGaussianBernsteinFunction}(object)
-
-\S4method{levyDensity}{InverseGaussianBernsteinFunction}(object)
-
-\S4method{stieltjesDensity}{InverseGaussianBernsteinFunction}(object)
-}
-\arguments{
-\item{.Object}{ An object:  see the \dQuote{Initialize Methods} section.}
-
-\item{eta}{Non-negative number.}
-
-\item{object}{An object deriving from \linkS4class{LevyBernsteinFunction}
-(for \code{levyDensity}) or \linkS4class{CompleteBernsteinFunction}
-(for \code{stieltjesDensity}).}
-}
 \description{
 For the inverse Gaussian Lévy subordinator with \eqn{\eta > 0},
 the corresponding Bernstein function is the function
@@ -49,26 +26,7 @@ to approximate it with the following representation:
 This Bernstein function can be found on p. 309 in \insertCite{Mai2017a}{rmo}.
 Furthermore it is  a transformation of no. 2 in the list of complete
 Bernstein functions in Chp. 16 of \insertCite{Schilling2012a}{rmo}.
-}
-\section{Functions}{
-\itemize{
-\item \code{initialize(InverseGaussianBernsteinFunction)}: Constructor
-
-\item \code{show(InverseGaussianBernsteinFunction)}: Display the object.
-
-\item \code{levyDensity(InverseGaussianBernsteinFunction)}: see \linkS4class{LevyBernsteinFunction}
-
-\item \code{stieltjesDensity(InverseGaussianBernsteinFunction)}: see \linkS4class{CompleteBernsteinFunction}
-
-}}
-\section{Slots}{
-
-\describe{
-\item{\code{eta}}{The distribution parameter (drift of the
-underlying Gaussian process)}
-}}
-
-\section{Lévy density}{
+\subsection{Lévy density}{
 
 \deqn{
   \nu(du)
@@ -77,7 +35,7 @@ underlying Gaussian process)}
 }
 }
 
-\section{Stieltjes density}{
+\subsection{Stieltjes density}{
 
 \deqn{
   \sigma(du)
@@ -93,6 +51,13 @@ underlying Gaussian process)}
       \quad u > \eta^2 / 2 .
 }
 }
+}
+\section{Slots}{
+
+\describe{
+\item{\code{eta}}{The distribution parameter (drift of the
+underlying Gaussian process)}
+}}
 
 \examples{
 InverseGaussianBernsteinFunction()
@@ -104,4 +69,43 @@ InverseGaussianBernsteinFunction(eta = 0.3)
 \seealso{
 \linkS4class{BernsteinFunction}, \linkS4class{LevyBernsteinFunction},
 \code{\link[=valueOf]{valueOf()}}
+
+Other Bernstein function classes: 
+\code{\link{AlphaStableBernsteinFunction-class}},
+\code{\link{BernsteinFunction-class}},
+\code{\link{CompleteBernsteinFunction-class}},
+\code{\link{CompositeScaledBernsteinFunction-class}},
+\code{\link{ConstantBernsteinFunction-class}},
+\code{\link{ConvexCombinationOfBernsteinFunctions-class}},
+\code{\link{ExponentialBernsteinFunction-class}},
+\code{\link{GammaBernsteinFunction-class}},
+\code{\link{LevyBernsteinFunction-class}},
+\code{\link{LinearBernsteinFunction-class}},
+\code{\link{ParetoBernsteinFunction-class}},
+\code{\link{PoissonBernsteinFunction-class}},
+\code{\link{ScaledBernsteinFunction-class}},
+\code{\link{SumOfBernsteinFunctions-class}}
+
+Other Levy Bernstein function classes: 
+\code{\link{AlphaStableBernsteinFunction-class}},
+\code{\link{CompleteBernsteinFunction-class}},
+\code{\link{ExponentialBernsteinFunction-class}},
+\code{\link{GammaBernsteinFunction-class}},
+\code{\link{LevyBernsteinFunction-class}},
+\code{\link{ParetoBernsteinFunction-class}},
+\code{\link{PoissonBernsteinFunction-class}}
+
+Other Complete Bernstein function classes: 
+\code{\link{AlphaStableBernsteinFunction-class}},
+\code{\link{ExponentialBernsteinFunction-class}},
+\code{\link{GammaBernsteinFunction-class}}
+
+Other Algebraic Bernstein function classes: 
+\code{\link{AlphaStableBernsteinFunction-class}},
+\code{\link{ExponentialBernsteinFunction-class}},
+\code{\link{ParetoBernsteinFunction-class}}
 }
+\concept{Algebraic Bernstein function classes}
+\concept{Bernstein function classes}
+\concept{Complete Bernstein function classes}
+\concept{Levy Bernstein function classes}

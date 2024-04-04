@@ -4,43 +4,7 @@
 \name{SumOfBernsteinFunctions-class}
 \alias{SumOfBernsteinFunctions-class}
 \alias{SumOfBernsteinFunctions}
-\alias{initialize,SumOfBernsteinFunctions-method}
-\alias{initialize,SumOfBernsteinFunctions,ANY-method}
-\alias{show,SumOfBernsteinFunctions-method}
-\alias{valueOf,SumOfBernsteinFunctions-method}
-\alias{valueOf,SumOfBernsteinFunctions,ANY-method}
 \title{Class for sums of two Bernstein functions}
-\usage{
-\S4method{initialize}{SumOfBernsteinFunctions}(.Object, first, second)
-
-\S4method{show}{SumOfBernsteinFunctions}(object)
-
-\S4method{valueOf}{SumOfBernsteinFunctions}(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...)
-}
-\arguments{
-\item{.Object}{ An object:  see the \dQuote{Initialize Methods} section.}
-
-\item{first}{Derives from \linkS4class{BernsteinFunction}.}
-
-\item{second}{Derives from \linkS4class{BernsteinFunction}.}
-
-\item{object}{An object deriving from \linkS4class{LevyBernsteinFunction}
-(for \code{levyDensity}) or \linkS4class{CompleteBernsteinFunction}
-(for \code{stieltjesDensity}).}
-
-\item{x}{a nonnegativ numeric vector at which the iterated difference of
-the Bernstein function is evaluated.}
-
-\item{difference_order}{a nonnegative integer with the order of the
-alternating iterated forward differences taken on the Bernstein function.}
-
-\item{n, k}{nonnegative numbers for the binomial factor.}
-
-\item{cscale}{a positive numeric scalar with the composite scaling factor.}
-
-\item{...}{arguments to specify properties of the new object, to
-      be passed to \code{initialize()}.}
-}
 \description{
 Bernstein functions are stable under addition, i.e. if \eqn{\psi_1} and
 \eqn{\psi_2} are two Bernstein functions, then
@@ -49,16 +13,6 @@ Bernstein functions are stable under addition, i.e. if \eqn{\psi_1} and
 }
 is also a Bernstein function.
 }
-\section{Functions}{
-\itemize{
-\item \code{initialize(SumOfBernsteinFunctions)}: Constructor
-
-\item \code{show(SumOfBernsteinFunctions)}: Display the object.
-
-\item \code{valueOf(SumOfBernsteinFunctions)}: Calculates the iterated differences of the Bernstein function,
-see \code{\link[=valueOf]{valueOf()}}
-
-}}
 \section{Slots}{
 
 \describe{
@@ -76,4 +30,27 @@ SumOfBernsteinFunctions(first = first_bf, second = second_bf)
 \seealso{
 \linkS4class{BernsteinFunction},
 \code{\link[=valueOf]{valueOf()}}
+
+Other Bernstein function classes: 
+\code{\link{AlphaStableBernsteinFunction-class}},
+\code{\link{BernsteinFunction-class}},
+\code{\link{CompleteBernsteinFunction-class}},
+\code{\link{CompositeScaledBernsteinFunction-class}},
+\code{\link{ConstantBernsteinFunction-class}},
+\code{\link{ConvexCombinationOfBernsteinFunctions-class}},
+\code{\link{ExponentialBernsteinFunction-class}},
+\code{\link{GammaBernsteinFunction-class}},
+\code{\link{InverseGaussianBernsteinFunction-class}},
+\code{\link{LevyBernsteinFunction-class}},
+\code{\link{LinearBernsteinFunction-class}},
+\code{\link{ParetoBernsteinFunction-class}},
+\code{\link{PoissonBernsteinFunction-class}},
+\code{\link{ScaledBernsteinFunction-class}}
+
+Other Bernstein function transformer classes: 
+\code{\link{CompositeScaledBernsteinFunction-class}},
+\code{\link{ConvexCombinationOfBernsteinFunctions-class}},
+\code{\link{ScaledBernsteinFunction-class}}
 }
+\concept{Bernstein function classes}
+\concept{Bernstein function transformer classes}

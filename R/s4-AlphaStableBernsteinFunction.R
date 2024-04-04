@@ -1,9 +1,3 @@
-#' @include error.R
-#' @include s4-BernsteinFunction.R
-#' @include s4-LevyBernsteinFunction.R
-#' @include s4-CompleteBernsteinFunction.R
-NULL
-
 #' Class for the \eqn{\alpha}-stable Bernstein function
 #'
 #' @slot alpha The index \eqn{\alpha}.
@@ -31,6 +25,18 @@ NULL
 #' This Bernstein function is no. 1 in the list of complete Bernstein functions
 #' in Chp. 16 of \insertCite{Schilling2012a}{rmo}.
 #'
+#' ### Lévy density
+#' \deqn{
+#'   \nu(du)
+#'     = \frac{\alpha}{\Gamma(1-\alpha)} u^{-1 - \alpha} , \quad u > 0 .
+#' }
+#'
+#' ### Stieltjes Density
+#' \deqn{
+#'   \sigma(du)
+#'     = \frac{\sin(\alpha \pi)}{\pi} u^{\alpha - 1}, \quad u > 0 .
+#' }
+#'
 #' @references
 #'   \insertAllCited{}
 #'
@@ -38,22 +44,24 @@ NULL
 #'   [CompleteBernsteinFunction-class],
 #'   [valueOf()]
 #'
+#' @include s4-BernsteinFunction.R s4-CompleteBernsteinFunction.R
+#' @family Bernstein function classes
+#' @family Levy Bernstein function classes
+#' @family Complete Bernstein function classes
+#' @family Algebraic Bernstein function classes
 #' @export AlphaStableBernsteinFunction
+#' @examples
+#' AlphaStableBernsteinFunction()
+#' AlphaStableBernsteinFunction(alpha = 0.5)
 AlphaStableBernsteinFunction <- setClass("AlphaStableBernsteinFunction", # nolint
   contains = "CompleteBernsteinFunction",
   slots = c(alpha = "numeric")
 )
 
-#' @describeIn AlphaStableBernsteinFunction-class Constructor
-#' @aliases initialize,AlphaStableBernsteinFunction-method
-#' @aliases initialize,AlphaStableBernsteinFunction,ANY-method
+#' @rdname hidden_aliases
 #'
 #' @inheritParams methods::initialize
 #' @param alpha Positive number between zero and one (bounds excl.).
-#'
-#' @examples
-#' AlphaStableBernsteinFunction()
-#' AlphaStableBernsteinFunction(alpha = 0.5)
 setMethod(
   "initialize", "AlphaStableBernsteinFunction",
   function(.Object, alpha) { # nolint
@@ -66,6 +74,7 @@ setMethod(
   }
 )
 
+#' @include error.R
 #' @importFrom checkmate qtest
 setValidity(
   "AlphaStableBernsteinFunction",
@@ -78,8 +87,9 @@ setValidity(
   }
 )
 
-#' @describeIn AlphaStableBernsteinFunction-class Display the object.
-#' @aliases show,AlphaStableBernsteinFunction-method
+#' @rdname hidden_aliases
+#'
+#' @inheritParams methods::show
 #'
 #' @export
 setMethod( # nocov start
@@ -96,18 +106,11 @@ setMethod( # nocov start
   }
 ) # nocov end
 
-#' @describeIn AlphaStableBernsteinFunction-class
-#'   see [LevyBernsteinFunction-class]
-#' @aliases levyDensity,AlphaStableBernsteinFunction-method
+#' @rdname hidden_aliases
 #'
 #' @inheritParams levyDensity
 #'
-#' @section Lévy density:
-#' \deqn{
-#'   \nu(du)
-#'     = \frac{\alpha}{\Gamma(1-\alpha)} u^{-1 - \alpha} , \quad u > 0 .
-#' }
-#'
+#' @include s4-levyDensity.R
 #' @export
 setMethod(
   "levyDensity", "AlphaStableBernsteinFunction",
@@ -121,18 +124,11 @@ setMethod(
   }
 )
 
-#' @describeIn AlphaStableBernsteinFunction-class
-#'   see [CompleteBernsteinFunction-class].
-#' @aliases stieltjesDensity,AlphaStableBernsteinFunction-method
+#' @rdname hidden_aliases
 #'
 #' @inheritParams levyDensity
 #'
-#' @section Stieltjes Density:
-#' \deqn{
-#'   \sigma(du)
-#'     = \frac{\sin(\alpha \pi)}{\pi} u^{\alpha - 1}, \quad u > 0 .
-#' }
-#'
+#' @include s4-stieltjesDensity.R
 #' @export
 setMethod(
   "stieltjesDensity", "AlphaStableBernsteinFunction",
@@ -146,7 +142,7 @@ setMethod(
   }
 )
 
-#' @keywords internal
+#' @include s4-valueOf0.R
 setMethod(
   "valueOf0", "AlphaStableBernsteinFunction",
   function(object, x, cscale = 1, ...) {

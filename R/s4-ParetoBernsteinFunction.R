@@ -1,8 +1,3 @@
-#' @include error.R
-#' @include s4-BernsteinFunction.R
-#' @include s4-LevyBernsteinFunction.R
-NULL
-
 #' Class for Pareto Bernstein functions
 #'
 #' @slot alpha The index \eqn{\alpha}
@@ -35,29 +30,36 @@ NULL
 #' \eqn{\alpha}-stable subordinator, see Sec. 5.3 of
 #' \insertCite{Fernandez2015a}{rmo}.
 #'
+#' ### Lévy density
+#' \deqn{
+#'   \nu(du)
+#'     = \alpha \frac{x_0^\alpha}{u^{\alpha + 1}}, \quad u > x_0 .
+#' }
+#'
 #' @references
 #'   \insertAllCited{}
 #'
 #' @seealso [BernsteinFunction-class], [LevyBernsteinFunction-class],
 #'   [valueOf()]
 #'
+#' @include s4-BernsteinFunction.R s4-LevyBernsteinFunction.R
+#' @family Bernstein function classes
+#' @family Levy Bernstein function classes
+#' @family Algebraic Bernstein function classes
 #' @export ParetoBernsteinFunction
+#' @examples
+#' ParetoBernsteinFunction()
+#' ParetoBernsteinFunction(alpha = 0.2, x0 = 1)
 ParetoBernsteinFunction <- setClass("ParetoBernsteinFunction", # nolint
   contains = "LevyBernsteinFunction",
   slots = c(alpha = "numeric", x0 = "numeric")
 )
 
-#' @describeIn ParetoBernsteinFunction-class Constructor
-#' @aliases initialize,ParetoBernsteinFunction-method
-#' @aliases initialize,ParetoBernsteinFunction,ANY-method
+#' @rdname hidden_aliases
 #'
 #' @inheritParams methods::initialize
 #' @param alpha Positive number between zero and one (bounds excl.).
 #' @param x0 Positive number.
-#'
-#' @examples
-#' ParetoBernsteinFunction()
-#' ParetoBernsteinFunction(alpha = 0.2, x0 = 1)
 setMethod(
   "initialize", "ParetoBernsteinFunction",
   function(.Object, alpha, x0) { # nolint
@@ -71,6 +73,7 @@ setMethod(
   }
 )
 
+#' @include error.R
 #' @importFrom checkmate qtest
 setValidity(
   "ParetoBernsteinFunction",
@@ -86,8 +89,9 @@ setValidity(
   }
 )
 
-#' @describeIn ParetoBernsteinFunction-class Display the object.
-#' @aliases show,ParetoBernsteinFunction-method
+#' @rdname hidden_aliases
+#'
+#' @inheritParams methods::show
 #'
 #' @export
 setMethod( # nocov start
@@ -105,18 +109,11 @@ setMethod( # nocov start
   }
 ) # nocov end
 
-#' @describeIn ParetoBernsteinFunction-class
-#'   see [LevyBernsteinFunction-class]
-#' @aliases levyDensity,ParetoBernsteinFunction-method
+#' @rdname hidden_aliases
 #'
 #' @inheritParams levyDensity
 #'
-#' @section Lévy density:
-#' \deqn{
-#'   \nu(du)
-#'     = \alpha \frac{x_0^\alpha}{u^{\alpha + 1}}, \quad u > x_0 .
-#' }
-#'
+#' @include s4-levyDensity.R
 #' @export
 setMethod(
   "levyDensity", "ParetoBernsteinFunction",

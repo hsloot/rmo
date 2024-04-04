@@ -4,30 +4,7 @@
 \name{ExponentialBernsteinFunction-class}
 \alias{ExponentialBernsteinFunction-class}
 \alias{ExponentialBernsteinFunction}
-\alias{initialize,ExponentialBernsteinFunction-method}
-\alias{initialize,ExponentialBernsteinFunction,ANY-method}
-\alias{show,ExponentialBernsteinFunction-method}
-\alias{levyDensity,ExponentialBernsteinFunction-method}
-\alias{stieltjesDensity,ExponentialBernsteinFunction-method}
 \title{Class for Exponential Bernstein functions}
-\usage{
-\S4method{initialize}{ExponentialBernsteinFunction}(.Object, lambda)
-
-\S4method{show}{ExponentialBernsteinFunction}(object)
-
-\S4method{levyDensity}{ExponentialBernsteinFunction}(object)
-
-\S4method{stieltjesDensity}{ExponentialBernsteinFunction}(object)
-}
-\arguments{
-\item{.Object}{ An object:  see the \dQuote{Initialize Methods} section.}
-
-\item{lambda}{Positive number.}
-
-\item{object}{An object deriving from \linkS4class{LevyBernsteinFunction}
-(for \code{levyDensity}) or \linkS4class{CompleteBernsteinFunction}
-(for \code{stieltjesDensity}).}
-}
 \description{
 For the Exponential jump CPP subordinator with \eqn{\lambda > 0},
 the corresponding Bernstein function is
@@ -45,25 +22,7 @@ alternating iterated forward differences are known in closed form:
 
 This Bernstein function is no. 4 in the list of complete Bernstein functions
 in Chp. 16 of \insertCite{Schilling2012a}{rmo}.
-}
-\section{Functions}{
-\itemize{
-\item \code{initialize(ExponentialBernsteinFunction)}: Constructor
-
-\item \code{show(ExponentialBernsteinFunction)}: Display the object.
-
-\item \code{levyDensity(ExponentialBernsteinFunction)}: see \linkS4class{LevyBernsteinFunction}
-
-\item \code{stieltjesDensity(ExponentialBernsteinFunction)}: see \linkS4class{CompleteBernsteinFunction}
-
-}}
-\section{Slots}{
-
-\describe{
-\item{\code{lambda}}{The index \eqn{\lambda}.}
-}}
-
-\section{Lévy density}{
+\subsection{Lévy density}{
 
 \deqn{
   \nu(du)
@@ -71,13 +30,19 @@ in Chp. 16 of \insertCite{Schilling2012a}{rmo}.
 }
 }
 
-\section{Stieltjes density}{
+\subsection{Stieltjes density}{
 
 \deqn{
   \sigma(du)
     = \delta_{\lambda}(du), \quad u > 0 .
 }
 }
+}
+\section{Slots}{
+
+\describe{
+\item{\code{lambda}}{The index \eqn{\lambda}.}
+}}
 
 \examples{
 ExponentialBernsteinFunction()
@@ -89,4 +54,43 @@ ExponentialBernsteinFunction(lambda = 0.5)
 \seealso{
 \linkS4class{BernsteinFunction}, \linkS4class{LevyBernsteinFunction},
 \linkS4class{CompleteBernsteinFunction}, \code{\link[=valueOf]{valueOf()}}
+
+Other Bernstein function classes: 
+\code{\link{AlphaStableBernsteinFunction-class}},
+\code{\link{BernsteinFunction-class}},
+\code{\link{CompleteBernsteinFunction-class}},
+\code{\link{CompositeScaledBernsteinFunction-class}},
+\code{\link{ConstantBernsteinFunction-class}},
+\code{\link{ConvexCombinationOfBernsteinFunctions-class}},
+\code{\link{GammaBernsteinFunction-class}},
+\code{\link{InverseGaussianBernsteinFunction-class}},
+\code{\link{LevyBernsteinFunction-class}},
+\code{\link{LinearBernsteinFunction-class}},
+\code{\link{ParetoBernsteinFunction-class}},
+\code{\link{PoissonBernsteinFunction-class}},
+\code{\link{ScaledBernsteinFunction-class}},
+\code{\link{SumOfBernsteinFunctions-class}}
+
+Other Levy Bernstein function classes: 
+\code{\link{AlphaStableBernsteinFunction-class}},
+\code{\link{CompleteBernsteinFunction-class}},
+\code{\link{GammaBernsteinFunction-class}},
+\code{\link{InverseGaussianBernsteinFunction-class}},
+\code{\link{LevyBernsteinFunction-class}},
+\code{\link{ParetoBernsteinFunction-class}},
+\code{\link{PoissonBernsteinFunction-class}}
+
+Other Complete Bernstein function classes: 
+\code{\link{AlphaStableBernsteinFunction-class}},
+\code{\link{GammaBernsteinFunction-class}},
+\code{\link{InverseGaussianBernsteinFunction-class}}
+
+Other Algebraic Bernstein function classes: 
+\code{\link{AlphaStableBernsteinFunction-class}},
+\code{\link{InverseGaussianBernsteinFunction-class}},
+\code{\link{ParetoBernsteinFunction-class}}
 }
+\concept{Algebraic Bernstein function classes}
+\concept{Bernstein function classes}
+\concept{Complete Bernstein function classes}
+\concept{Levy Bernstein function classes}

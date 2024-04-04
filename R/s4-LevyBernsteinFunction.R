@@ -1,6 +1,3 @@
-#' @include s4-BernsteinFunction.R
-NULL
-
 #' Virtual superclass for Bernstein functions with nonzero Lévy density
 #'
 #' A virtual superclass for all Bernstein functions which can represented
@@ -12,11 +9,17 @@ NULL
 #'
 #' @seealso [BernsteinFunction-class], [valueOf()]
 #'
+#' @include s4-BernsteinFunction.R
+#' @family Bernstein function classes
+#' @family Virtual Bernstein function classes
+#' @family Levy Bernstein function classes
 #' @export
 setClass("LevyBernsteinFunction",
   contains = c("BernsteinFunction", "VIRTUAL")
 )
 
+#' @include s4-defaultMethod.R
+#' @keywords internal
 setMethod(
   "defaultMethod", "LevyBernsteinFunction",
   function(object) {
@@ -24,28 +27,7 @@ setMethod(
   }
 )
 
-#' @describeIn LevyBernsteinFunction-class
-#'   returns the *Lévy density* with `lower`, `upper`, and `type`
-#'   attributes if continuous and returns a `data.frame` with named columns
-#'   `x` (atoms) and `y` (weights) as well as a type attribute if discrete.
-#'   The `type` attribute is either `"continuous"` or `"discrete"`.
-#'
-#' @param object An object deriving from [LevyBernsteinFunction-class]
-#'   (for `levyDensity`) or [CompleteBernsteinFunction-class]
-#'   (for `stieltjesDensity`).
-#'
-#' @export
-setGeneric(
-  "levyDensity",
-  function(object) {
-    standardGeneric("levyDensity")
-  }
-)
-
-#' @describeIn LevyBernsteinFunction-class
-#'   Calculates the iterated differences of the Bernstein function,
-#'   see [valueOf()]
-#' @aliases valueOf,LevyBernsteinFunction,ANY-method
+#' @rdname hidden_aliases
 #'
 #' @inheritParams valueOf
 #' @param method Method to calculate the result; use `method = "levy"` for
@@ -54,6 +36,8 @@ setGeneric(
 #' @param tolerance (Relative) tolerance, passed down to [stats::integrate()]
 #'
 #' @details
+#' ### Evaluation of Bernstein functions with Lévy densities
+#'
 #' For *continuous Lévy densities*, the values of the Bernstein function are
 #' calculated with [stats::integrate()] by using the representation
 #' \deqn{
@@ -84,6 +68,7 @@ setGeneric(
 #'     \quad x > 0 .
 #' }
 #'
+#' @include s4-valueOf.R s4-valueOf0.R RcppExports.R
 #' @importFrom checkmate qassert
 #' @importFrom stats integrate
 #' @export

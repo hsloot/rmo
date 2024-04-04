@@ -1,8 +1,3 @@
-#' @include error.R
-#' @include s4-BernsteinFunction.R
-#' @include s4-LevyBernsteinFunction.R
-NULL
-
 #' Class for Poisson Bernstein functions
 #'
 #' @slot lambda The (positive) arrival rate of the underlying Poisson process.
@@ -22,25 +17,32 @@ NULL
 #'   {(-1)}^{k-1} \Delta^k \psi(x) = e^{-u\eta} (1-e^{-\eta})^k, x>0, k>0.
 #' }
 #'
+#' ### Lévy density
+#' \deqn{
+#'   \nu(du)
+#'     = \lambda \delta_{\eta}(du), \quad u > 0 .
+#' }
+#'
 #' @seealso [BernsteinFunction-class], [LevyBernsteinFunction-class]
 #'   [valueOf()]
 #'
+#' @include s4-BernsteinFunction.R s4-LevyBernsteinFunction.R
+#' @family Bernstein function classes
+#' @family Levy Bernstein function classes
+#' @family Bernstein function boundary classes
 #' @export PoissonBernsteinFunction
+#' @examples
+#' PoissonBernsteinFunction()
+#' PoissonBernsteinFunction(eta = 2)
 PoissonBernsteinFunction <- setClass("PoissonBernsteinFunction", # nolint
   contains = "LevyBernsteinFunction",
   slots = c(eta = "numeric")
 )
 
-#' @describeIn PoissonBernsteinFunction-class Constructor
-#' @aliases initialize,PoissonBernsteinFunction-method
-#' @aliases initialize,PoissonBernsteinFunction,ANY-method
+#' @rdname hidden_aliases
 #'
 #' @inheritParams methods::initialize
 #' @param eta Positive number.
-#'
-#' @examples
-#' PoissonBernsteinFunction()
-#' PoissonBernsteinFunction(eta = 2)
 setMethod(
   "initialize", "PoissonBernsteinFunction",
   function(.Object, eta) { # nolint
@@ -53,6 +55,7 @@ setMethod(
   }
 )
 
+#' @include error.R
 #' @importFrom checkmate qtest
 setValidity(
   "PoissonBernsteinFunction",
@@ -65,8 +68,9 @@ setValidity(
   }
 )
 
-#' @describeIn PoissonBernsteinFunction-class Display the object.
-#' @aliases show,PoissonBernsteinFunction-method
+#' @rdname hidden_aliases
+#'
+#' @inheritParams methods::show
 #'
 #' @export
 setMethod( # nocov start
@@ -83,18 +87,11 @@ setMethod( # nocov start
   }
 ) # nocov end
 
-#' @describeIn PoissonBernsteinFunction-class
-#'   see [LevyBernsteinFunction-class]
-#' @aliases levyDensity,PoissonBernsteinFunction-method
+#' @rdname hidden_aliases
 #'
 #' @inheritParams levyDensity
 #'
-#' @section Lévy density:
-#' \deqn{
-#'   \nu(du)
-#'     = \lambda \delta_{\eta}(du), \quad u > 0 .
-#' }
-#'
+#' @include s4-levyDensity.R
 #' @export
 setMethod(
   "levyDensity", "PoissonBernsteinFunction",

@@ -1,7 +1,3 @@
-#' @include error.R
-#' @include s4-BernsteinFunction.R
-NULL
-
 #' Class for (almost) constant Bernstein functions
 #'
 #' @slot constant The nonnegative *killing* parameter (i.e. \eqn{a}
@@ -18,22 +14,22 @@ NULL
 #' @seealso [BernsteinFunction-class],
 #'   [valueOf()]
 #'
+#' @include s4-BernsteinFunction.R
+#' @family Bernstein function classes
+#' @family Bernstein function boundary classes
 #' @export ConstantBernsteinFunction
+#' @examples
+#' ConstantBernsteinFunction()
+#' ConstantBernsteinFunction(constant = 0.2)
 ConstantBernsteinFunction <- setClass("ConstantBernsteinFunction", # nolint
   contains = "BernsteinFunction",
   slots = c(constant = "numeric")
 )
 
-#' @describeIn ConstantBernsteinFunction-class Constructor
-#' @aliases initialize,ConstantBernsteinFunction-method
-#' @aliases initialize,ConstantBernsteinFunction,ANY-method
+#' @rdname hidden_aliases
 #'
 #' @inheritParams methods::initialize
 #' @param constant Nonnegative number.
-#'
-#' @examples
-#' ConstantBernsteinFunction()
-#' ConstantBernsteinFunction(constant = 0.2)
 setMethod(
   "initialize", "ConstantBernsteinFunction",
   function(.Object, constant) { # nolint
@@ -46,6 +42,7 @@ setMethod(
   }
 )
 
+#' @include error.R
 #' @importFrom checkmate qtest
 setValidity(
   "ConstantBernsteinFunction",
@@ -58,8 +55,9 @@ setValidity(
   }
 )
 
-#' @describeIn ConstantBernsteinFunction-class Display the object.
-#' @aliases show,ConstantBernsteinFunction-method
+#' @rdname hidden_aliases
+#'
+#' @inheritParams methods::show
 #'
 #' @export
 setMethod( # nocov start
@@ -76,13 +74,11 @@ setMethod( # nocov start
   }
 ) # nocov end
 
-#' @describeIn ConstantBernsteinFunction-class
-#'   Calculates the iterated differences of the Bernstein function,
-#'   see [valueOf()]
-#' @aliases valueOf,ConstantBernsteinFunction,ANY-method
+#' @rdname hidden_aliases
 #'
 #' @inheritParams valueOf
 #'
+#' @include s4-valueOf.R RcppExports.R
 #' @importFrom checkmate qassert assert check_numeric check_complex
 #' @export
 setMethod(

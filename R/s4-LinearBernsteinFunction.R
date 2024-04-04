@@ -1,7 +1,3 @@
-#' @include error.R
-#' @include s4-BernsteinFunction.R
-NULL
-
 #' Class for linear Bernstein functions
 #'
 #' @slot scale The nonnegative *drift* parameter
@@ -17,22 +13,22 @@ NULL
 #' @seealso [BernsteinFunction-class],
 #'   [valueOf()]
 #'
+#' @include s4-BernsteinFunction.R
+#' @family Bernstein function classes
+#' @family Bernstein function boundary classes
 #' @export LinearBernsteinFunction
+#' @examples
+#' LinearBernsteinFunction()
+#' LinearBernsteinFunction(scale = 2)
 LinearBernsteinFunction <- setClass("LinearBernsteinFunction", # nolint
   contains = "BernsteinFunction",
   slots = c(scale = "numeric")
 )
 
-#' @describeIn LinearBernsteinFunction-class Constructor
-#' @aliases initialize,LinearBernsteinFunction-method
-#' @aliases initialize,LinearBernsteinFunction,ANY-method
+#' @rdname hidden_aliases
 #'
 #' @inheritParams methods::initialize
 #' @param scale Nonnegative number.
-#'
-#' @examples
-#' LinearBernsteinFunction()
-#' LinearBernsteinFunction(scale = 2)
 setMethod(
   "initialize", "LinearBernsteinFunction",
   function(.Object, scale) { # nolint
@@ -45,6 +41,7 @@ setMethod(
   }
 )
 
+#' @include error.R
 #' @importFrom checkmate qtest
 setValidity(
   "LinearBernsteinFunction",
@@ -57,8 +54,9 @@ setValidity(
   }
 )
 
-#' @describeIn LinearBernsteinFunction-class Display the object.
-#' @aliases show,LinearBernsteinFunction-method
+#' @rdname hidden_aliases
+#'
+#' @inheritParams methods::show
 #'
 #' @export
 setMethod( # nocov start
@@ -75,13 +73,11 @@ setMethod( # nocov start
   }
 ) # nocov end
 
-#' @describeIn LinearBernsteinFunction-class
-#'   Calculates the iterated differences of the Bernstein function,
-#'    see [valueOf()]
-#' @aliases valueOf,LinearBernsteinFunction,ANY-method
+#' @rdname hidden_aliases
 #'
 #' @inheritParams valueOf
 #'
+#' @include s4-valueOf.R RcppExports.R
 #' @importFrom checkmate qassert assert check_numeric check_complex
 #' @export
 setMethod(

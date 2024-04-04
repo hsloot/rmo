@@ -1,5 +1,4 @@
 #' @include error.R
-#' @include s4-BernsteinFunction.R
 NULL
 
 #' Class for composite scaled Bernstein functions
@@ -18,25 +17,25 @@ NULL
 #' @seealso [BernsteinFunction-class],
 #'   [valueOf()]
 #'
+#' @include s4-BernsteinFunction.R
+#' @family Bernstein function classes
+#' @family Bernstein function transformer classes
 #' @export CompositeScaledBernsteinFunction
-CompositeScaledBernsteinFunction <- setClass("CompositeScaledBernsteinFunction", # nolint
-  contains = "BernsteinFunction",
-  slots = c(cscale = "numeric", original = "BernsteinFunction")
-)
-
-#' @describeIn CompositeScaledBernsteinFunction-class Constructor
-#' @aliases initialize,CompositeScaledBernsteinFunction-method
-#' @aliases initialize,CompositeScaledBernsteinFunction,ANY-method
-#'
-#' @inheritParams methods::initialize
-#' @param cscale Positive number.
-#' @param original Derives from [BernsteinFunction-class].
-#'
 #' @examples
 #' CompositeScaledBernsteinFunction()
 #' cscale <- 0.5
 #' bf_original <- AlphaStableBernsteinFunction()
 #' CompositeScaledBernsteinFunction(cscale = cscale, original = bf_original)
+CompositeScaledBernsteinFunction <- setClass("CompositeScaledBernsteinFunction", # nolint
+  contains = "BernsteinFunction",
+  slots = c(cscale = "numeric", original = "BernsteinFunction")
+)
+
+#' @rdname hidden_aliases
+#'
+#' @inheritParams methods::initialize
+#' @param cscale Positive number.
+#' @param original Derives from [BernsteinFunction-class].
 setMethod(
   "initialize", "CompositeScaledBernsteinFunction",
   function(.Object, cscale, original) { # nolint
@@ -50,6 +49,7 @@ setMethod(
   }
 )
 
+#' @include error.R
 #' @importFrom checkmate qtest
 setValidity(
   "CompositeScaledBernsteinFunction",
@@ -62,11 +62,11 @@ setValidity(
   }
 )
 
-#' @describeIn CompositeScaledBernsteinFunction-class Display the object.
-#' @aliases show,CompositeScaledBernsteinFunction-method
+#' @rdname hidden_aliases
+#'
+#' @inheritParams methods::show
 #'
 #' @importFrom utils capture.output
-#'
 #' @export
 setMethod( # nocov start
   "show", "CompositeScaledBernsteinFunction",
@@ -86,13 +86,11 @@ setMethod( # nocov start
   }
 ) # nocov end
 
-#' @describeIn CompositeScaledBernsteinFunction-class
-#'   Calculates the iterated differences of the Bernstein function,
-#'   see [valueOf()]
-#' @aliases valueOf,CompositeScaledBernsteinFunction,ANY-method
+#' @rdname hidden_aliases
 #'
 #' @inheritParams valueOf
 #'
+#' @include s4-valueOf.R
 #' @export
 setMethod(
   "valueOf", "CompositeScaledBernsteinFunction",
