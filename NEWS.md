@@ -1,5 +1,7 @@
 # rmo 0.9
 
+- Re-organize S4 code and documentation (#117)
+
 - Remove outdated rmarkdown notebooks from development phase (#115)
 
 - Remove convenience wrapper functions for generating shock arrival intensity
