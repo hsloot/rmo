@@ -22,49 +22,29 @@ reference:
 - subtitle: Generic methods for Bernstein functions
   desc: ~
   contents:
-  - valueOf
-  - intensities
-  - uexIntensities
-  - exIntensities
-  - exQMatrix
-  - levyDensity
-  - stieltjesDensity
+  - has_concept('Bernstein function generics')
 
 - subtitle: Virtual classes for Bernstein Functions
   desc: ~
   contents:
-  - BernsteinFunction-class
-  - LevyBernsteinFunction-class
-  - CompleteBernsteinFunction-class
+  - has_concept('Virtual Bernstein function classes')
 
 - subtitle: Bernstein function arithmetics
   desc: ~
   contents:
-  - ScaledBernsteinFunction-class
-  - CompositeScaledBernsteinFunction-class
-  - SumOfBernsteinFunctions-class
-  - ConvexCombinationOfBernsteinFunctions-class
+  - has_concept('Bernstein function transformer classes')
 
 - subtitle: Boundary cases
   desc: ~
   contents:
-  - LinearBernsteinFunction-class
-  - ConstantBernsteinFunction-class
+  - has_concept('Bernstein function boundary classes')
 
 - subtitle: Algebraic Bernstein functions
   desc: ~
   contents:
-  - ParetoBernsteinFunction-class
-  - AlphaStableBernsteinFunction-class
-  - InverseGaussianBernsteinFunction-class
-  - ExponentialBernsteinFunction-class
+  - has_concept('Algebraic Bernstein function classes')
 
 - subtitle: Logarithmic Bernstein functions
   desc: ~
   contents:
-  - GammaBernsteinFunction-class
-
-- subtitle: Other Bernstein Functions
-  desc: ~
-  contents:
-  - PoissonBernsteinFunction-class
+  - has_concept('Logarithmic Bernstein function classes')
