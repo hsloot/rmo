@@ -7,21 +7,40 @@
 exQMatrix(object, d, cscale = 1, ...)
 }
 \arguments{
-\item{object}{An object deriving from \linkS4class{LevyBernsteinFunction}
-(for \code{levyDensity}) or \linkS4class{CompleteBernsteinFunction}
-(for \code{stieltjesDensity}).}
+\item{object}{An object derived from class \code{BernsteinFunction}.}
 
-\item{d}{a positive integer, larger than two, for the \emph{dimension}.}
+\item{d}{A positive integer, larger than two, for the \emph{dimension}.}
 
-\item{cscale}{a positive number for the \emph{composite scaling factor}.}
+\item{cscale}{A positive number for the \emph{composite scaling factor}.}
 
-\item{...}{pass-through parameter}
+\item{...}{pass-through parameter.}
 }
 \description{
 Calculates the \emph{infinitesimal Markov generator matrix} of the corresponding
 (Markovian) default-counting process, used internally by \code{\link[=rexmo]{rexmo()}}.
 }
+\details{
+For a given Bernstein function, the Markov generator matrix is defined as the
+upper triangular matrix with elements
+\deqn{
+  q_{i, j}^\ast
+    = \binom{d-i}{j-i} \begin{cases}
+      -\psi{(d-i)} & \text{if } i = j , \\
+      {(-1)}^{j-i-1} \Delta^{j-i}{ \psi{(d-i)} } & \text{if } i < j , \\
+     0 & \text{otherwise} .
+   \end{cases}
+}
+The calculation of the Markov generator matrix using this formula is usually
+not numerically stable. Consequently, the various alternative approaches are
+used dependent on the class of the Bernstein function.
+}
+\examples{
+bf <- AlphaStableBernsteinFunction(alpha = 0.7)
+exQMatrix(bf, 3)
+}
 \seealso{
+\code{\link[=rexmo]{rexmo()}}
+
 Other Bernstein function generics: 
 \code{\link{exIntensities}()},
 \code{\link{intensities}()},

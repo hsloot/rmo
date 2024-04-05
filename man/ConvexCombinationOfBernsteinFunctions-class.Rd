@@ -23,16 +23,20 @@ is also a Bernstein function.
 }}
 
 \examples{
+# Create an object of class ConvexCombinationOfBernsteinFunctions
 ConvexCombinationOfBernsteinFunctions()
-bf1 <- LinearBernsteinFunction(scale = 0.2)
-bf2 <- ConstantBernsteinFunction(constant = 0.5)
-bf3 <- AlphaStableBernsteinFunction(alpha = 0.5)
 ConvexCombinationOfBernsteinFunctions(
   coefficients = c(0.2, 0.5, 0.1),
-  points = list(bf1, bf2, bf3)
+  points = list(
+    LinearBernsteinFunction(scale = 0.2),
+    ConstantBernsteinFunction(constant = 0.5),
+    AlphaStableBernsteinFunction(alpha = 0.5))
 )
 }
 \seealso{
+\code{\link[=valueOf]{valueOf()}}, \code{\link[=intensities]{intensities()}}, \code{\link[=uexIntensities]{uexIntensities()}}, \code{\link[=exIntensities]{exIntensities()}},
+\code{\link[=exQMatrix]{exQMatrix()}}, \code{\link[=rextmo]{rextmo()}}, \code{\link[=rpextmo]{rpextmo()}}
+
 Other Bernstein function classes: 
 \code{\link{AlphaStableBernsteinFunction-class}},
 \code{\link{BernsteinFunction-class}},

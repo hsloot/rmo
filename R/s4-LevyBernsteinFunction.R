@@ -7,34 +7,6 @@
 #'   \psi(x) = \int_0^\infty (1 - e^{-ux}) \nu(du) , x > 0 .
 #' }
 #'
-#' @seealso [BernsteinFunction-class], [valueOf()]
-#'
-#' @include s4-BernsteinFunction.R
-#' @family Bernstein function classes
-#' @family Virtual Bernstein function classes
-#' @family Levy Bernstein function classes
-#' @export
-setClass("LevyBernsteinFunction",
-  contains = c("BernsteinFunction", "VIRTUAL")
-)
-
-#' @include s4-defaultMethod.R
-#' @keywords internal
-setMethod(
-  "defaultMethod", "LevyBernsteinFunction",
-  function(object) {
-    "levy"
-  }
-)
-
-#' @rdname hidden_aliases
-#'
-#' @inheritParams valueOf
-#' @param method Method to calculate the result; use `method = "levy"` for
-#'   using the Lévy representation and `method = "stieltjes"` for using the
-#'   Stieltjes representation.
-#' @param tolerance (Relative) tolerance, passed down to [stats::integrate()]
-#'
 #' @details
 #' ### Evaluation of Bernstein functions with Lévy densities
 #'
@@ -67,6 +39,38 @@ setMethod(
 #'     = \sum_{i} \operatorname{e}^{-u_i x} (1 - \operatorname{e}^{-u_i})^j y_i,
 #'     \quad x > 0 .
 #' }
+#'
+#' @seealso [levyDensity()], [valueOf()], [intensities()], [uexIntensities()],
+#'   [exIntensities()], [exQMatrix()], [rextmo()], [rpextmo()]
+#'
+#' @docType class
+#' @name LevyBernsteinFunction-class
+#' @rdname LevyBernsteinFunction-class
+#' @include s4-BernsteinFunction.R
+#' @family Bernstein function classes
+#' @family Virtual Bernstein function classes
+#' @family Levy Bernstein function classes
+#' @export
+setClass("LevyBernsteinFunction",
+  contains = c("BernsteinFunction", "VIRTUAL")
+)
+
+#' @include s4-defaultMethod.R
+#' @keywords internal
+setMethod(
+  "defaultMethod", "LevyBernsteinFunction",
+  function(object) {
+    "levy"
+  }
+)
+
+#' @rdname hidden_aliases
+#'
+#' @inheritParams valueOf
+#' @param method Method to calculate the result; use `method = "levy"` for
+#'   using the Lévy representation and `method = "stieltjes"` for using the
+#'   Stieltjes representation.
+#' @param tolerance (Relative) tolerance, passed down to [stats::integrate()]
 #'
 #' @include s4-valueOf.R s4-valueOf0.R RcppExports.R
 #' @importFrom checkmate qassert

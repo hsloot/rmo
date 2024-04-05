@@ -42,24 +42,12 @@ and
 }
 }
 }
-\examples{
-uexIntensities(AlphaStableBernsteinFunction(4e-1), 3L)
-exIntensities(AlphaStableBernsteinFunction(4e-1), 3L)
-intensities(AlphaStableBernsteinFunction(4e-1), 3L)
-exQMatrix(AlphaStableBernsteinFunction(4e-1), 3L)
-
-}
 \references{
 \insertRef{Schilling2012a}{rmo}
 }
 \seealso{
-\linkS4class{LevyBernsteinFunction}, \linkS4class{ScaledBernsteinFunction},
-\linkS4class{SumOfBernsteinFunctions}, \linkS4class{CompositeScaledBernsteinFunction},
-\linkS4class{CompleteBernsteinFunction}, \linkS4class{ConstantBernsteinFunction},
-\linkS4class{LinearBernsteinFunction}, \linkS4class{PoissonBernsteinFunction},
-\linkS4class{AlphaStableBernsteinFunction}, \linkS4class{ExponentialBernsteinFunction},
-\linkS4class{InverseGaussianBernsteinFunction}, \linkS4class{GammaBernsteinFunction},
-\linkS4class{ParetoBernsteinFunction}
+\code{\link[=valueOf]{valueOf()}}, \code{\link[=intensities]{intensities()}}, \code{\link[=uexIntensities]{uexIntensities()}}, \code{\link[=exIntensities]{exIntensities()}},
+\code{\link[=exQMatrix]{exQMatrix()}}, \code{\link[=rextmo]{rextmo()}}, \code{\link[=rpextmo]{rpextmo()}}
 
 Other Bernstein function classes: 
 \code{\link{AlphaStableBernsteinFunction-class}},

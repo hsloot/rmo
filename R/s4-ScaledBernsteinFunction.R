@@ -11,17 +11,23 @@
 #'   is to be multiplied.
 #' @slot original The original Bernstein function which is to be multiplied.
 #'
-#' @seealso [BernsteinFunction-class],
-#'   [valueOf()]
+#' @seealso [valueOf()], [intensities()], [uexIntensities()], [exIntensities()],
+#'   [exQMatrix()], [rextmo()], [rpextmo()]
 #'
+#' @docType class
+#' @name ScaledBernsteinFunction-class
+#' @rdname ScaledBernsteinFunction-class
 #' @include s4-BernsteinFunction.R
 #' @family Bernstein function classes
 #' @family Bernstein function transformer classes
 #' @export ScaledBernsteinFunction
 #' @examples
+#' # Create an object of class ScaleBernsteinFunction
 #' ScaledBernsteinFunction()
-#' original_bf <- AlphaStableBernsteinFunction(alpha = 0.5)
-#' ScaledBernsteinFunction(scale = 2, original = original_bf)
+#' ScaledBernsteinFunction(
+#'   scale = 2,
+#'   original = AlphaStableBernsteinFunction(alpha = 0.5)
+#' )
 ScaledBernsteinFunction <- setClass("ScaledBernsteinFunction", # nolint
   contains = "BernsteinFunction",
   slots = c(scale = "numeric", original = "BernsteinFunction")

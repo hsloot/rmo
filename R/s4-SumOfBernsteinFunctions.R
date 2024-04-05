@@ -10,18 +10,23 @@
 #' @slot first The first summand (derived from [BernsteinFunction-class]).
 #' @slot second The second summand (derived from [BernsteinFunction-class]).
 #'
-#' @seealso [BernsteinFunction-class],
-#'   [valueOf()]
+#' @seealso [valueOf()], [intensities()], [uexIntensities()], [exIntensities()],
+#'   [exQMatrix()], [rextmo()], [rpextmo()]
 #'
+#' @docType class
+#' @name SumOfBernsteinFunctions-class
+#' @rdname SumOfBernsteinFunctions-class
 #' @include s4-BernsteinFunction.R
 #' @family Bernstein function classes
 #' @family Bernstein function transformer classes
 #' @export SumOfBernsteinFunctions
 #' @examples
+#' # Create an object of class SumOfBernsteinFunctions
 #' SumOfBernsteinFunctions()
-#' first_bf <- LinearBernsteinFunction(scale = 0.2)
-#' second_bf <- AlphaStableBernsteinFunction(alpha = 0.5)
-#' SumOfBernsteinFunctions(first = first_bf, second = second_bf)
+#' SumOfBernsteinFunctions(
+#'   first = LinearBernsteinFunction(scale = 0.2),
+#'   second = AlphaStableBernsteinFunction(alpha = 0.5)
+#' )
 SumOfBernsteinFunctions <- setClass("SumOfBernsteinFunctions", # nolint
   contains = "BernsteinFunction",
   slots = c(first = "BernsteinFunction", second = "BernsteinFunction")

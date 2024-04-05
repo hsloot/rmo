@@ -60,15 +60,63 @@ underlying Gaussian process)}
 }}
 
 \examples{
+# Create an object of class InverseGaussianBernsteinFunction
 InverseGaussianBernsteinFunction()
 InverseGaussianBernsteinFunction(eta = 0.3)
+
+# Create a Lévy density
+bf <- InverseGaussianBernsteinFunction(eta = 0.7)
+levy_density <- levyDensity(bf)
+integrate(
+  function(x) pmin(1, x) * levy_density(x),
+  lower = attr(levy_density, "lower"),
+  upper = attr(levy_density, "upper")
+)
+
+# Create a Stieltjes density
+bf <- InverseGaussianBernsteinFunction(eta = 0.5)
+stieltjes_density <- stieltjesDensity(bf)
+integrate(
+  function(x) 1/(1 + x) * stieltjes_density(x),
+  lower = attr(stieltjes_density, "lower"),
+  upper = attr(stieltjes_density, "upper")
+)
+
+# Evaluate the Bernstein function
+bf <- InverseGaussianBernsteinFunction(eta = 0.3)
+valueOf(bf, 1:5)
+
+# Calculate shock-arrival intensities
+bf <- InverseGaussianBernsteinFunction(eta = 0.8)
+intensities(bf, 3)
+intensities(bf, 3, method = "stieltjes")
+intensities(bf, 3, tolerance = 1e-4)
+
+# Calculate exchangeable shock-arrival intensities
+bf <- InverseGaussianBernsteinFunction(eta = 0.4)
+uexIntensities(bf, 3)
+uexIntensities(bf, 3, method = "stieltjes")
+uexIntensities(bf, 3, tolerance = 1e-4)
+
+# Calculate exchangeable shock-size arrival intensities
+bf <- InverseGaussianBernsteinFunction(eta = 0.2)
+exIntensities(bf, 3)
+exIntensities(bf, 3, method = "stieltjes")
+exIntensities(bf, 3, tolerance = 1e-4)
+
+# Calculate the Markov generator
+bf <- InverseGaussianBernsteinFunction(eta = 0.6)
+exQMatrix(bf, 3)
+exQMatrix(bf, 3, method = "stieltjes")
+exQMatrix(bf, 3, tolerance = 1e-4)
 }
 \references{
 \insertAllCited{}
 }
 \seealso{
-\linkS4class{BernsteinFunction}, \linkS4class{LevyBernsteinFunction},
-\code{\link[=valueOf]{valueOf()}}
+\code{\link[=levyDensity]{levyDensity()}}, \code{\link[=stieltjesDensity]{stieltjesDensity()}}, \code{\link[=valueOf]{valueOf()}},
+\code{\link[=intensities]{intensities()}}, \code{\link[=uexIntensities]{uexIntensities()}}, \code{\link[=exIntensities]{exIntensities()}}, \code{\link[=exQMatrix]{exQMatrix()}},
+\code{\link[=rextmo]{rextmo()}}, \code{\link[=rpextmo]{rpextmo()}}
 
 Other Bernstein function classes: 
 \code{\link{AlphaStableBernsteinFunction-class}},

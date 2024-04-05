@@ -1,5 +1,5 @@
-#' @importFrom methods new setClass setValidity setGeneric setMethod validObject
-#'    callNextMethod show classLabel
+#' @importFrom methods new setClass setValidity setMethod validObject
+#'   callNextMethod show classLabel
 NULL
 
 #' Virtual superclass for Bernstein functions
@@ -45,13 +45,8 @@ NULL
 #' @references
 #'   \insertRef{Schilling2012a}{rmo}
 #'
-#' @seealso [LevyBernsteinFunction-class], [ScaledBernsteinFunction-class],
-#' [SumOfBernsteinFunctions-class], [CompositeScaledBernsteinFunction-class],
-#' [CompleteBernsteinFunction-class], [ConstantBernsteinFunction-class],
-#' [LinearBernsteinFunction-class], [PoissonBernsteinFunction-class],
-#' [AlphaStableBernsteinFunction-class], [ExponentialBernsteinFunction-class],
-#' [InverseGaussianBernsteinFunction-class], [GammaBernsteinFunction-class],
-#' [ParetoBernsteinFunction-class]
+#' @seealso [valueOf()], [intensities()], [uexIntensities()], [exIntensities()],
+#'   [exQMatrix()], [rextmo()], [rpextmo()]
 #'
 #' @docType class
 #' @name BernsteinFunction-class
@@ -59,12 +54,6 @@ NULL
 #' @family Bernstein function classes
 #' @family Virtual Bernstein function classes
 #' @export
-#' @examples
-#' uexIntensities(AlphaStableBernsteinFunction(4e-1), 3L)
-#' exIntensities(AlphaStableBernsteinFunction(4e-1), 3L)
-#' intensities(AlphaStableBernsteinFunction(4e-1), 3L)
-#' exQMatrix(AlphaStableBernsteinFunction(4e-1), 3L)
-#'
 setClass("BernsteinFunction", # nolint
   contains = "VIRTUAL"
 )

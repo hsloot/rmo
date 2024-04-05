@@ -23,14 +23,16 @@ composition.}
 }}
 
 \examples{
+# Create an object of class CompositeScaleBernsteinFunction
 CompositeScaledBernsteinFunction()
-cscale <- 0.5
-bf_original <- AlphaStableBernsteinFunction()
-CompositeScaledBernsteinFunction(cscale = cscale, original = bf_original)
+CompositeScaledBernsteinFunction(
+  cscale = 0.5,
+  original = AlphaStableBernsteinFunction(0.5)
+)
 }
 \seealso{
-\linkS4class{BernsteinFunction},
-\code{\link[=valueOf]{valueOf()}}
+\code{\link[=valueOf]{valueOf()}}, \code{\link[=intensities]{intensities()}}, \code{\link[=uexIntensities]{uexIntensities()}}, \code{\link[=exIntensities]{exIntensities()}},
+\code{\link[=exQMatrix]{exQMatrix()}}, \code{\link[=rextmo]{rextmo()}}, \code{\link[=rpextmo]{rpextmo()}}
 
 Other Bernstein function classes: 
 \code{\link{AlphaStableBernsteinFunction-class}},

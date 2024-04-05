@@ -23,13 +23,16 @@ is to be multiplied.}
 }}
 
 \examples{
+# Create an object of class ScaleBernsteinFunction
 ScaledBernsteinFunction()
-original_bf <- AlphaStableBernsteinFunction(alpha = 0.5)
-ScaledBernsteinFunction(scale = 2, original = original_bf)
+ScaledBernsteinFunction(
+  scale = 2,
+  original = AlphaStableBernsteinFunction(alpha = 0.5)
+)
 }
 \seealso{
-\linkS4class{BernsteinFunction},
-\code{\link[=valueOf]{valueOf()}}
+\code{\link[=valueOf]{valueOf()}}, \code{\link[=intensities]{intensities()}}, \code{\link[=uexIntensities]{uexIntensities()}}, \code{\link[=exIntensities]{exIntensities()}},
+\code{\link[=exQMatrix]{exQMatrix()}}, \code{\link[=rextmo]{rextmo()}}, \code{\link[=rpextmo]{rpextmo()}}
 
 Other Bernstein function classes: 
 \code{\link{AlphaStableBernsteinFunction-class}},

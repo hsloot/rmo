@@ -7,21 +7,44 @@
 intensities(object, d, cscale = 1, ...)
 }
 \arguments{
-\item{object}{An object deriving from \linkS4class{LevyBernsteinFunction}
-(for \code{levyDensity}) or \linkS4class{CompleteBernsteinFunction}
-(for \code{stieltjesDensity}).}
+\item{object}{An object derived from class \code{BernsteinFunction}.}
 
-\item{d}{a positive integer, larger than two, for the \emph{dimension}.}
+\item{d}{A positive integer, larger than two, for the \emph{dimension}.}
 
-\item{cscale}{a positive number for the \emph{composite scaling factor}.}
+\item{cscale}{A positive number for the \emph{composite scaling factor}.}
 
-\item{...}{pass-through parameter}
+\item{...}{pass-through parameter.}
 }
 \description{
 Calculates the \emph{shock-arrival intensities}, the \code{intensities} parameter for
 \code{\link[=rmo]{rmo()}}.
 }
+\details{
+For a given Bernstein function, the shock-arrival intensities are defined as
+\deqn{
+  \lambda_{I}
+    = {(-1)}^{{\lvert I\rvert}-1}
+      \Delta^{{\lvert I\rvert}}{ \psi{(d-{\lvert I\rvert})} } ,
+        \quad 1 \leq {\lvert I\rvert} \leq d .
+}
+The calculation of the shock-arrival intensities using this formula is
+usually not numerically stable. Consequently, the various alternative
+approaches are used dependent on the class of the Bernstein function.
+
+The following binary representation is used to map subsets \eqn{I} of
+\eqn{{\{1, \ldots, d\}}} to an integers \eqn{0, \ldots, 2^d-1}:
+\deqn{
+  I
+    \equiv \sum_{k \in I}{ 2^{k-1} } .
+}
+}
+\examples{
+bf <- AlphaStableBernsteinFunction(alpha = 0.7)
+intensities(bf, 3)
+}
 \seealso{
+\code{\link[=rmo]{rmo()}}
+
 Other Bernstein function generics: 
 \code{\link{exIntensities}()},
 \code{\link{exQMatrix}()},

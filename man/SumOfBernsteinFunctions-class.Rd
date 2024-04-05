@@ -22,14 +22,16 @@ is also a Bernstein function.
 }}
 
 \examples{
+# Create an object of class SumOfBernsteinFunctions
 SumOfBernsteinFunctions()
-first_bf <- LinearBernsteinFunction(scale = 0.2)
-second_bf <- AlphaStableBernsteinFunction(alpha = 0.5)
-SumOfBernsteinFunctions(first = first_bf, second = second_bf)
+SumOfBernsteinFunctions(
+  first = LinearBernsteinFunction(scale = 0.2),
+  second = AlphaStableBernsteinFunction(alpha = 0.5)
+)
 }
 \seealso{
-\linkS4class{BernsteinFunction},
-\code{\link[=valueOf]{valueOf()}}
+\code{\link[=valueOf]{valueOf()}}, \code{\link[=intensities]{intensities()}}, \code{\link[=uexIntensities]{uexIntensities()}}, \code{\link[=exIntensities]{exIntensities()}},
+\code{\link[=exQMatrix]{exQMatrix()}}, \code{\link[=rextmo]{rextmo()}}, \code{\link[=rpextmo]{rpextmo()}}
 
 Other Bernstein function classes: 
 \code{\link{AlphaStableBernsteinFunction-class}},

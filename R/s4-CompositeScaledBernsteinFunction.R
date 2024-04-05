@@ -1,6 +1,3 @@
-#' @include error.R
-NULL
-
 #' Class for composite scaled Bernstein functions
 #'
 #' Bernstein functions are stable under composition, i.e. if \eqn{\psi} is
@@ -14,18 +11,23 @@ NULL
 #'   composition.
 #' @slot original The original Bernstein function.
 #'
-#' @seealso [BernsteinFunction-class],
-#'   [valueOf()]
+#' @seealso [valueOf()], [intensities()], [uexIntensities()], [exIntensities()],
+#'   [exQMatrix()], [rextmo()], [rpextmo()]
 #'
+#' @docType class
+#' @name CompositeScaledBernsteinFunction-class
+#' @rdname CompositeScaledBernsteinFunction-class
 #' @include s4-BernsteinFunction.R
 #' @family Bernstein function classes
 #' @family Bernstein function transformer classes
 #' @export CompositeScaledBernsteinFunction
 #' @examples
+#' # Create an object of class CompositeScaleBernsteinFunction
 #' CompositeScaledBernsteinFunction()
-#' cscale <- 0.5
-#' bf_original <- AlphaStableBernsteinFunction()
-#' CompositeScaledBernsteinFunction(cscale = cscale, original = bf_original)
+#' CompositeScaledBernsteinFunction(
+#'   cscale = 0.5,
+#'   original = AlphaStableBernsteinFunction(0.5)
+#' )
 CompositeScaledBernsteinFunction <- setClass("CompositeScaledBernsteinFunction", # nolint
   contains = "BernsteinFunction",
   slots = c(cscale = "numeric", original = "BernsteinFunction")

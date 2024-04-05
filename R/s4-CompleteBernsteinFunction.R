@@ -7,23 +7,6 @@
 #'   \psi(x) = \int_0^\infty \frac{x}{x + u} \sigma(du) , x > 0 .
 #' }
 #'
-#' @seealso [LevyBernsteinFunction-class],
-#'   [BernsteinFunction-class]
-#'   [valueOf()]
-#'
-#' @include s4-BernsteinFunction.R s4-LevyBernsteinFunction.R
-#' @family Bernstein function classes
-#' @family Virtual Bernstein function classes
-#' @family Levy Bernstein function classes
-#' @family Stieltjes Bernstein function classes
-#' @export
-setClass("CompleteBernsteinFunction",
-  contains = c("LevyBernsteinFunction", "VIRTUAL")
-)
-
-#' @rdname hidden_aliases
-#' @inheritParams valueOf
-#'
 #' @details
 #' ### Evaluation of Complete Bernstein functions
 #'
@@ -56,6 +39,31 @@ setClass("CompleteBernsteinFunction",
 #'     = \sum_{i} u_i \mathrm{Beta}(j+1, x + u_i) y_i ,
 #'     \quad x > 0 .
 #' }
+#'
+#' @seealso [levyDensity()], [stieltjesDensity()], [valueOf()],
+#'   [intensities()], [uexIntensities()], [exIntensities()], [exQMatrix()],
+#'   [rextmo()], [rpextmo()]
+#'
+#' @docType class
+#' @name CompleteBernsteinFunction-class
+#' @rdname CompleteBernsteinFunction-class
+#' @include s4-BernsteinFunction.R s4-LevyBernsteinFunction.R
+#' @family Bernstein function classes
+#' @family Virtual Bernstein function classes
+#' @family Levy Bernstein function classes
+#' @family Stieltjes Bernstein function classes
+#' @export
+setClass("CompleteBernsteinFunction",
+  contains = c("LevyBernsteinFunction", "VIRTUAL")
+)
+
+#' @rdname hidden_aliases
+#'
+#' @inheritParams valueOf
+#' @param method Method to calculate the result; use `method = "levy"` for
+#'   using the Lévy representation and `method = "stieltjes"` for using the
+#'   Stieltjes representation.
+#' @param tolerance (Relative) tolerance, passed down to [stats::integrate()].
 #'
 #' @include s4-valueOf0.R s4-valueOf.R RcppExports.R
 #' @importFrom checkmate qassert

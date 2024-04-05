@@ -7,21 +7,37 @@
 uexIntensities(object, d, cscale = 1, ...)
 }
 \arguments{
-\item{object}{An object deriving from \linkS4class{LevyBernsteinFunction}
-(for \code{levyDensity}) or \linkS4class{CompleteBernsteinFunction}
-(for \code{stieltjesDensity}).}
+\item{object}{An object derived from class \code{BernsteinFunction}.}
 
-\item{d}{a positive integer, larger than two, for the \emph{dimension}.}
+\item{d}{A positive integer, larger than two, for the \emph{dimension}.}
 
-\item{cscale}{a positive number for the \emph{composite scaling factor}.}
+\item{cscale}{A positive number for the \emph{composite scaling factor}.}
 
-\item{...}{pass-through parameter}
+\item{...}{pass-through parameter.}
 }
 \description{
-Calculates (unscaled) \emph{exchangeable shock-arrival intensities}, see \code{\link[=rmo]{rmo()}}
-and \code{\link[=rexmo]{rexmo()}}.
+Calculates (unscaled) \emph{exchangeable shock-arrival intensities}, see \code{\link[=rmo]{rmo()}}.
+}
+\details{
+For a given Bernstein function, the exchangeable shock-arrival intensities
+are defined as
+\deqn{
+  \lambda_{i}
+    = {(-1)}^{i-1} \Delta^{i}{ \psi{(d-i)} } ,
+      \quad 1 \leq i \leq d .
+}
+The calculation of the exchangeable shock-arrival intensities using this
+formula is usually not numerically stable. Consequently, the various
+alternative approaches are used dependent on the class of the Bernstein
+function.
+}
+\examples{
+bf <- AlphaStableBernsteinFunction(alpha = 0.4)
+uexIntensities(bf, 3)
 }
 \seealso{
+\code{\link[=rmo]{rmo()}}
+
 Other Bernstein function generics: 
 \code{\link{exIntensities}()},
 \code{\link{exQMatrix}()},

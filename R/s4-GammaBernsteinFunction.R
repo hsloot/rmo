@@ -40,9 +40,14 @@
 #' @references
 #'   \insertAllCited{}
 #'
-#' @seealso [BernsteinFunction-class], [LevyBernsteinFunction-class],
-#'   [CompleteBernsteinFunction-class], [valueOf()]
+#' @seealso [levyDensity()], [stieltjesDensity()], [valueOf()],
+#'   [intensities()], [uexIntensities()], [exIntensities()], [exQMatrix()],
+#'   [rextmo()], [rpextmo()]
 #'
+#' @docType class
+#' @name GammaBernsteinFunction-class
+#' @rdname GammaBernsteinFunction-class
+#' @aliases GammaBernsteinFunction
 #' @include s4-BernsteinFunction.R s4-CompleteBernsteinFunction.R
 #' @family Bernstein function classes
 #' @family Levy Bernstein function classes
@@ -50,8 +55,55 @@
 #' @family Logarithmic Bernstein function classes
 #' @export GammaBernsteinFunction
 #' @examples
+#' # Create an object of class GammaBernsteinFunction
 #' GammaBernsteinFunction()
 #' GammaBernsteinFunction(a = 2)
+#'
+#' # Create a Lévy density
+#' bf <- GammaBernsteinFunction(a = 0.7)
+#' levy_density <- levyDensity(bf)
+#' integrate(
+#'   function(x) pmin(1, x) * levy_density(x),
+#'   lower = attr(levy_density, "lower"),
+#'   upper = attr(levy_density, "upper")
+#' )
+#'
+#' # Create a Stieltjes density
+#' bf <- GammaBernsteinFunction(a = 0.5)
+#' stieltjes_density <- stieltjesDensity(bf)
+#' integrate(
+#'   function(x) 1/(1 + x) * stieltjes_density(x),
+#'   lower = attr(stieltjes_density, "lower"),
+#'   upper = attr(stieltjes_density, "upper")
+#' )
+#'
+#' # Evaluate the Bernstein function
+#' bf <- GammaBernsteinFunction(a = 0.3)
+#' valueOf(bf, 1:5)
+#'
+#' # Calculate shock-arrival intensities
+#' bf <- GammaBernsteinFunction(a = 0.8)
+#' intensities(bf, 3)
+#' intensities(bf, 3, method = "stieltjes")
+#' intensities(bf, 3, tolerance = 1e-4)
+#'
+#' # Calculate exchangeable shock-arrival intensities
+#' bf <- GammaBernsteinFunction(a = 0.4)
+#' uexIntensities(bf, 3)
+#' uexIntensities(bf, 3, method = "stieltjes")
+#' uexIntensities(bf, 3, tolerance = 1e-4)
+#'
+#' # Calculate exchangeable shock-size arrival intensities
+#' bf <- GammaBernsteinFunction(a = 0.2)
+#' exIntensities(bf, 3)
+#' exIntensities(bf, 3, method = "stieltjes")
+#' exIntensities(bf, 3, tolerance = 1e-4)
+#'
+#' # Calculate the Markov generator
+#' bf <- GammaBernsteinFunction(a = 0.6)
+#' exQMatrix(bf, 3)
+#' exQMatrix(bf, 3, method = "stieltjes")
+#' exQMatrix(bf, 3, tolerance = 1e-4)
 GammaBernsteinFunction <- setClass("GammaBernsteinFunction", # nolint
   contains = "CompleteBernsteinFunction",
   slots = c(a = "numeric")
@@ -125,7 +177,7 @@ setMethod(
 
 #' @rdname hidden_aliases
 #'
-#' @inheritParams levyDensity
+#' @inheritParams stieljtesDensity
 #'
 #' @include s4-stieltjesDensity.R
 #' @export
@@ -141,6 +193,8 @@ setMethod(
   }
 )
 
+#' @include s4-valueOf0.R
+#' @importFrom checkmate assert qassert check_numeric check_complex
 #' @keywords internal
 setMethod(
   "valueOf0", "GammaBernsteinFunction",

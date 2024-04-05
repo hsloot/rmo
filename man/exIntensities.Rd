@@ -7,21 +7,38 @@
 exIntensities(object, d, cscale = 1, ...)
 }
 \arguments{
-\item{object}{An object deriving from \linkS4class{LevyBernsteinFunction}
-(for \code{levyDensity}) or \linkS4class{CompleteBernsteinFunction}
-(for \code{stieltjesDensity}).}
+\item{object}{An object derived from class \code{BernsteinFunction}.}
 
-\item{d}{a positive integer, larger than two, for the \emph{dimension}.}
+\item{d}{A positive integer, larger than two, for the \emph{dimension}.}
 
-\item{cscale}{a positive number for the \emph{composite scaling factor}.}
+\item{cscale}{A positive number for the \emph{composite scaling factor}.}
 
-\item{...}{pass-through parameter}
+\item{...}{pass-through parameter.}
 }
 \description{
 Calculates \emph{exchangeable shock-size-arrival intensities}, the
 \code{ex_intensities} parameter for \code{\link[=rexmo]{rexmo()}}.
 }
+\details{
+For a given Bernstein function, the exchangeable shock-size-arrival
+intensities are defined as
+\deqn{
+  \eta_{i}
+    = \binom{d}{i} {(-1)}^{i-1} \Delta^{i}{ \psi{(d-i)} } ,
+      \quad 1 \leq i \leq d .
+}
+The calculation of the exchangeable shock-size-arrival intensities using this
+formula is usually not numerically stable. Consequently, the various
+alternative approaches are used dependent on the class of the Bernstein
+function.
+}
+\examples{
+bf <- AlphaStableBernsteinFunction(alpha = 0.4)
+exIntensities(bf, 3)
+}
 \seealso{
+\code{\link[=rexmo]{rexmo()}}
+
 Other Bernstein function generics: 
 \code{\link{exQMatrix}()},
 \code{\link{intensities}()},

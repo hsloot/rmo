@@ -31,6 +31,13 @@ coefficient, i.e.,
   {(-1)}^{j-1} \Delta^{j}{ \psi(c x) } ,
     \quad x > 0 .
 }
+The evaluation of Bernstein functions using this formula is usually not
+numerically stable. Consequently, the various alternative approaches are used
+dependent on the class of the Bernstein function.
+}
+\examples{
+bf <- AlphaStableBernsteinFunction(alpha = 0.7)
+valueOf(bf, 1:5)
 }
 \seealso{
 Other Bernstein function generics: 

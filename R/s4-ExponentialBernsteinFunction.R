@@ -34,9 +34,14 @@
 #' @references
 #'   \insertAllCited{}
 #'
-#' @seealso [BernsteinFunction-class], [LevyBernsteinFunction-class],
-#'   [CompleteBernsteinFunction-class], [valueOf()]
+#' @seealso [levyDensity()], [stieltjesDensity()], [valueOf()],
+#'   [intensities()], [uexIntensities()], [exIntensities()], [exQMatrix()],
+#'   [rextmo()], [rpextmo()]
 #'
+#' @docType class
+#' @name ExponentialBernsteinFunction-class
+#' @rdname ExponentialBernsteinFunction-class
+#' @aliases ExponentialBernsteinFunction
 #' @include s4-BernsteinFunction.R s4-CompleteBernsteinFunction.R
 #' @family Bernstein function classes
 #' @family Levy Bernstein function classes
@@ -44,8 +49,51 @@
 #' @family Algebraic Bernstein function classes
 #' @export ExponentialBernsteinFunction
 #' @examples
+#' # Create an object of class ExponentialBernsteinFunction
 #' ExponentialBernsteinFunction()
 #' ExponentialBernsteinFunction(lambda = 0.5)
+#'
+#' # Create a Lévy density
+#' bf <- ExponentialBernsteinFunction(lambda = 0.7)
+#' levy_density <- levyDensity(bf)
+#' integrate(
+#'   function(x) pmin(1, x) * levy_density(x),
+#'   lower = attr(levy_density, "lower"),
+#'   upper = attr(levy_density, "upper")
+#' )
+#'
+#' # Create a Stieltjes density
+#' bf <- ExponentialBernsteinFunction(lambda = 0.5)
+#' stieltjes_density <- stieltjesDensity(bf)
+#' sum(stieltjes_density$y * 1/(1 + stieltjes_density$x))
+#'
+#' # Evaluate the Bernstein function
+#' bf <- ExponentialBernsteinFunction(lambda = 0.3)
+#' valueOf(bf, 1:5)
+#'
+#' # Calculate shock-arrival intensities
+#' bf <- ExponentialBernsteinFunction(lambda = 0.8)
+#' intensities(bf, 3)
+#' intensities(bf, 3, method = "levy")
+#' intensities(bf, 3, tolerance = 1e-4)
+#'
+#' # Calculate exchangeable shock-arrival intensities
+#' bf <- ExponentialBernsteinFunction(lambda = 0.4)
+#' uexIntensities(bf, 3)
+#' uexIntensities(bf, 3, method = "levy")
+#' uexIntensities(bf, 3, tolerance = 1e-4)
+#'
+#' # Calculate exchangeable shock-size arrival intensities
+#' bf <- ExponentialBernsteinFunction(lambda = 0.2)
+#' exIntensities(bf, 3)
+#' exIntensities(bf, 3, method = "levy")
+#' exIntensities(bf, 3, tolerance = 1e-4)
+#'
+#' # Calculate the Markov generator
+#' bf <- ExponentialBernsteinFunction(lambda = 0.6)
+#' exQMatrix(bf, 3)
+#' exQMatrix(bf, 3, method = "levy")
+#' exQMatrix(bf, 3, tolerance = 1e-4)
 ExponentialBernsteinFunction <- setClass("ExponentialBernsteinFunction", # nolint
   contains = "CompleteBernsteinFunction",
   slots = c("lambda" = "numeric")
@@ -119,7 +167,7 @@ setMethod(
 
 #' @rdname hidden_aliases
 #'
-#' @inheritParams levyDensity
+#' @inheritParams stieljtesDensity
 #'
 #' @include s4-stieltjesDensity.R
 #' @export
@@ -141,6 +189,8 @@ setMethod(
   }
 )
 
+#' @include s4-valueOf0.R
+#' @importFrom checkmate assert qassert check_numeric check_complex
 #' @keywords internal
 setMethod(
   "valueOf0", "ExponentialBernsteinFunction",

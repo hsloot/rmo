@@ -12,10 +12,44 @@ exists a Stieltjes measure \eqn{\sigma} such that
   \psi(x) = \int_0^\infty \frac{x}{x + u} \sigma(du) , x > 0 .
 }
 }
+\details{
+\subsection{Evaluation of Complete Bernstein functions}{
+
+For \emph{continuous Stieltjes densities}, the values of the Bernstein function
+are calculated with \code{\link[stats:integrate]{stats::integrate()}} by using the representation
+\deqn{
+  \psi(x)
+    = \int_{0}^{\infty} x \mathrm{Beta}(1, x + u) \sigma(du), \quad x > 0 ,
+}
+and the values of the iterated differences are calculated by using the
+representation
+\deqn{
+  (-1)^{j-1} \Delta^{j} \psi(x)
+    = \int_{0}^{\infty} u \mathrm{Beta}(j+1, x + u) \sigma(du) ,
+    \quad x > 0 .
+}
+
+For \emph{discrete Lévy densities}
+\eqn{\sigma(du) = \sum_{i} y_i \delta_{u_i}(du)},
+the values of the Bernstein function are calculated by using the
+representation
+\deqn{
+  \psi(x)
+    = \sum_{i} x \mathrm{Beta}(1, x + u_i) y_i, \quad x > 0 ,
+}
+and the values of the iterated differences are calculated by using the
+representation
+\deqn{
+  (-1)^{j-1} \Delta^{j} \psi(x)
+    = \sum_{i} u_i \mathrm{Beta}(j+1, x + u_i) y_i ,
+    \quad x > 0 .
+}
+}
+}
 \seealso{
-\linkS4class{LevyBernsteinFunction},
-\linkS4class{BernsteinFunction}
-\code{\link[=valueOf]{valueOf()}}
+\code{\link[=levyDensity]{levyDensity()}}, \code{\link[=stieltjesDensity]{stieltjesDensity()}}, \code{\link[=valueOf]{valueOf()}},
+\code{\link[=intensities]{intensities()}}, \code{\link[=uexIntensities]{uexIntensities()}}, \code{\link[=exIntensities]{exIntensities()}}, \code{\link[=exQMatrix]{exQMatrix()}},
+\code{\link[=rextmo]{rextmo()}}, \code{\link[=rpextmo]{rpextmo()}}
 
 Other Bernstein function classes: 
 \code{\link{AlphaStableBernsteinFunction-class}},

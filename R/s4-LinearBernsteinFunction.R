@@ -10,16 +10,41 @@
 #'  \psi(x) = b x, x > 0.
 #' }
 #'
-#' @seealso [BernsteinFunction-class],
-#'   [valueOf()]
+#' @seealso [valueOf()], [intensities()], [uexIntensities()], [exIntensities()],
+#'   [exQMatrix()], [rextmo()], [rpextmo()]
 #'
+#' @docType class
+#' @name LinearBernsteinFunction-class
+#' @rdname LinearBernsteinFunction-class
+#' @aliases LinearBernsteinFunction
 #' @include s4-BernsteinFunction.R
 #' @family Bernstein function classes
 #' @family Bernstein function boundary classes
 #' @export LinearBernsteinFunction
 #' @examples
+#' # Create an object of class LinearBernsteinFunction
 #' LinearBernsteinFunction()
-#' LinearBernsteinFunction(scale = 2)
+#' LinearBernsteinFunction(scale = 0.2)
+#'
+#' # Evaluate the Bernstein function
+#' bf <- LinearBernsteinFunction(scale = 0.3)
+#' valueOf(bf, 1:5)
+#'
+#' # Calculate shock-arrival intensities
+#' bf <- LinearBernsteinFunction(scale = 0.8)
+#' intensities(bf, 3)
+#'
+#' # Calculate exchangeable shock-arrival intensities
+#' bf <- LinearBernsteinFunction(scale = 0.4)
+#' uexIntensities(bf, 3)
+#'
+#' # Calculate exchangeable shock-size arrival intensities
+#' bf <- LinearBernsteinFunction(scale = 0.2)
+#' exIntensities(bf, 3)
+#'
+#' # Calculate the Markov generator
+#' bf <- LinearBernsteinFunction(scale = 0.6)
+#' exQMatrix(bf, 3)
 LinearBernsteinFunction <- setClass("LinearBernsteinFunction", # nolint
   contains = "BernsteinFunction",
   slots = c(scale = "numeric")

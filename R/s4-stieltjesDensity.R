@@ -6,6 +6,7 @@
 #' is either `"continuous"` or `"discrete"`.
 #'
 #' @inheritParams levyDensity
+#'
 #' @importFrom methods setGeneric
 #' @family Bernstein function generics
 #' @export
