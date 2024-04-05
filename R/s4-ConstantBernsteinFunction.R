@@ -1,7 +1,3 @@
-#' @include error.R
-#' @include s4-BernsteinFunction.R
-NULL
-
 #' Class for (almost) constant Bernstein functions
 #'
 #' @slot constant The nonnegative *killing* parameter (i.e. \eqn{a}
@@ -15,25 +11,50 @@ NULL
 #'   \psi(x) = a , x > 0
 #' }
 #'
-#' @seealso [BernsteinFunction-class],
-#'   [valueOf()]
+#' @seealso [valueOf()], [intensities()], [uexIntensities()], [exIntensities()],
+#'   [exQMatrix()], [rextmo()], [rpextmo()]
 #'
+#' @docType class
+#' @name ConstantBernsteinFunction-class
+#' @rdname ConstantBernsteinFunction-class
+#' @aliases ConstantBernsteinFunction
+#' @include s4-BernsteinFunction.R
+#' @family Bernstein function classes
+#' @family Bernstein function boundary classes
 #' @export ConstantBernsteinFunction
+#' @examples
+#' # Create an object of class ConstantBernsteinFunction
+#' ConstantBernsteinFunction()
+#' ConstantBernsteinFunction(constant = 0.2)
+#'
+#' # Evaluate the Bernstein function
+#' bf <- ConstantBernsteinFunction(constant = 0.3)
+#' valueOf(bf, 1:5)
+#'
+#' # Calculate shock-arrival intensities
+#' bf <- ConstantBernsteinFunction(constant = 0.8)
+#' intensities(bf, 3)
+#'
+#' # Calculate exchangeable shock-arrival intensities
+#' bf <- ConstantBernsteinFunction(constant = 0.4)
+#' uexIntensities(bf, 3)
+#'
+#' # Calculate exchangeable shock-size arrival intensities
+#' bf <- ConstantBernsteinFunction(constant = 0.2)
+#' exIntensities(bf, 3)
+#'
+#' # Calculate the Markov generator
+#' bf <- ConstantBernsteinFunction(constant = 0.6)
+#' exQMatrix(bf, 3)
 ConstantBernsteinFunction <- setClass("ConstantBernsteinFunction", # nolint
   contains = "BernsteinFunction",
   slots = c(constant = "numeric")
 )
 
-#' @describeIn ConstantBernsteinFunction-class Constructor
-#' @aliases initialize,ConstantBernsteinFunction-method
-#' @aliases initialize,ConstantBernsteinFunction,ANY-method
+#'@rdname hidden_aliases
 #'
 #' @inheritParams methods::initialize
 #' @param constant Nonnegative number.
-#'
-#' @examples
-#' ConstantBernsteinFunction()
-#' ConstantBernsteinFunction(constant = 0.2)
 setMethod(
   "initialize", "ConstantBernsteinFunction",
   function(.Object, constant) { # nolint
@@ -46,6 +67,7 @@ setMethod(
   }
 )
 
+#' @include error.R
 #' @importFrom checkmate qtest
 setValidity(
   "ConstantBernsteinFunction",
@@ -58,8 +80,9 @@ setValidity(
   }
 )
 
-#' @describeIn ConstantBernsteinFunction-class Display the object.
-#' @aliases show,ConstantBernsteinFunction-method
+#' @rdname hidden_aliases
+#'
+#' @inheritParams methods::show
 #'
 #' @export
 setMethod( # nocov start
@@ -76,13 +99,11 @@ setMethod( # nocov start
   }
 ) # nocov end
 
-#' @describeIn ConstantBernsteinFunction-class
-#'   Calculates the iterated differences of the Bernstein function,
-#'   see [valueOf()]
-#' @aliases valueOf,ConstantBernsteinFunction,ANY-method
+#' @rdname hidden_aliases
 #'
 #' @inheritParams valueOf
 #'
+#' @include s4-valueOf.R RcppExports.R
 #' @importFrom checkmate qassert assert check_numeric check_complex
 #' @export
 setMethod(

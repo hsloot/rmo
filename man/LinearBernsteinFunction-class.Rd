@@ -4,41 +4,7 @@
 \name{LinearBernsteinFunction-class}
 \alias{LinearBernsteinFunction-class}
 \alias{LinearBernsteinFunction}
-\alias{initialize,LinearBernsteinFunction-method}
-\alias{initialize,LinearBernsteinFunction,ANY-method}
-\alias{show,LinearBernsteinFunction-method}
-\alias{valueOf,LinearBernsteinFunction-method}
-\alias{valueOf,LinearBernsteinFunction,ANY-method}
 \title{Class for linear Bernstein functions}
-\usage{
-\S4method{initialize}{LinearBernsteinFunction}(.Object, scale)
-
-\S4method{show}{LinearBernsteinFunction}(object)
-
-\S4method{valueOf}{LinearBernsteinFunction}(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...)
-}
-\arguments{
-\item{.Object}{ An object:  see the \dQuote{Initialize Methods} section.}
-
-\item{scale}{Nonnegative number.}
-
-\item{object}{An object deriving from \linkS4class{LevyBernsteinFunction}
-(for \code{levyDensity}) or \linkS4class{CompleteBernsteinFunction}
-(for \code{stieltjesDensity}).}
-
-\item{x}{a nonnegativ numeric vector at which the iterated difference of
-the Bernstein function is evaluated.}
-
-\item{difference_order}{a nonnegative integer with the order of the
-alternating iterated forward differences taken on the Bernstein function.}
-
-\item{n, k}{nonnegative numbers for the binomial factor.}
-
-\item{cscale}{a positive numeric scalar with the composite scaling factor.}
-
-\item{...}{arguments to specify properties of the new object, to
-      be passed to \code{initialize()}.}
-}
 \description{
 \emph{A linear Bernstein function} is a Bernstein function with only a drift,
 i.e. \eqn{a = 0} and \eqn{\nu = 0}. In particular,
@@ -46,16 +12,6 @@ i.e. \eqn{a = 0} and \eqn{\nu = 0}. In particular,
  \psi(x) = b x, x > 0.
 }
 }
-\section{Functions}{
-\itemize{
-\item \code{initialize(LinearBernsteinFunction)}: Constructor
-
-\item \code{show(LinearBernsteinFunction)}: Display the object.
-
-\item \code{valueOf(LinearBernsteinFunction)}: Calculates the iterated differences of the Bernstein function,
-see \code{\link[=valueOf]{valueOf()}}
-
-}}
 \section{Slots}{
 
 \describe{
@@ -64,10 +20,53 @@ see \code{\link[=valueOf]{valueOf()}}
 }}
 
 \examples{
+# Create an object of class LinearBernsteinFunction
 LinearBernsteinFunction()
-LinearBernsteinFunction(scale = 2)
+LinearBernsteinFunction(scale = 0.2)
+
+# Evaluate the Bernstein function
+bf <- LinearBernsteinFunction(scale = 0.3)
+valueOf(bf, 1:5)
+
+# Calculate shock-arrival intensities
+bf <- LinearBernsteinFunction(scale = 0.8)
+intensities(bf, 3)
+
+# Calculate exchangeable shock-arrival intensities
+bf <- LinearBernsteinFunction(scale = 0.4)
+uexIntensities(bf, 3)
+
+# Calculate exchangeable shock-size arrival intensities
+bf <- LinearBernsteinFunction(scale = 0.2)
+exIntensities(bf, 3)
+
+# Calculate the Markov generator
+bf <- LinearBernsteinFunction(scale = 0.6)
+exQMatrix(bf, 3)
 }
 \seealso{
-\linkS4class{BernsteinFunction},
-\code{\link[=valueOf]{valueOf()}}
+\code{\link[=valueOf]{valueOf()}}, \code{\link[=intensities]{intensities()}}, \code{\link[=uexIntensities]{uexIntensities()}}, \code{\link[=exIntensities]{exIntensities()}},
+\code{\link[=exQMatrix]{exQMatrix()}}, \code{\link[=rextmo]{rextmo()}}, \code{\link[=rpextmo]{rpextmo()}}
+
+Other Bernstein function classes: 
+\code{\link{AlphaStableBernsteinFunction-class}},
+\code{\link{BernsteinFunction-class}},
+\code{\link{CompleteBernsteinFunction-class}},
+\code{\link{CompositeScaledBernsteinFunction-class}},
+\code{\link{ConstantBernsteinFunction-class}},
+\code{\link{ConvexCombinationOfBernsteinFunctions-class}},
+\code{\link{ExponentialBernsteinFunction-class}},
+\code{\link{GammaBernsteinFunction-class}},
+\code{\link{InverseGaussianBernsteinFunction-class}},
+\code{\link{LevyBernsteinFunction-class}},
+\code{\link{ParetoBernsteinFunction-class}},
+\code{\link{PoissonBernsteinFunction-class}},
+\code{\link{ScaledBernsteinFunction-class}},
+\code{\link{SumOfBernsteinFunctions-class}}
+
+Other Bernstein function boundary classes: 
+\code{\link{ConstantBernsteinFunction-class}},
+\code{\link{PoissonBernsteinFunction-class}}
 }
+\concept{Bernstein function boundary classes}
+\concept{Bernstein function classes}

@@ -4,29 +4,7 @@
 \name{ParetoBernsteinFunction-class}
 \alias{ParetoBernsteinFunction-class}
 \alias{ParetoBernsteinFunction}
-\alias{initialize,ParetoBernsteinFunction-method}
-\alias{initialize,ParetoBernsteinFunction,ANY-method}
-\alias{show,ParetoBernsteinFunction-method}
-\alias{levyDensity,ParetoBernsteinFunction-method}
 \title{Class for Pareto Bernstein functions}
-\usage{
-\S4method{initialize}{ParetoBernsteinFunction}(.Object, alpha, x0)
-
-\S4method{show}{ParetoBernsteinFunction}(object)
-
-\S4method{levyDensity}{ParetoBernsteinFunction}(object)
-}
-\arguments{
-\item{.Object}{ An object:  see the \dQuote{Initialize Methods} section.}
-
-\item{alpha}{Positive number between zero and one (bounds excl.).}
-
-\item{x0}{Positive number.}
-
-\item{object}{An object deriving from \linkS4class{LevyBernsteinFunction}
-(for \code{levyDensity}) or \linkS4class{CompleteBernsteinFunction}
-(for \code{stieltjesDensity}).}
-}
 \description{
 For the Pareto-jump compound Poisson process with index \eqn{0 < \alpha < 1}
 and cutoff point \eqn{x0}, the corresponding Bernstein function is
@@ -53,16 +31,14 @@ The Pareto Bernstein function, in combination with a linear Bernstein
 function can be used to approximate the Bernstein function of an
 \eqn{\alpha}-stable subordinator, see Sec. 5.3 of
 \insertCite{Fernandez2015a}{rmo}.
+\subsection{Lévy density}{
+
+\deqn{
+  \nu(du)
+    = \alpha \frac{x_0^\alpha}{u^{\alpha + 1}}, \quad u > x_0 .
 }
-\section{Functions}{
-\itemize{
-\item \code{initialize(ParetoBernsteinFunction)}: Constructor
-
-\item \code{show(ParetoBernsteinFunction)}: Display the object.
-
-\item \code{levyDensity(ParetoBernsteinFunction)}: see \linkS4class{LevyBernsteinFunction}
-
-}}
+}
+}
 \section{Slots}{
 
 \describe{
@@ -71,22 +47,81 @@ function can be used to approximate the Bernstein function of an
 \item{\code{x0}}{The cutoff point \eqn{x_0}}
 }}
 
-\section{Lévy density}{
-
-\deqn{
-  \nu(du)
-    = \alpha \frac{x_0^\alpha}{u^{\alpha + 1}}, \quad u > x_0 .
-}
-}
-
 \examples{
+# Create an object of class ParetoBernsteinFunction
 ParetoBernsteinFunction()
-ParetoBernsteinFunction(alpha = 0.2, x0 = 1)
+ParetoBernsteinFunction(alpha = 0.2, x0 = 1e-2)
+
+# Create a Lévy density
+bf <- ParetoBernsteinFunction(alpha = 0.7, x0 = 1e-2)
+levy_density <- levyDensity(bf)
+integrate(
+  function(x) pmin(1, x) * levy_density(x),
+  lower = attr(levy_density, "lower"),
+  upper = attr(levy_density, "upper")
+)
+
+# Evaluate the Bernstein function
+bf <- ParetoBernsteinFunction(alpha = 0.3, x0 = 1)
+valueOf(bf, 1:5)
+
+# Calculate shock-arrival intensities
+bf <- ParetoBernsteinFunction(alpha = 0.8, x0 = 1e-2)
+intensities(bf, 3)
+intensities(bf, 3, tolerance = 1e-4)
+
+# Calculate exchangeable shock-arrival intensities
+bf <- ParetoBernsteinFunction(alpha = 0.4, x0 = 1e-2)
+uexIntensities(bf, 3)
+uexIntensities(bf, 3, tolerance = 1e-4)
+
+# Calculate exchangeable shock-size arrival intensities
+bf <- ParetoBernsteinFunction(alpha = 0.2, x0 = 1e-2)
+exIntensities(bf, 3)
+exIntensities(bf, 3, tolerance = 1e-4)
+
+# Calculate the Markov generator
+bf <- ParetoBernsteinFunction(alpha = 0.6, x0 = 1e-2)
+exQMatrix(bf, 3)
+exQMatrix(bf, 3, tolerance = 1e-4)
 }
 \references{
 \insertAllCited{}
 }
 \seealso{
-\linkS4class{BernsteinFunction}, \linkS4class{LevyBernsteinFunction},
-\code{\link[=valueOf]{valueOf()}}
+\code{\link[=levyDensity]{levyDensity()}},  \code{\link[=valueOf]{valueOf()}}, \code{\link[=intensities]{intensities()}}, \code{\link[=uexIntensities]{uexIntensities()}},
+\code{\link[=exIntensities]{exIntensities()}}, \code{\link[=exQMatrix]{exQMatrix()}}, \code{\link[=rextmo]{rextmo()}}, \code{\link[=rpextmo]{rpextmo()}}
+
+Other Bernstein function classes: 
+\code{\link{AlphaStableBernsteinFunction-class}},
+\code{\link{BernsteinFunction-class}},
+\code{\link{CompleteBernsteinFunction-class}},
+\code{\link{CompositeScaledBernsteinFunction-class}},
+\code{\link{ConstantBernsteinFunction-class}},
+\code{\link{ConvexCombinationOfBernsteinFunctions-class}},
+\code{\link{ExponentialBernsteinFunction-class}},
+\code{\link{GammaBernsteinFunction-class}},
+\code{\link{InverseGaussianBernsteinFunction-class}},
+\code{\link{LevyBernsteinFunction-class}},
+\code{\link{LinearBernsteinFunction-class}},
+\code{\link{PoissonBernsteinFunction-class}},
+\code{\link{ScaledBernsteinFunction-class}},
+\code{\link{SumOfBernsteinFunctions-class}}
+
+Other Levy Bernstein function classes: 
+\code{\link{AlphaStableBernsteinFunction-class}},
+\code{\link{CompleteBernsteinFunction-class}},
+\code{\link{ExponentialBernsteinFunction-class}},
+\code{\link{GammaBernsteinFunction-class}},
+\code{\link{InverseGaussianBernsteinFunction-class}},
+\code{\link{LevyBernsteinFunction-class}},
+\code{\link{PoissonBernsteinFunction-class}}
+
+Other Algebraic Bernstein function classes: 
+\code{\link{AlphaStableBernsteinFunction-class}},
+\code{\link{ExponentialBernsteinFunction-class}},
+\code{\link{InverseGaussianBernsteinFunction-class}}
 }
+\concept{Algebraic Bernstein function classes}
+\concept{Bernstein function classes}
+\concept{Levy Bernstein function classes}

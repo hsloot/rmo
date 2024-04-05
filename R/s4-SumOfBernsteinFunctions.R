@@ -1,6 +1,3 @@
-#' @include s4-BernsteinFunction.R
-NULL
-
 #' Class for sums of two Bernstein functions
 #'
 #' Bernstein functions are stable under addition, i.e. if \eqn{\psi_1} and
@@ -13,28 +10,33 @@ NULL
 #' @slot first The first summand (derived from [BernsteinFunction-class]).
 #' @slot second The second summand (derived from [BernsteinFunction-class]).
 #'
-#' @seealso [BernsteinFunction-class],
-#'   [valueOf()]
+#' @seealso [valueOf()], [intensities()], [uexIntensities()], [exIntensities()],
+#'   [exQMatrix()], [rextmo()], [rpextmo()]
 #'
+#' @docType class
+#' @name SumOfBernsteinFunctions-class
+#' @rdname SumOfBernsteinFunctions-class
+#' @include s4-BernsteinFunction.R
+#' @family Bernstein function classes
+#' @family Bernstein function transformer classes
 #' @export SumOfBernsteinFunctions
+#' @examples
+#' # Create an object of class SumOfBernsteinFunctions
+#' SumOfBernsteinFunctions()
+#' SumOfBernsteinFunctions(
+#'   first = LinearBernsteinFunction(scale = 0.2),
+#'   second = AlphaStableBernsteinFunction(alpha = 0.5)
+#' )
 SumOfBernsteinFunctions <- setClass("SumOfBernsteinFunctions", # nolint
   contains = "BernsteinFunction",
   slots = c(first = "BernsteinFunction", second = "BernsteinFunction")
 )
 
-#' @describeIn SumOfBernsteinFunctions-class Constructor
-#' @aliases initialize,SumOfBernsteinFunctions-method
-#' @aliases initialize,SumOfBernsteinFunctions,ANY-method
+#' @rdname hidden_aliases
 #'
 #' @inheritParams methods::initialize
 #' @param first Derives from [BernsteinFunction-class].
 #' @param second Derives from [BernsteinFunction-class].
-#'
-#' @examples
-#' SumOfBernsteinFunctions()
-#' first_bf <- LinearBernsteinFunction(scale = 0.2)
-#' second_bf <- AlphaStableBernsteinFunction(alpha = 0.5)
-#' SumOfBernsteinFunctions(first = first_bf, second = second_bf)
 setMethod(
   "initialize", "SumOfBernsteinFunctions",
   function(.Object, first, second) { # nolint
@@ -48,11 +50,11 @@ setMethod(
   }
 )
 
-#' @describeIn SumOfBernsteinFunctions-class Display the object.
-#' @aliases show,SumOfBernsteinFunctions-method
+#' @rdname hidden_aliases
+#'
+#' @inheritParams methods::show
 #'
 #' @importFrom utils capture.output
-#'
 #' @export
 setMethod( # nocov start
   "show", "SumOfBernsteinFunctions",
@@ -75,13 +77,11 @@ setMethod( # nocov start
   }
 ) # nocov end
 
-#' @describeIn SumOfBernsteinFunctions-class
-#'   Calculates the iterated differences of the Bernstein function,
-#'   see [valueOf()]
-#' @aliases valueOf,SumOfBernsteinFunctions,ANY-method
+#' @rdname hidden_aliases
 #'
 #' @inheritParams valueOf
 #'
+#' @include s4-valueOf.R
 #' @export
 setMethod(
   "valueOf", "SumOfBernsteinFunctions",

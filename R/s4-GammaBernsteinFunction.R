@@ -1,9 +1,3 @@
-#' @include error.R
-#' @include s4-BernsteinFunction.R
-#' @include s4-LevyBernsteinFunction.R
-#' @include s4-CompleteBernsteinFunction.R
-NULL
-
 #' Class for Gamma Bernstein functions
 #'
 #' @slot a Scale parameter for the Lévy measure.
@@ -31,28 +25,94 @@ NULL
 #' This Bernstein function is no. 26 in the list of complete Bernstein functions
 #' in Chp. 16 of \insertCite{Schilling2012a}{rmo}.
 #'
+#' ### Lévy density
+#' \deqn{
+#'   \nu(du)
+#'     = \frac{\operatorname{e}^{-a u}}{u}, \quad u > 0 .
+#' }
+#'
+#' ### Stieltjes density
+#' \deqn{
+#'   \sigma(du)
+#'     = 1 / u du, u > a .
+#' }
+#'
 #' @references
 #'   \insertAllCited{}
 #'
-#' @seealso [BernsteinFunction-class], [LevyBernsteinFunction-class],
-#'   [CompleteBernsteinFunction-class], [valueOf()]
+#' @seealso [levyDensity()], [stieltjesDensity()], [valueOf()],
+#'   [intensities()], [uexIntensities()], [exIntensities()], [exQMatrix()],
+#'   [rextmo()], [rpextmo()]
 #'
+#' @docType class
+#' @name GammaBernsteinFunction-class
+#' @rdname GammaBernsteinFunction-class
+#' @aliases GammaBernsteinFunction
+#' @include s4-BernsteinFunction.R s4-CompleteBernsteinFunction.R
+#' @family Bernstein function classes
+#' @family Levy Bernstein function classes
+#' @family Complete Bernstein function classes
+#' @family Logarithmic Bernstein function classes
 #' @export GammaBernsteinFunction
+#' @examples
+#' # Create an object of class GammaBernsteinFunction
+#' GammaBernsteinFunction()
+#' GammaBernsteinFunction(a = 2)
+#'
+#' # Create a Lévy density
+#' bf <- GammaBernsteinFunction(a = 0.7)
+#' levy_density <- levyDensity(bf)
+#' integrate(
+#'   function(x) pmin(1, x) * levy_density(x),
+#'   lower = attr(levy_density, "lower"),
+#'   upper = attr(levy_density, "upper")
+#' )
+#'
+#' # Create a Stieltjes density
+#' bf <- GammaBernsteinFunction(a = 0.5)
+#' stieltjes_density <- stieltjesDensity(bf)
+#' integrate(
+#'   function(x) 1/(1 + x) * stieltjes_density(x),
+#'   lower = attr(stieltjes_density, "lower"),
+#'   upper = attr(stieltjes_density, "upper")
+#' )
+#'
+#' # Evaluate the Bernstein function
+#' bf <- GammaBernsteinFunction(a = 0.3)
+#' valueOf(bf, 1:5)
+#'
+#' # Calculate shock-arrival intensities
+#' bf <- GammaBernsteinFunction(a = 0.8)
+#' intensities(bf, 3)
+#' intensities(bf, 3, method = "stieltjes")
+#' intensities(bf, 3, tolerance = 1e-4)
+#'
+#' # Calculate exchangeable shock-arrival intensities
+#' bf <- GammaBernsteinFunction(a = 0.4)
+#' uexIntensities(bf, 3)
+#' uexIntensities(bf, 3, method = "stieltjes")
+#' uexIntensities(bf, 3, tolerance = 1e-4)
+#'
+#' # Calculate exchangeable shock-size arrival intensities
+#' bf <- GammaBernsteinFunction(a = 0.2)
+#' exIntensities(bf, 3)
+#' exIntensities(bf, 3, method = "stieltjes")
+#' exIntensities(bf, 3, tolerance = 1e-4)
+#'
+#' # Calculate the Markov generator
+#' bf <- GammaBernsteinFunction(a = 0.6)
+#' exQMatrix(bf, 3)
+#' exQMatrix(bf, 3, method = "stieltjes")
+#' exQMatrix(bf, 3, tolerance = 1e-4)
 GammaBernsteinFunction <- setClass("GammaBernsteinFunction", # nolint
   contains = "CompleteBernsteinFunction",
   slots = c(a = "numeric")
 )
 
-#' @describeIn GammaBernsteinFunction-class Constructor
-#' @aliases initialize,GammaBernsteinFunction-method
-#' @aliases initialize,GammaBernsteinFunction,ANY-method
+#' @rdname hidden_aliases
 #'
 #' @inheritParams methods::initialize
 #' @param a Positive number.
-#'
-#' @examples
-#' GammaBernsteinFunction()
-#' GammaBernsteinFunction(a = 2)
 setMethod(
   "initialize", "GammaBernsteinFunction",
   function(.Object, a) { # nolint
@@ -65,6 +125,7 @@ setMethod(
   }
 )
 
+#' @include error.R
 #' @importFrom checkmate qtest
 setValidity(
   "GammaBernsteinFunction",
@@ -77,8 +138,9 @@ setValidity(
   }
 )
 
-#' @describeIn GammaBernsteinFunction-class Display the object.
-#' @aliases show,GammaBernsteinFunction-method
+#' @rdname hidden_aliases
+#'
+#' @inheritParams methods::show
 #'
 #' @export
 setMethod( # nocov start
@@ -95,18 +157,11 @@ setMethod( # nocov start
   }
 ) # nocov end
 
-#' @describeIn GammaBernsteinFunction-class
-#'   see [LevyBernsteinFunction-class]
-#' @aliases levyDensity,GammaBernsteinFunction-method
+#' @rdname hidden_aliases
 #'
 #' @inheritParams levyDensity
 #'
-#' @section Lévy density:
-#' \deqn{
-#'   \nu(du)
-#'     = \frac{\operatorname{e}^{-a u}}{u}, \quad u > 0 .
-#' }
-#'
+#' @include s4-levyDensity.R
 #' @export
 setMethod(
   "levyDensity", "GammaBernsteinFunction",
@@ -120,18 +175,12 @@ setMethod(
   }
 )
 
-#' @describeIn GammaBernsteinFunction-class
-#'   see [CompleteBernsteinFunction-class]
-#' @aliases stieltjesDensity,GammaBernsteinFunction-method
+#' @rdname hidden_aliases
 #'
-#' @inheritParams levyDensity
+#' @inheritParams stieljtesDensity
 #'
-#' @section Stieltjes density:
-#' \deqn{
-#'   \sigma(du)
-#'     = 1 / u du, u > a .
-#' }
-#'
+#' @include s4-stieltjesDensity.R
+#' @export
 setMethod(
   "stieltjesDensity", "GammaBernsteinFunction",
   function(object) {
@@ -144,6 +193,8 @@ setMethod(
   }
 )
 
+#' @include s4-valueOf0.R
+#' @importFrom checkmate assert qassert check_numeric check_complex
 #' @keywords internal
 setMethod(
   "valueOf0", "GammaBernsteinFunction",

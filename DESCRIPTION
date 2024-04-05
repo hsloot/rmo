@@ -1,6 +1,6 @@
 Package: rmo
 Title: A package for the Marshall-Olkin distribution
-Version: 0.8.5
+Version: 0.8.6
 Authors@R:
   person(given = "Henrik",
     family = "Sloot",
@@ -37,6 +37,15 @@ Collate:
     'catch-routine-registration.R'
     'error.R'
     'rmo-package.R'
+    's4-valueOf0.R'
+    's4-stieltjesDensity.R'
+    's4-levyDensity.R'
+    's4-valueOf.R'
+    's4-defaultMethod.R'
+    's4-exQMatrix.R'
+    's4-intensities.R'
+    's4-exIntensities.R'
+    's4-uexIntensities.R'
     's4-BernsteinFunction.R'
     's4-LevyBernsteinFunction.R'
     's4-CompleteBernsteinFunction.R'

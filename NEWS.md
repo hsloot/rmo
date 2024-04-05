@@ -1,4 +1,6 @@
-# rmo 0.8.3
+# rmo 0.9
+
+- Re-organize S4 code and documentation (#117)
 
 - Remove outdated rmarkdown notebooks from development phase (#115)
 
@@ -8,15 +10,12 @@
 - Add `ConvexCombinationOfBernsteinFunctions` to represent convex combinations
   of Bernstein functions compactly
 
-# rmo 0.8.2
+- Small changes of the documentation
 
-- bump version
-
-# rmo 0.8.1
-
-- Small changes in the documentation
 - Improvement of `exIntensities`
+
 - Allow `n = 0` in sampling algorithms (e.g. for measure setup time)
+
 - Consistent use of STL headers and attribute [[maybe_unused]] in C++ code
 
 # rmo 0.8

@@ -1,4 +1,5 @@
 ^_pkgdown\.yml$
+^\.vscode$
 ^\.clang_complete$
 ^\.clang.format$
 ^\.editorconfig$

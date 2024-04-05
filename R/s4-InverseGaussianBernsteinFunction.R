@@ -1,9 +1,3 @@
-#' @include error.R
-#' @include s4-BernsteinFunction.R
-#' @include s4-LevyBernsteinFunction.R
-#' @include s4-CompleteBernsteinFunction.R
-NULL
-
 #' Class for Inverse Gaussian Bernstein function
 #'
 #' @slot eta The distribution parameter (drift of the
@@ -31,28 +25,104 @@ NULL
 #' Furthermore it is  a transformation of no. 2 in the list of complete
 #' Bernstein functions in Chp. 16 of \insertCite{Schilling2012a}{rmo}.
 #'
+#' ### Lévy density
+#' \deqn{
+#'   \nu(du)
+#'     = \frac{1}{\sqrt{2 \pi u^3}} \operatorname{e}^{-\frac{1}{2} \eta^2 u} ,
+#'     \quad u > 0 .
+#' }
+#'
+#' ### Stieltjes density
+#' \deqn{
+#'   \sigma(du)
+#'     = \frac{
+#'         \sin(\pi / 2)
+#'       }{
+#'         \pi
+#'       } \cdot \frac{
+#'         \sqrt{2 x - \eta^2}
+#'       }{
+#'         x
+#'       } ,
+#'       \quad u > \eta^2 / 2 .
+#' }
+#'
 #' @references
 #'  \insertAllCited{}
 #'
-#' @seealso [BernsteinFunction-class], [LevyBernsteinFunction-class],
-#'   [valueOf()]
+#' @seealso [levyDensity()], [stieltjesDensity()], [valueOf()],
+#'   [intensities()], [uexIntensities()], [exIntensities()], [exQMatrix()],
+#'   [rextmo()], [rpextmo()]
 #'
+#' @docType class
+#' @name InverseGaussianBernsteinFunction-class
+#' @rdname InverseGaussianBernsteinFunction-class
+#' @aliases InverseGaussianBernsteinFunction
+#' @include s4-BernsteinFunction.R s4-CompleteBernsteinFunction.R
+#' @family Bernstein function classes
+#' @family Levy Bernstein function classes
+#' @family Complete Bernstein function classes
+#' @family Algebraic Bernstein function classes
 #' @export InverseGaussianBernsteinFunction
+#' @examples
+#' # Create an object of class InverseGaussianBernsteinFunction
+#' InverseGaussianBernsteinFunction()
+#' InverseGaussianBernsteinFunction(eta = 0.3)
+#'
+#' # Create a Lévy density
+#' bf <- InverseGaussianBernsteinFunction(eta = 0.7)
+#' levy_density <- levyDensity(bf)
+#' integrate(
+#'   function(x) pmin(1, x) * levy_density(x),
+#'   lower = attr(levy_density, "lower"),
+#'   upper = attr(levy_density, "upper")
+#' )
+#'
+#' # Create a Stieltjes density
+#' bf <- InverseGaussianBernsteinFunction(eta = 0.5)
+#' stieltjes_density <- stieltjesDensity(bf)
+#' integrate(
+#'   function(x) 1/(1 + x) * stieltjes_density(x),
+#'   lower = attr(stieltjes_density, "lower"),
+#'   upper = attr(stieltjes_density, "upper")
+#' )
+#'
+#' # Evaluate the Bernstein function
+#' bf <- InverseGaussianBernsteinFunction(eta = 0.3)
+#' valueOf(bf, 1:5)
+#'
+#' # Calculate shock-arrival intensities
+#' bf <- InverseGaussianBernsteinFunction(eta = 0.8)
+#' intensities(bf, 3)
+#' intensities(bf, 3, method = "stieltjes")
+#' intensities(bf, 3, tolerance = 1e-4)
+#'
+#' # Calculate exchangeable shock-arrival intensities
+#' bf <- InverseGaussianBernsteinFunction(eta = 0.4)
+#' uexIntensities(bf, 3)
+#' uexIntensities(bf, 3, method = "stieltjes")
+#' uexIntensities(bf, 3, tolerance = 1e-4)
+#'
+#' # Calculate exchangeable shock-size arrival intensities
+#' bf <- InverseGaussianBernsteinFunction(eta = 0.2)
+#' exIntensities(bf, 3)
+#' exIntensities(bf, 3, method = "stieltjes")
+#' exIntensities(bf, 3, tolerance = 1e-4)
+#'
+#' # Calculate the Markov generator
+#' bf <- InverseGaussianBernsteinFunction(eta = 0.6)
+#' exQMatrix(bf, 3)
+#' exQMatrix(bf, 3, method = "stieltjes")
+#' exQMatrix(bf, 3, tolerance = 1e-4)
 InverseGaussianBernsteinFunction <- setClass("InverseGaussianBernsteinFunction", # nolint
   contains = "CompleteBernsteinFunction",
   slots = c(eta = "numeric")
 )
 
-#' @describeIn InverseGaussianBernsteinFunction-class Constructor
-#' @aliases initialize,InverseGaussianBernsteinFunction-method
-#' @aliases initialize,InverseGaussianBernsteinFunction,ANY-method
+#' @rdname hidden_aliases
 #'
 #' @inheritParams methods::initialize
 #' @param eta Non-negative number.
-#'
-#' @examples
-#' InverseGaussianBernsteinFunction()
-#' InverseGaussianBernsteinFunction(eta = 0.3)
 setMethod(
   "initialize", "InverseGaussianBernsteinFunction",
   function(.Object, eta) { # nolint
@@ -65,6 +135,7 @@ setMethod(
   }
 )
 
+#' @include error.R
 #' @importFrom checkmate qtest
 setValidity(
   "InverseGaussianBernsteinFunction",
@@ -77,8 +148,9 @@ setValidity(
   }
 )
 
-#' @describeIn InverseGaussianBernsteinFunction-class Display the object.
-#' @aliases show,InverseGaussianBernsteinFunction-method
+#' @rdname hidden_aliases
+#'
+#' @inheritParams methods::show
 #'
 #' @export
 setMethod( # nocov start
@@ -95,19 +167,11 @@ setMethod( # nocov start
   }
 ) # nocov end
 
-#' @describeIn InverseGaussianBernsteinFunction-class
-#'   see [LevyBernsteinFunction-class]
-#' @aliases levyDensity,InverseGaussianBernsteinFunction-method
+#' @rdname hidden_aliases
 #'
 #' @inheritParams levyDensity
 #'
-#' @section Lévy density:
-#' \deqn{
-#'   \nu(du)
-#'     = \frac{1}{\sqrt{2 \pi u^3}} \operatorname{e}^{-\frac{1}{2} \eta^2 u} ,
-#'     \quad u > 0 .
-#' }
-#'
+#' @include s4-levyDensity.R
 #' @export
 setMethod(
   "levyDensity", "InverseGaussianBernsteinFunction",
@@ -121,27 +185,12 @@ setMethod(
   }
 )
 
-#' @describeIn InverseGaussianBernsteinFunction-class
-#'   see [CompleteBernsteinFunction-class]
-#' @aliases stieltjesDensity,InverseGaussianBernsteinFunction-method
+#' @rdname hidden_aliases
 #'
-#' @inheritParams levyDensity
+#' @inheritParams stieltjesyDensity
 #'
-#' @section Stieltjes density:
-#' \deqn{
-#'   \sigma(du)
-#'     = \frac{
-#'         \sin(\pi / 2)
-#'       }{
-#'         \pi
-#'       } \cdot \frac{
-#'         \sqrt{2 x - \eta^2}
-#'       }{
-#'         x
-#'       } ,
-#'       \quad u > \eta^2 / 2 .
-#' }
-#'
+#' @include s4-stieltjesDensity.R
+#' @export
 setMethod(
   "stieltjesDensity", "InverseGaussianBernsteinFunction",
   function(object) {
@@ -154,6 +203,8 @@ setMethod(
   }
 )
 
+#' @include s4-valueOf0.R
+#' @importFrom checkmate assert qassert check_numeric check_complex
 #' @keywords internal
 setMethod(
   "valueOf0", "InverseGaussianBernsteinFunction",

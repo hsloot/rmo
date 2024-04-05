@@ -4,27 +4,7 @@
 \name{PoissonBernsteinFunction-class}
 \alias{PoissonBernsteinFunction-class}
 \alias{PoissonBernsteinFunction}
-\alias{initialize,PoissonBernsteinFunction-method}
-\alias{initialize,PoissonBernsteinFunction,ANY-method}
-\alias{show,PoissonBernsteinFunction-method}
-\alias{levyDensity,PoissonBernsteinFunction-method}
 \title{Class for Poisson Bernstein functions}
-\usage{
-\S4method{initialize}{PoissonBernsteinFunction}(.Object, eta)
-
-\S4method{show}{PoissonBernsteinFunction}(object)
-
-\S4method{levyDensity}{PoissonBernsteinFunction}(object)
-}
-\arguments{
-\item{.Object}{ An object:  see the \dQuote{Initialize Methods} section.}
-
-\item{eta}{Positive number.}
-
-\item{object}{An object deriving from \linkS4class{LevyBernsteinFunction}
-(for \code{levyDensity}) or \linkS4class{CompleteBernsteinFunction}
-(for \code{stieltjesDensity}).}
-}
 \description{
 The Poisson process with arrival-rate \eqn{\lambda} and fixed jump size
 \eqn{\eta} is a Lévy subordinator corresponding to the Bernstein function
@@ -38,16 +18,14 @@ forward differences can be calculated in closed form:
 \deqn{
   {(-1)}^{k-1} \Delta^k \psi(x) = e^{-u\eta} (1-e^{-\eta})^k, x>0, k>0.
 }
+\subsection{Lévy density}{
+
+\deqn{
+  \nu(du)
+    = \lambda \delta_{\eta}(du), \quad u > 0 .
 }
-\section{Functions}{
-\itemize{
-\item \code{initialize(PoissonBernsteinFunction)}: Constructor
-
-\item \code{show(PoissonBernsteinFunction)}: Display the object.
-
-\item \code{levyDensity(PoissonBernsteinFunction)}: see \linkS4class{LevyBernsteinFunction}
-
-}}
+}
+}
 \section{Slots}{
 
 \describe{
@@ -56,19 +34,73 @@ forward differences can be calculated in closed form:
 \item{\code{eta}}{The fixed (positive) jump size of the Poisson process.}
 }}
 
-\section{Lévy density}{
-
-\deqn{
-  \nu(du)
-    = \lambda \delta_{\eta}(du), \quad u > 0 .
-}
-}
-
 \examples{
+# Create an object of class PoissonBernsteinFunction
 PoissonBernsteinFunction()
 PoissonBernsteinFunction(eta = 2)
+
+# Create a Lévy density
+bf <- PoissonBernsteinFunction(eta = 0.7)
+levy_density <- levyDensity(bf)
+sum(levy_density$y * pmin(1, levy_density$x))
+
+# Evaluate the Bernstein function
+bf <- PoissonBernsteinFunction(eta = 0.3)
+valueOf(bf, 1:5)
+
+# Calculate shock-arrival intensities
+bf <- PoissonBernsteinFunction(eta = 0.8)
+intensities(bf, 3)
+intensities(bf, 3, tolerance = 1e-4)
+
+# Calculate exchangeable shock-arrival intensities
+bf <- PoissonBernsteinFunction(eta = 0.4)
+uexIntensities(bf, 3)
+uexIntensities(bf, 3, tolerance = 1e-4)
+
+# Calculate exchangeable shock-size arrival intensities
+bf <- PoissonBernsteinFunction(eta = 0.2)
+exIntensities(bf, 3)
+exIntensities(bf, 3, tolerance = 1e-4)
+
+# Calculate the Markov generator
+bf <- PoissonBernsteinFunction(eta = 0.6)
+exQMatrix(bf, 3)
+exQMatrix(bf, 3, tolerance = 1e-4)
 }
 \seealso{
-\linkS4class{BernsteinFunction}, \linkS4class{LevyBernsteinFunction}
-\code{\link[=valueOf]{valueOf()}}
+\code{\link[=levyDensity]{levyDensity()}},  \code{\link[=valueOf]{valueOf()}}, \code{\link[=intensities]{intensities()}}, \code{\link[=uexIntensities]{uexIntensities()}},
+\code{\link[=exIntensities]{exIntensities()}}, \code{\link[=exQMatrix]{exQMatrix()}}, \code{\link[=rextmo]{rextmo()}}, \code{\link[=rpextmo]{rpextmo()}}
+
+Other Bernstein function classes: 
+\code{\link{AlphaStableBernsteinFunction-class}},
+\code{\link{BernsteinFunction-class}},
+\code{\link{CompleteBernsteinFunction-class}},
+\code{\link{CompositeScaledBernsteinFunction-class}},
+\code{\link{ConstantBernsteinFunction-class}},
+\code{\link{ConvexCombinationOfBernsteinFunctions-class}},
+\code{\link{ExponentialBernsteinFunction-class}},
+\code{\link{GammaBernsteinFunction-class}},
+\code{\link{InverseGaussianBernsteinFunction-class}},
+\code{\link{LevyBernsteinFunction-class}},
+\code{\link{LinearBernsteinFunction-class}},
+\code{\link{ParetoBernsteinFunction-class}},
+\code{\link{ScaledBernsteinFunction-class}},
+\code{\link{SumOfBernsteinFunctions-class}}
+
+Other Levy Bernstein function classes: 
+\code{\link{AlphaStableBernsteinFunction-class}},
+\code{\link{CompleteBernsteinFunction-class}},
+\code{\link{ExponentialBernsteinFunction-class}},
+\code{\link{GammaBernsteinFunction-class}},
+\code{\link{InverseGaussianBernsteinFunction-class}},
+\code{\link{LevyBernsteinFunction-class}},
+\code{\link{ParetoBernsteinFunction-class}}
+
+Other Bernstein function boundary classes: 
+\code{\link{ConstantBernsteinFunction-class}},
+\code{\link{LinearBernsteinFunction-class}}
 }
+\concept{Bernstein function boundary classes}
+\concept{Bernstein function classes}
+\concept{Levy Bernstein function classes}

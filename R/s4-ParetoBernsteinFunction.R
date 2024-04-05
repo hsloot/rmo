@@ -1,8 +1,3 @@
-#' @include error.R
-#' @include s4-BernsteinFunction.R
-#' @include s4-LevyBernsteinFunction.R
-NULL
-
 #' Class for Pareto Bernstein functions
 #'
 #' @slot alpha The index \eqn{\alpha}
@@ -35,29 +30,74 @@ NULL
 #' \eqn{\alpha}-stable subordinator, see Sec. 5.3 of
 #' \insertCite{Fernandez2015a}{rmo}.
 #'
+#' ### Lévy density
+#' \deqn{
+#'   \nu(du)
+#'     = \alpha \frac{x_0^\alpha}{u^{\alpha + 1}}, \quad u > x_0 .
+#' }
+#'
 #' @references
 #'   \insertAllCited{}
 #'
-#' @seealso [BernsteinFunction-class], [LevyBernsteinFunction-class],
-#'   [valueOf()]
+#' @seealso [levyDensity()],  [valueOf()], [intensities()], [uexIntensities()],
+#'   [exIntensities()], [exQMatrix()], [rextmo()], [rpextmo()]
 #'
+#' @docType class
+#' @name ParetoBernsteinFunction-class
+#' @rdname ParetoBernsteinFunction-class
+#' @aliases ParetoBernsteinFunction
+#' @include s4-BernsteinFunction.R s4-LevyBernsteinFunction.R
+#' @family Bernstein function classes
+#' @family Levy Bernstein function classes
+#' @family Algebraic Bernstein function classes
 #' @export ParetoBernsteinFunction
+#' @examples
+#' # Create an object of class ParetoBernsteinFunction
+#' ParetoBernsteinFunction()
+#' ParetoBernsteinFunction(alpha = 0.2, x0 = 1e-2)
+#'
+#' # Create a Lévy density
+#' bf <- ParetoBernsteinFunction(alpha = 0.7, x0 = 1e-2)
+#' levy_density <- levyDensity(bf)
+#' integrate(
+#'   function(x) pmin(1, x) * levy_density(x),
+#'   lower = attr(levy_density, "lower"),
+#'   upper = attr(levy_density, "upper")
+#' )
+#'
+#' # Evaluate the Bernstein function
+#' bf <- ParetoBernsteinFunction(alpha = 0.3, x0 = 1)
+#' valueOf(bf, 1:5)
+#'
+#' # Calculate shock-arrival intensities
+#' bf <- ParetoBernsteinFunction(alpha = 0.8, x0 = 1e-2)
+#' intensities(bf, 3)
+#' intensities(bf, 3, tolerance = 1e-4)
+#'
+#' # Calculate exchangeable shock-arrival intensities
+#' bf <- ParetoBernsteinFunction(alpha = 0.4, x0 = 1e-2)
+#' uexIntensities(bf, 3)
+#' uexIntensities(bf, 3, tolerance = 1e-4)
+#'
+#' # Calculate exchangeable shock-size arrival intensities
+#' bf <- ParetoBernsteinFunction(alpha = 0.2, x0 = 1e-2)
+#' exIntensities(bf, 3)
+#' exIntensities(bf, 3, tolerance = 1e-4)
+#'
+#' # Calculate the Markov generator
+#' bf <- ParetoBernsteinFunction(alpha = 0.6, x0 = 1e-2)
+#' exQMatrix(bf, 3)
+#' exQMatrix(bf, 3, tolerance = 1e-4)
 ParetoBernsteinFunction <- setClass("ParetoBernsteinFunction", # nolint
   contains = "LevyBernsteinFunction",
   slots = c(alpha = "numeric", x0 = "numeric")
 )
 
-#' @describeIn ParetoBernsteinFunction-class Constructor
-#' @aliases initialize,ParetoBernsteinFunction-method
-#' @aliases initialize,ParetoBernsteinFunction,ANY-method
+#' @rdname hidden_aliases
 #'
 #' @inheritParams methods::initialize
 #' @param alpha Positive number between zero and one (bounds excl.).
 #' @param x0 Positive number.
-#'
-#' @examples
-#' ParetoBernsteinFunction()
-#' ParetoBernsteinFunction(alpha = 0.2, x0 = 1)
 setMethod(
   "initialize", "ParetoBernsteinFunction",
   function(.Object, alpha, x0) { # nolint
@@ -71,6 +111,7 @@ setMethod(
   }
 )
 
+#' @include error.R
 #' @importFrom checkmate qtest
 setValidity(
   "ParetoBernsteinFunction",
@@ -86,8 +127,9 @@ setValidity(
   }
 )
 
-#' @describeIn ParetoBernsteinFunction-class Display the object.
-#' @aliases show,ParetoBernsteinFunction-method
+#' @rdname hidden_aliases
+#'
+#' @inheritParams methods::show
 #'
 #' @export
 setMethod( # nocov start
@@ -105,18 +147,11 @@ setMethod( # nocov start
   }
 ) # nocov end
 
-#' @describeIn ParetoBernsteinFunction-class
-#'   see [LevyBernsteinFunction-class]
-#' @aliases levyDensity,ParetoBernsteinFunction-method
+#' @rdname hidden_aliases
 #'
 #' @inheritParams levyDensity
 #'
-#' @section Lévy density:
-#' \deqn{
-#'   \nu(du)
-#'     = \alpha \frac{x_0^\alpha}{u^{\alpha + 1}}, \quad u > x_0 .
-#' }
-#'
+#' @include s4-levyDensity.R
 #' @export
 setMethod(
   "levyDensity", "ParetoBernsteinFunction",
@@ -130,6 +165,8 @@ setMethod(
   }
 )
 
+#' @include s4-valueOf0.R
+#' @importFrom checkmate assert qassert check_numeric check_complex
 #' @importFrom stats pgamma
 #' @keywords internal
 setMethod(

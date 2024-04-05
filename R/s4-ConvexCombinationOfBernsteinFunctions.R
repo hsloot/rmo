@@ -1,7 +1,3 @@
-#' @include error.R
-#' @include s4-BernsteinFunction.R
-NULL
-
 #' Class for convex combinations of Bernstein functions
 #'
 #' Bernstein functions are stable under convex combinations, i.e. if
@@ -15,7 +11,27 @@ NULL
 #' @slot coefficients Numeric vector of positive real values.
 #' @slot points List of Bernstein functions.
 #'
+#' @seealso [valueOf()], [intensities()], [uexIntensities()], [exIntensities()],
+#'   [exQMatrix()], [rextmo()], [rpextmo()]
+#'
+#' @docType class
+#' @name ConvexCombinationOfBernsteinFunctions-class
+#' @rdname ConvexCombinationOfBernsteinFunctions-class
+#' @aliases ConvexCombinationOfBernsteinFunctions
+#' @include s4-BernsteinFunction.R
+#' @family Bernstein function classes
+#' @family Bernstein function transformer classes
 #' @export ConvexCombinationOfBernsteinFunctions
+#' @examples
+#' # Create an object of class ConvexCombinationOfBernsteinFunctions
+#' ConvexCombinationOfBernsteinFunctions()
+#' ConvexCombinationOfBernsteinFunctions(
+#'   coefficients = c(0.2, 0.5, 0.1),
+#'   points = list(
+#'     LinearBernsteinFunction(scale = 0.2),
+#'     ConstantBernsteinFunction(constant = 0.5),
+#'     AlphaStableBernsteinFunction(alpha = 0.5))
+#' )
 ConvexCombinationOfBernsteinFunctions <- setClass( # nolint
   "ConvexCombinationOfBernsteinFunctions",
   contains = "BernsteinFunction",
@@ -25,24 +41,12 @@ ConvexCombinationOfBernsteinFunctions <- setClass( # nolint
   )
 )
 
-#' @describeIn ConvexCombinationOfBernsteinFunctions-class Constructor
-#' @aliases initialize,ConvexCombinationOfBernsteinFunctions-method
-#' @aliases initialize,ConvexCombinationOfBernsteinFunctions,ANY-method
+#' @rdname hidden_aliases
 #'
 #' @inheritParams methods::initialize
 #' @param coefficients Derives from
 #'   [ConvexCombinationOfBernsteinFunctions-class].
 #' @param points Derives from [ConvexCombinationOfBernsteinFunctions-class].
-#'
-#' @examples
-#' ConvexCombinationOfBernsteinFunctions()
-#' bf1 <- LinearBernsteinFunction(scale = 0.2)
-#' bf2 <- ConstantBernsteinFunction(constant = 0.5)
-#' bf3 <- AlphaStableBernsteinFunction(alpha = 0.5)
-#' ConvexCombinationOfBernsteinFunctions(
-#'   coefficients = c(0.2, 0.5, 0.1),
-#'   points = list(bf1, bf2, bf3)
-#' )
 setMethod(
   "initialize",
   "ConvexCombinationOfBernsteinFunctions",
@@ -57,6 +61,7 @@ setMethod(
   }
 )
 
+#' @include error.R
 #' @importFrom checkmate qtest test_list
 setValidity(
   "ConvexCombinationOfBernsteinFunctions",
@@ -99,11 +104,11 @@ setValidity(
   }
 )
 
-#' @describeIn ConvexCombinationOfBernsteinFunctions-class Display the object.
-#' @aliases show,ConvexCombinationOfBernsteinFunctions-method
+#' @rdname hidden_aliases
+#'
+#' @inheritParams methods::show
 #'
 #' @importFrom utils capture.output
-#'
 #' @export
 setMethod( # nocov start
   "show",
@@ -130,13 +135,11 @@ setMethod( # nocov start
   }
 ) # nocov end
 
-#' @describeIn ConvexCombinationOfBernsteinFunctions-class
-#'   Calculates the iterated differences of the Bernstein function,
-#'   see [valueOf()]
-#' @aliases valueOf,ConvexCombinationOfBernsteinFunctions,ANY-method
+#' @rdname hidden_aliases
 #'
 #' @inheritParams valueOf
 #'
+#' @include s4-valueOf.R
 #' @export
 setMethod(
   "valueOf",

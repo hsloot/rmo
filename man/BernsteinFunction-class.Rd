@@ -3,54 +3,7 @@
 \docType{class}
 \name{BernsteinFunction-class}
 \alias{BernsteinFunction-class}
-\alias{valueOf}
-\alias{uexIntensities}
-\alias{intensities}
-\alias{exIntensities}
-\alias{exQMatrix}
-\alias{uexIntensities,BernsteinFunction-method}
-\alias{exIntensities,BernsteinFunction-method}
-\alias{intensities,BernsteinFunction-method}
-\alias{exQMatrix,BernsteinFunction-method}
 \title{Virtual superclass for Bernstein functions}
-\usage{
-valueOf(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...)
-
-uexIntensities(object, d, cscale = 1, ...)
-
-intensities(object, d, cscale = 1, ...)
-
-exIntensities(object, d, cscale = 1, ...)
-
-exQMatrix(object, d, cscale = 1, ...)
-
-\S4method{uexIntensities}{BernsteinFunction}(object, d, cscale = 1, ...)
-
-\S4method{exIntensities}{BernsteinFunction}(object, d, cscale = 1, ...)
-
-\S4method{intensities}{BernsteinFunction}(object, d, cscale = 1, ...)
-
-\S4method{exQMatrix}{BernsteinFunction}(object, d, cscale = 1, ...)
-}
-\arguments{
-\item{object}{An object deriving from \linkS4class{LevyBernsteinFunction}
-(for \code{levyDensity}) or \linkS4class{CompleteBernsteinFunction}
-(for \code{stieltjesDensity}).}
-
-\item{x}{a nonnegativ numeric vector at which the iterated difference of
-the Bernstein function is evaluated.}
-
-\item{difference_order}{a nonnegative integer with the order of the
-alternating iterated forward differences taken on the Bernstein function.}
-
-\item{n, k}{nonnegative numbers for the binomial factor.}
-
-\item{cscale}{a positive numeric scalar with the composite scaling factor.}
-
-\item{...}{pass-through parameter}
-
-\item{d}{a positive integer, larger than two, for the \emph{dimension}.}
-}
 \description{
 A virtual superclass for all implementations of the various classes of
 \emph{Bernstein functions}.
@@ -89,48 +42,32 @@ and
 }
 }
 }
-\section{Functions}{
-\itemize{
-\item \code{valueOf()}: Calculate the values for a Bernstein function and its higher-order,
-alternating iterated forward differences, possibly scaled by a binomial
-coefficient, i.e.,
-\deqn{
-      {(-1)}^{j-1} \Delta^{j}{ \psi(c x) } ,
-          \quad x > 0 .
-  }
-
-\item \code{uexIntensities()}: Calculates (unscaled) \emph{exchangeable shock-arrival intensities},
-see \code{\link[=rmo]{rmo()}} and \code{\link[=rexmo]{rexmo()}}.
-
-\item \code{intensities()}: Calculates the \emph{shock-arrival intensities}, the \code{intensities} parameter for
-\code{\link[=rmo]{rmo()}}.
-
-\item \code{exIntensities()}: Calculates \emph{exchangeable shock-size-arrival intensities}, the
-\code{ex_intensities} parameter for \code{\link[=rexmo]{rexmo()}}.
-
-\item \code{exQMatrix()}: Calculates the \emph{infinitesimal Markov generator matrix} of the corresponding
-(Markovian) default-counting process, used internally by \code{\link[=rexmo]{rexmo()}}.
-
-}}
-\examples{
-exIntensities(AlphaStableBernsteinFunction(4e-1), 3L)
-
-exIntensities(AlphaStableBernsteinFunction(4e-1), 3L)
-
-intensities(AlphaStableBernsteinFunction(4e-1), 3L)
-
-exQMatrix(AlphaStableBernsteinFunction(4e-1), 3L)
-
-}
 \references{
 \insertRef{Schilling2012a}{rmo}
 }
 \seealso{
-\linkS4class{LevyBernsteinFunction}, \linkS4class{ScaledBernsteinFunction},
-\linkS4class{SumOfBernsteinFunctions}, \linkS4class{CompositeScaledBernsteinFunction},
-\linkS4class{CompleteBernsteinFunction}, \linkS4class{ConstantBernsteinFunction},
-\linkS4class{LinearBernsteinFunction}, \linkS4class{PoissonBernsteinFunction},
-\linkS4class{AlphaStableBernsteinFunction}, \linkS4class{ExponentialBernsteinFunction},
-\linkS4class{InverseGaussianBernsteinFunction}, \linkS4class{GammaBernsteinFunction},
-\linkS4class{ParetoBernsteinFunction}
+\code{\link[=valueOf]{valueOf()}}, \code{\link[=intensities]{intensities()}}, \code{\link[=uexIntensities]{uexIntensities()}}, \code{\link[=exIntensities]{exIntensities()}},
+\code{\link[=exQMatrix]{exQMatrix()}}, \code{\link[=rextmo]{rextmo()}}, \code{\link[=rpextmo]{rpextmo()}}
+
+Other Bernstein function classes: 
+\code{\link{AlphaStableBernsteinFunction-class}},
+\code{\link{CompleteBernsteinFunction-class}},
+\code{\link{CompositeScaledBernsteinFunction-class}},
+\code{\link{ConstantBernsteinFunction-class}},
+\code{\link{ConvexCombinationOfBernsteinFunctions-class}},
+\code{\link{ExponentialBernsteinFunction-class}},
+\code{\link{GammaBernsteinFunction-class}},
+\code{\link{InverseGaussianBernsteinFunction-class}},
+\code{\link{LevyBernsteinFunction-class}},
+\code{\link{LinearBernsteinFunction-class}},
+\code{\link{ParetoBernsteinFunction-class}},
+\code{\link{PoissonBernsteinFunction-class}},
+\code{\link{ScaledBernsteinFunction-class}},
+\code{\link{SumOfBernsteinFunctions-class}}
+
+Other Virtual Bernstein function classes: 
+\code{\link{CompleteBernsteinFunction-class}},
+\code{\link{LevyBernsteinFunction-class}}
 }
+\concept{Bernstein function classes}
+\concept{Virtual Bernstein function classes}

@@ -4,41 +4,7 @@
 \name{CompositeScaledBernsteinFunction-class}
 \alias{CompositeScaledBernsteinFunction-class}
 \alias{CompositeScaledBernsteinFunction}
-\alias{initialize,CompositeScaledBernsteinFunction-method}
-\alias{initialize,CompositeScaledBernsteinFunction,ANY-method}
-\alias{show,CompositeScaledBernsteinFunction-method}
-\alias{valueOf,CompositeScaledBernsteinFunction-method}
-\alias{valueOf,CompositeScaledBernsteinFunction,ANY-method}
 \title{Class for composite scaled Bernstein functions}
-\usage{
-\S4method{initialize}{CompositeScaledBernsteinFunction}(.Object, cscale, original)
-
-\S4method{show}{CompositeScaledBernsteinFunction}(object)
-
-\S4method{valueOf}{CompositeScaledBernsteinFunction}(object, x, difference_order = 0L, n = 1, k = 0, cscale = 1, ...)
-}
-\arguments{
-\item{.Object}{ An object:  see the \dQuote{Initialize Methods} section.}
-
-\item{cscale}{Positive number.}
-
-\item{original}{Derives from \linkS4class{BernsteinFunction}.}
-
-\item{object}{An object deriving from \linkS4class{LevyBernsteinFunction}
-(for \code{levyDensity}) or \linkS4class{CompleteBernsteinFunction}
-(for \code{stieltjesDensity}).}
-
-\item{x}{a nonnegativ numeric vector at which the iterated difference of
-the Bernstein function is evaluated.}
-
-\item{difference_order}{a nonnegative integer with the order of the
-alternating iterated forward differences taken on the Bernstein function.}
-
-\item{n, k}{nonnegative numbers for the binomial factor.}
-
-\item{...}{arguments to specify properties of the new object, to
-      be passed to \code{initialize()}.}
-}
 \description{
 Bernstein functions are stable under composition, i.e. if \eqn{\psi} is
 a Bernstein function and \code{c > 0}, then
@@ -47,16 +13,6 @@ a Bernstein function and \code{c > 0}, then
 }
 is also a Bernstein function.
 }
-\section{Functions}{
-\itemize{
-\item \code{initialize(CompositeScaledBernsteinFunction)}: Constructor
-
-\item \code{show(CompositeScaledBernsteinFunction)}: Display the object.
-
-\item \code{valueOf(CompositeScaledBernsteinFunction)}: Calculates the iterated differences of the Bernstein function,
-see \code{\link[=valueOf]{valueOf()}}
-
-}}
 \section{Slots}{
 
 \describe{
@@ -67,12 +23,37 @@ composition.}
 }}
 
 \examples{
+# Create an object of class CompositeScaleBernsteinFunction
 CompositeScaledBernsteinFunction()
-cscale <- 0.5
-bf_original <- AlphaStableBernsteinFunction()
-CompositeScaledBernsteinFunction(cscale = cscale, original = bf_original)
+CompositeScaledBernsteinFunction(
+  cscale = 0.5,
+  original = AlphaStableBernsteinFunction(0.5)
+)
 }
 \seealso{
-\linkS4class{BernsteinFunction},
-\code{\link[=valueOf]{valueOf()}}
+\code{\link[=valueOf]{valueOf()}}, \code{\link[=intensities]{intensities()}}, \code{\link[=uexIntensities]{uexIntensities()}}, \code{\link[=exIntensities]{exIntensities()}},
+\code{\link[=exQMatrix]{exQMatrix()}}, \code{\link[=rextmo]{rextmo()}}, \code{\link[=rpextmo]{rpextmo()}}
+
+Other Bernstein function classes: 
+\code{\link{AlphaStableBernsteinFunction-class}},
+\code{\link{BernsteinFunction-class}},
+\code{\link{CompleteBernsteinFunction-class}},
+\code{\link{ConstantBernsteinFunction-class}},
+\code{\link{ConvexCombinationOfBernsteinFunctions-class}},
+\code{\link{ExponentialBernsteinFunction-class}},
+\code{\link{GammaBernsteinFunction-class}},
+\code{\link{InverseGaussianBernsteinFunction-class}},
+\code{\link{LevyBernsteinFunction-class}},
+\code{\link{LinearBernsteinFunction-class}},
+\code{\link{ParetoBernsteinFunction-class}},
+\code{\link{PoissonBernsteinFunction-class}},
+\code{\link{ScaledBernsteinFunction-class}},
+\code{\link{SumOfBernsteinFunctions-class}}
+
+Other Bernstein function transformer classes: 
+\code{\link{ConvexCombinationOfBernsteinFunctions-class}},
+\code{\link{ScaledBernsteinFunction-class}},
+\code{\link{SumOfBernsteinFunctions-class}}
 }
+\concept{Bernstein function classes}
+\concept{Bernstein function transformer classes}

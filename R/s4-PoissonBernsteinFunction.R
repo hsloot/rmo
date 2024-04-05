@@ -1,8 +1,3 @@
-#' @include error.R
-#' @include s4-BernsteinFunction.R
-#' @include s4-LevyBernsteinFunction.R
-NULL
-
 #' Class for Poisson Bernstein functions
 #'
 #' @slot lambda The (positive) arrival rate of the underlying Poisson process.
@@ -22,25 +17,66 @@ NULL
 #'   {(-1)}^{k-1} \Delta^k \psi(x) = e^{-u\eta} (1-e^{-\eta})^k, x>0, k>0.
 #' }
 #'
-#' @seealso [BernsteinFunction-class], [LevyBernsteinFunction-class]
-#'   [valueOf()]
+#' ### Lévy density
+#' \deqn{
+#'   \nu(du)
+#'     = \lambda \delta_{\eta}(du), \quad u > 0 .
+#' }
 #'
+#' @seealso [levyDensity()],  [valueOf()], [intensities()], [uexIntensities()],
+#'   [exIntensities()], [exQMatrix()], [rextmo()], [rpextmo()]
+#'
+#' @docType class
+#' @name PoissonBernsteinFunction-class
+#' @rdname PoissonBernsteinFunction-class
+#' @aliases PoissonBernsteinFunction
+#' @include s4-BernsteinFunction.R s4-LevyBernsteinFunction.R
+#' @family Bernstein function classes
+#' @family Levy Bernstein function classes
+#' @family Bernstein function boundary classes
 #' @export PoissonBernsteinFunction
+#' @examples
+#' # Create an object of class PoissonBernsteinFunction
+#' PoissonBernsteinFunction()
+#' PoissonBernsteinFunction(eta = 2)
+#'
+#' # Create a Lévy density
+#' bf <- PoissonBernsteinFunction(eta = 0.7)
+#' levy_density <- levyDensity(bf)
+#' sum(levy_density$y * pmin(1, levy_density$x))
+#'
+#' # Evaluate the Bernstein function
+#' bf <- PoissonBernsteinFunction(eta = 0.3)
+#' valueOf(bf, 1:5)
+#'
+#' # Calculate shock-arrival intensities
+#' bf <- PoissonBernsteinFunction(eta = 0.8)
+#' intensities(bf, 3)
+#' intensities(bf, 3, tolerance = 1e-4)
+#'
+#' # Calculate exchangeable shock-arrival intensities
+#' bf <- PoissonBernsteinFunction(eta = 0.4)
+#' uexIntensities(bf, 3)
+#' uexIntensities(bf, 3, tolerance = 1e-4)
+#'
+#' # Calculate exchangeable shock-size arrival intensities
+#' bf <- PoissonBernsteinFunction(eta = 0.2)
+#' exIntensities(bf, 3)
+#' exIntensities(bf, 3, tolerance = 1e-4)
+#'
+#' # Calculate the Markov generator
+#' bf <- PoissonBernsteinFunction(eta = 0.6)
+#' exQMatrix(bf, 3)
+#' exQMatrix(bf, 3, tolerance = 1e-4)
 PoissonBernsteinFunction <- setClass("PoissonBernsteinFunction", # nolint
   contains = "LevyBernsteinFunction",
   slots = c(eta = "numeric")
 )
 
-#' @describeIn PoissonBernsteinFunction-class Constructor
-#' @aliases initialize,PoissonBernsteinFunction-method
-#' @aliases initialize,PoissonBernsteinFunction,ANY-method
+#' @rdname hidden_aliases
 #'
 #' @inheritParams methods::initialize
 #' @param eta Positive number.
-#'
-#' @examples
-#' PoissonBernsteinFunction()
-#' PoissonBernsteinFunction(eta = 2)
 setMethod(
   "initialize", "PoissonBernsteinFunction",
   function(.Object, eta) { # nolint
@@ -53,6 +89,7 @@ setMethod(
   }
 )
 
+#' @include error.R
 #' @importFrom checkmate qtest
 setValidity(
   "PoissonBernsteinFunction",
@@ -65,8 +102,9 @@ setValidity(
   }
 )
 
-#' @describeIn PoissonBernsteinFunction-class Display the object.
-#' @aliases show,PoissonBernsteinFunction-method
+#' @rdname hidden_aliases
+#'
+#' @inheritParams methods::show
 #'
 #' @export
 setMethod( # nocov start
@@ -83,18 +121,11 @@ setMethod( # nocov start
   }
 ) # nocov end
 
-#' @describeIn PoissonBernsteinFunction-class
-#'   see [LevyBernsteinFunction-class]
-#' @aliases levyDensity,PoissonBernsteinFunction-method
+#' @rdname hidden_aliases
 #'
 #' @inheritParams levyDensity
 #'
-#' @section Lévy density:
-#' \deqn{
-#'   \nu(du)
-#'     = \lambda \delta_{\eta}(du), \quad u > 0 .
-#' }
-#'
+#' @include s4-levyDensity.R
 #' @export
 setMethod(
   "levyDensity", "PoissonBernsteinFunction",
@@ -106,7 +137,8 @@ setMethod(
   }
 )
 
-#' @importFrom checkmate qassert
+#' @include s4-valueOf0.R
+#' @importFrom checkmate assert qassert check_numeric check_complex
 #' @keywords internal
 setMethod(
   "valueOf0", "PoissonBernsteinFunction",

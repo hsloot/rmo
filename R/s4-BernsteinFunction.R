@@ -1,5 +1,5 @@
-#' @importFrom methods new setClass setValidity setGeneric setMethod validObject
-#'    callNextMethod show classLabel
+#' @importFrom methods new setClass setValidity setMethod validObject
+#'   callNextMethod show classLabel
 NULL
 
 #' Virtual superclass for Bernstein functions
@@ -45,119 +45,33 @@ NULL
 #' @references
 #'   \insertRef{Schilling2012a}{rmo}
 #'
-#' @seealso [LevyBernsteinFunction-class], [ScaledBernsteinFunction-class],
-#' [SumOfBernsteinFunctions-class], [CompositeScaledBernsteinFunction-class],
-#' [CompleteBernsteinFunction-class], [ConstantBernsteinFunction-class],
-#' [LinearBernsteinFunction-class], [PoissonBernsteinFunction-class],
-#' [AlphaStableBernsteinFunction-class], [ExponentialBernsteinFunction-class],
-#' [InverseGaussianBernsteinFunction-class], [GammaBernsteinFunction-class],
-#' [ParetoBernsteinFunction-class]
+#' @seealso [valueOf()], [intensities()], [uexIntensities()], [exIntensities()],
+#'   [exQMatrix()], [rextmo()], [rpextmo()]
 #'
+#' @docType class
+#' @name BernsteinFunction-class
+#' @rdname BernsteinFunction-class
+#' @family Bernstein function classes
+#' @family Virtual Bernstein function classes
 #' @export
 setClass("BernsteinFunction", # nolint
   contains = "VIRTUAL"
 )
 
-#' @describeIn BernsteinFunction-class
-#'   Calculate the values for a Bernstein function and its higher-order,
-#'   alternating iterated forward differences, possibly scaled by a binomial
-#'   coefficient, i.e.,
-#'   \deqn{
-#'       {(-1)}^{j-1} \Delta^{j}{ \psi(c x) } ,
-#'           \quad x > 0 .
-#'   }
+#' For S4 methods that require a documentation entry but only clutter the index.
 #'
-#' @inheritParams levyDensity
-#' @param x a nonnegativ numeric vector at which the iterated difference of
-#'   the Bernstein function is evaluated.
-#' @param difference_order a nonnegative integer with the order of the
-#'   alternating iterated forward differences taken on the Bernstein function.
-#' @param cscale a positive numeric scalar with the composite scaling factor.
-#' @param n,k nonnegative numbers for the binomial factor.
-#' @param ... pass-through parameter.
-#'
-#' @export
-setGeneric(
-  "valueOf",
-  function(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...) { # nolint
-    standardGeneric("valueOf")
-  }
-)
-
+#' @name hidden_aliases
+#' @rdname hidden_aliases
+#' @usage NULL
+#' @format NULL
 #' @keywords internal
-setGeneric(
-  "valueOf0",
-  function(object, x, cscale = 1, ...) {
-    standardGeneric("valueOf0")
-  }
-)
+#' @docType methods
+NULL
 
+
+#' @include s4-valueOf0.R s4-valueOf.R
+#' @importFrom methods setMethod
 #' @keywords internal
-setGeneric(
-  "defaultMethod",
-  function(object) {
-    standardGeneric("defaultMethod")
-  }
-)
-
-#' @describeIn BernsteinFunction-class
-#'   Calculates (unscaled) *exchangeable shock-arrival intensities*,
-#'   see [rmo()] and [rexmo()].
-#'
-#' @inheritParams levyDensity
-#' @param d a positive integer, larger than two, for the *dimension*.
-#' @param ... pass-through parameter
-#'
-#' @export
-setGeneric(
-  "uexIntensities",
-  function(object, d, cscale = 1, ...) {
-    standardGeneric("uexIntensities")
-  }
-)
-
-#' @describeIn BernsteinFunction-class
-#'   Calculates the *shock-arrival intensities*, the `intensities` parameter for
-#'   [rmo()].
-#'
-#' @inheritParams uexIntensities
-#'
-#' @export
-setGeneric(
-  "intensities",
-  function(object, d, cscale = 1, ...) {
-    standardGeneric("intensities")
-  }
-)
-
-#' @describeIn BernsteinFunction-class
-#'   Calculates *exchangeable shock-size-arrival intensities*, the
-#'   `ex_intensities` parameter for [rexmo()].
-#'
-#' @inheritParams uexIntensities
-#'
-#' @export
-setGeneric(
-  "exIntensities",
-  function(object, d, cscale = 1, ...) {
-    standardGeneric("exIntensities")
-  }
-)
-
-#' @describeIn BernsteinFunction-class
-#'   Calculates the *infinitesimal Markov generator matrix* of the corresponding
-#'   (Markovian) default-counting process, used internally by [rexmo()].
-#'
-#' @inheritParams uexIntensities
-#'
-#' @export
-setGeneric(
-  "exQMatrix",
-  function(object, d, cscale = 1, ...) {
-    standardGeneric("exQMatrix")
-  }
-)
-
 setMethod(
   "valueOf0", "BernsteinFunction",
   function(object, x, cscale = 1, ...) {
@@ -168,11 +82,11 @@ setMethod(
   }
 )
 
-#' @rdname BernsteinFunction-class
+#' @rdname hidden_aliases
 #'
-#' @examples
-#' exIntensities(AlphaStableBernsteinFunction(4e-1), 3L)
+#' @inheritParams uexIntensities
 #'
+#' @include s4-uexIntensities.R s4-valueOf.R
 #' @export
 setMethod(
   "uexIntensities", "BernsteinFunction",
@@ -181,11 +95,11 @@ setMethod(
   }
 )
 
-#' @rdname BernsteinFunction-class
+#' @rdname hidden_aliases
 #'
-#' @examples
-#' exIntensities(AlphaStableBernsteinFunction(4e-1), 3L)
+#' @inheritParams exIntensities
 #'
+#' @include s4-exIntensities.R s4-valueOf0.R s4-valueOf.R
 #' @export
 setMethod(
   "exIntensities", "BernsteinFunction",
@@ -216,11 +130,11 @@ setMethod(
   }
 )
 
-#' @rdname BernsteinFunction-class
+#' @rdname hidden_aliases
 #'
-#' @examples
-#' intensities(AlphaStableBernsteinFunction(4e-1), 3L)
+#' @inheritParams intensities
 #'
+#' @include  s4-intensities.R s4-uexIntensities.R RcppExports.R
 #' @export
 setMethod(
   "intensities", "BernsteinFunction",
@@ -229,11 +143,11 @@ setMethod(
   }
 )
 
-#' @rdname BernsteinFunction-class
+#' @rdname hidden_aliases
 #'
-#' @examples
-#' exQMatrix(AlphaStableBernsteinFunction(4e-1), 3L)
+#' @inheritParams exQMatrix
 #'
+#' @include s4-exQMatrix.R s4-exIntensities.R RcppExports.R
 #' @export
 setMethod(
   "exQMatrix", "BernsteinFunction",

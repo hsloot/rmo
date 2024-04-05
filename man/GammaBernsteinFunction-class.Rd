@@ -4,30 +4,7 @@
 \name{GammaBernsteinFunction-class}
 \alias{GammaBernsteinFunction-class}
 \alias{GammaBernsteinFunction}
-\alias{initialize,GammaBernsteinFunction-method}
-\alias{initialize,GammaBernsteinFunction,ANY-method}
-\alias{show,GammaBernsteinFunction-method}
-\alias{levyDensity,GammaBernsteinFunction-method}
-\alias{stieltjesDensity,GammaBernsteinFunction-method}
 \title{Class for Gamma Bernstein functions}
-\usage{
-\S4method{initialize}{GammaBernsteinFunction}(.Object, a)
-
-\S4method{show}{GammaBernsteinFunction}(object)
-
-\S4method{levyDensity}{GammaBernsteinFunction}(object)
-
-\S4method{stieltjesDensity}{GammaBernsteinFunction}(object)
-}
-\arguments{
-\item{.Object}{ An object:  see the \dQuote{Initialize Methods} section.}
-
-\item{a}{Positive number.}
-
-\item{object}{An object deriving from \linkS4class{LevyBernsteinFunction}
-(for \code{levyDensity}) or \linkS4class{CompleteBernsteinFunction}
-(for \code{stieltjesDensity}).}
-}
 \description{
 The \emph{Gamma Bernstein function}, is the Bernstein function of a
 subordinator with a (scaled) Gamma distribution. The representation is for
@@ -50,25 +27,7 @@ following representation:
 
 This Bernstein function is no. 26 in the list of complete Bernstein functions
 in Chp. 16 of \insertCite{Schilling2012a}{rmo}.
-}
-\section{Functions}{
-\itemize{
-\item \code{initialize(GammaBernsteinFunction)}: Constructor
-
-\item \code{show(GammaBernsteinFunction)}: Display the object.
-
-\item \code{levyDensity(GammaBernsteinFunction)}: see \linkS4class{LevyBernsteinFunction}
-
-\item \code{stieltjesDensity(GammaBernsteinFunction)}: see \linkS4class{CompleteBernsteinFunction}
-
-}}
-\section{Slots}{
-
-\describe{
-\item{\code{a}}{Scale parameter for the Lévy measure.}
-}}
-
-\section{Lévy density}{
+\subsection{Lévy density}{
 
 \deqn{
   \nu(du)
@@ -76,22 +35,110 @@ in Chp. 16 of \insertCite{Schilling2012a}{rmo}.
 }
 }
 
-\section{Stieltjes density}{
+\subsection{Stieltjes density}{
 
 \deqn{
   \sigma(du)
     = 1 / u du, u > a .
 }
 }
+}
+\section{Slots}{
+
+\describe{
+\item{\code{a}}{Scale parameter for the Lévy measure.}
+}}
 
 \examples{
+# Create an object of class GammaBernsteinFunction
 GammaBernsteinFunction()
 GammaBernsteinFunction(a = 2)
+
+# Create a Lévy density
+bf <- GammaBernsteinFunction(a = 0.7)
+levy_density <- levyDensity(bf)
+integrate(
+  function(x) pmin(1, x) * levy_density(x),
+  lower = attr(levy_density, "lower"),
+  upper = attr(levy_density, "upper")
+)
+
+# Create a Stieltjes density
+bf <- GammaBernsteinFunction(a = 0.5)
+stieltjes_density <- stieltjesDensity(bf)
+integrate(
+  function(x) 1/(1 + x) * stieltjes_density(x),
+  lower = attr(stieltjes_density, "lower"),
+  upper = attr(stieltjes_density, "upper")
+)
+
+# Evaluate the Bernstein function
+bf <- GammaBernsteinFunction(a = 0.3)
+valueOf(bf, 1:5)
+
+# Calculate shock-arrival intensities
+bf <- GammaBernsteinFunction(a = 0.8)
+intensities(bf, 3)
+intensities(bf, 3, method = "stieltjes")
+intensities(bf, 3, tolerance = 1e-4)
+
+# Calculate exchangeable shock-arrival intensities
+bf <- GammaBernsteinFunction(a = 0.4)
+uexIntensities(bf, 3)
+uexIntensities(bf, 3, method = "stieltjes")
+uexIntensities(bf, 3, tolerance = 1e-4)
+
+# Calculate exchangeable shock-size arrival intensities
+bf <- GammaBernsteinFunction(a = 0.2)
+exIntensities(bf, 3)
+exIntensities(bf, 3, method = "stieltjes")
+exIntensities(bf, 3, tolerance = 1e-4)
+
+# Calculate the Markov generator
+bf <- GammaBernsteinFunction(a = 0.6)
+exQMatrix(bf, 3)
+exQMatrix(bf, 3, method = "stieltjes")
+exQMatrix(bf, 3, tolerance = 1e-4)
 }
 \references{
 \insertAllCited{}
 }
 \seealso{
-\linkS4class{BernsteinFunction}, \linkS4class{LevyBernsteinFunction},
-\linkS4class{CompleteBernsteinFunction}, \code{\link[=valueOf]{valueOf()}}
+\code{\link[=levyDensity]{levyDensity()}}, \code{\link[=stieltjesDensity]{stieltjesDensity()}}, \code{\link[=valueOf]{valueOf()}},
+\code{\link[=intensities]{intensities()}}, \code{\link[=uexIntensities]{uexIntensities()}}, \code{\link[=exIntensities]{exIntensities()}}, \code{\link[=exQMatrix]{exQMatrix()}},
+\code{\link[=rextmo]{rextmo()}}, \code{\link[=rpextmo]{rpextmo()}}
+
+Other Bernstein function classes: 
+\code{\link{AlphaStableBernsteinFunction-class}},
+\code{\link{BernsteinFunction-class}},
+\code{\link{CompleteBernsteinFunction-class}},
+\code{\link{CompositeScaledBernsteinFunction-class}},
+\code{\link{ConstantBernsteinFunction-class}},
+\code{\link{ConvexCombinationOfBernsteinFunctions-class}},
+\code{\link{ExponentialBernsteinFunction-class}},
+\code{\link{InverseGaussianBernsteinFunction-class}},
+\code{\link{LevyBernsteinFunction-class}},
+\code{\link{LinearBernsteinFunction-class}},
+\code{\link{ParetoBernsteinFunction-class}},
+\code{\link{PoissonBernsteinFunction-class}},
+\code{\link{ScaledBernsteinFunction-class}},
+\code{\link{SumOfBernsteinFunctions-class}}
+
+Other Levy Bernstein function classes: 
+\code{\link{AlphaStableBernsteinFunction-class}},
+\code{\link{CompleteBernsteinFunction-class}},
+\code{\link{ExponentialBernsteinFunction-class}},
+\code{\link{InverseGaussianBernsteinFunction-class}},
+\code{\link{LevyBernsteinFunction-class}},
+\code{\link{ParetoBernsteinFunction-class}},
+\code{\link{PoissonBernsteinFunction-class}}
+
+Other Complete Bernstein function classes: 
+\code{\link{AlphaStableBernsteinFunction-class}},
+\code{\link{ExponentialBernsteinFunction-class}},
+\code{\link{InverseGaussianBernsteinFunction-class}}
 }
+\concept{Bernstein function classes}
+\concept{Complete Bernstein function classes}
+\concept{Levy Bernstein function classes}
+\concept{Logarithmic Bernstein function classes}
