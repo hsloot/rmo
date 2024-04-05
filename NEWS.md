@@ -20,7 +20,7 @@
 - Bugfix for consistent use of STL headers and attribute [[maybe_unused]] in C++
   code
 
-# rmo 0.8.0
+# rmo 0.8
 
 - **Breaking change**: Rename simulation method `*_markovian` to `*_mdcm` and
   `*_arnold` to `*_am`
