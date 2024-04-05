@@ -7,59 +7,53 @@ reference:
 - title: Package
   desc: ~
   contents:
-  - "`rmo-package`"
+  - rmo-package
 
 - title: Sampling functions
   desc: ~
   contents:
-  - matches("^rmo$")
-  - matches("^rexmo$")
-  - matches("^rextmo$")
-  - matches("^rpextmo$")
-
-
-- title: Drop-in parameter factories
-  desc: ~
-  contents:
-  - matches("intensities")
+  - rmo
+  - rexmo
+  - rextmo
+  - rpextmo
 
 - title: Bernstein functions
 
 - subtitle: Virtual classes
   desc: ~
   contents:
-  - "`BernsteinFunction-class`"
-  - "`LevyBernsteinFunction-class`"
-  - "`CompleteBernsteinFunction-class`"
+  - BernsteinFunction-class
+  - LevyBernsteinFunction-class
+  - CompleteBernsteinFunction-class
 
 - subtitle: Bernstein function arithmetics
   desc: ~
   contents:
-  - "`ScaledBernsteinFunction-class`"
-  - "`CompositeScaledBernsteinFunction-class`"
-  - "`SumOfBernsteinFunctions-class`"
-  - "`ConvexCombinationOfBernsteinFunctions-class`"
+  - ScaledBernsteinFunction-class
+  - CompositeScaledBernsteinFunction-class
+  - SumOfBernsteinFunctions-class
+  - ConvexCombinationOfBernsteinFunctions-class
 
 - subtitle: Boundary cases
   desc: ~
   contents:
-  - "`LinearBernsteinFunction-class`"
-  - "`ConstantBernsteinFunction-class`"
+  - LinearBernsteinFunction-class
+  - ConstantBernsteinFunction-class
 
 - subtitle: Algebraic Bernstein functions
   desc: ~
   contents:
-  - "`ParetoBernsteinFunction-class`"
-  - "`AlphaStableBernsteinFunction-class`"
-  - "`InverseGaussianBernsteinFunction-class`"
-  - "`ExponentialBernsteinFunction-class`"
+  - ParetoBernsteinFunction-class
+  - AlphaStableBernsteinFunction-class
+  - InverseGaussianBernsteinFunction-class
+  - ExponentialBernsteinFunction-class
 
 - subtitle: Logarithmic Bernstein functions
   desc: ~
   contents:
-  - "`GammaBernsteinFunction-class`"
+  - GammaBernsteinFunction-class
 
 - subtitle: Other Bernstein Functions
   desc: ~
   contents:
-  - "`PoissonBernsteinFunction-class`"
+  - PoissonBernsteinFunction-class
