@@ -20,7 +20,7 @@ $$"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/
     
     <a class="navbar-brand me-2" href="../index.html">rmo</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.5</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.6</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -72,67 +72,15 @@ $$
 $$</p>
     </div>
 
-    <div class="section level2">
-    <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">levyDensity</span><span class="op">(</span><span class="va">object</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># S4 method for LevyBernsteinFunction</span></span>
-<span><span class="fu"><a href="BernsteinFunction-class.html">valueOf</a></span><span class="op">(</span></span>
-<span>  <span class="va">object</span>,</span>
-<span>  <span class="va">x</span>,</span>
-<span>  <span class="va">difference_order</span>,</span>
-<span>  n <span class="op">=</span> <span class="fl">1L</span>,</span>
-<span>  k <span class="op">=</span> <span class="fl">0L</span>,</span>
-<span>  cscale <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  <span class="va">...</span>,</span>
-<span>  method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"default"</span>, <span class="st">"levy"</span><span class="op">)</span>,</span>
-<span>  tolerance <span class="op">=</span> <span class="va">.Machine</span><span class="op">$</span><span class="va">double.eps</span><span class="op">^</span><span class="fl">0.5</span></span>
-<span><span class="op">)</span></span></code></pre></div>
-    </div>
 
-    <div class="section level2">
-    <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
-    <dl><dt>object</dt>
-<dd><p>An object deriving from LevyBernsteinFunction
-(for <code>levyDensity</code>) or <a href="CompleteBernsteinFunction-class.html">CompleteBernsteinFunction</a>
-(for <code>stieltjesDensity</code>).</p></dd>
-
-
-<dt>x</dt>
-<dd><p>a nonnegativ numeric vector at which the iterated difference of
-the Bernstein function is evaluated.</p></dd>
-
-
-<dt>difference_order</dt>
-<dd><p>a nonnegative integer with the order of the
-alternating iterated forward differences taken on the Bernstein function.</p></dd>
-
-
-<dt>n, k</dt>
-<dd><p>nonnegative numbers for the binomial factor.</p></dd>
-
-
-<dt>cscale</dt>
-<dd><p>a positive numeric scalar with the composite scaling factor.</p></dd>
-
-
-<dt>...</dt>
-<dd><p>pass-through parameter</p></dd>
-
-
-<dt>method</dt>
-<dd><p>Method to calculate the result; use <code>method = "levy"</code> for
-using the Lévy representation and <code>method = "stieltjes"</code> for using the
-Stieltjes representation.</p></dd>
-
-
-<dt>tolerance</dt>
-<dd><p>(Relative) tolerance, passed down to <code><a href="https://rdrr.io/r/stats/integrate.html" class="external-link">stats::integrate()</a></code></p></dd>
-
-</dl></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>For <em>continuous Lévy densities</em>, the values of the Bernstein function are
+    
+<div class="section">
+<h3 id="evaluation-of-bernstein-functions-with-l-vy-densities">Evaluation of Bernstein functions with Lévy densities<a class="anchor" aria-label="anchor" href="#evaluation-of-bernstein-functions-with-l-vy-densities"></a></h3>
+
+
+<p>For <em>continuous Lévy densities</em>, the values of the Bernstein function are
 calculated with <code><a href="https://rdrr.io/r/stats/integrate.html" class="external-link">stats::integrate()</a></code> by using the representation
 $$
   \psi(x)
@@ -160,20 +108,39 @@ $$
     = \sum_{i} \operatorname{e}^{-u_i x} (1 - \operatorname{e}^{-u_i})^j y_i,
     \quad x &gt; 0 .
 $$</p>
+</div>
+
     </div>
     <div class="section level2">
-    <h2 id="functions">Functions<a class="anchor" aria-label="anchor" href="#functions"></a></h2>
-    
-<ul><li><p><code>levyDensity()</code>: returns the <em>Lévy density</em> with <code>lower</code>, <code>upper</code>, and <code>type</code>
-attributes if continuous and returns a <code>data.frame</code> with named columns
-<code>x</code> (atoms) and <code>y</code> (weights) as well as a type attribute if discrete.
-The <code>type</code> attribute is either <code>"continuous"</code> or <code>"discrete"</code>.</p></li>
-<li><p><code>valueOf(LevyBernsteinFunction)</code>: Calculates the iterated differences of the Bernstein function,
-see <code><a href="BernsteinFunction-class.html">valueOf()</a></code></p></li>
-</ul></div>
-    <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><a href="BernsteinFunction-class.html">BernsteinFunction</a>, <code><a href="BernsteinFunction-class.html">valueOf()</a></code></p></div>
+    <div class="dont-index"><p><code><a href="levyDensity.html">levyDensity()</a></code>, <code><a href="valueOf.html">valueOf()</a></code>, <code><a href="intensities.html">intensities()</a></code>, <code><a href="uexIntensities.html">uexIntensities()</a></code>,
+<code><a href="exIntensities.html">exIntensities()</a></code>, <code><a href="exQMatrix.html">exQMatrix()</a></code>, <code><a href="rextmo.html">rextmo()</a></code>, <code><a href="rpextmo.html">rpextmo()</a></code></p>
+<p>Other Bernstein function classes: 
+<code><a href="AlphaStableBernsteinFunction-class.html">AlphaStableBernsteinFunction-class</a></code>,
+<code><a href="BernsteinFunction-class.html">BernsteinFunction-class</a></code>,
+<code><a href="CompleteBernsteinFunction-class.html">CompleteBernsteinFunction-class</a></code>,
+<code><a href="CompositeScaledBernsteinFunction-class.html">CompositeScaledBernsteinFunction-class</a></code>,
+<code><a href="ConstantBernsteinFunction-class.html">ConstantBernsteinFunction-class</a></code>,
+<code><a href="ConvexCombinationOfBernsteinFunctions-class.html">ConvexCombinationOfBernsteinFunctions-class</a></code>,
+<code><a href="ExponentialBernsteinFunction-class.html">ExponentialBernsteinFunction-class</a></code>,
+<code><a href="GammaBernsteinFunction-class.html">GammaBernsteinFunction-class</a></code>,
+<code><a href="InverseGaussianBernsteinFunction-class.html">InverseGaussianBernsteinFunction-class</a></code>,
+<code><a href="LinearBernsteinFunction-class.html">LinearBernsteinFunction-class</a></code>,
+<code><a href="ParetoBernsteinFunction-class.html">ParetoBernsteinFunction-class</a></code>,
+<code><a href="PoissonBernsteinFunction-class.html">PoissonBernsteinFunction-class</a></code>,
+<code><a href="ScaledBernsteinFunction-class.html">ScaledBernsteinFunction-class</a></code>,
+<code><a href="SumOfBernsteinFunctions-class.html">SumOfBernsteinFunctions-class</a></code></p>
+<p>Other Virtual Bernstein function classes: 
+<code><a href="BernsteinFunction-class.html">BernsteinFunction-class</a></code>,
+<code><a href="CompleteBernsteinFunction-class.html">CompleteBernsteinFunction-class</a></code></p>
+<p>Other Levy Bernstein function classes: 
+<code><a href="AlphaStableBernsteinFunction-class.html">AlphaStableBernsteinFunction-class</a></code>,
+<code><a href="CompleteBernsteinFunction-class.html">CompleteBernsteinFunction-class</a></code>,
+<code><a href="ExponentialBernsteinFunction-class.html">ExponentialBernsteinFunction-class</a></code>,
+<code><a href="GammaBernsteinFunction-class.html">GammaBernsteinFunction-class</a></code>,
+<code><a href="InverseGaussianBernsteinFunction-class.html">InverseGaussianBernsteinFunction-class</a></code>,
+<code><a href="ParetoBernsteinFunction-class.html">ParetoBernsteinFunction-class</a></code>,
+<code><a href="PoissonBernsteinFunction-class.html">PoissonBernsteinFunction-class</a></code></p></div>
     </div>
 
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

@@ -85,7 +85,22 @@
     <loc>/reference/SumOfBernsteinFunctions-class.html</loc>
   </url>
   <url>
+    <loc>/reference/exIntensities.html</loc>
+  </url>
+  <url>
+    <loc>/reference/exQMatrix.html</loc>
+  </url>
+  <url>
+    <loc>/reference/hidden_aliases.html</loc>
+  </url>
+  <url>
     <loc>/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>/reference/intensities.html</loc>
+  </url>
+  <url>
+    <loc>/reference/levyDensity.html</loc>
   </url>
   <url>
     <loc>/reference/rexmo.html</loc>
@@ -101,5 +116,14 @@
   </url>
   <url>
     <loc>/reference/rpextmo.html</loc>
+  </url>
+  <url>
+    <loc>/reference/stieltjesDensity.html</loc>
+  </url>
+  <url>
+    <loc>/reference/uexIntensities.html</loc>
+  </url>
+  <url>
+    <loc>/reference/valueOf.html</loc>
   </url>
 </urlset>

@@ -22,7 +22,7 @@ $$"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/
     
     <a class="navbar-brand me-2" href="../index.html">rmo</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.5</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.6</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -75,38 +75,7 @@ $$
 $$</p>
     </div>
 
-    <div class="section level2">
-    <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S4 method for ParetoBernsteinFunction</span></span>
-<span><span class="fu">initialize</span><span class="op">(</span><span class="va">.Object</span>, <span class="va">alpha</span>, <span class="va">x0</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># S4 method for ParetoBernsteinFunction</span></span>
-<span><span class="fu">show</span><span class="op">(</span><span class="va">object</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># S4 method for ParetoBernsteinFunction</span></span>
-<span><span class="fu"><a href="LevyBernsteinFunction-class.html">levyDensity</a></span><span class="op">(</span><span class="va">object</span><span class="op">)</span></span></code></pre></div>
-    </div>
 
-    <div class="section level2">
-    <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
-    <dl><dt>.Object</dt>
-<dd><p>An object:  see the “Initialize Methods” section.</p></dd>
-
-
-<dt>alpha</dt>
-<dd><p>Positive number between zero and one (bounds excl.).</p></dd>
-
-
-<dt>x0</dt>
-<dd><p>Positive number.</p></dd>
-
-
-<dt>object</dt>
-<dd><p>An object deriving from <a href="LevyBernsteinFunction-class.html">LevyBernsteinFunction</a>
-(for <code>levyDensity</code>) or <a href="CompleteBernsteinFunction-class.html">CompleteBernsteinFunction</a>
-(for <code>stieltjesDensity</code>).</p></dd>
-
-</dl></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>For this Bernstein function, the higher-order alternating iterated forward
@@ -124,15 +93,17 @@ $$</p>
 function can be used to approximate the Bernstein function of an
 \(\alpha\)-stable subordinator, see Sec. 5.3 of
 (Loroño 2015)
-.</p>
+.</p><div class="section">
+<h3 id="l-vy-density">Lévy density<a class="anchor" aria-label="anchor" href="#l-vy-density"></a></h3>
+
+
+<p>$$
+  \nu(du)
+    = \alpha \frac{x_0^\alpha}{u^{\alpha + 1}}, \quad u &gt; x_0 .
+$$</p>
+</div>
+
     </div>
-    <div class="section level2">
-    <h2 id="functions">Functions<a class="anchor" aria-label="anchor" href="#functions"></a></h2>
-    
-<ul><li><p><code>initialize(ParetoBernsteinFunction)</code>: Constructor</p></li>
-<li><p><code>show(ParetoBernsteinFunction)</code>: Display the object.</p></li>
-<li><p><code>levyDensity(ParetoBernsteinFunction)</code>: see <a href="LevyBernsteinFunction-class.html">LevyBernsteinFunction</a></p></li>
-</ul></div>
     <div class="section level2">
     <h2 id="slots">Slots<a class="anchor" aria-label="anchor" href="#slots"></a></h2>
     
@@ -147,15 +118,6 @@ function can be used to approximate the Bernstein function of an
 
 </dl></div>
     <div class="section level2">
-    <h2 id="l-vy-density">Lévy density<a class="anchor" aria-label="anchor" href="#l-vy-density"></a></h2>
-    
-
-<p>$$
-  \nu(du)
-    = \alpha \frac{x_0^\alpha}{u^{\alpha + 1}}, \quad u &gt; x_0 .
-$$</p>
-    </div>
-    <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
     <p>Loroño LF (2015).
 <em>Selected topics in financial engineering: first-exit times and dependence structures of Marshall-Olkin Kind</em>.
@@ -163,19 +125,99 @@ Ph.D. thesis, University of the Basque Country.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><a href="BernsteinFunction-class.html">BernsteinFunction</a>, <a href="LevyBernsteinFunction-class.html">LevyBernsteinFunction</a>,
-<code><a href="BernsteinFunction-class.html">valueOf()</a></code></p></div>
+    <div class="dont-index"><p><code><a href="levyDensity.html">levyDensity()</a></code>,  <code><a href="valueOf.html">valueOf()</a></code>, <code><a href="intensities.html">intensities()</a></code>, <code><a href="uexIntensities.html">uexIntensities()</a></code>,
+<code><a href="exIntensities.html">exIntensities()</a></code>, <code><a href="exQMatrix.html">exQMatrix()</a></code>, <code><a href="rextmo.html">rextmo()</a></code>, <code><a href="rpextmo.html">rpextmo()</a></code></p>
+<p>Other Bernstein function classes: 
+<code><a href="AlphaStableBernsteinFunction-class.html">AlphaStableBernsteinFunction-class</a></code>,
+<code><a href="BernsteinFunction-class.html">BernsteinFunction-class</a></code>,
+<code><a href="CompleteBernsteinFunction-class.html">CompleteBernsteinFunction-class</a></code>,
+<code><a href="CompositeScaledBernsteinFunction-class.html">CompositeScaledBernsteinFunction-class</a></code>,
+<code><a href="ConstantBernsteinFunction-class.html">ConstantBernsteinFunction-class</a></code>,
+<code><a href="ConvexCombinationOfBernsteinFunctions-class.html">ConvexCombinationOfBernsteinFunctions-class</a></code>,
+<code><a href="ExponentialBernsteinFunction-class.html">ExponentialBernsteinFunction-class</a></code>,
+<code><a href="GammaBernsteinFunction-class.html">GammaBernsteinFunction-class</a></code>,
+<code><a href="InverseGaussianBernsteinFunction-class.html">InverseGaussianBernsteinFunction-class</a></code>,
+<code><a href="LevyBernsteinFunction-class.html">LevyBernsteinFunction-class</a></code>,
+<code><a href="LinearBernsteinFunction-class.html">LinearBernsteinFunction-class</a></code>,
+<code><a href="PoissonBernsteinFunction-class.html">PoissonBernsteinFunction-class</a></code>,
+<code><a href="ScaledBernsteinFunction-class.html">ScaledBernsteinFunction-class</a></code>,
+<code><a href="SumOfBernsteinFunctions-class.html">SumOfBernsteinFunctions-class</a></code></p>
+<p>Other Levy Bernstein function classes: 
+<code><a href="AlphaStableBernsteinFunction-class.html">AlphaStableBernsteinFunction-class</a></code>,
+<code><a href="CompleteBernsteinFunction-class.html">CompleteBernsteinFunction-class</a></code>,
+<code><a href="ExponentialBernsteinFunction-class.html">ExponentialBernsteinFunction-class</a></code>,
+<code><a href="GammaBernsteinFunction-class.html">GammaBernsteinFunction-class</a></code>,
+<code><a href="InverseGaussianBernsteinFunction-class.html">InverseGaussianBernsteinFunction-class</a></code>,
+<code><a href="LevyBernsteinFunction-class.html">LevyBernsteinFunction-class</a></code>,
+<code><a href="PoissonBernsteinFunction-class.html">PoissonBernsteinFunction-class</a></code></p>
+<p>Other Algebraic Bernstein function classes: 
+<code><a href="AlphaStableBernsteinFunction-class.html">AlphaStableBernsteinFunction-class</a></code>,
+<code><a href="ExponentialBernsteinFunction-class.html">ExponentialBernsteinFunction-class</a></code>,
+<code><a href="InverseGaussianBernsteinFunction-class.html">InverseGaussianBernsteinFunction-class</a></code></p></div>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">ParetoBernsteinFunction</span><span class="op">(</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Create an object of class ParetoBernsteinFunction</span></span></span>
+<span class="r-in"><span><span class="fu">ParetoBernsteinFunction</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> An object of class "ParetoBernsteinFunction"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 	 (invalid or not initialized)</span>
-<span class="r-in"><span><span class="fu">ParetoBernsteinFunction</span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.2</span>, x0 <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">ParetoBernsteinFunction</span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.2</span>, x0 <span class="op">=</span> <span class="fl">1e-2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> An object of class "ParetoBernsteinFunction"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> - alpha: 0.2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - x0: 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - x0: 0.01</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Create a Lévy density</span></span></span>
+<span class="r-in"><span><span class="va">bf</span> <span class="op">&lt;-</span> <span class="fu">ParetoBernsteinFunction</span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.7</span>, x0 <span class="op">=</span> <span class="fl">1e-2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">levy_density</span> <span class="op">&lt;-</span> <span class="fu"><a href="levyDensity.html">levyDensity</a></span><span class="op">(</span><span class="va">bf</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/integrate.html" class="external-link">integrate</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">pmin</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">x</span><span class="op">)</span> <span class="op">*</span> <span class="fu">levy_density</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  lower <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">levy_density</span>, <span class="st">"lower"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  upper <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">levy_density</span>, <span class="st">"upper"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 0.1093688 with absolute error &lt; 7.4e-05</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Evaluate the Bernstein function</span></span></span>
+<span class="r-in"><span><span class="va">bf</span> <span class="op">&lt;-</span> <span class="fu">ParetoBernsteinFunction</span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.3</span>, x0 <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="valueOf.html">valueOf</a></span><span class="op">(</span><span class="va">bf</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.9421122 0.9865239 0.9963303 0.9989241 0.9996704</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Calculate shock-arrival intensities</span></span></span>
+<span class="r-in"><span><span class="va">bf</span> <span class="op">&lt;-</span> <span class="fu">ParetoBernsteinFunction</span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.8</span>, x0 <span class="op">=</span> <span class="fl">1e-2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="intensities.html">intensities</a></span><span class="op">(</span><span class="va">bf</span>, <span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.03709606 0.03709606 0.00846491 0.03709606 0.00846491 0.00846491 0.02132417</span>
+<span class="r-in"><span><span class="fu"><a href="intensities.html">intensities</a></span><span class="op">(</span><span class="va">bf</span>, <span class="fl">3</span>, tolerance <span class="op">=</span> <span class="fl">1e-4</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.037096063 0.037096063 0.008464909 0.037096063 0.008464909 0.008464909</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [7] 0.021324170</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Calculate exchangeable shock-arrival intensities</span></span></span>
+<span class="r-in"><span><span class="va">bf</span> <span class="op">&lt;-</span> <span class="fu">ParetoBernsteinFunction</span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.4</span>, x0 <span class="op">=</span> <span class="fl">1e-2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="uexIntensities.html">uexIntensities</a></span><span class="op">(</span><span class="va">bf</span>, <span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.04823193 0.02054932 0.14003630</span>
+<span class="r-in"><span><span class="fu"><a href="uexIntensities.html">uexIntensities</a></span><span class="op">(</span><span class="va">bf</span>, <span class="fl">3</span>, tolerance <span class="op">=</span> <span class="fl">1e-4</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.04823193 0.02054932 0.14003630</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Calculate exchangeable shock-size arrival intensities</span></span></span>
+<span class="r-in"><span><span class="va">bf</span> <span class="op">&lt;-</span> <span class="fu">ParetoBernsteinFunction</span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.2</span>, x0 <span class="op">=</span> <span class="fl">1e-2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="exIntensities.html">exIntensities</a></span><span class="op">(</span><span class="va">bf</span>, <span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.12750303 0.07180652 0.37062172</span>
+<span class="r-in"><span><span class="fu"><a href="exIntensities.html">exIntensities</a></span><span class="op">(</span><span class="va">bf</span>, <span class="fl">3</span>, tolerance <span class="op">=</span> <span class="fl">1e-4</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.12750303 0.07180651 0.37062172</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Calculate the Markov generator</span></span></span>
+<span class="r-in"><span><span class="va">bf</span> <span class="op">&lt;-</span> <span class="fu">ParetoBernsteinFunction</span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.6</span>, x0 <span class="op">=</span> <span class="fl">1e-2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="exQMatrix.html">exQMatrix</a></span><span class="op">(</span><span class="va">bf</span>, <span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]       [,2]        [,3]       [,4]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -0.2257529  0.1306000  0.04112552 0.05402745</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  0.0000000 -0.1822196  0.11448366 0.06773596</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]  0.0000000  0.0000000 -0.12497779 0.12497779</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]  0.0000000  0.0000000  0.00000000 0.00000000</span>
+<span class="r-in"><span><span class="fu"><a href="exQMatrix.html">exQMatrix</a></span><span class="op">(</span><span class="va">bf</span>, <span class="fl">3</span>, tolerance <span class="op">=</span> <span class="fl">1e-4</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]       [,2]        [,3]       [,4]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -0.2257529  0.1306000  0.04112552 0.05402745</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  0.0000000 -0.1822196  0.11448366 0.06773596</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]  0.0000000  0.0000000 -0.12497779 0.12497779</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]  0.0000000  0.0000000  0.00000000 0.00000000</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

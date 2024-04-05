@@ -12,7 +12,7 @@ Bernstein functions."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/
     
     <a class="navbar-brand me-2" href="../index.html">rmo</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.5</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.6</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -60,65 +60,7 @@ Bernstein functions."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/
 <em>Bernstein functions</em>.</p>
     </div>
 
-    <div class="section level2">
-    <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">valueOf</span><span class="op">(</span><span class="va">object</span>, <span class="va">x</span>, difference_order <span class="op">=</span> <span class="fl">0L</span>, n <span class="op">=</span> <span class="fl">1L</span>, k <span class="op">=</span> <span class="fl">0L</span>, cscale <span class="op">=</span> <span class="fl">1</span>, <span class="va">...</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">uexIntensities</span><span class="op">(</span><span class="va">object</span>, <span class="va">d</span>, cscale <span class="op">=</span> <span class="fl">1</span>, <span class="va">...</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">intensities</span><span class="op">(</span><span class="va">object</span>, <span class="va">d</span>, cscale <span class="op">=</span> <span class="fl">1</span>, <span class="va">...</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">exIntensities</span><span class="op">(</span><span class="va">object</span>, <span class="va">d</span>, cscale <span class="op">=</span> <span class="fl">1</span>, <span class="va">...</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">exQMatrix</span><span class="op">(</span><span class="va">object</span>, <span class="va">d</span>, cscale <span class="op">=</span> <span class="fl">1</span>, <span class="va">...</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># S4 method for BernsteinFunction</span></span>
-<span><span class="fu">uexIntensities</span><span class="op">(</span><span class="va">object</span>, <span class="va">d</span>, cscale <span class="op">=</span> <span class="fl">1</span>, <span class="va">...</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># S4 method for BernsteinFunction</span></span>
-<span><span class="fu">exIntensities</span><span class="op">(</span><span class="va">object</span>, <span class="va">d</span>, cscale <span class="op">=</span> <span class="fl">1</span>, <span class="va">...</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># S4 method for BernsteinFunction</span></span>
-<span><span class="fu">intensities</span><span class="op">(</span><span class="va">object</span>, <span class="va">d</span>, cscale <span class="op">=</span> <span class="fl">1</span>, <span class="va">...</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># S4 method for BernsteinFunction</span></span>
-<span><span class="fu">exQMatrix</span><span class="op">(</span><span class="va">object</span>, <span class="va">d</span>, cscale <span class="op">=</span> <span class="fl">1</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
-    </div>
 
-    <div class="section level2">
-    <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
-    <dl><dt>object</dt>
-<dd><p>An object deriving from <a href="LevyBernsteinFunction-class.html">LevyBernsteinFunction</a>
-(for <code>levyDensity</code>) or <a href="CompleteBernsteinFunction-class.html">CompleteBernsteinFunction</a>
-(for <code>stieltjesDensity</code>).</p></dd>
-
-
-<dt>x</dt>
-<dd><p>a nonnegativ numeric vector at which the iterated difference of
-the Bernstein function is evaluated.</p></dd>
-
-
-<dt>difference_order</dt>
-<dd><p>a nonnegative integer with the order of the
-alternating iterated forward differences taken on the Bernstein function.</p></dd>
-
-
-<dt>n, k</dt>
-<dd><p>nonnegative numbers for the binomial factor.</p></dd>
-
-
-<dt>cscale</dt>
-<dd><p>a positive numeric scalar with the composite scaling factor.</p></dd>
-
-
-<dt>...</dt>
-<dd><p>pass-through parameter</p></dd>
-
-
-<dt>d</dt>
-<dd><p>a positive integer, larger than two, for the <em>dimension</em>.</p></dd>
-
-</dl></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>A <em>Bernstein function</em> is a nonnegative, nondecreasing, infinitely often
@@ -156,25 +98,6 @@ $$</p>
 
     </div>
     <div class="section level2">
-    <h2 id="functions">Functions<a class="anchor" aria-label="anchor" href="#functions"></a></h2>
-    
-<ul><li><p><code>valueOf()</code>: Calculate the values for a Bernstein function and its higher-order,
-alternating iterated forward differences, possibly scaled by a binomial
-coefficient, i.e.,
-$$
-      {(-1)}^{j-1} \Delta^{j}{ \psi(c x) } ,
-          \quad x &gt; 0 .
-  $$</p></li>
-<li><p><code>uexIntensities()</code>: Calculates (unscaled) <em>exchangeable shock-arrival intensities</em>,
-see <code><a href="rmo.html">rmo()</a></code> and <code><a href="rexmo.html">rexmo()</a></code>.</p></li>
-<li><p><code>intensities()</code>: Calculates the <em>shock-arrival intensities</em>, the <code>intensities</code> parameter for
-<code><a href="rmo.html">rmo()</a></code>.</p></li>
-<li><p><code>exIntensities()</code>: Calculates <em>exchangeable shock-size-arrival intensities</em>, the
-<code>ex_intensities</code> parameter for <code><a href="rexmo.html">rexmo()</a></code>.</p></li>
-<li><p><code>exQMatrix()</code>: Calculates the <em>infinitesimal Markov generator matrix</em> of the corresponding
-(Markovian) default-counting process, used internally by <code><a href="rexmo.html">rexmo()</a></code>.</p></li>
-</ul></div>
-    <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
     <p>Schilling RL, Song R, Vondracek Z (2012).
 <em>Bernstein functions</em>, 2 edition.
@@ -184,35 +107,28 @@ De Gruyter.
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><a href="LevyBernsteinFunction-class.html">LevyBernsteinFunction</a>, <a href="ScaledBernsteinFunction-class.html">ScaledBernsteinFunction</a>,
-<a href="SumOfBernsteinFunctions-class.html">SumOfBernsteinFunctions</a>, <a href="CompositeScaledBernsteinFunction-class.html">CompositeScaledBernsteinFunction</a>,
-<a href="CompleteBernsteinFunction-class.html">CompleteBernsteinFunction</a>, <a href="ConstantBernsteinFunction-class.html">ConstantBernsteinFunction</a>,
-<a href="LinearBernsteinFunction-class.html">LinearBernsteinFunction</a>, <a href="PoissonBernsteinFunction-class.html">PoissonBernsteinFunction</a>,
-<a href="AlphaStableBernsteinFunction-class.html">AlphaStableBernsteinFunction</a>, <a href="ExponentialBernsteinFunction-class.html">ExponentialBernsteinFunction</a>,
-<a href="InverseGaussianBernsteinFunction-class.html">InverseGaussianBernsteinFunction</a>, <a href="GammaBernsteinFunction-class.html">GammaBernsteinFunction</a>,
-<a href="ParetoBernsteinFunction-class.html">ParetoBernsteinFunction</a></p></div>
+    <div class="dont-index"><p><code><a href="valueOf.html">valueOf()</a></code>, <code><a href="intensities.html">intensities()</a></code>, <code><a href="uexIntensities.html">uexIntensities()</a></code>, <code><a href="exIntensities.html">exIntensities()</a></code>,
+<code><a href="exQMatrix.html">exQMatrix()</a></code>, <code><a href="rextmo.html">rextmo()</a></code>, <code><a href="rpextmo.html">rpextmo()</a></code></p>
+<p>Other Bernstein function classes: 
+<code><a href="AlphaStableBernsteinFunction-class.html">AlphaStableBernsteinFunction-class</a></code>,
+<code><a href="CompleteBernsteinFunction-class.html">CompleteBernsteinFunction-class</a></code>,
+<code><a href="CompositeScaledBernsteinFunction-class.html">CompositeScaledBernsteinFunction-class</a></code>,
+<code><a href="ConstantBernsteinFunction-class.html">ConstantBernsteinFunction-class</a></code>,
+<code><a href="ConvexCombinationOfBernsteinFunctions-class.html">ConvexCombinationOfBernsteinFunctions-class</a></code>,
+<code><a href="ExponentialBernsteinFunction-class.html">ExponentialBernsteinFunction-class</a></code>,
+<code><a href="GammaBernsteinFunction-class.html">GammaBernsteinFunction-class</a></code>,
+<code><a href="InverseGaussianBernsteinFunction-class.html">InverseGaussianBernsteinFunction-class</a></code>,
+<code><a href="LevyBernsteinFunction-class.html">LevyBernsteinFunction-class</a></code>,
+<code><a href="LinearBernsteinFunction-class.html">LinearBernsteinFunction-class</a></code>,
+<code><a href="ParetoBernsteinFunction-class.html">ParetoBernsteinFunction-class</a></code>,
+<code><a href="PoissonBernsteinFunction-class.html">PoissonBernsteinFunction-class</a></code>,
+<code><a href="ScaledBernsteinFunction-class.html">ScaledBernsteinFunction-class</a></code>,
+<code><a href="SumOfBernsteinFunctions-class.html">SumOfBernsteinFunctions-class</a></code></p>
+<p>Other Virtual Bernstein function classes: 
+<code><a href="CompleteBernsteinFunction-class.html">CompleteBernsteinFunction-class</a></code>,
+<code><a href="LevyBernsteinFunction-class.html">LevyBernsteinFunction-class</a></code></p></div>
     </div>
 
-    <div class="section level2">
-    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">exIntensities</span><span class="op">(</span><span class="fu"><a href="AlphaStableBernsteinFunction-class.html">AlphaStableBernsteinFunction</a></span><span class="op">(</span><span class="fl">4e-1</span><span class="op">)</span>, <span class="fl">3L</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.6970130 0.2615107 0.5933218</span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">exIntensities</span><span class="op">(</span><span class="fu"><a href="AlphaStableBernsteinFunction-class.html">AlphaStableBernsteinFunction</a></span><span class="op">(</span><span class="fl">4e-1</span><span class="op">)</span>, <span class="fl">3L</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.6970130 0.2615107 0.5933218</span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">intensities</span><span class="op">(</span><span class="fu"><a href="AlphaStableBernsteinFunction-class.html">AlphaStableBernsteinFunction</a></span><span class="op">(</span><span class="fl">4e-1</span><span class="op">)</span>, <span class="fl">3L</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.23233766 0.23233766 0.08717025 0.23233766 0.08717025 0.08717025 0.59332184</span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">exQMatrix</span><span class="op">(</span><span class="fu"><a href="AlphaStableBernsteinFunction-class.html">AlphaStableBernsteinFunction</a></span><span class="op">(</span><span class="fl">4e-1</span><span class="op">)</span>, <span class="fl">3L</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>           [,1]      [,2]       [,3]      [,4]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -1.551846  0.697013  0.2615107 0.5933218</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  0.000000 -1.319508  0.6390158 0.6804921</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]  0.000000  0.000000 -1.0000000 1.0000000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]  0.000000  0.000000  0.0000000 0.0000000</span>
-<span class="r-in"><span></span></span>
-</code></pre></div>
-    </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>
 

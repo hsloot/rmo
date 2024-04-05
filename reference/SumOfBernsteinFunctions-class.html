@@ -20,7 +20,7 @@ is also a Bernstein function."><!-- mathjax --><script src="https://cdnjs.cloudf
     
     <a class="navbar-brand me-2" href="../index.html">rmo</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.5</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.6</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -72,69 +72,7 @@ $$
 is also a Bernstein function.</p>
     </div>
 
-    <div class="section level2">
-    <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S4 method for SumOfBernsteinFunctions</span></span>
-<span><span class="fu">initialize</span><span class="op">(</span><span class="va">.Object</span>, <span class="va">first</span>, <span class="va">second</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># S4 method for SumOfBernsteinFunctions</span></span>
-<span><span class="fu">show</span><span class="op">(</span><span class="va">object</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># S4 method for SumOfBernsteinFunctions</span></span>
-<span><span class="fu"><a href="BernsteinFunction-class.html">valueOf</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">x</span>, difference_order <span class="op">=</span> <span class="fl">0L</span>, n <span class="op">=</span> <span class="fl">1L</span>, k <span class="op">=</span> <span class="fl">0L</span>, cscale <span class="op">=</span> <span class="fl">1</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
-    </div>
 
-    <div class="section level2">
-    <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
-    <dl><dt>.Object</dt>
-<dd><p>An object:  see the “Initialize Methods” section.</p></dd>
-
-
-<dt>first</dt>
-<dd><p>Derives from <a href="BernsteinFunction-class.html">BernsteinFunction</a>.</p></dd>
-
-
-<dt>second</dt>
-<dd><p>Derives from <a href="BernsteinFunction-class.html">BernsteinFunction</a>.</p></dd>
-
-
-<dt>object</dt>
-<dd><p>An object deriving from <a href="LevyBernsteinFunction-class.html">LevyBernsteinFunction</a>
-(for <code>levyDensity</code>) or <a href="CompleteBernsteinFunction-class.html">CompleteBernsteinFunction</a>
-(for <code>stieltjesDensity</code>).</p></dd>
-
-
-<dt>x</dt>
-<dd><p>a nonnegativ numeric vector at which the iterated difference of
-the Bernstein function is evaluated.</p></dd>
-
-
-<dt>difference_order</dt>
-<dd><p>a nonnegative integer with the order of the
-alternating iterated forward differences taken on the Bernstein function.</p></dd>
-
-
-<dt>n, k</dt>
-<dd><p>nonnegative numbers for the binomial factor.</p></dd>
-
-
-<dt>cscale</dt>
-<dd><p>a positive numeric scalar with the composite scaling factor.</p></dd>
-
-
-<dt>...</dt>
-<dd><p>arguments to specify properties of the new object, to
-      be passed to <code>initialize()</code>.</p></dd>
-
-</dl></div>
-    <div class="section level2">
-    <h2 id="functions">Functions<a class="anchor" aria-label="anchor" href="#functions"></a></h2>
-    
-<ul><li><p><code>initialize(SumOfBernsteinFunctions)</code>: Constructor</p></li>
-<li><p><code>show(SumOfBernsteinFunctions)</code>: Display the object.</p></li>
-<li><p><code>valueOf(SumOfBernsteinFunctions)</code>: Calculates the iterated differences of the Bernstein function,
-see <code><a href="BernsteinFunction-class.html">valueOf()</a></code></p></li>
-</ul></div>
     <div class="section level2">
     <h2 id="slots">Slots<a class="anchor" aria-label="anchor" href="#slots"></a></h2>
     
@@ -150,18 +88,39 @@ see <code><a href="BernsteinFunction-class.html">valueOf()</a></code></p></li>
 </dl></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><a href="BernsteinFunction-class.html">BernsteinFunction</a>,
-<code><a href="BernsteinFunction-class.html">valueOf()</a></code></p></div>
+    <div class="dont-index"><p><code><a href="valueOf.html">valueOf()</a></code>, <code><a href="intensities.html">intensities()</a></code>, <code><a href="uexIntensities.html">uexIntensities()</a></code>, <code><a href="exIntensities.html">exIntensities()</a></code>,
+<code><a href="exQMatrix.html">exQMatrix()</a></code>, <code><a href="rextmo.html">rextmo()</a></code>, <code><a href="rpextmo.html">rpextmo()</a></code></p>
+<p>Other Bernstein function classes: 
+<code><a href="AlphaStableBernsteinFunction-class.html">AlphaStableBernsteinFunction-class</a></code>,
+<code><a href="BernsteinFunction-class.html">BernsteinFunction-class</a></code>,
+<code><a href="CompleteBernsteinFunction-class.html">CompleteBernsteinFunction-class</a></code>,
+<code><a href="CompositeScaledBernsteinFunction-class.html">CompositeScaledBernsteinFunction-class</a></code>,
+<code><a href="ConstantBernsteinFunction-class.html">ConstantBernsteinFunction-class</a></code>,
+<code><a href="ConvexCombinationOfBernsteinFunctions-class.html">ConvexCombinationOfBernsteinFunctions-class</a></code>,
+<code><a href="ExponentialBernsteinFunction-class.html">ExponentialBernsteinFunction-class</a></code>,
+<code><a href="GammaBernsteinFunction-class.html">GammaBernsteinFunction-class</a></code>,
+<code><a href="InverseGaussianBernsteinFunction-class.html">InverseGaussianBernsteinFunction-class</a></code>,
+<code><a href="LevyBernsteinFunction-class.html">LevyBernsteinFunction-class</a></code>,
+<code><a href="LinearBernsteinFunction-class.html">LinearBernsteinFunction-class</a></code>,
+<code><a href="ParetoBernsteinFunction-class.html">ParetoBernsteinFunction-class</a></code>,
+<code><a href="PoissonBernsteinFunction-class.html">PoissonBernsteinFunction-class</a></code>,
+<code><a href="ScaledBernsteinFunction-class.html">ScaledBernsteinFunction-class</a></code></p>
+<p>Other Bernstein function transformer classes: 
+<code><a href="CompositeScaledBernsteinFunction-class.html">CompositeScaledBernsteinFunction-class</a></code>,
+<code><a href="ConvexCombinationOfBernsteinFunctions-class.html">ConvexCombinationOfBernsteinFunctions-class</a></code>,
+<code><a href="ScaledBernsteinFunction-class.html">ScaledBernsteinFunction-class</a></code></p></div>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">SumOfBernsteinFunctions</span><span class="op">(</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Create an object of class SumOfBernsteinFunctions</span></span></span>
+<span class="r-in"><span><span class="fu">SumOfBernsteinFunctions</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> An object of class "SumOfBernsteinFunctions"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 	 (invalid or not initialized)</span>
-<span class="r-in"><span><span class="va">first_bf</span> <span class="op">&lt;-</span> <span class="fu"><a href="LinearBernsteinFunction-class.html">LinearBernsteinFunction</a></span><span class="op">(</span>scale <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">second_bf</span> <span class="op">&lt;-</span> <span class="fu"><a href="AlphaStableBernsteinFunction-class.html">AlphaStableBernsteinFunction</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">SumOfBernsteinFunctions</span><span class="op">(</span>first <span class="op">=</span> <span class="va">first_bf</span>, second <span class="op">=</span> <span class="va">second_bf</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">SumOfBernsteinFunctions</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  first <span class="op">=</span> <span class="fu"><a href="LinearBernsteinFunction-class.html">LinearBernsteinFunction</a></span><span class="op">(</span>scale <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  second <span class="op">=</span> <span class="fu"><a href="AlphaStableBernsteinFunction-class.html">AlphaStableBernsteinFunction</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> An object of class "SumOfBernsteinFunctions"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> - first:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 	An object of class "LinearBernsteinFunction"</span>

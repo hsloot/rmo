@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">rmo</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.5</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.6</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -99,22 +99,6 @@
         </dt>
         <dd>Sample from parametrized extendible MO distributions</dd>
       </dl></div><div class="section level2">
-      <h2 id="drop-in-parameter-factories">Drop-in parameter factories<a class="anchor" aria-label="anchor" href="#drop-in-parameter-factories"></a></h2>
-      
-      
-
-      
-    </div><div id="" class="section level2">
-      
-      
-      
-
-      <dl><dt>
-          
-          <code><a href="BernsteinFunction-class.html">valueOf()</a></code> <code><a href="BernsteinFunction-class.html">uexIntensities()</a></code> <code><a href="BernsteinFunction-class.html">intensities()</a></code> <code><a href="BernsteinFunction-class.html">exIntensities()</a></code> <code><a href="BernsteinFunction-class.html">exQMatrix()</a></code> 
-        </dt>
-        <dd>Virtual superclass for Bernstein functions</dd>
-      </dl></div><div class="section level2">
       <h2 id="bernstein-functions">Bernstein functions<a class="anchor" aria-label="anchor" href="#bernstein-functions"></a></h2>
       
       
@@ -122,7 +106,7 @@
       
     </div><div class="section level2">
       
-      <h3 id="virtual-classes">Virtual classes<a class="anchor" aria-label="anchor" href="#virtual-classes"></a></h3>
+      <h3 id="generic-methods-for-bernstein-functions">Generic methods for Bernstein functions<a class="anchor" aria-label="anchor" href="#generic-methods-for-bernstein-functions"></a></h3>
       
 
       
@@ -133,19 +117,65 @@
 
       <dl><dt>
           
-          <code><a href="BernsteinFunction-class.html">valueOf()</a></code> <code><a href="BernsteinFunction-class.html">uexIntensities()</a></code> <code><a href="BernsteinFunction-class.html">intensities()</a></code> <code><a href="BernsteinFunction-class.html">exIntensities()</a></code> <code><a href="BernsteinFunction-class.html">exQMatrix()</a></code> 
+          <code><a href="exIntensities.html">exIntensities()</a></code> 
+        </dt>
+        <dd>Calculate exchangeable shock-size-arrival intensities</dd>
+      </dl><dl><dt>
+          
+          <code><a href="exQMatrix.html">exQMatrix()</a></code> 
+        </dt>
+        <dd>Calculate the MDCM Markovian generator matrix</dd>
+      </dl><dl><dt>
+          
+          <code><a href="intensities.html">intensities()</a></code> 
+        </dt>
+        <dd>Calculate the shock-arrival intensities</dd>
+      </dl><dl><dt>
+          
+          <code><a href="levyDensity.html">levyDensity()</a></code> 
+        </dt>
+        <dd>Return the Lévy density of a Bernstein function</dd>
+      </dl><dl><dt>
+          
+          <code><a href="stieltjesDensity.html">stieltjesDensity()</a></code> 
+        </dt>
+        <dd>Return the Stieltjes density of a Bernstein function</dd>
+      </dl><dl><dt>
+          
+          <code><a href="uexIntensities.html">uexIntensities()</a></code> 
+        </dt>
+        <dd>Calculate exchangeable shock-arrival intensities</dd>
+      </dl><dl><dt>
+          
+          <code><a href="valueOf.html">valueOf()</a></code> 
+        </dt>
+        <dd>Evaluate Bernstein Functions</dd>
+      </dl></div><div class="section level2">
+      
+      <h3 id="virtual-classes-for-bernstein-functions">Virtual classes for Bernstein Functions<a class="anchor" aria-label="anchor" href="#virtual-classes-for-bernstein-functions"></a></h3>
+      
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="BernsteinFunction-class.html">BernsteinFunction-class</a></code> 
         </dt>
         <dd>Virtual superclass for Bernstein functions</dd>
       </dl><dl><dt>
           
-          <code><a href="LevyBernsteinFunction-class.html">levyDensity()</a></code> <code><a href="LevyBernsteinFunction-class.html">valueOf(<i>&lt;LevyBernsteinFunction&gt;</i>)</a></code> 
-        </dt>
-        <dd>Virtual superclass for Bernstein functions with nonzero Lévy density</dd>
-      </dl><dl><dt>
-          
-          <code><a href="CompleteBernsteinFunction-class.html">stieltjesDensity()</a></code> <code><a href="CompleteBernsteinFunction-class.html">valueOf(<i>&lt;CompleteBernsteinFunction&gt;</i>)</a></code> 
+          <code><a href="CompleteBernsteinFunction-class.html">CompleteBernsteinFunction-class</a></code> 
         </dt>
         <dd>Virtual superclass for complete Bernstein functions</dd>
+      </dl><dl><dt>
+          
+          <code><a href="LevyBernsteinFunction-class.html">LevyBernsteinFunction-class</a></code> 
+        </dt>
+        <dd>Virtual superclass for Bernstein functions with nonzero Lévy density</dd>
       </dl></div><div class="section level2">
       
       <h3 id="bernstein-function-arithmetics">Bernstein function arithmetics<a class="anchor" aria-label="anchor" href="#bernstein-function-arithmetics"></a></h3>
@@ -159,24 +189,24 @@
 
       <dl><dt>
           
-          <code><a href="ScaledBernsteinFunction-class.html">initialize(<i>&lt;ScaledBernsteinFunction&gt;</i>)</a></code> <code><a href="ScaledBernsteinFunction-class.html">show(<i>&lt;ScaledBernsteinFunction&gt;</i>)</a></code> <code><a href="ScaledBernsteinFunction-class.html">valueOf(<i>&lt;ScaledBernsteinFunction&gt;</i>)</a></code> 
-        </dt>
-        <dd>Class for scaled Bernstein functions</dd>
-      </dl><dl><dt>
-          
-          <code><a href="CompositeScaledBernsteinFunction-class.html">initialize(<i>&lt;CompositeScaledBernsteinFunction&gt;</i>)</a></code> <code><a href="CompositeScaledBernsteinFunction-class.html">show(<i>&lt;CompositeScaledBernsteinFunction&gt;</i>)</a></code> <code><a href="CompositeScaledBernsteinFunction-class.html">valueOf(<i>&lt;CompositeScaledBernsteinFunction&gt;</i>)</a></code> 
+          <code><a href="CompositeScaledBernsteinFunction-class.html">CompositeScaledBernsteinFunction-class</a></code> <code><a href="CompositeScaledBernsteinFunction-class.html">CompositeScaledBernsteinFunction</a></code> 
         </dt>
         <dd>Class for composite scaled Bernstein functions</dd>
       </dl><dl><dt>
           
-          <code><a href="SumOfBernsteinFunctions-class.html">initialize(<i>&lt;SumOfBernsteinFunctions&gt;</i>)</a></code> <code><a href="SumOfBernsteinFunctions-class.html">show(<i>&lt;SumOfBernsteinFunctions&gt;</i>)</a></code> <code><a href="SumOfBernsteinFunctions-class.html">valueOf(<i>&lt;SumOfBernsteinFunctions&gt;</i>)</a></code> 
-        </dt>
-        <dd>Class for sums of two Bernstein functions</dd>
-      </dl><dl><dt>
-          
-          <code><a href="ConvexCombinationOfBernsteinFunctions-class.html">initialize(<i>&lt;ConvexCombinationOfBernsteinFunctions&gt;</i>)</a></code> <code><a href="ConvexCombinationOfBernsteinFunctions-class.html">show(<i>&lt;ConvexCombinationOfBernsteinFunctions&gt;</i>)</a></code> <code><a href="ConvexCombinationOfBernsteinFunctions-class.html">valueOf(<i>&lt;ConvexCombinationOfBernsteinFunctions&gt;</i>)</a></code> 
+          <code><a href="ConvexCombinationOfBernsteinFunctions-class.html">ConvexCombinationOfBernsteinFunctions-class</a></code> <code><a href="ConvexCombinationOfBernsteinFunctions-class.html">ConvexCombinationOfBernsteinFunctions</a></code> 
         </dt>
         <dd>Class for convex combinations of Bernstein functions</dd>
+      </dl><dl><dt>
+          
+          <code><a href="ScaledBernsteinFunction-class.html">ScaledBernsteinFunction-class</a></code> <code><a href="ScaledBernsteinFunction-class.html">ScaledBernsteinFunction</a></code> 
+        </dt>
+        <dd>Class for scaled Bernstein functions</dd>
+      </dl><dl><dt>
+          
+          <code><a href="SumOfBernsteinFunctions-class.html">SumOfBernsteinFunctions-class</a></code> <code><a href="SumOfBernsteinFunctions-class.html">SumOfBernsteinFunctions</a></code> 
+        </dt>
+        <dd>Class for sums of two Bernstein functions</dd>
       </dl></div><div class="section level2">
       
       <h3 id="boundary-cases">Boundary cases<a class="anchor" aria-label="anchor" href="#boundary-cases"></a></h3>
@@ -190,14 +220,19 @@
 
       <dl><dt>
           
-          <code><a href="LinearBernsteinFunction-class.html">initialize(<i>&lt;LinearBernsteinFunction&gt;</i>)</a></code> <code><a href="LinearBernsteinFunction-class.html">show(<i>&lt;LinearBernsteinFunction&gt;</i>)</a></code> <code><a href="LinearBernsteinFunction-class.html">valueOf(<i>&lt;LinearBernsteinFunction&gt;</i>)</a></code> 
+          <code><a href="ConstantBernsteinFunction-class.html">ConstantBernsteinFunction-class</a></code> <code><a href="ConstantBernsteinFunction-class.html">ConstantBernsteinFunction</a></code> 
+        </dt>
+        <dd>Class for (almost) constant Bernstein functions</dd>
+      </dl><dl><dt>
+          
+          <code><a href="LinearBernsteinFunction-class.html">LinearBernsteinFunction-class</a></code> <code><a href="LinearBernsteinFunction-class.html">LinearBernsteinFunction</a></code> 
         </dt>
         <dd>Class for linear Bernstein functions</dd>
       </dl><dl><dt>
           
-          <code><a href="ConstantBernsteinFunction-class.html">initialize(<i>&lt;ConstantBernsteinFunction&gt;</i>)</a></code> <code><a href="ConstantBernsteinFunction-class.html">show(<i>&lt;ConstantBernsteinFunction&gt;</i>)</a></code> <code><a href="ConstantBernsteinFunction-class.html">valueOf(<i>&lt;ConstantBernsteinFunction&gt;</i>)</a></code> 
+          <code><a href="PoissonBernsteinFunction-class.html">PoissonBernsteinFunction-class</a></code> <code><a href="PoissonBernsteinFunction-class.html">PoissonBernsteinFunction</a></code> 
         </dt>
-        <dd>Class for (almost) constant Bernstein functions</dd>
+        <dd>Class for Poisson Bernstein functions</dd>
       </dl></div><div class="section level2">
       
       <h3 id="algebraic-bernstein-functions">Algebraic Bernstein functions<a class="anchor" aria-label="anchor" href="#algebraic-bernstein-functions"></a></h3>
@@ -211,24 +246,24 @@
 
       <dl><dt>
           
-          <code><a href="ParetoBernsteinFunction-class.html">initialize(<i>&lt;ParetoBernsteinFunction&gt;</i>)</a></code> <code><a href="ParetoBernsteinFunction-class.html">show(<i>&lt;ParetoBernsteinFunction&gt;</i>)</a></code> <code><a href="ParetoBernsteinFunction-class.html">levyDensity(<i>&lt;ParetoBernsteinFunction&gt;</i>)</a></code> 
-        </dt>
-        <dd>Class for Pareto Bernstein functions</dd>
-      </dl><dl><dt>
-          
-          <code><a href="AlphaStableBernsteinFunction-class.html">initialize(<i>&lt;AlphaStableBernsteinFunction&gt;</i>)</a></code> <code><a href="AlphaStableBernsteinFunction-class.html">show(<i>&lt;AlphaStableBernsteinFunction&gt;</i>)</a></code> <code><a href="AlphaStableBernsteinFunction-class.html">levyDensity(<i>&lt;AlphaStableBernsteinFunction&gt;</i>)</a></code> <code><a href="AlphaStableBernsteinFunction-class.html">stieltjesDensity(<i>&lt;AlphaStableBernsteinFunction&gt;</i>)</a></code> 
+          <code><a href="AlphaStableBernsteinFunction-class.html">AlphaStableBernsteinFunction-class</a></code> <code><a href="AlphaStableBernsteinFunction-class.html">AlphaStableBernsteinFunction</a></code> 
         </dt>
         <dd>Class for the \(\alpha\)-stable Bernstein function</dd>
       </dl><dl><dt>
           
-          <code><a href="InverseGaussianBernsteinFunction-class.html">initialize(<i>&lt;InverseGaussianBernsteinFunction&gt;</i>)</a></code> <code><a href="InverseGaussianBernsteinFunction-class.html">show(<i>&lt;InverseGaussianBernsteinFunction&gt;</i>)</a></code> <code><a href="InverseGaussianBernsteinFunction-class.html">levyDensity(<i>&lt;InverseGaussianBernsteinFunction&gt;</i>)</a></code> <code><a href="InverseGaussianBernsteinFunction-class.html">stieltjesDensity(<i>&lt;InverseGaussianBernsteinFunction&gt;</i>)</a></code> 
+          <code><a href="ExponentialBernsteinFunction-class.html">ExponentialBernsteinFunction-class</a></code> <code><a href="ExponentialBernsteinFunction-class.html">ExponentialBernsteinFunction</a></code> 
+        </dt>
+        <dd>Class for Exponential Bernstein functions</dd>
+      </dl><dl><dt>
+          
+          <code><a href="InverseGaussianBernsteinFunction-class.html">InverseGaussianBernsteinFunction-class</a></code> <code><a href="InverseGaussianBernsteinFunction-class.html">InverseGaussianBernsteinFunction</a></code> 
         </dt>
         <dd>Class for Inverse Gaussian Bernstein function</dd>
       </dl><dl><dt>
           
-          <code><a href="ExponentialBernsteinFunction-class.html">initialize(<i>&lt;ExponentialBernsteinFunction&gt;</i>)</a></code> <code><a href="ExponentialBernsteinFunction-class.html">show(<i>&lt;ExponentialBernsteinFunction&gt;</i>)</a></code> <code><a href="ExponentialBernsteinFunction-class.html">levyDensity(<i>&lt;ExponentialBernsteinFunction&gt;</i>)</a></code> <code><a href="ExponentialBernsteinFunction-class.html">stieltjesDensity(<i>&lt;ExponentialBernsteinFunction&gt;</i>)</a></code> 
+          <code><a href="ParetoBernsteinFunction-class.html">ParetoBernsteinFunction-class</a></code> <code><a href="ParetoBernsteinFunction-class.html">ParetoBernsteinFunction</a></code> 
         </dt>
-        <dd>Class for Exponential Bernstein functions</dd>
+        <dd>Class for Pareto Bernstein functions</dd>
       </dl></div><div class="section level2">
       
       <h3 id="logarithmic-bernstein-functions">Logarithmic Bernstein functions<a class="anchor" aria-label="anchor" href="#logarithmic-bernstein-functions"></a></h3>
@@ -242,25 +277,9 @@
 
       <dl><dt>
           
-          <code><a href="GammaBernsteinFunction-class.html">initialize(<i>&lt;GammaBernsteinFunction&gt;</i>)</a></code> <code><a href="GammaBernsteinFunction-class.html">show(<i>&lt;GammaBernsteinFunction&gt;</i>)</a></code> <code><a href="GammaBernsteinFunction-class.html">levyDensity(<i>&lt;GammaBernsteinFunction&gt;</i>)</a></code> <code><a href="GammaBernsteinFunction-class.html">stieltjesDensity(<i>&lt;GammaBernsteinFunction&gt;</i>)</a></code> 
+          <code><a href="GammaBernsteinFunction-class.html">GammaBernsteinFunction-class</a></code> <code><a href="GammaBernsteinFunction-class.html">GammaBernsteinFunction</a></code> 
         </dt>
         <dd>Class for Gamma Bernstein functions</dd>
-      </dl></div><div class="section level2">
-      
-      <h3 id="other-bernstein-functions">Other Bernstein Functions<a class="anchor" aria-label="anchor" href="#other-bernstein-functions"></a></h3>
-      
-
-      
-    </div><div id="" class="section level2">
-      
-      
-      
-
-      <dl><dt>
-          
-          <code><a href="PoissonBernsteinFunction-class.html">initialize(<i>&lt;PoissonBernsteinFunction&gt;</i>)</a></code> <code><a href="PoissonBernsteinFunction-class.html">show(<i>&lt;PoissonBernsteinFunction&gt;</i>)</a></code> <code><a href="PoissonBernsteinFunction-class.html">levyDensity(<i>&lt;PoissonBernsteinFunction&gt;</i>)</a></code> 
-        </dt>
-        <dd>Class for Poisson Bernstein functions</dd>
       </dl></div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>
