@@ -9,7 +9,6 @@
 ^\.Rproj\.user$
 ^bench$
 ^codemeta\.json$
-^CPPLINT.cfg$
 ^cran-comments\.md$
 ^docs$
 ^LICENSE\.md$
