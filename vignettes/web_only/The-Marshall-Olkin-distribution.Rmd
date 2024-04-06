@@ -1,6 +1,6 @@
 ---
 title: "The Marshall-Olkin distribution"
-bibliography: ../inst/REFERENCES.bib
+bibliography: ../../inst/REFERENCES.bib
 nocite: |
   @Mai2010a, @Mai2011a, @Schilling2012a, @Mai2017a, @Sloot2022a
 ---

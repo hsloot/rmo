@@ -1,6 +1,6 @@
 ---
 title: "The binary representation of the MO parameter"
-bibliography: ../inst/REFERENCES.bib
+bibliography: ../../inst/REFERENCES.bib
 nocite: |
   @Mai2017a
 ---

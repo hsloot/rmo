@@ -1,6 +1,6 @@
 ---
 title: "Mixing Marshall--Olkin distributions"
-bibliography: ../inst/REFERENCES.bib
+bibliography: ../../inst/REFERENCES.bib
 nocite: |
   @Mai2017a
 ---
