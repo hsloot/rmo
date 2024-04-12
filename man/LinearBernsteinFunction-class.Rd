@@ -7,7 +7,7 @@
 \title{Class for linear Bernstein functions}
 \description{
 \emph{A linear Bernstein function} is a Bernstein function with only a drift,
-i.e. \eqn{a = 0} and \eqn{\nu = 0}. In particular,
+i.e., \eqn{a = 0} and \eqn{\nu = 0}. In particular,
 \deqn{
  \psi(x) = b x, x > 0.
 }
@@ -15,8 +15,8 @@ i.e. \eqn{a = 0} and \eqn{\nu = 0}. In particular,
 \section{Slots}{
 
 \describe{
-\item{\code{scale}}{The nonnegative \emph{drift} parameter
-(i.e. \eqn{b} in the representation)}
+\item{\code{scale}}{The nonnegative \emph{drift} parameter (i.e. \eqn{b} in the
+representation).}
 }}
 
 \examples{

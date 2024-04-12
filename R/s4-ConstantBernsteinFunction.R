@@ -1,11 +1,11 @@
 #' Class for (almost) constant Bernstein functions
 #'
-#' @slot constant The nonnegative *killing* parameter (i.e. \eqn{a}
-#'   in the representation)
+#' @slot constant The nonnegative *killing* parameter (i.e., \eqn{a} in the
+#'   representation)
 #'
 #' @description
-#' A *constant Bernstein function* is a Bernstein function with only a
-#' constant part (for \eqn{x > 0}), i.e. \eqn{b = 0} and \eqn{\nu = 0}. In
+#' A *constant Bernstein function* is a Bernstein function with only a constant
+#' part (for \eqn{x > 0}), i.e., \eqn{b = 0} and \eqn{\nu = 0}. In
 #' particular,
 #' \deqn{
 #'   \psi(x) = a , x > 0

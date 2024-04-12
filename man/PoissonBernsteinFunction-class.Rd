@@ -18,20 +18,17 @@ forward differences can be calculated in closed form:
 \deqn{
   {(-1)}^{k-1} \Delta^k \psi(x) = e^{-u\eta} (1-e^{-\eta})^k, x>0, k>0.
 }
-\subsection{Lévy density}{
 
+The Poisson Bernstein function has the (discrete) \emph{Lévy density} \eqn{\nu}:
 \deqn{
   \nu(du)
-    = \lambda \delta_{\eta}(du), \quad u > 0 .
-}
+    = \delta_{\eta}(du), \quad u > 0 .
 }
 }
 \section{Slots}{
 
 \describe{
-\item{\code{lambda}}{The (positive) arrival rate of the underlying Poisson process.}
-
-\item{\code{eta}}{The fixed (positive) jump size of the Poisson process.}
+\item{\code{eta}}{The fixed (positive) jump size.}
 }}
 
 \examples{

@@ -7,9 +7,7 @@
 stieltjesDensity(object)
 }
 \arguments{
-\item{object}{An object deriving from \linkS4class{LevyBernsteinFunction}
-(for \code{levyDensity}) or \linkS4class{CompleteBernsteinFunction}
-(for \code{stieltjesDensity}).}
+\item{object}{An object deriving from \linkS4class{CompleteBernsteinFunction}.}
 }
 \description{
 Returns the \emph{Stieltjes density} with \code{lower}, \code{upper}, and \code{type} attributes

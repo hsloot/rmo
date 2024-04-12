@@ -11,12 +11,12 @@ rexmo(n, d, ex_intensities, method = c("MDCM", "AM", "ESM"))
 
 \item{d}{An integer for the \emph{dimension}.}
 
-\item{ex_intensities}{A numeric vector with the exchangeable
-\emph{shock-size arrival intensities}.}
+\item{ex_intensities}{A numeric vector with the exchangeable \emph{shock-size
+arrival intensities}.}
 
 \item{method}{A string indicating which sampling algorithm should be used.
-Use "MDCM" for the \emph{Markovian death-counting model}, "AM" for the
-\emph{Arnold model}, and "ESM" for the \emph{exogenous shock model}. We recommend
+Use \code{"MDCM"} for the \emph{Markovian death-counting model}, \code{"AM"} for the
+\emph{Arnold model}, and \code{"ESM"} for the \emph{exogenous shock model}. We recommend
 using the \emph{ESM} only for small dimensions; the \emph{AM} can be used up until
 dimension \eqn{30}.}
 }
@@ -26,9 +26,9 @@ an independently and identically (iid) distributed sample of a \code{d}-variate
 \emph{exchangeable Marshall–Olkin distribution} with specified parameters.
 }
 \description{
-Draws \code{n} iid samples from a \code{d}-variate
-\emph{exchangeable Marshall–Olkin distribution} parametrized by exchangeable
-\emph{shock-size arrival intensities}.
+Draws \code{n} iid samples from a \code{d}-variate \emph{exchangeable Marshall–Olkin
+distribution} parametrized by a vector of exchangeable \emph{shock-size arrival
+intensities}.
 }
 \details{
 The \emph{exchangeable Marshall–Olkin distribution} has the survival function
@@ -55,26 +55,24 @@ The relationship of \emph{exchangeable shock-size arrival intensities} to the
         = \binom{d}{i} \lambda_{i} ,
           \quad i \in {\{1, \ldots, n\}} .
 }
+The exchangeable shock-size arrival intensities correspond to the initial
+transition rates of independent exponential random variables in the
+\emph{Markovian death-counting model (MDCM)}.
 \subsection{Simulation algorithms}{
-\subsection{Markovian death-counting model}{
-
-The Markovian death-counting model is a simulation algorithm used to generate
-samples from the exchangeable Marshall-Olkin distribution. It simulates the
-death-counting process of the random vector, which is a Markov process, until
-all components are "dead". This process defines an order statistic that is
-then used to obtain a sample through a random permutation. For more details
-on this algorithm, refer to \insertCite{Sloot2022a}{rmo}.
-}
-
-\subsection{General Marshall–Olkin sampling algorithms}{
-
-The \emph{exogenous shock model (ESM)} and \emph{Arnold model (AM)} simulation
+\itemize{
+\item The \emph{Markovian death-counting model (MDCM)} is a simulation algorithm used
+to generate samples from an exchangeable Marshall-Olkin distribution. It
+simulates the death-counting process of the random vector, which is a
+Markov process, until all components are "dead". This process defines an
+order statistic that is then used to obtain a sample through a random
+permutation. For more details on this algorithm, refer to
+\insertCite{Sloot2022a}{rmo}.
+\item The \emph{exogenous shock model (ESM)} and \emph{Arnold model (AM)} simulation
 algorithms can be used to generate samples from the general \emph{Marshall–Olkin
 distribution}. In these algorithms, the exchangeable \emph{shock-size arrival
 intensities} are converted to the corresponding \emph{shock-arrival intensities}
 and passed to the \code{\link[=rmo]{rmo()}} function.
 }
-
 }
 }
 \examples{
@@ -146,7 +144,6 @@ rexmo(
   c(0, 0, 1),
   method = "ESM"
 )
-
 }
 \references{
 \insertAllCited{}

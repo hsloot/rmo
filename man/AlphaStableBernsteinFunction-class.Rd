@@ -27,20 +27,16 @@ following representation:
 
 This Bernstein function is no. 1 in the list of complete Bernstein functions
 in Chp. 16 of \insertCite{Schilling2012a}{rmo}.
-\subsection{Lévy density}{
 
+The \eqn{\alpha}-stable Bernstein function has the Lévy density \eqn{\nu}:
 \deqn{
   \nu(du)
-    = \frac{\alpha}{\Gamma(1-\alpha)} u^{-1 - \alpha} , \quad u > 0 .
+    = \frac{\alpha}{\Gamma(1-\alpha)} u^{-1 - \alpha} , \quad u > 0 ,
 }
-}
-
-\subsection{Stieltjes Density}{
-
+and it has the Stieltjes density \eqn{\sigma}:
 \deqn{
   \sigma(du)
     = \frac{\sin(\alpha \pi)}{\pi} u^{\alpha - 1}, \quad u > 0 .
-}
 }
 }
 \section{Slots}{

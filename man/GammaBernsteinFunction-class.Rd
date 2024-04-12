@@ -27,20 +27,17 @@ following representation:
 
 This Bernstein function is no. 26 in the list of complete Bernstein functions
 in Chp. 16 of \insertCite{Schilling2012a}{rmo}.
-\subsection{Lévy density}{
 
+The Gamma Bernstein function has the Lévy density \eqn{\nu}:
 \deqn{
   \nu(du)
-    = \frac{\operatorname{e}^{-a u}}{u}, \quad u > 0 .
-}
+    = \frac{\operatorname{e}^{-a u}}{u}, \quad u > 0 ,
 }
 
-\subsection{Stieltjes density}{
-
+and it has the Stieltjes density \eqn{\sigma}:
 \deqn{
   \sigma(du)
-    = 1 / u du, u > a .
-}
+    = u^{-1} du, u > a .
 }
 }
 \section{Slots}{

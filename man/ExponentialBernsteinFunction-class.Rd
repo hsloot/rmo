@@ -6,8 +6,8 @@
 \alias{ExponentialBernsteinFunction}
 \title{Class for Exponential Bernstein functions}
 \description{
-For the Exponential jump CPP subordinator with \eqn{\lambda > 0},
-the corresponding Bernstein function is
+For the Exponential-jump compound Poisson subordinator with
+\eqn{\lambda > 0}, the corresponding Bernstein function is
 \deqn{
   \psi(x) = \frac{x}{x + \lambda}, x>0.
 }
@@ -22,20 +22,16 @@ alternating iterated forward differences are known in closed form:
 
 This Bernstein function is no. 4 in the list of complete Bernstein functions
 in Chp. 16 of \insertCite{Schilling2012a}{rmo}.
-\subsection{Lévy density}{
 
+The Exponential Bernstein function has the \emph{Lévy density} \eqn{\nu}:
 \deqn{
   \nu(du)
-    = \lambda \operatorname{e}^{-\lambda u}, \quad u > 0 .
+    = \lambda \operatorname{e}^{-\lambda u}, \quad u > 0 ,
 }
-}
-
-\subsection{Stieltjes density}{
-
+and it has the (discrete) \emph{Stieltjes density} \eqn{\sigma}:
 \deqn{
   \sigma(du)
-    = \delta_{\lambda}(du), \quad u > 0 .
-}
+    = \delta_{\{ \lambda \}}(du), \quad u > 0 .
 }
 }
 \section{Slots}{

@@ -2,9 +2,8 @@
 #'
 #' Calculates (unscaled) *exchangeable shock-arrival intensities*, see [rmo()].
 #'
-#' @param object An object derived from class `BernsteinFunction`.
+#' @inheritParams valueOf
 #' @param d A positive integer, larger than two, for the *dimension*.
-#' @param cscale A positive number for the *composite scaling factor*.
 #' @param ... pass-through parameter.
 #'
 #' @details

@@ -27,17 +27,16 @@ representation:
   x>0, k>0 .
 }
 
-The Pareto Bernstein function, in combination with a linear Bernstein
-function can be used to approximate the Bernstein function of an
-\eqn{\alpha}-stable subordinator, see Sec. 5.3 of
-\insertCite{Fernandez2015a}{rmo}.
-\subsection{Lévy density}{
-
+The Pareto Bernstein function has the Lévy density \eqn{\nu}:
 \deqn{
   \nu(du)
     = \alpha \frac{x_0^\alpha}{u^{\alpha + 1}}, \quad u > x_0 .
 }
-}
+
+The Pareto Bernstein function, in combination with a linear Bernstein
+function can be used to approximate the Bernstein function of an
+\eqn{\alpha}-stable subordinator, see Sec. 5.3 of
+\insertCite{Fernandez2015a}{rmo}.
 }
 \section{Slots}{
 

@@ -1,18 +1,16 @@
-#' @include sample-rmo.R
-NULL
-
 #' Simulate from exchangeable Marshall–Olkin distributions
 #'
-#' Draws `n` iid samples from a `d`-variate
-#' *exchangeable Marshall–Olkin distribution* parametrized by exchangeable
-#' *shock-size arrival intensities*.
+#' @description
+#' Draws `n` iid samples from a `d`-variate *exchangeable Marshall–Olkin
+#' distribution* parametrized by a vector of exchangeable *shock-size arrival
+#' intensities*.
 #'
 #' @inheritParams rmo
-#' @param ex_intensities A numeric vector with the exchangeable
-#' *shock-size arrival intensities*.
+#' @param ex_intensities A numeric vector with the exchangeable *shock-size
+#'   arrival intensities*.
 #' @param method A string indicating which sampling algorithm should be used.
-#'   Use "MDCM" for the *Markovian death-counting model*, "AM" for the
-#'   *Arnold model*, and "ESM" for the *exogenous shock model*. We recommend
+#'   Use `"MDCM"` for the *Markovian death-counting model*, `"AM"` for the
+#'   *Arnold model*, and `"ESM"` for the *exogenous shock model*. We recommend
 #'   using the *ESM* only for small dimensions; the *AM* can be used up until
 #'   dimension \eqn{30}.
 #'
@@ -46,28 +44,33 @@ NULL
 #'         = \binom{d}{i} \lambda_{i} ,
 #'           \quad i \in {\{1, \ldots, n\}} .
 #' }
+#' The exchangeable shock-size arrival intensities correspond to the initial
+#' transition rates of independent exponential random variables in the
+#' *Markovian death-counting model (MDCM)*.
 #'
 #' ## Simulation algorithms
 #'
-#' ### Markovian death-counting model
+#' - The *Markovian death-counting model (MDCM)* is a simulation algorithm used
+#'   to generate samples from an exchangeable Marshall-Olkin distribution. It
+#'   simulates the death-counting process of the random vector, which is a
+#'   Markov process, until all components are "dead". This process defines an
+#'   order statistic that is then used to obtain a sample through a random
+#'   permutation. For more details on this algorithm, refer to
+#'   \insertCite{Sloot2022a}{rmo}.
 #'
-#' The Markovian death-counting model is a simulation algorithm used to generate
-#' samples from the exchangeable Marshall-Olkin distribution. It simulates the
-#' death-counting process of the random vector, which is a Markov process, until
-#' all components are "dead". This process defines an order statistic that is
-#' then used to obtain a sample through a random permutation. For more details
-#' on this algorithm, refer to \insertCite{Sloot2022a}{rmo}.
+#' - The *exogenous shock model (ESM)* and *Arnold model (AM)* simulation
+#'   algorithms can be used to generate samples from the general *Marshall–Olkin
+#'   distribution*. In these algorithms, the exchangeable *shock-size arrival
+#'   intensities* are converted to the corresponding *shock-arrival intensities*
+#'   and passed to the [rmo()] function.
+
+#' @references
+#'  \insertAllCited{}
 #'
-#' ### General Marshall–Olkin sampling algorithms
-#'
-#' The *exogenous shock model (ESM)* and *Arnold model (AM)* simulation
-#' algorithms can be used to generate samples from the general *Marshall–Olkin
-#' distribution*. In these algorithms, the exchangeable *shock-size arrival
-#' intensities* are converted to the corresponding *shock-arrival intensities*
-#' and passed to the [rmo()] function.
-#'
+#' @include sample-rmo.R
+#' @importFrom checkmate qassert assert_choice
 #' @family sampling-algorithms
-#'
+#' @export
 #' @examples
 #' rexmo(
 #'   10, 3,
@@ -137,13 +140,6 @@ NULL
 #'   c(0, 0, 1),
 #'   method = "ESM"
 #' )
-#'
-#' @references
-#'  \insertAllCited{}
-#'
-#' @importFrom checkmate qassert assert_choice
-#'
-#' @export
 rexmo <- function(n, d, ex_intensities, method = c("MDCM", "AM", "ESM")) {
   method <- match.arg(method)
   qassert(n, "X1[0,)")

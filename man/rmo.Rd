@@ -14,9 +14,9 @@ rmo(n, d, intensities, method = c("AM", "ESM"))
 \item{intensities}{A numeric vector for the \emph{shock-arrival intensities}.}
 
 \item{method}{A string indicating which sampling algorithm should be used.
-Use "AM" for the \emph{Arnold model} and "ESM" for the \emph{exogenous shock model}.
-We recommend using the \emph{ESM} for small dimensions only; the \emph{AM} can be
-used up until dimension \eqn{30}.}
+Use \code{"AM"} for the \emph{Arnold model} and \code{"ESM"} for the \emph{exogenous shock
+model}. We recommend using the \emph{ESM} for small dimensions only; the \emph{AM}
+can be used up until dimension \eqn{30}.}
 }
 \value{
 \code{rmo} returns a numeric matrix of size \code{n} x \code{d}. Each row corresponds to an
@@ -25,7 +25,7 @@ independently and identically (iid) distributed sample from a \code{d}-variate
 }
 \description{
 Draws \code{n} iid samples from a \code{d}-variate \emph{Marshall–Olkin distribution}
-parametrized by \emph{shock-arrival intensities}.
+parametrized by a vector of \emph{shock-arrival intensities}.
 }
 \details{
 The \emph{Marshall–Olkin distribution} was introduced in
@@ -40,34 +40,29 @@ for \emph{shock-arrival intensities} \eqn{\lambda_I \geq 0},
 \eqn{\emptyset \neq I \subseteq {\{ 1 , \ldots, d \}}}.
 The shock-arrival intensities correspond to the rates of independent
 exponential random variables in the \emph{exogenous shock model (ESM)}. If
-\eqn{\lambda_{I}} is zero, it means that the shock \eqn{I} never arrives. To
-map subsets of \eqn{{\{ 1, \ldots, d\}}} to integers \eqn{0, \ldots, 2^d-1},
-we use a binary representation:
+\eqn{\lambda_{I}} is zero, it means that the shock \eqn{I} never arrives.
+
+To map subsets of \eqn{{\{ 1, \ldots, d\}}} to integers
+\eqn{0, \ldots, 2^d-1}, we use a binary representation:
 \deqn{
   I \equiv \sum_{k \in I}{ 2^{k-1} }
 }
 \subsection{Simulation algorithms}{
-\subsection{Exogenous shock model}{
-
-The \emph{exogenous shock model (ESM)} is a simulation algorithm for generating
+\itemize{
+\item The \emph{exogenous shock model (ESM)} is a simulation algorithm for generating
 samples from a Marshall–Olkin distributed random vector. It works by
-generating independent exponentially distributed shock arrival times for all
-non-empty subsets of components. Each component's death time is then defined
-as the minimum of all shock arrival times corresponding to a subset
-containing that component. See \insertCite{@see pp. 104 psqq. @Mai2017a}{rmo}
-and \insertCite{Marshall1967a}{rmo}.
-}
-
-\subsection{Arnold model}{
-
-The \emph{Arnold model (AM)} is a simulation algorithm used to generate samples
+generating independent exponentially distributed shock arrival times for
+all non-empty subsets of components. Each component's death time is then
+defined as the minimum of all shock arrival times corresponding to a subset
+containing that component. See \insertCite{Marshall1967a}{rmo}.
+\item The \emph{Arnold model (AM)} is a simulation algorithm used to generate samples
 from a Marshall–Olkin distributed random vector. It simulates a marked
 homogeneous Poisson process with set-valued marks, where the process is
-stopped when all components are hit by a shock. This algorithm is described
-in detail in \insertCite{@see Sec. 3.1.2 @Mai2017a}{rmo} and
+stopped when all components are hit by a shock. See
 \insertCite{Arnold1975a}{rmo}.
 }
 
+\insertNoCite{Mai2017a}{rmo}
 }
 }
 \examples{
@@ -121,7 +116,6 @@ rmo(
   c(0, 0, 0, 0, 0, 0, 1),
   method = "AM"
 )
-
 }
 \references{
 \insertAllCited{}

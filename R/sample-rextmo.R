@@ -1,10 +1,8 @@
-#' @include sample-rmo.R sample-rexmo.R
-NULL
-
 #' Simulate from extendible Marshall–Olkin distributions
 #'
+#' @description
 #' Draws `n` iid samples from a `d`-variate *extendible Marshall–Olkin
-#' distribution* parametrized by Bernstein functions `bf`.
+#' distribution* parametrized by a Bernstein function `bf`.
 #'
 #' @inheritParams rexmo
 #' @param bf A [BernsteinFunction-class] representing the *Bernstein function*
@@ -27,6 +25,7 @@ NULL
 #' }
 #' for *Bernstein functions* \eqn{\psi}, see [BernsteinFunction-class], and
 #' \eqn{t_{[1]} \geq \cdots \geq t_{[d]}}, see \insertCite{Mai2017a}{rmo}.
+#'
 #' The relationship between *Bernstein functions* and
 #' *exchangeable shock-size arrival intensities* of the
 #' *exchangeable Marshall–Olkin distribution*, see [rexmo()], is as follows:
@@ -40,8 +39,14 @@ NULL
 #' numerically stable in higher dimensions, and [rextmo()] uses
 #' approximation techniques from \insertCite{Sloot2022a}{rmo} to calculate them.
 #'
+#' @references
+#'  \insertAllCited{}
+#'
 #' @family sampling-algorithms
 #'
+#' @include sample-rmo.R sample-rexmo.R
+#' @importFrom checkmate qassert assert_choice
+#' @export
 #' @examples
 #' rextmo(
 #'   10, 3,
@@ -93,13 +98,6 @@ NULL
 #'   ConstantBernsteinFunction(constant = 1),
 #'   method = "ESM"
 #' )
-#'
-#' @references
-#'  \insertAllCited{}
-#'
-#' @importFrom checkmate qassert assert_choice
-#'
-#' @export
 rextmo <- function(n, d, bf, method = c("MDCM", "AM", "ESM")) {
   method <- match.arg(method)
   qassert(n, "X1[0,)")

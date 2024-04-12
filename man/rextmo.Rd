@@ -15,8 +15,8 @@ rextmo(n, d, bf, method = c("MDCM", "AM", "ESM"))
 of a \emph{extendible Marshall–Olkin distribution}.}
 
 \item{method}{A string indicating which sampling algorithm should be used.
-Use "MDCM" for the \emph{Markovian death-counting model}, "AM" for the
-\emph{Arnold model}, and "ESM" for the \emph{exogenous shock model}. We recommend
+Use \code{"MDCM"} for the \emph{Markovian death-counting model}, \code{"AM"} for the
+\emph{Arnold model}, and \code{"ESM"} for the \emph{exogenous shock model}. We recommend
 using the \emph{ESM} only for small dimensions; the \emph{AM} can be used up until
 dimension \eqn{30}.}
 }
@@ -28,7 +28,7 @@ parameters.
 }
 \description{
 Draws \code{n} iid samples from a \code{d}-variate \emph{extendible Marshall–Olkin
-distribution} parametrized by Bernstein functions \code{bf}.
+distribution} parametrized by a Bernstein function \code{bf}.
 }
 \details{
 The \emph{extendible Marshall–Olkin distribution} has the survival function
@@ -41,6 +41,7 @@ The \emph{extendible Marshall–Olkin distribution} has the survival function
 }
 for \emph{Bernstein functions} \eqn{\psi}, see \linkS4class{BernsteinFunction}, and
 \eqn{t_{[1]} \geq \cdots \geq t_{[d]}}, see \insertCite{Mai2017a}{rmo}.
+
 The relationship between \emph{Bernstein functions} and
 \emph{exchangeable shock-size arrival intensities} of the
 \emph{exchangeable Marshall–Olkin distribution}, see \code{\link[=rexmo]{rexmo()}}, is as follows:
@@ -105,7 +106,6 @@ rextmo(
   ConstantBernsteinFunction(constant = 1),
   method = "ESM"
 )
-
 }
 \references{
 \insertAllCited{}

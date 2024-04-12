@@ -1,10 +1,8 @@
-#' @include sample-rmo.R sample-rexmo.R sample-rextmo.R
-NULL
-
 #' Simulate from parametrized families of extendible MO distributions
 #'
+#' @description
 #' Draws `n` iid `d`-variate samples from a *parametrized family of extendible
-#' MO distribution*.
+#' MO distributions*.
 #'
 #' @inheritParams rextmo
 #' @param a A non-negative double representing the *killing-rate* \eqn{a} of the
@@ -16,14 +14,14 @@ NULL
 #' @param eta A numeric vector representing the distribution family's
 #'   parameters, see the Details section.
 #' @param family A string representing the parametrized family.
-#'    Use "Armageddon" for the *Armageddon* family, "Poisson" for the
-#'    *Poisson family*, "Pareto" for the *Pareto family*, "Exponential" for the
-#'    *Exponential family*, "AlphaStable" for the *\eqn{\alpha}-stable family*,
-#'    "InverseGaussian" for the *Inverse-Gaussian family*, "Gamma" for
-#'    the *Gamma family*, see the Details section.
+#'   Use `"Armageddon"` for the *Armageddon* family, `"Poisson"` for the
+#'   *Poisson family*, `"Pareto"` for the *Pareto family*, `"Exponential"` for
+#'   the *Exponential family*, `"AlphaStable"` for the *\eqn{\alpha}-stable
+#'   family*, `"InverseGaussian"` for the *Inverse-Gaussian family*, `"Gamma"`
+#'   for the *Gamma family*, see the Details section.
 #' @param method A string representing which sampling algorithm should be used.
-#'   Use "MDCM" for the *Markovian death-set model*, "LFM" for the
-#'   *Lévy–frailty model*, "AM" for the *Arnold model*, and "ESM" for the
+#'   Use `"MDCM"` for the *Markovian death-set model*, `"LFM"` for the
+#'   *Lévy–frailty model*, `"AM"` for the *Arnold model*, and `"ESM"` for the
 #'   *exogenous shock model* (in case of the *Armageddon family*, the algorithm
 #'   is optimized to consider only finite shocks). We recommend using the *ESM*
 #'   only for small dimensions; the *AM* can be used up to dimension
@@ -58,153 +56,158 @@ NULL
 #'
 #' ## Families
 #'
-#' All implemented families are listed in the following; some re-combinations
-#' are possible, see [ScaledBernsteinFunction-class],
-#' [SumOfBernsteinFunctions-class], and
-#' [CompositeScaledBernsteinFunction-class].
+#' - All implemented families are listed in the following; some re-combinations
+#'   are possible, see [ScaledBernsteinFunction-class],
+#'   [SumOfBernsteinFunctions-class], and
+#'   [CompositeScaledBernsteinFunction-class].
 #'
-#' ### Armageddon family
-#' We have \eqn{\nu = \sigma \equiv 0} and Bernstein function
-#' \deqn{
-#'     \psi{(x)}
-#'         = 1_{\{ x > 0\}} a + b x ,
-#'             \quad x \geq 0 ,
-#' }
-#' see [ConstantBernsteinFunction-class] and [LinearBernsteinFunction-class].
+#' - **Armageddon family**:
+#'   We have for \eqn{\nu = \sigma \equiv 0} the Bernstein function \eqn{\psi}:
+#'   \deqn{
+#'       \psi{(x)}
+#'           = 1_{\{ x > 0\}} a + b x ,
+#'               \quad x \geq 0 ,
+#'   }
+#'   see [ConstantBernsteinFunction-class] and [LinearBernsteinFunction-class].
 #'
-#' ### Poisson family
-#' We have \eqn{\eta > 0}, Bernstein function
-#' \deqn{
-#'     \psi{(x)}
-#'         = 1_{\{ x > 0\}} a + b x + \gamma \cdot {[1 - e^{-\eta x}]},
-#'             \quad x \geq 0 ,
-#' }
-#' and Lévy measure
-#' \deqn{
-#'     \nu{(\mathrm{d}u)}
-#'         = \delta_{\{ \eta \}}{(\mathrm{d}u)} ,
-#' }
-#' see [PoissonBernsteinFunction-class].
+#' - **Poisson family**:
+#'   We have for \eqn{\eta > 0} the Bernstein function  \eqn{\psi}::
+#'   \deqn{
+#'       \psi{(x)}
+#'           = 1_{\{ x > 0\}} a + b x + \gamma \cdot {[1 - e^{-\eta x}]},
+#'               \quad x \geq 0 ,
+#'   }
+#'   with (discrete) Lévy measure \eqn{\nu}:
+#'   \deqn{
+#'       \nu{(\mathrm{d}u)}
+#'           = \delta_{\{ \eta \}}{(\mathrm{d}u)} ,
+#'   }
+#'   see [PoissonBernsteinFunction-class].
 #'
-#' ### Pareto family
-#' We have \eqn{\eta \in \mathbb{R}^2} with
-#' \eqn{\eta_1 \in {(0, 1)}, \eta_2 > 0} and Lévy measure
-#' \deqn{
-#'     \nu{(\mathrm{d}u)}
-#'         = \eta_{1} \eta_{2}^{\eta_{1}} \cdot
-#'          u^{-\eta_{1}-1}  1_{\{ u > \eta_{2}\}} \mathrm{d}u ,
-#' }
-#' see [ParetoBernsteinFunction-class].
+#' - **Pareto family**:
+#'   We have \eqn{\eta \in \mathbb{R}^2} with
+#'   \eqn{\eta_1 \in {(0, 1)}, \eta_2 > 0} a Bernstein function with Lévy
+#'   measure \eqn{\nu}:
+#'   \deqn{
+#'       \nu{(\mathrm{d}u)}
+#'           = \eta_{1} \eta_{2}^{\eta_{1}} \cdot
+#'            u^{-\eta_{1}-1}  1_{\{ u > \eta_{2}\}} \mathrm{d}u ,
+#'   }
+#'   see [ParetoBernsteinFunction-class].
 #'
-#' ### Exponential family
-#' We have \eqn{\eta > 0}, Bernstein function
-#' \deqn{
-#'     \psi{(x)}
-#'         = 1_{\{ x > 0\}} a + b x + \gamma \cdot \frac{x}{x + \eta} ,
-#'             \quad x \geq 0 ,
-#' }
-#' and Lévy measure
-#' \deqn{
-#'     \nu{(\mathrm{d}u)}
-#'         = \eta e^{-\eta u} \mathrm{d}u ,
-#' }
-#' and Stieltjes measure
-#' \deqn{
-#'     \sigma{(\mathrm{d}u)}
-#'         = \delta_{\{ \eta \}}{(\mathrm{d}u)} ,
-#' }
-#' see [ExponentialBernsteinFunction-class].
+#' - **Exponential family**:
+#'   We have for \eqn{\eta > 0} the Bernstein function \eqn{\psi}:
+#'   \deqn{
+#'       \psi{(x)}
+#'           = 1_{\{ x > 0\}} a + b x + \gamma \cdot \frac{x}{x + \eta} ,
+#'               \quad x \geq 0 ,
+#'   }
+#'   with Lévy measure \eqn{\nu}:
+#'   \deqn{
+#'       \nu{(\mathrm{d}u)}
+#'           = \eta e^{-\eta u} \mathrm{d}u ,
+#'   }
+#'   and with (discrete) Stieltjes measure \eqn{\sigma}:
+#'   \deqn{
+#'       \sigma{(\mathrm{d}u)}
+#'           = \delta_{\{ \eta \}}{(\mathrm{d}u)} ,
+#'   }
+#'   see [ExponentialBernsteinFunction-class].
 #'
-#' ### \eqn{\alpha}-stable family
-#' We have \eqn{\eta \in {(0, 1)}}, Bernstein function
-#' \deqn{
-#'     \psi{(x)}
-#'         = 1_{\{ x > 0\}} a + b x + \gamma \cdot x^{\eta} ,
-#'             \quad x \geq 0 ,
-#' }
-#' Lévy measure,
-#' \deqn{
-#'     \nu{(\mathrm{d}u)}
-#'         = \frac{\eta}{\Gamma{(1 - \eta)}} \cdot u^{-\eta-1} \mathrm{d}u ,
-#' }
-#' and Stieljtes measure
-#' \deqn{
-#'     \sigma{(\mathrm{d}u)}
-#'         = \frac{\sin{(\eta \pi)}}{\pi} \cdot u^{\eta - 1} \mathrm{d}u ,
-#' }
-#' see [AlphaStableBernsteinFunction-class].
+#' - **\eqn{\alpha}-stable family**:
+#'   We have for \eqn{\eta \in {(0, 1)}} the Bernstein function \eqn{\psi}:
+#'   \deqn{
+#'       \psi{(x)}
+#'           = 1_{\{ x > 0\}} a + b x + \gamma \cdot x^{\eta} ,
+#'               \quad x \geq 0 ,
+#'   }
+#'   with Lévy measure \eqn{\nu}:
+#'   \deqn{
+#'       \nu{(\mathrm{d}u)}
+#'           = \frac{\eta}{\Gamma{(1 - \eta)}} \cdot u^{-\eta-1} \mathrm{d}u ,
+#'   }
+#'   and with Stieljtes measure \eqn{\sigma}:
+#'   \deqn{
+#'       \sigma{(\mathrm{d}u)}
+#'           = \frac{\sin{(\eta \pi)}}{\pi} \cdot u^{\eta - 1} \mathrm{d}u ,
+#'   }
+#'   see [AlphaStableBernsteinFunction-class].
 #'
-#' ### Inverse-Gaussian family
-#' We have \eqn{\eta > 0}, Bernstein function
-#' \deqn{
-#'     \psi{(x)}
-#'         = 1_{\{ x > 0\}} a + b x + \gamma \cdot
-#'              {\left[ \sqrt{2 x + \eta^2} - \eta \right]},
-#'             \quad x \geq 0 ,
-#' }
-#' Lévy measure
-#' \deqn{
-#'     \nu{(\mathrm{d}u)}
-#'         = \frac{1}{ \sqrt{2 \pi} } \cdot
-#'             \frac{ e^{-\frac{1}{2} \eta^2 u} }{ \sqrt{u^3} } \mathrm{d}u ,
-#' }
-#' and Stieltjes measure
-#' \deqn{
-#'     \sigma{(\mathrm{d}u)}
-#'         = \frac{\sin{(\pi / 2)}}{\pi} \cdot
-#'             \frac{\sqrt{2 u - \eta^2}} {u}
-#'              1_{\{ u > \eta^2 / 2 \}} \mathrm{d}u ,
-#' }
-#' see [InverseGaussianBernsteinFunction-class].
+#' - **Inverse-Gaussian family**:
+#'   We have for \eqn{\eta > 0} the Bernstein function \eqn{\psi}:
+#'   \deqn{
+#'       \psi{(x)}
+#'           = 1_{\{ x > 0\}} a + b x + \gamma \cdot
+#'                {\left[ \sqrt{2 x + \eta^2} - \eta \right]},
+#'               \quad x \geq 0 ,
+#'   }
+#'   with Lévy measure \eqn{\nu}:
+#'   \deqn{
+#'       \nu{(\mathrm{d}u)}
+#'           = \frac{1}{ \sqrt{2 \pi} } \cdot
+#'               \frac{ e^{-\frac{1}{2} \eta^2 u} }{ \sqrt{u^3} } \mathrm{d}u ,
+#'   }
+#'   and with Stieltjes measure \eqn{\sigma}:
+#'   \deqn{
+#'       \sigma{(\mathrm{d}u)}
+#'           = \frac{\sin{(\pi / 2)}}{\pi} \cdot
+#'               \frac{\sqrt{2 u - \eta^2}} {u}
+#'                1_{\{ u > \eta^2 / 2 \}} \mathrm{d}u ,
+#'   }
+#'   see [InverseGaussianBernsteinFunction-class].
 #'
-#' ### Gamma family
-#' We have \eqn{\eta > 0}, Bernstein function
-#' \deqn{
-#'     \psi{(x)}
-#'         = 1_{\{ x > 0\}} a + b x + \gamma \cdot
-#'              \log{\left( 1 +  \frac{x}{\eta} \right)} ,
-#'             \quad x \geq 0 ,
-#' }
-#' Lévy measure
-#' \deqn{
-#'     \nu{(\mathrm{d}u)}
-#'         = e^{-\eta u} u^{-1} \mathrm{d}u ,
-#' }
-#' and Stieljtes measure
-#' \deqn{
-#'     \sigma{(\mathrm{d}u)}
-#'         = u^{-1} 1_{\{ u > \eta \}} \mathrm{d}u ,
-#' }
-#' see [GammaBernsteinFunction-class].
+#' - **Gamma family**:
+#'   We have for \eqn{\eta > 0} the Bernstein function \eqn{\psi}:
+#'   \deqn{
+#'       \psi{(x)}
+#'           = 1_{\{ x > 0\}} a + b x + \gamma \cdot
+#'                \log{\left( 1 +  \frac{x}{\eta} \right)} ,
+#'               \quad x \geq 0 ,
+#'   }
+#'   with Lévy measure \eqn{\nu}:
+#'   \deqn{
+#'       \nu{(\mathrm{d}u)}
+#'           = e^{-\eta u} u^{-1} \mathrm{d}u ,
+#'   }
+#'   and with Stieljtes measure \eqn{\sigma}:
+#'   \deqn{
+#'       \sigma{(\mathrm{d}u)}
+#'           = u^{-1} 1_{\{ u > \eta \}} \mathrm{d}u ,
+#'   }
+#'   see [GammaBernsteinFunction-class].
 #'
 #' ## Simulation algorithms
 #'
-#' ### Exchangeable Marshall–Olkin simulation algorithms
-#' The *MDCM*, *AM*, and *ESM* simulation algorithms for the
-#' *exchangeable Marshall–Olkin distribution* can be used.
-#' For this, the corresponding Bernstein function is passed to [rextmo()].
-#' An exception is the *ESM* for the *Armageddon family* which uses an optimized
-#' version considering only finite shock-times.
+#' - The *MDCM*, *AM*, and *ESM* simulation algorithms for the *exchangeable
+#'   Marshall–Olkin distribution* can be used. For this, the corresponding
+#'   Bernstein function is passed to [rextmo()]. An exception is the *ESM* for
+#'   the *Armageddon family* which uses an optimized version considering only
+#'   finite shock-times.
 #'
-#' ### Lévy-frailty simulation algorithms
-#' The *Lévy-frailty model* simulates the elements of the random vector as
-#' first-hitting times of a compound Poisson subordinator \eqn{\Lambda} into
-#' sets \eqn{(E_i, \infty)} for iid unit exponential random variables.
-#' Here, the subordinator is a linear combination of a pure-drift subordinator,
-#' a pure-killing subordinator, and a pure-jump compound Poisson subordinator,
-#' i.e.
-#' \deqn{
-#'    \Lambda_{t}
-#'        = \infty \cdot 1_{\{ \epsilon > a t \}} + b t +
-#'          \sum_{j=1}^{N_{\gamma t}} X_{j} ,
-#'            \quad t \geq 0,
-#' }
-#' where \eqn{\epsilon} is a unit exponential rv, `n` is a Poisson process, and
-#' \eqn{X_{1}, X_{2}, \ldots} are iid jumps from the corresponding jump
-#' distribution, see \insertCite{@see pp. 140 psqq. @Mai2017a}{rmo}.
+#' - The *Lévy-frailty model (LFM)* simulates the elements of the random vector
+#'   as first-hitting times of a compound Poisson subordinator \eqn{\Lambda}
+#'   into sets \eqn{(E_i, \infty)} for iid unit exponential random variables.
+#'   Here, the subordinator is a linear combination of a pure-drift
+#'   subordinator, a pure-killing subordinator, and a pure-jump compound Poisson
+#'   subordinator, i.e.
+#'   \deqn{
+#'      \Lambda_{t}
+#'          = \infty \cdot 1_{\{ \epsilon > a t \}} + b t +
+#'            \sum_{j=1}^{N_{\gamma t}} X_{j} ,
+#'              \quad t \geq 0,
+#'   }
+#'   where \eqn{\epsilon} is a unit exponential rv, `n` is a Poisson process,
+#'   and \eqn{X_{1}, X_{2}, \ldots} are iid jumps from the corresponding jump
+#'   distribution, see \insertCite{@see pp. 140 psqq. @Mai2017a}{rmo}.
+#'
+#' @references
+#'  \insertAllCited{}
 #'
 #' @family sampling-algorithms
 #'
+#' @include sample-rmo.R sample-rexmo.R sample-rextmo.R
+#' @importFrom checkmate qassert assert_choice
+#' @export
 #' @examples
 #' ## Armageddon
 #' rpextmo(10, 3, a = 0.2, b = 0.5)
@@ -494,13 +497,6 @@ NULL
 #'   eta = 0.5, family = "Gamma",
 #'   method = "AM"
 #' )
-#'
-#' @references
-#'  \insertAllCited{}
-#'
-#' @importFrom checkmate qassert assert_choice
-#'
-#' @export
 rpextmo <- function( # nolint
     n, d, a = 0, b = 0, gamma = 1, eta = NULL,
     family = c(

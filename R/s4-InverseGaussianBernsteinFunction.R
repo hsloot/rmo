@@ -1,7 +1,7 @@
 #' Class for Inverse Gaussian Bernstein function
 #'
 #' @slot eta The distribution parameter (drift of the
-#'   underlying Gaussian process)
+#'   underlying Gaussian process).
 #'
 #' @description
 #' For the inverse Gaussian Lévy subordinator with \eqn{\eta > 0},
@@ -25,14 +25,14 @@
 #' Furthermore it is  a transformation of no. 2 in the list of complete
 #' Bernstein functions in Chp. 16 of \insertCite{Schilling2012a}{rmo}.
 #'
-#' ### Lévy density
+#' The inverse Gaussian Bernstein function has the Lévy density \eqn{\nu}:
 #' \deqn{
 #'   \nu(du)
 #'     = \frac{1}{\sqrt{2 \pi u^3}} \operatorname{e}^{-\frac{1}{2} \eta^2 u} ,
-#'     \quad u > 0 .
+#'     \quad u > 0 ,
 #' }
 #'
-#' ### Stieltjes density
+#' and it has the Stieltjes density \eqn{\sigma}:
 #' \deqn{
 #'   \sigma(du)
 #'     = \frac{

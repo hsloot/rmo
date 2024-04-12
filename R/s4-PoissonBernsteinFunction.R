@@ -1,7 +1,6 @@
 #' Class for Poisson Bernstein functions
 #'
-#' @slot lambda The (positive) arrival rate of the underlying Poisson process.
-#' @slot eta The fixed (positive) jump size of the Poisson process.
+#' @slot eta The fixed (positive) jump size.
 #'
 #' @description
 #' The Poisson process with arrival-rate \eqn{\lambda} and fixed jump size
@@ -17,10 +16,10 @@
 #'   {(-1)}^{k-1} \Delta^k \psi(x) = e^{-u\eta} (1-e^{-\eta})^k, x>0, k>0.
 #' }
 #'
-#' ### Lévy density
+#' The Poisson Bernstein function has the (discrete) *Lévy density* \eqn{\nu}:
 #' \deqn{
 #'   \nu(du)
-#'     = \lambda \delta_{\eta}(du), \quad u > 0 .
+#'     = \delta_{\eta}(du), \quad u > 0 .
 #' }
 #'
 #' @seealso [levyDensity()],  [valueOf()], [intensities()], [uexIntensities()],
