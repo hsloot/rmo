@@ -18,4 +18,3 @@
 ^pkgdown$
 ^README\.Rmd$
 ^rmo\.Rproj$
-^vignettes/web_only$
