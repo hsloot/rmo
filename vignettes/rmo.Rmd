@@ -134,7 +134,7 @@ rextmo(10, 3,
 ## Extending `rmo`
 
 The `rmo` package is designed to be easily extensible. Consider the following 
-Bernstein function: 
+Bernstein function [@No. 28 in  Chp. 16 of @Schilling2012a]: 
 $$
   \psi(x)
     = \log{\frac{b {(x + a)}}{a {(x + b)}}},
