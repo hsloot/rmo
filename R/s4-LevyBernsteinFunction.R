@@ -172,3 +172,20 @@ setMethod(
     out
   }
 )
+
+#' @include s4-valueOf0.R s4-valueOf.R
+#' @importFrom methods setMethod
+#' @keywords internal
+setMethod(
+  "valueOf0", "LevyBernsteinFunction",
+  function(object, x, cscale = 1, method = defaultMethod(object), ...) {
+    method <- match.arg(method)
+    if (method == "default") {
+      method <- defaultMethod(object)
+    }
+    valueOf(
+      object, x,
+      cscale, method = method, difference_order = 0L, n = 1L, k = 0L, ...
+    )
+  }
+)
