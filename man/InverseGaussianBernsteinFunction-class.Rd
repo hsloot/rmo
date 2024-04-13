@@ -26,17 +26,15 @@ to approximate it with the following representation:
 This Bernstein function can be found on p. 309 in \insertCite{Mai2017a}{rmo}.
 Furthermore it is  a transformation of no. 2 in the list of complete
 Bernstein functions in Chp. 16 of \insertCite{Schilling2012a}{rmo}.
-\subsection{Lévy density}{
 
+The inverse Gaussian Bernstein function has the Lévy density \eqn{\nu}:
 \deqn{
   \nu(du)
     = \frac{1}{\sqrt{2 \pi u^3}} \operatorname{e}^{-\frac{1}{2} \eta^2 u} ,
-    \quad u > 0 .
-}
+    \quad u > 0 ,
 }
 
-\subsection{Stieltjes density}{
-
+and it has the Stieltjes density \eqn{\sigma}:
 \deqn{
   \sigma(du)
     = \frac{
@@ -51,12 +49,11 @@ Bernstein functions in Chp. 16 of \insertCite{Schilling2012a}{rmo}.
       \quad u > \eta^2 / 2 .
 }
 }
-}
 \section{Slots}{
 
 \describe{
 \item{\code{eta}}{The distribution parameter (drift of the
-underlying Gaussian process)}
+underlying Gaussian process).}
 }}
 
 \examples{

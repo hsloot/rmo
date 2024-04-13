@@ -172,7 +172,7 @@
 \S4method{valueOf}{SumOfBernsteinFunctions}(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...)
 }
 \arguments{
-\item{object}{An object derived from class \code{BernsteinFunction}.}
+\item{object}{An object deriving from the class \linkS4class{BernsteinFunction}.}
 
 \item{d}{A positive integer, larger than two, for the \emph{dimension}.}
 
@@ -180,13 +180,13 @@
 
 \item{...}{pass-through parameter.}
 
-\item{x}{a nonnegativ numeric vector at which the iterated difference of
+\item{x}{A nonnegativ numeric vector at which the iterated difference of
 the Bernstein function is evaluated.}
 
-\item{difference_order}{a nonnegative integer with the order of the
+\item{difference_order}{A nonnegative integer with the order of the
 alternating iterated forward differences taken on the Bernstein function.}
 
-\item{n, k}{nonnegative numbers for the binomial factor.}
+\item{n, k}{Nonnegative numbers for the binomial factor.}
 
 \item{method}{Method to calculate the result; use \code{method = "levy"} for
 using the Lévy representation and \code{method = "stieltjes"} for using the

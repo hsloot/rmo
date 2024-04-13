@@ -7,52 +7,45 @@
 
 ![minimal R
 version](https://img.shields.io/badge/R%3E%3D-3.4.0-6666ff.svg)
-![packageversion](https://img.shields.io/badge/Package%20version-0.8.4-orange.svg?style=flat-square)
+![packageversion](https://img.shields.io/badge/Package%20version-0.8.3-orange.svg?style=flat-square)
 [![Project Status: WIP – Initial development is in progress, but there
 has not yet been a stable, usable release suitable for the
 public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
-[![Last-changedate](https://img.shields.io/badge/last%20change-2024--04--03-yellowgreen.svg)](/commits/master)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2024--04--02-yellowgreen.svg)](/commits/master)
 [![R build
 status](https://github.com/hsloot/rmo/workflows/check-full/badge.svg)](https://github.com/hsloot/rmo/actions)
 [![Codecov test
 coverage](https://codecov.io/gh/hsloot/rmo/branch/master/graph/badge.svg)](https://codecov.io/gh/hsloot/rmo?branch=main)
 <!-- badges: end -->
 
-An R package for constructing and simulating *Marshall-Olkin
-distribution*.
-
-## Motivation
-
-While the academic literature about Marshall-Olkin distributions is
-extensive, an intuitive and easy-to-use implementation is still missing.
-This project aims to provide an `R` package makes it simple and fun to
-use Marshall-Olkin distributions for research and real-world
-applications.
+An R package for constructing and simulating high-dimensional
+*Marshall-Olkin (MO) distributions*, making it simple and fun to use
+them for research and real-world applications. Read more about
+simulating high-dimensional MO distributions in (Sloot 2022).
 
 ## Installation
 
-You can install the development version from
-[GitHub](https://github.com/) with:
+You can install the development version from GitHub using the `devtools`
+package with:
 
 ``` r
 # install.packages("devtools")
 devtools::install_github("hsloot/rmo")
 ```
 
-## Usage
+## Basic usage
 
-We provide drop-in wrapper `rpextmo`for simulating several parametric
-families of exchangeable Marshall-Olkin distributions: For example to
-simulate from the family associated with the $\alpha$-stable
-distribution, use
+Simulating high-dimensional Marshall–Olkin distributions is made simple
+with the `rpextmo()` function. Here is a basic example:
 
 ``` r
 rpextmo(
-  n = 10, d = 3,
-  eta = log2(2 - 0.5),
-  family = "AlphaStable"
+  n = 10,                # number of samples
+  d = 3,                 # dimension
+  eta = log2(2 - 0.5),   # distribution family parameter
+  family = "AlphaStable" # distribution family
 )
 #>             [,1]      [,2]       [,3]
 #>  [1,] 1.43771730 1.4377173 1.43771730
@@ -67,29 +60,18 @@ rpextmo(
 #> [10,] 2.57508782 0.1130284 0.91314202
 ```
 
-All parametric families are based on so-called Bernstein functions. For
-the previous example, the associated Bernstein function can be defined
-via:
+## Advanced usage
+
+All parametric families are linked to *so-called* Bernstein functions.
+The class of Bernstein functions is closed under addition, scaling, and
+composite scaling. You can create new Bernstein functions and simulate
+from them. Here is an example:
 
 ``` r
+# Create a custom Bernstein function parametrization
 alpha <- log2(2 - 0.5)
-bf <- AlphaStableBernsteinFunction(
-  alpha = alpha
-)
-bf
-#> An object of class "AlphaStableBernsteinFunction"
-#> - alpha: 0.5849625
-```
-
-Bernstein functions are closed under addition, scaling, and composite
-scaling, which can be used to create new Bernstein functions. The
-following Bernstein function approximates the Bernstein function
-associated with the $\alpha$-stable distribution from the previous
-example.
-
-``` r
 x0 <- 5e-4
-bf_approximated <- SumOfBernsteinFunctions(
+bf <- SumOfBernsteinFunctions(
   first = LinearBernsteinFunction(
     scale = alpha * x0^(1 - alpha) / (1 - alpha) / gamma(1 - alpha)
   ),
@@ -101,71 +83,77 @@ bf_approximated <- SumOfBernsteinFunctions(
     )
   )
 )
+
+# Simulate from the custom Bernstein function parametrization
+rextmo(n = 10, d = 3, bf = bf)
+#>            [,1]      [,2]      [,3]
+#>  [1,] 0.8633888 1.3353381 1.3353381
+#>  [2,] 2.1615788 2.1615788 2.1615788
+#>  [3,] 0.2844054 0.4893745 0.4893745
+#>  [4,] 1.3552345 1.3552345 0.6377810
+#>  [5,] 0.1877915 0.1877915 0.1877915
+#>  [6,] 0.1706188 0.1706188 0.1706188
+#>  [7,] 0.4699766 3.4625694 1.3128645
+#>  [8,] 0.1841238 0.1841238 0.1841238
+#>  [9,] 2.5726964 1.4836676 0.7034619
+#> [10,] 1.4657382 0.5681614 1.6458015
 ```
 
-Bernstein functions are closed under addition, scaling, and composite
-scaling, which can be used to create new Bernstein functions:
+## Word(s) of caution
 
-<img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" />
-
-## Word of caution for high dimensions
-
-The package, including the simulation algorithms, is extensively tested
-with unit tests. Nevertheless, it can happen to run into unexpected
-results for certain parametrizations in high dimensions. The reason for
-this are numerical issues with very small and very large numbers. We
-tried to program defensively to avoid these problems, but if the
-dimension is high enough and the parametrization leads to values below
-the double precision, at some point numerical issues are inevitable. For
-this reason, we encourage users to produce statistical tests suitable
-for their use-case; see our [statistical unit
+While the package is extensively tested, numerical issues may arise in
+high-dimensional simulations due to very small or large numbers. We
+recommend performing statistical tests suitable for your use-case to
+ensure validity. For more guidance, refer to our [statistical unit
 tests](https://github.com/hsloot/rmo/blob/main/tests/testthat/test-statistical-unit-test.R)
-for an example. If you are encountering statistical problems, please
-submit an [issue
+and submit an [issue
 report](https://github.com/hsloot/rmo/issues/new?assignees=&labels=bug&template=statistical_problem.md&title=%5BSTAT%5D)
-including a [reprex](https://github.com/tidyverse/reprex).
+if you encounter statistical problems.
 
-## Roadmap for future development
+Additionally, note that while the package reached a certain level of
+stability, it is still under active development. We aim to keep the
+interface of the primary function `rpextmo()` backwards compatible, the
+implementation may undergo changes.
 
-The aim of this package is the seamless and efficient simulation of
-Marshall-Olkin distributions. For this, we provide the primary function
-of this package: `rpextmo`. You may
+## API documentation
 
-- *assume stability of its interface* ✅, but
+The package is documented using `roxygen2` and `pkgdown`. You can find
+the documentation on the [project website](reference/index.html).
 
-- *do not assume stability of its simulation results* ❌.
+## Testing
 
-We are planning to develop the package incrementally. The API of other
-functions might change. Ideas for future changes are:
+The package is tested using `testthat`. You can run the tests using the
+following command after checking out the repository:
 
-- Refactoring the `arnold_distribution` and the
-  `markovian_exmo_distribution` to be based on a
-  `random_walk_distribution` and `markov_process`.
+``` r
+devtools::test()
+```
 
-- Add a distribution to sample from the Arnold model with exchangeable
-  shock-size arrival intensities which does not require to store all
-  shock arrival intensities.
+## Changelog
 
-- Implement the calculation of *exchangeable shock-size arrival
-  intensities* and the corresponding Markov generator in C++. Consider
-  using the [C++ wrapper to R’s C-API for
-  integration](https://github.com/hsloot/integratecpp), and implementing
-  a C++ backend for Bernstein functions.
-
-Other ideas for the future:
-
-- Implementation of estimation routines (**help wanted**).
-
-- Representation and simulation of hierarchical Marshall-Olkin
-  distributions.
+The changelog is available in the [NEWS.md](NEWS.md) file.
 
 ## Contributing
 
-Contribution is highly appreciated. Contribution can range from
-improving the documentation, writing tests, or raising issues and
-feature requests to implementing feature requests or fixing bugs. If you
-consider to contribute, have a look at our [contribution
-guide](.github/CONTRIBUTING.md).
+Contributions to `rmo` are welcome! You contribution can be about
+improving the documentation, writing tests, raising issues or feature
+requests, implementing feature requests, or fixing bugs. Check out our
+[contribution guide](.github/CONTRIBUTING.md) to get started.
+
+## References
+
+<div id="refs" class="references csl-bib-body hanging-indent"
+entry-spacing="0">
+
+<div id="ref-Sloot2022a" class="csl-entry">
+
+Sloot, Henrik. 2022. “Implementing Markovian Models for Extendible
+Marshall–Olkin Distributions.” *Dependence Modeling* 10 (1): 308–43.
+<https://doi.org/10.1515/demo-2022-0151>.
+
+</div>
+
+</div>
 
 ## License
 

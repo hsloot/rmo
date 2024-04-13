@@ -1,12 +1,18 @@
 ---
 name: Review proposal
-about: Propose something for a code-review
-title: "[REVIEW] "
+about: Propose changes for a code review
+title: "[REVIEW]"
 labels: good first issue, help wanted, review
 assignees: hsloot
 
 ---
 
-## Proposal 
+## Proposal
 
-Write quickly which parts of the repository should be reviewed and why. Preferably with links. __Usually, this should not be a proposal for somebody else, but a proper way of documenting your reviewing activities and including it in projects__.
+Please provide a brief overview of the changes you would like to propose for
+code review. Include any relevant links to specific files or sections of the
+repository.
+
+__Note:__ This template is intended for documenting your intention to review
+certain parts of the code. It should not be used to assign review tasks to
+others.

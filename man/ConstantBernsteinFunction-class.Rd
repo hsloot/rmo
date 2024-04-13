@@ -6,8 +6,8 @@
 \alias{ConstantBernsteinFunction}
 \title{Class for (almost) constant Bernstein functions}
 \description{
-A \emph{constant Bernstein function} is a Bernstein function with only a
-constant part (for \eqn{x > 0}), i.e. \eqn{b = 0} and \eqn{\nu = 0}. In
+A \emph{constant Bernstein function} is a Bernstein function with only a constant
+part (for \eqn{x > 0}), i.e., \eqn{b = 0} and \eqn{\nu = 0}. In
 particular,
 \deqn{
   \psi(x) = a , x > 0
@@ -16,8 +16,8 @@ particular,
 \section{Slots}{
 
 \describe{
-\item{\code{constant}}{The nonnegative \emph{killing} parameter (i.e. \eqn{a}
-in the representation)}
+\item{\code{constant}}{The nonnegative \emph{killing} parameter (i.e., \eqn{a} in the
+representation)}
 }}
 
 \examples{

@@ -5,55 +5,51 @@
 ## usethis namespace: end
 NULL
 
-#' rmo: A package for the Marshall–Olkin distribution.
+#' rmo: A package for simulating Marshall–Olkin distributions
 #'
-#' The package contains fast implementations of sampling algorithms related to
-#' the Marshall–Olkin distribution. It also contains an S4-class system for
-#' Bernstein functions which can be used to create a large variety of
-#' Marshall–Olkin parametrizations.
+#' The rmo-package provides efficient sampling algorithms for the Marshall–Olkin
+#' distribution and a flexible S4-class system for creating diverse
+#' parametrizations.
+#'
+#' @section Sampling:
+#' Simulation algorithms are provided for various MO parametrizations. The
+#' semantic naming scheme `r*mo` is used, e.g.,
+#'
+#' - [rpextmo()] allows to simulate from parametric families of extendible
+#'   Marshall–Olkin distributions. The function takes a *killing-rate*, a
+#'   *drift*, a *scaling factor*, a *parameter vector*, and a *family name* as
+#'   input.
+#' - [rextmo()] allows to simulate from extendible Marshall–Olkin
+#'   distributions. It takes a *Bernstein function* as input.
+#' - [rexmo()] allows to simulate from exchangeable Marshall–Olkin
+#'   distributions. It takes a vector of *exchangeable shock-size arrival
+#'   intensities* as input.
+#' - [rmo()] allows to simulate from Marshall–Olkin distributions. It takes
+#'   vector of *shock arrival intensities* as input and uses the *Arnold model*
+#'   or *exogenous shock model* for sampling; the former can be used up until
+#'   dimension \eqn{30}, but the latter should only be used in very small
+#'   dimensions.
+#'
+#' The default simulation algorithm is the *Markovian death-counting model*.
+#' Dependent on the parametrization, other algorithms can be used, e.g., the
+#' *exogenous shock model*, the *Arnold model*, or the *Lévy-frailty model*.
 #'
 #' @section Bernstein functions:
-#' A *Bernstein function* is a non-negative function with non-negative
-#' alternating iterative differences. These functions can be used to generated
-#' parametrizations the extendible Marshall–Olkin distributions.
-#' - An object that derives from [BernsteinFunction-class] can be used to
-#'   generate the Marshall–Olkin shock arrival intensities with [intensities()].
-#'   It can be used to generate (scaled) exchangeable shock-size arrival
-#'   intensities with [exIntensities()].
+#' A *Bernstein function* can be used to parametrize the *extendible
+#' Marshall–Olkin distribution*.
+#'
 #' - Many families of Bernstein functions are available,
 #'   e.g. [ParetoBernsteinFunction-class],
 #'   [ExponentialBernsteinFunction-class], and
 #'   [AlphaStableBernsteinFunction-class].
 #' - Bernstein functions can be recombined by scaling, by summation or by
 #'   composition, which can be used to create new Bernstein functions with
-#'   [ScaledBernsteinFunction-class] and [SumOfBernsteinFunctions-class].
-#'
-#'
-#' @section Sampling:
-#' Multiple sampling algorithms are provided. The semantic naming scheme `r*mo`
-#' is used, e.g.,
-#' - [rmo()] allows the simulation from Marshall–Olkin distributions. It has
-#'   *shock arrival intensities* as input and uses the *Arnold model* or
-#'   *exogenous shock model* for sampling; the former can be used up until
-#'   dimension \eqn{30}, but the latter should only be used in very small
-#'   dimensions.
-#' - [rexmo()] allows the simulation from exchangeable Marshall–Olkin
-#'   distributions. It has *exchangeable shock-size arrival intensities* as
-#'   input and uses the *Markovian death-set model*, the *Arnold model*, or the
-#'   *exogenous shock model* for sampling; for the latter two models, the
-#'   corresponding *shock arrival intensities* are calculated and passed down to
-#'   [rmo()].
-#' - [rextmo()] allows the simulation from extendible Marshall–Olkin
-#'   distributions. It has a *Bernstein function* as input and calculates the
-#'   corresponding *exchangeable shock-size arrival intensities* and passes them
-#'   down to [rexmo()].
-#' - [rpextmo()] allows the simulation from parametric families of extendible
-#'   Marshall–Olkin distributions. It has a *killing-rate*, a *drift*, a
-#'   *scaling factor*, a *parameter vector*, and a *family name* as input. All
-#'   previous models can be used and the corresponding inputs are calculated
-#'   from the Bernstein function. For special families, which correspond to Lévy
-#'   exponents of compound Poisson subordinators, the *Lévy frailty model* can
-#'   be used for simulations.
+#'   [ScaledBernsteinFunction-class], [CompositeScaledBernsteinFunction-class]
+#'   and [SumOfBernsteinFunctions-class].
+#' - An object that derives from [BernsteinFunction-class] can be used to
+#'   generate the Marshall–Olkin shock arrival intensities with [intensities()].
+#'   It can be used to generate (scaled) exchangeable shock-size arrival
+#'   intensities with [exIntensities()].
 #'
 #' @docType package
 #' @name rmo-package

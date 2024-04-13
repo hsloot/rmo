@@ -3,60 +3,55 @@
 \docType{package}
 \name{rmo-package}
 \alias{rmo-package}
-\title{rmo: A package for the Marshall–Olkin distribution.}
+\title{rmo: A package for simulating Marshall–Olkin distributions}
 \description{
-The package contains fast implementations of sampling algorithms related to
-the Marshall–Olkin distribution. It also contains an S4-class system for
-Bernstein functions which can be used to create a large variety of
-Marshall–Olkin parametrizations.
+The rmo-package provides efficient sampling algorithms for the Marshall–Olkin
+distribution and a flexible S4-class system for creating diverse
+parametrizations.
 }
+\section{Sampling}{
+
+Simulation algorithms are provided for various MO parametrizations. The
+semantic naming scheme \code{r*mo} is used, e.g.,
+\itemize{
+\item \code{\link[=rpextmo]{rpextmo()}} allows to simulate from parametric families of extendible
+Marshall–Olkin distributions. The function takes a \emph{killing-rate}, a
+\emph{drift}, a \emph{scaling factor}, a \emph{parameter vector}, and a \emph{family name} as
+input.
+\item \code{\link[=rextmo]{rextmo()}} allows to simulate from extendible Marshall–Olkin
+distributions. It takes a \emph{Bernstein function} as input.
+\item \code{\link[=rexmo]{rexmo()}} allows to simulate from exchangeable Marshall–Olkin
+distributions. It takes a vector of \emph{exchangeable shock-size arrival
+intensities} as input.
+\item \code{\link[=rmo]{rmo()}} allows to simulate from Marshall–Olkin distributions. It takes
+vector of \emph{shock arrival intensities} as input and uses the \emph{Arnold model}
+or \emph{exogenous shock model} for sampling; the former can be used up until
+dimension \eqn{30}, but the latter should only be used in very small
+dimensions.
+}
+
+The default simulation algorithm is the \emph{Markovian death-counting model}.
+Dependent on the parametrization, other algorithms can be used, e.g., the
+\emph{exogenous shock model}, the \emph{Arnold model}, or the \emph{Lévy-frailty model}.
+}
+
 \section{Bernstein functions}{
 
-A \emph{Bernstein function} is a non-negative function with non-negative
-alternating iterative differences. These functions can be used to generated
-parametrizations the extendible Marshall–Olkin distributions.
+A \emph{Bernstein function} can be used to parametrize the \emph{extendible
+Marshall–Olkin distribution}.
 \itemize{
-\item An object that derives from \linkS4class{BernsteinFunction} can be used to
-generate the Marshall–Olkin shock arrival intensities with \code{\link[=intensities]{intensities()}}.
-It can be used to generate (scaled) exchangeable shock-size arrival
-intensities with \code{\link[=exIntensities]{exIntensities()}}.
 \item Many families of Bernstein functions are available,
 e.g. \linkS4class{ParetoBernsteinFunction},
 \linkS4class{ExponentialBernsteinFunction}, and
 \linkS4class{AlphaStableBernsteinFunction}.
 \item Bernstein functions can be recombined by scaling, by summation or by
 composition, which can be used to create new Bernstein functions with
-\linkS4class{ScaledBernsteinFunction} and \linkS4class{SumOfBernsteinFunctions}.
-}
-}
-
-\section{Sampling}{
-
-Multiple sampling algorithms are provided. The semantic naming scheme \code{r*mo}
-is used, e.g.,
-\itemize{
-\item \code{\link[=rmo]{rmo()}} allows the simulation from Marshall–Olkin distributions. It has
-\emph{shock arrival intensities} as input and uses the \emph{Arnold model} or
-\emph{exogenous shock model} for sampling; the former can be used up until
-dimension \eqn{30}, but the latter should only be used in very small
-dimensions.
-\item \code{\link[=rexmo]{rexmo()}} allows the simulation from exchangeable Marshall–Olkin
-distributions. It has \emph{exchangeable shock-size arrival intensities} as
-input and uses the \emph{Markovian death-set model}, the \emph{Arnold model}, or the
-\emph{exogenous shock model} for sampling; for the latter two models, the
-corresponding \emph{shock arrival intensities} are calculated and passed down to
-\code{\link[=rmo]{rmo()}}.
-\item \code{\link[=rextmo]{rextmo()}} allows the simulation from extendible Marshall–Olkin
-distributions. It has a \emph{Bernstein function} as input and calculates the
-corresponding \emph{exchangeable shock-size arrival intensities} and passes them
-down to \code{\link[=rexmo]{rexmo()}}.
-\item \code{\link[=rpextmo]{rpextmo()}} allows the simulation from parametric families of extendible
-Marshall–Olkin distributions. It has a \emph{killing-rate}, a \emph{drift}, a
-\emph{scaling factor}, a \emph{parameter vector}, and a \emph{family name} as input. All
-previous models can be used and the corresponding inputs are calculated
-from the Bernstein function. For special families, which correspond to Lévy
-exponents of compound Poisson subordinators, the \emph{Lévy frailty model} can
-be used for simulations.
+\linkS4class{ScaledBernsteinFunction}, \linkS4class{CompositeScaledBernsteinFunction}
+and \linkS4class{SumOfBernsteinFunctions}.
+\item An object that derives from \linkS4class{BernsteinFunction} can be used to
+generate the Marshall–Olkin shock arrival intensities with \code{\link[=intensities]{intensities()}}.
+It can be used to generate (scaled) exchangeable shock-size arrival
+intensities with \code{\link[=exIntensities]{exIntensities()}}.
 }
 }
 

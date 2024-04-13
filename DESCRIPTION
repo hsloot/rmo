@@ -1,6 +1,6 @@
 Package: rmo
 Title: A package for the Marshall-Olkin distribution
-Version: 0.8.6
+Version: 0.8.7
 Authors@R:
   person(given = "Henrik",
     family = "Sloot",
@@ -26,7 +26,8 @@ Suggests:
     xml2,
     mockery,
     withr,
-    remotes
+    remotes,
+    knitr
 RdMacros:
     Rdpack
 Encoding: UTF-8
@@ -73,4 +74,6 @@ SystemRequirements: C++17
 LinkingTo:
     Rcpp,
     testthat
+VignetteBuilder: 
+    knitr
 Config/testthat/edition: 3

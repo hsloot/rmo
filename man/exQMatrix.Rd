@@ -7,7 +7,7 @@
 exQMatrix(object, d, cscale = 1, ...)
 }
 \arguments{
-\item{object}{An object derived from class \code{BernsteinFunction}.}
+\item{object}{An object deriving from the class \linkS4class{BernsteinFunction}.}
 
 \item{d}{A positive integer, larger than two, for the \emph{dimension}.}
 
@@ -33,6 +33,20 @@ upper triangular matrix with elements
 The calculation of the Markov generator matrix using this formula is usually
 not numerically stable. Consequently, the various alternative approaches are
 used dependent on the class of the Bernstein function.
+
+The (upper triagonal) infinitesimal Markov generator of the associated
+death-counting process is calculated recursively:
+\deqn{
+  q_{0, i}^\ast
+    = \eta_{i} ,
+      \quad i \in {\{ 1 , \ldots , d \}} ,
+}
+and
+\deqn{
+  q_{i+1, j+1}^\ast
+    = \frac{d-j}{d-i} q_{i,j}^\ast + \frac{j+1-i}{d-i} q_{i, j+1}^\ast ,
+     \quad 0 \leq i < j \leq d .
+}
 }
 \examples{
 bf <- AlphaStableBernsteinFunction(alpha = 0.7)

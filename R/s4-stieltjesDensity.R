@@ -5,7 +5,7 @@
 #' `y` (weights) as well as a type attribute if discrete. The `type` attribute
 #' is either `"continuous"` or `"discrete"`.
 #'
-#' @inheritParams levyDensity
+#' @param object An object deriving from [CompleteBernsteinFunction-class].
 #'
 #' @importFrom methods setGeneric
 #' @family Bernstein function generics

@@ -5,27 +5,33 @@ Closes/Fixes #...
 ## Checklist
 
 - [ ] `R CMD CHECK` successful
-- [ ] tests included
-- [ ] documentation included or updated
-- [ ] commit messages follow [commit guidelines](https://udacity.github.io/git-styleguide/)
+
+- [ ] Tests included
+
+- [ ] Documentation included or updated
+
+- [ ] Commit messages follow [commit
+  guidelines](https://udacity.github.io/git-styleguide/)
 
 Only for new or refactored algorithms:
 
-- [ ] benchmarks (and comparison with the previous version) included
+- [ ] Include benchmarks (and comparison with the previous version)
 
 Optional, but recommended:
 
-- [ ] code passes `lintr::lint_package()` without errors
+- [ ] Code passes `lintr::lint_package()` without errors
 
 ## Description
 
 Proposed changes:
+
 -
+
 -
+
 -
 
 ## Comments
-
 
 ## Mentions for review
 

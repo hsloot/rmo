@@ -1,5 +1,7 @@
 # rmo 0.9
 
+- Review and improve documentation (#116)
+
 - Re-organize S4 code and documentation (#117)
 
 - Remove outdated rmarkdown notebooks from development phase (#115)
@@ -12,69 +14,76 @@
 
 - Small changes of the documentation
 
-- Improvement of `exIntensities`
+- Improveming implementation of method `exIntensities`
 
-- Allow `n = 0` in sampling algorithms (e.g. for measure setup time)
+- Provide zero-sample-size parametrization, `n = 0`, in simulation algorithms
+  (e.g. for measure setup time)
 
-- Consistent use of STL headers and attribute [[maybe_unused]] in C++ code
+- Bugfix for consistent use of STL headers and attribute [[maybe_unused]] in C++
+  code
 
 # rmo 0.8
 
-- Create single entry point method for general MO sampling distributions, exchangeable MO sampling
-  routines, extendible MO sampling routines, and parametrized extendible MO sampling routines.
-- Improve documentation and add snaphot test for sampling routines.
+- **Breaking change**: Rename simulation method `*_markovian` to `*_mdcm` and
+  `*_arnold` to `*_am`
 
-# rmo 0.7.1
+- **Breaking change**: Provide a single entry point method for general MO
+  sampling distributions `rmo`, exchangeable MO sampling routine `rexmo`,
+  extendible MO sampling routines `rextmo`, and parametrized extendible MO
+  sampling routines `rpextmo`
 
-- Rename sampling method `*_markovian` and `*_arnold` to `*_mdcm` and `*_am`, respectively.
-- Rename internal CPP classes `arnold_mo_distribution`, `markovian_exmo_distribution`, and `armageddon_extmo_distribution` to `am_mo_distribution`, `mdcm_exmo_distribution`, and `esm_armextmo_distribution`, respectively.
+- Rename C++ backend classes `arnold_mo_distribution`,
+`markovian_exmo_distribution`, and `armageddon_extmo_distribution` to
+`am_mo_distribution`, `mdcm_exmo_distribution`, and `esm_armextmo_distribution`,
+respectively
+
+- Improve code coverage by adding snapshot tests for sampling routines
+
+- Improve documentation
 
 # rmo 0.7
 
-- Breaking change: remove `lambda` parameter for `PoissonBernsteinFunction`.
+- **Breaking change**: Remove `lambda` parameter for `PoissonBernsteinFunction`
 
 # rmo 0.6
 
-- Rename *Cuadras-Augé* to *armageddon ESM* to better reflect the nature of the distribution.
+- **Breaking change**: Rename concept *Cuadras-Augé* to *armageddon ESM* to
+  better reflect the nature of the distribution. Associated functions are
+  renamed accordingly
 
-# rmo 0.5.5
+- Bugfix to handle integration error explicitly, possibly adjusting in case of
+  for very small values
 
-- Explicitly handle integration error with possible adjustment for very small values.
+- Improve numerical stability by using the explicit first-order iterated
+  difference for `difference_order == 1L` in `valueOf` to avoid
+  endpoint-singularity problems in numerical integration
 
-# rmo 0.5.4
+- Bugfix in initializers and validity methods of S4 objects such that
+  `validObject` can now be called with the argument `test = TRUE` without
+  causing an error
 
-- Use explicit first-order iterated difference for `difference_order == 1L` in `valueOf` to
-  avoid endpoint-singularity problems in numerical integration.
+- Allow pass-though of arguments `uexIntensities`, `exIntensities`, and
+  `exQMatrix` from method `valueOf` to `integrate`
 
-# rmo 0.5.3
+- Add new `CompositeScaledBernsteinFunction` class
 
-- Fix implementation of initializers and validity methods. In particular, `validObject` can now
-  be called with the argument `test = TRUE` without causing an error.
-- Add show method for  `BernsteinFunction`-classes.
+- Add `show` method for `BernsteinFunction`-classes.
 
-# rmo 0.5.2
+# rmo 0.5
 
-- Allow pass-though of arguments to `integrate` in functions `valueOf`,
-  `uexIntensities`, `exIntensities`, and `exQMatrix`.
+- **Breaking change**: Rename function names of simulation algorithms. Now,
+  sampling algorithms follow the format `r*mo_*` where the first `*` indicates
+  the input-parameter and the second on the algorithm, e.g. `rexmo_markovian`
+  has `ex_intensities` as input parameters and uses the Markovian model for the
+  default counting process.
 
-# rmo 0.5.1
+- **Breaking change**: Rearrange order in arguments of `valueOf`: instead of
+  `cscale, n, k` we have `n, k, cscale`.
 
-- Add composite-scaled Bernstein function class.
+- Implementing new methods to generate distribution parameter from
+  `BernsteinFunction` classes
 
-# rmo 0.5.0
-
-- Rename Cuadras-Augé and Lévy-frailty model algorithms. Now a sampling algorithm
-  follows the format `r*mo_*` where the first `*` indicates the input-parameter
-  and the second on the algorithm, e.g. `rexmo_markovian` has `ex_intensities` as
-  input parameters and uses the Markovian model for the default counting process.
-
-# rmo 0.4.1
-
-- Rearrange order in arguments of `valueOf`: instead of `cscale, n, k` we
-  have `n, k, cscale`.
-- Add methods to generate parameter from `BernsteinFunction` classes
-
-# rmo 0.4.0
+# rmo 0.4
 
 - Change input parameter for `rexmo_markovian` (which is now is scaled
   exchangeable intensity). The `ex_intensities*`-methods are similarly adjusted
@@ -83,73 +92,57 @@
 - The Bernstein function classes have been refactored and some new features have
   been added.
 
-# rmo 0.3.0
+# rmo 0.3
 
-- Rename `rmo_ex_arnold` to `rexmo_markovian`.
+- **Breaking change**: Rename `rmo_ex_arnold` to `rexmo_markovian`.
 
-# rmo 0.2.6
+- Improve numerical stability of the calculation of products with large binomial
+  coefficients
 
-- Complete refactored C++ backend: Distribution classes satisfy a multivariate
+- Bugfix in function `is_within` to avoid undefined behavior
+
+- Implementing the Inverse Gaussian Bernstein function
+
+- Implementing Pareto jump simulation and the Pareto-jump compound Poisson
+  Bernstein function
+
+- Implementing the Exponential-jump compound Poisson Bernstein function
+
+- Add S4 classes for evaluating Bernstein Functions and their higher-order
+  alternating, iterated forward differences
+
+- Provide drop-in wrapper functions to create meaningful distribution parameters
+
+- Refactoring of C++ backend to distribution classes satisfying a multivariate
   version of the named requirement *RandomNumberDistribution*
 
-# rmo 0.2.5
+- Refactoring of several internal functions by rewriting them in C++
 
-- Include more tests
-- Include statistical tests for an integration test
-- Fix problem with large binomial coefficients
+- Refactoring of simulation algorithms to improve performance
 
-# rmo 0.2.4
+- Refactoring to improve internal representation
 
-- Implementation of the Inverse Gaussian Bernstein function
+- Refactoring of custom assertions
 
-# rmo 0.2.3
+- Improve code coverage, e.g., by adding additional unit tests, an integration
+  test, and statistical unit tests
 
-- Implement Pareto jumps and Pareto CPP Bernstein function
-- Implement Exponential-jump CPP Bernstein function
+# rmo 0.2
 
-# rmo 0.2.2
+- Re-License under GPL-3 (because of `Rcpp` dependence)
 
-- Improve internal representation
-- Internal support library now entirely written in C++
-- Make LFM more extendible
+- Properly handle case `rate == 0` in `rmo:::sample_cpp` (used in `rmo_lfm_cpp`)
 
-# rmo 0.2.1
+- Properly handle case when compound Poisson process drifts over several
+  barriers during waiting period in `rmo:::sample_cpp` (used in `rmo_lfm_cpp`)
 
-- Refactoring and additional tests
-- Fix problem with `int32` is `is_within` function
-- Refactor custom assertions
-- Add S4 classes for evaluating Bernstein Functions and their higher-order
-    alternating, iterated forward differences
-- Provide simple functions to create meaningful distribution parameters
-- Better test cases and increased test coverage
-- Refactor all sampling methods for increased performance
+- Re-implementation of sampling algorithms using `Rcpp`
 
-# rmo 0.2.0
+- Use original `R`-based implementations of simulation algorithms for unit tests
 
-- Reimplementation of all sampling algorithms in `Rcpp`
-- Changed License to GPL-3 (because of `Rcpp`-package)
-- Extended unit testing with original `R`-based implementations
+- Improve code coverage for `rmo_lfm_cpp` (independence case)
 
-
-# rmo 0.1.2
-
-- Bugfix for `rmo:::sample_cpp` which is used in `rmo_lfm_cpp`. The former
-implementation did not properly account for the case, when the CPP drifts
-over several barriers during a waiting period.
-
-
-# rmo 0.1.1
-
-- Bugfix for `rmo:::sample_cpp` which is used in `rmo_lfm_cpp` (case `rate == 0` was not properly handled).
-- Implemented more test for `rmo_lfm_cpp` in independence case
-
-# rmo 0.1.0
+# rmo 0.1
 
 - Added pure `R` implementations of various sampling algorithms: `rmo_esm`,
 `rmo_arnold`, `rmo_ex_arnold`, `rmo_lfm_cpp`, and `rmo_esm_cuadras_auge`.
-
-
-# rmo 0.0.0.9000
-
-- Added a `NEWS.md` file to track changes to the package.
-- Sep. 28, 2019: I initialized this project today. As of now, there is no code in the repository. The next goal is to provide the necessary background documentation on the Marshall-Olkin distribution and outline a project plan. Stay tuned.

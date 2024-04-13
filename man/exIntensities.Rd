@@ -7,7 +7,7 @@
 exIntensities(object, d, cscale = 1, ...)
 }
 \arguments{
-\item{object}{An object derived from class \code{BernsteinFunction}.}
+\item{object}{An object deriving from the class \linkS4class{BernsteinFunction}.}
 
 \item{d}{A positive integer, larger than two, for the \emph{dimension}.}
 

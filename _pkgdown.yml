@@ -9,7 +9,7 @@ reference:
   contents:
   - rmo-package
 
-- title: Sampling functions
+- title: Simulation functions
   desc: ~
   contents:
   - rmo
