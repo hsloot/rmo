@@ -1,0 +1,246 @@
+---
+title: "Using `rmo`"
+bibliography: ../inst/REFERENCES.bib
+output: 
+  rmarkdown::html_vignette:
+    code_folding: hide
+vignette: >
+  %\VignetteIndexEntry{Using `rmo`}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  class.source = "fold-none"
+)
+
+library(rmo)
+
+set.seed(1623)
+```
+
+The following demonstrates how to use the `rmo` package to generate samples from
+a multivariate Marshall–Olkin distribution.
+
+## Simple usage
+
+Sampling from one of the integrated family of *extendible Marshall–Olkin
+distributions* is simple. For example, the following code generates a sample of 
+size 10 from a trivariate extendible Marshall–Olkin distribution from the 
+so-called \( \alpha \)-stable family with parameter \( \alpha = 0.4 \):
+
+```{r}
+rpextmo(10, 3, eta = 0.4, family = "AlphaStable")
+```
+
+The jump distribution parameter `eta` usually allows for a range of possible 
+depenence structures.
+
+## Extended usage
+
+Each integrated family of extendible Marshall–Olkin distributions has the
+additional parameters
+
+- `a` (default: 0) for the *killing rate*,
+- `b` (default: 0) for the * drift*, and
+- `gamma` (default: 1) for the *intensity scaling parameter*.
+
+We cite [@Sloot2022a] for a better understanding of these parameters:
+
+> For this, recall that we can characterize every ext. MO distribution by a
+> Bernstein function \( \psi \), which defines the law of a (potentially killed)
+> Lévy subordinator. Components corresponding to the ext. MO distributed random
+> vector are killed once the subordinator passes their individual unit
+> exponential barrier values. For compound Poisson subordinators, we distinguish
+> subordinator laws by their jump intensity and jump size distribution: The jump
+> intensity translates into the overall speed with which the subordinator
+> surpasses the barrier values. Thus, it corresponds to the random vector's
+> marginal rate. The distribution of jump sizes predefines the chances of the
+> subordinator simultaneously surpassing multiple barrier values, and therefore,
+> it corresponds to the random vector's dependence structure. Simply put, a high
+> probability of larger jumps increases the chance of simultaneous deaths, while
+> a high probability of smaller jumps increases the likelihood of individual
+> deaths. This logic culminates into the pure-drift and pure-killing corner
+> cases, corresponding to the independence and comonotonicity, respectively,
+> pure-jump Lévy subordinators with infinite activity, which can be approximated
+> by compound Poisson processes, and convex combinations of those above.
+
+The following code generates a sample of size 10 from a trivariate extendible
+Marshall–Olkin distribution from the (extended) *\( \alpha \)-stable family*
+with parameter \( \alpha = 0.4 \), killing rate \( a = 0.1 \),
+drift \( b = 0.2 \), and intensity scaling parameter \( \gamma = 0.5 \):
+
+```{r}
+rpextmo(
+  10, 3,
+  a = 0.1, b = 0.2, gamma = 0.5,
+  eta = 0.4, family = "AlphaStable",
+)
+```
+
+## Advance usage
+
+Aside from the integrated families, the `rmo` package also provides tools to 
+create custom extendible Marshall–Olkin distributions via so-called *Bernstein
+functions*. For example, the following code generates the Bernstein function
+associated with the *\( \alpha \)-stable family* with parameter
+\( \alpha = 0.4 \) from the simple example above:
+
+```{r}
+AlphaStableBernsteinFunction(0.4)
+```
+
+The class of Bernstein functions is closed under addition, scalar
+multiplication, and composite scalar multiplication. This allows recombinations
+of implemented Bernstein functions to create new ones. For example, the following
+code creates the Bernstein function associated with the *\( \alpha \)-stable
+family* with parameter \( \alpha = 0.4 \), killing rate \( a = 0.1 \),
+drift \( b = 0.2 \), and intensity scaling parameter \( \gamma = 0.5 \):
+
+```{r}
+SumOfBernsteinFunctions(
+  SumOfBernsteinFunctions(
+    ConstantBernsteinFunction(0.1),
+    LinearBernsteinFunction(0.2)
+  ),
+  ScaledBernsteinFunction(
+    0.5,
+    AlphaStableBernsteinFunction(0.4)
+  )
+)
+```
+
+To generate a sample from this custom extendible Marshall–Olkin distribution,
+use the `rextmo` function:
+
+```{r}
+rextmo(10, 3,
+  SumOfBernsteinFunctions(
+    SumOfBernsteinFunctions(
+      ConstantBernsteinFunction(0.1),
+      LinearBernsteinFunction(0.2)
+    ),
+    ScaledBernsteinFunction(
+      0.5,
+      AlphaStableBernsteinFunction(0.4)
+    )
+  )
+)
+```
+
+## Extending `rmo`
+
+The `rmo` package is designed to be easily extensible. Consider the following 
+Bernstein function: 
+$$
+  \psi(x)
+    = \log{\frac{b {(x + a)}}{a {(x + b)}}},
+      0 < a < b.
+$$
+
+It is a complete Bernstein function with Lévy density \( \nu \):
+$$
+  \nu{(u)}
+    = {\left[ e^{-a u} - e^{-b u} \right]} / {u},
+      u > 0 ,
+$$
+and with the Stieljtes density \( \sigma \):
+$$
+  \sigma{(u)}
+    = 1_{(a, b)}{(u)} / {u},
+      u > 0 .
+$$
+
+It is not implemented in the package, but it can be added as follows:
+
+```{r}
+CustomBernsteinFunction <- setClass( # nolint
+  "CustomBernsteinFunction",
+  contains = "CompleteBernsteinFunction",
+  slots = c(a = "numeric", b = "numeric"),
+  validity = function(object) {
+    if (object@a <= 0) {
+      stop("a must be positive")
+    }
+    if (object@b <= 0) {
+      stop("b must be positive")
+    }
+    if (object@a >= object@b) {
+      stop("a must be less than b")
+    }
+
+    invisible(TRUE)
+  }
+)
+
+setMethod(
+  "initialize",
+  signature(.Object = "CustomBernsteinFunction"),
+  function(.Object, a, b) { # nolint
+    if (!missing(a) && !missing(b)) {
+      .Object@a <- a # nolint
+      .Object@b <- b # nolint
+      validObject(.Object)
+    }
+
+    invisible(.Object)
+  }
+)
+
+setMethod(
+  "show",
+  "CustomBernsteinFunction",
+  function(object) {
+    cat(sprintf("An object of class %s\n", classLabel(class(object))))
+    if (isTRUE(validObject(object, test = TRUE))) {
+      cat(sprintf("- a: %s\n", format(object@a)))
+      cat(sprintf("- b: %s\n", format(object@b)))
+    } else {
+      cat("invalid or not initialized object\n")
+    }
+
+    invisible(NULL)
+  }
+)
+
+setMethod(
+  "levyDensity",
+  "CustomBernsteinFunction",
+  function(object) {
+    structure(
+      function(u) {
+        (exp(-object@a * u) - exp(-object@b * u)) / u
+      },
+      lower = 0, upper = Inf, type = "continuous"
+    )
+  }
+)
+
+setMethod(
+  "stieltjesDensity",
+  "CustomBernsteinFunction",
+  function(object) {
+    structure(
+      function(u) {
+        ifelse(u > object@a & u < object@b, 1 / u, 0)
+      },
+      lower = object@a, upper = object@b, type = "continuous"
+    )
+  }
+)
+```
+
+Now we can create a custom Bernstein function object and generate samples from
+it:
+
+```{r}
+bf <- CustomBernsteinFunction(a = 0.1, b = 0.2)
+rextmo(10, 3, bf)
+rexmo(10, 3, exIntensities(bf, 3, method = "levy"))
+rexmo(10, 3, exIntensities(bf, 3, method = "stieltjes"))
+```
+
+## References
