@@ -332,43 +332,43 @@ follows:</p>
 <p>Now we can create a custom Bernstein function object and generate
 samples from it:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">bf</span> <span class="op">&lt;-</span> <span class="fu">CustomBernsteinFunction</span><span class="op">(</span>a <span class="op">=</span> <span class="fl">0.1</span>, b <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">bf</span> <span class="op">&lt;-</span> <span class="fu">CustomBernsteinFunction</span><span class="op">(</span>a <span class="op">=</span> <span class="fl">0.5</span>, b <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/rextmo.html">rextmo</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">3</span>, <span class="va">bf</span><span class="op">)</span></span>
 <span><span class="co">#&gt;            [,1]      [,2]      [,3]</span></span>
-<span><span class="co">#&gt;  [1,] 1.0549758 1.0549758 1.0549758</span></span>
-<span><span class="co">#&gt;  [2,] 0.1720830 0.1720830 0.2912106</span></span>
-<span><span class="co">#&gt;  [3,] 1.0027066 1.0027066 1.0027066</span></span>
-<span><span class="co">#&gt;  [4,] 1.7361198 1.7361198 1.7361198</span></span>
-<span><span class="co">#&gt;  [5,] 2.9675397 2.9675397 2.9675397</span></span>
-<span><span class="co">#&gt;  [6,] 0.6120055 0.6120055 0.6120055</span></span>
-<span><span class="co">#&gt;  [7,] 3.0140639 3.0140639 3.0140639</span></span>
-<span><span class="co">#&gt;  [8,] 2.1685034 2.1685034 2.1685034</span></span>
-<span><span class="co">#&gt;  [9,] 1.7068878 1.7068878 1.7068878</span></span>
-<span><span class="co">#&gt; [10,] 1.8254171 1.8254171 1.8254171</span></span>
+<span><span class="co">#&gt;  [1,] 4.5124306 0.6776867 0.6776867</span></span>
+<span><span class="co">#&gt;  [2,] 1.6510005 1.6510005 1.7551740</span></span>
+<span><span class="co">#&gt;  [3,] 0.8254936 0.8254936 0.6441104</span></span>
+<span><span class="co">#&gt;  [4,] 1.3517013 1.3517013 1.3517013</span></span>
+<span><span class="co">#&gt;  [5,] 2.5269475 2.5269475 1.9062638</span></span>
+<span><span class="co">#&gt;  [6,] 4.5057099 2.4365320 1.7672876</span></span>
+<span><span class="co">#&gt;  [7,] 1.6811601 1.6811601 1.6811601</span></span>
+<span><span class="co">#&gt;  [8,] 0.1955646 0.3424441 0.3424441</span></span>
+<span><span class="co">#&gt;  [9,] 0.5672961 0.5672961 0.5672961</span></span>
+<span><span class="co">#&gt; [10,] 1.9118335 3.3807612 1.9118335</span></span>
 <span><span class="fu"><a href="../reference/rexmo.html">rexmo</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">3</span>, <span class="fu"><a href="../reference/exIntensities.html">exIntensities</a></span><span class="op">(</span><span class="va">bf</span>, <span class="fl">3</span>, method <span class="op">=</span> <span class="st">"levy"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt;            [,1]      [,2]      [,3]</span></span>
-<span><span class="co">#&gt;  [1,] 2.6618019 2.6618019 2.6618019</span></span>
-<span><span class="co">#&gt;  [2,] 2.9762102 2.9762102 2.9762102</span></span>
-<span><span class="co">#&gt;  [3,] 1.8638888 6.0701926 1.8638888</span></span>
-<span><span class="co">#&gt;  [4,] 0.0833949 1.2157291 1.2157291</span></span>
-<span><span class="co">#&gt;  [5,] 6.4681773 6.4681773 6.4681773</span></span>
-<span><span class="co">#&gt;  [6,] 1.7451800 1.7451800 1.7451800</span></span>
-<span><span class="co">#&gt;  [7,] 0.1462707 0.1462707 0.1631292</span></span>
-<span><span class="co">#&gt;  [8,] 5.8981258 5.8981258 5.8981258</span></span>
-<span><span class="co">#&gt;  [9,] 1.3524206 1.3524206 1.3524206</span></span>
-<span><span class="co">#&gt; [10,] 1.2893100 1.2893100 1.2893100</span></span>
+<span><span class="co">#&gt;              [,1]        [,2]        [,3]</span></span>
+<span><span class="co">#&gt;  [1,] 0.621524066 3.576891392 0.621524066</span></span>
+<span><span class="co">#&gt;  [2,] 1.725156021 0.711134685 0.711134685</span></span>
+<span><span class="co">#&gt;  [3,] 0.041547469 0.518341738 0.041547469</span></span>
+<span><span class="co">#&gt;  [4,] 0.431265509 0.431265509 0.431265509</span></span>
+<span><span class="co">#&gt;  [5,] 0.009924545 0.009924545 0.009924545</span></span>
+<span><span class="co">#&gt;  [6,] 3.788789729 3.788789729 3.788789729</span></span>
+<span><span class="co">#&gt;  [7,] 0.868756834 0.930285358 0.930285358</span></span>
+<span><span class="co">#&gt;  [8,] 0.828216388 0.828216388 1.246066232</span></span>
+<span><span class="co">#&gt;  [9,] 0.041924976 0.041924976 0.041924976</span></span>
+<span><span class="co">#&gt; [10,] 1.212388226 1.498387190 1.212388226</span></span>
 <span><span class="fu"><a href="../reference/rexmo.html">rexmo</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">3</span>, <span class="fu"><a href="../reference/exIntensities.html">exIntensities</a></span><span class="op">(</span><span class="va">bf</span>, <span class="fl">3</span>, method <span class="op">=</span> <span class="st">"stieltjes"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;            [,1]      [,2]      [,3]</span></span>
-<span><span class="co">#&gt;  [1,] 0.3236678 0.3236678 0.3236678</span></span>
-<span><span class="co">#&gt;  [2,] 0.5440478 0.5440478 0.5440478</span></span>
-<span><span class="co">#&gt;  [3,] 1.6752404 2.0266284 0.2997276</span></span>
-<span><span class="co">#&gt;  [4,] 1.0552581 1.0552581 1.0552581</span></span>
-<span><span class="co">#&gt;  [5,] 0.8301409 0.8301409 0.8301409</span></span>
-<span><span class="co">#&gt;  [6,] 2.8636111 2.8636111 2.8636111</span></span>
-<span><span class="co">#&gt;  [7,] 1.9388474 1.9388474 1.9388474</span></span>
-<span><span class="co">#&gt;  [8,] 1.0083822 1.0083822 1.0083822</span></span>
-<span><span class="co">#&gt;  [9,] 4.0768445 4.0768445 4.0768445</span></span>
-<span><span class="co">#&gt; [10,] 2.0715136 2.0715136 2.0715136</span></span></code></pre></div>
+<span><span class="co">#&gt;  [1,] 3.5263329 2.7646248 4.7625102</span></span>
+<span><span class="co">#&gt;  [2,] 0.3084601 0.7489434 0.7489434</span></span>
+<span><span class="co">#&gt;  [3,] 1.6212391 0.6477563 1.6212391</span></span>
+<span><span class="co">#&gt;  [4,] 0.1090898 0.1090898 0.1090898</span></span>
+<span><span class="co">#&gt;  [5,] 0.7484761 0.7484761 0.7484761</span></span>
+<span><span class="co">#&gt;  [6,] 0.1174769 0.1174769 0.1174769</span></span>
+<span><span class="co">#&gt;  [7,] 0.8045211 2.2488587 1.8485112</span></span>
+<span><span class="co">#&gt;  [8,] 0.6993002 0.6993002 0.6993002</span></span>
+<span><span class="co">#&gt;  [9,] 3.1630755 3.1630755 3.1630755</span></span>
+<span><span class="co">#&gt; [10,] 3.7058646 3.7058646 3.7058646</span></span></code></pre></div>
 </div>
 <div class="section level2 unnumbered">
 <h2 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
