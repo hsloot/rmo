@@ -237,7 +237,7 @@ Now we can create a custom Bernstein function object and generate samples from
 it:
 
 ```{r}
-bf <- CustomBernsteinFunction(a = 0.1, b = 0.2)
+bf <- CustomBernsteinFunction(a = 0.5, b = 2)
 rextmo(10, 3, bf)
 rexmo(10, 3, exIntensities(bf, 3, method = "levy"))
 rexmo(10, 3, exIntensities(bf, 3, method = "stieltjes"))
