@@ -5,18 +5,14 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="
-  The package contains an implementation of the Marshall-Olkin distribution and
-  methods for estimation, simulation, and construction.">
+<meta name="description" content="The package contains an implementation of the Marshall-Olkin distribution and methods for estimation, simulation, and construction.">
 <title>A package for the Marshall-Olkin distribution • rmo</title>
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="A package for the Marshall-Olkin distribution">
-<meta property="og:description" content="
-  The package contains an implementation of the Marshall-Olkin distribution and
-  methods for estimation, simulation, and construction.">
+<meta property="og:description" content="The package contains an implementation of the Marshall-Olkin distribution and methods for estimation, simulation, and construction.">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -26,11 +22,11 @@
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
     
 
-    <nav class="navbar fixed-top navbar-light navbar-expand-lg bg-light"><div class="container">
+    <nav class="navbar fixed-top navbar-light navbar-expand-lg bg-light" data-bs-theme="light"><div class="container">
     
     <a class="navbar-brand me-2" href="index.html">rmo</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.7</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,15 +36,10 @@
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
 <li class="nav-item">
-  <a class="nav-link" href="reference/index.html">Reference</a>
+  <a class="nav-link" href="articles/rmo.html">Get started</a>
 </li>
-<li class="nav-item dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
-  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="articles/Mixing-Marshall-Olkin-distributions.html">Mixing Marshall--Olkin distributions</a>
-    <a class="dropdown-item" href="articles/The-Marshall-Olkin-distribution.html">The Marshall-Olkin distribution</a>
-    <a class="dropdown-item" href="articles/The-binary-representation.html">The binary representation of the MO parameter</a>
-  </div>
+<li class="nav-item">
+  <a class="nav-link" href="reference/index.html">Reference</a>
 </li>
 <li class="nav-item">
   <a class="nav-link" href="news/index.html">Changelog</a>
@@ -77,29 +68,25 @@
 </h1></div>
 <!-- badges: start -->
 
-<p>An R package for constructing and simulating <em>Marshall-Olkin distribution</em>.</p>
-<div class="section level2">
-<h2 id="motivation">Motivation<a class="anchor" aria-label="anchor" href="#motivation"></a>
-</h2>
-<p>While the academic literature about Marshall-Olkin distributions is extensive, an intuitive and easy-to-use implementation is still missing. This project aims to provide an <code>R</code> package makes it simple and fun to use Marshall-Olkin distributions for research and real-world applications.</p>
-</div>
+<p>An R package for constructing and simulating high-dimensional <em>Marshall-Olkin (MO) distributions</em>, making it simple and fun to use them for research and real-world applications. Read more about simulating high-dimensional MO distributions in (Sloot 2022).</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>You can install the development version from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
+<p>You can install the development version from GitHub using the <code>devtools</code> package with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"hsloot/rmo"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
+<h2 id="basic-usage">Basic usage<a class="anchor" aria-label="anchor" href="#basic-usage"></a>
 </h2>
-<p>We provide drop-in wrapper <code>rpextmo</code>for simulating several parametric families of exchangeable Marshall-Olkin distributions: For example to simulate from the family associated with the <span class="math inline"><em>α</em></span>-stable distribution, use</p>
+<p>Simulating high-dimensional Marshall–Olkin distributions is made simple with the <code><a href="reference/rpextmo.html">rpextmo()</a></code> function. Here is a basic example:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/rpextmo.html">rpextmo</a></span><span class="op">(</span></span>
-<span>  n <span class="op">=</span> <span class="fl">10</span>, d <span class="op">=</span> <span class="fl">3</span>,</span>
-<span>  eta <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log2</a></span><span class="op">(</span><span class="fl">2</span> <span class="op">-</span> <span class="fl">0.5</span><span class="op">)</span>,</span>
-<span>  family <span class="op">=</span> <span class="st">"AlphaStable"</span></span>
+<span>  n <span class="op">=</span> <span class="fl">10</span>,                <span class="co"># number of samples</span></span>
+<span>  d <span class="op">=</span> <span class="fl">3</span>,                 <span class="co"># dimension</span></span>
+<span>  eta <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log2</a></span><span class="op">(</span><span class="fl">2</span> <span class="op">-</span> <span class="fl">0.5</span><span class="op">)</span>,   <span class="co"># distribution family parameter</span></span>
+<span>  family <span class="op">=</span> <span class="st">"AlphaStable"</span> <span class="co"># distribution family</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt;             [,1]      [,2]       [,3]</span></span>
 <span><span class="co">#&gt;  [1,] 1.43771730 1.4377173 1.43771730</span></span>
@@ -112,19 +99,16 @@
 <span><span class="co">#&gt;  [8,] 0.07250493 0.7784406 0.07250493</span></span>
 <span><span class="co">#&gt;  [9,] 1.83458658 1.3509871 1.83458658</span></span>
 <span><span class="co">#&gt; [10,] 2.57508782 0.1130284 0.91314202</span></span></code></pre></div>
-<p>All parametric families are based on so-called Bernstein functions. For the previous example, the associated Bernstein function can be defined via:</p>
+</div>
+<div class="section level2">
+<h2 id="advanced-usage">Advanced usage<a class="anchor" aria-label="anchor" href="#advanced-usage"></a>
+</h2>
+<p>All parametric families are linked to <em>so-called</em> Bernstein functions. The class of Bernstein functions is closed under addition, scaling, and composite scaling. You can create new Bernstein functions and simulate from them. Here is an example:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">alpha</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log2</a></span><span class="op">(</span><span class="fl">2</span> <span class="op">-</span> <span class="fl">0.5</span><span class="op">)</span></span>
-<span><span class="va">bf</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/AlphaStableBernsteinFunction-class.html">AlphaStableBernsteinFunction</a></span><span class="op">(</span></span>
-<span>  alpha <span class="op">=</span> <span class="va">alpha</span></span>
-<span><span class="op">)</span></span>
-<span><span class="va">bf</span></span>
-<span><span class="co">#&gt; An object of class "AlphaStableBernsteinFunction"</span></span>
-<span><span class="co">#&gt; - alpha: 0.5849625</span></span></code></pre></div>
-<p>Bernstein functions are closed under addition, scaling, and composite scaling, which can be used to create new Bernstein functions. The following Bernstein function approximates the Bernstein function associated with the <span class="math inline"><em>α</em></span>-stable distribution from the previous example.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">x0</span> <span class="op">&lt;-</span> <span class="fl">5e-4</span></span>
-<span><span class="va">bf_approximated</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/SumOfBernsteinFunctions-class.html">SumOfBernsteinFunctions</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="co"># Create a custom Bernstein function parametrization</span></span>
+<span><span class="va">alpha</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log2</a></span><span class="op">(</span><span class="fl">2</span> <span class="op">-</span> <span class="fl">0.5</span><span class="op">)</span></span>
+<span><span class="va">x0</span> <span class="op">&lt;-</span> <span class="fl">5e-4</span></span>
+<span><span class="va">bf</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/SumOfBernsteinFunctions-class.html">SumOfBernsteinFunctions</a></span><span class="op">(</span></span>
 <span>  first <span class="op">=</span> <span class="fu"><a href="reference/LinearBernsteinFunction-class.html">LinearBernsteinFunction</a></span><span class="op">(</span></span>
 <span>    scale <span class="op">=</span> <span class="va">alpha</span> <span class="op">*</span> <span class="va">x0</span><span class="op">^</span><span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">alpha</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">alpha</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/Special.html" class="external-link">gamma</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">alpha</span><span class="op">)</span></span>
 <span>  <span class="op">)</span>,</span>
@@ -135,39 +119,58 @@
 <span>      x0 <span class="op">=</span> <span class="va">x0</span></span>
 <span>    <span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
-<span><span class="op">)</span></span></code></pre></div>
-<p>Bernstein functions are closed under addition, scaling, and composite scaling, which can be used to create new Bernstein functions:</p>
-<p><img src="reference/figures/README-unnamed-chunk-6-1.png" width="100%"></p>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Simulate from the custom Bernstein function parametrization</span></span>
+<span><span class="fu"><a href="reference/rextmo.html">rextmo</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10</span>, d <span class="op">=</span> <span class="fl">3</span>, bf <span class="op">=</span> <span class="va">bf</span><span class="op">)</span></span>
+<span><span class="co">#&gt;            [,1]      [,2]      [,3]</span></span>
+<span><span class="co">#&gt;  [1,] 0.8633888 1.3353381 1.3353381</span></span>
+<span><span class="co">#&gt;  [2,] 2.1615788 2.1615788 2.1615788</span></span>
+<span><span class="co">#&gt;  [3,] 0.2844054 0.4893745 0.4893745</span></span>
+<span><span class="co">#&gt;  [4,] 1.3552345 1.3552345 0.6377810</span></span>
+<span><span class="co">#&gt;  [5,] 0.1877915 0.1877915 0.1877915</span></span>
+<span><span class="co">#&gt;  [6,] 0.1706188 0.1706188 0.1706188</span></span>
+<span><span class="co">#&gt;  [7,] 0.4699766 3.4625694 1.3128645</span></span>
+<span><span class="co">#&gt;  [8,] 0.1841238 0.1841238 0.1841238</span></span>
+<span><span class="co">#&gt;  [9,] 2.5726964 1.4836676 0.7034619</span></span>
+<span><span class="co">#&gt; [10,] 1.4657382 0.5681614 1.6458015</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="word-of-caution-for-high-dimensions">Word of caution for high dimensions<a class="anchor" aria-label="anchor" href="#word-of-caution-for-high-dimensions"></a>
+<h2 id="words-of-caution">Word(s) of caution<a class="anchor" aria-label="anchor" href="#words-of-caution"></a>
 </h2>
-<p>The package, including the simulation algorithms, is extensively tested with unit tests. Nevertheless, it can happen to run into unexpected results for certain parametrizations in high dimensions. The reason for this are numerical issues with very small and very large numbers. We tried to program defensively to avoid these problems, but if the dimension is high enough and the parametrization leads to values below the double precision, at some point numerical issues are inevitable. For this reason, we encourage users to produce statistical tests suitable for their use-case; see our <a href="https://github.com/hsloot/rmo/blob/main/tests/testthat/test-statistical-unit-test.R" class="external-link">statistical unit tests</a> for an example. If you are encountering statistical problems, please submit an <a href="https://github.com/hsloot/rmo/issues/new?assignees=&amp;labels=bug&amp;template=statistical_problem.md&amp;title=%5BSTAT%5D" class="external-link">issue report</a> including a <a href="https://github.com/tidyverse/reprex" class="external-link">reprex</a>.</p>
+<p>While the package is extensively tested, numerical issues may arise in high-dimensional simulations due to very small or large numbers. We recommend performing statistical tests suitable for your use-case to ensure validity. For more guidance, refer to our <a href="https://github.com/hsloot/rmo/blob/main/tests/testthat/test-statistical-unit-test.R" class="external-link">statistical unit tests</a> and submit an <a href="https://github.com/hsloot/rmo/issues/new?assignees=&amp;labels=bug&amp;template=statistical_problem.md&amp;title=%5BSTAT%5D" class="external-link">issue report</a> if you encounter statistical problems.</p>
+<p>Additionally, note that while the package reached a certain level of stability, it is still under active development. We aim to keep the interface of the primary function <code><a href="reference/rpextmo.html">rpextmo()</a></code> backwards compatible, the implementation may undergo changes.</p>
 </div>
 <div class="section level2">
-<h2 id="roadmap-for-future-development">Roadmap for future development<a class="anchor" aria-label="anchor" href="#roadmap-for-future-development"></a>
+<h2 id="api-documentation">API documentation<a class="anchor" aria-label="anchor" href="#api-documentation"></a>
 </h2>
-<p>The aim of this package is the seamless and efficient simulation of Marshall-Olkin distributions. For this, we provide the primary function of this package: <code>rpextmo</code>. You may</p>
-<ul>
-<li><p><em>assume stability of its interface</em> ✅, but</p></li>
-<li><p><em>do not assume stability of its simulation results</em> ❌.</p></li>
-</ul>
-<p>We are planning to develop the package incrementally. The API of other functions might change. Ideas for future changes are:</p>
-<ul>
-<li><p>Refactoring the <code>arnold_distribution</code> and the <code>markovian_exmo_distribution</code> to be based on a <code>random_walk_distribution</code> and <code>markov_process</code>.</p></li>
-<li><p>Add a distribution to sample from the Arnold model with exchangeable shock-size arrival intensities which does not require to store all shock arrival intensities.</p></li>
-<li><p>Implement the calculation of <em>exchangeable shock-size arrival intensities</em> and the corresponding Markov generator in C++. Consider using the <a href="https://github.com/hsloot/integratecpp" class="external-link">C++ wrapper to R’s C-API for integration</a>, and implementing a C++ backend for Bernstein functions.</p></li>
-</ul>
-<p>Other ideas for the future:</p>
-<ul>
-<li><p>Implementation of estimation routines (<strong>help wanted</strong>).</p></li>
-<li><p>Representation and simulation of hierarchical Marshall-Olkin distributions.</p></li>
-</ul>
+<p>The package is documented using <code>roxygen2</code> and <code>pkgdown</code>. You can find the documentation on the <a href="reference/index.html">project website</a>.</p>
+</div>
+<div class="section level2">
+<h2 id="testing">Testing<a class="anchor" aria-label="anchor" href="#testing"></a>
+</h2>
+<p>The package is tested using <code>testthat</code>. You can run the tests using the following command after checking out the repository:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">test</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="changelog">Changelog<a class="anchor" aria-label="anchor" href="#changelog"></a>
+</h2>
+<p>The changelog is available in the <a href="NEWS.html">NEWS.md</a> file.</p>
 </div>
 <div class="section level2">
 <h2 id="contributing">Contributing<a class="anchor" aria-label="anchor" href="#contributing"></a>
 </h2>
-<p>Contribution is highly appreciated. Contribution can range from improving the documentation, writing tests, or raising issues and feature requests to implementing feature requests or fixing bugs. If you consider to contribute, have a look at our <a href="CONTRIBUTING.html">contribution guide</a>.</p>
+<p>Contributions to <code>rmo</code> are welcome! You contribution can be about improving the documentation, writing tests, raising issues or feature requests, implementing feature requests, or fixing bugs. Check out our <a href="CONTRIBUTING.html">contribution guide</a> to get started.</p>
+</div>
+<div class="section level2">
+<h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
+<div id="ref-Sloot2022a" class="csl-entry">
+Sloot, Henrik. 2022. “Implementing Markovian Models for Extendible Marshall–Olkin Distributions.” <em>Dependence Modeling</em> 10 (1): 308–43. <a href="https://doi.org/10.1515/demo-2022-0151" class="external-link uri">https://doi.org/10.1515/demo-2022-0151</a>.
+</div>
+</div>
 </div>
 <div class="section level2">
 <h2 id="license">License<a class="anchor" aria-label="anchor" href="#license"></a>
@@ -219,7 +222,7 @@
 <ul class="list-unstyled">
 <li><a href="https://www.repostatus.org/#wip" class="external-link"><img src="https://www.repostatus.org/badges/latest/wip.svg" alt="Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public."></a></li>
 <li><a href="https://www.tidyverse.org/lifecycle/#experimental" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
-<li><a href="/commits/master"><img src="https://img.shields.io/badge/last%20change-2024--04--03-yellowgreen.svg" alt="Last-changedate"></a></li>
+<li><a href="/commits/master"><img src="https://img.shields.io/badge/last%20change-2024--04--02-yellowgreen.svg" alt="Last-changedate"></a></li>
 <li><a href="https://github.com/hsloot/rmo/actions" class="external-link"><img src="https://github.com/hsloot/rmo/workflows/check-full/badge.svg" alt="R build status"></a></li>
 <li><a href="https://codecov.io/gh/hsloot/rmo?branch=main" class="external-link"><img src="https://codecov.io/gh/hsloot/rmo/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
 </ul>
@@ -236,7 +239,7 @@
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.8.</p>
 </div>
 
     </footer>

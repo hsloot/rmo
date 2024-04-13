@@ -6,11 +6,11 @@
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
     
 
-    <nav class="navbar fixed-top navbar-light navbar-expand-lg bg-light"><div class="container">
+    <nav class="navbar fixed-top navbar-light navbar-expand-lg bg-light" data-bs-theme="light"><div class="container">
     
     <a class="navbar-brand me-2" href="index.html">rmo</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.7</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,15 +19,10 @@
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="nav-item">
-  <a class="nav-link" href="reference/index.html">Reference</a>
+  <a class="nav-link" href="articles/rmo.html">Get started</a>
 </li>
-<li class="nav-item dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
-  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="articles/Mixing-Marshall-Olkin-distributions.html">Mixing Marshall--Olkin distributions</a>
-    <a class="dropdown-item" href="articles/The-Marshall-Olkin-distribution.html">The Marshall-Olkin distribution</a>
-    <a class="dropdown-item" href="articles/The-binary-representation.html">The binary representation of the MO parameter</a>
-  </div>
+<li class="nav-item">
+  <a class="nav-link" href="reference/index.html">Reference</a>
 </li>
 <li class="nav-item">
   <a class="nav-link" href="news/index.html">Changelog</a>
@@ -54,33 +49,62 @@
 
 <div id="contributing-to-rmo" class="section level1">
 
-<p>This outlines how to propose a change to rmo.</p>
-<div class="section level3">
-<h3 id="fixing-typos">Fixing typos<a class="anchor" aria-label="anchor" href="#fixing-typos"></a></h3>
-<p>Small typos or grammatical errors in documentation may be edited directly using the GitHub web interface, so long as the changes are made in the <em>source</em> file.</p>
-<ul><li>YES: you edit a roxygen comment in a <code>.R</code> file below <code>R/</code>.</li>
-<li>NO: you edit an <code>.Rd</code> file below <code>man/</code>.</li>
+<p>This outlines how to propose a change to the <code>rmo</code> package.</p>
+<div class="section level2">
+<h2 id="fixing-typos">Fixing typos<a class="anchor" aria-label="anchor" href="#fixing-typos"></a></h2>
+<p>Small typos or grammatical errors in documentation may be edited directly using the GitHub web interface, as long as the changes are made in the <em>source</em> file.</p>
+<p>When fixing typos, please make sure to describe the change in the commit message. For example</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="an">docs:</span><span class="co"> fix typo in the introduction section</span></span></code></pre></div>
+<p><span class="emoji" data-emoji="warning">⚠️</span> You edit a roxygen comment in a <code>.R</code> file below <code>R/</code> and not in an <code>.Rd</code> file below <code>man/</code>.</p>
+</div>
+<div class="section level2">
+<h2 id="prerequisites">Prerequisites<a class="anchor" aria-label="anchor" href="#prerequisites"></a></h2>
+<p>Before you make a substantial pull request, you should always file an issue and make sure maintainers agree that it’s a problem. If you’ve found a bug, create an associated issue and illustrate the bug with a minimal <a href="https://www.tidyverse.org/help/#reprex" class="external-link">reprex</a>.</p>
+</div>
+<div class="section level2">
+<h2 id="coding-style">Coding style<a class="anchor" aria-label="anchor" href="#coding-style"></a></h2>
+<p>To ensure consistent coding style, we utilize the following tools for style enforcement:</p>
+<ul><li>
+<a href="https://editorconfig.org/" class="external-link">EditorConfig</a> for maintaining consistent whitespace usage.</li>
+<li>
+<a href="https://lintr.r-lib.org" class="external-link">lintr</a> for enforcing R coding style.</li>
+<li>
+<a href="https://clang.llvm.org/docs/ClangFormat.html" class="external-link">ClangFormat</a> for maintaining consistent C++ coding style.</li>
 </ul></div>
-<div class="section level3">
-<h3 id="prerequisites">Prerequisites<a class="anchor" aria-label="anchor" href="#prerequisites"></a></h3>
-<p>Before you make a substantial pull request, you should always file an issue and make sure someone from the team agrees that it’s a problem. If you’ve found a bug, create an associated issue and illustrate the bug with a minimal <a href="https://www.tidyverse.org/help/#reprex" class="external-link">reprex</a>.</p>
+<div class="section level2">
+<h2 id="commit-guidelines">Commit guidelines<a class="anchor" aria-label="anchor" href="#commit-guidelines"></a></h2>
+<p>We use the conventional commits specification for our commit messages. This means that your commit message should be structured as follows:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">type</span><span class="dt">&gt;</span><span class="co">[</span><span class="ot">optional scope</span><span class="co">]</span>: <span class="dt">&lt;</span><span class="kw">description</span><span class="dt">&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="co">[</span><span class="ot">optional body</span><span class="co">]</span></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="co">[</span><span class="ot">optional footer</span><span class="co">]</span></span></code></pre></div>
+<p>For more information, see the <a href="https://www.conventionalcommits.org" class="external-link">conventional commits specification</a>.</p>
 </div>
-<div class="section level3">
-<h3 id="commit-message-style">Commit message style<a class="anchor" aria-label="anchor" href="#commit-message-style"></a></h3>
-<p>We use the <a href="https://udacity.github.io/git-styleguide/" class="external-link">Udacity commit message style</a>.</p>
+<div class="section level2">
+<h2 id="branching-strategy">Branching strategy<a class="anchor" aria-label="anchor" href="#branching-strategy"></a></h2>
+<p>We use the GitHub Flow branching strategy. This means that each feature or bug fix is developed in a separate branch. When working on a new feature or fixing a bug, create a new branch from the main branch. Once the changes are complete, submit a pull request to merge the branch back into the main branch. The pull request will be reviewed by the maintainers before merging. This approach allows for better collaboration and ensures that changes are thoroughly reviewed before being merged into the main codebase.</p>
 </div>
-<div class="section level3">
-<h3 id="pull-request-process">Pull request process<a class="anchor" aria-label="anchor" href="#pull-request-process"></a></h3>
-<ul><li>We recommend that you create a Git branch for each pull request (PR).<br></li>
-<li>Look at the Travis and AppVeyor build status before and after making changes. The <code>README</code> should contain badges for any continuous integration services used by the package.<br></li>
-<li>New code should follow the tidyverse <a href="https://style.tidyverse.org" class="external-link">style guide</a> and pass <code><a href="https://lintr.r-lib.org/reference/lint.html" class="external-link">lintr::lint_package()</a></code> without errors. You can use the <a href="https://CRAN.R-project.org/package=styler" class="external-link">styler</a> package to apply these styles, but please don’t restyle code that has nothing to do with your PR. For more information on the static code analysis tool <code>lintr</code>, see <a href="https://github.com/jimhester/lintr" class="external-link">https://github.com/jimhester/lintr</a>.</li>
-<li>We use <a href="https://cran.r-project.org/package=roxygen2" class="external-link">roxygen2</a>, with <a href="https://cran.r-project.org/web/packages/roxygen2/vignettes/markdown.html" class="external-link">Markdown syntax</a>, for documentation.<br></li>
-<li>We use <a href="https://cran.r-project.org/package=testthat" class="external-link">testthat</a>. Contributions with test cases included are easier to accept.<br></li>
+<div class="section level2">
+<h2 id="testing-and-code-coverage">Testing and code coverage<a class="anchor" aria-label="anchor" href="#testing-and-code-coverage"></a></h2>
+<p>We use the packages <a href="https://testthat.r-lib.org" class="external-link"><code>testthat</code></a> for unit testing and <a href="https://covr.r-lib.org" class="external-link"><code>covr</code></a> for checking code coverage.</p>
+<p>Run all tests with the following command:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">test</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p>Check the code coverage with the following command:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">covr</span><span class="fu">::</span><span class="fu"><a href="http://covr.r-lib.org/reference/package_coverage.html" class="external-link">package_coverage</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="summary">Summary<a class="anchor" aria-label="anchor" href="#summary"></a></h2>
+<ul><li>We recommend that you create a Git branch for each pull request (PR).</li>
+<li>New code should follow the tidyverse <a href="https://style.tidyverse.org" class="external-link">style guide</a> and pass <code><a href="https://lintr.r-lib.org/reference/lint.html" class="external-link">lintr::lint_package()</a></code> without errors. You can use the <a href="https://styler.r-lib.org" class="external-link">styler</a> package to apply these styles, but please don’t restyle code that has nothing to do with your PR. For more information on the static code analysis tool <code>lintr</code>, see <a href="https://lintr.r-lib.org" class="external-link uri">https://lintr.r-lib.org</a>. For changes of the C++ backend, use ClangFormat.</li>
+<li>We use <a href="https://roxygen2.r-lib.org" class="external-link">roxygen2</a>, with <a href="https://cran.r-project.org/web/packages/roxygen2/vignettes/markdown.html" class="external-link">Markdown syntax</a>, for documentation.<br></li>
+<li>We use <a href="https://testthat.r-lib.org" class="external-link">testthat</a>. Contributions with test cases included are easier to accept.<br></li>
 <li>For user-facing changes, add a bullet to the top of <code>NEWS.md</code> below the current development version header describing the changes made followed by your GitHub username, and links to relevant issue(s)/PR(s).</li>
-<li>For more information on good practices for <code>R</code> package-development, see the <a href="https://devguide.ropensci.org/" class="external-link">rOpenSci Packages</a> guide.</li>
 </ul></div>
-<div class="section level3">
-<h3 id="code-of-conduct">Code of Conduct<a class="anchor" aria-label="anchor" href="#code-of-conduct"></a></h3>
+<div class="section level2">
+<h2 id="code-of-conduct">Code of Conduct<a class="anchor" aria-label="anchor" href="#code-of-conduct"></a></h2>
 <p>Please note that the rmo project is released with a <a href="CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By contributing to this project you agree to abide by its terms.</p>
 </div>
 </div>
@@ -94,7 +118,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.8.</p>
 </div>
 
     </footer></div>

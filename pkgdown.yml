@@ -1,9 +1,7 @@
 pandoc: 3.1.11
-pkgdown: 2.0.7
+pkgdown: 2.0.8
 pkgdown_sha: ~
 articles:
-  Mixing-Marshall-Olkin-distributions: Mixing-Marshall-Olkin-distributions.html
-  The-Marshall-Olkin-distribution: The-Marshall-Olkin-distribution.html
-  The-binary-representation: The-binary-representation.html
-last_built: 2024-04-05T19:36Z
+  rmo: rmo.html
+last_built: 2024-04-13T01:29Z
 
