@@ -7,7 +7,7 @@
   "codeRepository": "https://github.com/hsloot/rmo",
   "issueTracker": "https://github.com/hsloot/rmo/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "0.8.7",
+  "version": "0.8.8",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -128,6 +128,18 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=remotes"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "knitr",
+      "name": "knitr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=knitr"
     }
   ],
   "softwareRequirements": {
@@ -180,5 +192,5 @@
     },
     "SystemRequirements": "C++17"
   },
-  "fileSize": "20747.936KB"
+  "fileSize": "20776.12KB"
 }
