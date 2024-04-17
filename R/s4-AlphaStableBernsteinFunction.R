@@ -194,7 +194,7 @@ setMethod(
 
 #' @rdname hidden_aliases
 #'
-#' @inheritParams valueOf
+#' @inheritParams valueOf0
 #'
 #' @include s4-valueOf0.R
 #' @importFrom checkmate assert qassert check_numeric check_complex
