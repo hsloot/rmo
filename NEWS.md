@@ -1,6 +1,6 @@
 # rmo 0.9
 
-- Improve extensibility by exposing `defaultMethod` and `valueOf0`
+- Improve extensibility by exposing `defaultMethod` and `valueOf0` (#118)
 
 - Review and improve documentation (#116)
 
