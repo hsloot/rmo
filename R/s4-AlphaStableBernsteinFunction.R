@@ -192,9 +192,13 @@ setMethod(
   }
 )
 
+#' @rdname hidden_aliases
+#'
+#' @inheritParams valueOf
+#'
 #' @include s4-valueOf0.R
 #' @importFrom checkmate assert qassert check_numeric check_complex
-#' @keywords internal
+#' @export
 setMethod(
   "valueOf0", "AlphaStableBernsteinFunction",
   function(object, x, cscale = 1, ...) {

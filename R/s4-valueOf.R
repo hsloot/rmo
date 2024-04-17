@@ -1,4 +1,4 @@
-#' Evaluate Bernstein Functions
+#' Evaluate Bernstein Function differences
 #'
 #' Calculate the values for a Bernstein function and its higher-order,
 #' alternating iterated forward differences, possibly scaled by a binomial
@@ -11,12 +11,9 @@
 #' numerically stable. Consequently, the various alternative approaches are used
 #' dependent on the class of the Bernstein function.
 #'
-#' @param object An object deriving from the class [BernsteinFunction-class].
-#' @param x A nonnegativ numeric vector at which the iterated difference of
-#'   the Bernstein function is evaluated.
+#' @inheritParams valueOf0
 #' @param difference_order A nonnegative integer with the order of the
 #'   alternating iterated forward differences taken on the Bernstein function.
-#' @param cscale A positive number for the *composite scaling factor*.
 #' @param n,k Nonnegative numbers for the binomial factor.
 #' @param ... Pass-through parameter.
 #'

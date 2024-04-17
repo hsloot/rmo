@@ -90,6 +90,19 @@ setMethod( # nocov start
 
 #' @rdname hidden_aliases
 #'
+#' @inheritParams valueOf0
+#'
+#' @include s4-valueOf0.R
+#' @export
+setMethod(
+  "valueOf0", "ScaledBernsteinFunction",
+  function(object, x, cscale = 1, ...) {
+    valueOf(object, x, cscale = cscale)
+  }
+)
+
+#' @rdname hidden_aliases
+#'
 #' @inheritParams valueOf
 #'
 #' @include s4-valueOf.R

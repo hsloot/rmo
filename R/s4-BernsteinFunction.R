@@ -192,20 +192,6 @@ setClass("BernsteinFunction", # nolint
 #' @docType methods
 NULL
 
-
-#' @include s4-valueOf0.R s4-valueOf.R
-#' @importFrom methods setMethod
-#' @keywords internal
-setMethod(
-  "valueOf0", "BernsteinFunction",
-  function(object, x, cscale = 1, ...) {
-    valueOf(
-      object, x,
-      difference_order = 0L, n = 1L, k = 0L, cscale = cscale, ...
-    )
-  }
-)
-
 #' @rdname hidden_aliases
 #'
 #' @inheritParams uexIntensities

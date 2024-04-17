@@ -40,11 +40,13 @@ exIntensities(bf, 3)
 \code{\link[=rexmo]{rexmo()}}
 
 Other Bernstein function generics: 
+\code{\link{defaultMethod}()},
 \code{\link{exQMatrix}()},
 \code{\link{intensities}()},
 \code{\link{levyDensity}()},
 \code{\link{stieltjesDensity}()},
 \code{\link{uexIntensities}()},
-\code{\link{valueOf}()}
+\code{\link{valueOf}()},
+\code{\link{valueOf0}()}
 }
 \concept{Bernstein function generics}

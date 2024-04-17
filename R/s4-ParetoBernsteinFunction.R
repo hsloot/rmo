@@ -165,10 +165,14 @@ setMethod(
   }
 )
 
+#' @rdname hidden_aliases
+#'
+#' @inheritParams valueOf0
+#'
 #' @include s4-valueOf0.R
 #' @importFrom checkmate assert qassert check_numeric check_complex
 #' @importFrom stats pgamma
-#' @keywords internal
+#' @export
 setMethod(
   "valueOf0", "ParetoBernsteinFunction",
   function(object, x, cscale = 1, ...) {

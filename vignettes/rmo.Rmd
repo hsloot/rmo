@@ -231,6 +231,23 @@ setMethod(
     )
   }
 )
+
+setMethod(
+  "valueOf0",
+  "CustomBernsteinFunction",
+  function(object, x, cscale = 1, ...) {
+    x <- cscale * x
+    log((object@b * (x + object@a)) / (object@a * (x + object@b)))
+  }
+)
+
+setMethod(
+  "defaultMethod",
+  "CustomBernsteinFunction",
+  function(object) {
+    "stieltjes"
+  }
+)
 ```
 
 Now we can create a custom Bernstein function object and generate samples from

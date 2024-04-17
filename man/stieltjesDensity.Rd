@@ -17,11 +17,13 @@ is either \code{"continuous"} or \code{"discrete"}.
 }
 \seealso{
 Other Bernstein function generics: 
+\code{\link{defaultMethod}()},
 \code{\link{exIntensities}()},
 \code{\link{exQMatrix}()},
 \code{\link{intensities}()},
 \code{\link{levyDensity}()},
 \code{\link{uexIntensities}()},
-\code{\link{valueOf}()}
+\code{\link{valueOf}()},
+\code{\link{valueOf0}()}
 }
 \concept{Bernstein function generics}
