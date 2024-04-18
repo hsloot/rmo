@@ -1,5 +1,20 @@
+#' Evaluate Bernstein functions
+#'
+#' @description
+#' Calculate the values for a Bernstein function function.
+#'
+#' @param object An object deriving from the class [BernsteinFunction-class].
+#' @param x A nonnegativ numeric vector at which the iterated difference of
+#'   the Bernstein function is evaluated.
+#' @param cscale A positive number for the *composite scaling factor*.
+#' @param ... Pass-through parameter.
+#'
+#' @family Bernstein function generics
 #' @importFrom methods setGeneric
-#' @keywords internal
+#' @export
+#' @examples
+#' bf <- AlphaStableBernsteinFunction(alpha = 0.7)
+#' valueOf0(bf, 1:5)
 setGeneric(
   "valueOf0",
   function(object, x, cscale = 1, ...) {

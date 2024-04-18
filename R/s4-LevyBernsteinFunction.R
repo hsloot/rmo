@@ -55,8 +55,12 @@ setClass("LevyBernsteinFunction",
   contains = c("BernsteinFunction", "VIRTUAL")
 )
 
+#' @rdname hidden_aliases
+#'
+#' @inheritParams valueOf0
+#'
 #' @include s4-defaultMethod.R
-#' @keywords internal
+#' @export
 setMethod(
   "defaultMethod", "LevyBernsteinFunction",
   function(object) {
@@ -173,9 +177,13 @@ setMethod(
   }
 )
 
-#' @include s4-valueOf0.R s4-valueOf.R
+#' @rdname hidden_aliases
+#'
+#' @inheritParams valueOf0
+#'
+#' @include s4-valueOf0.R s4-valueOf.R s4-defaultMethod.R
 #' @importFrom methods setMethod
-#' @keywords internal
+#' @export
 setMethod(
   "valueOf0", "LevyBernsteinFunction",
   function(object, x, cscale = 1, method = defaultMethod(object), ...) {

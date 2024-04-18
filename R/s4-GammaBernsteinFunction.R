@@ -193,9 +193,13 @@ setMethod(
   }
 )
 
+#' @rdname hidden_aliases
+#'
+#' @inheritParams valueOf0
+#'
 #' @include s4-valueOf0.R
 #' @importFrom checkmate assert qassert check_numeric check_complex
-#' @keywords internal
+#' @export
 setMethod(
   "valueOf0", "GammaBernsteinFunction",
   function(object, x, cscale = 1, ...) {

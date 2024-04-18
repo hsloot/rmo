@@ -2,7 +2,7 @@
 % Please edit documentation in R/s4-valueOf.R
 \name{valueOf}
 \alias{valueOf}
-\title{Evaluate Bernstein Functions}
+\title{Evaluate Bernstein Function differences}
 \usage{
 valueOf(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...)
 }
@@ -39,11 +39,13 @@ valueOf(bf, 1:5)
 }
 \seealso{
 Other Bernstein function generics: 
+\code{\link{defaultMethod}()},
 \code{\link{exIntensities}()},
 \code{\link{exQMatrix}()},
 \code{\link{intensities}()},
 \code{\link{levyDensity}()},
 \code{\link{stieltjesDensity}()},
-\code{\link{uexIntensities}()}
+\code{\link{uexIntensities}()},
+\code{\link{valueOf0}()}
 }
 \concept{Bernstein function generics}

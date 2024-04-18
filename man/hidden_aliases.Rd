@@ -15,47 +15,62 @@
 \alias{exIntensities,BernsteinFunction-method}
 \alias{intensities,BernsteinFunction-method}
 \alias{exQMatrix,BernsteinFunction-method}
+\alias{defaultMethod,LevyBernsteinFunction-method}
 \alias{valueOf,LevyBernsteinFunction-method}
+\alias{valueOf0,LevyBernsteinFunction-method}
 \alias{valueOf,CompleteBernsteinFunction-method}
 \alias{initialize,AlphaStableBernsteinFunction-method}
 \alias{show,AlphaStableBernsteinFunction-method}
 \alias{levyDensity,AlphaStableBernsteinFunction-method}
 \alias{stieltjesDensity,AlphaStableBernsteinFunction-method}
+\alias{valueOf0,AlphaStableBernsteinFunction-method}
 \alias{initialize,CompositeScaledBernsteinFunction-method}
 \alias{show,CompositeScaledBernsteinFunction-method}
+\alias{valueOf0,CompositeScaledBernsteinFunction-method}
 \alias{valueOf,CompositeScaledBernsteinFunction-method}
 \alias{initialize,ConstantBernsteinFunction-method}
 \alias{show,ConstantBernsteinFunction-method}
+\alias{valueOf0,ConstantBernsteinFunction-method}
 \alias{valueOf,ConstantBernsteinFunction-method}
 \alias{initialize,ConvexCombinationOfBernsteinFunctions-method}
 \alias{show,ConvexCombinationOfBernsteinFunctions-method}
+\alias{valueOf0,ConvexCombinationOfBernsteinFunctions-method}
 \alias{valueOf,ConvexCombinationOfBernsteinFunctions-method}
 \alias{initialize,ExponentialBernsteinFunction-method}
 \alias{show,ExponentialBernsteinFunction-method}
 \alias{levyDensity,ExponentialBernsteinFunction-method}
 \alias{stieltjesDensity,ExponentialBernsteinFunction-method}
+\alias{defaultMethod,ExponentialBernsteinFunction-method}
+\alias{valueOf0,ExponentialBernsteinFunction-method}
 \alias{initialize,GammaBernsteinFunction-method}
 \alias{show,GammaBernsteinFunction-method}
 \alias{levyDensity,GammaBernsteinFunction-method}
 \alias{stieltjesDensity,GammaBernsteinFunction-method}
+\alias{valueOf0,GammaBernsteinFunction-method}
 \alias{initialize,InverseGaussianBernsteinFunction-method}
 \alias{show,InverseGaussianBernsteinFunction-method}
 \alias{levyDensity,InverseGaussianBernsteinFunction-method}
 \alias{stieltjesDensity,InverseGaussianBernsteinFunction-method}
+\alias{valueOf0,InverseGaussianBernsteinFunction-method}
 \alias{initialize,LinearBernsteinFunction-method}
 \alias{show,LinearBernsteinFunction-method}
+\alias{valueOf0,LinearBernsteinFunction-method}
 \alias{valueOf,LinearBernsteinFunction-method}
 \alias{initialize,ParetoBernsteinFunction-method}
 \alias{show,ParetoBernsteinFunction-method}
 \alias{levyDensity,ParetoBernsteinFunction-method}
+\alias{valueOf0,ParetoBernsteinFunction-method}
 \alias{initialize,PoissonBernsteinFunction-method}
 \alias{show,PoissonBernsteinFunction-method}
 \alias{levyDensity,PoissonBernsteinFunction-method}
+\alias{valueOf0,PoissonBernsteinFunction-method}
 \alias{initialize,ScaledBernsteinFunction-method}
 \alias{show,ScaledBernsteinFunction-method}
+\alias{valueOf0,ScaledBernsteinFunction-method}
 \alias{valueOf,ScaledBernsteinFunction-method}
 \alias{initialize,SumOfBernsteinFunctions-method}
 \alias{show,SumOfBernsteinFunctions-method}
+\alias{valueOf0,SumOfBernsteinFunctions-method}
 \alias{valueOf,SumOfBernsteinFunctions-method}
 \title{For S4 methods that require a documentation entry but only clutter the index.}
 \usage{
@@ -66,6 +81,8 @@
 \S4method{intensities}{BernsteinFunction}(object, d, cscale = 1, ...)
 
 \S4method{exQMatrix}{BernsteinFunction}(object, d, cscale = 1, ...)
+
+\S4method{defaultMethod}{LevyBernsteinFunction}(object)
 
 \S4method{valueOf}{LevyBernsteinFunction}(
   object,
@@ -78,6 +95,8 @@
   method = c("default", "levy"),
   tolerance = .Machine$double.eps^0.5
 )
+
+\S4method{valueOf0}{LevyBernsteinFunction}(object, x, cscale = 1, method = defaultMethod(object), ...)
 
 \S4method{valueOf}{CompleteBernsteinFunction}(
   object,
@@ -99,9 +118,13 @@
 
 \S4method{stieltjesDensity}{AlphaStableBernsteinFunction}(object)
 
+\S4method{valueOf0}{AlphaStableBernsteinFunction}(object, x, cscale = 1, ...)
+
 \S4method{initialize}{CompositeScaledBernsteinFunction}(.Object, cscale, original)
 
 \S4method{show}{CompositeScaledBernsteinFunction}(object)
+
+\S4method{valueOf0}{CompositeScaledBernsteinFunction}(object, x, cscale = 1, ...)
 
 \S4method{valueOf}{CompositeScaledBernsteinFunction}(object, x, difference_order = 0L, n = 1, k = 0, cscale = 1, ...)
 
@@ -109,11 +132,15 @@
 
 \S4method{show}{ConstantBernsteinFunction}(object)
 
+\S4method{valueOf0}{ConstantBernsteinFunction}(object, x, cscale = 1, ...)
+
 \S4method{valueOf}{ConstantBernsteinFunction}(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...)
 
 \S4method{initialize}{ConvexCombinationOfBernsteinFunctions}(.Object, coefficients, points)
 
 \S4method{show}{ConvexCombinationOfBernsteinFunctions}(object)
+
+\S4method{valueOf0}{ConvexCombinationOfBernsteinFunctions}(object, x, cscale = 1, ...)
 
 \S4method{valueOf}{ConvexCombinationOfBernsteinFunctions}(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...)
 
@@ -125,6 +152,10 @@
 
 \S4method{stieltjesDensity}{ExponentialBernsteinFunction}(object)
 
+\S4method{defaultMethod}{ExponentialBernsteinFunction}(object)
+
+\S4method{valueOf0}{ExponentialBernsteinFunction}(object, x, cscale = 1, ...)
+
 \S4method{initialize}{GammaBernsteinFunction}(.Object, a)
 
 \S4method{show}{GammaBernsteinFunction}(object)
@@ -132,6 +163,8 @@
 \S4method{levyDensity}{GammaBernsteinFunction}(object)
 
 \S4method{stieltjesDensity}{GammaBernsteinFunction}(object)
+
+\S4method{valueOf0}{GammaBernsteinFunction}(object, x, cscale = 1, ...)
 
 \S4method{initialize}{InverseGaussianBernsteinFunction}(.Object, eta)
 
@@ -141,9 +174,13 @@
 
 \S4method{stieltjesDensity}{InverseGaussianBernsteinFunction}(object)
 
+\S4method{valueOf0}{InverseGaussianBernsteinFunction}(object, x, cscale = 1, ...)
+
 \S4method{initialize}{LinearBernsteinFunction}(.Object, scale)
 
 \S4method{show}{LinearBernsteinFunction}(object)
+
+\S4method{valueOf0}{LinearBernsteinFunction}(object, x, cscale = 1, ...)
 
 \S4method{valueOf}{LinearBernsteinFunction}(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...)
 
@@ -153,21 +190,29 @@
 
 \S4method{levyDensity}{ParetoBernsteinFunction}(object)
 
+\S4method{valueOf0}{ParetoBernsteinFunction}(object, x, cscale = 1, ...)
+
 \S4method{initialize}{PoissonBernsteinFunction}(.Object, eta)
 
 \S4method{show}{PoissonBernsteinFunction}(object)
 
 \S4method{levyDensity}{PoissonBernsteinFunction}(object)
 
+\S4method{valueOf0}{PoissonBernsteinFunction}(object, x, cscale = 1, ...)
+
 \S4method{initialize}{ScaledBernsteinFunction}(.Object, scale, original)
 
 \S4method{show}{ScaledBernsteinFunction}(object)
+
+\S4method{valueOf0}{ScaledBernsteinFunction}(object, x, cscale = 1, ...)
 
 \S4method{valueOf}{ScaledBernsteinFunction}(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...)
 
 \S4method{initialize}{SumOfBernsteinFunctions}(.Object, first, second)
 
 \S4method{show}{SumOfBernsteinFunctions}(object)
+
+\S4method{valueOf0}{SumOfBernsteinFunctions}(object, x, cscale = 1, ...)
 
 \S4method{valueOf}{SumOfBernsteinFunctions}(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...)
 }
