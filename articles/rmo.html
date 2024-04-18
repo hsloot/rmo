@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">rmo</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.7</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.8</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -327,6 +327,23 @@ follows:</p>
 <span>      <span class="op">}</span>,</span>
 <span>      lower <span class="op">=</span> <span class="va">object</span><span class="op">@</span><span class="va">a</span>, upper <span class="op">=</span> <span class="va">object</span><span class="op">@</span><span class="va">b</span>, type <span class="op">=</span> <span class="st">"continuous"</span></span>
 <span>    <span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="kw">setMethod</span><span class="op">(</span></span>
+<span>  <span class="st">"valueOf0"</span>,</span>
+<span>  <span class="st">"CustomBernsteinFunction"</span>,</span>
+<span>  <span class="kw">function</span><span class="op">(</span><span class="va">object</span>, <span class="va">x</span>, <span class="va">cscale</span> <span class="op">=</span> <span class="fl">1</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">cscale</span> <span class="op">*</span> <span class="va">x</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="op">(</span><span class="va">object</span><span class="op">@</span><span class="va">b</span> <span class="op">*</span> <span class="op">(</span><span class="va">x</span> <span class="op">+</span> <span class="va">object</span><span class="op">@</span><span class="va">a</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="va">object</span><span class="op">@</span><span class="va">a</span> <span class="op">*</span> <span class="op">(</span><span class="va">x</span> <span class="op">+</span> <span class="va">object</span><span class="op">@</span><span class="va">b</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="kw">setMethod</span><span class="op">(</span></span>
+<span>  <span class="st">"defaultMethod"</span>,</span>
+<span>  <span class="st">"CustomBernsteinFunction"</span>,</span>
+<span>  <span class="kw">function</span><span class="op">(</span><span class="va">object</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="st">"stieltjes"</span></span>
 <span>  <span class="op">}</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Now we can create a custom Bernstein function object and generate

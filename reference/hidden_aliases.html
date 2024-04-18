@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">rmo</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.7</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.8</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -67,6 +67,9 @@
 <span><span class="fu"><a href="exQMatrix.html">exQMatrix</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">d</span>, cscale <span class="op">=</span> <span class="fl">1</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S4 method for LevyBernsteinFunction</span></span>
+<span><span class="fu"><a href="defaultMethod.html">defaultMethod</a></span><span class="op">(</span><span class="va">object</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for LevyBernsteinFunction</span></span>
 <span><span class="fu"><a href="valueOf.html">valueOf</a></span><span class="op">(</span></span>
 <span>  <span class="va">object</span>,</span>
 <span>  <span class="va">x</span>,</span>
@@ -78,6 +81,9 @@
 <span>  method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"default"</span>, <span class="st">"levy"</span><span class="op">)</span>,</span>
 <span>  tolerance <span class="op">=</span> <span class="va">.Machine</span><span class="op">$</span><span class="va">double.eps</span><span class="op">^</span><span class="fl">0.5</span></span>
 <span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for LevyBernsteinFunction</span></span>
+<span><span class="fu"><a href="valueOf0.html">valueOf0</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">x</span>, cscale <span class="op">=</span> <span class="fl">1</span>, method <span class="op">=</span> <span class="fu"><a href="defaultMethod.html">defaultMethod</a></span><span class="op">(</span><span class="va">object</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S4 method for CompleteBernsteinFunction</span></span>
 <span><span class="fu"><a href="valueOf.html">valueOf</a></span><span class="op">(</span></span>
@@ -104,11 +110,17 @@
 <span><span class="co"># S4 method for AlphaStableBernsteinFunction</span></span>
 <span><span class="fu"><a href="stieltjesDensity.html">stieltjesDensity</a></span><span class="op">(</span><span class="va">object</span><span class="op">)</span></span>
 <span></span>
+<span><span class="co"># S4 method for AlphaStableBernsteinFunction</span></span>
+<span><span class="fu"><a href="valueOf0.html">valueOf0</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">x</span>, cscale <span class="op">=</span> <span class="fl">1</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
 <span><span class="co"># S4 method for CompositeScaledBernsteinFunction</span></span>
 <span><span class="fu">initialize</span><span class="op">(</span><span class="va">.Object</span>, <span class="va">cscale</span>, <span class="va">original</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S4 method for CompositeScaledBernsteinFunction</span></span>
 <span><span class="fu">show</span><span class="op">(</span><span class="va">object</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for CompositeScaledBernsteinFunction</span></span>
+<span><span class="fu"><a href="valueOf0.html">valueOf0</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">x</span>, cscale <span class="op">=</span> <span class="fl">1</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S4 method for CompositeScaledBernsteinFunction</span></span>
 <span><span class="fu"><a href="valueOf.html">valueOf</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">x</span>, difference_order <span class="op">=</span> <span class="fl">0L</span>, n <span class="op">=</span> <span class="fl">1</span>, k <span class="op">=</span> <span class="fl">0</span>, cscale <span class="op">=</span> <span class="fl">1</span>, <span class="va">...</span><span class="op">)</span></span>
@@ -120,6 +132,9 @@
 <span><span class="fu">show</span><span class="op">(</span><span class="va">object</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S4 method for ConstantBernsteinFunction</span></span>
+<span><span class="fu"><a href="valueOf0.html">valueOf0</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">x</span>, cscale <span class="op">=</span> <span class="fl">1</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for ConstantBernsteinFunction</span></span>
 <span><span class="fu"><a href="valueOf.html">valueOf</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">x</span>, difference_order <span class="op">=</span> <span class="fl">0L</span>, n <span class="op">=</span> <span class="fl">1L</span>, k <span class="op">=</span> <span class="fl">0L</span>, cscale <span class="op">=</span> <span class="fl">1</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S4 method for ConvexCombinationOfBernsteinFunctions</span></span>
@@ -127,6 +142,9 @@
 <span></span>
 <span><span class="co"># S4 method for ConvexCombinationOfBernsteinFunctions</span></span>
 <span><span class="fu">show</span><span class="op">(</span><span class="va">object</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for ConvexCombinationOfBernsteinFunctions</span></span>
+<span><span class="fu"><a href="valueOf0.html">valueOf0</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">x</span>, cscale <span class="op">=</span> <span class="fl">1</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S4 method for ConvexCombinationOfBernsteinFunctions</span></span>
 <span><span class="fu"><a href="valueOf.html">valueOf</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">x</span>, difference_order <span class="op">=</span> <span class="fl">0L</span>, n <span class="op">=</span> <span class="fl">1L</span>, k <span class="op">=</span> <span class="fl">0L</span>, cscale <span class="op">=</span> <span class="fl">1</span>, <span class="va">...</span><span class="op">)</span></span>
@@ -143,6 +161,12 @@
 <span><span class="co"># S4 method for ExponentialBernsteinFunction</span></span>
 <span><span class="fu"><a href="stieltjesDensity.html">stieltjesDensity</a></span><span class="op">(</span><span class="va">object</span><span class="op">)</span></span>
 <span></span>
+<span><span class="co"># S4 method for ExponentialBernsteinFunction</span></span>
+<span><span class="fu"><a href="defaultMethod.html">defaultMethod</a></span><span class="op">(</span><span class="va">object</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for ExponentialBernsteinFunction</span></span>
+<span><span class="fu"><a href="valueOf0.html">valueOf0</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">x</span>, cscale <span class="op">=</span> <span class="fl">1</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
 <span><span class="co"># S4 method for GammaBernsteinFunction</span></span>
 <span><span class="fu">initialize</span><span class="op">(</span><span class="va">.Object</span>, <span class="va">a</span><span class="op">)</span></span>
 <span></span>
@@ -154,6 +178,9 @@
 <span></span>
 <span><span class="co"># S4 method for GammaBernsteinFunction</span></span>
 <span><span class="fu"><a href="stieltjesDensity.html">stieltjesDensity</a></span><span class="op">(</span><span class="va">object</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for GammaBernsteinFunction</span></span>
+<span><span class="fu"><a href="valueOf0.html">valueOf0</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">x</span>, cscale <span class="op">=</span> <span class="fl">1</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S4 method for InverseGaussianBernsteinFunction</span></span>
 <span><span class="fu">initialize</span><span class="op">(</span><span class="va">.Object</span>, <span class="va">eta</span><span class="op">)</span></span>
@@ -167,11 +194,17 @@
 <span><span class="co"># S4 method for InverseGaussianBernsteinFunction</span></span>
 <span><span class="fu"><a href="stieltjesDensity.html">stieltjesDensity</a></span><span class="op">(</span><span class="va">object</span><span class="op">)</span></span>
 <span></span>
+<span><span class="co"># S4 method for InverseGaussianBernsteinFunction</span></span>
+<span><span class="fu"><a href="valueOf0.html">valueOf0</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">x</span>, cscale <span class="op">=</span> <span class="fl">1</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
 <span><span class="co"># S4 method for LinearBernsteinFunction</span></span>
 <span><span class="fu">initialize</span><span class="op">(</span><span class="va">.Object</span>, <span class="va">scale</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S4 method for LinearBernsteinFunction</span></span>
 <span><span class="fu">show</span><span class="op">(</span><span class="va">object</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for LinearBernsteinFunction</span></span>
+<span><span class="fu"><a href="valueOf0.html">valueOf0</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">x</span>, cscale <span class="op">=</span> <span class="fl">1</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S4 method for LinearBernsteinFunction</span></span>
 <span><span class="fu"><a href="valueOf.html">valueOf</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">x</span>, difference_order <span class="op">=</span> <span class="fl">0L</span>, n <span class="op">=</span> <span class="fl">1L</span>, k <span class="op">=</span> <span class="fl">0L</span>, cscale <span class="op">=</span> <span class="fl">1</span>, <span class="va">...</span><span class="op">)</span></span>
@@ -185,6 +218,9 @@
 <span><span class="co"># S4 method for ParetoBernsteinFunction</span></span>
 <span><span class="fu"><a href="levyDensity.html">levyDensity</a></span><span class="op">(</span><span class="va">object</span><span class="op">)</span></span>
 <span></span>
+<span><span class="co"># S4 method for ParetoBernsteinFunction</span></span>
+<span><span class="fu"><a href="valueOf0.html">valueOf0</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">x</span>, cscale <span class="op">=</span> <span class="fl">1</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
 <span><span class="co"># S4 method for PoissonBernsteinFunction</span></span>
 <span><span class="fu">initialize</span><span class="op">(</span><span class="va">.Object</span>, <span class="va">eta</span><span class="op">)</span></span>
 <span></span>
@@ -194,11 +230,17 @@
 <span><span class="co"># S4 method for PoissonBernsteinFunction</span></span>
 <span><span class="fu"><a href="levyDensity.html">levyDensity</a></span><span class="op">(</span><span class="va">object</span><span class="op">)</span></span>
 <span></span>
+<span><span class="co"># S4 method for PoissonBernsteinFunction</span></span>
+<span><span class="fu"><a href="valueOf0.html">valueOf0</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">x</span>, cscale <span class="op">=</span> <span class="fl">1</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
 <span><span class="co"># S4 method for ScaledBernsteinFunction</span></span>
 <span><span class="fu">initialize</span><span class="op">(</span><span class="va">.Object</span>, <span class="va">scale</span>, <span class="va">original</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S4 method for ScaledBernsteinFunction</span></span>
 <span><span class="fu">show</span><span class="op">(</span><span class="va">object</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for ScaledBernsteinFunction</span></span>
+<span><span class="fu"><a href="valueOf0.html">valueOf0</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">x</span>, cscale <span class="op">=</span> <span class="fl">1</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S4 method for ScaledBernsteinFunction</span></span>
 <span><span class="fu"><a href="valueOf.html">valueOf</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">x</span>, difference_order <span class="op">=</span> <span class="fl">0L</span>, n <span class="op">=</span> <span class="fl">1L</span>, k <span class="op">=</span> <span class="fl">0L</span>, cscale <span class="op">=</span> <span class="fl">1</span>, <span class="va">...</span><span class="op">)</span></span>
@@ -208,6 +250,9 @@
 <span></span>
 <span><span class="co"># S4 method for SumOfBernsteinFunctions</span></span>
 <span><span class="fu">show</span><span class="op">(</span><span class="va">object</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for SumOfBernsteinFunctions</span></span>
+<span><span class="fu"><a href="valueOf0.html">valueOf0</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">x</span>, cscale <span class="op">=</span> <span class="fl">1</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S4 method for SumOfBernsteinFunctions</span></span>
 <span><span class="fu"><a href="valueOf.html">valueOf</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">x</span>, difference_order <span class="op">=</span> <span class="fl">0L</span>, n <span class="op">=</span> <span class="fl">1L</span>, k <span class="op">=</span> <span class="fl">0L</span>, cscale <span class="op">=</span> <span class="fl">1</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>

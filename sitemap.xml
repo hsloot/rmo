@@ -79,6 +79,9 @@
     <loc>/reference/SumOfBernsteinFunctions-class.html</loc>
   </url>
   <url>
+    <loc>/reference/defaultMethod.html</loc>
+  </url>
+  <url>
     <loc>/reference/exIntensities.html</loc>
   </url>
   <url>
@@ -119,5 +122,8 @@
   </url>
   <url>
     <loc>/reference/valueOf.html</loc>
+  </url>
+  <url>
+    <loc>/reference/valueOf0.html</loc>
   </url>
 </urlset>
