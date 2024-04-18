@@ -13,13 +13,13 @@ jobs:
       - name: Checkout base
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event_name == 'pull_request' && github.base_ref || git.event.before }}
+          ref: ${{ github.event_name == 'pull_request' && github.base_ref || github.event.before }}
           path: base
 
       - name: Checkout HEAD
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event_name == 'pull_request' && github.head_ref || git.event.after }}
+          ref: ${{ github.event_name == 'pull_request' && github.head_ref || github.event.after }}
           path: head
 
       - name: Setup R
