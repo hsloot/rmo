@@ -1,38 +1,146 @@
-# Workflow derived from https://github.com/r-lib/actions/tree/v2/examples
-# Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
 on:
-  [push, pull_request]
+  pull_request:
+    branches: [main, master]
+  push:
+    branches: [main, master]
 
 name: continuous-benchmarks
 
 jobs:
   continuous-benchmarks:
-    runs-on: macOS-latest
-    env:
-      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout base
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'pull_request' && github.base_ref || git.event.before }}
+          path: base
 
-      - uses: r-lib/actions/setup-r@v2
+      - name: Checkout HEAD
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'pull_request' && github.head_ref || git.event.after }}
+          path: head
+
+      - name: Setup R
+        uses: r-lib/actions/setup-r@v2
         with:
           use-public-rspm: true
 
-      - uses: r-lib/actions/setup-r-dependencies@v2
+      - name: Install dependencies
+        uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: github::r-lib/bench@frozen/continuous-benchmarking, local::.
+          extra-packages: bench, remotes, readr, dplyr, tidyr
           needs: bench
+      - name: Run benchmarks
+        run: |
+          bench <- function(...) {
+            tryCatch({
+              out <- bench::mark(...)
+              in_file <- getOption("benchmark_file_in")
+              stopifnot(!file.exists(in_file))
+              out_file <- getOption("benchmark_file_out")
+              stopifnot(!file.exists(out_file))
+              x <- summary(x, filter_gc = FALSE) |>
+                mutate(file = in_file) |>
+                select(file, expression, min, median, mem_alloc) |>
+                mutate(across(c(min, median, mem_alloc), as_character))
+              write_tsv(
+                x, file = out_file, append = file.exists(out_file),
+                col_names = !append
+              )
+              out
+            }, error = function(e) {
+              message(paste("Error in benchmark", in_file, ":", e$message))
+            })
+          }
 
-      - name: fetch-benchmarks
-        run: bench::cb_fetch()
-        shell: Rscript {0}
+          out_file_base <- "base/bench/benchmarks.tsv"
+          options(benchmark_file_out = out_file_base)
 
-      - name: run-benchmarks
-        run: bench::cb_run()
-        shell: Rscript {0}
+          bench_files <- list.files("head", pattern = "\\.R$", full.names = TRUE)
+          if (length(bench_files) == 0) {
+            stop("No benchmarks found in base")
+          }
 
-      - name: show-benchmarks
-        run: git notes --ref benchmarks show
+          install_local("base")
+          bench_dir <- file.path("head", "bench")
+          for (file in bench_files) {
+            options(benchmark_file_in = file)
+            source(file)
+          }
 
-      - name: push-benchmarks
-        run: bench::cb_push()
-        shell: Rscript {0}
+          out_file_head <- "head/bench/benchmarks.tsv"
+          options(benchmark_file_out = out_file_head)
+
+          install_local("head")
+          bench_dir <- file.path("head", "bench")
+          for (file in bench_files) {
+            options(benchmark_file_in = file)
+            source(file)
+          }
+        shell: Rscript --default-packages=bench,remotes,readr {0}
+
+      - name: Calculate differences
+        run: |
+          read_tsv(file.path("base", "bench", "benchmarks.tsv")) |>
+            mutate(ref = "BASE") |>
+            bind_rows(
+              read_tsv(file.path("head", "bench", "benchmarks.tsv")) |>
+                mutate(ref = "HEAD")
+            ) |>
+            complete(file, expression, ref, fill = list(min = NA, median = NA, mem_alloc = NA)) |>
+            mutate(across(c(min, median), as_best_time)) |>
+            mutate(across(mem_alloc, as_bench_bytes)) |>
+            select(ref, file, expression, min, median, mem_alloc) |>
+            arrange(file, expression) |>
+            group_by(file, expression) |>
+            arrange(ref) |>
+            summarise(
+              across(c(min, median, mem_alloc),
+                ~paste0(as.character(.[[2]]), "(", format((as.numeric(.[[2]] / as.numeric(.[[1]]) - 1) * 1e2, digits = 2, nsmall = 2), "%)"))
+               )
+            ) |>
+            write_tsv("benchmarks.tsv")
+        shell: Rscript --default-arguments=bench,readr,dplyr,tidyr {0}
+
+      - name: Upload benchmarks
+        uses: actions/upload-artifact@v2
+        with:
+          name: benchmarks
+          path: benchmark.tsv base/bench/benchmarks.tsv head/bench/benchmarks.tsv
+
+      - name: Comment PR
+        if: github.event_name == 'pull_request'
+        run: |
+          df <- read_csv("benchmarks.tsv")
+
+          comment <- paste0(
+            "## Benchmark summary\n\n",
+            "File | Expression | Min time | Median time | Mem. alloc |\n",
+            "--------- | --------------- | ---------\n",
+            paste0(
+              df$file, " | ",
+              df$expression, " | ",
+              df$min, " | ",
+              df$median, " | ",
+              df$mem_alloc, " |\n"
+            )
+          )
+
+          writeLines(comment, "comment.md")
+        shell: Rscript --default-packages=readr,dplyr {0}
+
+      - name: Post comment
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v5
+        with:
+          script: |
+            const fs = require('fs');
+            const comment = fs.readFileSync('comment.md', 'utf8');
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
