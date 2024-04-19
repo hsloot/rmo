@@ -45,7 +45,6 @@ jobs:
             tryCatch({
               out <- bench::mark(...)
               in_file <- getOption("benchmark_file_in")
-              stopifnot(file.exists(in_file))
               out_file <- getOption("benchmark_file_out")
               summary(out, filter_gc = FALSE) |>
                 mutate(file = in_file) |>
@@ -63,17 +62,18 @@ jobs:
 
           run_benchmarks <- function(
             bench_files, ref_dir = c("head", "base")) {
+            ref_dir <- match.arg(ref_dir)
             old_dir <- setwd(ref_dir)
             on.exit(setwd(old_dir))
             pkgname <- c(read.dcf("DESCRIPTION", fields = "Package"))
             temp_dir <- tempdir()
             on.exit(unlink(file.path(temp_dir, pkgname), recursive = TRUE))
             install_local(
-              ".", lib = temp_dir, force = TRUE, upgraded = FALSE)
+              ".", lib = temp_dir, force = TRUE, upgrade = FALSE)
             library(pkgname, lib.loc = temp_dir, character.only = TRUE)
             options(benchmark_file_out = file.path("bench", "benchmarks.tsv"))
             for (file in bench_files) {
-              options(benchmark_file_in = file)
+              options(benchmark_file_in = basename(file))
               source(file)
             }
           }
@@ -88,7 +88,7 @@ jobs:
 
           run_benchmarks(bench_files, ref_dir = "base")
           run_benchmarks(bench_files, ref_dir = "head")
-        shell: Rscript --default-packages=bench,remotes,readr,dplyr {0}
+        shell: Rscript --default-packages=methods,bench,remotes,readr,dplyr {0}
 
       - name: Calculate differences
         run: |
