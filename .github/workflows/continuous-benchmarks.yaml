@@ -30,9 +30,9 @@ jobs:
       - name: Install dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          path: head
           extra-packages: bench, remotes, readr, dplyr, tidyr
           needs: bench
+          working-directory: head
 
       - name: Run benchmarks
         run: |
