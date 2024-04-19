@@ -10,24 +10,18 @@ d <- 15
 
 eta <- 0.5
 
-bf <- rmo::ScaledBernsteinFunction(
+bf <- ScaledBernsteinFunction(
   scale = 1,
-  original = rmo::PoissonBernsteinFunction(eta = eta)
+  original = PoissonBernsteinFunction(eta = eta)
 )
-intensities <- rmo::intensities(bf, d)
-ex_intensities <- rmo::exIntensities(bf, d)
+intensities <- intensities(bf, d)
+ex_intensities <- exIntensities(bf, d)
 
 #+ r bench
 mark(
-  Arnold = rmo:::Rcpp__rmo_am(
-    n, d, intensities = intensities
-  ),
-  ExMarkovian = rmo:::Rcpp__rexmo_mdcm(
-    n, d, ex_intensities = ex_intensities
-  ),
-  LFM = rmo:::Rcpp__rextmo_lfm(
-    n, d, 1, 0, 0, "rposval", list("value" = eta)
-  ),
+  Arnold = rmo(n, d, intensities, method = "AM"),
+  ExMarkovian = rexmo(n, d, ex_intensities, method = "MDCM"),
+  LFM = rpextmo(n, d, eta = eta, family = "Poisson", method = "LFM"),
   min_iterations = 100L,
   check = FALSE
 )

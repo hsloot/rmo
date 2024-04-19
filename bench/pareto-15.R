@@ -13,23 +13,21 @@ alpha <- 0.5
 x0 <- 5e-4
 
 
-bf <- rmo::ScaledBernsteinFunction(
+bf <- ScaledBernsteinFunction(
   scale = lambda,
-  original = rmo::ParetoBernsteinFunction(alpha = alpha, x0 = x0)
+  original = ParetoBernsteinFunction(alpha = alpha, x0 = x0)
 )
-intensities <- rmo::intensities(bf, d)
-ex_intensities <- rmo::exIntensities(bf, d)
+intensities <- intensities(bf, d)
+ex_intensities <- exIntensities(bf, d)
 
 #+ r bench
 mark(
-  Arnold = rmo:::Rcpp__rmo_am(
-    n, d, intensities = intensities
-  ),
-  ExMarkovian = rmo:::Rcpp__rexmo_mdcm(
-    n, d, ex_intensities = ex_intensities
-  ),
-  LFM = rmo:::Rcpp__rextmo_lfm(
-    n, d, lambda, 0, 0, "rpareto", list("alpha" = alpha, "x0" = x0)
+  Arnold = rmo(n, d, intensities, method = "AM"),
+  ExMarkovian = rexmo(n, d, ex_intensities, method = "MDCM"),
+  LFM = rpextmo(
+    n, d, gamma = lambda,
+    eta = c("alpha" = alpha, "x0" = x0), family = "Pareto",
+    method = "LFM"
   ),
   min_iterations = 100L,
   check = FALSE

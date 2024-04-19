@@ -30,7 +30,12 @@ jobs:
       - name: Install dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: bench, remotes, readr, dplyr, tidyr
+          extra-packages: |
+            bench
+            remotes
+            readr
+            dplyr
+            tidyr
           needs: bench
           working-directory: head
 
@@ -42,14 +47,14 @@ jobs:
               in_file <- getOption("benchmark_file_in")
               stopifnot(file.exists(in_file))
               out_file <- getOption("benchmark_file_out")
-              x <- summary(x, filter_gc = FALSE) |>
+              summary(out, filter_gc = FALSE) |>
                 mutate(file = in_file) |>
                 select(file, expression, min, median, mem_alloc) |>
-                mutate(across(c(min, median, mem_alloc), as.character))
-              write_tsv(
-                x, file = out_file, append = file.exists(out_file),
-                col_names = !file.exists(out_file)
-              )
+                mutate(across(c(min, median, mem_alloc), as.character)) |>
+                write_tsv(
+                  x, file = out_file, append = file.exists(out_file),
+                  col_names = !file.exists(out_file)
+                )
               out
             }, error = function(e) {
               message(paste("Error in benchmark", in_file, ":", e$message))
@@ -60,9 +65,7 @@ jobs:
             bench_files, ref_dir = c("head", "base")) {
             old_dir <- setwd(ref_dir)
             on.exit(setwd(old_dir))
-            pkgname <- readLines("DESCRIPTION") |>
-              grep("(?<=^Package: )(.+)", x = _,  perl = TRUE, value = TRUE) |>
-              gsub("(^Package: )(.+)", "\\2", x = _, perl = TRUE)
+            pkgname <- c(read.dcf("DESCRIPTION", fields = "Package"))
             temp_dir <- tempdir()
             on.exit(unlink(temp_dir, recursive = TRUE))
             install_local(".", lib = temp_dir, force = TRUE)

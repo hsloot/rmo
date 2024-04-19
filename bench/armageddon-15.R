@@ -11,22 +11,24 @@ d <- 15
 alpha <- 0.6
 beta <- 0.2
 
-bf <- rmo::SumOfBernsteinFunctions(
-  first = rmo::ConstantBernsteinFunction(constant = alpha),
-  second = rmo::LinearBernsteinFunction(scale = beta)
+bf <- SumOfBernsteinFunctions(
+  first = ConstantBernsteinFunction(constant = alpha),
+  second = LinearBernsteinFunction(scale = beta)
 )
-intensities <- rmo::intensities(bf, d)
-ex_intensities <- rmo::exIntensities(bf, d)
+intensities <- intensities(bf, d)
+ex_intensities <- exIntensities(bf, d)
 
 #+ r bench
 mark(
-  Armageddon = rmo:::Rcpp__rarmextmo_esm(n, d, alpha, beta),
-  ExMarkovian = rmo:::Rcpp__rexmo_mdcm(n, d, ex_intensities),
-  LFM = rmo:::Rcpp__rextmo_lfm(
-    n, d, 0, beta, alpha, "rposval", list("value" = 1)
+  Armageddon = rpextmo(
+    n, d, a = alpha, b = beta, family = "Armageddon", method = "ESM"
   ),
-  Arnold = rmo:::Rcpp__rmo_am(n, d, intensities),
-  ESM = rmo:::Rcpp__rmo_esm(n, d, intensities),
+  ExMarkovian = rexmo(n, d, ex_intensities, method = "MDCM"),
+  LFM = rpextmo(
+    n, d, a = alpha, b = beta, family = "Armageddon", method = "LFM"
+  ),
+  Arnold = rmo(n, d, intensities, method = "AM"),
+  ESM = rmo(n, d, intensities, method = "ESM"),
   min_iterations = 100L,
   check = FALSE
 )
