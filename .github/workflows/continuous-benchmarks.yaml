@@ -52,7 +52,7 @@ jobs:
                 select(file, expression, min, median, mem_alloc) |>
                 mutate(across(c(min, median, mem_alloc), as.character)) |>
                 write_tsv(
-                  x, file = out_file, append = file.exists(out_file),
+                  file = out_file, append = file.exists(out_file),
                   col_names = !file.exists(out_file)
                 )
               out
@@ -67,8 +67,9 @@ jobs:
             on.exit(setwd(old_dir))
             pkgname <- c(read.dcf("DESCRIPTION", fields = "Package"))
             temp_dir <- tempdir()
-            on.exit(unlink(temp_dir, recursive = TRUE))
-            install_local(".", lib = temp_dir, force = TRUE)
+            on.exit(unlink(file.path(temp_dir, pkgname), recursive = TRUE))
+            install_local(
+              ".", lib = temp_dir, force = TRUE, upgraded = FALSE)
             library(pkgname, lib.loc = temp_dir, character.only = TRUE)
             options(benchmark_file_out = file.path("bench", "benchmarks.tsv"))
             for (file in bench_files) {
