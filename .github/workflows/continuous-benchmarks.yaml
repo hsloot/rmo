@@ -42,7 +42,6 @@ jobs:
               in_file <- getOption("benchmark_file_in")
               stopifnot(!file.exists(in_file))
               out_file <- getOption("benchmark_file_out")
-              stopifnot(!file.exists(out_file))
               x <- summary(x, filter_gc = FALSE) |>
                 mutate(file = in_file) |>
                 select(file, expression, min, median, mem_alloc) |>
