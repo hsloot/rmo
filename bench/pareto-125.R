@@ -19,7 +19,7 @@ bf <- rmo::ScaledBernsteinFunction(
 ex_intensities <- rmo::exIntensities(bf, d)
 
 #+ r bench
-bench::mark(
+mark(
   ExMarkovian = rmo:::Rcpp__rexmo_mdcm(
       n, d, ex_intensities = ex_intensities),
   LFM = rmo:::Rcpp__rextmo_lfm(

@@ -36,19 +36,19 @@ jobs:
 
       - name: Run benchmarks
         run: |
-          bench <- function(...) {
+          mark <- function(...) {
             tryCatch({
               out <- bench::mark(...)
               in_file <- getOption("benchmark_file_in")
-              stopifnot(!file.exists(in_file))
+              stopifnot(file.exists(in_file))
               out_file <- getOption("benchmark_file_out")
               x <- summary(x, filter_gc = FALSE) |>
                 mutate(file = in_file) |>
                 select(file, expression, min, median, mem_alloc) |>
-                mutate(across(c(min, median, mem_alloc), as_character))
+                mutate(across(c(min, median, mem_alloc), as.character))
               write_tsv(
                 x, file = out_file, append = file.exists(out_file),
-                col_names = !append
+                col_names = !file.exists(out_file)
               )
               out
             }, error = function(e) {
@@ -56,31 +56,35 @@ jobs:
             })
           }
 
-          out_file_base <- "base/bench/benchmarks.tsv"
-          options(benchmark_file_out = out_file_base)
+          run_benchmarks <- function(
+            bench_files, ref_dir = c("head", "base")) {
+            old_dir <- setwd(ref_dir)
+            on.exit(setwd(old_dir))
+            pkgname <- readLines("DESCRIPTION") |>
+              grep("(?<=^Package: )(.+)", x = _,  perl = TRUE, value = TRUE) |>
+              gsub("(^Package: )(.+)", "\\2", x = _, perl = TRUE)
+            temp_dir <- tempdir()
+            on.exit(unlink(temp_dir, recursive = TRUE))
+            install_local(".", lib = temp_dir)
+            library(pkgname, lib.loc = temp_dir)
+            options(benchmark_file_out = file.path("bench", "benchmarks.tsv"))
+            for (file in bench_files) {
+              options(benchmark_file_in = file)
+              source(file)
+            }
+          }
 
-          bench_files <- list.files("head", pattern = "\\.R$", full.names = TRUE)
+          bench_files <- list.files(
+            file.path("head", "bench"),  pattern = "\\.R$",
+            full.names = TRUE) |>
+            normalizePath()
           if (length(bench_files) == 0) {
             stop("No benchmarks found in base")
           }
 
-          install_local("base")
-          bench_dir <- file.path("head", "bench")
-          for (file in bench_files) {
-            options(benchmark_file_in = file)
-            source(file)
-          }
-
-          out_file_head <- "head/bench/benchmarks.tsv"
-          options(benchmark_file_out = out_file_head)
-
-          install_local("head")
-          bench_dir <- file.path("head", "bench")
-          for (file in bench_files) {
-            options(benchmark_file_in = file)
-            source(file)
-          }
-        shell: Rscript --default-packages=bench,remotes,readr {0}
+          run_benchmarks(bench_files, ref_dir = "base")
+          run_benchmarks(bench_files, ref_dir = "head")
+        shell: Rscript --default-packages=bench,remotes,readr,dplyr {0}
 
       - name: Calculate differences
         run: |
@@ -91,7 +95,7 @@ jobs:
                 mutate(ref = "HEAD")
             ) |>
             complete(file, expression, ref, fill = list(min = NA, median = NA, mem_alloc = NA)) |>
-            mutate(across(c(min, median), as_best_time)) |>
+            mutate(across(c(min, median), as_bench_time)) |>
             mutate(across(mem_alloc, as_bench_bytes)) |>
             select(ref, file, expression, min, median, mem_alloc) |>
             arrange(file, expression) |>
@@ -99,33 +103,41 @@ jobs:
             arrange(ref) |>
             summarise(
               across(c(min, median, mem_alloc),
-                ~paste0(as.character(.[[2]]), "(", format((as.numeric(.[[2]] / as.numeric(.[[1]]) - 1) * 1e2, digits = 2, nsmall = 2), "%)"))
+                ~paste0(
+                  as.character(.[[2]]),
+                  " (", format(
+                    (as.numeric(.[[2]]) / as.numeric(.[[1]]) - 1) * 1e2,
+                    digits = 2, nsmall = 2), "%)")
                )
             ) |>
-            write_tsv("benchmarks.tsv")
+            write_tsv("benchmark-comparisons.tsv")
         shell: Rscript --default-arguments=bench,readr,dplyr,tidyr {0}
 
       - name: Upload benchmarks
         uses: actions/upload-artifact@v2
         with:
           name: benchmarks
-          path: benchmark.tsv base/bench/benchmarks.tsv head/bench/benchmarks.tsv
+          path: |
+            benchmark-comparisons.tsv
+            base/bench/benchmarks.tsv
+            head/bench/benchmarks.tsv
 
       - name: Comment PR
         if: github.event_name == 'pull_request'
         run: |
-          df <- read_csv("benchmarks.tsv")
+          df <- read_tsv("benchmark-comparisons.tsv")
 
           comment <- paste0(
             "## Benchmark summary\n\n",
-            "File | Expression | Min time | Median time | Mem. alloc |\n",
-            "--------- | --------------- | ---------\n",
+            "File | Expression | Min time | Median time | Mem. alloc\n",
+            "---- | ---------- | -------- | ----------- | ----------\n",
             paste0(
               df$file, " | ",
               df$expression, " | ",
               df$min, " | ",
               df$median, " | ",
-              df$mem_alloc, " |\n"
+              df$mem_alloc,
+              collapse = "\n"
             )
           )
 

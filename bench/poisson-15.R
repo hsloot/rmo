@@ -18,7 +18,7 @@ intensities <- rmo::intensities(bf, d)
 ex_intensities <- rmo::exIntensities(bf, d)
 
 #+ r bench
-bench::mark(
+mark(
   Arnold = rmo:::Rcpp__rmo_am(
     n, d, intensities = intensities
   ),

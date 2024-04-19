@@ -19,7 +19,7 @@ intensities <- rmo::intensities(bf, d)
 ex_intensities <- rmo::exIntensities(bf, d)
 
 #+ r bench
-bench::mark(
+mark(
   Armageddon = rmo:::Rcpp__rarmextmo_esm(n, d, alpha, beta),
   ExMarkovian = rmo:::Rcpp__rexmo_mdcm(n, d, ex_intensities),
   LFM = rmo:::Rcpp__rextmo_lfm(
