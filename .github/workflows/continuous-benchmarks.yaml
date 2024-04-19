@@ -65,7 +65,7 @@ jobs:
               gsub("(^Package: )(.+)", "\\2", x = _, perl = TRUE)
             temp_dir <- tempdir()
             on.exit(unlink(temp_dir, recursive = TRUE))
-            install_local(".", lib = temp_dir)
+            install_local(".", lib = temp_dir, force = TRUE)
             library(pkgname, lib.loc = temp_dir, character.only = TRUE)
             options(benchmark_file_out = file.path("bench", "benchmarks.tsv"))
             for (file in bench_files) {
