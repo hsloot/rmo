@@ -1,7 +1,7 @@
 pandoc: 3.1.11
-pkgdown: 2.0.8
+pkgdown: 2.0.9
 pkgdown_sha: ~
 articles:
   rmo: rmo.html
-last_built: 2024-04-19T00:25Z
+last_built: 2024-04-19T21:36Z
 
