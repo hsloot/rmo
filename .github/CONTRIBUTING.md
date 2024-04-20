@@ -37,7 +37,8 @@ enforcement:
 
 ## Commit guidelines
 
-We use the conventional commits specification for our commit messages. This means that your commit message should be structured as follows:
+We use the conventional commits specification for our commit messages. This
+means that your commit message should be structured as follows:
 
 ```markdown
 <type>[optional scope]: <description>
@@ -47,7 +48,8 @@ We use the conventional commits specification for our commit messages. This mean
 [optional footer]
 ```
 
-For more information, see the [conventional commits specification](https://www.conventionalcommits.org).
+For more information, see the
+[conventional commits specification](https://www.conventionalcommits.org).
 
 ## Branching strategy
 
@@ -61,7 +63,8 @@ being merged into the main codebase.
 
 ## Testing and code coverage
 
-We use the packages [`testthat`](https://testthat.r-lib.org) for unit testing and [`covr`](https://covr.r-lib.org) for checking code coverage.
+We use the packages [`testthat`](https://testthat.r-lib.org) for unit testing
+and [`covr`](https://covr.r-lib.org) for checking code coverage.
 
 Run all tests with the following command:
 
@@ -74,6 +77,11 @@ Check the code coverage with the following command:
 ```r
 covr::package_coverage()
 ```
+
+The package uses a continuous benchmark workflow. It runs all R scripts in the
+`bench` directory for `HEAD` and `base` (in case of a PR) or `HEAD~1` (in case
+of a push), collects summary output from calls to `bench::mark`, and calculates
+relative differences. The workflow will comment the results on PRs.
 
 ## Summary
 
@@ -95,4 +103,6 @@ covr::package_coverage()
 
 ## Code of Conduct
 
-Please note that the rmo project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By contributing to this project you agree to abide by its terms.
+Please note that the rmo project is released with a
+[Contributor Code of Conduct](CODE_OF_CONDUCT.md). By contributing to this
+project you agree to abide by its terms.
