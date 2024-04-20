@@ -117,7 +117,7 @@ jobs:
                )
             ) |>
             write_tsv("benchmark-comparisons.tsv")
-        shell: Rscript --default-arguments=bench,readr,dplyr,tidyr {0}
+        shell: Rscript --default-packages=bench,readr,dplyr,tidyr {0}
 
       - name: Upload benchmarks
         uses: actions/upload-artifact@v2
