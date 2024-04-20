@@ -39,6 +39,11 @@ jobs:
           needs: bench
           working-directory: head
 
+      - name: Debug
+        run: |
+          pwd
+          ls -la
+
       - name: Run benchmarks
         run: |
           mark <- function(...) {
