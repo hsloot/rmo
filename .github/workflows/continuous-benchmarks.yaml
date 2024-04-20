@@ -100,7 +100,9 @@ jobs:
               read_tsv(file.path("head", "bench", "benchmarks.tsv")) |>
                 mutate(ref = "HEAD")
             ) |>
-            complete(file, expression, ref, fill = list(min = NA, median = NA, mem_alloc = NA)) |>
+            complete(
+              nesting(file, expression), ref,
+              fill = list(min = NA, median = NA, mem_alloc = NA)) |>
             mutate(across(c(min, median), as_bench_time)) |>
             mutate(across(mem_alloc, as_bench_bytes)) |>
             select(ref, file, expression, min, median, mem_alloc) |>
