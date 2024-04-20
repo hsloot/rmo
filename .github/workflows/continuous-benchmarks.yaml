@@ -39,11 +39,6 @@ jobs:
           needs: bench
           working-directory: head
 
-      - name: Debug
-        run: |
-          pwd
-          ls -la
-
       - name: Run benchmarks
         run: |
           mark <- function(...) {
@@ -69,10 +64,12 @@ jobs:
             bench_files, ref_dir = c("head", "base")) {
             ref_dir <- match.arg(ref_dir)
             old_dir <- setwd(ref_dir)
-            on.exit(setwd(old_dir))
+            on.exit(setwd(old_dir), add = TRUE)
             pkgname <- c(read.dcf("DESCRIPTION", fields = "Package"))
             temp_dir <- tempdir()
-            on.exit(unlink(file.path(temp_dir, pkgname), recursive = TRUE))
+            on.exit(
+              unlink(
+                file.path(temp_dir, pkgname), recursive = TRUE), add = TRUE)
             install_local(
               ".", lib = temp_dir, force = TRUE, upgrade = FALSE)
             library(pkgname, lib.loc = temp_dir, character.only = TRUE)
