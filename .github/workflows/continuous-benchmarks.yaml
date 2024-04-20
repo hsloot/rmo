@@ -120,7 +120,7 @@ jobs:
         shell: Rscript --default-packages=bench,readr,dplyr,tidyr {0}
 
       - name: Upload benchmarks
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: benchmarks
           path: |
