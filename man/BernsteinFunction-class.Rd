@@ -102,12 +102,12 @@ Marshall–Olkin distribution's dependence properties, the following
 considerations are helpful:
 \itemize{
 \item A pure-killing Bernstein function (i.e., \eqn{a > 0}, \eqn{b = 0}, and
-\eqn{\nu \equiv 0}) corresponds to complete comononotonicity.
+\eqn{\nu \equiv 0}) corresponds to complete comonotonicity.
 \item A pure-drift Bernstein function (i.e., \eqn{a = 0}, \eqn{b > 0}, and
 \eqn{\nu \equiv 0}) corresponds to independence.
 \item A pure-jump Bernstein function (i.e., \eqn{a = 0}, \eqn{b = 0}, and
 \eqn{\nu \not\equiv 0}) can model various dependence structures. However,
-larger jump intensities lead to weaker dependendence and larger jump sizes
+larger jump intensities lead to weaker dependence and larger jump sizes
 lead to stronger dependence.
 }
 
@@ -179,7 +179,7 @@ Bernstein function. Use the method \code{\link[=exIntensities]{exIntensities()}}
 approximate them.
 }
 
-\subsection{The Exogeneous shock model and the Arnold model}{
+\subsection{The Exogenous shock model and the Arnold model}{
 
 Another alternative stochastic representation of Marshall–Olkin distributions
 is

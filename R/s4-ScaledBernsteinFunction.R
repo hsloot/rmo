@@ -1,6 +1,6 @@
 #' Class for scaled Bernstein functions
 #'
-#' Bernstein functions are stable under (nonegative) scalar multiplication,
+#' Bernstein functions are stable under (nonnegative) scalar multiplication,
 #' i.e. if \eqn{\psi} is a Bernstein function and \eqn{\lambda \geq 0} , then
 #' \deqn{
 #'   x \mapsto \lambda \psi(x), x > 0,

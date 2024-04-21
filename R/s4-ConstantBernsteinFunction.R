@@ -51,7 +51,7 @@ ConstantBernsteinFunction <- setClass("ConstantBernsteinFunction", # nolint
   slots = c(constant = "numeric")
 )
 
-#'@rdname hidden_aliases
+#' @rdname hidden_aliases
 #'
 #' @inheritParams methods::initialize
 #' @param constant Nonnegative number.

@@ -225,7 +225,7 @@
 
 \item{...}{pass-through parameter.}
 
-\item{x}{A nonnegativ numeric vector at which the iterated difference of
+\item{x}{A nonnegative numeric vector at which the iterated difference of
 the Bernstein function is evaluated.}
 
 \item{difference_order}{A nonnegative integer with the order of the

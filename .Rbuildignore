@@ -2,6 +2,7 @@
 ^\.clang_complete$
 ^\.clang-format$
 ^\.covrignore$
+^\.cspell\.json$
 ^\.DS_Store$
 ^\.editorconfig$
 ^\.git$

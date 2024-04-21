@@ -1,5 +1,5 @@
 lib_path_restore <- .libPaths()
-local_lib <- tempfile("RLIB_")
+local_lib <- tempfile("RLIB_") # cSpell:ignore RLIB_
 dir.create(local_lib)
 .libPaths(c(local_lib, .libPaths()))
 message("Loading testutils.rmo")

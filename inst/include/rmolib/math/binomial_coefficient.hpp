@@ -25,10 +25,10 @@ inline _RealType multiply_binomial_coefficient(const _RealType x,
         "signature");
     static_assert(
         std::is_integral_v<_IntType>,
-        "multiply_binomial_coefficient<>: _IntType not intgral value");
+        "multiply_binomial_coefficient<>: _IntType not integral value");
     static_assert(
         std::is_floating_point_v<_RealType>,
-        "multiply_binomial_coefficient<>: _RealType not intgral value");
+        "multiply_binomial_coefficient<>: _RealType not integral value");
     if (n < 0)
         std::domain_error(
             "multiply_binomial_coefficient<> cannot be called with negative n");

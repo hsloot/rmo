@@ -9,7 +9,7 @@ valueOf0(object, x, cscale = 1, ...)
 \arguments{
 \item{object}{An object deriving from the class \linkS4class{BernsteinFunction}.}
 
-\item{x}{A nonnegativ numeric vector at which the iterated difference of
+\item{x}{A nonnegative numeric vector at which the iterated difference of
 the Bernstein function is evaluated.}
 
 \item{cscale}{A positive number for the \emph{composite scaling factor}.}

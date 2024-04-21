@@ -8,7 +8,7 @@
 
 #include <Rcpp.h>
 
-static const R_xlen_t C_CHECK_USR_INTERRUP = 100000;
+static const R_xlen_t C_CHECK_USR_INTERRUPT = 100000;
 
 template <typename T, class = void>
 struct has_value_type : public std::false_type {};
@@ -124,12 +124,12 @@ class rcpp_distribution_caller {
 
         for (auto k = R_xlen_t{0}; k < n; ++k) {
             if constexpr (is_multivariate_v) {
-                if ((d * k) % C_CHECK_USR_INTERRUP == 0)
+                if ((d * k) % C_CHECK_USR_INTERRUPT == 0)
                     Rcpp::checkUserInterrupt();
                 auto values = out(k, Rcpp::_);
                 dist(engine, parm, values);
             } else {
-                if (k % C_CHECK_USR_INTERRUP == 0) Rcpp::checkUserInterrupt();
+                if (k % C_CHECK_USR_INTERRUPT == 0) Rcpp::checkUserInterrupt();
                 out[k] = dist(engine, parm);
             }
 

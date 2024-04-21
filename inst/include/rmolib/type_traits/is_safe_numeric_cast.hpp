@@ -9,7 +9,7 @@ namespace type_traits {
 
 namespace internal {
 
-template <typename... Conds>
+template <typename... Conds> // cSpell:ignore Conds
 struct and_ : std::true_type {};
 
 template <typename Cond, typename... Conds>
@@ -65,7 +65,7 @@ constexpr bool have_all_same_signage_v = have_all_same_signage<_Ts...>::value;
 }  // namespace internal
 
 //! true, if cast can be performed without loss of precision; signage might be
-//! lost if cast is to unsiged type
+//! lost if cast is to unsigned type
 template <typename _To, typename _From>
 struct is_safe_numeric_cast
     : public std::integral_constant<

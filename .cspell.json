@@ -1,0 +1,85 @@
+{
+    "version": "0.2",
+    "enabled": true,
+    "language": "en-US",
+    "enabledLanguageIds": [
+        "cpp",
+        "markdown",
+        "r",
+        "rmarkdown",
+        "yaml"
+    ],
+    "ignorePaths": [
+        ".git",
+        ".vscode",
+        "R/RcppExports.R",
+        "scr/RcppExports.cpp"
+    ],
+    "words": [
+        "comonotone",
+        "comonotonicity",
+        "parametrizations",
+        "subordinator",
+        "nondecreasing",
+        "submodel",
+        "Borel",
+        "Khintchine",
+        "Kolmogorov",
+        "Lévy",
+        "Markovian",
+        "Marshall",
+        "Olkin",
+        "Sloot",
+        "Smirnov",
+        "Stieltjes"
+    ],
+    "ignoreWords": [
+        "Rcpp",
+        "testthat",
+        "Rdpack",
+        "roxygen2",
+        "rmolib",
+        "usethis",
+        "ESM",
+        "AM",
+        "MDCM",
+        "LFM",
+        "LTDC",
+        "cscale",
+        "exmo",
+        "extmo",
+        "armextmo"
+    ],
+    "ignoreRegExpList": [
+        "/\\\\\\b\\w+\\b/g",
+        "/\\b(Rcpp__|)r\\w+mo(|_\\w+)\\b/g",
+        "/\\brjump_\\w+\\b/g",
+        "/\\br(jump|posval|pareto)\\b/g",
+        "/#' @\\b\\w+\\b/g"
+    ],
+    "languageSettings": [
+        {
+            "languageId": "r",
+            "ignoreWords": [
+                "nolint",
+                "nocov",
+                "qassert",
+                "qtest",
+                "reprompt"
+            ],
+            "ignoreRegExpList": [
+            ]
+        },
+        {
+            "languageId": "cpp",
+            "ignoreWords": [
+                "LGLSXP",
+                "INTSXP",
+                "REALSXP",
+                "revsort"
+            ],
+            "ignoreRegExpList": [
+            ]
+        }
+    ]
+}

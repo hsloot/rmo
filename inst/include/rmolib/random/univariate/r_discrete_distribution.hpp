@@ -40,7 +40,8 @@ class r_discrete_distribution {
 
         template <class _UnaryFunctor>
         explicit param_type(typename std::vector<_WeightType>::size_type count,
-                            const _WeightType xmin, const _WeightType xmax,
+                            const _WeightType xmin,  // cSpell:ignore xmin
+                            const _WeightType xmax,  // cSpell:ignore xmax
                             _UnaryFunctor unary_op) {
             using size_t = typename std::vector<_WeightType>::size_type;
 

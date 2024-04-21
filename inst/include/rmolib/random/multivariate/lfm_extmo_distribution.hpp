@@ -23,13 +23,13 @@ template <typename _T>
 struct __is_lfm_extmo_param_type<
     _T,
     std::enable_if_t<
-        decltype(std::declval<_T>().dim(), std::true_type())::value&& decltype(
-            std::declval<_T>().killing(),
-            std::true_type())::value&& decltype(std::declval<_T>().drift(),
-                                                std::true_type())::
-            value&& decltype(std::declval<_T>().intensity(), std::true_type())::
-                value&& decltype(std::declval<_T>().jump_param(),
-                                 std::true_type())::value>>
+        decltype(std::declval<_T>().dim(), std::true_type())::
+            value&& decltype(std::declval<_T>().killing(), std::true_type())::
+                value&& decltype(std::declval<_T>().drift(), std::true_type())::
+                    value&& decltype(std::declval<_T>().intensity(),
+                                     std::true_type())::
+                        value&& decltype(std::declval<_T>().jump_param(),
+                                         std::true_type())::value>>
     : public std::true_type {};
 
 }  // namespace internal
@@ -239,14 +239,14 @@ class lfm_extmo_distribution {
     template <typename _Engine, typename _Container>
     void operator()(_Engine&& engine, const param_type& parm, _Container& out) {
         const auto dim = out.size();
-        const auto sorted_barriers_with_indeces = __iid_barriers(engine, dim);
+        const auto sorted_barriers_with_indices = __iid_barriers(engine, dim);
         const auto killing_time = exponential_dist_(engine, parm.killing_parm_);
 
         auto state = std::make_pair(_RealType{0}, _RealType{0});
         auto& [time, value] = state;
         auto next_state = state;
         auto& [next_time, next_value] = next_state;
-        for (const auto& [index, barrier] : sorted_barriers_with_indeces) {
+        for (const auto& [index, barrier] : sorted_barriers_with_indices) {
             while (value < barrier) {
                 if (next_value < barrier) {
                     state = next_state;

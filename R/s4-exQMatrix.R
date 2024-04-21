@@ -20,7 +20,7 @@
 #' not numerically stable. Consequently, the various alternative approaches are
 #' used dependent on the class of the Bernstein function.
 #'
-#' The (upper triagonal) infinitesimal Markov generator of the associated
+#' The (upper triangular) infinitesimal Markov generator of the associated
 #' death-counting process is calculated recursively:
 #' \deqn{
 #'   q_{0, i}^\ast

@@ -177,7 +177,7 @@ setMethod(
 
 #' @rdname hidden_aliases
 #'
-#' @inheritParams stieljtesDensity
+#' @inheritParams stieltjesDensity
 #'
 #' @include s4-stieltjesDensity.R
 #' @export

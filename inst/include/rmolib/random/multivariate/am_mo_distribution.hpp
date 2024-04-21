@@ -199,7 +199,7 @@ class am_mo_distribution {
         return out;
     }
 
-    //! implicitely assumes that `out.size() == dim`
+    //! implicitly assumes that `out.size() == dim`
     template <typename _Engine, typename _Container>
     void operator()(_Engine&& engine, const param_type& parm, _Container& out) {
         // TODO: check compatibility

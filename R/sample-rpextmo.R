@@ -126,7 +126,7 @@
 #'       \nu{(\mathrm{d}u)}
 #'           = \frac{\eta}{\Gamma{(1 - \eta)}} \cdot u^{-\eta-1} \mathrm{d}u ,
 #'   }
-#'   and with Stieljtes measure \eqn{\sigma}:
+#'   and with Stieltjes measure \eqn{\sigma}:
 #'   \deqn{
 #'       \sigma{(\mathrm{d}u)}
 #'           = \frac{\sin{(\eta \pi)}}{\pi} \cdot u^{\eta - 1} \mathrm{d}u ,
@@ -169,7 +169,7 @@
 #'       \nu{(\mathrm{d}u)}
 #'           = e^{-\eta u} u^{-1} \mathrm{d}u ,
 #'   }
-#'   and with Stieljtes measure \eqn{\sigma}:
+#'   and with Stieltjes measure \eqn{\sigma}:
 #'   \deqn{
 #'       \sigma{(\mathrm{d}u)}
 #'           = u^{-1} 1_{\{ u > \eta \}} \mathrm{d}u ,
@@ -198,7 +198,7 @@
 #'   }
 #'   where \eqn{\epsilon} is a unit exponential rv, `n` is a Poisson process,
 #'   and \eqn{X_{1}, X_{2}, \ldots} are iid jumps from the corresponding jump
-#'   distribution, see \insertCite{@see pp. 140 psqq. @Mai2017a}{rmo}.
+#'   distribution, see \insertCite{@see pp. 140 sqq. @Mai2017a}{rmo}.
 #'
 #' @references
 #'  \insertAllCited{}

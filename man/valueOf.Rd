@@ -9,7 +9,7 @@ valueOf(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...)
 \arguments{
 \item{object}{An object deriving from the class \linkS4class{BernsteinFunction}.}
 
-\item{x}{A nonnegativ numeric vector at which the iterated difference of
+\item{x}{A nonnegative numeric vector at which the iterated difference of
 the Bernstein function is evaluated.}
 
 \item{difference_order}{A nonnegative integer with the order of the
