@@ -39,7 +39,7 @@ Collate:
     'error.R'
     'rmo-package.R'
     's4-valueOf0.R'
-    's4-stieltjesDensity.R'
+    's4-getStieltjesDensity.R'
     's4-getLevyDensity.R'
     's4-valueOf.R'
     's4-getDefaultMethodString.R'

@@ -40,7 +40,7 @@
 #' @references
 #'   \insertAllCited{}
 #'
-#' @seealso [getLevyDensity()], [stieltjesDensity()], [valueOf()],
+#' @seealso [getLevyDensity()], [getStieltjesDensity()], [valueOf()],
 #'   [calcShockArrivalIntensities()], [calcExShockArrivalIntensities()],
 #'   [calcExShockSizeArrivalIntensities()], [calcMDCMGeneratorMatrix()],
 #'   [rextmo()], [rpextmo()]
@@ -71,7 +71,7 @@
 #'
 #' # Create a Stieltjes density
 #' bf <- GammaBernsteinFunction(a = 0.5)
-#' stieltjes_density <- stieltjesDensity(bf)
+#' stieltjes_density <- getStieltjesDensity(bf)
 #' integrate(
 #'   function(x) 1/(1 + x) * stieltjes_density(x),
 #'   lower = attr(stieltjes_density, "lower"),
@@ -178,12 +178,12 @@ setMethod(
 
 #' @rdname hidden_aliases
 #'
-#' @inheritParams stieltjesDensity
+#' @inheritParams getStieltjesDensity
 #'
-#' @include s4-stieltjesDensity.R
+#' @include s4-getStieltjesDensity.R
 #' @export
 setMethod(
-  "stieltjesDensity", "GammaBernsteinFunction",
+  "getStieltjesDensity", "GammaBernsteinFunction",
   function(object) {
     structure(
       function(x) {

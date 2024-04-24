@@ -11,8 +11,8 @@
 #' @family Bernstein function generics
 #' @export
 setGeneric(
-  "stieltjesDensity",
+  "getStieltjesDensity",
   function(object) {
-    standardGeneric("stieltjesDensity")
+    standardGeneric("getStieltjesDensity")
   }
 )

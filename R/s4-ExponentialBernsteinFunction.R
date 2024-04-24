@@ -34,7 +34,7 @@
 #' @references
 #'   \insertAllCited{}
 #'
-#' @seealso [getLevyDensity()], [stieltjesDensity()], [valueOf()],
+#' @seealso [getLevyDensity()], [getStieltjesDensity()], [valueOf()],
 #'   [calcShockArrivalIntensities()], [calcExShockArrivalIntensities()],
 #'   [calcExShockSizeArrivalIntensities()], [calcMDCMGeneratorMatrix()],
 #'   [rextmo()], [rpextmo()]
@@ -65,7 +65,7 @@
 #'
 #' # Create a Stieltjes density
 #' bf <- ExponentialBernsteinFunction(lambda = 0.5)
-#' stieltjes_density <- stieltjesDensity(bf)
+#' stieltjes_density <- getStieltjesDensity(bf)
 #' sum(stieltjes_density$y * 1/(1 + stieltjes_density$x))
 #'
 #' # Evaluate the Bernstein function
@@ -168,12 +168,12 @@ setMethod(
 
 #' @rdname hidden_aliases
 #'
-#' @inheritParams stieltjesDensity
+#' @inheritParams getStieltjesDensity
 #'
-#' @include s4-stieltjesDensity.R
+#' @include s4-getStieltjesDensity.R
 #' @export
 setMethod(
-  "stieltjesDensity", "ExponentialBernsteinFunction",
+  "getStieltjesDensity", "ExponentialBernsteinFunction",
   function(object) {
     structure(
       data.frame(x = object@lambda, y = 1),

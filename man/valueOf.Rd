@@ -45,7 +45,7 @@ Other Bernstein function generics:
 \code{\link{calcShockArrivalIntensities}()},
 \code{\link{getDefaultMethodString}()},
 \code{\link{getLevyDensity}()},
-\code{\link{stieltjesDensity}()},
+\code{\link{getStieltjesDensity}()},
 \code{\link{valueOf0}()}
 }
 \concept{Bernstein function generics}

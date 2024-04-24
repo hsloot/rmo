@@ -72,7 +72,7 @@ integrate(
 
 # Create a Stieltjes density
 bf <- InverseGaussianBernsteinFunction(eta = 0.5)
-stieltjes_density <- stieltjesDensity(bf)
+stieltjes_density <- getStieltjesDensity(bf)
 integrate(
   function(x) 1/(1 + x) * stieltjes_density(x),
   lower = attr(stieltjes_density, "lower"),
@@ -111,7 +111,7 @@ calcMDCMGeneratorMatrix(bf, 3, tolerance = 1e-4)
 \insertAllCited{}
 }
 \seealso{
-\code{\link[=getLevyDensity]{getLevyDensity()}}, \code{\link[=stieltjesDensity]{stieltjesDensity()}}, \code{\link[=valueOf]{valueOf()}},
+\code{\link[=getLevyDensity]{getLevyDensity()}}, \code{\link[=getStieltjesDensity]{getStieltjesDensity()}}, \code{\link[=valueOf]{valueOf()}},
 \code{\link[=calcShockArrivalIntensities]{calcShockArrivalIntensities()}}, \code{\link[=calcExShockArrivalIntensities]{calcExShockArrivalIntensities()}},
 \code{\link[=calcExShockSizeArrivalIntensities]{calcExShockSizeArrivalIntensities()}}, \code{\link[=calcMDCMGeneratorMatrix]{calcMDCMGeneratorMatrix()}},
 \code{\link[=rextmo]{rextmo()}}, \code{\link[=rpextmo]{rpextmo()}}

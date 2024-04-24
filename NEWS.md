@@ -8,6 +8,7 @@
   - Rename S4-method `intensities()` to `calcShockArrivalIntensities()`
   - Rename S4-method `defaultMethod()` to `getDefaultMethodString()`
   - Rename S4-method `levyDensity()` to `getLevyDensity()`
+  - Rename S4-method `stieltjesDensity()` to `getStieltjesDensity()`
 
 - Improve extensibility by exposing `defaultMethod` and `valueOf0` (#118)
 
