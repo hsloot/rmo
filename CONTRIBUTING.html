@@ -94,7 +94,7 @@
 <p>Check the code coverage with the following command:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">covr</span><span class="fu">::</span><span class="fu"><a href="http://covr.r-lib.org/reference/package_coverage.html" class="external-link">package_coverage</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p>The package uses a continuous benchmark workflow. It runs all R scripts in the <code>bench</code> directory for <code>HEAD</code> and <code>base</code> (in case of a PR) or <code>HEAD~1</code> (in case of a push), collects summary output from calls to <code>bench::mark</code>, and calculates relative differences. The workflow will comment the results on PRs.</p>
+<p>The package uses a continuous benchmark workflow. It runs all R scripts in the <code>bench</code> directory for <code>HEAD</code> and <code>base</code> (in case of a PR) or <code>HEAD~1</code> (in case of a push), collects summary output from calls to <code><a href="http://bench.r-lib.org/reference/mark.html" class="external-link">bench::mark</a></code>, and calculates relative differences. The workflow will comment the results on PRs.</p>
 </div>
 <div class="section level2">
 <h2 id="summary">Summary<a class="anchor" aria-label="anchor" href="#summary"></a></h2>
