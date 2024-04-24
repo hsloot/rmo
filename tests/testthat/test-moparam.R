@@ -8,7 +8,7 @@ test_that("Shock-size arrival intensities are calculated correctly", {
     sapply(1:d, function(i) valueOf(bf, d - i, i, d, i))
   )
 
-  uex_intensities <- uexIntensities(bf, d)
+  uex_intensities <- calcExShockArrivalIntensities(bf, d)
   expect_equal(
     calcExShockSizeArrivalIntensities(bf, d),
     sapply(

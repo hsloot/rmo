@@ -11,7 +11,7 @@
 #' @slot coefficients Numeric vector of positive real values.
 #' @slot points List of Bernstein functions.
 #'
-#' @seealso [valueOf()], [intensities()], [uexIntensities()],
+#' @seealso [valueOf()], [intensities()], [calcExShockArrivalIntensities()],
 #'   [calcExShockSizeArrivalIntensities()], [exQMatrix()], [rextmo()],
 #'   [rpextmo()]
 #'

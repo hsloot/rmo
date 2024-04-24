@@ -3,7 +3,7 @@
 #' Calculates *exchangeable shock-size-arrival intensities*, the
 #' `theta` parameter for [rexmo()].
 #'
-#' @inheritParams uexIntensities
+#' @inheritParams calcExShockArrivalIntensities
 #'
 #' @details
 #' For a given Bernstein function, the exchangeable shock-size-arrival

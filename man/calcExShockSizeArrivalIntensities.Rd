@@ -40,12 +40,12 @@ calcExShockSizeArrivalIntensities(bf, 3)
 \code{\link[=rexmo]{rexmo()}}
 
 Other Bernstein function generics: 
+\code{\link{calcExShockArrivalIntensities}()},
 \code{\link{defaultMethod}()},
 \code{\link{exQMatrix}()},
 \code{\link{intensities}()},
 \code{\link{levyDensity}()},
 \code{\link{stieltjesDensity}()},
-\code{\link{uexIntensities}()},
 \code{\link{valueOf}()},
 \code{\link{valueOf0}()}
 }

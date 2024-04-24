@@ -11,7 +11,7 @@
 #'   \psi(x) = a , x > 0
 #' }
 #'
-#' @seealso [valueOf()], [intensities()], [uexIntensities()],
+#' @seealso [valueOf()], [intensities()], [calcExShockArrivalIntensities()],
 #'   [calcExShockSizeArrivalIntensities()], [exQMatrix()], [rextmo()],
 #'   [rpextmo()]
 #'
@@ -38,7 +38,7 @@
 #'
 #' # Calculate exchangeable shock-arrival intensities
 #' bf <- ConstantBernsteinFunction(constant = 0.4)
-#' uexIntensities(bf, 3)
+#' calcExShockArrivalIntensities(bf, 3)
 #'
 #' # Calculate exchangeable shock-size arrival intensities
 #' bf <- ConstantBernsteinFunction(constant = 0.2)

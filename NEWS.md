@@ -3,6 +3,7 @@
 - Rename multiple S4-methods and arguments (#121):
   - Rename S4-method `exIntensities()` to `calcExShockSizeArrivalIntensities()`
     and arguments/variables `ex_intensities` to `theta`
+  - Rename S4-method `uexIntensities()` to `calcExShockArrivalIntensities()`
 
 - Improve extensibility by exposing `defaultMethod` and `valueOf0` (#118)
 

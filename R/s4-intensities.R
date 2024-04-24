@@ -3,7 +3,7 @@
 #' Calculates the *shock-arrival intensities*, the `intensities` parameter for
 #' [rmo()].
 #'
-#' @inheritParams uexIntensities
+#' @inheritParams calcExShockArrivalIntensities
 #'
 #' @details
 #' For a given Bernstein function, the shock-arrival intensities are defined as

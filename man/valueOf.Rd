@@ -39,13 +39,13 @@ valueOf(bf, 1:5)
 }
 \seealso{
 Other Bernstein function generics: 
+\code{\link{calcExShockArrivalIntensities}()},
 \code{\link{calcExShockSizeArrivalIntensities}()},
 \code{\link{defaultMethod}()},
 \code{\link{exQMatrix}()},
 \code{\link{intensities}()},
 \code{\link{levyDensity}()},
 \code{\link{stieltjesDensity}()},
-\code{\link{uexIntensities}()},
 \code{\link{valueOf0}()}
 }
 \concept{Bernstein function generics}

@@ -46,7 +46,7 @@ Collate:
     's4-exQMatrix.R'
     's4-intensities.R'
     's4-calcExShockSizeArrivalIntensities.R'
-    's4-uexIntensities.R'
+    's4-calcExShockArrivalIntensities.R'
     's4-BernsteinFunction.R'
     's4-LevyBernsteinFunction.R'
     's4-CompleteBernsteinFunction.R'

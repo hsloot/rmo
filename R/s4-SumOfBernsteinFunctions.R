@@ -10,7 +10,7 @@
 #' @slot first The first summand (derived from [BernsteinFunction-class]).
 #' @slot second The second summand (derived from [BernsteinFunction-class]).
 #'
-#' @seealso [valueOf()], [intensities()], [uexIntensities()],
+#' @seealso [valueOf()], [intensities()], [calcExShockArrivalIntensities()],
 #'   [calcExShockSizeArrivalIntensities()], [exQMatrix()], [rextmo()],
 #'   [rpextmo()]
 #'

@@ -11,7 +11,7 @@
 \docType{methods}
 \name{hidden_aliases}
 \alias{hidden_aliases}
-\alias{uexIntensities,BernsteinFunction-method}
+\alias{calcExShockArrivalIntensities,BernsteinFunction-method}
 \alias{calcExShockSizeArrivalIntensities,BernsteinFunction-method}
 \alias{intensities,BernsteinFunction-method}
 \alias{exQMatrix,BernsteinFunction-method}
@@ -74,7 +74,7 @@
 \alias{valueOf,SumOfBernsteinFunctions-method}
 \title{For S4 methods that require a documentation entry but only clutter the index.}
 \usage{
-\S4method{uexIntensities}{BernsteinFunction}(object, d, cscale = 1, ...)
+\S4method{calcExShockArrivalIntensities}{BernsteinFunction}(object, d, cscale = 1, ...)
 
 \S4method{calcExShockSizeArrivalIntensities}{BernsteinFunction}(object, d, cscale = 1, ...)
 

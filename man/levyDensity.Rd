@@ -17,12 +17,12 @@ either \code{"continuous"} or \code{"discrete"}.
 }
 \seealso{
 Other Bernstein function generics: 
+\code{\link{calcExShockArrivalIntensities}()},
 \code{\link{calcExShockSizeArrivalIntensities}()},
 \code{\link{defaultMethod}()},
 \code{\link{exQMatrix}()},
 \code{\link{intensities}()},
 \code{\link{stieltjesDensity}()},
-\code{\link{uexIntensities}()},
 \code{\link{valueOf}()},
 \code{\link{valueOf0}()}
 }

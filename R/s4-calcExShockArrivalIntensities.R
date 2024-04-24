@@ -26,10 +26,10 @@
 #' @export
 #' @examples
 #' bf <- AlphaStableBernsteinFunction(alpha = 0.4)
-#' uexIntensities(bf, 3)
+#' calcExShockArrivalIntensities(bf, 3)
 setGeneric(
-  "uexIntensities",
+  "calcExShockArrivalIntensities",
   function(object, d, cscale = 1, ...) {
-    standardGeneric("uexIntensities")
+    standardGeneric("calcExShockArrivalIntensities")
   }
 )

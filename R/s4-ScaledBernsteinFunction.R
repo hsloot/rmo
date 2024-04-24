@@ -11,7 +11,7 @@
 #'   is to be multiplied.
 #' @slot original The original Bernstein function which is to be multiplied.
 #'
-#' @seealso [valueOf()], [intensities()], [uexIntensities()],
+#' @seealso [valueOf()], [intensities()], [calcExShockArrivalIntensities()],
 #'   [calcExShockSizeArrivalIntensities()], [exQMatrix()], [rextmo()],
 #'   [rpextmo()]
 #'

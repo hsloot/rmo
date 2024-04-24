@@ -25,13 +25,13 @@ valueOf0(bf, 1:5)
 }
 \seealso{
 Other Bernstein function generics: 
+\code{\link{calcExShockArrivalIntensities}()},
 \code{\link{calcExShockSizeArrivalIntensities}()},
 \code{\link{defaultMethod}()},
 \code{\link{exQMatrix}()},
 \code{\link{intensities}()},
 \code{\link{levyDensity}()},
 \code{\link{stieltjesDensity}()},
-\code{\link{uexIntensities}()},
 \code{\link{valueOf}()}
 }
 \concept{Bernstein function generics}

@@ -11,7 +11,7 @@
 #'   composition.
 #' @slot original The original Bernstein function.
 #'
-#' @seealso [valueOf()], [intensities()], [uexIntensities()],
+#' @seealso [valueOf()], [intensities()], [calcExShockArrivalIntensities()],
 #'   [calcExShockSizeArrivalIntensities()], [exQMatrix()], [rextmo()],
 #'   [rpextmo()]
 #'

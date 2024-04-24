@@ -169,7 +169,7 @@ NULL
 #'   \insertRef{Schilling2012a}{rmo}
 #'   \insertRef{Sloot2022a}{rmo}
 #'
-#' @seealso [valueOf()], [intensities()], [uexIntensities()],
+#' @seealso [valueOf()], [intensities()], [calcExShockArrivalIntensities()],
 #'   [calcExShockSizeArrivalIntensities()], [exQMatrix()], [rextmo()],
 #'   [rpextmo()]
 #'
@@ -195,12 +195,12 @@ NULL
 
 #' @rdname hidden_aliases
 #'
-#' @inheritParams uexIntensities
+#' @inheritParams calcExShockArrivalIntensities
 #'
-#' @include s4-uexIntensities.R s4-valueOf.R
+#' @include s4-calcExShockArrivalIntensities.R s4-valueOf.R
 #' @export
 setMethod(
-  "uexIntensities", "BernsteinFunction",
+  "calcExShockArrivalIntensities", "BernsteinFunction",
   function(object, d, cscale = 1, ...) {
     sapply(1:d, function(i) valueOf(object, d - i, i, cscale = cscale, ...))
   }
@@ -245,12 +245,12 @@ setMethod(
 #'
 #' @inheritParams intensities
 #'
-#' @include  s4-intensities.R s4-uexIntensities.R RcppExports.R
+#' @include  s4-intensities.R s4-calcExShockArrivalIntensities.R RcppExports.R
 #' @export
 setMethod(
   "intensities", "BernsteinFunction",
   function(object, d, cscale = 1, ...) {
-    uexi2i(uexIntensities(object, d, cscale = cscale, ...))
+    uexi2i(calcExShockArrivalIntensities(object, d, cscale = cscale, ...))
   }
 )
 

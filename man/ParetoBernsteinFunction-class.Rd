@@ -71,8 +71,8 @@ intensities(bf, 3, tolerance = 1e-4)
 
 # Calculate exchangeable shock-arrival intensities
 bf <- ParetoBernsteinFunction(alpha = 0.4, x0 = 1e-2)
-uexIntensities(bf, 3)
-uexIntensities(bf, 3, tolerance = 1e-4)
+calcExShockArrivalIntensities(bf, 3)
+calcExShockArrivalIntensities(bf, 3, tolerance = 1e-4)
 
 # Calculate exchangeable shock-size arrival intensities
 bf <- ParetoBernsteinFunction(alpha = 0.2, x0 = 1e-2)
@@ -88,9 +88,9 @@ exQMatrix(bf, 3, tolerance = 1e-4)
 \insertAllCited{}
 }
 \seealso{
-\code{\link[=levyDensity]{levyDensity()}},  \code{\link[=valueOf]{valueOf()}}, \code{\link[=intensities]{intensities()}}, \code{\link[=uexIntensities]{uexIntensities()}},
-\code{\link[=calcExShockSizeArrivalIntensities]{calcExShockSizeArrivalIntensities()}}, \code{\link[=exQMatrix]{exQMatrix()}}, \code{\link[=rextmo]{rextmo()}},
-\code{\link[=rpextmo]{rpextmo()}}
+\code{\link[=levyDensity]{levyDensity()}}, \code{\link[=valueOf]{valueOf()}}, \code{\link[=intensities]{intensities()}},
+\code{\link[=calcExShockArrivalIntensities]{calcExShockArrivalIntensities()}}, \code{\link[=calcExShockSizeArrivalIntensities]{calcExShockSizeArrivalIntensities()}},
+\code{\link[=exQMatrix]{exQMatrix()}}, \code{\link[=rextmo]{rextmo()}}, \code{\link[=rpextmo]{rpextmo()}}
 
 Other Bernstein function classes: 
 \code{\link{AlphaStableBernsteinFunction-class}},

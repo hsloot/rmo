@@ -3,7 +3,7 @@
 #' Calculates the *infinitesimal Markov generator matrix* of the corresponding
 #' (Markovian) default-counting process, used internally by [rexmo()].
 #'
-#' @inheritParams uexIntensities
+#' @inheritParams calcExShockArrivalIntensities
 #'
 #' @details
 #' For a given Bernstein function, the Markov generator matrix is defined as the

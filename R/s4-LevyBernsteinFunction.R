@@ -40,9 +40,9 @@
 #'     \quad x > 0 .
 #' }
 #'
-#' @seealso [levyDensity()], [valueOf()], [intensities()], [uexIntensities()],
-#'   [calcExShockSizeArrivalIntensities()], [exQMatrix()], [rextmo()],
-#'   [rpextmo()]
+#' @seealso [levyDensity()], [valueOf()], [intensities()],
+#'   [calcExShockArrivalIntensities()], [calcExShockSizeArrivalIntensities()],
+#'   [exQMatrix()], [rextmo()], [rpextmo()]
 #'
 #' @docType class
 #' @name LevyBernsteinFunction-class
