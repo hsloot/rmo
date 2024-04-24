@@ -242,7 +242,7 @@ setMethod(
 )
 
 setMethod(
-  "defaultMethod",
+  "getDefaultMethodString",
   "CustomBernsteinFunction",
   function(object) {
     "stieltjes"

@@ -94,7 +94,7 @@ setMethod(
           )
       } else {
         out <- valueOf(object, x, difference_order, n, k, cscale, ...,
-          method = defaultMethod(object), tolerance = tolerance
+          method = getDefaultMethodString(object), tolerance = tolerance
         )
       }
     } else if (isTRUE("stieltjes" == method)) {

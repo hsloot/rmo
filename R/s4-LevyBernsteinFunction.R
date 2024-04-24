@@ -60,10 +60,10 @@ setClass("LevyBernsteinFunction",
 #'
 #' @inheritParams valueOf0
 #'
-#' @include s4-defaultMethod.R
+#' @include s4-getDefaultMethodString.R
 #' @export
 setMethod(
-  "defaultMethod", "LevyBernsteinFunction",
+  "getDefaultMethodString", "LevyBernsteinFunction",
   function(object) {
     "levy"
   }
@@ -105,7 +105,7 @@ setMethod(
           )
       } else {
         out <- valueOf(object, x, difference_order, n, k, cscale, ...,
-          method = defaultMethod(object), tolerance = tolerance
+          method = getDefaultMethodString(object), tolerance = tolerance
         )
       }
     } else {
@@ -182,15 +182,15 @@ setMethod(
 #'
 #' @inheritParams valueOf0
 #'
-#' @include s4-valueOf0.R s4-valueOf.R s4-defaultMethod.R
+#' @include s4-valueOf0.R s4-valueOf.R s4-getDefaultMethodString.R
 #' @importFrom methods setMethod
 #' @export
 setMethod(
   "valueOf0", "LevyBernsteinFunction",
-  function(object, x, cscale = 1, method = defaultMethod(object), ...) {
+  function(object, x, cscale = 1, method = getDefaultMethodString(object), ...) { # nolint
     method <- match.arg(method)
     if (method == "default") {
-      method <- defaultMethod(object)
+      method <- getDefaultMethodString(object)
     }
     valueOf(
       object, x,

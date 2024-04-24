@@ -184,11 +184,11 @@ setMethod(
 
 #' @rdname hidden_aliases
 #'
-#' @inheritParams defaultMethod
+#' @inheritParams getDefaultMethodString
 #'
 #' @export
 setMethod(
-  "defaultMethod", "ExponentialBernsteinFunction",
+  "getDefaultMethodString", "ExponentialBernsteinFunction",
   function(object) {
     "stieltjes"
   }

@@ -15,7 +15,7 @@
 \alias{calcExShockSizeArrivalIntensities,BernsteinFunction-method}
 \alias{calcShockArrivalIntensities,BernsteinFunction-method}
 \alias{calcMDCMGeneratorMatrix,BernsteinFunction-method}
-\alias{defaultMethod,LevyBernsteinFunction-method}
+\alias{getDefaultMethodString,LevyBernsteinFunction-method}
 \alias{valueOf,LevyBernsteinFunction-method}
 \alias{valueOf0,LevyBernsteinFunction-method}
 \alias{valueOf,CompleteBernsteinFunction-method}
@@ -40,7 +40,7 @@
 \alias{show,ExponentialBernsteinFunction-method}
 \alias{levyDensity,ExponentialBernsteinFunction-method}
 \alias{stieltjesDensity,ExponentialBernsteinFunction-method}
-\alias{defaultMethod,ExponentialBernsteinFunction-method}
+\alias{getDefaultMethodString,ExponentialBernsteinFunction-method}
 \alias{valueOf0,ExponentialBernsteinFunction-method}
 \alias{initialize,GammaBernsteinFunction-method}
 \alias{show,GammaBernsteinFunction-method}
@@ -82,7 +82,7 @@
 
 \S4method{calcMDCMGeneratorMatrix}{BernsteinFunction}(object, d, cscale = 1, ...)
 
-\S4method{defaultMethod}{LevyBernsteinFunction}(object)
+\S4method{getDefaultMethodString}{LevyBernsteinFunction}(object)
 
 \S4method{valueOf}{LevyBernsteinFunction}(
   object,
@@ -96,7 +96,7 @@
   tolerance = .Machine$double.eps^0.5
 )
 
-\S4method{valueOf0}{LevyBernsteinFunction}(object, x, cscale = 1, method = defaultMethod(object), ...)
+\S4method{valueOf0}{LevyBernsteinFunction}(object, x, cscale = 1, method = getDefaultMethodString(object), ...)
 
 \S4method{valueOf}{CompleteBernsteinFunction}(
   object,
@@ -152,7 +152,7 @@
 
 \S4method{stieltjesDensity}{ExponentialBernsteinFunction}(object)
 
-\S4method{defaultMethod}{ExponentialBernsteinFunction}(object)
+\S4method{getDefaultMethodString}{ExponentialBernsteinFunction}(object)
 
 \S4method{valueOf0}{ExponentialBernsteinFunction}(object, x, cscale = 1, ...)
 

@@ -21,7 +21,7 @@ Other Bernstein function generics:
 \code{\link{calcExShockSizeArrivalIntensities}()},
 \code{\link{calcMDCMGeneratorMatrix}()},
 \code{\link{calcShockArrivalIntensities}()},
-\code{\link{defaultMethod}()},
+\code{\link{getDefaultMethodString}()},
 \code{\link{stieltjesDensity}()},
 \code{\link{valueOf}()},
 \code{\link{valueOf0}()}
