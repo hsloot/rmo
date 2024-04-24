@@ -114,9 +114,9 @@ test_that("`calcExShockSizeArrivalIntensities` calculates expected values", {
   )
 })
 
-test_that("`exQMatrix` calculates expected values", {
+test_that("`calcMDCMGeneratorMatrix` calculates expected values", {
   expect_equal(
-    exQMatrix(bf_composite_scaled_bf, d),
+    calcMDCMGeneratorMatrix(bf_composite_scaled_bf, d),
     ex_qmatrix_naive(
       actual_fn, d,
       original_cscale = bf_composite_scaled_bf@cscale,
@@ -125,7 +125,7 @@ test_that("`exQMatrix` calculates expected values", {
   )
 
   expect_equal(
-    exQMatrix(bf_composite_scaled_bf, d, cscale = cscale),
+    calcMDCMGeneratorMatrix(bf_composite_scaled_bf, d, cscale = cscale),
     ex_qmatrix_naive(
       actual_fn, d,
       original_cscale = bf_composite_scaled_bf@cscale,
@@ -135,8 +135,8 @@ test_that("`exQMatrix` calculates expected values", {
   )
 
   expect_equal(
-    exQMatrix(bf_composite_scaled_bf, d, cscale = cscale),
-    exQMatrix(
+    calcMDCMGeneratorMatrix(bf_composite_scaled_bf, d, cscale = cscale),
+    calcMDCMGeneratorMatrix(
       bf_composite_scaled_bf, d,
       cscale = cscale,
       method = "levy", tolerance = testthat_tolerance()
@@ -144,8 +144,8 @@ test_that("`exQMatrix` calculates expected values", {
   )
 
   expect_equal(
-    exQMatrix(bf_composite_scaled_bf, d, cscale = cscale),
-    exQMatrix(
+    calcMDCMGeneratorMatrix(bf_composite_scaled_bf, d, cscale = cscale),
+    calcMDCMGeneratorMatrix(
       bf_composite_scaled_bf, d,
       cscale = cscale,
       method = "stieltjes", tolerance = testthat_tolerance()

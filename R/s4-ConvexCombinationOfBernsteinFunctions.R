@@ -12,8 +12,8 @@
 #' @slot points List of Bernstein functions.
 #'
 #' @seealso [valueOf()], [intensities()], [calcExShockArrivalIntensities()],
-#'   [calcExShockSizeArrivalIntensities()], [exQMatrix()], [rextmo()],
-#'   [rpextmo()]
+#'   [calcExShockSizeArrivalIntensities()], [calcMDCMGeneratorMatrix()],
+#'   [rextmo()], [rpextmo()]
 #'
 #' @docType class
 #' @name ConvexCombinationOfBernsteinFunctions-class

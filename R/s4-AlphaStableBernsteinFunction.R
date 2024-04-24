@@ -41,8 +41,8 @@
 #'
 #' @seealso [levyDensity()], [stieltjesDensity()], [valueOf()],
 #'   [intensities()], [calcExShockArrivalIntensities()],
-#'   [calcExShockSizeArrivalIntensities()], [exQMatrix()], [rextmo()],
-#'   [rpextmo()]
+#'   [calcExShockSizeArrivalIntensities()], [calcMDCMGeneratorMatrix()],
+#'   [rextmo()], [rpextmo()]
 #'
 #' @docType class
 #' @name AlphaStableBernsteinFunction-class
@@ -101,9 +101,9 @@
 #'
 #' # Calculate the Markov generator
 #' bf <- AlphaStableBernsteinFunction(alpha = 0.6)
-#' exQMatrix(bf, 3)
-#' exQMatrix(bf, 3, method = "stieltjes")
-#' exQMatrix(bf, 3, tolerance = 1e-4)
+#' calcMDCMGeneratorMatrix(bf, 3)
+#' calcMDCMGeneratorMatrix(bf, 3, method = "stieltjes")
+#' calcMDCMGeneratorMatrix(bf, 3, tolerance = 1e-4)
 AlphaStableBernsteinFunction <- setClass("AlphaStableBernsteinFunction", # nolint
   contains = "CompleteBernsteinFunction",
   slots = c(alpha = "numeric")

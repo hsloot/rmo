@@ -62,13 +62,13 @@ calcExShockSizeArrivalIntensities(bf, 3, tolerance = 1e-4)
 
 # Calculate the Markov generator
 bf <- PoissonBernsteinFunction(eta = 0.6)
-exQMatrix(bf, 3)
-exQMatrix(bf, 3, tolerance = 1e-4)
+calcMDCMGeneratorMatrix(bf, 3)
+calcMDCMGeneratorMatrix(bf, 3, tolerance = 1e-4)
 }
 \seealso{
 \code{\link[=levyDensity]{levyDensity()}},  \code{\link[=valueOf]{valueOf()}}, \code{\link[=intensities]{intensities()}},
 \code{\link[=calcExShockArrivalIntensities]{calcExShockArrivalIntensities()}}, \code{\link[=calcExShockSizeArrivalIntensities]{calcExShockSizeArrivalIntensities()}},
-\code{\link[=exQMatrix]{exQMatrix()}}, \code{\link[=rextmo]{rextmo()}}, \code{\link[=rpextmo]{rpextmo()}}
+\code{\link[=calcMDCMGeneratorMatrix]{calcMDCMGeneratorMatrix()}}, \code{\link[=rextmo]{rextmo()}}, \code{\link[=rpextmo]{rpextmo()}}
 
 Other Bernstein function classes: 
 \code{\link{AlphaStableBernsteinFunction-class}},

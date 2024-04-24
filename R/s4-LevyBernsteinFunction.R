@@ -42,7 +42,7 @@
 #'
 #' @seealso [levyDensity()], [valueOf()], [intensities()],
 #'   [calcExShockArrivalIntensities()], [calcExShockSizeArrivalIntensities()],
-#'   [exQMatrix()], [rextmo()], [rpextmo()]
+#'   [calcMDCMGeneratorMatrix()], [rextmo()], [rpextmo()]
 #'
 #' @docType class
 #' @name LevyBernsteinFunction-class

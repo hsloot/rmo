@@ -41,8 +41,8 @@ valueOf(bf, 1:5)
 Other Bernstein function generics: 
 \code{\link{calcExShockArrivalIntensities}()},
 \code{\link{calcExShockSizeArrivalIntensities}()},
+\code{\link{calcMDCMGeneratorMatrix}()},
 \code{\link{defaultMethod}()},
-\code{\link{exQMatrix}()},
 \code{\link{intensities}()},
 \code{\link{levyDensity}()},
 \code{\link{stieltjesDensity}()},

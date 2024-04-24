@@ -50,9 +50,11 @@ test_that("ex_qmatrix parameter is calculated correctly", {
     }
   }
   diag(ex_qmatrix) <- -apply(ex_qmatrix, 1, sum)
-  expect_equal(exQMatrix(bf, d), ex_qmatrix)
+  expect_equal(calcMDCMGeneratorMatrix(bf, d), ex_qmatrix)
 
-  expect_equal(exQMatrix(bf, d), exQMatrix(bf, d + 1)[-1, -1])
+  expect_equal(
+    calcMDCMGeneratorMatrix(bf, d), calcMDCMGeneratorMatrix(bf, d + 1)[-1, -1]
+  )
 })
 
 test_that("Sum of shock-size arrival intensities is calculated correctly (base case)", { # nolint

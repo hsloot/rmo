@@ -49,7 +49,7 @@ representation
 \seealso{
 \code{\link[=levyDensity]{levyDensity()}}, \code{\link[=valueOf]{valueOf()}}, \code{\link[=intensities]{intensities()}},
 \code{\link[=calcExShockArrivalIntensities]{calcExShockArrivalIntensities()}}, \code{\link[=calcExShockSizeArrivalIntensities]{calcExShockSizeArrivalIntensities()}},
-\code{\link[=exQMatrix]{exQMatrix()}}, \code{\link[=rextmo]{rextmo()}}, \code{\link[=rpextmo]{rpextmo()}}
+\code{\link[=calcMDCMGeneratorMatrix]{calcMDCMGeneratorMatrix()}}, \code{\link[=rextmo]{rextmo()}}, \code{\link[=rpextmo]{rpextmo()}}
 
 Other Bernstein function classes: 
 \code{\link{AlphaStableBernsteinFunction-class}},

@@ -11,8 +11,8 @@
 #' @slot second The second summand (derived from [BernsteinFunction-class]).
 #'
 #' @seealso [valueOf()], [intensities()], [calcExShockArrivalIntensities()],
-#'   [calcExShockSizeArrivalIntensities()], [exQMatrix()], [rextmo()],
-#'   [rpextmo()]
+#'   [calcExShockSizeArrivalIntensities()], [calcMDCMGeneratorMatrix()],
+#'   [rextmo()], [rpextmo()]
 #'
 #' @docType class
 #' @name SumOfBernsteinFunctions-class

@@ -12,8 +12,8 @@
 #' }
 #'
 #' @seealso [valueOf()], [intensities()], [calcExShockArrivalIntensities()],
-#'   [calcExShockSizeArrivalIntensities()], [exQMatrix()], [rextmo()],
-#'   [rpextmo()]
+#'   [calcExShockSizeArrivalIntensities()], [calcMDCMGeneratorMatrix()],
+#'   [rextmo()], [rpextmo()]
 #'
 #' @docType class
 #' @name ConstantBernsteinFunction-class
@@ -46,7 +46,7 @@
 #'
 #' # Calculate the Markov generator
 #' bf <- ConstantBernsteinFunction(constant = 0.6)
-#' exQMatrix(bf, 3)
+#' calcMDCMGeneratorMatrix(bf, 3)
 ConstantBernsteinFunction <- setClass("ConstantBernsteinFunction", # nolint
   contains = "BernsteinFunction",
   slots = c(constant = "numeric")

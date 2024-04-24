@@ -41,10 +41,10 @@
 #' @export
 #' @examples
 #' bf <- AlphaStableBernsteinFunction(alpha = 0.7)
-#' exQMatrix(bf, 3)
+#' calcMDCMGeneratorMatrix(bf, 3)
 setGeneric(
-  "exQMatrix",
+  "calcMDCMGeneratorMatrix",
   function(object, d, cscale = 1, ...) {
-    standardGeneric("exQMatrix")
+    standardGeneric("calcMDCMGeneratorMatrix")
   }
 )

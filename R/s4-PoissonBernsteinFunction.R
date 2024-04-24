@@ -24,7 +24,7 @@
 #'
 #' @seealso [levyDensity()],  [valueOf()], [intensities()],
 #'   [calcExShockArrivalIntensities()], [calcExShockSizeArrivalIntensities()],
-#'   [exQMatrix()], [rextmo()], [rpextmo()]
+#'   [calcMDCMGeneratorMatrix()], [rextmo()], [rpextmo()]
 #'
 #' @docType class
 #' @name PoissonBernsteinFunction-class
@@ -66,8 +66,8 @@
 #'
 #' # Calculate the Markov generator
 #' bf <- PoissonBernsteinFunction(eta = 0.6)
-#' exQMatrix(bf, 3)
-#' exQMatrix(bf, 3, tolerance = 1e-4)
+#' calcMDCMGeneratorMatrix(bf, 3)
+#' calcMDCMGeneratorMatrix(bf, 3, tolerance = 1e-4)
 PoissonBernsteinFunction <- setClass("PoissonBernsteinFunction", # nolint
   contains = "LevyBernsteinFunction",
   slots = c(eta = "numeric")

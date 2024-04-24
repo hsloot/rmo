@@ -10,9 +10,9 @@
 #'  \psi(x) = b x, x > 0.
 #' }
 #'
-#' @seealso [valueOf()], [intensities()],
-#'   [calcExShockArrivalIntensities()], [calcExShockSizeArrivalIntensities()],
-#'   [exQMatrix()], [rextmo()], [rpextmo()]
+#' @seealso [valueOf()], [intensities()], [calcExShockArrivalIntensities()],
+#'   [calcExShockSizeArrivalIntensities()], [calcMDCMGeneratorMatrix()],
+#'   [rextmo()], [rpextmo()]
 #'
 #' @docType class
 #' @name LinearBernsteinFunction-class
@@ -45,7 +45,7 @@
 #'
 #' # Calculate the Markov generator
 #' bf <- LinearBernsteinFunction(scale = 0.6)
-#' exQMatrix(bf, 3)
+#' calcMDCMGeneratorMatrix(bf, 3)
 LinearBernsteinFunction <- setClass("LinearBernsteinFunction", # nolint
   contains = "BernsteinFunction",
   slots = c(scale = "numeric")

@@ -12,8 +12,8 @@
 #' @slot original The original Bernstein function which is to be multiplied.
 #'
 #' @seealso [valueOf()], [intensities()], [calcExShockArrivalIntensities()],
-#'   [calcExShockSizeArrivalIntensities()], [exQMatrix()], [rextmo()],
-#'   [rpextmo()]
+#'   [calcExShockSizeArrivalIntensities()], [calcMDCMGeneratorMatrix()],
+#'   [rextmo()], [rpextmo()]
 #'
 #' @docType class
 #' @name ScaledBernsteinFunction-class

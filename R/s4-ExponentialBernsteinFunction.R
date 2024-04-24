@@ -34,10 +34,9 @@
 #' @references
 #'   \insertAllCited{}
 #'
-#' @seealso [levyDensity()], [stieltjesDensity()], [valueOf()],
-#'   [intensities()], [calcExShockArrivalIntensities()],
-#'   [calcExShockSizeArrivalIntensities()], [exQMatrix()], [rextmo()],
-#'   [rpextmo()]
+#' @seealso [levyDensity()], [stieltjesDensity()], [valueOf()], [intensities()],
+#'   [calcExShockArrivalIntensities()], [calcExShockSizeArrivalIntensities()],
+#'   [calcMDCMGeneratorMatrix()], [rextmo()], [rpextmo()]
 #'
 #' @docType class
 #' @name ExponentialBernsteinFunction-class
@@ -92,9 +91,9 @@
 #'
 #' # Calculate the Markov generator
 #' bf <- ExponentialBernsteinFunction(lambda = 0.6)
-#' exQMatrix(bf, 3)
-#' exQMatrix(bf, 3, method = "levy")
-#' exQMatrix(bf, 3, tolerance = 1e-4)
+#' calcMDCMGeneratorMatrix(bf, 3)
+#' calcMDCMGeneratorMatrix(bf, 3, method = "levy")
+#' calcMDCMGeneratorMatrix(bf, 3, tolerance = 1e-4)
 ExponentialBernsteinFunction <- setClass("ExponentialBernsteinFunction", # nolint
   contains = "CompleteBernsteinFunction",
   slots = c("lambda" = "numeric")

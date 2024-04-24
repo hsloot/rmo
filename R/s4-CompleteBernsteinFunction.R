@@ -42,8 +42,8 @@
 #'
 #' @seealso [levyDensity()], [stieltjesDensity()], [valueOf()],
 #'   [intensities()], [calcExShockArrivalIntensities()],
-#'   [calcExShockSizeArrivalIntensities()], [exQMatrix()], [rextmo()],
-#'   [rpextmo()]
+#'   [calcExShockSizeArrivalIntensities()], [calcMDCMGeneratorMatrix()],
+#'   [rextmo()], [rpextmo()]
 #'
 #' @docType class
 #' @name CompleteBernsteinFunction-class

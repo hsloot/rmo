@@ -127,9 +127,9 @@ test_that("`calcExShockSizeArrivalIntensities` calculates expected values", {
   )
 })
 
-test_that("`exQMatrix` calculates expected values", {
+test_that("`calcMDCMGeneratorMatrix` calculates expected values", {
   expect_equal(
-    exQMatrix(bf_convex_combinations_of_bfs, d),
+    calcMDCMGeneratorMatrix(bf_convex_combinations_of_bfs, d),
     ex_qmatrix_naive(
       actual_fn, d,
       coefficients = bf_convex_combinations_of_bfs@coefficients,
@@ -138,7 +138,7 @@ test_that("`exQMatrix` calculates expected values", {
   )
 
   expect_equal(
-    exQMatrix(bf_convex_combinations_of_bfs, d, cscale = cscale),
+    calcMDCMGeneratorMatrix(bf_convex_combinations_of_bfs, d, cscale = cscale),
     ex_qmatrix_naive(
       actual_fn, d,
       coefficients = bf_convex_combinations_of_bfs@coefficients,
@@ -149,8 +149,8 @@ test_that("`exQMatrix` calculates expected values", {
 
   skip_if_not(has_levy_density(bf_convex_combinations_of_bfs))
   expect_equal(
-    exQMatrix(bf_convex_combinations_of_bfs, d, cscale = cscale),
-    exQMatrix(
+    calcMDCMGeneratorMatrix(bf_convex_combinations_of_bfs, d, cscale = cscale),
+    calcMDCMGeneratorMatrix(
       bf_convex_combinations_of_bfs, d,
       cscale = cscale,
       method = "levy", tolerance = testthat_tolerance()
@@ -159,8 +159,8 @@ test_that("`exQMatrix` calculates expected values", {
 
   skip_if_not(has_stieltjes_density(bf_convex_combinations_of_bfs))
   expect_equal(
-    exQMatrix(bf_convex_combinations_of_bfs, d, cscale = cscale),
-    exQMatrix(
+    calcMDCMGeneratorMatrix(bf_convex_combinations_of_bfs, d, cscale = cscale),
+    calcMDCMGeneratorMatrix(
       bf_convex_combinations_of_bfs, d,
       cscale = cscale,
       method = "stieltjes", tolerance = testthat_tolerance()

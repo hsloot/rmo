@@ -43,12 +43,12 @@ calcExShockSizeArrivalIntensities(bf, 3)
 
 # Calculate the Markov generator
 bf <- ConstantBernsteinFunction(constant = 0.6)
-exQMatrix(bf, 3)
+calcMDCMGeneratorMatrix(bf, 3)
 }
 \seealso{
 \code{\link[=valueOf]{valueOf()}}, \code{\link[=intensities]{intensities()}}, \code{\link[=calcExShockArrivalIntensities]{calcExShockArrivalIntensities()}},
-\code{\link[=calcExShockSizeArrivalIntensities]{calcExShockSizeArrivalIntensities()}}, \code{\link[=exQMatrix]{exQMatrix()}}, \code{\link[=rextmo]{rextmo()}},
-\code{\link[=rpextmo]{rpextmo()}}
+\code{\link[=calcExShockSizeArrivalIntensities]{calcExShockSizeArrivalIntensities()}}, \code{\link[=calcMDCMGeneratorMatrix]{calcMDCMGeneratorMatrix()}},
+\code{\link[=rextmo]{rextmo()}}, \code{\link[=rpextmo]{rpextmo()}}
 
 Other Bernstein function classes: 
 \code{\link{AlphaStableBernsteinFunction-class}},

@@ -4,6 +4,7 @@
   - Rename S4-method `exIntensities()` to `calcExShockSizeArrivalIntensities()`
     and arguments/variables `ex_intensities` to `theta`
   - Rename S4-method `uexIntensities()` to `calcExShockArrivalIntensities()`
+  - Rename S4-method `exQMatrix()` to `calcMDCMGeneratorMatrix()`
 
 - Improve extensibility by exposing `defaultMethod` and `valueOf0` (#118)
 

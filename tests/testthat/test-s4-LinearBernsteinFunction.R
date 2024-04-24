@@ -54,9 +54,9 @@ test_that("`calcExShockSizeArrivalIntensities` calculates expected values", {
   )
 })
 
-test_that("`exQMatrix` calculates expected values", {
+test_that("`calcMDCMGeneratorMatrix` calculates expected values", {
   expect_equal(
-    exQMatrix(bf_linear, d),
+    calcMDCMGeneratorMatrix(bf_linear, d),
     ex_qmatrix_naive(
       actual_fn, d,
       scale = bf_linear@scale
@@ -64,7 +64,7 @@ test_that("`exQMatrix` calculates expected values", {
   )
 
   expect_equal(
-    exQMatrix(bf_linear, d, cscale = cscale),
+    calcMDCMGeneratorMatrix(bf_linear, d, cscale = cscale),
     ex_qmatrix_naive(
       actual_fn, d,
       scale = bf_linear@scale,

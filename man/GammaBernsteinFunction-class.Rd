@@ -93,18 +93,17 @@ calcExShockSizeArrivalIntensities(bf, 3, tolerance = 1e-4)
 
 # Calculate the Markov generator
 bf <- GammaBernsteinFunction(a = 0.6)
-exQMatrix(bf, 3)
-exQMatrix(bf, 3, method = "stieltjes")
-exQMatrix(bf, 3, tolerance = 1e-4)
+calcMDCMGeneratorMatrix(bf, 3)
+calcMDCMGeneratorMatrix(bf, 3, method = "stieltjes")
+calcMDCMGeneratorMatrix(bf, 3, tolerance = 1e-4)
 }
 \references{
 \insertAllCited{}
 }
 \seealso{
-\code{\link[=levyDensity]{levyDensity()}}, \code{\link[=stieltjesDensity]{stieltjesDensity()}}, \code{\link[=valueOf]{valueOf()}},
-\code{\link[=intensities]{intensities()}}, \code{\link[=calcExShockArrivalIntensities]{calcExShockArrivalIntensities()}},
-\code{\link[=calcExShockSizeArrivalIntensities]{calcExShockSizeArrivalIntensities()}}, \code{\link[=exQMatrix]{exQMatrix()}}, \code{\link[=rextmo]{rextmo()}},
-\code{\link[=rpextmo]{rpextmo()}}
+\code{\link[=levyDensity]{levyDensity()}}, \code{\link[=stieltjesDensity]{stieltjesDensity()}}, \code{\link[=valueOf]{valueOf()}}, \code{\link[=intensities]{intensities()}},
+\code{\link[=calcExShockArrivalIntensities]{calcExShockArrivalIntensities()}}, \code{\link[=calcExShockSizeArrivalIntensities]{calcExShockSizeArrivalIntensities()}},
+\code{\link[=calcMDCMGeneratorMatrix]{calcMDCMGeneratorMatrix()}}, \code{\link[=rextmo]{rextmo()}}, \code{\link[=rpextmo]{rpextmo()}}
 
 Other Bernstein function classes: 
 \code{\link{AlphaStableBernsteinFunction-class}},

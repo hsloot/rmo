@@ -163,8 +163,8 @@ matrix:
 The evaluation of the infinitesimal generator matrix using this formula is
 usually not numerically stable. Consequently, the various alternative
 approaches are used dependent on the class of the Bernstein function. Use the
-method \code{\link[=exQMatrix]{exQMatrix()}} to evaluate or approximate this expression for a given
-Bernstein function.
+method \code{\link[=calcMDCMGeneratorMatrix]{calcMDCMGeneratorMatrix()}} to evaluate or approximate this expression
+for a given Bernstein function.
 
 For the \emph{all-alive-state}, the generator's first row has the interpretation
 of \emph{exchangeable shock-size-arrival intensities}:
@@ -191,8 +191,8 @@ is
 }
 \seealso{
 \code{\link[=valueOf]{valueOf()}}, \code{\link[=intensities]{intensities()}}, \code{\link[=calcExShockArrivalIntensities]{calcExShockArrivalIntensities()}},
-\code{\link[=calcExShockSizeArrivalIntensities]{calcExShockSizeArrivalIntensities()}}, \code{\link[=exQMatrix]{exQMatrix()}}, \code{\link[=rextmo]{rextmo()}},
-\code{\link[=rpextmo]{rpextmo()}}
+\code{\link[=calcExShockSizeArrivalIntensities]{calcExShockSizeArrivalIntensities()}}, \code{\link[=calcMDCMGeneratorMatrix]{calcMDCMGeneratorMatrix()}},
+\code{\link[=rextmo]{rextmo()}}, \code{\link[=rpextmo]{rpextmo()}}
 
 Other Bernstein function classes: 
 \code{\link{AlphaStableBernsteinFunction-class}},

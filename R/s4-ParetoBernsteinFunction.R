@@ -39,9 +39,9 @@
 #' @references
 #'   \insertAllCited{}
 #'
-#' @seealso [levyDensity()], [valueOf()], [intensities()],
+#' @seealso [levyDensity()],  [valueOf()], [intensities()],
 #'   [calcExShockArrivalIntensities()], [calcExShockSizeArrivalIntensities()],
-#'   [exQMatrix()], [rextmo()], [rpextmo()]
+#'   [calcMDCMGeneratorMatrix()], [rextmo()], [rpextmo()]
 #'
 #' @docType class
 #' @name ParetoBernsteinFunction-class
@@ -87,8 +87,8 @@
 #'
 #' # Calculate the Markov generator
 #' bf <- ParetoBernsteinFunction(alpha = 0.6, x0 = 1e-2)
-#' exQMatrix(bf, 3)
-#' exQMatrix(bf, 3, tolerance = 1e-4)
+#' calcMDCMGeneratorMatrix(bf, 3)
+#' calcMDCMGeneratorMatrix(bf, 3, tolerance = 1e-4)
 ParetoBernsteinFunction <- setClass("ParetoBernsteinFunction", # nolint
   contains = "LevyBernsteinFunction",
   slots = c(alpha = "numeric", x0 = "numeric")

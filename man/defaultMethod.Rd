@@ -25,7 +25,7 @@ defaultMethod(AlphaStableBernsteinFunction(alpha = 0.7))
 Other Bernstein function generics: 
 \code{\link{calcExShockArrivalIntensities}()},
 \code{\link{calcExShockSizeArrivalIntensities}()},
-\code{\link{exQMatrix}()},
+\code{\link{calcMDCMGeneratorMatrix}()},
 \code{\link{intensities}()},
 \code{\link{levyDensity}()},
 \code{\link{stieltjesDensity}()},

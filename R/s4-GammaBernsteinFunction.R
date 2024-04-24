@@ -40,10 +40,9 @@
 #' @references
 #'   \insertAllCited{}
 #'
-#' @seealso [levyDensity()], [stieltjesDensity()], [valueOf()],
-#'   [intensities()], [calcExShockArrivalIntensities()],
-#'   [calcExShockSizeArrivalIntensities()], [exQMatrix()], [rextmo()],
-#'   [rpextmo()]
+#' @seealso [levyDensity()], [stieltjesDensity()], [valueOf()], [intensities()],
+#'   [calcExShockArrivalIntensities()], [calcExShockSizeArrivalIntensities()],
+#'   [calcMDCMGeneratorMatrix()], [rextmo()], [rpextmo()]
 #'
 #' @docType class
 #' @name GammaBernsteinFunction-class
@@ -102,9 +101,9 @@
 #'
 #' # Calculate the Markov generator
 #' bf <- GammaBernsteinFunction(a = 0.6)
-#' exQMatrix(bf, 3)
-#' exQMatrix(bf, 3, method = "stieltjes")
-#' exQMatrix(bf, 3, tolerance = 1e-4)
+#' calcMDCMGeneratorMatrix(bf, 3)
+#' calcMDCMGeneratorMatrix(bf, 3, method = "stieltjes")
+#' calcMDCMGeneratorMatrix(bf, 3, tolerance = 1e-4)
 GammaBernsteinFunction <- setClass("GammaBernsteinFunction", # nolint
   contains = "CompleteBernsteinFunction",
   slots = c(a = "numeric")

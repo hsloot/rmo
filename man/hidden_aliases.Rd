@@ -14,7 +14,7 @@
 \alias{calcExShockArrivalIntensities,BernsteinFunction-method}
 \alias{calcExShockSizeArrivalIntensities,BernsteinFunction-method}
 \alias{intensities,BernsteinFunction-method}
-\alias{exQMatrix,BernsteinFunction-method}
+\alias{calcMDCMGeneratorMatrix,BernsteinFunction-method}
 \alias{defaultMethod,LevyBernsteinFunction-method}
 \alias{valueOf,LevyBernsteinFunction-method}
 \alias{valueOf0,LevyBernsteinFunction-method}
@@ -80,7 +80,7 @@
 
 \S4method{intensities}{BernsteinFunction}(object, d, cscale = 1, ...)
 
-\S4method{exQMatrix}{BernsteinFunction}(object, d, cscale = 1, ...)
+\S4method{calcMDCMGeneratorMatrix}{BernsteinFunction}(object, d, cscale = 1, ...)
 
 \S4method{defaultMethod}{LevyBernsteinFunction}(object)
 

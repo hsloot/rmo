@@ -146,8 +146,8 @@ NULL
 #' The evaluation of the infinitesimal generator matrix using this formula is
 #' usually not numerically stable. Consequently, the various alternative
 #' approaches are used dependent on the class of the Bernstein function. Use the
-#' method [exQMatrix()] to evaluate or approximate this expression for a given
-#' Bernstein function.
+#' method [calcMDCMGeneratorMatrix()] to evaluate or approximate this expression
+#' for a given Bernstein function.
 #'
 #' For the *all-alive-state*, the generator's first row has the interpretation
 #' of *exchangeable shock-size-arrival intensities*:
@@ -170,8 +170,8 @@ NULL
 #'   \insertRef{Sloot2022a}{rmo}
 #'
 #' @seealso [valueOf()], [intensities()], [calcExShockArrivalIntensities()],
-#'   [calcExShockSizeArrivalIntensities()], [exQMatrix()], [rextmo()],
-#'   [rpextmo()]
+#'   [calcExShockSizeArrivalIntensities()], [calcMDCMGeneratorMatrix()],
+#'   [rextmo()], [rpextmo()]
 #'
 #' @docType class
 #' @name BernsteinFunction-class
@@ -256,12 +256,13 @@ setMethod(
 
 #' @rdname hidden_aliases
 #'
-#' @inheritParams exQMatrix
+#' @inheritParams calcMDCMGeneratorMatrix
 #'
-#' @include s4-exQMatrix.R s4-calcExShockSizeArrivalIntensities.R RcppExports.R
+#' @include s4-calcMDCMGeneratorMatrix.R s4-calcExShockSizeArrivalIntensities.R
+#'   RcppExports.R
 #' @export
 setMethod(
-  "exQMatrix", "BernsteinFunction",
+  "calcMDCMGeneratorMatrix", "BernsteinFunction",
   function(object, d, cscale = 1, ...) {
     exi2exqm(calcExShockSizeArrivalIntensities(object, d, cscale = cscale, ...))
   }

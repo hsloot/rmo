@@ -75,9 +75,9 @@ test_that("`calcExShockSizeArrivalIntensities` calculates expected values", {
   )
 })
 
-test_that("`exQMatrix` calculates expected values", {
+test_that("`calcMDCMGeneratorMatrix` calculates expected values", {
   expect_equal(
-    exQMatrix(bf_pareto, d),
+    calcMDCMGeneratorMatrix(bf_pareto, d),
     ex_qmatrix_naive(
       actual_fn, d,
       alpha = bf_pareto@alpha,
@@ -86,7 +86,7 @@ test_that("`exQMatrix` calculates expected values", {
   )
 
   expect_equal(
-    exQMatrix(bf_pareto, d, cscale = cscale),
+    calcMDCMGeneratorMatrix(bf_pareto, d, cscale = cscale),
     ex_qmatrix_naive(
       actual_fn, d,
       cscale = cscale,
@@ -96,8 +96,8 @@ test_that("`exQMatrix` calculates expected values", {
   )
 
   expect_equal(
-    exQMatrix(bf_pareto, d, cscale = cscale),
-    exQMatrix(
+    calcMDCMGeneratorMatrix(bf_pareto, d, cscale = cscale),
+    calcMDCMGeneratorMatrix(
       bf_pareto, d,
       cscale = cscale,
       method = "levy", tolerance = testthat_tolerance()

@@ -50,10 +50,9 @@
 #' @references
 #'  \insertAllCited{}
 #'
-#' @seealso [levyDensity()], [stieltjesDensity()], [valueOf()],
-#'   [intensities()], [calcExShockArrivalIntensities()],
-#'   [calcExShockSizeArrivalIntensities()], [exQMatrix()], [rextmo()],
-#'   [rpextmo()]
+#' @seealso [levyDensity()], [stieltjesDensity()], [valueOf()], [intensities()],
+#'   [calcExShockArrivalIntensities()], [calcExShockSizeArrivalIntensities()],
+#'   [calcMDCMGeneratorMatrix()], [rextmo()], [rpextmo()]
 #'
 #' @docType class
 #' @name InverseGaussianBernsteinFunction-class
@@ -112,9 +111,9 @@
 #'
 #' # Calculate the Markov generator
 #' bf <- InverseGaussianBernsteinFunction(eta = 0.6)
-#' exQMatrix(bf, 3)
-#' exQMatrix(bf, 3, method = "stieltjes")
-#' exQMatrix(bf, 3, tolerance = 1e-4)
+#' calcMDCMGeneratorMatrix(bf, 3)
+#' calcMDCMGeneratorMatrix(bf, 3, method = "stieltjes")
+#' calcMDCMGeneratorMatrix(bf, 3, tolerance = 1e-4)
 InverseGaussianBernsteinFunction <- setClass("InverseGaussianBernsteinFunction", # nolint
   contains = "CompleteBernsteinFunction",
   slots = c(eta = "numeric")

@@ -43,7 +43,7 @@ Collate:
     's4-levyDensity.R'
     's4-valueOf.R'
     's4-defaultMethod.R'
-    's4-exQMatrix.R'
+    's4-calcMDCMGeneratorMatrix.R'
     's4-intensities.R'
     's4-calcExShockSizeArrivalIntensities.R'
     's4-calcExShockArrivalIntensities.R'
