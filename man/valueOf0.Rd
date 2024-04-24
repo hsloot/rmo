@@ -30,7 +30,7 @@ Other Bernstein function generics:
 \code{\link{calcMDCMGeneratorMatrix}()},
 \code{\link{calcShockArrivalIntensities}()},
 \code{\link{getDefaultMethodString}()},
-\code{\link{levyDensity}()},
+\code{\link{getLevyDensity}()},
 \code{\link{stieltjesDensity}()},
 \code{\link{valueOf}()}
 }

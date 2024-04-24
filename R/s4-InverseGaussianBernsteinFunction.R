@@ -50,7 +50,7 @@
 #' @references
 #'  \insertAllCited{}
 #'
-#' @seealso [levyDensity()], [stieltjesDensity()], [valueOf()],
+#' @seealso [getLevyDensity()], [stieltjesDensity()], [valueOf()],
 #'   [calcShockArrivalIntensities()], [calcExShockArrivalIntensities()],
 #'   [calcExShockSizeArrivalIntensities()], [calcMDCMGeneratorMatrix()],
 #'   [rextmo()], [rpextmo()]
@@ -72,7 +72,7 @@
 #'
 #' # Create a Lévy density
 #' bf <- InverseGaussianBernsteinFunction(eta = 0.7)
-#' levy_density <- levyDensity(bf)
+#' levy_density <- getLevyDensity(bf)
 #' integrate(
 #'   function(x) pmin(1, x) * levy_density(x),
 #'   lower = attr(levy_density, "lower"),
@@ -170,12 +170,12 @@ setMethod( # nocov start
 
 #' @rdname hidden_aliases
 #'
-#' @inheritParams levyDensity
+#' @inheritParams getLevyDensity
 #'
-#' @include s4-levyDensity.R
+#' @include s4-getLevyDensity.R
 #' @export
 setMethod(
-  "levyDensity", "InverseGaussianBernsteinFunction",
+  "getLevyDensity", "InverseGaussianBernsteinFunction",
   function(object) {
     structure(
       function(x) {

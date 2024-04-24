@@ -22,7 +22,7 @@ Other Bernstein function generics:
 \code{\link{calcMDCMGeneratorMatrix}()},
 \code{\link{calcShockArrivalIntensities}()},
 \code{\link{getDefaultMethodString}()},
-\code{\link{levyDensity}()},
+\code{\link{getLevyDensity}()},
 \code{\link{valueOf}()},
 \code{\link{valueOf0}()}
 }

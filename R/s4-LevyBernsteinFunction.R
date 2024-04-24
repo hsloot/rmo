@@ -40,7 +40,7 @@
 #'     \quad x > 0 .
 #' }
 #'
-#' @seealso [levyDensity()], [valueOf()], [calcShockArrivalIntensities()],
+#' @seealso [getLevyDensity()], [valueOf()], [calcShockArrivalIntensities()],
 #'   [calcExShockArrivalIntensities()], [calcExShockSizeArrivalIntensities()],
 #'   [calcMDCMGeneratorMatrix()], [rextmo()], [rpextmo()]
 #'
@@ -114,7 +114,7 @@ setMethod(
       qassert(cscale, "N1(0,)")
       qassert(n, "X1(0,)")
       qassert(k, "N1[0,)")
-      levy_density <- levyDensity(object)
+      levy_density <- getLevyDensity(object)
       if (isTRUE(0L == difference_order)) {
         fct <- function(u, .x) {
           (1 - exp(-u * cscale * .x))

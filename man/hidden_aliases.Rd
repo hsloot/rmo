@@ -21,7 +21,7 @@
 \alias{valueOf,CompleteBernsteinFunction-method}
 \alias{initialize,AlphaStableBernsteinFunction-method}
 \alias{show,AlphaStableBernsteinFunction-method}
-\alias{levyDensity,AlphaStableBernsteinFunction-method}
+\alias{getLevyDensity,AlphaStableBernsteinFunction-method}
 \alias{stieltjesDensity,AlphaStableBernsteinFunction-method}
 \alias{valueOf0,AlphaStableBernsteinFunction-method}
 \alias{initialize,CompositeScaledBernsteinFunction-method}
@@ -38,18 +38,18 @@
 \alias{valueOf,ConvexCombinationOfBernsteinFunctions-method}
 \alias{initialize,ExponentialBernsteinFunction-method}
 \alias{show,ExponentialBernsteinFunction-method}
-\alias{levyDensity,ExponentialBernsteinFunction-method}
+\alias{getLevyDensity,ExponentialBernsteinFunction-method}
 \alias{stieltjesDensity,ExponentialBernsteinFunction-method}
 \alias{getDefaultMethodString,ExponentialBernsteinFunction-method}
 \alias{valueOf0,ExponentialBernsteinFunction-method}
 \alias{initialize,GammaBernsteinFunction-method}
 \alias{show,GammaBernsteinFunction-method}
-\alias{levyDensity,GammaBernsteinFunction-method}
+\alias{getLevyDensity,GammaBernsteinFunction-method}
 \alias{stieltjesDensity,GammaBernsteinFunction-method}
 \alias{valueOf0,GammaBernsteinFunction-method}
 \alias{initialize,InverseGaussianBernsteinFunction-method}
 \alias{show,InverseGaussianBernsteinFunction-method}
-\alias{levyDensity,InverseGaussianBernsteinFunction-method}
+\alias{getLevyDensity,InverseGaussianBernsteinFunction-method}
 \alias{stieltjesDensity,InverseGaussianBernsteinFunction-method}
 \alias{valueOf0,InverseGaussianBernsteinFunction-method}
 \alias{initialize,LinearBernsteinFunction-method}
@@ -58,11 +58,11 @@
 \alias{valueOf,LinearBernsteinFunction-method}
 \alias{initialize,ParetoBernsteinFunction-method}
 \alias{show,ParetoBernsteinFunction-method}
-\alias{levyDensity,ParetoBernsteinFunction-method}
+\alias{getLevyDensity,ParetoBernsteinFunction-method}
 \alias{valueOf0,ParetoBernsteinFunction-method}
 \alias{initialize,PoissonBernsteinFunction-method}
 \alias{show,PoissonBernsteinFunction-method}
-\alias{levyDensity,PoissonBernsteinFunction-method}
+\alias{getLevyDensity,PoissonBernsteinFunction-method}
 \alias{valueOf0,PoissonBernsteinFunction-method}
 \alias{initialize,ScaledBernsteinFunction-method}
 \alias{show,ScaledBernsteinFunction-method}
@@ -114,7 +114,7 @@
 
 \S4method{show}{AlphaStableBernsteinFunction}(object)
 
-\S4method{levyDensity}{AlphaStableBernsteinFunction}(object)
+\S4method{getLevyDensity}{AlphaStableBernsteinFunction}(object)
 
 \S4method{stieltjesDensity}{AlphaStableBernsteinFunction}(object)
 
@@ -148,7 +148,7 @@
 
 \S4method{show}{ExponentialBernsteinFunction}(object)
 
-\S4method{levyDensity}{ExponentialBernsteinFunction}(object)
+\S4method{getLevyDensity}{ExponentialBernsteinFunction}(object)
 
 \S4method{stieltjesDensity}{ExponentialBernsteinFunction}(object)
 
@@ -160,7 +160,7 @@
 
 \S4method{show}{GammaBernsteinFunction}(object)
 
-\S4method{levyDensity}{GammaBernsteinFunction}(object)
+\S4method{getLevyDensity}{GammaBernsteinFunction}(object)
 
 \S4method{stieltjesDensity}{GammaBernsteinFunction}(object)
 
@@ -170,7 +170,7 @@
 
 \S4method{show}{InverseGaussianBernsteinFunction}(object)
 
-\S4method{levyDensity}{InverseGaussianBernsteinFunction}(object)
+\S4method{getLevyDensity}{InverseGaussianBernsteinFunction}(object)
 
 \S4method{stieltjesDensity}{InverseGaussianBernsteinFunction}(object)
 
@@ -188,7 +188,7 @@
 
 \S4method{show}{ParetoBernsteinFunction}(object)
 
-\S4method{levyDensity}{ParetoBernsteinFunction}(object)
+\S4method{getLevyDensity}{ParetoBernsteinFunction}(object)
 
 \S4method{valueOf0}{ParetoBernsteinFunction}(object, x, cscale = 1, ...)
 
@@ -196,7 +196,7 @@
 
 \S4method{show}{PoissonBernsteinFunction}(object)
 
-\S4method{levyDensity}{PoissonBernsteinFunction}(object)
+\S4method{getLevyDensity}{PoissonBernsteinFunction}(object)
 
 \S4method{valueOf0}{PoissonBernsteinFunction}(object, x, cscale = 1, ...)
 

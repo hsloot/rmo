@@ -52,7 +52,7 @@ AlphaStableBernsteinFunction(alpha = 0.5)
 
 # Create a Lévy density
 bf <- AlphaStableBernsteinFunction(alpha = 0.7)
-levy_density <- levyDensity(bf)
+levy_density <- getLevyDensity(bf)
 integrate(
   function(x) pmin(1, x) * levy_density(x),
   lower = attr(levy_density, "lower"),
@@ -100,7 +100,7 @@ calcMDCMGeneratorMatrix(bf, 3, tolerance = 1e-4)
 \insertAllCited{}
 }
 \seealso{
-\code{\link[=levyDensity]{levyDensity()}}, \code{\link[=stieltjesDensity]{stieltjesDensity()}}, \code{\link[=valueOf]{valueOf()}},
+\code{\link[=getLevyDensity]{getLevyDensity()}}, \code{\link[=stieltjesDensity]{stieltjesDensity()}}, \code{\link[=valueOf]{valueOf()}},
 \code{\link[=calcShockArrivalIntensities]{calcShockArrivalIntensities()}}, \code{\link[=calcExShockArrivalIntensities]{calcExShockArrivalIntensities()}},
 \code{\link[=calcExShockSizeArrivalIntensities]{calcExShockSizeArrivalIntensities()}}, \code{\link[=calcMDCMGeneratorMatrix]{calcMDCMGeneratorMatrix()}},
 \code{\link[=rextmo]{rextmo()}}, \code{\link[=rpextmo]{rpextmo()}}

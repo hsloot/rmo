@@ -39,7 +39,7 @@
 #' @references
 #'   \insertAllCited{}
 #'
-#' @seealso [levyDensity()],  [valueOf()], [calcShockArrivalIntensities()],
+#' @seealso [getLevyDensity()],  [valueOf()], [calcShockArrivalIntensities()],
 #'   [calcExShockArrivalIntensities()], [calcExShockSizeArrivalIntensities()],
 #'   [calcMDCMGeneratorMatrix()], [rextmo()], [rpextmo()]
 #'
@@ -59,7 +59,7 @@
 #'
 #' # Create a Lévy density
 #' bf <- ParetoBernsteinFunction(alpha = 0.7, x0 = 1e-2)
-#' levy_density <- levyDensity(bf)
+#' levy_density <- getLevyDensity(bf)
 #' integrate(
 #'   function(x) pmin(1, x) * levy_density(x),
 #'   lower = attr(levy_density, "lower"),
@@ -150,12 +150,12 @@ setMethod( # nocov start
 
 #' @rdname hidden_aliases
 #'
-#' @inheritParams levyDensity
+#' @inheritParams getLevyDensity
 #'
-#' @include s4-levyDensity.R
+#' @include s4-getLevyDensity.R
 #' @export
 setMethod(
-  "levyDensity", "ParetoBernsteinFunction",
+  "getLevyDensity", "ParetoBernsteinFunction",
   function(object) {
     structure(
       function(x) {

@@ -207,7 +207,7 @@ setMethod(
 )
 
 setMethod(
-  "levyDensity",
+  "getLevyDensity",
   "CustomBernsteinFunction",
   function(object) {
     structure(

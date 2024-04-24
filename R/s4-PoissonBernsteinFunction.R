@@ -22,7 +22,7 @@
 #'     = \delta_{\eta}(du), \quad u > 0 .
 #' }
 #'
-#' @seealso [levyDensity()],  [valueOf()], [calcShockArrivalIntensities()],
+#' @seealso [getLevyDensity()],  [valueOf()], [calcShockArrivalIntensities()],
 #'   [calcExShockArrivalIntensities()], [calcExShockSizeArrivalIntensities()],
 #'   [calcMDCMGeneratorMatrix()], [rextmo()], [rpextmo()]
 #'
@@ -42,7 +42,7 @@
 #'
 #' # Create a Lévy density
 #' bf <- PoissonBernsteinFunction(eta = 0.7)
-#' levy_density <- levyDensity(bf)
+#' levy_density <- getLevyDensity(bf)
 #' sum(levy_density$y * pmin(1, levy_density$x))
 #'
 #' # Evaluate the Bernstein function
@@ -123,12 +123,12 @@ setMethod( # nocov start
 
 #' @rdname hidden_aliases
 #'
-#' @inheritParams levyDensity
+#' @inheritParams getLevyDensity
 #'
-#' @include s4-levyDensity.R
+#' @include s4-getLevyDensity.R
 #' @export
 setMethod(
-  "levyDensity", "PoissonBernsteinFunction",
+  "getLevyDensity", "PoissonBernsteinFunction",
   function(object) {
     structure(
       data.frame(x = object@eta, y = 1),

@@ -38,7 +38,7 @@ PoissonBernsteinFunction(eta = 2)
 
 # Create a Lévy density
 bf <- PoissonBernsteinFunction(eta = 0.7)
-levy_density <- levyDensity(bf)
+levy_density <- getLevyDensity(bf)
 sum(levy_density$y * pmin(1, levy_density$x))
 
 # Evaluate the Bernstein function
@@ -66,7 +66,7 @@ calcMDCMGeneratorMatrix(bf, 3)
 calcMDCMGeneratorMatrix(bf, 3, tolerance = 1e-4)
 }
 \seealso{
-\code{\link[=levyDensity]{levyDensity()}},  \code{\link[=valueOf]{valueOf()}}, \code{\link[=calcShockArrivalIntensities]{calcShockArrivalIntensities()}},
+\code{\link[=getLevyDensity]{getLevyDensity()}},  \code{\link[=valueOf]{valueOf()}}, \code{\link[=calcShockArrivalIntensities]{calcShockArrivalIntensities()}},
 \code{\link[=calcExShockArrivalIntensities]{calcExShockArrivalIntensities()}}, \code{\link[=calcExShockSizeArrivalIntensities]{calcExShockSizeArrivalIntensities()}},
 \code{\link[=calcMDCMGeneratorMatrix]{calcMDCMGeneratorMatrix()}}, \code{\link[=rextmo]{rextmo()}}, \code{\link[=rpextmo]{rpextmo()}}
 
