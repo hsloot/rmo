@@ -1,7 +1,7 @@
 # Snapshot tests for `rmo`
 
     Code
-      rmo(10, 3, intensities)
+      rmo(10, 3, lambda)
     Output
                  [,1]      [,2]      [,3]
        [1,] 0.3647525 0.8628091 0.3647525
@@ -18,7 +18,7 @@
 ---
 
     Code
-      rmo(10, 3, intensities, method = "AM")
+      rmo(10, 3, lambda, method = "AM")
     Output
                   [,1]       [,2]       [,3]
        [1,] 0.06880645 0.06880645 0.06880645
@@ -35,7 +35,7 @@
 ---
 
     Code
-      rmo(10, 3, intensities, method = "ESM")
+      rmo(10, 3, lambda, method = "ESM")
     Output
                   [,1]       [,2]       [,3]
        [1,] 0.09217117 0.09217117 0.09217117

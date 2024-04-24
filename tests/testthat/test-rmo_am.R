@@ -12,7 +12,7 @@ test_that("Arnold model implementation for d = 2", {
   ## all equal
   args <- list(
     "d" = 2L,
-    "intensities" = c(1, 1, 1)
+    "lambda" = c(1, 1, 1)
   )
   expect_equal_rn_generation(
     rmo_am, testutils.rmo::rmo_am_naive,
@@ -22,7 +22,7 @@ test_that("Arnold model implementation for d = 2", {
   ## independence
   args <- list(
     "d" = 2,
-    "intensities" = intensities_linear(2, scale = 0.7)
+    "lambda" = intensities_linear(2, scale = 0.7)
   )
   expect_equal_rn_generation(
     rmo_am, testutils.rmo::rmo_am_naive,
@@ -32,7 +32,7 @@ test_that("Arnold model implementation for d = 2", {
   ## comonotone
   args <- list(
     "d" = 2,
-    "intensities" = intensities_constant(2, constant = 0.7)
+    "lambda" = intensities_constant(2, constant = 0.7)
   )
   expect_equal_rn_generation(
     rmo_am, testutils.rmo::rmo_am_naive,
@@ -42,7 +42,7 @@ test_that("Arnold model implementation for d = 2", {
   ## Poisson
   args <- list(
     "d" = 2,
-    "intensities" = intensities_poisson(
+    "lambda" = intensities_poisson(
       2,
       eta = 0.3
     )
@@ -55,7 +55,7 @@ test_that("Arnold model implementation for d = 2", {
   ## Alpha-Stable
   args <- list(
     "d" = 2,
-    "intensities" = intensities_alpha_stable(2, alpha = 0.25)
+    "lambda" = intensities_alpha_stable(2, alpha = 0.25)
   )
   expect_equal_rn_generation(
     rmo_am, testutils.rmo::rmo_am_naive,
@@ -65,7 +65,7 @@ test_that("Arnold model implementation for d = 2", {
   ## Gamma
   args <- list(
     "d" = 2,
-    "intensities" = intensities_gamma(2, a = 0.4)
+    "lambda" = intensities_gamma(2, a = 0.4)
   )
   expect_equal_rn_generation(
     rmo_am, testutils.rmo::rmo_am_naive,
@@ -75,7 +75,7 @@ test_that("Arnold model implementation for d = 2", {
   ## Pareto
   args <- list(
     "d" = 2,
-    "intensities" = intensities_pareto(2, alpha = 0.4, x0 = 1e-4)
+    "lambda" = intensities_pareto(2, alpha = 0.4, x0 = 1e-4)
   )
   expect_equal_rn_generation(
     rmo_am, testutils.rmo::rmo_am_naive,
@@ -85,7 +85,7 @@ test_that("Arnold model implementation for d = 2", {
   ## Inverse-Gaussian
   args <- list(
     "d" = 2,
-    "intensities" = intensities_inverse_gaussian(2, eta = 0.5)
+    "lambda" = intensities_inverse_gaussian(2, eta = 0.5)
   )
   expect_equal_rn_generation(
     rmo_am, testutils.rmo::rmo_am_naive,
@@ -95,7 +95,7 @@ test_that("Arnold model implementation for d = 2", {
   ## Mixed
   args <- list(
     "d" = 2,
-    "intensities" = c(0.1, 0.005, 2)
+    "lambda" = c(0.1, 0.005, 2)
   )
   expect_equal_rn_generation(
     rmo_am, testutils.rmo::rmo_am_naive,
@@ -115,7 +115,7 @@ test_that("Arnold model implementation for d>2", {
   ## all equal
   args <- list(
     "d" = d,
-    "intensities" = rep(0.5, times = 2^d - 1)
+    "lambda" = rep(0.5, times = 2^d - 1)
   )
   expect_equal_rn_generation(
     rmo_am, testutils.rmo::rmo_am_naive,
@@ -125,7 +125,7 @@ test_that("Arnold model implementation for d>2", {
   ## independence
   args <- list(
     "d" = d,
-    "intensities" = intensities_linear(d, scale = 0.7)
+    "lambda" = intensities_linear(d, scale = 0.7)
   )
   expect_equal_rn_generation(
     rmo_am, testutils.rmo::rmo_am_naive,
@@ -135,7 +135,7 @@ test_that("Arnold model implementation for d>2", {
   ## comonotone
   args <- list(
     "d" = d,
-    "intensities" = intensities_constant(d, constant = 0.7)
+    "lambda" = intensities_constant(d, constant = 0.7)
   )
   expect_equal_rn_generation(
     rmo_am, testutils.rmo::rmo_am_naive,
@@ -145,7 +145,7 @@ test_that("Arnold model implementation for d>2", {
   ## Poisson
   args <- list(
     "d" = d,
-    "intensities" = intensities_poisson(
+    "lambda" = intensities_poisson(
       d,
       eta = 0.3
     )
@@ -158,7 +158,7 @@ test_that("Arnold model implementation for d>2", {
   ## Alpha-stable
   args <- list(
     "d" = d,
-    "intensities" = intensities_alpha_stable(d, alpha = 0.25)
+    "lambda" = intensities_alpha_stable(d, alpha = 0.25)
   )
   expect_equal_rn_generation(
     rmo_am, testutils.rmo::rmo_am_naive,
@@ -168,7 +168,7 @@ test_that("Arnold model implementation for d>2", {
   ## Gamma
   args <- list(
     "d" = d,
-    "intensities" = intensities_gamma(d, a = 0.4)
+    "lambda" = intensities_gamma(d, a = 0.4)
   )
   expect_equal_rn_generation(
     rmo_am, testutils.rmo::rmo_am_naive,
@@ -178,7 +178,7 @@ test_that("Arnold model implementation for d>2", {
   ## Pareto
   args <- list(
     "d" = d,
-    "intensities" = intensities_pareto(d, alpha = 0.4, x0 = 1e-4)
+    "lambda" = intensities_pareto(d, alpha = 0.4, x0 = 1e-4)
   )
   expect_equal_rn_generation(
     rmo_am, testutils.rmo::rmo_am_naive,
@@ -188,7 +188,7 @@ test_that("Arnold model implementation for d>2", {
   ## Inverse-Gaussian
   args <- list(
     "d" = d,
-    "intensities" = intensities_inverse_gaussian(d, eta = 0.5)
+    "lambda" = intensities_inverse_gaussian(d, eta = 0.5)
   )
   expect_equal_rn_generation(
     rmo_am, testutils.rmo::rmo_am_naive,
@@ -198,8 +198,8 @@ test_that("Arnold model implementation for d>2", {
   ## Hierarchical
   args <- list(
     "d" = d,
-    "intensities" = intensities_hierarchical(
-      d1 = d1, d2 = d2, lambda = 0.1, eta = 0.3,
+    "lambda" = intensities_hierarchical(
+      d1 = d1, d2 = d2, gamma = 0.1, eta = 0.3,
       a = 0.2, alpha = 0.4
     )
   )

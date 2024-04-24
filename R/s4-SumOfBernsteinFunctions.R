@@ -10,9 +10,9 @@
 #' @slot first The first summand (derived from [BernsteinFunction-class]).
 #' @slot second The second summand (derived from [BernsteinFunction-class]).
 #'
-#' @seealso [valueOf()], [intensities()], [calcExShockArrivalIntensities()],
-#'   [calcExShockSizeArrivalIntensities()], [calcMDCMGeneratorMatrix()],
-#'   [rextmo()], [rpextmo()]
+#' @seealso [valueOf()], [calcShockArrivalIntensities()],
+#'   [calcExShockArrivalIntensities()], [calcExShockSizeArrivalIntensities()],
+#'   [calcMDCMGeneratorMatrix()], [rextmo()], [rpextmo()]
 #'
 #' @docType class
 #' @name SumOfBernsteinFunctions-class

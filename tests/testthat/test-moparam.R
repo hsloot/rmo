@@ -20,19 +20,19 @@ test_that("Shock-size arrival intensities are calculated correctly", {
   )
 })
 
-test_that("intensities parameter is calculated correctly", {
+test_that("calcShockArrivalIntensities parameter is calculated correctly", {
   bf <- AlphaStableBernsteinFunction(alpha = 0.07608632)
 
   tmp <- sapply(1:d, function(i) valueOf(bf, d - i, i))
-  intensities <- numeric(2^d - 1)
-  for (j in seq_along(intensities)) {
+  lambda <- numeric(2^d - 1)
+  for (j in seq_along(lambda)) {
     count <- 0
     for (i in 1:d) {
       count <- count + Rcpp__is_within(i, j)
     }
-    intensities[j] <- tmp[count]
+    lambda[j] <- tmp[count]
   }
-  expect_equal(intensities(bf, d), intensities)
+  expect_equal(calcShockArrivalIntensities(bf, d), lambda)
 })
 
 test_that("ex_qmatrix parameter is calculated correctly", {

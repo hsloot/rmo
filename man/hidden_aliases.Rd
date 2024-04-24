@@ -13,7 +13,7 @@
 \alias{hidden_aliases}
 \alias{calcExShockArrivalIntensities,BernsteinFunction-method}
 \alias{calcExShockSizeArrivalIntensities,BernsteinFunction-method}
-\alias{intensities,BernsteinFunction-method}
+\alias{calcShockArrivalIntensities,BernsteinFunction-method}
 \alias{calcMDCMGeneratorMatrix,BernsteinFunction-method}
 \alias{defaultMethod,LevyBernsteinFunction-method}
 \alias{valueOf,LevyBernsteinFunction-method}
@@ -78,7 +78,7 @@
 
 \S4method{calcExShockSizeArrivalIntensities}{BernsteinFunction}(object, d, cscale = 1, ...)
 
-\S4method{intensities}{BernsteinFunction}(object, d, cscale = 1, ...)
+\S4method{calcShockArrivalIntensities}{BernsteinFunction}(object, d, cscale = 1, ...)
 
 \S4method{calcMDCMGeneratorMatrix}{BernsteinFunction}(object, d, cscale = 1, ...)
 

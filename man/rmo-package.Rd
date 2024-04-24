@@ -49,9 +49,10 @@ composition, which can be used to create new Bernstein functions with
 \linkS4class{ScaledBernsteinFunction}, \linkS4class{CompositeScaledBernsteinFunction}
 and \linkS4class{SumOfBernsteinFunctions}.
 \item An object that derives from \linkS4class{BernsteinFunction} can be used to
-generate the Marshall–Olkin shock arrival intensities with \code{\link[=intensities]{intensities()}}.
-It can be used to generate (scaled) exchangeable shock-size arrival
-intensities with \code{\link[=calcExShockSizeArrivalIntensities]{calcExShockSizeArrivalIntensities()}}.
+generate the Marshall–Olkin shock arrival intensities with
+\code{\link[=calcShockArrivalIntensities]{calcShockArrivalIntensities()}}. It can be used to generate (scaled)
+exchangeable shock-size arrival intensities with
+\code{\link[=calcExShockSizeArrivalIntensities]{calcExShockSizeArrivalIntensities()}}.
 }
 }
 

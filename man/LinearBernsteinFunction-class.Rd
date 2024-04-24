@@ -30,7 +30,7 @@ valueOf(bf, 1:5)
 
 # Calculate shock-arrival intensities
 bf <- LinearBernsteinFunction(scale = 0.8)
-intensities(bf, 3)
+calcShockArrivalIntensities(bf, 3)
 
 # Calculate exchangeable shock-arrival intensities
 bf <- LinearBernsteinFunction(scale = 0.4)
@@ -45,9 +45,9 @@ bf <- LinearBernsteinFunction(scale = 0.6)
 calcMDCMGeneratorMatrix(bf, 3)
 }
 \seealso{
-\code{\link[=valueOf]{valueOf()}}, \code{\link[=intensities]{intensities()}}, \code{\link[=calcExShockArrivalIntensities]{calcExShockArrivalIntensities()}},
-\code{\link[=calcExShockSizeArrivalIntensities]{calcExShockSizeArrivalIntensities()}}, \code{\link[=calcMDCMGeneratorMatrix]{calcMDCMGeneratorMatrix()}},
-\code{\link[=rextmo]{rextmo()}}, \code{\link[=rpextmo]{rpextmo()}}
+\code{\link[=valueOf]{valueOf()}}, \code{\link[=calcShockArrivalIntensities]{calcShockArrivalIntensities()}},
+\code{\link[=calcExShockArrivalIntensities]{calcExShockArrivalIntensities()}}, \code{\link[=calcExShockSizeArrivalIntensities]{calcExShockSizeArrivalIntensities()}},
+\code{\link[=calcMDCMGeneratorMatrix]{calcMDCMGeneratorMatrix()}}, \code{\link[=rextmo]{rextmo()}}, \code{\link[=rpextmo]{rpextmo()}}
 
 Other Bernstein function classes: 
 \code{\link{AlphaStableBernsteinFunction-class}},

@@ -41,7 +41,7 @@
 #' }
 #'
 #' @seealso [levyDensity()], [stieltjesDensity()], [valueOf()],
-#'   [intensities()], [calcExShockArrivalIntensities()],
+#'   [calcShockArrivalIntensities()], [calcExShockArrivalIntensities()],
 #'   [calcExShockSizeArrivalIntensities()], [calcMDCMGeneratorMatrix()],
 #'   [rextmo()], [rpextmo()]
 #'

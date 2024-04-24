@@ -28,8 +28,8 @@ Other Bernstein function generics:
 \code{\link{calcExShockArrivalIntensities}()},
 \code{\link{calcExShockSizeArrivalIntensities}()},
 \code{\link{calcMDCMGeneratorMatrix}()},
+\code{\link{calcShockArrivalIntensities}()},
 \code{\link{defaultMethod}()},
-\code{\link{intensities}()},
 \code{\link{levyDensity}()},
 \code{\link{stieltjesDensity}()},
 \code{\link{valueOf}()}

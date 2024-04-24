@@ -11,9 +11,9 @@
 #'   composition.
 #' @slot original The original Bernstein function.
 #'
-#' @seealso [valueOf()], [intensities()], [calcExShockArrivalIntensities()],
-#'   [calcExShockSizeArrivalIntensities()], [calcMDCMGeneratorMatrix()],
-#'   [rextmo()], [rpextmo()]
+#' @seealso [valueOf()], [calcShockArrivalIntensities()],
+#'   [calcExShockArrivalIntensities()], [calcExShockSizeArrivalIntensities()],
+#'   [calcMDCMGeneratorMatrix()], [rextmo()], [rpextmo()]
 #'
 #' @docType class
 #' @name CompositeScaledBernsteinFunction-class

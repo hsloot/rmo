@@ -47,8 +47,8 @@ valueOf(bf, 1:5)
 
 # Calculate shock-arrival intensities
 bf <- PoissonBernsteinFunction(eta = 0.8)
-intensities(bf, 3)
-intensities(bf, 3, tolerance = 1e-4)
+calcShockArrivalIntensities(bf, 3)
+calcShockArrivalIntensities(bf, 3, tolerance = 1e-4)
 
 # Calculate exchangeable shock-arrival intensities
 bf <- PoissonBernsteinFunction(eta = 0.4)
@@ -66,7 +66,7 @@ calcMDCMGeneratorMatrix(bf, 3)
 calcMDCMGeneratorMatrix(bf, 3, tolerance = 1e-4)
 }
 \seealso{
-\code{\link[=levyDensity]{levyDensity()}},  \code{\link[=valueOf]{valueOf()}}, \code{\link[=intensities]{intensities()}},
+\code{\link[=levyDensity]{levyDensity()}},  \code{\link[=valueOf]{valueOf()}}, \code{\link[=calcShockArrivalIntensities]{calcShockArrivalIntensities()}},
 \code{\link[=calcExShockArrivalIntensities]{calcExShockArrivalIntensities()}}, \code{\link[=calcExShockSizeArrivalIntensities]{calcExShockSizeArrivalIntensities()}},
 \code{\link[=calcMDCMGeneratorMatrix]{calcMDCMGeneratorMatrix()}}, \code{\link[=rextmo]{rextmo()}}, \code{\link[=rpextmo]{rpextmo()}}
 

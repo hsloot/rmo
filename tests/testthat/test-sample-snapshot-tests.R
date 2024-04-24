@@ -6,10 +6,10 @@ skip_if(!require_R_version("3.6.0"))
 set.seed(1632)
 
 test_that("Snapshot tests for `rmo`", {
-  intensities <- c(0.4, 0.4, 0.1, 0.4, 0.1, 0.1, 0.4)
-  expect_snapshot(rmo(10, 3, intensities))
-  expect_snapshot(rmo(10, 3, intensities, method = "AM"))
-  expect_snapshot(rmo(10, 3, intensities, method = "ESM"))
+  lambda <- c(0.4, 0.4, 0.1, 0.4, 0.1, 0.1, 0.4)
+  expect_snapshot(rmo(10, 3, lambda))
+  expect_snapshot(rmo(10, 3, lambda, method = "AM"))
+  expect_snapshot(rmo(10, 3, lambda, method = "ESM"))
 })
 
 test_that("Snapshot tests for `rexmo`", {

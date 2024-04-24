@@ -48,7 +48,7 @@ representation
 }
 \seealso{
 \code{\link[=levyDensity]{levyDensity()}}, \code{\link[=stieltjesDensity]{stieltjesDensity()}}, \code{\link[=valueOf]{valueOf()}},
-\code{\link[=intensities]{intensities()}}, \code{\link[=calcExShockArrivalIntensities]{calcExShockArrivalIntensities()}},
+\code{\link[=calcShockArrivalIntensities]{calcShockArrivalIntensities()}}, \code{\link[=calcExShockArrivalIntensities]{calcExShockArrivalIntensities()}},
 \code{\link[=calcExShockSizeArrivalIntensities]{calcExShockSizeArrivalIntensities()}}, \code{\link[=calcMDCMGeneratorMatrix]{calcMDCMGeneratorMatrix()}},
 \code{\link[=rextmo]{rextmo()}}, \code{\link[=rpextmo]{rpextmo()}}
 

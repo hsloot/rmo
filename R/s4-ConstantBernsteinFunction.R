@@ -11,9 +11,9 @@
 #'   \psi(x) = a , x > 0
 #' }
 #'
-#' @seealso [valueOf()], [intensities()], [calcExShockArrivalIntensities()],
-#'   [calcExShockSizeArrivalIntensities()], [calcMDCMGeneratorMatrix()],
-#'   [rextmo()], [rpextmo()]
+#' @seealso [valueOf()], [calcShockArrivalIntensities()],
+#'   [calcExShockArrivalIntensities()], [calcExShockSizeArrivalIntensities()],
+#'   [calcMDCMGeneratorMatrix()], [rextmo()], [rpextmo()]
 #'
 #' @docType class
 #' @name ConstantBernsteinFunction-class
@@ -34,7 +34,7 @@
 #'
 #' # Calculate shock-arrival intensities
 #' bf <- ConstantBernsteinFunction(constant = 0.8)
-#' intensities(bf, 3)
+#' calcShockArrivalIntensities(bf, 3)
 #'
 #' # Calculate exchangeable shock-arrival intensities
 #' bf <- ConstantBernsteinFunction(constant = 0.4)

@@ -39,7 +39,7 @@
 #' @references
 #'   \insertAllCited{}
 #'
-#' @seealso [levyDensity()],  [valueOf()], [intensities()],
+#' @seealso [levyDensity()],  [valueOf()], [calcShockArrivalIntensities()],
 #'   [calcExShockArrivalIntensities()], [calcExShockSizeArrivalIntensities()],
 #'   [calcMDCMGeneratorMatrix()], [rextmo()], [rpextmo()]
 #'
@@ -72,8 +72,8 @@
 #'
 #' # Calculate shock-arrival intensities
 #' bf <- ParetoBernsteinFunction(alpha = 0.8, x0 = 1e-2)
-#' intensities(bf, 3)
-#' intensities(bf, 3, tolerance = 1e-4)
+#' calcShockArrivalIntensities(bf, 3)
+#' calcShockArrivalIntensities(bf, 3, tolerance = 1e-4)
 #'
 #' # Calculate exchangeable shock-arrival intensities
 #' bf <- ParetoBernsteinFunction(alpha = 0.4, x0 = 1e-2)

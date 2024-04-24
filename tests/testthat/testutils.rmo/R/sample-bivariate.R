@@ -26,7 +26,7 @@
 #'
 #' @param n Number of samples (> 0)
 #' @param d Dimension (== 2)
-#' @param intensities Shock intensities (length == 3; all >= 0, any > 0)
+#' @param lambda Shock intensities (length == 3; all >= 0, any > 0)
 #'
 #' @examples
 #' rmo_esm_bivariate(10, 2, c(0.4, 0.3, 0.2))
@@ -35,17 +35,17 @@
 #' @include sample-helper.R
 #' @export
 rmo_esm_bivariate <- function( # nolint
-    n, d = 2, intensities = c(1, 1, 0)) {
+    n, d = 2, lambda = c(1, 1, 0)) {
   stopifnot(
     is.numeric(n) && 1L == length(n) && 0 == n %% 1 && n > 0 &&
       is.numeric(d) && 1L == length(d) && 0 == d %% 1 && d == 2 &&
-      is.numeric(intensities) && 3 == length(intensities) &&
-      all(intensities >= 0) && any(intensities > 0)
+      is.numeric(lambda) && 3 == length(lambda) &&
+      all(lambda >= 0) && any(lambda > 0)
   )
 
-  first_intensity <- intensities[[1]]
-  second_intensity <- intensities[[2]]
-  combined_intensity <- intensities[[3]]
+  first_intensity <- lambda[[1]]
+  second_intensity <- lambda[[2]]
+  combined_intensity <- lambda[[3]]
 
   out <- matrix(nrow = n, ncol = 2)
   for (i in 1:n) {

@@ -40,9 +40,10 @@
 #' @references
 #'   \insertAllCited{}
 #'
-#' @seealso [levyDensity()], [stieltjesDensity()], [valueOf()], [intensities()],
-#'   [calcExShockArrivalIntensities()], [calcExShockSizeArrivalIntensities()],
-#'   [calcMDCMGeneratorMatrix()], [rextmo()], [rpextmo()]
+#' @seealso [levyDensity()], [stieltjesDensity()], [valueOf()],
+#'   [calcShockArrivalIntensities()], [calcExShockArrivalIntensities()],
+#'   [calcExShockSizeArrivalIntensities()], [calcMDCMGeneratorMatrix()],
+#'   [rextmo()], [rpextmo()]
 #'
 #' @docType class
 #' @name GammaBernsteinFunction-class
@@ -83,9 +84,9 @@
 #'
 #' # Calculate shock-arrival intensities
 #' bf <- GammaBernsteinFunction(a = 0.8)
-#' intensities(bf, 3)
-#' intensities(bf, 3, method = "stieltjes")
-#' intensities(bf, 3, tolerance = 1e-4)
+#' calcShockArrivalIntensities(bf, 3)
+#' calcShockArrivalIntensities(bf, 3, method = "stieltjes")
+#' calcShockArrivalIntensities(bf, 3, tolerance = 1e-4)
 #'
 #' # Calculate exchangeable shock-arrival intensities
 #' bf <- GammaBernsteinFunction(a = 0.4)

@@ -169,9 +169,9 @@ NULL
 #'   \insertRef{Schilling2012a}{rmo}
 #'   \insertRef{Sloot2022a}{rmo}
 #'
-#' @seealso [valueOf()], [intensities()], [calcExShockArrivalIntensities()],
-#'   [calcExShockSizeArrivalIntensities()], [calcMDCMGeneratorMatrix()],
-#'   [rextmo()], [rpextmo()]
+#' @seealso [valueOf()], [calcShockArrivalIntensities()],
+#'   [calcExShockArrivalIntensities()], [calcExShockSizeArrivalIntensities()],
+#'   [calcMDCMGeneratorMatrix()], [rextmo()], [rpextmo()]
 #'
 #' @docType class
 #' @name BernsteinFunction-class
@@ -243,12 +243,13 @@ setMethod(
 
 #' @rdname hidden_aliases
 #'
-#' @inheritParams intensities
+#' @inheritParams calcShockArrivalIntensities
 #'
-#' @include  s4-intensities.R s4-calcExShockArrivalIntensities.R RcppExports.R
+#' @include  s4-calcShockArrivalIntensities.R s4-calcExShockArrivalIntensities.R
+#'   RcppExports.R
 #' @export
 setMethod(
-  "intensities", "BernsteinFunction",
+  "calcShockArrivalIntensities", "BernsteinFunction",
   function(object, d, cscale = 1, ...) {
     uexi2i(calcExShockArrivalIntensities(object, d, cscale = cscale, ...))
   }

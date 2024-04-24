@@ -40,7 +40,7 @@
 #'     \quad x > 0 .
 #' }
 #'
-#' @seealso [levyDensity()], [valueOf()], [intensities()],
+#' @seealso [levyDensity()], [valueOf()], [calcShockArrivalIntensities()],
 #'   [calcExShockArrivalIntensities()], [calcExShockSizeArrivalIntensities()],
 #'   [calcMDCMGeneratorMatrix()], [rextmo()], [rpextmo()]
 #'

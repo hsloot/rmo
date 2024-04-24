@@ -26,7 +26,7 @@
 #'
 #' @param n Number of samples (> 0)
 #' @param d Dimension (> 0)
-#' @param intensities Shock intensities (length == 2^d-1; all >= 0, any > 0)
+#' @param lambda Shock intensities (length == 2^d-1; all >= 0, any > 0)
 #'
 #' @examples
 #' rmo_esm_naive(10, 3, c(0.4, 0.3, 0.2, 0.5, 0.2, 0.1, 0.05))
@@ -34,12 +34,12 @@
 #' rmo_esm_naive(10, 3, c(0, 0, 0, 0, 0, 0, 1)) ## comonotone
 #' @include sample-helper.R
 #' @export
-rmo_esm_naive <- function(n, d, intensities) { # nolint
+rmo_esm_naive <- function(n, d, lambda) { # nolint
   stopifnot(
     is.numeric(n) && 1L == length(n) && 0 == n %% 1 && n > 0 &&
       is.numeric(d) && 1L == length(d) && 0 == d %% 1 && d > 0 &&
-      is.numeric(intensities) && 2^d - 1 == length(intensities) &&
-      all(intensities >= 0) && any(intensities > 0)
+      is.numeric(lambda) && 2^d - 1 == length(lambda) &&
+      all(lambda >= 0) && any(lambda > 0)
   )
 
   out <- matrix(nrow = n, ncol = d)
@@ -49,7 +49,7 @@ rmo_esm_naive <- function(n, d, intensities) { # nolint
     value <- rep(Inf, times = d)
     for (j in 1:(2^d - 1)) {
       ## sample shock time
-      shock_time <- rexp(1, rate = intensities[[j]])
+      shock_time <- rexp(1, rate = lambda[[j]])
       ## iterate over all components, check if current shock concerns it,
       ## and update value if that is the case
       for (i in 1:d) {
@@ -71,7 +71,7 @@ rmo_esm_naive <- function(n, d, intensities) { # nolint
 #'
 #' @param n Number of samples (> 0)
 #' @param d Dimension (> 0)
-#' @param intensities Shock intensities (length == 2^d-1; all >= 0, any > 0)
+#' @param lambda Shock intensities (length == 2^d-1; all >= 0, any > 0)
 #'
 #' @examples
 #' rmo_am_naive(10, 3, c(0.4, 0.3, 0.2, 0.5, 0.2, 0.1, 0.05))
@@ -79,17 +79,17 @@ rmo_esm_naive <- function(n, d, intensities) { # nolint
 #' rmo_am_naive(10, 3, c(0, 0, 0, 0, 0, 0, 1)) ## comonotone
 #' @include sample-helper.R
 #' @export
-rmo_am_naive <- function(n, d, intensities) { # nolint
+rmo_am_naive <- function(n, d, lambda) { # nolint
   stopifnot(
     is.numeric(n) && 1L == length(n) && 0 == n %% 1 && n > 0 &&
       is.numeric(d) && 1L == length(d) && 0 == d %% 1 && d > 0 &&
-      is.numeric(intensities) && 2^d - 1 == length(intensities) &&
-      all(intensities >= 0) && any(intensities > 0)
+      is.numeric(lambda) && 2^d - 1 == length(lambda) &&
+      all(lambda >= 0) && any(lambda > 0)
   )
 
   ## calculate arrival intensity and all arrival probabilities
-  arrival_intensity <- sum(intensities)
-  arrival_probs <- intensities / arrival_intensity
+  arrival_intensity <- sum(lambda)
+  arrival_probs <- lambda / arrival_intensity
 
   out <- matrix(nrow = n, ncol = d)
   for (k in 1:n) {

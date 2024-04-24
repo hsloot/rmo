@@ -10,9 +10,9 @@
 #'  \psi(x) = b x, x > 0.
 #' }
 #'
-#' @seealso [valueOf()], [intensities()], [calcExShockArrivalIntensities()],
-#'   [calcExShockSizeArrivalIntensities()], [calcMDCMGeneratorMatrix()],
-#'   [rextmo()], [rpextmo()]
+#' @seealso [valueOf()], [calcShockArrivalIntensities()],
+#'   [calcExShockArrivalIntensities()], [calcExShockSizeArrivalIntensities()],
+#'   [calcMDCMGeneratorMatrix()], [rextmo()], [rpextmo()]
 #'
 #' @docType class
 #' @name LinearBernsteinFunction-class
@@ -33,7 +33,7 @@
 #'
 #' # Calculate shock-arrival intensities
 #' bf <- LinearBernsteinFunction(scale = 0.8)
-#' intensities(bf, 3)
+#' calcShockArrivalIntensities(bf, 3)
 #'
 #' # Calculate exchangeable shock-arrival intensities
 #' bf <- LinearBernsteinFunction(scale = 0.4)

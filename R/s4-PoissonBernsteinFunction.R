@@ -22,7 +22,7 @@
 #'     = \delta_{\eta}(du), \quad u > 0 .
 #' }
 #'
-#' @seealso [levyDensity()],  [valueOf()], [intensities()],
+#' @seealso [levyDensity()],  [valueOf()], [calcShockArrivalIntensities()],
 #'   [calcExShockArrivalIntensities()], [calcExShockSizeArrivalIntensities()],
 #'   [calcMDCMGeneratorMatrix()], [rextmo()], [rpextmo()]
 #'
@@ -51,8 +51,8 @@
 #'
 #' # Calculate shock-arrival intensities
 #' bf <- PoissonBernsteinFunction(eta = 0.8)
-#' intensities(bf, 3)
-#' intensities(bf, 3, tolerance = 1e-4)
+#' calcShockArrivalIntensities(bf, 3)
+#' calcShockArrivalIntensities(bf, 3, tolerance = 1e-4)
 #'
 #' # Calculate exchangeable shock-arrival intensities
 #' bf <- PoissonBernsteinFunction(eta = 0.4)

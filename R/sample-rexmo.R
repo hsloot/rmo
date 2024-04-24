@@ -149,12 +149,12 @@ rexmo <- function(n, d, theta, method = c("MDCM", "AM", "ESM")) {
   if (method == "MDCM") {
     Rcpp__rexmo_mdcm(n, d, theta)
   } else if (method %in% c("AM", "ESM")) {
-    intensities <- uexi2i(
+    lambda <- uexi2i(
       sapply(seq_along(theta), function(i) {
         divide_binomial_coefficient(theta[[i]], d, i)
       })
     )
-    rmo(n, d, intensities, method = method)
+    rmo(n, d, lambda, method = method)
   } else {
     stop(sprintf("Method %s not implemented", method)) # nocov
   }
