@@ -1,5 +1,9 @@
 # rmo 0.9
 
+- Rename multiple S4-methods and arguments (#121):
+  - Rename S4-method `exIntensities()` to `calcExShockSizeArrivalIntensities()`
+    and arguments/variables `ex_intensities` to `theta`
+
 - Improve extensibility by exposing `defaultMethod` and `valueOf0` (#118)
 
 - Review and improve documentation (#116)
@@ -16,7 +20,7 @@
 
 - Small changes of the documentation
 
-- Improveming implementation of method `exIntensities`
+- Improving implementation of method `exIntensities`
 
 - Provide zero-sample-size parametrization, `n = 0`, in simulation algorithms
   (e.g. for measure setup time)

@@ -104,5 +104,5 @@ rextmo <- function(n, d, bf, method = c("MDCM", "AM", "ESM")) {
   qassert(d, "X1[2,)")
   assert_choice(method, c("MDCM", "AM", "ESM"))
 
-  rexmo(n, d, exIntensities(bf, d), method = method)
+  rexmo(n, d, calcExShockSizeArrivalIntensities(bf, d), method = method)
 }

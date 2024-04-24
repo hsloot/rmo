@@ -23,7 +23,8 @@
 #' }
 #'
 #' @seealso [levyDensity()],  [valueOf()], [intensities()], [uexIntensities()],
-#'   [exIntensities()], [exQMatrix()], [rextmo()], [rpextmo()]
+#'   [calcExShockSizeArrivalIntensities()], [exQMatrix()], [rextmo()],
+#'   [rpextmo()]
 #'
 #' @docType class
 #' @name PoissonBernsteinFunction-class
@@ -60,8 +61,8 @@
 #'
 #' # Calculate exchangeable shock-size arrival intensities
 #' bf <- PoissonBernsteinFunction(eta = 0.2)
-#' exIntensities(bf, 3)
-#' exIntensities(bf, 3, tolerance = 1e-4)
+#' calcExShockSizeArrivalIntensities(bf, 3)
+#' calcExShockSizeArrivalIntensities(bf, 3, tolerance = 1e-4)
 #'
 #' # Calculate the Markov generator
 #' bf <- PoissonBernsteinFunction(eta = 0.6)

@@ -129,7 +129,7 @@ rmo_am_naive <- function(n, d, intensities) { # nolint
 #'
 #' @param n Number of samples (> 0)
 #' @param d Dimension (== 2)
-#' @param ex_intensities (Scaled) exchangeable shock intensities
+#' @param theta (Scaled) exchangeable shock intensities
 #'   (length == 2; all >= 0, any > 0)
 #'
 #' @examples
@@ -138,16 +138,16 @@ rmo_am_naive <- function(n, d, intensities) { # nolint
 #' rexmo_mdcm_naive(10, 3, c(0, 0, 1)) ## comonotone
 #' @include sample-helper.R
 #' @export
-rexmo_mdcm_naive <- function(n, d, ex_intensities) { # nolint
+rexmo_mdcm_naive <- function(n, d, theta) { # nolint
   stopifnot(
     is.numeric(n) && 1L == length(n) && 0 == n %% 1 && n > 0 &&
       is.numeric(d) && 1L == length(d) && 0 == d %% 1 && d > 0 &&
-      is.numeric(ex_intensities) && d == length(ex_intensities) &&
-      all(ex_intensities >= 0) && any(ex_intensities > 0)
+      is.numeric(theta) && d == length(theta) &&
+      all(theta >= 0) && any(theta > 0)
   )
 
   ## convert to unscaled exchangeable intensities
-  ex_intensities <- sapply(1:d, function(i) ex_intensities[i] / choose(d, i))
+  lambda <- sapply(1:d, function(i) theta[i] / choose(d, i))
 
   ## store transition intensities and transition probabilities for all
   ## possible states (number of destroyed components) in a list
@@ -160,7 +160,7 @@ rexmo_mdcm_naive <- function(n, d, ex_intensities) { # nolint
           vapply(
             0:(d - i),
             function(l) {
-              choose((d - i), l) * ex_intensities[[k + l]]
+              choose((d - i), l) * lambda[[k + l]]
             },
             FUN.VALUE = 0.5
           )
@@ -220,7 +220,7 @@ rexmo_mdcm_naive <- function(n, d, ex_intensities) { # nolint
 #'
 #' @param n Number of samples (> 0)
 #' @param d Dimension (== 2)
-#' @param ex_intensities (Scaled) exchangeable shock intensities
+#' @param theta (Scaled) exchangeable shock intensities
 #'   (length == 2; all >= 0, any > 0)
 #'
 #' @details
@@ -239,27 +239,27 @@ rexmo_mdcm_naive <- function(n, d, ex_intensities) { # nolint
 #' @include sample-helper.R
 #' @export
 rexmo_mdcm_naive_recursive <- function( # nolint
-    n, d = 2, ex_intensities = c(1, 0)) {
+    n, d = 2, theta = c(1, 0)) {
   stopifnot(
     is.numeric(n) && 1L == length(n) && 0 == n %% 1 && n > 0 &&
       is.numeric(d) && 1L == length(d) && 0 == d %% 1 && d > 0 &&
-      is.numeric(ex_intensities) && d == length(ex_intensities) &&
-      all(ex_intensities >= 0) && any(ex_intensities > 0)
+      is.numeric(theta) && d == length(theta) &&
+      all(theta >= 0) && any(theta > 0)
   )
 
   ## convert to unscaled exchangeable intensities
-  ex_intensities <- sapply(1:d, function(i) ex_intensities[i] / choose(d, i))
+  lambda <- sapply(1:d, function(i) theta[i] / choose(d, i))
 
   ## calculate the corresponding reparametrisation for the
-  ## `ex_intensities` parameters with
-  ## a[i] = sum[k=0]^[d-i-1] binom[d-i-1][k] ex_intensities[k+1] , k=0,...,d-1
-  ex_a <- vapply(
+  ## `lambda` parameters with
+  ## a[i] = sum[k=0]^[d-i-1] binom[d-i-1][k] lambda[k+1] , k=0,...,d-1
+  a <- vapply(
     0:(d - 1),
     function(i) {
       sum(
         vapply(0:(d - i - 1),
           function(k) {
-            choose(d - i - 1, k) * ex_intensities[[k + 1]]
+            choose(d - i - 1, k) * lambda[[k + 1]]
           },
           FUN.VALUE = 0.5
         )
@@ -272,19 +272,19 @@ rexmo_mdcm_naive_recursive <- function( # nolint
   for (i in 1:n) {
     ## reset parameters at the beginning, i.e. all components are alive
     ## and we reset the `a` parameters
-    ex_a_alive <- ex_a
+    a_alive <- a
     d_alive <- d
     while (d_alive > 0) {
-      ## update the `ex_intensities` parameters to the next submodel
-      ex_a_alive <- ex_a_alive[1:d_alive]
-      ex_intensities_alive <- vapply(
+      ## update the `lambda` parameters to the next submodel
+      a_alive <- a_alive[1:d_alive]
+      lambda_alive <- vapply(
         1:d_alive,
         function(i) {
           sum(
             vapply(0:(i - 1),
               function(k) {
                 (-1)^k * choose(i - 1, k) *
-                  ex_a_alive[[d_alive - i + k + 1]]
+                  a_alive[[d_alive - i + k + 1]]
               },
               FUN.VALUE = 0.5
             )
@@ -296,7 +296,7 @@ rexmo_mdcm_naive_recursive <- function( # nolint
       transition_probs <- vapply(
         1:d_alive,
         function(i) {
-          choose(d_alive, i) * ex_intensities_alive[[i]]
+          choose(d_alive, i) * lambda_alive[[i]]
         },
         FUN.VALUE = 0.5
       ) ## intermediate result, not normalised

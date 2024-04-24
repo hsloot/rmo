@@ -10,8 +10,9 @@
 #'  \psi(x) = b x, x > 0.
 #' }
 #'
-#' @seealso [valueOf()], [intensities()], [uexIntensities()], [exIntensities()],
-#'   [exQMatrix()], [rextmo()], [rpextmo()]
+#' @seealso [valueOf()], [intensities()], [uexIntensities()],
+#'   [calcExShockSizeArrivalIntensities()], [exQMatrix()], [rextmo()],
+#'   [rpextmo()]
 #'
 #' @docType class
 #' @name LinearBernsteinFunction-class
@@ -40,7 +41,7 @@
 #'
 #' # Calculate exchangeable shock-size arrival intensities
 #' bf <- LinearBernsteinFunction(scale = 0.2)
-#' exIntensities(bf, 3)
+#' calcExShockSizeArrivalIntensities(bf, 3)
 #'
 #' # Calculate the Markov generator
 #' bf <- LinearBernsteinFunction(scale = 0.6)

@@ -51,8 +51,8 @@
 #'  \insertAllCited{}
 #'
 #' @seealso [levyDensity()], [stieltjesDensity()], [valueOf()],
-#'   [intensities()], [uexIntensities()], [exIntensities()], [exQMatrix()],
-#'   [rextmo()], [rpextmo()]
+#'   [intensities()], [uexIntensities()], [calcExShockSizeArrivalIntensities()],
+#'   [exQMatrix()], [rextmo()], [rpextmo()]
 #'
 #' @docType class
 #' @name InverseGaussianBernsteinFunction-class
@@ -105,9 +105,9 @@
 #'
 #' # Calculate exchangeable shock-size arrival intensities
 #' bf <- InverseGaussianBernsteinFunction(eta = 0.2)
-#' exIntensities(bf, 3)
-#' exIntensities(bf, 3, method = "stieltjes")
-#' exIntensities(bf, 3, tolerance = 1e-4)
+#' calcExShockSizeArrivalIntensities(bf, 3)
+#' calcExShockSizeArrivalIntensities(bf, 3, method = "stieltjes")
+#' calcExShockSizeArrivalIntensities(bf, 3, tolerance = 1e-4)
 #'
 #' # Calculate the Markov generator
 #' bf <- InverseGaussianBernsteinFunction(eta = 0.6)

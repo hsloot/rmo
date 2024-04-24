@@ -175,8 +175,8 @@ of \emph{exchangeable shock-size-arrival intensities}:
 }
 As noted above, their evaluation is usually not numerically stable, and
 various alternative approaches are used dependent on the class of the
-Bernstein function. Use the method \code{\link[=exIntensities]{exIntensities()}} to evaluate or
-approximate them.
+Bernstein function. Use the method \code{\link[=calcExShockSizeArrivalIntensities]{calcExShockSizeArrivalIntensities()}} to
+evaluate or approximate them.
 }
 
 \subsection{The Exogenous shock model and the Arnold model}{
@@ -190,8 +190,9 @@ is
 \insertRef{Sloot2022a}{rmo}
 }
 \seealso{
-\code{\link[=valueOf]{valueOf()}}, \code{\link[=intensities]{intensities()}}, \code{\link[=uexIntensities]{uexIntensities()}}, \code{\link[=exIntensities]{exIntensities()}},
-\code{\link[=exQMatrix]{exQMatrix()}}, \code{\link[=rextmo]{rextmo()}}, \code{\link[=rpextmo]{rpextmo()}}
+\code{\link[=valueOf]{valueOf()}}, \code{\link[=intensities]{intensities()}}, \code{\link[=uexIntensities]{uexIntensities()}},
+\code{\link[=calcExShockSizeArrivalIntensities]{calcExShockSizeArrivalIntensities()}}, \code{\link[=exQMatrix]{exQMatrix()}}, \code{\link[=rextmo]{rextmo()}},
+\code{\link[=rpextmo]{rpextmo()}}
 
 Other Bernstein function classes: 
 \code{\link{AlphaStableBernsteinFunction-class}},

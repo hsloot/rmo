@@ -35,18 +35,18 @@ test_that("`valueOf` calculates expected values", {
 
 d <- 7
 
-test_that("`exIntensities` calculates expected values", {
+test_that("`calcExShockSizeArrivalIntensities` calculates expected values", {
   expect_equal(
-    exIntensities(bf_linear, d),
-    ex_intensities_naive(
+    calcExShockSizeArrivalIntensities(bf_linear, d),
+    calc_ex_shock_size_arrival_intensities_naive(
       actual_fn, d,
       scale = bf_linear@scale
     )
   )
 
   expect_equal(
-    exIntensities(bf_linear, d, cscale = cscale),
-    ex_intensities_naive(
+    calcExShockSizeArrivalIntensities(bf_linear, d, cscale = cscale),
+    calc_ex_shock_size_arrival_intensities_naive(
       actual_fn, d,
       scale = bf_linear@scale,
       cscale = cscale

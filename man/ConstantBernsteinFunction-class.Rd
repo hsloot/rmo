@@ -39,15 +39,16 @@ uexIntensities(bf, 3)
 
 # Calculate exchangeable shock-size arrival intensities
 bf <- ConstantBernsteinFunction(constant = 0.2)
-exIntensities(bf, 3)
+calcExShockSizeArrivalIntensities(bf, 3)
 
 # Calculate the Markov generator
 bf <- ConstantBernsteinFunction(constant = 0.6)
 exQMatrix(bf, 3)
 }
 \seealso{
-\code{\link[=valueOf]{valueOf()}}, \code{\link[=intensities]{intensities()}}, \code{\link[=uexIntensities]{uexIntensities()}}, \code{\link[=exIntensities]{exIntensities()}},
-\code{\link[=exQMatrix]{exQMatrix()}}, \code{\link[=rextmo]{rextmo()}}, \code{\link[=rpextmo]{rpextmo()}}
+\code{\link[=valueOf]{valueOf()}}, \code{\link[=intensities]{intensities()}}, \code{\link[=uexIntensities]{uexIntensities()}},
+\code{\link[=calcExShockSizeArrivalIntensities]{calcExShockSizeArrivalIntensities()}}, \code{\link[=exQMatrix]{exQMatrix()}}, \code{\link[=rextmo]{rextmo()}},
+\code{\link[=rpextmo]{rpextmo()}}
 
 Other Bernstein function classes: 
 \code{\link{AlphaStableBernsteinFunction-class}},

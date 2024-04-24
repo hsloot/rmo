@@ -6,7 +6,7 @@
 #' intensities*.
 #'
 #' @inheritParams rmo
-#' @param ex_intensities A numeric vector with the exchangeable *shock-size
+#' @param theta A numeric vector with the exchangeable *shock-size
 #'   arrival intensities*.
 #' @param method A string indicating which sampling algorithm should be used.
 #'   Use `"MDCM"` for the *Markovian death-counting model*, `"AM"` for the
@@ -140,18 +140,18 @@
 #'   c(0, 0, 1),
 #'   method = "ESM"
 #' )
-rexmo <- function(n, d, ex_intensities, method = c("MDCM", "AM", "ESM")) {
+rexmo <- function(n, d, theta, method = c("MDCM", "AM", "ESM")) {
   method <- match.arg(method)
   qassert(n, "X1[0,)")
   qassert(d, "X1[2,)")
   assert_choice(method, c("MDCM", "AM", "ESM"))
 
   if (method == "MDCM") {
-    Rcpp__rexmo_mdcm(n, d, ex_intensities)
+    Rcpp__rexmo_mdcm(n, d, theta)
   } else if (method %in% c("AM", "ESM")) {
     intensities <- uexi2i(
-      sapply(seq_along(ex_intensities), function(i) {
-        divide_binomial_coefficient(ex_intensities[[i]], d, i)
+      sapply(seq_along(theta), function(i) {
+        divide_binomial_coefficient(theta[[i]], d, i)
       })
     )
     rmo(n, d, intensities, method = method)

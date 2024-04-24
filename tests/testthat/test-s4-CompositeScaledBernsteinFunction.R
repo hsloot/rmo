@@ -68,10 +68,10 @@ test_that("`valueOf` calculates expected values", {
 
 d <- 7
 
-test_that("`exIntensities` calculates expected values", {
+test_that("`calcExShockSizeArrivalIntensities` calculates expected values", {
   expect_equal(
-    exIntensities(bf_composite_scaled_bf, d),
-    ex_intensities_naive(
+    calcExShockSizeArrivalIntensities(bf_composite_scaled_bf, d),
+    calc_ex_shock_size_arrival_intensities_naive(
       actual_fn, d,
       original_cscale = bf_composite_scaled_bf@cscale,
       alpha = bf_composite_scaled_bf@original@alpha
@@ -79,8 +79,10 @@ test_that("`exIntensities` calculates expected values", {
   )
 
   expect_equal(
-    exIntensities(bf_composite_scaled_bf, d, cscale = cscale),
-    ex_intensities_naive(
+    calcExShockSizeArrivalIntensities(
+      bf_composite_scaled_bf, d, cscale = cscale
+    ),
+    calc_ex_shock_size_arrival_intensities_naive(
       actual_fn, d,
       original_cscale = bf_composite_scaled_bf@cscale,
       alpha = bf_composite_scaled_bf@original@alpha,
@@ -89,8 +91,10 @@ test_that("`exIntensities` calculates expected values", {
   )
 
   expect_equal(
-    exIntensities(bf_composite_scaled_bf, d, cscale = cscale),
-    exIntensities(
+    calcExShockSizeArrivalIntensities(
+      bf_composite_scaled_bf, d, cscale = cscale
+    ),
+    calcExShockSizeArrivalIntensities(
       bf_composite_scaled_bf, d,
       cscale = cscale,
       method = "levy",
@@ -99,8 +103,10 @@ test_that("`exIntensities` calculates expected values", {
   )
 
   expect_equal(
-    exIntensities(bf_composite_scaled_bf, d, cscale = cscale),
-    exIntensities(
+    calcExShockSizeArrivalIntensities(
+      bf_composite_scaled_bf, d, cscale = cscale
+    ),
+    calcExShockSizeArrivalIntensities(
       bf_composite_scaled_bf, d,
       cscale = cscale,
       method = "stieltjes", tolerance = testthat_tolerance()

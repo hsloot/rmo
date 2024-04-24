@@ -11,8 +11,9 @@
 #'   composition.
 #' @slot original The original Bernstein function.
 #'
-#' @seealso [valueOf()], [intensities()], [uexIntensities()], [exIntensities()],
-#'   [exQMatrix()], [rextmo()], [rpextmo()]
+#' @seealso [valueOf()], [intensities()], [uexIntensities()],
+#'   [calcExShockSizeArrivalIntensities()], [exQMatrix()], [rextmo()],
+#'   [rpextmo()]
 #'
 #' @docType class
 #' @name CompositeScaledBernsteinFunction-class

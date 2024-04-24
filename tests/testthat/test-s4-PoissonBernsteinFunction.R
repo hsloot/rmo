@@ -45,15 +45,17 @@ test_that("`valueOf` calculates expected values", {
 
 d <- 7
 
-test_that("`exIntensities` calculates expected values", {
+test_that("`calcExShockSizeArrivalIntensities` calculates expected values", {
   expect_equal(
-    exIntensities(bf_poisson, d),
-    ex_intensities_naive(actual_fn, d, eta = bf_poisson@eta)
+    calcExShockSizeArrivalIntensities(bf_poisson, d),
+    calc_ex_shock_size_arrival_intensities_naive(
+      actual_fn, d, eta = bf_poisson@eta
+    )
   )
 
   expect_equal(
-    exIntensities(bf_poisson, d, cscale = cscale),
-    ex_intensities_naive(
+    calcExShockSizeArrivalIntensities(bf_poisson, d, cscale = cscale),
+    calc_ex_shock_size_arrival_intensities_naive(
       actual_fn, d,
       eta = bf_poisson@eta,
       cscale = cscale
@@ -61,8 +63,8 @@ test_that("`exIntensities` calculates expected values", {
   )
 
   expect_equal(
-    exIntensities(bf_poisson, d, cscale = cscale),
-    exIntensities(
+    calcExShockSizeArrivalIntensities(bf_poisson, d, cscale = cscale),
+    calcExShockSizeArrivalIntensities(
       bf_poisson, d,
       cscale = cscale,
       method = "levy",

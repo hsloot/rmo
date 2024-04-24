@@ -18,12 +18,12 @@ bf <- ScaledBernsteinFunction(
   original = ParetoBernsteinFunction(alpha = alpha, x0 = x0)
 )
 intensities <- intensities(bf, d)
-ex_intensities <- exIntensities(bf, d)
+theta <- calcExShockSizeArrivalIntensities(bf, d)
 
 #+ r bench
 mark(
   Arnold = rmo(n, d, intensities, method = "AM"),
-  ExMarkovian = rexmo(n, d, ex_intensities, method = "MDCM"),
+  ExMarkovian = rexmo(n, d, theta, method = "MDCM"),
   LFM = rpextmo(
     n, d, gamma = lambda,
     eta = c("alpha" = alpha, "x0" = x0), family = "Pareto",

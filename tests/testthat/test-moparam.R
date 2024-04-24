@@ -1,16 +1,16 @@
 d <- 10L
 
-test_that("ex_intensities parameter is calculated correctly", {
+test_that("Shock-size arrival intensities are calculated correctly", {
   bf <- AlphaStableBernsteinFunction(alpha = 0.1033993)
 
   expect_equal(
-    exIntensities(bf, d),
+    calcExShockSizeArrivalIntensities(bf, d),
     sapply(1:d, function(i) valueOf(bf, d - i, i, d, i))
   )
 
   uex_intensities <- uexIntensities(bf, d)
   expect_equal(
-    exIntensities(bf, d),
+    calcExShockSizeArrivalIntensities(bf, d),
     sapply(
       1:d,
       function(i) {
@@ -39,7 +39,7 @@ test_that("ex_qmatrix parameter is calculated correctly", {
   bf <- AlphaStableBernsteinFunction(alpha = 0.6101982)
 
   ex_qmatrix <- matrix(0, nrow = d + 1, ncol = d + 1)
-  ex_qmatrix[1, -1] <- exIntensities(bf, d)
+  ex_qmatrix[1, -1] <- calcExShockSizeArrivalIntensities(bf, d)
   for (i in 1:d) {
     if (i < d) {
       for (j in (i + 1):d) {
@@ -55,21 +55,21 @@ test_that("ex_qmatrix parameter is calculated correctly", {
   expect_equal(exQMatrix(bf, d), exQMatrix(bf, d + 1)[-1, -1])
 })
 
-test_that("sum(ex_intensities) is calculated correctly (base case)", {
+test_that("Sum of shock-size arrival intensities is calculated correctly (base case)", { # nolint
   bf <- AlphaStableBernsteinFunction(alpha = 0.8598596)
 
   expect_equal(
-    sum(exIntensities(bf, d)),
+    sum(calcExShockSizeArrivalIntensities(bf, d)),
     valueOf0(bf, d)
   )
 })
 
-test_that("sum(ex_intensities) is calculated correctly (corner case)", {
+test_that("Sum of shock-size arrival intensities is calculated correctly (corner case)", { # nolint
   bf <- AlphaStableBernsteinFunction(log2(2 - 99.999e-2))
   d <- 125
 
   expect_equal(
-    sum(exIntensities(bf, d)),
+    sum(calcExShockSizeArrivalIntensities(bf, d)),
     valueOf0(bf, d)
   )
 })

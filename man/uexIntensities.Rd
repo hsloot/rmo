@@ -39,8 +39,8 @@ uexIntensities(bf, 3)
 \code{\link[=rmo]{rmo()}}
 
 Other Bernstein function generics: 
+\code{\link{calcExShockSizeArrivalIntensities}()},
 \code{\link{defaultMethod}()},
-\code{\link{exIntensities}()},
 \code{\link{exQMatrix}()},
 \code{\link{intensities}()},
 \code{\link{levyDensity}()},

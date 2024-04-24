@@ -256,8 +256,8 @@ it:
 ```{r}
 bf <- CustomBernsteinFunction(a = 0.5, b = 2)
 rextmo(10, 3, bf)
-rexmo(10, 3, exIntensities(bf, 3, method = "levy"))
-rexmo(10, 3, exIntensities(bf, 3, method = "stieltjes"))
+rexmo(10, 3, calcExShockSizeArrivalIntensities(bf, 3, method = "levy"))
+rexmo(10, 3, calcExShockSizeArrivalIntensities(bf, 3, method = "stieltjes"))
 ```
 
 ## References

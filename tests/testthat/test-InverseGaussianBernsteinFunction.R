@@ -40,18 +40,18 @@ test_that("`valueOf` calculates expected values", {
 
 d <- 7
 
-test_that("`exIntensities` calculates expected values", {
+test_that("`calcExShockSizeArrivalIntensities` calculates expected values", {
   expect_equal(
-    exIntensities(bf_inverse_gaussian, d),
-    ex_intensities_naive(
+    calcExShockSizeArrivalIntensities(bf_inverse_gaussian, d),
+    calc_ex_shock_size_arrival_intensities_naive(
       actual_fn, d,
       eta = bf_inverse_gaussian@eta
     )
   )
 
   expect_equal(
-    exIntensities(bf_inverse_gaussian, d, cscale = cscale),
-    ex_intensities_naive(
+    calcExShockSizeArrivalIntensities(bf_inverse_gaussian, d, cscale = cscale),
+    calc_ex_shock_size_arrival_intensities_naive(
       actual_fn, d,
       eta = bf_inverse_gaussian@eta,
       cscale = cscale
@@ -59,8 +59,8 @@ test_that("`exIntensities` calculates expected values", {
   )
 
   expect_equal(
-    exIntensities(bf_inverse_gaussian, d, cscale = cscale),
-    exIntensities(
+    calcExShockSizeArrivalIntensities(bf_inverse_gaussian, d, cscale = cscale),
+    calcExShockSizeArrivalIntensities(
       bf_inverse_gaussian, d,
       cscale = cscale,
       method = "levy",
@@ -69,8 +69,8 @@ test_that("`exIntensities` calculates expected values", {
   )
 
   expect_equal(
-    exIntensities(bf_inverse_gaussian, d, cscale = cscale),
-    exIntensities(
+    calcExShockSizeArrivalIntensities(bf_inverse_gaussian, d, cscale = cscale),
+    calcExShockSizeArrivalIntensities(
       bf_inverse_gaussian, d,
       cscale = cscale,
       method = "stieltjes", tolerance = testthat_tolerance()

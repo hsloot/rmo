@@ -51,7 +51,7 @@ and \linkS4class{SumOfBernsteinFunctions}.
 \item An object that derives from \linkS4class{BernsteinFunction} can be used to
 generate the Marshall–Olkin shock arrival intensities with \code{\link[=intensities]{intensities()}}.
 It can be used to generate (scaled) exchangeable shock-size arrival
-intensities with \code{\link[=exIntensities]{exIntensities()}}.
+intensities with \code{\link[=calcExShockSizeArrivalIntensities]{calcExShockSizeArrivalIntensities()}}.
 }
 }
 

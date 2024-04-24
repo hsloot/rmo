@@ -77,9 +77,9 @@ uexIntensities(bf, 3, tolerance = 1e-4)
 
 # Calculate exchangeable shock-size arrival intensities
 bf <- ExponentialBernsteinFunction(lambda = 0.2)
-exIntensities(bf, 3)
-exIntensities(bf, 3, method = "levy")
-exIntensities(bf, 3, tolerance = 1e-4)
+calcExShockSizeArrivalIntensities(bf, 3)
+calcExShockSizeArrivalIntensities(bf, 3, method = "levy")
+calcExShockSizeArrivalIntensities(bf, 3, tolerance = 1e-4)
 
 # Calculate the Markov generator
 bf <- ExponentialBernsteinFunction(lambda = 0.6)
@@ -92,8 +92,8 @@ exQMatrix(bf, 3, tolerance = 1e-4)
 }
 \seealso{
 \code{\link[=levyDensity]{levyDensity()}}, \code{\link[=stieltjesDensity]{stieltjesDensity()}}, \code{\link[=valueOf]{valueOf()}},
-\code{\link[=intensities]{intensities()}}, \code{\link[=uexIntensities]{uexIntensities()}}, \code{\link[=exIntensities]{exIntensities()}}, \code{\link[=exQMatrix]{exQMatrix()}},
-\code{\link[=rextmo]{rextmo()}}, \code{\link[=rpextmo]{rpextmo()}}
+\code{\link[=intensities]{intensities()}}, \code{\link[=uexIntensities]{uexIntensities()}}, \code{\link[=calcExShockSizeArrivalIntensities]{calcExShockSizeArrivalIntensities()}},
+\code{\link[=exQMatrix]{exQMatrix()}}, \code{\link[=rextmo]{rextmo()}}, \code{\link[=rpextmo]{rpextmo()}}
 
 Other Bernstein function classes: 
 \code{\link{AlphaStableBernsteinFunction-class}},

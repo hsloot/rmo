@@ -1,7 +1,7 @@
 #' Calculate exchangeable shock-size-arrival intensities
 #'
 #' Calculates *exchangeable shock-size-arrival intensities*, the
-#' `ex_intensities` parameter for [rexmo()].
+#' `theta` parameter for [rexmo()].
 #'
 #' @inheritParams uexIntensities
 #'
@@ -25,10 +25,10 @@
 #' @export
 #' @examples
 #' bf <- AlphaStableBernsteinFunction(alpha = 0.4)
-#' exIntensities(bf, 3)
+#' calcExShockSizeArrivalIntensities(bf, 3)
 setGeneric(
-  "exIntensities",
+  "calcExShockSizeArrivalIntensities",
   function(object, d, cscale = 1, ...) {
-    standardGeneric("exIntensities")
+    standardGeneric("calcExShockSizeArrivalIntensities")
   }
 )

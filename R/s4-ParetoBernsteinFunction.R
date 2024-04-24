@@ -40,7 +40,8 @@
 #'   \insertAllCited{}
 #'
 #' @seealso [levyDensity()],  [valueOf()], [intensities()], [uexIntensities()],
-#'   [exIntensities()], [exQMatrix()], [rextmo()], [rpextmo()]
+#'   [calcExShockSizeArrivalIntensities()], [exQMatrix()], [rextmo()],
+#'   [rpextmo()]
 #'
 #' @docType class
 #' @name ParetoBernsteinFunction-class
@@ -81,8 +82,8 @@
 #'
 #' # Calculate exchangeable shock-size arrival intensities
 #' bf <- ParetoBernsteinFunction(alpha = 0.2, x0 = 1e-2)
-#' exIntensities(bf, 3)
-#' exIntensities(bf, 3, tolerance = 1e-4)
+#' calcExShockSizeArrivalIntensities(bf, 3)
+#' calcExShockSizeArrivalIntensities(bf, 3, tolerance = 1e-4)
 #'
 #' # Calculate the Markov generator
 #' bf <- ParetoBernsteinFunction(alpha = 0.6, x0 = 1e-2)

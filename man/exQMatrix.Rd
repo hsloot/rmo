@@ -56,8 +56,8 @@ exQMatrix(bf, 3)
 \code{\link[=rexmo]{rexmo()}}
 
 Other Bernstein function generics: 
+\code{\link{calcExShockSizeArrivalIntensities}()},
 \code{\link{defaultMethod}()},
-\code{\link{exIntensities}()},
 \code{\link{intensities}()},
 \code{\link{levyDensity}()},
 \code{\link{stieltjesDensity}()},

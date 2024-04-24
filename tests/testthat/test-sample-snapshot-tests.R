@@ -13,11 +13,11 @@ test_that("Snapshot tests for `rmo`", {
 })
 
 test_that("Snapshot tests for `rexmo`", {
-  ex_intensities <- c(1.2, 0.3, 0.4)
-  expect_snapshot(rexmo(10, 3, ex_intensities))
-  expect_snapshot(rexmo(10, 3, ex_intensities, method = "MDCM"))
-  expect_snapshot(rexmo(10, 3, ex_intensities, method = "AM"))
-  expect_snapshot(rexmo(10, 3, ex_intensities, method = "ESM"))
+  theta <- c(1.2, 0.3, 0.4)
+  expect_snapshot(rexmo(10, 3, theta))
+  expect_snapshot(rexmo(10, 3, theta, method = "MDCM"))
+  expect_snapshot(rexmo(10, 3, theta, method = "AM"))
+  expect_snapshot(rexmo(10, 3, theta, method = "ESM"))
 })
 
 test_that("Snapshot tests for `rextmo`", {

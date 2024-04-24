@@ -11,8 +11,9 @@
 #' @slot coefficients Numeric vector of positive real values.
 #' @slot points List of Bernstein functions.
 #'
-#' @seealso [valueOf()], [intensities()], [uexIntensities()], [exIntensities()],
-#'   [exQMatrix()], [rextmo()], [rpextmo()]
+#' @seealso [valueOf()], [intensities()], [uexIntensities()],
+#'   [calcExShockSizeArrivalIntensities()], [exQMatrix()], [rextmo()],
+#'   [rpextmo()]
 #'
 #' @docType class
 #' @name ConvexCombinationOfBernsteinFunctions-class

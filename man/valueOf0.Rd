@@ -25,8 +25,8 @@ valueOf0(bf, 1:5)
 }
 \seealso{
 Other Bernstein function generics: 
+\code{\link{calcExShockSizeArrivalIntensities}()},
 \code{\link{defaultMethod}()},
-\code{\link{exIntensities}()},
 \code{\link{exQMatrix}()},
 \code{\link{intensities}()},
 \code{\link{levyDensity}()},

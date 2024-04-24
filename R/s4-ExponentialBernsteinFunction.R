@@ -35,8 +35,8 @@
 #'   \insertAllCited{}
 #'
 #' @seealso [levyDensity()], [stieltjesDensity()], [valueOf()],
-#'   [intensities()], [uexIntensities()], [exIntensities()], [exQMatrix()],
-#'   [rextmo()], [rpextmo()]
+#'   [intensities()], [uexIntensities()], [calcExShockSizeArrivalIntensities()],
+#'   [exQMatrix()], [rextmo()], [rpextmo()]
 #'
 #' @docType class
 #' @name ExponentialBernsteinFunction-class
@@ -85,9 +85,9 @@
 #'
 #' # Calculate exchangeable shock-size arrival intensities
 #' bf <- ExponentialBernsteinFunction(lambda = 0.2)
-#' exIntensities(bf, 3)
-#' exIntensities(bf, 3, method = "levy")
-#' exIntensities(bf, 3, tolerance = 1e-4)
+#' calcExShockSizeArrivalIntensities(bf, 3)
+#' calcExShockSizeArrivalIntensities(bf, 3, method = "levy")
+#' calcExShockSizeArrivalIntensities(bf, 3, tolerance = 1e-4)
 #'
 #' # Calculate the Markov generator
 #' bf <- ExponentialBernsteinFunction(lambda = 0.6)

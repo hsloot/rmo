@@ -17,7 +17,7 @@ value_of_naive <- function(f, x, difference_order = 0L, n = 1L, k = 0L, cscale =
   choose(n, k) * out
 }
 
-ex_intensities_naive <- function(f, d, cscale = 1, ...) {
+calc_ex_shock_size_arrival_intensities_naive <- function(f, d, cscale = 1, ...) { # nolint
   sapply(
     seq_len(d),
     function(i) {

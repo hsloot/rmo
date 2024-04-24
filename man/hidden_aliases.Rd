@@ -12,7 +12,7 @@
 \name{hidden_aliases}
 \alias{hidden_aliases}
 \alias{uexIntensities,BernsteinFunction-method}
-\alias{exIntensities,BernsteinFunction-method}
+\alias{calcExShockSizeArrivalIntensities,BernsteinFunction-method}
 \alias{intensities,BernsteinFunction-method}
 \alias{exQMatrix,BernsteinFunction-method}
 \alias{defaultMethod,LevyBernsteinFunction-method}
@@ -76,7 +76,7 @@
 \usage{
 \S4method{uexIntensities}{BernsteinFunction}(object, d, cscale = 1, ...)
 
-\S4method{exIntensities}{BernsteinFunction}(object, d, cscale = 1, ...)
+\S4method{calcExShockSizeArrivalIntensities}{BernsteinFunction}(object, d, cscale = 1, ...)
 
 \S4method{intensities}{BernsteinFunction}(object, d, cscale = 1, ...)
 

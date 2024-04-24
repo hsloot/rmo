@@ -158,8 +158,8 @@ NULL
 #' }
 #' As noted above, their evaluation is usually not numerically stable, and
 #' various alternative approaches are used dependent on the class of the
-#' Bernstein function. Use the method [exIntensities()] to evaluate or
-#' approximate them.
+#' Bernstein function. Use the method [calcExShockSizeArrivalIntensities()] to
+#' evaluate or approximate them.
 #'
 #' ## The Exogenous shock model and the Arnold model
 #' Another alternative stochastic representation of Marshall–Olkin distributions
@@ -169,8 +169,9 @@ NULL
 #'   \insertRef{Schilling2012a}{rmo}
 #'   \insertRef{Sloot2022a}{rmo}
 #'
-#' @seealso [valueOf()], [intensities()], [uexIntensities()], [exIntensities()],
-#'   [exQMatrix()], [rextmo()], [rpextmo()]
+#' @seealso [valueOf()], [intensities()], [uexIntensities()],
+#'   [calcExShockSizeArrivalIntensities()], [exQMatrix()], [rextmo()],
+#'   [rpextmo()]
 #'
 #' @docType class
 #' @name BernsteinFunction-class
@@ -207,12 +208,12 @@ setMethod(
 
 #' @rdname hidden_aliases
 #'
-#' @inheritParams exIntensities
+#' @inheritParams calcExShockSizeArrivalIntensities
 #'
-#' @include s4-exIntensities.R s4-valueOf0.R s4-valueOf.R
+#' @include s4-calcExShockSizeArrivalIntensities.R s4-valueOf0.R s4-valueOf.R
 #' @export
 setMethod(
-  "exIntensities", "BernsteinFunction",
+  "calcExShockSizeArrivalIntensities", "BernsteinFunction",
   function(object, d, cscale = 1, ...) {
     if (d == 2) {
       out <- d * (
@@ -257,11 +258,11 @@ setMethod(
 #'
 #' @inheritParams exQMatrix
 #'
-#' @include s4-exQMatrix.R s4-exIntensities.R RcppExports.R
+#' @include s4-exQMatrix.R s4-calcExShockSizeArrivalIntensities.R RcppExports.R
 #' @export
 setMethod(
   "exQMatrix", "BernsteinFunction",
   function(object, d, cscale = 1, ...) {
-    exi2exqm(exIntensities(object, d, cscale = cscale, ...))
+    exi2exqm(calcExShockSizeArrivalIntensities(object, d, cscale = cscale, ...))
   }
 )

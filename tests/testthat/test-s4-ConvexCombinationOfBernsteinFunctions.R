@@ -79,10 +79,10 @@ test_that("`valueOf` calculates expected values", {
 
 d <- 7
 
-test_that("`exIntensities` calculates expected values", {
+test_that("`calcExShockSizeArrivalIntensities` calculates expected values", {
   expect_equal(
-    exIntensities(bf_convex_combinations_of_bfs, d),
-    ex_intensities_naive(
+    calcExShockSizeArrivalIntensities(bf_convex_combinations_of_bfs, d),
+    calc_ex_shock_size_arrival_intensities_naive(
       actual_fn, d,
       coefficients = bf_convex_combinations_of_bfs@coefficients,
       points = bf_convex_combinations_of_bfs@points
@@ -90,8 +90,10 @@ test_that("`exIntensities` calculates expected values", {
   )
 
   expect_equal(
-    exIntensities(bf_convex_combinations_of_bfs, d, cscale = cscale),
-    ex_intensities_naive(
+    calcExShockSizeArrivalIntensities(
+      bf_convex_combinations_of_bfs, d, cscale = cscale
+    ),
+    calc_ex_shock_size_arrival_intensities_naive(
       actual_fn, d,
       coefficients = bf_convex_combinations_of_bfs@coefficients,
       points = bf_convex_combinations_of_bfs@points,
@@ -101,8 +103,10 @@ test_that("`exIntensities` calculates expected values", {
 
   skip_if_not(has_levy_density(bf_convex_combinations_of_bfs))
   expect_equal(
-    exIntensities(bf_convex_combinations_of_bfs, d, cscale = cscale),
-    exIntensities(
+    calcExShockSizeArrivalIntensities(
+      bf_convex_combinations_of_bfs, d, cscale = cscale
+    ),
+    calcExShockSizeArrivalIntensities(
       bf_convex_combinations_of_bfs, d,
       cscale = cscale,
       method = "levy",
@@ -112,8 +116,10 @@ test_that("`exIntensities` calculates expected values", {
 
   skip_if_not(has_stieltjes_density(bf_convex_combinations_of_bfs))
   expect_equal(
-    exIntensities(bf_convex_combinations_of_bfs, d, cscale = cscale),
-    exIntensities(
+    calcExShockSizeArrivalIntensities(
+      bf_convex_combinations_of_bfs, d, cscale = cscale
+    ),
+    calcExShockSizeArrivalIntensities(
       bf_convex_combinations_of_bfs, d,
       cscale = cscale,
       method = "stieltjes", tolerance = testthat_tolerance()

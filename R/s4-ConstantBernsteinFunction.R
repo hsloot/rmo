@@ -11,8 +11,9 @@
 #'   \psi(x) = a , x > 0
 #' }
 #'
-#' @seealso [valueOf()], [intensities()], [uexIntensities()], [exIntensities()],
-#'   [exQMatrix()], [rextmo()], [rpextmo()]
+#' @seealso [valueOf()], [intensities()], [uexIntensities()],
+#'   [calcExShockSizeArrivalIntensities()], [exQMatrix()], [rextmo()],
+#'   [rpextmo()]
 #'
 #' @docType class
 #' @name ConstantBernsteinFunction-class
@@ -41,7 +42,7 @@
 #'
 #' # Calculate exchangeable shock-size arrival intensities
 #' bf <- ConstantBernsteinFunction(constant = 0.2)
-#' exIntensities(bf, 3)
+#' calcExShockSizeArrivalIntensities(bf, 3)
 #'
 #' # Calculate the Markov generator
 #' bf <- ConstantBernsteinFunction(constant = 0.6)

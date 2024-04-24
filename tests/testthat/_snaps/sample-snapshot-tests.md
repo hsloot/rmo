@@ -52,7 +52,7 @@
 # Snapshot tests for `rexmo`
 
     Code
-      rexmo(10, 3, ex_intensities)
+      rexmo(10, 3, theta)
     Output
                   [,1]       [,2]       [,3]
        [1,] 2.82740734 0.51497959 0.43866507
@@ -69,7 +69,7 @@
 ---
 
     Code
-      rexmo(10, 3, ex_intensities, method = "MDCM")
+      rexmo(10, 3, theta, method = "MDCM")
     Output
                    [,1]        [,2]        [,3]
        [1,] 0.889558444 0.457819425 1.962147001
@@ -86,7 +86,7 @@
 ---
 
     Code
-      rexmo(10, 3, ex_intensities, method = "AM")
+      rexmo(10, 3, theta, method = "AM")
     Output
                     [,1]       [,2]         [,3]
        [1,] 0.4053342602 0.40533426 0.4245635443
@@ -103,7 +103,7 @@
 ---
 
     Code
-      rexmo(10, 3, ex_intensities, method = "ESM")
+      rexmo(10, 3, theta, method = "ESM")
     Output
                     [,1]         [,2]         [,3]
        [1,] 1.0151254316 0.0773239334 0.1795608563
