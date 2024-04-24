@@ -19,31 +19,31 @@ actual_fn <- function(x, alpha) {
   x^alpha
 }
 
-test_that("`valueOf` calculates expected values", {
+test_that("`calcIterativeDifference` calculates expected values", {
   expect_equal(
-    valueOf(bf_alpha_stable, x),
+    calcIterativeDifference(bf_alpha_stable, x),
     actual_fn(x, bf_alpha_stable@alpha)
   )
 
   expect_equal(
-    valueOf(bf_alpha_stable, x),
+    calcIterativeDifference(bf_alpha_stable, x),
     valueOf0(bf_alpha_stable, x)
   )
 
   expect_equal(
-    valueOf(bf_alpha_stable, x, cscale = cscale),
+    calcIterativeDifference(bf_alpha_stable, x, cscale = cscale),
     actual_fn(cscale * x, bf_alpha_stable@alpha)
   )
 
   expect_error(
-    valueOf(
+    calcIterativeDifference(
       AlphaStableBernsteinFunction(log2(2 - 1e-4)),
       x,
       difference_order = 1L
     ), NA
   )
   expect_error(
-    valueOf(
+    calcIterativeDifference(
       AlphaStableBernsteinFunction(log2(2 - (1 - 1e-4))),
       x,
       difference_order = 1L

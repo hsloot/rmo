@@ -61,7 +61,7 @@ sum(stieltjes_density$y * 1/(1 + stieltjes_density$x))
 
 # Evaluate the Bernstein function
 bf <- ExponentialBernsteinFunction(lambda = 0.3)
-valueOf(bf, 1:5)
+calcIterativeDifference(bf, 1:5)
 
 # Calculate shock-arrival intensities
 bf <- ExponentialBernsteinFunction(lambda = 0.8)
@@ -91,10 +91,10 @@ calcMDCMGeneratorMatrix(bf, 3, tolerance = 1e-4)
 \insertAllCited{}
 }
 \seealso{
-\code{\link[=getLevyDensity]{getLevyDensity()}}, \code{\link[=getStieltjesDensity]{getStieltjesDensity()}}, \code{\link[=valueOf]{valueOf()}},
-\code{\link[=calcShockArrivalIntensities]{calcShockArrivalIntensities()}}, \code{\link[=calcExShockArrivalIntensities]{calcExShockArrivalIntensities()}},
-\code{\link[=calcExShockSizeArrivalIntensities]{calcExShockSizeArrivalIntensities()}}, \code{\link[=calcMDCMGeneratorMatrix]{calcMDCMGeneratorMatrix()}},
-\code{\link[=rextmo]{rextmo()}}, \code{\link[=rpextmo]{rpextmo()}}
+\code{\link[=getLevyDensity]{getLevyDensity()}}, \code{\link[=getStieltjesDensity]{getStieltjesDensity()}},
+\code{\link[=calcIterativeDifference]{calcIterativeDifference()}}, \code{\link[=calcShockArrivalIntensities]{calcShockArrivalIntensities()}},
+\code{\link[=calcExShockArrivalIntensities]{calcExShockArrivalIntensities()}}, \code{\link[=calcExShockSizeArrivalIntensities]{calcExShockSizeArrivalIntensities()}},
+\code{\link[=calcMDCMGeneratorMatrix]{calcMDCMGeneratorMatrix()}}, \code{\link[=rextmo]{rextmo()}}, \code{\link[=rpextmo]{rpextmo()}}
 
 Other Bernstein function classes: 
 \code{\link{AlphaStableBernsteinFunction-class}},

@@ -58,11 +58,11 @@ calcMDCMGeneratorMatrix(bf, 3)
 Other Bernstein function generics: 
 \code{\link{calcExShockArrivalIntensities}()},
 \code{\link{calcExShockSizeArrivalIntensities}()},
+\code{\link{calcIterativeDifference}()},
 \code{\link{calcShockArrivalIntensities}()},
 \code{\link{getDefaultMethodString}()},
 \code{\link{getLevyDensity}()},
 \code{\link{getStieltjesDensity}()},
-\code{\link{valueOf}()},
 \code{\link{valueOf0}()}
 }
 \concept{Bernstein function generics}

@@ -25,19 +25,19 @@ actual_fn <- function(x, alpha, x0) {
       gamma(1 - alpha)
 }
 
-test_that("`valueOf` calculates expected values", {
+test_that("`calcIterativeDifference` calculates expected values", {
   expect_equal(
-    valueOf(bf_pareto, x),
+    calcIterativeDifference(bf_pareto, x),
     actual_fn(x, bf_pareto@alpha, bf_pareto@x0)
   )
 
   expect_equal(
-    valueOf(bf_pareto, x),
+    calcIterativeDifference(bf_pareto, x),
     valueOf0(bf_pareto, x)
   )
 
   expect_equal(
-    valueOf(bf_pareto, x, cscale = cscale),
+    calcIterativeDifference(bf_pareto, x, cscale = cscale),
     actual_fn(cscale * x, bf_pareto@alpha, bf_pareto@x0)
   )
 })

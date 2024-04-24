@@ -19,11 +19,11 @@ is either \code{"continuous"} or \code{"discrete"}.
 Other Bernstein function generics: 
 \code{\link{calcExShockArrivalIntensities}()},
 \code{\link{calcExShockSizeArrivalIntensities}()},
+\code{\link{calcIterativeDifference}()},
 \code{\link{calcMDCMGeneratorMatrix}()},
 \code{\link{calcShockArrivalIntensities}()},
 \code{\link{getDefaultMethodString}()},
 \code{\link{getLevyDensity}()},
-\code{\link{valueOf}()},
 \code{\link{valueOf0}()}
 }
 \concept{Bernstein function generics}

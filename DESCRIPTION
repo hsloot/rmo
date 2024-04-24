@@ -41,7 +41,7 @@ Collate:
     's4-valueOf0.R'
     's4-getStieltjesDensity.R'
     's4-getLevyDensity.R'
-    's4-valueOf.R'
+    's4-calcIterativeDifference.R'
     's4-getDefaultMethodString.R'
     's4-calcMDCMGeneratorMatrix.R'
     's4-calcShockArrivalIntensities.R'

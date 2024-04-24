@@ -16,9 +16,9 @@ actual_fn <- function(x, alpha, lambda) {
   x^alpha + 1 / (1 + lambda / x)
 }
 
-test_that("`valueOf` calculates expected values", {
+test_that("`calcIterativeDifference` calculates expected values", {
   expect_equal(
-    valueOf(bf_sum_of_bfs, x),
+    calcIterativeDifference(bf_sum_of_bfs, x),
     actual_fn(
       x,
       alpha = bf_sum_of_bfs@first@alpha,
@@ -27,12 +27,12 @@ test_that("`valueOf` calculates expected values", {
   )
 
   expect_equal(
-    valueOf(bf_sum_of_bfs, x),
+    calcIterativeDifference(bf_sum_of_bfs, x),
     valueOf0(bf_sum_of_bfs, x)
   )
 
   expect_equal(
-    valueOf(bf_sum_of_bfs, x, cscale = cscale),
+    calcIterativeDifference(bf_sum_of_bfs, x, cscale = cscale),
     actual_fn(
       cscale * x,
       alpha = bf_sum_of_bfs@first@alpha,

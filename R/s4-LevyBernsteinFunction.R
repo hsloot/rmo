@@ -40,9 +40,10 @@
 #'     \quad x > 0 .
 #' }
 #'
-#' @seealso [getLevyDensity()], [valueOf()], [calcShockArrivalIntensities()],
-#'   [calcExShockArrivalIntensities()], [calcExShockSizeArrivalIntensities()],
-#'   [calcMDCMGeneratorMatrix()], [rextmo()], [rpextmo()]
+#' @seealso [getLevyDensity()], [calcIterativeDifference()],
+#'   [calcShockArrivalIntensities()], [calcExShockArrivalIntensities()],
+#'   [calcExShockSizeArrivalIntensities()], [calcMDCMGeneratorMatrix()],
+#'   [rextmo()], [rpextmo()]
 #'
 #' @docType class
 #' @name LevyBernsteinFunction-class
@@ -71,18 +72,18 @@ setMethod(
 
 #' @rdname hidden_aliases
 #'
-#' @inheritParams valueOf
+#' @inheritParams calcIterativeDifference
 #' @param method Method to calculate the result; use `method = "levy"` for
 #'   using the Lévy representation and `method = "stieltjes"` for using the
 #'   Stieltjes representation.
 #' @param tolerance (Relative) tolerance, passed down to [stats::integrate()]
 #'
-#' @include s4-valueOf.R s4-valueOf0.R RcppExports.R
+#' @include s4-calcIterativeDifference.R s4-valueOf0.R RcppExports.R
 #' @importFrom checkmate qassert
 #' @importFrom stats integrate
 #' @export
 setMethod(
-  "valueOf", "LevyBernsteinFunction",
+  "calcIterativeDifference", "LevyBernsteinFunction",
   function(object, x, difference_order, n = 1L, k = 0L, cscale = 1, ...,
            method = c("default", "levy"),
            tolerance = .Machine$double.eps^0.5) {
@@ -104,7 +105,8 @@ setMethod(
             valueOf0(object, x * cscale), n, k
           )
       } else {
-        out <- valueOf(object, x, difference_order, n, k, cscale, ...,
+        out <- calcIterativeDifference(
+          object, x, difference_order, n, k, cscale, ...,
           method = getDefaultMethodString(object), tolerance = tolerance
         )
       }
@@ -182,7 +184,8 @@ setMethod(
 #'
 #' @inheritParams valueOf0
 #'
-#' @include s4-valueOf0.R s4-valueOf.R s4-getDefaultMethodString.R
+#' @include s4-valueOf0.R s4-calcIterativeDifference.R
+#'   s4-getDefaultMethodString.R
 #' @importFrom methods setMethod
 #' @export
 setMethod(
@@ -192,7 +195,7 @@ setMethod(
     if (method == "default") {
       method <- getDefaultMethodString(object)
     }
-    valueOf(
+    calcIterativeDifference(
       object, x,
       cscale, method = method, difference_order = 0L, n = 1L, k = 0L, ...
     )

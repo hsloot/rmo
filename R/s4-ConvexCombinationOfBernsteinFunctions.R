@@ -11,7 +11,7 @@
 #' @slot coefficients Numeric vector of positive real values.
 #' @slot points List of Bernstein functions.
 #'
-#' @seealso [valueOf()], [calcShockArrivalIntensities()],
+#' @seealso [calcIterativeDifference()], [calcShockArrivalIntensities()],
 #'   [calcExShockArrivalIntensities()], [calcExShockSizeArrivalIntensities()],
 #'   [calcMDCMGeneratorMatrix()], [rextmo()], [rpextmo()]
 #'
@@ -145,25 +145,25 @@ setMethod( # nocov start
 setMethod(
   "valueOf0", "ConvexCombinationOfBernsteinFunctions",
   function(object, x, cscale = 1, ...) {
-    valueOf(object, x, cscale = cscale)
+    calcIterativeDifference(object, x, cscale = cscale)
   }
 )
 
 #' @rdname hidden_aliases
 #'
-#' @inheritParams valueOf
+#' @inheritParams calcIterativeDifference
 #'
-#' @include s4-valueOf.R
+#' @include s4-calcIterativeDifference.R
 #' @export
 setMethod(
-  "valueOf",
+  "calcIterativeDifference",
   "ConvexCombinationOfBernsteinFunctions",
   function(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...) { # nolint
     drop(
       t(object@coefficients) %*%
         drop(t(sapply(
           object@points,
-          valueOf,
+          calcIterativeDifference,
           x = x,
           difference_order = difference_order,
           n = n,

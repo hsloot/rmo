@@ -17,19 +17,19 @@ actual_fn <- function(x, a) {
   log(1 + x / a)
 }
 
-test_that("`valueOf` calculates expected values", {
+test_that("`calcIterativeDifference` calculates expected values", {
   expect_equal(
-    valueOf(bf_gamma, x),
+    calcIterativeDifference(bf_gamma, x),
     actual_fn(x, bf_gamma@a)
   )
 
   expect_equal(
-    valueOf(bf_gamma, x),
+    calcIterativeDifference(bf_gamma, x),
     valueOf0(bf_gamma, x)
   )
 
   expect_equal(
-    valueOf(bf_gamma, x, cscale = cscale),
+    calcIterativeDifference(bf_gamma, x, cscale = cscale),
     actual_fn(cscale * x, bf_gamma@a)
   )
 })

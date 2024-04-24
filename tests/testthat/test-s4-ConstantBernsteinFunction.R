@@ -16,19 +16,19 @@ actual_fn <- function(x, constant) {
   ifelse(0 < x, constant, 0)
 }
 
-test_that("`valueOf` calculates expected values", {
+test_that("`calcIterativeDifference` calculates expected values", {
   expect_equal(
-    valueOf(bf_constant, x),
+    calcIterativeDifference(bf_constant, x),
     actual_fn(x, bf_constant@constant)
   )
 
   expect_equal(
-    valueOf(bf_constant, x),
+    calcIterativeDifference(bf_constant, x),
     valueOf0(bf_constant, x)
   )
 
   expect_equal(
-    valueOf(bf_constant, x, cscale = cscale),
+    calcIterativeDifference(bf_constant, x, cscale = cscale),
     actual_fn(cscale * x, bf_constant@constant)
   )
 })

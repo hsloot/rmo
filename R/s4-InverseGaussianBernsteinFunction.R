@@ -50,10 +50,10 @@
 #' @references
 #'  \insertAllCited{}
 #'
-#' @seealso [getLevyDensity()], [getStieltjesDensity()], [valueOf()],
-#'   [calcShockArrivalIntensities()], [calcExShockArrivalIntensities()],
-#'   [calcExShockSizeArrivalIntensities()], [calcMDCMGeneratorMatrix()],
-#'   [rextmo()], [rpextmo()]
+#' @seealso [getLevyDensity()], [getStieltjesDensity()],
+#'   [calcIterativeDifference()], [calcShockArrivalIntensities()],
+#'   [calcExShockArrivalIntensities()], [calcExShockSizeArrivalIntensities()],
+#'   [calcMDCMGeneratorMatrix()], [rextmo()], [rpextmo()]
 #'
 #' @docType class
 #' @name InverseGaussianBernsteinFunction-class
@@ -90,7 +90,7 @@
 #'
 #' # Evaluate the Bernstein function
 #' bf <- InverseGaussianBernsteinFunction(eta = 0.3)
-#' valueOf(bf, 1:5)
+#' calcIterativeDifference(bf, 1:5)
 #'
 #' # Calculate shock-arrival intensities
 #' bf <- InverseGaussianBernsteinFunction(eta = 0.8)

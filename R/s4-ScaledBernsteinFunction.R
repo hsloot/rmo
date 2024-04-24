@@ -11,7 +11,7 @@
 #'   is to be multiplied.
 #' @slot original The original Bernstein function which is to be multiplied.
 #'
-#' @seealso [valueOf()], [calcShockArrivalIntensities()],
+#' @seealso [calcIterativeDifference()], [calcShockArrivalIntensities()],
 #'   [calcExShockArrivalIntensities()], [calcExShockSizeArrivalIntensities()],
 #'   [calcMDCMGeneratorMatrix()], [rextmo()], [rpextmo()]
 #'
@@ -98,20 +98,22 @@ setMethod( # nocov start
 setMethod(
   "valueOf0", "ScaledBernsteinFunction",
   function(object, x, cscale = 1, ...) {
-    valueOf(object, x, cscale = cscale)
+    calcIterativeDifference(object, x, cscale = cscale)
   }
 )
 
 #' @rdname hidden_aliases
 #'
-#' @inheritParams valueOf
+#' @inheritParams calcIterativeDifference
 #'
-#' @include s4-valueOf.R
+#' @include s4-calcIterativeDifference.R
 #' @export
 setMethod(
-  "valueOf", "ScaledBernsteinFunction",
+  "calcIterativeDifference", "ScaledBernsteinFunction",
   function(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...) { # nolint
     object@scale *
-      valueOf(object@original, x, difference_order, n, k, cscale, ...)
+      calcIterativeDifference(
+        object@original, x, difference_order, n, k, cscale, ...
+      )
   }
 )

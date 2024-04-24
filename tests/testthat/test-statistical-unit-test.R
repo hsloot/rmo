@@ -124,7 +124,7 @@ lfm_ks_test <- function(n, d, FUN, # nolint
                         rate, rate_killing, rate_drift,
                         rjump_name, rjump_arg_list) {
   bf <- lfm_bf(rate, rate_killing, rate_drift, rjump_name, rjump_arg_list)
-  min_rate <- valueOf(bf, d, 0L)
+  min_rate <- calcIterativeDifference(bf, d, 0L)
   x <- min_rate * apply(
     FUN(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list),
     1, min

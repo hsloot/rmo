@@ -16,25 +16,25 @@ actual_fn <- function(x, eta) {
   1 - exp(-eta * x)
 }
 
-test_that("`valueOf` calculates expected values", {
+test_that("`calcIterativeDifference` calculates expected values", {
   expect_equal(
-    valueOf(bf_poisson, x),
+    calcIterativeDifference(bf_poisson, x),
     actual_fn(x, bf_poisson@eta)
   )
 
   expect_equal(
-    valueOf(bf_poisson, x),
+    calcIterativeDifference(bf_poisson, x),
     valueOf0(bf_poisson, x)
   )
 
   expect_equal(
-    valueOf(bf_poisson, x, cscale = cscale),
+    calcIterativeDifference(bf_poisson, x, cscale = cscale),
     actual_fn(cscale * x, bf_poisson@eta)
   )
 
   expect_equal(
-    valueOf(bf_poisson, x, cscale = cscale),
-    valueOf(
+    calcIterativeDifference(bf_poisson, x, cscale = cscale),
+    calcIterativeDifference(
       bf_poisson, x,
       cscale = cscale,
       method = "levy",

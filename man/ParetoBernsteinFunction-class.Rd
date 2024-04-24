@@ -62,7 +62,7 @@ integrate(
 
 # Evaluate the Bernstein function
 bf <- ParetoBernsteinFunction(alpha = 0.3, x0 = 1)
-valueOf(bf, 1:5)
+calcIterativeDifference(bf, 1:5)
 
 # Calculate shock-arrival intensities
 bf <- ParetoBernsteinFunction(alpha = 0.8, x0 = 1e-2)
@@ -88,9 +88,10 @@ calcMDCMGeneratorMatrix(bf, 3, tolerance = 1e-4)
 \insertAllCited{}
 }
 \seealso{
-\code{\link[=getLevyDensity]{getLevyDensity()}},  \code{\link[=valueOf]{valueOf()}}, \code{\link[=calcShockArrivalIntensities]{calcShockArrivalIntensities()}},
-\code{\link[=calcExShockArrivalIntensities]{calcExShockArrivalIntensities()}}, \code{\link[=calcExShockSizeArrivalIntensities]{calcExShockSizeArrivalIntensities()}},
-\code{\link[=calcMDCMGeneratorMatrix]{calcMDCMGeneratorMatrix()}}, \code{\link[=rextmo]{rextmo()}}, \code{\link[=rpextmo]{rpextmo()}}
+\code{\link[=getLevyDensity]{getLevyDensity()}},  \code{\link[=calcIterativeDifference]{calcIterativeDifference()}},
+\code{\link[=calcShockArrivalIntensities]{calcShockArrivalIntensities()}}, \code{\link[=calcExShockArrivalIntensities]{calcExShockArrivalIntensities()}},
+\code{\link[=calcExShockSizeArrivalIntensities]{calcExShockSizeArrivalIntensities()}}, \code{\link[=calcMDCMGeneratorMatrix]{calcMDCMGeneratorMatrix()}},
+\code{\link[=rextmo]{rextmo()}}, \code{\link[=rpextmo]{rpextmo()}}
 
 Other Bernstein function classes: 
 \code{\link{AlphaStableBernsteinFunction-class}},

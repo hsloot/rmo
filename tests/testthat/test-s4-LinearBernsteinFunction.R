@@ -16,19 +16,19 @@ actual_fn <- function(x, scale) {
   x * scale
 }
 
-test_that("`valueOf` calculates expected values", {
+test_that("`calcIterativeDifference` calculates expected values", {
   expect_equal(
-    valueOf(bf_linear, x),
+    calcIterativeDifference(bf_linear, x),
     actual_fn(x, bf_linear@scale)
   )
 
   expect_equal(
-    valueOf(bf_linear, x),
+    calcIterativeDifference(bf_linear, x),
     valueOf0(bf_linear, x)
   )
 
   expect_equal(
-    valueOf(bf_linear, x, cscale = cscale),
+    calcIterativeDifference(bf_linear, x, cscale = cscale),
     actual_fn(cscale * x, bf_linear@scale)
   )
 })

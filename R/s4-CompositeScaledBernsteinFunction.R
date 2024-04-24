@@ -11,7 +11,7 @@
 #'   composition.
 #' @slot original The original Bernstein function.
 #'
-#' @seealso [valueOf()], [calcShockArrivalIntensities()],
+#' @seealso [calcIterativeDifference()], [calcShockArrivalIntensities()],
 #'   [calcExShockArrivalIntensities()], [calcExShockSizeArrivalIntensities()],
 #'   [calcMDCMGeneratorMatrix()], [rextmo()], [rpextmo()]
 #'
@@ -98,20 +98,20 @@ setMethod( # nocov start
 setMethod(
   "valueOf0", "CompositeScaledBernsteinFunction",
   function(object, x, cscale = 1, ...) {
-    valueOf(object, x, cscale = cscale)
+    calcIterativeDifference(object, x, cscale = cscale)
   }
 )
 
 #' @rdname hidden_aliases
 #'
-#' @inheritParams valueOf
+#' @inheritParams calcIterativeDifference
 #'
-#' @include s4-valueOf.R
+#' @include s4-calcIterativeDifference.R
 #' @export
 setMethod(
-  "valueOf", "CompositeScaledBernsteinFunction",
+  "calcIterativeDifference", "CompositeScaledBernsteinFunction",
   function(object, x, difference_order = 0L, n = 1, k = 0, cscale = 1, ...) {
-    valueOf(
+    calcIterativeDifference(
       object@original, x,
       difference_order = difference_order,
       n = n, k = k,

@@ -5,7 +5,7 @@ test_that("Shock-size arrival intensities are calculated correctly", {
 
   expect_equal(
     calcExShockSizeArrivalIntensities(bf, d),
-    sapply(1:d, function(i) valueOf(bf, d - i, i, d, i))
+    sapply(1:d, function(i) calcIterativeDifference(bf, d - i, i, d, i))
   )
 
   uex_intensities <- calcExShockArrivalIntensities(bf, d)
@@ -23,7 +23,7 @@ test_that("Shock-size arrival intensities are calculated correctly", {
 test_that("calcShockArrivalIntensities parameter is calculated correctly", {
   bf <- AlphaStableBernsteinFunction(alpha = 0.07608632)
 
-  tmp <- sapply(1:d, function(i) valueOf(bf, d - i, i))
+  tmp <- sapply(1:d, function(i) calcIterativeDifference(bf, d - i, i))
   lambda <- numeric(2^d - 1)
   for (j in seq_along(lambda)) {
     count <- 0

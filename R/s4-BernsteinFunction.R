@@ -126,8 +126,9 @@ NULL
 #' }
 #' The evaluation of Bernstein functions using this formula is usually not
 #' numerically stable. Consequently, the various alternative approaches are used
-#' dependent on the class of the Bernstein function. Use the method [valueOf()]
-#' to evaluate or approximate this expression for a given Bernstein function.
+#' dependent on the class of the Bernstein function. Use the method
+#' [calcIterativeDifference()] to evaluate or approximate this expression for a
+#' given Bernstein function.
 #'
 #' ## Exchangeable Marshall–Olkin distributions
 #' An alternative stochastic representation of an exchangeable Marshall–Olkin
@@ -169,7 +170,7 @@ NULL
 #'   \insertRef{Schilling2012a}{rmo}
 #'   \insertRef{Sloot2022a}{rmo}
 #'
-#' @seealso [valueOf()], [calcShockArrivalIntensities()],
+#' @seealso [calcIterativeDifference()], [calcShockArrivalIntensities()],
 #'   [calcExShockArrivalIntensities()], [calcExShockSizeArrivalIntensities()],
 #'   [calcMDCMGeneratorMatrix()], [rextmo()], [rpextmo()]
 #'
@@ -197,12 +198,17 @@ NULL
 #'
 #' @inheritParams calcExShockArrivalIntensities
 #'
-#' @include s4-calcExShockArrivalIntensities.R s4-valueOf.R
+#' @include s4-calcExShockArrivalIntensities.R s4-calcIterativeDifference.R
 #' @export
 setMethod(
   "calcExShockArrivalIntensities", "BernsteinFunction",
   function(object, d, cscale = 1, ...) {
-    sapply(1:d, function(i) valueOf(object, d - i, i, cscale = cscale, ...))
+    sapply(
+      1:d,
+      function(i) {
+        calcIterativeDifference(object, d - i, i, cscale = cscale, ...)
+      }
+    )
   }
 )
 
@@ -210,7 +216,8 @@ setMethod(
 #'
 #' @inheritParams calcExShockSizeArrivalIntensities
 #'
-#' @include s4-calcExShockSizeArrivalIntensities.R s4-valueOf0.R s4-valueOf.R
+#' @include s4-calcExShockSizeArrivalIntensities.R s4-valueOf0.R
+#'   s4-calcIterativeDifference.R
 #' @export
 setMethod(
   "calcExShockSizeArrivalIntensities", "BernsteinFunction",
@@ -228,7 +235,7 @@ setMethod(
         sapply(
           2:(d - 1),
           function(i) {
-            valueOf(
+            calcIterativeDifference(
               object, d - i, i,
               n = d, k = i, cscale = cscale, ...
             )

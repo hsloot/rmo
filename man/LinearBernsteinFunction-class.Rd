@@ -26,7 +26,7 @@ LinearBernsteinFunction(scale = 0.2)
 
 # Evaluate the Bernstein function
 bf <- LinearBernsteinFunction(scale = 0.3)
-valueOf(bf, 1:5)
+calcIterativeDifference(bf, 1:5)
 
 # Calculate shock-arrival intensities
 bf <- LinearBernsteinFunction(scale = 0.8)
@@ -45,7 +45,7 @@ bf <- LinearBernsteinFunction(scale = 0.6)
 calcMDCMGeneratorMatrix(bf, 3)
 }
 \seealso{
-\code{\link[=valueOf]{valueOf()}}, \code{\link[=calcShockArrivalIntensities]{calcShockArrivalIntensities()}},
+\code{\link[=calcIterativeDifference]{calcIterativeDifference()}}, \code{\link[=calcShockArrivalIntensities]{calcShockArrivalIntensities()}},
 \code{\link[=calcExShockArrivalIntensities]{calcExShockArrivalIntensities()}}, \code{\link[=calcExShockSizeArrivalIntensities]{calcExShockSizeArrivalIntensities()}},
 \code{\link[=calcMDCMGeneratorMatrix]{calcMDCMGeneratorMatrix()}}, \code{\link[=rextmo]{rextmo()}}, \code{\link[=rpextmo]{rpextmo()}}
 

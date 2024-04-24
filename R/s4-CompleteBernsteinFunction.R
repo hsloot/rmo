@@ -40,10 +40,10 @@
 #'     \quad x > 0 .
 #' }
 #'
-#' @seealso [getLevyDensity()], [getStieltjesDensity()], [valueOf()],
-#'   [calcShockArrivalIntensities()], [calcExShockArrivalIntensities()],
-#'   [calcExShockSizeArrivalIntensities()], [calcMDCMGeneratorMatrix()],
-#'   [rextmo()], [rpextmo()]
+#' @seealso [getLevyDensity()], [getStieltjesDensity()],
+#'   [calcIterativeDifference()], [calcShockArrivalIntensities()],
+#'   [calcExShockArrivalIntensities()], [calcExShockSizeArrivalIntensities()],
+#'   [calcMDCMGeneratorMatrix()], [rextmo()], [rpextmo()]
 #'
 #' @docType class
 #' @name CompleteBernsteinFunction-class
@@ -60,18 +60,18 @@ setClass("CompleteBernsteinFunction",
 
 #' @rdname hidden_aliases
 #'
-#' @inheritParams valueOf
+#' @inheritParams calcIterativeDifference
 #' @param method Method to calculate the result; use `method = "levy"` for
 #'   using the Lévy representation and `method = "stieltjes"` for using the
 #'   Stieltjes representation.
 #' @param tolerance (Relative) tolerance, passed down to [stats::integrate()].
 #'
-#' @include s4-valueOf0.R s4-valueOf.R RcppExports.R
+#' @include s4-valueOf0.R s4-calcIterativeDifference.R RcppExports.R
 #' @importFrom checkmate qassert
 #' @importFrom stats integrate
 #' @export
 setMethod(
-  "valueOf", "CompleteBernsteinFunction",
+  "calcIterativeDifference", "CompleteBernsteinFunction",
   function(object, x, difference_order, n = 1L, k = 0L, cscale = 1, ...,
            method = c("default", "stieltjes", "levy"),
            tolerance = .Machine$double.eps^0.5) {
@@ -93,7 +93,8 @@ setMethod(
             valueOf0(object, x * cscale), n, k
           )
       } else {
-        out <- valueOf(object, x, difference_order, n, k, cscale, ...,
+        out <- calcIterativeDifference(
+          object, x, difference_order, n, k, cscale, ...,
           method = getDefaultMethodString(object), tolerance = tolerance
         )
       }

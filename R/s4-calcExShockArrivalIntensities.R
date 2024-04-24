@@ -2,7 +2,7 @@
 #'
 #' Calculates (unscaled) *exchangeable shock-arrival intensities*, see [rmo()].
 #'
-#' @inheritParams valueOf
+#' @inheritParams calcIterativeDifference
 #' @param d A positive integer, larger than two, for the *dimension*.
 #' @param ... pass-through parameter.
 #'

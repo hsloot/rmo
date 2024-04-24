@@ -11,7 +11,7 @@
 #'   \psi(x) = a , x > 0
 #' }
 #'
-#' @seealso [valueOf()], [calcShockArrivalIntensities()],
+#' @seealso [calcIterativeDifference()], [calcShockArrivalIntensities()],
 #'   [calcExShockArrivalIntensities()], [calcExShockSizeArrivalIntensities()],
 #'   [calcMDCMGeneratorMatrix()], [rextmo()], [rpextmo()]
 #'
@@ -30,7 +30,7 @@
 #'
 #' # Evaluate the Bernstein function
 #' bf <- ConstantBernsteinFunction(constant = 0.3)
-#' valueOf(bf, 1:5)
+#' calcIterativeDifference(bf, 1:5)
 #'
 #' # Calculate shock-arrival intensities
 #' bf <- ConstantBernsteinFunction(constant = 0.8)
@@ -109,19 +109,19 @@ setMethod( # nocov start
 setMethod(
   "valueOf0", "ConstantBernsteinFunction",
   function(object, x, cscale = 1, ...) {
-    valueOf(object, x, cscale = cscale)
+    calcIterativeDifference(object, x, cscale = cscale)
   }
 )
 
 #' @rdname hidden_aliases
 #'
-#' @inheritParams valueOf
+#' @inheritParams calcIterativeDifference
 #'
-#' @include s4-valueOf.R RcppExports.R
+#' @include s4-calcIterativeDifference.R RcppExports.R
 #' @importFrom checkmate qassert assert check_numeric check_complex
 #' @export
 setMethod(
-  "valueOf", "ConstantBernsteinFunction",
+  "calcIterativeDifference", "ConstantBernsteinFunction",
   function(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...) { # nolint
     assert(
       combine = "or",

@@ -141,8 +141,9 @@ expression is frequently evaluated:
 }
 The evaluation of Bernstein functions using this formula is usually not
 numerically stable. Consequently, the various alternative approaches are used
-dependent on the class of the Bernstein function. Use the method \code{\link[=valueOf]{valueOf()}}
-to evaluate or approximate this expression for a given Bernstein function.
+dependent on the class of the Bernstein function. Use the method
+\code{\link[=calcIterativeDifference]{calcIterativeDifference()}} to evaluate or approximate this expression for a
+given Bernstein function.
 }
 
 \subsection{Exchangeable Marshall–Olkin distributions}{
@@ -190,7 +191,7 @@ is
 \insertRef{Sloot2022a}{rmo}
 }
 \seealso{
-\code{\link[=valueOf]{valueOf()}}, \code{\link[=calcShockArrivalIntensities]{calcShockArrivalIntensities()}},
+\code{\link[=calcIterativeDifference]{calcIterativeDifference()}}, \code{\link[=calcShockArrivalIntensities]{calcShockArrivalIntensities()}},
 \code{\link[=calcExShockArrivalIntensities]{calcExShockArrivalIntensities()}}, \code{\link[=calcExShockSizeArrivalIntensities]{calcExShockSizeArrivalIntensities()}},
 \code{\link[=calcMDCMGeneratorMatrix]{calcMDCMGeneratorMatrix()}}, \code{\link[=rextmo]{rextmo()}}, \code{\link[=rpextmo]{rpextmo()}}
 

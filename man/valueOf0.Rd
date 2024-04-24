@@ -27,11 +27,11 @@ valueOf0(bf, 1:5)
 Other Bernstein function generics: 
 \code{\link{calcExShockArrivalIntensities}()},
 \code{\link{calcExShockSizeArrivalIntensities}()},
+\code{\link{calcIterativeDifference}()},
 \code{\link{calcMDCMGeneratorMatrix}()},
 \code{\link{calcShockArrivalIntensities}()},
 \code{\link{getDefaultMethodString}()},
 \code{\link{getLevyDensity}()},
-\code{\link{getStieltjesDensity}()},
-\code{\link{valueOf}()}
+\code{\link{getStieltjesDensity}()}
 }
 \concept{Bernstein function generics}

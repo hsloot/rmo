@@ -22,10 +22,10 @@
 #' @export
 #' @examples
 #' bf <- AlphaStableBernsteinFunction(alpha = 0.7)
-#' valueOf(bf, 1:5)
+#' calcIterativeDifference(bf, 1:5)
 setGeneric(
-  "valueOf",
+  "calcIterativeDifference",
   function(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...) { # nolint
-    standardGeneric("valueOf")
+    standardGeneric("calcIterativeDifference")
   }
 )

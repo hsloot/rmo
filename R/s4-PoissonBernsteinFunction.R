@@ -22,9 +22,10 @@
 #'     = \delta_{\eta}(du), \quad u > 0 .
 #' }
 #'
-#' @seealso [getLevyDensity()],  [valueOf()], [calcShockArrivalIntensities()],
-#'   [calcExShockArrivalIntensities()], [calcExShockSizeArrivalIntensities()],
-#'   [calcMDCMGeneratorMatrix()], [rextmo()], [rpextmo()]
+#' @seealso [getLevyDensity()],  [calcIterativeDifference()],
+#'   [calcShockArrivalIntensities()], [calcExShockArrivalIntensities()],
+#'   [calcExShockSizeArrivalIntensities()], [calcMDCMGeneratorMatrix()],
+#'   [rextmo()], [rpextmo()]
 #'
 #' @docType class
 #' @name PoissonBernsteinFunction-class
@@ -47,7 +48,7 @@
 #'
 #' # Evaluate the Bernstein function
 #' bf <- PoissonBernsteinFunction(eta = 0.3)
-#' valueOf(bf, 1:5)
+#' calcIterativeDifference(bf, 1:5)
 #'
 #' # Calculate shock-arrival intensities
 #' bf <- PoissonBernsteinFunction(eta = 0.8)

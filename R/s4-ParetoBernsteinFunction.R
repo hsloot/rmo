@@ -39,9 +39,10 @@
 #' @references
 #'   \insertAllCited{}
 #'
-#' @seealso [getLevyDensity()],  [valueOf()], [calcShockArrivalIntensities()],
-#'   [calcExShockArrivalIntensities()], [calcExShockSizeArrivalIntensities()],
-#'   [calcMDCMGeneratorMatrix()], [rextmo()], [rpextmo()]
+#' @seealso [getLevyDensity()],  [calcIterativeDifference()],
+#'   [calcShockArrivalIntensities()], [calcExShockArrivalIntensities()],
+#'   [calcExShockSizeArrivalIntensities()], [calcMDCMGeneratorMatrix()],
+#'   [rextmo()], [rpextmo()]
 #'
 #' @docType class
 #' @name ParetoBernsteinFunction-class
@@ -68,7 +69,7 @@
 #'
 #' # Evaluate the Bernstein function
 #' bf <- ParetoBernsteinFunction(alpha = 0.3, x0 = 1)
-#' valueOf(bf, 1:5)
+#' calcIterativeDifference(bf, 1:5)
 #'
 #' # Calculate shock-arrival intensities
 #' bf <- ParetoBernsteinFunction(alpha = 0.8, x0 = 1e-2)

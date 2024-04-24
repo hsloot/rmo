@@ -41,9 +41,9 @@ actual_fn <- function(x, original_cscale, alpha) {
   (original_cscale * x)^alpha
 }
 
-test_that("`valueOf` calculates expected values", {
+test_that("`calcIterativeDifference` calculates expected values", {
   expect_equal(
-    valueOf(bf_composite_scaled_bf, x),
+    calcIterativeDifference(bf_composite_scaled_bf, x),
     actual_fn(
       x,
       original_cscale = bf_composite_scaled_bf@cscale,
@@ -52,12 +52,12 @@ test_that("`valueOf` calculates expected values", {
   )
 
   expect_equal(
-    valueOf(bf_composite_scaled_bf, x),
+    calcIterativeDifference(bf_composite_scaled_bf, x),
     valueOf0(bf_composite_scaled_bf, x)
   )
 
   expect_equal(
-    valueOf(bf_composite_scaled_bf, x, cscale = cscale),
+    calcIterativeDifference(bf_composite_scaled_bf, x, cscale = cscale),
     actual_fn(
       cscale * x,
       original_cscale = bf_composite_scaled_bf@cscale,

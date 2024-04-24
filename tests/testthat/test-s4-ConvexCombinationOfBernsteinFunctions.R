@@ -52,9 +52,9 @@ has_stieltjes_density <- function(bf) {
   )
 }
 
-test_that("`valueOf` calculates expected values", {
+test_that("`calcIterativeDifference` calculates expected values", {
   expect_equal(
-    valueOf(bf_convex_combinations_of_bfs, x),
+    calcIterativeDifference(bf_convex_combinations_of_bfs, x),
     actual_fn(
       x,
       coefficients = bf_convex_combinations_of_bfs@coefficients,
@@ -63,12 +63,12 @@ test_that("`valueOf` calculates expected values", {
   )
 
   expect_equal(
-    valueOf(bf_convex_combinations_of_bfs, x),
+    calcIterativeDifference(bf_convex_combinations_of_bfs, x),
     valueOf0(bf_convex_combinations_of_bfs, x)
   )
 
   expect_equal(
-    valueOf(bf_convex_combinations_of_bfs, x, cscale = cscale),
+    calcIterativeDifference(bf_convex_combinations_of_bfs, x, cscale = cscale),
     actual_fn(
       cscale * x,
       coefficients = bf_convex_combinations_of_bfs@coefficients,

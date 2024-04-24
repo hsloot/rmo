@@ -21,25 +21,25 @@ actual_fn <- function(x, lambda) {
   x / (x + lambda)
 }
 
-test_that("`valueOf` calculates expected values", {
+test_that("`calcIterativeDifference` calculates expected values", {
   expect_equal(
-    valueOf(bf_exponential, x),
+    calcIterativeDifference(bf_exponential, x),
     actual_fn(x, bf_exponential@lambda)
   )
 
   expect_equal(
-    valueOf(bf_exponential, x),
+    calcIterativeDifference(bf_exponential, x),
     valueOf0(bf_exponential, x)
   )
 
   expect_equal(
-    valueOf(bf_exponential, x, cscale = cscale),
+    calcIterativeDifference(bf_exponential, x, cscale = cscale),
     actual_fn(cscale * x, bf_exponential@lambda)
   )
 
   expect_equal(
-    valueOf(bf_exponential, x, cscale = cscale),
-    valueOf(
+    calcIterativeDifference(bf_exponential, x, cscale = cscale),
+    calcIterativeDifference(
       bf_exponential, x,
       cscale = cscale,
       method = "levy",
@@ -48,8 +48,8 @@ test_that("`valueOf` calculates expected values", {
   )
 
   expect_equal(
-    valueOf(bf_exponential, x, cscale = cscale),
-    valueOf(
+    calcIterativeDifference(bf_exponential, x, cscale = cscale),
+    calcIterativeDifference(
       bf_exponential, x,
       cscale = cscale,
       method = "stieltjes",

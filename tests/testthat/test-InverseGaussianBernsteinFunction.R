@@ -21,19 +21,19 @@ actual_fn <- function(x, eta) {
   sqrt(2 * x + eta^2) - eta
 }
 
-test_that("`valueOf` calculates expected values", {
+test_that("`calcIterativeDifference` calculates expected values", {
   expect_equal(
-    valueOf(bf_inverse_gaussian, x),
+    calcIterativeDifference(bf_inverse_gaussian, x),
     actual_fn(x, bf_inverse_gaussian@eta)
   )
 
   expect_equal(
-    valueOf(bf_inverse_gaussian, x),
+    calcIterativeDifference(bf_inverse_gaussian, x),
     valueOf0(bf_inverse_gaussian, x)
   )
 
   expect_equal(
-    valueOf(bf_inverse_gaussian, x, cscale = cscale),
+    calcIterativeDifference(bf_inverse_gaussian, x, cscale = cscale),
     actual_fn(cscale * x, bf_inverse_gaussian@eta)
   )
 })
