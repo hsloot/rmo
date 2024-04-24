@@ -33,7 +33,7 @@ test_that("`calcIterativeDifference` calculates expected values", {
 
   expect_equal(
     calcIterativeDifference(bf_pareto, x),
-    valueOf0(bf_pareto, x)
+    calcValue(bf_pareto, x)
   )
 
   expect_equal(

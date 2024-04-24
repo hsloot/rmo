@@ -14,10 +14,10 @@
 #' @export
 #' @examples
 #' bf <- AlphaStableBernsteinFunction(alpha = 0.7)
-#' valueOf0(bf, 1:5)
+#' calcValue(bf, 1:5)
 setGeneric(
-  "valueOf0",
+  "calcValue",
   function(object, x, cscale = 1, ...) {
-    standardGeneric("valueOf0")
+    standardGeneric("calcValue")
   }
 )

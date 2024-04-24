@@ -43,9 +43,9 @@ Other Bernstein function generics:
 \code{\link{calcIterativeDifference}()},
 \code{\link{calcMDCMGeneratorMatrix}()},
 \code{\link{calcShockArrivalIntensities}()},
+\code{\link{calcValue}()},
 \code{\link{getDefaultMethodString}()},
 \code{\link{getLevyDensity}()},
-\code{\link{getStieltjesDensity}()},
-\code{\link{valueOf0}()}
+\code{\link{getStieltjesDensity}()}
 }
 \concept{Bernstein function generics}

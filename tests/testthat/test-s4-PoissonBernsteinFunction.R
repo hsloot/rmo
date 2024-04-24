@@ -24,7 +24,7 @@ test_that("`calcIterativeDifference` calculates expected values", {
 
   expect_equal(
     calcIterativeDifference(bf_poisson, x),
-    valueOf0(bf_poisson, x)
+    calcValue(bf_poisson, x)
   )
 
   expect_equal(

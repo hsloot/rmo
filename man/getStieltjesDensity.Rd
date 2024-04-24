@@ -22,8 +22,8 @@ Other Bernstein function generics:
 \code{\link{calcIterativeDifference}()},
 \code{\link{calcMDCMGeneratorMatrix}()},
 \code{\link{calcShockArrivalIntensities}()},
+\code{\link{calcValue}()},
 \code{\link{getDefaultMethodString}()},
-\code{\link{getLevyDensity}()},
-\code{\link{valueOf0}()}
+\code{\link{getLevyDensity}()}
 }
 \concept{Bernstein function generics}

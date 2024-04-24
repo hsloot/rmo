@@ -49,7 +49,7 @@ test_that("`calcIterativeDifference` calculates expected values", {
 
   expect_equal(
     calcIterativeDifference(bf_scaled_bf, x),
-    valueOf0(bf_scaled_bf, x)
+    calcValue(bf_scaled_bf, x)
   )
 
   expect_equal(

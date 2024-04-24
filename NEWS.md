@@ -10,6 +10,7 @@
   - Rename S4-method `levyDensity()` to `getLevyDensity()`
   - Rename S4-method `stieltjesDensity()` to `getStieltjesDensity()`
   - Rename S4-method `valueOf()` to `calcIterativeDifference()`
+  - Rename S4-method `valueOf0()` to `calcValue()`
 
 - Improve extensibility by exposing `defaultMethod` and `valueOf0` (#118)
 

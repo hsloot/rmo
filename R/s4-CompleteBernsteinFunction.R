@@ -66,7 +66,7 @@ setClass("CompleteBernsteinFunction",
 #'   Stieltjes representation.
 #' @param tolerance (Relative) tolerance, passed down to [stats::integrate()].
 #'
-#' @include s4-valueOf0.R s4-calcIterativeDifference.R RcppExports.R
+#' @include s4-calcValue.R s4-calcIterativeDifference.R RcppExports.R
 #' @importFrom checkmate qassert
 #' @importFrom stats integrate
 #' @export
@@ -83,14 +83,14 @@ setMethod(
         qassert(n, "X1(0,)")
         qassert(k, "N1[0,)")
         out <- multiply_binomial_coefficient(
-          valueOf0(object, x * cscale), n, k
+          calcValue(object, x * cscale), n, k
         )
       } else if (isTRUE(1L == difference_order)) {
         out <- multiply_binomial_coefficient(
-          valueOf0(object, (x + 1) * cscale), n, k
+          calcValue(object, (x + 1) * cscale), n, k
         ) -
           multiply_binomial_coefficient(
-            valueOf0(object, x * cscale), n, k
+            calcValue(object, x * cscale), n, k
           )
       } else {
         out <- calcIterativeDifference(

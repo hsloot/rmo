@@ -62,7 +62,7 @@ test_that("Sum of shock-size arrival intensities is calculated correctly (base c
 
   expect_equal(
     sum(calcExShockSizeArrivalIntensities(bf, d)),
-    valueOf0(bf, d)
+    calcValue(bf, d)
   )
 })
 
@@ -72,6 +72,6 @@ test_that("Sum of shock-size arrival intensities is calculated correctly (corner
 
   expect_equal(
     sum(calcExShockSizeArrivalIntensities(bf, d)),
-    valueOf0(bf, d)
+    calcValue(bf, d)
   )
 })

@@ -26,7 +26,7 @@ cscale <- sqrt(2)
 x <- seq(0, 10, by = 0.25)
 actual_fn <- function(x, coefficients, points) {
   drop(
-    t(coefficients) %*% drop(t(sapply(points, valueOf0, x = x)))
+    t(coefficients) %*% drop(t(sapply(points, calcValue, x = x)))
   )
 }
 
@@ -64,7 +64,7 @@ test_that("`calcIterativeDifference` calculates expected values", {
 
   expect_equal(
     calcIterativeDifference(bf_convex_combinations_of_bfs, x),
-    valueOf0(bf_convex_combinations_of_bfs, x)
+    calcValue(bf_convex_combinations_of_bfs, x)
   )
 
   expect_equal(

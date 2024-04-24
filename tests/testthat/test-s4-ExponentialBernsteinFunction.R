@@ -29,7 +29,7 @@ test_that("`calcIterativeDifference` calculates expected values", {
 
   expect_equal(
     calcIterativeDifference(bf_exponential, x),
-    valueOf0(bf_exponential, x)
+    calcValue(bf_exponential, x)
   )
 
   expect_equal(

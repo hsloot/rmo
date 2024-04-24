@@ -29,7 +29,7 @@ test_that("`calcIterativeDifference` calculates expected values", {
 
   expect_equal(
     calcIterativeDifference(bf_inverse_gaussian, x),
-    valueOf0(bf_inverse_gaussian, x)
+    calcValue(bf_inverse_gaussian, x)
   )
 
   expect_equal(

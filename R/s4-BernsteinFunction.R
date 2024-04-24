@@ -216,7 +216,7 @@ setMethod(
 #'
 #' @inheritParams calcExShockSizeArrivalIntensities
 #'
-#' @include s4-calcExShockSizeArrivalIntensities.R s4-valueOf0.R
+#' @include s4-calcExShockSizeArrivalIntensities.R s4-calcValue.R
 #'   s4-calcIterativeDifference.R
 #' @export
 setMethod(
@@ -224,14 +224,14 @@ setMethod(
   function(object, d, cscale = 1, ...) {
     if (d == 2) {
       out <- d * (
-        valueOf0(object, d, cscale = cscale) -
-          valueOf0(object, d - 1, cscale = cscale)
+        calcValue(object, d, cscale = cscale) -
+          calcValue(object, d - 1, cscale = cscale)
       )
     } else {
       out <- c(
         d * (
-             valueOf0(object, d, cscale = cscale) -
-               valueOf0(object, d - 1, cscale = cscale)),
+             calcValue(object, d, cscale = cscale) -
+               calcValue(object, d - 1, cscale = cscale)),
         sapply(
           2:(d - 1),
           function(i) {
@@ -244,7 +244,7 @@ setMethod(
       )
     }
 
-    c(out, pmax(valueOf0(object, d, cscale = cscale) - sum(out), 0))
+    c(out, pmax(calcValue(object, d, cscale = cscale) - sum(out), 0))
   }
 )
 

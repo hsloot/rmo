@@ -233,7 +233,7 @@ setMethod(
 )
 
 setMethod(
-  "valueOf0",
+  "calcValue",
   "CustomBernsteinFunction",
   function(object, x, cscale = 1, ...) {
     x <- cscale * x

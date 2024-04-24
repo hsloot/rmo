@@ -169,14 +169,14 @@ setMethod(
 
 #' @rdname hidden_aliases
 #'
-#' @inheritParams valueOf0
+#' @inheritParams calcValue
 #'
-#' @include s4-valueOf0.R
+#' @include s4-calcValue.R
 #' @importFrom checkmate assert qassert check_numeric check_complex
 #' @importFrom stats pgamma
 #' @export
 setMethod(
-  "valueOf0", "ParetoBernsteinFunction",
+  "calcValue", "ParetoBernsteinFunction",
   function(object, x, cscale = 1, ...) {
     assert(
       combine = "or",

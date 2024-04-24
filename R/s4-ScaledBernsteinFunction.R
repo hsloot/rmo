@@ -91,12 +91,12 @@ setMethod( # nocov start
 
 #' @rdname hidden_aliases
 #'
-#' @inheritParams valueOf0
+#' @inheritParams calcValue
 #'
-#' @include s4-valueOf0.R
+#' @include s4-calcValue.R
 #' @export
 setMethod(
-  "valueOf0", "ScaledBernsteinFunction",
+  "calcValue", "ScaledBernsteinFunction",
   function(object, x, cscale = 1, ...) {
     calcIterativeDifference(object, x, cscale = cscale)
   }

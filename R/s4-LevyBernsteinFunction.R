@@ -59,7 +59,7 @@ setClass("LevyBernsteinFunction",
 
 #' @rdname hidden_aliases
 #'
-#' @inheritParams valueOf0
+#' @inheritParams calcValue
 #'
 #' @include s4-getDefaultMethodString.R
 #' @export
@@ -78,7 +78,7 @@ setMethod(
 #'   Stieltjes representation.
 #' @param tolerance (Relative) tolerance, passed down to [stats::integrate()]
 #'
-#' @include s4-calcIterativeDifference.R s4-valueOf0.R RcppExports.R
+#' @include s4-calcIterativeDifference.R s4-calcValue.R RcppExports.R
 #' @importFrom checkmate qassert
 #' @importFrom stats integrate
 #' @export
@@ -95,14 +95,14 @@ setMethod(
         qassert(n, "X1(0,)")
         qassert(k, "N1[0,)")
         out <- multiply_binomial_coefficient(
-          valueOf0(object, x * cscale), n, k
+          calcValue(object, x * cscale), n, k
         )
       } else if (isTRUE(1L == difference_order)) {
         out <- multiply_binomial_coefficient(
-          valueOf0(object, (x + 1) * cscale), n, k
+          calcValue(object, (x + 1) * cscale), n, k
         ) -
           multiply_binomial_coefficient(
-            valueOf0(object, x * cscale), n, k
+            calcValue(object, x * cscale), n, k
           )
       } else {
         out <- calcIterativeDifference(
@@ -182,14 +182,14 @@ setMethod(
 
 #' @rdname hidden_aliases
 #'
-#' @inheritParams valueOf0
+#' @inheritParams calcValue
 #'
-#' @include s4-valueOf0.R s4-calcIterativeDifference.R
+#' @include s4-calcValue.R s4-calcIterativeDifference.R
 #'   s4-getDefaultMethodString.R
 #' @importFrom methods setMethod
 #' @export
 setMethod(
-  "valueOf0", "LevyBernsteinFunction",
+  "calcValue", "LevyBernsteinFunction",
   function(object, x, cscale = 1, method = getDefaultMethodString(object), ...) { # nolint
     method <- match.arg(method)
     if (method == "default") {

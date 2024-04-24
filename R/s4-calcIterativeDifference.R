@@ -11,7 +11,7 @@
 #' numerically stable. Consequently, the various alternative approaches are used
 #' dependent on the class of the Bernstein function.
 #'
-#' @inheritParams valueOf0
+#' @inheritParams calcValue
 #' @param difference_order A nonnegative integer with the order of the
 #'   alternating iterated forward differences taken on the Bernstein function.
 #' @param n,k Nonnegative numbers for the binomial factor.

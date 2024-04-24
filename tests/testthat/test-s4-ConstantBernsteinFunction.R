@@ -24,7 +24,7 @@ test_that("`calcIterativeDifference` calculates expected values", {
 
   expect_equal(
     calcIterativeDifference(bf_constant, x),
-    valueOf0(bf_constant, x)
+    calcValue(bf_constant, x)
   )
 
   expect_equal(

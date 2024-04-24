@@ -38,7 +38,7 @@ Collate:
     'catch-routine-registration.R'
     'error.R'
     'rmo-package.R'
-    's4-valueOf0.R'
+    's4-calcValue.R'
     's4-getStieltjesDensity.R'
     's4-getLevyDensity.R'
     's4-calcIterativeDifference.R'
