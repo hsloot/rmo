@@ -5,13 +5,10 @@ Closes/Fixes #...
 ## Checklist
 
 - [ ] `R CMD CHECK` successful
-
 - [ ] Tests included
-
 - [ ] Documentation included or updated
-
-- [ ] Commit messages follow [commit
-  guidelines](https://udacity.github.io/git-styleguide/)
+- [ ] Commit messages follow
+  [commit guidelines](https://udacity.github.io/git-styleguide/)
 
 Only for new or refactored algorithms:
 
@@ -26,9 +23,7 @@ Optional, but recommended:
 Proposed changes:
 
 -
-
 -
-
 -
 
 ## Comments
