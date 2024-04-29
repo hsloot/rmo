@@ -20,7 +20,7 @@ test_that("Exchangeable shock-size arrival intensities are calculated correctly"
   )
 })
 
-test_that("calcShockArrivalIntensities parameter is calculated correctly", {
+test_that("Shock-size arrival intensities are calculated correctly", {
   bf <- AlphaStableBernsteinFunction(alpha = 0.07608632)
 
   tmp <- sapply(1:d, function(i) calcIterativeDifference(bf, d - i, i))
@@ -35,22 +35,22 @@ test_that("calcShockArrivalIntensities parameter is calculated correctly", {
   expect_equal(calcShockArrivalIntensities(bf, d), lambda)
 })
 
-test_that("ex_qmatrix parameter is calculated correctly", {
+test_that("MDCM generator matrix is calculated correctly", {
   bf <- AlphaStableBernsteinFunction(alpha = 0.6101982)
 
-  ex_qmatrix <- matrix(0, nrow = d + 1, ncol = d + 1)
-  ex_qmatrix[1, -1] <- calcExShockSizeArrivalIntensities(bf, d)
+  generator <- matrix(0, nrow = d + 1, ncol = d + 1)
+  generator[1, -1] <- calcExShockSizeArrivalIntensities(bf, d)
   for (i in 1:d) {
     if (i < d) {
       for (j in (i + 1):d) {
-        ex_qmatrix[1 + i, 1 + j] <-
-          (d - j + 1) / (d - i + 1) * ex_qmatrix[i, j] +
-          (j + 1 - i) / (d - i + 1) * ex_qmatrix[i, j + 1]
+        generator[1 + i, 1 + j] <-
+          (d - j + 1) / (d - i + 1) * generator[i, j] +
+          (j + 1 - i) / (d - i + 1) * generator[i, j + 1]
       }
     }
   }
-  diag(ex_qmatrix) <- -apply(ex_qmatrix, 1, sum)
-  expect_equal(calcMDCMGeneratorMatrix(bf, d), ex_qmatrix)
+  diag(generator) <- -apply(generator, 1, sum)
+  expect_equal(calcMDCMGeneratorMatrix(bf, d), generator)
 
   expect_equal(
     calcMDCMGeneratorMatrix(bf, d), calcMDCMGeneratorMatrix(bf, d + 1)[-1, -1]

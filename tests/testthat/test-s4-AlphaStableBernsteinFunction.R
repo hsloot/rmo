@@ -93,7 +93,7 @@ test_that("`calcExShockSizeArrivalIntensities` calculates expected values", {
 test_that("`calcMDCMGeneratorMatrix` calculates expected values", {
   expect_equal(
     calcMDCMGeneratorMatrix(bf_alpha_stable, d),
-    ex_qmatrix_naive(
+    mdcm_generator_matrix(
       actual_fn, d,
       alpha = bf_alpha_stable@alpha
     )
@@ -101,7 +101,7 @@ test_that("`calcMDCMGeneratorMatrix` calculates expected values", {
 
   expect_equal(
     calcMDCMGeneratorMatrix(bf_alpha_stable, d, cscale = cscale),
-    ex_qmatrix_naive(
+    mdcm_generator_matrix(
       actual_fn, d,
       cscale = cscale,
       alpha = bf_alpha_stable@alpha

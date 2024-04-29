@@ -33,13 +33,13 @@ calc_ex_shock_size_arrival_intensities_naive <- function(f, d, cscale = 1, ...) 
   )
 }
 
-ex_qmatrix_naive <- function(f, d, cscale = 1, ...) {
+mdcm_generator_matrix <- function(f, d, cscale = 1, ...) {
   outer(
     as.integer(c(0, seq_len(d))), as.integer(c(0, seq_len(d))),
     Vectorize(
       function(i, j) {
         if (j > i) {
-          value_of_naive(
+          calc_iterative_difference(
             f,
             x = d - j,
             difference_order = j - i,

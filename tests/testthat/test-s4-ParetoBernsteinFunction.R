@@ -78,7 +78,7 @@ test_that("`calcExShockSizeArrivalIntensities` calculates expected values", {
 test_that("`calcMDCMGeneratorMatrix` calculates expected values", {
   expect_equal(
     calcMDCMGeneratorMatrix(bf_pareto, d),
-    ex_qmatrix_naive(
+    mdcm_generator_matrix(
       actual_fn, d,
       alpha = bf_pareto@alpha,
       x0 = bf_pareto@x0
@@ -87,7 +87,7 @@ test_that("`calcMDCMGeneratorMatrix` calculates expected values", {
 
   expect_equal(
     calcMDCMGeneratorMatrix(bf_pareto, d, cscale = cscale),
-    ex_qmatrix_naive(
+    mdcm_generator_matrix(
       actual_fn, d,
       cscale = cscale,
       alpha = bf_pareto@alpha,
