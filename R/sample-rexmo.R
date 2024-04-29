@@ -149,7 +149,7 @@ rexmo <- function(n, d, theta, method = c("MDCM", "AM", "ESM")) {
   if (method == "MDCM") {
     Rcpp__rexmo_mdcm(n, d, theta)
   } else if (method %in% c("AM", "ESM")) {
-    lambda <- uexi2i(
+    lambda <- stretch_lambda(
       sapply(seq_along(theta), function(i) {
         divide_binomial_coefficient(theta[[i]], d, i)
       })

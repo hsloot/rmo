@@ -36,23 +36,23 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// uexi2i
-NumericVector uexi2i(const NumericVector& uexi);
-RcppExport SEXP _rmo_uexi2i(SEXP uexiSEXP) {
+// stretch_lambda
+NumericVector stretch_lambda(const NumericVector& lambda);
+RcppExport SEXP _rmo_stretch_lambda(SEXP lambdaSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::traits::input_parameter< const NumericVector& >::type uexi(uexiSEXP);
-    rcpp_result_gen = Rcpp::wrap(uexi2i(uexi));
+    Rcpp::traits::input_parameter< const NumericVector& >::type lambda(lambdaSEXP);
+    rcpp_result_gen = Rcpp::wrap(stretch_lambda(lambda));
     return rcpp_result_gen;
 END_RCPP
 }
-// exi2exqm
-NumericMatrix exi2exqm(const NumericVector& exi);
-RcppExport SEXP _rmo_exi2exqm(SEXP exiSEXP) {
+// pour_theta
+NumericMatrix pour_theta(const NumericVector& theta);
+RcppExport SEXP _rmo_pour_theta(SEXP thetaSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::traits::input_parameter< const NumericVector& >::type exi(exiSEXP);
-    rcpp_result_gen = Rcpp::wrap(exi2exqm(exi));
+    Rcpp::traits::input_parameter< const NumericVector& >::type theta(thetaSEXP);
+    rcpp_result_gen = Rcpp::wrap(pour_theta(theta));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -264,8 +264,8 @@ RcppExport SEXP run_testthat_tests(SEXP);
 static const R_CallMethodDef CallEntries[] = {
     {"_rmo_multiply_binomial_coefficient", (DL_FUNC) &_rmo_multiply_binomial_coefficient, 3},
     {"_rmo_divide_binomial_coefficient", (DL_FUNC) &_rmo_divide_binomial_coefficient, 3},
-    {"_rmo_uexi2i", (DL_FUNC) &_rmo_uexi2i, 1},
-    {"_rmo_exi2exqm", (DL_FUNC) &_rmo_exi2exqm, 1},
+    {"_rmo_stretch_lambda", (DL_FUNC) &_rmo_stretch_lambda, 1},
+    {"_rmo_pour_theta", (DL_FUNC) &_rmo_pour_theta, 1},
     {"_rmo_Rcpp__is_within", (DL_FUNC) &_rmo_Rcpp__is_within, 2},
     {"_rmo_Rcpp__rmo_esm", (DL_FUNC) &_rmo_Rcpp__rmo_esm, 3},
     {"_rmo_Rcpp__rmo_am", (DL_FUNC) &_rmo_Rcpp__rmo_am, 3},

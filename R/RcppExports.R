@@ -9,12 +9,12 @@ divide_binomial_coefficient <- function(x, n, k) {
     .Call(`_rmo_divide_binomial_coefficient`, x, n, k)
 }
 
-uexi2i <- function(uexi) {
-    .Call(`_rmo_uexi2i`, uexi)
+stretch_lambda <- function(lambda) {
+    .Call(`_rmo_stretch_lambda`, lambda)
 }
 
-exi2exqm <- function(exi) {
-    .Call(`_rmo_exi2exqm`, exi)
+pour_theta <- function(theta) {
+    .Call(`_rmo_pour_theta`, theta)
 }
 
 Rcpp__is_within <- function(i, j) {
