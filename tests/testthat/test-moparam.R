@@ -8,13 +8,13 @@ test_that("Exchangeable shock-size arrival intensities are calculated correctly"
     sapply(1:d, function(i) calcIterativeDifference(bf, d - i, i, d, i))
   )
 
-  uex_intensities <- calcExShockArrivalIntensities(bf, d)
+  lambda <- calcExShockArrivalIntensities(bf, d)
   expect_equal(
     calcExShockSizeArrivalIntensities(bf, d),
     sapply(
       1:d,
       function(i) {
-        multiply_binomial_coefficient(uex_intensities[[i]], d, i)
+        multiply_binomial_coefficient(lambda[[i]], d, i)
       }
     )
   )
