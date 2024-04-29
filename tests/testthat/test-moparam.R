@@ -1,6 +1,6 @@
 d <- 10L
 
-test_that("Shock-size arrival intensities are calculated correctly", {
+test_that("Exchangeable shock-size arrival intensities are calculated correctly", { # nolint
   bf <- AlphaStableBernsteinFunction(alpha = 0.1033993)
 
   expect_equal(
