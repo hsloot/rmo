@@ -7,7 +7,7 @@
   "codeRepository": "https://github.com/hsloot/rmo",
   "issueTracker": "https://github.com/hsloot/rmo/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "0.8.8",
+  "version": "0.9",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -192,5 +192,5 @@
     },
     "SystemRequirements": "C++17"
   },
-  "fileSize": "20776.12KB"
+  "fileSize": "21217.185KB"
 }
