@@ -11,6 +11,7 @@
   - Rename S4-method `stieltjesDensity()` to `getStieltjesDensity()`
   - Rename S4-method `valueOf()` to `calcIterativeDifference()`
   - Rename S4-method `valueOf0()` to `calcValue()`
+  - Rename various variable, method, and argument names appropriately
 
 - Improve extensibility by exposing `defaultMethod` and `valueOf0` (#118)
 
