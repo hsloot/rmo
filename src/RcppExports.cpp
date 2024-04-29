@@ -69,41 +69,41 @@ BEGIN_RCPP
 END_RCPP
 }
 // Rcpp__rmo_esm
-NumericMatrix Rcpp__rmo_esm(const std::size_t n, const std::size_t d, const NumericVector& intensities);
-RcppExport SEXP _rmo_Rcpp__rmo_esm(SEXP nSEXP, SEXP dSEXP, SEXP intensitiesSEXP) {
+NumericMatrix Rcpp__rmo_esm(const std::size_t n, const std::size_t d, const NumericVector& lambda);
+RcppExport SEXP _rmo_Rcpp__rmo_esm(SEXP nSEXP, SEXP dSEXP, SEXP lambdaSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const std::size_t >::type n(nSEXP);
     Rcpp::traits::input_parameter< const std::size_t >::type d(dSEXP);
-    Rcpp::traits::input_parameter< const NumericVector& >::type intensities(intensitiesSEXP);
-    rcpp_result_gen = Rcpp::wrap(Rcpp__rmo_esm(n, d, intensities));
+    Rcpp::traits::input_parameter< const NumericVector& >::type lambda(lambdaSEXP);
+    rcpp_result_gen = Rcpp::wrap(Rcpp__rmo_esm(n, d, lambda));
     return rcpp_result_gen;
 END_RCPP
 }
 // Rcpp__rmo_am
-NumericMatrix Rcpp__rmo_am(const std::size_t n, const std::size_t d, const NumericVector& intensities);
-RcppExport SEXP _rmo_Rcpp__rmo_am(SEXP nSEXP, SEXP dSEXP, SEXP intensitiesSEXP) {
+NumericMatrix Rcpp__rmo_am(const std::size_t n, const std::size_t d, const NumericVector& lambda);
+RcppExport SEXP _rmo_Rcpp__rmo_am(SEXP nSEXP, SEXP dSEXP, SEXP lambdaSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const std::size_t >::type n(nSEXP);
     Rcpp::traits::input_parameter< const std::size_t >::type d(dSEXP);
-    Rcpp::traits::input_parameter< const NumericVector& >::type intensities(intensitiesSEXP);
-    rcpp_result_gen = Rcpp::wrap(Rcpp__rmo_am(n, d, intensities));
+    Rcpp::traits::input_parameter< const NumericVector& >::type lambda(lambdaSEXP);
+    rcpp_result_gen = Rcpp::wrap(Rcpp__rmo_am(n, d, lambda));
     return rcpp_result_gen;
 END_RCPP
 }
 // Rcpp__rexmo_mdcm
-NumericMatrix Rcpp__rexmo_mdcm(const std::size_t n, const std::size_t d, const NumericVector& ex_intensities);
-RcppExport SEXP _rmo_Rcpp__rexmo_mdcm(SEXP nSEXP, SEXP dSEXP, SEXP ex_intensitiesSEXP) {
+NumericMatrix Rcpp__rexmo_mdcm(const std::size_t n, const std::size_t d, const NumericVector& theta);
+RcppExport SEXP _rmo_Rcpp__rexmo_mdcm(SEXP nSEXP, SEXP dSEXP, SEXP thetaSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const std::size_t >::type n(nSEXP);
     Rcpp::traits::input_parameter< const std::size_t >::type d(dSEXP);
-    Rcpp::traits::input_parameter< const NumericVector& >::type ex_intensities(ex_intensitiesSEXP);
-    rcpp_result_gen = Rcpp::wrap(Rcpp__rexmo_mdcm(n, d, ex_intensities));
+    Rcpp::traits::input_parameter< const NumericVector& >::type theta(thetaSEXP);
+    rcpp_result_gen = Rcpp::wrap(Rcpp__rexmo_mdcm(n, d, theta));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -139,41 +139,41 @@ BEGIN_RCPP
 END_RCPP
 }
 // rtest__rmo_esm
-NumericMatrix rtest__rmo_esm(const std::size_t n, const std::size_t d, const NumericVector& intensities);
-RcppExport SEXP _rmo_rtest__rmo_esm(SEXP nSEXP, SEXP dSEXP, SEXP intensitiesSEXP) {
+NumericMatrix rtest__rmo_esm(const std::size_t n, const std::size_t d, const NumericVector& lambda);
+RcppExport SEXP _rmo_rtest__rmo_esm(SEXP nSEXP, SEXP dSEXP, SEXP lambdaSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const std::size_t >::type n(nSEXP);
     Rcpp::traits::input_parameter< const std::size_t >::type d(dSEXP);
-    Rcpp::traits::input_parameter< const NumericVector& >::type intensities(intensitiesSEXP);
-    rcpp_result_gen = Rcpp::wrap(rtest__rmo_esm(n, d, intensities));
+    Rcpp::traits::input_parameter< const NumericVector& >::type lambda(lambdaSEXP);
+    rcpp_result_gen = Rcpp::wrap(rtest__rmo_esm(n, d, lambda));
     return rcpp_result_gen;
 END_RCPP
 }
 // rtest__rmo_am
-NumericMatrix rtest__rmo_am(const std::size_t n, const std::size_t d, const NumericVector& intensities);
-RcppExport SEXP _rmo_rtest__rmo_am(SEXP nSEXP, SEXP dSEXP, SEXP intensitiesSEXP) {
+NumericMatrix rtest__rmo_am(const std::size_t n, const std::size_t d, const NumericVector& lambda);
+RcppExport SEXP _rmo_rtest__rmo_am(SEXP nSEXP, SEXP dSEXP, SEXP lambdaSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const std::size_t >::type n(nSEXP);
     Rcpp::traits::input_parameter< const std::size_t >::type d(dSEXP);
-    Rcpp::traits::input_parameter< const NumericVector& >::type intensities(intensitiesSEXP);
-    rcpp_result_gen = Rcpp::wrap(rtest__rmo_am(n, d, intensities));
+    Rcpp::traits::input_parameter< const NumericVector& >::type lambda(lambdaSEXP);
+    rcpp_result_gen = Rcpp::wrap(rtest__rmo_am(n, d, lambda));
     return rcpp_result_gen;
 END_RCPP
 }
 // rtest__rexmo_mdcm
-NumericMatrix rtest__rexmo_mdcm(const std::size_t n, const std::size_t d, const NumericVector& ex_intensities);
-RcppExport SEXP _rmo_rtest__rexmo_mdcm(SEXP nSEXP, SEXP dSEXP, SEXP ex_intensitiesSEXP) {
+NumericMatrix rtest__rexmo_mdcm(const std::size_t n, const std::size_t d, const NumericVector& theta);
+RcppExport SEXP _rmo_rtest__rexmo_mdcm(SEXP nSEXP, SEXP dSEXP, SEXP thetaSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const std::size_t >::type n(nSEXP);
     Rcpp::traits::input_parameter< const std::size_t >::type d(dSEXP);
-    Rcpp::traits::input_parameter< const NumericVector& >::type ex_intensities(ex_intensitiesSEXP);
-    rcpp_result_gen = Rcpp::wrap(rtest__rexmo_mdcm(n, d, ex_intensities));
+    Rcpp::traits::input_parameter< const NumericVector& >::type theta(thetaSEXP);
+    rcpp_result_gen = Rcpp::wrap(rtest__rexmo_mdcm(n, d, theta));
     return rcpp_result_gen;
 END_RCPP
 }

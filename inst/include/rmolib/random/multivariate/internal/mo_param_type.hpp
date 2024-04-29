@@ -16,7 +16,7 @@ struct __is_mo_param_type<
     _T,
     std::enable_if_t<
         decltype(std::declval<_T>().dim(), std::true_type())::value&& decltype(
-            std::declval<_T>().intensities(), std::true_type())::value>>
+            std::declval<_T>().lambda(), std::true_type())::value>>
     : public std::true_type {};
 
 }  // namespace internal
