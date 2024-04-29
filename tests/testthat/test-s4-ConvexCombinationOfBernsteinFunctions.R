@@ -130,7 +130,7 @@ test_that("`calcExShockSizeArrivalIntensities` calculates expected values", {
 test_that("`calcMDCMGeneratorMatrix` calculates expected values", {
   expect_equal(
     calcMDCMGeneratorMatrix(bf_convex_combinations_of_bfs, d),
-    mdcm_generator_matrix(
+    mdcm_generator_matrix_naive(
       actual_fn, d,
       coefficients = bf_convex_combinations_of_bfs@coefficients,
       points = bf_convex_combinations_of_bfs@points
@@ -139,7 +139,7 @@ test_that("`calcMDCMGeneratorMatrix` calculates expected values", {
 
   expect_equal(
     calcMDCMGeneratorMatrix(bf_convex_combinations_of_bfs, d, cscale = cscale),
-    mdcm_generator_matrix(
+    mdcm_generator_matrix_naive(
       actual_fn, d,
       coefficients = bf_convex_combinations_of_bfs@coefficients,
       points = bf_convex_combinations_of_bfs@points,

@@ -1,4 +1,4 @@
-calc_iterative_difference <- function(f, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...) { # nolint
+calc_iterative_difference_naive <- function(f, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...) { # nolint
   if (isTRUE(0L == difference_order)) {
     out <- f(cscale * x, ...)
   } else {
@@ -21,7 +21,7 @@ calc_ex_shock_size_arrival_intensities_naive <- function(f, d, cscale = 1, ...) 
   sapply(
     seq_len(d),
     function(i) {
-      calc_iterative_difference(
+      calc_iterative_difference_naive(
         f,
         x = d - i,
         difference_order = i,
@@ -33,13 +33,13 @@ calc_ex_shock_size_arrival_intensities_naive <- function(f, d, cscale = 1, ...) 
   )
 }
 
-mdcm_generator_matrix <- function(f, d, cscale = 1, ...) {
+mdcm_generator_matrix_naive <- function(f, d, cscale = 1, ...) {
   outer(
     as.integer(c(0, seq_len(d))), as.integer(c(0, seq_len(d))),
     Vectorize(
       function(i, j) {
         if (j > i) {
-          calc_iterative_difference(
+          calc_iterative_difference_naive(
             f,
             x = d - j,
             difference_order = j - i,
