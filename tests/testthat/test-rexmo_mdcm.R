@@ -12,7 +12,7 @@ test_that("Exchangeable Arnold model for d = 2", {
   ## all equal
   args <- list(
     "d" = 2,
-    theta = sapply(1:2, function(i) choose(2, i))
+    "theta" = sapply(1:2, function(i) choose(2, i))
   )
   expect_equal_rn_generation(
     rexmo_mdcm, testutils.rmo::rexmo_mdcm_bivariate,
@@ -22,7 +22,7 @@ test_that("Exchangeable Arnold model for d = 2", {
   ## independence
   args <- list(
     "d" = 2,
-    theta = calc_theta_linear(2, scale = 0.7)
+    "theta" = calc_theta_linear(2, scale = 0.7)
   )
   expect_equal_rn_generation(
     rexmo_mdcm, testutils.rmo::rexmo_mdcm_bivariate,
@@ -32,7 +32,7 @@ test_that("Exchangeable Arnold model for d = 2", {
   ## comonotone
   args <- list(
     "d" = 2,
-    theta = calc_theta_constant(2, constant = 0.7)
+    "theta" = calc_theta_constant(2, constant = 0.7)
   )
   expect_equal_rn_generation(
     rexmo_mdcm, testutils.rmo::rexmo_mdcm_bivariate,
@@ -42,7 +42,7 @@ test_that("Exchangeable Arnold model for d = 2", {
   ## Poisson
   args <- list(
     "d" = 2,
-    theta = calc_theta_poisson(
+    "theta" = calc_theta_poisson(
       2,
       eta = 0.3
     )
@@ -55,7 +55,7 @@ test_that("Exchangeable Arnold model for d = 2", {
   ## Alpha-Stable
   args <- list(
     "d" = 2,
-    theta = calc_theta_alpha_stable(2, alpha = 0.25)
+    "theta" = calc_theta_alpha_stable(2, alpha = 0.25)
   )
   expect_equal_rn_generation(
     rexmo_mdcm, testutils.rmo::rexmo_mdcm_bivariate,
@@ -65,7 +65,7 @@ test_that("Exchangeable Arnold model for d = 2", {
   ## Gamma
   args <- list(
     "d" = 2,
-    theta = calc_theta_gamma(2, a = 0.4)
+    "theta" = calc_theta_gamma(2, a = 0.4)
   )
   expect_equal_rn_generation(
     rexmo_mdcm, testutils.rmo::rexmo_mdcm_bivariate,
