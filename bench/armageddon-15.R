@@ -15,7 +15,7 @@ bf <- SumOfBernsteinFunctions(
   first = ConstantBernsteinFunction(constant = alpha),
   second = LinearBernsteinFunction(scale = beta)
 )
-intensities <- intensities(bf, d)
+lambda <- intensities(bf, d)
 theta <- calcExShockSizeArrivalIntensities(bf, d)
 
 #+ r bench
@@ -27,8 +27,8 @@ mark(
   LFM = rpextmo(
     n, d, a = alpha, b = beta, family = "Armageddon", method = "LFM"
   ),
-  Arnold = rmo(n, d, intensities, method = "AM"),
-  ESM = rmo(n, d, intensities, method = "ESM"),
+  Arnold = rmo(n, d, lambda, method = "AM"),
+  ESM = rmo(n, d, lambda, method = "ESM"),
   min_iterations = 100L,
   check = FALSE
 )
