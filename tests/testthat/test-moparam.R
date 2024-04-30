@@ -20,7 +20,7 @@ test_that("Exchangeable shock-size arrival intensities are calculated correctly"
   )
 })
 
-test_that("Shock-size arrival intensities are calculated correctly", {
+test_that("Shock arrival intensities are calculated correctly", {
   bf <- AlphaStableBernsteinFunction(alpha = 0.07608632)
 
   tmp <- sapply(1:d, function(i) calcIterativeDifference(bf, d - i, i))
