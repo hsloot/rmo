@@ -258,7 +258,9 @@ setMethod(
 setMethod(
   "calcShockArrivalIntensities", "BernsteinFunction",
   function(object, d, cscale = 1, ...) {
-    stretch_lambda(calcExShockArrivalIntensities(object, d, cscale = cscale, ...))
+    stretch_lambda(
+      calcExShockArrivalIntensities(object, d, cscale = cscale, ...)
+    )
   }
 )
 
@@ -272,6 +274,8 @@ setMethod(
 setMethod(
   "calcMDCMGeneratorMatrix", "BernsteinFunction",
   function(object, d, cscale = 1, ...) {
-    pour_theta(calcExShockSizeArrivalIntensities(object, d, cscale = cscale, ...))
+    pour_theta(
+      calcExShockSizeArrivalIntensities(object, d, cscale = cscale, ...)
+    )
   }
 )
