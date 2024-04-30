@@ -17,6 +17,7 @@
 #' - [valueOf()] is deprecated in favor of [calcIterativeDifference()].
 #' - [valueOf0()] is deprecated in favor of [calcValue()].
 #' @name rmo-deprecated
+#' @include s4-BernsteinFunction.R
 NULL
 
 #' @rdname rmo-deprecated
@@ -36,7 +37,7 @@ setGeneric(
 #' @export
 setMethod(
   "exIntensities",
-  "ANY",
+  "BernsteinFunction",
   function(object, d, cscale = 1, ...) {
     calcExShockSizeArrivalIntensities(object, d, cscale = cscale, ...)
   }
@@ -59,7 +60,7 @@ setGeneric(
 #' @export
 setMethod(
   "uexIntensities",
-  "ANY",
+  "BernsteinFunction",
   function(object, d, cscale = 1, ...) {
     calcExShockArrivalIntensities(object, d, cscale = cscale, ...)
   }
@@ -82,7 +83,7 @@ setGeneric(
 #' @export
 setMethod(
   "exQMatrix",
-  "ANY",
+  "BernsteinFunction",
   function(object, d, cscale = 1, ...) {
     calcMDCMGeneratorMatrix(object, d, cscale = cscale, ...)
   }
@@ -105,7 +106,7 @@ setGeneric(
 #' @export
 setMethod(
   "intensities",
-  "ANY",
+  "BernsteinFunction",
   function(object, d, cscale = 1, ...) {
     calcShockArrivalIntensities(object, d, cscale = cscale, ...)
   }
@@ -128,7 +129,7 @@ setGeneric(
 #' @export
 setMethod(
   "defaultMethod",
-  "ANY",
+  "BernsteinFunction",
   function(object) {
     getDefaultMethodString(object)
   }
@@ -151,7 +152,7 @@ setGeneric(
 #' @export
 setMethod(
   "levyDensity",
-  "ANY",
+  "BernsteinFunction",
   function(object) {
     getLevyDensity(object)
   }
@@ -174,7 +175,7 @@ setGeneric(
 #' @export
 setMethod(
   "stieltjesDensity",
-  "ANY",
+  "BernsteinFunction",
   function(object) {
     getStieltjesDensity(object)
   }
@@ -197,7 +198,7 @@ setGeneric(
 #' @export
 setMethod(
   "valueOf",
-  "ANY",
+  "BernsteinFunction",
   function(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...) {
     calcIterativeDifference(
       object, x,
@@ -223,7 +224,7 @@ setGeneric(
 #' @export
 setMethod(
   "valueOf0",
-  "ANY",
+  "BernsteinFunction",
   function(object, x, cscale = 1, ...) {
     calcValue(object, x, cscale = cscale, ...)
   }
