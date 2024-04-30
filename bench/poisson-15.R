@@ -14,7 +14,7 @@ bf <- ScaledBernsteinFunction(
   scale = 1,
   original = PoissonBernsteinFunction(eta = eta)
 )
-lambda <- intensities(bf, d)
+lambda <- calcShockArrivalIntensities(bf, d)
 theta <- calcExShockSizeArrivalIntensities(bf, d)
 
 #+ r bench

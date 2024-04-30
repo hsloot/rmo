@@ -17,7 +17,7 @@ bf <- ScaledBernsteinFunction(
   scale = lambda,
   original = ParetoBernsteinFunction(alpha = alpha, x0 = x0)
 )
-lambda <- intensities(bf, d)
+lambda <- calcShockArrivalIntensities(bf, d)
 theta <- calcExShockSizeArrivalIntensities(bf, d)
 
 #+ r bench

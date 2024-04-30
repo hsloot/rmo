@@ -15,7 +15,7 @@ bf <- SumOfBernsteinFunctions(
   first = ConstantBernsteinFunction(constant = alpha),
   second = LinearBernsteinFunction(scale = beta)
 )
-lambda <- intensities(bf, d)
+lambda <- calcShockArrivalIntensities(bf, d)
 theta <- calcExShockSizeArrivalIntensities(bf, d)
 
 #+ r bench
