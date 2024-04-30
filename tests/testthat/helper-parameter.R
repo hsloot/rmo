@@ -23,7 +23,7 @@ calc_theta_armageddon <- function(d, alpha, beta) {
     calc_theta_constant(d, constant = beta)
 }
 
-intensities_armageddon <- function(d, alpha, beta) {
+calc_lambda_armageddon <- function(d, alpha, beta) {
   calc_lambda_linear(d, scale = alpha) +
     calc_lambda_constant(d, constant = beta)
 }
