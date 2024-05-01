@@ -18,7 +18,7 @@ $$"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/
     
     <a class="navbar-brand me-2" href="../index.html">rmo</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.8</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -77,8 +77,9 @@ representation).</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code><a href="valueOf.html">valueOf()</a></code>, <code><a href="intensities.html">intensities()</a></code>, <code><a href="uexIntensities.html">uexIntensities()</a></code>, <code><a href="exIntensities.html">exIntensities()</a></code>,
-<code><a href="exQMatrix.html">exQMatrix()</a></code>, <code><a href="rextmo.html">rextmo()</a></code>, <code><a href="rpextmo.html">rpextmo()</a></code></p>
+    <div class="dont-index"><p><code><a href="calcIterativeDifference.html">calcIterativeDifference()</a></code>, <code><a href="calcShockArrivalIntensities.html">calcShockArrivalIntensities()</a></code>,
+<code><a href="calcExShockArrivalIntensities.html">calcExShockArrivalIntensities()</a></code>, <code><a href="calcExShockSizeArrivalIntensities.html">calcExShockSizeArrivalIntensities()</a></code>,
+<code><a href="calcMDCMGeneratorMatrix.html">calcMDCMGeneratorMatrix()</a></code>, <code><a href="rextmo.html">rextmo()</a></code>, <code><a href="rpextmo.html">rpextmo()</a></code></p>
 <p>Other Bernstein function classes: 
 <code><a href="AlphaStableBernsteinFunction-class.html">AlphaStableBernsteinFunction-class</a></code>,
 <code><a href="BernsteinFunction-class.html">BernsteinFunction-class</a></code>,
@@ -111,27 +112,27 @@ representation).</p></dd>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Evaluate the Bernstein function</span></span></span>
 <span class="r-in"><span><span class="va">bf</span> <span class="op">&lt;-</span> <span class="fu">LinearBernsteinFunction</span><span class="op">(</span>scale <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="valueOf.html">valueOf</a></span><span class="op">(</span><span class="va">bf</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="calcIterativeDifference.html">calcIterativeDifference</a></span><span class="op">(</span><span class="va">bf</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.3 0.6 0.9 1.2 1.5</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Calculate shock-arrival intensities</span></span></span>
 <span class="r-in"><span><span class="va">bf</span> <span class="op">&lt;-</span> <span class="fu">LinearBernsteinFunction</span><span class="op">(</span>scale <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="intensities.html">intensities</a></span><span class="op">(</span><span class="va">bf</span>, <span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="calcShockArrivalIntensities.html">calcShockArrivalIntensities</a></span><span class="op">(</span><span class="va">bf</span>, <span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.8 0.8 0.0 0.8 0.0 0.0 0.0</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Calculate exchangeable shock-arrival intensities</span></span></span>
 <span class="r-in"><span><span class="va">bf</span> <span class="op">&lt;-</span> <span class="fu">LinearBernsteinFunction</span><span class="op">(</span>scale <span class="op">=</span> <span class="fl">0.4</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="uexIntensities.html">uexIntensities</a></span><span class="op">(</span><span class="va">bf</span>, <span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="calcExShockArrivalIntensities.html">calcExShockArrivalIntensities</a></span><span class="op">(</span><span class="va">bf</span>, <span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.4 0.0 0.0</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Calculate exchangeable shock-size arrival intensities</span></span></span>
 <span class="r-in"><span><span class="va">bf</span> <span class="op">&lt;-</span> <span class="fu">LinearBernsteinFunction</span><span class="op">(</span>scale <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="exIntensities.html">exIntensities</a></span><span class="op">(</span><span class="va">bf</span>, <span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="calcExShockSizeArrivalIntensities.html">calcExShockSizeArrivalIntensities</a></span><span class="op">(</span><span class="va">bf</span>, <span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.6 0.0 0.0</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Calculate the Markov generator</span></span></span>
 <span class="r-in"><span><span class="va">bf</span> <span class="op">&lt;-</span> <span class="fu">LinearBernsteinFunction</span><span class="op">(</span>scale <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="exQMatrix.html">exQMatrix</a></span><span class="op">(</span><span class="va">bf</span>, <span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="calcMDCMGeneratorMatrix.html">calcMDCMGeneratorMatrix</a></span><span class="op">(</span><span class="va">bf</span>, <span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      [,1] [,2] [,3]         [,4]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -1.8  1.8  0.0 2.220446e-16</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  0.0 -1.2  1.2 2.220446e-16</span>

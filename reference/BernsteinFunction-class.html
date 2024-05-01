@@ -36,7 +36,7 @@ of Bernstein functions.
     
     <a class="navbar-brand me-2" href="../index.html">rmo</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.8</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -214,8 +214,9 @@ $$
 $$
 The evaluation of Bernstein functions using this formula is usually not
 numerically stable. Consequently, the various alternative approaches are used
-dependent on the class of the Bernstein function. Use the method <code><a href="valueOf.html">valueOf()</a></code>
-to evaluate or approximate this expression for a given Bernstein function.</p>
+dependent on the class of the Bernstein function. Use the method
+<code><a href="calcIterativeDifference.html">calcIterativeDifference()</a></code> to evaluate or approximate this expression for a
+given Bernstein function.</p>
 </div>
 
 <div class="section">
@@ -238,8 +239,8 @@ $$
 The evaluation of the infinitesimal generator matrix using this formula is
 usually not numerically stable. Consequently, the various alternative
 approaches are used dependent on the class of the Bernstein function. Use the
-method <code><a href="exQMatrix.html">exQMatrix()</a></code> to evaluate or approximate this expression for a given
-Bernstein function.</p>
+method <code><a href="calcMDCMGeneratorMatrix.html">calcMDCMGeneratorMatrix()</a></code> to evaluate or approximate this expression
+for a given Bernstein function.</p>
 <p>For the <em>all-alive-state</em>, the generator's first row has the interpretation
 of <em>exchangeable shock-size-arrival intensities</em>:
 $$
@@ -249,8 +250,8 @@ $$
 $$
 As noted above, their evaluation is usually not numerically stable, and
 various alternative approaches are used dependent on the class of the
-Bernstein function. Use the method <code><a href="exIntensities.html">exIntensities()</a></code> to evaluate or
-approximate them.</p>
+Bernstein function. Use the method <code><a href="calcExShockSizeArrivalIntensities.html">calcExShockSizeArrivalIntensities()</a></code> to
+evaluate or approximate them.</p>
 </div>
 
 <div class="section">
@@ -278,8 +279,9 @@ Sloot H (2022).
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code><a href="valueOf.html">valueOf()</a></code>, <code><a href="intensities.html">intensities()</a></code>, <code><a href="uexIntensities.html">uexIntensities()</a></code>, <code><a href="exIntensities.html">exIntensities()</a></code>,
-<code><a href="exQMatrix.html">exQMatrix()</a></code>, <code><a href="rextmo.html">rextmo()</a></code>, <code><a href="rpextmo.html">rpextmo()</a></code></p>
+    <div class="dont-index"><p><code><a href="calcIterativeDifference.html">calcIterativeDifference()</a></code>, <code><a href="calcShockArrivalIntensities.html">calcShockArrivalIntensities()</a></code>,
+<code><a href="calcExShockArrivalIntensities.html">calcExShockArrivalIntensities()</a></code>, <code><a href="calcExShockSizeArrivalIntensities.html">calcExShockSizeArrivalIntensities()</a></code>,
+<code><a href="calcMDCMGeneratorMatrix.html">calcMDCMGeneratorMatrix()</a></code>, <code><a href="rextmo.html">rextmo()</a></code>, <code><a href="rpextmo.html">rpextmo()</a></code></p>
 <p>Other Bernstein function classes: 
 <code><a href="AlphaStableBernsteinFunction-class.html">AlphaStableBernsteinFunction-class</a></code>,
 <code><a href="CompleteBernsteinFunction-class.html">CompleteBernsteinFunction-class</a></code>,

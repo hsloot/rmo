@@ -76,13 +76,31 @@
     <loc>/reference/SumOfBernsteinFunctions-class.html</loc>
   </url>
   <url>
-    <loc>/reference/defaultMethod.html</loc>
+    <loc>/reference/calcExShockArrivalIntensities.html</loc>
   </url>
   <url>
-    <loc>/reference/exIntensities.html</loc>
+    <loc>/reference/calcExShockSizeArrivalIntensities.html</loc>
   </url>
   <url>
-    <loc>/reference/exQMatrix.html</loc>
+    <loc>/reference/calcIterativeDifference.html</loc>
+  </url>
+  <url>
+    <loc>/reference/calcMDCMGeneratorMatrix.html</loc>
+  </url>
+  <url>
+    <loc>/reference/calcShockArrivalIntensities.html</loc>
+  </url>
+  <url>
+    <loc>/reference/calcValue.html</loc>
+  </url>
+  <url>
+    <loc>/reference/getDefaultMethodString.html</loc>
+  </url>
+  <url>
+    <loc>/reference/getLevyDensity.html</loc>
+  </url>
+  <url>
+    <loc>/reference/getStieltjesDensity.html</loc>
   </url>
   <url>
     <loc>/reference/hidden_aliases.html</loc>
@@ -91,16 +109,13 @@
     <loc>/reference/index.html</loc>
   </url>
   <url>
-    <loc>/reference/intensities.html</loc>
-  </url>
-  <url>
-    <loc>/reference/levyDensity.html</loc>
-  </url>
-  <url>
     <loc>/reference/rexmo.html</loc>
   </url>
   <url>
     <loc>/reference/rextmo.html</loc>
+  </url>
+  <url>
+    <loc>/reference/rmo-deprecated.html</loc>
   </url>
   <url>
     <loc>/reference/rmo-package.html</loc>
@@ -110,17 +125,5 @@
   </url>
   <url>
     <loc>/reference/rpextmo.html</loc>
-  </url>
-  <url>
-    <loc>/reference/stieltjesDensity.html</loc>
-  </url>
-  <url>
-    <loc>/reference/uexIntensities.html</loc>
-  </url>
-  <url>
-    <loc>/reference/valueOf.html</loc>
-  </url>
-  <url>
-    <loc>/reference/valueOf0.html</loc>
   </url>
 </urlset>

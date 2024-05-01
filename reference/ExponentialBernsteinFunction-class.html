@@ -18,7 +18,7 @@ $$"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/
     
     <a class="navbar-brand me-2" href="../index.html">rmo</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.8</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -106,9 +106,10 @@ De Gruyter.
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code><a href="levyDensity.html">levyDensity()</a></code>, <code><a href="stieltjesDensity.html">stieltjesDensity()</a></code>, <code><a href="valueOf.html">valueOf()</a></code>,
-<code><a href="intensities.html">intensities()</a></code>, <code><a href="uexIntensities.html">uexIntensities()</a></code>, <code><a href="exIntensities.html">exIntensities()</a></code>, <code><a href="exQMatrix.html">exQMatrix()</a></code>,
-<code><a href="rextmo.html">rextmo()</a></code>, <code><a href="rpextmo.html">rpextmo()</a></code></p>
+    <div class="dont-index"><p><code><a href="getLevyDensity.html">getLevyDensity()</a></code>, <code><a href="getStieltjesDensity.html">getStieltjesDensity()</a></code>,
+<code><a href="calcIterativeDifference.html">calcIterativeDifference()</a></code>, <code><a href="calcShockArrivalIntensities.html">calcShockArrivalIntensities()</a></code>,
+<code><a href="calcExShockArrivalIntensities.html">calcExShockArrivalIntensities()</a></code>, <code><a href="calcExShockSizeArrivalIntensities.html">calcExShockSizeArrivalIntensities()</a></code>,
+<code><a href="calcMDCMGeneratorMatrix.html">calcMDCMGeneratorMatrix()</a></code>, <code><a href="rextmo.html">rextmo()</a></code>, <code><a href="rpextmo.html">rpextmo()</a></code></p>
 <p>Other Bernstein function classes: 
 <code><a href="AlphaStableBernsteinFunction-class.html">AlphaStableBernsteinFunction-class</a></code>,
 <code><a href="BernsteinFunction-class.html">BernsteinFunction-class</a></code>,
@@ -154,7 +155,7 @@ De Gruyter.
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Create a Lévy density</span></span></span>
 <span class="r-in"><span><span class="va">bf</span> <span class="op">&lt;-</span> <span class="fu">ExponentialBernsteinFunction</span><span class="op">(</span>lambda <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">levy_density</span> <span class="op">&lt;-</span> <span class="fu"><a href="levyDensity.html">levyDensity</a></span><span class="op">(</span><span class="va">bf</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">levy_density</span> <span class="op">&lt;-</span> <span class="fu"><a href="getLevyDensity.html">getLevyDensity</a></span><span class="op">(</span><span class="va">bf</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/integrate.html" class="external-link">integrate</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">pmin</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">x</span><span class="op">)</span> <span class="op">*</span> <span class="fu">levy_density</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  lower <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">levy_density</span>, <span class="st">"lower"</span><span class="op">)</span>,</span></span>
@@ -164,57 +165,57 @@ De Gruyter.
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Create a Stieltjes density</span></span></span>
 <span class="r-in"><span><span class="va">bf</span> <span class="op">&lt;-</span> <span class="fu">ExponentialBernsteinFunction</span><span class="op">(</span>lambda <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">stieltjes_density</span> <span class="op">&lt;-</span> <span class="fu"><a href="stieltjesDensity.html">stieltjesDensity</a></span><span class="op">(</span><span class="va">bf</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">stieltjes_density</span> <span class="op">&lt;-</span> <span class="fu"><a href="getStieltjesDensity.html">getStieltjesDensity</a></span><span class="op">(</span><span class="va">bf</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">stieltjes_density</span><span class="op">$</span><span class="va">y</span> <span class="op">*</span> <span class="fl">1</span><span class="op">/</span><span class="op">(</span><span class="fl">1</span> <span class="op">+</span> <span class="va">stieltjes_density</span><span class="op">$</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.6666667</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Evaluate the Bernstein function</span></span></span>
 <span class="r-in"><span><span class="va">bf</span> <span class="op">&lt;-</span> <span class="fu">ExponentialBernsteinFunction</span><span class="op">(</span>lambda <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="valueOf.html">valueOf</a></span><span class="op">(</span><span class="va">bf</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="calcIterativeDifference.html">calcIterativeDifference</a></span><span class="op">(</span><span class="va">bf</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.7692308 0.8695652 0.9090909 0.9302326 0.9433962</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Calculate shock-arrival intensities</span></span></span>
 <span class="r-in"><span><span class="va">bf</span> <span class="op">&lt;-</span> <span class="fu">ExponentialBernsteinFunction</span><span class="op">(</span>lambda <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="intensities.html">intensities</a></span><span class="op">(</span><span class="va">bf</span>, <span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="calcShockArrivalIntensities.html">calcShockArrivalIntensities</a></span><span class="op">(</span><span class="va">bf</span>, <span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.07518797 0.07518797 0.08354219 0.07518797 0.08354219 0.08354219 0.31328321</span>
-<span class="r-in"><span><span class="fu"><a href="intensities.html">intensities</a></span><span class="op">(</span><span class="va">bf</span>, <span class="fl">3</span>, method <span class="op">=</span> <span class="st">"levy"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="calcShockArrivalIntensities.html">calcShockArrivalIntensities</a></span><span class="op">(</span><span class="va">bf</span>, <span class="fl">3</span>, method <span class="op">=</span> <span class="st">"levy"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.07518797 0.07518797 0.08354219 0.07518797 0.08354219 0.08354219 0.31328321</span>
-<span class="r-in"><span><span class="fu"><a href="intensities.html">intensities</a></span><span class="op">(</span><span class="va">bf</span>, <span class="fl">3</span>, tolerance <span class="op">=</span> <span class="fl">1e-4</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="calcShockArrivalIntensities.html">calcShockArrivalIntensities</a></span><span class="op">(</span><span class="va">bf</span>, <span class="fl">3</span>, tolerance <span class="op">=</span> <span class="fl">1e-4</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.07518797 0.07518797 0.08354219 0.07518797 0.08354219 0.08354219 0.31328321</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Calculate exchangeable shock-arrival intensities</span></span></span>
 <span class="r-in"><span><span class="va">bf</span> <span class="op">&lt;-</span> <span class="fu">ExponentialBernsteinFunction</span><span class="op">(</span>lambda <span class="op">=</span> <span class="fl">0.4</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="uexIntensities.html">uexIntensities</a></span><span class="op">(</span><span class="va">bf</span>, <span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="calcExShockArrivalIntensities.html">calcExShockArrivalIntensities</a></span><span class="op">(</span><span class="va">bf</span>, <span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.04901961 0.07002801 0.52521008</span>
-<span class="r-in"><span><span class="fu"><a href="uexIntensities.html">uexIntensities</a></span><span class="op">(</span><span class="va">bf</span>, <span class="fl">3</span>, method <span class="op">=</span> <span class="st">"levy"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="calcExShockArrivalIntensities.html">calcExShockArrivalIntensities</a></span><span class="op">(</span><span class="va">bf</span>, <span class="fl">3</span>, method <span class="op">=</span> <span class="st">"levy"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.04901961 0.07002801 0.52521008</span>
-<span class="r-in"><span><span class="fu"><a href="uexIntensities.html">uexIntensities</a></span><span class="op">(</span><span class="va">bf</span>, <span class="fl">3</span>, tolerance <span class="op">=</span> <span class="fl">1e-4</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="calcExShockArrivalIntensities.html">calcExShockArrivalIntensities</a></span><span class="op">(</span><span class="va">bf</span>, <span class="fl">3</span>, tolerance <span class="op">=</span> <span class="fl">1e-4</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.04901961 0.07002801 0.52521008</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Calculate exchangeable shock-size arrival intensities</span></span></span>
 <span class="r-in"><span><span class="va">bf</span> <span class="op">&lt;-</span> <span class="fu">ExponentialBernsteinFunction</span><span class="op">(</span>lambda <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="exIntensities.html">exIntensities</a></span><span class="op">(</span><span class="va">bf</span>, <span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="calcExShockSizeArrivalIntensities.html">calcExShockSizeArrivalIntensities</a></span><span class="op">(</span><span class="va">bf</span>, <span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.08522727 0.14204545 0.71022727</span>
-<span class="r-in"><span><span class="fu"><a href="exIntensities.html">exIntensities</a></span><span class="op">(</span><span class="va">bf</span>, <span class="fl">3</span>, method <span class="op">=</span> <span class="st">"levy"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="calcExShockSizeArrivalIntensities.html">calcExShockSizeArrivalIntensities</a></span><span class="op">(</span><span class="va">bf</span>, <span class="fl">3</span>, method <span class="op">=</span> <span class="st">"levy"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.08522727 0.14204545 0.71022727</span>
-<span class="r-in"><span><span class="fu"><a href="exIntensities.html">exIntensities</a></span><span class="op">(</span><span class="va">bf</span>, <span class="fl">3</span>, tolerance <span class="op">=</span> <span class="fl">1e-4</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="calcExShockSizeArrivalIntensities.html">calcExShockSizeArrivalIntensities</a></span><span class="op">(</span><span class="va">bf</span>, <span class="fl">3</span>, tolerance <span class="op">=</span> <span class="fl">1e-4</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.08522727 0.14204545 0.71022727</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Calculate the Markov generator</span></span></span>
 <span class="r-in"><span><span class="va">bf</span> <span class="op">&lt;-</span> <span class="fu">ExponentialBernsteinFunction</span><span class="op">(</span>lambda <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="exQMatrix.html">exQMatrix</a></span><span class="op">(</span><span class="va">bf</span>, <span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="calcMDCMGeneratorMatrix.html">calcMDCMGeneratorMatrix</a></span><span class="op">(</span><span class="va">bf</span>, <span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]       [,2]       [,3]      [,4]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -0.8333333  0.1923077  0.2403846 0.4006410</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  0.0000000 -0.7692308  0.2884615 0.4807692</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [3,]  0.0000000  0.0000000 -0.6250000 0.6250000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [4,]  0.0000000  0.0000000  0.0000000 0.0000000</span>
-<span class="r-in"><span><span class="fu"><a href="exQMatrix.html">exQMatrix</a></span><span class="op">(</span><span class="va">bf</span>, <span class="fl">3</span>, method <span class="op">=</span> <span class="st">"levy"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="calcMDCMGeneratorMatrix.html">calcMDCMGeneratorMatrix</a></span><span class="op">(</span><span class="va">bf</span>, <span class="fl">3</span>, method <span class="op">=</span> <span class="st">"levy"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]       [,2]       [,3]      [,4]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -0.8333333  0.1923077  0.2403846 0.4006410</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  0.0000000 -0.7692308  0.2884615 0.4807692</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [3,]  0.0000000  0.0000000 -0.6250000 0.6250000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [4,]  0.0000000  0.0000000  0.0000000 0.0000000</span>
-<span class="r-in"><span><span class="fu"><a href="exQMatrix.html">exQMatrix</a></span><span class="op">(</span><span class="va">bf</span>, <span class="fl">3</span>, tolerance <span class="op">=</span> <span class="fl">1e-4</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="calcMDCMGeneratorMatrix.html">calcMDCMGeneratorMatrix</a></span><span class="op">(</span><span class="va">bf</span>, <span class="fl">3</span>, tolerance <span class="op">=</span> <span class="fl">1e-4</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]       [,2]       [,3]      [,4]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -0.8333333  0.1923077  0.2403846 0.4006410</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  0.0000000 -0.7692308  0.2884615 0.4807692</span>
