@@ -39,9 +39,10 @@
 #' @references
 #'   \insertAllCited{}
 #'
-#' @seealso [levyDensity()], [stieltjesDensity()], [valueOf()],
-#'   [intensities()], [uexIntensities()], [exIntensities()], [exQMatrix()],
-#'   [rextmo()], [rpextmo()]
+#' @seealso [getLevyDensity()], [getStieltjesDensity()],
+#'   [calcIterativeDifference()], [calcShockArrivalIntensities()],
+#'   [calcExShockArrivalIntensities()], [calcExShockSizeArrivalIntensities()],
+#'   [calcMDCMGeneratorMatrix()], [rextmo()], [rpextmo()]
 #'
 #' @docType class
 #' @name AlphaStableBernsteinFunction-class
@@ -60,7 +61,7 @@
 #'
 #' # Create a Lévy density
 #' bf <- AlphaStableBernsteinFunction(alpha = 0.7)
-#' levy_density <- levyDensity(bf)
+#' levy_density <- getLevyDensity(bf)
 #' integrate(
 #'   function(x) pmin(1, x) * levy_density(x),
 #'   lower = attr(levy_density, "lower"),
@@ -69,7 +70,7 @@
 #'
 #' # Create a Stieltjes density
 #' bf <- AlphaStableBernsteinFunction(alpha = 0.5)
-#' stieltjes_density <- stieltjesDensity(bf)
+#' stieltjes_density <- getStieltjesDensity(bf)
 #' integrate(
 #'   function(x) 1/(1 + x) * stieltjes_density(x),
 #'   lower = attr(stieltjes_density, "lower"),
@@ -78,31 +79,31 @@
 #'
 #' # Evaluate the Bernstein function
 #' bf <- AlphaStableBernsteinFunction(alpha = 0.3)
-#' valueOf(bf, 1:5)
+#' calcIterativeDifference(bf, 1:5)
 #'
 #' # Calculate shock-arrival intensities
 #' bf <- AlphaStableBernsteinFunction(alpha = 0.8)
-#' intensities(bf, 3)
-#' intensities(bf, 3, method = "stieltjes")
-#' intensities(bf, 3, tolerance = 1e-4)
+#' calcShockArrivalIntensities(bf, 3)
+#' calcShockArrivalIntensities(bf, 3, method = "stieltjes")
+#' calcShockArrivalIntensities(bf, 3, tolerance = 1e-4)
 #'
 #' # Calculate exchangeable shock-arrival intensities
 #' bf <- AlphaStableBernsteinFunction(alpha = 0.4)
-#' uexIntensities(bf, 3)
-#' uexIntensities(bf, 3, method = "stieltjes")
-#' uexIntensities(bf, 3, tolerance = 1e-4)
+#' calcExShockArrivalIntensities(bf, 3)
+#' calcExShockArrivalIntensities(bf, 3, method = "stieltjes")
+#' calcExShockArrivalIntensities(bf, 3, tolerance = 1e-4)
 #'
 #' # Calculate exchangeable shock-size arrival intensities
 #' bf <- AlphaStableBernsteinFunction(alpha = 0.2)
-#' exIntensities(bf, 3)
-#' exIntensities(bf, 3, method = "stieltjes")
-#' exIntensities(bf, 3, tolerance = 1e-4)
+#' calcExShockSizeArrivalIntensities(bf, 3)
+#' calcExShockSizeArrivalIntensities(bf, 3, method = "stieltjes")
+#' calcExShockSizeArrivalIntensities(bf, 3, tolerance = 1e-4)
 #'
 #' # Calculate the Markov generator
 #' bf <- AlphaStableBernsteinFunction(alpha = 0.6)
-#' exQMatrix(bf, 3)
-#' exQMatrix(bf, 3, method = "stieltjes")
-#' exQMatrix(bf, 3, tolerance = 1e-4)
+#' calcMDCMGeneratorMatrix(bf, 3)
+#' calcMDCMGeneratorMatrix(bf, 3, method = "stieltjes")
+#' calcMDCMGeneratorMatrix(bf, 3, tolerance = 1e-4)
 AlphaStableBernsteinFunction <- setClass("AlphaStableBernsteinFunction", # nolint
   contains = "CompleteBernsteinFunction",
   slots = c(alpha = "numeric")
@@ -158,12 +159,12 @@ setMethod( # nocov start
 
 #' @rdname hidden_aliases
 #'
-#' @inheritParams levyDensity
+#' @inheritParams getLevyDensity
 #'
-#' @include s4-levyDensity.R
+#' @include s4-getLevyDensity.R
 #' @export
 setMethod(
-  "levyDensity", "AlphaStableBernsteinFunction",
+  "getLevyDensity", "AlphaStableBernsteinFunction",
   function(object) {
     structure(
       function(x) {
@@ -176,12 +177,12 @@ setMethod(
 
 #' @rdname hidden_aliases
 #'
-#' @inheritParams stieltjesDensity
+#' @inheritParams getStieltjesDensity
 #'
-#' @include s4-stieltjesDensity.R
+#' @include s4-getStieltjesDensity.R
 #' @export
 setMethod(
-  "stieltjesDensity", "AlphaStableBernsteinFunction",
+  "getStieltjesDensity", "AlphaStableBernsteinFunction",
   function(object) {
     structure(
       function(x) {
@@ -194,13 +195,13 @@ setMethod(
 
 #' @rdname hidden_aliases
 #'
-#' @inheritParams valueOf0
+#' @inheritParams calcValue
 #'
-#' @include s4-valueOf0.R
+#' @include s4-calcValue.R
 #' @importFrom checkmate assert qassert check_numeric check_complex
 #' @export
 setMethod(
-  "valueOf0", "AlphaStableBernsteinFunction",
+  "calcValue", "AlphaStableBernsteinFunction",
   function(object, x, cscale = 1, ...) {
     assert(
       combine = "or",

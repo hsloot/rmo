@@ -3,7 +3,7 @@
 #' Calculates the *infinitesimal Markov generator matrix* of the corresponding
 #' (Markovian) default-counting process, used internally by [rexmo()].
 #'
-#' @inheritParams uexIntensities
+#' @inheritParams calcExShockArrivalIntensities
 #'
 #' @details
 #' For a given Bernstein function, the Markov generator matrix is defined as the
@@ -41,10 +41,10 @@
 #' @export
 #' @examples
 #' bf <- AlphaStableBernsteinFunction(alpha = 0.7)
-#' exQMatrix(bf, 3)
+#' calcMDCMGeneratorMatrix(bf, 3)
 setGeneric(
-  "exQMatrix",
+  "calcMDCMGeneratorMatrix",
   function(object, d, cscale = 1, ...) {
-    standardGeneric("exQMatrix")
+    standardGeneric("calcMDCMGeneratorMatrix")
   }
 )

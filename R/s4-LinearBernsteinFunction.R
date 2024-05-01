@@ -10,8 +10,9 @@
 #'  \psi(x) = b x, x > 0.
 #' }
 #'
-#' @seealso [valueOf()], [intensities()], [uexIntensities()], [exIntensities()],
-#'   [exQMatrix()], [rextmo()], [rpextmo()]
+#' @seealso [calcIterativeDifference()], [calcShockArrivalIntensities()],
+#'   [calcExShockArrivalIntensities()], [calcExShockSizeArrivalIntensities()],
+#'   [calcMDCMGeneratorMatrix()], [rextmo()], [rpextmo()]
 #'
 #' @docType class
 #' @name LinearBernsteinFunction-class
@@ -28,23 +29,23 @@
 #'
 #' # Evaluate the Bernstein function
 #' bf <- LinearBernsteinFunction(scale = 0.3)
-#' valueOf(bf, 1:5)
+#' calcIterativeDifference(bf, 1:5)
 #'
 #' # Calculate shock-arrival intensities
 #' bf <- LinearBernsteinFunction(scale = 0.8)
-#' intensities(bf, 3)
+#' calcShockArrivalIntensities(bf, 3)
 #'
 #' # Calculate exchangeable shock-arrival intensities
 #' bf <- LinearBernsteinFunction(scale = 0.4)
-#' uexIntensities(bf, 3)
+#' calcExShockArrivalIntensities(bf, 3)
 #'
 #' # Calculate exchangeable shock-size arrival intensities
 #' bf <- LinearBernsteinFunction(scale = 0.2)
-#' exIntensities(bf, 3)
+#' calcExShockSizeArrivalIntensities(bf, 3)
 #'
 #' # Calculate the Markov generator
 #' bf <- LinearBernsteinFunction(scale = 0.6)
-#' exQMatrix(bf, 3)
+#' calcMDCMGeneratorMatrix(bf, 3)
 LinearBernsteinFunction <- setClass("LinearBernsteinFunction", # nolint
   contains = "BernsteinFunction",
   slots = c(scale = "numeric")
@@ -100,26 +101,26 @@ setMethod( # nocov start
 
 #' @rdname hidden_aliases
 #'
-#' @inheritParams valueOf0
+#' @inheritParams calcValue
 #'
-#' @include s4-valueOf0.R
+#' @include s4-calcValue.R
 #' @export
 setMethod(
-  "valueOf0", "LinearBernsteinFunction",
+  "calcValue", "LinearBernsteinFunction",
   function(object, x, cscale = 1, ...) {
-    valueOf(object, x, cscale = cscale)
+    calcIterativeDifference(object, x, cscale = cscale)
   }
 )
 
 #' @rdname hidden_aliases
 #'
-#' @inheritParams valueOf
+#' @inheritParams calcIterativeDifference
 #'
-#' @include s4-valueOf.R RcppExports.R
+#' @include s4-calcIterativeDifference.R RcppExports.R
 #' @importFrom checkmate qassert assert check_numeric check_complex
 #' @export
 setMethod(
-  "valueOf", "LinearBernsteinFunction",
+  "calcIterativeDifference", "LinearBernsteinFunction",
   function(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...) { # nolint
     assert(
       combine = "or",

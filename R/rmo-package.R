@@ -47,9 +47,10 @@ NULL
 #'   [ScaledBernsteinFunction-class], [CompositeScaledBernsteinFunction-class]
 #'   and [SumOfBernsteinFunctions-class].
 #' - An object that derives from [BernsteinFunction-class] can be used to
-#'   generate the Marshall–Olkin shock arrival intensities with [intensities()].
-#'   It can be used to generate (scaled) exchangeable shock-size arrival
-#'   intensities with [exIntensities()].
+#'   generate the Marshall–Olkin shock arrival intensities with
+#'   [calcShockArrivalIntensities()]. It can be used to generate (scaled)
+#'   exchangeable shock-size arrival intensities with
+#'   [calcExShockSizeArrivalIntensities()].
 #'
 #' @docType package
 #' @name rmo-package

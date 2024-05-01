@@ -9,26 +9,27 @@
 
 using namespace Rcpp;
 
-//! unscaled `uex_intensities` to `intensities`
+//! Stretch exchangeable shock arrival intensities to shock arrival intensities
 // [[Rcpp::export(rng=false)]]
-NumericVector uexi2i(const NumericVector& uexi) {
-    const auto d = static_cast<std::size_t>(uexi.size());
+NumericVector stretch_lambda(const NumericVector& lambda) {
+    const auto d = static_cast<std::size_t>(lambda.size());
     auto out = NumericVector(no_init((1 << d) - 1));
     for (auto j = std::size_t{0}; j < out.size(); ++j) {
         auto cnt = std::size_t{0};
         for (auto i = std::size_t{0}; i < d; ++i) {
             if (rmolib::random::internal::is_within(i, j + 1)) ++cnt;
         }
-        out[j] = uexi[cnt - 1];
+        out[j] = lambda[cnt - 1];
     }
 
     return out;
 }
 
-//! scaled `ex_intensities` to `ex_qmatrix`
+//! Pour exchangeable shock-size arrival intensities into MDCM generator matrix
+//! recursion algorithm
 // [[Rcpp::export(rng=false)]]
-NumericMatrix exi2exqm(const NumericVector& exi) {
-    const auto d = static_cast<std::size_t>(exi.size());
+NumericMatrix pour_theta(const NumericVector& theta) {
+    const auto d = static_cast<std::size_t>(theta.size());
     auto out = NumericMatrix(no_init(d + 1, d + 1));
     for (auto i = std::size_t{0}; i <= d; ++i) {
         auto values = out(i, _);
@@ -42,7 +43,7 @@ NumericMatrix exi2exqm(const NumericVector& exi) {
                                 static_cast<double>(d - i + 1) * out(i - 1, j);
             }
         } else if (0 == i) {
-            std::copy(exi.cbegin(), exi.cend(), ++values.begin());
+            std::copy(theta.cbegin(), theta.cend(), ++values.begin());
         }
         values[i] = -std::accumulate(std::next(values.cbegin(), i + 1),
                                      values.cend(), 0.);

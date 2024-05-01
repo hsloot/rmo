@@ -26,7 +26,7 @@
 #'
 #' @param n Number of samples (> 0)
 #' @param d Dimension (== 2)
-#' @param intensities Shock intensities (length == 3; all >= 0, any > 0)
+#' @param lambda Shock intensities (length == 3; all >= 0, any > 0)
 #'
 #' @examples
 #' rmo_esm_bivariate(10, 2, c(0.4, 0.3, 0.2))
@@ -35,17 +35,17 @@
 #' @include sample-helper.R
 #' @export
 rmo_esm_bivariate <- function( # nolint
-    n, d = 2, intensities = c(1, 1, 0)) {
+    n, d = 2, lambda = c(1, 1, 0)) {
   stopifnot(
     is.numeric(n) && 1L == length(n) && 0 == n %% 1 && n > 0 &&
       is.numeric(d) && 1L == length(d) && 0 == d %% 1 && d == 2 &&
-      is.numeric(intensities) && 3 == length(intensities) &&
-      all(intensities >= 0) && any(intensities > 0)
+      is.numeric(lambda) && 3 == length(lambda) &&
+      all(lambda >= 0) && any(lambda > 0)
   )
 
-  first_intensity <- intensities[[1]]
-  second_intensity <- intensities[[2]]
-  combined_intensity <- intensities[[3]]
+  first_intensity <- lambda[[1]]
+  second_intensity <- lambda[[2]]
+  combined_intensity <- lambda[[3]]
 
   out <- matrix(nrow = n, ncol = 2)
   for (i in 1:n) {
@@ -68,7 +68,7 @@ rmo_esm_bivariate <- function( # nolint
 #'
 #' @param n Number of samples (> 0)
 #' @param d Dimension (== 2)
-#' @param ex_intensities Exchangeable shock intensities
+#' @param theta Exchangeable shock intensities
 #'   (length == 2; all >= 0, any > 0)
 #'
 #' @examples
@@ -78,22 +78,22 @@ rmo_esm_bivariate <- function( # nolint
 #' @include sample-helper.R
 #' @export
 rexmo_mdcm_bivariate <- function( # nolint
-    n, d = 2, ex_intensities = c(1, 0)) {
+    n, d = 2, theta = c(1, 0)) {
   stopifnot(
     is.numeric(n) && 1L == length(n) && 0 == n %% 1 && n > 0 &&
       is.numeric(d) && 1L == length(d) && 0 == d %% 1 && d == 2 &&
-      is.numeric(ex_intensities) && 2 == length(ex_intensities) &&
-      all(ex_intensities >= 0) && any(ex_intensities > 0)
+      is.numeric(theta) && 2 == length(theta) &&
+      all(theta >= 0) && any(theta > 0)
   )
 
   ## convert to unscaled exchangeable intensities
-  ex_intensities <- sapply(1:d, function(i) ex_intensities[i] / choose(d, i))
+  lambda <- sapply(1:d, function(i) theta[i] / choose(d, i))
 
   ## calculate the transition intensities for all states
-  first_transition_intensity <- 2 * ex_intensities[[1]] + ex_intensities[[2]]
-  second_transition_intensity <- ex_intensities[[1]] + ex_intensities[[2]]
+  first_transition_intensity <- 2 * lambda[[1]] + lambda[[2]]
+  second_transition_intensity <- lambda[[1]] + lambda[[2]]
   ## calculate the transition probabilities for all states
-  first_transition_prob <- c(2 * ex_intensities[[1]], ex_intensities[[2]]) /
+  first_transition_prob <- c(2 * lambda[[1]], lambda[[2]]) /
     first_transition_intensity
 
   out <- matrix(nrow = n, ncol = 2)

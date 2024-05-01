@@ -21,25 +21,25 @@ actual_fn <- function(x, lambda) {
   x / (x + lambda)
 }
 
-test_that("`valueOf` calculates expected values", {
+test_that("`calcIterativeDifference` calculates expected values", {
   expect_equal(
-    valueOf(bf_exponential, x),
+    calcIterativeDifference(bf_exponential, x),
     actual_fn(x, bf_exponential@lambda)
   )
 
   expect_equal(
-    valueOf(bf_exponential, x),
-    valueOf0(bf_exponential, x)
+    calcIterativeDifference(bf_exponential, x),
+    calcValue(bf_exponential, x)
   )
 
   expect_equal(
-    valueOf(bf_exponential, x, cscale = cscale),
+    calcIterativeDifference(bf_exponential, x, cscale = cscale),
     actual_fn(cscale * x, bf_exponential@lambda)
   )
 
   expect_equal(
-    valueOf(bf_exponential, x, cscale = cscale),
-    valueOf(
+    calcIterativeDifference(bf_exponential, x, cscale = cscale),
+    calcIterativeDifference(
       bf_exponential, x,
       cscale = cscale,
       method = "levy",
@@ -48,8 +48,8 @@ test_that("`valueOf` calculates expected values", {
   )
 
   expect_equal(
-    valueOf(bf_exponential, x, cscale = cscale),
-    valueOf(
+    calcIterativeDifference(bf_exponential, x, cscale = cscale),
+    calcIterativeDifference(
       bf_exponential, x,
       cscale = cscale,
       method = "stieltjes",
@@ -60,18 +60,18 @@ test_that("`valueOf` calculates expected values", {
 
 d <- 7
 
-test_that("`exIntensities` calculates expected values", {
+test_that("`calcExShockSizeArrivalIntensities` calculates expected values", {
   expect_equal(
-    exIntensities(bf_exponential, d),
-    ex_intensities_naive(
+    calcExShockSizeArrivalIntensities(bf_exponential, d),
+    calc_ex_shock_size_arrival_intensities_naive(
       actual_fn, d,
       lambda = bf_exponential@lambda
     )
   )
 
   expect_equal(
-    exIntensities(bf_exponential, d, cscale = cscale),
-    ex_intensities_naive(
+    calcExShockSizeArrivalIntensities(bf_exponential, d, cscale = cscale),
+    calc_ex_shock_size_arrival_intensities_naive(
       actual_fn, d,
       lambda = bf_exponential@lambda,
       cscale = cscale
@@ -79,8 +79,8 @@ test_that("`exIntensities` calculates expected values", {
   )
 
   expect_equal(
-    exIntensities(bf_exponential, d, cscale = cscale),
-    exIntensities(
+    calcExShockSizeArrivalIntensities(bf_exponential, d, cscale = cscale),
+    calcExShockSizeArrivalIntensities(
       bf_exponential, d,
       cscale = cscale,
       method = "levy",
@@ -89,8 +89,8 @@ test_that("`exIntensities` calculates expected values", {
   )
 
   expect_equal(
-    exIntensities(bf_exponential, d, cscale = cscale),
-    exIntensities(
+    calcExShockSizeArrivalIntensities(bf_exponential, d, cscale = cscale),
+    calcExShockSizeArrivalIntensities(
       bf_exponential, d,
       cscale = cscale,
       method = "stieltjes", tolerance = testthat_tolerance()
@@ -98,18 +98,18 @@ test_that("`exIntensities` calculates expected values", {
   )
 })
 
-test_that("`exQMatrix` calculates expected values", {
+test_that("`calcMDCMGeneratorMatrix` calculates expected values", {
   expect_equal(
-    exQMatrix(bf_exponential, d),
-    ex_qmatrix_naive(
+    calcMDCMGeneratorMatrix(bf_exponential, d),
+    mdcm_generator_matrix_naive(
       actual_fn, d,
       lambda = bf_exponential@lambda
     )
   )
 
   expect_equal(
-    exQMatrix(bf_exponential, d, cscale = cscale),
-    ex_qmatrix_naive(
+    calcMDCMGeneratorMatrix(bf_exponential, d, cscale = cscale),
+    mdcm_generator_matrix_naive(
       actual_fn, d,
       cscale = cscale,
       lambda = bf_exponential@lambda
@@ -117,8 +117,8 @@ test_that("`exQMatrix` calculates expected values", {
   )
 
   expect_equal(
-    exQMatrix(bf_exponential, d, cscale = cscale),
-    exQMatrix(
+    calcMDCMGeneratorMatrix(bf_exponential, d, cscale = cscale),
+    calcMDCMGeneratorMatrix(
       bf_exponential, d,
       cscale = cscale,
       method = "levy", tolerance = testthat_tolerance()
@@ -126,8 +126,8 @@ test_that("`exQMatrix` calculates expected values", {
   )
 
   expect_equal(
-    exQMatrix(bf_exponential, d, cscale = cscale),
-    exQMatrix(
+    calcMDCMGeneratorMatrix(bf_exponential, d, cscale = cscale),
+    calcMDCMGeneratorMatrix(
       bf_exponential, d,
       cscale = cscale,
       method = "stieltjes", tolerance = testthat_tolerance()

@@ -69,18 +69,18 @@ lfm_cpp_threshold <- total_threshold / 25 * 10
 #' @importFrom stats ks.test
 #' @noRd
 #' @keywords internal test
-ks_test <- function(n, d, FUN, intensities) { # nolint
-  min_rate <- sum(intensities)
-  x <- min_rate * apply(FUN(n, d, intensities), 1, min)
+ks_test <- function(n, d, FUN, lambda) { # nolint
+  min_rate <- sum(lambda)
+  x <- min_rate * apply(FUN(n, d, lambda), 1, min)
   ks.test(x, stats::pexp)
 }
 
 #' @importFrom stats ks.test
 #' @noRd
 #' @keywords internal test
-ex_ks_test <- function(n, d, FUN, ex_intensities) { # nolint
-  min_rate <- sum(ex_intensities)
-  x <- min_rate * apply(FUN(n, d, ex_intensities), 1, min)
+ex_ks_test <- function(n, d, FUN, theta) { # nolint
+  min_rate <- sum(theta)
+  x <- min_rate * apply(FUN(n, d, theta), 1, min)
   ks.test(x, stats::pexp)
 }
 
@@ -124,7 +124,7 @@ lfm_ks_test <- function(n, d, FUN, # nolint
                         rate, rate_killing, rate_drift,
                         rjump_name, rjump_arg_list) {
   bf <- lfm_bf(rate, rate_killing, rate_drift, rjump_name, rjump_arg_list)
-  min_rate <- valueOf(bf, d, 0L)
+  min_rate <- calcIterativeDifference(bf, d, 0L)
   x <- min_rate * apply(
     FUN(n, d, rate, rate_killing, rate_drift, rjump_name, rjump_arg_list),
     1, min
@@ -158,30 +158,30 @@ test_that("ESM passes statistical unit test", {
     first = ConstantBernsteinFunction(constant = 2.73383),
     second = LinearBernsteinFunction(scale = 2.296823)
   )
-  intensities <- intensities(bf, d)
+  lambda <- calcShockArrivalIntensities(bf, d)
   expect_not_rejected(
-    ks_test(n, d, rmo_esm, intensities),
+    ks_test(n, d, rmo_esm, lambda),
     unit_threshold
   )
 
   bf <- AlphaStableBernsteinFunction(alpha = 0.595094)
-  intensities <- intensities(bf, d)
+  lambda <- calcShockArrivalIntensities(bf, d)
   expect_not_rejected(
-    ks_test(n, d, rmo_esm, intensities),
+    ks_test(n, d, rmo_esm, lambda),
     unit_threshold
   )
 
   bf <- InverseGaussianBernsteinFunction(eta = 0.5186811)
-  intensities <- intensities(bf, d)
+  lambda <- calcShockArrivalIntensities(bf, d)
   expect_not_rejected(
-    ks_test(n, d, rmo_esm, intensities),
+    ks_test(n, d, rmo_esm, lambda),
     unit_threshold
   )
 
   bf <- ExponentialBernsteinFunction(lambda = 0.3410571)
-  intensities <- intensities(bf, d)
+  lambda <- calcShockArrivalIntensities(bf, d)
   expect_not_rejected(
-    ks_test(n, d, rmo_esm, intensities),
+    ks_test(n, d, rmo_esm, lambda),
     unit_threshold
   )
 })
@@ -198,30 +198,30 @@ test_that("Arnold model passes statistical unit test", {
     first = ConstantBernsteinFunction(constant = 0.1819954),
     second = LinearBernsteinFunction(scale = 1.152357)
   )
-  intensities <- intensities(bf, d)
+  lambda <- calcShockArrivalIntensities(bf, d)
   expect_not_rejected(
-    ks_test(n, d, rmo_am, intensities),
+    ks_test(n, d, rmo_am, lambda),
     unit_threshold
   )
 
   bf <- AlphaStableBernsteinFunction(alpha = 0.6546152)
-  intensities <- intensities(bf, d)
+  lambda <- calcShockArrivalIntensities(bf, d)
   expect_not_rejected(
-    ks_test(n, d, rmo_am, intensities),
+    ks_test(n, d, rmo_am, lambda),
     unit_threshold
   )
 
   bf <- InverseGaussianBernsteinFunction(eta = 0.09929306)
-  intensities <- intensities(bf, d)
+  lambda <- calcShockArrivalIntensities(bf, d)
   expect_not_rejected(
-    ks_test(n, d, rmo_am, intensities),
+    ks_test(n, d, rmo_am, lambda),
     unit_threshold
   )
 
   bf <- ExponentialBernsteinFunction(lambda = 0.6385946)
-  intensities <- intensities(bf, d)
+  lambda <- calcShockArrivalIntensities(bf, d)
   expect_not_rejected(
-    ks_test(n, d, rmo_am, intensities),
+    ks_test(n, d, rmo_am, lambda),
     unit_threshold
   )
 })
@@ -237,30 +237,30 @@ test_that("Exchangeable Arnold model passes statistical unit test", {
     first = ConstantBernsteinFunction(constant = 2.112945),
     second = LinearBernsteinFunction(scale = 0.5088719)
   )
-  ex_intensities <- exIntensities(bf, d)
+  theta <- calcExShockSizeArrivalIntensities(bf, d)
   expect_not_rejected(
-    ex_ks_test(n, d, rexmo_mdcm, ex_intensities),
+    ex_ks_test(n, d, rexmo_mdcm, theta),
     unit_threshold
   )
 
   bf <- AlphaStableBernsteinFunction(alpha = 0.09870832)
-  ex_intensities <- exIntensities(bf, d)
+  theta <- calcExShockSizeArrivalIntensities(bf, d)
   expect_not_rejected(
-    ex_ks_test(n, d, rexmo_mdcm, ex_intensities),
+    ex_ks_test(n, d, rexmo_mdcm, theta),
     unit_threshold
   )
 
   bf <- InverseGaussianBernsteinFunction(eta = 4.687992)
-  ex_intensities <- exIntensities(bf, d)
+  theta <- calcExShockSizeArrivalIntensities(bf, d)
   expect_not_rejected(
-    ex_ks_test(n, d, rexmo_mdcm, ex_intensities),
+    ex_ks_test(n, d, rexmo_mdcm, theta),
     unit_threshold
   )
 
   bf <- ExponentialBernsteinFunction(lambda = 0.2047898)
-  ex_intensities <- exIntensities(bf, d)
+  theta <- calcExShockSizeArrivalIntensities(bf, d)
   expect_not_rejected(
-    ex_ks_test(n, d, rexmo_mdcm, ex_intensities),
+    ex_ks_test(n, d, rexmo_mdcm, theta),
     unit_threshold
   )
 
@@ -270,30 +270,30 @@ test_that("Exchangeable Arnold model passes statistical unit test", {
     first = ConstantBernsteinFunction(constant = 1.796975),
     second = LinearBernsteinFunction(scale = 0.3058118)
   )
-  ex_intensities <- exIntensities(bf, d)
+  theta <- calcExShockSizeArrivalIntensities(bf, d)
   expect_not_rejected(
-    ex_ks_test(n, d, rexmo_mdcm, ex_intensities),
+    ex_ks_test(n, d, rexmo_mdcm, theta),
     unit_threshold
   )
 
   bf <- AlphaStableBernsteinFunction(alpha = 0.9034687)
-  ex_intensities <- exIntensities(bf, d)
+  theta <- calcExShockSizeArrivalIntensities(bf, d)
   expect_not_rejected(
-    ex_ks_test(n, d, rexmo_mdcm, ex_intensities),
+    ex_ks_test(n, d, rexmo_mdcm, theta),
     unit_threshold
   )
 
   bf <- InverseGaussianBernsteinFunction(eta = 5.023343)
-  ex_intensities <- exIntensities(bf, d)
+  theta <- calcExShockSizeArrivalIntensities(bf, d)
   expect_not_rejected(
-    ex_ks_test(n, d, rexmo_mdcm, ex_intensities),
+    ex_ks_test(n, d, rexmo_mdcm, theta),
     unit_threshold
   )
 
   bf <- ExponentialBernsteinFunction(lambda = 0.6293527)
-  ex_intensities <- exIntensities(bf, d)
+  theta <- calcExShockSizeArrivalIntensities(bf, d)
   expect_not_rejected(
-    ex_ks_test(n, d, rexmo_mdcm, ex_intensities),
+    ex_ks_test(n, d, rexmo_mdcm, theta),
     unit_threshold
   )
 })

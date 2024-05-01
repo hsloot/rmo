@@ -15,10 +15,10 @@
 #' @importFrom methods setGeneric
 #' @export
 #' @examples
-#' defaultMethod(AlphaStableBernsteinFunction(alpha = 0.7))
+#' getDefaultMethodString(AlphaStableBernsteinFunction(alpha = 0.7))
 setGeneric(
-  "defaultMethod",
+  "getDefaultMethodString",
   function(object) {
-    standardGeneric("defaultMethod")
+    standardGeneric("getDefaultMethodString")
   }
 )

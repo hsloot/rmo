@@ -1,4 +1,4 @@
-value_of_naive <- function(f, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...) { # nolint
+calc_iterative_difference_naive <- function(f, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...) { # nolint
   if (isTRUE(0L == difference_order)) {
     out <- f(cscale * x, ...)
   } else {
@@ -17,11 +17,11 @@ value_of_naive <- function(f, x, difference_order = 0L, n = 1L, k = 0L, cscale =
   choose(n, k) * out
 }
 
-ex_intensities_naive <- function(f, d, cscale = 1, ...) {
+calc_ex_shock_size_arrival_intensities_naive <- function(f, d, cscale = 1, ...) { # nolint
   sapply(
     seq_len(d),
     function(i) {
-      value_of_naive(
+      calc_iterative_difference_naive(
         f,
         x = d - i,
         difference_order = i,
@@ -33,13 +33,13 @@ ex_intensities_naive <- function(f, d, cscale = 1, ...) {
   )
 }
 
-ex_qmatrix_naive <- function(f, d, cscale = 1, ...) {
+mdcm_generator_matrix_naive <- function(f, d, cscale = 1, ...) {
   outer(
     as.integer(c(0, seq_len(d))), as.integer(c(0, seq_len(d))),
     Vectorize(
       function(i, j) {
         if (j > i) {
-          value_of_naive(
+          calc_iterative_difference_naive(
             f,
             x = d - j,
             difference_order = j - i,

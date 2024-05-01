@@ -43,8 +43,8 @@ class mdcm_exmo_distribution {
 
         template <typename _Container>
         explicit param_type(const std::size_t dim,
-                            const _Container& ex_intensities)
-            : param_type{dim, ex_intensities.cbegin(), ex_intensities.cend()} {}
+                            const _Container& theta)
+            : param_type{dim, theta.cbegin(), theta.cend()} {}
 
         // Used for construction from a different specialization
         template <typename _ExMOParamType,
@@ -53,12 +53,12 @@ class mdcm_exmo_distribution {
                           is_exmo_param_type_v<_ExMOParamType>,
                       int> = 0>
         explicit param_type(_ExMOParamType&& parm)
-            : param_type{parm.dim(), parm.ex_intensities()} {}
+            : param_type{parm.dim(), parm.theta()} {}
 
         // compiler generated ctor and assignment op is sufficient
 
         auto dim() const { return dim_; }
-        auto ex_intensities() const {
+        auto theta() const {
             const auto& [intensity_parm, discrete_parm] = markov_parm_.front();
             auto out = discrete_parm.probabilities();
             std::transform(out.cbegin(), out.cend(), out.begin(),
@@ -95,7 +95,7 @@ class mdcm_exmo_distribution {
 
             if (!(dim == distance(first, last)))
                 throw std::domain_error(
-                    "ex_intensities vector has wrong length");
+                    "theta vector has wrong length");
         }
 
         void __init_empty() {
@@ -135,16 +135,16 @@ class mdcm_exmo_distribution {
             };
 
             markov_parm_.clear();
-            std::vector<_RealType> ex_intensities{first, last};
-            while (!ex_intensities.empty()) {
+            std::vector<_RealType> theta{first, last};
+            while (!theta.empty()) {
                 auto intensity_parm = exponential_parm_t{
-                    std::accumulate(ex_intensities.cbegin(),
-                                    ex_intensities.cend(), _RealType{0})};
-                auto discrete_parm = discrete_parm_t{ex_intensities};
+                    std::accumulate(theta.cbegin(),
+                                    theta.cend(), _RealType{0})};
+                auto discrete_parm = discrete_parm_t{theta};
                 markov_parm_.emplace_back(std::make_pair(
                     std::move(intensity_parm), std::move(discrete_parm)));
 
-                next_submodel(ex_intensities);
+                next_submodel(theta);
             }
             markov_parm_.shrink_to_fit();
         }
@@ -181,8 +181,8 @@ class mdcm_exmo_distribution {
 
     template <typename _Container>
     explicit mdcm_exmo_distribution(const std::size_t dim,
-                                    const _Container& ex_intensities)
-        : parm_{dim, ex_intensities} {}
+                                    const _Container& theta)
+        : parm_{dim, theta} {}
 
     explicit mdcm_exmo_distribution(const param_type& parm) : parm_{parm} {}
 
@@ -207,7 +207,7 @@ class mdcm_exmo_distribution {
     }
 
     auto dim() const { return parm_.dim(); }
-    auto ex_intensities() const { return parm_.ex_intensities(); }
+    auto theta() const { return parm_.theta(); }
 
     param_type param() const { return parm_; }
     void param(const param_type& parm) { parm_ = parm; }

@@ -1,7 +1,7 @@
 # Snapshot tests for `rmo`
 
     Code
-      rmo(10, 3, intensities)
+      rmo(10, 3, lambda)
     Output
                  [,1]      [,2]      [,3]
        [1,] 0.3647525 0.8628091 0.3647525
@@ -18,7 +18,7 @@
 ---
 
     Code
-      rmo(10, 3, intensities, method = "AM")
+      rmo(10, 3, lambda, method = "AM")
     Output
                   [,1]       [,2]       [,3]
        [1,] 0.06880645 0.06880645 0.06880645
@@ -35,7 +35,7 @@
 ---
 
     Code
-      rmo(10, 3, intensities, method = "ESM")
+      rmo(10, 3, lambda, method = "ESM")
     Output
                   [,1]       [,2]       [,3]
        [1,] 0.09217117 0.09217117 0.09217117
@@ -52,7 +52,7 @@
 # Snapshot tests for `rexmo`
 
     Code
-      rexmo(10, 3, ex_intensities)
+      rexmo(10, 3, theta)
     Output
                   [,1]       [,2]       [,3]
        [1,] 2.82740734 0.51497959 0.43866507
@@ -69,7 +69,7 @@
 ---
 
     Code
-      rexmo(10, 3, ex_intensities, method = "MDCM")
+      rexmo(10, 3, theta, method = "MDCM")
     Output
                    [,1]        [,2]        [,3]
        [1,] 0.889558444 0.457819425 1.962147001
@@ -86,7 +86,7 @@
 ---
 
     Code
-      rexmo(10, 3, ex_intensities, method = "AM")
+      rexmo(10, 3, theta, method = "AM")
     Output
                     [,1]       [,2]         [,3]
        [1,] 0.4053342602 0.40533426 0.4245635443
@@ -103,7 +103,7 @@
 ---
 
     Code
-      rexmo(10, 3, ex_intensities, method = "ESM")
+      rexmo(10, 3, theta, method = "ESM")
     Output
                     [,1]         [,2]         [,3]
        [1,] 1.0151254316 0.0773239334 0.1795608563

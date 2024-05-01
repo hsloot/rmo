@@ -27,7 +27,7 @@ class generic_param_type {
     template <typename _InputIterator>
     explicit generic_param_type(const std::size_t dim, _InputIterator first,
                                 _InputIterator last)
-        : dim_{dim}, intensities_{first, last} {}
+        : dim_{dim}, lambda_{first, last} {}
 
     generic_param_type(const std::size_t dim, std::initializer_list<double> wl)
         : generic_param_type{dim, wl.begin(), wl.end()} {}
@@ -38,16 +38,16 @@ class generic_param_type {
                       rmolib::random::is_mo_param_type_v<_MOParamType>,
                   int>::type = 0>
     explicit generic_param_type(_MOParamType&& parm)
-        : dim_{parm.dim()}, intensities_{parm.intensities()} {}
+        : dim_{parm.dim()}, lambda_{parm.lambda()} {}
 
     // compiler generated ctor and assignment op is sufficient
 
     auto dim() const { return dim_; }
-    auto intensities() const { return intensities_; }
+    auto lambda() const { return lambda_; }
 
    private:
     std::size_t dim_{1};
-    std::vector<double> intensities_ = {1.};
+    std::vector<double> lambda_ = {1.};
 };
 
 }  // namespace test_esm_mo_distribution
@@ -59,7 +59,7 @@ void tester_distribution<esm_mo_dist_t, generic_parm_t>::__param_test(
     const generic_param_type& test_parm) const {
     const auto dist = distribution_type{test_parm};
     expect_true(dist.dim() == test_parm.dim());
-    CATCH_CHECK_THAT(dist.intensities(), EqualsApprox(test_parm.intensities()));
+    CATCH_CHECK_THAT(dist.lambda(), EqualsApprox(test_parm.lambda()));
 }
 
 using dist_tester_t = tester_distribution<esm_mo_dist_t, generic_parm_t>;

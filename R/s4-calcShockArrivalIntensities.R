@@ -1,9 +1,9 @@
 #' Calculate the shock-arrival intensities
 #'
-#' Calculates the *shock-arrival intensities*, the `intensities` parameter for
+#' Calculates the *shock-arrival intensities*, the distribution parameter for
 #' [rmo()].
 #'
-#' @inheritParams uexIntensities
+#' @inheritParams calcExShockArrivalIntensities
 #'
 #' @details
 #' For a given Bernstein function, the shock-arrival intensities are defined as
@@ -31,10 +31,10 @@
 #' @export
 #' @examples
 #' bf <- AlphaStableBernsteinFunction(alpha = 0.7)
-#' intensities(bf, 3)
+#' calcShockArrivalIntensities(bf, 3)
 setGeneric(
-  "intensities",
+  "calcShockArrivalIntensities",
   function(object, d, cscale = 1, ...) {
-    standardGeneric("intensities")
+    standardGeneric("calcShockArrivalIntensities")
   }
 )

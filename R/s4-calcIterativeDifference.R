@@ -11,7 +11,7 @@
 #' numerically stable. Consequently, the various alternative approaches are used
 #' dependent on the class of the Bernstein function.
 #'
-#' @inheritParams valueOf0
+#' @inheritParams calcValue
 #' @param difference_order A nonnegative integer with the order of the
 #'   alternating iterated forward differences taken on the Bernstein function.
 #' @param n,k Nonnegative numbers for the binomial factor.
@@ -22,10 +22,10 @@
 #' @export
 #' @examples
 #' bf <- AlphaStableBernsteinFunction(alpha = 0.7)
-#' valueOf(bf, 1:5)
+#' calcIterativeDifference(bf, 1:5)
 setGeneric(
-  "valueOf",
+  "calcIterativeDifference",
   function(object, x, difference_order = 0L, n = 1L, k = 0L, cscale = 1, ...) { # nolint
-    standardGeneric("valueOf")
+    standardGeneric("calcIterativeDifference")
   }
 )

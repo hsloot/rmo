@@ -16,9 +16,9 @@ actual_fn <- function(x, alpha, lambda) {
   x^alpha + 1 / (1 + lambda / x)
 }
 
-test_that("`valueOf` calculates expected values", {
+test_that("`calcIterativeDifference` calculates expected values", {
   expect_equal(
-    valueOf(bf_sum_of_bfs, x),
+    calcIterativeDifference(bf_sum_of_bfs, x),
     actual_fn(
       x,
       alpha = bf_sum_of_bfs@first@alpha,
@@ -27,12 +27,12 @@ test_that("`valueOf` calculates expected values", {
   )
 
   expect_equal(
-    valueOf(bf_sum_of_bfs, x),
-    valueOf0(bf_sum_of_bfs, x)
+    calcIterativeDifference(bf_sum_of_bfs, x),
+    calcValue(bf_sum_of_bfs, x)
   )
 
   expect_equal(
-    valueOf(bf_sum_of_bfs, x, cscale = cscale),
+    calcIterativeDifference(bf_sum_of_bfs, x, cscale = cscale),
     actual_fn(
       cscale * x,
       alpha = bf_sum_of_bfs@first@alpha,
@@ -43,10 +43,10 @@ test_that("`valueOf` calculates expected values", {
 
 d <- 7
 
-test_that("`exIntensities` calculates expected values", {
+test_that("`calcExShockSizeArrivalIntensities` calculates expected values", {
   expect_equal(
-    exIntensities(bf_sum_of_bfs, d),
-    ex_intensities_naive(
+    calcExShockSizeArrivalIntensities(bf_sum_of_bfs, d),
+    calc_ex_shock_size_arrival_intensities_naive(
       actual_fn, d,
       alpha = bf_sum_of_bfs@first@alpha,
       lambda = bf_sum_of_bfs@second@lambda
@@ -54,8 +54,8 @@ test_that("`exIntensities` calculates expected values", {
   )
 
   expect_equal(
-    exIntensities(bf_sum_of_bfs, d, cscale = cscale),
-    ex_intensities_naive(
+    calcExShockSizeArrivalIntensities(bf_sum_of_bfs, d, cscale = cscale),
+    calc_ex_shock_size_arrival_intensities_naive(
       actual_fn, d,
       alpha = bf_sum_of_bfs@first@alpha,
       lambda = bf_sum_of_bfs@second@lambda,
@@ -64,8 +64,8 @@ test_that("`exIntensities` calculates expected values", {
   )
 
   expect_equal(
-    exIntensities(bf_sum_of_bfs, d, cscale = cscale),
-    exIntensities(
+    calcExShockSizeArrivalIntensities(bf_sum_of_bfs, d, cscale = cscale),
+    calcExShockSizeArrivalIntensities(
       bf_sum_of_bfs, d,
       cscale = cscale,
       method = "levy",
@@ -74,8 +74,8 @@ test_that("`exIntensities` calculates expected values", {
   )
 
   expect_equal(
-    exIntensities(bf_sum_of_bfs, d, cscale = cscale),
-    exIntensities(
+    calcExShockSizeArrivalIntensities(bf_sum_of_bfs, d, cscale = cscale),
+    calcExShockSizeArrivalIntensities(
       bf_sum_of_bfs, d,
       cscale = cscale,
       method = "stieltjes", tolerance = testthat_tolerance()
@@ -83,10 +83,10 @@ test_that("`exIntensities` calculates expected values", {
   )
 })
 
-test_that("`exQMatrix` calculates expected values", {
+test_that("`calcMDCMGeneratorMatrix` calculates expected values", {
   expect_equal(
-    exQMatrix(bf_sum_of_bfs, d),
-    ex_qmatrix_naive(
+    calcMDCMGeneratorMatrix(bf_sum_of_bfs, d),
+    mdcm_generator_matrix_naive(
       actual_fn, d,
       alpha = bf_sum_of_bfs@first@alpha,
       lambda = bf_sum_of_bfs@second@lambda
@@ -94,8 +94,8 @@ test_that("`exQMatrix` calculates expected values", {
   )
 
   expect_equal(
-    exQMatrix(bf_sum_of_bfs, d, cscale = cscale),
-    ex_qmatrix_naive(
+    calcMDCMGeneratorMatrix(bf_sum_of_bfs, d, cscale = cscale),
+    mdcm_generator_matrix_naive(
       actual_fn, d,
       alpha = bf_sum_of_bfs@first@alpha,
       lambda = bf_sum_of_bfs@second@lambda,
@@ -104,8 +104,8 @@ test_that("`exQMatrix` calculates expected values", {
   )
 
   expect_equal(
-    exQMatrix(bf_sum_of_bfs, d, cscale = cscale),
-    exQMatrix(
+    calcMDCMGeneratorMatrix(bf_sum_of_bfs, d, cscale = cscale),
+    calcMDCMGeneratorMatrix(
       bf_sum_of_bfs, d,
       cscale = cscale,
       method = "levy", tolerance = testthat_tolerance()
@@ -113,8 +113,8 @@ test_that("`exQMatrix` calculates expected values", {
   )
 
   expect_equal(
-    exQMatrix(bf_sum_of_bfs, d, cscale = cscale),
-    exQMatrix(
+    calcMDCMGeneratorMatrix(bf_sum_of_bfs, d, cscale = cscale),
+    calcMDCMGeneratorMatrix(
       bf_sum_of_bfs, d,
       cscale = cscale,
       method = "stieltjes", tolerance = testthat_tolerance()

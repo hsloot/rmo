@@ -38,9 +38,9 @@ actual_fn <- function(x, scale, alpha) {
   scale * x^alpha
 }
 
-test_that("`valueOf` calculates expected values", {
+test_that("`calcIterativeDifference` calculates expected values", {
   expect_equal(
-    valueOf(bf_scaled_bf, x),
+    calcIterativeDifference(bf_scaled_bf, x),
     actual_fn(
       x,
       scale = bf_scaled_bf@scale, alpha = bf_scaled_bf@original@alpha
@@ -48,12 +48,12 @@ test_that("`valueOf` calculates expected values", {
   )
 
   expect_equal(
-    valueOf(bf_scaled_bf, x),
-    valueOf0(bf_scaled_bf, x)
+    calcIterativeDifference(bf_scaled_bf, x),
+    calcValue(bf_scaled_bf, x)
   )
 
   expect_equal(
-    valueOf(bf_scaled_bf, x, cscale = cscale),
+    calcIterativeDifference(bf_scaled_bf, x, cscale = cscale),
     actual_fn(
       cscale * x,
       scale = bf_scaled_bf@scale,
@@ -64,10 +64,10 @@ test_that("`valueOf` calculates expected values", {
 
 d <- 7
 
-test_that("`exIntensities` calculates expected values", {
+test_that("`calcExShockSizeArrivalIntensities` calculates expected values", {
   expect_equal(
-    exIntensities(bf_scaled_bf, d),
-    ex_intensities_naive(
+    calcExShockSizeArrivalIntensities(bf_scaled_bf, d),
+    calc_ex_shock_size_arrival_intensities_naive(
       actual_fn, d,
       scale = bf_scaled_bf@scale,
       alpha = bf_scaled_bf@original@alpha
@@ -75,8 +75,8 @@ test_that("`exIntensities` calculates expected values", {
   )
 
   expect_equal(
-    exIntensities(bf_scaled_bf, d, cscale = cscale),
-    ex_intensities_naive(
+    calcExShockSizeArrivalIntensities(bf_scaled_bf, d, cscale = cscale),
+    calc_ex_shock_size_arrival_intensities_naive(
       actual_fn, d,
       scale = bf_scaled_bf@scale,
       alpha = bf_scaled_bf@original@alpha,
@@ -85,8 +85,8 @@ test_that("`exIntensities` calculates expected values", {
   )
 
   expect_equal(
-    exIntensities(bf_scaled_bf, d, cscale = cscale),
-    exIntensities(
+    calcExShockSizeArrivalIntensities(bf_scaled_bf, d, cscale = cscale),
+    calcExShockSizeArrivalIntensities(
       bf_scaled_bf, d,
       cscale = cscale,
       method = "levy",
@@ -95,8 +95,8 @@ test_that("`exIntensities` calculates expected values", {
   )
 
   expect_equal(
-    exIntensities(bf_scaled_bf, d, cscale = cscale),
-    exIntensities(
+    calcExShockSizeArrivalIntensities(bf_scaled_bf, d, cscale = cscale),
+    calcExShockSizeArrivalIntensities(
       bf_scaled_bf, d,
       cscale = cscale,
       method = "stieltjes", tolerance = testthat_tolerance()
@@ -104,10 +104,10 @@ test_that("`exIntensities` calculates expected values", {
   )
 })
 
-test_that("`exQMatrix` calculates expected values", {
+test_that("`calcMDCMGeneratorMatrix` calculates expected values", {
   expect_equal(
-    exQMatrix(bf_scaled_bf, d),
-    ex_qmatrix_naive(
+    calcMDCMGeneratorMatrix(bf_scaled_bf, d),
+    mdcm_generator_matrix_naive(
       actual_fn, d,
       scale = bf_scaled_bf@scale,
       alpha = bf_scaled_bf@original@alpha
@@ -115,8 +115,8 @@ test_that("`exQMatrix` calculates expected values", {
   )
 
   expect_equal(
-    exQMatrix(bf_scaled_bf, d, cscale = cscale),
-    ex_qmatrix_naive(
+    calcMDCMGeneratorMatrix(bf_scaled_bf, d, cscale = cscale),
+    mdcm_generator_matrix_naive(
       actual_fn, d,
       cscale = cscale,
       scale = bf_scaled_bf@scale,
@@ -125,8 +125,8 @@ test_that("`exQMatrix` calculates expected values", {
   )
 
   expect_equal(
-    exQMatrix(bf_scaled_bf, d, cscale = cscale),
-    exQMatrix(
+    calcMDCMGeneratorMatrix(bf_scaled_bf, d, cscale = cscale),
+    calcMDCMGeneratorMatrix(
       bf_scaled_bf, d,
       cscale = cscale,
       method = "levy", tolerance = testthat_tolerance()
@@ -134,8 +134,8 @@ test_that("`exQMatrix` calculates expected values", {
   )
 
   expect_equal(
-    exQMatrix(bf_scaled_bf, d, cscale = cscale),
-    exQMatrix(
+    calcMDCMGeneratorMatrix(bf_scaled_bf, d, cscale = cscale),
+    calcMDCMGeneratorMatrix(
       bf_scaled_bf, d,
       cscale = cscale,
       method = "stieltjes", tolerance = testthat_tolerance()

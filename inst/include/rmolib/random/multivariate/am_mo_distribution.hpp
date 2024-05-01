@@ -42,8 +42,8 @@ class am_mo_distribution {
 
         template <typename _Container>
         explicit param_type(const std::size_t dim,
-                            const _Container& intensities)
-            : param_type{dim, intensities.cbegin(), intensities.cend()} {}
+                            const _Container& lambda)
+            : param_type{dim, lambda.cbegin(), lambda.cend()} {}
 
         // Used for construction from a different specialization
         template <
@@ -52,12 +52,12 @@ class am_mo_distribution {
                                  is_mo_param_type_v<_MOParamType>,
                              int> = 0>
         explicit param_type(_MOParamType&& parm)
-            : param_type{parm.dim(), parm.intensities()} {}
+            : param_type{parm.dim(), parm.lambda()} {}
 
         // compiler generated ctor and assignment op is sufficient
 
         auto dim() const { return dim_; }
-        auto intensities() const {
+        auto lambda() const {
             const auto& [poisson_parm, discrete_parm] = compound_poisson_parm_;
             auto out = discrete_parm.probabilities();
             std::transform(out.cbegin(), out.cend(), out.begin(),
@@ -94,10 +94,10 @@ class am_mo_distribution {
 
             if (!(bit::bit_fill<std::size_t>(0, dim, true) ==
                   distance(first, last)))
-                throw std::domain_error("intensities vector has wrong size");
+                throw std::domain_error("lambda vector has wrong size");
 
             if (!(std::accumulate(first, last, _RealType{0}) > 0))
-                throw std::domain_error("sum of intensities must be positive");
+                throw std::domain_error("sum of lambda must be positive");
         }
 
         void __init_empty() {
@@ -157,8 +157,8 @@ class am_mo_distribution {
 
     template <typename _Container>
     explicit am_mo_distribution(const std::size_t dim,
-                                const _Container& intensities)
-        : parm_{dim, intensities} {}
+                                const _Container& lambda)
+        : parm_{dim, lambda} {}
 
     explicit am_mo_distribution(const param_type& parm) : parm_{parm} {}
 
@@ -182,7 +182,7 @@ class am_mo_distribution {
     }
 
     auto dim() const { return parm_.dim(); }
-    auto intensities() const { return parm_.intensities(); }
+    auto lambda() const { return parm_.lambda(); }
 
     param_type param() const { return parm_; }
     void param(const param_type& parm) { parm_ = parm; }

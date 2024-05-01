@@ -4,14 +4,14 @@
 \alias{rexmo}
 \title{Simulate from exchangeable Marshall–Olkin distributions}
 \usage{
-rexmo(n, d, ex_intensities, method = c("MDCM", "AM", "ESM"))
+rexmo(n, d, theta, method = c("MDCM", "AM", "ESM"))
 }
 \arguments{
 \item{n}{An integer for the \emph{number of samples}.}
 
 \item{d}{An integer for the \emph{dimension}.}
 
-\item{ex_intensities}{A numeric vector with the exchangeable \emph{shock-size
+\item{theta}{A numeric vector with the exchangeable \emph{shock-size
 arrival intensities}.}
 
 \item{method}{A string indicating which sampling algorithm should be used.

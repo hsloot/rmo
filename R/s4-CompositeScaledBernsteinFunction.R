@@ -11,8 +11,9 @@
 #'   composition.
 #' @slot original The original Bernstein function.
 #'
-#' @seealso [valueOf()], [intensities()], [uexIntensities()], [exIntensities()],
-#'   [exQMatrix()], [rextmo()], [rpextmo()]
+#' @seealso [calcIterativeDifference()], [calcShockArrivalIntensities()],
+#'   [calcExShockArrivalIntensities()], [calcExShockSizeArrivalIntensities()],
+#'   [calcMDCMGeneratorMatrix()], [rextmo()], [rpextmo()]
 #'
 #' @docType class
 #' @name CompositeScaledBernsteinFunction-class
@@ -90,27 +91,27 @@ setMethod( # nocov start
 
 #' @rdname hidden_aliases
 #'
-#' @inheritParams valueOf0
+#' @inheritParams calcValue
 #'
-#' @include s4-valueOf0.R
+#' @include s4-calcValue.R
 #' @export
 setMethod(
-  "valueOf0", "CompositeScaledBernsteinFunction",
+  "calcValue", "CompositeScaledBernsteinFunction",
   function(object, x, cscale = 1, ...) {
-    valueOf(object, x, cscale = cscale)
+    calcIterativeDifference(object, x, cscale = cscale)
   }
 )
 
 #' @rdname hidden_aliases
 #'
-#' @inheritParams valueOf
+#' @inheritParams calcIterativeDifference
 #'
-#' @include s4-valueOf.R
+#' @include s4-calcIterativeDifference.R
 #' @export
 setMethod(
-  "valueOf", "CompositeScaledBernsteinFunction",
+  "calcIterativeDifference", "CompositeScaledBernsteinFunction",
   function(object, x, difference_order = 0L, n = 1, k = 0, cscale = 1, ...) {
-    valueOf(
+    calcIterativeDifference(
       object@original, x,
       difference_order = difference_order,
       n = n, k = k,

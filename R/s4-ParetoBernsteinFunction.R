@@ -39,8 +39,10 @@
 #' @references
 #'   \insertAllCited{}
 #'
-#' @seealso [levyDensity()],  [valueOf()], [intensities()], [uexIntensities()],
-#'   [exIntensities()], [exQMatrix()], [rextmo()], [rpextmo()]
+#' @seealso [getLevyDensity()],  [calcIterativeDifference()],
+#'   [calcShockArrivalIntensities()], [calcExShockArrivalIntensities()],
+#'   [calcExShockSizeArrivalIntensities()], [calcMDCMGeneratorMatrix()],
+#'   [rextmo()], [rpextmo()]
 #'
 #' @docType class
 #' @name ParetoBernsteinFunction-class
@@ -58,7 +60,7 @@
 #'
 #' # Create a Lévy density
 #' bf <- ParetoBernsteinFunction(alpha = 0.7, x0 = 1e-2)
-#' levy_density <- levyDensity(bf)
+#' levy_density <- getLevyDensity(bf)
 #' integrate(
 #'   function(x) pmin(1, x) * levy_density(x),
 #'   lower = attr(levy_density, "lower"),
@@ -67,27 +69,27 @@
 #'
 #' # Evaluate the Bernstein function
 #' bf <- ParetoBernsteinFunction(alpha = 0.3, x0 = 1)
-#' valueOf(bf, 1:5)
+#' calcIterativeDifference(bf, 1:5)
 #'
 #' # Calculate shock-arrival intensities
 #' bf <- ParetoBernsteinFunction(alpha = 0.8, x0 = 1e-2)
-#' intensities(bf, 3)
-#' intensities(bf, 3, tolerance = 1e-4)
+#' calcShockArrivalIntensities(bf, 3)
+#' calcShockArrivalIntensities(bf, 3, tolerance = 1e-4)
 #'
 #' # Calculate exchangeable shock-arrival intensities
 #' bf <- ParetoBernsteinFunction(alpha = 0.4, x0 = 1e-2)
-#' uexIntensities(bf, 3)
-#' uexIntensities(bf, 3, tolerance = 1e-4)
+#' calcExShockArrivalIntensities(bf, 3)
+#' calcExShockArrivalIntensities(bf, 3, tolerance = 1e-4)
 #'
 #' # Calculate exchangeable shock-size arrival intensities
 #' bf <- ParetoBernsteinFunction(alpha = 0.2, x0 = 1e-2)
-#' exIntensities(bf, 3)
-#' exIntensities(bf, 3, tolerance = 1e-4)
+#' calcExShockSizeArrivalIntensities(bf, 3)
+#' calcExShockSizeArrivalIntensities(bf, 3, tolerance = 1e-4)
 #'
 #' # Calculate the Markov generator
 #' bf <- ParetoBernsteinFunction(alpha = 0.6, x0 = 1e-2)
-#' exQMatrix(bf, 3)
-#' exQMatrix(bf, 3, tolerance = 1e-4)
+#' calcMDCMGeneratorMatrix(bf, 3)
+#' calcMDCMGeneratorMatrix(bf, 3, tolerance = 1e-4)
 ParetoBernsteinFunction <- setClass("ParetoBernsteinFunction", # nolint
   contains = "LevyBernsteinFunction",
   slots = c(alpha = "numeric", x0 = "numeric")
@@ -149,12 +151,12 @@ setMethod( # nocov start
 
 #' @rdname hidden_aliases
 #'
-#' @inheritParams levyDensity
+#' @inheritParams getLevyDensity
 #'
-#' @include s4-levyDensity.R
+#' @include s4-getLevyDensity.R
 #' @export
 setMethod(
-  "levyDensity", "ParetoBernsteinFunction",
+  "getLevyDensity", "ParetoBernsteinFunction",
   function(object) {
     structure(
       function(x) {
@@ -167,14 +169,14 @@ setMethod(
 
 #' @rdname hidden_aliases
 #'
-#' @inheritParams valueOf0
+#' @inheritParams calcValue
 #'
-#' @include s4-valueOf0.R
+#' @include s4-calcValue.R
 #' @importFrom checkmate assert qassert check_numeric check_complex
 #' @importFrom stats pgamma
 #' @export
 setMethod(
-  "valueOf0", "ParetoBernsteinFunction",
+  "calcValue", "ParetoBernsteinFunction",
   function(object, x, cscale = 1, ...) {
     assert(
       combine = "or",

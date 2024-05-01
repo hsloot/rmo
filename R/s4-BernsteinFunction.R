@@ -126,8 +126,9 @@ NULL
 #' }
 #' The evaluation of Bernstein functions using this formula is usually not
 #' numerically stable. Consequently, the various alternative approaches are used
-#' dependent on the class of the Bernstein function. Use the method [valueOf()]
-#' to evaluate or approximate this expression for a given Bernstein function.
+#' dependent on the class of the Bernstein function. Use the method
+#' [calcIterativeDifference()] to evaluate or approximate this expression for a
+#' given Bernstein function.
 #'
 #' ## Exchangeable Marshall–Olkin distributions
 #' An alternative stochastic representation of an exchangeable Marshall–Olkin
@@ -146,8 +147,8 @@ NULL
 #' The evaluation of the infinitesimal generator matrix using this formula is
 #' usually not numerically stable. Consequently, the various alternative
 #' approaches are used dependent on the class of the Bernstein function. Use the
-#' method [exQMatrix()] to evaluate or approximate this expression for a given
-#' Bernstein function.
+#' method [calcMDCMGeneratorMatrix()] to evaluate or approximate this expression
+#' for a given Bernstein function.
 #'
 #' For the *all-alive-state*, the generator's first row has the interpretation
 #' of *exchangeable shock-size-arrival intensities*:
@@ -158,8 +159,8 @@ NULL
 #' }
 #' As noted above, their evaluation is usually not numerically stable, and
 #' various alternative approaches are used dependent on the class of the
-#' Bernstein function. Use the method [exIntensities()] to evaluate or
-#' approximate them.
+#' Bernstein function. Use the method [calcExShockSizeArrivalIntensities()] to
+#' evaluate or approximate them.
 #'
 #' ## The Exogenous shock model and the Arnold model
 #' Another alternative stochastic representation of Marshall–Olkin distributions
@@ -169,8 +170,9 @@ NULL
 #'   \insertRef{Schilling2012a}{rmo}
 #'   \insertRef{Sloot2022a}{rmo}
 #'
-#' @seealso [valueOf()], [intensities()], [uexIntensities()], [exIntensities()],
-#'   [exQMatrix()], [rextmo()], [rpextmo()]
+#' @seealso [calcIterativeDifference()], [calcShockArrivalIntensities()],
+#'   [calcExShockArrivalIntensities()], [calcExShockSizeArrivalIntensities()],
+#'   [calcMDCMGeneratorMatrix()], [rextmo()], [rpextmo()]
 #'
 #' @docType class
 #' @name BernsteinFunction-class
@@ -194,40 +196,46 @@ NULL
 
 #' @rdname hidden_aliases
 #'
-#' @inheritParams uexIntensities
+#' @inheritParams calcExShockArrivalIntensities
 #'
-#' @include s4-uexIntensities.R s4-valueOf.R
+#' @include s4-calcExShockArrivalIntensities.R s4-calcIterativeDifference.R
 #' @export
 setMethod(
-  "uexIntensities", "BernsteinFunction",
+  "calcExShockArrivalIntensities", "BernsteinFunction",
   function(object, d, cscale = 1, ...) {
-    sapply(1:d, function(i) valueOf(object, d - i, i, cscale = cscale, ...))
+    sapply(
+      1:d,
+      function(i) {
+        calcIterativeDifference(object, d - i, i, cscale = cscale, ...)
+      }
+    )
   }
 )
 
 #' @rdname hidden_aliases
 #'
-#' @inheritParams exIntensities
+#' @inheritParams calcExShockSizeArrivalIntensities
 #'
-#' @include s4-exIntensities.R s4-valueOf0.R s4-valueOf.R
+#' @include s4-calcExShockSizeArrivalIntensities.R s4-calcValue.R
+#'   s4-calcIterativeDifference.R
 #' @export
 setMethod(
-  "exIntensities", "BernsteinFunction",
+  "calcExShockSizeArrivalIntensities", "BernsteinFunction",
   function(object, d, cscale = 1, ...) {
     if (d == 2) {
       out <- d * (
-        valueOf0(object, d, cscale = cscale) -
-          valueOf0(object, d - 1, cscale = cscale)
+        calcValue(object, d, cscale = cscale) -
+          calcValue(object, d - 1, cscale = cscale)
       )
     } else {
       out <- c(
         d * (
-             valueOf0(object, d, cscale = cscale) -
-               valueOf0(object, d - 1, cscale = cscale)),
+             calcValue(object, d, cscale = cscale) -
+               calcValue(object, d - 1, cscale = cscale)),
         sapply(
           2:(d - 1),
           function(i) {
-            valueOf(
+            calcIterativeDifference(
               object, d - i, i,
               n = d, k = i, cscale = cscale, ...
             )
@@ -236,32 +244,38 @@ setMethod(
       )
     }
 
-    c(out, pmax(valueOf0(object, d, cscale = cscale) - sum(out), 0))
+    c(out, pmax(calcValue(object, d, cscale = cscale) - sum(out), 0))
   }
 )
 
 #' @rdname hidden_aliases
 #'
-#' @inheritParams intensities
+#' @inheritParams calcShockArrivalIntensities
 #'
-#' @include  s4-intensities.R s4-uexIntensities.R RcppExports.R
+#' @include  s4-calcShockArrivalIntensities.R s4-calcExShockArrivalIntensities.R
+#'   RcppExports.R
 #' @export
 setMethod(
-  "intensities", "BernsteinFunction",
+  "calcShockArrivalIntensities", "BernsteinFunction",
   function(object, d, cscale = 1, ...) {
-    uexi2i(uexIntensities(object, d, cscale = cscale, ...))
+    stretch_lambda(
+      calcExShockArrivalIntensities(object, d, cscale = cscale, ...)
+    )
   }
 )
 
 #' @rdname hidden_aliases
 #'
-#' @inheritParams exQMatrix
+#' @inheritParams calcMDCMGeneratorMatrix
 #'
-#' @include s4-exQMatrix.R s4-exIntensities.R RcppExports.R
+#' @include s4-calcMDCMGeneratorMatrix.R s4-calcExShockSizeArrivalIntensities.R
+#'   RcppExports.R
 #' @export
 setMethod(
-  "exQMatrix", "BernsteinFunction",
+  "calcMDCMGeneratorMatrix", "BernsteinFunction",
   function(object, d, cscale = 1, ...) {
-    exi2exqm(exIntensities(object, d, cscale = cscale, ...))
+    pour_theta(
+      calcExShockSizeArrivalIntensities(object, d, cscale = cscale, ...)
+    )
   }
 )

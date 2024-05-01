@@ -12,7 +12,7 @@ test_that("Exchangeable Arnold model for d = 2", {
   ## all equal
   args <- list(
     "d" = 2,
-    ex_intensities = sapply(1:2, function(i) choose(2, i))
+    "theta" = sapply(1:2, function(i) choose(2, i))
   )
   expect_equal_rn_generation(
     rexmo_mdcm, testutils.rmo::rexmo_mdcm_bivariate,
@@ -22,7 +22,7 @@ test_that("Exchangeable Arnold model for d = 2", {
   ## independence
   args <- list(
     "d" = 2,
-    ex_intensities = ex_intensities_linear(2, scale = 0.7)
+    "theta" = calc_theta_linear(2, scale = 0.7)
   )
   expect_equal_rn_generation(
     rexmo_mdcm, testutils.rmo::rexmo_mdcm_bivariate,
@@ -32,7 +32,7 @@ test_that("Exchangeable Arnold model for d = 2", {
   ## comonotone
   args <- list(
     "d" = 2,
-    ex_intensities = ex_intensities_constant(2, constant = 0.7)
+    "theta" = calc_theta_constant(2, constant = 0.7)
   )
   expect_equal_rn_generation(
     rexmo_mdcm, testutils.rmo::rexmo_mdcm_bivariate,
@@ -42,7 +42,7 @@ test_that("Exchangeable Arnold model for d = 2", {
   ## Poisson
   args <- list(
     "d" = 2,
-    ex_intensities = ex_intensities_poisson(
+    "theta" = calc_theta_poisson(
       2,
       eta = 0.3
     )
@@ -55,7 +55,7 @@ test_that("Exchangeable Arnold model for d = 2", {
   ## Alpha-Stable
   args <- list(
     "d" = 2,
-    ex_intensities = ex_intensities_alpha_stable(2, alpha = 0.25)
+    "theta" = calc_theta_alpha_stable(2, alpha = 0.25)
   )
   expect_equal_rn_generation(
     rexmo_mdcm, testutils.rmo::rexmo_mdcm_bivariate,
@@ -65,7 +65,7 @@ test_that("Exchangeable Arnold model for d = 2", {
   ## Gamma
   args <- list(
     "d" = 2,
-    ex_intensities = ex_intensities_gamma(2, a = 0.4)
+    "theta" = calc_theta_gamma(2, a = 0.4)
   )
   expect_equal_rn_generation(
     rexmo_mdcm, testutils.rmo::rexmo_mdcm_bivariate,
@@ -75,7 +75,7 @@ test_that("Exchangeable Arnold model for d = 2", {
   ## Pareto
   args <- list(
     "d" = 2,
-    "ex_intensities" = ex_intensities_pareto(2, alpha = 0.4, x0 = 1e-4)
+    "theta" = calc_theta_pareto(2, alpha = 0.4, x0 = 1e-4)
   )
   expect_equal_rn_generation(
     rexmo_mdcm, testutils.rmo::rexmo_mdcm_bivariate,
@@ -85,7 +85,7 @@ test_that("Exchangeable Arnold model for d = 2", {
   ## Inverse-Gaussian
   args <- list(
     "d" = 2,
-    "ex_intensities" = ex_intensities_inverse_gaussian(2, eta = 0.5)
+    "theta" = calc_theta_inverse_gaussian(2, eta = 0.5)
   )
   expect_equal_rn_generation(
     rexmo_mdcm, testutils.rmo::rexmo_mdcm_bivariate,
@@ -103,7 +103,7 @@ test_that("Alternative implementation in R for d>2", {
   ## all equal
   args <- list(
     "d" = d,
-    "ex_intensities" = sapply(1:d, function(i) choose(d, i))
+    "theta" = sapply(1:d, function(i) choose(d, i))
   )
   expect_equal_rn_generation(
     rexmo_mdcm, testutils.rmo::rexmo_mdcm_naive_recursive,
@@ -113,7 +113,7 @@ test_that("Alternative implementation in R for d>2", {
   ## independence
   args <- list(
     "d" = d,
-    "ex_intensities" = ex_intensities_linear(d, scale = 0.7)
+    "theta" = calc_theta_linear(d, scale = 0.7)
   )
   expect_equal_rn_generation(
     rexmo_mdcm, testutils.rmo::rexmo_mdcm_naive_recursive,
@@ -123,7 +123,7 @@ test_that("Alternative implementation in R for d>2", {
   ## comonotone
   args <- list(
     "d" = d,
-    "ex_intensities" = ex_intensities_constant(d, constant = 0.7)
+    "theta" = calc_theta_constant(d, constant = 0.7)
   )
   expect_equal_rn_generation(
     rexmo_mdcm, testutils.rmo::rexmo_mdcm_naive_recursive,
@@ -133,7 +133,7 @@ test_that("Alternative implementation in R for d>2", {
   ## Poisson
   args <- list(
     "d" = d,
-    "ex_intensities" = ex_intensities_poisson(
+    "theta" = calc_theta_poisson(
       d,
       eta = 0.3
     )
@@ -146,7 +146,7 @@ test_that("Alternative implementation in R for d>2", {
   ## Alpha-stable
   args <- list(
     "d" = d,
-    "ex_intensities" = ex_intensities_alpha_stable(d, alpha = 0.25)
+    "theta" = calc_theta_alpha_stable(d, alpha = 0.25)
   )
   expect_equal_rn_generation(
     rexmo_mdcm, testutils.rmo::rexmo_mdcm_naive_recursive,
@@ -156,7 +156,7 @@ test_that("Alternative implementation in R for d>2", {
   ## Gamma
   args <- list(
     "d" = d,
-    "ex_intensities" = ex_intensities_gamma(d, a = 0.4)
+    "theta" = calc_theta_gamma(d, a = 0.4)
   )
   expect_equal_rn_generation(
     rexmo_mdcm, testutils.rmo::rexmo_mdcm_naive_recursive,
@@ -166,7 +166,7 @@ test_that("Alternative implementation in R for d>2", {
   ## Pareto
   args <- list(
     "d" = d,
-    "ex_intensities" = ex_intensities_pareto(d, alpha = 0.4, x0 = 1e-4)
+    "theta" = calc_theta_pareto(d, alpha = 0.4, x0 = 1e-4)
   )
   expect_equal_rn_generation(
     rexmo_mdcm, testutils.rmo::rexmo_mdcm_naive_recursive,
@@ -176,7 +176,7 @@ test_that("Alternative implementation in R for d>2", {
   ## Inverse-Gaussian
   args <- list(
     "d" = d,
-    "ex_intensities" = ex_intensities_inverse_gaussian(d, eta = 0.5)
+    "theta" = calc_theta_inverse_gaussian(d, eta = 0.5)
   )
   expect_equal_rn_generation(
     rexmo_mdcm, testutils.rmo::rexmo_mdcm_naive_recursive,
@@ -196,7 +196,7 @@ test_that("Exchangeable Arnold model implementation in C++", {
   ## all equal
   args <- list(
     "d" = d,
-    "ex_intensities" = sapply(1:d, function(i) choose(d, i))
+    "theta" = sapply(1:d, function(i) choose(d, i))
   )
   expect_equal_rn_generation(
     rexmo_mdcm, testutils.rmo::rexmo_mdcm_naive,
@@ -206,7 +206,7 @@ test_that("Exchangeable Arnold model implementation in C++", {
   ## independence
   args <- list(
     "d" = d,
-    "ex_intensities" = ex_intensities_linear(d, scale = 0.7)
+    "theta" = calc_theta_linear(d, scale = 0.7)
   )
   expect_equal_rn_generation(
     rexmo_mdcm, testutils.rmo::rexmo_mdcm_naive,
@@ -216,7 +216,7 @@ test_that("Exchangeable Arnold model implementation in C++", {
   ## comonotone
   args <- list(
     "d" = d,
-    "ex_intensities" = ex_intensities_constant(d, constant = 0.7)
+    "theta" = calc_theta_constant(d, constant = 0.7)
   )
   expect_equal_rn_generation(
     rexmo_mdcm, testutils.rmo::rexmo_mdcm_naive,
@@ -226,7 +226,7 @@ test_that("Exchangeable Arnold model implementation in C++", {
   ## Poisson
   args <- list(
     "d" = d,
-    "ex_intensities" = ex_intensities_poisson(
+    "theta" = calc_theta_poisson(
       d,
       eta = 0.3
     )
@@ -239,7 +239,7 @@ test_that("Exchangeable Arnold model implementation in C++", {
   ## Alpha-stable
   args <- list(
     "d" = d,
-    "ex_intensities" = ex_intensities_alpha_stable(d, alpha = 0.25)
+    "theta" = calc_theta_alpha_stable(d, alpha = 0.25)
   )
   expect_equal_rn_generation(
     rexmo_mdcm, testutils.rmo::rexmo_mdcm_naive,
@@ -249,7 +249,7 @@ test_that("Exchangeable Arnold model implementation in C++", {
   ## Gamma
   args <- list(
     "d" = d,
-    "ex_intensities" = ex_intensities_gamma(d, a = 0.4)
+    "theta" = calc_theta_gamma(d, a = 0.4)
   )
   expect_equal_rn_generation(
     rexmo_mdcm, testutils.rmo::rexmo_mdcm_naive,
@@ -259,7 +259,7 @@ test_that("Exchangeable Arnold model implementation in C++", {
   ## Pareto
   args <- list(
     "d" = d,
-    "ex_intensities" = ex_intensities_pareto(d, alpha = 0.4, x0 = 1e-4)
+    "theta" = calc_theta_pareto(d, alpha = 0.4, x0 = 1e-4)
   )
   expect_equal_rn_generation(
     rexmo_mdcm, testutils.rmo::rexmo_mdcm_naive,
@@ -269,7 +269,7 @@ test_that("Exchangeable Arnold model implementation in C++", {
   ## Inverse-Gaussian
   args <- list(
     "d" = d,
-    "ex_intensities" = ex_intensities_inverse_gaussian(d, eta = 0.5)
+    "theta" = calc_theta_inverse_gaussian(d, eta = 0.5)
   )
   expect_equal_rn_generation(
     rexmo_mdcm, testutils.rmo::rexmo_mdcm_naive,
@@ -282,6 +282,6 @@ test_that("Exchangeable Arnold model implementation in C++", {
 test_that("MDCM implementation for n = 0", {
   n <- 0
   d <- 5
-  x <- rexmo_mdcm(n, d, ex_intensities_exponential(d, 1))
+  x <- rexmo_mdcm(n, d, calc_theta_exponential(d, 1))
   checkmate::expect_matrix(x, mode = "numeric", nrows = n, ncols = d)
 })

@@ -1,5 +1,18 @@
 # rmo 0.9
 
+- Rename multiple S4-methods and arguments (#121):
+  - Rename S4-method `exIntensities()` to `calcExShockSizeArrivalIntensities()`
+    and arguments/variables `ex_intensities` to `theta`
+  - Rename S4-method `uexIntensities()` to `calcExShockArrivalIntensities()`
+  - Rename S4-method `exQMatrix()` to `calcMDCMGeneratorMatrix()`
+  - Rename S4-method `intensities()` to `calcShockArrivalIntensities()`
+  - Rename S4-method `defaultMethod()` to `getDefaultMethodString()`
+  - Rename S4-method `levyDensity()` to `getLevyDensity()`
+  - Rename S4-method `stieltjesDensity()` to `getStieltjesDensity()`
+  - Rename S4-method `valueOf()` to `calcIterativeDifference()`
+  - Rename S4-method `valueOf0()` to `calcValue()`
+  - Rename various variable, method, and argument names appropriately
+
 - Improve extensibility by exposing `defaultMethod` and `valueOf0` (#118)
 
 - Review and improve documentation (#116)
@@ -16,7 +29,7 @@
 
 - Small changes of the documentation
 
-- Improveming implementation of method `exIntensities`
+- Improving implementation of method `exIntensities`
 
 - Provide zero-sample-size parametrization, `n = 0`, in simulation algorithms
   (e.g. for measure setup time)

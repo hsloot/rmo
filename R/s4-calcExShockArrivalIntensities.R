@@ -2,7 +2,7 @@
 #'
 #' Calculates (unscaled) *exchangeable shock-arrival intensities*, see [rmo()].
 #'
-#' @inheritParams valueOf
+#' @inheritParams calcIterativeDifference
 #' @param d A positive integer, larger than two, for the *dimension*.
 #' @param ... pass-through parameter.
 #'
@@ -26,10 +26,10 @@
 #' @export
 #' @examples
 #' bf <- AlphaStableBernsteinFunction(alpha = 0.4)
-#' uexIntensities(bf, 3)
+#' calcExShockArrivalIntensities(bf, 3)
 setGeneric(
-  "uexIntensities",
+  "calcExShockArrivalIntensities",
   function(object, d, cscale = 1, ...) {
-    standardGeneric("uexIntensities")
+    standardGeneric("calcExShockArrivalIntensities")
   }
 )

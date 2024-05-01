@@ -16,25 +16,25 @@ actual_fn <- function(x, eta) {
   1 - exp(-eta * x)
 }
 
-test_that("`valueOf` calculates expected values", {
+test_that("`calcIterativeDifference` calculates expected values", {
   expect_equal(
-    valueOf(bf_poisson, x),
+    calcIterativeDifference(bf_poisson, x),
     actual_fn(x, bf_poisson@eta)
   )
 
   expect_equal(
-    valueOf(bf_poisson, x),
-    valueOf0(bf_poisson, x)
+    calcIterativeDifference(bf_poisson, x),
+    calcValue(bf_poisson, x)
   )
 
   expect_equal(
-    valueOf(bf_poisson, x, cscale = cscale),
+    calcIterativeDifference(bf_poisson, x, cscale = cscale),
     actual_fn(cscale * x, bf_poisson@eta)
   )
 
   expect_equal(
-    valueOf(bf_poisson, x, cscale = cscale),
-    valueOf(
+    calcIterativeDifference(bf_poisson, x, cscale = cscale),
+    calcIterativeDifference(
       bf_poisson, x,
       cscale = cscale,
       method = "levy",
@@ -45,15 +45,17 @@ test_that("`valueOf` calculates expected values", {
 
 d <- 7
 
-test_that("`exIntensities` calculates expected values", {
+test_that("`calcExShockSizeArrivalIntensities` calculates expected values", {
   expect_equal(
-    exIntensities(bf_poisson, d),
-    ex_intensities_naive(actual_fn, d, eta = bf_poisson@eta)
+    calcExShockSizeArrivalIntensities(bf_poisson, d),
+    calc_ex_shock_size_arrival_intensities_naive(
+      actual_fn, d, eta = bf_poisson@eta
+    )
   )
 
   expect_equal(
-    exIntensities(bf_poisson, d, cscale = cscale),
-    ex_intensities_naive(
+    calcExShockSizeArrivalIntensities(bf_poisson, d, cscale = cscale),
+    calc_ex_shock_size_arrival_intensities_naive(
       actual_fn, d,
       eta = bf_poisson@eta,
       cscale = cscale
@@ -61,8 +63,8 @@ test_that("`exIntensities` calculates expected values", {
   )
 
   expect_equal(
-    exIntensities(bf_poisson, d, cscale = cscale),
-    exIntensities(
+    calcExShockSizeArrivalIntensities(bf_poisson, d, cscale = cscale),
+    calcExShockSizeArrivalIntensities(
       bf_poisson, d,
       cscale = cscale,
       method = "levy",
@@ -71,18 +73,18 @@ test_that("`exIntensities` calculates expected values", {
   )
 })
 
-test_that("`exQMatrix` calculates expected values", {
+test_that("`calcMDCMGeneratorMatrix` calculates expected values", {
   expect_equal(
-    exQMatrix(bf_poisson, d),
-    ex_qmatrix_naive(
+    calcMDCMGeneratorMatrix(bf_poisson, d),
+    mdcm_generator_matrix_naive(
       actual_fn, d,
       eta = bf_poisson@eta
     )
   )
 
   expect_equal(
-    exQMatrix(bf_poisson, d, cscale = cscale),
-    ex_qmatrix_naive(
+    calcMDCMGeneratorMatrix(bf_poisson, d, cscale = cscale),
+    mdcm_generator_matrix_naive(
       actual_fn, d,
       cscale = cscale,
       eta = bf_poisson@eta
@@ -90,8 +92,8 @@ test_that("`exQMatrix` calculates expected values", {
   )
 
   expect_equal(
-    exQMatrix(bf_poisson, d, cscale = cscale),
-    exQMatrix(
+    calcMDCMGeneratorMatrix(bf_poisson, d, cscale = cscale),
+    calcMDCMGeneratorMatrix(
       bf_poisson, d,
       cscale = cscale,
       method = "levy", tolerance = testthat_tolerance()

@@ -38,36 +38,38 @@ PoissonBernsteinFunction(eta = 2)
 
 # Create a Lévy density
 bf <- PoissonBernsteinFunction(eta = 0.7)
-levy_density <- levyDensity(bf)
+levy_density <- getLevyDensity(bf)
 sum(levy_density$y * pmin(1, levy_density$x))
 
 # Evaluate the Bernstein function
 bf <- PoissonBernsteinFunction(eta = 0.3)
-valueOf(bf, 1:5)
+calcIterativeDifference(bf, 1:5)
 
 # Calculate shock-arrival intensities
 bf <- PoissonBernsteinFunction(eta = 0.8)
-intensities(bf, 3)
-intensities(bf, 3, tolerance = 1e-4)
+calcShockArrivalIntensities(bf, 3)
+calcShockArrivalIntensities(bf, 3, tolerance = 1e-4)
 
 # Calculate exchangeable shock-arrival intensities
 bf <- PoissonBernsteinFunction(eta = 0.4)
-uexIntensities(bf, 3)
-uexIntensities(bf, 3, tolerance = 1e-4)
+calcExShockArrivalIntensities(bf, 3)
+calcExShockArrivalIntensities(bf, 3, tolerance = 1e-4)
 
 # Calculate exchangeable shock-size arrival intensities
 bf <- PoissonBernsteinFunction(eta = 0.2)
-exIntensities(bf, 3)
-exIntensities(bf, 3, tolerance = 1e-4)
+calcExShockSizeArrivalIntensities(bf, 3)
+calcExShockSizeArrivalIntensities(bf, 3, tolerance = 1e-4)
 
 # Calculate the Markov generator
 bf <- PoissonBernsteinFunction(eta = 0.6)
-exQMatrix(bf, 3)
-exQMatrix(bf, 3, tolerance = 1e-4)
+calcMDCMGeneratorMatrix(bf, 3)
+calcMDCMGeneratorMatrix(bf, 3, tolerance = 1e-4)
 }
 \seealso{
-\code{\link[=levyDensity]{levyDensity()}},  \code{\link[=valueOf]{valueOf()}}, \code{\link[=intensities]{intensities()}}, \code{\link[=uexIntensities]{uexIntensities()}},
-\code{\link[=exIntensities]{exIntensities()}}, \code{\link[=exQMatrix]{exQMatrix()}}, \code{\link[=rextmo]{rextmo()}}, \code{\link[=rpextmo]{rpextmo()}}
+\code{\link[=getLevyDensity]{getLevyDensity()}},  \code{\link[=calcIterativeDifference]{calcIterativeDifference()}},
+\code{\link[=calcShockArrivalIntensities]{calcShockArrivalIntensities()}}, \code{\link[=calcExShockArrivalIntensities]{calcExShockArrivalIntensities()}},
+\code{\link[=calcExShockSizeArrivalIntensities]{calcExShockSizeArrivalIntensities()}}, \code{\link[=calcMDCMGeneratorMatrix]{calcMDCMGeneratorMatrix()}},
+\code{\link[=rextmo]{rextmo()}}, \code{\link[=rpextmo]{rpextmo()}}
 
 Other Bernstein function classes: 
 \code{\link{AlphaStableBernsteinFunction-class}},

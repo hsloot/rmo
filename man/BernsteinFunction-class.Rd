@@ -141,8 +141,9 @@ expression is frequently evaluated:
 }
 The evaluation of Bernstein functions using this formula is usually not
 numerically stable. Consequently, the various alternative approaches are used
-dependent on the class of the Bernstein function. Use the method \code{\link[=valueOf]{valueOf()}}
-to evaluate or approximate this expression for a given Bernstein function.
+dependent on the class of the Bernstein function. Use the method
+\code{\link[=calcIterativeDifference]{calcIterativeDifference()}} to evaluate or approximate this expression for a
+given Bernstein function.
 }
 
 \subsection{Exchangeable Marshall–Olkin distributions}{
@@ -163,8 +164,8 @@ matrix:
 The evaluation of the infinitesimal generator matrix using this formula is
 usually not numerically stable. Consequently, the various alternative
 approaches are used dependent on the class of the Bernstein function. Use the
-method \code{\link[=exQMatrix]{exQMatrix()}} to evaluate or approximate this expression for a given
-Bernstein function.
+method \code{\link[=calcMDCMGeneratorMatrix]{calcMDCMGeneratorMatrix()}} to evaluate or approximate this expression
+for a given Bernstein function.
 
 For the \emph{all-alive-state}, the generator's first row has the interpretation
 of \emph{exchangeable shock-size-arrival intensities}:
@@ -175,8 +176,8 @@ of \emph{exchangeable shock-size-arrival intensities}:
 }
 As noted above, their evaluation is usually not numerically stable, and
 various alternative approaches are used dependent on the class of the
-Bernstein function. Use the method \code{\link[=exIntensities]{exIntensities()}} to evaluate or
-approximate them.
+Bernstein function. Use the method \code{\link[=calcExShockSizeArrivalIntensities]{calcExShockSizeArrivalIntensities()}} to
+evaluate or approximate them.
 }
 
 \subsection{The Exogenous shock model and the Arnold model}{
@@ -190,8 +191,9 @@ is
 \insertRef{Sloot2022a}{rmo}
 }
 \seealso{
-\code{\link[=valueOf]{valueOf()}}, \code{\link[=intensities]{intensities()}}, \code{\link[=uexIntensities]{uexIntensities()}}, \code{\link[=exIntensities]{exIntensities()}},
-\code{\link[=exQMatrix]{exQMatrix()}}, \code{\link[=rextmo]{rextmo()}}, \code{\link[=rpextmo]{rpextmo()}}
+\code{\link[=calcIterativeDifference]{calcIterativeDifference()}}, \code{\link[=calcShockArrivalIntensities]{calcShockArrivalIntensities()}},
+\code{\link[=calcExShockArrivalIntensities]{calcExShockArrivalIntensities()}}, \code{\link[=calcExShockSizeArrivalIntensities]{calcExShockSizeArrivalIntensities()}},
+\code{\link[=calcMDCMGeneratorMatrix]{calcMDCMGeneratorMatrix()}}, \code{\link[=rextmo]{rextmo()}}, \code{\link[=rpextmo]{rpextmo()}}
 
 Other Bernstein function classes: 
 \code{\link{AlphaStableBernsteinFunction-class}},

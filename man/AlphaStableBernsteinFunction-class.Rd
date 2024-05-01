@@ -52,7 +52,7 @@ AlphaStableBernsteinFunction(alpha = 0.5)
 
 # Create a Lévy density
 bf <- AlphaStableBernsteinFunction(alpha = 0.7)
-levy_density <- levyDensity(bf)
+levy_density <- getLevyDensity(bf)
 integrate(
   function(x) pmin(1, x) * levy_density(x),
   lower = attr(levy_density, "lower"),
@@ -61,7 +61,7 @@ integrate(
 
 # Create a Stieltjes density
 bf <- AlphaStableBernsteinFunction(alpha = 0.5)
-stieltjes_density <- stieltjesDensity(bf)
+stieltjes_density <- getStieltjesDensity(bf)
 integrate(
   function(x) 1/(1 + x) * stieltjes_density(x),
   lower = attr(stieltjes_density, "lower"),
@@ -70,39 +70,40 @@ integrate(
 
 # Evaluate the Bernstein function
 bf <- AlphaStableBernsteinFunction(alpha = 0.3)
-valueOf(bf, 1:5)
+calcIterativeDifference(bf, 1:5)
 
 # Calculate shock-arrival intensities
 bf <- AlphaStableBernsteinFunction(alpha = 0.8)
-intensities(bf, 3)
-intensities(bf, 3, method = "stieltjes")
-intensities(bf, 3, tolerance = 1e-4)
+calcShockArrivalIntensities(bf, 3)
+calcShockArrivalIntensities(bf, 3, method = "stieltjes")
+calcShockArrivalIntensities(bf, 3, tolerance = 1e-4)
 
 # Calculate exchangeable shock-arrival intensities
 bf <- AlphaStableBernsteinFunction(alpha = 0.4)
-uexIntensities(bf, 3)
-uexIntensities(bf, 3, method = "stieltjes")
-uexIntensities(bf, 3, tolerance = 1e-4)
+calcExShockArrivalIntensities(bf, 3)
+calcExShockArrivalIntensities(bf, 3, method = "stieltjes")
+calcExShockArrivalIntensities(bf, 3, tolerance = 1e-4)
 
 # Calculate exchangeable shock-size arrival intensities
 bf <- AlphaStableBernsteinFunction(alpha = 0.2)
-exIntensities(bf, 3)
-exIntensities(bf, 3, method = "stieltjes")
-exIntensities(bf, 3, tolerance = 1e-4)
+calcExShockSizeArrivalIntensities(bf, 3)
+calcExShockSizeArrivalIntensities(bf, 3, method = "stieltjes")
+calcExShockSizeArrivalIntensities(bf, 3, tolerance = 1e-4)
 
 # Calculate the Markov generator
 bf <- AlphaStableBernsteinFunction(alpha = 0.6)
-exQMatrix(bf, 3)
-exQMatrix(bf, 3, method = "stieltjes")
-exQMatrix(bf, 3, tolerance = 1e-4)
+calcMDCMGeneratorMatrix(bf, 3)
+calcMDCMGeneratorMatrix(bf, 3, method = "stieltjes")
+calcMDCMGeneratorMatrix(bf, 3, tolerance = 1e-4)
 }
 \references{
 \insertAllCited{}
 }
 \seealso{
-\code{\link[=levyDensity]{levyDensity()}}, \code{\link[=stieltjesDensity]{stieltjesDensity()}}, \code{\link[=valueOf]{valueOf()}},
-\code{\link[=intensities]{intensities()}}, \code{\link[=uexIntensities]{uexIntensities()}}, \code{\link[=exIntensities]{exIntensities()}}, \code{\link[=exQMatrix]{exQMatrix()}},
-\code{\link[=rextmo]{rextmo()}}, \code{\link[=rpextmo]{rpextmo()}}
+\code{\link[=getLevyDensity]{getLevyDensity()}}, \code{\link[=getStieltjesDensity]{getStieltjesDensity()}},
+\code{\link[=calcIterativeDifference]{calcIterativeDifference()}}, \code{\link[=calcShockArrivalIntensities]{calcShockArrivalIntensities()}},
+\code{\link[=calcExShockArrivalIntensities]{calcExShockArrivalIntensities()}}, \code{\link[=calcExShockSizeArrivalIntensities]{calcExShockSizeArrivalIntensities()}},
+\code{\link[=calcMDCMGeneratorMatrix]{calcMDCMGeneratorMatrix()}}, \code{\link[=rextmo]{rextmo()}}, \code{\link[=rpextmo]{rpextmo()}}
 
 Other Bernstein function classes: 
 \code{\link{BernsteinFunction-class}},

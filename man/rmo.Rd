@@ -4,14 +4,14 @@
 \alias{rmo}
 \title{Simulate from Marshall–Olkin distributions}
 \usage{
-rmo(n, d, intensities, method = c("AM", "ESM"))
+rmo(n, d, lambda, method = c("AM", "ESM"))
 }
 \arguments{
 \item{n}{An integer for the \emph{number of samples}.}
 
 \item{d}{An integer for the \emph{dimension}.}
 
-\item{intensities}{A numeric vector for the \emph{shock-arrival intensities}.}
+\item{lambda}{A numeric vector for the \emph{shock-arrival intensities}.}
 
 \item{method}{A string indicating which sampling algorithm should be used.
 Use \code{"AM"} for the \emph{Arnold model} and \code{"ESM"} for the \emph{exogenous shock

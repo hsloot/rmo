@@ -9,28 +9,28 @@ divide_binomial_coefficient <- function(x, n, k) {
     .Call(`_rmo_divide_binomial_coefficient`, x, n, k)
 }
 
-uexi2i <- function(uexi) {
-    .Call(`_rmo_uexi2i`, uexi)
+stretch_lambda <- function(lambda) {
+    .Call(`_rmo_stretch_lambda`, lambda)
 }
 
-exi2exqm <- function(exi) {
-    .Call(`_rmo_exi2exqm`, exi)
+pour_theta <- function(theta) {
+    .Call(`_rmo_pour_theta`, theta)
 }
 
 Rcpp__is_within <- function(i, j) {
     .Call(`_rmo_Rcpp__is_within`, i, j)
 }
 
-Rcpp__rmo_esm <- function(n, d, intensities) {
-    .Call(`_rmo_Rcpp__rmo_esm`, n, d, intensities)
+Rcpp__rmo_esm <- function(n, d, lambda) {
+    .Call(`_rmo_Rcpp__rmo_esm`, n, d, lambda)
 }
 
-Rcpp__rmo_am <- function(n, d, intensities) {
-    .Call(`_rmo_Rcpp__rmo_am`, n, d, intensities)
+Rcpp__rmo_am <- function(n, d, lambda) {
+    .Call(`_rmo_Rcpp__rmo_am`, n, d, lambda)
 }
 
-Rcpp__rexmo_mdcm <- function(n, d, ex_intensities) {
-    .Call(`_rmo_Rcpp__rexmo_mdcm`, n, d, ex_intensities)
+Rcpp__rexmo_mdcm <- function(n, d, theta) {
+    .Call(`_rmo_Rcpp__rexmo_mdcm`, n, d, theta)
 }
 
 Rcpp__rarmextmo_esm <- function(n, d, alpha, beta) {
@@ -42,18 +42,18 @@ Rcpp__rextmo_lfm <- function(n, d, rate, rate_killing, rate_drift, rjump_name, r
 }
 
 #' @keywords internal test
-rtest__rmo_esm <- function(n, d, intensities) {
-    .Call(`_rmo_rtest__rmo_esm`, n, d, intensities)
+rtest__rmo_esm <- function(n, d, lambda) {
+    .Call(`_rmo_rtest__rmo_esm`, n, d, lambda)
 }
 
 #' @keywords internal test
-rtest__rmo_am <- function(n, d, intensities) {
-    .Call(`_rmo_rtest__rmo_am`, n, d, intensities)
+rtest__rmo_am <- function(n, d, lambda) {
+    .Call(`_rmo_rtest__rmo_am`, n, d, lambda)
 }
 
 #' @keywords internal test
-rtest__rexmo_mdcm <- function(n, d, ex_intensities) {
-    .Call(`_rmo_rtest__rexmo_mdcm`, n, d, ex_intensities)
+rtest__rexmo_mdcm <- function(n, d, theta) {
+    .Call(`_rmo_rtest__rexmo_mdcm`, n, d, theta)
 }
 
 #' @keywords internal test

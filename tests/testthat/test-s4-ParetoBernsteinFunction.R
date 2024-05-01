@@ -25,29 +25,29 @@ actual_fn <- function(x, alpha, x0) {
       gamma(1 - alpha)
 }
 
-test_that("`valueOf` calculates expected values", {
+test_that("`calcIterativeDifference` calculates expected values", {
   expect_equal(
-    valueOf(bf_pareto, x),
+    calcIterativeDifference(bf_pareto, x),
     actual_fn(x, bf_pareto@alpha, bf_pareto@x0)
   )
 
   expect_equal(
-    valueOf(bf_pareto, x),
-    valueOf0(bf_pareto, x)
+    calcIterativeDifference(bf_pareto, x),
+    calcValue(bf_pareto, x)
   )
 
   expect_equal(
-    valueOf(bf_pareto, x, cscale = cscale),
+    calcIterativeDifference(bf_pareto, x, cscale = cscale),
     actual_fn(cscale * x, bf_pareto@alpha, bf_pareto@x0)
   )
 })
 
 d <- 7
 
-test_that("`exIntensities` calculates expected values", {
+test_that("`calcExShockSizeArrivalIntensities` calculates expected values", {
   expect_equal(
-    exIntensities(bf_pareto, d),
-    ex_intensities_naive(
+    calcExShockSizeArrivalIntensities(bf_pareto, d),
+    calc_ex_shock_size_arrival_intensities_naive(
       actual_fn, d,
       alpha = bf_pareto@alpha,
       x0 = bf_pareto@x0
@@ -55,8 +55,8 @@ test_that("`exIntensities` calculates expected values", {
   )
 
   expect_equal(
-    exIntensities(bf_pareto, d, cscale = cscale),
-    ex_intensities_naive(
+    calcExShockSizeArrivalIntensities(bf_pareto, d, cscale = cscale),
+    calc_ex_shock_size_arrival_intensities_naive(
       actual_fn, d,
       alpha = bf_pareto@alpha,
       x0 = bf_pareto@x0,
@@ -65,8 +65,8 @@ test_that("`exIntensities` calculates expected values", {
   )
 
   expect_equal(
-    exIntensities(bf_pareto, d, cscale = cscale),
-    exIntensities(
+    calcExShockSizeArrivalIntensities(bf_pareto, d, cscale = cscale),
+    calcExShockSizeArrivalIntensities(
       bf_pareto, d,
       cscale = cscale,
       method = "levy",
@@ -75,10 +75,10 @@ test_that("`exIntensities` calculates expected values", {
   )
 })
 
-test_that("`exQMatrix` calculates expected values", {
+test_that("`calcMDCMGeneratorMatrix` calculates expected values", {
   expect_equal(
-    exQMatrix(bf_pareto, d),
-    ex_qmatrix_naive(
+    calcMDCMGeneratorMatrix(bf_pareto, d),
+    mdcm_generator_matrix_naive(
       actual_fn, d,
       alpha = bf_pareto@alpha,
       x0 = bf_pareto@x0
@@ -86,8 +86,8 @@ test_that("`exQMatrix` calculates expected values", {
   )
 
   expect_equal(
-    exQMatrix(bf_pareto, d, cscale = cscale),
-    ex_qmatrix_naive(
+    calcMDCMGeneratorMatrix(bf_pareto, d, cscale = cscale),
+    mdcm_generator_matrix_naive(
       actual_fn, d,
       cscale = cscale,
       alpha = bf_pareto@alpha,
@@ -96,8 +96,8 @@ test_that("`exQMatrix` calculates expected values", {
   )
 
   expect_equal(
-    exQMatrix(bf_pareto, d, cscale = cscale),
-    exQMatrix(
+    calcMDCMGeneratorMatrix(bf_pareto, d, cscale = cscale),
+    calcMDCMGeneratorMatrix(
       bf_pareto, d,
       cscale = cscale,
       method = "levy", tolerance = testthat_tolerance()

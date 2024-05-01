@@ -40,8 +40,10 @@
 #'     \quad x > 0 .
 #' }
 #'
-#' @seealso [levyDensity()], [valueOf()], [intensities()], [uexIntensities()],
-#'   [exIntensities()], [exQMatrix()], [rextmo()], [rpextmo()]
+#' @seealso [getLevyDensity()], [calcIterativeDifference()],
+#'   [calcShockArrivalIntensities()], [calcExShockArrivalIntensities()],
+#'   [calcExShockSizeArrivalIntensities()], [calcMDCMGeneratorMatrix()],
+#'   [rextmo()], [rpextmo()]
 #'
 #' @docType class
 #' @name LevyBernsteinFunction-class
@@ -57,12 +59,12 @@ setClass("LevyBernsteinFunction",
 
 #' @rdname hidden_aliases
 #'
-#' @inheritParams valueOf0
+#' @inheritParams calcValue
 #'
-#' @include s4-defaultMethod.R
+#' @include s4-getDefaultMethodString.R
 #' @export
 setMethod(
-  "defaultMethod", "LevyBernsteinFunction",
+  "getDefaultMethodString", "LevyBernsteinFunction",
   function(object) {
     "levy"
   }
@@ -70,18 +72,18 @@ setMethod(
 
 #' @rdname hidden_aliases
 #'
-#' @inheritParams valueOf
+#' @inheritParams calcIterativeDifference
 #' @param method Method to calculate the result; use `method = "levy"` for
 #'   using the Lévy representation and `method = "stieltjes"` for using the
 #'   Stieltjes representation.
 #' @param tolerance (Relative) tolerance, passed down to [stats::integrate()]
 #'
-#' @include s4-valueOf.R s4-valueOf0.R RcppExports.R
+#' @include s4-calcIterativeDifference.R s4-calcValue.R RcppExports.R
 #' @importFrom checkmate qassert
 #' @importFrom stats integrate
 #' @export
 setMethod(
-  "valueOf", "LevyBernsteinFunction",
+  "calcIterativeDifference", "LevyBernsteinFunction",
   function(object, x, difference_order, n = 1L, k = 0L, cscale = 1, ...,
            method = c("default", "levy"),
            tolerance = .Machine$double.eps^0.5) {
@@ -93,18 +95,19 @@ setMethod(
         qassert(n, "X1(0,)")
         qassert(k, "N1[0,)")
         out <- multiply_binomial_coefficient(
-          valueOf0(object, x * cscale), n, k
+          calcValue(object, x * cscale), n, k
         )
       } else if (isTRUE(1L == difference_order)) {
         out <- multiply_binomial_coefficient(
-          valueOf0(object, (x + 1) * cscale), n, k
+          calcValue(object, (x + 1) * cscale), n, k
         ) -
           multiply_binomial_coefficient(
-            valueOf0(object, x * cscale), n, k
+            calcValue(object, x * cscale), n, k
           )
       } else {
-        out <- valueOf(object, x, difference_order, n, k, cscale, ...,
-          method = defaultMethod(object), tolerance = tolerance
+        out <- calcIterativeDifference(
+          object, x, difference_order, n, k, cscale, ...,
+          method = getDefaultMethodString(object), tolerance = tolerance
         )
       }
     } else {
@@ -113,7 +116,7 @@ setMethod(
       qassert(cscale, "N1(0,)")
       qassert(n, "X1(0,)")
       qassert(k, "N1[0,)")
-      levy_density <- levyDensity(object)
+      levy_density <- getLevyDensity(object)
       if (isTRUE(0L == difference_order)) {
         fct <- function(u, .x) {
           (1 - exp(-u * cscale * .x))
@@ -179,19 +182,20 @@ setMethod(
 
 #' @rdname hidden_aliases
 #'
-#' @inheritParams valueOf0
+#' @inheritParams calcValue
 #'
-#' @include s4-valueOf0.R s4-valueOf.R s4-defaultMethod.R
+#' @include s4-calcValue.R s4-calcIterativeDifference.R
+#'   s4-getDefaultMethodString.R
 #' @importFrom methods setMethod
 #' @export
 setMethod(
-  "valueOf0", "LevyBernsteinFunction",
-  function(object, x, cscale = 1, method = defaultMethod(object), ...) {
+  "calcValue", "LevyBernsteinFunction",
+  function(object, x, cscale = 1, method = getDefaultMethodString(object), ...) { # nolint
     method <- match.arg(method)
     if (method == "default") {
-      method <- defaultMethod(object)
+      method <- getDefaultMethodString(object)
     }
-    valueOf(
+    calcIterativeDifference(
       object, x,
       cscale, method = method, difference_order = 0L, n = 1L, k = 0L, ...
     )

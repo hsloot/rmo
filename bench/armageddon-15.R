@@ -15,20 +15,20 @@ bf <- SumOfBernsteinFunctions(
   first = ConstantBernsteinFunction(constant = alpha),
   second = LinearBernsteinFunction(scale = beta)
 )
-intensities <- intensities(bf, d)
-ex_intensities <- exIntensities(bf, d)
+lambda <- calcShockArrivalIntensities(bf, d)
+theta <- calcExShockSizeArrivalIntensities(bf, d)
 
 #+ r bench
 mark(
   Armageddon = rpextmo(
     n, d, a = alpha, b = beta, family = "Armageddon", method = "ESM"
   ),
-  ExMarkovian = rexmo(n, d, ex_intensities, method = "MDCM"),
+  ExMarkovian = rexmo(n, d, theta, method = "MDCM"),
   LFM = rpextmo(
     n, d, a = alpha, b = beta, family = "Armageddon", method = "LFM"
   ),
-  Arnold = rmo(n, d, intensities, method = "AM"),
-  ESM = rmo(n, d, intensities, method = "ESM"),
+  Arnold = rmo(n, d, lambda, method = "AM"),
+  ESM = rmo(n, d, lambda, method = "ESM"),
   min_iterations = 100L,
   check = FALSE
 )

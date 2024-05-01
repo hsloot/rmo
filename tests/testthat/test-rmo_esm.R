@@ -10,7 +10,7 @@ rmo_esm <- function(...) {
 
 test_that("ESM implementation for d = 2", {
   ## all equal
-  args <- list("d" = 2, "intensities" = rep(1, 3))
+  args <- list("d" = 2, "lambda" = rep(1, 3))
   expect_equal_rn_generation(
     rmo_esm, testutils.rmo::rmo_esm_bivariate,
     args, n, use_seed
@@ -19,7 +19,7 @@ test_that("ESM implementation for d = 2", {
   ## independence
   args <- list(
     "d" = 2,
-    "intensities" = intensities_linear(2, scale = 1)
+    "lambda" = calc_lambda_linear(2, scale = 1)
   )
   expect_equal_rn_generation(
     rmo_esm, testutils.rmo::rmo_esm_bivariate,
@@ -29,7 +29,7 @@ test_that("ESM implementation for d = 2", {
   ## comonotone
   args <- list(
     "d" = 2,
-    "intensities" = intensities_constant(2, constant = 1)
+    "lambda" = calc_lambda_constant(2, constant = 1)
   )
   expect_equal_rn_generation(
     rmo_esm, testutils.rmo::rmo_esm_bivariate,
@@ -39,7 +39,7 @@ test_that("ESM implementation for d = 2", {
   ## Poisson
   args <- list(
     "d" = 2,
-    "intensities" = intensities_poisson(
+    "lambda" = calc_lambda_poisson(
       2,
       eta = 0.3
     )
@@ -52,7 +52,7 @@ test_that("ESM implementation for d = 2", {
   ## Alpha-Stable
   args <- list(
     "d" = 2,
-    "intensities" = intensities_alpha_stable(2, alpha = 0.25)
+    "lambda" = calc_lambda_alpha_stable(2, alpha = 0.25)
   )
   expect_equal_rn_generation(
     rmo_esm, testutils.rmo::rmo_esm_bivariate,
@@ -62,7 +62,7 @@ test_that("ESM implementation for d = 2", {
   ## Gamma
   args <- list(
     "d" = 2,
-    "intensities" = intensities_gamma(2, a = 0.4)
+    "lambda" = calc_lambda_gamma(2, a = 0.4)
   )
   expect_equal_rn_generation(
     rmo_esm, testutils.rmo::rmo_esm_bivariate,
@@ -72,7 +72,7 @@ test_that("ESM implementation for d = 2", {
   ## Pareto
   args <- list(
     "d" = 2,
-    "intensities" = intensities_pareto(2, alpha = 0.4, x0 = 1e-4)
+    "lambda" = calc_lambda_pareto(2, alpha = 0.4, x0 = 1e-4)
   )
   expect_equal_rn_generation(
     rmo_esm, testutils.rmo::rmo_esm_bivariate,
@@ -82,7 +82,7 @@ test_that("ESM implementation for d = 2", {
   ## Inverse-Gaussian
   args <- list(
     "d" = 2,
-    "intensities" = intensities_inverse_gaussian(2, eta = 0.5)
+    "lambda" = calc_lambda_inverse_gaussian(2, eta = 0.5)
   )
   expect_equal_rn_generation(
     rmo_esm, testutils.rmo::rmo_esm_bivariate,
@@ -92,7 +92,7 @@ test_that("ESM implementation for d = 2", {
   ## Mixed
   args <- list(
     "d" = 2,
-    "intensities" = c(0.1, 0.005, 2)
+    "lambda" = c(0.1, 0.005, 2)
   )
   expect_equal_rn_generation(
     rmo_esm, testutils.rmo::rmo_esm_bivariate,
@@ -112,7 +112,7 @@ test_that("ESM implementation for d > 2", {
   ## all equal
   args <- list(
     "d" = d,
-    "intensities" = rep(0.5, times = 2^d - 1)
+    "lambda" = rep(0.5, times = 2^d - 1)
   )
   expect_equal_rn_generation(
     rmo_esm, testutils.rmo::rmo_esm_naive,
@@ -122,7 +122,7 @@ test_that("ESM implementation for d > 2", {
   ## independence
   args <- list(
     "d" = d,
-    "intensities" = intensities_linear(d, scale = 0.3)
+    "lambda" = calc_lambda_linear(d, scale = 0.3)
   )
   expect_equal_rn_generation(
     rmo_esm, testutils.rmo::rmo_esm_naive,
@@ -132,7 +132,7 @@ test_that("ESM implementation for d > 2", {
   ## comonotone
   args <- list(
     "d" = d,
-    "intensities" = intensities_constant(d, constant = 0.7)
+    "lambda" = calc_lambda_constant(d, constant = 0.7)
   )
   expect_equal_rn_generation(
     rmo_esm, testutils.rmo::rmo_esm_naive,
@@ -142,7 +142,7 @@ test_that("ESM implementation for d > 2", {
   ## Poisson
   args <- list(
     "d" = d,
-    "intensities" = intensities_poisson(
+    "lambda" = calc_lambda_poisson(
       d,
       eta = 0.3
     )
@@ -155,7 +155,7 @@ test_that("ESM implementation for d > 2", {
   ## Alpha-Stable
   args <- list(
     "d" = d,
-    "intensities" = intensities_alpha_stable(d, alpha = 0.25)
+    "lambda" = calc_lambda_alpha_stable(d, alpha = 0.25)
   )
   expect_equal_rn_generation(
     rmo_esm, testutils.rmo::rmo_esm_naive,
@@ -165,7 +165,7 @@ test_that("ESM implementation for d > 2", {
   ## Gamma
   args <- list(
     "d" = d,
-    "intensities" = intensities_gamma(d, a = 0.4)
+    "lambda" = calc_lambda_gamma(d, a = 0.4)
   )
   expect_equal_rn_generation(
     rmo_esm, testutils.rmo::rmo_esm_naive,
@@ -175,7 +175,7 @@ test_that("ESM implementation for d > 2", {
   ## Pareto
   args <- list(
     "d" = d,
-    "intensities" = intensities_pareto(d, alpha = 0.4, x0 = 1e-4)
+    "lambda" = calc_lambda_pareto(d, alpha = 0.4, x0 = 1e-4)
   )
   expect_equal_rn_generation(
     rmo_esm, testutils.rmo::rmo_esm_naive,
@@ -185,7 +185,7 @@ test_that("ESM implementation for d > 2", {
   ## Inverse-Gaussian
   args <- list(
     "d" = d,
-    "intensities" = intensities_inverse_gaussian(d, eta = 0.5)
+    "lambda" = calc_lambda_inverse_gaussian(d, eta = 0.5)
   )
   expect_equal_rn_generation(
     rmo_esm, testutils.rmo::rmo_esm_naive,
@@ -195,8 +195,8 @@ test_that("ESM implementation for d > 2", {
   ## Hierarchical
   args <- list(
     "d" = d,
-    "intensities" = intensities_hierarchical(
-      d1 = d1, d2 = d2, lambda = 0.1, eta = 0.3,
+    "lambda" = calc_lambda_hierarchical(
+      d1 = d1, d2 = d2, gamma = 0.1, eta = 0.3,
       a = 0.2, alpha = 0.4
     )
   )
@@ -211,6 +211,6 @@ test_that("ESM implementation for d > 2", {
 test_that("ESM implementation for n = 0", {
   n <- 0
   d <- 5
-  x <- rmo_esm(n, d, intensities_exponential(d, 1))
+  x <- rmo_esm(n, d, calc_lambda_exponential(d, 1))
   checkmate::expect_matrix(x, mode = "numeric", nrows = n, ncols = d)
 })

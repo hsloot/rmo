@@ -1,99 +1,99 @@
-ex_intensities_constant <- function(d, constant) {
+calc_theta_constant <- function(d, constant) {
   bf <- ConstantBernsteinFunction(constant = constant)
-  exIntensities(bf, d)
+  calcExShockSizeArrivalIntensities(bf, d)
 }
 
-intensities_constant <- function(d, constant) {
+calc_lambda_constant <- function(d, constant) {
   bf <- ConstantBernsteinFunction(constant = constant)
-  intensities(bf, d)
+  calcShockArrivalIntensities(bf, d)
 }
 
-ex_intensities_linear <- function(d, scale) {
+calc_theta_linear <- function(d, scale) {
   bf <- LinearBernsteinFunction(scale = scale)
-  exIntensities(bf, d)
+  calcExShockSizeArrivalIntensities(bf, d)
 }
 
-intensities_linear <- function(d, scale) {
+calc_lambda_linear <- function(d, scale) {
   bf <- LinearBernsteinFunction(scale = scale)
-  intensities(bf, d)
+  calcShockArrivalIntensities(bf, d)
 }
 
-ex_intensities_armageddon <- function(d, alpha, beta) {
-  ex_intensities_linear(d, scale = alpha) +
-    ex_intensities_constant(d, constant = beta)
+calc_theta_armageddon <- function(d, alpha, beta) {
+  calc_theta_linear(d, scale = alpha) +
+    calc_theta_constant(d, constant = beta)
 }
 
-intensities_armageddon <- function(d, alpha, beta) {
-  intensities_linear(d, scale = alpha) +
-    intensities_constant(d, constant = beta)
+calc_lambda_armageddon <- function(d, alpha, beta) {
+  calc_lambda_linear(d, scale = alpha) +
+    calc_lambda_constant(d, constant = beta)
 }
 
-ex_intensities_poisson <- function(d, eta) {
+calc_theta_poisson <- function(d, eta) {
   bf <- PoissonBernsteinFunction(eta = eta)
-  exIntensities(bf, d)
+  calcExShockSizeArrivalIntensities(bf, d)
 }
 
-intensities_poisson <- function(d, eta) {
+calc_lambda_poisson <- function(d, eta) {
   bf <- PoissonBernsteinFunction(eta = eta)
-  intensities(bf, d)
+  calcShockArrivalIntensities(bf, d)
 }
 
-ex_intensities_alpha_stable <- function(d, alpha) {
+calc_theta_alpha_stable <- function(d, alpha) {
   bf <- AlphaStableBernsteinFunction(alpha = alpha)
-  exIntensities(bf, d)
+  calcExShockSizeArrivalIntensities(bf, d)
 }
 
-intensities_alpha_stable <- function(d, alpha) {
+calc_lambda_alpha_stable <- function(d, alpha) {
   bf <- AlphaStableBernsteinFunction(alpha = alpha)
-  intensities(bf, d)
+  calcShockArrivalIntensities(bf, d)
 }
 
-ex_intensities_exponential <- function(d, lambda) {
+calc_theta_exponential <- function(d, lambda) {
   bf <- ExponentialBernsteinFunction(lambda = lambda)
-  exIntensities(bf, d)
+  calcExShockSizeArrivalIntensities(bf, d)
 }
 
-intensities_exponential <- function(d, lambda) {
+calc_lambda_exponential <- function(d, lambda) {
   bf <- ExponentialBernsteinFunction(lambda = lambda)
-  intensities(bf, d)
+  calcShockArrivalIntensities(bf, d)
 }
 
-ex_intensities_gamma <- function(d, a) {
+calc_theta_gamma <- function(d, a) {
   bf <- GammaBernsteinFunction(a = a)
-  exIntensities(bf, d)
+  calcExShockSizeArrivalIntensities(bf, d)
 }
 
-intensities_gamma <- function(d, a) {
+calc_lambda_gamma <- function(d, a) {
   bf <- GammaBernsteinFunction(a = a)
-  intensities(bf, d)
+  calcShockArrivalIntensities(bf, d)
 }
 
-ex_intensities_pareto <- function(d, alpha, x0) {
+calc_theta_pareto <- function(d, alpha, x0) {
   bf <- ParetoBernsteinFunction(alpha = alpha, x0 = x0)
-  exIntensities(bf, d)
+  calcExShockSizeArrivalIntensities(bf, d)
 }
 
-intensities_pareto <- function(d, alpha, x0) {
+calc_lambda_pareto <- function(d, alpha, x0) {
   bf <- ParetoBernsteinFunction(alpha = alpha, x0 = x0)
-  intensities(bf, d)
+  calcShockArrivalIntensities(bf, d)
 }
 
-ex_intensities_inverse_gaussian <- function(d, eta) { # nolint
+calc_theta_inverse_gaussian <- function(d, eta) { # nolint
   bf <- InverseGaussianBernsteinFunction(eta = eta)
-  exIntensities(bf, d)
+  calcExShockSizeArrivalIntensities(bf, d)
 }
 
-intensities_inverse_gaussian <- function(d, eta) {
+calc_lambda_inverse_gaussian <- function(d, eta) {
   bf <- InverseGaussianBernsteinFunction(eta = eta)
-  intensities(bf, d)
+  calcShockArrivalIntensities(bf, d)
 }
 
-intensities_hierarchical <- function(d1, d2, lambda, eta, a, alpha) { # nolint
-  ex_intensities_1 <- ex_intensities_gamma(d1, a)
-  ex_intensities_2 <- ex_intensities_alpha_stable(d2, alpha)
+calc_lambda_hierarchical <- function(d1, d2, gamma, eta, a, alpha) { # nolint
+  theta_1 <- calc_theta_gamma(d1, a)
+  theta_2 <- calc_theta_alpha_stable(d2, alpha)
 
-  intensities <- lambda * intensities_poisson(d1 + d2, eta)
-  for (j in seq_along(intensities)) {
+  lambda <- gamma * calc_lambda_poisson(d1 + d2, eta)
+  for (j in seq_along(lambda)) {
     count_1 <- 0
     count_2 <- 0
     for (i in 1:d1) {
@@ -104,11 +104,11 @@ intensities_hierarchical <- function(d1, d2, lambda, eta, a, alpha) { # nolint
     }
 
     if (count_1 > 0 && count_2 == 0) {
-      intensities[j] <- intensities[j] + ex_intensities_1[count_1]
+      lambda[j] <- lambda[j] + theta_1[count_1]
     } else if (count_2 > 0 && count_1 == 0) {
-      intensities[j] <- intensities[j] + ex_intensities_2[count_2]
+      lambda[j] <- lambda[j] + theta_2[count_2]
     }
   }
 
-  intensities
+  lambda
 }

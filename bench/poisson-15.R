@@ -14,13 +14,13 @@ bf <- ScaledBernsteinFunction(
   scale = 1,
   original = PoissonBernsteinFunction(eta = eta)
 )
-intensities <- intensities(bf, d)
-ex_intensities <- exIntensities(bf, d)
+lambda <- calcShockArrivalIntensities(bf, d)
+theta <- calcExShockSizeArrivalIntensities(bf, d)
 
 #+ r bench
 mark(
-  Arnold = rmo(n, d, intensities, method = "AM"),
-  ExMarkovian = rexmo(n, d, ex_intensities, method = "MDCM"),
+  Arnold = rmo(n, d, lambda, method = "AM"),
+  ExMarkovian = rexmo(n, d, theta, method = "MDCM"),
   LFM = rpextmo(n, d, eta = eta, family = "Poisson", method = "LFM"),
   min_iterations = 100L,
   check = FALSE

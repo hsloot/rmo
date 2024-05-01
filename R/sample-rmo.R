@@ -6,7 +6,7 @@
 #'
 #' @param n An integer for the *number of samples*.
 #' @param d An integer for the *dimension*.
-#' @param intensities A numeric vector for the *shock-arrival intensities*.
+#' @param lambda A numeric vector for the *shock-arrival intensities*.
 #' @param method A string indicating which sampling algorithm should be used.
 #'   Use `"AM"` for the *Arnold model* and `"ESM"` for the *exogenous shock
 #'   model*. We recommend using the *ESM* for small dimensions only; the *AM*
@@ -113,16 +113,16 @@
 #'   c(0, 0, 0, 0, 0, 0, 1),
 #'   method = "AM"
 #' )
-rmo <- function(n, d, intensities, method = c("AM", "ESM")) {
+rmo <- function(n, d, lambda, method = c("AM", "ESM")) {
   method <- match.arg(method)
   qassert(n, "X1[0,)")
   qassert(d, "X1[2,)")
   assert_choice(method, c("AM", "ESM"))
 
   if (method == "ESM") {
-    Rcpp__rmo_esm(n, d, intensities)
+    Rcpp__rmo_esm(n, d, lambda)
   } else if (method == "AM") {
-    Rcpp__rmo_am(n, d, intensities)
+    Rcpp__rmo_am(n, d, lambda)
   } else {
     stop(sprintf("Method %s not implemented", method)) # nocov
   }
